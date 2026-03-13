@@ -1,0 +1,206 @@
+## player_controller.gd
+## ---------------------------------------------------------------------------
+## Discrete grid-based player controller for D-pad / arrow-key input.
+##
+## Design goals:
+##   • One key press  = one cell move (no analog / continuous movement).
+##   • Wall collision  – movement only if MazeData says the wall is open.
+##   • Input debounce  – a short cooldown prevents rapid-fire movement when
+##     a toddler mashes the remote.
+##   • Smooth visual   – a short tween slides the sprite to the new position
+##     so the movement feels polished rather than instantaneous.
+##
+## Supports an optional theme image (player.png) loaded via ThemeLoader.
+## Falls back to a coloured square if no image is available.
+##
+## All tunable parameters are read from the Config autoload singleton.
+##
+## Signals:
+##   reached_end – emitted the moment the player lands on the End cell.
+## ---------------------------------------------------------------------------
+class_name PlayerController
+extends Node2D
+
+# ── Signals ──────────────────────────────────────────────────────────────────
+
+## Emitted when the player moves to a new cell.
+signal moved(new_pos: Vector2i)
+
+## Emitted when the player bumps into a wall.
+signal bumped(direction: Vector2i)
+
+## Emitted when the player arrives at the End cell.
+signal reached_end
+
+# ── Runtime state ────────────────────────────────────────────────────────────
+
+## Current grid coordinate.
+var grid_pos: Vector2i = Vector2i.ZERO
+
+## References injected by GameManager.
+var maze_data: MazeData       = null
+var maze_renderer: MazeRenderer = null
+
+## Internal cooldown tracker.
+var _cooldown_remaining: float = 0.0
+
+# ── Visual ───────────────────────────────────────────────────────────────────
+## The visual node (either a ColorRect or a Sprite2D).
+var _visual: Node = null
+
+## Tracked shake tween so we can kill it before starting a new one.
+var _shake_tween: Tween = null
+
+
+# ── Lifecycle ────────────────────────────────────────────────────────────────
+
+func _ready() -> void:
+	_build_visual()
+
+	# Snap to starting pixel position immediately.
+	if maze_renderer:
+		position = maze_renderer.grid_to_pixel(grid_pos)
+
+
+## Build the player visual.  Uses a theme sprite if available,
+## otherwise falls back to a coloured square.
+func _build_visual() -> void:
+	# Remove previous visual if rebuilding.
+	if _visual:
+		_visual.queue_free()
+		_visual = null
+
+	var cs: float = 120.0
+	if maze_renderer:
+		cs = maze_renderer.get_cell_size()
+
+	# Try to use a theme sprite.
+	var theme_tex: Texture2D = null
+	if maze_renderer:
+		var theme_loader := maze_renderer.get_theme_loader()
+		if theme_loader and theme_loader.player_texture:
+			theme_tex = theme_loader.player_texture
+
+	if theme_tex:
+		# ── Sprite2D from theme ──
+		var sprite := Sprite2D.new()
+		sprite.texture = theme_tex
+		sprite.centered = true
+
+		# Scale to fit the cell with a margin.
+		var margin := cs * 0.1
+		var target_size := cs - margin * 2
+		var tex_size := Vector2(theme_tex.get_width(), theme_tex.get_height())
+		var scale_factor: float = target_size / float(max(tex_size.x, tex_size.y))
+		sprite.scale = Vector2(scale_factor, scale_factor)
+
+		# Sprite2D is already centred on the Node2D origin.
+		_visual = sprite
+	else:
+		# ── Fallback: coloured square ──
+		var rect := ColorRect.new()
+		var sprite_size := cs * Config.player_scale
+		rect.size = Vector2(sprite_size, sprite_size)
+		rect.position = Vector2(-sprite_size / 2.0, -sprite_size / 2.0)
+		rect.color = Config.player_color
+		_visual = rect
+
+	add_child(_visual)
+
+
+func _process(delta: float) -> void:
+	# Tick cooldown.
+	if _cooldown_remaining > 0.0:
+		_cooldown_remaining -= delta
+		return  # Ignore input during cooldown.
+
+	# Read D-pad / arrow keys.
+	var direction := Vector2i.ZERO
+
+	if Input.is_action_pressed("ui_up"):
+		direction = Vector2i.UP
+	elif Input.is_action_pressed("ui_down"):
+		direction = Vector2i.DOWN
+	elif Input.is_action_pressed("ui_left"):
+		direction = Vector2i.LEFT
+	elif Input.is_action_pressed("ui_right"):
+		direction = Vector2i.RIGHT
+
+	if direction == Vector2i.ZERO:
+		return  # No input this frame.
+
+	_try_move(direction)
+
+
+# ── Movement ─────────────────────────────────────────────────────────────────
+
+## Attempt to move one cell in `direction`.
+func _try_move(direction: Vector2i) -> void:
+	if maze_data == null or maze_renderer == null:
+		return
+
+	# Check wall – deny if blocked.
+	if not maze_data.is_wall_open(grid_pos, direction):
+		_shake_visual(direction)
+		bumped.emit(direction)
+		return
+
+	# Update logical position.
+	grid_pos += direction
+
+	# Start cooldown.
+	_cooldown_remaining = Config.move_cooldown
+
+	# Notify listeners that we moved.
+	moved.emit(grid_pos)
+
+	# Tween to new pixel position.
+	var target_pixel := maze_renderer.grid_to_pixel(grid_pos)
+	var tw := create_tween()
+	tw.tween_property(self, "position", target_pixel, Config.tween_duration)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+
+	# Check win condition.
+	var cell := maze_data.get_cell(grid_pos)
+	if cell and cell.is_end:
+		# Small delay so the tween finishes before the signal fires.
+		await tw.finished
+		reached_end.emit()
+
+
+## Apply a short shake animation when bumping into a wall.
+func _shake_visual(dir: Vector2i) -> void:
+	if _visual == null:
+		return
+		
+	# Trigger cooldown so they can't spam it and break the tween.
+	_cooldown_remaining = Config.move_cooldown
+	
+	var base_pos: Vector2 = _visual.position
+	# Define start position based on visual node type since Sprite2D and ColorRect differ
+	if _visual is Sprite2D:
+		base_pos = Vector2.ZERO # Centered
+	else:
+		var cs := 120.0
+		if maze_renderer:
+			cs = maze_renderer.get_cell_size()
+		var sprite_size := cs * Config.player_scale
+		base_pos = Vector2(-sprite_size / 2.0, -sprite_size / 2.0)
+		
+	# Kill any previous shake tween to prevent drift
+	if _shake_tween and _shake_tween.is_valid():
+		_shake_tween.kill()
+			
+	# Reset position before shaking (in case of killed tweens)
+	_visual.position = base_pos
+
+	var cs := 120.0
+	if maze_renderer:
+		cs = maze_renderer.get_cell_size()
+	var bump_offset := Vector2(dir) * (cs * 0.15)
+	
+	_shake_tween = create_tween()
+	_shake_tween.bind_node(_visual)
+	_shake_tween.tween_property(_visual, "position", base_pos + bump_offset, 0.05).set_trans(Tween.TRANS_SINE)
+	_shake_tween.tween_property(_visual, "position", base_pos, 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)

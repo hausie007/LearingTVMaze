@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gm"]
+[ext_resource type="Script" path="res://scripts/maze_generator.gd" id="2_mg"]
+[ext_resource type="Script" path="res://scripts/maze_renderer.gd" id="3_mr"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="4_pc"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_gm")
+
+[node name="MazeGenerator" type="Node" parent="."]
+script = ExtResource("2_mg")
+
+[node name="MazeRenderer" type="Node2D" parent="."]
+script = ExtResource("3_mr")
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("4_pc")

@@ -1,0 +1,618 @@
+## game_manager.gd
+## ---------------------------------------------------------------------------
+## Top-level orchestrator for the maze game.
+##
+## Responsibilities:
+##   1. Tell MazeGenerator to create a new MazeData.
+##   2. Tell MazeRenderer to draw it.
+##   3. Spawn the Player at the Start cell.
+##   4. Listen for the player's `reached_end` signal → show win feedback and
+##      regenerate a new maze.
+##   5. Spawn collectibles (numbers, letters, or word letters) based on mode.
+##   6. Display a universal top-bar HUD (stopwatch, move count, word progress).
+##
+## All tunable parameters are read from the Config autoload singleton.
+## ---------------------------------------------------------------------------
+class_name GameManager
+extends Node
+
+# ── Child-node references (assigned in _ready via node paths) ────────────────
+@onready var maze_generator:  MazeGenerator    = $MazeGenerator
+@onready var maze_renderer:   MazeRenderer     = $MazeRenderer
+@onready var player:          PlayerController  = $Player
+
+const CollectibleScene = preload("res://scenes/collectible.tscn")
+
+# ── UI layer ─────────────────────────────────────────────────────────────────
+var _win_container: Control = null
+var _win_label: Label = null
+var _next_button: Button = null
+var _harder_button: Button = null
+var _timer_label: Label = null
+
+# ── Top-bar HUD ──────────────────────────────────────────────────────────────
+const HUD_HEIGHT: float = 160.0
+
+var _hud_layer: CanvasLayer = null
+var _hud_time_label: Label = null
+var _hud_moves_label: Label = null
+var _hud_word_container: HBoxContainer = null
+var _word_letter_labels: Array[Label] = []
+var _word_next_index: int = 0
+
+# ── State ────────────────────────────────────────────────────────────────────
+var _current_maze: MazeData = null
+var _collectibles: Dictionary = {}  # Vector2i -> Collectible
+var _win_timer_remaining: float = 0.0
+var _is_win_screen_active: bool = false
+var _elapsed_time: float = 0.0
+var _move_count: int = 0
+
+
+# ── Lifecycle ────────────────────────────────────────────────────────────────
+
+func _ready() -> void:
+	# Build the "You Win!" label (hidden by default).
+	_create_win_label()
+
+	# Build the universal top-bar HUD.
+	_create_top_hud()
+
+	# Wire up the player signals.
+	player.reached_end.connect(_on_player_reached_end)
+	player.moved.connect(_on_player_moved)
+	player.bumped.connect(_on_player_bumped)
+
+	# Tell the maze renderer to leave space for the HUD bar.
+	maze_renderer.top_margin = HUD_HEIGHT
+
+	# Generate and display the first maze.
+	_start_new_maze()
+
+func _process(delta: float) -> void:
+	# Win countdown
+	if _is_win_screen_active and _win_timer_remaining > 0.0:
+		_win_timer_remaining -= delta
+		if _timer_label:
+			_timer_label.text = str(ceili(_win_timer_remaining))
+		
+		if _win_timer_remaining <= 0.0:
+			_on_next_round_pressed()
+	
+	# Stopwatch (only while playing, not during win screen)
+	if not _is_win_screen_active:
+		_elapsed_time += delta
+		if _hud_time_label:
+			var mins := int(_elapsed_time) / 60
+			var secs := int(_elapsed_time) % 60
+			_hud_time_label.text = "%02d:%02d" % [mins, secs]
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Android TV 'Back' button maps to ui_cancel
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+# ── Game flow ────────────────────────────────────────────────────────────────
+
+## Generate a fresh maze, render it, and place the player.
+func _start_new_maze() -> void:
+	if _win_container:
+		_win_container.visible = false
+
+	# Clear old collectibles
+	for c in _collectibles.values():
+		if is_instance_valid(c):
+			c.queue_free()
+	_collectibles.clear()
+
+	# Reset round state
+	_elapsed_time = 0.0
+	_move_count = 0
+	_word_next_index = 0
+	_update_hud_moves()
+
+	# 1. Generate
+	_current_maze = maze_generator.generate()
+
+	# 2. Render
+	maze_renderer.draw_maze(_current_maze)
+
+	# 2.5 Spawn collectibles if applicable
+	if Config.game_mode > 0:
+		if Config.game_mode == 3:
+			_spawn_word_collectibles()
+		else:
+			_spawn_collectibles()
+	
+	# Update word display in HUD (clears if not words mode)
+	_update_hud_word_display()
+
+	# 3. Place player at Start cell
+	var start_cell := _current_maze.get_start_cell()
+	if start_cell:
+		player.grid_pos      = start_cell.coords
+		player.maze_data     = _current_maze
+		player.maze_renderer = maze_renderer
+		player.position      = maze_renderer.grid_to_pixel(start_cell.coords)
+
+	# Rebuild the player visual (picks up theme sprites if available).
+	player._build_visual()
+
+	# Re-enable player input (disabled during win sequence).
+	player.set_process(true)
+
+
+## Called when the player steps onto the End cell.
+func _on_player_reached_end() -> void:
+	if _is_win_screen_active: return
+	
+	# Freeze player input.
+	player.set_process(false)
+
+	# Show the win message and start timer.
+	if _win_container:
+		_win_container.visible = true
+		_is_win_screen_active = true
+		_win_timer_remaining = 10.0
+		
+		# Hide Challenge++ if already at max difficulty
+		if _harder_button:
+			_harder_button.visible = (Config.difficulty < 3)
+			
+		if _next_button:
+			_next_button.grab_focus()
+			_next_button.text = Locale.t("next_round")
+
+## Actions for the win screen buttons.
+func _on_next_round_pressed() -> void:
+	_is_win_screen_active = false
+	_start_new_maze()
+
+func _on_harder_pressed() -> void:
+	if Config.difficulty >= 3: return
+	_is_win_screen_active = false
+	Config.difficulty = clampi(Config.difficulty + 1, 0, 3)
+	Config.save_settings()
+	_start_new_maze()
+
+func _on_home_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+# ── Top-bar HUD ──────────────────────────────────────────────────────────────
+
+## Create the persistent top-bar HUD with stopwatch, word display area, and move counter.
+func _create_top_hud() -> void:
+	_hud_layer = CanvasLayer.new()
+	_hud_layer.layer = 5
+	add_child(_hud_layer)
+	
+	# Background panel spanning full width at the top
+	var bg_panel := PanelContainer.new()
+	var bg_style := StyleBoxFlat.new()
+	bg_style.bg_color = Color(0.1, 0.12, 0.16, 0.90)
+	bg_style.content_margin_left = 20
+	bg_style.content_margin_right = 20
+	bg_style.content_margin_top = 8
+	bg_style.content_margin_bottom = 8
+	bg_panel.add_theme_stylebox_override("panel", bg_style)
+	bg_panel.anchors_preset = Control.PRESET_TOP_WIDE
+	bg_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	bg_panel.custom_minimum_size.y = HUD_HEIGHT
+	_hud_layer.add_child(bg_panel)
+	
+	# Main HBox: [Stopwatch] [center word area] [Moves]
+	var hbox := HBoxContainer.new()
+	hbox.anchors_preset = Control.PRESET_FULL_RECT
+	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	hbox.add_theme_constant_override("separation", 12)
+	bg_panel.add_child(hbox)
+	
+	# Left: Stopwatch
+	_hud_time_label = Label.new()
+	_hud_time_label.text = "00:00"
+	_hud_time_label.add_theme_font_size_override("font_size", 64)
+	_hud_time_label.add_theme_color_override("font_color", Color(0.7, 0.75, 0.8))
+	_hud_time_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_hud_time_label.custom_minimum_size.x = 250
+	hbox.add_child(_hud_time_label)
+	
+	# Center: Word display area (flexible, fills remaining space)
+	_hud_word_container = HBoxContainer.new()
+	_hud_word_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_hud_word_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	_hud_word_container.add_theme_constant_override("separation", 4)
+	hbox.add_child(_hud_word_container)
+	
+	# Right: Move counter
+	_hud_moves_label = Label.new()
+	_hud_moves_label.text = "0"
+	_hud_moves_label.add_theme_font_size_override("font_size", 64)
+	_hud_moves_label.add_theme_color_override("font_color", Color(0.7, 0.75, 0.8))
+	_hud_moves_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_hud_moves_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_hud_moves_label.custom_minimum_size.x = 200
+	hbox.add_child(_hud_moves_label)
+
+
+## Populate the center word display area of the HUD (Words mode only).
+func _update_hud_word_display() -> void:
+	# Clear previous letters
+	_word_letter_labels.clear()
+	for child in _hud_word_container.get_children():
+		child.queue_free()
+	
+	if Config.game_mode != 3 or Config.current_word.is_empty():
+		return
+	
+	var emoji: String = Config.current_word.get("emoji", "")
+	var word: String = Config.current_word.get("word", "")
+	if word.is_empty():
+		return
+	
+	# Emoji label
+	if not emoji.is_empty():
+		var emoji_label := Label.new()
+		emoji_label.text = emoji
+		emoji_label.add_theme_font_size_override("font_size", 96)
+		emoji_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_hud_word_container.add_child(emoji_label)
+		
+		# Small spacer
+		var spacer := Control.new()
+		spacer.custom_minimum_size.x = 12
+		_hud_word_container.add_child(spacer)
+	
+	# Letter labels — dimmed by default
+	for i in range(word.length()):
+		var lbl := Label.new()
+		lbl.text = word[i]
+		lbl.add_theme_font_size_override("font_size", 80)
+		lbl.add_theme_color_override("font_color", Color(0.35, 0.38, 0.44))  # Dimmed
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.custom_minimum_size.x = 72
+		_hud_word_container.add_child(lbl)
+		_word_letter_labels.append(lbl)
+
+
+func _update_hud_moves() -> void:
+	if _hud_moves_label:
+		_hud_moves_label.text = "%d" % _move_count
+
+
+## Light up a letter in the word HUD when collected.
+func _light_up_word_letter(index: int) -> void:
+	if index < 0 or index >= _word_letter_labels.size():
+		return
+	
+	var lbl := _word_letter_labels[index]
+	
+	# Bright colour to indicate collected
+	lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.4))  # Bright yellow
+	
+	# Pop animation
+	var tw := create_tween()
+	tw.tween_property(lbl, "scale", Vector2(1.3, 1.3), 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(lbl, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+
+# ── Win screen UI ────────────────────────────────────────────────────────────
+
+## Create a centred "You Win!" badge with options.
+func _create_win_label() -> void:
+	var canvas_layer := CanvasLayer.new()
+	canvas_layer.layer = 10
+	add_child(canvas_layer)
+
+	_win_container = CenterContainer.new()
+	_win_container.anchors_preset = Control.PRESET_FULL_RECT
+	_win_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	canvas_layer.add_child(_win_container)
+
+	var main_panel := PanelContainer.new()
+	var main_style := StyleBoxFlat.new()
+	main_style.bg_color = Color(0.15, 0.17, 0.22, 0.95) # Dark tint
+	main_style.corner_radius_top_left = 32
+	main_style.corner_radius_top_right = 32
+	main_style.corner_radius_bottom_right = 32
+	main_style.corner_radius_bottom_left = 32
+	main_style.border_width_left = 4
+	main_style.border_width_top = 4
+	main_style.border_width_right = 4
+	main_style.border_width_bottom = 4
+	main_style.border_color = Color(0.3, 0.85, 0.4) # Green border
+	main_style.content_margin_left = 60
+	main_style.content_margin_right = 60
+	main_style.content_margin_top = 40
+	main_style.content_margin_bottom = 40
+	main_panel.add_theme_stylebox_override("panel", main_style)
+	_win_container.add_child(main_panel)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 30)
+	main_panel.add_child(vbox)
+
+	# 1. Header
+	_win_label = Label.new()
+	_win_label.text = Locale.t("you_win")
+	_win_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_win_label.add_theme_font_size_override("font_size", 90)
+	_win_label.add_theme_color_override("font_color", Color(0.3, 0.85, 0.4)) # Green
+	vbox.add_child(_win_label)
+
+	var button_vbox := VBoxContainer.new()
+	button_vbox.add_theme_constant_override("separation", 20)
+	vbox.add_child(button_vbox)
+
+	# 2. Next Round Button (Default) + Timer Label
+	var next_hbox := HBoxContainer.new()
+	next_hbox.add_theme_constant_override("separation", 20)
+	next_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	button_vbox.add_child(next_hbox)
+
+	var next_spacer_l := Control.new()
+	next_spacer_l.custom_minimum_size.x = 80
+	next_hbox.add_child(next_spacer_l)
+
+	_next_button = _create_styled_button(Locale.t("next_round"), 500, 100)
+	_next_button.pressed.connect(_on_next_round_pressed)
+	next_hbox.add_child(_next_button)
+
+	_timer_label = Label.new()
+	_timer_label.text = "10"
+	_timer_label.custom_minimum_size.x = 80
+	_timer_label.add_theme_font_size_override("font_size", 36)
+	_timer_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5)) # Muted grey
+	_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_timer_label.vertical_alignment   = VERTICAL_ALIGNMENT_CENTER
+	next_hbox.add_child(_timer_label)
+
+	# 3. Harder Button
+	var harder_hbox := HBoxContainer.new()
+	harder_hbox.add_theme_constant_override("separation", 20)
+	harder_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	button_vbox.add_child(harder_hbox)
+	
+	var h_spacer_l := Control.new()
+	h_spacer_l.custom_minimum_size.x = 80
+	harder_hbox.add_child(h_spacer_l)
+
+	_harder_button = _create_styled_button(Locale.t("challenge_pp"), 500, 100, Color(0.92, 0.75, 0.2)) # Yellow focus
+	_harder_button.pressed.connect(_on_harder_pressed)
+	harder_hbox.add_child(_harder_button)
+	
+	var h_spacer_r := Control.new()
+	h_spacer_r.custom_minimum_size.x = 80
+	harder_hbox.add_child(h_spacer_r)
+
+	# 4. Home Button
+	var home_hbox := HBoxContainer.new()
+	home_hbox.add_theme_constant_override("separation", 20)
+	home_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	button_vbox.add_child(home_hbox)
+	
+	var home_spacer_l := Control.new()
+	home_spacer_l.custom_minimum_size.x = 80
+	home_hbox.add_child(home_spacer_l)
+
+	var home_btn := _create_styled_button(Locale.t("main_menu"), 500, 100, Color(0.7, 0.75, 0.8)) # Grey focus
+	home_btn.pressed.connect(_on_home_pressed)
+	home_hbox.add_child(home_btn)
+	
+	var home_spacer_r := Control.new()
+	home_spacer_r.custom_minimum_size.x = 80
+	home_hbox.add_child(home_spacer_r)
+
+	_win_container.visible = false
+
+
+func _create_styled_button(btn_text: String, w: int, h: int, focus_color: Color = Color(0.3, 0.85, 0.4)) -> Button:
+	var btn := Button.new()
+	btn.text = btn_text
+	btn.custom_minimum_size = Vector2(w, h)
+	btn.add_theme_font_size_override("font_size", 42)
+	
+	# Normal style
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(0.25, 0.3, 0.35)
+	normal.corner_radius_top_left = 12
+	normal.corner_radius_top_right = 12
+	normal.corner_radius_bottom_right = 12
+	normal.corner_radius_bottom_left = 12
+	btn.add_theme_stylebox_override("normal", normal)
+	
+	# Focus / Hover style
+	var focus := StyleBoxFlat.new()
+	focus.bg_color = focus_color
+	focus.border_width_left = 4
+	focus.border_width_top = 4
+	focus.border_width_right = 4
+	focus.border_width_bottom = 4
+	focus.border_color = Color.WHITE
+	focus.corner_radius_top_left = 12
+	focus.corner_radius_top_right = 12
+	focus.corner_radius_bottom_right = 12
+	focus.corner_radius_bottom_left = 12
+	btn.add_theme_stylebox_override("focus", focus)
+	btn.add_theme_stylebox_override("hover", focus)
+	
+	# Text colors
+	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.add_theme_color_override("font_focus_color", Color.BLACK)
+	btn.add_theme_color_override("font_hover_color", Color.BLACK)
+	
+	return btn
+
+# ── Collectibles ──────────────────────────────────────────────────────────────
+
+## Spawn numbers or letters along the main path based on the game mode.
+func _spawn_collectibles() -> void:
+	if _current_maze == null or Config.game_mode <= 0:
+		return
+
+	var path_coords := _current_maze.main_path_coords
+	
+	# Exclude start and end cells
+	var temp_path: Array[MazeData.CellData] = []
+	for coord in path_coords:
+		var c := _current_maze.get_cell(coord)
+		if not c.is_start and not c.is_end:
+			temp_path.append(c)
+			
+	var L: int = temp_path.size()
+	if L == 0:
+		return
+		
+	# Determine how many items to spawn (roughly 1 every 3-4 cells, max 26 for letters)
+	var max_items := 26 if Config.game_mode == 2 else 50
+	var num_items: int = maxi(1, mini(max_items, L / 3))
+	
+	# Space them out evenly along the valid path
+	var step: float = float(L) / float(num_items)
+	
+	for i in range(num_items):
+		var idx: int = int(i * step + (step / 2.0))
+		idx = mini(idx, L - 1)
+		var cell := temp_path[idx]
+		
+		# Generate the string value
+		var val_str: String = ""
+		if Config.game_mode == 1:
+			val_str = str(i + 1)
+		elif Config.game_mode == 2:
+			val_str = String.chr(65 + i) # 65 == 'A'
+			
+		var col: Collectible = CollectibleScene.instantiate()
+		col.grid_pos = cell.coords
+		col.value_str = val_str
+		
+		# Add to tree and position it
+		add_child(col)
+		col.setup(maze_renderer.get_cell_size())
+		col.position = maze_renderer.grid_to_pixel(cell.coords)
+		
+		# Track it for pickup detection
+		_collectibles[cell.coords] = col
+
+
+## Spawn word-letter collectibles along the main path (Words mode).
+func _spawn_word_collectibles() -> void:
+	if _current_maze == null:
+		return
+	
+	# Pick a random word for the effective language + difficulty
+	var lang := Config.get_effective_language()
+	var word_data := WordList.get_random_word(lang, Config.difficulty)
+	if word_data.is_empty():
+		push_warning("GameManager: No word found for lang=%s diff=%d" % [lang, Config.difficulty])
+		return
+	
+	Config.current_word = word_data
+	_word_next_index = 0
+	
+	var word: String = word_data.get("word", "")
+	if word.is_empty():
+		return
+	
+	var path_coords := _current_maze.main_path_coords
+	
+	# Exclude start and end cells
+	var temp_path: Array[MazeData.CellData] = []
+	for coord in path_coords:
+		var c := _current_maze.get_cell(coord)
+		if not c.is_start and not c.is_end:
+			temp_path.append(c)
+	
+	var L: int = temp_path.size()
+	if L == 0:
+		return
+	
+	var num_letters: int = word.length()
+	
+	# Space the letters evenly along the path
+	var step: float = float(L) / float(num_letters)
+	
+	for i in range(num_letters):
+		var idx: int = int(i * step + (step / 2.0))
+		idx = mini(idx, L - 1)
+		var cell := temp_path[idx]
+		
+		var col: Collectible = CollectibleScene.instantiate()
+		col.grid_pos = cell.coords
+		col.value_str = word[i]
+		col.collect_index = i  # Index in the word for order validation
+		
+		add_child(col)
+		col.setup(maze_renderer.get_cell_size())
+		col.position = maze_renderer.grid_to_pixel(cell.coords)
+		
+		_collectibles[cell.coords] = col
+
+
+## Called every time the player completes a move to a new cell.
+func _on_player_bumped(_dir: Vector2i) -> void:
+	_move_count += 1
+	_update_hud_moves()
+
+## ── TTS Voice Hints ─────────────────────────────────────────────────────────
+
+## Speak text using the OS TTS engine, matching the current game language.
+func _speak(text: String, rate: float = 1.0) -> void:
+	if not Config.voice_hints:
+		return
+		
+	var lang := Config.get_effective_language() # "en" or "cs"
+	var speak_text := text.to_lower()
+	
+	# Find a voice that matches the language.
+	var voices := DisplayServer.tts_get_voices_for_language(lang)
+	if voices.is_empty():
+		DisplayServer.tts_speak(speak_text, "", 50, 1.0, rate)
+	else:
+		DisplayServer.tts_speak(speak_text, voices[0], 50, 1.0, rate)
+
+func _on_player_moved(new_pos: Vector2i) -> void:
+	_move_count += 1
+	_update_hud_moves()
+	
+	if _collectibles.has(new_pos):
+		var col: Collectible = _collectibles[new_pos]
+		var val := col.value_str
+		
+		# Words mode: enforce collection order
+		if Config.game_mode == 3 and col.collect_index >= 0:
+			if col.collect_index == _word_next_index:
+				# Correct letter — collect it and light up HUD
+				col.collect()
+				_collectibles.erase(new_pos)
+				_light_up_word_letter(_word_next_index)
+				_speak(val, 0.85) # Speak the letter 15% slower
+				
+				_word_next_index += 1
+				
+				# If word is complete, speak the full word!
+				if _word_next_index >= _word_letter_labels.size():
+					var full_word: String = Config.current_word.get("word", "")
+					if not full_word.is_empty():
+						# 1.0s delay as requested, and 30% slower (0.7 rate)
+						get_tree().create_timer(1.0).timeout.connect(func(): _speak(full_word, 0.7))
+			else:
+				# Wrong order — shake the collectible to give feedback
+				_shake_collectible(col)
+		else:
+			# Numbers / Letters mode — collect freely
+			col.collect()
+			_collectibles.erase(new_pos)
+			_speak(val, 0.85) # Speak the number or letter 15% slower
+
+
+## Shake a collectible to indicate wrong collection order.
+func _shake_collectible(col: Collectible) -> void:
+	var base_pos := col.position
+	var tw := col.create_tween()
+	tw.tween_property(col, "position", base_pos + Vector2(8, 0), 0.04)
+	tw.tween_property(col, "position", base_pos + Vector2(-8, 0), 0.04)
+	tw.tween_property(col, "position", base_pos + Vector2(4, 0), 0.04)
+	tw.tween_property(col, "position", base_pos, 0.04)

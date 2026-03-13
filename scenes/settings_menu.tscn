@@ -1,0 +1,319 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.18, 0.2, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.25, 0.3, 0.35, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_focus"]
+bg_color = Color(0.92, 0.75, 0.2, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.4, 1)
+theme_override_font_sizes/font_size = 80
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="RowMode" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ModeTitle" type="Label" parent="CenterContainer/VBoxContainer/RowMode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Game Mode:"
+
+[node name="ModeButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowMode"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ModeLeftArrow" type="Label" parent="CenterContainer/VBoxContainer/RowMode/ModeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModeButton" type="Button" parent="CenterContainer/VBoxContainer/RowMode/ModeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Numbers"
+
+[node name="ModeRightArrow" type="Label" parent="CenterContainer/VBoxContainer/RowMode/ModeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowDiff" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="DiffTitle" type="Label" parent="CenterContainer/VBoxContainer/RowDiff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Difficulty:"
+
+[node name="DiffButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowDiff"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="DiffLeftArrow" type="Label" parent="CenterContainer/VBoxContainer/RowDiff/DiffButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiffButton" type="Button" parent="CenterContainer/VBoxContainer/RowDiff/DiffButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Easy"
+
+[node name="DiffRightArrow" type="Label" parent="CenterContainer/VBoxContainer/RowDiff/DiffButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowLang" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="LangTitle" type="Label" parent="CenterContainer/VBoxContainer/RowLang"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Language:"
+
+[node name="LangButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowLang"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LangLeftArrow" type="Label" parent="CenterContainer/VBoxContainer/RowLang/LangButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LangButton" type="Button" parent="CenterContainer/VBoxContainer/RowLang/LangButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "English"
+
+[node name="LangRightArrow" type="Label" parent="CenterContainer/VBoxContainer/RowLang/LangButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowTheme" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ThemeTitle" type="Label" parent="CenterContainer/VBoxContainer/RowTheme"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Theme:"
+
+[node name="ThemeButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowTheme"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ThemeLeftArrow" type="Label" parent="CenterContainer/VBoxContainer/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThemeButton" type="Button" parent="CenterContainer/VBoxContainer/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Default"
+
+[node name="ThemeRightArrow" type="Label" parent="CenterContainer/VBoxContainer/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowVoice" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="VoiceTitle" type="Label" parent="CenterContainer/VBoxContainer/RowVoice"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Voice Hints:"
+
+[node name="VoiceButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowVoice"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="VoiceLeftArrow" type="Label" parent="CenterContainer/VBoxContainer/RowVoice/VoiceButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoiceButton" type="Button" parent="CenterContainer/VBoxContainer/RowVoice/VoiceButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "On"
+
+[node name="VoiceRightArrow" type="Label" parent="CenterContainer/VBoxContainer/RowVoice/VoiceButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../RowTheme/ThemeButtonContainer/ThemeButton")
+focus_neighbor_bottom = NodePath("../RowMode/ModeButtonContainer/ModeButton")
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Save & Return"
