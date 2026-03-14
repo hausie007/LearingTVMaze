@@ -35,3 +35,8 @@ window/stretch/aspect="expand"
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.id.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation")
+

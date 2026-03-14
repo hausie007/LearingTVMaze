@@ -76,10 +76,14 @@ func _build_visual() -> void:
 
 	# Try to use a theme sprite.
 	var theme_tex: Texture2D = null
+	var theme_color: Color = Config.player_color
+	
 	if maze_renderer:
 		var theme_loader := maze_renderer.get_theme_loader()
-		if theme_loader and theme_loader.player_texture:
-			theme_tex = theme_loader.player_texture
+		if theme_loader:
+			theme_color = theme_loader.color_player
+			if theme_loader.player_texture:
+				theme_tex = theme_loader.player_texture
 
 	if theme_tex:
 		# ── Sprite2D from theme ──
@@ -102,7 +106,7 @@ func _build_visual() -> void:
 		var sprite_size := cs * Config.player_scale
 		rect.size = Vector2(sprite_size, sprite_size)
 		rect.position = Vector2(-sprite_size / 2.0, -sprite_size / 2.0)
-		rect.color = Config.player_color
+		rect.color = theme_color
 		_visual = rect
 
 	add_child(_visual)

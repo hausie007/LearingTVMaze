@@ -67,10 +67,18 @@ func draw_maze(maze: MazeData) -> void:
 	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
 	var offset := Vector2(hpad, vpad).floor()
 
-	# Draw the outer rectangle (wall-coloured background for the whole grid).
-	_add_rect(offset, maze_pixel_size, Config.color_wall)
+	# 1. Background / Wall base
+	_add_rect(offset, maze_pixel_size, _theme.color_wall)
+	
+	# 2. Optional background image (tiled or centered)
+	if _theme.bg_texture:
+		if _theme.bg_tiled:
+			_add_tiled_background(offset, maze_pixel_size, _theme.bg_texture)
+		else:
+			# If not tiled, just centre it in the whole maze area
+			_add_sprite(offset, maze_pixel_size.x, _theme.bg_texture, maze_pixel_size)
 
-	# Draw every cell.
+	# 3. Draw every cell.
 	for x in range(maze.grid_size.x):
 		for y in range(maze.grid_size.y):
 			var coord := Vector2i(x, y)
@@ -118,11 +126,11 @@ func _draw_cell(cell: MazeData.CellData, pos: Vector2) -> void:
 		return
 
 	# ── Floor ──
-	var floor_color := Config.color_floor
+	var floor_color := _theme.color_floor
 	if cell.is_start:
-		floor_color = Config.color_start
+		floor_color = _theme.color_start
 	elif cell.is_end:
-		floor_color = Config.color_end
+		floor_color = _theme.color_end
 
 	var cs := _current_cell_size
 	var wt := _current_wall_thickness
@@ -137,8 +145,6 @@ func _draw_cell(cell: MazeData.CellData, pos: Vector2) -> void:
 
 	# ── Open-wall connectors ──
 	# Where a wall is OPEN, draw a floor-coloured rect bridging the gap.
-	# We add a 1-pixel "bleed" (overlap) to these rects to ensure they perfectly
-	# cover the background and don't leave faint lines between cells.
 	var bleed := 1.0
 	
 	if not cell.wall_north:
@@ -167,19 +173,37 @@ func _add_rect(pos: Vector2, size: Vector2, color: Color) -> void:
 
 
 ## Instantiate a Sprite2D centred in the cell, scaled to fit.
-func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D) -> void:
+func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D, custom_size: Vector2 = Vector2.ZERO) -> void:
 	var sprite := Sprite2D.new()
 	sprite.texture = texture
 	sprite.centered = true
 
 	# Scale the sprite to fit inside the cell (with a small margin).
-	var margin := cell_size_px * 0.1
-	var target_size := cell_size_px - margin * 2
+	var target_box_size := cell_size_px
+	if custom_size != Vector2.ZERO:
+		target_box_size = max(custom_size.x, custom_size.y)
+	
+	var margin := cell_size_px * 0.1 if custom_size == Vector2.ZERO else 0.0
+	var target_size := target_box_size - margin * 2
+	
 	var tex_size := Vector2(texture.get_width(), texture.get_height())
 	var scale_factor: float = target_size / float(max(tex_size.x, tex_size.y))
 	sprite.scale = Vector2(scale_factor, scale_factor)
 
-	# Position at the centre of the cell.
-	sprite.position = cell_pos + Vector2(cell_size_px, cell_size_px) / 2.0
-
+	# Position at the centre of the cell/box.
+	var offset := Vector2(cell_size_px, cell_size_px) / 2.0
+	if custom_size != Vector2.ZERO:
+		offset = custom_size / 2.0
+		
+	sprite.position = cell_pos + offset
 	add_child(sprite)
+
+func _add_tiled_background(pos: Vector2, size: Vector2, texture: Texture2D) -> void:
+	# Using TextureRect for easy tiling
+	var tr := TextureRect.new()
+	tr.texture = texture
+	tr.stretch_mode = TextureRect.STRETCH_TILE
+	tr.position = pos
+	tr.size = size
+	# Option: add a bit of modulate if needed, or just raw
+	add_child(tr)

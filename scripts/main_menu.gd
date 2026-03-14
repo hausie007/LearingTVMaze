@@ -9,9 +9,9 @@ func _ready() -> void:
 	settings_btn.pressed.connect(_on_settings_pressed)
 	
 	# Localize UI
-	title_label.text = Locale.t("app_title")
-	play_btn.text = Locale.t("play")
-	settings_btn.text = Locale.t("settings")
+	title_label.text = tr("app_title")
+	play_btn.text = tr("play")
+	settings_btn.text = tr("settings")
 	
 	# Pre-select Play button for TV D-pad
 	play_btn.grab_focus()

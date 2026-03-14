@@ -13,43 +13,75 @@
 class_name ThemeLoader
 extends RefCounted
 
-## Loaded textures (null = use default visual).
+## Loaded resources.
 var start_texture:  Texture2D = null
 var end_texture:    Texture2D = null
 var player_texture: Texture2D = null
+var bg_texture:     Texture2D = null
 
-## Whether any theme images were loaded.
-var has_any_texture: bool = false
+var color_wall:     Color = Color(0.75, 0.78, 0.82)
+var color_floor:    Color = Color(0.18, 0.20, 0.25)
+var color_start:    Color = Color(0.21, 0.36, 0.29)
+var color_end:      Color = Color(0.20, 0.30, 0.43)
+var color_player:   Color = Color(0.25, 0.55, 0.95)
 
+var bg_tiled:       bool = false
 
-## Load theme images from the directory specified in Config.
-## Call this once at startup (or whenever the theme changes).
+var manifest: Dictionary = {}
+
+## Load theme resources from the directory specified in Config.
 func load_theme() -> void:
 	var dir_path: String = Config.theme_dir
+	_load_manifest(dir_path)
 
-	start_texture  = _try_load(dir_path, "start.png")
-	end_texture    = _try_load(dir_path, "end.png")
-	player_texture = _try_load(dir_path, "player.png")
+	# Textures
+	player_texture = _try_load(dir_path, _get_asset("player", "player.png"))
+	start_texture  = _try_load(dir_path, _get_asset("start", "start.png"))
+	end_texture    = _try_load(dir_path, _get_asset("end", "end.png"))
+	bg_texture     = _try_load(dir_path, _get_asset("background", "background.png"))
 
-	has_any_texture = (
-		start_texture != null or
-		end_texture != null or
-		player_texture != null
-	)
+	# Colors
+	color_wall    = _get_color("wall", color_wall)
+	color_floor   = _get_color("floor", color_floor)
+	color_start   = _get_color("start_cell", color_start)
+	color_end     = _get_color("end_cell", color_end)
+	color_player  = _get_color("player", color_player)
 
+	# Background Options
+	if manifest.has("background"):
+		var bg_cfg = manifest["background"]
+		if bg_cfg is Dictionary:
+			bg_tiled = bg_cfg.get("tiled", false)
+			if bg_cfg.has("color"):
+				# Background color can optionally override wall color for the whole maze base
+				color_wall = Color.from_string(bg_cfg["color"], color_wall)
 
-## Try to load a PNG file and return a Texture2D, or null on failure.
+func _load_manifest(dir_path: String) -> void:
+	var path := dir_path.path_join("manifest.json")
+	if FileAccess.file_exists(path):
+		var file := FileAccess.open(path, FileAccess.READ)
+		var json_text := file.get_as_text()
+		var json = JSON.new()
+		if json.parse(json_text) == OK:
+			manifest = json.data
+		else:
+			push_error("ThemeLoader: Failed to parse manifest at %s" % path)
+
+func _get_asset(key: String, default: String) -> String:
+	if manifest.has("assets") and manifest["assets"].has(key):
+		return manifest["assets"][key]
+	return default
+
+func _get_color(key: String, default: Color) -> Color:
+	if manifest.has("colors") and manifest["colors"].has(key):
+		return Color.from_string(manifest["colors"][key], default)
+	return default
+
 func _try_load(dir_path: String, file_name: String) -> Texture2D:
 	var full_path := dir_path.path_join(file_name)
-
-	# Check if the resource exists in the Godot file system.
 	if not ResourceLoader.exists(full_path):
 		return null
-
 	var resource = ResourceLoader.load(full_path)
 	if resource is Texture2D:
 		return resource as Texture2D
-
-	# Resource exists but is not a valid texture.
-	push_warning("ThemeLoader: '%s' is not a valid Texture2D, skipping." % full_path)
 	return null

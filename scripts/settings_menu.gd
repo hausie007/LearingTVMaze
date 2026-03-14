@@ -7,11 +7,11 @@ var temp_lang_idx: int
 var temp_voice: bool
 var themes: Array[String] = []
 
-# Mode/diff/lang keys for Locale.t()
+# Mode/diff/lang keys for tr()
 const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
 const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard"]
-const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech"]
-const LANG_CODES = ["auto", "en", "cs"]
+const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_indonesian", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish"]
+const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
 
 func _ready() -> void:
 	# Load current config state into temp variables
@@ -90,8 +90,9 @@ func _cycle_diff(dir: int) -> void:
 
 func _cycle_lang(dir: int) -> void:
 	temp_lang_idx = (temp_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
-	# Temporarily set the language so Locale.t() previews the new language
+	# Temporarily set the language so tr() previews the new language
 	Config.language = LANG_CODES[temp_lang_idx]
+	TranslationServer.set_locale(Config.get_effective_language())
 	_update_labels()
 	_update_static_labels()
 
@@ -104,30 +105,31 @@ func _cycle_voice(_dir: int) -> void:
 	_update_labels()
 
 func _update_labels() -> void:
-	%ModeButton.text = Locale.t(MODE_KEYS[temp_mode])
-	%DiffButton.text = Locale.t(DIFF_KEYS[temp_diff])
+	%ModeButton.text = tr(MODE_KEYS[temp_mode])
+	%DiffButton.text = tr(DIFF_KEYS[temp_diff])
 	
 	# For "Auto", show the detected language in parentheses
-	var lang_text := Locale.t(LANG_KEYS[temp_lang_idx])
+	var lang_text := tr(LANG_KEYS[temp_lang_idx])
 	if temp_lang_idx == 0:
 		# Show which language auto resolves to
 		var detected := Config.get_effective_language()
-		var det_key := "lang_english" if detected == "en" else "lang_czech"
-		lang_text += " (%s)" % Locale.t(det_key)
+		var det_idx := LANG_CODES.find(detected)
+		if det_idx > 0:
+			lang_text += " (%s)" % tr(LANG_KEYS[det_idx])
 	%LangButton.text = lang_text
 	
 	%ThemeButton.text = themes[temp_theme_idx].capitalize()
-	%VoiceButton.text = Locale.t("on") if temp_voice else Locale.t("off")
+	%VoiceButton.text = tr("on") if temp_voice else tr("off")
 
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
-	%Title.text = Locale.t("settings_title")
-	%ModeTitle.text = Locale.t("setting_mode")
-	%DiffTitle.text = Locale.t("setting_diff")
-	%LangTitle.text = Locale.t("setting_lang")
-	%ThemeTitle.text = Locale.t("setting_theme")
-	%VoiceTitle.text = Locale.t("setting_voice")
-	%SaveButton.text = Locale.t("save_return")
+	%Title.text = tr("settings_title")
+	%ModeTitle.text = tr("setting_mode")
+	%DiffTitle.text = tr("setting_diff")
+	%LangTitle.text = tr("setting_lang")
+	%ThemeTitle.text = tr("setting_theme")
+	%VoiceTitle.text = tr("setting_voice")
+	%SaveButton.text = tr("save_return")
 
 func _on_save_pressed() -> void:
 	# Save temp variables back to singleton
@@ -137,6 +139,7 @@ func _on_save_pressed() -> void:
 	Config.theme_dir_name = themes[temp_theme_idx]
 	Config.voice_hints = temp_voice
 	Config.save_settings()
+	TranslationServer.set_locale(Config.get_effective_language())
 	
 	# Return to Main Menu
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

@@ -26,9 +26,11 @@ const CollectibleScene = preload("res://scenes/collectible.tscn")
 # ── UI layer ─────────────────────────────────────────────────────────────────
 var _win_container: Control = null
 var _win_label: Label = null
+var _score_label: Label = null
 var _next_button: Button = null
 var _harder_button: Button = null
 var _timer_label: Label = null
+var _suggestion_container: VBoxContainer = null
 
 # ── Top-bar HUD ──────────────────────────────────────────────────────────────
 const HUD_HEIGHT: float = 160.0
@@ -44,6 +46,7 @@ var _word_next_index: int = 0
 var _current_maze: MazeData = null
 var _collectibles: Dictionary = {}  # Vector2i -> Collectible
 var _win_timer_remaining: float = 0.0
+var _win_timer_paused: bool = false
 var _is_win_screen_active: bool = false
 var _elapsed_time: float = 0.0
 var _move_count: int = 0
@@ -71,7 +74,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Win countdown
-	if _is_win_screen_active and _win_timer_remaining > 0.0:
+	if _is_win_screen_active and not _win_timer_paused and _win_timer_remaining > 0.0:
 		_win_timer_remaining -= delta
 		if _timer_label:
 			_timer_label.text = str(ceili(_win_timer_remaining))
@@ -86,6 +89,17 @@ func _process(delta: float) -> void:
 			var mins := int(_elapsed_time) / 60
 			var secs := int(_elapsed_time) % 60
 			_hud_time_label.text = "%02d:%02d" % [mins, secs]
+
+func _input(event: InputEvent) -> void:
+	# Any interaction during win screen pauses the auto-countdown
+	# Using _input instead of _unhandled_input ensures focus doesn't block it
+	if _is_win_screen_active and not _win_timer_paused:
+		if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or \
+		   event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or \
+		   event.is_action_pressed("ui_accept"):
+			_win_timer_paused = true
+			if _timer_label:
+				_timer_label.text = "" # Hide number but keep spacer width
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Android TV 'Back' button maps to ui_cancel
@@ -155,14 +169,67 @@ func _on_player_reached_end() -> void:
 		_win_container.visible = true
 		_is_win_screen_active = true
 		_win_timer_remaining = 10.0
+		_win_timer_paused = false
 		
-		# Hide Challenge++ if already at max difficulty
+		# Hide "That was easy" (harder) if already at max difficulty
 		if _harder_button:
 			_harder_button.visible = (Config.difficulty < 3)
+			_harder_button.text = tr("that_was_easy")
 			
 		if _next_button:
 			_next_button.grab_focus()
-			_next_button.text = Locale.t("next_round")
+			_next_button.text = tr("next_round")
+			
+		if _score_label:
+			# Format elapsed time as mm:ss
+			var mins := int(_elapsed_time) / 60
+			var secs := int(_elapsed_time) % 60
+			var time_str := "%02d:%02d" % [mins, secs]
+			
+			var loc_time := tr("score_time") % time_str
+			var loc_steps := tr("score_steps") % _move_count
+			_score_label.text = "%s | %s" % [loc_time, loc_steps]
+		
+		_update_mode_suggestions()
+
+func _update_mode_suggestions() -> void:
+	# Clear old suggestions
+	for child in _suggestion_container.get_children():
+		child.queue_free()
+	
+	var current_mode := Config.game_mode
+	var suggestion_modes := []
+	
+	if current_mode == 1: # Numbers
+		suggestion_modes = [2, 3] # Alphabet, Words
+	elif current_mode == 2: # Alphabet
+		suggestion_modes = [1, 3] # Numbers, Words
+	elif current_mode == 3: # Words
+		suggestion_modes = [1, 2] # Numbers, Alphabet
+	else: # Normal or other
+		suggestion_modes = [1, 2, 3]
+	
+	for m in suggestion_modes:
+		var key := ""
+		match m:
+			1: key = "try_numbers"
+			2: key = "try_alphabet"
+			3: key = "try_words"
+		
+		if not key.is_empty():
+			var hbox := HBoxContainer.new()
+			hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+			_suggestion_container.add_child(hbox)
+			
+			var btn := _create_styled_button(tr(key), 650, 100, Color(0.4, 0.6, 0.9)) # Blue-ish for suggestions
+			btn.pressed.connect(_on_suggestion_pressed.bind(m))
+			hbox.add_child(btn)
+
+func _on_suggestion_pressed(target_mode: int) -> void:
+	Config.game_mode = target_mode
+	Config.save_settings()
+	_is_win_screen_active = false
+	_start_new_maze()
 
 ## Actions for the win screen buttons.
 func _on_next_round_pressed() -> void:
@@ -336,11 +403,18 @@ func _create_win_label() -> void:
 
 	# 1. Header
 	_win_label = Label.new()
-	_win_label.text = Locale.t("you_win")
+	_win_label.text = tr("you_win")
 	_win_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_win_label.add_theme_font_size_override("font_size", 90)
 	_win_label.add_theme_color_override("font_color", Color(0.3, 0.85, 0.4)) # Green
 	vbox.add_child(_win_label)
+
+	_score_label = Label.new()
+	_score_label.text = "⏱ 00:00 | 🚶 0"
+	_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_score_label.add_theme_font_size_override("font_size", 40)
+	_score_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	vbox.add_child(_score_label)
 
 	var button_vbox := VBoxContainer.new()
 	button_vbox.add_theme_constant_override("separation", 20)
@@ -356,7 +430,7 @@ func _create_win_label() -> void:
 	next_spacer_l.custom_minimum_size.x = 80
 	next_hbox.add_child(next_spacer_l)
 
-	_next_button = _create_styled_button(Locale.t("next_round"), 500, 100)
+	_next_button = _create_styled_button(tr("next_round"), 650, 100)
 	_next_button.pressed.connect(_on_next_round_pressed)
 	next_hbox.add_child(_next_button)
 
@@ -379,7 +453,7 @@ func _create_win_label() -> void:
 	h_spacer_l.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_l)
 
-	_harder_button = _create_styled_button(Locale.t("challenge_pp"), 500, 100, Color(0.92, 0.75, 0.2)) # Yellow focus
+	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color(0.92, 0.75, 0.2)) # Yellow focus
 	_harder_button.pressed.connect(_on_harder_pressed)
 	harder_hbox.add_child(_harder_button)
 	
@@ -387,7 +461,17 @@ func _create_win_label() -> void:
 	h_spacer_r.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_r)
 
-	# 4. Home Button
+	# 4. Mode Suggestions
+	_suggestion_container = VBoxContainer.new()
+	_suggestion_container.add_theme_constant_override("separation", 20)
+	button_vbox.add_child(_suggestion_container)
+
+	# Padding before Main Menu
+	var padding := Control.new()
+	padding.custom_minimum_size.y = 40
+	button_vbox.add_child(padding)
+
+	# 5. Home Button
 	var home_hbox := HBoxContainer.new()
 	home_hbox.add_theme_constant_override("separation", 20)
 	home_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -397,7 +481,7 @@ func _create_win_label() -> void:
 	home_spacer_l.custom_minimum_size.x = 80
 	home_hbox.add_child(home_spacer_l)
 
-	var home_btn := _create_styled_button(Locale.t("main_menu"), 500, 100, Color(0.7, 0.75, 0.8)) # Grey focus
+	var home_btn := _create_styled_button(tr("main_menu"), 650, 100, Color(0.7, 0.75, 0.8)) # Grey focus
 	home_btn.pressed.connect(_on_home_pressed)
 	home_hbox.add_child(home_btn)
 	
@@ -558,12 +642,12 @@ func _on_player_bumped(_dir: Vector2i) -> void:
 
 ## ── TTS Voice Hints ─────────────────────────────────────────────────────────
 
-## Speak text using the OS TTS engine, matching the current game language.
-func _speak(text: String, rate: float = 1.0) -> void:
+## Speak text using the OS TTS engine, matching the current game language (unless overridden).
+func _speak(text: String, rate: float = 1.0, lang_override: String = "") -> void:
 	if not Config.voice_hints:
 		return
 		
-	var lang := Config.get_effective_language() # "en" or "cs"
+	var lang := lang_override if not lang_override.is_empty() else Config.get_effective_language()
 	var speak_text := text.to_lower()
 	
 	# Find a voice that matches the language.
@@ -583,12 +667,14 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 		
 		# Words mode: enforce collection order
 		if Config.game_mode == 3 and col.collect_index >= 0:
+			var word_lang: String = Config.current_word.get("lang", "")
+			
 			if col.collect_index == _word_next_index:
 				# Correct letter — collect it and light up HUD
 				col.collect()
 				_collectibles.erase(new_pos)
 				_light_up_word_letter(_word_next_index)
-				_speak(val, 0.85) # Speak the letter 15% slower
+				_speak(val, 0.85, word_lang) # Speak the letter (with word-specific lang)
 				
 				_word_next_index += 1
 				
@@ -597,7 +683,7 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 					var full_word: String = Config.current_word.get("word", "")
 					if not full_word.is_empty():
 						# 1.0s delay as requested, and 30% slower (0.7 rate)
-						get_tree().create_timer(1.0).timeout.connect(func(): _speak(full_word, 0.7))
+						get_tree().create_timer(1.0).timeout.connect(func(): _speak(full_word, 0.7, word_lang))
 			else:
 				# Wrong order — shake the collectible to give feedback
 				_shake_collectible(col)

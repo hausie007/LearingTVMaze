@@ -73,10 +73,11 @@ alignment = 1
 
 [node name="ModeTitle" type="Label" parent="CenterContainer/VBoxContainer/RowMode"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Game Mode:"
+horizontal_alignment = 2
 
 [node name="ModeButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowMode"]
 layout_mode = 2
@@ -120,10 +121,11 @@ alignment = 1
 
 [node name="DiffTitle" type="Label" parent="CenterContainer/VBoxContainer/RowDiff"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Difficulty:"
+horizontal_alignment = 2
 
 [node name="DiffButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowDiff"]
 layout_mode = 2
@@ -167,10 +169,11 @@ alignment = 1
 
 [node name="LangTitle" type="Label" parent="CenterContainer/VBoxContainer/RowLang"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Language:"
+horizontal_alignment = 2
 
 [node name="LangButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowLang"]
 layout_mode = 2
@@ -214,10 +217,11 @@ alignment = 1
 
 [node name="ThemeTitle" type="Label" parent="CenterContainer/VBoxContainer/RowTheme"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Theme:"
+horizontal_alignment = 2
 
 [node name="ThemeButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowTheme"]
 layout_mode = 2
@@ -261,10 +265,11 @@ alignment = 1
 
 [node name="VoiceTitle" type="Label" parent="CenterContainer/VBoxContainer/RowVoice"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Voice Hints:"
+horizontal_alignment = 2
 
 [node name="VoiceButtonContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/RowVoice"]
 layout_mode = 2

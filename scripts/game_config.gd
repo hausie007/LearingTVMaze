@@ -26,22 +26,28 @@ var difficulty: int = 1
 ## Current active theme directory name. "default" is the built-in fallback.
 var theme_dir_name: String = "default"
 
-## Language code for word lists. "auto" = detect from OS. Valid: "auto", "en", "cs"
+## Language code for word lists. "auto" = detect from OS. Valid: "auto", "en", "cs", "de"
 var language: String = "auto"
 
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
-const LANGUAGES: Array[String] = ["auto", "en", "cs"]
-const SUPPORTED_LANGS: Array[String] = ["en", "cs"]
+const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
+const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
 var current_word: Dictionary = {}
 var theme_dir: String:
 	get:
-		if theme_dir_name == "default":
-			return "res://themes/default"
-		return "user://themes/".path_join(theme_dir_name) # Future-proofing for downloaded themes
+		var res_path := "res://themes/".path_join(theme_dir_name)
+		if DirAccess.dir_exists_absolute(res_path):
+			return res_path
+		
+		var user_path := "user://themes/".path_join(theme_dir_name)
+		if DirAccess.dir_exists_absolute(user_path):
+			return user_path
+			
+		return "res://themes/default"
 
 # Difficulty -> Grid Size mapping
 const DIFFICULTY_SIZES: Array[Vector2i] = [
@@ -106,6 +112,7 @@ var color_end: Color = Color(0.25, 0.60, 0.95).lerp(color_floor, 0.75)
 
 func _ready() -> void:
 	load_settings()
+	TranslationServer.set_locale(get_effective_language())
 
 func save_settings() -> void:
 	var config := ConfigFile.new()
@@ -143,17 +150,29 @@ func get_effective_language() -> String:
 
 ## Scan available themes dynamically.
 func get_available_themes() -> Array[String]:
-	var themes: Array[String] = ["default"]
+	var themes: Array[String] = []
 	
-	# Future expansion: scan user://themes/ for downloaded themes
-	var dir := DirAccess.open("user://themes/")
+	# 1. Scan built-in themes
+	_scan_theme_dir("res://themes/", themes)
+	
+	# 2. Scan user-downloaded themes
+	_scan_theme_dir("user://themes/", themes)
+	
+	if themes.is_empty():
+		themes.append("default")
+		
+	return themes
+
+func _scan_theme_dir(path: String, out_list: Array[String]) -> void:
+	if not DirAccess.dir_exists_absolute(path):
+		return
+		
+	var dir := DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir() and not file_name.begins_with("."):
-				if not themes.has(file_name):
-					themes.append(file_name)
+				if not out_list.has(file_name):
+					out_list.append(file_name)
 			file_name = dir.get_next()
-			
-	return themes

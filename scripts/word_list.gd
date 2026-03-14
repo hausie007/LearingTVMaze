@@ -51,11 +51,13 @@ static func get_random_word(lang: String, difficulty: int) -> Dictionary:
 static func _load_word_list(lang: String, difficulty: int) -> Array:
 	var diff_clamped := clampi(difficulty, 0, 3)
 	var path := "res://data/words/words_%s_%d.json" % [lang, diff_clamped]
+	var actual_lang := lang
 	
 	if not FileAccess.file_exists(path):
 		if lang != "en":
 			push_warning("WordList: file not found: %s — falling back to English" % path)
 			path = "res://data/words/words_en_%d.json" % diff_clamped
+			actual_lang = "en"
 			if not FileAccess.file_exists(path):
 				push_warning("WordList: English fallback also missing: %s" % path)
 				return []
@@ -77,6 +79,10 @@ static func _load_word_list(lang: String, difficulty: int) -> Array:
 	
 	var data = json.get_data()
 	if data is Array:
+		# Inject the actual language used into each word entry
+		for item in data:
+			if item is Dictionary:
+				item["lang"] = actual_lang
 		return data
 	
 	push_warning("WordList: expected Array in %s" % path)
