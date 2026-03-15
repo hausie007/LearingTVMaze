@@ -37,6 +37,11 @@ const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "id"
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
 var current_word: Dictionary = {}
+
+## Cache of language codes that have at least one TTS voice installed.
+var _installed_tts_langs: Array[String] = []
+var _tts_scan_thread: Thread = null
+
 var theme_dir: String:
 	get:
 		var res_path := "res://themes/".path_join(theme_dir_name)
@@ -113,6 +118,34 @@ var color_end: Color = Color(0.25, 0.60, 0.95).lerp(color_floor, 0.75)
 func _ready() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
+	
+	# Start background TTS scan
+	_tts_scan_thread = Thread.new()
+	_tts_scan_thread.start(_scan_all_tts_voices)
+
+func _exit_tree() -> void:
+	if _tts_scan_thread and _tts_scan_thread.is_alive():
+		_tts_scan_thread.wait_to_finish()
+
+## Background worker to pre-cache voice availability.
+func _scan_all_tts_voices() -> void:
+	var results: Array[String] = []
+	for lang_code in LANGUAGES:
+		var check_lang = lang_code
+		if check_lang == "auto":
+			check_lang = get_effective_language()
+		
+		# DisplayServer.tts_get_voices_for_language is safe to call from thread
+		if not DisplayServer.tts_get_voices_for_language(check_lang).is_empty():
+			if not results.has(lang_code):
+				results.append(lang_code)
+	
+	# Atomically swap the results
+	_installed_tts_langs = results
+
+## Instantaneous cached check for voice availability.
+func is_tts_available(lang_code: String) -> bool:
+	return _installed_tts_langs.has(lang_code)
 
 func save_settings() -> void:
 	var config := ConfigFile.new()

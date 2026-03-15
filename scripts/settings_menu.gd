@@ -13,6 +13,7 @@ const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard"]
 const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_indonesian", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish"]
 const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
 var _is_saving: bool = false
+var _tts_warning_label: Label = null
 
 func _ready() -> void:
 	# Load current config state into temp variables
@@ -47,6 +48,29 @@ func _ready() -> void:
 	# Focus first interactive element for TV
 	if has_node("%ModeButton"):
 		%ModeButton.grab_focus()
+
+func _create_tts_warning() -> void:
+	if _tts_warning_label: return
+	
+	# Add as a child of the button so it doesn't affect the parent container layout
+	var voice_btn = get_node_or_null("%VoiceButton")
+	if voice_btn:
+		_tts_warning_label = Label.new()
+		_tts_warning_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_tts_warning_label.add_theme_font_size_override("font_size", 24) # Tiny bit bigger
+		_tts_warning_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_tts_warning_label.visible = false
+		
+		voice_btn.add_child(_tts_warning_label)
+		
+		# Overlay it beneath the button using anchors
+		_tts_warning_label.anchors_preset = Control.PRESET_CENTER_BOTTOM
+		_tts_warning_label.anchor_left = 0.0
+		_tts_warning_label.anchor_right = 1.0
+		_tts_warning_label.anchor_top = 1.0
+		_tts_warning_label.anchor_bottom = 1.0
+		_tts_warning_label.grow_vertical = Control.GROW_DIRECTION_BOTH
+		_tts_warning_label.offset_top = 25 # More below, not touching the button!
 
 func _input(event: InputEvent) -> void:
 	if _is_saving: return
@@ -146,8 +170,28 @@ func _update_labels() -> void:
 	
 	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
 		%ThemeButton.text = themes[temp_theme_idx].capitalize()
+	
 	if has_node("%VoiceButton"):
 		%VoiceButton.text = tr("on") if temp_voice else tr("off")
+		
+		# Instant check using Config's background cache
+		var current_lang_code = LANG_CODES[temp_lang_idx]
+		var is_available = Config.is_tts_available(current_lang_code) if Config else false
+		
+		if not is_available:
+			%VoiceButton.modulate = Color(1, 1, 1, 0.4) # Dimmed
+			if not _tts_warning_label: _create_tts_warning()
+			if _tts_warning_label: 
+				_tts_warning_label.visible = true
+				_tts_warning_label.text = tr("tts_missing")
+				_tts_warning_label.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4)) # Soft red
+		else:
+			%VoiceButton.modulate = Color(1, 1, 1, 1.0) # Full
+			if not _tts_warning_label: _create_tts_warning()
+			if _tts_warning_label:
+				_tts_warning_label.visible = true
+				_tts_warning_label.text = tr("tts_ready")
+				_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4)) # Green
 
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
