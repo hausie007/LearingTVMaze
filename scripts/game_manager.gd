@@ -51,6 +51,15 @@ var _is_win_screen_active: bool = false
 var _elapsed_time: float = 0.0
 var _move_count: int = 0
 
+# ── Threaded TTS (Android TV Optimization) ───────────────────────────────────
+var _tts_thread: Thread = null
+var _tts_mutex: Mutex = null
+var _tts_semaphore: Semaphore = null
+var _tts_exit_flag: bool = false
+var _tts_pending_text: String = ""
+var _tts_pending_voice: String = ""
+var _tts_pending_rate: float = 1.0
+
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
@@ -71,6 +80,21 @@ func _ready() -> void:
 
 	# Generate and display the first maze.
 	_start_new_maze()
+
+	# Start TTS background thread
+	_tts_mutex = Mutex.new()
+	_tts_semaphore = Semaphore.new()
+	_tts_thread = Thread.new()
+	_tts_thread.start(_tts_worker_loop)
+
+func _exit_tree() -> void:
+	# Clean up TTS thread
+	if _tts_thread and _tts_thread.is_alive():
+		_tts_mutex.lock()
+		_tts_exit_flag = true
+		_tts_mutex.unlock()
+		_tts_semaphore.post()
+		_tts_thread.wait_to_finish()
 
 func _process(delta: float) -> void:
 	# Win countdown
@@ -650,12 +674,47 @@ func _speak(text: String, rate: float = 1.0, lang_override: String = "") -> void
 	var lang := lang_override if not lang_override.is_empty() else Config.get_effective_language()
 	var speak_text := text.to_lower()
 	
-	# Find a voice that matches the language.
 	var voices := DisplayServer.tts_get_voices_for_language(lang)
-	if voices.is_empty():
-		DisplayServer.tts_speak(speak_text, "", 50, 1.0, rate)
-	else:
-		DisplayServer.tts_speak(speak_text, voices[0], 50, 1.0, rate)
+	var voice_id := ""
+	if not voices.is_empty():
+		voice_id = voices[0]
+	
+	# Pass to background thread
+	_tts_mutex.lock()
+	_tts_pending_text = speak_text
+	_tts_pending_voice = voice_id
+	_tts_pending_rate = rate
+	_tts_mutex.unlock()
+	
+	_tts_semaphore.post()
+
+
+## Background thread loop for TTS calls
+func _tts_worker_loop() -> void:
+	while true:
+		_tts_semaphore.wait()
+		
+		var text: String = ""
+		var voice: String = ""
+		var rate: float = 1.0
+		
+		_tts_mutex.lock()
+		if _tts_exit_flag:
+			_tts_mutex.unlock()
+			break
+		
+		# Grab the LATEST request and clear the pending state
+		text = _tts_pending_text
+		voice = _tts_pending_voice
+		rate = _tts_pending_rate
+		_tts_pending_text = ""
+		_tts_mutex.unlock()
+		
+		if not text.is_empty():
+			# Note: DisplayServer methods are generally thread-safe in Godot 4,
+			# but offloading the block solves the OS-level UI lag.
+			DisplayServer.tts_stop()
+			DisplayServer.tts_speak(text, voice, 50, 1.0, rate)
 
 func _on_player_moved(new_pos: Vector2i) -> void:
 	_move_count += 1

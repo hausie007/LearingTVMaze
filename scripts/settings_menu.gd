@@ -12,22 +12,24 @@ const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
 const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard"]
 const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_indonesian", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish"]
 const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
+var _is_saving: bool = false
 
 func _ready() -> void:
 	# Load current config state into temp variables
-	temp_mode = Config.game_mode
-	temp_diff = Config.difficulty
-	themes = Config.get_available_themes()
-	
-	temp_theme_idx = themes.find(Config.theme_dir_name)
-	if temp_theme_idx < 0:
-		temp_theme_idx = 0
-	
-	temp_lang_idx = LANG_CODES.find(Config.language)
-	if temp_lang_idx < 0:
-		temp_lang_idx = 0
+	if Config:
+		temp_mode = Config.game_mode
+		temp_diff = Config.difficulty
+		themes = Config.get_available_themes()
 		
-	temp_voice = Config.voice_hints
+		temp_theme_idx = themes.find(Config.theme_dir_name)
+		if temp_theme_idx < 0:
+			temp_theme_idx = 0
+		
+		temp_lang_idx = LANG_CODES.find(Config.language)
+		if temp_lang_idx < 0:
+			temp_lang_idx = 0
+			
+		temp_voice = Config.voice_hints
 		
 	# Wire up buttons
 	_setup_cycling_button(%ModeButton, func(dir): _cycle_mode(dir))
@@ -36,33 +38,45 @@ func _ready() -> void:
 	_setup_cycling_button(%ThemeButton, func(dir): _cycle_theme(dir))
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	
-	%SaveButton.pressed.connect(_on_save_pressed)
+	if has_node("%SaveButton"):
+		%SaveButton.pressed.connect(_on_save_pressed)
 	
 	_update_labels()
 	_update_static_labels()
 	
 	# Focus first interactive element for TV
-	%ModeButton.grab_focus()
+	if has_node("%ModeButton"):
+		%ModeButton.grab_focus()
+
+func _input(event: InputEvent) -> void:
+	if _is_saving: return
+	
+	if event.is_action_pressed("ui_cancel"):
+		# Set handled BEFORE calling save, to stop bubbling
+		get_viewport().set_input_as_handled()
+		_on_save_pressed()
 
 func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
+	if not btn: return
+	
 	# Find relative arrows based on button name
 	var base_name = btn.name.replace("Button", "")
-	var left_arrow: Label = get_node_or_null("%%%sLeftArrow" % base_name)
-	var right_arrow: Label = get_node_or_null("%%%sRightArrow" % base_name)
+	var left_arrow = get_node_or_null("%%%sLeftArrow" % base_name)
+	var right_arrow = get_node_or_null("%%%sRightArrow" % base_name)
 	
 	if left_arrow: left_arrow.modulate.a = 0.0
 	if right_arrow: right_arrow.modulate.a = 0.0
 	
 	# Show arrows when focused
 	btn.focus_entered.connect(func():
-		if left_arrow: left_arrow.modulate.a = 1.0
-		if right_arrow: right_arrow.modulate.a = 1.0
+		if is_instance_valid(left_arrow): left_arrow.modulate.a = 1.0
+		if is_instance_valid(right_arrow): right_arrow.modulate.a = 1.0
 	)
 	
 	# Hide arrows when focus is lost
 	btn.focus_exited.connect(func():
-		if left_arrow: left_arrow.modulate.a = 0.0
-		if right_arrow: right_arrow.modulate.a = 0.0
+		if is_instance_valid(left_arrow): left_arrow.modulate.a = 0.0
+		if is_instance_valid(right_arrow): right_arrow.modulate.a = 0.0
 	)
 	
 	# Cycle on click
@@ -81,22 +95,27 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	)
 
 func _cycle_mode(dir: int) -> void:
+	if MODE_KEYS.size() == 0: return
 	temp_mode = (temp_mode + dir + MODE_KEYS.size()) % MODE_KEYS.size()
 	_update_labels()
 
 func _cycle_diff(dir: int) -> void:
+	if DIFF_KEYS.size() == 0: return
 	temp_diff = (temp_diff + dir + DIFF_KEYS.size()) % DIFF_KEYS.size()
 	_update_labels()
 
 func _cycle_lang(dir: int) -> void:
+	if LANG_KEYS.size() == 0: return
 	temp_lang_idx = (temp_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
 	# Temporarily set the language so tr() previews the new language
-	Config.language = LANG_CODES[temp_lang_idx]
-	TranslationServer.set_locale(Config.get_effective_language())
+	if Config and temp_lang_idx < LANG_CODES.size():
+		Config.language = LANG_CODES[temp_lang_idx]
+		TranslationServer.set_locale(Config.get_effective_language())
 	_update_labels()
 	_update_static_labels()
 
 func _cycle_theme(dir: int) -> void:
+	if themes.size() == 0: return
 	temp_theme_idx = (temp_theme_idx + dir + themes.size()) % themes.size()
 	_update_labels()
 
@@ -105,41 +124,56 @@ func _cycle_voice(_dir: int) -> void:
 	_update_labels()
 
 func _update_labels() -> void:
-	%ModeButton.text = tr(MODE_KEYS[temp_mode])
-	%DiffButton.text = tr(DIFF_KEYS[temp_diff])
+	if has_node("%ModeButton") and temp_mode < MODE_KEYS.size():
+		%ModeButton.text = tr(MODE_KEYS[temp_mode])
+	if has_node("%DiffButton") and temp_diff < DIFF_KEYS.size():
+		%DiffButton.text = tr(DIFF_KEYS[temp_diff])
 	
 	# For "Auto", show the detected language in parentheses
-	var lang_text := tr(LANG_KEYS[temp_lang_idx])
-	if temp_lang_idx == 0:
+	var lang_text := ""
+	if temp_lang_idx < LANG_KEYS.size():
+		lang_text = tr(LANG_KEYS[temp_lang_idx])
+		
+	if temp_lang_idx == 0 and Config:
 		# Show which language auto resolves to
 		var detected := Config.get_effective_language()
 		var det_idx := LANG_CODES.find(detected)
-		if det_idx > 0:
+		if det_idx > 0 and det_idx < LANG_KEYS.size():
 			lang_text += " (%s)" % tr(LANG_KEYS[det_idx])
-	%LangButton.text = lang_text
+			
+	if has_node("%LangButton"):
+		%LangButton.text = lang_text
 	
-	%ThemeButton.text = themes[temp_theme_idx].capitalize()
-	%VoiceButton.text = tr("on") if temp_voice else tr("off")
+	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
+		%ThemeButton.text = themes[temp_theme_idx].capitalize()
+	if has_node("%VoiceButton"):
+		%VoiceButton.text = tr("on") if temp_voice else tr("off")
 
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
-	%Title.text = tr("settings_title")
-	%ModeTitle.text = tr("setting_mode")
-	%DiffTitle.text = tr("setting_diff")
-	%LangTitle.text = tr("setting_lang")
-	%ThemeTitle.text = tr("setting_theme")
-	%VoiceTitle.text = tr("setting_voice")
-	%SaveButton.text = tr("save_return")
+	if has_node("%Title"): %Title.text = tr("settings_title")
+	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
+	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")
+	if has_node("%LangTitle"): %LangTitle.text = tr("setting_lang")
+	if has_node("%ThemeTitle"): %ThemeTitle.text = tr("setting_theme")
+	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
+	if has_node("%SaveButton"): %SaveButton.text = tr("save_return")
 
 func _on_save_pressed() -> void:
+	if _is_saving: return
+	_is_saving = true
+	
 	# Save temp variables back to singleton
-	Config.game_mode = temp_mode
-	Config.difficulty = temp_diff
-	Config.language = LANG_CODES[temp_lang_idx]
-	Config.theme_dir_name = themes[temp_theme_idx]
-	Config.voice_hints = temp_voice
-	Config.save_settings()
-	TranslationServer.set_locale(Config.get_effective_language())
+	if Config:
+		Config.game_mode = temp_mode
+		Config.difficulty = temp_diff
+		if temp_lang_idx < LANG_CODES.size():
+			Config.language = LANG_CODES[temp_lang_idx]
+		if temp_theme_idx < themes.size():
+			Config.theme_dir_name = themes[temp_theme_idx]
+		Config.voice_hints = temp_voice
+		Config.save_settings()
+		TranslationServer.set_locale(Config.get_effective_language())
 	
 	# Return to Main Menu
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

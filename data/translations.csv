@@ -8,7 +8,7 @@ setting_diff,Difficulty:,Obtížnost:,Schwierigkeit:,Dificultad:,Difficulté :,D
 setting_lang,Language:,Jazyk:,Sprache:,Idioma:,Langue :,Idioma:,Bahasa:,Ngôn ngữ:,Dil:,Lingua:,Język:
 setting_theme,Theme:,Téma:,Thema:,Tema:,Thème :,Tema:,Tema:,Chủ đề:,Tema:,Tema:,Temat:
 setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :,Dicas de voz:,Petunjuk Suara:,Gợi ý bằng giọng nói:,Sesli İpuçları:,Suggerimenti vocali:,Wskazówki głosowe:
-save_return,Save & Return,Uložit,Zurück,Guardar y salir,Sauvegarder,Salvar e Voltar,Simpan & Kembali,Lưu và Quay lại,Kaydet ve Dön,Salva e Torna,Zapisz i wróć
+save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Kembali,Quay lại,Geri,Indietro,Powrót
 on,On,Zapnuto,An,Activado,Activé,Ligado,Aktif,Bật,Açık,Attivato,Włączone
 off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Nonaktif,Tắt,Kapalı,Disattivato,Wyłączone
 mode_normal,Normal (Maze Only),Normální (jen bludiště),Normal (Nur Labyrinth),Normal (Solo laberinto),Normal (Labyrinthe uniquement),Normal (Apenas labirinto),Normal (Hanya labirin),Bình thường (Chỉ mê cung),Normal (Sadece Labirent),Normale (Solo labirinto),Normalny (Tylko labirynt)
@@ -40,3 +40,6 @@ try_alphabet,Try Alphabet,Zkusit Abecedu,Alphabet versuchen,Probar Alfabet,Essay
 try_words,Try Words,Zkusit Slova,Wörter versuchen,Probar Palabras,Essayer Mots,Tentar Palavras,Coba Kata,Thử Từ ngữ,Kelimelerı Dene,Prova Parole,Spróbuj Słowa
 score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Waktu: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s
 score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d langkah,%d bước,%d adım,%d passi,%d kroków
+quit_confirm,Are you sure you want to exit?,Opravdu chcete odejít?,Möchten Sie wirklich beenden?,¿Estás seguro de que quieres salir?,Êtes-vous sûr de vouloir quitter ?,Tem certeza de que deseja sair?,Apakah Anda yakin ingin keluar?,Bạn có chắc chắn muốn thoát không?,Çıkmak istediğinizden emin misiniz?,Sei sicuro di voler uscire?,Czy na pewno chcesz wyjść?
+yes,Yes,Ano,Ja,Sí,Oui,Sim,Ya,Có,Evet,Sì,Tak
+no,No,Ne,Nein,No,Non,Não,Tidak,Không,Hayır,No,Nie
