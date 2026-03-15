@@ -8,6 +8,9 @@ extends Control
 var _quit_dialog: CanvasLayer = null
 var _quit_no_button: Button = null
 
+# Prevent "leaked" Back button presses from previous scene
+var _input_locked: bool = true
+
 func _ready() -> void:
 	play_btn.pressed.connect(_on_play_pressed)
 	settings_btn.pressed.connect(_on_settings_pressed)
@@ -19,8 +22,21 @@ func _ready() -> void:
 	
 	# Pre-select Play button for TV D-pad
 	play_btn.grab_focus()
+	
+	# Release input lock after a short delay
+	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if not _input_locked:
+			if _quit_dialog and _quit_dialog.visible:
+				_hide_quit_dialog()
+			else:
+				_show_quit_dialog()
 
 func _input(event: InputEvent) -> void:
+	if _input_locked: return
+	
 	if event.is_action_pressed("ui_cancel"):
 		if _quit_dialog and _quit_dialog.visible:
 			_hide_quit_dialog()

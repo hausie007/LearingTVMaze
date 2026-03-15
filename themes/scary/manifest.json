@@ -1,0 +1,19 @@
+{
+  "title": "Scary",
+  "assets": {
+    "player": "player.png",
+    "start": "start.png",
+    "end": "finish.png",
+    "background": "tile4.png"
+  },
+  "colors": {
+    "wall": "#221934",
+    "wall_border": "#5B4A73",
+    "start_cell": "#6A2E5E",
+    "end_cell": "#A85A2A",
+    "player": "#38A9FF"
+  },
+  "background": {
+    "tiled": true
+  }
+}

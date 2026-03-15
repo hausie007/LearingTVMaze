@@ -96,6 +96,10 @@ func _exit_tree() -> void:
 		_tts_semaphore.post()
 		_tts_thread.wait_to_finish()
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
 func _process(delta: float) -> void:
 	# Win countdown
 	if _is_win_screen_active and not _win_timer_paused and _win_timer_remaining > 0.0:
@@ -197,7 +201,7 @@ func _on_player_reached_end() -> void:
 		
 		# Hide "That was easy" (harder) if already at max difficulty
 		if _harder_button:
-			_harder_button.visible = (Config.difficulty < 3)
+			_harder_button.visible = (Config.difficulty < 4)
 			_harder_button.text = tr("that_was_easy")
 			
 		if _next_button:
@@ -261,9 +265,9 @@ func _on_next_round_pressed() -> void:
 	_start_new_maze()
 
 func _on_harder_pressed() -> void:
-	if Config.difficulty >= 3: return
+	if Config.difficulty >= 4: return
 	_is_win_screen_active = false
-	Config.difficulty = clampi(Config.difficulty + 1, 0, 3)
+	Config.difficulty = clampi(Config.difficulty + 1, 0, 4)
 	Config.save_settings()
 	_start_new_maze()
 
@@ -598,7 +602,7 @@ func _spawn_collectibles() -> void:
 		
 		# Add to tree and position it
 		add_child(col)
-		col.setup(maze_renderer.get_cell_size())
+		col.setup(maze_renderer.get_cell_size(), maze_renderer.theme)
 		col.position = maze_renderer.grid_to_pixel(cell.coords)
 		
 		# Track it for pickup detection
@@ -637,23 +641,31 @@ func _spawn_word_collectibles() -> void:
 	if L == 0:
 		return
 	
-	var num_letters: int = word.length()
+	# Filter out spaces for collectibles
+	var collectible_chars: Array[int] = [] # indices in the word
+	for i in range(word.length()):
+		if word[i] != " ":
+			collectible_chars.append(i)
 	
-	# Space the letters evenly along the path
-	var step: float = float(L) / float(num_letters)
+	var num_collectibles: int = collectible_chars.size()
+	if num_collectibles == 0: return
+
+	# Space the collectibles evenly along the path
+	var step: float = float(L) / float(num_collectibles)
 	
-	for i in range(num_letters):
-		var idx: int = int(i * step + (step / 2.0))
-		idx = mini(idx, L - 1)
-		var cell := temp_path[idx]
+	for i in range(num_collectibles):
+		var char_idx: int = collectible_chars[i]
+		var path_idx: int = int(i * step + (step / 2.0))
+		path_idx = mini(path_idx, L - 1)
+		var cell := temp_path[path_idx]
 		
 		var col: Collectible = CollectibleScene.instantiate()
 		col.grid_pos = cell.coords
-		col.value_str = word[i]
-		col.collect_index = i  # Index in the word for order validation
+		col.value_str = word[char_idx]
+		col.collect_index = char_idx  # Original index in the full word/phrase
 		
 		add_child(col)
-		col.setup(maze_renderer.get_cell_size())
+		col.setup(maze_renderer.get_cell_size(), maze_renderer.theme)
 		col.position = maze_renderer.grid_to_pixel(cell.coords)
 		
 		_collectibles[cell.coords] = col
@@ -674,10 +686,8 @@ func _speak(text: String, rate: float = 1.0, lang_override: String = "") -> void
 	var lang := lang_override if not lang_override.is_empty() else Config.get_effective_language()
 	var speak_text := text.to_lower()
 	
-	var voices := DisplayServer.tts_get_voices_for_language(lang)
-	var voice_id := ""
-	if not voices.is_empty():
-		voice_id = voices[0]
+	# Use the cached voice ID to avoid blocking the main thread with OS queries
+	var voice_id := Config.get_tts_voice(lang)
 	
 	# Pass to background thread
 	_tts_mutex.lock()
@@ -733,16 +743,25 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 				col.collect()
 				_collectibles.erase(new_pos)
 				_light_up_word_letter(_word_next_index)
-				_speak(val, 0.85, word_lang) # Speak the letter (with word-specific lang)
+				_speak(val, 0.85, word_lang) # Speak the letter
 				
 				_word_next_index += 1
 				
-				# If word is complete, speak the full word!
-				if _word_next_index >= _word_letter_labels.size():
-					var full_word: String = Config.current_word.get("word", "")
-					if not full_word.is_empty():
-						# 1.0s delay as requested, and 30% slower (0.7 rate)
-						get_tree().create_timer(1.0).timeout.connect(func(): _speak(full_word, 0.7, word_lang))
+				# Check for spaces to auto-collect/skip
+				var word_full: String = Config.current_word.get("word", "")
+				var hit_word_boundary: bool = false
+				
+				while _word_next_index < word_full.length() and word_full[_word_next_index] == " ":
+					_light_up_word_letter(_word_next_index)
+					_word_next_index += 1
+					hit_word_boundary = true
+				
+				# If we hit a space or completed the whole thing, say the phrase collected so far
+				if hit_word_boundary or _word_next_index >= word_full.length():
+					var phrase_so_far := word_full.substr(0, _word_next_index).strip_edges()
+					if not phrase_so_far.is_empty():
+						# Use a small delay so literal letter finishes
+						get_tree().create_timer(1.2).timeout.connect(func(): _speak(phrase_so_far, 0.7, word_lang))
 			else:
 				# Wrong order — shake the collectible to give feedback
 				_shake_collectible(col)

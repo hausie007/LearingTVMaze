@@ -31,8 +31,8 @@ var language: String = "auto"
 
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
-const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
-const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "id", "vi", "tr", "it", "pl"]
+const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
+const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
@@ -40,7 +40,9 @@ var current_word: Dictionary = {}
 
 ## Cache of language codes that have at least one TTS voice installed.
 var _installed_tts_langs: Array[String] = []
-var _tts_scan_thread: Thread = null
+
+## Map of language codes to their first available voice ID.
+var _tts_voice_cache: Dictionary = {}
 
 var theme_dir: String:
 	get:
@@ -60,12 +62,13 @@ const DIFFICULTY_SIZES: Array[Vector2i] = [
 	Vector2i(7, 6),   # Easy
 	Vector2i(9, 8),   # Medium
 	Vector2i(13, 10), # Hard
+	Vector2i(20, 12), # Very Hard
 ]
 
 ## Effective grid dimensions in cells (width × height).
 var grid_size: Vector2i:
 	get:
-		return DIFFICULTY_SIZES[clampi(difficulty, 0, 3)]
+		return DIFFICULTY_SIZES[clampi(difficulty, 0, 4)]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -119,29 +122,49 @@ func _ready() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
 	
-	# Start background TTS scan
-	_tts_scan_thread = Thread.new()
-	_tts_scan_thread.start(_scan_all_tts_voices)
+	# Scan for available TTS voices synchronously (it's fast)
+	_scan_all_tts_voices()
 
-func _exit_tree() -> void:
-	if _tts_scan_thread and _tts_scan_thread.is_alive():
-		_tts_scan_thread.wait_to_finish()
-
-## Background worker to pre-cache voice availability.
+## Pre-cache voice availability and voice IDs for all supported languages.
 func _scan_all_tts_voices() -> void:
-	var results: Array[String] = []
-	for lang_code in LANGUAGES:
-		var check_lang = lang_code
-		if check_lang == "auto":
-			check_lang = get_effective_language()
-		
-		# DisplayServer.tts_get_voices_for_language is safe to call from thread
-		if not DisplayServer.tts_get_voices_for_language(check_lang).is_empty():
-			if not results.has(lang_code):
-				results.append(lang_code)
+	_installed_tts_langs.clear()
+	_tts_voice_cache.clear()
 	
-	# Atomically swap the results
-	_installed_tts_langs = results
+	# Get ALL voices from the system once
+	var all_voices := DisplayServer.tts_get_voices()
+	if all_voices.is_empty():
+		return
+	
+	for lang_code in LANGUAGES:
+		var target_lang := lang_code
+		if target_lang == "auto":
+			target_lang = get_effective_language()
+			
+		# Standardize the target code for prefix matching (e.g. "en")
+		var target_prefix := target_lang.to_lower() + "_"
+		var target_dash_prefix := target_lang.to_lower() + "-"
+		
+		# Look for a match among all system voices
+		var found_voice_id := ""
+		for v in all_voices:
+			var v_lang: String = v.get("language", "").to_lower()
+			# Exact match (e.g. "cs" == "cs") or prefix match (e.g. "cs" in "cs_CZ" or "cs-CZ")
+			if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
+				found_voice_id = v.get("id", "")
+				break
+		
+		if not found_voice_id.is_empty():
+			if not _installed_tts_langs.has(lang_code):
+				_installed_tts_langs.append(lang_code)
+			_tts_voice_cache[lang_code] = found_voice_id
+
+## Quick re-scan for external triggers (like entering Settings)
+func refresh_tts_cache() -> void:
+	_scan_all_tts_voices()
+
+## Quick retrieval of cached voice ID.
+func get_tts_voice(lang_code: String) -> String:
+	return _tts_voice_cache.get(lang_code, "")
 
 ## Instantaneous cached check for voice availability.
 func is_tts_available(lang_code: String) -> bool:

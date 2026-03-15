@@ -1,47 +1,47 @@
-keys,en,cs,de,es,fr,pt,id,vi,tr,it,pl
-app_title,Learning Maze,Učící Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Labirin Pembelajaran,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki
-play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Main,Chơi,Oyna,Gioca,Graj
-settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Pengaturan,Cài đặt,Ayarlar,Impostazioni,Ustawienia
-settings_title,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Pengaturan,Cài đặt,Ayarlar,Impostazioni,Ustawienia
-setting_mode,Game Mode:,Herní mód:,Spielmodus:,Modo de juego:,Mode de jeu :,Modo de jogo:,Mode Permainan:,Chế độ chơi:,Oyun Modu:,Modalità di gioco:,Tryb gry:
-setting_diff,Difficulty:,Obtížnost:,Schwierigkeit:,Dificultad:,Difficulté :,Dificuldade:,Kesulitan:,Độ khó:,Zorluk:,Difficoltà:,Poziom trudności:
-setting_lang,Language:,Jazyk:,Sprache:,Idioma:,Langue :,Idioma:,Bahasa:,Ngôn ngữ:,Dil:,Lingua:,Język:
-setting_theme,Theme:,Téma:,Thema:,Tema:,Thème :,Tema:,Tema:,Chủ đề:,Tema:,Tema:,Temat:
-setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :,Dicas de voz:,Petunjuk Suara:,Gợi ý bằng giọng nói:,Sesli İpuçları:,Suggerimenti vocali:,Wskazówki głosowe:
-save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Kembali,Quay lại,Geri,Indietro,Powrót
-on,On,Zapnuto,An,Activado,Activé,Ligado,Aktif,Bật,Açık,Attivato,Włączone
-off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Nonaktif,Tắt,Kapalı,Disattivato,Wyłączone
-mode_normal,Normal (Maze Only),Normální (jen bludiště),Normal (Nur Labyrinth),Normal (Solo laberinto),Normal (Labyrinthe uniquement),Normal (Apenas labirinto),Normal (Hanya labirin),Bình thường (Chỉ mê cung),Normal (Sadece Labirent),Normale (Solo labirinto),Normalny (Tylko labirynt)
-mode_numbers,Numbers,Čísla,Zahlen,Números,Nombres,Números,Angka,Con số,Sayılar,Numeri,Liczby
-mode_letters,Alphabet,Abeceda,Alphabet,Alfabeto,Alphabet,Alfabeto,Alfabet,Chữ cái,Alfabe,Alfabeto,Alfabet
-mode_words,Words,Slova,Wörter,Palabras,Mots,Palavras,Kata,Từ ngữ,Kelimeler,Parole,Słowa
-diff_very_easy,Very Easy,Velmi snadné,Sehr Einfach,Muy fácil,Très facile,Muito fácil,Sangat Mudah,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy
-diff_easy,Easy,Snadné,Einfach,Fácil,Facile,Fácil,Mudah,Dễ,Kolay,Facile,Łatwy
-diff_medium,Medium,Střední,Mittel,Medio,Moyen,Médio,Menengah,Trung bình,Orta,Medio,Średni
-diff_hard,Hard,Těžké,Schwer,Difícil,Difficile,Difícil,Sulit,Khó,Zor,Difficile,Trudny
-lang_auto,Auto,Automaticky,Automatisch,Automático,Auto,Automático,Otomatis,Tự động,Otomatik,Automatico,Automatyczny
-lang_english,English,English,Englisch,Inglés,Anglais,Inglês,Inggris,Tiếng Anh,İngilizce,Inglese,Angielski
-lang_czech,Čeština,Čeština,Tschechisch,Checo,Tchèque,Tcheco,Ceko,Tiếng Séc,Çekçe,Ceco,Czeski
-lang_german,Deutsch,Němčina,Deutsch,Alemán,Allemand,Alemão,Jerman,Tiếng Đức,Almanca,Tedesco,Niemiecki
-lang_spanish,Español,Španělština,Spanisch,Español,Espagnol,Espanhol,Spanyol,Tiếng Tây Ban Nha,İspanyolca,Spagnolo,Hiszpański
-lang_french,Français,Francouzština,Französisch,Francés,Français,Francês,Prancis,Tiếng Pháp,Fransızca,Francese,Francuski
-lang_portuguese,Português,Portugalština,Portugiesisch,Portugués,Portugais,Português,Portugis,Tiếng Bồ Đào Nha,Portekizce,Portoghese,Portugalski
-lang_indonesian,Indonesian,Indonéština,Indonesisch,Indonesio,Indonésien,Indonésio,Bahasa Indonesia,Tiếng Indonesia,Endonezyaca,Indonesiano,Indonezyjski
-lang_vietnamese,Tiếng Việt,Vietnamština,Vietnamesisch,Vietnamita,Vietnamien,Vietnamita,Vietnam,Tiếng Việt,Vietnamca,Vietnamita,Wietnamski
-lang_turkish,Türkçe,Turečtina,Türkisch,Turco,Turc,Turco,Turki,Tiếng Thổ Nhĩ Kỳ,Türkçe,Turco,Turecki
-lang_italian,Italiano,Italština,Italienisch,Italiano,Italien,Italiano,Italia,Tiếng Ý,İtalyanca,Italiano,Włoski
-lang_polish,Polski,Polština,Polnisch,Polaco,Polonais,Polonês,Polandia,Tiếng Ba Lan,Lehçe,Polacco,Polski
-you_win,⭐ YOU WIN! ⭐,⭐ VÝHRA! ⭐,⭐ GEWONNEN! ⭐,⭐ ¡HAS GANADO! ⭐,⭐ VOUS AVEZ GAGNÉ ! ⭐,⭐ VOCÊ VENCEU! ⭐,⭐ KAMU MENANG! ⭐,⭐ BẠN THẮNG RỒI! ⭐,⭐ KAZANDIN! ⭐,⭐ HAI VINTO! ⭐,⭐ WYGRAŁEŚ! ⭐
-next_round,Next Round,Další kolo,Nächste Runde,Siguiente ronda,Prochaine manche,Próxima rodada,Ronde berikutnya,Vòng tiếp theo,Sonraki Tur,Prossimo turno,Następna runda
-that_was_easy,That was easy,To bylo lehké,Das war einfach,Fue fácil,C'était facile,Isso foi fácil,Itu mudah,Thật dễ dàng,Bu kolaydı,È stato facile,To było proste
-main_menu,Main Menu,Hlavní menu,Hauptmenü,Menú principal,Menu principal,Menu principal,Menu utama,Menu chính,Ana Menü,Menu principale,Menu główne
-try_numbers,Try Numbers,Zkusit Čísla,Zahlen versuchen,Probar Números,Essayer Nombres,Tentar Números,Coba Angka,Thử Chế độ Số,Sayıları Dene,Prova Numeri,Spróbuj Liczby
-try_alphabet,Try Alphabet,Zkusit Abecedu,Alphabet versuchen,Probar Alfabet,Essayer Alphabet,Tentar Alfabeto,Coba Alfabet,Thử Chữ cái,Alfabeyi Dene,Prova Alfabeto,Spróbuj Alfabet
-try_words,Try Words,Zkusit Slova,Wörter versuchen,Probar Palabras,Essayer Mots,Tentar Palavras,Coba Kata,Thử Từ ngữ,Kelimelerı Dene,Prova Parole,Spróbuj Słowa
-score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Waktu: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s
-score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d langkah,%d bước,%d adım,%d passi,%d kroków
-quit_confirm,Are you sure you want to exit?,Opravdu chcete odejít?,Möchten Sie wirklich beenden?,¿Estás seguro de que quieres salir?,Êtes-vous sûr de vouloir quitter ?,Tem certeza de que deseja sair?,Apakah Anda yakin ingin keluar?,Bạn có chắc chắn muốn thoát không?,Çıkmak istediğinizden emin misiniz?,Sei sicuro di voler uscire?,Czy na pewno chcesz wyjść?
-yes,Yes,Ano,Ja,Sí,Oui,Sim,Ya,Có,Evet,Sì,Tak
-no,No,Ne,Nein,No,Non,Não,Tidak,Không,Hayır,No,Nie
-tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Suara tidak terpasang untuk bahasa ini,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany
-tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Suara terpasang,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany
+keys,en,cs,de,es,fr,pt,vi,tr,it,pl
+app_title,Learning Maze,Učící Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki
+play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Chơi,Oyna,Gioca,Graj
+settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia
+settings_title,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia
+setting_mode,Game Mode:,Herní mód:,Spielmodus:,Modo de juego:,Mode de jeu :,Modo de jogo:,Chế độ chơi:,Oyun Modu:,Modalità di gioco:,Tryb gry:
+setting_diff,Difficulty:,Obtížnost:,Schwierigkeit:,Dificultad:,Difficulté :,Dificuldade:,Độ khó:,Zorluk:,Difficoltà:,Poziom trudności:
+setting_lang,Language:,Jazyk:,Sprache:,Idioma:,Langue :,Idioma:,Ngôn ngữ:,Dil:,Lingua:,Język:
+setting_theme,Theme:,Téma:,Thema:,Tema:,Thème :,Tema:,Chủ đề:,Tema:,Tema:,Temat:
+setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :,Dicas de voz:,Gợi ý bằng giọng nói:,Sesli İpuçları:,Suggerimenti vocali:,Wskazówki głosowe:
+save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Quay lại,Geri,Indietro,Powrót
+on,On,Zapnuto,An,Activado,Activé,Ligado,Bật,Açık,Attivato,Włączone
+off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone
+mode_normal,Normal (Maze Only),Normální (jen bludiště),Normal (Nur Labyrinth),Normal (Solo laberinto),Normal (Labyrinthe uniquement),Normal (Apenas labirinto),Bình thường (Chỉ mê cung),Normal (Sadece Labirent),Normale (Solo labirinto),Normalny (Tylko labirynt)
+mode_numbers,Numbers,Čísla,Zahlen,Números,Nombres,Números,Con số,Sayılar,Numeri,Liczby
+mode_letters,Alphabet,Abeceda,Alphabet,Alfabeto,Alphabet,Alfabeto,Chữ cái,Alfabe,Alfabeto,Alfabet
+mode_words,Words,Slova,Wörter,Palabras,Mots,Palavras,Từ ngữ,Kelimeler,Parole,Słowa
+diff_very_easy,Very Easy,Velmi snadné,Sehr Einfach,Muy fácil,Très facile,Muito fácil,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy
+diff_easy,Easy,Snadné,Einfach,Fácil,Facile,Fácil,Dễ,Kolay,Facile,Łatwy
+diff_medium,Medium,Střední,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średni
+diff_hard,Hard,Těžké,Schwer,Difícil,Difficile,Difícil,Khó,Zor,Difficile,Trudny
+diff_very_hard,Very Hard,Velmi těžké,Sehr schwer,Muy difícil,Très difficile,Muito difícil,Rất khó,Çok Zor,Molto difficile,Bardzo trudny
+lang_auto,Auto,Automaticky,Automatisch,Automático,Auto,Automático,Tự động,Otomatik,Automatico,Automatyczny
+lang_english,English,English,Englisch,Inglés,Anglais,Inglês,Tiếng Anh,İngilizce,Inglese,Angielski
+lang_czech,Čeština,Čeština,Tschechisch,Checo,Tchèque,Tcheco,Tiếng Séc,Çekçe,Ceco,Czeski
+lang_german,Deutsch,Němčina,Deutsch,Alemán,Allemand,Alemão,Tiếng Đức,Almanca,Tedesco,Niemiecki
+lang_spanish,Español,Španělština,Spanisch,Español,Espagnol,Espanhol,Tiếng Tây Ban Nha,İspanyolca,Spagnolo,Hiszpański
+lang_french,Français,Francouzština,Französisch,Francés,Français,Francês,Tiếng Pháp,Fransızca,Francese,Francuski
+lang_portuguese,Português,Portugalština,Portugiesisch,Portugués,Portugais,Português,Tiếng Bồ Đào Nha,Portekizce,Portoghese,Portugalski
+lang_vietnamese,Tiếng Việt,Vietnamština,Vietnamesisch,Vietnamita,Vietnamien,Vietnamita,Tiếng Việt,Vietnamca,Vietnamita,Wietnamski
+lang_turkish,Türkçe,Turečtina,Türkisch,Turco,Turc,Turco,Tiếng Thổ Nhĩ Kỳ,Türkçe,Turco,Turecki
+lang_italian,Italiano,Italština,Italienisch,Italiano,Italien,Italiano,Tiếng Ý,İtalyanca,Italiano,Włoski
+lang_polish,Polski,Polština,Polnisch,Polaco,Polonais,Polonês,Tiếng Ba Lan,Lehçe,Polacco,Polski
+you_win,⭐ YOU WIN! ⭐,⭐ VÝHRA! ⭐,⭐ GEWONNEN! ⭐,⭐ ¡HAS GANADO! ⭐,⭐ VOUS AVEZ GAGNÉ ! ⭐,⭐ VOCÊ VENCEU! ⭐,⭐ BẠN THẮNG RỒI! ⭐,⭐ KAZANDIN! ⭐,⭐ HAI VINTO! ⭐,⭐ WYGRAŁEŚ! ⭐
+next_round,Next Round,Další kolo,Nächste Runde,Siguiente ronda,Prochaine manche,Próxima rodada,Vòng tiếp theo,Sonraki Tur,Prossimo turno,Następna runda
+that_was_easy,That was easy,To bylo lehké,Das war einfach,Fue fácil,C'était facile,Isso foi fácil,Thật dễ dàng,Bu kolaydı,È stato facile,To było proste
+main_menu,Main Menu,Hlavní menu,Hauptmenü,Menú principal,Menu principal,Menu principal,Menu chính,Ana Menü,Menu principale,Menu główne
+try_numbers,Try Numbers,Zkusit Čísla,Zahlen versuchen,Probar Números,Essayer Nombres,Tentar Números,Thử Chế độ Số,Sayıları Dene,Prova Numeri,Spróbuj Liczby
+try_alphabet,Try Alphabet,Zkusit Abecedu,Alphabet versuchen,Probar Alfabet,Essayer Alphabet,Tentar Alfabeto,Thử Chữ cái,Alfabeyi Dene,Prova Alfabeto,Spróbuj Alfabet
+try_words,Try Words,Zkusit Slova,Wörter versuchen,Probar Palabras,Essayer Mots,Tentar Palavras,Thử Từ ngữ,Kelimelerı Dene,Prova Parole,Spróbuj Słowa
+score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s
+score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d bước,%d adım,%d passi,%d kroków
+quit_confirm,Are you sure you want to exit?,Opravdu chcete odejít?,Möchten Sie wirklich beenden?,¿Estás seguro de que quieres salir?,Êtes-vous sûr de vouloir quitter ?,Tem certeza de que deseja sair?,Bạn có chắc chắn muốn thoát không?,Çıkmak istediğinizden emin misiniz?,Sei sicuro di voler uscire?,Czy na pewno chcesz wyjść?
+yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak
+no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie
+tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany
+tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany

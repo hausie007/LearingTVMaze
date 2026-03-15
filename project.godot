@@ -13,6 +13,7 @@ config_version=5
 config/name="Bludiste"
 config/description="Educational maze game for toddlers"
 run/main_scene="res://scenes/main_menu.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -29,7 +30,7 @@ window/stretch/aspect="expand"
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.id.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation")
+locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation")
 
 [physics]
 

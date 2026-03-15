@@ -49,7 +49,7 @@ static func get_random_word(lang: String, difficulty: int) -> Dictionary:
 ## Load the full word list array for a language + difficulty.
 ## Falls back to English if the requested language file is not found.
 static func _load_word_list(lang: String, difficulty: int) -> Array:
-	var diff_clamped := clampi(difficulty, 0, 3)
+	var diff_clamped := clampi(difficulty, 0, 4)
 	var path := "res://data/words/words_%s_%d.json" % [lang, diff_clamped]
 	var actual_lang := lang
 	

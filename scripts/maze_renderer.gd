@@ -17,7 +17,7 @@ extends Node2D
 
 # ── State ────────────────────────────────────────────────────────────────────
 var _maze: MazeData = null
-var _theme: ThemeLoader = null
+var theme: ThemeLoader = null
 
 # Dynamic rendering parameters
 var _current_cell_size: float = 120.0
@@ -35,8 +35,8 @@ func draw_maze(maze: MazeData) -> void:
 	_clear()
 
 	# Load theme images.
-	_theme = ThemeLoader.new()
-	_theme.load_theme()
+	theme = ThemeLoader.new()
+	theme.load_theme()
 
 	# Calculate dynamic cell size to fit the screen.
 	var viewport_size := get_viewport_rect().size
@@ -67,16 +67,19 @@ func draw_maze(maze: MazeData) -> void:
 	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
 	var offset := Vector2(hpad, vpad).floor()
 
-	# 1. Background / Wall base
-	_add_rect(offset, maze_pixel_size, _theme.color_wall)
-	
-	# 2. Optional background image (tiled or centered)
-	if _theme.bg_texture:
-		if _theme.bg_tiled:
-			_add_tiled_background(offset, maze_pixel_size, _theme.bg_texture)
+	# 1. Background Layer (Strictly contained in maze area)
+	if theme.bg_texture:
+		if theme.bg_tiled:
+			# If tiled, we always clip to the maze area now as requested.
+			# We ignore full_screen for now or interpret it as "maze full area".
+			_add_tiled_background(offset, maze_pixel_size, theme.bg_texture)
 		else:
-			# If not tiled, just centre it in the whole maze area
-			_add_sprite(offset, maze_pixel_size.x, _theme.bg_texture, maze_pixel_size)
+			# Non-tiled centered background
+			_add_sprite(offset, maze_pixel_size.x, theme.bg_texture, maze_pixel_size)
+
+	# 2. Wall Base (only if no background texture, to avoid covering it)
+	if not theme.bg_texture:
+		_add_rect(offset, maze_pixel_size, theme.color_wall)
 
 	# 3. Draw every cell.
 	for x in range(maze.grid_size.x):
@@ -107,7 +110,7 @@ func get_cell_size() -> float:
 
 ## Return the loaded ThemeLoader (so other scripts can reuse it).
 func get_theme_loader() -> ThemeLoader:
-	return _theme
+	return theme
 
 
 # ── Private: draw helpers ────────────────────────────────────────────────────
@@ -120,47 +123,65 @@ func _clear() -> void:
 
 ## Create floor + wall rects for a single cell.
 func _draw_cell(cell: MazeData.CellData, pos: Vector2) -> void:
-
-	# ── Unvisited cells: leave as solid wall (background covers them) ──
-	if not cell.is_visited:
-		return
-
-	# ── Floor ──
-	var floor_color := _theme.color_floor
-	if cell.is_start:
-		floor_color = _theme.color_start
-	elif cell.is_end:
-		floor_color = _theme.color_end
-
 	var cs := _current_cell_size
 	var wt := _current_wall_thickness
+	var floor_color := theme.color_floor
+	var wall_color := theme.color_wall
+	var has_bg := theme.bg_texture != null
 
-	# Inset the floor by wall_thickness so walls are always visible
-	# on the outer edges of the grid.
-	_add_rect(
-		pos + Vector2(wt, wt),
-		Vector2(cs - wt * 2, cs - wt * 2),
-		floor_color,
-	)
+	# ── UNVISITED: Draw solid wall block ──
+	if not cell.is_visited:
+		_add_rect(pos, Vector2(cs, cs), wall_color)
+		return
 
-	# ── Open-wall connectors ──
-	# Where a wall is OPEN, draw a floor-coloured rect bridging the gap.
-	var bleed := 1.0
-	
-	if not cell.wall_north:
-		_add_rect(pos + Vector2(wt, -bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
-	if not cell.wall_south:
-		_add_rect(pos + Vector2(wt, cs - wt - bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
-	if not cell.wall_west:
-		_add_rect(pos + Vector2(-bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
-	if not cell.wall_east:
-		_add_rect(pos + Vector2(cs - wt - bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
+	# ── VISITED: Corridors ──
+	# Only draw solid floor if NO background is present.
+	# This allows the background to serve as the "floor".
+	if not has_bg:
+		if cell.is_start:
+			floor_color = theme.color_start
+		elif cell.is_end:
+			floor_color = theme.color_end
+			
+		_add_rect(
+			pos + Vector2(wt, wt),
+			Vector2(cs - wt * 2, cs - wt * 2),
+			floor_color,
+		)
+		
+		# Connectors for transparent floor (when bg is present, we don't need these as background is continuous)
+		var bleed := 1.0
+		if not cell.wall_north:
+			_add_rect(pos + Vector2(wt, -bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
+		if not cell.wall_south:
+			_add_rect(pos + Vector2(wt, cs - wt - bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
+		if not cell.wall_west:
+			_add_rect(pos + Vector2(-bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
+		if not cell.wall_east:
+			_add_rect(pos + Vector2(cs - wt - bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
+	else:
+		# BACKGROUND MODE: If background is the floor, we need to draw CLOSED walls as solid colors
+		# or wall borders to maintain the maze structure.
+		if cell.wall_north: _add_rect(pos, Vector2(cs, wt), wall_color)
+		if cell.wall_south: _add_rect(pos + Vector2(0, cs - wt), Vector2(cs, wt), wall_color)
+		if cell.wall_west:  _add_rect(pos, Vector2(wt, cs), wall_color)
+		if cell.wall_east:  _add_rect(pos + Vector2(cs - wt, 0), Vector2(wt, cs), wall_color)
 
-	# ── Theme sprites on Start / End cells ──
-	if cell.is_start and _theme and _theme.start_texture:
-		_add_sprite(pos, cs, _theme.start_texture)
-	elif cell.is_end and _theme and _theme.end_texture:
-		_add_sprite(pos, cs, _theme.end_texture)
+	# ── Wall Borders (optional, always draw if defined) ──
+	if theme.color_wall_border.a > 0.0:
+		var bw := maxf(1.0, wt * 0.5)
+		if cell.wall_north: _add_rect(pos + Vector2(0, 0), Vector2(cs, bw), theme.color_wall_border)
+		if cell.wall_south: _add_rect(pos + Vector2(0, cs - bw), Vector2(cs, bw), theme.color_wall_border)
+		if cell.wall_west:  _add_rect(pos + Vector2(0, 0), Vector2(bw, cs), theme.color_wall_border)
+		if cell.wall_east:  _add_rect(pos + Vector2(cs - bw, 0), Vector2(bw, cs), theme.color_wall_border)
+
+	# ── Start/End markers ──
+	# We still draw markers, possibly with a faint tint if it's backgrounds mode?
+	# For now, icons are usually enough.
+	if cell.is_start and theme.start_texture:
+		_add_sprite(pos, cs, theme.start_texture)
+	elif cell.is_end and theme.end_texture:
+		_add_sprite(pos, cs, theme.end_texture)
 
 
 ## Instantiate a simple ColorRect child.
@@ -199,11 +220,22 @@ func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D, cus
 	add_child(sprite)
 
 func _add_tiled_background(pos: Vector2, size: Vector2, texture: Texture2D) -> void:
-	# Using TextureRect for easy tiling
-	var tr := TextureRect.new()
-	tr.texture = texture
-	tr.stretch_mode = TextureRect.STRETCH_TILE
-	tr.position = pos
-	tr.size = size
-	# Option: add a bit of modulate if needed, or just raw
-	add_child(tr)
+	# Using Sprite2D with region_rect is more robust for clipping in Node2D
+	# than TextureRect (which is a Control).
+	var sprite := Sprite2D.new()
+	sprite.texture = texture
+	sprite.centered = false
+	sprite.position = pos
+	
+	# Enable tiling
+	sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	
+	# Calculate region to center the tiling pattern optionally
+	# This ensures if the tile is big, we see the center part in the maze.
+	var tex_size := Vector2(texture.get_width(), texture.get_height())
+	var offset_vec := (tex_size - size) * 0.5
+	
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(offset_vec, size)
+	
+	add_child(sprite)
