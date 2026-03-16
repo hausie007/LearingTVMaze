@@ -107,16 +107,16 @@ var restart_delay: float = 2.0
 # ─────────────────────────────────────────────────────────────────────────────
 
 ## Floor colour for normal corridor cells.
-var color_floor: Color = Color(0.18, 0.20, 0.25)       # Dark slate
+var color_floor: Color = Color("#1A1C23")       # Brand dark
 
 ## Wall / background colour.
-var color_wall: Color = Color(0.75, 0.78, 0.82)        # Light grey
+var color_wall: Color = Color("#EEEEEE")        # Brand light grey
 
-## Start cell floor colour (pale green, 75% blend with floor so it's very light).
-var color_start: Color = Color(0.30, 0.85, 0.40).lerp(color_floor, 0.75)
+## Start cell floor colour (Sky blue tint).
+var color_start: Color = Color("#1188FF").lerp(Color("#1A1C23"), 0.7)
 
-## End cell floor colour (pale blue, 75% blend with floor so it's very light).
-var color_end: Color = Color(0.25, 0.60, 0.95).lerp(color_floor, 0.75)
+## End cell floor colour (Yellow accent tint).
+var color_end: Color = Color("#FFCC00").lerp(Color("#1A1C23"), 0.7)
 
 
 # ─────────────────────────────────────────────────────────────────────────────

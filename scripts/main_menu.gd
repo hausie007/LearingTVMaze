@@ -90,6 +90,11 @@ func _create_quit_dialog() -> void:
 	style.content_margin_right = 60
 	style.content_margin_top = 40
 	style.content_margin_bottom = 40
+	style.border_width_left = 4
+	style.border_width_top = 4
+	style.border_width_right = 4
+	style.border_width_bottom = 4
+	style.border_color = Color("#1188FF") # Brand Sky
 	panel.add_theme_stylebox_override("panel", style)
 	center.add_child(panel)
 	
@@ -132,16 +137,26 @@ func _create_dialog_button(txt: String, focus_color: Color) -> Button:
 	
 	var focus := StyleBoxFlat.new()
 	focus.bg_color = focus_color
-	focus.border_width_left = 3
-	focus.border_width_top = 3
-	focus.border_width_right = 3
-	focus.border_width_bottom = 3
+	focus.border_width_left = 4
+	focus.border_width_top = 4
+	focus.border_width_right = 4
+	focus.border_width_bottom = 4
 	focus.border_color = Color.WHITE
-	focus.corner_radius_top_left = 10
-	focus.corner_radius_top_right = 10
-	focus.corner_radius_bottom_right = 10
-	focus.corner_radius_bottom_left = 10
+	focus.corner_radius_top_left = 12
+	focus.corner_radius_top_right = 12
+	focus.corner_radius_bottom_right = 12
+	focus.corner_radius_bottom_left = 12
+	
+	var hover := focus.duplicate()
+	hover.bg_color = focus_color.lightened(0.2)
+	
 	btn.add_theme_stylebox_override("focus", focus)
-	btn.add_theme_stylebox_override("hover", focus)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", focus)
+	
+	# Text color on colored buttons should be dark
+	btn.add_theme_color_override("font_focus_color", Color("#112244"))
+	btn.add_theme_color_override("font_hover_color", Color("#112244"))
+	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
 	
 	return btn

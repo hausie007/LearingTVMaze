@@ -125,6 +125,45 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 					cycle_func.call(1)
 					get_viewport().set_input_as_handled()
 	)
+	
+	# Apply brand styles to the button
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(0.15, 0.17, 0.22)
+	normal.corner_radius_top_left = 12
+	normal.corner_radius_top_right = 12
+	normal.corner_radius_bottom_right = 12
+	normal.corner_radius_bottom_left = 12
+	normal.border_width_left = 2
+	normal.border_width_top = 2
+	normal.border_width_right = 2
+	normal.border_width_bottom = 2
+	normal.border_color = Color(1, 1, 1, 0.1)
+	
+	var focus_color = Color("#1188FF") # Default Sky
+	if btn.name.contains("Theme") or btn.name.contains("Voice"):
+		focus_color = Color("#FFCC00") # Theme/Voice use Yellow accent
+		
+	var focus := normal.duplicate()
+	focus.bg_color = focus_color
+	focus.border_color = Color.WHITE
+	focus.border_width_left = 4
+	focus.border_width_top = 4
+	focus.border_width_right = 4
+	focus.border_width_bottom = 4
+	
+	var hover := focus.duplicate()
+	hover.bg_color = focus_color.lightened(0.2)
+	
+	btn.add_theme_stylebox_override("normal", normal)
+	btn.add_theme_stylebox_override("focus", focus)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", focus)
+	
+	# Text colors
+	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.add_theme_color_override("font_focus_color", Color("#112244"))
+	btn.add_theme_color_override("font_hover_color", Color("#112244"))
+	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
 
 func _cycle_mode(dir: int) -> void:
 	if MODE_KEYS.size() == 0: return
@@ -220,12 +259,14 @@ func _update_labels() -> void:
 
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
-	if has_node("%Title"): %Title.text = tr("settings_title")
-	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
-	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")
-	if has_node("%LangTitle"): %LangTitle.text = tr("setting_lang")
-	if has_node("%ThemeTitle"): %ThemeTitle.text = tr("setting_theme")
-	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
+	if has_node("%Title"): 
+		%Title.text = tr("settings_title")
+		%Title.add_theme_color_override("font_color", Color("#1188FF")) # Sky
+	
+	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle"]
+	for t in titles:
+		if has_node(t):
+			get_node(t).add_theme_color_override("font_color", Color(0.8, 0.82, 0.85)) # Light grey
 
 func _on_save_pressed() -> void:
 	if _is_saving: return

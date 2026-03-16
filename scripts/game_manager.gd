@@ -364,7 +364,7 @@ func _update_hud_word_display() -> void:
 		var lbl := Label.new()
 		lbl.text = word[i]
 		lbl.add_theme_font_size_override("font_size", 80)
-		lbl.add_theme_color_override("font_color", Color(0.35, 0.38, 0.44))  # Dimmed
+		lbl.add_theme_color_override("font_color", Color(0.3, 0.33, 0.4))  # Dim Navy
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		lbl.custom_minimum_size.x = 72
@@ -384,8 +384,8 @@ func _light_up_word_letter(index: int) -> void:
 	
 	var lbl := _word_letter_labels[index]
 	
-	# Bright colour to indicate collected
-	lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.4))  # Bright yellow
+	# Bright yellow brand color
+	lbl.add_theme_color_override("font_color", Color("#FFCC00"))
 	
 	# Pop animation
 	var tw := create_tween()
@@ -417,7 +417,7 @@ func _create_win_label() -> void:
 	main_style.border_width_top = 4
 	main_style.border_width_right = 4
 	main_style.border_width_bottom = 4
-	main_style.border_color = Color(0.3, 0.85, 0.4) # Green border
+	main_style.border_color = Color("#1188FF") # Sky border
 	main_style.content_margin_left = 60
 	main_style.content_margin_right = 60
 	main_style.content_margin_top = 40
@@ -434,7 +434,7 @@ func _create_win_label() -> void:
 	_win_label.text = tr("you_win")
 	_win_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_win_label.add_theme_font_size_override("font_size", 90)
-	_win_label.add_theme_color_override("font_color", Color(0.3, 0.85, 0.4)) # Green
+	_win_label.add_theme_color_override("font_color", Color("#FFCC00")) # Yellow
 	vbox.add_child(_win_label)
 
 	_score_label = Label.new()
@@ -481,7 +481,7 @@ func _create_win_label() -> void:
 	h_spacer_l.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_l)
 
-	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color(0.92, 0.75, 0.2)) # Yellow focus
+	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color("#FFCC00")) # Yellow accent
 	_harder_button.pressed.connect(_on_harder_pressed)
 	harder_hbox.add_child(_harder_button)
 	
@@ -509,7 +509,7 @@ func _create_win_label() -> void:
 	home_spacer_l.custom_minimum_size.x = 80
 	home_hbox.add_child(home_spacer_l)
 
-	var home_btn := _create_styled_button(tr("main_menu"), 650, 100, Color(0.7, 0.75, 0.8)) # Grey focus
+	var home_btn := _create_styled_button(tr("main_menu"), 650, 100, Color("#1188FF")) # Sky
 	home_btn.pressed.connect(_on_home_pressed)
 	home_hbox.add_child(home_btn)
 	
@@ -520,7 +520,7 @@ func _create_win_label() -> void:
 	_win_container.visible = false
 
 
-func _create_styled_button(btn_text: String, w: int, h: int, focus_color: Color = Color(0.3, 0.85, 0.4)) -> Button:
+func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = Color("#1188FF")) -> Button:
 	var btn := Button.new()
 	btn.text = btn_text
 	btn.custom_minimum_size = Vector2(w, h)
@@ -528,16 +528,21 @@ func _create_styled_button(btn_text: String, w: int, h: int, focus_color: Color 
 	
 	# Normal style
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.25, 0.3, 0.35)
+	normal.bg_color = Color(0.15, 0.17, 0.22)
 	normal.corner_radius_top_left = 12
 	normal.corner_radius_top_right = 12
 	normal.corner_radius_bottom_right = 12
 	normal.corner_radius_bottom_left = 12
+	normal.border_width_left = 2
+	normal.border_width_top = 2
+	normal.border_width_right = 2
+	normal.border_width_bottom = 2
+	normal.border_color = Color(1, 1, 1, 0.1)
 	btn.add_theme_stylebox_override("normal", normal)
 	
 	# Focus / Hover style
 	var focus := StyleBoxFlat.new()
-	focus.bg_color = focus_color
+	focus.bg_color = f_color
 	focus.border_width_left = 4
 	focus.border_width_top = 4
 	focus.border_width_right = 4
@@ -547,13 +552,19 @@ func _create_styled_button(btn_text: String, w: int, h: int, focus_color: Color 
 	focus.corner_radius_top_right = 12
 	focus.corner_radius_bottom_right = 12
 	focus.corner_radius_bottom_left = 12
+	
+	var hover := focus.duplicate()
+	hover.bg_color = f_color.lightened(0.2)
+	
 	btn.add_theme_stylebox_override("focus", focus)
-	btn.add_theme_stylebox_override("hover", focus)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", focus)
 	
 	# Text colors
 	btn.add_theme_color_override("font_color", Color.WHITE)
-	btn.add_theme_color_override("font_focus_color", Color.BLACK)
-	btn.add_theme_color_override("font_hover_color", Color.BLACK)
+	btn.add_theme_color_override("font_focus_color", Color("#112244"))
+	btn.add_theme_color_override("font_hover_color", Color("#112244"))
+	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
 	
 	return btn
 
