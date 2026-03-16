@@ -36,6 +36,9 @@ func _ready() -> void:
 			temp_lang_idx = 0
 			
 		temp_voice = Config.voice_hints
+		# Listen for async TTS completion
+		if not Config.tts_status_changed.is_connected(_update_labels):
+			Config.tts_status_changed.connect(_update_labels)
 		
 	# Wire up buttons
 	_setup_cycling_button(%ModeButton, func(dir): _cycle_mode(dir))
@@ -177,6 +180,20 @@ func _update_labels() -> void:
 		%ThemeButton.text = themes[temp_theme_idx].capitalize()
 	
 	if has_node("%VoiceButton"):
+		# Ensure warning label exists
+		if not _tts_warning_label: _create_tts_warning()
+		
+		# If scan isn't done yet, show "Checking..." in the info label
+		if Config and not Config.tts_ready:
+			%VoiceButton.text = tr("on") if temp_voice else tr("off")
+			%VoiceButton.disabled = true
+			%VoiceButton.modulate.a = 0.5
+			if _tts_warning_label:
+				_tts_warning_label.visible = true
+				_tts_warning_label.text = tr("checking_tts")
+				_tts_warning_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8)) # Neutral grey
+			return
+
 		# Instant check using Config's background cache
 		var current_lang_code = LANG_CODES[temp_lang_idx]
 		var is_available = Config.is_tts_available(current_lang_code) if Config else false

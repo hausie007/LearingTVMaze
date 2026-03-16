@@ -15,6 +15,8 @@ extends Node
 #  PERSISTENCE & SETTINGS LOGIC
 # ─────────────────────────────────────────────────────────────────────────────
 
+signal tts_status_changed
+
 const SAVE_PATH := "user://settings.cfg"
 
 ## 0 = Normal, 1 = Numbers, 2 = Letters, 3 = Words
@@ -43,6 +45,9 @@ var _installed_tts_langs: Array[String] = []
 
 ## Map of language codes to their first available voice ID.
 var _tts_voice_cache: Dictionary = {}
+
+## Whether the TTS scan has completed at least once.
+var tts_ready: bool = false
 
 var theme_dir: String:
 	get:
@@ -122,45 +127,50 @@ func _ready() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
 	
-	# Scan for available TTS voices synchronously (it's fast)
-	_scan_all_tts_voices()
+	# Scan for available TTS voices ASYNCHRONOUSLY to avoid blocking (especially on Android TV)
+	refresh_tts_cache()
 
 ## Pre-cache voice availability and voice IDs for all supported languages.
 func _scan_all_tts_voices() -> void:
-	_installed_tts_langs.clear()
-	_tts_voice_cache.clear()
+	# This function runs in a background thread via WorkerThreadPool
+	var new_langs: Array[String] = []
+	var new_cache: Dictionary = {}
 	
-	# Get ALL voices from the system once
 	var all_voices := DisplayServer.tts_get_voices()
-	if all_voices.is_empty():
-		return
-	
-	for lang_code in LANGUAGES:
-		var target_lang := lang_code
-		if target_lang == "auto":
-			target_lang = get_effective_language()
+	if not all_voices.is_empty():
+		for lang_code in LANGUAGES:
+			var target_lang := lang_code
+			if target_lang == "auto":
+				target_lang = get_effective_language()
+				
+			var target_prefix := target_lang.to_lower() + "_"
+			var target_dash_prefix := target_lang.to_lower() + "-"
 			
-		# Standardize the target code for prefix matching (e.g. "en")
-		var target_prefix := target_lang.to_lower() + "_"
-		var target_dash_prefix := target_lang.to_lower() + "-"
-		
-		# Look for a match among all system voices
-		var found_voice_id := ""
-		for v in all_voices:
-			var v_lang: String = v.get("language", "").to_lower()
-			# Exact match (e.g. "cs" == "cs") or prefix match (e.g. "cs" in "cs_CZ" or "cs-CZ")
-			if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
-				found_voice_id = v.get("id", "")
-				break
-		
-		if not found_voice_id.is_empty():
-			if not _installed_tts_langs.has(lang_code):
-				_installed_tts_langs.append(lang_code)
-			_tts_voice_cache[lang_code] = found_voice_id
+			var found_voice_id := ""
+			for v in all_voices:
+				var v_lang: String = v.get("language", "").to_lower()
+				if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
+					found_voice_id = v.get("id", "")
+					break
+			
+			if not found_voice_id.is_empty():
+				new_langs.append(lang_code)
+				new_cache[lang_code] = found_voice_id
+	
+	# Update state and notify on main thread
+	call_deferred("_finalize_tts_scan", new_langs, new_cache)
 
-## Quick re-scan for external triggers (like entering Settings)
+func _finalize_tts_scan(langs: Array[String], cache: Dictionary) -> void:
+	_installed_tts_langs = langs
+	_tts_voice_cache = cache
+	tts_ready = true
+	tts_status_changed.emit()
+
+## Start a background scan for TTS voices.
 func refresh_tts_cache() -> void:
-	_scan_all_tts_voices()
+	tts_ready = false
+	tts_status_changed.emit()
+	WorkerThreadPool.add_task(_scan_all_tts_voices)
 
 ## Quick retrieval of cached voice ID.
 func get_tts_voice(lang_code: String) -> String:

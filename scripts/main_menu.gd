@@ -2,7 +2,7 @@ extends Control
 
 @onready var play_btn: Button = %PlayButton
 @onready var settings_btn: Button = %SettingsButton
-@onready var title_label: Label = %Title
+@onready var title_banner: TextureRect = %Title
 
 # ── Quit Dialog ──────────────────────────────────────────────────────────────
 var _quit_dialog: CanvasLayer = null
@@ -16,7 +16,7 @@ func _ready() -> void:
 	settings_btn.pressed.connect(_on_settings_pressed)
 	
 	# Localize UI
-	title_label.text = tr("app_title")
+	# title_banner is an image now, so no tr("app_title")
 	play_btn.text = tr("play")
 	settings_btn.text = tr("settings")
 	
