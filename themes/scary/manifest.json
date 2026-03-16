@@ -15,5 +15,9 @@
   },
   "background": {
     "tiled": true
+  },
+  "collectible": {
+    "image": "pumpkin3.png",
+    "text-color": "#f6fb36"
   }
 }
