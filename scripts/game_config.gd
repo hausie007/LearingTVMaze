@@ -245,7 +245,7 @@ func _scan_theme_dir(path: String, out_list: Array[String]) -> void:
 	var dir := DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
+		var file_name: String = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir() and not file_name.begins_with("."):
 				if not out_list.has(file_name):

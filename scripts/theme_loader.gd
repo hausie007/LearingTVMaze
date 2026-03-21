@@ -59,7 +59,7 @@ func load_theme() -> void:
 
 	# Background Options
 	if manifest.has("background"):
-		var bg_cfg = manifest["background"]
+		var bg_cfg: Variant = manifest["background"]
 		if bg_cfg is Dictionary:
 			bg_tiled = bg_cfg.get("tiled", false)
 			bg_full_screen = bg_cfg.get("full_screen", false)
@@ -69,7 +69,7 @@ func load_theme() -> void:
 
 	# Collectible Options
 	if manifest.has("collectible"):
-		var col_cfg = manifest["collectible"]
+		var col_cfg: Variant = manifest["collectible"]
 		if col_cfg is Dictionary:
 			if col_cfg.has("color"):
 				col_color = Color.from_string(col_cfg["color"], col_color)
@@ -83,7 +83,7 @@ func _load_manifest(dir_path: String) -> void:
 	if FileAccess.file_exists(path):
 		var file := FileAccess.open(path, FileAccess.READ)
 		var json_text := file.get_as_text()
-		var json = JSON.new()
+		var json: JSON = JSON.new()
 		if json.parse(json_text) == OK:
 			manifest = json.data
 		else:

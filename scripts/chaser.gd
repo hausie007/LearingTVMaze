@@ -12,7 +12,7 @@ var _is_moving: bool = false
 
 func setup(renderer: MazeRenderer) -> void:
 	_maze_renderer = renderer
-	var theme = renderer.get_theme_loader()
+	var theme: ThemeLoader = renderer.get_theme_loader()
 	
 	if theme and theme.chaser_texture:
 		sprite.texture = theme.chaser_texture
@@ -20,9 +20,11 @@ func setup(renderer: MazeRenderer) -> void:
 		_create_fallback_visual()
 		
 	# Scale to fit cell (slightly larger than player for visibility)
-	var cs = renderer.get_cell_size()
-	var tex_size = sprite.texture.get_size()
-	var target_size = cs * 0.75
+	var cs: float = renderer.get_cell_size()
+	if sprite.texture == null:
+		_create_fallback_visual()
+	var tex_size: Vector2 = sprite.texture.get_size()
+	var target_size: float = cs * 0.75
 	sprite.scale = Vector2(target_size / tex_size.x, target_size / tex_size.y)
 	
 	# Start movement timer
@@ -43,7 +45,7 @@ func move_to(new_grid_pos: Vector2i) -> void:
 	
 	# 1. Jiggle before move
 	var jiggle_tw = create_tween()
-	var offset = Vector2(10, 0)
+	var offset: Vector2 = Vector2(10, 0)
 	jiggle_tw.tween_property(sprite, "position", offset, 0.04)
 	jiggle_tw.tween_property(sprite, "position", -offset, 0.04)
 	jiggle_tw.tween_property(sprite, "position", offset * 0.5, 0.04)

@@ -26,6 +26,9 @@ var _current_wall_thickness: float = 6.0
 ## Extra top margin (pixels) reserved for HUD bar above the maze.
 var top_margin: float = 0.0
 
+## Cached layout offset (set after draw_maze, reused in grid_to_pixel/pixel_to_grid).
+var _cached_offset: Vector2 = Vector2.ZERO
+
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
@@ -66,6 +69,7 @@ func draw_maze(maze: MazeData) -> void:
 	var hpad := (viewport_size.x - maze_pixel_size.x) / 2.0
 	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
 	var offset := Vector2(hpad, vpad).floor()
+	_cached_offset = offset
 
 	# 1. Background Layer (Strictly contained in maze area)
 	if theme.bg_texture:
@@ -93,15 +97,7 @@ func draw_maze(maze: MazeData) -> void:
 ## Return the pixel position for a given grid coordinate (centred in cell).
 func grid_to_pixel(coord: Vector2i) -> Vector2:
 	if not _maze: return Vector2.ZERO
-	var viewport_size := get_viewport_rect().size
-	var maze_pixel_size := Vector2(
-		_maze.grid_size.x * _current_cell_size,
-		_maze.grid_size.y * _current_cell_size,
-	)
-	var hpad := (viewport_size.x - maze_pixel_size.x) / 2.0
-	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
-	var offset := Vector2(hpad, vpad)
-	return offset + Vector2(coord.x * _current_cell_size, coord.y * _current_cell_size) + Vector2(_current_cell_size, _current_cell_size) / 2.0
+	return _cached_offset + Vector2(coord.x * _current_cell_size, coord.y * _current_cell_size) + Vector2(_current_cell_size, _current_cell_size) / 2.0
 
 
 ## Return the calculated cell size.
@@ -154,16 +150,7 @@ func get_navigation_map() -> AStar2D:
 ## Convert a pixel position back to game grid coordinates.
 func pixel_to_grid(pixel_pos: Vector2) -> Vector2i:
 	if not _maze: return Vector2i.ZERO
-	var viewport_size := get_viewport_rect().size
-	var maze_pixel_size := Vector2(
-		_maze.grid_size.x * _current_cell_size,
-		_maze.grid_size.y * _current_cell_size,
-	)
-	var hpad := (viewport_size.x - maze_pixel_size.x) / 2.0
-	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
-	var offset := Vector2(hpad, vpad)
-	
-	var relative := pixel_pos - offset
+	var relative: Vector2 = pixel_pos - _cached_offset
 	return Vector2i(
 		int(relative.x / _current_cell_size),
 		int(relative.y / _current_cell_size)

@@ -129,32 +129,20 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 					get_viewport().set_input_as_handled()
 	)
 	
-	# Apply brand styles to the button
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.15, 0.17, 0.22)
-	normal.corner_radius_top_left = 12
-	normal.corner_radius_top_right = 12
-	normal.corner_radius_bottom_right = 12
-	normal.corner_radius_bottom_left = 12
-	normal.border_width_left = 2
-	normal.border_width_top = 2
-	normal.border_width_right = 2
-	normal.border_width_bottom = 2
-	normal.border_color = Color(1, 1, 1, 0.1)
+	# Apply brand styles using shared utility
+	var normal: StyleBoxFlat = UIHelpers.create_rounded_stylebox(
+		Color(0.15, 0.17, 0.22),
+		Color(1, 1, 1, 0.1),
+		12, 2
+	)
 	
-	var focus_color = Color("#1188FF") # Default Sky
+	var focus_color: Color = Color("#1188FF") # Default Sky
 	if btn.name.contains("Theme") or btn.name.contains("Voice") or btn.name.contains("Chaser"):
 		focus_color = Color("#FFCC00") # Theme/Voice/Chaser use Yellow accent
 		
-	var focus := normal.duplicate()
-	focus.bg_color = focus_color
-	focus.border_color = Color.WHITE
-	focus.border_width_left = 4
-	focus.border_width_top = 4
-	focus.border_width_right = 4
-	focus.border_width_bottom = 4
+	var focus: StyleBoxFlat = UIHelpers.create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
 	
-	var hover := focus.duplicate()
+	var hover: StyleBoxFlat = focus.duplicate()
 	hover.bg_color = focus_color.lightened(0.2)
 	
 	btn.add_theme_stylebox_override("normal", normal)
@@ -167,6 +155,7 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	btn.add_theme_color_override("font_focus_color", Color("#112244"))
 	btn.add_theme_color_override("font_hover_color", Color("#112244"))
 	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
+
 
 func _cycle_mode(dir: int) -> void:
 	if MODE_KEYS.size() == 0: return

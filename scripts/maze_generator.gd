@@ -152,25 +152,3 @@ func _is_in_bounds(coord: Vector2i, grid_size: Vector2i) -> bool:
 		coord.x >= 0 and coord.x < grid_size.x and
 		coord.y >= 0 and coord.y < grid_size.y
 	)
-
-
-## Re-close the wall between two cells (used during backtracking).
-func _close_wall_between(maze: MazeData, a: Vector2i, b: Vector2i) -> void:
-	var cell_a := maze.get_cell(a)
-	var cell_b := maze.get_cell(b)
-	if cell_a == null or cell_b == null:
-		return
-
-	var diff := b - a
-	if diff == Vector2i.UP:
-		cell_a.wall_north = true
-		cell_b.wall_south = true
-	elif diff == Vector2i.DOWN:
-		cell_a.wall_south = true
-		cell_b.wall_north = true
-	elif diff == Vector2i.RIGHT:
-		cell_a.wall_east  = true
-		cell_b.wall_west  = true
-	elif diff == Vector2i.LEFT:
-		cell_a.wall_west  = true
-		cell_b.wall_east  = true

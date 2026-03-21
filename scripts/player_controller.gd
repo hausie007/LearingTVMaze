@@ -177,15 +177,16 @@ func _shake_visual(dir: Vector2i) -> void:
 	# Trigger cooldown so they can't spam it and break the tween.
 	_cooldown_remaining = Config.move_cooldown
 	
+	var cs: float = 120.0
+	if maze_renderer:
+		cs = maze_renderer.get_cell_size()
+	
 	var base_pos: Vector2 = _visual.position
 	# Define start position based on visual node type since Sprite2D and ColorRect differ
 	if _visual is Sprite2D:
 		base_pos = Vector2.ZERO # Centered
 	else:
-		var cs := 120.0
-		if maze_renderer:
-			cs = maze_renderer.get_cell_size()
-		var sprite_size := cs * Config.player_scale
+		var sprite_size: float = cs * Config.player_scale
 		base_pos = Vector2(-sprite_size / 2.0, -sprite_size / 2.0)
 		
 	# Kill any previous shake tween to prevent drift
@@ -195,10 +196,7 @@ func _shake_visual(dir: Vector2i) -> void:
 	# Reset position before shaking (in case of killed tweens)
 	_visual.position = base_pos
 
-	var cs := 120.0
-	if maze_renderer:
-		cs = maze_renderer.get_cell_size()
-	var bump_offset := Vector2(dir) * (cs * 0.15)
+	var bump_offset: Vector2 = Vector2(dir) * (cs * 0.15)
 	
 	_shake_tween = create_tween()
 	_shake_tween.bind_node(_visual)

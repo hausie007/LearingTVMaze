@@ -122,41 +122,4 @@ func _create_quit_dialog() -> void:
 	hbox.add_child(_quit_no_button)
 
 func _create_dialog_button(txt: String, focus_color: Color) -> Button:
-	var btn := Button.new()
-	btn.text = txt
-	btn.custom_minimum_size = Vector2(250, 100)
-	btn.add_theme_font_size_override("font_size", 36)
-	
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.25, 0.3, 0.35)
-	normal.corner_radius_top_left = 10
-	normal.corner_radius_top_right = 10
-	normal.corner_radius_bottom_right = 10
-	normal.corner_radius_bottom_left = 10
-	btn.add_theme_stylebox_override("normal", normal)
-	
-	var focus := StyleBoxFlat.new()
-	focus.bg_color = focus_color
-	focus.border_width_left = 4
-	focus.border_width_top = 4
-	focus.border_width_right = 4
-	focus.border_width_bottom = 4
-	focus.border_color = Color.WHITE
-	focus.corner_radius_top_left = 12
-	focus.corner_radius_top_right = 12
-	focus.corner_radius_bottom_right = 12
-	focus.corner_radius_bottom_left = 12
-	
-	var hover := focus.duplicate()
-	hover.bg_color = focus_color.lightened(0.2)
-	
-	btn.add_theme_stylebox_override("focus", focus)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", focus)
-	
-	# Text color on colored buttons should be dark
-	btn.add_theme_color_override("font_focus_color", Color("#112244"))
-	btn.add_theme_color_override("font_hover_color", Color("#112244"))
-	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
-	
-	return btn
+	return UIHelpers.create_styled_button(txt, 250, 100, focus_color, 36)
