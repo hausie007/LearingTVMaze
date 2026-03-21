@@ -33,6 +33,13 @@ var language: String = "auto"
 
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
+
+## Whether the Tag Partner (Chaser) is enabled.
+var chaser_enabled: bool = true
+
+## Moves per second for the Chaser.
+var chaser_speed: float = 0.65
+
 const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
 const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
 
@@ -186,6 +193,7 @@ func save_settings() -> void:
 	config.set_value("Game", "difficulty", difficulty)
 	config.set_value("Game", "language", language)
 	config.set_value("Game", "voice_hints", voice_hints)
+	config.set_value("Game", "chaser_enabled", chaser_enabled)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	
 	var err := config.save(SAVE_PATH)
@@ -199,6 +207,7 @@ func load_settings() -> void:
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
 		language       = config.get_value("Game", "language", language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
+		chaser_enabled = config.get_value("Game", "chaser_enabled", chaser_enabled)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 
 ## Return the effective language code, resolving "auto" from OS locale.

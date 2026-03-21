@@ -19,6 +19,7 @@ var end_texture:    Texture2D = null
 var player_texture: Texture2D = null
 var bg_texture:     Texture2D = null
 var col_texture:    Texture2D = null
+var chaser_texture: Texture2D = null
 
 var color_wall:     Color = Color(0.75, 0.78, 0.82)
 var color_wall_border: Color = Color(0, 0, 0, 0) # Transparent by default
@@ -46,6 +47,7 @@ func load_theme() -> void:
 	start_texture  = _try_load(dir_path, _get_asset("start", "start.png"))
 	end_texture    = _try_load(dir_path, _get_asset("end", "end.png"))
 	bg_texture     = _try_load(dir_path, _get_asset("background", "background.png"))
+	chaser_texture = _try_load(dir_path, _get_asset("chaser", "chaser.png"))
 
 	# Colors
 	color_wall    = _get_color("wall", color_wall)

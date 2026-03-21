@@ -92,6 +92,7 @@ func draw_maze(maze: MazeData) -> void:
 
 ## Return the pixel position for a given grid coordinate (centred in cell).
 func grid_to_pixel(coord: Vector2i) -> Vector2:
+	if not _maze: return Vector2.ZERO
 	var viewport_size := get_viewport_rect().size
 	var maze_pixel_size := Vector2(
 		_maze.grid_size.x * _current_cell_size,
@@ -111,6 +112,62 @@ func get_cell_size() -> float:
 ## Return the loaded ThemeLoader (so other scripts can reuse it).
 func get_theme_loader() -> ThemeLoader:
 	return theme
+
+
+## Build and return an AStar2D map for navigation within the current maze.
+func get_navigation_map() -> AStar2D:
+	if _maze == null:
+		return null
+		
+	var astar := AStar2D.new()
+	var size := _maze.grid_size
+	
+	# 1. Add all cells as points
+	for x in range(size.x):
+		for y in range(size.y):
+			var id := y * size.x + x
+			astar.add_point(id, Vector2(x, y))
+			
+	# 2. Connect points where walls are open
+	for x in range(size.x):
+		for y in range(size.y):
+			var curr := Vector2i(x, y)
+			var id_curr := y * size.x + x
+			
+			# We only need to check East and South neighbors to connect all
+			var neighbors = [
+				{"dir": Vector2i.RIGHT, "id_off": 1},
+				{"dir": Vector2i.DOWN,  "id_off": size.x}
+			]
+			
+			for n: Dictionary in neighbors:
+				var d: Vector2i = n.dir
+				var next: Vector2i = curr + d
+				if next.x < size.x and next.y < size.y:
+					if _maze.is_wall_open(curr, d):
+						var id_next := id_curr + int(n.id_off)
+						astar.connect_points(id_curr, id_next)
+						
+	return astar
+
+
+## Convert a pixel position back to game grid coordinates.
+func pixel_to_grid(pixel_pos: Vector2) -> Vector2i:
+	if not _maze: return Vector2i.ZERO
+	var viewport_size := get_viewport_rect().size
+	var maze_pixel_size := Vector2(
+		_maze.grid_size.x * _current_cell_size,
+		_maze.grid_size.y * _current_cell_size,
+	)
+	var hpad := (viewport_size.x - maze_pixel_size.x) / 2.0
+	var vpad := top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0
+	var offset := Vector2(hpad, vpad)
+	
+	var relative := pixel_pos - offset
+	return Vector2i(
+		int(relative.x / _current_cell_size),
+		int(relative.y / _current_cell_size)
+	)
 
 
 # ── Private: draw helpers ────────────────────────────────────────────────────

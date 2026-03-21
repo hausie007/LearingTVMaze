@@ -22,6 +22,7 @@ extends Node
 @onready var player:          PlayerController  = $Player
 
 const CollectibleScene = preload("res://scenes/collectible.tscn")
+const ChaserScene = preload("res://scenes/chaser.tscn")
 
 # ── UI layer ─────────────────────────────────────────────────────────────────
 var _win_container: Control = null
@@ -41,6 +42,11 @@ var _hud_moves_label: Label = null
 var _hud_word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
 var _word_next_index: int = 0
+
+# ── Chaser State ─────────────────────────────────────────────────────────────
+var _chaser: Node2D = null
+var _nav_map: AStar2D = null
+var _chaser_active: bool = false
 
 # ── State ────────────────────────────────────────────────────────────────────
 var _current_maze: MazeData = null
@@ -153,12 +159,28 @@ func _start_new_maze() -> void:
 	_move_count = 0
 	_word_next_index = 0
 	_update_hud_moves()
+	_is_win_screen_active = false
+	
+	# Thorough Chaser Cleanup
+	_chaser_active = false
+	if _chaser and is_instance_valid(_chaser):
+		_chaser.request_move.disconnect(_on_chaser_request_move)
+		_chaser.queue_free()
+	_chaser = null
+	
+	# Re-enable player
+	player.set_process(true)
+	player.set_physics_process(true)
+	player.set_process_input(true)
 
 	# 1. Generate
 	_current_maze = maze_generator.generate()
 
 	# 2. Render
 	maze_renderer.draw_maze(_current_maze)
+
+	# 2.2 Navigation for chaser
+	_nav_map = maze_renderer.get_navigation_map()
 
 	# 2.5 Spawn collectibles if applicable
 	if Config.game_mode > 0:
@@ -188,37 +210,31 @@ func _start_new_maze() -> void:
 ## Called when the player steps onto the End cell.
 func _on_player_reached_end() -> void:
 	if _is_win_screen_active: return
+	_is_win_screen_active = true
 	
-	# Freeze player input.
+	# Stop Chaser
+	_chaser_active = false
+	if _chaser: _chaser.stop()
+	
+	# Freeze player
 	player.set_process(false)
-
-	# Show the win message and start timer.
-	if _win_container:
-		_win_container.visible = true
-		_is_win_screen_active = true
-		_win_timer_remaining = 10.0
-		_win_timer_paused = false
-		
-		# Hide "That was easy" (harder) if already at max difficulty
-		if _harder_button:
-			_harder_button.visible = (Config.difficulty < 4)
-			_harder_button.text = tr("that_was_easy")
-			
-		if _next_button:
-			_next_button.grab_focus()
-			_next_button.text = tr("next_round")
-			
-		if _score_label:
-			# Format elapsed time as mm:ss
-			var mins := int(_elapsed_time) / 60
-			var secs := int(_elapsed_time) % 60
-			var time_str := "%02d:%02d" % [mins, secs]
-			
-			var loc_time := tr("score_time") % time_str
-			var loc_steps := tr("score_steps") % _move_count
-			_score_label.text = "%s | %s" % [loc_time, loc_steps]
-		
-		_update_mode_suggestions()
+	player.set_physics_process(false)
+	player.set_process_input(false)
+	
+	_win_timer_remaining = 10.0
+	_win_timer_paused = false
+	
+	# Full word progress update if word mode
+	if Config.game_mode == 3:
+		_light_up_word_letter(_word_next_index) 
+	
+	var elapsed_int := int(_elapsed_time)
+	var mm := elapsed_int / 60
+	var ss := elapsed_int % 60
+	var time_str := "%02d:%02d" % [mm, ss]
+	
+	_show_win_screen(time_str)
+	_update_mode_suggestions()
 
 func _update_mode_suggestions() -> void:
 	# Clear old suggestions
@@ -265,9 +281,15 @@ func _on_next_round_pressed() -> void:
 	_start_new_maze()
 
 func _on_harder_pressed() -> void:
-	if Config.difficulty >= 4: return
+	if _harder_button and _harder_button.text == tr("challenge_mm"):
+		# It's an "Easier" request from Gotcha screen
+		Config.difficulty = clampi(Config.difficulty - 1, 0, 4)
+	else:
+		# It's a "Harder" request from Win screen
+		if Config.difficulty >= 4: return
+		Config.difficulty = clampi(Config.difficulty + 1, 0, 4)
+		
 	_is_win_screen_active = false
-	Config.difficulty = clampi(Config.difficulty + 1, 0, 4)
 	Config.save_settings()
 	_start_new_maze()
 
@@ -407,6 +429,11 @@ func _create_win_label() -> void:
 	canvas_layer.add_child(_win_container)
 
 	var main_panel := PanelContainer.new()
+	# We need to ensure the panel is centered in _win_container
+	main_panel.anchors_preset = Control.PRESET_CENTER
+	main_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	main_panel.custom_minimum_size.x = 800
+	
 	var main_style := StyleBoxFlat.new()
 	main_style.bg_color = Color(0.15, 0.17, 0.22, 0.95) # Dark tint
 	main_style.corner_radius_top_left = 32
@@ -439,9 +466,10 @@ func _create_win_label() -> void:
 
 	_score_label = Label.new()
 	_score_label.text = "⏱ 00:00 | 🚶 0"
-	_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_score_label.add_theme_font_size_override("font_size", 40)
-	_score_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	_score_label.add_theme_color_override("font_color", Color(0.8, 0.82, 0.85))
+	_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_score_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART # Ensure description fits
 	vbox.add_child(_score_label)
 
 	var button_vbox := VBoxContainer.new()
@@ -518,6 +546,13 @@ func _create_win_label() -> void:
 	home_hbox.add_child(home_spacer_r)
 
 	_win_container.visible = false
+	
+	# Build navigation map for the chaser
+	_nav_map = maze_renderer.get_navigation_map()
+	_chaser_active = false
+	if _chaser:
+		_chaser.queue_free()
+		_chaser = null
 
 
 func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = Color("#1188FF")) -> Button:
@@ -682,10 +717,11 @@ func _spawn_word_collectibles() -> void:
 		_collectibles[cell.coords] = col
 
 
-## Called every time the player completes a move to a new cell.
 func _on_player_bumped(_dir: Vector2i) -> void:
 	_move_count += 1
 	_update_hud_moves()
+	_check_chaser_trigger()
+	_check_chaser_collision()
 
 ## ── TTS Voice Hints ─────────────────────────────────────────────────────────
 
@@ -740,6 +776,8 @@ func _tts_worker_loop() -> void:
 func _on_player_moved(new_pos: Vector2i) -> void:
 	_move_count += 1
 	_update_hud_moves()
+	_check_chaser_trigger()
+	_check_chaser_collision()
 	
 	if _collectibles.has(new_pos):
 		var col: Collectible = _collectibles[new_pos]
@@ -791,3 +829,101 @@ func _shake_collectible(col: Collectible) -> void:
 	tw.tween_property(col, "position", base_pos + Vector2(-8, 0), 0.04)
 	tw.tween_property(col, "position", base_pos + Vector2(4, 0), 0.04)
 	tw.tween_property(col, "position", base_pos, 0.04)
+
+
+# ── Chaser Logic ─────────────────────────────────────────────────────────────
+
+func _check_chaser_trigger() -> void:
+	if not Config.chaser_enabled or _chaser_active:
+		return
+		
+	# Spawn chaser after 6 moves for kids (Easy/V.Easy), 10 for others
+	var threshold = 6 if Config.difficulty <= 1 else 10
+	if _move_count >= threshold:
+		_spawn_chaser()
+
+func _spawn_chaser() -> void:
+	_chaser_active = true
+	var start_cell = _current_maze.get_start_cell()
+	if not start_cell: return
+	
+	_chaser = ChaserScene.instantiate()
+	add_child(_chaser)
+	_chaser.grid_pos = start_cell.coords
+	_chaser.position = maze_renderer.grid_to_pixel(_chaser.grid_pos)
+	_chaser.setup(maze_renderer)
+	
+	_chaser.request_move.connect(_on_chaser_request_move)
+	_chaser.move_finished.connect(_check_chaser_collision) # Check after slide too
+
+func _on_chaser_request_move() -> void:
+	if not _chaser or not _nav_map: return
+	
+	var player_pos = player.grid_pos
+	var chaser_pos = _chaser.grid_pos
+	
+	if player_pos == chaser_pos:
+		_on_chaser_caught_player()
+		return
+		
+	# Find path to player
+	var id_start = chaser_pos.y * _current_maze.grid_size.x + chaser_pos.x
+	var id_end = player_pos.y * _current_maze.grid_size.x + player_pos.x
+	
+	var path = _nav_map.get_id_path(id_start, id_end)
+	if path.size() > 1:
+		# Next step is the second point in path
+		var next_id = path[1]
+		var next_pos = Vector2i(next_id % _current_maze.grid_size.x, next_id / _current_maze.grid_size.x)
+		
+		# Tailgating logic: if next step is the player, we already know they are 1 cell away.
+		# If it's a child's game, we could add a "hesitation" here, but the speed diff is enough.
+		_chaser.move_to(next_pos)
+
+func _check_chaser_collision() -> void:
+	if _chaser and _chaser.grid_pos == player.grid_pos:
+		_on_chaser_caught_player()
+
+func _on_chaser_caught_player() -> void:
+	if not _chaser_active: return
+	_chaser_active = false
+	_is_win_screen_active = true
+	
+	if _chaser: _chaser.stop()
+	
+	# Throroughly freeze player
+	player.set_process(false)
+	player.set_physics_process(false) # Block movement loop
+	player.set_process_input(false)   # Block direct input
+	
+	# Faster feedback
+	_show_gotcha_screen()
+
+func _show_gotcha_screen() -> void:
+	_win_label.text = tr("gotcha")
+	_score_label.text = tr("try_again_desc")
+	_next_button.text = tr("try_again")
+	
+	# Show "Easier" if possible
+	if _harder_button:
+		_harder_button.visible = Config.difficulty > 0
+		_harder_button.text = tr("challenge_mm")
+		# We'll need to update the logic for this button in Gotcha context
+		# but for now let's just use the existing harder logic which is actually difficulty change
+		# Wait, if they click it, it currently does _on_harder_pressed (+1).
+		# We need a new handler or change the handler.
+	
+	_win_container.visible = true
+	_next_button.grab_focus()
+
+func _show_win_screen(time_str: String) -> void:
+	_win_label.text = tr("you_win")
+	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % _move_count
+	
+	# On WIN, show "Harder"
+	if _harder_button:
+		_harder_button.visible = Config.difficulty < 4
+		_harder_button.text = tr("challenge_pp")
+
+	_win_container.visible = true
+	_next_button.grab_focus()

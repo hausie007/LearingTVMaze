@@ -5,6 +5,7 @@ var temp_diff: int
 var temp_theme_idx: int
 var temp_lang_idx: int
 var temp_voice: bool
+var temp_chaser: bool
 var themes: Array[String] = []
 
 # Mode/diff/lang keys for tr()
@@ -36,6 +37,7 @@ func _ready() -> void:
 			temp_lang_idx = 0
 			
 		temp_voice = Config.voice_hints
+		temp_chaser = Config.chaser_enabled
 		# Listen for async TTS completion
 		if not Config.tts_status_changed.is_connected(_update_labels):
 			Config.tts_status_changed.connect(_update_labels)
@@ -46,6 +48,7 @@ func _ready() -> void:
 	_setup_cycling_button(%LangButton, func(dir): _cycle_lang(dir))
 	_setup_cycling_button(%ThemeButton, func(dir): _cycle_theme(dir))
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
+	_setup_cycling_button(%ChaserButton, func(dir): _cycle_chaser(dir))
 	
 	_update_labels()
 	_update_static_labels()
@@ -140,8 +143,8 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	normal.border_color = Color(1, 1, 1, 0.1)
 	
 	var focus_color = Color("#1188FF") # Default Sky
-	if btn.name.contains("Theme") or btn.name.contains("Voice"):
-		focus_color = Color("#FFCC00") # Theme/Voice use Yellow accent
+	if btn.name.contains("Theme") or btn.name.contains("Voice") or btn.name.contains("Chaser"):
+		focus_color = Color("#FFCC00") # Theme/Voice/Chaser use Yellow accent
 		
 	var focus := normal.duplicate()
 	focus.bg_color = focus_color
@@ -192,6 +195,10 @@ func _cycle_theme(dir: int) -> void:
 
 func _cycle_voice(_dir: int) -> void:
 	temp_voice = !temp_voice
+	_update_labels()
+
+func _cycle_chaser(_dir: int) -> void:
+	temp_chaser = !temp_chaser
 	_update_labels()
 
 func _update_labels() -> void:
@@ -257,13 +264,23 @@ func _update_labels() -> void:
 				_tts_warning_label.text = tr("tts_ready")
 				_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4)) # Green
 
+	if has_node("%ChaserButton"):
+		%ChaserButton.text = tr("on") if temp_chaser else tr("off")
+
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
 		%Title.add_theme_color_override("font_color", Color("#1188FF")) # Sky
 	
-	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle"]
+	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
+	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")
+	if has_node("%LangTitle"): %LangTitle.text = tr("setting_lang")
+	if has_node("%ThemeTitle"): %ThemeTitle.text = tr("setting_theme")
+	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
+	if has_node("%ChaserTitle"): %ChaserTitle.text = tr("setting_chaser")
+	
+	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", Color(0.8, 0.82, 0.85)) # Light grey
@@ -281,6 +298,7 @@ func _on_save_pressed() -> void:
 		if temp_theme_idx < themes.size():
 			Config.theme_dir_name = themes[temp_theme_idx]
 		Config.voice_hints = temp_voice
+		Config.chaser_enabled = temp_chaser
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_language())
 	

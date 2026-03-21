@@ -57,10 +57,6 @@ var _shake_tween: Tween = null
 func _ready() -> void:
 	_build_visual()
 
-	# Snap to starting pixel position immediately.
-	if maze_renderer:
-		position = maze_renderer.grid_to_pixel(grid_pos)
-
 
 ## Build the player visual.  Uses a theme sprite if available,
 ## otherwise falls back to a coloured square.

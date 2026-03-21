@@ -163,6 +163,54 @@ text = ">"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RowChaser" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ChaserTitle" type="Label" parent="CenterContainer/MainVBox/RowChaser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Tag Partner:"
+horizontal_alignment = 2
+
+[node name="ChaserButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowChaser"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ChaserLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowChaser/ChaserButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChaserButton" type="Button" parent="CenterContainer/MainVBox/RowChaser/ChaserButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Off"
+
+[node name="ChaserRightArrow" type="Label" parent="CenterContainer/MainVBox/RowChaser/ChaserButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SpacerMid1" type="Control" parent="CenterContainer/MainVBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2

@@ -45,4 +45,10 @@ yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak
 no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie
 tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany
 tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany
-checking_tts,Checking voice availability...,Kontrola dostupnosti hlasu...,Überprüfung der Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité de la voix...,Verificando a disponibilidade da voz...,Đang kiểm tra tính khả dụng của giọng nói...,Sesli kitaplık kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...
+checking_tts,Checking voice availability...,Zjišťuji dostupnost hlasů...,Prüfe Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité des voix...,Verificando disponibilidade de voz...,Đang kiểm tra giọng nói...,Ses uygunluğu kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...
+setting_chaser,Tag Partner:,Honěná:,Fangen:,Atrapada:,Poursuite:,Atrapada:,Đuổi bắt:,Kovalama:,Acchiapparella:,Gonić:
+gotcha,Gotcha!,Chycen!,Gefangen!,¡Atrapado!,Attrapé!,Pego!,Bắt được rồi!,Yakalandın!,Preso!,Złapany!
+try_again_desc,Don't worry, try again!,Nevadí, zkus to znovu!,Keine Sorge, versuch es nochmal!,¡No te preocupes, inténtalo de nuevo!,Ne t'inquiète pas, réessaie !,Não se preocupe, tente novamente!,Đừng lo, thử lại nhé!,Üzülme, tekrar dene!,Non preoccuparti, riprova!,Nie martw się, spróbuj ponownie!
+try_again,Try Again,Znovu,Nochmal,De nuevo,Réessayer,Tentar de novo,Thử lại,Tekrar Dene,Riprova,Spróbuj ponownie
+challenge_pp,Harder,Těžší,Schwerer,Más difícil,Plus difficile,Mais difícil,Khó hơn,Daha Zor,Più difficile,Trudniejszy
+challenge_mm,Easier,Snazší,Leichter,Más fácil,Plus facile,Mais fácil,Dễ hơn,Daha Kolay,Più facile,Łatwiejszy
