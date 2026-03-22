@@ -131,16 +131,16 @@ func load_theme() -> void:
 
 func _load_manifest(dir_path: String) -> Dictionary:
 	var path: String = dir_path + "/manifest.json"
-	var manifest: Dictionary = {}
+	var result: Dictionary = {}
 	if FileAccess.file_exists(path):
 		var file := FileAccess.open(path, FileAccess.READ)
 		var json_text := file.get_as_text()
 		var json: JSON = JSON.new()
 		if json.parse(json_text) == OK:
-			manifest = json.data
+			result = json.data
 		else:
 			push_error("ThemeLoader: Failed to parse %s" % path)
-	return manifest
+	return result
 
 func _parse_anim_cfg(cfg_key: String, file_name: String, dir_path: String) -> Dictionary:
 	var fps: float = 5.0

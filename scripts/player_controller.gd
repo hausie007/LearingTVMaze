@@ -57,12 +57,12 @@ var _animator: FrameAnimator = null
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
-	_build_visual()
+	rebuild_visual()
 
 
-## Build the player visual.  Uses a theme sprite if available,
+## Build (or rebuild) the player visual.  Uses a theme sprite if available,
 ## otherwise falls back to a coloured square.
-func _build_visual() -> void:
+func rebuild_visual() -> void:
 	# Remove previous visual if rebuilding.
 	if _visual:
 		_visual.queue_free()
@@ -98,7 +98,6 @@ func _build_visual() -> void:
 		sprite.scale = Vector2(scale_factor, scale_factor)
 
 		_visual = sprite
-		add_child(sprite)
 
 		# Add animation support
 		if theme_loader and not theme_loader.player_frames.is_empty():

@@ -172,6 +172,7 @@ func _finalize_tts_scan(langs: Array[String], cache: Dictionary) -> void:
 	_tts_voice_cache = cache
 	tts_ready = true
 	tts_status_changed.emit()
+	warm_up_tts()
 
 ## Start a background scan for TTS voices.
 func refresh_tts_cache() -> void:
@@ -186,6 +187,12 @@ func get_tts_voice(lang_code: String) -> String:
 ## Instantaneous cached check for voice availability.
 func is_tts_available(lang_code: String) -> bool:
 	return _installed_tts_langs.has(lang_code)
+
+## Primes the TTS engine to reduce latency.
+func warm_up_tts() -> void:
+	var tts = get_node_or_null("/root/TTSManager")
+	if tts:
+		tts.warm_up(get_effective_language())
 
 func save_settings() -> void:
 	var config := ConfigFile.new()

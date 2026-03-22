@@ -21,6 +21,9 @@ func _notification(what: int) -> void:
 		_on_save_pressed()
 
 func _ready() -> void:
+	# Warp mouse off-screen to prevent phantom hover highlights on TV
+	Input.warp_mouse(Vector2(-1, -1))
+	
 	# Load current config state into temp variables
 	if Config:
 		Config.refresh_tts_cache() # Ensure we have latest OS voice state
@@ -55,7 +58,7 @@ func _ready() -> void:
 	
 	# Focus first interactive element for TV
 	if has_node("%ModeButton"):
-		%ModeButton.grab_focus()
+		%ModeButton.call_deferred("grab_focus")
 
 func _create_tts_warning() -> void:
 	if _tts_warning_label: return
@@ -129,32 +132,11 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 					get_viewport().set_input_as_handled()
 	)
 	
-	# Apply brand styles using shared utility
-	var normal: StyleBoxFlat = UIHelpers.create_rounded_stylebox(
-		Color(0.15, 0.17, 0.22),
-		Color(1, 1, 1, 0.1),
-		12, 2
-	)
-	
-	var focus_color: Color = Color("#1188FF") # Blue for game modifiers
+	var focus_color: Color = UIColors.BLUE # Blue for game modifiers
 	if btn.name in ["ThemeButton", "LangButton", "VoiceButton"]:
-		focus_color = Color("#FFCC00") # Yellow for app modifiers
+		focus_color = UIColors.YELLOW # Yellow for app modifiers
 		
-	var focus: StyleBoxFlat = UIHelpers.create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
-	
-	var hover: StyleBoxFlat = focus.duplicate()
-	hover.bg_color = focus_color.lightened(0.2)
-	
-	btn.add_theme_stylebox_override("normal", normal)
-	btn.add_theme_stylebox_override("focus", focus)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", focus)
-	
-	# Text colors
-	btn.add_theme_color_override("font_color", Color.WHITE)
-	btn.add_theme_color_override("font_focus_color", Color("#112244"))
-	btn.add_theme_color_override("font_hover_color", Color("#112244"))
-	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
+	UIHelpers.apply_style_to_button(btn, focus_color)
 
 
 func _cycle_mode(dir: int) -> void:
@@ -174,6 +156,7 @@ func _cycle_lang(dir: int) -> void:
 	if Config and temp_lang_idx < LANG_CODES.size():
 		Config.language = LANG_CODES[temp_lang_idx]
 		TranslationServer.set_locale(Config.get_effective_language())
+		Config.warm_up_tts()
 	_update_labels()
 	_update_static_labels()
 
@@ -260,7 +243,7 @@ func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
-		%Title.add_theme_color_override("font_color", Color("#FFCC00")) # Match Settings Button
+		%Title.add_theme_color_override("font_color", UIColors.YELLOW) # Match Settings Button
 	
 	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
 	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")
@@ -272,7 +255,7 @@ func _update_static_labels() -> void:
 	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle"]
 	for t in titles:
 		if has_node(t):
-			get_node(t).add_theme_color_override("font_color", Color(0.8, 0.82, 0.85)) # Light grey
+			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 
 func _on_save_pressed() -> void:
 	if _is_saving: return

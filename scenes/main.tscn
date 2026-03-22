@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gm"]
 [ext_resource type="Script" path="res://scripts/maze_generator.gd" id="2_mg"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://scripts/game_hud.gd" id="5_hud"]
 [ext_resource type="Script" path="res://scripts/win_screen.gd" id="6_ws"]
 [ext_resource type="Script" path="res://scripts/tts_manager.gd" id="7_tts"]
+[ext_resource type="Script" path="res://scripts/pause_dialog.gd" id="8_pd"]
+[ext_resource type="Script" path="res://scripts/collectible_spawner.gd" id="9_cs"]
+[ext_resource type="Script" path="res://scripts/chaser_manager.gd" id="10_cm"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_gm")
@@ -28,3 +31,12 @@ script = ExtResource("6_ws")
 
 [node name="TTSManager" type="Node" parent="."]
 script = ExtResource("7_tts")
+
+[node name="PauseDialog" type="CanvasLayer" parent="."]
+script = ExtResource("8_pd")
+
+[node name="CollectibleSpawner" type="Node" parent="."]
+script = ExtResource("9_cs")
+
+[node name="ChaserManager" type="Node" parent="."]
+script = ExtResource("10_cm")

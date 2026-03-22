@@ -117,32 +117,69 @@ func update_suggestions(current_mode: int) -> void:
 	for child in _suggestion_container.get_children():
 		child.queue_free()
 
-	var suggestion_modes: Array[int] = []
-	match current_mode:
-		1: suggestion_modes = [2, 3]
-		2: suggestion_modes = [1, 3]
-		3: suggestion_modes = [1, 2]
-		_: suggestion_modes = [1, 2, 3]
+	# 1. Always suggest the "Next" mode if available (0 -> 1 -> 2 -> 3)
+	var always_suggest: int = -1
+	if current_mode < 3:
+		always_suggest = current_mode + 1
 
-	for m in suggestion_modes:
+	# 2. Build a pool of "Others" to pick from randomly
+	var other_pool: Array = []
+	
+	# Add other modes (not current, not the "always" one)
+	for m in [0, 1, 2, 3]:
+		if m != current_mode and m != always_suggest:
+			other_pool.append({"type": "mode", "val": m})
+	
+	# Add Chaser toggle as an "other" option
+	var chaser_key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
+	other_pool.append({"type": "chaser", "key": chaser_key})
+
+	# 3. Selection
+	var final_suggestions: Array = []
+	
+	# Always Add "More Difficult" mode (except if we are already at max)
+	if always_suggest != -1:
+		final_suggestions.append({"type": "mode", "val": always_suggest})
+	
+	# Pick up to 1 others randomly (total 2 max suggestions)
+	other_pool.shuffle()
+	while final_suggestions.size() < 2 and not other_pool.is_empty():
+		final_suggestions.append(other_pool.pop_back())
+
+	# 4. Build Buttons
+	for sug in final_suggestions:
 		var key: String = ""
-		match m:
-			1: key = "try_numbers"
-			2: key = "try_alphabet"
-			3: key = "try_words"
+		var callback: Callable
+		
+		if sug.type == "mode":
+			match sug.val:
+				0: key = "try_normal" # Maze only
+				1: key = "try_numbers"
+				2: key = "try_alphabet"
+				3: key = "try_words"
+			callback = func(): suggestion_pressed.emit(sug.val)
+		else:
+			key = sug.key
+			callback = func(): chaser_toggled_pressed.emit()
 
 		if not key.is_empty():
 			var hbox := HBoxContainer.new()
 			hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 			_suggestion_container.add_child(hbox)
 
-			var btn: Button = _create_styled_button(tr(key), 650, 100, Color("#1188FF"))
-			btn.pressed.connect(func(): suggestion_pressed.emit(m))
+			var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.BLUE)
+			btn.pressed.connect(callback)
 			hbox.add_child(btn)
 
-	# If we have space (less than 3 mode suggestions), add the chaser toggle.
-	if suggestion_modes.size() < 3:
-		_add_chaser_suggestion()
+## Appends a localized button to toggle the Chaser.
+func _add_chaser_suggestion() -> void:
+	var key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_suggestion_container.add_child(hbox)
+	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.BLUE)
+	btn.pressed.connect(func(): chaser_toggled_pressed.emit())
+	hbox.add_child(btn)
 
 
 ## Hide the screen and reset state.
@@ -151,20 +188,6 @@ func hide_screen() -> void:
 	get_tree().paused = false
 	if _container:
 		_container.visible = false
-
-
-## Appends a localized button to toggle the Chaser.
-func _add_chaser_suggestion() -> void:
-	# If chaser is ON, button offers to play WITHOUT it.
-	var key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
-	
-	var hbox := HBoxContainer.new()
-	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_suggestion_container.add_child(hbox)
-
-	var btn: Button = _create_styled_button(tr(key), 650, 100, Color("#1188FF"))
-	btn.pressed.connect(func(): chaser_toggled_pressed.emit())
-	hbox.add_child(btn)
 
 
 # ── UI Construction ──────────────────────────────────────────────────────────
@@ -190,7 +213,7 @@ func _build_ui() -> void:
 	main_style.border_width_top = 4
 	main_style.border_width_right = 4
 	main_style.border_width_bottom = 4
-	main_style.border_color = Color("#1188FF")
+	main_style.border_color = UIColors.BLUE
 	main_style.content_margin_left = 60
 	main_style.content_margin_right = 60
 	main_style.content_margin_top = 40
@@ -199,7 +222,7 @@ func _build_ui() -> void:
 	_container.add_child(main_panel)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 30)
+	vbox.add_theme_constant_override("separation", 20)
 	main_panel.add_child(vbox)
 
 	# Header
@@ -207,19 +230,19 @@ func _build_ui() -> void:
 	_win_label.text = tr("you_win")
 	_win_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_win_label.add_theme_font_size_override("font_size", 90)
-	_win_label.add_theme_color_override("font_color", Color("#FFCC00"))
+	_win_label.add_theme_color_override("font_color", UIColors.YELLOW)
 	vbox.add_child(_win_label)
 
 	_score_label = Label.new()
 	_score_label.text = ""
 	_score_label.add_theme_font_size_override("font_size", 40)
-	_score_label.add_theme_color_override("font_color", Color(0.8, 0.82, 0.85))
+	_score_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_score_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(_score_label)
 
 	var button_vbox := VBoxContainer.new()
-	button_vbox.add_theme_constant_override("separation", 20)
+	button_vbox.add_theme_constant_override("separation", 15)
 	vbox.add_child(button_vbox)
 
 	# Next Round + Timer
@@ -232,7 +255,7 @@ func _build_ui() -> void:
 	next_spacer_l.custom_minimum_size.x = 80
 	next_hbox.add_child(next_spacer_l)
 
-	_next_button = _create_styled_button(tr("next_round"), 650, 100, Color("#FFCC00"))
+	_next_button = _create_styled_button(tr("next_round"), 650, 90, UIColors.YELLOW)
 	_next_button.pressed.connect(func(): next_round_pressed.emit())
 	next_hbox.add_child(_next_button)
 
@@ -255,7 +278,7 @@ func _build_ui() -> void:
 	h_spacer_l.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_l)
 
-	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color("#1188FF"))
+	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 90, UIColors.BLUE)
 	_harder_button.pressed.connect(func(): harder_pressed.emit())
 	harder_hbox.add_child(_harder_button)
 
@@ -265,12 +288,12 @@ func _build_ui() -> void:
 
 	# Mode Suggestions
 	_suggestion_container = VBoxContainer.new()
-	_suggestion_container.add_theme_constant_override("separation", 20)
+	_suggestion_container.add_theme_constant_override("separation", 12)
 	button_vbox.add_child(_suggestion_container)
 
 	# Padding before Main Menu
 	var padding := Control.new()
-	padding.custom_minimum_size.y = 40
+	padding.custom_minimum_size.y = 20
 	button_vbox.add_child(padding)
 
 	# Home Button
@@ -283,7 +306,7 @@ func _build_ui() -> void:
 	home_spacer_l.custom_minimum_size.x = 80
 	home_hbox.add_child(home_spacer_l)
 
-	var home_btn: Button = _create_styled_button(tr("main_menu"), 650, 100, Color("#FFCC00"))
+	var home_btn: Button = _create_styled_button(tr("main_menu"), 650, 90, UIColors.YELLOW)
 	home_btn.pressed.connect(func(): home_pressed.emit())
 	home_hbox.add_child(home_btn)
 
@@ -296,6 +319,5 @@ func _build_ui() -> void:
 
 # ── Shared Button Style ──────────────────────────────────────────────────────
 
-func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = Color("#1188FF")) -> Button:
+func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.BLUE) -> Button:
 	return UIHelpers.create_styled_button(btn_text, w, h, f_color)
-

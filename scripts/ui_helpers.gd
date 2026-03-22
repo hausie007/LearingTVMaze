@@ -24,7 +24,7 @@ static func create_styled_button(
 	btn_text: String,
 	w: int,
 	h: int,
-	focus_color: Color = Color("#1188FF"),
+	focus_color: Color = UIColors.BLUE,
 	font_size: int = 42,
 ) -> Button:
 	var btn := Button.new()
@@ -32,31 +32,38 @@ static func create_styled_button(
 	btn.custom_minimum_size = Vector2(w, h)
 	btn.add_theme_font_size_override("font_size", font_size)
 
+	apply_style_to_button(btn, focus_color)
+	return btn
+
+## Applies standardized game button styles (normal, focus, hover layers and text colors) to an existing button node.
+static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	# Normal state
 	var normal := create_rounded_stylebox(
-		Color(0.15, 0.17, 0.22),
-		Color(1, 1, 1, 0.1),
+		UIColors.BG_DARK,
+		UIColors.BORDER_SUBTLE,
 		12, 2
 	)
 	btn.add_theme_stylebox_override("normal", normal)
 
-	# Focus / Hover / Pressed
+	# Focus / Pressed (Vibrant blue/yellow)
 	var focus := create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
 
-	var hover: StyleBoxFlat = focus.duplicate()
-	hover.bg_color = focus_color.lightened(0.2)
+	# Hover (Subtle - avoid phantom highlights on TV)
+	# We use the normal background but a slightly brighter border than subtle
+	var hover := create_rounded_stylebox(UIColors.BG_DARK, focus_color.darkened(0.1), 12, 3)
 
 	btn.add_theme_stylebox_override("focus", focus)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", focus)
 
 	# Text colors
-	btn.add_theme_color_override("font_color", Color.WHITE)
-	btn.add_theme_color_override("font_focus_color", Color("#112244"))
-	btn.add_theme_color_override("font_hover_color", Color("#112244"))
-	btn.add_theme_color_override("font_pressed_color", Color("#112244"))
+	var text_color_on_focus: Color = UIColors.TEXT_PRIMARY if focus_color == UIColors.BLUE else UIColors.TEXT_ON_BRIGHT
+	btn.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
+	btn.add_theme_color_override("font_focus_color", text_color_on_focus)
+	btn.add_theme_color_override("font_hover_color", UIColors.TEXT_PRIMARY) # Dark hover BG requires light text
+	btn.add_theme_color_override("font_pressed_color", text_color_on_focus)
 
-	return btn
+
 
 
 ## Create a StyleBoxFlat with uniform corner radius and border width.

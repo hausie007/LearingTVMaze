@@ -1,3 +1,4 @@
+class_name Chaser
 extends Node2D
 
 signal request_move

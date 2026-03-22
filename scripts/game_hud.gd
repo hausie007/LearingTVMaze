@@ -85,7 +85,7 @@ func light_up_letter(index: int) -> void:
 		return
 
 	var lbl: Label = _word_letter_labels[index]
-	lbl.add_theme_color_override("font_color", Color("#FFCC00"))
+	lbl.add_theme_color_override("font_color", UIColors.YELLOW)
 
 	# Pop animation
 	var tw := create_tween()

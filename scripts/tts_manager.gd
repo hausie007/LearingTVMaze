@@ -23,6 +23,7 @@ var _exit_flag: bool = false
 var _pending_text: String = ""
 var _pending_voice: String = ""
 var _pending_rate: float = 1.0
+var _pending_volume: float = 70.0
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -47,8 +48,9 @@ func _exit_tree() -> void:
 
 ## Queue text to be spoken. Only the most recent request is kept.
 ## `rate` controls speech speed (1.0 = normal).
+## `volume` controls loudness (0-100).
 ## `lang_override` forces a specific language; empty = use game language.
-func speak(text: String, rate: float = 1.0, lang_override: String = "") -> void:
+func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: float = 70.0) -> void:
 	if not Config.voice_hints:
 		return
 
@@ -59,9 +61,17 @@ func speak(text: String, rate: float = 1.0, lang_override: String = "") -> void:
 	_pending_text = text.to_lower()
 	_pending_voice = voice_id
 	_pending_rate = rate
+	_pending_volume = volume
 	_mutex.unlock()
 
 	_semaphore.post()
+
+
+## Primes the TTS engine to reduce initial latency (especially on Android TV).
+## Speaks a silent, high-speed character to wake up the OS voice service.
+func warm_up(lang: String) -> void:
+	# Use a very high rate and 0 volume to be invisible/silent
+	speak(".", 10.0, lang, 0.0)
 
 
 # ── Worker Thread ────────────────────────────────────────────────────────────
@@ -74,6 +84,7 @@ func _worker_loop() -> void:
 		var text: String = ""
 		var voice: String = ""
 		var rate: float = 1.0
+		var volume: float = 70.0
 
 		_mutex.lock()
 		if _exit_flag:
@@ -83,9 +94,10 @@ func _worker_loop() -> void:
 		text = _pending_text
 		voice = _pending_voice
 		rate = _pending_rate
+		volume = _pending_volume
 		_pending_text = ""
 		_mutex.unlock()
 
 		if not text.is_empty():
 			DisplayServer.tts_stop()
-			DisplayServer.tts_speak(text, voice, 50, 1.0, rate)
+			DisplayServer.tts_speak(text, voice, int(volume), 1.0, rate)

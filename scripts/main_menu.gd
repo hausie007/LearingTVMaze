@@ -12,6 +12,9 @@ var _quit_no_button: Button = null
 var _input_locked: bool = true
 
 func _ready() -> void:
+	# Warp mouse off-screen to prevent phantom hover highlights on TV
+	Input.warp_mouse(Vector2(-1, -1))
+	
 	play_btn.pressed.connect(_on_play_pressed)
 	settings_btn.pressed.connect(_on_settings_pressed)
 	
@@ -20,8 +23,12 @@ func _ready() -> void:
 	play_btn.text = tr("play")
 	settings_btn.text = tr("settings")
 	
+	# Apply global dynamic styles to existing editor-built buttons
+	UIHelpers.apply_style_to_button(play_btn, UIColors.BLUE)
+	UIHelpers.apply_style_to_button(settings_btn, UIColors.YELLOW)
+	
 	# Pre-select Play button for TV D-pad
-	play_btn.grab_focus()
+	play_btn.call_deferred("grab_focus")
 	
 	# Release input lock after a short delay
 	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
@@ -69,7 +76,7 @@ func _create_quit_dialog() -> void:
 	add_child(_quit_dialog)
 	
 	var overlay := ColorRect.new()
-	overlay.color = Color(0, 0, 0, 0.7)
+	overlay.color = UIColors.OVERLAY
 	overlay.anchors_preset = Control.PRESET_FULL_RECT
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_quit_dialog.add_child(overlay)
@@ -81,7 +88,7 @@ func _create_quit_dialog() -> void:
 	
 	var panel := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.15, 0.17, 0.22)
+	style.bg_color = UIColors.BG_DARK
 	style.corner_radius_top_left = 20
 	style.corner_radius_top_right = 20
 	style.corner_radius_bottom_right = 20
@@ -94,7 +101,7 @@ func _create_quit_dialog() -> void:
 	style.border_width_top = 4
 	style.border_width_right = 4
 	style.border_width_bottom = 4
-	style.border_color = Color("#1188FF") # Brand Sky
+	style.border_color = UIColors.BLUE
 	panel.add_theme_stylebox_override("panel", style)
 	center.add_child(panel)
 	
@@ -113,11 +120,11 @@ func _create_quit_dialog() -> void:
 	hbox.add_theme_constant_override("separation", 50)
 	vbox.add_child(hbox)
 	
-	var yes_btn := _create_dialog_button(tr("yes"), Color("#FFCC00"))
+	var yes_btn := _create_dialog_button(tr("yes"), UIColors.YELLOW)
 	yes_btn.pressed.connect(func(): get_tree().quit())
 	hbox.add_child(yes_btn)
 	
-	_quit_no_button = _create_dialog_button(tr("no"), Color("#1188FF"))
+	_quit_no_button = _create_dialog_button(tr("no"), UIColors.BLUE)
 	_quit_no_button.pressed.connect(_hide_quit_dialog)
 	hbox.add_child(_quit_no_button)
 
