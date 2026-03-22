@@ -1,15 +1,13 @@
 {
   "title": "Default",
   "assets": {
-    "player": "player.png",
-    "start": "start.png",
-    "end": "end.png"
+	"start": "start.png",
+	"end": "end.png"
   },
   "colors": {
-    "wall": "#bfc7d1",
-    "floor": "#2e3340",
-    "start_cell": "#365c49",
-    "end_cell": "#324d6c",
-    "player": "#408cf2"
+	"wall": "#bfc7d1",
+	"floor": "#2e3340",
+	"start_cell": "#365c49",
+	"end_cell": "#324d6c"
   }
 }

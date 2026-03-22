@@ -21,6 +21,17 @@ var bg_texture:     Texture2D = null
 var col_texture:    Texture2D = null
 var chaser_texture: Texture2D = null
 
+var player_frames: Array[Texture2D] = []
+var chaser_frames: Array[Texture2D] = []
+var bg_frames: Array[Texture2D] = []
+var col_frames: Array[Texture2D] = []
+
+## Animation speeds (FPS).
+var player_fps: float = 5.0
+var chaser_fps: float = 5.0
+var bg_fps: float = 5.0
+var col_fps: float = 5.0
+
 var color_wall:     Color = Color(0.75, 0.78, 0.82)
 var color_wall_border: Color = Color(0, 0, 0, 0) # Transparent by default
 var color_floor:    Color = Color(0.18, 0.20, 0.25)
@@ -40,7 +51,16 @@ var manifest: Dictionary = {}
 ## Load theme resources from the directory specified in Config.
 func load_theme() -> void:
 	var dir_path: String = Config.theme_dir
-	_load_manifest(dir_path)
+	player_frames.clear()
+	chaser_frames.clear()
+	bg_frames.clear()
+	col_frames.clear()
+	player_fps = 5.0
+	chaser_fps = 5.0
+	bg_fps = 5.0
+	col_fps = 5.0
+
+	manifest = _load_manifest(dir_path)
 
 	# Textures
 	player_texture = _try_load(dir_path, _get_asset("player", "player.png"))
@@ -78,8 +98,40 @@ func load_theme() -> void:
 			if col_cfg.has("image"):
 				col_texture = _try_load(dir_path, col_cfg["image"])
 
-func _load_manifest(dir_path: String) -> void:
-	var path := dir_path.path_join("manifest.json")
+	# Animation Options
+	var p_anim: Dictionary = _parse_anim_cfg("player", _get_asset("player", "player.png"), dir_path)
+	player_fps = p_anim["fps"]
+	player_frames = p_anim["frames"]
+	if player_texture == null and not player_frames.is_empty():
+		player_texture = player_frames[0]
+
+	var c_anim: Dictionary = _parse_anim_cfg("chaser", _get_asset("chaser", "chaser.png"), dir_path)
+	chaser_fps = c_anim["fps"]
+	chaser_frames = c_anim["frames"]
+	if chaser_texture == null and not chaser_frames.is_empty():
+		chaser_texture = chaser_frames[0]
+
+	var b_anim: Dictionary = _parse_anim_cfg("background", _get_asset("background", "background.png"), dir_path)
+	bg_fps = b_anim["fps"]
+	bg_frames = b_anim["frames"]
+	if bg_texture == null and not bg_frames.is_empty():
+		bg_texture = bg_frames[0]
+
+	var col_file: String = "collectible.png"
+	if manifest.has("collectible") and manifest["collectible"] is Dictionary and manifest["collectible"].has("image"):
+		col_file = manifest["collectible"]["image"]
+		
+	var col_anim: Dictionary = _parse_anim_cfg("collectible", col_file, dir_path)
+	col_fps = col_anim["fps"]
+	col_frames = col_anim["frames"]
+	if col_texture == null and not col_frames.is_empty():
+		col_texture = col_frames[0]
+
+# ── Private Helpers ──────────────────────────────────────────────────────────
+
+func _load_manifest(dir_path: String) -> Dictionary:
+	var path: String = dir_path + "/manifest.json"
+	var manifest: Dictionary = {}
 	if FileAccess.file_exists(path):
 		var file := FileAccess.open(path, FileAccess.READ)
 		var json_text := file.get_as_text()
@@ -87,16 +139,88 @@ func _load_manifest(dir_path: String) -> void:
 		if json.parse(json_text) == OK:
 			manifest = json.data
 		else:
-			push_error("ThemeLoader: Failed to parse manifest at %s" % path)
+			push_error("ThemeLoader: Failed to parse %s" % path)
+	return manifest
+
+func _parse_anim_cfg(cfg_key: String, file_name: String, dir_path: String) -> Dictionary:
+	var fps: float = 5.0
+	var frames: Array[Texture2D] = []
+	
+	var cfg: Variant = manifest.get(cfg_key, null)
+	var base_name: String = file_name.replace(".png", "")
+	
+	if cfg is Dictionary:
+		fps = float(cfg.get("fps", fps))
+		if cfg.has("frames"):
+			var frames_val: Variant = cfg["frames"]
+			if frames_val is Array:
+				frames = _load_list_frames(dir_path, frames_val)
+			elif frames_val is String:
+				frames = _load_auto_frames(dir_path, frames_val)
+			elif frames_val is int or frames_val is float:
+				frames = _load_numbered_frames(dir_path, base_name, int(frames_val))
+		else:
+			frames = _load_auto_frames(dir_path, base_name)
+	else:
+		frames = _load_auto_frames(dir_path, base_name)
+		
+	return {"fps": fps, "frames": frames}
+
+
+func _load_numbered_frames(dir_path: String, base_name: String, count: int) -> Array[Texture2D]:
+	var frames: Array[Texture2D] = []
+	for i in range(count):
+		# Support both 'player.png' as frame 0 and 'player_0.png'.
+		# Naming preference: base_1, base_2... for simplicity.
+		var suffix: String = "" if i == 0 else "_" + str(i)
+		var p: String = dir_path + "/" + base_name + suffix + ".png"
+		if FileAccess.file_exists(p):
+			frames.append(load(p))
+	return frames
+
+
+func _load_list_frames(dir_path: String, file_list: Array) -> Array[Texture2D]:
+	var frames: Array[Texture2D] = []
+	for f in file_list:
+		if f is String:
+			var tex: Texture2D = _try_load(dir_path, f)
+			if tex:
+				frames.append(tex)
+	return frames
+
+
+func _load_auto_frames(dir_path: String, base_name: String) -> Array[Texture2D]:
+	var frames: Array[Texture2D] = []
+	var clean_name: String = base_name.replace(".png", "")
+	
+	# 1. Try base file (player.png)
+	var base_p: String = dir_path + "/" + clean_name + ".png"
+	if FileAccess.file_exists(base_p):
+		frames.append(load(base_p))
+	
+	# 2. Try _1, _2... starting from 1 if base was found, or 1 anyway.
+	var i: int = 1
+	while true:
+		var p: String = dir_path + "/" + clean_name + "_" + str(i) + ".png"
+		if FileAccess.file_exists(p):
+			frames.append(load(p))
+			i += 1
+		else:
+			break
+	return frames
 
 func _get_asset(key: String, default: String) -> String:
 	if manifest.has("assets") and manifest["assets"].has(key):
-		return manifest["assets"][key]
+		var val: Variant = manifest["assets"][key]
+		if val is String:
+			return val
 	return default
 
 func _get_color(key: String, default: Color) -> Color:
 	if manifest.has("colors") and manifest["colors"].has(key):
-		return Color.from_string(manifest["colors"][key], default)
+		var val: Variant = manifest["colors"][key]
+		if val is String:
+			return Color.from_string(val, default)
 	return default
 
 func _try_load(dir_path: String, file_name: String) -> Texture2D:

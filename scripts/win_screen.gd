@@ -15,6 +15,7 @@ signal next_round_pressed
 signal harder_pressed
 signal home_pressed
 signal suggestion_pressed(target_mode: int)
+signal chaser_toggled_pressed
 
 
 # ── UI References ────────────────────────────────────────────────────────────
@@ -72,6 +73,7 @@ func show_win(time_str: String, move_count: int) -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
+	get_tree().paused = true
 
 	_win_label.text = tr("you_win")
 	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
@@ -86,13 +88,14 @@ func show_win(time_str: String, move_count: int) -> void:
 
 
 ## Show the "Gotcha!" screen when the chaser catches the player.
-func show_gotcha() -> void:
+func show_gotcha(time_str: String, move_count: int) -> void:
 	_is_active = true
-	_timer_remaining = 0.0  # No auto-advance on gotcha
-	_timer_paused = true
+	_timer_remaining = 10.0
+	_timer_paused = false
+	get_tree().paused = true
 
 	_win_label.text = tr("gotcha")
-	_score_label.text = tr("try_again_desc")
+	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
 	_next_button.text = tr("try_again")
 
 	# Show "Easier" if possible (button handler checks text to decide direction)
@@ -102,6 +105,11 @@ func show_gotcha() -> void:
 
 	_container.visible = true
 	_next_button.grab_focus()
+
+	# Gotcha screen has zero mode suggestions, so always show chaser toggle.
+	for child in _suggestion_container.get_children():
+		child.queue_free()
+	_add_chaser_suggestion()
 
 
 ## Update mode suggestions on the win screen.
@@ -128,16 +136,35 @@ func update_suggestions(current_mode: int) -> void:
 			hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 			_suggestion_container.add_child(hbox)
 
-			var btn: Button = _create_styled_button(tr(key), 650, 100, Color(0.4, 0.6, 0.9))
+			var btn: Button = _create_styled_button(tr(key), 650, 100, Color("#1188FF"))
 			btn.pressed.connect(func(): suggestion_pressed.emit(m))
 			hbox.add_child(btn)
+
+	# If we have space (less than 3 mode suggestions), add the chaser toggle.
+	if suggestion_modes.size() < 3:
+		_add_chaser_suggestion()
 
 
 ## Hide the screen and reset state.
 func hide_screen() -> void:
 	_is_active = false
+	get_tree().paused = false
 	if _container:
 		_container.visible = false
+
+
+## Appends a localized button to toggle the Chaser.
+func _add_chaser_suggestion() -> void:
+	# If chaser is ON, button offers to play WITHOUT it.
+	var key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
+	
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_suggestion_container.add_child(hbox)
+
+	var btn: Button = _create_styled_button(tr(key), 650, 100, Color("#1188FF"))
+	btn.pressed.connect(func(): chaser_toggled_pressed.emit())
+	hbox.add_child(btn)
 
 
 # ── UI Construction ──────────────────────────────────────────────────────────
@@ -205,7 +232,7 @@ func _build_ui() -> void:
 	next_spacer_l.custom_minimum_size.x = 80
 	next_hbox.add_child(next_spacer_l)
 
-	_next_button = _create_styled_button(tr("next_round"), 650, 100)
+	_next_button = _create_styled_button(tr("next_round"), 650, 100, Color("#FFCC00"))
 	_next_button.pressed.connect(func(): next_round_pressed.emit())
 	next_hbox.add_child(_next_button)
 
@@ -228,7 +255,7 @@ func _build_ui() -> void:
 	h_spacer_l.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_l)
 
-	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color("#FFCC00"))
+	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 100, Color("#1188FF"))
 	_harder_button.pressed.connect(func(): harder_pressed.emit())
 	harder_hbox.add_child(_harder_button)
 
@@ -256,7 +283,7 @@ func _build_ui() -> void:
 	home_spacer_l.custom_minimum_size.x = 80
 	home_hbox.add_child(home_spacer_l)
 
-	var home_btn: Button = _create_styled_button(tr("main_menu"), 650, 100, Color("#1188FF"))
+	var home_btn: Button = _create_styled_button(tr("main_menu"), 650, 100, Color("#FFCC00"))
 	home_btn.pressed.connect(func(): home_pressed.emit())
 	home_hbox.add_child(home_btn)
 

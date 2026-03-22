@@ -73,13 +73,16 @@ func draw_maze(maze: MazeData) -> void:
 
 	# 1. Background Layer (Strictly contained in maze area)
 	if theme.bg_texture:
+		var bg_node: Node2D = null
 		if theme.bg_tiled:
-			# If tiled, we always clip to the maze area now as requested.
-			# We ignore full_screen for now or interpret it as "maze full area".
-			_add_tiled_background(offset, maze_pixel_size, theme.bg_texture)
+			bg_node = _add_tiled_background(offset, maze_pixel_size, theme.bg_texture)
 		else:
-			# Non-tiled centered background
-			_add_sprite(offset, maze_pixel_size.x, theme.bg_texture, maze_pixel_size)
+			bg_node = _add_sprite(offset, maze_pixel_size.x, theme.bg_texture, maze_pixel_size)
+			
+		if bg_node and not theme.bg_frames.is_empty():
+			var animator := FrameAnimator.new()
+			bg_node.add_child(animator)
+			animator.start(bg_node, theme.bg_frames, theme.bg_fps)
 
 	# 2. Wall Base (only if no background texture, to avoid covering it)
 	if not theme.bg_texture:
@@ -238,7 +241,7 @@ func _add_rect(pos: Vector2, size: Vector2, color: Color) -> void:
 
 
 ## Instantiate a Sprite2D centred in the cell, scaled to fit.
-func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D, custom_size: Vector2 = Vector2.ZERO) -> void:
+func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D, custom_size: Vector2 = Vector2.ZERO) -> Sprite2D:
 	var sprite := Sprite2D.new()
 	sprite.texture = texture
 	sprite.centered = true
@@ -262,8 +265,9 @@ func _add_sprite(cell_pos: Vector2, cell_size_px: float, texture: Texture2D, cus
 		
 	sprite.position = cell_pos + offset
 	add_child(sprite)
+	return sprite
 
-func _add_tiled_background(pos: Vector2, size: Vector2, texture: Texture2D) -> void:
+func _add_tiled_background(pos: Vector2, size: Vector2, texture: Texture2D) -> Sprite2D:
 	# Using Sprite2D with region_rect is more robust for clipping in Node2D
 	# than TextureRect (which is a Control).
 	var sprite := Sprite2D.new()
@@ -283,3 +287,4 @@ func _add_tiled_background(pos: Vector2, size: Vector2, texture: Texture2D) -> v
 	sprite.region_rect = Rect2(offset_vec, size)
 	
 	add_child(sprite)
+	return sprite

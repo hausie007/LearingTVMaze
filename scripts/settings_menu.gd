@@ -136,9 +136,9 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 		12, 2
 	)
 	
-	var focus_color: Color = Color("#1188FF") # Default Sky
-	if btn.name.contains("Theme") or btn.name.contains("Voice") or btn.name.contains("Chaser"):
-		focus_color = Color("#FFCC00") # Theme/Voice/Chaser use Yellow accent
+	var focus_color: Color = Color("#1188FF") # Blue for game modifiers
+	if btn.name in ["ThemeButton", "LangButton", "VoiceButton"]:
+		focus_color = Color("#FFCC00") # Yellow for app modifiers
 		
 	var focus: StyleBoxFlat = UIHelpers.create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
 	
@@ -260,7 +260,7 @@ func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
-		%Title.add_theme_color_override("font_color", Color("#1188FF")) # Sky
+		%Title.add_theme_color_override("font_color", Color("#FFCC00")) # Match Settings Button
 	
 	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
 	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")

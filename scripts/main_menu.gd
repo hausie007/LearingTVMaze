@@ -113,11 +113,11 @@ func _create_quit_dialog() -> void:
 	hbox.add_theme_constant_override("separation", 50)
 	vbox.add_child(hbox)
 	
-	var yes_btn := _create_dialog_button(tr("yes"), Color(0.8, 0.3, 0.3))
+	var yes_btn := _create_dialog_button(tr("yes"), Color("#FFCC00"))
 	yes_btn.pressed.connect(func(): get_tree().quit())
 	hbox.add_child(yes_btn)
 	
-	_quit_no_button = _create_dialog_button(tr("no"), Color(0.3, 0.6, 0.4))
+	_quit_no_button = _create_dialog_button(tr("no"), Color("#1188FF"))
 	_quit_no_button.pressed.connect(_hide_quit_dialog)
 	hbox.add_child(_quit_no_button)
 

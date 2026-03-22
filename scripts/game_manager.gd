@@ -39,6 +39,12 @@ var _chaser: Node2D = null
 var _nav_map: AStar2D = null
 var _chaser_active: bool = false
 
+# ── Pause State ─────────────────────────────────────────────────────────────
+
+var _is_paused: bool = false
+var _pause_dialog: CanvasLayer = null
+var _pause_no_button: Button = null
+
 
 # ── Game State ───────────────────────────────────────────────────────────────
 
@@ -52,6 +58,14 @@ var _word_next_index: int = 0
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	# GameManager remains active to handle pause, but pauses children by default
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	player.process_mode = Node.PROCESS_MODE_PAUSABLE
+	maze_generator.process_mode = Node.PROCESS_MODE_PAUSABLE
+	maze_renderer.process_mode = Node.PROCESS_MODE_PAUSABLE
+	hud.process_mode = Node.PROCESS_MODE_PAUSABLE
+	tts.process_mode = Node.PROCESS_MODE_ALWAYS
+
 	# Wire up the player signals.
 	player.reached_end.connect(_on_player_reached_end)
 	player.moved.connect(_on_player_moved)
@@ -62,6 +76,7 @@ func _ready() -> void:
 	win_screen.harder_pressed.connect(_on_harder_pressed)
 	win_screen.home_pressed.connect(_on_home_pressed)
 	win_screen.suggestion_pressed.connect(_on_suggestion_pressed)
+	win_screen.chaser_toggled_pressed.connect(_on_chaser_toggled_pressed)
 
 	# Tell the maze renderer to leave space for the HUD bar.
 	maze_renderer.top_margin = hud.get_height()
@@ -72,12 +87,16 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		if not win_screen.is_active():
+			if _is_paused:
+				_hide_pause_dialog()
+			else:
+				_show_pause_dialog()
 
 
 func _process(delta: float) -> void:
-	# Stopwatch (only while playing, not during win screen)
-	if not win_screen.is_active():
+	# Stopwatch (only while playing, not during win screen or pause)
+	if not win_screen.is_active() and not get_tree().paused:
 		_elapsed_time += delta
 		hud.update_time(_elapsed_time)
 
@@ -85,7 +104,90 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Android TV 'Back' button maps to ui_cancel
 	if event.is_action_pressed("ui_cancel"):
+		if win_screen.is_active():
+			return
+		
+		if _is_paused:
+			_hide_pause_dialog()
+		else:
+			_show_pause_dialog()
+		get_viewport().set_input_as_handled()
+
+
+# ── Pause Menu ───────────────────────────────────────────────────────────────
+
+func _show_pause_dialog() -> void:
+	if not _pause_dialog:
+		_create_pause_dialog()
+	
+	_is_paused = true
+	get_tree().paused = true
+	_pause_dialog.visible = true
+	if _pause_no_button:
+		_pause_no_button.grab_focus()
+
+
+func _hide_pause_dialog() -> void:
+	_is_paused = false
+	get_tree().paused = false
+	if _pause_dialog:
+		_pause_dialog.visible = false
+
+
+func _create_pause_dialog() -> void:
+	_pause_dialog = CanvasLayer.new()
+	_pause_dialog.layer = 100
+	_pause_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(_pause_dialog)
+	
+	var overlay := ColorRect.new()
+	overlay.color = Color(0, 0, 0, 0.7)
+	overlay.anchors_preset = Control.PRESET_FULL_RECT
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_pause_dialog.add_child(overlay)
+	
+	var center := CenterContainer.new()
+	center.anchors_preset = Control.PRESET_FULL_RECT
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.add_child(center)
+	
+	var panel := PanelContainer.new()
+	var style: StyleBoxFlat = UIHelpers.create_rounded_stylebox(
+		Color(0.15, 0.17, 0.22), Color("#1188FF"), 20, 4
+	)
+	style.content_margin_left = 60
+	style.content_margin_right = 60
+	style.content_margin_top = 40
+	style.content_margin_bottom = 40
+	panel.add_theme_stylebox_override("panel", style)
+	center.add_child(panel)
+	
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 30)
+	panel.add_child(vbox)
+	
+	var lbl := Label.new()
+	lbl.text = tr("quit_confirm")
+	lbl.add_theme_font_size_override("font_size", 42)
+	lbl.add_theme_color_override("font_color", Color.WHITE)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(lbl)
+	
+	var hbox := HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", 20)
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	vbox.add_child(hbox)
+	
+	var yes_btn: Button = UIHelpers.create_styled_button(tr("yes"), 200, 80, Color("#FFCC00"))
+	yes_btn.pressed.connect(func():
+		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	)
+	hbox.add_child(yes_btn)
+	
+	_pause_no_button = UIHelpers.create_styled_button(tr("no"), 200, 80)
+	_pause_no_button.pressed.connect(_hide_pause_dialog)
+	hbox.add_child(_pause_no_button)
 
 
 # ── Game Flow ────────────────────────────────────────────────────────────────
@@ -140,6 +242,7 @@ func _start_new_maze() -> void:
 	# 3. Place player at Start cell
 	var start_cell: MazeData.CellData = _current_maze.get_start_cell()
 	if start_cell:
+		player.reset_movement()
 		player.grid_pos      = start_cell.coords
 		player.maze_data     = _current_maze
 		player.maze_renderer = maze_renderer
@@ -196,10 +299,16 @@ func _on_harder_pressed() -> void:
 	_start_new_maze()
 
 func _on_home_pressed() -> void:
+	win_screen.hide_screen()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_suggestion_pressed(target_mode: int) -> void:
 	Config.game_mode = target_mode
+	Config.save_settings()
+	_start_new_maze()
+
+func _on_chaser_toggled_pressed() -> void:
+	Config.chaser_enabled = not Config.chaser_enabled
 	Config.save_settings()
 	_start_new_maze()
 
@@ -240,6 +349,7 @@ func _spawn_collectibles() -> void:
 			val_str = String.chr(65 + i)
 
 		var col: Collectible = CollectibleScene.instantiate()
+		col.process_mode = Node.PROCESS_MODE_PAUSABLE
 		col.grid_pos = cell.coords
 		col.value_str = val_str
 
@@ -296,6 +406,7 @@ func _spawn_word_collectibles() -> void:
 		var cell: MazeData.CellData = temp_path[path_idx]
 
 		var col: Collectible = CollectibleScene.instantiate()
+		col.process_mode = Node.PROCESS_MODE_PAUSABLE
 		col.grid_pos = cell.coords
 		col.value_str = word[char_idx]
 		col.collect_index = char_idx
@@ -382,6 +493,7 @@ func _spawn_chaser() -> void:
 	if not start_cell: return
 
 	_chaser = ChaserScene.instantiate()
+	_chaser.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(_chaser)
 	_chaser.grid_pos = start_cell.coords
 	_chaser.position = maze_renderer.grid_to_pixel(_chaser.grid_pos)
@@ -427,4 +539,9 @@ func _on_chaser_caught_player() -> void:
 	player.set_physics_process(false)
 	player.set_process_input(false)
 
-	win_screen.show_gotcha()
+	var elapsed_int: int = int(_elapsed_time)
+	var mm: int = elapsed_int / 60
+	var ss: int = elapsed_int % 60
+	var time_str: String = "%02d:%02d" % [mm, ss]
+
+	win_screen.show_gotcha(time_str, _move_count)

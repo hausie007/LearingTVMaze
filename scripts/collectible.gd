@@ -16,14 +16,16 @@ var collect_index: int = -1
 @onready var text_label: Label = $TextLabel
 @onready var sprite: Sprite2D = Sprite2D.new()
 
+var _animator: FrameAnimator = null
+
 func _ready() -> void:
 	# Add sprite as child 0 so it's behind everything else
 	add_child(sprite)
 	move_child(sprite, 0)
 	sprite.visible = false
 	
-	# Explicitly ensure Labels are above the sprite
-	# (Control nodes in Node2D usually draw in tree order)
+	_animator = FrameAnimator.new()
+	add_child(_animator)
 
 
 var _last_cs: float = 120.0
@@ -71,9 +73,15 @@ func _apply_visuals(effective_cs: float) -> void:
 		var target_size := effective_cs * 0.7
 		sprite.scale = Vector2(target_size / img_size.x, target_size / img_size.y)
 		sprite.position = Vector2.ZERO
+		
+		if _last_theme and not _last_theme.col_frames.is_empty():
+			_animator.start(sprite, _last_theme.col_frames, _last_theme.col_fps)
+		else:
+			_animator.stop()
 	else:
 		bg_label.visible = true
 		sprite.visible = false
+		_animator.stop()
 		bg_label.text = "⬤"
 		bg_label.add_theme_font_size_override("font_size", int(effective_cs * 0.6))
 		bg_label.add_theme_color_override("font_color", bg_color)

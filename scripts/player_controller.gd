@@ -48,8 +48,10 @@ var _cooldown_remaining: float = 0.0
 ## The visual node (either a ColorRect or a Sprite2D).
 var _visual: Node = null
 
-## Tracked shake tween so we can kill it before starting a new one.
+## Tracked tweens so we can kill them before starting a new one or on game reset.
 var _shake_tween: Tween = null
+var _move_tween: Tween = null
+var _animator: FrameAnimator = null
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -73,9 +75,10 @@ func _build_visual() -> void:
 	# Try to use a theme sprite.
 	var theme_tex: Texture2D = null
 	var theme_color: Color = Config.player_color
+	var theme_loader: ThemeLoader = null
 	
 	if maze_renderer:
-		var theme_loader := maze_renderer.get_theme_loader()
+		theme_loader = maze_renderer.get_theme_loader()
 		if theme_loader:
 			theme_color = theme_loader.color_player
 			if theme_loader.player_texture:
@@ -94,8 +97,18 @@ func _build_visual() -> void:
 		var scale_factor: float = target_size / float(max(tex_size.x, tex_size.y))
 		sprite.scale = Vector2(scale_factor, scale_factor)
 
-		# Sprite2D is already centred on the Node2D origin.
 		_visual = sprite
+		add_child(sprite)
+
+		# Add animation support
+		if theme_loader and not theme_loader.player_frames.is_empty():
+			if _animator == null:
+				_animator = FrameAnimator.new()
+				add_child(_animator)
+			_animator.start(sprite, theme_loader.player_frames, theme_loader.player_fps)
+		elif _animator:
+			_animator.stop()
+
 	else:
 		# ── Fallback: coloured square ──
 		var rect := ColorRect.new()
@@ -156,8 +169,11 @@ func _try_move(direction: Vector2i) -> void:
 
 	# Tween to new pixel position.
 	var target_pixel := maze_renderer.grid_to_pixel(grid_pos)
-	var tw := create_tween()
-	tw.tween_property(self, "position", target_pixel, Config.tween_duration)\
+	if _move_tween and _move_tween.is_valid():
+		_move_tween.kill()
+		
+	_move_tween = create_tween()
+	_move_tween.tween_property(self, "position", target_pixel, Config.tween_duration)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_OUT)
 
@@ -165,8 +181,19 @@ func _try_move(direction: Vector2i) -> void:
 	var cell := maze_data.get_cell(grid_pos)
 	if cell and cell.is_end:
 		# Small delay so the tween finishes before the signal fires.
-		await tw.finished
+		await _move_tween.finished
 		reached_end.emit()
+
+## Kills any active tweens and resets cooldowns (used when restarting the game).
+func reset_movement() -> void:
+	if _move_tween and _move_tween.is_valid():
+		_move_tween.kill()
+	if _shake_tween and _shake_tween.is_valid():
+		_shake_tween.kill()
+	_cooldown_remaining = 0.0
+	
+	if _visual:
+		_visual.position = Vector2.ZERO if _visual is Sprite2D else Vector2(-_visual.size.x / 2.0, -_visual.size.y / 2.0)
 
 
 ## Apply a short shake animation when bumping into a wall.

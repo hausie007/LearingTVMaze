@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj1l74pm8ujt8"
-path="res://.godot/imported/chaser.png-2bbeb577dad206d1e15af7eb02171c3b.ctex"
+uid="uid://cbciar7g6l1jc"
+path="res://.godot/imported/player_3.png-8b7031984bf27f5e55567ded36ad92f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/default/chaser.png"
-dest_files=["res://.godot/imported/chaser.png-2bbeb577dad206d1e15af7eb02171c3b.ctex"]
+source_file="res://themes/default/player_3.png"
+dest_files=["res://.godot/imported/player_3.png-8b7031984bf27f5e55567ded36ad92f1.ctex"]
 
 [params]
 

@@ -11,11 +11,11 @@ setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :
 save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Quay lại,Geri,Indietro,Powrót
 on,On,Zapnuto,An,Activado,Activé,Ligado,Bật,Açık,Attivato,Włączone
 off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone
-mode_normal,Normal (Maze Only),Normální (jen bludiště),Normal (Nur Labyrinth),Normal (Solo laberinto),Normal (Labyrinthe uniquement),Normal (Apenas labirinto),Bình thường (Chỉ mê cung),Normal (Sadece Labirent),Normale (Solo labirinto),Normalny (Tylko labirynt)
+mode_normal,Just the Maze,Jen bludiště,Nur Labyrinth,Solo el laberinto,Juste le labyrinthe,Só o labirinto,Chỉ mê cung,Sadece Labirent,Solo il labirinto,Tylko labirynt
 mode_numbers,Numbers,Čísla,Zahlen,Números,Nombres,Números,Con số,Sayılar,Numeri,Liczby
 mode_letters,Alphabet,Abeceda,Alphabet,Alfabeto,Alphabet,Alfabeto,Chữ cái,Alfabe,Alfabeto,Alfabet
 mode_words,Words,Slova,Wörter,Palabras,Mots,Palavras,Từ ngữ,Kelimeler,Parole,Słowa
-diff_very_easy,Very Easy,Velmi snadné,Sehr Einfach,Muy fácil,Très facile,Muito fácil,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy
+diff_very_easy,Very Easy,Velmi snadné,Sehr einfach,Muy fácil,Très facile,Muito fácil,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy
 diff_easy,Easy,Snadné,Einfach,Fácil,Facile,Fácil,Dễ,Kolay,Facile,Łatwy
 diff_medium,Medium,Střední,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średni
 diff_hard,Hard,Těžké,Schwer,Difícil,Difficile,Difícil,Khó,Zor,Difficile,Trudny
@@ -31,24 +31,26 @@ lang_vietnamese,Tiếng Việt,Vietnamština,Vietnamesisch,Vietnamita,Vietnamien
 lang_turkish,Türkçe,Turečtina,Türkisch,Turco,Turc,Turco,Tiếng Thổ Nhĩ Kỳ,Türkçe,Turco,Turecki
 lang_italian,Italiano,Italština,Italienisch,Italiano,Italien,Italiano,Tiếng Ý,İtalyanca,Italiano,Włoski
 lang_polish,Polski,Polština,Polnisch,Polaco,Polonais,Polonês,Tiếng Ba Lan,Lehçe,Polacco,Polski
-you_win,⭐ YOU WIN! ⭐,⭐ VÝHRA! ⭐,⭐ GEWONNEN! ⭐,⭐ ¡HAS GANADO! ⭐,⭐ VOUS AVEZ GAGNÉ ! ⭐,⭐ VOCÊ VENCEU! ⭐,⭐ BẠN THẮNG RỒI! ⭐,⭐ KAZANDIN! ⭐,⭐ HAI VINTO! ⭐,⭐ WYGRAŁEŚ! ⭐
-next_round,Next Round,Další kolo,Nächste Runde,Siguiente ronda,Prochaine manche,Próxima rodada,Vòng tiếp theo,Sonraki Tur,Prossimo turno,Następna runda
-that_was_easy,That was easy,To bylo lehké,Das war einfach,Fue fácil,C'était facile,Isso foi fácil,Thật dễ dàng,Bu kolaydı,È stato facile,To było proste
+you_win,⭐ YOU DID IT! ⭐,⭐ SKVĚLÁ PRÁCE! ⭐,⭐ GUT GEMACHT! ⭐,⭐ ¡LO LOGRASTE! ⭐,⭐ TU AS RÉUSSI ! ⭐,⭐ VOCÊ CONSEGUIU! ⭐,⭐ GIỎI QUÁ! ⭐,⭐ HARİKA İŞ! ⭐,⭐ BRAVISSIMO! ⭐,⭐ ŚWIETNA ROBOTA! ⭐
+next_round,Next Maze!,Další bludiště!,Nächstes Labyrinth!,¡Siguiente laberinto!,Labyrinthe suivant !,Próximo labirinto!,Mê cung tiếp!,Sonraki Labirent!,Prossimo labirinto!,Następny labirynt!
+that_was_easy,Piece of cake!,To byla hračka!,Ein Kinderspiel!,¡Pan comido!,Trop facile !,Moleza!,Quá dễ luôn!,Çok kolaydı!,Un gioco da ragazzi!,Bułka z masłem!
 main_menu,Main Menu,Hlavní menu,Hauptmenü,Menú principal,Menu principal,Menu principal,Menu chính,Ana Menü,Menu principale,Menu główne
-try_numbers,Try Numbers,Zkusit Čísla,Zahlen versuchen,Probar Números,Essayer Nombres,Tentar Números,Thử Chế độ Số,Sayıları Dene,Prova Numeri,Spróbuj Liczby
-try_alphabet,Try Alphabet,Zkusit Abecedu,Alphabet versuchen,Probar Alfabet,Essayer Alphabet,Tentar Alfabeto,Thử Chữ cái,Alfabeyi Dene,Prova Alfabeto,Spróbuj Alfabet
-try_words,Try Words,Zkusit Slova,Wörter versuchen,Probar Palabras,Essayer Mots,Tentar Palavras,Thử Từ ngữ,Kelimelerı Dene,Prova Parole,Spróbuj Słowa
+try_numbers,With Numbers,S čísly,Mit Zahlen,Con números,Avec des nombres,Com números,Cùng chữ số,Sayılarla,Con i numeri,Z liczbami
+try_alphabet,With Letters,S písmenky,Mit Buchstaben,Con letras,Avec des lettres,Com letras,Cùng chữ cái,Harflerle,Con le lettere,Z literami
+try_words,With Words,Se slovy,Mit Wörtern,Con palabras,Avec des mots,Com palavras,Cùng từ ngữ,Kelimelerle,Con le parole,Ze słowami
 score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s
 score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d bước,%d adım,%d passi,%d kroków
-quit_confirm,Are you sure you want to exit?,Opravdu chcete odejít?,Möchten Sie wirklich beenden?,¿Estás seguro de que quieres salir?,Êtes-vous sûr de vouloir quitter ?,Tem certeza de que deseja sair?,Bạn có chắc chắn muốn thoát không?,Çıkmak istediğinizden emin misiniz?,Sei sicuro di voler uscire?,Czy na pewno chcesz wyjść?
+quit_confirm,Leaving already?,Už chceš jít?,Willst du schon gehen?,¿Ya te vas?,Tu veux déjà partir ?,Já vai?,Bạn muốn nghỉ rồi sao?,Çıkmak istediğine emin misin?,Vuoi già uscire?,Chcesz już wyjść?
 yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak
 no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie
 tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany
 tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany
 checking_tts,Checking voice availability...,Zjišťuji dostupnost hlasů...,Prüfe Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité des voix...,Verificando disponibilidade de voz...,Đang kiểm tra giọng nói...,Ses uygunluğu kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...
-setting_chaser,Tag Partner:,Honěná:,Fangen:,Atrapada:,Poursuite:,Atrapada:,Đuổi bắt:,Kovalama:,Acchiapparella:,Gonić:
-gotcha,Gotcha!,Chycen!,Gefangen!,¡Atrapado!,Attrapé!,Pego!,Bắt được rồi!,Yakalandın!,Preso!,Złapany!
-try_again_desc,Don't worry, try again!,Nevadí, zkus to znovu!,Keine Sorge, versuch es nochmal!,¡No te preocupes, inténtalo de nuevo!,Ne t'inquiète pas, réessaie !,Não se preocupe, tente novamente!,Đừng lo, thử lại nhé!,Üzülme, tekrar dene!,Non preoccuparti, riprova!,Nie martw się, spróbuj ponownie!
-try_again,Try Again,Znovu,Nochmal,De nuevo,Réessayer,Tentar de novo,Thử lại,Tekrar Dene,Riprova,Spróbuj ponownie
-challenge_pp,Harder,Těžší,Schwerer,Más difícil,Plus difficile,Mais difícil,Khó hơn,Daha Zor,Più difficile,Trudniejszy
-challenge_mm,Easier,Snazší,Leichter,Más fácil,Plus facile,Mais fácil,Dễ hơn,Daha Kolay,Più facile,Łatwiejszy
+setting_chaser,Chaser:,Honěná:,Fänger:,Atrapada:,Poursuite:,Atrapada:,Đuổi bắt:,Kovalama:,Acchiapparella:,Berek:
+gotcha,Gotcha!,Mám tě!,Hab dich!,¡Te atrapé!,Je t'ai eu !,Te peguei!,Bắt được nha!,Yakaladım seni!,Preso!,Mam cię!
+try_again_desc,Don't worry, try again!,Neva, zkus to znovu!,Nicht schlimm, versuch es nochmal!,¡No pasa nada, inténtalo otra vez!,Pas de souci, essaie encore !,Não faz mal, tente de novo!,Không sao đâu, thử lại nhé!,Sorun değil, bir daha dene!,Non fa niente, riprova!,Nic nie szkodzi, spróbuj jeszcze raz!
+try_again,Play Again,Hrát znovu,Nochmal spielen,Jugar otra vez,Rejouer,Jogar de novo,Chơi lại,Tekrar Oyna,Gioca ancora,Zagraj ponownie
+challenge_pp,A bit harder?,Zkusíš těžší?,Etwas schwerer?,¿Un poco más difícil?,Un peu plus difficile ?,Um pouco mais difícil?,Thử khó hơn nhé?,Biraz daha zor?,Un po' più difficile?,Trochę trudniej?
+challenge_mm,A bit easier?,Zkusíš lehčí?,Etwas leichter?,¿Un poco más fácil?,Un peu plus facile ?,Um pouco mais fácil?,Thử dễ hơn nhé?,Biraz daha kolay?,Un po' più facile?,Trochę łatwiej?
+with_chaser,With Chaser,S Honěnou,Mit Fänger,Con Atrapada,Avec Poursuite,Com Atrapada,Cùng Đuổi bắt,Kovalama ile,Con Acchiapparella,Z Berkiem
+without_chaser,Without Chaser,Bez Honěné,Ohne Fänger,Sin Atrapada,Sans Poursuite,Sem Atrapada,Không Đuổi bắt,Kovalama olmadan,Senza Acchiapparella,Bez Berka

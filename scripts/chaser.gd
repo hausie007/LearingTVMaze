@@ -7,6 +7,7 @@ signal move_finished
 
 var grid_pos: Vector2i = Vector2i.ZERO
 var _maze_renderer: MazeRenderer = null
+var _animator: FrameAnimator = null
 var _move_timer: Timer = null
 var _is_moving: bool = false
 
@@ -26,6 +27,13 @@ func setup(renderer: MazeRenderer) -> void:
 	var tex_size: Vector2 = sprite.texture.get_size()
 	var target_size: float = cs * 0.75
 	sprite.scale = Vector2(target_size / tex_size.x, target_size / tex_size.y)
+	
+	# Add animation support
+	if theme and not theme.chaser_frames.is_empty():
+		if _animator == null:
+			_animator = FrameAnimator.new()
+			add_child(_animator)
+		_animator.start(sprite, theme.chaser_frames, theme.chaser_fps)
 	
 	# Start movement timer
 	_move_timer = Timer.new()
