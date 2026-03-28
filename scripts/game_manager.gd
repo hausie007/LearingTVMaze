@@ -28,7 +28,6 @@ extends Node
 @onready var player:             PlayerController    = $Player
 @onready var hud:                GameHUD             = $HUD
 @onready var win_screen:         WinScreen           = $WinScreen
-@onready var tts:                TTSManager          = $TTSManager
 @onready var pause_dialog:       PauseDialog         = $PauseDialog
 @onready var collectible_spawner: CollectibleSpawner = $CollectibleSpawner
 @onready var chaser_manager:     ChaserManager       = $ChaserManager
@@ -52,7 +51,6 @@ func _ready() -> void:
 	maze_generator.process_mode = Node.PROCESS_MODE_PAUSABLE
 	maze_renderer.process_mode = Node.PROCESS_MODE_PAUSABLE
 	hud.process_mode = Node.PROCESS_MODE_PAUSABLE
-	tts.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	# Wire up the player signals.
 	player.reached_end.connect(_on_player_reached_end)
@@ -225,10 +223,12 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 # ── Collectible Callbacks ────────────────────────────────────────────────────
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
+	if not Config.voice_hints: return
+	
 	if Config.game_mode == 3:
 		# Words mode: light up letter and speak it
 		hud.light_up_letter(collect_index)
-		tts.speak(value_str, 0.85, lang)
+		TTS.speak(value_str, 0.85, lang)
 
 		# Auto-advanced spaces: light them up in the HUD
 		var next_idx: int = collectible_spawner.get_word_next_index()
@@ -245,10 +245,10 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 			if not phrase_so_far.is_empty():
 				var word_lang: String = lang
 				get_tree().create_timer(0.6).timeout.connect(
-					func(): tts.speak(phrase_so_far, 0.7, word_lang)
+					func(): TTS.speak(phrase_so_far, 0.7, word_lang)
 				)
 	else:
-		tts.speak(value_str, 0.85)
+		TTS.speak(value_str, 0.85)
 
 
 # ── Chaser Callbacks ─────────────────────────────────────────────────────────
@@ -285,8 +285,8 @@ func _on_suggestion_pressed(target_mode: int) -> void:
 	Config.save_settings()
 	_start_new_maze()
 
-func _on_chaser_toggled_pressed() -> void:
-	Config.chaser_enabled = not Config.chaser_enabled
+func _on_chaser_toggled_pressed(target_level: int) -> void:
+	Config.chaser_level = target_level
 	Config.save_settings()
 	_start_new_maze()
 

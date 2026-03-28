@@ -170,12 +170,11 @@ func _parse_anim_cfg(cfg_key: String, file_name: String, dir_path: String) -> Di
 func _load_numbered_frames(dir_path: String, base_name: String, count: int) -> Array[Texture2D]:
 	var frames: Array[Texture2D] = []
 	for i in range(count):
-		# Support both 'player.png' as frame 0 and 'player_0.png'.
-		# Naming preference: base_1, base_2... for simplicity.
 		var suffix: String = "" if i == 0 else "_" + str(i)
-		var p: String = dir_path + "/" + base_name + suffix + ".png"
-		if FileAccess.file_exists(p):
-			frames.append(load(p))
+		var filename: String = base_name + suffix + ".png"
+		var tex: Texture2D = _try_load(dir_path, filename)
+		if tex:
+			frames.append(tex)
 	return frames
 
 
@@ -194,16 +193,17 @@ func _load_auto_frames(dir_path: String, base_name: String) -> Array[Texture2D]:
 	var clean_name: String = base_name.replace(".png", "")
 	
 	# 1. Try base file (player.png)
-	var base_p: String = dir_path + "/" + clean_name + ".png"
-	if FileAccess.file_exists(base_p):
-		frames.append(load(base_p))
+	var base_tex: Texture2D = _try_load(dir_path, clean_name + ".png")
+	if base_tex:
+		frames.append(base_tex)
 	
-	# 2. Try _1, _2... starting from 1 if base was found, or 1 anyway.
+	# 2. Try _1, _2...
 	var i: int = 1
 	while true:
-		var p: String = dir_path + "/" + clean_name + "_" + str(i) + ".png"
-		if FileAccess.file_exists(p):
-			frames.append(load(p))
+		var filename: String = clean_name + "_" + str(i) + ".png"
+		var tex: Texture2D = _try_load(dir_path, filename)
+		if tex:
+			frames.append(tex)
 			i += 1
 		else:
 			break
@@ -225,9 +225,17 @@ func _get_color(key: String, default: Color) -> Color:
 
 func _try_load(dir_path: String, file_name: String) -> Texture2D:
 	var full_path := dir_path.path_join(file_name)
-	if not ResourceLoader.exists(full_path):
-		return null
-	var resource = ResourceLoader.load(full_path)
-	if resource is Texture2D:
-		return resource as Texture2D
+	
+	# Internal resources (bundled in the APK/PCK)
+	if full_path.begins_with("res://"):
+		if ResourceLoader.exists(full_path):
+			return ResourceLoader.load(full_path) as Texture2D
+			
+	# External files (user folder or absolute paths on Android)
+	else:
+		if FileAccess.file_exists(full_path):
+			var img := Image.load_from_file(full_path)
+			if img:
+				return ImageTexture.create_from_image(img)
+	
 	return null

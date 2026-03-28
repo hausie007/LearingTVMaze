@@ -15,7 +15,7 @@ signal next_round_pressed
 signal harder_pressed
 signal home_pressed
 signal suggestion_pressed(target_mode: int)
-signal chaser_toggled_pressed
+signal chaser_toggled_pressed(target_level: int)
 
 
 # ── UI References ────────────────────────────────────────────────────────────
@@ -130,9 +130,13 @@ func update_suggestions(current_mode: int) -> void:
 		if m != current_mode and m != always_suggest:
 			other_pool.append({"type": "mode", "val": m})
 	
-	# Add Chaser toggle as an "other" option
-	var chaser_key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
-	other_pool.append({"type": "chaser", "key": chaser_key})
+	# 3. Add Chaser suggestions to pool
+	if Config.chaser_level > 0:
+		other_pool.append({"type": "chaser", "key": "chaser_suggestion_off", "level": 0})
+		if Config.chaser_level < 3:
+			other_pool.append({"type": "chaser", "key": "chaser_suggestion_fast", "level": Config.chaser_level + 1})
+	else:
+		other_pool.append({"type": "chaser", "key": "chaser_suggestion_on", "level": 1})
 
 	# 3. Selection
 	var final_suggestions: Array = []
@@ -160,7 +164,7 @@ func update_suggestions(current_mode: int) -> void:
 			callback = func(): suggestion_pressed.emit(sug.val)
 		else:
 			key = sug.key
-			callback = func(): chaser_toggled_pressed.emit()
+			callback = func(): chaser_toggled_pressed.emit(sug.level)
 
 		if not key.is_empty():
 			var hbox := HBoxContainer.new()
@@ -173,12 +177,14 @@ func update_suggestions(current_mode: int) -> void:
 
 ## Appends a localized button to toggle the Chaser.
 func _add_chaser_suggestion() -> void:
-	var key: String = "without_chaser" if Config.chaser_enabled else "with_chaser"
+	var key: String = "chaser_suggestion_off" if Config.chaser_level > 0 else "chaser_suggestion_on"
+	var level: int = 0 if Config.chaser_level > 0 else 1
+	
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	_suggestion_container.add_child(hbox)
 	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.BLUE)
-	btn.pressed.connect(func(): chaser_toggled_pressed.emit())
+	btn.pressed.connect(func(): chaser_toggled_pressed.emit(level))
 	hbox.add_child(btn)
 
 

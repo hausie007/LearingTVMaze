@@ -1,5 +1,5 @@
 keys,en,cs,de,es,fr,pt,vi,tr,it,pl
-app_title,Learning Maze,Učící Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki
+app_title,Learning Maze,Vzdělávací Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki
 play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Chơi,Oyna,Gioca,Graj
 settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia
 settings_title,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia
@@ -44,6 +44,9 @@ score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d bước,
 quit_confirm,Leaving already?,Už chceš jít?,Willst du schon gehen?,¿Ya te vas?,Tu veux déjà partir ?,Já vai?,Bạn muốn nghỉ rồi sao?,Çıkmak istediğine emin misin?,Vuoi già uscire?,Chcesz już wyjść?
 yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak
 no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie
+chaser_suggestion_off,Without Chaser,Bez Honěné,Ohne Fänger,Sin Atrapada,Sans Poursuite,Sem Atrapada,Không Đuổi bắt,Kovalama olmadan,Senza Acchiapparella,Bez Berka
+chaser_suggestion_on,With Chaser,S Honěnou,Mit Fänger,Con Atrapada,Avec Poursuite,Com Atrapada,Cùng Đuổi bắt,Kovalama ile,Con Acchiapparella,Z Berkiem
+chaser_suggestion_fast,Faster Chaser,Rychlejší Honěná,Schnellerer Fänger,Atrapada más rápida,Poursuite plus rapide,Atrapada mais rápida,Đuổi bắt nhanh hơn,Daha hızlı Kovalama,Acchiapparella più veloce,Szybszy Berek
 tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany
 tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany
 checking_tts,Checking voice availability...,Zjišťuji dostupnost hlasů...,Prüfe Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité des voix...,Verificando disponibilidade de voz...,Đang kiểm tra giọng nói...,Ses uygunluğu kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...
@@ -53,5 +56,85 @@ try_again_desc,Don't worry, try again!,Neva, zkus to znovu!,Nicht schlimm, versu
 try_again,Play Again,Hrát znovu,Nochmal spielen,Jugar otra vez,Rejouer,Jogar de novo,Chơi lại,Tekrar Oyna,Gioca ancora,Zagraj ponownie
 challenge_pp,A bit harder?,Zkusíš těžší?,Etwas schwerer?,¿Un poco más difícil?,Un peu plus difficile ?,Um pouco mais difícil?,Thử khó hơn nhé?,Biraz daha zor?,Un po' più difficile?,Trochę trudniej?
 challenge_mm,A bit easier?,Zkusíš lehčí?,Etwas leichter?,¿Un poco más fácil?,Un peu plus facile ?,Um pouco mais fácil?,Thử dễ hơn nhé?,Biraz daha kolay?,Un po' più facile?,Trochę łatwiej?
-with_chaser,With Chaser,S Honěnou,Mit Fänger,Con Atrapada,Avec Poursuite,Com Atrapada,Cùng Đuổi bắt,Kovalama ile,Con Acchiapparella,Z Berkiem
-without_chaser,Without Chaser,Bez Honěné,Ohne Fänger,Sin Atrapada,Sans Poursuite,Sem Atrapada,Không Đuổi bắt,Kovalama olmadan,Senza Acchiapparella,Bez Berka
+chaser_off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone
+chaser_slow,Slow,Pomalu,Langsam,Lento,Lent,Lento,Chậm,Yavaş,Lento,Powoli
+chaser_medium,Medium,Středně,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średnio
+chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szybko
+help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc
+help_slide_1_text,"Welcome to Learning Maze!
+Let's learn how to play this fun game.","Vítej ve Vzdělávacím Bludišti!
+Pojďme se naučit, jak se tato hra hraje.","Willkommen im Lernlabyrinth!
+Lass uns lernen, wie man dieses lustige Spiel spielt.","¡Bienvenido al Laberinto de Aprendizaje!
+Aprendamos a jugar a este divertido juego.","Bienvenue dans le Labyrinthe d'Apprentissage !
+Apprenons à jouer à ce jeu amusant.","Bem-vindo ao Labirinto de Aprendizagem!
+Vamos aprender a jogar este jogo divertido.","Chào mừng đến với Mê Cung Học Tập!
+Hãy cùng học cách chơi trò chơi thú vị này nhé.","Öğrenme Labirenti'ne Hoş Geldiniz!
+Hadi bu eğlenceli oyunun nasıl oynandığını öğrenelim.","Benvenuto nel Labirinto Didattico!
+Impariamo a giocare a questo divertente gioco.","Witaj w Labiryncie Nauki!
+Nauczmy się grać w tę fajną grę."
+help_slide_2_text,"This is YOU!
+Use the arrows or D-pad to move around the maze.","Tohle jsi TY!
+K pohybu v bludišti použij šipky nebo ovladač.","Das bist DU!
+Benutze die Pfeiltasten oder das Steuerkreuz, um dich im Labyrinth zu bewegen.","¡Este eres TÚ!
+Usa las flechas o el mando para moverte por el laberinto.","C'est TOI !
+Utilise les flèches ou la croix directionnelle pour te déplacer dans le labyrinthe.","Este é VOCÊ!
+Use as setas ou o controle para se mover pelo labirinto.","Đây chính là BẠN!
+Sử dụng các mũi tên hoặc phím điều hướng để di chuyển trong mê cung.","Bu SENSİN!
+Labirentte hareket etmek için okları veya yön tuşlarını kullan.","Questo sei TU!
+Usa le frecce o il pad direzionale per muoverti nel labirinto.","To jesteś TY!
+Użyj strzałek lub pada, aby poruszać się po labiryncie."
+help_slide_3_text,"Find the EXIT!
+Reach the finish to win and get a gold star!","Najdi VÝCHOD!
+Dojeď do cíle, abys vyhrál a získal zlatou hvězdu!","Finde den AUSGANG!
+Erreiche das Ziel, um zu gewinnen und einen goldenen Stern zu bekommen!","¡Busca la SALIDA!
+¡Llega a la meta para ganar y conseguir una estrella de oro!","Trouve la SORTIE !
+Atteins l'arrivée pour gagner et obtenir une étoile d'or !","Encontre a SAÍDA!
+Chegue ao fim para vencer e ganhar uma estrela dourada!","Tìm ĐỊA ĐIỂM KẾT THÚC!
+Hãy về đích để chiến thắng và nhận được một ngôi sao vàng nhé!","ÇIKIŞI Bul!
+Kazanmak ve altın bir yıldız almak için bitişe ulaş!","Trova l'USCITA!
+Raggiungi il traguardo per vincere e ottenere una stella d'oro!","Znajdź WYJŚCIE!
+Dotrzyj do mety, aby wygrać i zdobyć złotą gwiazdkę!"
+help_slide_4_text,"Collect items!
+Pick up numbers, letters, or words. The game will say them for you!","Sbírej věci!
+Sbírej čísla, písmenka nebo slova. Hra ti je i nahlas přečte!","Sammle Gegenstände!
+Sammle Zahlen, Buchstaben oder Wörter. Das Spiel wird sie für dich vorlesen!","¡Colecciona objetos!
+Recoge números, letras o palabras. ¡El juego te los dirá en voz alta!","Collectionne des objets !
+Ramasse des nombres, des lettres ou des mots. Le jeu les dira pour toi !","Colecione itens!
+Pegue números, letras ou palavras. O jogo vai dizer para você!","Thu thập vật phẩm!
+Hãy nhặt các con số, chữ cái hoặc từ ngữ. Trò chơi sẽ đọc chúng cho bạn nghe!","Öğeleri topla!
+Sayıları, harfleri veya kelimelaeri topla. Oyun onları senin için seslendirecek!","Colleziona oggetti!
+Raccogli numeri, lettere o parole. Il gioco le pronuncerà per te!","Zbieraj przedmioty!
+Zbieraj liczby, litery lub słowa. Gra przeczyta je dla Ciebie!"
+help_slide_5_text,"Watch out for the CHASER!
+Sometimes a friend tries to catch you. Reach the exit first!","Pozor na KAMARÁDA!
+Občas se tě kamarád pokusí chytit. Musíš u cíle být dřív než on!","Pass auf den FÄNGER auf!
+Manchmal versucht ein Freund, dich zu fangen. Erreiche den Ausgang zuerst!","¡Cuidado con la ATRAPADA!
+A veces un amigo intenta atraparte. ¡Llega primero a la salida!","Attention à la POURSUITE !
+Parfois, un ami essaie de t'attraper. Atteins la sortie en premier !","Cuidado com a ATRAPADA!
+Às vezes, um amigo tenta pegar você. Chegue primeiro na saída!","Hãy cẩn thận với NGƯỜI ĐUỔI BẮT!
+Đôi khi một người bạn sẽ cố gắng bắt bạn. Hãy đến lối thoát trước nhé!","KOVALAYICIYA dikkat et!
+Bazen bir arkadaşın seni yakalamaya çalışır. Çıkışa önce sen ulaş!","Attenzione all'ACCHIAPPARELLA!
+A volte un amico cerca di prenderti. Raggiungi l'uscita per primo!","Uważaj na BERKA!
+Czasami kolega próbuje Cię złapać. Dotrzyj do wyjścia przed nim!"
+help_slide_6_text,"Customise your game!
+You can change difficulty, themes, and more in the Settings.","Uprav si hru!
+V Nastavení si můžeš změnit obtížnost, téma a další věci.","Passe dein Spiel an!
+In den Einstellungen kannst du Schwierigkeit, Themen und mehr ändern.","¡Personaliza tu juego!
+Puedes cambiar la dificultad, los temas y más en Ajustes.","Personnalise ton jeu !
+Tu peux changer la difficulté, les thèmes et plus encore dans les Paramètres.","Personalize seu jogo!
+Você pode mudar a dificuldade, temas e muito mais nas Configurações.","Tùy chỉnh trò chơi của bạn!
+Bạn có thể thay đổi độ khó, chủ đề và nhiều thứ khác trong Cài đặt.","Oyununu özelleştir!
+Ayarlardan zorluğu, temaları ve daha fazlasını değiştirebilirsin.","Personalizza il tuo gioco!
+Puoi cambiare difficoltà, temi e altro nelle Impostazioni.","Dostosuj swoją grę!
+W Ustawieniach możesz zmienić poziom trudności, motywy i nie tylko."
+help_slide_maze_text,"You are in a MAZE!
+The maze has walls and paths. Try to find your way through!","Jsi v BLUDIŠTI!
+Bludiště má zdi a cesty. Zkus najít cestu ven!","Du bist in einem LABYRINTH!
+Das Labyrinth hat Wände und Wege. Versuche, deinen Weg hindurch zu finden!","¡Estás en un LABERINTO!
+El laberinto tiene paredes y caminos. ¡Intenta encontrar el camino!","Tu es dans un LABYRINTHE !
+Le labyrinthe a des murs et des chemins. Essaie de trouver ton chemin !","Você está em um LABIRINTO!
+O labirinto tem paredes e caminhos. Tente encontrar o seu caminho!","Bạn đang ở trong một MÊ CUNG!
+Mê cung có các bức tường và lối đi. Hãy cố gắng tìm đường đi nhé!","Bir LABİRENTTEYİZ!
+Labirentin duvarları ve yolları var. Yolunu bulmaya çalış!","Sei in un LABIRINTO!
+Il labirinto ha muri e sentieri. Prova a trovare la strada!","Jesteś w LABIRYNCIE!
+Labirynt ma ściany i ścieżki. Spróbuj się z niego wydostać!"

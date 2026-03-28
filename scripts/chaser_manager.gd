@@ -37,10 +37,19 @@ func build_nav_map(renderer: MazeRenderer) -> void:
 
 ## Check if the chaser should spawn based on move count and difficulty.
 func check_trigger(move_count: int) -> void:
-	if not Config.chaser_enabled or _active:
+	if Config.chaser_level == 0 or _active:
 		return
 
-	var threshold: int = 6 if Config.difficulty <= 1 else 10
+	# Calculate threshold based on speed level and maze size
+	var base_steps: int = 0
+	match Config.chaser_level:
+		1: base_steps = 10 # Slow
+		2: base_steps = 7  # Medium
+		3: base_steps = 4  # Fast
+	
+	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
+	var size_mult: float = multipliers[clampi(Config.difficulty, 0, 4)]
+	var threshold: int = clampi(int(base_steps * size_mult), 2, 30)
 	if move_count >= threshold:
 		# Signal to GameManager that we need spawn context (maze + renderer)
 		_active = true

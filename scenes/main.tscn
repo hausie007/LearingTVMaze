@@ -29,9 +29,6 @@ script = ExtResource("5_hud")
 [node name="WinScreen" type="CanvasLayer" parent="."]
 script = ExtResource("6_ws")
 
-[node name="TTSManager" type="Node" parent="."]
-script = ExtResource("7_tts")
-
 [node name="PauseDialog" type="CanvasLayer" parent="."]
 script = ExtResource("8_pd")
 

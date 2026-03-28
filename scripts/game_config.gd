@@ -34,11 +34,16 @@ var language: String = "auto"
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
 
-## Whether the Tag Partner (Chaser) is enabled.
-var chaser_enabled: bool = true
+## 0 = Off, 1 = Slow, 2 = Medium, 3 = Fast
+var chaser_level: int = 1
 
-## Moves per second for the Chaser.
-var chaser_speed: float = 0.65
+## Moves per second for the Chaser. Read-only, based on chaser_level.
+var chaser_speed: float:
+	get:
+		match chaser_level:
+			2: return 1.0 # Medium
+			3: return 1.5 # Fast
+			_: return 0.65 # Slow (default)
 
 const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
 const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
@@ -52,6 +57,8 @@ var _installed_tts_langs: Array[String] = []
 
 ## Map of language codes to their first available voice ID.
 var _tts_voice_cache: Dictionary = {}
+
+var _is_first_boot: bool = true
 
 ## Whether the TTS scan has completed at least once.
 var tts_ready: bool = false
@@ -134,65 +141,92 @@ func _ready() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
 	
-	# Scan for available TTS voices ASYNCHRONOUSLY to avoid blocking (especially on Android TV)
+	# Perform full TTS scan synchronously to ensure correct voice is ready before any sounds play
 	refresh_tts_cache()
 
-## Pre-cache voice availability and voice IDs for all supported languages.
-func _scan_all_tts_voices() -> void:
-	# This function runs in a background thread via WorkerThreadPool
-	var new_langs: Array[String] = []
-	var new_cache: Dictionary = {}
-	
-	var all_voices := DisplayServer.tts_get_voices()
-	if not all_voices.is_empty():
-		for lang_code in LANGUAGES:
-			var target_lang := lang_code
-			if target_lang == "auto":
-				target_lang = get_effective_language()
-				
-			var target_prefix := target_lang.to_lower() + "_"
-			var target_dash_prefix := target_lang.to_lower() + "-"
-			
-			var found_voice_id := ""
-			for v in all_voices:
-				var v_lang: String = v.get("language", "").to_lower()
-				if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
-					found_voice_id = v.get("id", "")
-					break
-			
-			if not found_voice_id.is_empty():
-				new_langs.append(lang_code)
-				new_cache[lang_code] = found_voice_id
-	
-	# Update state and notify on main thread
-	call_deferred("_finalize_tts_scan", new_langs, new_cache)
-
-func _finalize_tts_scan(langs: Array[String], cache: Dictionary) -> void:
-	_installed_tts_langs = langs
-	_tts_voice_cache = cache
-	tts_ready = true
-	tts_status_changed.emit()
-	warm_up_tts()
-
-## Start a background scan for TTS voices.
+## Synchronously scan for available TTS voices for all supported languages.
+## Includes a retry mechanism for Android/Google TV as the voice service can be slow to bind.
 func refresh_tts_cache() -> void:
 	tts_ready = false
 	tts_status_changed.emit()
-	WorkerThreadPool.add_task(_scan_all_tts_voices)
+	
+	var attempts := 0
+	var max_attempts := 10
+	var all_voices: Array = []
+	
+	while attempts < max_attempts:
+		all_voices = DisplayServer.tts_get_voices()
+		if not all_voices.is_empty():
+			break
+		
+		attempts += 1
+		# Wait 200ms before retrying on Android (TV engine cold start)
+		OS.delay_msec(200)
+	
+	if all_voices.is_empty():
+		push_warning("TTS: No voices found after %d attempts. Initialization aborted." % max_attempts)
+		tts_ready = true # Allow system to proceed (to system defaults) but log warning
+		return
+
+	var new_langs: Array[String] = []
+	var new_cache: Dictionary = {}
+	
+	for lang_code in LANGUAGES:
+		var target_lang := lang_code
+		if target_lang == "auto":
+			target_lang = get_effective_language()
+			
+		var target_prefix := target_lang.to_lower() + "_"
+		var target_dash_prefix := target_lang.to_lower() + "-"
+		
+		var found_voice_id := ""
+		for v in all_voices:
+			var v_lang: String = v.get("language", "").to_lower()
+			if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
+				found_voice_id = v.get("id", "")
+				break
+		
+		if not found_voice_id.is_empty():
+			new_langs.append(lang_code)
+			new_cache[lang_code] = found_voice_id
+	
+	_installed_tts_langs = new_langs
+	_tts_voice_cache = new_cache
+	tts_ready = true
+	tts_status_changed.emit()
+	
+	# Announce app title ONLY on first boot to confirm readiness
+	if _is_first_boot:
+		_is_first_boot = false
+		warm_up_tts(TranslationServer.translate("app_title"))
+	else:
+		warm_up_tts() # Silent whisper for subsequent refreshes
 
 ## Quick retrieval of cached voice ID.
 func get_tts_voice(lang_code: String) -> String:
-	return _tts_voice_cache.get(lang_code, "")
+	var exact_id = _tts_voice_cache.get(lang_code, "")
+	if not exact_id.is_empty():
+		return exact_id
+	
+	# Best-effort fallback: Search all cached IDs for anything matching the prefix
+	if not lang_code.is_empty():
+		var prefix := lang_code.to_lower() + "_"
+		var dash_prefix := lang_code.to_lower() + "-"
+		for k in _tts_voice_cache.keys():
+			if k.to_lower().begins_with(prefix) or k.to_lower().begins_with(dash_prefix):
+				return _tts_voice_cache[k]
+				
+	return ""
 
 ## Instantaneous cached check for voice availability.
 func is_tts_available(lang_code: String) -> bool:
 	return _installed_tts_langs.has(lang_code)
 
 ## Primes the TTS engine to reduce latency.
-func warm_up_tts() -> void:
-	var tts = get_node_or_null("/root/TTSManager")
-	if tts:
-		tts.warm_up(get_effective_language())
+func warm_up_tts(text: String = "") -> void:
+	if text.strip_edges().is_empty():
+		return
+	TTS.warm_up(get_effective_language(), text)
 
 func save_settings() -> void:
 	var config := ConfigFile.new()
@@ -200,7 +234,7 @@ func save_settings() -> void:
 	config.set_value("Game", "difficulty", difficulty)
 	config.set_value("Game", "language", language)
 	config.set_value("Game", "voice_hints", voice_hints)
-	config.set_value("Game", "chaser_enabled", chaser_enabled)
+	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	
 	var err := config.save(SAVE_PATH)
@@ -214,7 +248,7 @@ func load_settings() -> void:
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
 		language       = config.get_value("Game", "language", language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
-		chaser_enabled = config.get_value("Game", "chaser_enabled", chaser_enabled)
+		chaser_level   = config.get_value("Game", "chaser_level", 1)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 
 ## Return the effective language code, resolving "auto" from OS locale.
@@ -224,10 +258,16 @@ func get_effective_language() -> String:
 			return language
 		return "en"
 	
-	# Auto-detect from OS (works on Android / Google TV)
-	var os_lang := OS.get_locale_language()  # e.g. "cs", "en", "de"
+	# Auto-detect from OS (True system source)
+	var os_lang := OS.get_locale_language().to_lower().split("_")[0]
 	if os_lang in SUPPORTED_LANGS:
 		return os_lang
+	
+	# Secondary auto-detect from TranslationServer 
+	var locale := TranslationServer.get_locale().split("_")[0].to_lower()
+	if locale in SUPPORTED_LANGS:
+		return locale
+		
 	return "en"
 
 ## Scan available themes dynamically.

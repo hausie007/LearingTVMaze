@@ -5,7 +5,7 @@ var temp_diff: int
 var temp_theme_idx: int
 var temp_lang_idx: int
 var temp_voice: bool
-var temp_chaser: bool
+var temp_chaser_level: int
 var themes: Array[String] = []
 
 # Mode/diff/lang keys for tr()
@@ -13,6 +13,7 @@ const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
 const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard"]
 const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish"]
 const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
+const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast"]
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
@@ -40,7 +41,7 @@ func _ready() -> void:
 			temp_lang_idx = 0
 			
 		temp_voice = Config.voice_hints
-		temp_chaser = Config.chaser_enabled
+		temp_chaser_level = Config.chaser_level
 		# Listen for async TTS completion
 		if not Config.tts_status_changed.is_connected(_update_labels):
 			Config.tts_status_changed.connect(_update_labels)
@@ -59,6 +60,30 @@ func _ready() -> void:
 	# Focus first interactive element for TV
 	if has_node("%ModeButton"):
 		%ModeButton.call_deferred("grab_focus")
+
+
+func _trigger_warmup() -> void:
+	# Only warm up if voice hints are currently toggled ON in the UI
+	if temp_voice and Config:
+		var lang_name := ""
+		if temp_lang_idx == 0: # Auto case
+			var detected := Config.get_effective_language()
+			var det_idx := LANG_CODES.find(detected)
+			if det_idx > 0 and det_idx < LANG_KEYS.size():
+				# i.e. "Automatic - čeština"
+				lang_name = tr("lang_auto") + " - " + tr(LANG_KEYS[det_idx]).to_lower()
+			else:
+				lang_name = tr("lang_auto")
+		else:
+			lang_name = tr(LANG_KEYS[temp_lang_idx])
+			
+		Config.warm_up_tts(lang_name)
+
+
+func _on_tts_init_warmup() -> void:
+	if Config and Config.tts_ready:
+		_trigger_warmup()
+
 
 func _create_tts_warning() -> void:
 	if _tts_warning_label: return
@@ -156,7 +181,7 @@ func _cycle_lang(dir: int) -> void:
 	if Config and temp_lang_idx < LANG_CODES.size():
 		Config.language = LANG_CODES[temp_lang_idx]
 		TranslationServer.set_locale(Config.get_effective_language())
-		Config.warm_up_tts()
+		_trigger_warmup()
 	_update_labels()
 	_update_static_labels()
 
@@ -168,9 +193,11 @@ func _cycle_theme(dir: int) -> void:
 func _cycle_voice(_dir: int) -> void:
 	temp_voice = !temp_voice
 	_update_labels()
+	if temp_voice:
+		_trigger_warmup()
 
-func _cycle_chaser(_dir: int) -> void:
-	temp_chaser = !temp_chaser
+func _cycle_chaser(dir: int) -> void:
+	temp_chaser_level = (temp_chaser_level + dir + 4) % 4
 	_update_labels()
 
 func _update_labels() -> void:
@@ -236,8 +263,8 @@ func _update_labels() -> void:
 				_tts_warning_label.text = tr("tts_ready")
 				_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4)) # Green
 
-	if has_node("%ChaserButton"):
-		%ChaserButton.text = tr("on") if temp_chaser else tr("off")
+	if has_node("%ChaserButton") and temp_chaser_level < CHASER_LEVEL_KEYS.size():
+		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
 
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
@@ -270,7 +297,7 @@ func _on_save_pressed() -> void:
 		if temp_theme_idx < themes.size():
 			Config.theme_dir_name = themes[temp_theme_idx]
 		Config.voice_hints = temp_voice
-		Config.chaser_enabled = temp_chaser
+		Config.chaser_level = temp_chaser_level
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_language())
 	

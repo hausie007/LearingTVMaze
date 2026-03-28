@@ -2,6 +2,7 @@ extends Control
 
 @onready var play_btn: Button = %PlayButton
 @onready var settings_btn: Button = %SettingsButton
+@onready var help_btn: Button = %HelpButton
 @onready var title_banner: TextureRect = %Title
 
 # ── Quit Dialog ──────────────────────────────────────────────────────────────
@@ -17,15 +18,18 @@ func _ready() -> void:
 	
 	play_btn.pressed.connect(_on_play_pressed)
 	settings_btn.pressed.connect(_on_settings_pressed)
+	help_btn.pressed.connect(_on_help_pressed)
 	
 	# Localize UI
 	# title_banner is an image now, so no tr("app_title")
 	play_btn.text = tr("play")
 	settings_btn.text = tr("settings")
+	help_btn.text = tr("help")
 	
 	# Apply global dynamic styles to existing editor-built buttons
 	UIHelpers.apply_style_to_button(play_btn, UIColors.BLUE)
 	UIHelpers.apply_style_to_button(settings_btn, UIColors.YELLOW)
+	UIHelpers.apply_style_to_button(help_btn, UIColors.YELLOW)
 	
 	# Pre-select Play button for TV D-pad
 	play_btn.call_deferred("grab_focus")
@@ -56,6 +60,9 @@ func _on_play_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")
+
+func _on_help_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/help_menu.tscn")
 
 func _show_quit_dialog() -> void:
 	if not _quit_dialog:

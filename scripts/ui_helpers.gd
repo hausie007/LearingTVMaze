@@ -48,9 +48,8 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	# Focus / Pressed (Vibrant blue/yellow)
 	var focus := create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
 
-	# Hover (Subtle - avoid phantom highlights on TV)
-	# We use the normal background but a slightly brighter border than subtle
-	var hover := create_rounded_stylebox(UIColors.BG_DARK, focus_color.darkened(0.1), 12, 3)
+	# Hover (Made identical to normal to avoid phantom highlights on TV)
+	var hover := normal
 
 	btn.add_theme_stylebox_override("focus", focus)
 	btn.add_theme_stylebox_override("hover", hover)

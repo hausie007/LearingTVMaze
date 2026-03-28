@@ -29,16 +29,19 @@ const DIRECTIONS: Array[Vector2i] = [
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-## Generate and return a new MazeData instance.
+## Generate and return a new MazeData instance using Config defaults.
 func generate() -> MazeData:
-	var grid_size: Vector2i = Config.grid_size
+	return generate_custom(Config.grid_size)
 
+
+## Generate and return a new MazeData instance with a specific size.
+func generate_custom(custom_size: Vector2i) -> MazeData:
 	var maze := MazeData.new()
-	maze.init_grid(grid_size)
+	maze.init_grid(custom_size)
 
 	# -- 1. Start = bottom-left, End = top-right --
-	var start_coord := Vector2i(0, grid_size.y - 1)
-	var end_coord   := Vector2i(grid_size.x - 1, 0)
+	var start_coord := Vector2i(0, custom_size.y - 1)
+	var end_coord   := Vector2i(custom_size.x - 1, 0)
 
 	maze.get_cell(start_coord).is_start = true
 	maze.get_cell(end_coord).is_end     = true
@@ -46,10 +49,10 @@ func generate() -> MazeData:
 	# -- 2. Build the main path via constrained random walk --
 	var visited: Dictionary = {}          # Dictionary<Vector2i, bool>
 	var path: Array[Vector2i] = []        # Ordered main-path coords
-	_build_main_path(maze, start_coord, end_coord, visited, path, grid_size)
+	_build_main_path(maze, start_coord, end_coord, visited, path, custom_size)
 
 	# -- 3. Fill ALL remaining cells (no empty spaces) --
-	_fill_remaining_cells(maze, visited, grid_size)
+	_fill_remaining_cells(maze, visited, custom_size)
 
 	return maze
 

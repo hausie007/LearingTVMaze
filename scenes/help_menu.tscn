@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp7u8x4y2m6n1"]
+
+[ext_resource type="Script" path="res://scripts/help_menu.gd" id="1_help"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_help"]
+bg_color = Color(0.12, 0.14, 0.18, 0.98)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.07, 0.53, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 30
+shadow_offset = Vector2(0, 15)
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_help")
+
+[node name="BackgroundShadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.07, 0.09, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1500, 900)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_help")
+
+[node name="MainHBox" type="HBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constant_override/separation = 0
+
+[node name="LeftButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_font_sizes/font_size = 84
+text = "<"
+flat = true
+
+[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/Panel/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin"]
+layout_mode = 2
+theme_override_constant_override/separation = 40
+alignment = 1
+
+[node name="VisualContainer" type="CenterContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox/VisualContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 54
+text = "Slide Text Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PageLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.48, 0.55, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / 7"
+horizontal_alignment = 1
+
+[node name="RightButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_font_sizes/font_size = 84
+text = ">"
+flat = true

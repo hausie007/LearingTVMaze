@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Bludiste"
 config/description="Educational maze game for toddlers"
-run/main_scene="res://scenes/splash.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 boot_splash/bg_color=Color(0.15, 0.17, 0.22, 1)
 boot_splash/image="res://images/lm_icon.png"
 boot_splash/use_filter=false
@@ -23,6 +23,7 @@ config/android_tv_banner="res://images/lm_banner_320.png"
 
 [autoload]
 
+TTS="*res://scripts/tts_manager.gd"
 Config="*res://scripts/game_config.gd"
 
 [display]
