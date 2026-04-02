@@ -51,50 +51,14 @@ func _draw() -> void:
 			var pos := Vector2(x * cell_size, y * cell_size)
 			var cell = _maze.get_cell(coord)
 			
-			if cell and cell.is_visited:
-				# ── VISITED ──
-				var floor_c = theme_loader.color_floor
-				if cell.is_start: floor_c = theme_loader.color_start
-				if cell.is_end:   floor_c = theme_loader.color_end
+			if cell:
+				var cmds := MazeCellDrawer.get_cell_draw_commands(cell, pos, cell_size, wt, theme_loader, bg_texture != null)
 				
-				# Only draw floor rects if no bg texture (allows bg to show through corridors)
-				if not bg_texture:
-					# Central floor
-					draw_rect(Rect2(pos + Vector2(wt, wt), Vector2(cell_size - wt*2, cell_size - wt*2)), floor_c)
-					# Connectors (allow overlap/bleed just like MazeRenderer)
-					var bleed := 1.0
-					if not cell.wall_north: draw_rect(Rect2(pos + Vector2(wt, -bleed), Vector2(cell_size - wt*2, wt + bleed*2)), floor_c)
-					if not cell.wall_south: draw_rect(Rect2(pos + Vector2(wt, cell_size - wt - bleed), Vector2(cell_size - wt*2, wt + bleed*2)), floor_c)
-					if not cell.wall_west:  draw_rect(Rect2(pos + Vector2(-bleed, wt), Vector2(wt + bleed * 2, cell_size - wt*2)), floor_c)
-					if not cell.wall_east:  draw_rect(Rect2(pos + Vector2(cell_size - wt - bleed, wt), Vector2(wt + bleed * 2, cell_size - wt*2)), floor_c)
-				else:
-					# BG Mode: Draw CLOSED wall rectangles as obstacles
-					if cell.wall_north: draw_rect(Rect2(pos, Vector2(cell_size, wt)), theme_loader.color_wall)
-					if cell.wall_south: draw_rect(Rect2(pos + Vector2(0, cell_size - wt), Vector2(cell_size, wt)), theme_loader.color_wall)
-					if cell.wall_west:  draw_rect(Rect2(pos, Vector2(wt, cell_size)), theme_loader.color_wall)
-					if cell.wall_east:  draw_rect(Rect2(pos + Vector2(cell_size - wt, 0), Vector2(wt, cell_size)), theme_loader.color_wall)
-				
-				# ── Borders (Always draw if defined) ──
-				if theme_loader.color_wall_border.a > 0.0:
-					var bw := maxf(1.0, wt * 0.5)
-					if cell.wall_north: draw_rect(Rect2(pos, Vector2(cell_size, bw)), theme_loader.color_wall_border)
-					if cell.wall_south: draw_rect(Rect2(pos + Vector2(0, cell_size - bw), Vector2(cell_size, bw)), theme_loader.color_wall_border)
-					if cell.wall_west:  draw_rect(Rect2(pos, Vector2(bw, cell_size)), theme_loader.color_wall_border)
-					if cell.wall_east:  draw_rect(Rect2(pos + Vector2(cell_size - bw, 0), Vector2(bw, cell_size)), theme_loader.color_wall_border)
-					# Fix for vertical borders height
-					# Actually draw_rect for borders should match MazeRenderer logic exactly.
-					# Let's re-verify MazeRenderer.gd:220
-					# 222: if cell.wall_west:  _add_rect(pos + Vector2(0, 0), Vector2(bw, cs), theme.color_wall_border)
-				
-				# ── Icons ──
-				if cell.is_start and theme_loader.start_texture:
-					_draw_icon(pos, cell_size, theme_loader.start_texture)
-				elif cell.is_end and theme_loader.end_texture:
-					_draw_icon(pos, cell_size, theme_loader.end_texture)
-			else:
-				# ── UNVISITED (Solid Wall) ──
-				# This handles the areas not carved by the generator
-				draw_rect(Rect2(pos, Vector2(cell_size, cell_size)), theme_loader.color_wall)
+				for r: MazeCellDrawer.RectCmd in cmds["rects"]:
+					draw_rect(Rect2(r.pos, r.size), r.color)
+					
+				for icon: MazeCellDrawer.IconCmd in cmds["icons"]:
+					_draw_icon(icon.pos, icon.cell_size, icon.texture)
 
 func _draw_icon(pos: Vector2, cs: float, tex: Texture2D) -> void:
 	var margin := cs * 0.1

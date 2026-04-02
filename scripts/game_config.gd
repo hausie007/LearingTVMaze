@@ -5,28 +5,52 @@
 ## This script is registered as an Autoload singleton ("Config") so every
 ## other script can access values via `Config.grid_size`, etc.
 ##
-## When a proper settings UI is added later, it will read/write these values.
+## Settings are persisted to user://settings.cfg and managed via the
+## SettingsMenu UI.
 ## ---------------------------------------------------------------------------
 class_name GameConfig
 extends Node
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+#  ENUMS
+# ─────────────────────────────────────────────────────────────────────────────
+
+## Available game modes controlling what collectibles appear in the maze.
+enum GameMode {
+	NORMAL  = 0,  ## Maze only — no collectibles
+	NUMBERS = 1,  ## Numbered collectibles (1, 2, 3…)
+	LETTERS = 2,  ## Alphabetical collectibles (A, B, C…)
+	WORDS   = 3,  ## Word letters collected in order
+}
+
+## Chaser AI speed tiers.
+enum ChaserLevel {
+	OFF    = 0,
+	SLOW   = 1,
+	MEDIUM = 2,
+	FAST   = 3,
+}
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 #  PERSISTENCE & SETTINGS LOGIC
 # ─────────────────────────────────────────────────────────────────────────────
 
-signal tts_status_changed
-
 const SAVE_PATH := "user://settings.cfg"
 
-## 0 = Normal, 1 = Numbers, 2 = Letters, 3 = Words
-var game_mode: int = 1
+## Current game mode. See GameMode enum.
+var game_mode: int = GameMode.NUMBERS
 
-## 0 = Very Easy, 1 = Easy, 2 = Medium, 3 = Hard
+## 0 = Very Easy, 1 = Easy, 2 = Medium, 3 = Hard, 4 = Very Hard
 var difficulty: int = 1
 
 ## Current active theme directory name. "default" is the built-in fallback.
-var theme_dir_name: String = "default"
+var theme_dir_name: String = "default":
+	set(value):
+		if theme_dir_name != value:
+			theme_dir_name = value
+			_theme_cache = null
 
 ## Language code for word lists. "auto" = detect from OS. Valid: "auto", "en", "cs", "de"
 var language: String = "auto"
@@ -34,16 +58,16 @@ var language: String = "auto"
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
 
-## 0 = Off, 1 = Slow, 2 = Medium, 3 = Fast
-var chaser_level: int = 1
+## Chaser speed tier. See ChaserLevel enum.
+var chaser_level: int = ChaserLevel.SLOW
 
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
 var chaser_speed: float:
 	get:
 		match chaser_level:
-			2: return 1.0 # Medium
-			3: return 1.5 # Fast
-			_: return 0.65 # Slow (default)
+			ChaserLevel.MEDIUM: return 1.0
+			ChaserLevel.FAST:   return 1.5
+			_:                  return 0.65  # Slow (default)
 
 const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
 const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
@@ -51,17 +75,6 @@ const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi"
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
 var current_word: Dictionary = {}
-
-## Cache of language codes that have at least one TTS voice installed.
-var _installed_tts_langs: Array[String] = []
-
-## Map of language codes to their first available voice ID.
-var _tts_voice_cache: Dictionary = {}
-
-var _is_first_boot: bool = true
-
-## Whether the TTS scan has completed at least once.
-var tts_ready: bool = false
 
 var theme_dir: String:
 	get:
@@ -74,6 +87,15 @@ var theme_dir: String:
 			return user_path
 			
 		return "res://themes/default"
+
+var _theme_cache: ThemeLoader = null
+
+var theme: ThemeLoader:
+	get:
+		if _theme_cache == null:
+			_theme_cache = ThemeLoader.new()
+			_theme_cache.load_theme()
+		return _theme_cache
 
 # Difficulty -> Grid Size mapping
 const DIFFICULTY_SIZES: Array[Vector2i] = [
@@ -140,93 +162,6 @@ var color_end: Color = Color("#FFCC00").lerp(Color("#1A1C23"), 0.7)
 func _ready() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
-	
-	# Perform full TTS scan synchronously to ensure correct voice is ready before any sounds play
-	refresh_tts_cache()
-
-## Synchronously scan for available TTS voices for all supported languages.
-## Includes a retry mechanism for Android/Google TV as the voice service can be slow to bind.
-func refresh_tts_cache() -> void:
-	tts_ready = false
-	tts_status_changed.emit()
-	
-	var attempts := 0
-	var max_attempts := 10
-	var all_voices: Array = []
-	
-	while attempts < max_attempts:
-		all_voices = DisplayServer.tts_get_voices()
-		if not all_voices.is_empty():
-			break
-		
-		attempts += 1
-		# Wait 200ms before retrying on Android (TV engine cold start)
-		OS.delay_msec(200)
-	
-	if all_voices.is_empty():
-		push_warning("TTS: No voices found after %d attempts. Initialization aborted." % max_attempts)
-		tts_ready = true # Allow system to proceed (to system defaults) but log warning
-		return
-
-	var new_langs: Array[String] = []
-	var new_cache: Dictionary = {}
-	
-	for lang_code in LANGUAGES:
-		var target_lang := lang_code
-		if target_lang == "auto":
-			target_lang = get_effective_language()
-			
-		var target_prefix := target_lang.to_lower() + "_"
-		var target_dash_prefix := target_lang.to_lower() + "-"
-		
-		var found_voice_id := ""
-		for v in all_voices:
-			var v_lang: String = v.get("language", "").to_lower()
-			if v_lang == target_lang.to_lower() or v_lang.begins_with(target_prefix) or v_lang.begins_with(target_dash_prefix):
-				found_voice_id = v.get("id", "")
-				break
-		
-		if not found_voice_id.is_empty():
-			new_langs.append(lang_code)
-			new_cache[lang_code] = found_voice_id
-	
-	_installed_tts_langs = new_langs
-	_tts_voice_cache = new_cache
-	tts_ready = true
-	tts_status_changed.emit()
-	
-	# Announce app title ONLY on first boot to confirm readiness
-	if _is_first_boot:
-		_is_first_boot = false
-		warm_up_tts(TranslationServer.translate("app_title"))
-	else:
-		warm_up_tts() # Silent whisper for subsequent refreshes
-
-## Quick retrieval of cached voice ID.
-func get_tts_voice(lang_code: String) -> String:
-	var exact_id = _tts_voice_cache.get(lang_code, "")
-	if not exact_id.is_empty():
-		return exact_id
-	
-	# Best-effort fallback: Search all cached IDs for anything matching the prefix
-	if not lang_code.is_empty():
-		var prefix := lang_code.to_lower() + "_"
-		var dash_prefix := lang_code.to_lower() + "-"
-		for k in _tts_voice_cache.keys():
-			if k.to_lower().begins_with(prefix) or k.to_lower().begins_with(dash_prefix):
-				return _tts_voice_cache[k]
-				
-	return ""
-
-## Instantaneous cached check for voice availability.
-func is_tts_available(lang_code: String) -> bool:
-	return _installed_tts_langs.has(lang_code)
-
-## Primes the TTS engine to reduce latency.
-func warm_up_tts(text: String = "") -> void:
-	if text.strip_edges().is_empty():
-		return
-	TTS.warm_up(get_effective_language(), text)
 
 func save_settings() -> void:
 	var config := ConfigFile.new()
@@ -248,7 +183,7 @@ func load_settings() -> void:
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
 		language       = config.get_value("Game", "language", language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
-		chaser_level   = config.get_value("Game", "chaser_level", 1)
+		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 
 ## Return the effective language code, resolving "auto" from OS locale.
@@ -257,7 +192,10 @@ func get_effective_language() -> String:
 		if language in SUPPORTED_LANGS:
 			return language
 		return "en"
-	
+	return get_auto_detected_language()
+
+## Perform true OS/System language auto-detection, ignoring any saved preference.
+func get_auto_detected_language() -> String:
 	# Auto-detect from OS (True system source)
 	var os_lang := OS.get_locale_language().to_lower().split("_")[0]
 	if os_lang in SUPPORTED_LANGS:

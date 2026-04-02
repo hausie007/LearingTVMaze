@@ -46,7 +46,7 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 	for child in _word_container.get_children():
 		child.queue_free()
 
-	if game_mode != 3 or word_data.is_empty():
+	if game_mode != Config.GameMode.WORDS or word_data.is_empty():
 		return
 
 	var emoji: String = word_data.get("emoji", "")

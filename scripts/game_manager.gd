@@ -62,6 +62,8 @@ func _ready() -> void:
 	win_screen.home_pressed.connect(_on_home_pressed)
 	win_screen.suggestion_pressed.connect(_on_suggestion_pressed)
 	win_screen.chaser_toggled_pressed.connect(_on_chaser_toggled_pressed)
+	win_screen.screen_shown.connect(_on_win_screen_shown)
+	win_screen.screen_hidden.connect(_on_win_screen_hidden)
 
 	# Wire up the pause dialog signals.
 	pause_dialog.confirmed.connect(_on_pause_confirmed)
@@ -138,8 +140,9 @@ func _on_pause_cancelled() -> void:
 ## Generate a fresh maze, render it, and place the player.
 func _start_new_maze() -> void:
 	win_screen.hide_screen()
-
-	# Reset round state
+	
+	# Ensure tree is unpaused (win/gotcha screens pause the tree via signal)
+	get_tree().paused = false
 	_elapsed_time = 0.0
 	_move_count = 0
 	hud.update_moves(_move_count)
@@ -164,7 +167,7 @@ func _start_new_maze() -> void:
 	chaser_manager.set_grid_width(_current_maze.grid_size.x)
 
 	# 4. Spawn collectibles if applicable
-	if Config.game_mode > 0:
+	if Config.game_mode != Config.GameMode.NORMAL:
 		collectible_spawner.spawn(_current_maze, maze_renderer)
 
 	# Update word display in HUD
@@ -196,7 +199,7 @@ func _on_player_reached_end() -> void:
 	_freeze_player()
 
 	# Full word progress update if word mode
-	if Config.game_mode == 3:
+	if Config.game_mode == Config.GameMode.WORDS:
 		hud.light_up_letter(collectible_spawner.get_word_next_index())
 
 	win_screen.show_win(_format_time(), _move_count)
@@ -225,7 +228,7 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
 	if not Config.voice_hints: return
 	
-	if Config.game_mode == 3:
+	if Config.game_mode == Config.GameMode.WORDS:
 		# Words mode: light up letter and speak it
 		hud.light_up_letter(collect_index)
 		TTS.speak(value_str, 0.85, lang)
@@ -259,7 +262,14 @@ func _on_chaser_caught_player() -> void:
 	win_screen.show_gotcha(_format_time(), _move_count)
 
 
-# ── Win Screen Callbacks ─────────────────────────────────────────────────────
+# ── Win Screen Pause Ownership ───────────────────────────────────────────────
+
+## GameManager owns the tree pause state for win/gotcha overlays.
+func _on_win_screen_shown() -> void:
+	get_tree().paused = true
+
+func _on_win_screen_hidden() -> void:
+	get_tree().paused = false
 
 func _on_next_round_pressed() -> void:
 	_start_new_maze()
@@ -278,6 +288,7 @@ func _on_harder_pressed() -> void:
 
 func _on_home_pressed() -> void:
 	win_screen.hide_screen()
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_suggestion_pressed(target_mode: int) -> void:

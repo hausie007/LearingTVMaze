@@ -17,6 +17,11 @@ signal home_pressed
 signal suggestion_pressed(target_mode: int)
 signal chaser_toggled_pressed(target_level: int)
 
+## Emitted when the screen becomes visible (GameManager should pause the tree).
+signal screen_shown
+## Emitted when the screen is hidden (GameManager should unpause the tree).
+signal screen_hidden
+
 
 # ── UI References ────────────────────────────────────────────────────────────
 
@@ -73,7 +78,6 @@ func show_win(time_str: String, move_count: int) -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
-	get_tree().paused = true
 
 	_win_label.text = tr("you_win")
 	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
@@ -85,6 +89,7 @@ func show_win(time_str: String, move_count: int) -> void:
 
 	_container.visible = true
 	_next_button.grab_focus()
+	screen_shown.emit()
 
 
 ## Show the "Gotcha!" screen when the chaser catches the player.
@@ -92,7 +97,6 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
-	get_tree().paused = true
 
 	_win_label.text = tr("gotcha")
 	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
@@ -105,6 +109,7 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 
 	_container.visible = true
 	_next_button.grab_focus()
+	screen_shown.emit()
 
 	# Gotcha screen has zero mode suggestions, so always show chaser toggle.
 	for child in _suggestion_container.get_children():
@@ -117,26 +122,26 @@ func update_suggestions(current_mode: int) -> void:
 	for child in _suggestion_container.get_children():
 		child.queue_free()
 
-	# 1. Always suggest the "Next" mode if available (0 -> 1 -> 2 -> 3)
+	# 1. Always suggest the "Next" mode if available
 	var always_suggest: int = -1
-	if current_mode < 3:
+	if current_mode < Config.GameMode.WORDS:
 		always_suggest = current_mode + 1
 
 	# 2. Build a pool of "Others" to pick from randomly
 	var other_pool: Array = []
 	
 	# Add other modes (not current, not the "always" one)
-	for m in [0, 1, 2, 3]:
+	for m in [Config.GameMode.NORMAL, Config.GameMode.NUMBERS, Config.GameMode.LETTERS, Config.GameMode.WORDS]:
 		if m != current_mode and m != always_suggest:
 			other_pool.append({"type": "mode", "val": m})
 	
 	# 3. Add Chaser suggestions to pool
-	if Config.chaser_level > 0:
-		other_pool.append({"type": "chaser", "key": "chaser_suggestion_off", "level": 0})
-		if Config.chaser_level < 3:
+	if Config.chaser_level != Config.ChaserLevel.OFF:
+		other_pool.append({"type": "chaser", "key": "chaser_suggestion_off", "level": Config.ChaserLevel.OFF})
+		if Config.chaser_level < Config.ChaserLevel.FAST:
 			other_pool.append({"type": "chaser", "key": "chaser_suggestion_fast", "level": Config.chaser_level + 1})
 	else:
-		other_pool.append({"type": "chaser", "key": "chaser_suggestion_on", "level": 1})
+		other_pool.append({"type": "chaser", "key": "chaser_suggestion_on", "level": Config.ChaserLevel.SLOW})
 
 	# 3. Selection
 	var final_suggestions: Array = []
@@ -157,10 +162,10 @@ func update_suggestions(current_mode: int) -> void:
 		
 		if sug.type == "mode":
 			match sug.val:
-				0: key = "try_normal" # Maze only
-				1: key = "try_numbers"
-				2: key = "try_alphabet"
-				3: key = "try_words"
+				Config.GameMode.NORMAL:  key = "try_normal"
+				Config.GameMode.NUMBERS: key = "try_numbers"
+				Config.GameMode.LETTERS: key = "try_alphabet"
+				Config.GameMode.WORDS:   key = "try_words"
 			callback = func(): suggestion_pressed.emit(sug.val)
 		else:
 			key = sug.key
@@ -177,8 +182,8 @@ func update_suggestions(current_mode: int) -> void:
 
 ## Appends a localized button to toggle the Chaser.
 func _add_chaser_suggestion() -> void:
-	var key: String = "chaser_suggestion_off" if Config.chaser_level > 0 else "chaser_suggestion_on"
-	var level: int = 0 if Config.chaser_level > 0 else 1
+	var key: String = "chaser_suggestion_off" if Config.chaser_level != Config.ChaserLevel.OFF else "chaser_suggestion_on"
+	var level: int = Config.ChaserLevel.OFF if Config.chaser_level != Config.ChaserLevel.OFF else Config.ChaserLevel.SLOW
 	
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -191,9 +196,9 @@ func _add_chaser_suggestion() -> void:
 ## Hide the screen and reset state.
 func hide_screen() -> void:
 	_is_active = false
-	get_tree().paused = false
 	if _container:
 		_container.visible = false
+	screen_hidden.emit()
 
 
 # ── UI Construction ──────────────────────────────────────────────────────────

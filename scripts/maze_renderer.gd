@@ -37,9 +37,8 @@ func draw_maze(maze: MazeData) -> void:
 	_maze = maze
 	_clear()
 
-	# Load theme images.
-	theme = ThemeLoader.new()
-	theme.load_theme()
+	# Use cached theme from Config
+	theme = Config.theme
 
 	# Calculate dynamic cell size to fit the screen.
 	var viewport_size := get_viewport_rect().size
@@ -168,67 +167,19 @@ func _clear() -> void:
 		child.queue_free()
 
 
-## Create floor + wall rects for a single cell.
+## Create floor + wall rects for a single cell using shared draw logic.
 func _draw_cell(cell: MazeData.CellData, pos: Vector2) -> void:
 	var cs := _current_cell_size
 	var wt := _current_wall_thickness
-	var floor_color := theme.color_floor
-	var wall_color := theme.color_wall
 	var has_bg := theme.bg_texture != null
 
-	# ── UNVISITED: Draw solid wall block ──
-	if not cell.is_visited:
-		_add_rect(pos, Vector2(cs, cs), wall_color)
-		return
+	var cmds := MazeCellDrawer.get_cell_draw_commands(cell, pos, cs, wt, theme, has_bg)
 
-	# ── VISITED: Corridors ──
-	# Only draw solid floor if NO background is present.
-	# This allows the background to serve as the "floor".
-	if not has_bg:
-		if cell.is_start:
-			floor_color = theme.color_start
-		elif cell.is_end:
-			floor_color = theme.color_end
-			
-		_add_rect(
-			pos + Vector2(wt, wt),
-			Vector2(cs - wt * 2, cs - wt * 2),
-			floor_color,
-		)
-		
-		# Connectors for transparent floor (when bg is present, we don't need these as background is continuous)
-		var bleed := 1.0
-		if not cell.wall_north:
-			_add_rect(pos + Vector2(wt, -bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
-		if not cell.wall_south:
-			_add_rect(pos + Vector2(wt, cs - wt - bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color)
-		if not cell.wall_west:
-			_add_rect(pos + Vector2(-bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
-		if not cell.wall_east:
-			_add_rect(pos + Vector2(cs - wt - bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color)
-	else:
-		# BACKGROUND MODE: If background is the floor, we need to draw CLOSED walls as solid colors
-		# or wall borders to maintain the maze structure.
-		if cell.wall_north: _add_rect(pos, Vector2(cs, wt), wall_color)
-		if cell.wall_south: _add_rect(pos + Vector2(0, cs - wt), Vector2(cs, wt), wall_color)
-		if cell.wall_west:  _add_rect(pos, Vector2(wt, cs), wall_color)
-		if cell.wall_east:  _add_rect(pos + Vector2(cs - wt, 0), Vector2(wt, cs), wall_color)
+	for r: MazeCellDrawer.RectCmd in cmds["rects"]:
+		_add_rect(r.pos, r.size, r.color)
 
-	# ── Wall Borders (optional, always draw if defined) ──
-	if theme.color_wall_border.a > 0.0:
-		var bw := maxf(1.0, wt * 0.5)
-		if cell.wall_north: _add_rect(pos + Vector2(0, 0), Vector2(cs, bw), theme.color_wall_border)
-		if cell.wall_south: _add_rect(pos + Vector2(0, cs - bw), Vector2(cs, bw), theme.color_wall_border)
-		if cell.wall_west:  _add_rect(pos + Vector2(0, 0), Vector2(bw, cs), theme.color_wall_border)
-		if cell.wall_east:  _add_rect(pos + Vector2(cs - bw, 0), Vector2(bw, cs), theme.color_wall_border)
-
-	# ── Start/End markers ──
-	# We still draw markers, possibly with a faint tint if it's backgrounds mode?
-	# For now, icons are usually enough.
-	if cell.is_start and theme.start_texture:
-		_add_sprite(pos, cs, theme.start_texture)
-	elif cell.is_end and theme.end_texture:
-		_add_sprite(pos, cs, theme.end_texture)
+	for icon: MazeCellDrawer.IconCmd in cmds["icons"]:
+		_add_sprite(icon.pos, icon.cell_size, icon.texture)
 
 
 ## Instantiate a simple ColorRect child.

@@ -69,32 +69,50 @@ func _build_main_path(
 	path: Array[Vector2i],
 	grid_size: Vector2i,
 ) -> bool:
+	
+	# Stack stores state: {"pos": Vector2i, "dirs": Array[Vector2i]}
+	var stack: Array = []
+	
 	visited[start] = true
 	maze.get_cell(start).is_visited = true
 	path.append(start)
-
-	# Reached the goal – mark every cell on the path as main.
-	if start == goal:
-		maze.main_path_coords = path.duplicate()
-		for coord in path:
-			maze.get_cell(coord).is_main_path = true
-		return true
-
-	# Try neighbours in random order.
-	var dirs := DIRECTIONS.duplicate()
-	dirs.shuffle()
-
-	for dir: Vector2i in dirs:
-		var next := start + dir
+	
+	var initial_dirs := DIRECTIONS.duplicate()
+	initial_dirs.shuffle()
+	stack.append({"pos": start, "dirs": initial_dirs})
+	
+	while not stack.is_empty():
+		var current = stack.back()
+		var pos: Vector2i = current["pos"]
+		var dirs: Array = current["dirs"]
+		
+		# Reached the goal – mark every cell on the path as main.
+		if pos == goal:
+			maze.main_path_coords = path.duplicate()
+			for coord in path:
+				maze.get_cell(coord).is_main_path = true
+			return true
+			
+		# Try next direction
+		if dirs.is_empty():
+			stack.pop_back()
+			path.pop_back()
+			continue
+			
+		var dir: Vector2i = dirs.pop_back()
+		var next := pos + dir
+		
 		if _is_in_bounds(next, grid_size) and not visited.has(next):
-			maze.open_wall_between(start, next)
-			if _build_main_path(maze, next, goal, visited, path, grid_size):
-				return true
-			# We DO NOT backtrack the wall or the visited status.
-			# This ensures we don't re-explore these nodes, making the search O(N).
-			# These "failed" paths simply become dead ends in the final maze.
-
-	path.pop_back()
+			maze.open_wall_between(pos, next)
+			
+			visited[next] = true
+			maze.get_cell(next).is_visited = true
+			path.append(next)
+			
+			var next_dirs := DIRECTIONS.duplicate()
+			next_dirs.shuffle()
+			stack.append({"pos": next, "dirs": next_dirs})
+			
 	return false
 
 

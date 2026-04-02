@@ -61,80 +61,80 @@ chaser_slow,Slow,Pomalu,Langsam,Lento,Lent,Lento,Chậm,Yavaş,Lento,Powoli
 chaser_medium,Medium,Středně,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średnio
 chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szybko
 help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc
-help_slide_1_text,"Welcome to Learning Maze!
-Let's learn how to play this fun game.","Vítej ve Vzdělávacím Bludišti!
-Pojďme se naučit, jak se tato hra hraje.","Willkommen im Lernlabyrinth!
-Lass uns lernen, wie man dieses lustige Spiel spielt.","¡Bienvenido al Laberinto de Aprendizaje!
-Aprendamos a jugar a este divertido juego.","Bienvenue dans le Labyrinthe d'Apprentissage !
-Apprenons à jouer à ce jeu amusant.","Bem-vindo ao Labirinto de Aprendizagem!
-Vamos aprender a jogar este jogo divertido.","Chào mừng đến với Mê Cung Học Tập!
-Hãy cùng học cách chơi trò chơi thú vị này nhé.","Öğrenme Labirenti'ne Hoş Geldiniz!
-Hadi bu eğlenceli oyunun nasıl oynandığını öğrenelim.","Benvenuto nel Labirinto Didattico!
-Impariamo a giocare a questo divertente gioco.","Witaj w Labiryncie Nauki!
-Nauczmy się grać w tę fajną grę."
-help_slide_2_text,"This is YOU!
-Use the arrows or D-pad to move around the maze.","Tohle jsi TY!
-K pohybu v bludišti použij šipky nebo ovladač.","Das bist DU!
-Benutze die Pfeiltasten oder das Steuerkreuz, um dich im Labyrinth zu bewegen.","¡Este eres TÚ!
-Usa las flechas o el mando para moverte por el laberinto.","C'est TOI !
-Utilise les flèches ou la croix directionnelle pour te déplacer dans le labyrinthe.","Este é VOCÊ!
-Use as setas ou o controle para se mover pelo labirinto.","Đây chính là BẠN!
-Sử dụng các mũi tên hoặc phím điều hướng để di chuyển trong mê cung.","Bu SENSİN!
-Labirentte hareket etmek için okları veya yön tuşlarını kullan.","Questo sei TU!
-Usa le frecce o il pad direzionale per muoverti nel labirinto.","To jesteś TY!
-Użyj strzałek lub pada, aby poruszać się po labiryncie."
-help_slide_3_text,"Find the EXIT!
-Reach the finish to win and get a gold star!","Najdi VÝCHOD!
-Dojeď do cíle, abys vyhrál a získal zlatou hvězdu!","Finde den AUSGANG!
-Erreiche das Ziel, um zu gewinnen und einen goldenen Stern zu bekommen!","¡Busca la SALIDA!
-¡Llega a la meta para ganar y conseguir una estrella de oro!","Trouve la SORTIE !
-Atteins l'arrivée pour gagner et obtenir une étoile d'or !","Encontre a SAÍDA!
-Chegue ao fim para vencer e ganhar uma estrela dourada!","Tìm ĐỊA ĐIỂM KẾT THÚC!
-Hãy về đích để chiến thắng và nhận được một ngôi sao vàng nhé!","ÇIKIŞI Bul!
-Kazanmak ve altın bir yıldız almak için bitişe ulaş!","Trova l'USCITA!
-Raggiungi il traguardo per vincere e ottenere una stella d'oro!","Znajdź WYJŚCIE!
-Dotrzyj do mety, aby wygrać i zdobyć złotą gwiazdkę!"
-help_slide_4_text,"Collect items!
-Pick up numbers, letters, or words. The game will say them for you!","Sbírej věci!
-Sbírej čísla, písmenka nebo slova. Hra ti je i nahlas přečte!","Sammle Gegenstände!
-Sammle Zahlen, Buchstaben oder Wörter. Das Spiel wird sie für dich vorlesen!","¡Colecciona objetos!
-Recoge números, letras o palabras. ¡El juego te los dirá en voz alta!","Collectionne des objets !
-Ramasse des nombres, des lettres ou des mots. Le jeu les dira pour toi !","Colecione itens!
-Pegue números, letras ou palavras. O jogo vai dizer para você!","Thu thập vật phẩm!
-Hãy nhặt các con số, chữ cái hoặc từ ngữ. Trò chơi sẽ đọc chúng cho bạn nghe!","Öğeleri topla!
-Sayıları, harfleri veya kelimelaeri topla. Oyun onları senin için seslendirecek!","Colleziona oggetti!
-Raccogli numeri, lettere o parole. Il gioco le pronuncerà per te!","Zbieraj przedmioty!
-Zbieraj liczby, litery lub słowa. Gra przeczyta je dla Ciebie!"
-help_slide_5_text,"Watch out for the CHASER!
-Sometimes a friend tries to catch you. Reach the exit first!","Pozor na KAMARÁDA!
-Občas se tě kamarád pokusí chytit. Musíš u cíle být dřív než on!","Pass auf den FÄNGER auf!
-Manchmal versucht ein Freund, dich zu fangen. Erreiche den Ausgang zuerst!","¡Cuidado con la ATRAPADA!
-A veces un amigo intenta atraparte. ¡Llega primero a la salida!","Attention à la POURSUITE !
-Parfois, un ami essaie de t'attraper. Atteins la sortie en premier !","Cuidado com a ATRAPADA!
-Às vezes, um amigo tenta pegar você. Chegue primeiro na saída!","Hãy cẩn thận với NGƯỜI ĐUỔI BẮT!
-Đôi khi một người bạn sẽ cố gắng bắt bạn. Hãy đến lối thoát trước nhé!","KOVALAYICIYA dikkat et!
-Bazen bir arkadaşın seni yakalamaya çalışır. Çıkışa önce sen ulaş!","Attenzione all'ACCHIAPPARELLA!
-A volte un amico cerca di prenderti. Raggiungi l'uscita per primo!","Uważaj na BERKA!
-Czasami kolega próbuje Cię złapać. Dotrzyj do wyjścia przed nim!"
-help_slide_6_text,"Customise your game!
-You can change difficulty, themes, and more in the Settings.","Uprav si hru!
-V Nastavení si můžeš změnit obtížnost, téma a další věci.","Passe dein Spiel an!
-In den Einstellungen kannst du Schwierigkeit, Themen und mehr ändern.","¡Personaliza tu juego!
-Puedes cambiar la dificultad, los temas y más en Ajustes.","Personnalise ton jeu !
-Tu peux changer la difficulté, les thèmes et plus encore dans les Paramètres.","Personalize seu jogo!
-Você pode mudar a dificuldade, temas e muito mais nas Configurações.","Tùy chỉnh trò chơi của bạn!
-Bạn có thể thay đổi độ khó, chủ đề và nhiều thứ khác trong Cài đặt.","Oyununu özelleştir!
-Ayarlardan zorluğu, temaları ve daha fazlasını değiştirebilirsin.","Personalizza il tuo gioco!
-Puoi cambiare difficoltà, temi e altro nelle Impostazioni.","Dostosuj swoją grę!
-W Ustawieniach możesz zmienić poziom trudności, motywy i nie tylko."
-help_slide_maze_text,"You are in a MAZE!
-The maze has walls and paths. Try to find your way through!","Jsi v BLUDIŠTI!
-Bludiště má zdi a cesty. Zkus najít cestu ven!","Du bist in einem LABYRINTH!
-Das Labyrinth hat Wände und Wege. Versuche, deinen Weg hindurch zu finden!","¡Estás en un LABERINTO!
-El laberinto tiene paredes y caminos. ¡Intenta encontrar el camino!","Tu es dans un LABYRINTHE !
-Le labyrinthe a des murs et des chemins. Essaie de trouver ton chemin !","Você está em um LABIRINTO!
-O labirinto tem paredes e caminhos. Tente encontrar o seu caminho!","Bạn đang ở trong một MÊ CUNG!
-Mê cung có các bức tường và lối đi. Hãy cố gắng tìm đường đi nhé!","Bir LABİRENTTEYİZ!
-Labirentin duvarları ve yolları var. Yolunu bulmaya çalış!","Sei in un LABIRINTO!
-Il labirinto ha muri e sentieri. Prova a trovare la strada!","Jesteś w LABIRYNCIE!
-Labirynt ma ściany i ścieżki. Spróbuj się z niego wydostać!"
+help_slide_1_text,"Welcome to the Learning Maze!
+Let's embark on a magical journey and learn how to play.","Vítej ve Vzdělávacím Bludišti!
+Pojďme se vydat na kouzelnou cestu a naučit se hrát.","Willkommen im Lernlabyrinth!
+Lass uns auf eine magische Reise gehen und spielen lernen.","¡Bienvenido al Laberinto de Aprendizaje!
+Emprendamos un viaje mágico y aprendamos a jugar.","Bienvenue dans le Labyrinthe d'Apprentissage !
+Embarquons pour un voyage magique et apprenons à jouer.","Bem-vindo ao Labirinto de Aprendizagem!
+Vamos embarcar em uma jornada mágica e aprender a jogar.","Chào mừng đến với Mê Cung Học Tập!
+Hãy cùng bước vào một hành trình kỳ diệu và học cách chơi nhé.","Öğrenme Labirenti'ne Hoş Geldiniz!
+Sihirli bir yolculuğa çıkalım ve nasıl oynanacağını öğrenelim.","Benvenuto nel Labirinto Didattico!
+Iniziamo un viaggio magico per imparare a giocare.","Witaj w Labiryncie Nauki!
+Wyruszmy w magiczną podróż i nauczmy się grać."
+help_slide_2_text,"This brave explorer is YOU!
+Use the little arrows on your controller to hop through the corridors.","Tenhle odvážný průzkumník jsi TY!
+Použij šipky na ovladači a proskákej chodbičkami dál.","Dieser mutige Entdecker bist DU!
+Benutze die Pfeile, um fröhlich durch die Gänge zu hüpfen.","¡Este valiente explorador eres TÚ!
+Usa las flechitas de tu mando para saltar por los pasillos.","Ce courageux explorateur, c'est TOI !
+Utilise les petites flèches pour bondir à travers les couloirs.","Este corajoso explorador é VOCÊ!
+Use as setinhas do seu controle para pular pelos corredores.","Nhà thám hiểm dũng cảm này chính là BẠN!
+Hãy dùng các mũi tên trên bộ điều khiển để nhảy nhót qua các hành lang.","Bu cesur kaşif SENSİN!
+Koridorlarda neşeyle zıplamak için kumandandaki okları kullan.","Questo coraggioso esploratore sei TU!
+Usa le freccette del controller per saltellare tra i corridoi.","Ten dzielny odkrywca to TY!
+Użyj strzałek na padzie, aby wesoło kicać przez korytarze."
+help_slide_3_text,"Can you find the grand EXIT?
+Reach the starry finish line to win the round and celebrate!","Dokážeš najít velký VÝCHOD?
+Dojeď do hvězdného cíle, vyhraj kolo a pořádně to oslav!","Kannst du den großen AUSGANG finden?
+Erreiche das sternenklare Ziel, um zu gewinnen und zu feiern!","¿Puedes encontrar la gran SALIDA?
+¡Alcanza la meta estrellada para ganar la ronda y celebrarlo!","Sauras-tu trouver la grande SORTIE ?
+Atteins la ligne d'arrivée étoilée pour gagner et célébrer !","Consegues encontrar a grande SAÍDA?
+Chegue à linha de chegada estrelada para vencer e celebrar!","Bạn có tìm thấy LỐI THOÁT lớn không?
+Hãy chạm đến vạch đích đầy sao để chiến thắng và ăn mừng nào!","Büyük ÇIKIŞI bulabilir misin?
+Turu kazanmak ve kutlamak için yıldızlı bitiş çizgisine ulaş!","Riuscirai a trovare la grande USCITA?
+Raggiungi il traguardo stellato per vincere e festeggiare!","Czy potrafisz znaleźć wielkie WYJŚCIE?
+Dotrzyj do gwiezdnej mety, aby wygrać rundę i świętować!"
+help_slide_4_text,"Wait, there's treasure on the way!
+Pick up shiny items and the game will magically read them out loud to you!","Páni, po cestě je poklad!
+Sbírej tajné předměty a hra ti je kouzlem přečte nahlas!","Halt, da ist ein Schatz auf dem Weg!
+Sammle funkelnde Dinge ein und das Spiel liest sie dir zauberhaft vor!","¡Espera, hay un tesoro en el camino!
+¡Recoge objetos brillantes y el juego te los leerá mágicamente en voz alta!","Attends, il y a un trésor sur le chemin !
+Ramasse des objets brillants et le jeu te les liras par magie !","Espere, há um tesouro no caminho!
+Pegue itens brilhantes e o jogo irá lê-los magicamente em voz alta para você!","Khoan đã, có kho báu trên đường đi kìa!
+Hãy nhặt những món đồ lấp lánh và trò chơi sẽ đọc to chúng lên như có phép thuật!","Dur, yolda bir hazine var!
+Parlayan eşyaları topla, oyun onları senin için sihirli bir şekilde yüksek sesle okusun!","Aspetta, c'è un tesoro lungo la strada!
+Raccogli oggetti scintillanti e il gioco te li leggerà magicamente ad alta voce!","Czekaj, po drodze jest skarb!
+Zbieraj błyszczące przedmioty, a gra magicznie przeczyta je dla ciebie na głos!"
+help_slide_5_text,"Watch out for the playful CHASER!
+Sometimes a cheeky friend plays tag. Hurry and reach the end before they catch you!","Pozor na hravou HONĚNOU!
+Občas si s tebou kamarád zahraje na bábu. Pospěš si do cíle, než tě chytí!","Pass auf den verspielten FÄNGER auf!
+Manchmal spielt ein lustiger Freund Fangen mit dir. Beeil dich!","¡Cuidado con el juguetón PERSEGUIDOR!
+A veces un amiguito travieso juega a atraparte. ¡Date prisa!","Attention au curieux POURSUIVANT !
+Parfois, un ami farceur joue au chat perché. Dépêche-toi !","Cuidado com o brincalhão PERSEGUIDOR!
+Às vezes, um amigo atrevido gosta de brincar de pega-pega. Corra!","Hãy cẩn thận với NGƯỜI ĐUỔI BẮT tinh nghịch!
+Đôi khi một người bạn thích chơi trò đuổi bắt. Hãy nhanh chân lên!","Oyuncu KOVALAYICIYA dikkat et!
+Bazen yaramaz bir arkadaş seninle ebelemece oynar. Çabuk ol!","Attento al giocoso ACCHIAPPARELLA!
+A volte un amico dispettoso vuole prenderti. Sbrigati!","Uważaj na figlarnego BERKA!
+Czasami psotny przyjaciel chce cię złapać. Pospiesz się!"
+help_slide_6_text,"Make the game truly yours!
+Visit Settings to change the colors, characters, and how tricky the maze is.","Uprav si hru podle sebe!
+V Nastavení můžeš měnit barvy, postavičky i to, jak je bludiště záludné.","Mach das Spiel zu deinem eigenen!
+In den Einstellungen kannst du Farben, Figuren und die Schwierigkeit ändern.","¡Haz que el juego sea tuyo!
+Visita Ajustes para cambiar los colores, personajes y la dificultad del laberinto.","Personnalise ton jeu !
+Va dans les Paramètres pour changer les couleurs, les personnages et la difficulté.","Faça o jogo com a sua cara!
+Visite as Configurações para mudar as cores, personagens e a dificuldade.","Thiết kế trò chơi theo ý bạn!
+Hãy vào mục Cài đặt để đổi màu sắc, nhân vật và độ khó của mê cung.","Oyunu tamamen senin yap!
+Renkleri, karakterleri ve labirentin zorluğunu değiştirmek için Ayarları ziyaret et.","Rendi il gioco davvero tuo!
+Visita le Impostazioni per cambiare i colori, i personaggi e la difficoltà.","Stwórz grę po swojemu!
+Odwiedź Ustawienia, aby zmienić kolory, postacie i stopień trudności labiryntu."
+help_slide_maze_text,"You are inside a twisting maze!
+You always start at the bottom left, and your goal is shining at the top right.","Jsi v tajemném bludišti!
+Začínáš vždy vlevo dole a tvůj vysněný cíl září vpravo nahoře.","Du bist in einem verschlungenen Labyrinth!
+Du startest stets unten links und dein Ziel leuchtet oben rechts.","¡Estás dentro de un laberinto enredado!
+Siempre empiezas abajo a la izquierda y tu meta brilla arriba a la derecha.","Tu es dans un labyrinthe sinueux !
+Tu commences toujours en bas à gauche, et ton but brille en haut à droite.","Você está dentro de um labirinto sinuoso!
+Você começa sempre no canto inferior esquerdo e a meta brilla no canto superior direito.","Bạn đang ở trong một mê cung uốn lượn!
+Bạn luôn bắt đầu ở góc dưới bên trái, và vạch đích tỏa sáng ở góc trên bên phải.","Büyülü bir labirentin içindesin!
+Her zaman sol alttan başlarsın ve hedefin sağ üstte parlar.","Sei in un labirinto intricato!
+Inizi sempre in basso a sinistra e il tuo obiettivo brilla in alto a destra.","Jesteś w zawiłym labiryncie!
+Zawsze zaczynasz w lewym dolnym rogu, a twój cel lśni w prawym górnym rogu."

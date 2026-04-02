@@ -17,6 +17,9 @@ const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
+## Original language stored on enter so we can preview without mutating Config.
+var _original_language: String = ""
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		_on_save_pressed()
@@ -27,7 +30,7 @@ func _ready() -> void:
 	
 	# Load current config state into temp variables
 	if Config:
-		Config.refresh_tts_cache() # Ensure we have latest OS voice state
+		TTS.refresh_cache() # Ensure we have latest OS voice state
 		temp_mode = Config.game_mode
 		temp_diff = Config.difficulty
 		themes = Config.get_available_themes()
@@ -42,9 +45,10 @@ func _ready() -> void:
 			
 		temp_voice = Config.voice_hints
 		temp_chaser_level = Config.chaser_level
+		_original_language = Config.language
 		# Listen for async TTS completion
-		if not Config.tts_status_changed.is_connected(_update_labels):
-			Config.tts_status_changed.connect(_update_labels)
+		if not TTS.status_changed.is_connected(_update_labels):
+			TTS.status_changed.connect(_update_labels)
 		
 	# Wire up buttons
 	_setup_cycling_button(%ModeButton, func(dir): _cycle_mode(dir))
@@ -64,24 +68,37 @@ func _ready() -> void:
 
 func _trigger_warmup() -> void:
 	# Only warm up if voice hints are currently toggled ON in the UI
-	if temp_voice and Config:
+	if temp_voice:
 		var lang_name := ""
+		var preview_lang := _get_preview_language()
 		if temp_lang_idx == 0: # Auto case
-			var detected := Config.get_effective_language()
+			var detected := Config.get_auto_detected_language()
 			var det_idx := LANG_CODES.find(detected)
 			if det_idx > 0 and det_idx < LANG_KEYS.size():
-				# i.e. "Automatic - čeština"
 				lang_name = tr("lang_auto") + " - " + tr(LANG_KEYS[det_idx]).to_lower()
 			else:
 				lang_name = tr("lang_auto")
 		else:
 			lang_name = tr(LANG_KEYS[temp_lang_idx])
-			
-		Config.warm_up_tts(lang_name)
+		
+		if not lang_name.is_empty():
+			TTS.warm_up(preview_lang, lang_name)
+
+
+## Return the effective language for the currently selected temp_lang_idx.
+## Does NOT mutate Config.language.
+func _get_preview_language() -> String:
+	if temp_lang_idx < LANG_CODES.size():
+		var code: String = LANG_CODES[temp_lang_idx]
+		if code == "auto":
+			return Config.get_auto_detected_language()
+		if code in Config.SUPPORTED_LANGS:
+			return code
+	return "en"
 
 
 func _on_tts_init_warmup() -> void:
-	if Config and Config.tts_ready:
+	if TTS.tts_ready:
 		_trigger_warmup()
 
 
@@ -177,10 +194,10 @@ func _cycle_diff(dir: int) -> void:
 func _cycle_lang(dir: int) -> void:
 	if LANG_KEYS.size() == 0: return
 	temp_lang_idx = (temp_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
-	# Temporarily set the language so tr() previews the new language
-	if Config and temp_lang_idx < LANG_CODES.size():
-		Config.language = LANG_CODES[temp_lang_idx]
-		TranslationServer.set_locale(Config.get_effective_language())
+	# Preview the language via TranslationServer without mutating Config.language
+	if temp_lang_idx < LANG_CODES.size():
+		var preview_lang := _get_preview_language()
+		TranslationServer.set_locale(preview_lang)
 		_trigger_warmup()
 	_update_labels()
 	_update_static_labels()
@@ -212,8 +229,8 @@ func _update_labels() -> void:
 		lang_text = tr(LANG_KEYS[temp_lang_idx])
 		
 	if temp_lang_idx == 0 and Config:
-		# Show which language auto resolves to
-		var detected := Config.get_effective_language()
+		# Show which language auto resolves to system-wide
+		var detected := Config.get_auto_detected_language()
 		var det_idx := LANG_CODES.find(detected)
 		if det_idx > 0 and det_idx < LANG_KEYS.size():
 			lang_text += " (%s)" % tr(LANG_KEYS[det_idx])
@@ -229,7 +246,7 @@ func _update_labels() -> void:
 		if not _tts_warning_label: _create_tts_warning()
 		
 		# If scan isn't done yet, show "Checking..." in the info label
-		if Config and not Config.tts_ready:
+		if not TTS.tts_ready:
 			%VoiceButton.text = tr("on") if temp_voice else tr("off")
 			%VoiceButton.disabled = true
 			%VoiceButton.modulate.a = 0.5
@@ -239,9 +256,9 @@ func _update_labels() -> void:
 				_tts_warning_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8)) # Neutral grey
 			return
 
-		# Instant check using Config's background cache
+		# Instant check using TTS voice cache
 		var current_lang_code = LANG_CODES[temp_lang_idx]
-		var is_available = Config.is_tts_available(current_lang_code) if Config else false
+		var is_available = TTS.is_available(current_lang_code)
 		
 		# UI logic: if not available, force show as "off" but don't overwrite user's temp_voice preference
 		var effective_voice_state = temp_voice and is_available

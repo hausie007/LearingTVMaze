@@ -42,10 +42,10 @@ func clear() -> void:
 ## Spawn collectibles based on current game mode into the given maze.
 func spawn(maze: MazeData, renderer: MazeRenderer) -> void:
 	clear()
-	if Config.game_mode <= 0:
+	if Config.game_mode == Config.GameMode.NORMAL:
 		return
 
-	if Config.game_mode == 3:
+	if Config.game_mode == Config.GameMode.WORDS:
 		_spawn_word_collectibles(maze, renderer)
 	else:
 		_spawn_mode_collectibles(maze, renderer)
@@ -58,7 +58,7 @@ func check_collection(pos: Vector2i) -> bool:
 
 	var col: Collectible = _collectibles[pos]
 
-	if Config.game_mode == 3 and col.collect_index >= 0:
+	if Config.game_mode == Config.GameMode.WORDS and col.collect_index >= 0:
 		return _try_collect_word_letter(col, pos)
 	else:
 		col.collect()
@@ -86,7 +86,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 	if L == 0:
 		return
 
-	var max_items: int = 26 if Config.game_mode == 2 else 50
+	var max_items: int = 26 if Config.game_mode == Config.GameMode.LETTERS else 50
 	var num_items: int = maxi(1, mini(max_items, L / 3))
 	var step: float = float(L) / float(num_items)
 
@@ -96,9 +96,9 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		var cell: MazeData.CellData = temp_path[idx]
 
 		var val_str: String = ""
-		if Config.game_mode == 1:
+		if Config.game_mode == Config.GameMode.NUMBERS:
 			val_str = str(i + 1)
-		elif Config.game_mode == 2:
+		elif Config.game_mode == Config.GameMode.LETTERS:
 			val_str = String.chr(65 + i)
 
 		_instantiate_collectible(cell, val_str, -1, renderer)

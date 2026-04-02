@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="4_pc"]
 [ext_resource type="Script" path="res://scripts/game_hud.gd" id="5_hud"]
 [ext_resource type="Script" path="res://scripts/win_screen.gd" id="6_ws"]
-[ext_resource type="Script" path="res://scripts/tts_manager.gd" id="7_tts"]
 [ext_resource type="Script" path="res://scripts/pause_dialog.gd" id="8_pd"]
 [ext_resource type="Script" path="res://scripts/collectible_spawner.gd" id="9_cs"]
 [ext_resource type="Script" path="res://scripts/chaser_manager.gd" id="10_cm"]

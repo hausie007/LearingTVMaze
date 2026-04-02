@@ -29,9 +29,8 @@ const SLIDES = [
 @onready var _right_btn: Button = %RightButton
 
 func _ready() -> void:
-	# Load theme to get icons
-	_theme = ThemeLoader.new()
-	_theme.load_theme()
+	# Load cached theme to get icons
+	_theme = Config.theme
 	
 	_left_btn.pressed.connect(_on_left_pressed)
 	_right_btn.pressed.connect(_on_right_pressed)
@@ -47,7 +46,7 @@ func _process(delta: float) -> void:
 	_update_animations()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_on_back_pressed()

@@ -37,15 +37,15 @@ func build_nav_map(renderer: MazeRenderer) -> void:
 
 ## Check if the chaser should spawn based on move count and difficulty.
 func check_trigger(move_count: int) -> void:
-	if Config.chaser_level == 0 or _active:
+	if Config.chaser_level == Config.ChaserLevel.OFF or _active:
 		return
 
 	# Calculate threshold based on speed level and maze size
 	var base_steps: int = 0
 	match Config.chaser_level:
-		1: base_steps = 10 # Slow
-		2: base_steps = 7  # Medium
-		3: base_steps = 4  # Fast
+		Config.ChaserLevel.SLOW:   base_steps = 10
+		Config.ChaserLevel.MEDIUM: base_steps = 7
+		Config.ChaserLevel.FAST:   base_steps = 4
 	
 	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
 	var size_mult: float = multipliers[clampi(Config.difficulty, 0, 4)]
@@ -116,8 +116,6 @@ func _on_chaser_request_move() -> void:
 		_on_caught()
 		return
 
-	var maze_width: int = int(_nav_map.get_point_position(0).x) if _nav_map.get_point_count() == 0 else 0
-	# Calculate IDs using the stored maze dimensions
 	var grid_size_x: int = _get_grid_width()
 	var id_start: int = chaser_pos.y * grid_size_x + chaser_pos.x
 	var id_end: int = player_pos.y * grid_size_x + player_pos.x
