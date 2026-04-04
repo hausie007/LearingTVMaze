@@ -46,6 +46,7 @@ func check_trigger(move_count: int) -> void:
 		Config.ChaserLevel.SLOW:   base_steps = 10
 		Config.ChaserLevel.MEDIUM: base_steps = 7
 		Config.ChaserLevel.FAST:   base_steps = 4
+		Config.ChaserLevel.TURBO:  base_steps = 2
 	
 	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
 	var size_mult: float = multipliers[clampi(Config.difficulty, 0, 4)]

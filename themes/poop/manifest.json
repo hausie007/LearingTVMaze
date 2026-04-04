@@ -1,4 +1,5 @@
 {
+  "title": "Bathroom",
   "assets": {
     "player": "player_0.png",
     "chaser": "chaser_0.png",
@@ -8,7 +9,8 @@
     "collectible": "collectible_0.png"
   },
   "colors": {
-    "wall": "#2F80ED",
+    "wall": "#051c3c",
+    "wall_glow_factor": 1.0,
     "wall_border": "#163A70",
     "floor": "#F7FCFF",
     "start_cell": "#B9F6CA",
@@ -16,43 +18,33 @@
     "player": "#8B5A2B"
   },
   "background": {
+    "modulate": "#999999",
     "tiled": true,
     "full_screen": false,
-    "color": "#EAF7FF",
-    "fps": 2,
-    "frames": [
-      "background_tile_0.png",
-      "background_tile_1.png"
-    ]
+    "color": "#EAF7FF"
+  },
+  "glow": {
+    "enabled": true,
+    "strength": 0.2,
+    "bloom": 0.1
   },
   "collectible": {
     "color": "#DFF4FF",
     "text_color": "#17324D",
-    "image": "collectible_0.png",
-    "fps": 6,
-    "frames": [
-      "collectible_0.png",
-      "collectible_1.png",
-      "collectible_2.png",
-      "collectible_3.png"
-    ]
+    "image": "collectible_0.png"
   },
   "player": {
-    "fps": 8,
+    "fps": 2,
     "frames": [
       "player_0.png",
-      "player_1.png",
-      "player_2.png",
-      "player_3.png"
+      "player_1.png"
     ]
   },
   "chaser": {
-    "fps": 8,
+    "fps": 1,
     "frames": [
       "chaser_0.png",
-      "chaser_1.png",
-      "chaser_2.png",
-      "chaser_3.png"
+      "chaser_1.png"
     ]
   }
 }

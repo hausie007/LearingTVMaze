@@ -35,7 +35,7 @@ window/stretch/aspect="expand"
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation")
+locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation", "res://data/translations.sv.translation", "res://data/translations.nb.translation", "res://data/translations.nl.translation")
 
 [physics]
 

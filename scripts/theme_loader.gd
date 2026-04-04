@@ -41,6 +41,13 @@ var color_player:   Color = Color(0.25, 0.55, 0.95)
 
 var bg_tiled:       bool = false
 var bg_full_screen: bool = false
+var bg_modulate:    Color = Color.WHITE
+
+# Glow Options (HDR)
+var glow_enabled:   bool = false
+var glow_strength:  float = 1.0
+var glow_bloom:     float = 0.2
+var wall_glow_factor: float = 1.0
 
 # Collectible Styling
 var col_color:      Color = Color(1.0, 0.95, 0.6)  # Default pale yellow
@@ -48,9 +55,20 @@ var col_text_color: Color = Color(0.1, 0.1, 0.15) # Default dark slate
 
 var manifest: Dictionary = {}
 
-## Load theme resources from the directory specified in Config.
-func load_theme() -> void:
+## Load theme resources from the directory specified in Config, or override.
+func load_theme(override_dir_name: String = "") -> void:
 	var dir_path: String = Config.theme_dir
+	if not override_dir_name.is_empty():
+		var res_path := "res://themes/".path_join(override_dir_name)
+		if DirAccess.dir_exists_absolute(res_path):
+			dir_path = res_path
+		else:
+			var user_path := "user://themes/".path_join(override_dir_name)
+			if DirAccess.dir_exists_absolute(user_path):
+				dir_path = user_path
+			else:
+				dir_path = "res://themes/default"
+
 	player_frames.clear()
 	chaser_frames.clear()
 	bg_frames.clear()
@@ -86,6 +104,20 @@ func load_theme() -> void:
 			if bg_cfg.has("color"):
 				# Background color can optionally override wall color for the whole maze base
 				color_wall = Color.from_string(bg_cfg["color"], color_wall)
+			if bg_cfg.has("modulate"):
+				bg_modulate = Color.from_string(bg_cfg["modulate"], Color.WHITE)
+
+	# Glow Options
+	if manifest.has("glow"):
+		var glow_cfg: Variant = manifest["glow"]
+		if glow_cfg is Dictionary:
+			glow_enabled  = glow_cfg.get("enabled", false)
+			glow_strength = float(glow_cfg.get("strength", 1.0))
+			glow_bloom    = float(glow_cfg.get("bloom", 0.2))
+
+	# Wall Glow Factor (Multiplies base color to reach HDR threshold)
+	if manifest.get("colors", {}).has("wall_glow_factor"):
+		wall_glow_factor = float(manifest["colors"]["wall_glow_factor"])
 
 	# Collectible Options
 	if manifest.has("collectible"):
@@ -226,16 +258,15 @@ func _get_color(key: String, default: Color) -> Color:
 func _try_load(dir_path: String, file_name: String) -> Texture2D:
 	var full_path := dir_path.path_join(file_name)
 	
-	# Internal resources (bundled in the APK/PCK)
-	if full_path.begins_with("res://"):
-		if ResourceLoader.exists(full_path):
-			return ResourceLoader.load(full_path) as Texture2D
+	# 1. Standard Godot way (works for already imported assets with .import files)
+	if ResourceLoader.exists(full_path):
+		return ResourceLoader.load(full_path) as Texture2D
 			
-	# External files (user folder or absolute paths on Android)
-	else:
-		if FileAccess.file_exists(full_path):
-			var img := Image.load_from_file(full_path)
-			if img:
-				return ImageTexture.create_from_image(img)
+	# 2. Manual Fallback: Raw image load (essential for files added by the AI that lack .import records)
+	# Image.load_from_file and FileAccess handle res://, user:// and absolute paths correctly on most platforms.
+	if FileAccess.file_exists(full_path):
+		var img := Image.load_from_file(full_path)
+		if img:
+			return ImageTexture.create_from_image(img)
 	
 	return null

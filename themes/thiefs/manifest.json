@@ -1,0 +1,32 @@
+{
+  "assets": {
+    "player": "t_player_0.png",
+    "chaser": "t_chaser_0.png",
+    "start": "t_start.png",
+    "end": "t_finish.png",
+    "background": "t_background_tile_0.png",
+    "collectible": "t_collectible_0.png"
+  },
+  "colors": {
+    "wall": "#051c3c",
+    "wall_glow_factor": 1.2,
+    "floor": "#BBC2C2",
+    "start_cell": "#DCEBFF",
+    "end_cell": "#FFF1A8",
+    "player": "#1A1A1A"
+  },
+  "background": {
+    "modulate": "#DDDDDD",
+    "tiled": true
+  },
+  "glow": {
+    "enabled": true,
+    "strength": 0.3,
+    "bloom": 0.1
+  },
+  "collectible": {
+    "color": "#FFD54A",
+    "text_color": "#FF3963",
+    "image": "t_collectible_0.png"
+  }
+}

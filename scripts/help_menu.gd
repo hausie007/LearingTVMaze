@@ -18,7 +18,7 @@ const SLIDES = [
 	{"icon": "finish",      "text": "help_slide_3_text",    "type": "icon"},
 	{"icon": "collectible", "text": "help_slide_4_text",    "type": "collectible"},
 	{"icon": "chaser",      "text": "help_slide_5_text",    "type": "icon"},
-	{"icon": "settings",    "text": "help_slide_6_text",    "type": "icon"},
+	{"icon": "settings",    "text": "help_slide_6_text",    "type": "themes"},
 ]
 
 @onready var _visual_container: CenterContainer = %VisualContainer
@@ -35,8 +35,10 @@ func _ready() -> void:
 	_left_btn.pressed.connect(_on_left_pressed)
 	_right_btn.pressed.connect(_on_right_pressed)
 	
-	# Focus right button initially
-	_right_btn.grab_focus()
+	# Disable focus for buttons so D-pad always triggers direct slide transitions
+	# without "getting stuck" on a button.
+	_left_btn.focus_mode = Control.FOCUS_NONE
+	_right_btn.focus_mode = Control.FOCUS_NONE
 	
 	_update_slide()
 
@@ -55,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_on_left_pressed()
 		
-	if event.is_action_pressed("ui_right") or event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_right"):
 		get_viewport().set_input_as_handled()
 		_on_right_pressed()
 
@@ -86,18 +88,22 @@ func _update_slide() -> void:
 			_update_icon(slide.icon)
 		"collectible":
 			_spawn_collectible_preview()
+		"themes":
+			_spawn_themes_preview()
 	
 	# 4. Arrow Visibility
-	_left_btn.disabled = (_current_slide == 0)
-	_right_btn.disabled = (_current_slide == SLIDES.size() - 1)
+	var is_first := (_current_slide == 0)
+	_left_btn.disabled = is_first
+	_left_btn.modulate.a = 0.0 if is_first else 1.0
 	
-	# Keep focus on an active button
-	if _right_btn.disabled and _right_btn.has_focus():
-		_left_btn.grab_focus()
-	elif _left_btn.disabled and _left_btn.has_focus():
-		_right_btn.grab_focus()
-
+	# Right button stays enabled even on last slide to act as "exit/finish"
+	_right_btn.disabled = false
+	_right_btn.modulate.a = 1.0
+	
 	_update_animations()
+	
+	if Config.voice_hints:
+		TTS.speak(tr(slide.text), 0.8)
 
 
 func _update_icon(icon_name: String) -> void:
@@ -108,8 +114,6 @@ func _update_icon(icon_name: String) -> void:
 			_icon_rect.texture = _theme.end_texture
 		"chaser":
 			_icon_rect.texture = _theme.chaser_texture
-		"settings":
-			_icon_rect.visible = false
 
 
 func _update_animations() -> void:
@@ -202,6 +206,53 @@ func _spawn_collectible_preview() -> void:
 	root.add_child(label)
 
 
+func _spawn_themes_preview() -> void:
+	var hbox = HBoxContainer.new()
+	hbox.name = "ThemesPreview"
+	hbox.add_theme_constant_override("separation", 60)
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_visual_container.add_child(hbox)
+	
+	var available = Config.get_available_themes()
+	var others: Array[String] = []
+	for t in available:
+		if t != Config.theme_dir_name:
+			others.append(t)
+			
+	others.shuffle()
+	var count = min(3, others.size())
+	
+	if count == 0:
+		# Fallback if no other themes installed
+		var tex_rect = TextureRect.new()
+		tex_rect.texture = load("res://images/lm_icon.png")
+		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tex_rect.custom_minimum_size = Vector2(250, 250)
+		hbox.add_child(tex_rect)
+		return
+	
+	for i in range(count):
+		var t_name = others[i]
+		var loader = ThemeLoader.new()
+		loader.load_theme(t_name)
+		
+		# Pick randomly between player and chaser
+		var tex = loader.player_texture
+		if loader.chaser_texture and randf() > 0.5:
+			tex = loader.chaser_texture
+			
+		# Fallback to default icon if theme is totally missing player/chaser
+		if not tex: tex = load("res://images/lm_icon.png")
+			
+		var tex_rect = TextureRect.new()
+		tex_rect.texture = tex
+		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tex_rect.custom_minimum_size = Vector2(250, 250)
+		hbox.add_child(tex_rect)
+
+
 func _on_left_pressed() -> void:
 	if _current_slide > 0:
 		_current_slide -= 1
@@ -217,4 +268,5 @@ func _on_right_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
+	TTS.stop()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

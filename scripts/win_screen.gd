@@ -84,7 +84,7 @@ func show_win(time_str: String, move_count: int) -> void:
 	_next_button.text = tr("next_round")
 
 	if _harder_button:
-		_harder_button.visible = Config.difficulty < 4
+		_harder_button.visible = Config.difficulty < 6
 		_harder_button.text = tr("challenge_pp")
 
 	_container.visible = true

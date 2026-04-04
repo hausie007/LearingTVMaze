@@ -50,6 +50,10 @@ var _pending_text: String = ""
 var _pending_voice: String = ""
 var _pending_rate: float = 1.0
 var _pending_volume: float = 70.0
+var _pending_version: int = 0
+
+## Track latest request ID to allow interrupting the worker thread (main thread only).
+var _current_version: int = 0
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -162,14 +166,33 @@ func is_available(lang_code: String) -> bool:
 func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: float = 70.0) -> void:
 	var lang: String = lang_override if not lang_override.is_empty() else Config.get_effective_language()
 
+	_current_version += 1
+	
+	# Stop OS speech immediately on the main thread for snappy UI response
+	DisplayServer.tts_stop()
+
 	_mutex.lock()
 	_pending_text = text.to_lower()
-	_pending_voice = lang  # Store requested lang; resolved in worker thread
+	_pending_voice = lang
 	_pending_rate = rate
 	_pending_volume = volume
+	_pending_version = _current_version
 	_mutex.unlock()
 
 	_semaphore.post()
+
+
+## Stops any ongoing or pending speech immediately.
+func stop() -> void:
+	_current_version += 1
+	DisplayServer.tts_stop()
+	
+	_mutex.lock()
+	_pending_text = ""
+	_pending_version = _current_version
+	_mutex.unlock()
+	
+	_semaphore.post() # Wake worker to see the empty text and newer version
 
 
 ## Primes the TTS engine to reduce initial latency (especially on Android TV).
@@ -201,6 +224,7 @@ func _worker_loop() -> void:
 		lang = _pending_voice
 		rate = _pending_rate
 		volume = _pending_volume
+		var local_version: int = _pending_version
 		_pending_text = ""
 		_mutex.unlock()
 
@@ -213,4 +237,57 @@ func _worker_loop() -> void:
 			var final_voice_id := get_voice(lang)
 
 			DisplayServer.tts_stop()
-			DisplayServer.tts_speak(text, final_voice_id, int(volume), 1.0, rate)
+			
+			# Force natural pauses by splitting text into separate utterances
+			# which tells the OS TTS engine to take a breath between them.
+			var formatted_text = text.replace(".", ".|").replace("!", "!|").replace("?", "?|").replace("\n", " |")
+			var parts = formatted_text.split("|")
+			
+			for part in parts:
+				var clean_part = part.strip_edges()
+				if clean_part.is_empty():
+					continue
+
+				# INTERRUPT CHECK: Before starting speech
+				_mutex.lock()
+				var interrupted = (_pending_version > local_version)
+				_mutex.unlock()
+				
+				if interrupted or _exit_flag:
+					break
+					
+				# Send ONLY one sentence to the OS to avoid its internal queueing problems
+				DisplayServer.tts_speak(clean_part, final_voice_id, int(volume), 1.0, rate, 0, false)
+				
+				# Wait a moment for the OS engine to physically start processing
+				OS.delay_msec(100)
+				
+				# Polling loop: block this background thread until this specific sentence is finished
+				while DisplayServer.tts_is_speaking() and not _exit_flag:
+					_mutex.lock()
+					interrupted = (_pending_version > local_version)
+					_mutex.unlock()
+					
+					if interrupted:
+						break
+					OS.delay_msec(50)
+					
+				# If we were interrupted while speaking, abort entire block
+				if interrupted or _exit_flag:
+					break
+					
+				# Force a clean, deliberate pause between sentences naturally
+				var pause_ms = 400
+				while pause_ms > 0 and not _exit_flag:
+					_mutex.lock()
+					interrupted = (_pending_version > local_version)
+					_mutex.unlock()
+					
+					if interrupted:
+						break
+						
+					OS.delay_msec(50)
+					pause_ms -= 50
+					
+				if interrupted or _exit_flag:
+					break

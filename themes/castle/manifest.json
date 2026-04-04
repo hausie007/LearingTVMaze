@@ -1,0 +1,36 @@
+{
+  "title": "Stone Castle",
+  "assets": {
+    "player": "c_player.png",
+    "chaser": "c_chaser.png",
+    "start": "c_start.png",
+    "end": "c_end.png",
+    "collectible": "c_collectible_0.png"
+  },
+  "colors": {
+    "wall": "#000000",
+    "wall_glow_factor": 1.0,
+    "wall_border": "#1B2433",
+    "floor": "#B0B0B0",
+    "start_cell": "#FFFFFF",
+    "end_cell": "#FFFAD6",
+    "player": "#5A78B5"
+  },
+  "background": {
+    "tiled": false,
+    "full_screen": false
+  },
+  "glow": {
+    "enabled": false
+  },
+  "collectible": {
+    "color": "#FFCC00",
+    "text_color": "#2A1F0A",
+    "image": "c_collectible_0.png",
+    "fps": 6,
+    "frames": [
+      "c_collectible_0.png",
+      "c_collectible_1.png"
+    ]
+  }
+}

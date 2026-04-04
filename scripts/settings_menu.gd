@@ -10,15 +10,21 @@ var themes: Array[String] = []
 
 # Mode/diff/lang keys for tr()
 const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
-const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard"]
-const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish"]
-const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
-const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast"]
+const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
+const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch"]
+const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl"]
+const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast", "chaser_turbo"]
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
 ## Original language stored on enter so we can preview without mutating Config.
 var _original_language: String = ""
+
+# Animated Theme Preview
+var _theme_preview_loader: ThemeLoader = null
+var _theme_icon_rect: TextureRect = null
+var _anim_time: float = 0.0
+var _last_theme_idx: int = -1
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -58,6 +64,18 @@ func _ready() -> void:
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	_setup_cycling_button(%ChaserButton, func(dir): _cycle_chaser(dir))
 	
+	# Add animated character preview next to the theme arrow
+	# We attach it to the arrow (which is a Label, not a Container)
+	# so it's taken out of the HBox flow and doesn't break the layout centering.
+	var theme_arrow = get_node_or_null("%ThemeRightArrow")
+	if theme_arrow:
+		_theme_icon_rect = TextureRect.new()
+		_theme_icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		_theme_icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		_theme_icon_rect.custom_minimum_size = Vector2(80, 80)
+		theme_arrow.add_child(_theme_icon_rect)
+		_theme_icon_rect.position = Vector2(50, -15) # Offset to the right
+	
 	_update_labels()
 	_update_static_labels()
 	
@@ -65,6 +83,17 @@ func _ready() -> void:
 	if has_node("%ModeButton"):
 		%ModeButton.call_deferred("grab_focus")
 
+
+func _process(delta: float) -> void:
+	if _theme_icon_rect and _theme_preview_loader:
+		_anim_time += delta
+		var frames = _theme_preview_loader.player_frames
+		if frames and frames.size() > 1:
+			var fps = _theme_preview_loader.player_fps
+			var idx = int(_anim_time * fps) % frames.size()
+			_theme_icon_rect.texture = frames[idx]
+		else:
+			_theme_icon_rect.texture = _theme_preview_loader.player_texture
 
 func _trigger_warmup() -> void:
 	# Only warm up if voice hints are currently toggled ON in the UI
@@ -214,7 +243,8 @@ func _cycle_voice(_dir: int) -> void:
 		_trigger_warmup()
 
 func _cycle_chaser(dir: int) -> void:
-	temp_chaser_level = (temp_chaser_level + dir + 4) % 4
+	if CHASER_LEVEL_KEYS.size() == 0: return
+	temp_chaser_level = (temp_chaser_level + dir + CHASER_LEVEL_KEYS.size()) % CHASER_LEVEL_KEYS.size()
 	_update_labels()
 
 func _update_labels() -> void:
@@ -238,8 +268,25 @@ func _update_labels() -> void:
 	if has_node("%LangButton"):
 		%LangButton.text = lang_text
 	
+	if has_node("%ChaserButton") and temp_chaser_level < CHASER_LEVEL_KEYS.size():
+		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
+		
 	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
-		%ThemeButton.text = themes[temp_theme_idx].capitalize()
+		# Update theme preview icon loader when theme changes
+		if _theme_icon_rect and temp_theme_idx != _last_theme_idx:
+			_last_theme_idx = temp_theme_idx
+			_theme_preview_loader = ThemeLoader.new()
+			# Always explicitly pass the theme name to force a clean load,
+			# even for "default", to prevent it falling back to Config's active theme.
+			_theme_preview_loader.load_theme(themes[temp_theme_idx])
+			
+		var display_title: String = themes[temp_theme_idx].capitalize()
+		if _theme_preview_loader and _theme_preview_loader.manifest.has("title"):
+			var manifest_title = _theme_preview_loader.manifest["title"]
+			if manifest_title is String and not manifest_title.is_empty():
+				display_title = manifest_title
+				
+		%ThemeButton.text = display_title
 	
 	if has_node("%VoiceButton"):
 		# Ensure warning label exists

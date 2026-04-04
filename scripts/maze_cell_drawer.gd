@@ -46,7 +46,9 @@ class IconCmd:
 ##   cs      — cell size in pixels
 ##   wt      — wall thickness in pixels
 ##   theme   — ThemeLoader with colors and textures
-##   has_bg  — whether a background texture is active (changes draw mode)
+##   has_bg  — whether a background texture is active
+##   maze    — the full MazeData for neighbor lookups
+##   coord   — coordinates of the cell being drawn
 ##
 ## Returns: { "rects": Array[RectCmd], "icons": Array[IconCmd] }
 static func get_cell_draw_commands(
@@ -56,60 +58,60 @@ static func get_cell_draw_commands(
 	wt: float,
 	theme: ThemeLoader,
 	has_bg: bool,
+	maze: MazeData,
+	coord: Vector2i,
 ) -> Dictionary:
 	var rects: Array[RectCmd] = []
 	var icons: Array[IconCmd] = []
 
+	# FORCE strict integer math to eliminate sub-pixel drift (zig-zags)
+	var r_pos := Vector2(roundf(pos.x), roundf(pos.y))
+	var r_cs  := int(roundf(cs))
+	var r_wt  := int(roundf(wt))
+
 	# ── UNVISITED: Draw solid wall block ──
 	if not cell.is_visited:
-		rects.append(RectCmd.new(pos, Vector2(cs, cs), theme.color_wall))
+		rects.append(RectCmd.new(r_pos, Vector2(r_cs, r_cs), theme.color_wall))
 		return {"rects": rects, "icons": icons}
 
-	# ── VISITED: Corridors ──
+	# Helper for neighbor checks
+	var wall_continues = func(direction: Vector2i, wall_type: String):
+		if not maze: return false
+		var neighbor := maze.get_cell(coord + direction)
+		if not neighbor: return false
+		return neighbor.get(wall_type) == true
+
+	# ── VISITED: Corridor Mode ──
+	# If has_bg is true, the background image IS the floor, so we don't draw solid rects.
 	if not has_bg:
-		# Determine floor color based on cell type
-		var floor_color: Color = theme.color_floor
-		if cell.is_start:
-			floor_color = theme.color_start
-		elif cell.is_end:
-			floor_color = theme.color_end
+		var floor_color := theme.color_floor
+		if cell.is_start: floor_color = theme.color_start
+		elif cell.is_end: floor_color = theme.color_end
 
-		# Central floor rect
-		rects.append(RectCmd.new(
-			pos + Vector2(wt, wt),
-			Vector2(cs - wt * 2, cs - wt * 2),
-			floor_color,
-		))
+		# Central floor area
+		rects.append(RectCmd.new(r_pos + Vector2(r_wt, r_wt), Vector2(r_cs - r_wt * 2, r_cs - r_wt * 2), floor_color))
 
-		# Connector rects bridging open walls to create corridors
-		var bleed := 1.0
+		# Passages
+		var bleed := 1.0 
 		if not cell.wall_north:
-			rects.append(RectCmd.new(pos + Vector2(wt, -bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color))
+			rects.append(RectCmd.new(r_pos + Vector2(r_wt, -bleed), Vector2(r_cs - r_wt * 2, r_wt + bleed * 2), floor_color))
 		if not cell.wall_south:
-			rects.append(RectCmd.new(pos + Vector2(wt, cs - wt - bleed), Vector2(cs - wt * 2, wt + bleed * 2), floor_color))
+			rects.append(RectCmd.new(r_pos + Vector2(r_wt, r_cs - r_wt - bleed), Vector2(r_cs - r_wt * 2, r_wt + bleed * 2), floor_color))
 		if not cell.wall_west:
-			rects.append(RectCmd.new(pos + Vector2(-bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color))
+			rects.append(RectCmd.new(r_pos + Vector2(-bleed, r_wt), Vector2(r_wt + bleed * 2, r_cs - r_wt * 2), floor_color))
 		if not cell.wall_east:
-			rects.append(RectCmd.new(pos + Vector2(cs - wt - bleed, wt), Vector2(wt + bleed * 2, cs - wt * 2), floor_color))
-	else:
-		# BACKGROUND MODE: draw closed walls as solid rects over the background
-		if cell.wall_north: rects.append(RectCmd.new(pos, Vector2(cs, wt), theme.color_wall))
-		if cell.wall_south: rects.append(RectCmd.new(pos + Vector2(0, cs - wt), Vector2(cs, wt), theme.color_wall))
-		if cell.wall_west:  rects.append(RectCmd.new(pos, Vector2(wt, cs), theme.color_wall))
-		if cell.wall_east:  rects.append(RectCmd.new(pos + Vector2(cs - wt, 0), Vector2(wt, cs), theme.color_wall))
+			rects.append(RectCmd.new(r_pos + Vector2(r_cs - r_wt - bleed, r_wt), Vector2(r_wt + bleed * 2, r_cs - r_wt * 2), floor_color))
 
-	# ── Wall borders (optional, always draw if defined) ──
-	if theme.color_wall_border.a > 0.0:
-		var bw := maxf(1.0, wt * 0.5)
-		if cell.wall_north: rects.append(RectCmd.new(pos, Vector2(cs, bw), theme.color_wall_border))
-		if cell.wall_south: rects.append(RectCmd.new(pos + Vector2(0, cs - bw), Vector2(cs, bw), theme.color_wall_border))
-		if cell.wall_west:  rects.append(RectCmd.new(pos, Vector2(bw, cs), theme.color_wall_border))
-		if cell.wall_east:  rects.append(RectCmd.new(pos + Vector2(cs - bw, 0), Vector2(bw, cs), theme.color_wall_border))
+	# ── Minimalist Wall Rendering ──
+	# (Borders/rims removed to ensure high contrast and zero visual artifacts)
 
-	# ── Start/End marker icons ──
+	# ── Icons ──
 	if cell.is_start and theme.start_texture:
-		icons.append(IconCmd.new(pos, cs, theme.start_texture))
+		icons.append(IconCmd.new(r_pos, r_cs, theme.start_texture))
 	elif cell.is_end and theme.end_texture:
-		icons.append(IconCmd.new(pos, cs, theme.end_texture))
+		icons.append(IconCmd.new(r_pos, r_cs, theme.end_texture))
 
 	return {"rects": rects, "icons": icons}
+
+
+

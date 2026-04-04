@@ -49,41 +49,32 @@ static func get_random_word(lang: String, difficulty: int) -> Dictionary:
 ## Load the full word list array for a language + difficulty.
 ## Falls back to English if the requested language file is not found.
 static func _load_word_list(lang: String, difficulty: int) -> Array:
-	var diff_clamped := clampi(difficulty, 0, 4)
-	var path := "res://data/words/words_%s_%d.json" % [lang, diff_clamped]
-	var actual_lang := lang
+	# Try the requested language first, scanning downwards from 'difficulty' to 0
+	var current_diff := clampi(difficulty, 0, 6)
 	
-	if not FileAccess.file_exists(path):
-		if lang != "en":
-			push_warning("WordList: file not found: %s — falling back to English" % path)
-			path = "res://data/words/words_en_%d.json" % diff_clamped
-			actual_lang = "en"
-			if not FileAccess.file_exists(path):
-				push_warning("WordList: English fallback also missing: %s" % path)
-				return []
-		else:
-			push_warning("WordList: file not found: %s" % path)
-			return []
+	while current_diff >= 0:
+		var path := "res://data/words/words_%s_%d.json" % [lang, current_diff]
+		if FileAccess.file_exists(path):
+			var file := FileAccess.open(path, FileAccess.READ)
+			if file:
+				var json_text := file.get_as_text()
+				var json := JSON.new()
+				if json.parse(json_text) == OK:
+					var data = json.get_data()
+					if data is Array:
+						for item in data:
+							if item is Dictionary:
+								item["lang"] = lang
+						return data
+		
+		# Not found at this difficulty, try one step easier
+		current_diff -= 1
+
+	# If still not found and we weren't already trying English, fallback to English
+	# and repeat the downward scan starting back at the original requested difficulty.
+	if lang != "en":
+		push_warning("WordList: No list found for %s (up to diff %d). Falling back to English scan." % [lang, difficulty])
+		return _load_word_list("en", difficulty)
 	
-	var file := FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		push_warning("WordList: cannot open: %s" % path)
-		return []
-	
-	var json_text := file.get_as_text()
-	var json := JSON.new()
-	var err := json.parse(json_text)
-	if err != OK:
-		push_warning("WordList: JSON parse error in %s: %s" % [path, json.get_error_message()])
-		return []
-	
-	var data = json.get_data()
-	if data is Array:
-		# Inject the actual language used into each word entry
-		for item in data:
-			if item is Dictionary:
-				item["lang"] = actual_lang
-		return data
-	
-	push_warning("WordList: expected Array in %s" % path)
+	push_warning("WordList: No word lists found at all for %s up to diff %d." % [lang, difficulty])
 	return []

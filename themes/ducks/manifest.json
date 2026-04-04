@@ -3,7 +3,8 @@
   "assets": {
     "player": "player.png",
     "start": "start.png",
-    "end": "finish.png"
+    "end": "finish.png",
+    "chaser": "chaser.png"
   },
   "colors": {
     "wall": "#8abbd0",

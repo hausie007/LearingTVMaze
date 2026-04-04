@@ -30,6 +30,7 @@ enum ChaserLevel {
 	SLOW   = 1,
 	MEDIUM = 2,
 	FAST   = 3,
+	TURBO  = 4,
 }
 
 
@@ -59,7 +60,7 @@ var language: String = "auto"
 var voice_hints: bool = true
 
 ## Chaser speed tier. See ChaserLevel enum.
-var chaser_level: int = ChaserLevel.SLOW
+var chaser_level: int = ChaserLevel.MEDIUM
 
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
 var chaser_speed: float:
@@ -67,10 +68,11 @@ var chaser_speed: float:
 		match chaser_level:
 			ChaserLevel.MEDIUM: return 1.0
 			ChaserLevel.FAST:   return 1.5
+			ChaserLevel.TURBO:  return 3.5
 			_:                  return 0.65  # Slow (default)
 
-const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
-const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl"]
+const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl"]
+const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
@@ -104,12 +106,14 @@ const DIFFICULTY_SIZES: Array[Vector2i] = [
 	Vector2i(9, 8),   # Medium
 	Vector2i(13, 10), # Hard
 	Vector2i(20, 12), # Very Hard
+	Vector2i(26, 13), # Insane
+	Vector2i(36, 15), # Unbelievable
 ]
 
 ## Effective grid dimensions in cells (width × height).
 var grid_size: Vector2i:
 	get:
-		return DIFFICULTY_SIZES[clampi(difficulty, 0, 4)]
+		return DIFFICULTY_SIZES[clampi(difficulty, 0, 6)]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -159,7 +163,7 @@ var color_end: Color = Color("#FFCC00").lerp(Color("#1A1C23"), 0.7)
 #  LIFECYCLE & SAVE/LOAD
 # ─────────────────────────────────────────────────────────────────────────────
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
 
@@ -198,6 +202,8 @@ func get_effective_language() -> String:
 func get_auto_detected_language() -> String:
 	# Auto-detect from OS (True system source)
 	var os_lang := OS.get_locale_language().to_lower().split("_")[0]
+	if os_lang == "no": os_lang = "nb"
+	
 	if os_lang in SUPPORTED_LANGS:
 		return os_lang
 	

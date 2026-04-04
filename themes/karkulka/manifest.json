@@ -1,0 +1,46 @@
+{
+  "title": "Little Red",
+  "assets": {
+    "player": "k_player.png",
+    "chaser": "k_chaser.png",
+    "start": "k_start.png",
+    "end": "k_end.png",
+    "background": "background_tile_0.png",
+    "collectible": "k_collectible.png"
+  },
+  "colors": {
+    "wall": "#FFFFFF",
+    "wall_glow_factor": 1.7,
+    "wall_border": "#0D140F",
+    "floor": "#DCE88A",
+    "start_cell": "#E9E2C8",
+    "end_cell": "#FFE39A",
+    "player": "#D7263D"
+  },
+  "background": {
+    "modulate": "#666666",
+    "tiled": true,
+    "full_screen": false,
+    "color": "#DCE88A"
+  },
+  "glow": {
+    "enabled": true,
+    "strength": 0.6,
+    "bloom": 0.1
+  },
+  "collectible": {
+    "color": "#F7C948",
+    "text_color": "#1C2A1F",
+    "image": "k_collectible.png"
+  },
+  "player": {
+    "frames": [
+      "k_player.png"
+    ]
+  },
+  "chaser": {
+    "frames": [
+      "k_chaser.png"
+    ]
+  }
+}

@@ -280,8 +280,8 @@ func _on_harder_pressed() -> void:
 		Config.difficulty = clampi(Config.difficulty - 1, 0, 4)
 	else:
 		# Win = make it harder
-		if Config.difficulty >= 4: return
-		Config.difficulty = clampi(Config.difficulty + 1, 0, 4)
+		if Config.difficulty >= 6: return
+		Config.difficulty = clampi(Config.difficulty + 1, 0, 6)
 
 	Config.save_settings()
 	_start_new_maze()
