@@ -1,62 +1,22 @@
 [
-  {
-    "word": "SÜT",
-    "emoji": "🥛"
-  },
-  {
-    "word": "TOP",
-    "emoji": "⚽"
-  },
-  {
-    "word": "KUŞ",
-    "emoji": "🐦"
-  },
-  {
-    "word": "ARİ",
-    "emoji": "🐝"
-  },
-  {
-    "word": "AYI",
-    "emoji": "🐻"
-  },
-  {
-    "word": "GÜL",
-    "emoji": "🌹"
-  },
-  {
-    "word": "OT",
-    "emoji": "🌿"
-  },
-  {
-    "word": "SU",
-    "emoji": "💧"
-  },
-  {
-    "word": "EV",
-    "emoji": "🏠"
-  },
-  {
-    "word": "EL",
-    "emoji": "🖐️"
-  },
-  {
-    "word": "AY",
-    "emoji": "🌙"
-  },
-  {
-    "word": "ET",
-    "emoji": "🥩"
-  },
-  {
-    "word": "AV",
-    "emoji": "🏹"
-  },
-  {
-    "word": "AD",
-    "emoji": "📛"
-  },
-  {
-    "word": "İKİ",
-    "emoji": "2️⃣"
-  }
+  {"word": "EV", "emoji": "🏠"},
+  {"word": "KEDI", "emoji": "🐱"},
+  {"word": "KOPEK", "emoji": "🐶"},
+  {"word": "ANNE", "emoji": "👩"},
+  {"word": "BABA", "emoji": "👨"},
+  {"word": "GUNEŞ", "emoji": "☀️"},
+  {"word": "DENIZ", "emoji": "🌊"},
+  {"word": "ELMA", "emoji": "🍎"},
+  {"word": "EKMEK", "emoji": "🍞"},
+  {"word": "SUT", "emoji": "🥛"},
+  {"word": "ÇIÇEK", "emoji": "🌸"},
+  {"word": "AĞAÇ", "emoji": "🌳"},
+  {"word": "KITAP", "emoji": "📖"},
+  {"word": "OKUL", "emoji": "🏫"},
+  {"word": "OYUN", "emoji": "🧸"},
+  {"word": "ÇOCUK", "emoji": "🧒"},
+  {"word": "YILDIZ", "emoji": "⭐"},
+  {"word": "AY", "emoji": "🌙"},
+  {"word": "GOK", "emoji": "🌌"},
+  {"word": "ARKADAŞ", "emoji": "🤝"}
 ]

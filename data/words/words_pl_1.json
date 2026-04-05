@@ -1,74 +1,22 @@
 [
-  {
-    "word": "AUTO",
-    "emoji": "🚗"
-  },
-  {
-    "word": "OKNO",
-    "emoji": "🪟"
-  },
-  {
-    "word": "RYBA",
-    "emoji": "🐟"
-  },
-  {
-    "word": "SOWA",
-    "emoji": "🦉"
-  },
-  {
-    "word": "KURA",
-    "emoji": "🐔"
-  },
-  {
-    "word": "DOMY",
-    "emoji": "🏙️"
-  },
-  {
-    "word": "KRAN",
-    "emoji": "🚰"
-  },
-  {
-    "word": "ZABA",
-    "emoji": "🐸"
-  },
-  {
-    "word": "WILK",
-    "emoji": "🐺"
-  },
-  {
-    "word": "PTAK",
-    "emoji": "🐦"
-  },
-  {
-    "word": "TATA",
-    "emoji": "👨"
-  },
-  {
-    "word": "MAMA",
-    "emoji": "👩"
-  },
-  {
-    "word": "KINO",
-    "emoji": "🎬"
-  },
-  {
-    "word": "ZAB",
-    "emoji": "🦷"
-  },
-  {
-    "word": "MOST",
-    "emoji": "🌉"
-  },
-  {
-    "word": "KURA",
-    "emoji": "🐥"
-  },
-  {
-    "word": "KRAJ",
-    "emoji": "🇵🇱"
-  },
-  {
-    "word": "LISC",
-    "emoji": "🍂"
-  }
+  {"word": "MOTYL", "emoji": "🦋"},
+  {"word": "LISKI", "emoji": "🦊"},
+  {"word": "ZABA", "emoji": "🐸"},
+  {"word": "SOWA", "emoji": "🦉"},
+  {"word": "KACZKA", "emoji": "🦆"},
+  {"word": "KURA", "emoji": "🐔"},
+  {"word": "GĘŚ", "emoji": "🦢"},
+  {"word": "KOZA", "emoji": "🐐"},
+  {"word": "OWCA", "emoji": "🐑"},
+  {"word": "KROWA", "emoji": "🐮"},
+  {"word": "ŚWINKA", "emoji": "🐷"},
+  {"word": "KONIK", "emoji": "🐎"},
+  {"word": "MYSZKA", "emoji": "🐭"},
+  {"word": "JEŻYK", "emoji": "🦔"},
+  {"word": "WIŁKI", "emoji": "🐺"},
+  {"word": "NIEDŹWIEDŹ", "emoji": "🐻"},
+  {"word": "ZAJĄC", "emoji": "🐰"},
+  {"word": "PTASZEK", "emoji": "🐦"},
+  {"word": "PSZCZÓŁKA", "emoji": "🐝"},
+  {"word": "MRÓWKA", "emoji": "🐜"}
 ]

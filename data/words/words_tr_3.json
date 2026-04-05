@@ -1,58 +1,22 @@
 [
-  {
-    "word": "KELEBEK",
-    "emoji": "🦋"
-  },
-  {
-    "word": "FİL",
-    "emoji": "🐘"
-  },
-  {
-    "word": "ZÜRAFA",
-    "emoji": "🦒"
-  },
-  {
-    "word": "PENGUEN",
-    "emoji": "🐧"
-  },
-  {
-    "word": "YUNUS",
-    "emoji": "🐬"
-  },
-  {
-    "word": "BİSİKLET",
-    "emoji": "🚲"
-  },
-  {
-    "word": "UÇAK",
-    "emoji": "✈️"
-  },
-  {
-    "word": "ARABA",
-    "emoji": "🚗"
-  },
-  {
-    "word": "OTOBÜS",
-    "emoji": "🚌"
-  },
-  {
-    "word": "HAYVAN",
-    "emoji": "🦁"
-  },
-  {
-    "word": "GITAR",
-    "emoji": "🎸"
-  },
-  {
-    "word": "PİYANO",
-    "emoji": "🎹"
-  },
-  {
-    "word": "DİNOZOR",
-    "emoji": "🦕"
-  },
-  {
-    "word": "EJDERHA",
-    "emoji": "🐉"
-  }
+  {"word": "FIL", "emoji": "🐘"},
+  {"word": "ZURAFA", "emoji": "🦒"},
+  {"word": "ASLAN", "emoji": "🦁"},
+  {"word": "KAPLAN", "emoji": "🐯"},
+  {"word": "AYI", "emoji": "🐻"},
+  {"word": "MAYMUN", "emoji": "🐒"},
+  {"word": "TAVŞAN", "emoji": "🐰"},
+  {"word": "AT", "emoji": "🐎"},
+  {"word": "KOYUN", "emoji": "🐑"},
+  {"word": "KUZU", "emoji": "🐏"},
+  {"word": "TAVUK", "emoji": "🐔"},
+  {"word": "KUŞ", "emoji": "🐦"},
+  {"word": "KELEBEK", "emoji": "🦋"},
+  {"word": "ARI", "emoji": "🐝"},
+  {"word": "KARINCA", "emoji": "🐜"},
+  {"word": "ORUMCEK", "emoji": "🕷️"},
+  {"word": "YILAN", "emoji": "🐍"},
+  {"word": "KAPLUMBAĞA", "emoji": "🐢"},
+  {"word": "KURBAĞA", "emoji": "🐸"},
+  {"word": "YUNUS", "emoji": "🐬"}
 ]

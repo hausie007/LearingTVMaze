@@ -1,72 +1,78 @@
-keys,en,cs,de,es,fr,pt,vi,tr,it,pl,sv,nb,nl
-app_title,Learning Maze,Vzdělávací Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki,Lärande Labyrint,Læring Labyrint,Leerdoolhof
-play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Chơi,Oyna,Gioca,Graj,Spela,Spill,Spelen
-settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia,Inställningar,Innstillinger,Instellingen
-settings_title,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia,Inställningar,Innstillinger,Instellingen
-setting_mode,Game Mode:,Herní mód:,Spielmodus:,Modo de juego:,Mode de jeu :,Modo de jogo:,Chế độ chơi:,Oyun Modu:,Modalità di gioco:,Tryb gry:,Spelläge:,Spillmodus:,Spelmodus:
-setting_diff,Difficulty:,Obtížnost:,Schwierigkeit:,Dificultad:,Difficulté :,Dificuldade:,Độ khó:,Zorluk:,Difficoltà:,Poziom trudności:,Svårighetsgrad:,Vanskelighetsgrad:,Moeilijkheidsgraad:
-setting_lang,Language:,Jazyk:,Sprache:,Idioma:,Langue :,Idioma:,Ngôn ngữ:,Dil:,Lingua:,Język:,Språk:,Språk:,Taal:
-setting_theme,Theme:,Téma:,Thema:,Tema:,Thème :,Tema:,Chủ đề:,Tema:,Tema:,Temat:,Tema:,Tema:,Thema:
-setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :,Dicas de voz:,Gợi ý bằng giọng nói:,Sesli İpuçları:,Suggerimenti vocali:,Wskazówki głosowe:,Röstanvisningar:,Talehint:,Gesproken hints:
-save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Quay lại,Geri,Indietro,Powrót,Bakåt,Tilbake,Terug
-on,On,Zapnuto,An,Activado,Activé,Ligado,Bật,Açık,Attivato,Włączone,På,På,Aan
-off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone,Av,Av,Uit
-mode_normal,Just the Maze,Jen bludiště,Nur Labyrinth,Solo el laberinto,Juste le labyrinthe,Só o labirinto,Chỉ mê cung,Sadece Labirent,Solo il labirinto,Tylko labirynt,Bara labyrint,Bare labyrint,Alleen doolhof
-mode_numbers,Numbers,Čísla,Zahlen,Números,Nombres,Números,Con số,Sayılar,Numeri,Liczby,Siffror,Tall,Getallen
-mode_letters,Alphabet,Abeceda,Alphabet,Alfabeto,Alphabet,Alfabeto,Chữ cái,Alfabe,Alfabeto,Alfabet,Bokstäver,Bokstaver,Letters
-mode_words,Words,Slova,Wörter,Palabras,Mots,Palavras,Từ ngữ,Kelimeler,Parole,Słowa,Ord,Ord,Woorden
-diff_very_easy,Very Easy,Velmi snadné,Sehr einfach,Muy fácil,Très facile,Muito fácil,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy,Mycket lätt,Veldig lett,Zeer makkelijk
-diff_easy,Easy,Snadné,Einfach,Fácil,Facile,Fácil,Dễ,Kolay,Facile,Łatwy,Lätt,Lett,Makkelijk
-diff_medium,Medium,Střední,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średni,Medel,Middels,Gemiddeld
-diff_hard,Hard,Těžké,Schwer,Difícil,Difficile,Difícil,Khó,Zor,Difficile,Trudny,Svårt,Vanskelig,Moeilijk
-diff_very_hard,Very Hard,Velmi těžké,Sehr schwer,Muy difícil,Très difficile,Muito difícil,Rất khó,Çok Zor,Molto difficile,Bardzo trudny,Mycket svårt,Veldig vanskelig,Zeer moeilijk
-diff_insane,Insane,Šílené,Wahnsinnig,Insano,Dément,Insano,Điên rồ,Çılgınca,Folle,Szalone,Galet,Vanvittig,Krankzinnig
-diff_unbelievable,Unbelievable,K nevíře,Unglaublich,Increíble,Incroyable,Inacreditável,Không thể tin nổi,İnanılmaz,Incredibile,Niewiarygodne,Otroligt,Utrolig,Ongelooflijk
-lang_auto,Auto,Automaticky,Automatisch,Automático,Auto,Automático,Tự động,Otomatik,Automatico,Automatyczny,Automatisk,Automatisk,Automatisch
-lang_english,English,English,Englisch,Inglés,Anglais,Inglês,Tiếng Anh,İngilizce,Inglese,Angielski,Engelska,Engelsk,Engels
-lang_czech,Čeština,Čeština,Tschechisch,Checo,Tchèque,Tcheco,Tiếng Séc,Çekçe,Ceco,Czeski,Tjeckiska,Tsjekkisk,Tsjechisch
-lang_german,Deutsch,Němčina,Deutsch,Alemán,Allemand,Alemão,Tiếng Đức,Almanca,Tedesco,Niemiecki,Tyska,Tysk,Duits
-lang_spanish,Español,Španělština,Spanisch,Español,Espagnol,Espanhol,Tiếng Tây Ban Nha,İspanyolca,Spagnolo,Hiszpański,Spanska,Spansk,Spaans
-lang_french,Français,Francouzština,Französisch,Francés,Français,Francês,Tiếng Pháp,Fransızca,Francese,Francuski,Franska,Fransk,Frans
-lang_portuguese,Português,Portugalština,Portugiesisch,Portugués,Portugais,Português,Tiếng Bồ Đào Nha,Portekizce,Portoghese,Portugalski,Portugisiska,Portugisisk,Portugees
-lang_vietnamese,Tiếng Việt,Vietnamština,Vietnamesisch,Vietnamita,Vietnamien,Vietnamita,Tiếng Việt,Vietnamca,Vietnamita,Wietnamski,Vietnamesiska,Vietnamesisk,Vietnamees
-lang_turkish,Türkçe,Turečtina,Türkisch,Turco,Turc,Turco,Tiếng Thổ Nhĩ Kỳ,Türkçe,Turco,Turecki,Turkiska,Tyrkisk,Turks
-lang_italian,Italiano,Italština,Italienisch,Italiano,Italien,Italiano,Tiếng Ý,İtalyanca,Italiano,Włoski,Italienska,Italiensk,Italiaans
-lang_polish,Polski,Polština,Polnisch,Polaco,Polonais,Polonês,Tiếng Ba Lan,Lehçe,Polacco,Polski,Polska,Polsk,Pools
-lang_swedish,Swedish,Švédština,Schwedisch,Sueco,Suédois,Sueco,Tiếng Thụy Điển,İsveççe,Svedese,Szwedzki,Svenska,Svensk,Zweeds
-lang_norwegian,Norwegian,Norština,Norwegisch,Noruego,Norvégien,Norueguês,Tiếng Na Uy,Norveççe,Norvegese,Norweski,Norska,Norsk,Noors
-lang_dutch,Dutch,Nizozemština,Niederländisch,Holandés,Néerlandais,Holandês,Tiếng Hà Lan,Hollandaca,Olandese,Holenderski,Nederländska,Nederlandsk,Nederlands
-you_win,⭐ YOU DID IT! ⭐,⭐ SKVĚLÁ PRÁCE! ⭐,⭐ GUT GEMACHT! ⭐,⭐ ¡LO LOGRASTE! ⭐,⭐ TU AS RÉUSSI ! ⭐,⭐ VOCÊ CONSEGUIU! ⭐,⭐ GIỎI QUÁ! ⭐,⭐ HARİKA İŞ! ⭐,⭐ BRAVISSIMO! ⭐,⭐ ŚWIETNA ROBOTA! ⭐,⭐ DU KLARADE DET! ⭐,⭐ DU KLARTE DET! ⭐,⭐ JE HEBT HET GEDAAN! ⭐
-next_round,Next Maze!,Další bludiště!,Nächstes Labyrinth!,¡Siguiente laberinto!,Labyrinthe suivant !,Próximo labirinto!,Mê cung tiếp!,Sonraki Labirent!,Prossimo labirinto!,Następny labirynt!,Nästa labyrint!,Neste labyrint!,Volgende doolhof!
-that_was_easy,Piece of cake!,To byla hračka!,Ein Kinderspiel!,¡Pan comido!,Trop facile !,Moleza!,Quá dễ luôn!,Çok kolaydı!,Un gioco da ragazzi!,Bułka z masłem!,Lätt som en plätt!,Enkel som bare det!,Eitje!
-main_menu,Main Menu,Hlavní menu,Hauptmenü,Menú principal,Menu principal,Menu principal,Menu chính,Ana Menü,Menu principale,Menu główne,Huvudmeny,Hovedmeny,Hoofdmenu
-try_normal,Just the Maze,Jen bludiště,Nur Labyrinth,Solo el laberinto,Juste le labyrinthe,Só o labirinto,Chỉ mê cung,Sadece Labirent,Solo il laberinto,Tylko labirynt,Bara labyrint,Bare labyrint,Alleen doolhof
-try_numbers,With Numbers,S čísly,Mit Zahlen,Con números,Avec des nombres,Com números,Cùng chữ số,Sayılarla,Con i numeri,Z liczbami,Med siffror,Med tall,Met getallen
-try_alphabet,With Letters,S písmenky,Mit Buchstaben,Con letras,Avec des lettres,Com letras,Cùng chữ cái,Harflerle,Con le lettere,Z literami,Med bokstäver,Med bokstaver,Met letters
-try_words,With Words,Se slovy,Mit Wörtern,Con palabras,Avec des mots,Com palavras,Cùng từ ngữ,Kelimelerle,Con le parole,Ze słowami,Med ord,Med ord,Met woorden
-score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s,Tid: %s,Tid: %s,Tijd: %s
-score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d bước,%d adım,%d passi,%d kroków,%d steg,%d steg,%d stappen
-quit_confirm,Leaving already?,Už chceš jít?,Willst du schon gehen?,¿Ya te vas?,Tu veux déjà partir ?,Já vai?,Bạn muốn nghỉ rồi sao?,Çıkmak istediğine emin misin?,Vuoi già uscire?,Chcesz już wyjść?,Vill du gå redan?,Vil du dra allerede?,Wil je nu al weg?
-yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak,Ja,Ja,Ja
-no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie,Nej,Nei,Nee
-chaser_suggestion_off,Without Chaser,Bez Honěné,Ohne Fänger,Sin Atrapada,Sans Poursuite,Sem Atrapada,Không Đuổi bắt,Kovalama olmadan,Senza Acchiapparella,Bez Berka,Utan jagare,Uten jager,Zonder tikkertje
-chaser_suggestion_on,With Chaser,S Honěnou,Mit Fänger,Con Atrapada,Avec Poursuite,Com Atrapada,Cùng Đuổi bắt,Kovalama ile,Con Acchiapparella,Z Berkiem,Med jagare,Med jager,Met tikkertje
-chaser_suggestion_fast,Faster Chaser,Rychlejší Honěná,Schnellerer Fänger,Atrapada más rápida,Poursuite plus rapide,Atrapada mais rápida,Đuổi bắt nhanh hơn,Daha hızlı Kovalama,Acchiapparella più veloce,Szybszy Berek,Snabbare jagare,Raskere jager,Snellere tikkertje
-tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany,⚠ Rösten saknas,⚠ Stemme ikke installert,⚠ Stem niet geïnstalleerd
-tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany,✓ Rösten är installerad,✓ Stemme installert,✓ Stem geïnstalleerd
-checking_tts,Checking voice availability...,Zjišťuji dostupnost hlasů...,Prüfe Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité des voix...,Verificando disponibilidade de voz...,Đang kiểm tra giọng nói...,Ses uygunluğu kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...,Kontrollerar röst...,Sjekker stemme...,Stem beschikbaarheid controleren...
-setting_chaser,Chaser:,Honěná:,Fänger:,Atrapada:,Poursuite:,Atrapada:,Đuổi bắt:,Kovalama:,Acchiapparella:,Berek:,Jagare:,Jager:,Tikkertje:
-gotcha,Gotcha!,Mám tě!,Hab dich!,¡Te atrapé!,Je t'ai eu !,Te peguei!,Bắt được nha!,Yakaladım seni!,Preso!,Mam cię!,Fångad!,Tatt!,Hebbes!
-try_again_desc,Don't worry, try again!,Neva, zkus to znovu!,Nicht schlimm, versuch es nochmal!,¡No pasa nada, inténtalo otra vez!,Pas de souci, essaie encore !,Não faz mal, tente de novo!,Không sao đâu, thử lại nhé!,Sorun değil, bir daha dene!,Non fa niente, riprova!,Nic nie szkodzi, spróbuj jeszcze raz!,"Oroa dig inte, försök igen!","Ikke bekymre deg, prøv igjen!","Maak je geen zorgen, probeer het nog eens!"
-try_again,Play Again,Hrát znovu,Nochmal spielen,Jugar otra vez,Rejouer,Jogar de novo,Chơi lại,Tekrar Oyna,Gioca ancora,Zagraj ponownie,Spela igen,Spill igjen,Opnieuw spelen
-challenge_pp,A bit harder?,Zkusíš těžší?,Etwas schwerer?,¿Un poco más difícil?,Un peu plus difficile ?,Um pouco mais difícil?,Thử khó hơn nhé?,Biraz daha zor?,Un po' più difficile?,Trochę trudniej?,Lite svårare?,Litt vanskeligere?,Iets moeilijker?
-challenge_mm,A bit easier?,Zkusíš lehčí?,Etwas leichter?,¿Un poco más fácil?,Un peu plus facile ?,Um pouco mais fácil?,Thử dễ hơn nhé?,Biraz daha kolay?,Un po' più facile?,Trochę łatwiej?,Lite lättare?,Litt lettere?,Iets makkelijker?
-chaser_off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone,Av,Av,Uit
-chaser_slow,Slow,Pomalu,Langsam,Lento,Lent,Lento,Chậm,Yavaş,Lento,Powoli,Långsamt,Sakte,Langzaam
-chaser_medium,Medium,Středně,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średnio,Medel,Middels,Gemiddeld
-chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szybko,Snabbt,Rask,Snel
-chaser_turbo,Turbo!,Turbo!,Turbo!,¡Turbo!,Turbo !,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!
-help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc,Hjälp,Hjelp,Help
+keys,en,cs,de,es,fr,pt,vi,tr,it,pl,sv,nb,nl,uk,fi,da,hu,ro,el
+app_title,Learning Maze,Vzdělávací Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki,Lärande Labyrint,Læring Labyrint,Leerdoolhof,Навчальний Лабіринт,Oppimislabyrintti,Labyrinten,Tanuló Labirintus,Labirintul de Învățare,Εκπαιδευτικός Λαβύρινθος
+play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Chơi,Oyna,Gioca,Graj,Spela,Spill,Spelen,Грати,Pelaa,Spil,Játék,Joacă,Παίξε
+settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia,Inställningar,Innstillinger,Instellingen,Налаштування,Asetukset,Indstillinger,Beállítások,Setări,Ρυθμίσεις
+settings_title,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia,Inställningar,Innstillinger,Instellingen,Налаштування,Asetukset,Indstillinger,Beállítások,Setări,Ρυθμίσεις
+setting_mode,Game Mode:,Herní mód:,Spielmodus:,Modo de juego:,Mode de jeu :,Modo de jogo:,Chế độ chơi:,Oyun Modu:,Modalità di gioco:,Tryb gry:,Spelläge:,Spillmodus:,Spelmodus:,Режим гри:,Pelitila:,Spiltilstand:,Játékmód:,Mod Joc:,Λειτουργία:
+setting_diff,Difficulty:,Obtížnost:,Schwierigkeit:,Dificultad:,Difficulté :,Dificuldade:,Độ khó:,Zorluk:,Difficoltà:,Poziom trudności:,Svårighetsgrad:,Vanskelighetsgrad:,Moeilijkheidsgraad:,Складність:,Vaikeusaste:,Sværhedsgrad:,Nehézség:,Dificultate:,Δυσκολία:
+setting_lang,Language:,Jazyk:,Sprache:,Idioma:,Langue :,Idioma:,Ngôn ngữ:,Dil:,Lingua:,Język:,Språk:,Språk:,Taal:,Мова:,Kieli:,Sprog:,Nyelv:,Limbă:,Γλώσσα:
+setting_theme,Theme:,Téma:,Thema:,Tema:,Thème :,Tema:,Chủ đề:,Tema:,Tema:,Temat:,Tema:,Tema:,Thema:,Тема:,Teema:,Tema:,Téma:,Temă:,Θέμα:
+setting_voice,Voice Hints:,Hlas:,Sprachhinweise:,Pistas de voz:,Indices vocaux :,Dicas de voz:,Gợi ý bằng giọng nói:,Sesli İpuçları:,Suggerimenti vocali:,Wskazówki głosowe:,Röstanvisningar:,Talehint:,Gesproken hints:,Голосові підказки:,Äänivinkit:,Stemme-tips:,Hangsegítség:,Sugestii Vocale:,Φωνητικές οδηγίες:
+save_return,Back,Zpět,Zurück,Atrás,Retour,Voltar,Quay lại,Geri,Indietro,Powrót,Bakåt,Tilbake,Terug,Назад,Takaisin,Tilbage,Vissza,Înapoia,Επιστροφή
+on,On,Zapnuto,An,Activado,Activé,Ligado,Bật,Açık,Attivato,Włączone,På,På,Aan,Увімк.,Päällä,Til,Be,Pornit,Ναι
+off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone,Av,Av,Uit,Вимк.,Pois,Fra,Ki,Oprit,Όχι
+mode_normal,Just the Maze,Jen bludiště,Nur Labyrinth,Solo el laberinto,Juste le labyrinthe,Só o labirinto,Chỉ mê cung,Sadece Labirent,Solo il labirinto,Tylko labirynt,Bara labyrint,Bare labyrint,Alleen doolhof,Тільки лабіринт,Vain labyrintti,Kun labyrint,Csak labirintus,Doar labirint,Μόνο Λαβύρινθος
+mode_numbers,Numbers,Čísla,Zahlen,Números,Nombres,Números,Con số,Sayılar,Numeri,Liczby,Siffror,Tall,Getallen,Цифри,Numerot,Tal,Számok,Numere,Αριθμοί
+mode_letters,Alphabet,Abeceda,Alphabet,Alfabeto,Alphabet,Alfabeto,Chữ cái,Alfabe,Alfabeto,Alfabet,Bokstäver,Bokstaver,Letters,Алфавіт,Aakkoset,Alfabet,Betűk,Litere,Γράμματα
+mode_words,Words,Slova,Wörter,Palabras,Mots,Palavras,Từ ngữ,Kelimeler,Parole,Słowa,Ord,Ord,Woorden,Слова,Sanat,Ord,Szavak,Cuvinte,Λέξεις
+diff_very_easy,Very Easy,Velmi snadné,Sehr einfach,Muy fácil,Très facile,Muito fácil,Rất dễ,Çok Kolay,Molto facile,Bardzo łatwy,Mycket lätt,Veldig lett,Zeer makkelijk,Дуже легко,Erittäin helppo,Meget let,Nagyon könnyű,Foarte ușor,Πολύ Εύκολο
+diff_easy,Easy,Snadné,Einfach,Fácil,Facile,Fácil,Dễ,Kolay,Facile,Łatwy,Lätt,Lett,Makkelijk,Легко,Helppo,Let,Könnyű,Ușor,Εύκολο
+diff_medium,Medium,Střední,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średni,Medel,Middels,Gemiddeld,Середньо,Keskitaso,Middel,Közepes,Mediu,Μέτριο
+diff_hard,Hard,Těžké,Schwer,Difícil,Difficile,Difícil,Khó,Zor,Difficile,Trudny,Svårt,Vanskelig,Moeilijk,Важко,Vaikea,Svær,Nehéz,Greu,Δύσκολο
+diff_very_hard,Very Hard,Velmi těžké,Sehr schwer,Muy difícil,Très difficile,Muito difícil,Rất khó,Çok Zor,Molto difficile,Bardzo trudny,Mycket svårt,Veldig vanskelig,Zeer moeilijk,Дуже важко,Erittäin vaikea,Meget svær,Nagyon nehéz,Foarte greu,Πολύ Δύσκολο
+diff_insane,Insane,Šílené,Wahnsinnig,Insano,Dément,Insano,Điên rồ,Çılgınca,Folle,Szalone,Galet,Vanvittig,Krankzinnig,Шалено,Mieletön,Vanvittig,Őrült,Nebunesc,Τρελό
+diff_unbelievable,Unbelievable,K nevíře,Unglaublich,Increíble,Incroyable,Inacreditável,Không thể tin nổi,İnanılmaz,Incredibile,Niewiarygodne,Otroligt,Utrolig,Ongelooflijk,Неймовірно,Uskomaton,Utrolig,Hihetetlen,Incredibil,Απίστευτο
+lang_auto,Auto,Automaticky,Automatisch,Automático,Auto,Automático,Tự động,Otomatik,Automatico,Automatyczny,Automatisk,Automatisk,Automatisch,Авто,Automaattinen,Automatisk,Auto,Auto,Αυτόματα
+lang_english,English,English,Englisch,Inglés,Anglais,Inglês,Tiếng Anh,İngilizce,Inglese,Angielski,Engelska,Engelsk,Engels,Англійська,Englanti,Engelsk,Angol,Engleză,Αγγλικά
+lang_czech,Čeština,Čeština,Tschechisch,Checo,Tchèque,Tcheco,Tiếng Séc,Çekçe,Ceco,Czeski,Tjeckiska,Tsjekkisk,Tsjechisch,Чеська,Tšekki,Tjekkisk,Cseh,Cehă,Τσεχικά
+lang_german,Deutsch,Němčina,Deutsch,Alemán,Allemand,Alemão,Tiếng Đức,Almanca,Tedesco,Niemiecki,Tyska,Tysk,Duits,Німецька,Saksa,Tysk,Német,Germană,Γερμανικά
+lang_spanish,Español,Španělština,Spanisch,Español,Espagnol,Espanhol,Tiếng Tây Ban Nha,İspanyolca,Spagnolo,Hiszpański,Spanska,Spansk,Spaans,Іспанська,Espanja,Spansk,Spanyol,Spaniolă,Ισπανικά
+lang_french,Français,Francouzština,Französisch,Francés,Français,Francês,Tiếng Pháp,Fransızca,Francese,Francuski,Franska,Fransk,Frans,Французька,Ranska,Frans,Francia,Franceză,Γαλλικά
+lang_portuguese,Português,Portugalština,Portugiesisch,Portugués,Portugais,Português,Tiếng Bồ Đào Nha,Portekizce,Portoghese,Portugalski,Portugisiska,Portugisisk,Portugees,Португальська,Portugali,Portugisisk,Portugál,Portugheză,Πορτογαλικά
+lang_vietnamese,Tiếng Việt,Vietnamština,Vietnamesisch,Vietnamita,Vietnamien,Vietnamita,Tiếng Việt,Vietnamca,Vietnamita,Wietnamski,Vietnamesiska,Vietnamesisk,Vietnamees,В'єтнамська,Vietnam,Vietnamesisk,Vietnámi,Vietnameză,Βιετναμέζικα
+lang_turkish,Türkçe,Turečtina,Türkisch,Turco,Turc,Turco,Tiếng Thổ Nhĩ Kỳ,Türkçe,Turco,Turecki,Turkiska,Tyrkisk,Turks,Турецька,Turkki,Tyrkisk,Török,Turcă,Τουρκικά
+lang_italian,Italiano,Italština,Italienisch,Italiano,Italien,Italiano,Tiếng Ý,İtalyanca,Italiano,Włoski,Italienska,Italiensk,Italiaans,Італійська,Italia,Italiensk,Olasz,Italiană,Ιταλικά
+lang_polish,Polski,Polština,Polnisch,Polaco,Polonais,Polonês,Tiếng Ba Lan,Lehçe,Polacco,Polski,Polska,Polsk,Pools,Польська,Puola,Polsk,Lengyel,Poloneză,Πολωνικά
+lang_swedish,Swedish,Švédština,Schwedisch,Sueco,Suédois,Sueco,Tiếng Thụy Điển,İsveççe,Svedese,Szwedzki,Svenska,Svensk,Zweeds,Шведська,Ruotsi,Svensk,Svéd,Suedeză,Σουηδικά
+lang_norwegian,Norwegian,Norština,Norwegisch,Noruego,Norvégien,Norueguês,Tiếng Na Uy,Norveççe,Norvegese,Norweski,Norska,Norsk,Noors,Норвезька,Norja,Norsk,Norvég,Norvegiană,Νορβηγικά
+lang_dutch,Dutch,Nizozemština,Niederländisch,Holandés,Néerlandais,Holandês,Tiếng Hà Lan,Hollandaca,Olandese,Holenderski,Nederländska,Nederlandsk,Nederlands,Голландська,Hollanti,Hollandsk,Holland,Holandeză,Ολλανδικά
+lang_ukrainian,Ukrainian,Ukrajinština,Ukrainisch,Ucraniano,Ukrainien,Ucraniano,Tiếng Ukraina,Ukraynaca,Ucraino,Ukraiński,Ukrainska,Ukrainsk,Oekraïens,Українська,Ukraina,Ukrainsk,Ukrán,Ucraineană,Ουκρανικά
+lang_finnish,Finnish,Finština,Finnisch,Finlandés,Finnois,Finlandês,Tiếng Phần Lan,Fince,Finlandese,Fiński,Finska,Finsk,Fins,Фінська,Suomi,Finsk,Finn,Finlandeză,Φινλανδικά
+lang_danish,Danish,Dánština,Dänisch,Danés,Danois,Dinamarquês,Tiếng Đan Mạch,Danimarkaca,Danese,Duński,Danska,Dansk,Deens,Данська,Tanska,Dansk,Dán,Daneză,Δανικά
+lang_hungarian,Hungarian,Maďarština,Ungarisch,Húngaro,Hongrois,Húngaro,Tiếng Hungary,Macarca,Ungherese,Węgierski,Ungerska,Ungarsk,Hongaars,Ukrán,Unkari,Ungarsk,Magyar,Maghiară,Ουγγρικά
+lang_romanian,Romanian,Rumunština,Rumänisch,Rumano,Roumain,Romeno,Tiếng Rumani,Rumence,Rumeno,Rumuński,Rumänska,Rumensk,Roemeens,Román,Romania,Rumænsk,Román,Română,Ρουμανικά
+lang_greek,Greek,Řečtina,Griechisch,Griego,Grec,Grego,Tiếng Hy Lạp,Yunanca,Greco,Grecki,Grekiska,Gresk,Grieks,Görög,Grecă,Ελληνικά,Greek,Greek,Ελληνικά
+you_win,⭐ YOU DID IT! ⭐,⭐ SKVĚLÁ PRÁCE! ⭐,⭐ GUT GEMACHT! ⭐,⭐ ¡LO LOGRASTE! ⭐,⭐ TU AS RÉUSSI ! ⭐,⭐ VOCÊ CONSEGUIU! ⭐,⭐ GIỎI QUÁ! ⭐,⭐ HARİKA İŞ! ⭐,⭐ BRAVISSIMO! ⭐,⭐ ŚWIETNA ROBOTA! ⭐,⭐ DU KLARADE DET! ⭐,⭐ DU KLARTE DET! ⭐,⭐ JE HEBT HET GEDAAN! ⭐,⭐ ТИ ЦЕ ЗРОБИВ! ⭐,⭐ TEIT SEN! ⭐,⭐ DU GJORDE DET! ⭐,⭐ MEGCSINÁLTAD! ⭐,⭐ AI REUȘIT! ⭐,⭐ ΤΑ ΚΑΤΑΦΕΡΕΣ! ⭐
+next_round,Next Maze!,Další bludiště!,Nächstes Labyrinth!,¡Siguiente laberinto!,Labyrinthe suivant !,Próximo labirinto!,Mê cung tiếp!,Sonraki Labirent!,Prossimo labirinto!,Następny labirynt!,Nästa labyrint!,Neste labyrint!,Volgende doolhof!,Наступний лабіринт!,Seuraava labyrintti!,Volgende doolhof!,Következő labirintus!,Următorul labirint!,Επόμενος λαβύρινθος!
+that_was_easy,Piece of cake!,To byla hračka!,Ein Kinderspiel!,¡Pan comido!,Trop facile !,Moleza!,Quá dễ luôn!,Çok kolaydı!,Un gioco da ragazzi!,Bułka z masłem!,Lätt som en plätt!,Enkel som bare det!,Eitje!,Простіше простого!,Helppo nakki!,Enkel som bare det!,Ez könnyű volt!,A fost ușor!,Ήταν εύκολο!
+main_menu,Main Menu,Hlavní menu,Hauptmenü,Menú principal,Menu principal,Menu principal,Menu chính,Ana Menü,Menu principale,Menu główne,Huvudmeny,Hovedmeny,Hoofdmenu,Головне меню,Päävalikko,Hoofdmenu,Főmenü,Meniu Principal,Κύριο Μενού
+try_normal,Just the Maze,Jen bludiště,Nur Labyrinth,Solo el laberinto,Juste le labyrinthe,Só o labirinto,Chỉ mê cung,Sadece Labirent,Solo il laberinto,Tylko labirynt,Bara labyrint,Bare labyrint,Alleen doolhof,Тільки лабіринт,Vain labyrintti,Kun labyrint,Csak labirintus,Doar labirint,Μόνο Λαβύρινθος
+try_numbers,With Numbers,S čísly,Mit Zahlen,Con números,Avec des nombres,Com números,Cùng chữ số,Sayılarla,Con i numeri,Z liczbami,Med siffror,Med tall,Met getallen,З цифрами,Numeroiden kanssa,Med tal,Számokkal,Cu numere,Με αριθμούς
+try_alphabet,With Letters,S písmenky,Mit Buchstaben,Con letras,Avec des lettres,Com letras,Cùng chữ cái,Harflerle,Con le lettere,Z literami,Med bokstäver,Med bokstaver,Met letters,З літерами,Kirjainten kanssa,Med bogstaver,Betűkkel,Cu litere,Με γράμματα
+try_words,With Words,Se slovy,Mit Wörtern,Con palabras,Avec des mots,Com palavras,Cùng từ ngữ,Kelimelerle,Con le parole,Ze słowami,Med ord,Med ord,Met woorden,Зі словами,Sanojen kanssa,Med ord,Szavakkal,Cu cuvinte,Με λέξεις
+score_time,Time: %s,Čas: %s,Zeit: %s,Tiempo: %s,Temps : %s,Tempo: %s,Thời gian: %s,Süre: %s,Tempo: %s,Czas: %s,Tid: %s,Tid: %s,Tijd: %s,Час: %s,Aika: %s,Tid: %s,Idő: %s,Timp: %s,Χρόνος: %s
+score_steps,%d steps,%d kroků,%d Schritte,%d pasos,%d pas,%d passos,%d bước,%d adım,%d passi,%d kroków,%d steg,%d steg,%d stappen,%d кроків,%d askelta,%d trin,%d lépés,%d pași,%d βήματα
+quit_confirm,Leaving already?,Už chceš jít?,Willst du schon gehen?,¿Ya te vas?,Tu veux déjà partir ?,Já vai?,Bạn muốn nghỉ rồi sao?,Çıkmak istediğine emin misin?,Vuoi già uscire?,Chcesz już wyjść?,Vill du gå redan?,Vil du dra allerede?,Wil je nu al weg?,Вже йдеш?,Lähdetkö jo?,Vil du gå allerede?,Már mész is?,Pleci deja?,Φεύγεις ήδη;
+yes,Yes,Ano,Ja,Sí,Oui,Sim,Có,Evet,Sì,Tak,Ja,Ja,Ja,Так,Kyllä,Ja,Igen,Da,Ναι
+no,No,Ne,Nein,No,Non,Não,Không,Hayır,No,Nie,Nej,Nei,Nee,Ні,Ei,Nej,Nem,Nu,Όχι
+chaser_suggestion_off,Without Chaser,Bez Honěné,Ohne Fänger,Sin Atrapada,Sans Poursuite,Sem Atrapada,Không Đuổi bắt,Kovalama olmadan,Senza Acchiapparella,Bez Berka,Utan jagare,Uten jager,Zonder tikkertje,Без переслідувача,Ilman jahtaajaa,Uden jager,Üldöző nélkül,Fără urmăritor,Χωρίς κυνηγό
+chaser_suggestion_on,With Chaser,S Honěnou,Mit Fänger,Con Atrapada,Avec Poursuite,Com Atrapada,Cùng Đuổi bắt,Kovalama ile,Con Acchiapparella,Z Berkiem,Med jagare,Med jager,Met tikkertje,З переслідувачем,Jahtaajan kanssa,Med jager,Üldözővel,Cu urmăritor,Με κυνηγό
+chaser_suggestion_fast,Faster Chaser,Rychlejší Honěná,Schnellerer Fänger,Atrapada más rápida,Poursuite plus rapide,Atrapada mais rápida,Đuổi bắt nhanh hơn,Daha hızlı Kovalama,Acchiapparella più veloce,Szybszy Berek,Snabbare jagare,Raskere jager,Snellere tikkertje,Швидший переслідувач,Nopeampi jahtaaja,Hurtigere jager,Gyorsabb üldöző,Urmăritor mai rapid,Γρήγορος κυνηγός
+tts_missing,⚠ Voice not installed for this language,⚠ Hlas pro tento jazyk není nainstalován,⚠ Stimme für diese Sprache nicht installiert,⚠ Voz no instalada para este idioma,⚠ Voix non installée pour cette langue,⚠ Voz não instalada para este idioma,⚠ Chưa cài đặt giọng nói cho ngôn ngữ này,⚠ Bu dil için ses yüklü değil,⚠ Voce non installata per questa lingua,⚠ Głos dla tego języka nie jest zainstalowany,⚠ Rösten saknas,⚠ Stemme ikke installert,⚠ Stem niet geïnstalleerd,⚠ Голос не встановлено,⚠ Ääntä ei asennettu,⚠ Stemme ikke installeret,⚠ Hang nincs telepítve,⚠ Voce neinstalată,⚠ Η φωνή δεν βρέθηκε
+tts_ready,✓ Voice installed,✓ Hlas je nainstalován,✓ Stimme installiert,✓ Voz instalada,✓ Voix installée,✓ Voz instalada,✓ Đã cài đặt giọng nói,✓ Ses yüklü,✓ Voce installata,✓ Głos zainstalowany,✓ Rösten är installerad,✓ Stemme installert,✓ Stem geïnstalleerd,✓ Голос встановлено,✓ Ääni asennettu,✓ Stemme installeret,✓ Hang kész,✓ Voce pregătită,✓ Έτοιμη φωνή
+checking_tts,Checking voice availability...,Zjišťuji dostupnost hlasů...,Prüfe Sprachverfügbarkeit...,Comprobando disponibilidad de voz...,Vérification de la disponibilité des voix...,Verificando disponibilidade de voz...,Đang kiểm tra giọng nói...,Ses uygunluğu kontrol ediliyor...,Verifica disponibilità voce...,Sprawdzanie dostępności głosu...,Kontrollerar röst...,Sjekker stemme...,Stem beschikbaarheid controleren...,Перевірка голосу...,Tarkistetaan ääntä...,Stem beschikbaarheid controleren...,Hang ellenőrzése...,Verificare voce...,Έλεγχος φωνής...
+setting_chaser,Chaser:,Honěná:,Fänger:,Atrapada:,Poursuite:,Atrapada:,Đuổi bắt:,Kovalama:,Acchiapparella:,Berek:,Jagare:,Jager:,Tikkertje:,Переслідувач:,Jahtaaja:,Tikkertje:,Üldöző:,Urmăritor:,Κυνηγός:
+gotcha,Gotcha!,Mám tě!,Hab dich!,¡Te atrapé!,Je t'ai eu !,Te peguei!,Bắt được nha!,Yakaladım seni!,Preso!,Mam cię!,Fångad!,Tatt!,Hebbes!,Спіймав!,Kiinni jäit!,Hebbes!,Elkapva!,Te-am prins!,Σε έπιασα!
+try_again_desc,Don't worry,try again!,Neva,zkus to znovu!,Nicht schlimm,versuch es nochmal!,¡No pasa nada,inténtalo otra vez!,Pas de souci,essaie encore !,Não faz mal,tente de novo!,Không sao đâu,thử lại nhé!,Sorun değil,bir daha dene!,"Ne aggódj, próbáld újra!","Nu-ți face griji, mai încearcă!","Μην ανησυχείς, προσπάθησε ξανά!"
+try_again,Play Again,Hrát znovu,Nochmal spielen,Jugar otra vez,Rejouer,Jogar de novo,Chơi lại,Tekrar Oyna,Gioca ancora,Zagraj ponownie,Spela igen,Spill igjen,Opnieuw spelen,Грати знову,Pelaa uudelleen,Prøv igen,Új játék,Joacă din nou,Παίξε ξανά
+challenge_pp,A bit harder?,Zkusíš těžší?,Etwas schwerer?,¿Un poco más difícil?,Un peu plus difficile ?,Um pouco mais difícil?,Thử khó hơn nhé?,Biraz daha zor?,Un po' più difficile?,Trochę trudniej?,Lite svårare?,Litt vanskeligere?,Iets moeilijker?,Трішки важче?,Hieman vaikeampi?,Lidt sværere?,Kicsit nehezebb?,Puțin mai greu?,Λίγο πιο δύσκολο;
+challenge_mm,A bit easier?,Zkusíš lehčí?,Etwas leichter?,¿Un poco más fácil?,Un peu plus facile ?,Um pouco mais fácil?,Thử dễ hơn nhé?,Biraz daha kolay?,Un po' più facile?,Trochę łatwiej?,Lite lättare?,Litt lettere?,Iets makkelijker?,Трішки легше?,Hieman helpompi?,Lidt lettere?,Kicsit könnyebb?,Puțin mai ușor?,Λίγο πιο εύκολο;
+chaser_off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone,Av,Av,Uit,Вимк.,Pois,Fra,Ki,Oprit,Όχι
+chaser_slow,Slow,Pomalu,Langsam,Lento,Lent,Lento,Chậm,Yavaş,Lento,Powoli,Långsamt,Sakte,Langzaam,Повільно,Hidas,Langsom,Lassú,Lent,Αργά
+chaser_medium,Medium,Středně,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,Średnio,Medel,Middels,Gemiddeld,Середньо,Keskitaso,Middel,Közepes,Mediu,Μέτρια
+chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szybko,Snabbt,Rask,Snel,Швидко,Nopea,Hurtig,Gyors,Rapid,Γρήγορα
+chaser_turbo,Turbo!,Turbo!,Turbo!,¡Turbo!,Turbo !,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Турбо!,Turbo!,Turbo!,Turbó!,Turbo!,Τούρμπο!
+help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc,Hjälp,Hjelp,Help,Допомога,Ohje,Hjælp,Súgó,Ajutor,Βοήθεια
 help_slide_1_text,"Welcome to the Learning Maze!
 Every great adventure begins with a single step. Let's learn how to explore this world together.","Vítej ve Vzdělávacím bludišti!
 Každé velké dobrodružství začíná prvním krokem. Pojďme se podívat, jak tento svět prozkoumat.","Willkommen im Lernlabyrinth!
@@ -77,10 +83,16 @@ Toda grande aventura começa com um simples passo. Vamos aprender a explorar est
 Mọi chuyến phiêu lưu tuyệt vời đều bắt đầu từ một bước đi. Hãy cùng khám phá thế giới này nhé.","Öğrenme Labirenti'ne Hoş Geldiniz!
 Her büyük macera tek bir adımla başlar. Bu dünyayı nasıl keşfedeceğimizi birlikte öğrenelim.","Benvenuto nel Labirinto Didattico!
 Ogni grande avventura inizia con un singolo passo. Impariamo insieme a esplorare questo mondo.","Witaj w Labiryncie Nauki!
-Każda wielka przygoda zaczyna się od jednego kroku. Nauczmy się razem odkrywać ten świat.","""Välkommen till Lärande Labyrint!
-Varje stort äventyr börjar med ett enda steg. Låt oss lära oss hur vi utforskar den här världen tillsammans.""","""Velkommen til Læring Labyrint!
-Hvert store eventyr begynner med ett enkelt skritt. La oss lære hvordan vi utforsker denne verden sammen.""","""Welkom bij het Leerdoolhof!
-Elk groot avontuur begint met een enkele stap. Laten we leren hoe we deze wereld samen kunnen verkennen."""
+Każda wielka przygoda zaczyna się od jednego kroku. Nauczmy się razem odkrywać ten świat.","Välkommen till Lärande Labyrint!
+Varje stort äventyr börjar med ett enda steg. Låt oss lära oss hur vi utforskar den här världen tillsammans.","Velkommen til Læring Labyrint!
+Hvert store eventyr begynner med ett enkelt skritt. La oss lære hvordan vi utforsker denne verden sammen.","Welkom bij het Leerdoolhof!
+Elk groot avontuur begint met een enkele stap. Laten we leren hoe we deze wereld samen kunnen verkennen.","Ласкаво просимо до Навчального Лабіринту!
+Кожна велика пригода починається з одного кроку. Давайте навчимося досліджувати цей світ разом.","Tervetuloa Oppimislabyrinttiin!
+Jokainen suuri seikkailu alkaa yhdellä askeleella. Opitaan tutkimaan tätä maailmaa yhdessä.","Velkommen til Labyrinten!
+Hvert store eventyr begynder med et enkelt skridt. Lad os lære hvordan vi udforsker denne verden sammen.","Üdvözöljük a Tanuló Labirintusban!
+Minden nagy kaland egyetlen lépéssel kezdődik. Tanuljuk meg együtt, hogyan fedezhetjük fel ezt a világot.","Bun venit în Labirintul de Învățare!
+Fiecare aventură mare începe cu un singur pas. Hai să învățăm cum să explorăm această lume împreună.","Καλώς ήρθατε στον Εκπαιδευτικό Λαβύρινθο!
+Κάθε μεγάλη περιπέτεια ξεκινά με ένα βήμα. Ας μάθουμε μαζί πώς να εξερευνούμε αυτόν τον κόσμο."
 help_slide_2_text,"This is you!
 Your journey always begins in the bottom-left corner. Use the arrows or D-pad to move step by step.","Tohle jsi ty!
 Tvá cesta vždy začíná v levém dolním rohu. K pohybu vpřed používej šipky nebo ovladač.","Das bist du!
@@ -91,10 +103,16 @@ Sua jornada sempre começa no canto inferior esquerdo. Use as setas para se move
 Hành trình của bạn luôn bắt đầu ở góc dưới bên trái. Sử dụng các mũi tên để di chuyển từng bước.","Bu sensin!
 Yolculuğun her zaman sol alt köşeden başlar. Adım adım ilerlemek için okları kullan.","Questo sei tu!
 Il tuo viaggio inizia sempre nell'angolo in basso a sinistra. Usa le frecce per muoverti passo dopo passo.","To jesteś ty!
-Twoja podróż zawsze zaczyna się w lewym dolnym rogu. Użyj strzałek, aby się poruszać.","""Det här är du!
-Din resa börjar alltid i det nedre vänstra hörnet. Använd pilarna eller styrkorset för att flytta steg för steg.""","""Dette er deg!
-Reisen din begynner alltid i det nedre venstre hjørnet. Bruk pilene eller D-paden for å flytte steg for steg.""","""Dit ben jij!
-Je reis begint altijd in de linkerbenedenhoek. Gebruik de pijltjes of het D-pad om stap voor stap te bewegen."""
+Twoja podróż zawsze zaczyna się w lewym dolnym rogu. Użyj strzałek, aby się poruszać.","Det här är du!
+Din resa börjar alltid i det nedre vänstra hörnet. Använd pilarna eller styrkorset för att flytta steg för steg.","Dette er deg!
+Reisen din begynner alltid i det nedre venstre hjørnet. Bruk pilene eller D-paden for å flytte steg for steg.","Dit ben jij!
+Je reis begint altijd in de linkerbenedenhoek. Gebruik de pijltjes of het D-pad om stap voor stap te bewegen.","Це ти!
+Твоя подорож завжди починається в нижньому лівому куті. Використовуй стрілки або пульт, щоб рухатися крок за кроком.","Tämä olet sinä!
+Matkasi alkaa aina vasemmasta alakulmasta. Käytä nuolia tai ohjainta liikkuaksesi askel askeleelta.","Dette er dig!
+Din rejse begynder altid i det nederste venstre hjørne. Brug pilene eller D-pad'en til at bevæge dig trin for trin.","Ez te vagy!
+Utazásod mindig a bal alsó sarokban kezdődik. Használd a nyilakat vagy a D-padot, hogy lépésről lépésre haladj.","Acesta ești tu!
+Călătoria ta începe întotdeauna în colțul din stânga jos. Folosește săgețile sau D-pad-ul pentru a te deplasa pas cu pas.","Αυτός είσαι εσύ!
+Το ταξίδι σου ξεκινά πάντα από την κάτω αριστερή γωνία. Χρησιμοποίησε τα βέλη για να κινηθείς βήμα-βήμα."
 help_slide_3_text,"Your destination is the glowing exit,
 always waiting for you in the top-right corner. Reach it, and the victory is yours!","Tvým cílem je zářící východ,
 který na tebe vždy čeká v pravém horním rohu. Dostaň se k němu a vítězství je tvoje!","Dein Ziel ist der leuchtende Ausgang,
@@ -105,10 +123,16 @@ sempre esperando por você no canto superior direito. Alcance-a, e a vitória é
 luôn chờ đợi bạn ở góc trên bên phải. Hãy đến đó, và chiến thắng sẽ thuộc về bạn!","Hedefin parlayan çıkış,
 her zaman sağ üst köşede seni bekliyor. Oraya ulaş, ve zafer senin olsun!","La tua destinazione è l'uscita luminosa,
 che ti aspetta sempre nell'angolo in alto a destra. Raggiungila e la vittoria sarà tua!","Twoim celem jest świetliste wyjście,
-które zawsze czeka na ciebie w prawym górnym rogu. Dotrzyj tam, a zwycięstwo będzie twoje!","""Ditt mål är den lysande utgången,
-som alltid väntar på dig i det övre högra hörnet. Nå den, och segern är din!""","""Destinasjonen din er den glødende utgangen,
-som alltid venter på deg i øvre høyre hjørne. Nå den, og seieren er din!""","""Je bestemming is de gloeiende uitgang,
-die altijd op je wacht in de rechterbovenhoek. Bereik hem en de overwinning is voor jou!"""
+które zawsze czeka na ciebie w prawym górnym rogu. Dotrzyj tam, a zwycięstwo będzie twoje!","Ditt mål är den lysande utgången,
+som alltid väntar på dig i det övre högra hörnet. Nå den, och segern är din!","Destinasjonen din er den glødende utgangen,
+som alltid venter på deg i øvre høyre hjørne. Nå den, og seieren er din!","Je bestemming is de gloeiende uitgang,
+die altijd op je wacht in de rechterbovenhoek. Bereik hem en de overwinning is voor jou!","Твій пункт призначення — це сяючий вихід,
+який завжди чекає на тебе в правому верхньому куті. Дійди до нього, і перемога твоя!","Kohteesi on hohtava uloskäynti,
+joka odottaa sinua aina oikeassa yläkulmassa. Saavuta se, ja voitto on sinun!","Din destination er den lysende udgang,
+der altid venter på dig i øverste højre hjørne. Nå den, og sejren er din!","A célod a fénylő kijárat,
+amely mindig a jobb felső sarokban vár rád. Érd el, és a győzelem a tiéd!","Scopul tău este ieșirea strălucitoare,
+care te așteaptă mereu în colțul din dreapta sus. Ajungi la ea, și victoria este a ta!","Ο στόχος σου είναι η φωτεινή έξοδος,
+που σε περιμένει πάντα στην πάνω δεξιά γωνία. Φτάσε εκεί και κέρδισες!"
 help_slide_4_text,"Along the way, you might discover numbers, letters, or words.
 Collect them all to learn something new!","Po cestě můžeš narazit na čísla, písmena nebo celá slova.
 Posbírej je a hra ti je přečte, aby ses naučil něco nového!","Unterwegs kannst du Zahlen, Buchstaben oder Wörter entdecken.
@@ -119,10 +143,16 @@ Colete todos para aprender algo novo!","Dọc đường, bạn có thể tìm th
 Hãy nhặt tất cả để học thêm điều mới mẻ!","Yol boyunca sayılar, harfler veya kelimeler keşfedebilirsin.
 Yeni bir şeyler öğrenmek için hepsini topla!","Lungo la strada potresti scoprire numeri, lettere o parole.
 Raccoglili tutti per imparare qualcosa di nuovo!","Po drodze możesz odkryć liczby, litery lub słowa.
-Zbierz je wszystkie, aby nauczyć się czegoś nowego!","""Längs vägen kan du upptäcka siffror, bokstäver eller ord.
-Samla dem alla för att lära dig något nytt!""","""Underveis kan du oppdage tall, bokstaver eller ord.
-Samle dem alle for å lære noe nytt!""","""Onderweg ontdek je misschien cijfers, letters of woorden.
-Verzamel ze allemaal om iets nieuws te leren!"""
+Zbierz je wszystkie, aby nauczyć się czegoś nowego!","Längs vägen kan du upptäcka siffror, bokstäver eller ord.
+Samla dem alla för att lära dig något nytt!","Underveis kan du oppdage tall, bokstaver eller ord.
+Samle dem alle for å lære noe nytt!","Onderweg ontdek je misschien cijfers, letters of woorden.
+Verzamel ze allemaal om iets nieuws te leren!","По дорозі ти можеш знайти цифри, літери або слова.
+Збери їх усіх, щоб навчитися чомусь новому!","Matkan varrella voit löytää numeroita, kirjaimia tai sanoja.
+Kerää ne kaikki oppiaksesi jotain uutta!","Undervejs kan du opdage tal, bogstaver eller ord.
+Saml dem alle for at lære noget nyt!","Útközben számokat, betűket vagy szavakat találhatsz.
+Gyűjtsd össze mindet, hogy valami újat tanulj!","Pe drum poți găsi numere, litere sau cuvinte.
+Adună-le pe toate pentru a învăța ceva nou!","Στον δρόμο μπορείς να βρεις αριθμούς, γράμματα ή λέξεις.
+Μάζεψέ τα όλα για να μάθεις κάτι καινούργιο!"
 help_slide_5_text,"But don't linger too long!
 Sometimes, a friendly chaser is right behind you. Stay carefully ahead and reach the finish first.","Nezdržuj se ale příliš dlouho!
 Někdy tě může dohánět malý rošťák. Zůstaň o krok napřed a dostaň se do cíle první.","Aber trödle nicht zu lange!
@@ -133,10 +163,16 @@ Parfois, un poursuivant amical est juste derrière toi. Garde une longueur d'ava
 Đôi khi, sẽ có ai đó đuổi theo ngay sát phía sau. Hãy cố gắng luôn đi trước một bước!","Ama fazla oyalanma!
 Bazen hemen arkanda seni kovalayan sevimli biri olabilir. Bir adım önde kalarak bitişe koş.","Ma non indugiare troppo a lungo!
 A volte, c'è un amichevole inseguitore proprio dietro di te. Mantieni un passo di vantaggio!","Ale nie zatrzymuj się zbyt długo!
-Czasem tuż za tobą kryje się berkiem. Bądź o krok przed nim, by dotrzeć do mety pierwszy.","""Men dröj inte kvar för länge!
-Ibland är en vänlig jagare precis bakom dig. Håll dig försiktigt före och nå målet först.""","""Men ikke bli værende for lenge!
-Noen ganger er en vennlig jager rett bak deg. Hold deg forsiktig foran og nå målet først.""","""Maar blijf niet te lang hangen!
-Soms zit er een vriendelijk tikkertje vlak achter je. Blijf hem voorzichtig voor en bereik als eerste de finish."""
+Czasem tuż za tobą kryje się berkiem. Bądź o krok przed nim, by dotrzeć do mety pierwszy.","Men dröj inte kvar för länge!
+Ibland är en vänlig jagare precis bakom dig. Håll dig försiktigt före och nå målet först.","Men ikke bli værende for lenge!
+Noen ganger er en vennlig jager rett bak deg. Hold deg forsiktig foran og nå målet først.","Maar blijf niet te lang hangen!
+Soms zit er een vriendelijk tikkertje vlak achter je. Blijf hem voorzichtig voor en bereik als eerste de finish.","Але не затримуйся занадто довго!
+Іноді переслідувач прямо за тобою. Будь обережним і дістанься фінішу першим.","Mutta älä viivyttele liian kauan!
+Joskus ystävällinen jahtaaja on aivan perässäsi. Pysy edellä ja saavuta maali ensin.","Men bliv ikke for længe!
+Nogle gange er en venlig jager lige bag dig. Hold dig foran og nå i mål først.","De ne maradj túl sokáig!
+Néha egy barátságos üldöző van a sarkadban. Maradj óvatosan előtted, és érj célba először.","Dar nu sta prea mult!
+Uneori, un urmăritor prietenos este chiar în spatele tău. Rămâi cu atenție în față și ajungi primul la sosire.","Αλλά μην αργείς πολύ!
+Μερικές φορές ένας φιλικός κυνηγός είναι ακριβώς πίσω σου. Μείνε μπροστά και φτάσε πρώτος στον τερματισμό."
 help_slide_6_text,"Make the game your own.
 In the Settings, you can change the difficulty, pick a new theme, or try different game modes. Have fun!","Přizpůsob si hru podle sebe.
 V Nastavení si můžeš změnit obtížnost, vybrat jiné téma nebo zkusit nové herní módy. Dobře se bav!","Mach das Spiel zu deinem eigenen.
@@ -147,10 +183,16 @@ Nas Configurações, você pode mudar a dificuldade, escolher um novo tema ou te
 Trong phần Cài đặt, bạn có thể thay đổi độ khó, chọn chủ đề mới hoặc các chế độ chơi.","Oyununu istediğin gibi yap.
 Ayarlardan zorluğu değiştirebilir, yeni bir tema seçebilir veya farklı oyun modlarını deneyebilirsin.","Personalizza il tuo gioco.
 Nelle Impostazioni puoi cambiare la difficoltà, scegliere un nuovo tema o provare modalità diverse.","Dostosuj grę do siebie.
-W Ustawieniach możesz zmienić poziom trudności, wybrać nowy motyw i tryb gry!","""Gör spelet till ditt eget.
-I Inställningar kan du ändra svårighetsgrad, välja ett nytt tema eller prova olika spellägen. Ha så kul!""","""Gjør spillet til ditt eget.
-I Innstillinger kan du endre vanskelighetsgrad, velge et nytt tema eller prøve forskjellige spillmoduser. Ha det gøy!""","""Maak het spel van jou.
-In de Instellingen kun je de moeilijkheidsgraad aanpassen, een nieuw thema kiezen of verschillende spelmodi proberen. Veel plezier!"""
+W Ustawieniach możesz zmienić poziom trudności, wybrać nowy motyw i tryb gry!","Gör spelet till ditt eget.
+I Inställningar kan du ändra svårighetsgrad, välja ett nytt tema eller prova olika spellägen. Ha så kul!","Gjør spillet til ditt eget.
+I Innstillinger kan du endre vanskelighetsgrad, velge et nytt tema eller prøve forskjellige spillmoduser. Ha det gøy!","Maak het spel van jou.
+In de Instellingen kun je de moeilijkheidsgraad aanpassen, een nieuw thema kiezen of verschillende spelmodi proberen. Veel plezier!","Зроби гру своєю.
+У налаштуваннях ти можеш змінити складність, вибрати нову тему або спробувати різні режими гри. Розважайся!","Tee pelistä omasi.
+Asetuksissa voit vaihtaa vaikeusastetta, valita uuden teeman tai kokeilla eri pelitiloja. Pidä hauskaa!","Gør spillet til dit eget.
+I Indstillinger kan du ændre sværhedsgraden, vælge et nyt tema eller prøve forskellige spiltilstande. Hav det sjovt!","Tedd a játékot a sajátoddá.
+A Beállításokban megváltoztathatod a nehézséget, választhatsz új témát vagy próbálhatsz ki különböző játékmódokat. Jó szórakozást!","Personalizează jocul.
+În Setări poți schimba dificultatea, alege o temă nouă sau încerca diferite moduri de joc. Distracție plăcută!","Κάνε το παιχνίδι δικό σου.
+Στις Ρυθμίσεις μπορείς να αλλάξεις τη δυσκολία ή να επιλέξεις ένα νέο θέμα. Καλή διασκέδαση!"
 help_slide_maze_text,"You are in a maze of walls and paths.
 The challenge is to navigate through the twisting corridors to find your way out.","Ocitáš se v bludišti spletitých cest a zdí.
 Tvým úkolem je bezpečně projít těmito uličkami a najít správnou cestu ven.","Du befindest dich in einem Labyrinth aus Wänden und Wegen.
@@ -161,7 +203,16 @@ O desafio é navegar pelos corredores sinuosos para encontrar a saída.","Bạn 
 Thử thách là phải điều hướng qua những hành lang vòng vèo để tìm lối ra.","Duvarlardan ve yollardan oluşan bir labirenttesiniz.
 Zorluk, çıkış yolunu bulmak için kıvrımlı koridorlarda gezinmektir.","Ti trovi in un labirinto di muri e sentieri.
 La sfida è navigare attraverso i corridoi tortuosi per trovare la via d'uscita.","Jesteś w labiryncie ze ścian i ścieżek.
-Wyzwaniem jest odnalezienie drogi przez kręte korytarze do samego wyjścia.","""Du är i en labyrint av väggar och stigar.
-Utmaningen är att navigera genom de slingrande korridorerna för att hitta vägen ut.""","""Du er i en labyrint av vegger og stigar.
-Utfordringen er å navigere gjennom de svingete korridorene for att finna veien ut.""","""Je bent in een doolhof van muren en paden.
-De uitdaging is om door de kronkelende gangen te navigeren om de weg naar buiten te vinden."""
+Wyzwaniem jest odnalezienie drogi przez kręte korytarze do samego wyjścia.","Du är i en labyrint av väggar och stigar.
+Utmaningen är att navigera genom de slingrande korridorerna för att hitta vägen ut.","Du er i en labyrint av vegger og stigar.
+Utfordringen er å navigere gjennom de svingete korridorene for att finna veien ut.","Je bent in een doolhof van muren en paden.
+De uitdaging is om door de kronkelende gangen te navigeren om de weg naar buiten te vinden.","Ти в лабіринті стін і доріжок.
+Твоє завдання — пройти крізь звивисті коридори, щоб знайти вихід.","Olet seinien ja polkujen labyrintissä.
+Haasteena on navigoida mutkaisten käytävien läpi löytääksesi tien ulos.","Du er i en labyrint af vægge og stier.
+Udfordringen er at navigere gennem de snoede korridorer for at finde vej ud.","Falak és utak labirintusában vagy.
+A kihívás az, hogy navigálj a kanyargós folyosókon, hogy megtaláld a kijáratot.","Ești într-un labirint de pereți și căi.
+Provocarea este să navighezi prin coridoarele întortocheate pentru a găsi calea de ieșire.","Βρίσκεσαι σε έναν λαβύρινθο με τοίχους και μονοπάτια.
+Η πρόκληση είναι να βρεις την έξοδο μέσα από τους διαδρόμους."
+setting_quality,Visual Quality:,Kvalita obrazu:,Bildqualität:,Calidad visual:,Qualité visuelle :,Qualidade visual:,Chất lượng hình ảnh:,Görüntü Kalitesi:,Qualità visiva:,Jakość grafiki:,Bildkvalitet:,Bildekvalitet:,Beeldkwaliteit:,Якість зображення:,Kuvanlaatu:,Billedkvalitet:,Képminőség:,Calitate Vizuală:,Ποιότητα εικόνας:
+quality_high,High,Vysoká,Hoch,Alta,Haute ,Alta,Cao,Yüksek,Alta,Wysoka,Hög,Høy,Hoog,Висока,Korkea,Høj,Magas,Înaltă,Υψηλή
+quality_standard,Standard,Standard,Standard,Estándar,Standard,Padrão,Tiêu chuẩn,Standart,Standard,Standard,Standard,Standard,Standaard,Стандарт,Vakio,Standard,Alapértelmezett,Standard,Πρότυπο

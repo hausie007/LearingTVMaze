@@ -1,74 +1,22 @@
 [
-  {
-    "word": "FARFALLA",
-    "emoji": "🦋"
-  },
-  {
-    "word": "ELEFANTE",
-    "emoji": "🐘"
-  },
-  {
-    "word": "DELFINO",
-    "emoji": "🐬"
-  },
-  {
-    "word": "PINGUINO",
-    "emoji": "🐧"
-  },
-  {
-    "word": "SERPENTE",
-    "emoji": "🐍"
-  },
-  {
-    "word": "CHITARRA",
-    "emoji": "🎸"
-  },
-  {
-    "word": "OSPEDALE",
-    "emoji": "🏥"
-  },
-  {
-    "word": "TELEFONO",
-    "emoji": "📱"
-  },
-  {
-    "word": "OMBRELLO",
-    "emoji": "☔"
-  },
-  {
-    "word": "VULCANO",
-    "emoji": "🌋"
-  },
-  {
-    "word": "SCATOLA",
-    "emoji": "📦"
-  },
-  {
-    "word": "MACCHINA",
-    "emoji": "🚗"
-  },
-  {
-    "word": "BAMBINO",
-    "emoji": "👦"
-  },
-  {
-    "word": "OROLOGIO",
-    "emoji": "⌚"
-  },
-  {
-    "word": "PALLONCINO",
-    "emoji": "🎈"
-  },
-  {
-    "word": "ELICOTTERO",
-    "emoji": "🚁"
-  },
-  {
-    "word": "STRUZZO",
-    "emoji": "🦩"
-  },
-  {
-    "word": "IPPOPOTAMO",
-    "emoji": "🦛"
-  }
+  {"word": "ELEFANTE", "emoji": "🐘"},
+  {"word": "GIRAFFA", "emoji": "🦒"},
+  {"word": "LEONE", "emoji": "🦁"},
+  {"word": "TIGRE", "emoji": "🐯"},
+  {"word": "ORSO", "emoji": "🐻"},
+  {"word": "SCIMMIA", "emoji": "🐒"},
+  {"word": "CONIGLIO", "emoji": "🐰"},
+  {"word": "CAVALLO", "emoji": "🐎"},
+  {"word": "PECORA", "emoji": "🐑"},
+  {"word": "MAIALE", "emoji": "🐷"},
+  {"word": "GALLINA", "emoji": "🐔"},
+  {"word": "UCCELLO", "emoji": "🐦"},
+  {"word": "FARFALLA", "emoji": "🦋"},
+  {"word": "APE", "emoji": "🐝"},
+  {"word": "FORMICA", "emoji": "🐜"},
+  {"word": "RAGNO", "emoji": "🕷️"},
+  {"word": "SERPENTE", "emoji": "🐍"},
+  {"word": "TARTARUGA", "emoji": "🐢"},
+  {"word": "RANA", "emoji": "🐸"},
+  {"word": "DELFINO", "emoji": "🐬"}
 ]

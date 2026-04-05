@@ -90,11 +90,16 @@ func draw_maze(maze: MazeData) -> void:
 	if not theme.bg_texture:
 		_add_rect(offset, maze_pixel_size, theme.color_wall)
 
-	# 3. Enable Anti-Aliasing (MSAA + FXAA) for smooth edges
+	# 3. Anti-Aliasing (MSAA + FXAA) for smooth edges.
+	# Disabled in Performance Mode to save GPU cycles on lower-powered TVs.
 	var vp := get_viewport()
 	if vp:
-		vp.msaa_2d = Viewport.MSAA_4X
-		vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+		if Config.performance_mode:
+			vp.msaa_2d = Viewport.MSAA_DISABLED
+			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+		else:
+			vp.msaa_2d = Viewport.MSAA_4X
+			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
 
 	# 4. Draw Maze Surfaces (Floor)
 	# Non-wall elements (floor, icons) are still drawn per-cell
@@ -113,7 +118,8 @@ func draw_maze(maze: MazeData) -> void:
 	_draw_walls_line2d(offset, int_cs)
 
 	# 6. Global Effects (Glow/Environment)
-	if theme.glow_enabled:
+	# Skip entirely in Performance Mode as Glow/HDR is extremely hungry.
+	if theme.glow_enabled and not Config.performance_mode:
 		var env_node := WorldEnvironment.new()
 		var env := Environment.new()
 		env.background_mode = Environment.BG_CANVAS
@@ -288,7 +294,7 @@ func _add_wall_line(p0: Vector2, p1: Vector2) -> void:
 	line.joint_mode = Line2D.LINE_JOINT_ROUND
 	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	line.end_cap_mode = Line2D.LINE_CAP_ROUND
-	line.antialiased = true
+	line.antialiased = not Config.performance_mode
 	
 	add_child(line)
 

@@ -1,74 +1,22 @@
 [
-  {
-    "word": "KROWA",
-    "emoji": "🐮"
-  },
-  {
-    "word": "KACZKA",
-    "emoji": "🦆"
-  },
-  {
-    "word": "SLONCE",
-    "emoji": "☀️"
-  },
-  {
-    "word": "JABLKO",
-    "emoji": "🍎"
-  },
-  {
-    "word": "MALPA",
-    "emoji": "🐒"
-  },
-  {
-    "word": "SWINIA",
-    "emoji": "🐷"
-  },
-  {
-    "word": "ROWER",
-    "emoji": "🚲"
-  },
-  {
-    "word": "KWIAT",
-    "emoji": "🌸"
-  },
-  {
-    "word": "ZEGAR",
-    "emoji": "⌚"
-  },
-  {
-    "word": "WODA",
-    "emoji": "💧"
-  },
-  {
-    "word": "PTAKI",
-    "emoji": "🐦"
-  },
-  {
-    "word": "CEBULA",
-    "emoji": "🧅"
-  },
-  {
-    "word": "OGIEN",
-    "emoji": "🔥"
-  },
-  {
-    "word": "LALKA",
-    "emoji": "🎎"
-  },
-  {
-    "word": "PIESEK",
-    "emoji": "🐕"
-  },
-  {
-    "word": "PILKA",
-    "emoji": "⚽"
-  },
-  {
-    "word": "KOTEK",
-    "emoji": "🐈"
-  },
-  {
-    "word": "TORTY",
-    "emoji": "🎂"
-  }
+  {"word": "JABŁKO", "emoji": "🍎"},
+  {"word": "BANAN", "emoji": "🍌"},
+  {"word": "GRUSZA", "emoji": "🍐"},
+  {"word": "ŚLIWKA", "emoji": "🫐"},
+  {"word": "CYTRYNA", "emoji": "🍋"},
+  {"word": "ARBUZ", "emoji": "🍉"},
+  {"word": "TRUSKAWKA", "emoji": "🍓"},
+  {"word": "BORÓWKA", "emoji": "🫐"},
+  {"word": "MALINA", "emoji": "🍇"},
+  {"word": "CUKIERKI", "emoji": "🍬"},
+  {"word": "CIASTKO", "emoji": "🍪"},
+  {"word": "DORT", "emoji": "🎂"},
+  {"word": "LODY", "emoji": "🍦"},
+  {"word": "MLEKO", "emoji": "🥛"},
+  {"word": "WODA", "emoji": "💧"},
+  {"word": "SOK", "emoji": "🧃"},
+  {"word": "CHLEB", "emoji": "🍞"},
+  {"word": "MASŁO", "emoji": "🧈"},
+  {"word": "JAJKO", "emoji": "🥚"},
+  {"word": "MIÓD", "emoji": "🍯"}
 ]

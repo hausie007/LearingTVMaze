@@ -1,62 +1,22 @@
 [
-  {
-    "word": "CHUỐI",
-    "emoji": "🍌"
-  },
-  {
-    "word": "TRỨNG",
-    "emoji": "🥚"
-  },
-  {
-    "word": "BÁNH",
-    "emoji": "🎂"
-  },
-  {
-    "word": "RỒNG",
-    "emoji": "🐉"
-  },
-  {
-    "word": "SỮA",
-    "emoji": "🥛"
-  },
-  {
-    "word": "BƯỞI",
-    "emoji": "🍊"
-  },
-  {
-    "word": "KÉO",
-    "emoji": "✂️"
-  },
-  {
-    "word": "KHĂN",
-    "emoji": "🧣"
-  },
-  {
-    "word": "TRĂNG",
-    "emoji": "🌙"
-  },
-  {
-    "word": "RỪNG",
-    "emoji": "🌲"
-  },
-  {
-    "word": "VỊT",
-    "emoji": "🦆"
-  },
-  {
-    "word": "MÈO",
-    "emoji": "🐱"
-  },
-  {
-    "word": "CỜ",
-    "emoji": "🚩"
-  },
-  {
-    "word": "BÀN",
-    "emoji": "table_"
-  },
-  {
-    "word": "BÚT",
-    "emoji": "✏️"
-  }
+  {"word": "CAM", "emoji": "🍊"},
+  {"word": "CHUOI", "emoji": "🍌"},
+  {"word": "DAU TAY", "emoji": "🍓"},
+  {"word": "DUA HAU", "emoji": "🍉"},
+  {"word": "KEM", "emoji": "🍦"},
+  {"word": "KEO", "emoji": "🍬"},
+  {"word": "SUA", "emoji": "🥛"},
+  {"word": "BANH MI", "emoji": "🍞"},
+  {"word": "PHO MAI", "emoji": "🧀"},
+  {"word": "TRUNG", "emoji": "🥚"},
+  {"word": "GA", "emoji": "🍗"},
+  {"word": "CA", "emoji": "🐟"},
+  {"word": "COM", "emoji": "🍚"},
+  {"word": "MY", "emoji": "🍝"},
+  {"word": "RAU", "emoji": "🥗"},
+  {"word": "CA CHUA", "emoji": "🍅"},
+  {"word": "DUA CHUOT", "emoji": "🥒"},
+  {"word": "KHOAI TAY", "emoji": "🥔"},
+  {"word": "CA ROT", "emoji": "🥕"},
+  {"word": "OT", "emoji": "🫑"}
 ]

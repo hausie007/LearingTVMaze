@@ -80,7 +80,7 @@ func _update_slide() -> void:
 	match slide.type:
 		"welcome":
 			_icon_rect.visible = true
-			_icon_rect.texture = load("res://images/lm_icon.png")
+			_icon_rect.texture = load("res://images/lm_icon_new.png")
 		"maze":
 			_spawn_maze_preview()
 		"icon":
@@ -225,7 +225,7 @@ func _spawn_themes_preview() -> void:
 	if count == 0:
 		# Fallback if no other themes installed
 		var tex_rect = TextureRect.new()
-		tex_rect.texture = load("res://images/lm_icon.png")
+		tex_rect.texture = load("res://images/lm_icon_new.png")
 		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		tex_rect.custom_minimum_size = Vector2(250, 250)
@@ -243,7 +243,7 @@ func _spawn_themes_preview() -> void:
 			tex = loader.chaser_texture
 			
 		# Fallback to default icon if theme is totally missing player/chaser
-		if not tex: tex = load("res://images/lm_icon.png")
+		if not tex: tex = load("res://images/lm_icon_new.png")
 			
 		var tex_rect = TextureRect.new()
 		tex_rect.texture = tex
@@ -269,4 +269,8 @@ func _on_right_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	TTS.stop()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	var loading_scene = load("res://scenes/loading_screen.tscn").instantiate()
+	loading_scene.target_scene_path = "res://scenes/main_menu.tscn"
+	get_tree().root.add_child(loading_scene)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = loading_scene

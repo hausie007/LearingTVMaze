@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dp6m5k8g4jlvg"]
+
+[ext_resource type="Script" path="res://scripts/loading_screen.gd" id="1_r8y4k"]
+[ext_resource type="Texture2D" uid="uid://b5x5x5x5x5x5x" path="res://images/lm_icon_new.png" id="2_i4n6m"]
+
+[node name="LoadingScreen" type="Control"]
+layout_stretch_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8y4k")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14902, 0.168627, 0.219608, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+texture = ExtResource("2_i4n6m")
+expand_mode = 1
+stretch_mode = 5
+pivot_offset = Vector2(200, 200)
+
+[node name="LoadingLabel" type="Label" parent="CenterContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1

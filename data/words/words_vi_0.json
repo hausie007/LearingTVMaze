@@ -1,62 +1,22 @@
 [
-  {
-    "word": "CÁ",
-    "emoji": "🐟"
-  },
-  {
-    "word": "BÒ",
-    "emoji": "🐮"
-  },
-  {
-    "word": "GÀ",
-    "emoji": "🐓"
-  },
-  {
-    "word": "CÚ",
-    "emoji": "🦉"
-  },
-  {
-    "word": "DÊ",
-    "emoji": "🐐"
-  },
-  {
-    "word": "HỔ",
-    "emoji": "🐅"
-  },
-  {
-    "word": "XE",
-    "emoji": "🚗"
-  },
-  {
-    "word": "NƠ",
-    "emoji": "🎀"
-  },
-  {
-    "word": "BIA",
-    "emoji": "🍺"
-  },
-  {
-    "word": "MŨ",
-    "emoji": "🎩"
-  },
-  {
-    "word": "TẢ",
-    "emoji": "📜"
-  },
-  {
-    "word": "CỪ",
-    "emoji": "🐑"
-  },
-  {
-    "word": "BÉ",
-    "emoji": "👶"
-  },
-  {
-    "word": "MẸ",
-    "emoji": "👩"
-  },
-  {
-    "word": "BỐ",
-    "emoji": "👨"
-  }
+  {"word": "NHA", "emoji": "🏠"},
+  {"word": "MEO", "emoji": "🐱"},
+  {"word": "CHO", "emoji": "🐶"},
+  {"word": "ME", "emoji": "👩"},
+  {"word": "BO", "emoji": "👨"},
+  {"word": "TROI", "emoji": "☀️"},
+  {"word": "BIEN", "emoji": "🌊"},
+  {"word": "TAO", "emoji": "🍎"},
+  {"word": "BANH", "emoji": "🍞"},
+  {"word": "SUA", "emoji": "🥛"},
+  {"word": "HOA", "emoji": "🌸"},
+  {"word": "CAY", "emoji": "🌳"},
+  {"word": "SACH", "emoji": "📖"},
+  {"word": "TRUONG", "emoji": "🏫"},
+  {"word": "CHOI", "emoji": "🧸"},
+  {"word": "BE", "emoji": "🧒"},
+  {"word": "SAO", "emoji": "⭐"},
+  {"word": "TRANG", "emoji": "🌙"},
+  {"word": "TRO", "emoji": "🌌"},
+  {"word": "BAN", "emoji": "🤝"}
 ]

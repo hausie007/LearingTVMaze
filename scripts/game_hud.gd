@@ -67,14 +67,33 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 		_word_container.add_child(spacer)
 
 	# Letter labels — dimmed by default
+	# Dynamic font scaling to fit longer phrases (1920 viewport width)
+	var font_size: int = 80
+	var min_w: float = 72.0
+	
+	if word.length() > 24:
+		font_size = 48
+		min_w = 42.0
+	elif word.length() > 16:
+		font_size = 60
+		min_w = 54.0
+
 	for i in range(word.length()):
+		if word[i] == " ":
+			var spacer := Control.new()
+			spacer.custom_minimum_size.x = min_w * 0.6
+			_word_container.add_child(spacer)
+			_word_letter_labels.append(null) # Placeholder for space
+			continue
+
 		var lbl := Label.new()
 		lbl.text = word[i]
-		lbl.add_theme_font_size_override("font_size", 80)
+		lbl.add_theme_font_size_override("font_size", font_size)
 		lbl.add_theme_color_override("font_color", Color(0.3, 0.33, 0.4))  # Dim Navy
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		lbl.custom_minimum_size.x = 72
+		lbl.custom_minimum_size.x = min_w
+		lbl.pivot_offset = Vector2(min_w / 2.0, font_size / 2.0)
 		_word_container.add_child(lbl)
 		_word_letter_labels.append(lbl)
 
@@ -85,6 +104,7 @@ func light_up_letter(index: int) -> void:
 		return
 
 	var lbl: Label = _word_letter_labels[index]
+	if not lbl: return # Skip spaces
 	lbl.add_theme_color_override("font_color", UIColors.YELLOW)
 
 	# Pop animation

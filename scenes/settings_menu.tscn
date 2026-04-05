@@ -52,14 +52,14 @@ grow_vertical = 2
 
 [node name="MainVBox" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Title" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.8, 0, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 52
 text = "Settings"
 horizontal_alignment = 1
 
@@ -76,7 +76,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Game Mode:"
 horizontal_alignment = 2
 
@@ -97,10 +97,10 @@ vertical_alignment = 1
 
 [node name="ModeButton" type="Button" parent="CenterContainer/MainVBox/RowMode/ModeButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "Numbers"
@@ -124,7 +124,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Difficulty:"
 horizontal_alignment = 2
 
@@ -145,10 +145,10 @@ vertical_alignment = 1
 
 [node name="DiffButton" type="Button" parent="CenterContainer/MainVBox/RowDiff/DiffButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "Easy"
@@ -172,7 +172,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Tag Partner:"
 horizontal_alignment = 2
 
@@ -193,10 +193,10 @@ vertical_alignment = 1
 
 [node name="ChaserButton" type="Button" parent="CenterContainer/MainVBox/RowChaser/ChaserButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "Off"
@@ -211,8 +211,9 @@ text = ">"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+
 [node name="SpacerMid1" type="Control" parent="CenterContainer/MainVBox"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="RowTheme" type="HBoxContainer" parent="CenterContainer/MainVBox"]
@@ -224,7 +225,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Theme:"
 horizontal_alignment = 2
 
@@ -245,10 +246,10 @@ vertical_alignment = 1
 
 [node name="ThemeButton" type="Button" parent="CenterContainer/MainVBox/RowTheme/ThemeButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "Default"
@@ -264,8 +265,57 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SpacerMid2" type="Control" parent="CenterContainer/MainVBox"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+
+[node name="RowPerf" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PerfTitle" type="Label" parent="CenterContainer/MainVBox/RowPerf"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Performance:"
+horizontal_alignment = 2
+
+[node name="PerfButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowPerf"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PerfLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowPerf/PerfButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PerfButton" type="Button" parent="CenterContainer/MainVBox/RowPerf/PerfButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Standard"
+
+[node name="PerfRightArrow" type="Label" parent="CenterContainer/MainVBox/RowPerf/PerfButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RowLang" type="HBoxContainer" parent="CenterContainer/MainVBox"]
 layout_mode = 2
@@ -276,7 +326,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Language:"
 horizontal_alignment = 2
 
@@ -297,10 +347,10 @@ vertical_alignment = 1
 
 [node name="LangButton" type="Button" parent="CenterContainer/MainVBox/RowLang/LangButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "English"
@@ -324,7 +374,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 text = "Voice Hints:"
 horizontal_alignment = 2
 
@@ -345,10 +395,10 @@ vertical_alignment = 1
 
 [node name="VoiceButton" type="Button" parent="CenterContainer/MainVBox/RowVoice/VoiceButtonContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 80)
+custom_minimum_size = Vector2(500, 72)
 layout_mode = 2
 theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 text = "On"

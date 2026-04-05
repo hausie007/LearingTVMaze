@@ -1,74 +1,22 @@
 [
-  {
-    "word": "SCHULE",
-    "emoji": "🏫"
-  },
-  {
-    "word": "TOMATE",
-    "emoji": "🍅"
-  },
-  {
-    "word": "KAMERA",
-    "emoji": "📷"
-  },
-  {
-    "word": "RAKETE",
-    "emoji": "🚀"
-  },
-  {
-    "word": "BANANE",
-    "emoji": "🍌"
-  },
-  {
-    "word": "KIRSCHE",
-    "emoji": "🍒"
-  },
-  {
-    "word": "GITARRE",
-    "emoji": "🎸"
-  },
-  {
-    "word": "ORANGE",
-    "emoji": "🍊"
-  },
-  {
-    "word": "GIRAFFE",
-    "emoji": "🦒"
-  },
-  {
-    "word": "PINGUIN",
-    "emoji": "🐧"
-  },
-  {
-    "word": "DELFIN",
-    "emoji": "🐬"
-  },
-  {
-    "word": "ELEFANT",
-    "emoji": "🐘"
-  },
-  {
-    "word": "FLUGZEUG",
-    "emoji": "✈️"
-  },
-  {
-    "word": "ERDBEERE",
-    "emoji": "🍓"
-  },
-  {
-    "word": "EISBAER",
-    "emoji": "🐻‍❄️"
-  },
-  {
-    "word": "KAROTTE",
-    "emoji": "🥕"
-  },
-  {
-    "word": "FAHRRAD",
-    "emoji": "🚲"
-  },
-  {
-    "word": "KROKODIL",
-    "emoji": "🐊"
-  }
+  {"word": "WINTERWALD", "emoji": "❄️"},
+  {"word": "SCHNEEMANN", "emoji": "☃️"},
+  {"word": "RODELBAHN", "emoji": "🛷"},
+  {"word": "EISBÄRCHEN", "emoji": "🐻"},
+  {"word": "PINGUINE", "emoji": "🐧"},
+  {"word": "KUCHENESSEN", "emoji": "🍰"},
+  {"word": "TEEPARTY", "emoji": "🍵"},
+  {"word": "KINDERFEST", "emoji": "🎈"},
+  {"word": "LUFTBALLON", "emoji": "🎈"},
+  {"word": "ZAUBERER", "emoji": "🧙"},
+  {"word": "FEUERWEHR", "emoji": "🚒"},
+  {"word": "POLIZEIAUTO", "emoji": "🚓"},
+  {"word": "KRANKENWAGEN", "emoji": "🚑"},
+  {"word": "MÜLLFUHR", "emoji": "🚛"},
+  {"word": "TRAKTORFAHRT", "emoji": "🚜"},
+  {"word": "BAUERNHOF", "emoji": "🏡"},
+  {"word": "KUHSTALL", "emoji": "🐄"},
+  {"word": "PFERDESTALL", "emoji": "🐎"},
+  {"word": "HÜHNERHOF", "emoji": "🐔"},
+  {"word": "ENTENTEICH", "emoji": "🦆"}
 ]

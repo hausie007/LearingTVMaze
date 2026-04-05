@@ -172,7 +172,15 @@ func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: 
 	DisplayServer.tts_stop()
 
 	_mutex.lock()
-	_pending_text = text.to_lower()
+	# Always lowercase for TTS to suppress "Capital/Big" announcements (common in cs, el, etc.)
+	var processed_text = text.to_lower()
+	
+	# For single letters in specific languages, adding a period often helps the engine
+	# just speak the letter name instead of identifying the case.
+	if processed_text.length() == 1 and lang in ["el", "cs"]:
+		processed_text += "."
+		
+	_pending_text = processed_text
 	_pending_voice = lang
 	_pending_rate = rate
 	_pending_volume = volume

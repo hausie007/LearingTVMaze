@@ -62,6 +62,9 @@ var voice_hints: bool = true
 ## Chaser speed tier. See ChaserLevel enum.
 var chaser_level: int = ChaserLevel.MEDIUM
 
+## Whether to prioritize smooth gameplay over visual effects (disables Glow, Anti-Aliasing).
+var performance_mode: bool = true
+
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
 var chaser_speed: float:
 	get:
@@ -71,8 +74,8 @@ var chaser_speed: float:
 			ChaserLevel.TURBO:  return 3.5
 			_:                  return 0.65  # Slow (default)
 
-const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl"]
-const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl"]
+const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
+const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
@@ -174,6 +177,7 @@ func save_settings() -> void:
 	config.set_value("Game", "language", language)
 	config.set_value("Game", "voice_hints", voice_hints)
 	config.set_value("Game", "chaser_level", chaser_level)
+	config.set_value("Game", "performance_mode", performance_mode)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	
 	var err := config.save(SAVE_PATH)
@@ -188,6 +192,7 @@ func load_settings() -> void:
 		language       = config.get_value("Game", "language", language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
+		performance_mode = config.get_value("Game", "performance_mode", true)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 
 ## Return the effective language code, resolving "auto" from OS locale.
@@ -242,3 +247,17 @@ func _scan_theme_dir(path: String, out_list: Array[String]) -> void:
 				if not out_list.has(file_name):
 					out_list.append(file_name)
 			file_name = dir.get_next()
+
+
+## Return the N-th character of the alphabet for the given language.
+## For 'el' (Greek), it returns Α, Β, Γ...
+## For others, it returns A, B, C...
+func get_alphabet_char(index: int, lang: String) -> String:
+	if lang == "el":
+		var greek_alphabet = "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"
+		if index >= 0 and index < greek_alphabet.length():
+			return greek_alphabet[index]
+		return greek_alphabet[greek_alphabet.length() - 1]
+	
+	# Default to Latin A-Z
+	return String.chr(65 + (index % 26))

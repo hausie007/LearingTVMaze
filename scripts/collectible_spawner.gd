@@ -99,7 +99,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		if Config.game_mode == Config.GameMode.NUMBERS:
 			val_str = str(i + 1)
 		elif Config.game_mode == Config.GameMode.LETTERS:
-			val_str = String.chr(65 + i)
+			val_str = Config.get_alphabet_char(i, Config.get_effective_language())
 
 		_instantiate_collectible(cell, val_str, -1, renderer)
 

@@ -1,62 +1,22 @@
 [
-  {
-    "word": "KEM",
-    "emoji": "🍦"
-  },
-  {
-    "word": "HOA",
-    "emoji": "🌺"
-  },
-  {
-    "word": "MƯA",
-    "emoji": "🌧️"
-  },
-  {
-    "word": "CHIM",
-    "emoji": "🐦"
-  },
-  {
-    "word": "QUẢ",
-    "emoji": "🍎"
-  },
-  {
-    "word": "BÓNG",
-    "emoji": "⚽"
-  },
-  {
-    "word": "SÁCH",
-    "emoji": "📖"
-  },
-  {
-    "word": "CỬA",
-    "emoji": "🚪"
-  },
-  {
-    "word": "MÂY",
-    "emoji": "☁️"
-  },
-  {
-    "word": "GẤU",
-    "emoji": "🐻"
-  },
-  {
-    "word": "ẾCH",
-    "emoji": "🐸"
-  },
-  {
-    "word": "KIẾN",
-    "emoji": "🐜"
-  },
-  {
-    "word": "RÙA",
-    "emoji": "🐢"
-  },
-  {
-    "word": "THỎ",
-    "emoji": "🐰"
-  },
-  {
-    "word": "GHẾ",
-    "emoji": "🪑"
-  }
+  {"word": "OTO", "emoji": "🚗"},
+  {"word": "MAY BAY", "emoji": "✈️"},
+  {"word": "TAU THUY", "emoji": "🚢"},
+  {"word": "TAU HOA", "emoji": "🚂"},
+  {"word": "XE DAP", "emoji": "🚲"},
+  {"word": "XE BUYT", "emoji": "🚌"},
+  {"word": "XE TAI", "emoji": "🚚"},
+  {"word": "BONG BAY", "emoji": "🎈"},
+  {"word": "MAY BAY", "emoji": "🚁"},
+  {"word": "TEN LUA", "emoji": "🚀"},
+  {"word": "XE MAY", "emoji": "🏍️"},
+  {"word": "MAY CAY", "emoji": "🚜"},
+  {"word": "CANO", "emoji": "🚤"},
+  {"word": "THUYEN", "emoji": "🛶"},
+  {"word": "XE TRUOT", "emoji": "🛴"},
+  {"word": "PHI CO", "emoji": "🛩️"},
+  {"word": "TAU DIEN", "emoji": "🚇"},
+  {"word": "XE DIEN", "emoji": "🚋"},
+  {"word": "PHA", "emoji": "⛴️"},
+  {"word": "TAU NGAM", "emoji": "⚗️"}
 ]
