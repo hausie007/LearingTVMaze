@@ -7,6 +7,7 @@ var temp_lang_idx: int
 var temp_voice: bool
 var temp_chaser_level: int
 var temp_perf: bool
+var temp_controls: int
 var themes: Array[String] = []
 
 # Mode/diff/lang keys for tr()
@@ -15,6 +16,7 @@ const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "d
 const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek"]
 const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
 const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast", "chaser_turbo"]
+const CONTROLS_KEYS = ["controls_off", "controls_left", "controls_right"]
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
@@ -53,11 +55,14 @@ func _ready() -> void:
 		temp_voice = Config.voice_hints
 		temp_chaser_level = Config.chaser_level
 		temp_perf = Config.performance_mode
+		temp_controls = Config.on_screen_controls
 		_original_language = Config.language
 		# Listen for async TTS completion
 		if not TTS.status_changed.is_connected(_update_labels):
 			TTS.status_changed.connect(_update_labels)
-		
+			
+	# Apply D-Pad layout shift
+	_apply_layout_shift()
 	# Wire up buttons
 	_setup_cycling_button(%ModeButton, func(dir): _cycle_mode(dir))
 	_setup_cycling_button(%DiffButton, func(dir): _cycle_diff(dir))
@@ -66,6 +71,7 @@ func _ready() -> void:
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	_setup_cycling_button(%ChaserButton, func(dir): _cycle_chaser(dir))
 	_setup_cycling_button(%PerfButton, func(dir): _cycle_perf(dir))
+	_setup_cycling_button(get_node_or_null("%ControlsButton"), func(dir): _cycle_controls(dir))
 	
 	# Add animated character preview next to the theme arrow
 	# We attach it to the arrow (which is a Label, not a Container)
@@ -196,19 +202,21 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	
 	# Cycle on D-pad Left/Right
 	btn.gui_input.connect(func(event: InputEvent):
-		if event is InputEventKey or event is InputEventJoypadButton:
-			if event.is_pressed():
-				if event.is_action("ui_left"):
-					cycle_func.call(-1)
-					get_viewport().set_input_as_handled()
-				elif event.is_action("ui_right"):
-					cycle_func.call(1)
-					get_viewport().set_input_as_handled()
+		if event.is_pressed():
+			if event.is_action("ui_left"):
+				cycle_func.call(-1)
+				get_viewport().set_input_as_handled()
+			elif event.is_action("ui_right"):
+				cycle_func.call(1)
+				get_viewport().set_input_as_handled()
 	)
 	
 	var focus_color: Color = UIColors.BLUE # Blue for game modifiers
-	if btn.name in ["ThemeButton", "LangButton", "VoiceButton", "PerfButton"]:
+	if btn.name in ["ThemeButton", "LangButton", "VoiceButton", "PerfButton", "ControlsButton"]:
 		focus_color = UIColors.YELLOW # Yellow for app modifiers
+		
+	if left_arrow: left_arrow.add_theme_color_override("font_color", focus_color)
+	if right_arrow: right_arrow.add_theme_color_override("font_color", focus_color)
 		
 	UIHelpers.apply_style_to_button(btn, focus_color)
 
@@ -252,6 +260,15 @@ func _cycle_chaser(dir: int) -> void:
 
 func _cycle_perf(_dir: int) -> void:
 	temp_perf = !temp_perf
+	_update_labels()
+
+func _cycle_controls(dir: int) -> void:
+	if CONTROLS_KEYS.size() == 0: return
+	temp_controls = (temp_controls + dir + CONTROLS_KEYS.size()) % CONTROLS_KEYS.size()
+	# Immediately update Config so the d-pad previews live
+	if Config: 
+		Config.on_screen_controls = temp_controls
+		_apply_layout_shift()
 	_update_labels()
 
 func _update_labels() -> void:
@@ -340,6 +357,10 @@ func _update_labels() -> void:
 	if has_node("%PerfButton"):
 		%PerfButton.text = tr("quality_high") if not temp_perf else tr("quality_standard")
 
+	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < CONTROLS_KEYS.size():
+		var controls_btn = get_node("%ControlsButton")
+		controls_btn.text = tr(CONTROLS_KEYS[temp_controls])
+
 func _update_static_labels() -> void:
 	# Update row titles and other static text to current language
 	if has_node("%Title"): 
@@ -353,8 +374,27 @@ func _update_static_labels() -> void:
 	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
 	if has_node("%ChaserTitle"): %ChaserTitle.text = tr("setting_chaser")
 	if has_node("%PerfTitle"): %PerfTitle.text = tr("setting_quality")
+	if has_node("%ControlsTitle"): %ControlsTitle.text = tr("setting_controls")
 	
-	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle", "%PerfTitle"]
+func _apply_layout_shift() -> void:
+	var center_container = $CenterContainer
+	if not center_container: return
+	
+	var controls_mode = temp_controls
+	if controls_mode == Config.ControlsMode.LEFT_HANDED:
+		center_container.anchor_left = 0.25
+		center_container.anchor_right = 1.0
+	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
+		center_container.anchor_left = 0.0
+		center_container.anchor_right = 0.75
+	else:
+		center_container.anchor_left = 0.0
+		center_container.anchor_right = 1.0
+		
+	center_container.offset_left = 0
+	center_container.offset_right = 0
+	
+	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle", "%PerfTitle", "%ControlsTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
@@ -374,6 +414,7 @@ func _on_save_pressed() -> void:
 		Config.voice_hints = temp_voice
 		Config.chaser_level = temp_chaser_level
 		Config.performance_mode = temp_perf
+		Config.on_screen_controls = temp_controls
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_language())
 	

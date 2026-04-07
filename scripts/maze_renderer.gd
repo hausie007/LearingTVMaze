@@ -44,19 +44,35 @@ func draw_maze(maze: MazeData) -> void:
 	var viewport_size := get_viewport_rect().size
 	
 	# Reserve some padding (e.g., 5% each side) and subtract top_margin
-	var margin_percent := 0.05
-	var available_size := viewport_size * (1.0 - margin_percent * 2.0)
-	available_size.y -= top_margin
+	# Define minimum margins
+	var margin_x = viewport_size.x * 0.02
+	
+	# Compute horizontal boundaries spanning the whole screen
+	var rect_left = margin_x
+	var rect_right = viewport_size.x - margin_x
+	
+	# If D-pad is active, carve out 25% of the screen
+	var controls = -1
+	if is_instance_valid(Config) and "on_screen_controls" in Config:
+		controls = Config.on_screen_controls
+		
+	if controls == Config.ControlsMode.LEFT_HANDED:
+		rect_left = (viewport_size.x * 0.25) + margin_x
+	elif controls == Config.ControlsMode.RIGHT_HANDED:
+		rect_right = (viewport_size.x * 0.75) - margin_x
+		
+	# Compute maximum available dimensions strictly within the dynamic boundaries
+	var available_w = maxf(10.0, rect_right - rect_left)
+	var available_h = maxf(10.0, viewport_size.y - top_margin - (viewport_size.y * 0.02))
 	
 	# Calculate max possible cell size for both dimensions
-	var max_cs_x := available_size.x / maze.grid_size.x
-	var max_cs_y := available_size.y / maze.grid_size.y
+	var max_cs_x: float = available_w / float(maze.grid_size.x)
+	var max_cs_y: float = available_h / float(maze.grid_size.y)
 	
 	# Pick the smaller one to fit the whole maze while keeping aspect ratio
-	# Use floorf to ensure the maze never overflows, preventing sub-pixel scaling 'zig-zags'.
 	_current_cell_size = floorf(minf(max_cs_x, max_cs_y))
 	
-	# Scale wall thickness (minimum 2.0 pixels for visibility on dense mazes).
+	# Scale wall thickness
 	var scale_ratio := _current_cell_size / float(Config.cell_size)
 	_current_wall_thickness = maxf(2.0, floorf(float(Config.wall_thickness) * scale_ratio))
 
@@ -64,9 +80,10 @@ func draw_maze(maze: MazeData) -> void:
 		int(maze.grid_size.x * _current_cell_size),
 		int(maze.grid_size.y * _current_cell_size),
 	)
-	# Centre horizontally, shift down by top_margin vertically
-	# Use floori to ensure the offset is an absolute integer
-	var hpad := floori((viewport_size.x - maze_pixel_size.x) / 2.0)
+	
+	# Center the maze strictly inside the newly carved out available\_w window
+	var hpad := floori(rect_left + (available_w - maze_pixel_size.x) / 2.0)
+		
 	var vpad := floori(top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0)
 	var offset := Vector2i(hpad, vpad)
 	_cached_offset = Vector2(offset)

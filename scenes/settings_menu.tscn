@@ -317,6 +317,56 @@ text = ">"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RowControls" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ControlsTitle" type="Label" parent="CenterContainer/MainVBox/RowControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "On-Screen Controls:"
+horizontal_alignment = 2
+
+[node name="ControlsButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowControls"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ControlsLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowControls/ControlsButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlsButton" type="Button" parent="CenterContainer/MainVBox/RowControls/ControlsButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_focus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "Off"
+
+[node name="ControlsRightArrow" type="Label" parent="CenterContainer/MainVBox/RowControls/ControlsButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
 [node name="RowLang" type="HBoxContainer" parent="CenterContainer/MainVBox"]
 layout_mode = 2
 theme_override_constants/separation = 40

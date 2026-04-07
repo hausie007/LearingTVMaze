@@ -33,6 +33,14 @@ enum ChaserLevel {
 	TURBO  = 4,
 }
 
+## On-Screen Controls configuration.
+enum ControlsMode {
+	OFF = 0,
+	LEFT_HANDED = 1,
+	RIGHT_HANDED = 2,
+}
+
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  PERSISTENCE & SETTINGS LOGIC
@@ -64,6 +72,10 @@ var chaser_level: int = ChaserLevel.MEDIUM
 
 ## Whether to prioritize smooth gameplay over visual effects (disables Glow, Anti-Aliasing).
 var performance_mode: bool = true
+
+## On-Screen Controls preference (-1 = not set/autodetect).
+var on_screen_controls: int = -1
+
 
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
 var chaser_speed: float:
@@ -170,6 +182,14 @@ func _enter_tree() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_language())
 
+func _ready() -> void:
+	# Instantiate Universal Virtual D-Pad Layout
+	var dpad_script = load("res://scripts/virtual_dpad.gd")
+	if dpad_script:
+		var dpad_node = CanvasLayer.new()
+		dpad_node.set_script(dpad_script)
+		add_child(dpad_node)
+
 func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("Game", "game_mode", game_mode)
@@ -178,6 +198,7 @@ func save_settings() -> void:
 	config.set_value("Game", "voice_hints", voice_hints)
 	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Game", "performance_mode", performance_mode)
+	config.set_value("Game", "on_screen_controls", on_screen_controls)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	
 	var err := config.save(SAVE_PATH)
@@ -193,7 +214,14 @@ func load_settings() -> void:
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
+		on_screen_controls = config.get_value("Game", "on_screen_controls", -1)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
+		
+	if on_screen_controls == -1:
+		if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
+			on_screen_controls = ControlsMode.RIGHT_HANDED
+		else:
+			on_screen_controls = ControlsMode.OFF
 
 ## Return the effective language code, resolving "auto" from OS locale.
 func get_effective_language() -> String:

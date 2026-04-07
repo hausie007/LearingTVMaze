@@ -41,6 +41,42 @@ func _ready() -> void:
 	_right_btn.focus_mode = Control.FOCUS_NONE
 	
 	_update_slide()
+	_apply_layout_shift()
+
+
+func _apply_layout_shift() -> void:
+	var center_container = $CenterContainer
+	if not center_container: return
+	
+	var controls_mode = Config.on_screen_controls if is_instance_valid(Config) else -1
+	if controls_mode == Config.ControlsMode.LEFT_HANDED:
+		center_container.anchor_left = 0.25
+		center_container.anchor_right = 1.0
+	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
+		center_container.anchor_left = 0.0
+		center_container.anchor_right = 0.75
+	else:
+		center_container.anchor_left = 0.0
+		center_container.anchor_right = 1.0
+		
+	center_container.offset_left = 0
+	center_container.offset_right = 0
+	
+	var panel = get_node_or_null("%Panel")
+	var text_label = get_node_or_null("%TextLabel")
+	var icon_rect = get_node_or_null("%IconRect")
+	
+	if panel and text_label:
+		if controls_mode != Config.ControlsMode.OFF:
+			panel.custom_minimum_size = Vector2(900, 700)
+			text_label.custom_minimum_size = Vector2(650, 200)
+			text_label.add_theme_font_size_override("font_size", 42)
+			if icon_rect: icon_rect.custom_minimum_size = Vector2(300, 300)
+		else:
+			panel.custom_minimum_size = Vector2(1500, 900)
+			text_label.custom_minimum_size = Vector2(1000, 240)
+			text_label.add_theme_font_size_override("font_size", 54)
+			if icon_rect: icon_rect.custom_minimum_size = Vector2(400, 400)
 
 
 func _process(delta: float) -> void:

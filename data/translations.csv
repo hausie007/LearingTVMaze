@@ -216,3 +216,7 @@ Provocarea este să navighezi prin coridoarele întortocheate pentru a găsi cal
 setting_quality,Visual Quality:,Kvalita obrazu:,Bildqualität:,Calidad visual:,Qualité visuelle :,Qualidade visual:,Chất lượng hình ảnh:,Görüntü Kalitesi:,Qualità visiva:,Jakość grafiki:,Bildkvalitet:,Bildekvalitet:,Beeldkwaliteit:,Якість зображення:,Kuvanlaatu:,Billedkvalitet:,Képminőség:,Calitate Vizuală:,Ποιότητα εικόνας:
 quality_high,High,Vysoká,Hoch,Alta,Haute ,Alta,Cao,Yüksek,Alta,Wysoka,Hög,Høy,Hoog,Висока,Korkea,Høj,Magas,Înaltă,Υψηλή
 quality_standard,Standard,Standard,Standard,Estándar,Standard,Padrão,Tiêu chuẩn,Standart,Standard,Standard,Standard,Standard,Standaard,Стандарт,Vakio,Standard,Alapértelmezett,Standard,Πρότυπο
+setting_controls,On-Screen Controls:,Virtuální ovladač:,Bildschirmsteuerung:,Controles en Pantalla:,Contrôles à l'Écran:,Controles na Tela:,Điều khiển trên màn hình:,Ekran Kontrolleri:,Controlli a schermo:,Podręczne przyciski:,Skärmkontroller:,Skjermkontroller:,Schermbediening:,Екранне керування:,Näyttöohjaimet:,Skærmkontroller:,Képernyővezérlők:,Controale pe ecran:,Έλεγχος Οθόνης:
+controls_off,Off,Vypnuto,Aus,Desactivado,Désactivé,Desligado,Tắt,Kapalı,Disattivato,Wyłączone,Av,Av,Uit,Вимк.,Pois,Fra,Ki,Oprit,Όχι
+controls_left,Left,Vlevo,Links,Izquierda,Gauche,Esquerda,Trái,Sol,Sinistra,Lewo,Vänster,Venstre,Links,Ліворуч,Vasen,Venstre,Balra,Stânga,Αριστερά
+controls_right,Right,Vpravo,Rechts,Derecha,Droite,Direita,Phải,Sağ,Destra,Prawo,Höger,Høyre,Rechts,Праворуч,Oikea,Højre,Jobbra,Dreapta,Δεξιά
