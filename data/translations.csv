@@ -74,8 +74,8 @@ chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szyb
 chaser_turbo,Turbo!,Turbo!,Turbo!,¡Turbo!,Turbo !,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Турбо!,Turbo!,Turbo!,Turbó!,Turbo!,Τούρμπο!
 help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc,Hjälp,Hjelp,Help,Допомога,Ohje,Hjælp,Súgó,Ajutor,Βοήθεια
 help_slide_1_text,"Welcome to the Learning Maze!
-Every great adventure begins with a single step. Let's learn how to explore this world together.","Vítej ve Vzdělávacím bludišti!
-Každé velké dobrodružství začíná prvním krokem. Pojďme se podívat, jak tento svět prozkoumat.","Willkommen im Lernlabyrinth!
+Every great adventure begins with a single step. Let's learn how to explore this world together.","Vítej ve Vzdělávacím bludišti.
+Ještě než se do něj pustíš, krátce si ukážeme, jak to tu vlastně funguje. Je to docela prosté.","Willkommen im Lernlabyrinth!
 Jedes große Abenteuer beginnt mit einem einzigen Schritt. Lass uns gemeinsam diese Welt erkunden.","¡Bienvenido al Laberinto de Aprendizaje!
 Cada gran aventura comienza con un solo paso. Vamos a aprender a explorar este mundo juntos.","Bienvenue dans le Labyrinthe d'Apprentissage !
 Chaque grande aventure commence par un simple pas. Apprenons ensemble à explorer ce monde.","Bem-vindo ao Labirinto de Aprendizagem!
@@ -94,8 +94,8 @@ Minden nagy kaland egyetlen lépéssel kezdődik. Tanuljuk meg együtt, hogyan f
 Fiecare aventură mare începe cu un singur pas. Hai să învățăm cum să explorăm această lume împreună.","Καλώς ήρθατε στον Εκπαιδευτικό Λαβύρινθο!
 Κάθε μεγάλη περιπέτεια ξεκινά με ένα βήμα. Ας μάθουμε μαζί πώς να εξερευνούμε αυτόν τον κόσμο."
 help_slide_2_text,"This is you!
-Your journey always begins in the bottom-left corner. Use the arrows or D-pad to move step by step.","Tohle jsi ty!
-Tvá cesta vždy začíná v levém dolním rohu. K pohybu vpřed používej šipky nebo ovladač.","Das bist du!
+Your journey always begins in the bottom-left corner. Use the arrows or D-pad to move step by step.","Tohle jsi ty.
+Začínáš vždycky dole v levém rohu obrazovky. Pohybovat se můžeš doleva, doprava, nahoru a dolů s pomocí šipek ovladače.","Das bist du!
 Deine Reise beginnt immer in der unteren linken Ecke. Benutze die Pfeiltasten, um dich zu bewegen.","¡Este eres tú!
 Tu viaje siempre comienza en la esquina inferior izquierda. Usa las flechas para moverte paso a paso.","C'est toi !
 Ton voyage commence toujours dans le coin inférieur gauche. Utilise les flèches pour avancer pas à pas.","Este é você!
@@ -114,8 +114,8 @@ Utazásod mindig a bal alsó sarokban kezdődik. Használd a nyilakat vagy a D-p
 Călătoria ta începe întotdeauna în colțul din stânga jos. Folosește săgețile sau D-pad-ul pentru a te deplasa pas cu pas.","Αυτός είσαι εσύ!
 Το ταξίδι σου ξεκινά πάντα από την κάτω αριστερή γωνία. Χρησιμοποίησε τα βέλη για να κινηθείς βήμα-βήμα."
 help_slide_3_text,"Your destination is the glowing exit,
-always waiting for you in the top-right corner. Reach it, and the victory is yours!","Tvým cílem je zářící východ,
-který na tebe vždy čeká v pravém horním rohu. Dostaň se k němu a vítězství je tvoje!","Dein Ziel ist der leuchtende Ausgang,
+always waiting for you in the top-right corner. Reach it, and the victory is yours!","A toto už je cíl tvé cesty.
+Najdeš ho vždy nahoře v pravém rohu. Jakmile k němu dojdeš, zvítězíš.","Dein Ziel ist der leuchtende Ausgang,
 der immer in der oberen rechten Ecke auf dich wartet. Erreiche ihn, und du hast gewonnen!","Tu destino es la salida brillante,
 que siempre te espera en la esquina superior derecha. ¡Alcánzala y la victoria será tuya!","Ta destination est la sortie lumineuse,
 toujours là pour toi dans le coin supérieur droit. Atteins-la, et la victoire est à toi !","Seu destino é a saída brilhante,
@@ -134,8 +134,7 @@ amely mindig a jobb felső sarokban vár rád. Érd el, és a győzelem a tiéd!
 care te așteaptă mereu în colțul din dreapta sus. Ajungi la ea, și victoria este a ta!","Ο στόχος σου είναι η φωτεινή έξοδος,
 που σε περιμένει πάντα στην πάνω δεξιά γωνία. Φτάσε εκεί και κέρδισες!"
 help_slide_4_text,"Along the way, you might discover numbers, letters, or words.
-Collect them all to learn something new!","Po cestě můžeš narazit na čísla, písmena nebo celá slova.
-Posbírej je a hra ti je přečte, aby ses naučil něco nového!","Unterwegs kannst du Zahlen, Buchstaben oder Wörter entdecken.
+Collect them all to learn something new!","V bludišti, ale vždy jen na té správné cestě, můžeš sbírat různá čísla, písmena nebo i celá slova. Hra ti je nahlas přečte, aby ses naučil něco nového.","Unterwegs kannst du Zahlen, Buchstaben oder Wörter entdecken.
 Sammle sie alle, um etwas Neues zu lernen!","A lo largo del camino, descubrirás números, letras o palabras.
 ¡Recógelos todos para aprender algo nuevo!","En chemin, tu pourras découvrir des nombres, des lettres ou des mots.
 Ramasse-les tous pour apprendre quelque chose de nouveau !","Pelo caminho, você pode descobrir números, letras ou palabras.
@@ -154,8 +153,8 @@ Gyűjtsd össze mindet, hogy valami újat tanulj!","Pe drum poți găsi numere, 
 Adună-le pe toate pentru a învăța ceva nou!","Στον δρόμο μπορείς να βρεις αριθμούς, γράμματα ή λέξεις.
 Μάζεψέ τα όλα για να μάθεις κάτι καινούργιο!"
 help_slide_5_text,"But don't linger too long!
-Sometimes, a friendly chaser is right behind you. Stay carefully ahead and reach the finish first.","Nezdržuj se ale příliš dlouho!
-Někdy tě může dohánět malý rošťák. Zůstaň o krok napřed a dostaň se do cíle první.","Aber trödle nicht zu lange!
+Sometimes, a friendly chaser is right behind you. Stay carefully ahead and reach the finish first.","Zbytečně se ale nikde nezdržuj.
+Možná ti je totiž někdo v patách. Musíš mu utéct a dostat se do cíle dřív, než tě chytí.","Aber trödle nicht zu lange!
 Manchmal ist ein freundlicher Verfolger direkt hinter dir. Bleibe aufmerksam und erreiche das Ziel zuerst.","¡Pero no te entretengas demasiado!
 A veces, alguien amigable te persigue de cerca. Mantente un paso por delante de él.","Mais ne tarde pas trop !
 Parfois, un poursuivant amical est juste derrière toi. Garde une longueur d'avance !","Mas não demore muito!
@@ -174,8 +173,8 @@ Néha egy barátságos üldöző van a sarkadban. Maradj óvatosan előttük, é
 Uneori, un urmăritor prietenos este chiar în spatele tău. Rămâi cu atenție în față și ajungi primul la sosire.","Αλλά μην αργείς πολύ!
 Μερικές φορές ένας φιλικός κυνηγός είναι ακριβώς πίσω σου. Μείνε μπροστά και φτάσε πρώτος στον τερματισμό."
 help_slide_6_text,"Make the game your own.
-In the Settings, you can change the difficulty, pick a new theme, or try different game modes. Have fun!","Přizpůsob si hru podle sebe.
-V Nastavení si můžeš změnit obtížnost, vybrat jiné téma nebo zkusit nové herní módy. Dobře se bav!","Mach das Spiel zu deinem eigenen.
+In the Settings, you can change the difficulty, pick a new theme, or try different game modes. Have fun!","Hru si můžeš upravit podle svého.
+V nastavení jde změnit jak veliké je bludiště, v jakém prostředí se odehrává i jak rychle tě kdo bude honit. Můžeš si také zvolit jazyk hry a v jakém jazyce chceš čísla a písmena číst. Tak s chutí do toho!","Mach das Spiel zu deinem eigenen.
 In den Einstellungen kannst du die Schwierigkeit ändern, ein neues Thema wählen oder andere Modi ausprobieren.","Haz el juego a tu medida.
 En los Ajustes, puedes cambiar la dificultad, elegir un nuevo tema o probar diferentes modos.","Personnalise ton jeu.
 Dans les Paramètres, tu peux changer la difficulté, choisir un nouveau thème ou de nouveaux modes.","Personalize o seu jogo.
@@ -194,8 +193,7 @@ A Beállításokban megváltoztathatod a nehézséget, választhatsz új témát
 În Setări poți schimba dificultatea, alege o temă nouă sau încerca diferite moduri de joc. Distracție plăcută!","Κάνε το παιχνίδι δικό σου.
 Στις Ρυθμίσεις μπορείς να αλλάξεις τη δυσκολία ή να επιλέξεις ένα νέο θέμα. Καλή διασκέδαση!"
 help_slide_maze_text,"You are in a maze of walls and paths.
-The challenge is to navigate through the twisting corridors to find your way out.","Ocitáš se v bludišti spletitých cest a zdí.
-Tvým úkolem je bezpečně projít těmito uličkami a najít správnou cestu ven.","Du befindest dich in einem Labyrinth aus Wänden und Wegen.
+The challenge is to navigate through the twisting corridors to find your way out.","Ocitl ses na kraji bludiště plného chodeb a slepých uliček. Tvůj úkol je jasný. Musíš najít tu jedinou správnou cestu ven.","Du befindest dich in einem Labyrinth aus Wänden und Wegen.
 Die Herausforderung ist es, deinen Weg durch die gewundenen Gänge zu finden.","Estás en un laberinto de paredes y caminos.
 El reto es navegar por los pasillos retorcidos para encontrar la salida.","Tu te trouves dans un labyrinthe de murs et de chemins.
 Le but est de naviguer à travers les couloirs pour retrouver la sortie.","Você está em um labirinto de paredes e caminhos.
