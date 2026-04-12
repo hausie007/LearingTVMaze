@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=3 format=3]
+[gd_resource type="Theme" load_steps=4 format=3]
 
 [ext_resource type="FontFile" path="res://assets/fonts/NotoColorEmoji-Regular.ttf" id="1_emoji"]
+[ext_resource type="FontFile" path="res://assets/fonts/NotoSansHebrew.ttf" id="2_hebrew"]
 
 [sub_resource type="FontVariation" id="FontVariation_default"]
-fallbacks = Array[Font]([ExtResource("1_emoji")])
+fallbacks = Array[Font]([ExtResource("1_emoji"), ExtResource("2_hebrew")])
 
 [resource]
 default_font = SubResource("FontVariation_default")

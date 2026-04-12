@@ -122,7 +122,14 @@ static func create_rounded_stylebox(
 ## Adjust a container's horizontal anchors to avoid the on-screen D-Pad area.
 ## Call from any screen that needs to shift its layout when D-Pad is active.
 static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
-	match controls_mode:
+	var eff_mode = controls_mode
+	if container.is_layout_rtl():
+		if eff_mode == Config.ControlsMode.LEFT_HANDED:
+			eff_mode = Config.ControlsMode.RIGHT_HANDED
+		elif eff_mode == Config.ControlsMode.RIGHT_HANDED:
+			eff_mode = Config.ControlsMode.LEFT_HANDED
+			
+	match eff_mode:
 		Config.ControlsMode.LEFT_HANDED:
 			container.anchor_left = DPAD_SCREEN_FRACTION
 			container.anchor_right = 1.0

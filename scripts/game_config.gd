@@ -97,13 +97,13 @@ var chaser_speed: float:
 			_:                  return 0.65  # Slow (default)
 
 ## All language codes including "auto" sentinel. Canonical source for UI cycling.
-const LANG_CODES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
+const LANG_CODES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el", "sk", "he"]
 
 ## Translation keys matching LANG_CODES 1:1. Used by settings and mode-selection UI.
-const LANG_KEYS: Array[String] = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek"]
+const LANG_KEYS: Array[String] = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek", "lang_slovak", "lang_hebrew"]
 
 ## Language codes without "auto" — used for validation and TTS scanning.
-const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
+const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el", "sk", "he"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.
@@ -284,6 +284,16 @@ func get_alphabet_char(index: int, lang: String) -> String:
 		if index >= 0 and index < greek_alphabet.length():
 			return greek_alphabet[index]
 		return greek_alphabet[greek_alphabet.length() - 1]
+	if lang == "he":
+		var hebrew_alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
+		if index >= 0 and index < hebrew_alphabet.length():
+			return hebrew_alphabet[index]
+		return hebrew_alphabet[hebrew_alphabet.length() - 1]
+	if lang == "uk":
+		var ukrainian_alphabet = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"
+		if index >= 0 and index < ukrainian_alphabet.length():
+			return ukrainian_alphabet[index]
+		return ukrainian_alphabet[ukrainian_alphabet.length() - 1]
 	
 	# Default to Latin A-Z
 	return String.chr(65 + (index % 26))
