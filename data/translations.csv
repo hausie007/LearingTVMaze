@@ -73,144 +73,108 @@ chaser_medium,Medium,Středně,Mittel,Medio,Moyen,Médio,Trung bình,Orta,Medio,
 chaser_fast,Fast,Rychle,Schnell,Rápido,Rapide,Rápido,Nhanh,Hızlı,Veloce,Szybko,Snabbt,Rask,Snel,Швидко,Nopea,Hurtig,Gyors,Rapid,Γρήγορα
 chaser_turbo,Turbo!,Turbo!,Turbo!,¡Turbo!,Turbo !,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Turbo!,Турбо!,Turbo!,Turbo!,Turbó!,Turbo!,Τούρμπο!
 help,Help,Nápověda,Hilfe,Ayuda,Aide,Ajuda,Trợ giúp,Yardım,Aiuto,Pomoc,Hjälp,Hjelp,Help,Допомога,Ohje,Hjælp,Súgó,Ajutor,Βοήθεια
-help_slide_1_text,"Welcome to the Learning Maze!
-Every great adventure begins with a single step. Let's learn how to explore this world together.","Vítej ve Vzdělávacím bludišti.
-Ještě než se do něj pustíš, krátce si ukážeme, jak to tu vlastně funguje. Je to docela prosté.","Willkommen im Lernlabyrinth!
-Jedes große Abenteuer beginnt mit einem einzigen Schritt. Lass uns gemeinsam diese Welt erkunden.","¡Bienvenido al Laberinto de Aprendizaje!
-Cada gran aventura comienza con un solo paso. Vamos a aprender a explorar este mundo juntos.","Bienvenue dans le Labyrinthe d'Apprentissage !
-Chaque grande aventure commence par un simple pas. Apprenons ensemble à explorer ce monde.","Bem-vindo ao Labirinto de Aprendizagem!
-Toda grande aventura começa com um simples passo. Vamos aprender a explorar este mundo juntos.","Chào mừng bạn đến với Mê Cung Học Tập!
-Mọi chuyến phiêu lưu tuyệt vời đều bắt đầu từ một bước đi. Hãy cùng khám phá thế giới này nhé.","Öğrenme Labirenti'ne Hoş Geldiniz!
-Her büyük macera tek bir adımla başlar. Bu dünyayı nasıl keşfedeceğimizi birlikte öğrenelim.","Benvenuto nel Labirinto Didattico!
-Ogni grande avventura inizia con un singolo passo. Impariamo insieme a esplorare questo mondo.","Witaj w Labiryncie Nauki!
-Każda wielka przygoda zaczyna się od jednego kroku. Nauczmy się razem odkrywać ten świat.","Välkommen till Lärande Labyrint!
-Varje stort äventyr börjar med ett enda steg. Låt oss lära oss hur vi utforskar den här världen tillsammans.","Velkommen til Læring Labyrint!
-Hvert store eventyr begynner med ett enkelt skritt. La oss lære hvordan vi utforsker denne verden sammen.","Welkom bij het Leerdoolhof!
-Elk groot avontuur begint met een enkele stap. Laten we leren hoe we deze wereld samen kunnen verkennen.","Ласкаво просимо до Навчального Лабіринту!
-Кожна велика пригода починається з одного кроку. Давайте навчиμοся досліджувати цей світ разом.","Tervetuloa Oppimislabyrinttiin!
-Jokainen suuri seikkailu alkaa yhdellä askeleella. Opitaan tutkimaan tätä maailmaa yhdessä.","Velkommen til Labyrinten!
-Hvert store eventyr begynder med et enkelt skridt. Lad os lære hvordan vi udforsker denne verden sammen.","Üdvözöljük a Tanuló Labirintusban!
-Minden nagy kaland egyetlen lépéssel kezdődik. Tanuljuk meg együtt, hogyan fedezhetjük fel ezt a világot.","Bun venit în Labirintul de Învățare!
-Fiecare aventură mare începe cu un singur pas. Hai să învățăm cum să explorăm această lume împreună.","Καλώς ήρθατε στον Εκπαιδευτικό Λαβύρινθο!
-Κάθε μεγάλη περιπέτεια ξεκινά με ένα βήμα. Ας μάθουμε μαζί πώς να εξερευνούμε αυτόν τον κόσμο."
-help_slide_2_text,"This is you!
-Your journey always begins in the bottom-left corner. Use the arrows or D-pad to move step by step.","Tohle jsi ty.
-Začínáš vždycky dole v levém rohu obrazovky. Pohybovat se můžeš doleva, doprava, nahoru a dolů s pomocí šipek ovladače.","Das bist du!
-Deine Reise beginnt immer in der unteren linken Ecke. Benutze die Pfeiltasten, um dich zu bewegen.","¡Este eres tú!
-Tu viaje siempre comienza en la esquina inferior izquierda. Usa las flechas para moverte paso a paso.","C'est toi !
-Ton voyage commence toujours dans le coin inférieur gauche. Utilise les flèches pour avancer pas à pas.","Este é você!
-Sua jornada sempre começa no canto inferior esquerdo. Use as setas para se mover passo a passo.","Đây chính là bạn!
-Hành trình của bạn luôn bắt đầu ở góc dưới bên trái. Sử dụng các mũi tên để di chuyển từng bước.","Bu sensin!
-Yolculuğun her zaman sol alt köşeden başlar. Adım adım ilerlemek için okları kullan.","Questo sei tu!
-Il tuo viaggio inizia sempre nell'angolo in basso a sinistra. Usa le frecce per muoverti passo dopo passo.","To jesteś ty!
-Twój podróż zawsze zaczyna się w lewym dolnym rogu. Użyj strzałek, aby się poruszać.","Det här är du!
-Din resa börjar alltid i det nedre vänstra hörnet. Använd pilarna eller styrkorset för att flytta steg för steg.","Dette er deg!
-Reisen din begynner alltid i det nedre venstre hjørnet. Bruk pilene eller D-paden for å flytte steg for steg.","Dit ben jij!
-Je reis begint altijd in de linkerbenedenhoek. Gebruik de pijltjes of het D-pad om stap voor stap te bewegen.","Це ти!
-Твоя подорож завжди починається в нижньому лівому куті. Використовуй стрілки або пульт, щоб рухатися крок за кроком.","Tämä olet sinä!
-Matkasi alkaa aina vasemmasta alakulmasta. Käytä nuolia tai ohjainta liikkuaksesi askel askeleelta.","Dette er dig!
-Din rejse begynder altid i det nederste venstre hjørne. Brug pilene eller D-pad'en til at bevæge dig trin for trin.","Ez te vagy!
-Utazásod mindig a bal alsó sarokban kezdődik. Használd a nyilakat vagy a D-padot, hogy lépésről lépésre haladj.","Acesta ești tu!
-Călătoria ta începe întotdeauna în colțul din stânga jos. Folosește săgețile sau D-pad-ul pentru a te deplasa pas cu pas.","Αυτός είσαι εσύ!
-Το ταξίδι σου ξεκινά πάντα από την κάτω αριστερή γωνία. Χρησιμοποίησε τα βέλη για να κινηθείς βήμα-βήμα."
-help_slide_3_text,"Your destination is the glowing exit,
-always waiting for you in the top-right corner. Reach it, and the victory is yours!","A toto už je cíl tvé cesty.
-Najdeš ho vždy nahoře v pravém rohu. Jakmile k němu dojdeš, zvítězíš.","Dein Ziel ist der leuchtende Ausgang,
-der immer in der oberen rechten Ecke auf dich wartet. Erreiche ihn, und du hast gewonnen!","Tu destino es la salida brillante,
-que siempre te espera en la esquina superior derecha. ¡Alcánzala y la victoria será tuya!","Ta destination est la sortie lumineuse,
-toujours là pour toi dans le coin supérieur droit. Atteins-la, et la victoire est à toi !","Seu destino é a saída brilhante,
-sempre esperando por você no canto superior direito. Alcance-a, e a vitória é sua!","Đích đến của bạn là lối thoát phát sáng,
-luôn chờ đợi bạn ở góc trên bên phải. Hãy đến đó, và chiến thắng sẽ thuộc về bạn!","Hedefin parlayan çıkış,
-her zaman sağ üst köşede seni bekliyor. Oraya ulaş, ve zafer senin olsun!","La tua destinazione è l'uscita luminosa,
-che ti aspetta sempre nell'angolo in alto a destra. Raggiungila e la vittoria sarà tua!","Twoim celem jest świetliste wyjście,
-które zawsze czeka na ciebie w prawym górnym rogu. Dotrzyj tam, a zwycięstwo będzie twoje!","Ditt mål är den lysande utgången,
-som alltid väntar på dig i det övre högra hörnet. Nå den, och segern är din!","Destinasjonen din er den glødende utgangen,
-som alltid venter på deg i øvre høyre hjørne. Nå den, og seieren er din!","Je bestemming is de gloeiende uitgang,
-die altijd op je wacht in de rechterbovenhoek. Bereik hem en de overwinning is voor jou!","Твій пункт призначення — це сяючий вихід,
-який завжди чекає на тебе в правому верхньому куті. Дійди до нього, і перемога твоя!","Kohteesi on hohtava uloskäynti,
-joka odottaa sinua aina oikeassa yläkulmassa. Saavuta se, ja voitto on sinun!","Din destination er den lysende udgang,
-der altid venter på dig i øverste højre hjørne. Nå den, og sejren er din!","A célod a fénylő kijárat,
-amely mindig a jobb felső sarokban vár rád. Érd el, és a győzelem a tiéd!","Scopul tău este ieșirea strălucitoare,
-care te așteaptă mereu în colțul din dreapta sus. Ajungi la ea, și victoria este a ta!","Ο στόχος σου είναι η φωτεινή έξοδος,
-που σε περιμένει πάντα στην πάνω δεξιά γωνία. Φτάσε εκεί και κέρδισες!"
-help_slide_4_text,"Along the way, you might discover numbers, letters, or words.
-Collect them all to learn something new!","V bludišti, ale vždy jen na té správné cestě, můžeš sbírat různá čísla, písmena nebo i celá slova. Hra ti je nahlas přečte, aby ses naučil něco nového.","Unterwegs kannst du Zahlen, Buchstaben oder Wörter entdecken.
-Sammle sie alle, um etwas Neues zu lernen!","A lo largo del camino, descubrirás números, letras o palabras.
-¡Recógelos todos para aprender algo nuevo!","En chemin, tu pourras découvrir des nombres, des lettres ou des mots.
-Ramasse-les tous pour apprendre quelque chose de nouveau !","Pelo caminho, você pode descobrir números, letras ou palabras.
-Colete todos para aprender algo novo!","Dọc đường, bạn có thể tìm thấy các con số, chữ cái hoặc từ ngữ.
-Hãy nhặt tất cả để học thêm điều mới mẻ!","Yol boyunca sayılar, harfler veya kelimeler keşfedebilirsin.
-Yeni bir şeyler öğrenmek için hepsini topla!","Lungo la strada potresti scoprire numeri, lettere o parole.
-Raccoglili tutti per imparare qualcosa di nuovo!","Po drodze możesz odkryć liczby, litery lub słowa.
-Zbierz je wszystkie, aby nauczyć się czegoś nowego!","Längs vägen kan du upptäcka siffror, bokstäver eller ord.
-Samla dem alla för att lära dig något nytt!","Underveis kan du oppdage tall, bokstaver eller ord.
-Samle dem alle for å lære noe nytt!","Onderweg ontdek je misschien cijfers, letters of woorden.
-Verzamel ze allemaal om iets nieuws te leren!","По дорозі ти можеш знайти цифри, літери або слова.
-Збери їх усіх, щоб навчитися чомусь новому!","Matkan varrella voit löytää numeroita, kirjaimia tai sanoja.
-Kerää ne kaikki oppiaksesi jotain uutta!","Undervejs kan du opdage tal, bogstaver eller ord.
-Saml dem alle for at lære noget nyt!","Útközben számokat, betűket vagy szavakat találhatsz.
-Gyűjtsd össze mindet, hogy valami újat tanulj!","Pe drum poți găsi numere, litere sau cuvinte.
-Adună-le pe toate pentru a învăța ceva nou!","Στον δρόμο μπορείς να βρεις αριθμούς, γράμματα ή λέξεις.
-Μάζεψέ τα όλα για να μάθεις κάτι καινούργιο!"
-help_slide_5_text,"But don't linger too long!
-Sometimes, a friendly chaser is right behind you. Stay carefully ahead and reach the finish first.","Zbytečně se ale nikde nezdržuj.
-Možná ti je totiž někdo v patách. Musíš mu utéct a dostat se do cíle dřív, než tě chytí.","Aber trödle nicht zu lange!
-Manchmal ist ein freundlicher Verfolger direkt hinter dir. Bleibe aufmerksam und erreiche das Ziel zuerst.","¡Pero no te entretengas demasiado!
-A veces, alguien amigable te persigue de cerca. Mantente un paso por delante de él.","Mais ne tarde pas trop !
-Parfois, un poursuivant amical est juste derrière toi. Garde une longueur d'avance !","Mas não demore muito!
-Às vezes, um perseguidor amigável está logo atrás. Mantenha-se à frente para chegar primeiro.","Nhưng đừng nấn ná quá lâu!
-Đôi khi, sẽ có ai đó đuổi theo ngay sát phía sau. Hãy cố gắng luôn đi trước một bước!","Ama fazla oyalanma!
-Bazen hemen arkanda seni kovalayan sevimli biri olabilir. Bir adım önde kalarak bitişe koş.","Ma non indugiare troppo a lungo!
-A volte, c'è un amichevole inseguitore proprio dietro di te. Mantieni un passo di vantaggio!","Ale nie zatrzymuj się zbyt długo!
-Czasem tuż za tobą kryje się berkiem. Bądź o krok przed nim, by dotrzeć do mety pierwszy.","Men dröj inte kvar för länge!
-Ibland är en vänlig jagare precis bakom dig. Håll dig försiktigt före och når målet först.","Men ikke bli værende for lenge!
-Noen ganger er en vennlig jager rett bak deg. Hold deg forsiktig foran og nå målet først.","Maar blijf niet te lang hangen!
-Soms zit er een vriendelijk tikkertje vlak achter je. Blijf hem voorzichtig voor en bereik als eerste de finish.","Але не затримуйся занадто довго!
-Іноді переслідувач прямо за тобою. Будь обережним і дістанься фінішу першим.","Mutta älä viivyttele liian kauan!
-Joskus ystävällinen jahtaaja on aivan perässäsi. Pysy edellä ja saavuta maali ensin.","Men bliv ikke for længe!
-Nogle gange er en venlig jager lige bag dig. Hold dig foran og når i mål først.","De ne maradj túl sokáig!
-Néha egy barátságos üldöző van a sarkadban. Maradj óvatosan előttük, és érj célba először.","Dar nu sta prea mult!
-Uneori, un urmăritor prietenos este chiar în spatele tău. Rămâi cu atenție în față și ajungi primul la sosire.","Αλλά μην αργείς πολύ!
-Μερικές φορές ένας φιλικός κυνηγός είναι ακριβώς πίσω σου. Μείνε μπροστά και φτάσε πρώτος στον τερματισμό."
-help_slide_6_text,"Make the game your own.
-In the Settings, you can change the difficulty, pick a new theme, or try different game modes. Have fun!","Hru si můžeš upravit podle svého.
-V nastavení jde změnit jak veliké je bludiště, v jakém prostředí se odehrává i jak rychle tě kdo bude honit. Můžeš si také zvolit jazyk hry a v jakém jazyce chceš čísla a písmena číst. Tak s chutí do toho!","Mach das Spiel zu deinem eigenen.
-In den Einstellungen kannst du die Schwierigkeit ändern, ein neues Thema wählen oder andere Modi ausprobieren.","Haz el juego a tu medida.
-En los Ajustes, puedes cambiar la dificultad, elegir un nuevo tema o probar diferentes modos.","Personnalise ton jeu.
-Dans les Paramètres, tu peux changer la difficulté, choisir un nouveau thème ou de nouveaux modes.","Personalize o seu jogo.
-Nas Configurações, você pode mudar a dificuldade, escolher un novo tema ou tentar outros modos.","Hãy tự do tùy chỉnh trò chơi.
-Trong phần Cài đặt, bạn có thể thay đổi độ khó, chọn chủ đề mới hoặc các chế độ chơi.","Oyununu istediğin gibi yap.
-Ayarlardan zorluğu değiştirebilir, yeni bir tema seçebilir veya farklı oyun modlarını deneyebilirsin.","Personalizza il tuo gioco.
-Nelle Impostazioni puoi cambiare la difficoltà, scegliere un nuovo tema o provare modalità diverse.","Dostosuj grę do siebie.
-W Ustawieniach możesz zmienić poziom trudności, wybrać nowy motyw i tryb gry!","Gör spelet till ditt eget.
-I Inställningar kan du ändra svårighetsgrad, välja ett nytt tema eller prova olika spellägen. Ha så kul!","Gjør spillet till ditt eget.
-I Innstillinger kan du endre vanskelighetsgrad, velge et nytt tema eller prøve forskjellige spillmoduser. Ha det gøy!","Maak het spel van jou.
-In de Instellingen kun je de moeilijkheidsgraad aanpassen, een nieuw thema kiezen of verschillende spelmodi proberen. Veel plezier!","Зроби гру своєю.
-У налаштуваннях ти можеш змінити складність, вибрати нову тему або спробувати різні режими гри. Розважайся!","Tee pelistä omasi.
-Asetuksissa voit vaihtaa vaikeusastetta, valita uuden teeman tai kokeilla eri pelitiloja. Pidä hauskaa!","Gør spillet til dit eget.
-I Indstillinger kan du ændre sværhedsgraden, vælge et nyt tema eller prøve forskellige spiltilstande. Hav det sjovt!","Tedd a játékot a sajátoddá.
-A Beállításokban megváltoztathatod a nehézséget, választhatsz új témát vagy próbálhatsz ki különböző játékmódokat. Jó szórakozást!","Personalizează jocul.
-În Setări poți schimba dificultatea, alege o temă nouă sau încerca diferite moduri de joc. Distracție plăcută!","Κάνε το παιχνίδι δικό σου.
-Στις Ρυθμίσεις μπορείς να αλλάξεις τη δυσκολία ή να επιλέξεις ένα νέο θέμα. Καλή διασκέδαση!"
-help_slide_maze_text,"You are in a maze of walls and paths.
-The challenge is to navigate through the twisting corridors to find your way out.","Ocitl ses na kraji bludiště plného chodeb a slepých uliček. Tvůj úkol je jasný. Musíš najít tu jedinou správnou cestu ven.","Du befindest dich in einem Labyrinth aus Wänden und Wegen.
-Die Herausforderung ist es, deinen Weg durch die gewundenen Gänge zu finden.","Estás en un laberinto de paredes y caminos.
-El reto es navegar por los pasillos retorcidos para encontrar la salida.","Tu te trouves dans un labyrinthe de murs et de chemins.
-Le but est de naviguer à travers les couloirs pour retrouver la sortie.","Você está em um labirinto de paredes e caminhos.
-O desafio é navegar pelos corridors sinuosos para encontrar a saída.","Bạn đang ở trong một mê cung của những bức tường và lối đi.
-Thử thách là phải điều hướng qua những hành lang vòng vèo để tìm lối ra.","Duvarlardan ve yollardan oluşan bir labirenttesiniz.
-Zorluk, çıkış yolunu bulmak için kıvrımlı koridorlarda gezinmektir.","Ti trovi in un labirinto di muri e sentieri.
-La sfida è navigare attraverso i corridoi tortuosi per trovare la via d'uscita.","Jesteś w labiryncie ze ścian i ścieżek.
-Wyzwaniem jest odnalezienie drogi przez kręte korytarze do samego wyjścia.","Du är i en labyrint av väggar och stigar.
-Utmaningen är att navigera genom de slingrande korridorerna för att hitta vägen ut.","Du er i en labyrint av vegger og stigar.
-Utfordringen er å navigera gjennom de svingete korridorene for å finna veien ut.","Je bent in een doolhof van muren en paden.
-De uitdaging is om door de kronkelende gangen te navigeren om de weg naar buiten te vinden.","Ти в лабіринті стін і доріжок.
-Твоє завдання — пройти крізь звивисті коридори, щоб знайти вихід.","Olet seinien ja polkujen labyrintissä.
-Haasteena on navigoida mutkaisten käytävien läpi löytääksesi tien ulos.","Du er i en labyrint af vægge och stier.
-Udfordringen er at navigere gennem de snoede korridorer for at finde vej ud.","Falak és utak labirintusában vagy.
-A kihívás az, hogy navigálj a kanyargós folyosókon, hogy megtaláld a kijáratot.","Ești într-un labirint de pereți și căi.
-Provocarea este să navighezi prin coridoarele întortocheate pentru a găsi calea de ieșire.","Βρίσκεσαι σε έναν λαβύρινθο με τοίχους και μονοπάτια.
-Η πρόκληση είναι να βρεις την έξοδο μέσα από τους διαδρόμους."
+help_slide_1_text,"Welcome to the Learning Maze.
+Before you dive in, let's briefly show you how it works. It's quite simple.","Vítej ve Vzdělávacím bludišti.
+Ještě než se do něj pustíš, krátce si ukážeme, jak to tu vlastně funguje. Je to docela prosté.","Willkommen im Lernlabyrinth.
+Bevor du eintauchst, zeigen wir dir kurz, wie es funktioniert. Es ist ganz einfach.","Bienvenido al Laberinto de Aprendizaje.
+Antes de que empieces, te mostraremos brevemente cómo funciona. Es muy sencillo.","Bienvenue dans le Labyrinthe d'Apprentissage.
+Avant de commencer, nous allons te montrer brièvement comment cela fonctionne. C'est très simple.","Bem-vindo ao Labirinto de Aprendizagem.
+Antes de começar, vamos mostrar brevemente como funciona. É bem simples.","Chào mừng bạn đến với Mê Cung Học Tập.
+Trước khi bắt đầu, chúng ta hãy xem qua cách hoạt động nhé. Rất đơn giản thôi.","Öğrenme Labirenti'ne Hoş Geldin.
+Başlamadan önce, sana kısaca nasıl çalıştığını gösterelim. Oldukça basit.","Benvenuto nel Labirinto Didattico.
+Prima di iniziare, ti mostreremo brevemente come funziona. È molto semplice.","Witaj w Labiryncie Nauki.
+Zanim zaczniesz, krótko pokażemy ci, jak to działa. To bardzo proste.","Välkommen till Lärande Labyrint.
+Innan du börjar ska vi kort visa hur det fungerar. Det är ganska enkelt.","Velkommen til Læring Labyrint.
+Før du begynner, skal vi kort vise deg hvordan det fungerer. Det er ganske enkelt.","Welkom bij het Leerdoolhof.
+Voordat je begint, laten we je kort zien hoe het werkt. Het is heel simpel.","Ласкаво просимо до Навчального Лабіринту.
+Перш ніж ти почнеш, ми коротко покажемо, як тут усе працює. Це досить просто.","Tervetuloa Oppimislabyrinttiin.
+Ennen kuin aloitat, näytämme lyhyesti, miten se toimii. Se on melko yksinkertaista.","Velkommen til Læring Labyrint.
+Inden du begynder, viser vi dig kort, hvordan det fungerer. Det er ganske enkelt.","Üdvözlünk a Tanuló Labirintusban.
+Mielőtt belevágnál, röviden megmutatjuk, hogyan működik. Nagyon egyszerű.","Bun venit în Labirintul de Învățare.
+Înainte de a începe, îți vom arăta pe scurt cum funcționează. Este destul de simplu.","Καλώς ήρθες στον Εκπαιδευτικό Λαβύρινθο.
+Πριν ξεκινήσεις, θα σου δείξουμε σύντομα πώς λειτουργεί. Είναι πολύ απλό."
+help_slide_2_text,"This is you.
+You always start in the bottom left corner of the screen. You can move left, right, up, and down using the directional arrows.","Tohle jsi ty.
+Začínáš vždycky dole v levém rohu obrazovky. Pohybovat se můžeš doleva, doprava, nahoru a dolů s pomocí šipek ovladače.","Das bist du.
+Du startest immer unten in der linken Ecke des Bildschirms. Du kannst dich mit den Pfeiltasten nach links, rechts, oben und unten bewegen.","Este eres tú.
+Siempre empiezas en la esquina inferior izquierda de la pantalla. Puedes moverte a la izquierda, derecha, arriba y abajo usando las flechas.","C'est toi.
+Tu commences toujours dans le coin inférieur gauche de l'écran. Tu peux te déplacer vers la gauche, la droite, le haut et le bas à l'aide des flèches directionnelles.","Este é você.
+Você sempre começa no canto inferior esquerdo da tela. Você pode se mover para a esquerda, direita, cima e baixo usando as setas do controle.","Đây là bạn.
+Bạn luôn bắt đầu ở góc dưới bên trái màn hình. Bạn có thể di chuyển sang trái, phải, lên và xuống bằng các phím mũi tên.","Bu sensin.
+Her zaman ekranın sol alt köşesinden başlarsın. Yön oklarını kullanarak sola, sağa, yukarı ve aşağı hareket edebilirsin.","Questo sei tu.
+Inizi sempre nell'angolo in basso a sinistra dello schermo. Puoi muoverti a sinistra, a destra, in alto e in basso usando le frecce direzionali.","To ty.
+Zawsze zaczynasz w lewym dolnym rogu ekranu. Możesz poruszać się w lewo, w prawo, w górę i w dół za pomocą strzałek kontrolera.","Det här är du.
+Du börjar alltid i det nedre vänstra hörnet av skärmen. Du kan röra dig vänster, höger, uppåt och nedåt med hjälp av styrpilarna.","Dette er deg.
+Du starter alltid i det nedre venstre hjørnet av skjermen. Du kan bevege deg venstre, høyre, opp og ned ved hjelp av styrepilene.","Dit ben jij.
+Je begint altijd in de linkerbenedenhoek van het scherm. Je kunt naar links, rechts, omhoog en omlaag bewegen met de pijltjestoetsen.","Це ти.
+Ти завжди починаєш у нижньому лівому куті екрана. Ти можеш рухатися вліво, вправо, вгору та вниз за допомогою кнопок керування.","Tämä olet sinä.
+Aloitat aina näytön vasemmasta alakulmasta. Voit liikkua vasemmalle, oikealle, ylös ja alas suuntanuolia käyttämällä.","Dette er dig.
+Du starter altid i det nederste venstre hjørne af skærmen. Du kan bevæge dig venstre, højre, op og ned ved hjælp af piletasterne.","Ez te vagy.
+Mindig a képernyő bal alsó sarkából indulsz. Mozoghatsz balra, jobbra, fel és le az irányítógombok segítségével.","Acesta ești tu.
+Începi întotdeauna în colțul din stânga jos al ecranului. Te poți mișca la stânga, la dreapta, în sus și în jos folosind săgețile direcționale.","Αυτός είσαι εσύ.
+Ξεκινάς πάντα στην κάτω αριστερή γωνία της οθόνης. Μπορείς να κινηθείς αριστερά, δεξιά, πάνω και κάτω χρησιμοποιώντας τα βέλη."
+help_slide_3_text,"And this is your destination.
+You'll always find it in the top right corner. Once you reach it, you win.","A toto už je cíl tvé cesty.
+Najdeš ho vždy nahoře v pravém rohu. Jakmile k němu dojdeš, zvítězíš.","Und das ist dein Ziel.
+Du findest es immer in der oberen rechten Ecke. Sobald du es erreichst, gewinnst du.","Y este es tu destino.
+Siempre lo encontrarás en la esquina superior derecha. Una vez que llegues a él, ganarás.","Et voici ta destination.
+Tu la trouveras toujours dans le coin supérieur droit. Une fois que tu l'atteins, tu gagnes.","E este é o seu destino.
+Você sempre o encontrará no canto superior direito. Assim que chegar a ele, você vence.","Và đây là đích đến của bạn.
+Bạn sẽ luôn tìm thấy nó ở góc trên cùng bên phải. Một khi bạn đến đó, bạn sẽ chiến thắng.","Ve işte hedefin.
+Onu her zaman sağ üst köşede bulacaksın. Oraya ulaştığında kazanırsın.","E questa è la tua destinazione.
+La troverai sempre nell'angolo in alto a destra. Una volta raggiunta, vinci.","A to już twój cel.
+Zawsze znajdziesz go w prawym górnym rogu. Gdy do niego dotrzesz, zwyciężysz.","Och det här är ditt mål.
+Du hittar det alltid i det övre högra hörnet. När du når dit vinner du.","Og dette er målet ditt.
+Du finner det alltid i øvre høyre hjørne. Når du når det, vinner du.","En dit is je uiteindelijke bestemming.
+Je vindt het altijd in de rechterbovenhoek. Zodra je het bereikt, win je.","А це вже твоя мета.
+Ти завжди знайдеш її у правому верхньому куті. Щойно ти дійдеш до неї, ти виграєш.","Ja tämä on määränpääsi.
+Löydät sen aina oikeasta yläkulmasta. Kun saavutat sen, voitat.","Og dette er din destination.
+Du vil altid finde den i det øverste højre hjørne. Når du når dertil, vinder du.","És ez már a te célod.
+Mindig a jobb felső sarokban találod. Amikor odaérsz, győzöl.","Iar aceasta este destinația ta.
+O vei găsi mereu în colțul din dreapta sus. Odată ce ajungi la ea, vei câștiga.","Και αυτός είναι ο προορισμός σου.
+Θα τον βρίσκεις πάντα στην πάνω δεξιά γωνία. Μόλις φτάσεις εκεί, κερδίζεις."
+help_slide_4_text,"In the maze, but only on the right path, you can collect various numbers, letters, or even whole words. The game will read them out aloud so you can learn something new.","V bludišti, ale vždy jen na té správné cestě, můžeš sbírat různá čísla, písmena nebo i celá slova. Hra ti je nahlas přečte, aby ses naučil něco nového.","Im Labyrinth kannst du, aber nur auf dem richtigen Weg, verschiedene Zahlen, Buchstaben oder sogar ganze Wörter sammeln. Das Spiel liest sie dir laut vor, damit du etwas Neues lernen kannst.","En el laberinto, pero solo en el camino correcto, puedes recoger varios números, letras o incluso palabras enteras. El juego te los leerá en voz alta para que aprendas algo nuevo.","Dans le labyrinthe, mais uniquement sur le bon chemin, tu peux collecter divers nombres, lettres ou même des mots entiers. Le jeu te les lira à haute voix pour que tu apprennes quelque chose de nouveau.","No labirinto, mas apenas no caminho certo, você pode coletar vários números, letras ou até mesmo palavras inteiras. O jogo as lerá em voz alta para você aprender algo novo.","Trong mê cung, nhưng chỉ trên con đường đúng, bạn có thể thu thập nhiều con số, chữ cái hoặc thậm chí cả những từ ngữ. Trò chơi sẽ đọc to chúng để bạn học thêm điều mới.","Labirentte, ancak sadece doğru yolda, çeşitli sayılar, harfler ve hatta bütün kelimeleri toplayabilirsin. Yeni bir şeyler öğrenmen için oyun onları sana yüksek sesle okuyacaktır.","Nel labirinto, ma solo sul percorso corretto, puoi raccogliere vari numeri, lettere o persino parole intere. Il gioco te le leggerà ad alta voce per farti imparare qualcosa di nuovo.","W labiryncie, ale tylko na właściwej drodze, możesz zbierać różne liczby, litery, a nawet całe słowa. Gra przeczyta je na głos, aby pomóc ci nauczyć się czegoś nowego.","I labyrinten, men bara på rätt väg, kan du samla olika siffror, bokstäver eller till och med hela ord. Spelet kommer att läsa upp dem högt så att du kan lära dig något nytt.","I labyrinten, men bare på riktig vei, kan du samle ulike tall, bokstaver eller til og med hele ord. Spillet vil lese dem høyt slik at du kan lære noe nytt.","In het doolhof, maar alleen op het juiste pad, kun je verschillende getallen, letters of zelfs hele woorden verzamelen. Het spel zal ze hardop voorlezen, zodat je iets nieuws kunt leren.","У лабіринті, але лише на правильному шляху, ти можеш збирати різні цифри, літери або навіть цілі слова. Гра прочитає їх вголос, щоб ти навчився чомусь новому.","Labyrintissä, mutta vain oikealla polulla, voit kerätä erilaisia numeroita, kirjaimia tai jopa kokonaisia sanoja. Peli lukee ne ääneen, jotta voit oppia jotain uutta.","I labyrinten, men kun på den rigtige vej, kan du samle forskellige tal, bogstaver eller endda hele ord. Spillet vil læse dem højt, så du kan lære noget nyt.","A labirintusban, de csak a helyes úton, különböző számokat, betűket vagy akár egész szavakat is gyűjthetsz. A játék hangosan felolvassa őket, hogy tanulhass valami újat.","În labirint, dar numai pe calea cea bună, poți colecta diverse numere, litere sau chiar cuvinte întregi. Jocul le va citi cu voce tare ca să poți învăța ceva nou.","Στον λαβύρινθο, αλλά μόνο στο σωστό μονοπάτι, μπορείς να μαζέψεις διάφορους αριθμούς, γράμματα ή ακόμα και ολόκληρες λέξεις. Το παιχνίδι θα τις διαβάσει φωναχτά για να μάθεις κάτι νέο."
+help_slide_5_text,"But don't loiter anywhere unnecessarily.
+Someone might be right on your heels. You just have to outrun them and reach the goal before they catch you.","Zbytečně se ale nikde nezdržuj.
+Možná ti je totiž někdo v patách. Musíš mu utéct a dostat se do cíle dřív, než tě chytí.","Trödle aber nirgends unnötig.
+Möglicherweise ist dir nämlich jemand dicht auf den Fersen. Du musst ihm entkommen und das Ziel erreichen, bevor er dich fängt.","Pero no te entretengas innecesariamente en ninguna parte.
+Puede que alguien te esté pisando los talones. Tienes que huir de él y llegar a la meta antes de que te atrape.","Ne traîne nulle part inutilement.
+Il se peut que quelqu'un soit à tes trousses. Tu dois lui échapper et atteindre le but avant qu'il ne t'attrape.","Mas não demore em lugar nenhum sem necessidade.
+Alguém pode estar nos seus calcanhares. Você tem que fugir dele e chegar ao destino antes que ele o alcance.","Nhưng đừng la cà ở đâu không cần thiết nhé.
+Có thể đang có ai đó bám gót bạn đấy. Bạn phải chạy trốn và về đích trước khi bị bắt.","Ancak gereksiz yere hiçbir yerde oyalanma.
+Biri hemen arkanda olabilir. Ondan kaçmalı ve seni yakalamadan önce hedefe ulaşmalısın.","Ma non attardarti da nessuna parte inutilmente.
+Qualcuno potrebbe essere alle tue calcagna. Devi scappare e raggiungere il traguardo prima che ti prenda.","Ale nie zatrzymuj się nigdzie niepotrzebnie.
+Być może ktoś depta ci po piętach. Musisz mu uciec i dotrzeć do celu, zanim cię złapie.","Men dröj inte i onödan någonstans.
+Någon kanske är hack i häl på dig. Du måste springa ifrån dem och nå målet innan de fångar dig.","Men ikke nøl unødvendig noe sted.
+Noen kan være i hælene på deg. Du må løpe fra dem og nå målet før de fanger deg.","Blijf nergens onnodig hangen.
+Misschien zit er wel iemand op je hielen. Je moet hem ontwijken en de finish halen voordat hij je pakt.","Але не затримуйся ніде без потреби.
+Можливо, хтось наступає тобі на п'яти. Тобі потрібно втекти від нього та дістатися фінішу раніше, ніж тебе спіймають.","Mutta älä viivyttele missään turhaan.
+Joku saattaa olla aivan kannoillasi. Sinun on paettava häntä ja päästävä maaliin ennen kuin jäät kiinni.","Men bliv ikke noget sted unødvendigt.
+Nogle er måske lige i hælene på dig. Du er nødt til at løbe fra dem og nå i mål, inden de fanger dig.","De ne időzz sehol feleslegesen.
+Lehet, hogy valaki a nyomodban van. El kell menekülnöd előle, és célba kell érned, mielőtt elkapna.","Dar nu zăbovi nicăieri fără rost.
+S-ar putea ca cineva să fie pe urmele tale. Trebuie să scapi de el și să ajungi la destinație înainte să te prindă.","Αλλά μην καθυστερείς άσκοπα πουθενά.
+Ίσως κάποιος να σε κυνηγάει. Πρέπει να του ξεφύγεις και να φτάσεις στον τερματισμό πριν σε πιάσει."
+help_slide_6_text,"You can customize the game to your liking.
+In the settings, you can change the maze size, the environment, and how fast you are chased. You can also choose the game's language and which language the numbers and letters should be read in. Let's get started!","Hru si můžeš upravit podle svého.
+V nastavení jde změnit jak veliké je bludiště, v jakém prostředí se odehrává i jak rychle tě kdo bude honit. Můžeš si také zvolit jazyk hry a v jakém jazyce chceš čísla a písmena číst. Tak s chutí do toho!","Du kannst das Spiel nach deinen Wünschen anpassen.
+In den Einstellungen lässt sich ändern, wie groß das Labyrinth ist, die Umgebung wählen und wie schnell dir jemand nachjagt. Du kannst auch die Spielsprache festlegen und in welcher Sprache die Zahlen und Buchstaben gelesen werden. Los geht's!","Puedes adaptar el juego a tu gusto.
+En los ajustes puedes cambiar el tamaño del laberinto, el entorno y la velocidad a la que te persiguen. También puedes elegir el idioma del juego y en qué idioma se leerán los números y las letras. ¡Vamos a ello!","Tu peux adapter le jeu selon tes envies.
+Dans les paramètres, tu peux changer la taille du labyrinthe, l'environnement et la vitesse de poursuite. Tu peux aussi choisir la langue du jeu et la langue dans laquelle les nombres et lettres seront lus. Lance-toi !","Você pode personalizar o jogo ao seu gosto.
+Nas configurações, pode mudar o tamanho do labirinto, o ambiente e e a velocidade de perseguição. Também pode escolher o idioma do jogo e em qual idioma os números e letras serão lidos. Vamos começar!","Bạn có thể tùy chỉnh trò chơi theo ý thích.
+Trong phần cài đặt, bạn có thể thay đổi kích thước mê cung, bối cảnh và tốc độ bị rượt đuổi. Bạn cũng có thể chọn ngôn ngữ trò chơi và ngôn ngữ đọc chữ cái và số. Bắt đầu nào!","Oyunu istediğin gibi özelleştirebilirsin.
+Ayarlardan labirentin ne kadar büyük olacağını, hangi ortamda geçeceğini ve seni kovalayanın ne kadar hızlı olacağını değiştirebilirsin. Ayrıca oyun dilini ve sayılarla harflerin hangi dilde okunacağını seçebilirsin. Hadi başlayalım!","Puoi personalizzare il gioco a tuo piacimento.
+Nelle impostazioni puoi cambiare la dimensione del labirinto, l'ambiente in cui si svolge e la velocità dell'inseguitore. Puoi anche scegliere la lingua del gioco e in che lingua verranno letti i numeri e le lettere. Iniziamo!","Możesz dostosować grę do swoich upodobań.
+W ustawieniach zmienisz wielkość labiryntu, środowisko, w którym się toczy, i to, z jaką prędkością jesteś goniony. Możesz również wybrać język gry oraz to, w jakim języku będą czytane liczby i litery. Do dzieła!","Du kan anpassa spelet efter din egen smak.
+I inställningarna kan du ändra labyrintens storlek, miljön det utspelar sig i, och hur snabb jakten ska vara. Du kan också välja spelets språk och på vilket språk siffrorna och bokstäverna ska läsas. Låt oss börja!","Du kan tilpasse spillet slik du vil ha det.
+I innstillingene kan du endre hvor stor labyrinten er, miljøet du spiller i og hvor fort noen vil jage deg. Du kan også velge språket i spillet og hvilket språk tallene og bokstavene skal leses på. La oss sette i gang!","Je kunt het spel helemaal naar eigen wens aanpassen.
+In de instellingen kun je de grootte van het doolhof, de omgeving, en hoe snel je achtervolgd wordt veranderen. Je kunt ook de taal van het spel kiezen en in welke taal je de getallen en letters wilt laten lezen. Laten we beginnen!","Ти можеш налаштувати гру на свій смак.
+У налаштуваннях можна змінити розмір лабіринту, середовище і те, як швидко за тобою будуть гнатися. Ти також можеш вибрати мову гри та мову, якою читатимуться цифри й літери. Гайда до гри!","Voit mukauttaa peliä mielesi mukaan.
+Asetuksissa voit muuttaa labyrintin kokoa, ympäristöä ja sitä, kuinka nopeasti sinua jahdataan. Voit myös valita pelin kielen ja millä kielellä numerot ja kirjaimet luetaan. Eiköhän aloiteta!","Du kan tilpasse spillet efter din smag.
+I indstillingerne kan du ændre labyrintens størrelse, miljøet, og hvor hurtigt du bliver jagtet. Du kan også vælge spillets sprog, og hvilket sprog tallene og bogstaverne skal læses op på. Lad os komme i gang!","A játékot saját ízlésed szerint alakíthatod.
+A beállításokban módosíthatod, milyen nagy legyen a labirintus, milyen környezetben játszódjon, és milyen gyorsan üldözzenek. Kiválaszthatod a játék nyelvét is, és azt, hogy a számokat és betűket milyen nyelven olvassák fel. Kezdjük el!","Poți personaliza jocul după bunul plac.
+În setări poți schimba dimensiunea labirintului, mediul în care se desfășoară și cât de repede te va urmări cineva. De asemenea, poți alege limba jocului și în ce limbă vor fi citite numerele și literele. Hai să începem!","Μπορείς να προσαρμόσεις το παιχνίδι στα μέτρα σου.
+Στις ρυθμίσεις μπορείς να αλλάξεις το μέγεθος του λαβυρίνθου, το περιβάλλον στο οποίο βρίσκεσαι, και το πόσο γρήγορα σε κυνηγάνε. Μπορείς επίσης να επιλέξεις τη γλώσσα του παιχνιδιού και τη γλώσσα για τους αριθμούς και γράμματα. Ας ξεκινήσουμε!"
+help_slide_maze_text,You find yourself at the edge of a maze full of corridors and dead ends. Your task is clear. You have to find that single right way out.,Ocitl ses na kraji bludiště plného chodeb a slepých uliček. Tvůj úkol je jasný. Musíš najít tu jedinou správnou cestu ven.,Du befindest dich am Rande eines Labyrinths voller Gänge und Sackgassen. Deine Aufgabe ist klar. Du musst den einzig richtigen Weg nach draußen finden.,Te encuentras en el borde de un laberinto lleno de pasillos y callejones sin salida. Tu misión está clara. Tienes que encontrar el único camino correcto para salir.,Te voilà au bord d'un labyrinthe rempli de couloirs et d'impasses. Ta mission est claire. Tu dois trouver le seul bon chemin pour en sortir.,Você se encontra na beira de um labirinto cheio de corredores e becos sem saída. Sua tarefa é clara. Você tem que encontrar o único caminho certo para sair.,Bạn đang ở rìa của một mê cung đầy các hành lang và ngõ cụt. Nhiệm vụ của bạn đã rõ. Bạn phải tìm ra lối thoát đúng duy nhất.,Kendini koridorlar ve çıkmaz sokaklarla dolu bir labirentin kenarında buldun. Görevin belli. Çıkışa giden o tek doğru yolu bulmalısın.,Ti ritrovi ai margini di un labirinto pieno di corridoi e vicoli ciechi. Il tuo compito è chiaro. Devi trovare l'unica via d'uscita giusta.,Znalazłeś się na skraju labiryntu pełnego korytarzy i ślepych zaułków. Twoje zadanie jest jasne. Musisz znaleźć tę jedną właściwą drogę wyjścia.,Du befinner dig vid kanten av en labyrint full av korridorer och återvändsgränder. Ditt uppdrag är tydligt. Du måste hitta den enda rätta vägen ut.,Du befinner deg på kanten av en labyrint full av korridorer og blindveier. Oppgaven din er klar. Du må finne den eneste riktige veien ut.,Je staat aan de rand van een doolhof vol gangen en doodlopende wegen. Je taak is duidelijk. Je moet de enige juiste uitweg vinden.,"Ти опинився на краю лабіринту, сповненого коридорів і глухих кутів. Твоє завдання зрозуміле. Тобі потрібно знайти той єдиний правильний вихід.",Olet käytäviä ja umpikuja täynnä olevan labyrintin reunalla. Tehtäväsi on selvä. Sinun on löydettävä se ainokainen oikea tie ulos.,Du befinder dig på kanten af en labyrint fuld af korridorer og blindgyder. Din opgave er klar. Du skal finde den ene rigtige vej ud.,Egy folyosókkal és zsákutcákkal teli labirintus szélén találod magad. A feladatod egyértelmű. Meg kell találnod az egyetlen helyes kiutat.,Te afli la marginea unui labirint plin de coridoare și fundături. Sarcina ta este clară. Trebuie să găsești acea singură cale corectă de ieșire.,Βρίσκεσαι στην άκρη ενός λαβύρινθου γεμάτου διαδρόμους και αδιέξοδα. Η αποστολή σου είναι ξεκάθαρη. Πρέπει να βρεις τον μοναδικό σωστό δρόμο προς την έξοδο.
 setting_quality,Visual Quality:,Kvalita obrazu:,Bildqualität:,Calidad visual:,Qualité visuelle :,Qualidade visual:,Chất lượng hình ảnh:,Görüntü Kalitesi:,Qualità visiva:,Jakość grafiki:,Bildkvalitet:,Bildekvalitet:,Beeldkwaliteit:,Якість зображення:,Kuvanlaatu:,Billedkvalitet:,Képminőség:,Calitate Vizuală:,Ποιότητα εικόνας:
 quality_high,High,Vysoká,Hoch,Alta,Haute ,Alta,Cao,Yüksek,Alta,Wysoka,Hög,Høy,Hoog,Висока,Korkea,Høj,Magas,Înaltă,Υψηλή
 quality_standard,Standard,Standard,Standard,Estándar,Standard,Padrão,Tiêu chuẩn,Standart,Standard,Standard,Standard,Standard,Standaard,Стандарт,Vakio,Standard,Alapértelmezett,Standard,Πρότυπο

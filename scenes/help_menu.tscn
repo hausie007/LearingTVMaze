@@ -45,14 +45,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+[node name="Panel" type="Panel" parent="CenterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1500, 900)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_help")
 
 [node name="MainHBox" type="HBoxContainer" parent="CenterContainer/Panel"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constant_override/separation = 0
 
 [node name="LeftButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
@@ -79,7 +84,7 @@ alignment = 1
 
 [node name="VisualContainer" type="CenterContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 420)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_vertical = 3
 

@@ -59,13 +59,13 @@ func _apply_layout_shift() -> void:
 		if controls_mode != Config.ControlsMode.OFF:
 			panel.custom_minimum_size = Vector2(900, 700)
 			text_label.custom_minimum_size = Vector2(650, 200)
-			text_label.add_theme_font_size_override("font_size", 42)
-			if icon_rect: icon_rect.custom_minimum_size = Vector2(300, 300)
+			text_label.add_theme_font_size_override("font_size", 38)
+			if icon_rect: icon_rect.custom_minimum_size = Vector2(250, 250)
 		else:
 			panel.custom_minimum_size = Vector2(1500, 900)
-			text_label.custom_minimum_size = Vector2(1000, 240)
-			text_label.add_theme_font_size_override("font_size", 54)
-			if icon_rect: icon_rect.custom_minimum_size = Vector2(400, 400)
+			text_label.custom_minimum_size = Vector2(1000, 280)
+			text_label.add_theme_font_size_override("font_size", 50)
+			if icon_rect: icon_rect.custom_minimum_size = Vector2(300, 300)
 
 
 func _process(delta: float) -> void:
@@ -195,7 +195,7 @@ func _spawn_collectible_preview() -> void:
 	# Centered container for the whole collectible (Image + Label)
 	var root := Control.new()
 	root.name = "ColPreview"
-	root.custom_minimum_size = Vector2(400, 400)
+	root.custom_minimum_size = Vector2(300, 300)
 	_visual_container.add_child(root)
 	
 	# 1. Base (Theme Image or Procedural Circle)
@@ -205,7 +205,7 @@ func _spawn_collectible_preview() -> void:
 		tex_rect.texture = _theme.col_texture
 		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.size = Vector2(350, 350)
+		tex_rect.size = Vector2(250, 250)
 		tex_rect.position = Vector2(25, 25)
 		root.add_child(tex_rect)
 	else:
@@ -217,15 +217,15 @@ func _spawn_collectible_preview() -> void:
 		style.corner_radius_bottom_right = 60
 		style.corner_radius_bottom_left = 60
 		panel.add_theme_stylebox_override("panel", style)
-		panel.size = Vector2(220, 220)
-		panel.position = Vector2(90, 90)
+		panel.size = Vector2(180, 180)
+		panel.position = Vector2(60, 60)
 		root.add_child(panel)
 
 	# 2. Identifier Label (Always show "A")
 	var label := Label.new()
 	label.text = "A"
 	label.add_theme_color_override("font_color", _theme.col_text_color if not _theme.col_texture else Color.WHITE)
-	label.add_theme_font_size_override("font_size", 140)
+	label.add_theme_font_size_override("font_size", 100)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	# Outline for visibility on images
@@ -238,7 +238,7 @@ func _spawn_collectible_preview() -> void:
 func _spawn_themes_preview() -> void:
 	var hbox = HBoxContainer.new()
 	hbox.name = "ThemesPreview"
-	hbox.add_theme_constant_override("separation", 60)
+	hbox.add_theme_constant_override("separation", 30)
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	_visual_container.add_child(hbox)
 	
@@ -257,7 +257,7 @@ func _spawn_themes_preview() -> void:
 		tex_rect.texture = load("res://images/lm_icon_new.png")
 		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.custom_minimum_size = Vector2(250, 250)
+		tex_rect.custom_minimum_size = Vector2(180, 180)
 		hbox.add_child(tex_rect)
 		return
 	
@@ -278,7 +278,7 @@ func _spawn_themes_preview() -> void:
 		tex_rect.texture = tex
 		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.custom_minimum_size = Vector2(250, 250)
+		tex_rect.custom_minimum_size = Vector2(180, 180)
 		hbox.add_child(tex_rect)
 
 
