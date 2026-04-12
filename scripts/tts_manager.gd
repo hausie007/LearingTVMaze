@@ -106,7 +106,7 @@ func refresh_cache() -> void:
 	var new_langs: Array[String] = []
 	var new_cache: Dictionary = {}
 	
-	for lang_code in Config.LANGUAGES:
+	for lang_code in Config.LANG_CODES:
 		var target_lang := lang_code
 		if target_lang == "auto":
 			target_lang = Config.get_effective_ui_language()
@@ -164,7 +164,7 @@ func is_available(lang_code: String) -> bool:
 
 ## Queue text to be spoken. Only the most recent request is kept.
 func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: float = 70.0) -> void:
-	var lang: String = lang_override if not lang_override.is_empty() else Config.get_effective_language()
+	var lang: String = lang_override if not lang_override.is_empty() else Config.get_effective_learning_language()
 
 	_current_version += 1
 	

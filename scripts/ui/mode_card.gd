@@ -31,5 +31,5 @@ func _on_focus_exited() -> void:
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(subtitle_label, "theme_override_colors/font_color", Color(0.7, 0.7, 0.7, 1.0), 0.1)
+	tween.tween_property(subtitle_label, "theme_override_colors/font_color", UIColors.TEXT_SUBTITLE, 0.1)
 	z_index = 0

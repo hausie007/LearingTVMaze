@@ -19,21 +19,25 @@ extends Control
 @onready var _player_preview: CharacterPreview = %PlayerAnchor
 @onready var _chaser_preview: CharacterPreview = %ChaserAnchor
 
-const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek"]
-const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
-
 var temp_lang_idx: int = 0
 var temp_theme_idx: int = 0
 var themes: Array[String] = []
 var _theme_preview_loader: ThemeLoader = null
 var _last_theme_idx: int = -1
 
+## Original values stored on enter so we can restore on cancel.
+var _original_learning_language: String = ""
+var _original_theme_dir_name: String = ""
+
 func _ready() -> void:
 	# Warp mouse off-screen
 	Input.warp_mouse(Vector2(-1, -1))
 	
 	if Config:
-		temp_lang_idx = LANG_CODES.find(Config.learning_language)
+		_original_learning_language = Config.learning_language
+		_original_theme_dir_name = Config.theme_dir_name
+		
+		temp_lang_idx = Config.LANG_CODES.find(Config.learning_language)
 		if temp_lang_idx < 0: temp_lang_idx = 0
 		
 		themes = ThemeLoader.get_available_themes()
@@ -100,25 +104,17 @@ func _localize_ui() -> void:
 	theme_title_lbl.text = tr("setting_theme")
 
 func _cycle_lang(dir: int) -> void:
-	temp_lang_idx = (temp_lang_idx + dir + LANG_CODES.size()) % LANG_CODES.size()
-	Config.learning_language = LANG_CODES[temp_lang_idx]
+	temp_lang_idx = (temp_lang_idx + dir + Config.LANG_CODES.size()) % Config.LANG_CODES.size()
 	_update_labels()
 
 func _cycle_theme(dir: int) -> void:
 	if themes.size() == 0: return
 	temp_theme_idx = (temp_theme_idx + dir + themes.size()) % themes.size()
-	Config.theme_dir_name = themes[temp_theme_idx]
 	_update_labels()
 
 func _update_labels() -> void:
 	# Language
-	if temp_lang_idx == 0:
-		var ui_lang = Config.get_effective_ui_language()
-		var ui_idx = LANG_CODES.find(ui_lang)
-		var ui_name = tr(LANG_KEYS[ui_idx])
-		lang_btn.text = tr("lang_auto") + " (" + ui_name + ")"
-	else:
-		lang_btn.text = tr(LANG_KEYS[temp_lang_idx])
+	lang_btn.text = Config.get_lang_display_name(temp_lang_idx, true)
 	
 	# Theme
 	if temp_theme_idx < themes.size():
@@ -127,12 +123,7 @@ func _update_labels() -> void:
 			_theme_preview_loader = ThemeLoader.new()
 			_theme_preview_loader.load_theme(themes[temp_theme_idx])
 			
-		var display_title: String = themes[temp_theme_idx].capitalize()
-		if _theme_preview_loader and _theme_preview_loader.manifest.has("title"):
-			var manifest_title = _theme_preview_loader.manifest["title"]
-			if manifest_title is String and not manifest_title.is_empty():
-				display_title = manifest_title
-		theme_btn.text = display_title
+		theme_btn.text = _theme_preview_loader.get_display_title(themes[temp_theme_idx])
 		
 		if _player_preview:
 			_player_preview.set_character(_theme_preview_loader.player_frames, _theme_preview_loader.player_fps)
@@ -146,12 +137,21 @@ func _update_labels() -> void:
 
 func _start_game(mode: int) -> void:
 	Config.game_mode = mode
+	# Commit temp selections to Config only when the user starts a game
+	Config.learning_language = Config.LANG_CODES[temp_lang_idx]
+	Config.theme_dir_name = themes[temp_theme_idx] if temp_theme_idx < themes.size() else _original_theme_dir_name
 	Config.save_settings()
 	UIHelpers.go_to_scene_with_loading(get_tree(), "res://scenes/main.tscn")
 
 func _on_back_pressed() -> void:
-	Config.save_settings()
+	# Restore original values — user cancelled, so don't persist cycling changes
+	Config.learning_language = _original_learning_language
+	Config.theme_dir_name = _original_theme_dir_name
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		_on_back_pressed()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

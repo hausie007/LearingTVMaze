@@ -222,7 +222,7 @@ func _build_ui() -> void:
 	main_panel.custom_minimum_size.x = 800
 
 	var main_style := StyleBoxFlat.new()
-	main_style.bg_color = Color(0.15, 0.17, 0.22, 0.95)
+	main_style.bg_color = UIColors.BG_PANEL
 	main_style.corner_radius_top_left = 32
 	main_style.corner_radius_top_right = 32
 	main_style.corner_radius_bottom_right = 32
@@ -281,7 +281,7 @@ func _build_ui() -> void:
 	_timer_label.text = "10"
 	_timer_label.custom_minimum_size.x = 80
 	_timer_label.add_theme_font_size_override("font_size", 36)
-	_timer_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+	_timer_label.add_theme_color_override("font_color", UIColors.TIMER_DIM)
 	_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_timer_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	next_hbox.add_child(_timer_label)

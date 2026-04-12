@@ -74,7 +74,7 @@ func rebuild_visual() -> void:
 
 	# Try to use a theme sprite.
 	var theme_tex: Texture2D = null
-	var theme_color: Color = Config.player_color
+	var theme_color: Color = Color(0.25, 0.55, 0.95)  # Fallback; overridden by ThemeLoader below
 	var theme_loader: ThemeLoader = null
 	
 	if maze_renderer:

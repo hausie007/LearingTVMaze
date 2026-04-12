@@ -10,11 +10,9 @@ var temp_perf: bool
 var temp_controls: int
 var themes: Array[String] = []
 @onready var player_preview: CharacterPreview = %ThemePlayerAnchor
-# Mode/diff/lang keys for tr()
+# Mode/diff keys for tr()
 const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
 const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
-const LANG_KEYS = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek"]
-const LANG_CODES = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
 const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast", "chaser_turbo"]
 const CONTROLS_KEYS = ["controls_off", "controls_left", "controls_right"]
 var _is_saving: bool = false
@@ -48,10 +46,10 @@ func _ready() -> void:
 		if temp_theme_idx < 0:
 			temp_theme_idx = 0
 		
-		temp_ui_lang_idx = LANG_CODES.find(Config.ui_language)
+		temp_ui_lang_idx = Config.LANG_CODES.find(Config.ui_language)
 		if temp_ui_lang_idx < 0: temp_ui_lang_idx = 0
 		
-		temp_learning_lang_idx = LANG_CODES.find(Config.learning_language)
+		temp_learning_lang_idx = Config.LANG_CODES.find(Config.learning_language)
 		if temp_learning_lang_idx < 0: temp_learning_lang_idx = 0
 			
 		temp_voice = Config.voice_hints
@@ -87,8 +85,8 @@ func _ready() -> void:
 
 func _get_preview_language(is_learning: bool = false) -> String:
 	var idx = temp_learning_lang_idx if is_learning else temp_ui_lang_idx
-	if idx < LANG_CODES.size():
-		var code: String = LANG_CODES[idx]
+	if idx < Config.LANG_CODES.size():
+		var code: String = Config.LANG_CODES[idx]
 		if code == "auto":
 			return Config.get_auto_detected_language()
 		if code in Config.SUPPORTED_LANGS:
@@ -181,8 +179,8 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 
 
 func _cycle_ui_lang(dir: int) -> void:
-	if LANG_KEYS.size() == 0: return
-	temp_ui_lang_idx = (temp_ui_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
+	if Config.LANG_KEYS.size() == 0: return
+	temp_ui_lang_idx = (temp_ui_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
 	var preview_lang := _get_preview_language(false)
 	TranslationServer.set_locale(preview_lang)
 	_trigger_warmup_ui()
@@ -205,28 +203,11 @@ func _trigger_warmup_learning() -> void:
 		TTS.warm_up(_get_preview_language(true), lang_name)
 
 func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
-	var lang_name = tr(LANG_KEYS[idx])
-	if idx == 0:
-		if is_learning:
-			# For Learning Language, "Auto" means the current UI language
-			var ui_effective_idx = temp_ui_lang_idx
-			if ui_effective_idx == 0:
-				var detected = Config.get_auto_detected_language()
-				ui_effective_idx = LANG_CODES.find(detected)
-			
-			var ui_name = tr(LANG_KEYS[ui_effective_idx])
-			return tr("lang_auto") + " (" + ui_name + ")"
-		else:
-			# For UI Language, "Auto" means "Detected System Lang"
-			var detected := Config.get_auto_detected_language()
-			var det_idx := LANG_CODES.find(detected)
-			if det_idx > 0:
-				lang_name += " - " + tr(LANG_KEYS[det_idx]).to_lower()
-	return lang_name
+	return Config.get_lang_display_name(idx, is_learning, temp_ui_lang_idx)
 
 func _cycle_learning_lang(dir: int) -> void:
-	if LANG_KEYS.size() == 0: return
-	temp_learning_lang_idx = (temp_learning_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
+	if Config.LANG_KEYS.size() == 0: return
+	temp_learning_lang_idx = (temp_learning_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
 	_update_labels()
 
 func _cycle_theme(dir: int) -> void:
@@ -276,11 +257,7 @@ func _update_labels() -> void:
 		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
 		
 	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
-		var display_title: String = themes[temp_theme_idx].capitalize()
-		if _theme_preview_loader and _theme_preview_loader.manifest.has("title"):
-			var manifest_title = _theme_preview_loader.manifest["title"]
-			if manifest_title is String and not manifest_title.is_empty():
-				display_title = manifest_title
+		var display_title: String = _theme_preview_loader.get_display_title(themes[temp_theme_idx]) if _theme_preview_loader else themes[temp_theme_idx].capitalize()
 		%ThemeButton.text = display_title
 	
 	if has_node("%VoiceButton"):
@@ -293,10 +270,10 @@ func _update_labels() -> void:
 			if _tts_warning_label:
 				_tts_warning_label.visible = true
 				_tts_warning_label.text = tr("checking_tts")
-				_tts_warning_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
+				_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_PENDING)
 		else:
-			var ui_lang_code = LANG_CODES[temp_ui_lang_idx]
-			var learning_lang_code = LANG_CODES[temp_learning_lang_idx]
+			var ui_lang_code = Config.LANG_CODES[temp_ui_lang_idx]
+			var learning_lang_code = Config.LANG_CODES[temp_learning_lang_idx]
 			var ui_available = TTS.is_available(ui_lang_code)
 			var learning_available = TTS.is_available(learning_lang_code)
 			var is_available = ui_available and learning_available
@@ -315,10 +292,10 @@ func _update_labels() -> void:
 						_tts_warning_label.text = tr("tts_missing") + " (UI)"
 					else:
 						_tts_warning_label.text = tr("tts_missing") + " (Learn)"
-					_tts_warning_label.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
+					_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_ERROR)
 				else:
 					_tts_warning_label.text = tr("tts_ready")
-					_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4))
+					_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_OK)
 
 	if has_node("%PerfButton"):
 		%PerfButton.text = tr("quality_high") if not temp_perf else tr("quality_standard")
@@ -362,8 +339,8 @@ func _on_save_pressed() -> void:
 	_is_saving = true
 	if Config:
 		Config.difficulty = temp_diff
-		if temp_ui_lang_idx < LANG_CODES.size(): Config.ui_language = LANG_CODES[temp_ui_lang_idx]
-		if temp_learning_lang_idx < LANG_CODES.size(): Config.learning_language = LANG_CODES[temp_learning_lang_idx]
+		if temp_ui_lang_idx < Config.LANG_CODES.size(): Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
+		if temp_learning_lang_idx < Config.LANG_CODES.size(): Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
 		if temp_theme_idx < themes.size(): Config.theme_dir_name = themes[temp_theme_idx]
 		Config.voice_hints = temp_voice
 		Config.chaser_level = temp_chaser_level

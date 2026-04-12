@@ -39,3 +39,34 @@ const TEXT_PRIMARY := Color.WHITE
 
 ## Subtle border for unfocused buttons.
 const BORDER_SUBTLE := Color(1, 1, 1, 0.1)
+
+# ── HUD & In-Game UI ────────────────────────────────────────────────────────
+
+## Dim text for unlit word letters in the HUD.
+const TEXT_DIM := Color(0.3, 0.33, 0.4)
+
+## Muted text for HUD time/moves display.
+const TEXT_HUD := Color(0.7, 0.75, 0.8)
+
+## HUD top-bar background with transparency.
+const BG_HUD := Color(0.1, 0.12, 0.16, 0.90)
+
+## Win/Gotcha panel background with near-opaque transparency.
+const BG_PANEL := Color(0.15, 0.17, 0.22, 0.95)
+
+## Timer countdown text color.
+const TIMER_DIM := Color(0.5, 0.5, 0.5)
+
+## Mode card subtitle when unfocused.
+const TEXT_SUBTITLE := Color(0.7, 0.7, 0.7, 1.0)
+
+# ── TTS Status Indicators ───────────────────────────────────────────────────
+
+## TTS checking/pending state.
+const TTS_PENDING := Color(0.8, 0.8, 0.8)
+
+## TTS unavailable/error state.
+const TTS_ERROR := Color(1.0, 0.4, 0.4)
+
+## TTS ready/available state.
+const TTS_OK := Color(0.4, 0.8, 0.4)

@@ -90,7 +90,7 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 		var lbl := Label.new()
 		lbl.text = word[i]
 		lbl.add_theme_font_size_override("font_size", font_size)
-		lbl.add_theme_color_override("font_color", Color(0.3, 0.33, 0.4))  # Dim Navy
+		lbl.add_theme_color_override("font_color", UIColors.TEXT_DIM)  # Dim Navy
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		lbl.custom_minimum_size.x = min_w
@@ -125,7 +125,7 @@ func _build_ui() -> void:
 	# Background panel spanning full width at the top
 	var bg_panel := PanelContainer.new()
 	var bg_style := StyleBoxFlat.new()
-	bg_style.bg_color = Color(0.1, 0.12, 0.16, 0.90)
+	bg_style.bg_color = UIColors.BG_HUD
 	bg_style.content_margin_left = 20
 	bg_style.content_margin_right = 20
 	bg_style.content_margin_top = 8
@@ -147,7 +147,7 @@ func _build_ui() -> void:
 	_time_label = Label.new()
 	_time_label.text = "00:00"
 	_time_label.add_theme_font_size_override("font_size", 64)
-	_time_label.add_theme_color_override("font_color", Color(0.7, 0.75, 0.8))
+	_time_label.add_theme_color_override("font_color", UIColors.TEXT_HUD)
 	_time_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_time_label.custom_minimum_size.x = 250
 	hbox.add_child(_time_label)
@@ -163,7 +163,7 @@ func _build_ui() -> void:
 	_moves_label = Label.new()
 	_moves_label.text = "0"
 	_moves_label.add_theme_font_size_override("font_size", 64)
-	_moves_label.add_theme_color_override("font_color", Color(0.7, 0.75, 0.8))
+	_moves_label.add_theme_color_override("font_color", UIColors.TEXT_HUD)
 	_moves_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_moves_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_moves_label.custom_minimum_size.x = 200

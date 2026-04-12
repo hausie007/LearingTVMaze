@@ -96,7 +96,13 @@ var chaser_speed: float:
 			ChaserLevel.TURBO:  return 3.5
 			_:                  return 0.65  # Slow (default)
 
-const LANGUAGES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
+## All language codes including "auto" sentinel. Canonical source for UI cycling.
+const LANG_CODES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
+
+## Translation keys matching LANG_CODES 1:1. Used by settings and mode-selection UI.
+const LANG_KEYS: Array[String] = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek"]
+
+## Language codes without "auto" — used for validation and TTS scanning.
 const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
@@ -160,28 +166,6 @@ var tween_duration: float = 0.12
 ## Player square size as a fraction of cell_size (0.0 – 1.0).
 var player_scale: float = 0.6
 
-## Player colour.
-var player_color: Color = Color(0.25, 0.55, 0.95)  # Friendly blue
-
-## Seconds to wait after winning before generating a new maze.
-var restart_delay: float = 2.0
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  COLOURS  (visual theme)
-# ─────────────────────────────────────────────────────────────────────────────
-
-## Floor colour for normal corridor cells.
-var color_floor: Color = Color("#1A1C23")       # Brand dark
-
-## Wall / background colour.
-var color_wall: Color = Color("#EEEEEE")        # Brand light grey
-
-## Start cell floor colour (Sky blue tint).
-var color_start: Color = Color("#1188FF").lerp(Color("#1A1C23"), 0.7)
-
-## End cell floor colour (Yellow accent tint).
-var color_end: Color = Color("#FFCC00").lerp(Color("#1A1C23"), 0.7)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -246,9 +230,33 @@ func get_effective_learning_language() -> String:
 		return get_effective_ui_language()
 	return learning_language
 
-## Fallback for any code still calling get_effective_language
-func get_effective_language() -> String:
-	return get_effective_learning_language()
+
+## Format a human-readable display name for a language at the given LANG_CODES index.
+##
+## For non-"auto" indices, returns the translated language name (e.g., "English").
+## For index 0 ("auto"):
+##   - is_learning=true:  "Auto (English)" — shows the effective UI language name
+##   - is_learning=false: "Auto - english" — shows the auto-detected system language
+##
+## [ui_lang_idx] is only used when is_learning=true, to determine the effective UI language.
+func get_lang_display_name(idx: int, is_learning: bool = false, ui_lang_idx: int = 0) -> String:
+	var lang_name = TranslationServer.translate(LANG_KEYS[idx])
+	if idx == 0:
+		if is_learning:
+			# "Auto" for learning means the current UI language
+			var ui_effective_idx = ui_lang_idx
+			if ui_effective_idx == 0:
+				var detected = get_auto_detected_language()
+				ui_effective_idx = LANG_CODES.find(detected)
+			var ui_name = TranslationServer.translate(LANG_KEYS[ui_effective_idx])
+			return TranslationServer.translate("lang_auto") + " (" + ui_name + ")"
+		else:
+			# "Auto" for UI means "Detected System Lang"
+			var detected := get_auto_detected_language()
+			var det_idx := LANG_CODES.find(detected)
+			if det_idx > 0:
+				lang_name += " - " + TranslationServer.translate(LANG_KEYS[det_idx]).to_lower()
+	return lang_name
 
 ## Perform true OS/System language auto-detection, ignoring any saved preference.
 func get_auto_detected_language() -> String:

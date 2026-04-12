@@ -159,6 +159,16 @@ func load_theme(override_dir_name: String = "") -> void:
 	if col_texture == null and not col_frames.is_empty():
 		col_texture = col_frames[0]
 
+## Return the human-readable display title for this loaded theme.
+## Uses the manifest "title" field if present, otherwise capitalizes the dir name.
+func get_display_title(fallback_dir_name: String = "") -> String:
+	var display_title: String = fallback_dir_name.capitalize() if not fallback_dir_name.is_empty() else "Theme"
+	if manifest.has("title"):
+		var manifest_title = manifest["title"]
+		if manifest_title is String and not manifest_title.is_empty():
+			display_title = manifest_title
+	return display_title
+
 ## Scan available themes dynamically.
 static func get_available_themes() -> Array[String]:
 	var themes: Array[String] = []
