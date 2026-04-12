@@ -109,7 +109,7 @@ func refresh_cache() -> void:
 	for lang_code in Config.LANGUAGES:
 		var target_lang := lang_code
 		if target_lang == "auto":
-			target_lang = Config.get_effective_language()
+			target_lang = Config.get_effective_ui_language()
 			
 		var target_prefix := target_lang.to_lower() + "_"
 		var target_dash_prefix := target_lang.to_lower() + "-"
@@ -133,9 +133,9 @@ func refresh_cache() -> void:
 	# Announce app title ONLY on first boot to confirm readiness
 	if _is_first_boot:
 		_is_first_boot = false
-		warm_up(Config.get_effective_language(), TranslationServer.translate("app_title"))
+		warm_up(Config.get_effective_ui_language(), TranslationServer.translate("app_title"))
 	else:
-		warm_up(Config.get_effective_language())  # Silent whisper for subsequent refreshes
+		warm_up(Config.get_effective_ui_language())  # Silent whisper for subsequent refreshes
 
 
 ## Quick retrieval of cached voice ID for a given language code.

@@ -48,19 +48,8 @@ func _apply_layout_shift() -> void:
 	var center_container = $CenterContainer
 	if not center_container: return
 	
-	var controls_mode = Config.on_screen_controls if is_instance_valid(Config) else -1
-	if controls_mode == Config.ControlsMode.LEFT_HANDED:
-		center_container.anchor_left = 0.25
-		center_container.anchor_right = 1.0
-	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
-		center_container.anchor_left = 0.0
-		center_container.anchor_right = 0.75
-	else:
-		center_container.anchor_left = 0.0
-		center_container.anchor_right = 1.0
-		
-	center_container.offset_left = 0
-	center_container.offset_right = 0
+	var controls_mode = Config.on_screen_controls
+	UIHelpers.apply_dpad_layout(center_container, controls_mode)
 	
 	var panel = get_node_or_null("%Panel")
 	var text_label = get_node_or_null("%TextLabel")
@@ -139,7 +128,7 @@ func _update_slide() -> void:
 	_update_animations()
 	
 	if Config.voice_hints:
-		TTS.speak(tr(slide.text), 0.8)
+		TTS.speak(tr(slide.text), 0.8, Config.get_effective_ui_language())
 
 
 func _update_icon(icon_name: String) -> void:
@@ -249,7 +238,7 @@ func _spawn_themes_preview() -> void:
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	_visual_container.add_child(hbox)
 	
-	var available = Config.get_available_themes()
+	var available = ThemeLoader.get_available_themes()
 	var others: Array[String] = []
 	for t in available:
 		if t != Config.theme_dir_name:
@@ -305,8 +294,4 @@ func _on_right_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	TTS.stop()
-	var loading_scene = load("res://scenes/loading_screen.tscn").instantiate()
-	loading_scene.target_scene_path = "res://scenes/main_menu.tscn"
-	get_tree().root.add_child(loading_scene)
-	get_tree().current_scene.queue_free()
-	get_tree().current_scene = loading_scene
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

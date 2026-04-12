@@ -58,6 +58,7 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 	if not emoji.is_empty():
 		var emoji_label := Label.new()
 		emoji_label.text = emoji
+		emoji_label.add_theme_font_override("font", UIHelpers.get_emoji_font())
 		emoji_label.add_theme_font_size_override("font_size", 96)
 		emoji_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_word_container.add_child(emoji_label)

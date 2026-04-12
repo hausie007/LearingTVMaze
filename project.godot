@@ -21,10 +21,15 @@ config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://images/lm_icon_new.png"
 config/android_tv_banner="res://images/lm_banner_320.png"
 
+[gui]
+
+theme/custom="res://ui/default_theme.theme"
+
 [autoload]
 
 TTS="*res://scripts/tts_manager.gd"
 Config="*res://scripts/game_config.gd"
+DPad="*res://scripts/virtual_dpad.gd"
 
 [display]
 
@@ -43,7 +48,7 @@ locale/translations=PackedStringArray("res://data/translations.en.translation", 
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+text/canvas_item_default_antialiasing=1
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 

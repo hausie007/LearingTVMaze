@@ -43,6 +43,7 @@ var _is_active: bool = false
 
 func _ready() -> void:
 	layer = 10
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_ui()
 
 
@@ -55,7 +56,7 @@ func _process(delta: float) -> void:
 			next_round_pressed.emit()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	# Any D-pad interaction during the active screen pauses the auto-countdown.
 	if _is_active and not _timer_paused:
 		if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or \
@@ -87,6 +88,9 @@ func show_win(time_str: String, move_count: int) -> void:
 		_harder_button.visible = Config.difficulty < 6
 		_harder_button.text = tr("challenge_pp")
 
+	if _container and is_instance_valid(Config):
+		UIHelpers.apply_dpad_layout(_container, Config.on_screen_controls)
+
 	_container.visible = true
 	_next_button.grab_focus()
 	screen_shown.emit()
@@ -106,6 +110,9 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	if _harder_button:
 		_harder_button.visible = Config.difficulty > 0
 		_harder_button.text = tr("challenge_mm")
+
+	if _container and is_instance_valid(Config):
+		UIHelpers.apply_dpad_layout(_container, Config.on_screen_controls)
 
 	_container.visible = true
 	_next_button.grab_focus()

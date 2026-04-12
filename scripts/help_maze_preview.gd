@@ -41,9 +41,9 @@ func _draw() -> void:
 		controls = Config.on_screen_controls
 		
 	if controls == Config.ControlsMode.LEFT_HANDED:
-		rect_left = (size.x * 0.25) + margin_x
+		rect_left = (size.x * UIHelpers.DPAD_SCREEN_FRACTION) + margin_x
 	elif controls == Config.ControlsMode.RIGHT_HANDED:
-		rect_right = (size.x * 0.75) - margin_x
+		rect_right = (size.x * (1.0 - UIHelpers.DPAD_SCREEN_FRACTION)) - margin_x
 	
 	var available_w = maxf(10.0, rect_right - rect_left)
 	var available_h = size.y

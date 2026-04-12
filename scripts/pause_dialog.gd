@@ -16,6 +16,7 @@ signal cancelled
 
 
 var _no_button: Button = null
+var _center_container: CenterContainer = null
 
 
 func _init() -> void:
@@ -30,6 +31,9 @@ func _ready() -> void:
 
 ## Show the dialog and grab focus on "No" (safer default for children).
 func show_dialog() -> void:
+	if _center_container and is_instance_valid(Config):
+		UIHelpers.apply_dpad_layout(_center_container, Config.on_screen_controls)
+	
 	visible = true
 	if _no_button:
 		_no_button.grab_focus()
@@ -53,6 +57,7 @@ func _build_ui() -> void:
 	center.anchors_preset = Control.PRESET_FULL_RECT
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	overlay.add_child(center)
+	_center_container = center
 
 	var panel := PanelContainer.new()
 	var style: StyleBoxFlat = UIHelpers.create_rounded_stylebox(

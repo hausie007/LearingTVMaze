@@ -99,7 +99,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		if Config.game_mode == Config.GameMode.NUMBERS:
 			val_str = str(i + 1)
 		elif Config.game_mode == Config.GameMode.LETTERS:
-			val_str = Config.get_alphabet_char(i, Config.get_effective_language())
+			val_str = Config.get_alphabet_char(i, Config.get_effective_learning_language())
 
 		_instantiate_collectible(cell, val_str, -1, renderer)
 
@@ -107,7 +107,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 # ── Private: Words Mode ──────────────────────────────────────────────────────
 
 func _spawn_word_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
-	var lang: String = Config.get_effective_language()
+	var lang: String = Config.get_effective_learning_language()
 	var word_data: Dictionary = WordList.get_random_word(lang, Config.difficulty)
 	if word_data.is_empty():
 		push_warning("CollectibleSpawner: No word found for lang=%s diff=%d" % [lang, Config.difficulty])

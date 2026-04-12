@@ -29,4 +29,4 @@ Place any of these in your theme directory to override the defaults:
 - `chaser.png`: The enemy/chaser character.
 - `start.png`: An icon drawn on the start cell.
 - `end.png`: An icon drawn on the goal cell.
-- `bg.png`: An image drawn *behind* the corridors. If present, the `color_wall` rectangles are drawn over it to form the solid walls, but the floor is entirely transparent.
+- `background.png`: An image drawn *behind* the corridors. If present, the `color_wall` rectangles are drawn over it to form the solid walls, but the floor is entirely transparent.

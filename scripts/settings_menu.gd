@@ -1,15 +1,15 @@
 extends Control
 
-var temp_mode: int
+var temp_ui_lang_idx: int
+var temp_learning_lang_idx: int
 var temp_diff: int
 var temp_theme_idx: int
-var temp_lang_idx: int
 var temp_voice: bool
 var temp_chaser_level: int
 var temp_perf: bool
 var temp_controls: int
 var themes: Array[String] = []
-
+@onready var player_preview: CharacterPreview = %ThemePlayerAnchor
 # Mode/diff/lang keys for tr()
 const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
 const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
@@ -20,13 +20,15 @@ const CONTROLS_KEYS = ["controls_off", "controls_left", "controls_right"]
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
-## Original language stored on enter so we can preview without mutating Config.
-var _original_language: String = ""
+## Original language stored on enter so we can restore on cancel.
+var _original_ui_language: String = ""
+var _original_learning_language: String = ""
 
-# Animated Theme Preview
+## Original controls state so we can restore on cancel (controls are live-previewed).
+var _original_controls: int = 0
+
+# Animated Theme Previews
 var _theme_preview_loader: ThemeLoader = null
-var _theme_icon_rect: TextureRect = null
-var _anim_time: float = 0.0
 var _last_theme_idx: int = -1
 
 func _notification(what: int) -> void:
@@ -37,108 +39,65 @@ func _ready() -> void:
 	# Warp mouse off-screen to prevent phantom hover highlights on TV
 	Input.warp_mouse(Vector2(-1, -1))
 	
-	# Load current config state into temp variables
 	if Config:
-		TTS.refresh_cache() # Ensure we have latest OS voice state
-		temp_mode = Config.game_mode
+		TTS.refresh_cache()
 		temp_diff = Config.difficulty
-		themes = Config.get_available_themes()
+		themes = ThemeLoader.get_available_themes()
 		
 		temp_theme_idx = themes.find(Config.theme_dir_name)
 		if temp_theme_idx < 0:
 			temp_theme_idx = 0
 		
-		temp_lang_idx = LANG_CODES.find(Config.language)
-		if temp_lang_idx < 0:
-			temp_lang_idx = 0
+		temp_ui_lang_idx = LANG_CODES.find(Config.ui_language)
+		if temp_ui_lang_idx < 0: temp_ui_lang_idx = 0
+		
+		temp_learning_lang_idx = LANG_CODES.find(Config.learning_language)
+		if temp_learning_lang_idx < 0: temp_learning_lang_idx = 0
 			
 		temp_voice = Config.voice_hints
 		temp_chaser_level = Config.chaser_level
 		temp_perf = Config.performance_mode
 		temp_controls = Config.on_screen_controls
-		_original_language = Config.language
+		_original_controls = Config.on_screen_controls
+		_original_ui_language = Config.ui_language
+		_original_learning_language = Config.learning_language
 		# Listen for async TTS completion
 		if not TTS.status_changed.is_connected(_update_labels):
 			TTS.status_changed.connect(_update_labels)
 			
-	# Apply D-Pad layout shift
-	_apply_layout_shift()
+	# Apply D-Pad layout shift using shared utility
+	UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
+	_apply_title_colors()
 	# Wire up buttons
-	_setup_cycling_button(%ModeButton, func(dir): _cycle_mode(dir))
+	_setup_cycling_button(%UILangButton, func(dir): _cycle_ui_lang(dir))
 	_setup_cycling_button(%DiffButton, func(dir): _cycle_diff(dir))
-	_setup_cycling_button(%LangButton, func(dir): _cycle_lang(dir))
+	_setup_cycling_button(%LearningLangButton, func(dir): _cycle_learning_lang(dir))
 	_setup_cycling_button(%ThemeButton, func(dir): _cycle_theme(dir))
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	_setup_cycling_button(%ChaserButton, func(dir): _cycle_chaser(dir))
 	_setup_cycling_button(%PerfButton, func(dir): _cycle_perf(dir))
 	_setup_cycling_button(get_node_or_null("%ControlsButton"), func(dir): _cycle_controls(dir))
 	
-	# Add animated character preview next to the theme arrow
-	# We attach it to the arrow (which is a Label, not a Container)
-	# so it's taken out of the HBox flow and doesn't break the layout centering.
-	var theme_arrow = get_node_or_null("%ThemeRightArrow")
-	if theme_arrow:
-		_theme_icon_rect = TextureRect.new()
-		_theme_icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		_theme_icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		_theme_icon_rect.custom_minimum_size = Vector2(80, 80)
-		theme_arrow.add_child(_theme_icon_rect)
-		_theme_icon_rect.position = Vector2(50, -15) # Offset to the right
-	
 	_update_labels()
 	_update_static_labels()
 	
 	# Focus first interactive element for TV
-	if has_node("%ModeButton"):
-		%ModeButton.call_deferred("grab_focus")
+	if has_node("%DiffButton"):
+		%DiffButton.call_deferred("grab_focus")
 
-
-func _process(delta: float) -> void:
-	if _theme_icon_rect and _theme_preview_loader:
-		_anim_time += delta
-		var frames = _theme_preview_loader.player_frames
-		if frames and frames.size() > 1:
-			var fps = _theme_preview_loader.player_fps
-			var idx = int(_anim_time * fps) % frames.size()
-			_theme_icon_rect.texture = frames[idx]
-		else:
-			_theme_icon_rect.texture = _theme_preview_loader.player_texture
-
-func _trigger_warmup() -> void:
-	# Only warm up if voice hints are currently toggled ON in the UI
-	if temp_voice:
-		var lang_name := ""
-		var preview_lang := _get_preview_language()
-		if temp_lang_idx == 0: # Auto case
-			var detected := Config.get_auto_detected_language()
-			var det_idx := LANG_CODES.find(detected)
-			if det_idx > 0 and det_idx < LANG_KEYS.size():
-				lang_name = tr("lang_auto") + " - " + tr(LANG_KEYS[det_idx]).to_lower()
-			else:
-				lang_name = tr("lang_auto")
-		else:
-			lang_name = tr(LANG_KEYS[temp_lang_idx])
-		
-		if not lang_name.is_empty():
-			TTS.warm_up(preview_lang, lang_name)
-
-
-## Return the effective language for the currently selected temp_lang_idx.
-## Does NOT mutate Config.language.
-func _get_preview_language() -> String:
-	if temp_lang_idx < LANG_CODES.size():
-		var code: String = LANG_CODES[temp_lang_idx]
+func _get_preview_language(is_learning: bool = false) -> String:
+	var idx = temp_learning_lang_idx if is_learning else temp_ui_lang_idx
+	if idx < LANG_CODES.size():
+		var code: String = LANG_CODES[idx]
 		if code == "auto":
 			return Config.get_auto_detected_language()
 		if code in Config.SUPPORTED_LANGS:
 			return code
 	return "en"
 
-
 func _on_tts_init_warmup() -> void:
 	if TTS.tts_ready:
-		_trigger_warmup()
-
+		_trigger_warmup_ui()
 
 func _create_tts_warning() -> void:
 	if _tts_warning_label: return
@@ -166,7 +125,7 @@ func _create_tts_warning() -> void:
 		_tts_warning_label.grow_vertical = Control.GROW_DIRECTION_BOTH
 		_tts_warning_label.offset_top = 30 # Balanced for compact layout
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if _is_saving: return
 	
 	if event.is_action_pressed("ui_cancel"):
@@ -211,9 +170,9 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 				get_viewport().set_input_as_handled()
 	)
 	
-	var focus_color: Color = UIColors.BLUE # Blue for game modifiers
-	if btn.name in ["ThemeButton", "LangButton", "VoiceButton", "PerfButton", "ControlsButton"]:
-		focus_color = UIColors.YELLOW # Yellow for app modifiers
+	var focus_color: Color = UIColors.BLUE
+	if btn.name in ["ThemeButton", "UILangButton", "LearningLangButton", "VoiceButton", "PerfButton", "ControlsButton"]:
+		focus_color = UIColors.YELLOW
 		
 	if left_arrow: left_arrow.add_theme_color_override("font_color", focus_color)
 	if right_arrow: right_arrow.add_theme_color_override("font_color", focus_color)
@@ -221,26 +180,54 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	UIHelpers.apply_style_to_button(btn, focus_color)
 
 
-func _cycle_mode(dir: int) -> void:
-	if MODE_KEYS.size() == 0: return
-	temp_mode = (temp_mode + dir + MODE_KEYS.size()) % MODE_KEYS.size()
+func _cycle_ui_lang(dir: int) -> void:
+	if LANG_KEYS.size() == 0: return
+	temp_ui_lang_idx = (temp_ui_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
+	var preview_lang := _get_preview_language(false)
+	TranslationServer.set_locale(preview_lang)
+	_trigger_warmup_ui()
 	_update_labels()
+	_update_static_labels()
 
 func _cycle_diff(dir: int) -> void:
 	if DIFF_KEYS.size() == 0: return
 	temp_diff = (temp_diff + dir + DIFF_KEYS.size()) % DIFF_KEYS.size()
 	_update_labels()
 
-func _cycle_lang(dir: int) -> void:
+func _trigger_warmup_ui() -> void:
+	if temp_voice:
+		var lang_name = _get_lang_display_name(temp_ui_lang_idx, false)
+		TTS.warm_up(_get_preview_language(false), lang_name)
+
+func _trigger_warmup_learning() -> void:
+	if temp_voice:
+		var lang_name = _get_lang_display_name(temp_learning_lang_idx, true)
+		TTS.warm_up(_get_preview_language(true), lang_name)
+
+func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
+	var lang_name = tr(LANG_KEYS[idx])
+	if idx == 0:
+		if is_learning:
+			# For Learning Language, "Auto" means the current UI language
+			var ui_effective_idx = temp_ui_lang_idx
+			if ui_effective_idx == 0:
+				var detected = Config.get_auto_detected_language()
+				ui_effective_idx = LANG_CODES.find(detected)
+			
+			var ui_name = tr(LANG_KEYS[ui_effective_idx])
+			return tr("lang_auto") + " (" + ui_name + ")"
+		else:
+			# For UI Language, "Auto" means "Detected System Lang"
+			var detected := Config.get_auto_detected_language()
+			var det_idx := LANG_CODES.find(detected)
+			if det_idx > 0:
+				lang_name += " - " + tr(LANG_KEYS[det_idx]).to_lower()
+	return lang_name
+
+func _cycle_learning_lang(dir: int) -> void:
 	if LANG_KEYS.size() == 0: return
-	temp_lang_idx = (temp_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
-	# Preview the language via TranslationServer without mutating Config.language
-	if temp_lang_idx < LANG_CODES.size():
-		var preview_lang := _get_preview_language()
-		TranslationServer.set_locale(preview_lang)
-		_trigger_warmup()
+	temp_learning_lang_idx = (temp_learning_lang_idx + dir + LANG_KEYS.size()) % LANG_KEYS.size()
 	_update_labels()
-	_update_static_labels()
 
 func _cycle_theme(dir: int) -> void:
 	if themes.size() == 0: return
@@ -251,7 +238,7 @@ func _cycle_voice(_dir: int) -> void:
 	temp_voice = !temp_voice
 	_update_labels()
 	if temp_voice:
-		_trigger_warmup()
+		_trigger_warmup_ui()
 
 func _cycle_chaser(dir: int) -> void:
 	if CHASER_LEVEL_KEYS.size() == 0: return
@@ -268,55 +255,37 @@ func _cycle_controls(dir: int) -> void:
 	# Immediately update Config so the d-pad previews live
 	if Config: 
 		Config.on_screen_controls = temp_controls
-		_apply_layout_shift()
+		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 	_update_labels()
 
 func _update_labels() -> void:
-	if has_node("%ModeButton") and temp_mode < MODE_KEYS.size():
-		%ModeButton.text = tr(MODE_KEYS[temp_mode])
+	# ALWAYS update previews first so that _theme_preview_loader gets initialized with the right theme
+	# BEFORE we use it to pull the manifest title for ThemeButton.
+	_update_previews()
+
+	if has_node("%UILangButton"):
+		%UILangButton.text = _get_lang_display_name(temp_ui_lang_idx, false)
+	
 	if has_node("%DiffButton") and temp_diff < DIFF_KEYS.size():
 		%DiffButton.text = tr(DIFF_KEYS[temp_diff])
-	
-	# For "Auto", show the detected language in parentheses
-	var lang_text := ""
-	if temp_lang_idx < LANG_KEYS.size():
-		lang_text = tr(LANG_KEYS[temp_lang_idx])
-		
-	if temp_lang_idx == 0 and Config:
-		# Show which language auto resolves to system-wide
-		var detected := Config.get_auto_detected_language()
-		var det_idx := LANG_CODES.find(detected)
-		if det_idx > 0 and det_idx < LANG_KEYS.size():
-			lang_text += " (%s)" % tr(LANG_KEYS[det_idx])
-			
-	if has_node("%LangButton"):
-		%LangButton.text = lang_text
+
+	if has_node("%LearningLangButton"):
+		%LearningLangButton.text = _get_lang_display_name(temp_learning_lang_idx, true)
 	
 	if has_node("%ChaserButton") and temp_chaser_level < CHASER_LEVEL_KEYS.size():
 		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
 		
 	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
-		# Update theme preview icon loader when theme changes
-		if _theme_icon_rect and temp_theme_idx != _last_theme_idx:
-			_last_theme_idx = temp_theme_idx
-			_theme_preview_loader = ThemeLoader.new()
-			# Always explicitly pass the theme name to force a clean load,
-			# even for "default", to prevent it falling back to Config's active theme.
-			_theme_preview_loader.load_theme(themes[temp_theme_idx])
-			
 		var display_title: String = themes[temp_theme_idx].capitalize()
 		if _theme_preview_loader and _theme_preview_loader.manifest.has("title"):
 			var manifest_title = _theme_preview_loader.manifest["title"]
 			if manifest_title is String and not manifest_title.is_empty():
 				display_title = manifest_title
-				
 		%ThemeButton.text = display_title
 	
 	if has_node("%VoiceButton"):
-		# Ensure warning label exists
 		if not _tts_warning_label: _create_tts_warning()
 		
-		# If scan isn't done yet, show "Checking..." in the info label
 		if not TTS.tts_ready:
 			%VoiceButton.text = tr("on") if temp_voice else tr("off")
 			%VoiceButton.disabled = true
@@ -324,77 +293,66 @@ func _update_labels() -> void:
 			if _tts_warning_label:
 				_tts_warning_label.visible = true
 				_tts_warning_label.text = tr("checking_tts")
-				_tts_warning_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8)) # Neutral grey
-			return
-
-		# Instant check using TTS voice cache
-		var current_lang_code = LANG_CODES[temp_lang_idx]
-		var is_available = TTS.is_available(current_lang_code)
-		
-		# UI logic: if not available, force show as "off" but don't overwrite user's temp_voice preference
-		var effective_voice_state = temp_voice and is_available
-		%VoiceButton.text = tr("on") if effective_voice_state else tr("off")
-		%VoiceButton.disabled = not is_available
-		
-		if not is_available:
-			%VoiceButton.modulate = Color(1, 1, 1, 0.4) # Dimmed
-			if not _tts_warning_label: _create_tts_warning()
-			if _tts_warning_label: 
-				_tts_warning_label.visible = true
-				_tts_warning_label.text = tr("tts_missing")
-				_tts_warning_label.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4)) # Soft red
+				_tts_warning_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
 		else:
-			%VoiceButton.modulate = Color(1, 1, 1, 1.0) # Full
-			if not _tts_warning_label: _create_tts_warning()
+			var ui_lang_code = LANG_CODES[temp_ui_lang_idx]
+			var learning_lang_code = LANG_CODES[temp_learning_lang_idx]
+			var ui_available = TTS.is_available(ui_lang_code)
+			var learning_available = TTS.is_available(learning_lang_code)
+			var is_available = ui_available and learning_available
+			var effective_voice_state = temp_voice and is_available
+			
+			%VoiceButton.text = tr("on") if effective_voice_state else tr("off")
+			%VoiceButton.disabled = not is_available
+			%VoiceButton.modulate.a = 1.0 if is_available else 0.4
+			
 			if _tts_warning_label:
-				_tts_warning_label.visible = true
-				_tts_warning_label.text = tr("tts_ready")
-				_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4)) # Green
-
-	if has_node("%ChaserButton") and temp_chaser_level < CHASER_LEVEL_KEYS.size():
-		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
+				_tts_warning_label.visible = not is_available
+				if not is_available:
+					if not ui_available and not learning_available:
+						_tts_warning_label.text = tr("tts_missing")
+					elif not ui_available:
+						_tts_warning_label.text = tr("tts_missing") + " (UI)"
+					else:
+						_tts_warning_label.text = tr("tts_missing") + " (Learn)"
+					_tts_warning_label.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
+				else:
+					_tts_warning_label.text = tr("tts_ready")
+					_tts_warning_label.add_theme_color_override("font_color", Color(0.4, 0.8, 0.4))
 
 	if has_node("%PerfButton"):
 		%PerfButton.text = tr("quality_high") if not temp_perf else tr("quality_standard")
 
 	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < CONTROLS_KEYS.size():
-		var controls_btn = get_node("%ControlsButton")
-		controls_btn.text = tr(CONTROLS_KEYS[temp_controls])
+		%ControlsButton.text = tr(CONTROLS_KEYS[temp_controls])
+
+func _update_previews() -> void:
+	if themes.size() == 0: return
+	
+	if temp_theme_idx != _last_theme_idx:
+		_last_theme_idx = temp_theme_idx
+		_theme_preview_loader = ThemeLoader.new()
+		_theme_preview_loader.load_theme(themes[temp_theme_idx])
+	
+	var player_preview: CharacterPreview = get_node_or_null("%ThemePlayerAnchor") as CharacterPreview
+	if player_preview:
+		player_preview.set_character(_theme_preview_loader.player_frames, _theme_preview_loader.player_fps)
 
 func _update_static_labels() -> void:
-	# Update row titles and other static text to current language
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
-		%Title.add_theme_color_override("font_color", UIColors.YELLOW) # Match Settings Button
-	
-	if has_node("%ModeTitle"): %ModeTitle.text = tr("setting_mode")
+		%Title.add_theme_color_override("font_color", UIColors.YELLOW)
+	if has_node("%UILangTitle"): %UILangTitle.text = tr("setting_ui_lang")
 	if has_node("%DiffTitle"): %DiffTitle.text = tr("setting_diff")
-	if has_node("%LangTitle"): %LangTitle.text = tr("setting_lang")
+	if has_node("%LearningLangTitle"): %LearningLangTitle.text = tr("setting_learning_lang")
 	if has_node("%ThemeTitle"): %ThemeTitle.text = tr("setting_theme")
 	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
 	if has_node("%ChaserTitle"): %ChaserTitle.text = tr("setting_chaser")
 	if has_node("%PerfTitle"): %PerfTitle.text = tr("setting_quality")
 	if has_node("%ControlsTitle"): %ControlsTitle.text = tr("setting_controls")
 	
-func _apply_layout_shift() -> void:
-	var center_container = $CenterContainer
-	if not center_container: return
-	
-	var controls_mode = temp_controls
-	if controls_mode == Config.ControlsMode.LEFT_HANDED:
-		center_container.anchor_left = 0.25
-		center_container.anchor_right = 1.0
-	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
-		center_container.anchor_left = 0.0
-		center_container.anchor_right = 0.75
-	else:
-		center_container.anchor_left = 0.0
-		center_container.anchor_right = 1.0
-		
-	center_container.offset_left = 0
-	center_container.offset_right = 0
-	
-	var titles = ["%ModeTitle", "%DiffTitle", "%LangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle", "%PerfTitle", "%ControlsTitle"]
+func _apply_title_colors() -> void:
+	var titles = ["%UILangTitle", "%DiffTitle", "%LearningLangTitle", "%ThemeTitle", "%VoiceTitle", "%ChaserTitle", "%PerfTitle", "%ControlsTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
@@ -402,21 +360,19 @@ func _apply_layout_shift() -> void:
 func _on_save_pressed() -> void:
 	if _is_saving: return
 	_is_saving = true
-	
-	# Save temp variables back to singleton
 	if Config:
-		Config.game_mode = temp_mode
 		Config.difficulty = temp_diff
-		if temp_lang_idx < LANG_CODES.size():
-			Config.language = LANG_CODES[temp_lang_idx]
-		if temp_theme_idx < themes.size():
-			Config.theme_dir_name = themes[temp_theme_idx]
+		if temp_ui_lang_idx < LANG_CODES.size(): Config.ui_language = LANG_CODES[temp_ui_lang_idx]
+		if temp_learning_lang_idx < LANG_CODES.size(): Config.learning_language = LANG_CODES[temp_learning_lang_idx]
+		if temp_theme_idx < themes.size(): Config.theme_dir_name = themes[temp_theme_idx]
 		Config.voice_hints = temp_voice
 		Config.chaser_level = temp_chaser_level
 		Config.performance_mode = temp_perf
 		Config.on_screen_controls = temp_controls
 		Config.save_settings()
-		TranslationServer.set_locale(Config.get_effective_language())
-	
-	# Return to Main Menu
+		TranslationServer.set_locale(Config.get_effective_ui_language())
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func _exit_tree() -> void:
+	if not _is_saving and Config:
+		Config.on_screen_controls = _original_controls

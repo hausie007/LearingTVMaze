@@ -51,15 +51,15 @@ func draw_maze(maze: MazeData) -> void:
 	var rect_left = margin_x
 	var rect_right = viewport_size.x - margin_x
 	
-	# If D-pad is active, carve out 25% of the screen
+	# If D-pad is active, carve out its reserved screen fraction
 	var controls = -1
 	if is_instance_valid(Config) and "on_screen_controls" in Config:
 		controls = Config.on_screen_controls
 		
 	if controls == Config.ControlsMode.LEFT_HANDED:
-		rect_left = (viewport_size.x * 0.25) + margin_x
+		rect_left = (viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION) + margin_x
 	elif controls == Config.ControlsMode.RIGHT_HANDED:
-		rect_right = (viewport_size.x * 0.75) - margin_x
+		rect_right = (viewport_size.x * (1.0 - UIHelpers.DPAD_SCREEN_FRACTION)) - margin_x
 		
 	# Compute maximum available dimensions strictly within the dynamic boundaries
 	var available_w = maxf(10.0, rect_right - rect_left)
@@ -107,16 +107,8 @@ func draw_maze(maze: MazeData) -> void:
 	if not theme.bg_texture:
 		_add_rect(offset, maze_pixel_size, theme.color_wall)
 
-	# 3. Anti-Aliasing (MSAA + FXAA) for smooth edges.
-	# Disabled in Performance Mode to save GPU cycles on lower-powered TVs.
-	var vp := get_viewport()
-	if vp:
-		if Config.performance_mode:
-			vp.msaa_2d = Viewport.MSAA_DISABLED
-			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
-		else:
-			vp.msaa_2d = Viewport.MSAA_4X
-			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+	# 3. Apply Visual Environment (Glow, MSAA, etc.)
+	UIHelpers.configure_environment(self, theme, Config.performance_mode)
 
 	# 4. Draw Maze Surfaces (Floor)
 	# Non-wall elements (floor, icons) are still drawn per-cell
@@ -133,25 +125,6 @@ func draw_maze(maze: MazeData) -> void:
 
 	# 5. Draw Walls using Line2D (Rounded Paths)
 	_draw_walls_line2d(offset, int_cs)
-
-	# 6. Global Effects (Glow/Environment)
-	# Skip entirely in Performance Mode as Glow/HDR is extremely hungry.
-	if theme.glow_enabled and not Config.performance_mode:
-		var env_node := WorldEnvironment.new()
-		var env := Environment.new()
-		env.background_mode = Environment.BG_CANVAS
-		env.glow_enabled = true
-		env.glow_hdr_threshold = 1.5 # Only things > 1.5 glow (Icons/BG stay at 1.0)
-		env.glow_intensity = theme.glow_strength
-		env.glow_bloom = theme.glow_bloom
-		env.glow_blend_mode = Environment.GLOW_BLEND_MODE_ADDITIVE
-		
-		# Standard glow levels for 2D
-		env.set_glow_level(3, 1.0)
-		env.set_glow_level(5, 1.0)
-		
-		env_node.environment = env
-		add_child(env_node)
 
 
 ## Return the pixel position for a given grid coordinate (centred in cell).
@@ -234,9 +207,7 @@ func _draw_cell_corridors(cell: MazeData.CellData, pos: Vector2, coord: Vector2i
 	var cmds := MazeCellDrawer.get_cell_draw_commands(cell, pos, cs, wt, theme, has_bg, _maze, coord)
 
 	for r: MazeCellDrawer.RectCmd in cmds["rects"]:
-		# CRITICAL: We only draw non-wall rects (floor and passages)
-		# We skip wall rects because we now use Line2D for walls.
-		# MazeCellDrawer.get_cell_draw_commands will be updated to not return walls.
+		# Floor and passage rects only — walls use Line2D (drawn separately).
 		_add_rect(r.pos, r.size, r.color)
 
 	for icon: MazeCellDrawer.IconCmd in cmds["icons"]:

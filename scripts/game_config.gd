@@ -61,8 +61,11 @@ var theme_dir_name: String = "default":
 			theme_dir_name = value
 			_theme_cache = null
 
-## Language code for word lists. "auto" = detect from OS. Valid: "auto", "en", "cs", "de"
-var language: String = "auto"
+## Language code for the UI and system announcements. "auto" = detect from OS.
+var ui_language: String = "auto"
+
+## Language code for learning content (word lists, alphabets). "auto" = detect from OS.
+var learning_language: String = "auto"
 
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
@@ -73,8 +76,15 @@ var chaser_level: int = ChaserLevel.MEDIUM
 ## Whether to prioritize smooth gameplay over visual effects (disables Glow, Anti-Aliasing).
 var performance_mode: bool = true
 
+## Emitted when the on-screen controls mode changes (for D-Pad layout updates).
+signal on_screen_controls_changed(new_mode: int)
+
 ## On-Screen Controls preference (-1 = not set/autodetect).
-var on_screen_controls: int = -1
+var on_screen_controls: int = -1:
+	set(value):
+		if on_screen_controls != value:
+			on_screen_controls = value
+			on_screen_controls_changed.emit(value)
 
 
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
@@ -180,21 +190,15 @@ var color_end: Color = Color("#FFCC00").lerp(Color("#1A1C23"), 0.7)
 
 func _enter_tree() -> void:
 	load_settings()
-	TranslationServer.set_locale(get_effective_language())
+	TranslationServer.set_locale(get_effective_ui_language())
 
-func _ready() -> void:
-	# Instantiate Universal Virtual D-Pad Layout
-	var dpad_script = load("res://scripts/virtual_dpad.gd")
-	if dpad_script:
-		var dpad_node = CanvasLayer.new()
-		dpad_node.set_script(dpad_script)
-		add_child(dpad_node)
 
 func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("Game", "game_mode", game_mode)
 	config.set_value("Game", "difficulty", difficulty)
-	config.set_value("Game", "language", language)
+	config.set_value("Game", "ui_language", ui_language)
+	config.set_value("Game", "learning_language", learning_language)
 	config.set_value("Game", "voice_hints", voice_hints)
 	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Game", "performance_mode", performance_mode)
@@ -210,7 +214,12 @@ func load_settings() -> void:
 	if config.load(SAVE_PATH) == OK:
 		game_mode      = config.get_value("Game", "game_mode", game_mode)
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
-		language       = config.get_value("Game", "language", language)
+		ui_language       = config.get_value("Game", "ui_language", "auto")
+		learning_language = config.get_value("Game", "learning_language", "auto")
+		
+		# Migration: if we have an old 'language' setting, migrate it to learning_language
+		if config.has_section_key("Game", "language"):
+			learning_language = config.get_value("Game", "language", learning_language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
@@ -218,18 +227,28 @@ func load_settings() -> void:
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 		
 	if on_screen_controls == -1:
-		if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
+		if UIHelpers.is_likely_tv():
+			on_screen_controls = ControlsMode.OFF
+		elif DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
 			on_screen_controls = ControlsMode.RIGHT_HANDED
 		else:
 			on_screen_controls = ControlsMode.OFF
 
-## Return the effective language code, resolving "auto" from OS locale.
-func get_effective_language() -> String:
-	if language != "auto":
-		if language in SUPPORTED_LANGS:
-			return language
-		return "en"
+## Return the effective UI language code.
+func get_effective_ui_language() -> String:
+	if ui_language != "auto" and ui_language in SUPPORTED_LANGS:
+		return ui_language
 	return get_auto_detected_language()
+
+## Return the effective Learning language code.
+func get_effective_learning_language() -> String:
+	if learning_language == "auto":
+		return get_effective_ui_language()
+	return learning_language
+
+## Fallback for any code still calling get_effective_language
+func get_effective_language() -> String:
+	return get_effective_learning_language()
 
 ## Perform true OS/System language auto-detection, ignoring any saved preference.
 func get_auto_detected_language() -> String:
@@ -246,35 +265,6 @@ func get_auto_detected_language() -> String:
 		return locale
 		
 	return "en"
-
-## Scan available themes dynamically.
-func get_available_themes() -> Array[String]:
-	var themes: Array[String] = []
-	
-	# 1. Scan built-in themes
-	_scan_theme_dir("res://themes/", themes)
-	
-	# 2. Scan user-downloaded themes
-	_scan_theme_dir("user://themes/", themes)
-	
-	if themes.is_empty():
-		themes.append("default")
-		
-	return themes
-
-func _scan_theme_dir(path: String, out_list: Array[String]) -> void:
-	if not DirAccess.dir_exists_absolute(path):
-		return
-		
-	var dir := DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name: String = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir() and not file_name.begins_with("."):
-				if not out_list.has(file_name):
-					out_list.append(file_name)
-			file_name = dir.get_next()
 
 
 ## Return the N-th character of the alphabet for the given language.

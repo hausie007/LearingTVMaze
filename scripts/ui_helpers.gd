@@ -13,6 +13,39 @@ class_name UIHelpers
 extends RefCounted
 
 
+## Preloaded bundled emoji font for 100% compatibility across Android versions.
+const EMOJI_FONT = preload("res://assets/fonts/NotoColorEmoji-Regular.ttf")
+
+
+## Return a Font configured specifically for Emoji rendering with multi-platform fallbacks.
+## Essential for Android (Samsung) where default fonts often lack emoji glyphs.
+static func get_emoji_font() -> Font:
+	# In Godot 4, we use FontVariation to wrap a SystemFont and add the bundled font as fallback.
+	var variation := FontVariation.new()
+	var system_font := SystemFont.new()
+	
+	# Attempt to use system emoji families as base for better performance/look if available.
+	system_font.font_names = PackedStringArray([
+		"Emoji", 
+		"Noto Color Emoji", 
+		"Samsung Color Emoji", 
+		"Apple Color Emoji", 
+		"Segoe UI Emoji"
+	])
+	
+	variation.base_font = system_font
+	
+	# Add our bundled font as the definitive fallback to prevent "tofu".
+	variation.fallbacks = [EMOJI_FONT]
+	
+	return variation
+
+
+## Screen fraction reserved for the on-screen D-Pad when active.
+## Used by MazeRenderer, Help, and Settings to shift content away from the D-Pad area.
+const DPAD_SCREEN_FRACTION := 0.25
+
+
 ## Create a fully styled Button matching the game's brand design.
 ##
 ## Parameters:
@@ -84,3 +117,132 @@ static func create_rounded_stylebox(
 	style.border_width_bottom = border_width
 	style.border_color = border_color
 	return style
+
+
+## Adjust a container's horizontal anchors to avoid the on-screen D-Pad area.
+## Call from any screen that needs to shift its layout when D-Pad is active.
+static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
+	match controls_mode:
+		Config.ControlsMode.LEFT_HANDED:
+			container.anchor_left = DPAD_SCREEN_FRACTION
+			container.anchor_right = 1.0
+			container.offset_left = -100 # Slight bias towards d-pad as requested
+			container.offset_right = -100
+		Config.ControlsMode.RIGHT_HANDED:
+			container.anchor_left = 0.0
+			container.anchor_right = 1.0 - DPAD_SCREEN_FRACTION
+			container.offset_left = 100
+			container.offset_right = 100
+		_:
+			container.anchor_left = 0.0
+			container.anchor_right = 1.0
+			container.offset_left = 0
+			container.offset_right = 0
+
+
+## Transition to a target scene via the branded loading screen.
+## Handles freeing the current scene and setting the loading screen as active.
+## Use for heavier transitions (e.g., initial startup). For lightweight menu
+## transitions, prefer `tree.change_scene_to_file()`.
+static func go_to_scene_with_loading(tree: SceneTree, target_path: String) -> void:
+	var loading_scene = load("res://scenes/loading_screen.tscn").instantiate()
+	loading_scene.target_scene_path = target_path
+	tree.root.add_child(loading_scene)
+	tree.current_scene.queue_free()
+	tree.current_scene = loading_scene
+
+
+## Configure global visual settings (MSAA, AA, and Glow) for the current viewport.
+## Centralizes visual post-processing logic away from drawing logic (MazeRenderer).
+static func configure_environment(node: Node2D, theme: ThemeLoader, performance_mode: bool) -> void:
+	var vp := node.get_viewport()
+	if vp:
+		if performance_mode:
+			vp.msaa_2d = Viewport.MSAA_DISABLED
+			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+		else:
+			vp.msaa_2d = Viewport.MSAA_4X
+			vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+
+	# Update or Create WorldEnvironment
+	var env_node: WorldEnvironment = null
+	for child in node.get_children():
+		if child is WorldEnvironment:
+			env_node = child
+			break
+	
+	if not theme.glow_enabled or performance_mode:
+		if env_node: env_node.queue_free()
+		return
+
+	if not env_node:
+		env_node = WorldEnvironment.new()
+		node.add_child(env_node)
+	
+	var env := Environment.new()
+	env.background_mode = Environment.BG_CANVAS
+	env.glow_enabled = true
+	env.glow_hdr_threshold = 1.5 # Only things > 1.5 glow (Icons/BG stay at 1.0)
+	env.glow_intensity = theme.glow_strength
+	env.glow_bloom = theme.glow_bloom
+	env.glow_blend_mode = Environment.GLOW_BLEND_MODE_ADDITIVE
+	
+	# Standard glow levels for 2D
+	env.set_glow_level(3, 1.0)
+	env_node.environment = env
+
+
+## Multi-layered detection to distinguish between TVs (Chromecast, Android TV) 
+## and Mobile devices (Phones, Tablets).
+##
+## TVs should have virtual D-Pad OFF by default.
+## Tablets/Phones should have virtual D-Pad ON by default.
+static func is_likely_tv() -> bool:
+	if OS.get_name() != "Android":
+		return false
+	
+	# Layer 1: JNI Leanback Check (The gold standard)
+	# Check for "android.software.leanback" feature via Java.
+	var bridge = null
+	if Engine.has_singleton("GodotAndroid"):
+		bridge = Engine.get_singleton("GodotAndroid")
+	elif Engine.has_singleton("GodotAndroidBridge"):
+		bridge = Engine.get_singleton("GodotAndroidBridge")
+
+	if bridge:
+		var activity = bridge.get_activity()
+		if activity:
+			var pm = activity.call("getPackageManager")
+			if pm:
+				if pm.call("hasSystemFeature", "android.software.leanback"):
+					return true
+
+	# Layer 2: Model Name Filtering
+	# Catch common TV brands and generic TV identifiers.
+	var model = OS.get_model_name().to_lower()
+	var tv_keywords = [
+		"tv", "player", "shield", "chromecast", "aft", "box", "adt-", "mibox", 
+		"bravia", "viera", "aquos", "tcl", "hisense", "philips", "stick"
+	]
+	for key in tv_keywords:
+		if key in model:
+			return true
+
+	# Layer 3: Physical Presence Check
+	# If the OS explicitly says no touchscreen is available, trust it.
+	# (User manifest changes to remove faketouch should help here).
+	if not DisplayServer.is_touchscreen_available():
+		return true
+
+	# Layer 4: DPI & Aspect Ratio Heuristics
+	# TVs are almost exclusively 16:9 (1.77) and report low "virtual" DPI (160-213).
+	# Tablets (including 10") are usually 16:10 or 4:3 and have higher DPI (240+).
+	var dpi = DisplayServer.screen_get_dpi()
+	var size = DisplayServer.window_get_size()
+	var aspect = float(size.x) / float(size.y)
+	
+	# Heuristic: Low density + traditional TV aspect ratio
+	if dpi < 220 and abs(aspect - 1.778) < 0.05:
+		return true
+		
+	return false

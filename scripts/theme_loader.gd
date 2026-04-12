@@ -159,6 +159,35 @@ func load_theme(override_dir_name: String = "") -> void:
 	if col_texture == null and not col_frames.is_empty():
 		col_texture = col_frames[0]
 
+## Scan available themes dynamically.
+static func get_available_themes() -> Array[String]:
+	var themes: Array[String] = []
+	
+	# 1. Scan built-in themes
+	_scan_theme_dir("res://themes/", themes)
+	
+	# 2. Scan user-downloaded themes
+	_scan_theme_dir("user://themes/", themes)
+	
+	if themes.is_empty():
+		themes.append("default")
+		
+	return themes
+
+static func _scan_theme_dir(path: String, out_list: Array[String]) -> void:
+	if not DirAccess.dir_exists_absolute(path):
+		return
+		
+	var dir := DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir() and not file_name.begins_with("."):
+				if not out_list.has(file_name):
+					out_list.append(file_name)
+			file_name = dir.get_next()
+
 # ── Private Helpers ──────────────────────────────────────────────────────────
 
 func _load_manifest(dir_path: String) -> Dictionary:

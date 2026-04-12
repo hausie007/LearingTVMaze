@@ -247,7 +247,7 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 			var phrase_so_far: String = word_full.substr(0, next_idx).strip_edges()
 			if not phrase_so_far.is_empty():
 				var word_lang: String = lang
-				get_tree().create_timer(0.6).timeout.connect(
+				get_tree().create_timer(1.5).timeout.connect(
 					func(): TTS.speak(phrase_so_far, 0.7, word_lang)
 				)
 	else:
@@ -275,13 +275,14 @@ func _on_next_round_pressed() -> void:
 	_start_new_maze()
 
 func _on_harder_pressed() -> void:
+	var max_diff: int = Config.DIFFICULTY_SIZES.size() - 1
 	if _is_gotcha_screen:
 		# Gotcha = make it easier
-		Config.difficulty = clampi(Config.difficulty - 1, 0, 4)
+		Config.difficulty = clampi(Config.difficulty - 1, 0, max_diff)
 	else:
 		# Win = make it harder
-		if Config.difficulty >= 6: return
-		Config.difficulty = clampi(Config.difficulty + 1, 0, 6)
+		if Config.difficulty >= max_diff: return
+		Config.difficulty = clampi(Config.difficulty + 1, 0, max_diff)
 
 	Config.save_settings()
 	_start_new_maze()

@@ -45,7 +45,7 @@ func _notification(what: int) -> void:
 			else:
 				_show_quit_dialog()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked: return
 	
 	if event.is_action_pressed("ui_cancel"):
@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/mode_selection.tscn")
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")
@@ -94,21 +94,13 @@ func _create_quit_dialog() -> void:
 	overlay.add_child(center)
 	
 	var panel := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = UIColors.BG_DARK
-	style.corner_radius_top_left = 20
-	style.corner_radius_top_right = 20
-	style.corner_radius_bottom_right = 20
-	style.corner_radius_bottom_left = 20
+	var style: StyleBoxFlat = UIHelpers.create_rounded_stylebox(
+		UIColors.BG_DARK, UIColors.BLUE, 20, 4
+	)
 	style.content_margin_left = 60
 	style.content_margin_right = 60
 	style.content_margin_top = 40
 	style.content_margin_bottom = 40
-	style.border_width_left = 4
-	style.border_width_top = 4
-	style.border_width_right = 4
-	style.border_width_bottom = 4
-	style.border_color = UIColors.BLUE
 	panel.add_theme_stylebox_override("panel", style)
 	center.add_child(panel)
 	

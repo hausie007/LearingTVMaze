@@ -2,6 +2,9 @@
 ## ---------------------------------------------------------------------------
 ## An on-screen virtual directional pad for mobile/touch devices.
 ## Programmatically constructs TouchScreenButtons for directional movement.
+##
+## Registered as Autoload singleton "DPad". Layout updates are signal-driven
+## via Config.on_screen_controls_changed (no per-frame polling).
 ## ---------------------------------------------------------------------------
 extends CanvasLayer
 
@@ -18,13 +21,17 @@ func _ready() -> void:
 	add_child(dpad_container)
 	
 	_update_visibility_and_layout()
+	
+	# React to controls mode changes instead of polling every frame
+	if is_instance_valid(Config):
+		Config.on_screen_controls_changed.connect(_update_visibility_and_layout.unbind(1))
 
 func _rebuild_dpad(viewport_size: Vector2) -> void:
 	for child in dpad_container.get_children():
 		child.queue_free()
 		
 	# Scale up to use almost all of the 25% zone
-	var quarter_screen = viewport_size.x * 0.25
+	var quarter_screen = viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION
 	# D-pad needs to fit 3 buttons width-wise (Left, OK, Right) + 2 spacings
 	var btn_size_val = floori(quarter_screen / 3.5) 
 	var btn_size = Vector2(btn_size_val, btn_size_val)
@@ -101,7 +108,7 @@ func _update_visibility_and_layout() -> void:
 	if dpad_container.get_child_count() == 0:
 		_rebuild_dpad(viewport_size)
 	
-	var quarter_screen = viewport_size.x * 0.25
+	var quarter_screen = viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION
 	var center_x = quarter_screen / 2.0
 	
 	# D-Pad button size was calculated as quarter_screen / 3.5. 
@@ -116,8 +123,3 @@ func _update_visibility_and_layout() -> void:
 		dpad_container.position = Vector2(center_x, base_margin_y)
 	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
 		dpad_container.position = Vector2(viewport_size.x - center_x, base_margin_y)
-
-
-func _process(_delta: float) -> void:
-	# Keep layout in sync if the user adjusts settings
-	_update_visibility_and_layout()
