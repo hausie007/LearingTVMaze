@@ -1,31 +1,118 @@
 [
-  {"word": "SOL", "emoji": "☀️"},
-  {"word": "BIL", "emoji": "🚗"},
-  {"word": "HUS", "emoji": "🏠"},
-  {"word": "BOK", "emoji": "📖"},
-  {"word": "MAT", "emoji": "🍎"},
-  {"word": "IS", "emoji": "🧊"},
-  {"word": "APA", "emoji": "🐒"},
-  {"word": "ÖGA", "emoji": "👁️"},
-  {"word": "ÖRA", "emoji": "👂"},
-  {"word": "BRO", "emoji": "🌉"},
-  {"word": "SKO", "emoji": "👟"},
-  {"word": "TRE", "emoji": "3️⃣"},
-  {"word": "NY", "emoji": "🆕"},
-  {"word": "HEJ", "emoji": "👋"},
-  {"word": "BO", "emoji": "🏠"},
-  {"word": "SE", "emoji": "👁️"},
-  {"word": "GE", "emoji": "🎁"},
-  {"word": "ÄLG", "emoji": "🫎"},
-  {"word": "TÅG", "emoji": "🚄"},
-  {"word": "BUS", "emoji": "🤡"},
-  {"word": "TYP", "emoji": "⌨️"},
-  {"word": "SIL", "emoji": "🥣"},
-  {"word": "KEX", "emoji": "🍪"},
-  {"word": "MUS", "emoji": "🐭"},
-  {"word": "ARM", "emoji": "💪"},
-  {"word": "BEN", "emoji": "🦵"},
-  {"word": "SY", "emoji": "🧵"},
-  {"word": "ÄT", "emoji": "🍴"},
-  {"word": "GÅ", "emoji": "🚶"}
+  {
+    "word": "SOL",
+    "emoji": "☀️"
+  },
+  {
+    "word": "BIL",
+    "emoji": "🚗"
+  },
+  {
+    "word": "HUS",
+    "emoji": "🏠"
+  },
+  {
+    "word": "BOK",
+    "emoji": "📖"
+  },
+  {
+    "word": "MAT",
+    "emoji": "🍎"
+  },
+  {
+    "word": "IS",
+    "emoji": "🍦"
+  },
+  {
+    "word": "APA",
+    "emoji": "🐒"
+  },
+  {
+    "word": "ÖGA",
+    "emoji": "👁️"
+  },
+  {
+    "word": "ÖRA",
+    "emoji": "👂"
+  },
+  {
+    "word": "BRO",
+    "emoji": "🌉"
+  },
+  {
+    "word": "SKO",
+    "emoji": "👟"
+  },
+  {
+    "word": "ÄLG",
+    "emoji": "🫎"
+  },
+  {
+    "word": "TÅG",
+    "emoji": "🚄"
+  },
+  {
+    "word": "MUS",
+    "emoji": "🐭"
+  },
+  {
+    "word": "ARM",
+    "emoji": "💪"
+  },
+  {
+    "word": "BEN",
+    "emoji": "🦵"
+  },
+  {
+    "word": "KEX",
+    "emoji": "🍪"
+  },
+  {
+    "word": "BUSS",
+    "emoji": "🚌"
+  },
+  {
+    "word": "SIL",
+    "emoji": "🥣"
+  },
+  {
+    "word": "GÅS",
+    "emoji": "🦢"
+  },
+  {
+    "word": "NÄSA",
+    "emoji": "👃"
+  },
+  {
+    "word": "LÖV",
+    "emoji": "🍃"
+  },
+  {
+    "word": "MÅNE",
+    "emoji": "🌙"
+  },
+  {
+    "word": "HAV",
+    "emoji": "🌊"
+  },
+  {
+    "word": "RÄV",
+    "emoji": "🦊"
+  },
+  {
+    "word": "BÅT",
+    "emoji": "⛵"
+  },
+  {
+    "word": "KO",
+    "emoji": "🐄"
+  },
+  {
+    "word": "LAMM",
+    "emoji": "🐑"
+  },
+  {
+    "word": "UGGLA",
+    "emoji": "🦉"
+  }
 ]

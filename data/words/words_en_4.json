@@ -1,11 +1,11 @@
 [
   {
-    "word": "WONDERFUL",
+    "word": "STARLIGHT",
     "emoji": "✨"
   },
   {
-    "word": "BUTTERFLY",
-    "emoji": "🦋"
+    "word": "DRAGONFLY",
+    "emoji": "🪽"
   },
   {
     "word": "STRAWBERRY",
@@ -44,8 +44,8 @@
     "emoji": "🐧"
   },
   {
-    "word": "SNOWMAN",
-    "emoji": "☃️"
+    "word": "SNOWGLOBE",
+    "emoji": "❄️"
   },
   {
     "word": "HALLOWEEN",
@@ -68,7 +68,7 @@
     "emoji": "🍍"
   },
   {
-    "word": "LADYBUG",
+    "word": "CATERPILLAR",
     "emoji": "🐞"
   },
   {
@@ -88,20 +88,20 @@
     "emoji": "🔬"
   },
   {
-    "word": "HOSPITAL",
-    "emoji": "🏥"
+    "word": "PLAYGROUND",
+    "emoji": "🛝"
   },
   {
-    "word": "FIRETRUCK",
-    "emoji": "🚒"
+    "word": "SCHOOLBUS",
+    "emoji": "🚌"
   },
   {
-    "word": "BICYCLE",
-    "emoji": "🚲"
+    "word": "SKATEBOARD",
+    "emoji": "🛹"
   },
   {
-    "word": "HELICOPTER",
-    "emoji": "🚁"
+    "word": "PARACHUTE",
+    "emoji": "🪂"
   },
   {
     "word": "SCARECROW",
@@ -120,16 +120,16 @@
     "emoji": "🐿️"
   },
   {
-    "word": "KANGAROO",
-    "emoji": "🦘"
+    "word": "CHIPMUNK",
+    "emoji": "🌰"
   },
   {
-    "word": "ELEPHANT",
-    "emoji": "🐘"
+    "word": "RHINOCEROS",
+    "emoji": "🦏"
   },
   {
-    "word": "GIRAFFE",
-    "emoji": "🦒"
+    "word": "HIPPOPOTAMUS",
+    "emoji": "🦛"
   },
   {
     "word": "CROCODILE",
@@ -140,8 +140,8 @@
     "emoji": "🦩"
   },
   {
-    "word": "OCTOPUS",
-    "emoji": "🐙"
+    "word": "JELLYFISH",
+    "emoji": "🪼"
   },
   {
     "word": "HEDGEHOG",
@@ -184,19 +184,19 @@
     "emoji": "🚂"
   },
   {
-    "word": "BLUE OCEAN",
+    "word": "OCEAN WAVE",
     "emoji": "🌊"
   },
   {
-    "word": "GREEN GRASS",
+    "word": "GRASSLAND",
     "emoji": "🌱"
   },
   {
-    "word": "COLD WATER",
-    "emoji": "🧊"
+    "word": "WATERFALL",
+    "emoji": "💦"
   },
   {
-    "word": "HAPPY FACE",
+    "word": "SMILEY FACE",
     "emoji": "😊"
   }
 ]

@@ -1,22 +1,82 @@
 [
-  {"word": "AURINKO", "emoji": "☀️"},
-  {"word": "KUKA", "emoji": "❓"},
-  {"word": "MINA", "emoji": "🙋"},
-  {"word": "SINA", "emoji": "👈"},
-  {"word": "TALO", "emoji": "🏠"},
-  {"word": "KOIRA", "emoji": "🐶"},
-  {"word": "KISSA", "emoji": "🐱"},
-  {"word": "PUU", "emoji": "🌳"},
-  {"word": "VESI", "emoji": "💧"},
-  {"word": "MAITO", "emoji": "🥛"},
-  {"word": "LEIPI", "emoji": "🍞"},
-  {"word": "OMUNA", "emoji": "🍎"},
-  {"word": "KALA", "emoji": "🐟"},
-  {"word": "LINTU", "emoji": "🐦"},
-  {"word": "AUTO", "emoji": "🚗"},
-  {"word": "KIRJA", "emoji": "📖"},
-  {"word": "KENGAT", "emoji": "👟"},
-  {"word": "KUU", "emoji": "🌙"},
-  {"word": "TAHTI", "emoji": "⭐"},
-  {"word": "LAPSI", "emoji": "👶"}
+  {
+    "word": "AURINKO",
+    "emoji": "☀️"
+  },
+  {
+    "word": "TALO",
+    "emoji": "🏠"
+  },
+  {
+    "word": "KOIRA",
+    "emoji": "🐶"
+  },
+  {
+    "word": "KISSA",
+    "emoji": "🐱"
+  },
+  {
+    "word": "PUU",
+    "emoji": "🌳"
+  },
+  {
+    "word": "VESI",
+    "emoji": "💧"
+  },
+  {
+    "word": "MAITO",
+    "emoji": "🥛"
+  },
+  {
+    "word": "LEIPÄ",
+    "emoji": "🍞"
+  },
+  {
+    "word": "OMENA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "KALA",
+    "emoji": "🐟"
+  },
+  {
+    "word": "LINTU",
+    "emoji": "🐦"
+  },
+  {
+    "word": "AUTO",
+    "emoji": "🚗"
+  },
+  {
+    "word": "KIRJA",
+    "emoji": "📖"
+  },
+  {
+    "word": "KENKÄ",
+    "emoji": "👟"
+  },
+  {
+    "word": "KUU",
+    "emoji": "🌙"
+  },
+  {
+    "word": "TÄHTI",
+    "emoji": "⭐"
+  },
+  {
+    "word": "LAPSI",
+    "emoji": "🧒"
+  },
+  {
+    "word": "KUKKA",
+    "emoji": "🌸"
+  },
+  {
+    "word": "PÖYTÄ",
+    "emoji": "🪵"
+  },
+  {
+    "word": "HATTU",
+    "emoji": "👒"
+  }
 ]

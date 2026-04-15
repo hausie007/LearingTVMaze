@@ -1,202 +1,202 @@
 [
-    {
-        "word": "PRASE",
-        "emoji": "🐷"
-    },
-    {
-        "word": "TYGR",
-        "emoji": "🐅"
-    },
-    {
-        "word": "ŽIRAFA",
-        "emoji": "🦒"
-    },
-    {
-        "word": "OPICE",
-        "emoji": "🐒"
-    },
-    {
-        "word": "PANDA",
-        "emoji": "🐼"
-    },
-    {
-        "word": "VEVERKA",
-        "emoji": "🐿️"
-    },
-    {
-        "word": "LIŠKA",
-        "emoji": "🦊"
-    },
-    {
-        "word": "ZAJÍC",
-        "emoji": "🐰"
-    },
-    {
-        "word": "SRDCE",
-        "emoji": "❤️"
-    },
-    {
-        "word": "SLONÍK",
-        "emoji": "🐘"
-    },
-    {
-        "word": "DRAK",
-        "emoji": "🐉"
-    },
-    {
-        "word": "KVĚTINA",
-        "emoji": "🌸"
-    },
-    {
-        "word": "TRÁVA",
-        "emoji": "🌱"
-    },
-    {
-        "word": "MOTÝL",
-        "emoji": "🦋"
-    },
-    {
-        "word": "VČELA",
-        "emoji": "🐝"
-    },
-    {
-        "word": "MRAVENEC",
-        "emoji": "🐜"
-    },
-    {
-        "word": "PAVOUK",
-        "emoji": "🕷️"
-    },
-    {
-        "word": "BROUK",
-        "emoji": "🪲"
-    },
-    {
-        "word": "ŠNEK",
-        "emoji": "🐌"
-    },
-    {
-        "word": "RYBKA",
-        "emoji": "🐠"
-    },
-    {
-        "word": "KRAB",
-        "emoji": "🦀"
-    },
-    {
-        "word": "ŽRALOK",
-        "emoji": "🦈"
-    },
-    {
-        "word": "CHOBOT",
-        "emoji": "🐘"
-    },
-    {
-        "word": "MOUCHA",
-        "emoji": "🪰"
-    },
-    {
-        "word": "DÝNĚ",
-        "emoji": "🎃"
-    },
-    {
-        "word": "MELOUN",
-        "emoji": "🍉"
-    },
-    {
-        "word": "CITRON",
-        "emoji": "🍋"
-    },
-    {
-        "word": "BANÁN",
-        "emoji": "🍌"
-    },
-    {
-        "word": "HRUŠKA",
-        "emoji": "🍐"
-    },
-    {
-        "word": "TŘEŠEŇ",
-        "emoji": "🍒"
-    },
-    {
-        "word": "JAHODA",
-        "emoji": "🍓"
-    },
-    {
-        "word": "MRKEV",
-        "emoji": "🥕"
-    },
-    {
-        "word": "CIBULE",
-        "emoji": "🧅"
-    },
-    {
-        "word": "CHLÉB",
-        "emoji": "🍞"
-    },
-    {
-        "word": "MLÉKO",
-        "emoji": "🥛"
-    },
-    {
-        "word": "KÁVA",
-        "emoji": "☕"
-    },
-    {
-        "word": "ČAJ",
-        "emoji": "🍵"
-    },
-    {
-        "word": "LÍZÁTKO",
-        "emoji": "🍭"
-    },
-    {
-        "word": "BONBON",
-        "emoji": "🍬"
-    },
-    {
-        "word": "ČOKO",
-        "emoji": "🍫"
-    },
-    {
-        "word": "ZMRZLINA",
-        "emoji": "🍦"
-    },
-    {
-        "word": "KOLÁČ",
-        "emoji": "🥧"
-    },
-    {
-        "word": "HRNEK",
-        "emoji": "☕"
-    },
-    {
-        "word": "TALÍŘ",
-        "emoji": "🍽️"
-    },
-    {
-        "word": "LŽÍCE",
-        "emoji": "🥄"
-    },
-    {
-        "word": "VIDLIČKA",
-        "emoji": "🍴"
-    },
-    {
-        "word": "STŮL",
-        "emoji": "🪑"
-    },
-    {
-        "word": "ŽIDLE",
-        "emoji": "🪑"
-    },
-    {
-        "word": "POSTEL",
-        "emoji": "🛌"
-    },
-    {
-        "word": "ZRCADLO",
-        "emoji": "🪞"
-    }
+  {
+    "word": "PRASE",
+    "emoji": "🐷"
+  },
+  {
+    "word": "TYGR",
+    "emoji": "🐅"
+  },
+  {
+    "word": "ŽIRAFA",
+    "emoji": "🦒"
+  },
+  {
+    "word": "OPICE",
+    "emoji": "🐒"
+  },
+  {
+    "word": "PANDA",
+    "emoji": "🐼"
+  },
+  {
+    "word": "VEVERKA",
+    "emoji": "🐿️"
+  },
+  {
+    "word": "LIŠKA",
+    "emoji": "🦊"
+  },
+  {
+    "word": "ZAJÍC",
+    "emoji": "🐰"
+  },
+  {
+    "word": "SRDCE",
+    "emoji": "❤️"
+  },
+  {
+    "word": "SLONÍK",
+    "emoji": "🐘"
+  },
+  {
+    "word": "DRAK",
+    "emoji": "🐉"
+  },
+  {
+    "word": "KVĚTINA",
+    "emoji": "🌸"
+  },
+  {
+    "word": "TRÁVA",
+    "emoji": "🌱"
+  },
+  {
+    "word": "MOTÝL",
+    "emoji": "🦋"
+  },
+  {
+    "word": "VČELA",
+    "emoji": "🐝"
+  },
+  {
+    "word": "MRAVENEC",
+    "emoji": "🐜"
+  },
+  {
+    "word": "PAVOUK",
+    "emoji": "🕷️"
+  },
+  {
+    "word": "BROUK",
+    "emoji": "🪲"
+  },
+  {
+    "word": "ŠNEK",
+    "emoji": "🐌"
+  },
+  {
+    "word": "RYBKA",
+    "emoji": "🐠"
+  },
+  {
+    "word": "KRAB",
+    "emoji": "🦀"
+  },
+  {
+    "word": "ŽRALOK",
+    "emoji": "🦈"
+  },
+  {
+    "word": "MAMUT",
+    "emoji": "🦣"
+  },
+  {
+    "word": "MOUCHA",
+    "emoji": "🪰"
+  },
+  {
+    "word": "DÝNĚ",
+    "emoji": "🎃"
+  },
+  {
+    "word": "MELOUN",
+    "emoji": "🍉"
+  },
+  {
+    "word": "CITRON",
+    "emoji": "🍋"
+  },
+  {
+    "word": "BANÁN",
+    "emoji": "🍌"
+  },
+  {
+    "word": "HRUŠKA",
+    "emoji": "🍐"
+  },
+  {
+    "word": "TŘEŠEŇ",
+    "emoji": "🍒"
+  },
+  {
+    "word": "JAHODA",
+    "emoji": "🍓"
+  },
+  {
+    "word": "CUKETA",
+    "emoji": "🥒"
+  },
+  {
+    "word": "CIBULE",
+    "emoji": "🧅"
+  },
+  {
+    "word": "CHLÉB",
+    "emoji": "🍞"
+  },
+  {
+    "word": "MLÉKO",
+    "emoji": "🥛"
+  },
+  {
+    "word": "KÁVA",
+    "emoji": "☕"
+  },
+  {
+    "word": "ČAJ",
+    "emoji": "🍵"
+  },
+  {
+    "word": "LÍZÁTKO",
+    "emoji": "🍭"
+  },
+  {
+    "word": "BONBON",
+    "emoji": "🍬"
+  },
+  {
+    "word": "ČOKO",
+    "emoji": "🍫"
+  },
+  {
+    "word": "ZMRZLINA",
+    "emoji": "🍦"
+  },
+  {
+    "word": "KOLÁČ",
+    "emoji": "🥧"
+  },
+  {
+    "word": "HRNEK",
+    "emoji": "🫖"
+  },
+  {
+    "word": "TALÍŘ",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "LŽÍCE",
+    "emoji": "🥄"
+  },
+  {
+    "word": "VIDLIČKA",
+    "emoji": "🍴"
+  },
+  {
+    "word": "STŮL",
+    "emoji": "🪵"
+  },
+  {
+    "word": "ŽIDLE",
+    "emoji": "🪑"
+  },
+  {
+    "word": "POSTEL",
+    "emoji": "🛌"
+  },
+  {
+    "word": "ZRCADLO",
+    "emoji": "🪞"
+  }
 ]

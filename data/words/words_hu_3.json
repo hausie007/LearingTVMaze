@@ -1,22 +1,82 @@
 [
-  {"word": "ELEFÁNT", "emoji": "🐘"},
-  {"word": "ZSIRÁF", "emoji": "🦒"},
-  {"word": "OROSZLÁN", "emoji": "🦁"},
-  {"word": "TIGRIS", "emoji": "🐯"},
-  {"word": "MEDVE", "emoji": "🐻"},
-  {"word": "MAJOM", "emoji": "🐒"},
-  {"word": "NYÚL", "emoji": "🐰"},
-  {"word": "LÓ", "emoji": "🐎"},
-  {"word": "JUH", "emoji": "🐑"},
-  {"word": "MALAC", "emoji": "🐷"},
-  {"word": "TYÚK", "emoji": "🐔"},
-  {"word": "MADÁR", "emoji": "🐦"},
-  {"word": "PILLANGÓ", "emoji": "🦋"},
-  {"word": "MÉH", "emoji": "🐝"},
-  {"word": "HANGYA", "emoji": "🐜"},
-  {"word": "PÓK", "emoji": "🕷️"},
-  {"word": "KÍGYÓ", "emoji": "🐍"},
-  {"word": "TEKNŐS", "emoji": "🐢"},
-  {"word": "BÉKA", "emoji": "🐸"},
-  {"word": "DELFIN", "emoji": "🐬"}
+  {
+    "word": "ELEFÁNT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "ZSIRÁF",
+    "emoji": "🦒"
+  },
+  {
+    "word": "OROSZLÁN",
+    "emoji": "🦁"
+  },
+  {
+    "word": "TIGRIS",
+    "emoji": "🐯"
+  },
+  {
+    "word": "MEDVE",
+    "emoji": "🐻"
+  },
+  {
+    "word": "MAJOM",
+    "emoji": "🐒"
+  },
+  {
+    "word": "NYÚL",
+    "emoji": "🐰"
+  },
+  {
+    "word": "LÓ",
+    "emoji": "🐎"
+  },
+  {
+    "word": "JUH",
+    "emoji": "🐑"
+  },
+  {
+    "word": "MALAC",
+    "emoji": "🐷"
+  },
+  {
+    "word": "TYÚK",
+    "emoji": "🐔"
+  },
+  {
+    "word": "MADÁR",
+    "emoji": "🐦"
+  },
+  {
+    "word": "PILLANGÓ",
+    "emoji": "🦋"
+  },
+  {
+    "word": "MÉH",
+    "emoji": "🐝"
+  },
+  {
+    "word": "HANGYA",
+    "emoji": "🐜"
+  },
+  {
+    "word": "PÓK",
+    "emoji": "🕷️"
+  },
+  {
+    "word": "KÍGYÓ",
+    "emoji": "🐍"
+  },
+  {
+    "word": "TEKNŐS",
+    "emoji": "🐢"
+  },
+  {
+    "word": "BÉKA",
+    "emoji": "🐸"
+  },
+  {
+    "word": "DELFIN",
+    "emoji": "🐬"
+  }
 ]

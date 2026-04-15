@@ -1,23 +1,23 @@
 [
   {
-    "word": "CASA",
-    "emoji": "🏠"
+    "word": "NIDO",
+    "emoji": "🪺"
   },
   {
-    "word": "CANE",
-    "emoji": "🐶"
+    "word": "LAGO",
+    "emoji": "🏞️"
   },
   {
     "word": "NEVE",
     "emoji": "🌨️"
   },
   {
-    "word": "SOLE",
-    "emoji": "☀️"
+    "word": "VENTO",
+    "emoji": "💨"
   },
   {
-    "word": "LUNA",
-    "emoji": "🌙"
+    "word": "NUVOLA",
+    "emoji": "☁️"
   },
   {
     "word": "RANA",
@@ -28,8 +28,8 @@
     "emoji": "🐁"
   },
   {
-    "word": "MARE",
-    "emoji": "🌊"
+    "word": "ISOLA",
+    "emoji": "🏝️"
   },
   {
     "word": "NAVE",
@@ -60,16 +60,16 @@
     "emoji": "🌲"
   },
   {
-    "word": "VINO",
-    "emoji": "🍷"
+    "word": "SUCCO",
+    "emoji": "🧃"
   },
   {
-    "word": "PANE",
-    "emoji": "🍞"
+    "word": "PESCA",
+    "emoji": "🍑"
   },
   {
-    "word": "MELA",
-    "emoji": "🍎"
+    "word": "PRATO",
+    "emoji": "🍏"
   },
   {
     "word": "NERO",
@@ -80,7 +80,7 @@
     "emoji": "👆"
   },
   {
-    "word": "SOLE",
-    "emoji": "🌞"
+    "word": "ALBA",
+    "emoji": "🌅"
   }
 ]

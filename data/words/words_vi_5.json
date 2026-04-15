@@ -1,22 +1,82 @@
 [
-  {"word": "CHAO CAC BAN", "emoji": "👋"},
-  {"word": "MAT TROI SANG", "emoji": "☀️"},
-  {"word": "NGOI NHA NHO", "emoji": "🏠"},
-  {"word": "CHU CHO CON", "emoji": "🐕"},
-  {"word": "CON MEO LUOI", "emoji": "🐈"},
-  {"word": "BIEN XANH LAM", "emoji": "🌊"},
-  {"word": "RUNG XANH MUOT", "emoji": "🌲"},
-  {"word": "MAT TROI VANG", "emoji": "🟡"},
-  {"word": "QUA TAO DO", "emoji": "🍎"},
-  {"word": "BONG HOA DEP", "emoji": "🌸"},
-  {"word": "CHIM DANG BAY", "emoji": "🐦"},
-  {"word": "CA DANG BOI", "emoji": "🐟"},
-  {"word": "EM BE VUI", "emoji": "👦"},
-  {"word": "BE GAI NGOAN", "emoji": "👧"},
-  {"word": "VI KEOT NGOT", "emoji": "🍭"},
-  {"word": "TRAI CAY TUOI", "emoji": "🍎"},
-  {"word": "AN UONG SACH", "emoji": "🥦"},
-  {"word": "UONG NUOC LOC", "emoji": "💧"},
-  {"word": "CHOI CUNG NHAU", "emoji": "🤝"},
-  {"word": "HAT MOT BAI", "emoji": "🎤"}
+  {
+    "word": "CHÀO CÁC BẠN",
+    "emoji": "👋"
+  },
+  {
+    "word": "MẶT TRỜI SÁNG",
+    "emoji": "☀️"
+  },
+  {
+    "word": "NGÔI NHÀ NHỎ",
+    "emoji": "🏠"
+  },
+  {
+    "word": "CHÚ CHÓ CON",
+    "emoji": "🐕"
+  },
+  {
+    "word": "MÈO LƯỜI BIẾNG",
+    "emoji": "🐈"
+  },
+  {
+    "word": "ĐẠI DƯƠNG XANH",
+    "emoji": "🌊"
+  },
+  {
+    "word": "RỪNG XANH MÁT",
+    "emoji": "🌲"
+  },
+  {
+    "word": "MẶT TRỜI VÀNG",
+    "emoji": "🟡"
+  },
+  {
+    "word": "QUẢ TÁO ĐỎ",
+    "emoji": "🍎"
+  },
+  {
+    "word": "BÔNG HOA ĐẸP",
+    "emoji": "🌸"
+  },
+  {
+    "word": "CHIM ĐANG BAY",
+    "emoji": "🐦"
+  },
+  {
+    "word": "CÁ ĐANG BƠI",
+    "emoji": "🐟"
+  },
+  {
+    "word": "EM BÉ VUI",
+    "emoji": "👦"
+  },
+  {
+    "word": "BÉ GÁI NGOAN",
+    "emoji": "👧"
+  },
+  {
+    "word": "VIÊN KẸO NGỌT",
+    "emoji": "🍭"
+  },
+  {
+    "word": "TRÁI CÂY TƯƠI",
+    "emoji": "🍏"
+  },
+  {
+    "word": "ĂN UỐNG LÀNH MẠNH",
+    "emoji": "🥦"
+  },
+  {
+    "word": "UỐNG NƯỚC LỌC",
+    "emoji": "💧"
+  },
+  {
+    "word": "CHƠI CÙNG NHAU",
+    "emoji": "🤝"
+  },
+  {
+    "word": "HÁT MỘT BÀI",
+    "emoji": "🎤"
+  }
 ]

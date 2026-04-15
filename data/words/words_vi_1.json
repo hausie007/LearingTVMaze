@@ -1,22 +1,82 @@
 [
-  {"word": "OTO", "emoji": "🚗"},
-  {"word": "MAY BAY", "emoji": "✈️"},
-  {"word": "TAU THUY", "emoji": "🚢"},
-  {"word": "TAU HOA", "emoji": "🚂"},
-  {"word": "XE DAP", "emoji": "🚲"},
-  {"word": "XE BUYT", "emoji": "🚌"},
-  {"word": "XE TAI", "emoji": "🚚"},
-  {"word": "BONG BAY", "emoji": "🎈"},
-  {"word": "MAY BAY", "emoji": "🚁"},
-  {"word": "TEN LUA", "emoji": "🚀"},
-  {"word": "XE MAY", "emoji": "🏍️"},
-  {"word": "MAY CAY", "emoji": "🚜"},
-  {"word": "CANO", "emoji": "🚤"},
-  {"word": "THUYEN", "emoji": "🛶"},
-  {"word": "XE TRUOT", "emoji": "🛴"},
-  {"word": "PHI CO", "emoji": "🛩️"},
-  {"word": "TAU DIEN", "emoji": "🚇"},
-  {"word": "XE DIEN", "emoji": "🚋"},
-  {"word": "PHA", "emoji": "⛴️"},
-  {"word": "TAU NGAM", "emoji": "⚗️"}
+  {
+    "word": "Ô TÔ",
+    "emoji": "🚗"
+  },
+  {
+    "word": "MÁY BAY",
+    "emoji": "✈️"
+  },
+  {
+    "word": "TÀU THỦY",
+    "emoji": "🚢"
+  },
+  {
+    "word": "TÀU HỎA",
+    "emoji": "🚂"
+  },
+  {
+    "word": "XE ĐẠP",
+    "emoji": "🚲"
+  },
+  {
+    "word": "XE BUÝT",
+    "emoji": "🚌"
+  },
+  {
+    "word": "XE TẢI",
+    "emoji": "🚚"
+  },
+  {
+    "word": "BÓNG BAY",
+    "emoji": "🎈"
+  },
+  {
+    "word": "TRỰC THĂNG",
+    "emoji": "🚁"
+  },
+  {
+    "word": "TÊN LỬA",
+    "emoji": "🚀"
+  },
+  {
+    "word": "XE MÁY",
+    "emoji": "🏍️"
+  },
+  {
+    "word": "MÁY CÀY",
+    "emoji": "🚜"
+  },
+  {
+    "word": "CA NÔ",
+    "emoji": "🚤"
+  },
+  {
+    "word": "THUYỀN",
+    "emoji": "🛶"
+  },
+  {
+    "word": "XE TRƯỢT",
+    "emoji": "🛴"
+  },
+  {
+    "word": "PHI CƠ",
+    "emoji": "🛩️"
+  },
+  {
+    "word": "TÀU ĐIỆN",
+    "emoji": "🚇"
+  },
+  {
+    "word": "XE ĐIỆN",
+    "emoji": "🚋"
+  },
+  {
+    "word": "PHÀ",
+    "emoji": "⛴️"
+  },
+  {
+    "word": "TÀU LỚN",
+    "emoji": "🛳️"
+  }
 ]

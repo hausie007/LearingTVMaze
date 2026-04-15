@@ -1,22 +1,82 @@
 [
-  {"word": "IL SOLE SPLENDE", "emoji": "☀️"},
-  {"word": "AMA IL TUO PIANETA", "emoji": "🌍"},
-  {"word": "SORRIDI E SII FELICE", "emoji": "😊"},
-  {"word": "LA MIA FAMIGLIA", "emoji": "❤️"},
-  {"word": "GLI AMICI CONDIVIDONO", "emoji": "🤝"},
-  {"word": "GLI UCCELLI VOLANO ALTO", "emoji": "🦅"},
-  {"word": "IL NOSTRO MARE BLU", "emoji": "🌊"},
-  {"word": "BOSCO PIENO DI VITA", "emoji": "🌲"},
-  {"word": "MANGIA MOLTA FRUTTA", "emoji": "🍏"},
-  {"word": "BEVI ACQUA PER CRESCERE", "emoji": "💧"},
-  {"word": "DÌ GRAZIE E PER FAVORE", "emoji": "🙏"},
-  {"word": "AIUTA TUTTI QUANTI", "emoji": "🤝"},
-  {"word": "DORMI BENE STASERA", "emoji": "😴"},
-  {"word": "LEGGI UNA BELLA STORIA", "emoji": "📖"},
-  {"word": "GIOCA CON I TUOI GIOCHI", "emoji": "🧸"},
-  {"word": "IMPARA OGNI GIORNO", "emoji": "📚"},
-  {"word": "L'ARCOBALENO HA COLORI", "emoji": "🌈"},
-  {"word": "LE STELLE BRILLANO", "emoji": "⭐"},
-  {"word": "LA LUNA CI ILLUMINA", "emoji": "🌙"},
-  {"word": "CAMMINA CON GIOIA", "emoji": "🚶"}
+  {
+    "word": "IL SOLE SPLENDE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "AMA IL TUO PIANETA",
+    "emoji": "🌍"
+  },
+  {
+    "word": "SORRIDI E SII FELICE",
+    "emoji": "😊"
+  },
+  {
+    "word": "LA MIA FAMIGLIA È AMORE",
+    "emoji": "❤️"
+  },
+  {
+    "word": "GLI AMICI CONDIVIDONO",
+    "emoji": "🤝"
+  },
+  {
+    "word": "GLI UCCELLI VOLANO IN ALTO",
+    "emoji": "🦅"
+  },
+  {
+    "word": "IL NOSTRO MARE È BLU",
+    "emoji": "🌊"
+  },
+  {
+    "word": "IL BOSCO È PIENO DI VITA",
+    "emoji": "🌲"
+  },
+  {
+    "word": "MANGIA MOLTA FRUTTA",
+    "emoji": "🍏"
+  },
+  {
+    "word": "BEVI ACQUA PER CRESCERE",
+    "emoji": "💧"
+  },
+  {
+    "word": "DI GRAZIE E PER FAVORE",
+    "emoji": "🙏"
+  },
+  {
+    "word": "AIUTA TUTTI GLI ALTRI",
+    "emoji": "🫶"
+  },
+  {
+    "word": "DORMI BENE STANOTTE",
+    "emoji": "😴"
+  },
+  {
+    "word": "LEGGI UNA BELLA STORIA",
+    "emoji": "📖"
+  },
+  {
+    "word": "GIOCA CON I TUOI GIOCATTOLI",
+    "emoji": "🧸"
+  },
+  {
+    "word": "IMPARA OGNI GIORNO",
+    "emoji": "📚"
+  },
+  {
+    "word": "L'ARCOBALENO HA TANTI COLORI",
+    "emoji": "🌈"
+  },
+  {
+    "word": "LE STELLE BRILLANO",
+    "emoji": "⭐"
+  },
+  {
+    "word": "LA LUNA CI ILLUMINA",
+    "emoji": "🌙"
+  },
+  {
+    "word": "CAMMINA CON GIOIA",
+    "emoji": "🚶"
+  }
 ]

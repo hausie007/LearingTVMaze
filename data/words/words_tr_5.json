@@ -1,22 +1,82 @@
 [
-  {"word": "SELAM ARKADAŞLAR", "emoji": "👋"},
-  {"word": "PARLAK GÜNEŞ", "emoji": "☀️"},
-  {"word": "KÜÇÜK EVİM", "emoji": "🏠"},
-  {"word": "OYUNCU KÖPEK", "emoji": "🐕"},
-  {"word": "UYKUCU KEDİ", "emoji": "🐈"},
-  {"word": "MAVİ DENİZ", "emoji": "🌊"},
-  {"word": "YEŞİL ORMAN", "emoji": "🌲"},
-  {"word": "SARI GÜNEŞ", "emoji": "🟡"},
-  {"word": "KIRMIZI ELMA", "emoji": "🍎"},
-  {"word": "GÜZEL ÇİÇEK", "emoji": "🌸"},
-  {"word": "UÇAN KUŞ", "emoji": "🐦"},
-  {"word": "YÜZEN BALIK", "emoji": "🐟"},
-  {"word": "MUTLU ÇOCUK", "emoji": "👦"},
-  {"word": "NEŞELİ KIZ", "emoji": "👧"},
-  {"word": "TATLI ŞEKER", "emoji": "🍭"},
-  {"word": "TAZE MEYVE", "emoji": "🍎"},
-  {"word": "SAĞLIKLI BESLEN", "emoji": "🥦"},
-  {"word": "SU İÇELİM", "emoji": "💧"},
-  {"word": "BİRLİKTE OYNA", "emoji": "🤝"},
-  {"word": "ŞARKI SÖYLE", "emoji": "🎤"}
+  {
+    "word": "SELAM ARKADAŞLAR",
+    "emoji": "👋"
+  },
+  {
+    "word": "PARLAK GÜNEŞ",
+    "emoji": "☀️"
+  },
+  {
+    "word": "KÜÇÜK EV",
+    "emoji": "🏠"
+  },
+  {
+    "word": "OYUNCU KÖPEK",
+    "emoji": "🐕"
+  },
+  {
+    "word": "UYKUCU KEDİ",
+    "emoji": "🐈"
+  },
+  {
+    "word": "MAVİ DENİZ",
+    "emoji": "🌊"
+  },
+  {
+    "word": "YEŞİL ORMAN",
+    "emoji": "🌲"
+  },
+  {
+    "word": "SARI GÜNEŞ",
+    "emoji": "🟡"
+  },
+  {
+    "word": "KIRMIZI ELMA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "GÜZEL ÇİÇEK",
+    "emoji": "🌸"
+  },
+  {
+    "word": "UÇAN KUŞ",
+    "emoji": "🐦"
+  },
+  {
+    "word": "YÜZEN BALIK",
+    "emoji": "🐟"
+  },
+  {
+    "word": "MUTLU ÇOCUK",
+    "emoji": "👦"
+  },
+  {
+    "word": "NEŞELİ KIZ",
+    "emoji": "👧"
+  },
+  {
+    "word": "ŞEKERLEME",
+    "emoji": "🍭"
+  },
+  {
+    "word": "TAZE MEYVE",
+    "emoji": "🍏"
+  },
+  {
+    "word": "SAĞLIKLI BESLEN",
+    "emoji": "🥦"
+  },
+  {
+    "word": "SU İÇ",
+    "emoji": "💧"
+  },
+  {
+    "word": "BİRLİKTE OYNA",
+    "emoji": "🤝"
+  },
+  {
+    "word": "ŞARKI SÖYLE",
+    "emoji": "🎤"
+  }
 ]

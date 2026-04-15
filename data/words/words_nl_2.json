@@ -1,22 +1,82 @@
 [
-  {"word": "APPEL", "emoji": "🍎"},
-  {"word": "BANAAN", "emoji": "🍌"},
-  {"word": "WATER", "emoji": "💧"},
-  {"word": "BROOD", "emoji": "🥖"},
-  {"word": "BLOEM", "emoji": "🌸"},
-  {"word": "VOGEL", "emoji": "🐦"},
-  {"word": "BROEK", "emoji": "👖"},
-  {"word": "STOEL", "emoji": "🪑"},
-  {"word": "TAFEL", "emoji": "🛋️"},
-  {"word": "FEEST", "emoji": "🥳"},
-  {"word": "JARIG", "emoji": "🎂"},
-  {"word": "KLEIN", "emoji": "🤏"},
-  {"word": "GROOT", "emoji": "🐘"},
-  {"word": "TREIN", "emoji": "🚂"},
-  {"word": "FIETS", "emoji": "🚲"},
-  {"word": "TAART", "emoji": "🍰"},
-  {"word": "VLAGG", "emoji": "🚩"},
-  {"word": "BRAND", "emoji": "🔥"},
-  {"word": "STIER", "emoji": "🐂"},
-  {"word": "SLANG", "emoji": "🐍"}
+  {
+    "word": "APPEL",
+    "emoji": "🍎"
+  },
+  {
+    "word": "BANAAN",
+    "emoji": "🍌"
+  },
+  {
+    "word": "WATER",
+    "emoji": "💧"
+  },
+  {
+    "word": "BROOD",
+    "emoji": "🥖"
+  },
+  {
+    "word": "BLOEM",
+    "emoji": "🌸"
+  },
+  {
+    "word": "VOGEL",
+    "emoji": "🐦"
+  },
+  {
+    "word": "BROEK",
+    "emoji": "👖"
+  },
+  {
+    "word": "STOEL",
+    "emoji": "🪑"
+  },
+  {
+    "word": "TAFEL",
+    "emoji": "🛋️"
+  },
+  {
+    "word": "FEEST",
+    "emoji": "🥳"
+  },
+  {
+    "word": "JARIG",
+    "emoji": "🎂"
+  },
+  {
+    "word": "KLEIN",
+    "emoji": "🤏"
+  },
+  {
+    "word": "GROOT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "TREIN",
+    "emoji": "🚂"
+  },
+  {
+    "word": "FIETS",
+    "emoji": "🚲"
+  },
+  {
+    "word": "TAART",
+    "emoji": "🍰"
+  },
+  {
+    "word": "VLAG",
+    "emoji": "🚩"
+  },
+  {
+    "word": "BRAND",
+    "emoji": "🔥"
+  },
+  {
+    "word": "STIER",
+    "emoji": "🐂"
+  },
+  {
+    "word": "SLANG",
+    "emoji": "🐍"
+  }
 ]

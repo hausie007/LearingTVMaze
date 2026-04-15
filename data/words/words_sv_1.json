@@ -1,32 +1,122 @@
 [
-  {"word": "HUND", "emoji": "🐶"},
-  {"word": "KAKA", "emoji": "🍪"},
-  {"word": "KULA", "emoji": "🔮"},
-  {"word": "DANS", "emoji": "💃"},
-  {"word": "BARN", "emoji": "🧒"},
-  {"word": "KATT", "emoji": "🐱"},
-  {"word": "FISK", "emoji": "🐟"},
-  {"word": "KÖTT", "emoji": "🥩"},
-  {"word": "GLAD", "emoji": "😊"},
-  {"word": "GRÄS", "emoji": "🌱"},
-  {"word": "HÄST", "emoji": "🐴"},
-  {"word": "LAMM", "emoji": "🐑"},
-  {"word": "MJÖLK", "emoji": "🥛"},
-  {"word": "MYRA", "emoji": "🐜"},
-  {"word": "NATT", "emoji": "🌙"},
-  {"word": "PÄRA", "emoji": "🍐"},
-  {"word": "RÄV", "emoji": "🦊"},
-  {"word": "SNÖ", "emoji": "❄️"},
-  {"word": "STOL", "emoji": "🪑"},
-  {"word": "TRÄD", "emoji": "🌳"},
-  {"word": "BORD", "emoji": "🛋️"},
-  {"word": "LJUS", "emoji": "🕯️"},
-  {"word": "MÅNE", "emoji": "🌙"},
-  {"word": "REGN", "emoji": "🌧️"},
-  {"word": "VAGN", "emoji": "🛒"},
-  {"word": "BLÅ", "emoji": "🟦"},
-  {"word": "RÖD", "emoji": "🟥"},
-  {"word": "GUL", "emoji": "🟨"},
-  {"word": "GRÅ", "emoji": "⬜"},
-  {"word": "VIT", "emoji": "⬜"}
+  {
+    "word": "HUND",
+    "emoji": "🐶"
+  },
+  {
+    "word": "KAKA",
+    "emoji": "🍪"
+  },
+  {
+    "word": "KULA",
+    "emoji": "🔮"
+  },
+  {
+    "word": "DANS",
+    "emoji": "💃"
+  },
+  {
+    "word": "BARN",
+    "emoji": "🧒"
+  },
+  {
+    "word": "KATT",
+    "emoji": "🐱"
+  },
+  {
+    "word": "FISK",
+    "emoji": "🐟"
+  },
+  {
+    "word": "KÖTTBULLE",
+    "emoji": "🍝"
+  },
+  {
+    "word": "GRÄS",
+    "emoji": "🌱"
+  },
+  {
+    "word": "HÄST",
+    "emoji": "🐴"
+  },
+  {
+    "word": "MJÖLK",
+    "emoji": "🥛"
+  },
+  {
+    "word": "MYRA",
+    "emoji": "🐜"
+  },
+  {
+    "word": "NATT",
+    "emoji": "🌙"
+  },
+  {
+    "word": "PÄRON",
+    "emoji": "🍐"
+  },
+  {
+    "word": "SNÖ",
+    "emoji": "❄️"
+  },
+  {
+    "word": "STOL",
+    "emoji": "🪑"
+  },
+  {
+    "word": "TRÄD",
+    "emoji": "🌳"
+  },
+  {
+    "word": "BORD",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "LJUS",
+    "emoji": "🕯️"
+  },
+  {
+    "word": "REGN",
+    "emoji": "🌧️"
+  },
+  {
+    "word": "VAGN",
+    "emoji": "🛒"
+  },
+  {
+    "word": "BLÅTT",
+    "emoji": "🟦"
+  },
+  {
+    "word": "RÖTT",
+    "emoji": "🟥"
+  },
+  {
+    "word": "GULT",
+    "emoji": "🟨"
+  },
+  {
+    "word": "VITT",
+    "emoji": "⬜"
+  },
+  {
+    "word": "RING",
+    "emoji": "💍"
+  },
+  {
+    "word": "SAGA",
+    "emoji": "📖"
+  },
+  {
+    "word": "ROS",
+    "emoji": "🌹"
+  },
+  {
+    "word": "HAND",
+    "emoji": "🖐️"
+  },
+  {
+    "word": "MUN",
+    "emoji": "👄"
+  }
 ]

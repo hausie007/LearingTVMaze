@@ -1,90 +1,90 @@
 [
-    {
-        "word": "VLAK",
-        "emoji": "🚂"
-    },
-    {
-        "word": "KVET",
-        "emoji": "🌸"
-    },
-    {
-        "word": "MORE",
-        "emoji": "🌊"
-    },
-    {
-        "word": "HRAD",
-        "emoji": "🏰"
-    },
-    {
-        "word": "KRÁĽ",
-        "emoji": "👑"
-    },
-    {
-        "word": "SLNKO",
-        "emoji": "☀️"
-    },
-    {
-        "word": "LUNA",
-        "emoji": "🌙"
-    },
-    {
-        "word": "VODA",
-        "emoji": "💧"
-    },
-    {
-        "word": "LOĎ",
-        "emoji": "⛵"
-    },
-    {
-        "word": "MLIEKO",
-        "emoji": "🥛"
-    },
-    {
-        "word": "HRUŠKA",
-        "emoji": "🍐"
-    },
-    {
-        "word": "JABLKO",
-        "emoji": "🍎"
-    },
-    {
-        "word": "LÍŠKA",
-        "emoji": "🦊"
-    },
-    {
-        "word": "ZAJAC",
-        "emoji": "🐰"
-    },
-    {
-        "word": "PTÁK",
-        "emoji": "🐦"
-    },
-    {
-        "word": "ZOBÁK",
-        "emoji": "🦆"
-    },
-    {
-        "word": "KURA",
-        "emoji": "🐔"
-    },
-    {
-        "word": "OHEŇ",
-        "emoji": "🔥"
-    },
-    {
-        "word": "STROM",
-        "emoji": "🌳"
-    },
-    {
-        "word": "LÚKA",
-        "emoji": "🌱"
-    },
-    {
-        "word": "KOSA",
-        "emoji": "🌾"
-    },
-    {
-        "word": "PLUH",
-        "emoji": "🚜"
-    }
+  {
+    "word": "VLAK",
+    "emoji": "🚂"
+  },
+  {
+    "word": "KVET",
+    "emoji": "🌸"
+  },
+  {
+    "word": "MORE",
+    "emoji": "🌊"
+  },
+  {
+    "word": "HRAD",
+    "emoji": "🏰"
+  },
+  {
+    "word": "KRÁĽ",
+    "emoji": "👑"
+  },
+  {
+    "word": "SLNKO",
+    "emoji": "☀️"
+  },
+  {
+    "word": "MESIAC",
+    "emoji": "🌙"
+  },
+  {
+    "word": "VODA",
+    "emoji": "💧"
+  },
+  {
+    "word": "LOĎ",
+    "emoji": "⛵"
+  },
+  {
+    "word": "MLIEKO",
+    "emoji": "🥛"
+  },
+  {
+    "word": "HRUŠKA",
+    "emoji": "🍐"
+  },
+  {
+    "word": "JABĹKO",
+    "emoji": "🍎"
+  },
+  {
+    "word": "LÍŠKA",
+    "emoji": "🦊"
+  },
+  {
+    "word": "ZAJAC",
+    "emoji": "🐰"
+  },
+  {
+    "word": "VTÁK",
+    "emoji": "🐦"
+  },
+  {
+    "word": "ZOBÁK",
+    "emoji": "🐤"
+  },
+  {
+    "word": "KURA",
+    "emoji": "🐔"
+  },
+  {
+    "word": "OHEŇ",
+    "emoji": "🔥"
+  },
+  {
+    "word": "STROM",
+    "emoji": "🌳"
+  },
+  {
+    "word": "LÚKA",
+    "emoji": "🌱"
+  },
+  {
+    "word": "PLUH",
+    "emoji": "🚜"
+  },
+  {
+    "word": "OBLAK",
+    "emoji": "☁️"
+  }
 ]

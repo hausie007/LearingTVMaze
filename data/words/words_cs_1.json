@@ -1,202 +1,202 @@
 [
-    {
-        "word": "AUTO",
-        "emoji": "🚗"
-    },
-    {
-        "word": "SLON",
-        "emoji": "🐘"
-    },
-    {
-        "word": "HRAD",
-        "emoji": "🏰"
-    },
-    {
-        "word": "RŮŽE",
-        "emoji": "🌹"
-    },
-    {
-        "word": "KOČKA",
-        "emoji": "🐱"
-    },
-    {
-        "word": "MYŠKA",
-        "emoji": "🐁"
-    },
-    {
-        "word": "OKNO",
-        "emoji": "🪟"
-    },
-    {
-        "word": "STROM",
-        "emoji": "🌳"
-    },
-    {
-        "word": "PTÁK",
-        "emoji": "🐦"
-    },
-    {
-        "word": "ŽÁBA",
-        "emoji": "🐸"
-    },
-    {
-        "word": "LOĎKA",
-        "emoji": "⛵"
-    },
-    {
-        "word": "BOTY",
-        "emoji": "👞"
-    },
-    {
-        "word": "VLAK",
-        "emoji": "🚂"
-    },
-    {
-        "word": "KOLO",
-        "emoji": "🚲"
-    },
-    {
-        "word": "RUKA",
-        "emoji": "🖐️"
-    },
-    {
-        "word": "NOHA",
-        "emoji": "🦶"
-    },
-    {
-        "word": "OČI",
-        "emoji": "👀"
-    },
-    {
-        "word": "UŠI",
-        "emoji": "👂"
-    },
-    {
-        "word": "KOSA",
-        "emoji": "🐦"
-    },
-    {
-        "word": "SOVA",
-        "emoji": "🦉"
-    },
-    {
-        "word": "DORT",
-        "emoji": "🎂"
-    },
-    {
-        "word": "MÁMA",
-        "emoji": "👩"
-    },
-    {
-        "word": "TÁTA",
-        "emoji": "👨"
-    },
-    {
-        "word": "PERO",
-        "emoji": "🖊️"
-    },
-    {
-        "word": "DÍRA",
-        "emoji": "🕳️"
-    },
-    {
-        "word": "ZLATO",
-        "emoji": "🌟"
-    },
-    {
-        "word": "MRKEV",
-        "emoji": "🥕"
-    },
-    {
-        "word": "PAPÍR",
-        "emoji": "📄"
-    },
-    {
-        "word": "JABLKO",
-        "emoji": "🍎"
-    },
-    {
-        "word": "MRAK",
-        "emoji": "☁️"
-    },
-    {
-        "word": "VÍTR",
-        "emoji": "💨"
-    },
-    {
-        "word": "BOTA",
-        "emoji": "👢"
-    },
-    {
-        "word": "SLUNCE",
-        "emoji": "☀️"
-    },
-    {
-        "word": "MĚSÍC",
-        "emoji": "🌙"
-    },
-    {
-        "word": "HRA",
-        "emoji": "🎲"
-    },
-    {
-        "word": "KNIHA",
-        "emoji": "📖"
-    },
-    {
-        "word": "TUŽKA",
-        "emoji": "✏️"
-    },
-    {
-        "word": "VLK",
-        "emoji": "🐺"
-    },
-    {
-        "word": "MEDVĚD",
-        "emoji": "🐻"
-    },
-    {
-        "word": "RÁDIO",
-        "emoji": "📻"
-    },
-    {
-        "word": "ZIMA",
-        "emoji": "❄️"
-    },
-    {
-        "word": "LÉTO",
-        "emoji": "🌻"
-    },
-    {
-        "word": "JARO",
-        "emoji": "🌸"
-    },
-    {
-        "word": "PODZIM",
-        "emoji": "🍁"
-    },
-    {
-        "word": "VLASY",
-        "emoji": "💇"
-    },
-    {
-        "word": "BARVA",
-        "emoji": "🎨"
-    },
-    {
-        "word": "PÍSEK",
-        "emoji": "🏖️"
-    },
-    {
-        "word": "VODA",
-        "emoji": "💧"
-    },
-    {
-        "word": "SNÍH",
-        "emoji": "⛄"
-    },
-    {
-        "word": "KRÁVA",
-        "emoji": "🐮"
-    }
+  {
+    "word": "AUTO",
+    "emoji": "🚗"
+  },
+  {
+    "word": "SLON",
+    "emoji": "🐘"
+  },
+  {
+    "word": "HRAD",
+    "emoji": "🏰"
+  },
+  {
+    "word": "RŮŽE",
+    "emoji": "🌹"
+  },
+  {
+    "word": "KOČKA",
+    "emoji": "🐱"
+  },
+  {
+    "word": "MYŠKA",
+    "emoji": "🐁"
+  },
+  {
+    "word": "OKNO",
+    "emoji": "🪟"
+  },
+  {
+    "word": "STROM",
+    "emoji": "🌳"
+  },
+  {
+    "word": "PTÁK",
+    "emoji": "🕊️"
+  },
+  {
+    "word": "ŽÁBA",
+    "emoji": "🐸"
+  },
+  {
+    "word": "LOĎKA",
+    "emoji": "⛵"
+  },
+  {
+    "word": "BOTY",
+    "emoji": "👞"
+  },
+  {
+    "word": "VLAK",
+    "emoji": "🚂"
+  },
+  {
+    "word": "KOLO",
+    "emoji": "🚲"
+  },
+  {
+    "word": "RUKA",
+    "emoji": "🖐️"
+  },
+  {
+    "word": "NOHA",
+    "emoji": "🦶"
+  },
+  {
+    "word": "OČI",
+    "emoji": "👀"
+  },
+  {
+    "word": "UŠI",
+    "emoji": "👂"
+  },
+  {
+    "word": "VRÁNA",
+    "emoji": "🐦"
+  },
+  {
+    "word": "OREL",
+    "emoji": "🦅"
+  },
+  {
+    "word": "DORT",
+    "emoji": "🎂"
+  },
+  {
+    "word": "MÁMA",
+    "emoji": "👩"
+  },
+  {
+    "word": "TÁTA",
+    "emoji": "👨"
+  },
+  {
+    "word": "PERO",
+    "emoji": "🖊️"
+  },
+  {
+    "word": "DÍRA",
+    "emoji": "🕳️"
+  },
+  {
+    "word": "ZLATO",
+    "emoji": "🌟"
+  },
+  {
+    "word": "MRKEV",
+    "emoji": "🥕"
+  },
+  {
+    "word": "PAPÍR",
+    "emoji": "📄"
+  },
+  {
+    "word": "JABLKO",
+    "emoji": "🍎"
+  },
+  {
+    "word": "MRÁZ",
+    "emoji": "🌬️"
+  },
+  {
+    "word": "VÍTR",
+    "emoji": "💨"
+  },
+  {
+    "word": "BOTA",
+    "emoji": "👢"
+  },
+  {
+    "word": "SLUNCE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "MĚSÍC",
+    "emoji": "🌙"
+  },
+  {
+    "word": "HRA",
+    "emoji": "🎲"
+  },
+  {
+    "word": "KNIHA",
+    "emoji": "📖"
+  },
+  {
+    "word": "TUŽKA",
+    "emoji": "✏️"
+  },
+  {
+    "word": "KRTEK",
+    "emoji": "🦫"
+  },
+  {
+    "word": "MEDVĚD",
+    "emoji": "🐻"
+  },
+  {
+    "word": "RÁDIO",
+    "emoji": "📻"
+  },
+  {
+    "word": "ZIMA",
+    "emoji": "❄️"
+  },
+  {
+    "word": "LÉTO",
+    "emoji": "🌻"
+  },
+  {
+    "word": "JARO",
+    "emoji": "🌸"
+  },
+  {
+    "word": "PODZIM",
+    "emoji": "🍁"
+  },
+  {
+    "word": "VLASY",
+    "emoji": "💇"
+  },
+  {
+    "word": "BARVA",
+    "emoji": "🎨"
+  },
+  {
+    "word": "PÍSEK",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "ŘEKA",
+    "emoji": "🌊"
+  },
+  {
+    "word": "LEDY",
+    "emoji": "🧊"
+  },
+  {
+    "word": "KRÁVA",
+    "emoji": "🐮"
+  }
 ]

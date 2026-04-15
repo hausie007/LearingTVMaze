@@ -1,22 +1,82 @@
 [
-  {"word": "ALMA", "emoji": "🍎"},
-  {"word": "BANÁN", "emoji": "🍌"},
-  {"word": "NARANCS", "emoji": "🍊"},
-  {"word": "EPER", "emoji": "🍓"},
-  {"word": "SZŐLŐ", "emoji": "🍇"},
-  {"word": "FAGYI", "emoji": "🍦"},
-  {"word": "CUKOR", "emoji": "🍬"},
-  {"word": "TEJ", "emoji": "🥛"},
-  {"word": "KENYÉR", "emoji": "🍞"},
-  {"word": "SAJT", "emoji": "🧀"},
-  {"word": "TOJÁS", "emoji": "🥚"},
-  {"word": "CSIRKE", "emoji": "🍗"},
-  {"word": "HAL", "emoji": "🐟"},
-  {"word": "RIZS", "emoji": "🍚"},
-  {"word": "TÉSZTA", "emoji": "🍝"},
-  {"word": "SALÁTA", "emoji": "🥗"},
-  {"word": "PARADICSOM", "emoji": "🍅"},
-  {"word": "UBORKA", "emoji": "🥒"},
-  {"word": "BURGONYA", "emoji": "🥔"},
-  {"word": "SÁRGARÉPA", "emoji": "🥕"}
+  {
+    "word": "ALMA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "BANÁN",
+    "emoji": "🍌"
+  },
+  {
+    "word": "NARANCS",
+    "emoji": "🍊"
+  },
+  {
+    "word": "EPER",
+    "emoji": "🍓"
+  },
+  {
+    "word": "SZŐLŐ",
+    "emoji": "🍇"
+  },
+  {
+    "word": "FAGYI",
+    "emoji": "🍦"
+  },
+  {
+    "word": "CUKOR",
+    "emoji": "🍬"
+  },
+  {
+    "word": "TEJ",
+    "emoji": "🥛"
+  },
+  {
+    "word": "KENYÉR",
+    "emoji": "🍞"
+  },
+  {
+    "word": "SAJT",
+    "emoji": "🧀"
+  },
+  {
+    "word": "TOJÁS",
+    "emoji": "🥚"
+  },
+  {
+    "word": "CSIRKE",
+    "emoji": "🍗"
+  },
+  {
+    "word": "HAL",
+    "emoji": "🐟"
+  },
+  {
+    "word": "RIZS",
+    "emoji": "🍚"
+  },
+  {
+    "word": "TÉSZTA",
+    "emoji": "🍝"
+  },
+  {
+    "word": "SALÁTA",
+    "emoji": "🥗"
+  },
+  {
+    "word": "PARADICSOM",
+    "emoji": "🍅"
+  },
+  {
+    "word": "UBORKA",
+    "emoji": "🥒"
+  },
+  {
+    "word": "BURGONYA",
+    "emoji": "🥔"
+  },
+  {
+    "word": "SÁRGARÉPA",
+    "emoji": "🥕"
+  }
 ]

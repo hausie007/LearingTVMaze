@@ -1,22 +1,82 @@
 [
-  {"word": "THE SUN IS SHINING", "emoji": "☀️"},
-  {"word": "SMILE AND BE HAPPY", "emoji": "😊"},
-  {"word": "I LOVE MY FAMILY", "emoji": "❤️"},
-  {"word": "IT IS RAINING CATS", "emoji": "🐈"},
-  {"word": "A RAINBOW IN THE SKY", "emoji": "🌈"},
-  {"word": "GOOD NIGHT SLEEP TIGHT", "emoji": "😴"},
-  {"word": "LEARNING IS LOTS OF FUN", "emoji": "📚"},
-  {"word": "WATCH THE GREEN GRASS", "emoji": "🌱"},
-  {"word": "LITTLE BIRDS SINGING", "emoji": "🐦"},
-  {"word": "MY DOG LIKES TO PLAY", "emoji": "🐕"},
-  {"word": "THE MOON IS BRIGHT", "emoji": "🌙"},
-  {"word": "WE EAT HEALTHY FOOD", "emoji": "🍏"},
-  {"word": "FRIENDS PLAY TOGETHER", "emoji": "🤝"},
-  {"word": "BIRDS FLY VERY HIGH", "emoji": "🦅"},
-  {"word": "THE EARTH IS ROUND", "emoji": "🌍"},
-  {"word": "KINDNESS IS MAGIC", "emoji": "✨"},
-  {"word": "BE BRAVE AND STRONG", "emoji": "🦁"},
-  {"word": "WATER IS GOOD FOR YOU", "emoji": "💧"},
-  {"word": "READ A GOOD BOOK", "emoji": "📖"},
-  {"word": "SHARE YOUR NICE TOYS", "emoji": "🧸"}
+  {
+    "word": "THE SUN IS SHINING",
+    "emoji": "☀️"
+  },
+  {
+    "word": "SMILE AND BE HAPPY",
+    "emoji": "😊"
+  },
+  {
+    "word": "I LOVE MY FAMILY",
+    "emoji": "❤️"
+  },
+  {
+    "word": "IT IS RAINING NOW",
+    "emoji": "🐈"
+  },
+  {
+    "word": "A RAINBOW IN THE SKY",
+    "emoji": "🌈"
+  },
+  {
+    "word": "GOOD NIGHT SLEEP TIGHT",
+    "emoji": "😴"
+  },
+  {
+    "word": "LEARNING IS LOTS OF FUN",
+    "emoji": "📚"
+  },
+  {
+    "word": "WATCH THE GREEN GRASS",
+    "emoji": "🌱"
+  },
+  {
+    "word": "LITTLE BIRDS SINGING",
+    "emoji": "🐦"
+  },
+  {
+    "word": "MY DOG LIKES TO PLAY",
+    "emoji": "🐕"
+  },
+  {
+    "word": "THE MOON IS BRIGHT",
+    "emoji": "🌙"
+  },
+  {
+    "word": "WE EAT HEALTHY FOOD",
+    "emoji": "🍏"
+  },
+  {
+    "word": "FRIENDS PLAY TOGETHER",
+    "emoji": "🤝"
+  },
+  {
+    "word": "BIRDS FLY VERY HIGH",
+    "emoji": "🦅"
+  },
+  {
+    "word": "THE EARTH IS ROUND",
+    "emoji": "🌍"
+  },
+  {
+    "word": "KINDNESS IS MAGIC",
+    "emoji": "✨"
+  },
+  {
+    "word": "BE BRAVE AND STRONG",
+    "emoji": "🦁"
+  },
+  {
+    "word": "WATER IS GOOD FOR YOU",
+    "emoji": "💧"
+  },
+  {
+    "word": "READ A GOOD BOOK",
+    "emoji": "📖"
+  },
+  {
+    "word": "SHARE YOUR NICE TOYS",
+    "emoji": "🧸"
+  }
 ]

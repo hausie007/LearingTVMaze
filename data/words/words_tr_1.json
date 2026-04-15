@@ -1,22 +1,82 @@
 [
-  {"word": "ARABA", "emoji": "🚗"},
-  {"word": "UÇAK", "emoji": "✈️"},
-  {"word": "GEMI", "emoji": "🚢"},
-  {"word": "TREN", "emoji": "🚂"},
-  {"word": "BISIKLET", "emoji": "🚲"},
-  {"word": "OTOBUS", "emoji": "🚌"},
-  {"word": "KAMYON", "emoji": "🚚"},
-  {"word": "BALON", "emoji": "🎈"},
-  {"word": "HELIKOPTER", "emoji": "🚁"},
-  {"word": "ROKET", "emoji": "🚀"},
-  {"word": "MOTOSIKLET", "emoji": "🏍️"},
-  {"word": "TRAKTOR", "emoji": "🚜"},
-  {"word": "TEKNE", "emoji": "🚤"},
-  {"word": "KAYIK", "emoji": "🛶"},
-  {"word": "SCOOTER", "emoji": "🛴"},
-  {"word": "PIRPIR", "emoji": "🛩️"},
-  {"word": "METRO", "emoji": "🚇"},
-  {"word": "TRAMVAY", "emoji": "🚋"},
-  {"word": "FERIBOT", "emoji": "⛴️"},
-  {"word": "DENIZALTI", "emoji": "⚗️"}
+  {
+    "word": "ARABA",
+    "emoji": "🚗"
+  },
+  {
+    "word": "UÇAK",
+    "emoji": "✈️"
+  },
+  {
+    "word": "GEMİ",
+    "emoji": "🚢"
+  },
+  {
+    "word": "TREN",
+    "emoji": "🚂"
+  },
+  {
+    "word": "BİSİKLET",
+    "emoji": "🚲"
+  },
+  {
+    "word": "OTOBÜS",
+    "emoji": "🚌"
+  },
+  {
+    "word": "KAMYON",
+    "emoji": "🚚"
+  },
+  {
+    "word": "BALON",
+    "emoji": "🎈"
+  },
+  {
+    "word": "HELİKOPTER",
+    "emoji": "🚁"
+  },
+  {
+    "word": "ROKET",
+    "emoji": "🚀"
+  },
+  {
+    "word": "MOTOSİKLET",
+    "emoji": "🏍️"
+  },
+  {
+    "word": "TRAKTÖR",
+    "emoji": "🚜"
+  },
+  {
+    "word": "TEKNE",
+    "emoji": "🚤"
+  },
+  {
+    "word": "KAYIK",
+    "emoji": "🛶"
+  },
+  {
+    "word": "SCOOTER",
+    "emoji": "🛴"
+  },
+  {
+    "word": "JET UÇAĞI",
+    "emoji": "🛩️"
+  },
+  {
+    "word": "METRO",
+    "emoji": "🚇"
+  },
+  {
+    "word": "TRAMVAY",
+    "emoji": "🚋"
+  },
+  {
+    "word": "FERİBOT",
+    "emoji": "⛴️"
+  },
+  {
+    "word": "VAPUR",
+    "emoji": "🛳️"
+  }
 ]

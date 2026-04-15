@@ -1,22 +1,82 @@
 [
-  {"word": "PUPU", "emoji": "🐰"},
-  {"word": "ORAVA", "emoji": "🐿️"},
-  {"word": "KARHU", "emoji": "🐻"},
-  {"word": "LUMIUUKKO", "emoji": "☃️"},
-  {"word": "KETTU", "emoji": "🦊"},
-  {"word": "PORO", "emoji": "🦌"},
-  {"word": "METSA", "emoji": "🌲"},
-  {"word": "JARVI", "emoji": "🛶"},
-  {"word": "SAUNA", "emoji": "🧖"},
-  {"word": "SISU", "emoji": "🦁"},
-  {"word": "POIKA", "emoji": "👦"},
-  {"word": "TYTTO", "emoji": "👧"},
-  {"word": "AITI", "emoji": "👩"},
-  {"word": "ISA", "emoji": "👨"},
-  {"word": "VELI", "emoji": "👦"},
-  {"word": "SISKO", "emoji": "👧"},
-  {"word": "KOTI", "emoji": "🏠"},
-  {"word": "KOULU", "emoji": "🏫"},
-  {"word": "YSTAVA", "emoji": "🤝"},
-  {"word": "LEIKKI", "emoji": "🎠"}
+  {
+    "word": "PUPU",
+    "emoji": "🐰"
+  },
+  {
+    "word": "ORAVA",
+    "emoji": "🐿️"
+  },
+  {
+    "word": "KARHU",
+    "emoji": "🐻"
+  },
+  {
+    "word": "LUMIUKKO",
+    "emoji": "☃️"
+  },
+  {
+    "word": "KETTU",
+    "emoji": "🦊"
+  },
+  {
+    "word": "PORO",
+    "emoji": "🦌"
+  },
+  {
+    "word": "METSÄ",
+    "emoji": "🌲"
+  },
+  {
+    "word": "JÄRVI",
+    "emoji": "🏞️"
+  },
+  {
+    "word": "SAUNA",
+    "emoji": "🧖"
+  },
+  {
+    "word": "SISU",
+    "emoji": "💪"
+  },
+  {
+    "word": "POIKA",
+    "emoji": "👦"
+  },
+  {
+    "word": "TYTTÖ",
+    "emoji": "👧"
+  },
+  {
+    "word": "ÄITI",
+    "emoji": "👩"
+  },
+  {
+    "word": "ISÄ",
+    "emoji": "👨"
+  },
+  {
+    "word": "VELI",
+    "emoji": "👬"
+  },
+  {
+    "word": "SISKO",
+    "emoji": "👭"
+  },
+  {
+    "word": "KOTI",
+    "emoji": "🏡"
+  },
+  {
+    "word": "KOULU",
+    "emoji": "🏫"
+  },
+  {
+    "word": "YSTÄVÄ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "LEIKKI",
+    "emoji": "🪀"
+  }
 ]

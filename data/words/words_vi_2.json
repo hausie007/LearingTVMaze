@@ -1,22 +1,82 @@
 [
-  {"word": "CAM", "emoji": "🍊"},
-  {"word": "CHUOI", "emoji": "🍌"},
-  {"word": "DAU TAY", "emoji": "🍓"},
-  {"word": "DUA HAU", "emoji": "🍉"},
-  {"word": "KEM", "emoji": "🍦"},
-  {"word": "KEO", "emoji": "🍬"},
-  {"word": "SUA", "emoji": "🥛"},
-  {"word": "BANH MI", "emoji": "🍞"},
-  {"word": "PHO MAI", "emoji": "🧀"},
-  {"word": "TRUNG", "emoji": "🥚"},
-  {"word": "GA", "emoji": "🍗"},
-  {"word": "CA", "emoji": "🐟"},
-  {"word": "COM", "emoji": "🍚"},
-  {"word": "MY", "emoji": "🍝"},
-  {"word": "RAU", "emoji": "🥗"},
-  {"word": "CA CHUA", "emoji": "🍅"},
-  {"word": "DUA CHUOT", "emoji": "🥒"},
-  {"word": "KHOAI TAY", "emoji": "🥔"},
-  {"word": "CA ROT", "emoji": "🥕"},
-  {"word": "OT", "emoji": "🫑"}
+  {
+    "word": "CAM",
+    "emoji": "🍊"
+  },
+  {
+    "word": "CHUỐI",
+    "emoji": "🍌"
+  },
+  {
+    "word": "DÂU TÂY",
+    "emoji": "🍓"
+  },
+  {
+    "word": "DƯA HẤU",
+    "emoji": "🍉"
+  },
+  {
+    "word": "KEM",
+    "emoji": "🍦"
+  },
+  {
+    "word": "KẸO",
+    "emoji": "🍬"
+  },
+  {
+    "word": "PHÔ MAI",
+    "emoji": "🧀"
+  },
+  {
+    "word": "TRỨNG",
+    "emoji": "🥚"
+  },
+  {
+    "word": "CƠM",
+    "emoji": "🍚"
+  },
+  {
+    "word": "MÌ",
+    "emoji": "🍝"
+  },
+  {
+    "word": "RAU",
+    "emoji": "🥗"
+  },
+  {
+    "word": "CÀ CHUA",
+    "emoji": "🍅"
+  },
+  {
+    "word": "DƯA CHUỘT",
+    "emoji": "🥒"
+  },
+  {
+    "word": "KHOAI TÂY",
+    "emoji": "🥔"
+  },
+  {
+    "word": "CÀ RỐT",
+    "emoji": "🥕"
+  },
+  {
+    "word": "ỚT",
+    "emoji": "🫑"
+  },
+  {
+    "word": "SỮA CHUA",
+    "emoji": "🥛"
+  },
+  {
+    "word": "NƯỚC ÉP",
+    "emoji": "🧃"
+  },
+  {
+    "word": "BÁNH QUY",
+    "emoji": "🍪"
+  },
+  {
+    "word": "CHÁO",
+    "emoji": "🥣"
+  }
 ]

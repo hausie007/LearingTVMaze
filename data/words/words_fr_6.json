@@ -1,22 +1,82 @@
 [
-  {"word": "LE SOLEIL BRILLE", "emoji": "☀️"},
-  {"word": "AIME TA PLANETE", "emoji": "🌍"},
-  {"word": "SOURIS ET SOIS HEUREUX", "emoji": "😊"},
-  {"word": "MA FAMILLE C'EST L'AMOUR", "emoji": "❤️"},
-  {"word": "LES AMIS PARTAGENT", "emoji": "🤝"},
-  {"word": "LES OISEAUX VOLENT HAUT", "emoji": "🦅"},
-  {"word": "NOTRE MER EST BLEUE", "emoji": "🌊"},
-  {"word": "FORET PLEINE DE VIE", "emoji": "🌲"},
-  {"word": "MANGE DES FRUITS", "emoji": "🍏"},
-  {"word": "BOIS DE L'EAU VITE", "emoji": "💧"},
-  {"word": "DIS MERCI ET S'IL TE PLAÎT", "emoji": "🙏"},
-  {"word": "AIDE LES AUTRES GENS", "emoji": "🤝"},
-  {"word": "DORS BIEN CE SOIR", "emoji": "😴"},
-  {"word": "LIS UNE BELLE HISTOIRE", "emoji": "📖"},
-  {"word": "JOUE AVEC TES JOUETS", "emoji": "🧸"},
-  {"word": "APPRENDS CHAQUE JOURS", "emoji": "📚"},
-  {"word": "L'ARC-EN-CIEL EST BEAU", "emoji": "🌈"},
-  {"word": "LES ETOILES BRILLENT", "emoji": "⭐"},
-  {"word": "LA LUNE NOUS ECLAIRE", "emoji": "🌙"},
-  {"word": "MARCHE AVEC JOIE", "emoji": "🚶"}
+  {
+    "word": "LE SOLEIL BRILLE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "AIME TA PLANÈTE",
+    "emoji": "🌍"
+  },
+  {
+    "word": "SOURIS ET SOIS HEUREUX",
+    "emoji": "😊"
+  },
+  {
+    "word": "MA FAMILLE C'EST L'AMOUR",
+    "emoji": "❤️"
+  },
+  {
+    "word": "LES AMIS PARTAGENT TOUT",
+    "emoji": "🤝"
+  },
+  {
+    "word": "LES OISEAUX VOLENT HAUT",
+    "emoji": "🦅"
+  },
+  {
+    "word": "NOTRE MER EST BLEUE",
+    "emoji": "🌊"
+  },
+  {
+    "word": "FORÊT PLEINE DE VIE",
+    "emoji": "🌲"
+  },
+  {
+    "word": "MANGE DES FRUITS",
+    "emoji": "🍏"
+  },
+  {
+    "word": "BOIS DE L'EAU CHAQUE JOUR",
+    "emoji": "💧"
+  },
+  {
+    "word": "DIS MERCI ET S'IL TE PLAÎT",
+    "emoji": "🙏"
+  },
+  {
+    "word": "AIDE LES AUTRES GENS",
+    "emoji": "🫶"
+  },
+  {
+    "word": "DORS BIEN CE SOIR",
+    "emoji": "😴"
+  },
+  {
+    "word": "LIS UNE BELLE HISTOIRE",
+    "emoji": "📖"
+  },
+  {
+    "word": "JOUE AVEC TES JOUETS",
+    "emoji": "🧸"
+  },
+  {
+    "word": "APPRENDS CHAQUE JOUR",
+    "emoji": "📚"
+  },
+  {
+    "word": "L'ARC-EN-CIEL EST BEAU",
+    "emoji": "🌈"
+  },
+  {
+    "word": "LES ÉTOILES BRILLENT",
+    "emoji": "⭐"
+  },
+  {
+    "word": "LA LUNE NOUS ÉCLAIRE",
+    "emoji": "🌙"
+  },
+  {
+    "word": "MARCHE AVEC JOIE",
+    "emoji": "🚶"
+  }
 ]

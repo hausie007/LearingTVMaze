@@ -1,22 +1,82 @@
 [
-  {"word": "PORTAKAL", "emoji": "🍊"},
-  {"word": "MUZ", "emoji": "🍌"},
-  {"word": "ÇILEK", "emoji": "🍓"},
-  {"word": "KARPUZ", "emoji": "🍉"},
-  {"word": "DONDURMA", "emoji": "🍦"},
-  {"word": "ŞEKER", "emoji": "🍬"},
-  {"word": "SUT", "emoji": "🥛"},
-  {"word": "EKMEK", "emoji": "🍞"},
-  {"word": "PEYNIR", "emoji": "🧀"},
-  {"word": "YUMURTA", "emoji": "🥚"},
-  {"word": "TAVUK", "emoji": "🍗"},
-  {"word": "BALIK", "emoji": "🐟"},
-  {"word": "PILAV", "emoji": "🍚"},
-  {"word": "MAKARNA", "emoji": "🍝"},
-  {"word": "SALATA", "emoji": "🥗"},
-  {"word": "DOMATES", "emoji": "🍅"},
-  {"word": "SALATALIK", "emoji": "🥒"},
-  {"word": "PATATES", "emoji": "🥔"},
-  {"word": "HAVUÇ", "emoji": "🥕"},
-  {"word": "BIBER", "emoji": "🫑"}
+  {
+    "word": "PORTAKAL",
+    "emoji": "🍊"
+  },
+  {
+    "word": "MUZ",
+    "emoji": "🍌"
+  },
+  {
+    "word": "ÇİLEK",
+    "emoji": "🍓"
+  },
+  {
+    "word": "KARPUZ",
+    "emoji": "🍉"
+  },
+  {
+    "word": "DONDURMA",
+    "emoji": "🍦"
+  },
+  {
+    "word": "ŞEKER",
+    "emoji": "🍬"
+  },
+  {
+    "word": "PEYNİR",
+    "emoji": "🧀"
+  },
+  {
+    "word": "YUMURTA",
+    "emoji": "🥚"
+  },
+  {
+    "word": "PİLAV",
+    "emoji": "🍚"
+  },
+  {
+    "word": "MAKARNA",
+    "emoji": "🍝"
+  },
+  {
+    "word": "SALATA",
+    "emoji": "🥗"
+  },
+  {
+    "word": "DOMATES",
+    "emoji": "🍅"
+  },
+  {
+    "word": "SALATALIK",
+    "emoji": "🥒"
+  },
+  {
+    "word": "PATATES",
+    "emoji": "🥔"
+  },
+  {
+    "word": "HAVUÇ",
+    "emoji": "🥕"
+  },
+  {
+    "word": "BİBER",
+    "emoji": "🫑"
+  },
+  {
+    "word": "YOĞURT",
+    "emoji": "🥣"
+  },
+  {
+    "word": "AYRAN",
+    "emoji": "🥛"
+  },
+  {
+    "word": "BÖREK",
+    "emoji": "🥐"
+  },
+  {
+    "word": "PİDE",
+    "emoji": "🍕"
+  }
 ]

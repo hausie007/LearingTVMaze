@@ -1,22 +1,82 @@
 [
-  {"word": "SOLEN SKINER NU", "emoji": "☀️"},
-  {"word": "ÄLSKA DIN PLANET", "emoji": "🌍"},
-  {"word": "LE OCH VAR GLAD", "emoji": "😊"},
-  {"word": "MIN FAMILJ ÄR KÄRLEK", "emoji": "❤️"},
-  {"word": "VÄNNER DELAR MED", "emoji": "🤝"},
-  {"word": "FÅGLAR FLYGER HÖGT", "emoji": "🦅"},
-  {"word": "VÅRT BLÅA HAV", "emoji": "🌊"},
-  {"word": "SKOG FULL AV LIV", "emoji": "🌲"},
-  {"word": "ÄT MYCKET FRUKT", "emoji": "🍏"},
-  {"word": "DRICK VATTEN NU", "emoji": "💧"},
-  {"word": "SÄG TACK ALLTID", "emoji": "🙏"},
-  {"word": "HJÄLP ALLA ANDRA", "emoji": "🤝"},
-  {"word": "SOV GOTT I NATT", "emoji": "😴"},
-  {"word": "LÄS EN FIN SAGA", "emoji": "📖"},
-  {"word": "LEK MED DINA LEKSAKER", "emoji": "🧸"},
-  {"word": "LÄR DIG VARJE DAG", "emoji": "📚"},
-  {"word": "REGNBÅGEN HAR FÄRGER", "emoji": "🌈"},
-  {"word": "STJÄRNORNA LYSER", "emoji": "⭐"},
-  {"word": "MÅNEN LYSER UPP", "emoji": "🌙"},
-  {"word": "GÅ MED GLÄDJE", "emoji": "🚶"}
+  {
+    "word": "SOLEN SKINER NU",
+    "emoji": "☀️"
+  },
+  {
+    "word": "ÄLSKA DIN PLANET",
+    "emoji": "🌍"
+  },
+  {
+    "word": "LE OCH VAR GLAD",
+    "emoji": "😊"
+  },
+  {
+    "word": "MIN FAMILJ ÄR KÄRLEK",
+    "emoji": "❤️"
+  },
+  {
+    "word": "VÄNNER DELAR GÄRNA",
+    "emoji": "🤝"
+  },
+  {
+    "word": "FÅGLAR FLYGER HÖGT",
+    "emoji": "🦅"
+  },
+  {
+    "word": "VÅRT HAV ÄR BLÅTT",
+    "emoji": "🌊"
+  },
+  {
+    "word": "SKOGEN ÄR FULL AV LIV",
+    "emoji": "🌲"
+  },
+  {
+    "word": "ÄT MYCKET FRUKT",
+    "emoji": "🍏"
+  },
+  {
+    "word": "DRICK VATTEN VARJE DAG",
+    "emoji": "💧"
+  },
+  {
+    "word": "SÄG TACK ALLTID",
+    "emoji": "🙏"
+  },
+  {
+    "word": "HJÄLP ALLA ANDRA",
+    "emoji": "🫶"
+  },
+  {
+    "word": "SOV GOTT I NATT",
+    "emoji": "😴"
+  },
+  {
+    "word": "LÄS EN FIN SAGA",
+    "emoji": "📖"
+  },
+  {
+    "word": "LEK MED DINA LEKSAKER",
+    "emoji": "🧸"
+  },
+  {
+    "word": "LÄR DIG NÅGOT VARJE DAG",
+    "emoji": "📚"
+  },
+  {
+    "word": "REGNBÅGEN HAR FÄRGER",
+    "emoji": "🌈"
+  },
+  {
+    "word": "STJÄRNORNA LYSER",
+    "emoji": "⭐"
+  },
+  {
+    "word": "MÅNEN LYSER UPP",
+    "emoji": "🌙"
+  },
+  {
+    "word": "GÅ MED GLÄDJE",
+    "emoji": "🚶"
+  }
 ]

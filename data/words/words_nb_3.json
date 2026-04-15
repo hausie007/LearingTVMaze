@@ -1,22 +1,82 @@
 [
-  {"word": "BLOMST", "emoji": "🌸"},
-  {"word": "SOLSKINN", "emoji": "☀️"},
-  {"word": "REGNBUE", "emoji": "🌈"},
-  {"word": "SOMMER", "emoji": "🏖️"},
-  {"word": "VINTER", "emoji": "❄️"},
-  {"word": "KANIN", "emoji": "🐰"},
-  {"word": "KATT", "emoji": "🐱"},
-  {"word": "HUND", "emoji": "🐶"},
-  {"word": "FUGL", "emoji": "🐦"},
-  {"word": "SKOG", "emoji": "🌲"},
-  {"word": "IS", "emoji": "🍦"},
-  {"word": "SØT", "emoji": "🍬"},
-  {"word": "FARGE", "emoji": "🎨"},
-  {"word": "LEK", "emoji": "🎠"},
-  {"word": "VENN", "emoji": "🤝"},
-  {"word": "MOR", "emoji": "👩"},
-  {"word": "FAR", "emoji": "👨"},
-  {"word": "SØSTER", "emoji": "👧"},
-  {"word": "BROR", "emoji": "👦"},
-  {"word": "HUS", "emoji": "🏠"}
+  {
+    "word": "SOLSTRÅLE",
+    "emoji": "🌞"
+  },
+  {
+    "word": "SOLSKINN",
+    "emoji": "☀️"
+  },
+  {
+    "word": "REGNBUE",
+    "emoji": "🌈"
+  },
+  {
+    "word": "SOMMER",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "VINTER",
+    "emoji": "❄️"
+  },
+  {
+    "word": "EKORN",
+    "emoji": "🐿️"
+  },
+  {
+    "word": "SEBRA",
+    "emoji": "🦓"
+  },
+  {
+    "word": "PANDA",
+    "emoji": "🐼"
+  },
+  {
+    "word": "FUGL",
+    "emoji": "🐦"
+  },
+  {
+    "word": "SKOG",
+    "emoji": "🌲"
+  },
+  {
+    "word": "KJEKS",
+    "emoji": "🍪"
+  },
+  {
+    "word": "GODTERI",
+    "emoji": "🍬"
+  },
+  {
+    "word": "MALING",
+    "emoji": "🖌️"
+  },
+  {
+    "word": "LEKEN",
+    "emoji": "🎠"
+  },
+  {
+    "word": "VENNEN",
+    "emoji": "🙂"
+  },
+  {
+    "word": "SØSTER",
+    "emoji": "👧"
+  },
+  {
+    "word": "BROR",
+    "emoji": "👦"
+  },
+  {
+    "word": "GÅSUNG",
+    "emoji": "🐥"
+  },
+  {
+    "word": "SLANGE",
+    "emoji": "🐍"
+  },
+  {
+    "word": "SLOTT",
+    "emoji": "🏰"
+  }
 ]

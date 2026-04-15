@@ -1,22 +1,82 @@
 [
-  {"word": "MANSIKKA", "emoji": "🍓"},
-  {"word": "MUSTIKKA", "emoji": "🫐"},
-  {"word": "PORKKANA", "emoji": "🥕"},
-  {"word": "PERUNA", "emoji": "🥔"},
-  {"word": "OMUNA", "emoji": "🍎"},
-  {"word": "BANAANI", "emoji": "🍌"},
-  {"word": "APPELSIINI", "emoji": "🍊"},
-  {"word": "VIINIRYPALE", "emoji": "🍇"},
-  {"word": "PIRAKKA", "emoji": "🥧"},
-  {"word": "KAKKU", "emoji": "🎂"},
-  {"word": "JADE", "emoji": "🍦"},
-  {"word": "MEHU", "emoji": "🧃"},
-  {"word": "TEE", "emoji": "🍵"},
-  {"word": "KAHVI", "emoji": "☕"},
-  {"word": "LUSIKKA", "emoji": "🥄"},
-  {"word": "HAARUKKA", "emoji": "🍴"},
-  {"word": "VEITSI", "emoji": "🔪"},
-  {"word": "LAUTANEN", "emoji": "🍽️"},
-  {"word": "KUPPI", "emoji": "☕"},
-  {"word": "KEITTIÖ", "emoji": "🍳"}
+  {
+    "word": "MANSIKKA",
+    "emoji": "🍓"
+  },
+  {
+    "word": "MUSTIKKA",
+    "emoji": "🫐"
+  },
+  {
+    "word": "PORKKANA",
+    "emoji": "🥕"
+  },
+  {
+    "word": "PERUNA",
+    "emoji": "🥔"
+  },
+  {
+    "word": "PÄÄRYNÄ",
+    "emoji": "🍐"
+  },
+  {
+    "word": "BANAANI",
+    "emoji": "🍌"
+  },
+  {
+    "word": "APPELSIINI",
+    "emoji": "🍊"
+  },
+  {
+    "word": "VIINIRYPÄLE",
+    "emoji": "🍇"
+  },
+  {
+    "word": "PIIRAKKA",
+    "emoji": "🥧"
+  },
+  {
+    "word": "KAKKU",
+    "emoji": "🎂"
+  },
+  {
+    "word": "JÄÄTELÖ",
+    "emoji": "🍦"
+  },
+  {
+    "word": "MEHU",
+    "emoji": "🧃"
+  },
+  {
+    "word": "TEE",
+    "emoji": "🍵"
+  },
+  {
+    "word": "KAAKAO",
+    "emoji": "🥤"
+  },
+  {
+    "word": "LUSIKKA",
+    "emoji": "🥄"
+  },
+  {
+    "word": "HAARUKKA",
+    "emoji": "🍴"
+  },
+  {
+    "word": "KULHO",
+    "emoji": "🥣"
+  },
+  {
+    "word": "LAUTANEN",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "KUPPI",
+    "emoji": "☕"
+  },
+  {
+    "word": "KEITTIÖ",
+    "emoji": "🍳"
+  }
 ]

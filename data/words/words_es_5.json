@@ -1,22 +1,82 @@
 [
-  {"word": "HOLA AMIGOS", "emoji": "👋"},
-  {"word": "SOL BRILLANTE", "emoji": "☀️"},
-  {"word": "CASA PEQUEÑA", "emoji": "🏠"},
-  {"word": "PERRO JUGUETÓN", "emoji": "🐕"},
-  {"word": "GATO DORMILÓN", "emoji": "🐈"},
-  {"word": "AZUL DEL MAR", "emoji": "🌊"},
-  {"word": "VERDE BOSQUE", "emoji": "🌲"},
-  {"word": "AMARILLO SOL", "emoji": "🟡"},
-  {"word": "ROJO MANZANA", "emoji": "🍎"},
-  {"word": "FLOR BONITA", "emoji": "🌸"},
-  {"word": "PÁJARO VOLANDO", "emoji": "🐦"},
-  {"word": "PEZ NADANDO", "emoji": "🐟"},
-  {"word": "NIÑO FELIZ", "emoji": "👦"},
-  {"word": "NIÑA ALEGRE", "emoji": "👧"},
-  {"word": "DULCE CARAMELO", "emoji": "🍭"},
-  {"word": "FRUTA RICA", "emoji": "🍎"},
-  {"word": "COMER SANO", "emoji": "🥦"},
-  {"word": "BEBER AGUA", "emoji": "💧"},
-  {"word": "JUGAR JUNTOS", "emoji": "🤝"},
-  {"word": "CANTAR CANCIÓN", "emoji": "🎤"}
+  {
+    "word": "HOLA AMIGOS",
+    "emoji": "👋"
+  },
+  {
+    "word": "SOL BRILLANTE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "CASA PEQUEÑA",
+    "emoji": "🏠"
+  },
+  {
+    "word": "PERRO JUGUETÓN",
+    "emoji": "🐕"
+  },
+  {
+    "word": "GATO DORMILÓN",
+    "emoji": "🐈"
+  },
+  {
+    "word": "MAR AZUL",
+    "emoji": "🌊"
+  },
+  {
+    "word": "VERDE BOSQUE",
+    "emoji": "🌲"
+  },
+  {
+    "word": "SOL AMARILLO",
+    "emoji": "🟡"
+  },
+  {
+    "word": "MANZANA ROJA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "FLOR BONITA",
+    "emoji": "🌸"
+  },
+  {
+    "word": "PÁJARO VOLANDO",
+    "emoji": "🐦"
+  },
+  {
+    "word": "PEZ NADANDO",
+    "emoji": "🐟"
+  },
+  {
+    "word": "NIÑO FELIZ",
+    "emoji": "👦"
+  },
+  {
+    "word": "NIÑA ALEGRE",
+    "emoji": "👧"
+  },
+  {
+    "word": "DULCE CARAMELO",
+    "emoji": "🍭"
+  },
+  {
+    "word": "FRUTA FRESCA",
+    "emoji": "🍐"
+  },
+  {
+    "word": "COMER SANO",
+    "emoji": "🥦"
+  },
+  {
+    "word": "BEBER AGUA",
+    "emoji": "💧"
+  },
+  {
+    "word": "JUGAR JUNTOS",
+    "emoji": "🤝"
+  },
+  {
+    "word": "CANTAR CANCIÓN",
+    "emoji": "🎤"
+  }
 ]

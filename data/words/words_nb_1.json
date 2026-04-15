@@ -1,27 +1,102 @@
 [
-  {"word": "HUND", "emoji": "🐶"},
-  {"word": "KAKE", "emoji": "🍪"},
-  {"word": "BARN", "emoji": "🧒"},
-  {"word": "KATT", "emoji": "🐱"},
-  {"word": "FISK", "emoji": "🐟"},
-  {"word": "HEST", "emoji": "🐴"},
-  {"word": "MELK", "emoji": "🥛"},
-  {"word": "MAUR", "emoji": "🐜"},
-  {"word": "NATT", "emoji": "🌙"},
-  {"word": "PÆRE", "emoji": "🍐"},
-  {"word": "STOL", "emoji": "🪑"},
-  {"word": "BALL", "emoji": "⚽"},
-  {"word": "BÅT", "emoji": "⛵"},
-  {"word": "DØR", "emoji": "🚪"},
-  {"word": "BLAD", "emoji": "🍃"},
-  {"word": "BEIN", "emoji": "🦴"},
-  {"word": "GAVE", "emoji": "🎁"},
-  {"word": "LØVE", "emoji": "🦁"},
-  {"word": "SKRU", "emoji": "🪛"},
-  {"word": "VIND", "emoji": "💨"},
-  {"word": "PIKE", "emoji": "👧"},
-  {"word": "GUTT", "emoji": "👦"},
-  {"word": "REVE", "emoji": "🦊"},
-  {"word": "GRAS", "emoji": "🌱"},
-  {"word": "SØVN", "emoji": "💤"}
+  {
+    "word": "HUND",
+    "emoji": "🐶"
+  },
+  {
+    "word": "KAKE",
+    "emoji": "🍪"
+  },
+  {
+    "word": "BARN",
+    "emoji": "🧒"
+  },
+  {
+    "word": "KATT",
+    "emoji": "🐱"
+  },
+  {
+    "word": "FISK",
+    "emoji": "🐟"
+  },
+  {
+    "word": "HEST",
+    "emoji": "🐴"
+  },
+  {
+    "word": "MELK",
+    "emoji": "🥛"
+  },
+  {
+    "word": "MAUR",
+    "emoji": "🐜"
+  },
+  {
+    "word": "NATT",
+    "emoji": "🌙"
+  },
+  {
+    "word": "PÆRE",
+    "emoji": "🍐"
+  },
+  {
+    "word": "STOL",
+    "emoji": "🪑"
+  },
+  {
+    "word": "BALL",
+    "emoji": "⚽"
+  },
+  {
+    "word": "SKIP",
+    "emoji": "⛵"
+  },
+  {
+    "word": "DØR",
+    "emoji": "🚪"
+  },
+  {
+    "word": "BLAD",
+    "emoji": "🍃"
+  },
+  {
+    "word": "BEIN",
+    "emoji": "🦴"
+  },
+  {
+    "word": "GAVE",
+    "emoji": "🎁"
+  },
+  {
+    "word": "LØVE",
+    "emoji": "🦁"
+  },
+  {
+    "word": "SKRUE",
+    "emoji": "🔩"
+  },
+  {
+    "word": "VIND",
+    "emoji": "💨"
+  },
+  {
+    "word": "PIKE",
+    "emoji": "👧"
+  },
+  {
+    "word": "GUTT",
+    "emoji": "👦"
+  },
+  {
+    "word": "REVE",
+    "emoji": "🦊"
+  },
+  {
+    "word": "GRAS",
+    "emoji": "🌱"
+  },
+  {
+    "word": "SØVN",
+    "emoji": "💤"
+  }
 ]

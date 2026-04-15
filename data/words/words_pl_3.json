@@ -1,22 +1,82 @@
 [
-  {"word": "ZABAWKI", "emoji": "🧸"},
-  {"word": "KLOCKI", "emoji": "🧱"},
-  {"word": "LALKA", "emoji": "🪆"},
-  {"word": "AUTO", "emoji": "🚗"},
-  {"word": "POCIĄG", "emoji": "🚂"},
-  {"word": "PIŁKA", "emoji": "⚽"},
-  {"word": "ROWER", "emoji": "🚲"},
-  {"word": "HULAJNOGA", "emoji": "🛴"},
-  {"word": "BALON", "emoji": "🎈"},
-  {"word": "KREDKI", "emoji": "🖍️"},
-  {"word": "FARBY", "emoji": "🎨"},
-  {"word": "PĘDZEL", "emoji": "🖌️"},
-  {"word": "KARTKA", "emoji": "📄"},
-  {"word": "KROWA", "emoji": "🐄"},
-  {"word": "ŚWINKA", "emoji": "🐷"},
-  {"word": "OWCA", "emoji": "🐑"},
-  {"word": "KOZA", "emoji": "🐐"},
-  {"word": "KURA", "emoji": "🐔"},
-  {"word": "GĘŚ", "emoji": "🦢"},
-  {"word": "INDYK", "emoji": "🦃"}
+  {
+    "word": "ZABAWKI",
+    "emoji": "🧸"
+  },
+  {
+    "word": "KLOCKI",
+    "emoji": "🧱"
+  },
+  {
+    "word": "LALKA",
+    "emoji": "🪆"
+  },
+  {
+    "word": "AUTO",
+    "emoji": "🚗"
+  },
+  {
+    "word": "POCIĄG",
+    "emoji": "🚂"
+  },
+  {
+    "word": "PIŁKA",
+    "emoji": "⚽"
+  },
+  {
+    "word": "ROWER",
+    "emoji": "🚲"
+  },
+  {
+    "word": "HULAJNOGA",
+    "emoji": "🛴"
+  },
+  {
+    "word": "URODZINY",
+    "emoji": "🎈"
+  },
+  {
+    "word": "KREDKI",
+    "emoji": "🖍️"
+  },
+  {
+    "word": "FARBY",
+    "emoji": "🎨"
+  },
+  {
+    "word": "PĘDZEL",
+    "emoji": "🖌️"
+  },
+  {
+    "word": "KARTKA",
+    "emoji": "📄"
+  },
+  {
+    "word": "TRAKTOR",
+    "emoji": "🚜"
+  },
+  {
+    "word": "RAKIETA",
+    "emoji": "🚀"
+  },
+  {
+    "word": "BIEDRONKA",
+    "emoji": "🐞"
+  },
+  {
+    "word": "DINOZAUR",
+    "emoji": "🦖"
+  },
+  {
+    "word": "DELFIN",
+    "emoji": "🐬"
+  },
+  {
+    "word": "ŻYRAFA",
+    "emoji": "🦒"
+  },
+  {
+    "word": "ZAMEK",
+    "emoji": "🏰"
+  }
 ]

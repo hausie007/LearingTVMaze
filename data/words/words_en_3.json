@@ -1,52 +1,202 @@
 [
-  {"word": "ELEPHANT", "emoji": "🐘"},
-  {"word": "GIRAFFE", "emoji": "🦒"},
-  {"word": "KANGAROO", "emoji": "🦘"},
-  {"word": "PENGUIN", "emoji": "🐧"},
-  {"word": "DOLPHIN", "emoji": "🐬"},
-  {"word": "OCTOPUS", "emoji": "🐙"},
-  {"word": "LADYBUG", "emoji": "🐞"},
-  {"word": "SPIDER", "emoji": "🕷️"},
-  {"word": "BUTTERFLY", "emoji": "🦋"},
-  {"word": "DINOSAUR", "emoji": "🦕"},
-  {"word": "UNICORN", "emoji": "🦄"},
-  {"word": "DRAGON", "emoji": "🐉"},
-  {"word": "MONSTER", "emoji": "👹"},
-  {"word": "ROBOT", "emoji": "🤖"},
-  {"word": "ROCKET", "emoji": "🚀"},
-  {"word": "AIRPLANE", "emoji": "✈️"},
-  {"word": "HELICOPTER", "emoji": "🚁"},
-  {"word": "TRACTOR", "emoji": "🚜"},
-  {"word": "BICYCLE", "emoji": "🚲"},
-  {"word": "SCOOTER", "emoji": "🛴"},
-  {"word": "AMBULANCE", "emoji": "🚑"},
-  {"word": "FIRETRUCK", "emoji": "🚒"},
-  {"word": "POLICE", "emoji": "🚓"},
-  {"word": "SUBMARINE", "emoji": "🛳️"},
-  {"word": "SAILBOAT", "emoji": "⛵"},
-  {"word": "BUILDING", "emoji": "🏢"},
-  {"word": "HOSPITAL", "emoji": "🏥"},
-  {"word": "SCHOOL", "emoji": "🏫"},
-  {"word": "CASTLE", "emoji": "🏰"},
-  {"word": "STATUE", "emoji": "🗽"},
-  {"word": "MOUNTAIN", "emoji": "⛰️"},
-  {"word": "VOLCANO", "emoji": "🌋"},
-  {"word": "ISLAND", "emoji": "🏝️"},
-  {"word": "WEATHER", "emoji": "🌦️"},
-  {"word": "TORNADO", "emoji": "🌪️"},
-  {"word": "RAINBOW", "emoji": "🌈"},
-  {"word": "SNOWMAN", "emoji": "⛄"},
-  {"word": "UMBRELLA", "emoji": "☔"},
-  {"word": "BASEBALL", "emoji": "⚾"},
-  {"word": "FOOTBALL", "emoji": "🏈"},
-  {"word": "TENNIS", "emoji": "🎾"},
-  {"word": "BOWLING", "emoji": "🎳"},
-  {"word": "GUITAR", "emoji": "🎸"},
-  {"word": "TRUMPET", "emoji": "🎺"},
-  {"word": "DRUMSET", "emoji": "🥁"},
-  {"word": "PICTURE", "emoji": "🖼️"},
-  {"word": "CAMERA", "emoji": "📷"},
-  {"word": "COMPUTER", "emoji": "💻"},
-  {"word": "KEYBOARD", "emoji": "⌨️"},
-  {"word": "TELEVISION", "emoji": "📺"}
+  {
+    "word": "ELEPHANT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "GIRAFFE",
+    "emoji": "🦒"
+  },
+  {
+    "word": "KANGAROO",
+    "emoji": "🦘"
+  },
+  {
+    "word": "PENGUIN",
+    "emoji": "🐧"
+  },
+  {
+    "word": "DOLPHIN",
+    "emoji": "🐬"
+  },
+  {
+    "word": "OCTOPUS",
+    "emoji": "🐙"
+  },
+  {
+    "word": "LADYBUG",
+    "emoji": "🐞"
+  },
+  {
+    "word": "SPIDER",
+    "emoji": "🕷️"
+  },
+  {
+    "word": "BUTTERFLY",
+    "emoji": "🦋"
+  },
+  {
+    "word": "DINOSAUR",
+    "emoji": "🦕"
+  },
+  {
+    "word": "UNICORN",
+    "emoji": "🦄"
+  },
+  {
+    "word": "DRAGON",
+    "emoji": "🐉"
+  },
+  {
+    "word": "MERMAID",
+    "emoji": "🧜‍♀️"
+  },
+  {
+    "word": "ROBOT",
+    "emoji": "🤖"
+  },
+  {
+    "word": "ROCKET",
+    "emoji": "🚀"
+  },
+  {
+    "word": "AIRPLANE",
+    "emoji": "✈️"
+  },
+  {
+    "word": "HELICOPTER",
+    "emoji": "🚁"
+  },
+  {
+    "word": "TRACTOR",
+    "emoji": "🚜"
+  },
+  {
+    "word": "BICYCLE",
+    "emoji": "🚲"
+  },
+  {
+    "word": "SCOOTER",
+    "emoji": "🛴"
+  },
+  {
+    "word": "AMBULANCE",
+    "emoji": "🚑"
+  },
+  {
+    "word": "FIRETRUCK",
+    "emoji": "🚒"
+  },
+  {
+    "word": "POLICE CAR",
+    "emoji": "🚓"
+  },
+  {
+    "word": "SUBMARINE",
+    "emoji": "🛳️"
+  },
+  {
+    "word": "SAILBOAT",
+    "emoji": "⛵"
+  },
+  {
+    "word": "BUILDING",
+    "emoji": "🏢"
+  },
+  {
+    "word": "HOSPITAL",
+    "emoji": "🏥"
+  },
+  {
+    "word": "SCHOOL",
+    "emoji": "🏫"
+  },
+  {
+    "word": "CASTLE",
+    "emoji": "🏰"
+  },
+  {
+    "word": "STATUE",
+    "emoji": "🗽"
+  },
+  {
+    "word": "MOUNTAIN",
+    "emoji": "⛰️"
+  },
+  {
+    "word": "VOLCANO",
+    "emoji": "🌋"
+  },
+  {
+    "word": "ISLAND",
+    "emoji": "🏝️"
+  },
+  {
+    "word": "WEATHER",
+    "emoji": "🌦️"
+  },
+  {
+    "word": "TORNADO",
+    "emoji": "🌪️"
+  },
+  {
+    "word": "RAINBOW",
+    "emoji": "🌈"
+  },
+  {
+    "word": "SNOWMAN",
+    "emoji": "⛄"
+  },
+  {
+    "word": "UMBRELLA",
+    "emoji": "☔"
+  },
+  {
+    "word": "BASEBALL",
+    "emoji": "⚾"
+  },
+  {
+    "word": "FOOTBALL",
+    "emoji": "🏈"
+  },
+  {
+    "word": "TENNIS",
+    "emoji": "🎾"
+  },
+  {
+    "word": "BOWLING",
+    "emoji": "🎳"
+  },
+  {
+    "word": "GUITAR",
+    "emoji": "🎸"
+  },
+  {
+    "word": "TRUMPET",
+    "emoji": "🎺"
+  },
+  {
+    "word": "DRUMSET",
+    "emoji": "🥁"
+  },
+  {
+    "word": "PICTURE",
+    "emoji": "🖼️"
+  },
+  {
+    "word": "CAMERA",
+    "emoji": "📷"
+  },
+  {
+    "word": "COMPUTER",
+    "emoji": "💻"
+  },
+  {
+    "word": "KEYBOARD",
+    "emoji": "⌨️"
+  },
+  {
+    "word": "TELEVISION",
+    "emoji": "📺"
+  }
 ]

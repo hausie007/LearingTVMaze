@@ -1,22 +1,82 @@
 [
-  {"word": "HEST", "emoji": "🐴"},
-  {"word": "BARN", "emoji": "🧒"},
-  {"word": "BORD", "emoji": "🪑"},
-  {"word": "HUND", "emoji": "🐶"},
-  {"word": "KAGE", "emoji": "🍪"},
-  {"word": "FISK", "emoji": "🐟"},
-  {"word": "GLAD", "emoji": "😊"},
-  {"word": "GRØN", "emoji": "🟩"},
-  {"word": "SORT", "emoji": "⬛"},
-  {"word": "BÅD", "emoji": "⛵"},
-  {"word": "DØR", "emoji": "🚪"},
-  {"word": "BLAD", "emoji": "🍃"},
-  {"word": "GAVE", "emoji": "🎁"},
-  {"word": "LØVE", "emoji": "🦁"},
-  {"word": "MINDRE", "emoji": "🤏"},
-  {"word": "STOR", "emoji": "🐘"},
-  {"word": "SOLER", "emoji": "☀️"},
-  {"word": "MÅNE", "emoji": "🌙"},
-  {"word": "SØD", "emoji": "🍭"},
-  {"word": "BOLT", "emoji": "⚽"}
+  {
+    "word": "HEST",
+    "emoji": "🐴"
+  },
+  {
+    "word": "BARN",
+    "emoji": "🧒"
+  },
+  {
+    "word": "BORD",
+    "emoji": "🪵"
+  },
+  {
+    "word": "HUND",
+    "emoji": "🐶"
+  },
+  {
+    "word": "KAGE",
+    "emoji": "🎂"
+  },
+  {
+    "word": "FISK",
+    "emoji": "🐟"
+  },
+  {
+    "word": "FUGL",
+    "emoji": "🐦"
+  },
+  {
+    "word": "BLAD",
+    "emoji": "🍃"
+  },
+  {
+    "word": "SKAT",
+    "emoji": "💎"
+  },
+  {
+    "word": "BÅD",
+    "emoji": "⛵"
+  },
+  {
+    "word": "DØR",
+    "emoji": "🚪"
+  },
+  {
+    "word": "GAVE",
+    "emoji": "🎁"
+  },
+  {
+    "word": "LØVE",
+    "emoji": "🦁"
+  },
+  {
+    "word": "KANIN",
+    "emoji": "🐇"
+  },
+  {
+    "word": "KURV",
+    "emoji": "🧺"
+  },
+  {
+    "word": "SKYEN",
+    "emoji": "☁️"
+  },
+  {
+    "word": "MÅNE",
+    "emoji": "🌙"
+  },
+  {
+    "word": "FRUGT",
+    "emoji": "🍐"
+  },
+  {
+    "word": "BOLT",
+    "emoji": "⚽"
+  },
+  {
+    "word": "BLOMST",
+    "emoji": "🌸"
+  }
 ]

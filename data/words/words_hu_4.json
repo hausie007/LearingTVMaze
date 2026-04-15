@@ -1,22 +1,82 @@
 [
-  {"word": "BUDAPEST", "emoji": "🏙️"},
-  {"word": "BALATON", "emoji": "🏖️"},
-  {"word": "DUNA", "emoji": "🌊"},
-  {"word": "TISZA", "emoji": "🚣"},
-  {"word": "HUNGARIA", "emoji": "🇭🇺"},
-  {"word": "MAGYAR", "emoji": "🇭🇺"},
-  {"word": "BARÁTSÁG", "emoji": "🤝"},
-  {"word": "SZERETET", "emoji": "❤️"},
-  {"word": "BOLDOGSÁG", "emoji": "😊"},
-  {"word": "ZENE", "emoji": "🎵"},
-  {"word": "TÁNC", "emoji": "💃"},
-  {"word": "DAL", "emoji": "🎤"},
-  {"word": "MESE", "emoji": "📚"},
-  {"word": "KERTI", "emoji": "🌻"},
-  {"word": "VIRÁGOS", "emoji": "🌺"},
-  {"word": "ERDŐS", "emoji": "🌲"},
-  {"word": "HEGYI", "emoji": "⛰️"},
-  {"word": "DÉLI", "emoji": "🌞"},
-  {"word": "ESTI", "emoji": "🌙"},
-  {"word": "REGGELI", "emoji": "🌅"}
+  {
+    "word": "BUDAPEST",
+    "emoji": "🏙️"
+  },
+  {
+    "word": "BALATON",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "DUNAKANYAR",
+    "emoji": "🌊"
+  },
+  {
+    "word": "TISZA-TÓ",
+    "emoji": "🚣"
+  },
+  {
+    "word": "PARLAMENT",
+    "emoji": "🏛️"
+  },
+  {
+    "word": "TŰZIJÁTÉK",
+    "emoji": "🎆"
+  },
+  {
+    "word": "NAPRAFORGÓ",
+    "emoji": "🌻"
+  },
+  {
+    "word": "KATICABOGÁR",
+    "emoji": "🐞"
+  },
+  {
+    "word": "CSOKOLÁDÉTORTA",
+    "emoji": "🎂"
+  },
+  {
+    "word": "JÁTÉKVONAT",
+    "emoji": "🚂"
+  },
+  {
+    "word": "TŰZOLTÓAUTÓ",
+    "emoji": "🚒"
+  },
+  {
+    "word": "MENTŐAUTÓ",
+    "emoji": "🚑"
+  },
+  {
+    "word": "HELIKOPTER",
+    "emoji": "🚁"
+  },
+  {
+    "word": "ŰRHAJÓ",
+    "emoji": "🚀"
+  },
+  {
+    "word": "MIKROSZKÓP",
+    "emoji": "🔬"
+  },
+  {
+    "word": "TÁVCSŐ",
+    "emoji": "🔭"
+  },
+  {
+    "word": "KINCSESLÁDA",
+    "emoji": "💎"
+  },
+  {
+    "word": "HÓEMBER",
+    "emoji": "☃️"
+  },
+  {
+    "word": "VIDÁMPARK",
+    "emoji": "🎡"
+  },
+  {
+    "word": "MESEKÖNYV",
+    "emoji": "📖"
+  }
 ]

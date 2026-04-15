@@ -1,22 +1,82 @@
 [
-  {"word": "HAPPY BIRTHDAY", "emoji": "🎂"},
-  {"word": "LITTLE MONSTER", "emoji": "👾"},
-  {"word": "SOARING ROCKET", "emoji": "🚀"},
-  {"word": "BEAUTIFUL ROSE", "emoji": "🌹"},
-  {"word": "SPARKLING STAR", "emoji": "⭐"},
-  {"word": "JUMPING RABBIT", "emoji": "🐇"},
-  {"word": "FUNNY CLOWN", "emoji": "🤡"},
-  {"word": "MY BEST FRIEND", "emoji": "👫"},
-  {"word": "GARDEN FLOWER", "emoji": "🌻"},
-  {"word": "WILD ELEPHANT", "emoji": "🐘"},
-  {"word": "LITTLE LADYBUG", "emoji": "🐞"},
-  {"word": "BRIGHT RAINBOW", "emoji": "🌈"},
-  {"word": "GREEN TURTLE", "emoji": "🐢"},
-  {"word": "SLOW SNAIL", "emoji": "🐌"},
-  {"word": "BUSY BEES", "emoji": "🐝"},
-  {"word": "SUNNY BEACH", "emoji": "🏖️"},
-  {"word": "TASTY APPLE", "emoji": "🍎"},
-  {"word": "COLD ICE CREAM", "emoji": "🍦"},
-  {"word": "SOFT PILLOW", "emoji": "🛌"},
-  {"word": "BIG BALLOON", "emoji": "🎈"}
+  {
+    "word": "HAPPY BIRTHDAY",
+    "emoji": "🎂"
+  },
+  {
+    "word": "LITTLE ROBOT",
+    "emoji": "🤖"
+  },
+  {
+    "word": "SOARING ROCKET",
+    "emoji": "🚀"
+  },
+  {
+    "word": "BEAUTIFUL ROSE",
+    "emoji": "🌹"
+  },
+  {
+    "word": "SPARKLING STAR",
+    "emoji": "⭐"
+  },
+  {
+    "word": "JUMPING RABBIT",
+    "emoji": "🐇"
+  },
+  {
+    "word": "FUNNY CLOWN",
+    "emoji": "🤡"
+  },
+  {
+    "word": "MY BEST FRIEND",
+    "emoji": "👫"
+  },
+  {
+    "word": "GARDEN FLOWER",
+    "emoji": "🌻"
+  },
+  {
+    "word": "WILD ELEPHANT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "LITTLE LADYBUG",
+    "emoji": "🐞"
+  },
+  {
+    "word": "BRIGHT RAINBOW",
+    "emoji": "🌈"
+  },
+  {
+    "word": "GREEN TURTLE",
+    "emoji": "🐢"
+  },
+  {
+    "word": "SLOW SNAIL",
+    "emoji": "🐌"
+  },
+  {
+    "word": "BUSY BEES",
+    "emoji": "🐝"
+  },
+  {
+    "word": "SUNNY BEACH",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "TASTY APPLE",
+    "emoji": "🍎"
+  },
+  {
+    "word": "COLD ICE CREAM",
+    "emoji": "🍦"
+  },
+  {
+    "word": "SOFT PILLOW",
+    "emoji": "🛌"
+  },
+  {
+    "word": "BIG BALLOON",
+    "emoji": "🎈"
+  }
 ]

@@ -1,86 +1,86 @@
 [
-    {
-        "word": "KNIHA",
-        "emoji": "📖"
-    },
-    {
-        "word": "STôL",
-        "emoji": "🪑"
-    },
-    {
-        "word": "OKNO",
-        "emoji": "🪟"
-    },
-    {
-        "word": "OHEŇ",
-        "emoji": "🔥"
-    },
-    {
-        "word": "VÍKEND",
-        "emoji": "🎈"
-    },
-    {
-        "word": "KRAJINA",
-        "emoji": "🏞️"
-    },
-    {
-        "word": "MRAK",
-        "emoji": "☁️"
-    },
-    {
-        "word": "HVIEZDA",
-        "emoji": "⭐"
-    },
-    {
-        "word": "ZIMA",
-        "emoji": "❄️"
-    },
-    {
-        "word": "LETO",
-        "emoji": "🌞"
-    },
-    {
-        "word": "LÍZANKA",
-        "emoji": "🍭"
-    },
-    {
-        "word": "ZMRAZLINA",
-        "emoji": "🍦"
-    },
-    {
-        "word": "TORTA",
-        "emoji": "🎂"
-    },
-    {
-        "word": "SYR",
-        "emoji": "🧀"
-    },
-    {
-        "word": "ZEM",
-        "emoji": "🌍"
-    },
-    {
-        "word": "RUKA",
-        "emoji": "🖐️"
-    },
-    {
-        "word": "NOHA",
-        "emoji": "🦶"
-    },
-    {
-        "word": "UCHO",
-        "emoji": "👂"
-    },
-    {
-        "word": "MESIAC",
-        "emoji": "🌙"
-    },
-    {
-        "word": "PLANÉTA",
-        "emoji": "🪐"
-    },
-    {
-        "word": "ROBOT",
-        "emoji": "🤖"
-    }
+  {
+    "word": "KNIHA",
+    "emoji": "📖"
+  },
+  {
+    "word": "STÔL",
+    "emoji": "🪑"
+  },
+  {
+    "word": "OKNO",
+    "emoji": "🪟"
+  },
+  {
+    "word": "BALÓN",
+    "emoji": "🎈"
+  },
+  {
+    "word": "KRAJINA",
+    "emoji": "🏞️"
+  },
+  {
+    "word": "MRAK",
+    "emoji": "☁️"
+  },
+  {
+    "word": "HVIEZDA",
+    "emoji": "⭐"
+  },
+  {
+    "word": "ZIMA",
+    "emoji": "❄️"
+  },
+  {
+    "word": "LETO",
+    "emoji": "🌞"
+  },
+  {
+    "word": "LÍZANKA",
+    "emoji": "🍭"
+  },
+  {
+    "word": "ZMRZLINA",
+    "emoji": "🍦"
+  },
+  {
+    "word": "TORTA",
+    "emoji": "🎂"
+  },
+  {
+    "word": "SYR",
+    "emoji": "🧀"
+  },
+  {
+    "word": "ZEM",
+    "emoji": "🌍"
+  },
+  {
+    "word": "RUKA",
+    "emoji": "🖐️"
+  },
+  {
+    "word": "NOHA",
+    "emoji": "🦶"
+  },
+  {
+    "word": "UCHO",
+    "emoji": "👂"
+  },
+  {
+    "word": "PLANÉTA",
+    "emoji": "🪐"
+  },
+  {
+    "word": "ROBOT",
+    "emoji": "🤖"
+  },
+  {
+    "word": "SEMIAČKO",
+    "emoji": "🌱"
+  },
+  {
+    "word": "KAMIENOK",
+    "emoji": "🪨"
+  }
 ]

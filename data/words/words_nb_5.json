@@ -1,22 +1,82 @@
 [
-  {"word": "HEI VENNER", "emoji": "👋"},
-  {"word": "STRÅLENDE SOL", "emoji": "☀️"},
-  {"word": "LITE HUS", "emoji": "🏠"},
-  {"word": "LEKEFULL HUND", "emoji": "🐕"},
-  {"word": "SOVENDE KATT", "emoji": "🐈"},
-  {"word": "BLÅTT HAV", "emoji": "🌊"},
-  {"word": "GRØNN SKOG", "emoji": "🌲"},
-  {"word": "GUL SOL", "emoji": "🟡"},
-  {"word": "RØDT EPLE", "emoji": "🍎"},
-  {"word": "VAKKER BLOMST", "emoji": "🌸"},
-  {"word": "FLYGENDE FUGL", "emoji": "🐦"},
-  {"word": "SVØMMENDE FISK", "emoji": "🐟"},
-  {"word": "GLAD BARN", "emoji": "👦"},
-  {"word": "LYKKELIG JENTE", "emoji": "👧"},
-  {"word": "SØTT GODTERI", "emoji": "🍭"},
-  {"word": "FRISK FRUKT", "emoji": "🍎"},
-  {"word": "SPIS SUNT", "emoji": "🥦"},
-  {"word": "DRIKK VANN", "emoji": "💧"},
-  {"word": "LEK SAMMEN", "emoji": "🤝"},
-  {"word": "SYNG SANG", "emoji": "🎤"}
+  {
+    "word": "HEI VENNER",
+    "emoji": "👋"
+  },
+  {
+    "word": "STRÅLENDE SOL",
+    "emoji": "☀️"
+  },
+  {
+    "word": "LITE HUS",
+    "emoji": "🏠"
+  },
+  {
+    "word": "LEKEFULL HUND",
+    "emoji": "🐕"
+  },
+  {
+    "word": "SOVENDE KATT",
+    "emoji": "🐈"
+  },
+  {
+    "word": "BLÅTT HAV",
+    "emoji": "🌊"
+  },
+  {
+    "word": "GRØNN SKOG",
+    "emoji": "🌲"
+  },
+  {
+    "word": "SOLEN ER GUL",
+    "emoji": "🟡"
+  },
+  {
+    "word": "RØDT EPLE",
+    "emoji": "🍎"
+  },
+  {
+    "word": "VAKKER BLOMST",
+    "emoji": "🌸"
+  },
+  {
+    "word": "FLYGENDE FUGL",
+    "emoji": "🐦"
+  },
+  {
+    "word": "SVØMMENDE FISK",
+    "emoji": "🐟"
+  },
+  {
+    "word": "GLAD BARN",
+    "emoji": "👦"
+  },
+  {
+    "word": "LYKKELIG JENTE",
+    "emoji": "👧"
+  },
+  {
+    "word": "SØTT GODTERI",
+    "emoji": "🍭"
+  },
+  {
+    "word": "FRISK FRUKT",
+    "emoji": "🍊"
+  },
+  {
+    "word": "SPIS SUNT",
+    "emoji": "🥦"
+  },
+  {
+    "word": "DRIKK VANN",
+    "emoji": "💧"
+  },
+  {
+    "word": "LEK SAMMEN",
+    "emoji": "🤝"
+  },
+  {
+    "word": "SYNG SANG",
+    "emoji": "🎤"
+  }
 ]

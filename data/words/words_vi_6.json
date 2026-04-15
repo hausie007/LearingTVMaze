@@ -1,22 +1,82 @@
 [
-  {"word": "MAT TROI TOA SANG", "emoji": "☀️"},
-  {"word": "YEU TRAI DAT NAY", "emoji": "🌍"},
-  {"word": "CUOI VA HANH PHUC", "emoji": "😊"},
-  {"word": "GIA DINH LA TINH YEU", "emoji": "❤️"},
-  {"word": "BAN BE CHIA SE", "emoji": "🤝"},
-  {"word": "CHIM BAY CAO", "emoji": "🦅"},
-  {"word": "BIEN XANH CUA TA", "emoji": "🌊"},
-  {"word": "RUNG DAY SUC SONG", "emoji": "🌲"},
-  {"word": "AN NHIEU TRAI CAY", "emoji": "🍏"},
-  {"word": "UONG NUOC NGAY", "emoji": "💧"},
-  {"word": "NOI LOI CAM ON", "emoji": "🙏"},
-  {"word": "GIUP DO MOI NGUOI", "emoji": "🤝"},
-  {"word": "NGU NGON DEM NAY", "emoji": "😴"},
-  {"word": "DOC TRUYEN HAY", "emoji": "📖"},
-  {"word": "CHOI VOI DO CHOI", "emoji": "🧸"},
-  {"word": "HOC MOI NGAY", "emoji": "📚"},
-  {"word": "CAU VONG NHIEU MAU", "emoji": "🌈"},
-  {"word": "NGÔI SAO LAP LANH", "emoji": "⭐"},
-  {"word": "MAT TRANG CHIEU SANG", "emoji": "🌙"},
-  {"word": "DI BO VUI VE", "emoji": "🚶"}
+  {
+    "word": "MẶT TRỜI TỎA SÁNG",
+    "emoji": "☀️"
+  },
+  {
+    "word": "YÊU TRÁI ĐẤT NÀY",
+    "emoji": "🌍"
+  },
+  {
+    "word": "CƯỜI VÀ HẠNH PHÚC",
+    "emoji": "😊"
+  },
+  {
+    "word": "GIA ĐÌNH LÀ TÌNH YÊU",
+    "emoji": "❤️"
+  },
+  {
+    "word": "BẠN BÈ CHIA SẺ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "CHIM BAY THẬT CAO",
+    "emoji": "🦅"
+  },
+  {
+    "word": "BIỂN XANH CỦA TA",
+    "emoji": "🌊"
+  },
+  {
+    "word": "RỪNG ĐẦY SỨC SỐNG",
+    "emoji": "🌲"
+  },
+  {
+    "word": "ĂN NHIỀU TRÁI CÂY",
+    "emoji": "🍏"
+  },
+  {
+    "word": "UỐNG NƯỚC MỖI NGÀY",
+    "emoji": "💧"
+  },
+  {
+    "word": "NÓI LỜI CẢM ƠN",
+    "emoji": "🙏"
+  },
+  {
+    "word": "GIÚP ĐỠ MỌI NGƯỜI",
+    "emoji": "🫶"
+  },
+  {
+    "word": "NGỦ NGON ĐÊM NAY",
+    "emoji": "😴"
+  },
+  {
+    "word": "ĐỌC TRUYỆN HAY",
+    "emoji": "📖"
+  },
+  {
+    "word": "CHƠI VỚI ĐỒ CHƠI",
+    "emoji": "🧸"
+  },
+  {
+    "word": "HỌC MỖI NGÀY",
+    "emoji": "📚"
+  },
+  {
+    "word": "CẦU VỒNG NHIỀU MÀU",
+    "emoji": "🌈"
+  },
+  {
+    "word": "NGÔI SAO LẤP LÁNH",
+    "emoji": "⭐"
+  },
+  {
+    "word": "MẶT TRĂNG CHIẾU SÁNG",
+    "emoji": "🌙"
+  },
+  {
+    "word": "ĐI BỘ VUI VẺ",
+    "emoji": "🚶"
+  }
 ]

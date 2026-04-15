@@ -1,22 +1,82 @@
 [
-  {"word": "MOTYL", "emoji": "🦋"},
-  {"word": "LISKI", "emoji": "🦊"},
-  {"word": "ZABA", "emoji": "🐸"},
-  {"word": "SOWA", "emoji": "🦉"},
-  {"word": "KACZKA", "emoji": "🦆"},
-  {"word": "KURA", "emoji": "🐔"},
-  {"word": "GĘŚ", "emoji": "🦢"},
-  {"word": "KOZA", "emoji": "🐐"},
-  {"word": "OWCA", "emoji": "🐑"},
-  {"word": "KROWA", "emoji": "🐮"},
-  {"word": "ŚWINKA", "emoji": "🐷"},
-  {"word": "KONIK", "emoji": "🐎"},
-  {"word": "MYSZKA", "emoji": "🐭"},
-  {"word": "JEŻYK", "emoji": "🦔"},
-  {"word": "WIŁKI", "emoji": "🐺"},
-  {"word": "NIEDŹWIEDŹ", "emoji": "🐻"},
-  {"word": "ZAJĄC", "emoji": "🐰"},
-  {"word": "PTASZEK", "emoji": "🐦"},
-  {"word": "PSZCZÓŁKA", "emoji": "🐝"},
-  {"word": "MRÓWKA", "emoji": "🐜"}
+  {
+    "word": "MOTYL",
+    "emoji": "🦋"
+  },
+  {
+    "word": "LIS",
+    "emoji": "🦊"
+  },
+  {
+    "word": "ŻABA",
+    "emoji": "🐸"
+  },
+  {
+    "word": "SOWA",
+    "emoji": "🦉"
+  },
+  {
+    "word": "KACZKA",
+    "emoji": "🦆"
+  },
+  {
+    "word": "KURA",
+    "emoji": "🐔"
+  },
+  {
+    "word": "GĘŚ",
+    "emoji": "🦢"
+  },
+  {
+    "word": "KOZA",
+    "emoji": "🐐"
+  },
+  {
+    "word": "OWCA",
+    "emoji": "🐑"
+  },
+  {
+    "word": "KROWA",
+    "emoji": "🐮"
+  },
+  {
+    "word": "ŚWINKA",
+    "emoji": "🐷"
+  },
+  {
+    "word": "KONIK",
+    "emoji": "🐎"
+  },
+  {
+    "word": "MYSZKA",
+    "emoji": "🐭"
+  },
+  {
+    "word": "JEŻYK",
+    "emoji": "🦔"
+  },
+  {
+    "word": "WILK",
+    "emoji": "🐺"
+  },
+  {
+    "word": "NIEDŹWIEDŹ",
+    "emoji": "🐻"
+  },
+  {
+    "word": "ZAJĄC",
+    "emoji": "🐰"
+  },
+  {
+    "word": "PTASZEK",
+    "emoji": "🐦"
+  },
+  {
+    "word": "PSZCZÓŁKA",
+    "emoji": "🐝"
+  },
+  {
+    "word": "MRÓWKA",
+    "emoji": "🐜"
+  }
 ]

@@ -1,52 +1,202 @@
 [
-  {"word": "CAT", "emoji": "🐱"},
-  {"word": "DOG", "emoji": "🐶"},
-  {"word": "SUN", "emoji": "☀️"},
-  {"word": "CAR", "emoji": "🚗"},
-  {"word": "COW", "emoji": "🐮"},
-  {"word": "PIG", "emoji": "🐷"},
-  {"word": "HAT", "emoji": "🎩"},
-  {"word": "BUG", "emoji": "🐛"},
-  {"word": "BED", "emoji": "🛌"},
-  {"word": "BOX", "emoji": "📦"},
-  {"word": "SAD", "emoji": "😢"},
-  {"word": "BAT", "emoji": "🦇"},
-  {"word": "FOX", "emoji": "🦊"},
-  {"word": "MUG", "emoji": "☕"},
-  {"word": "SUN", "emoji": "🌞"},
-  {"word": "NUT", "emoji": "🥜"},
-  {"word": "OWL", "emoji": "🦉"},
-  {"word": "PEN", "emoji": "🖊️"},
-  {"word": "KEY", "emoji": "🔑"},
-  {"word": "BOY", "emoji": "👦"},
-  {"word": "CUP", "emoji": "🍵"},
-  {"word": "EGG", "emoji": "🥚"},
-  {"word": "FLY", "emoji": "🪰"},
-  {"word": "ICE", "emoji": "🧊"},
-  {"word": "LEG", "emoji": "🦵"},
-  {"word": "MAP", "emoji": "🗺️"},
-  {"word": "NET", "emoji": "🕸️"},
-  {"word": "PIE", "emoji": "🥧"},
-  {"word": "SEA", "emoji": "🌊"},
-  {"word": "TOY", "emoji": "🧸"},
-  {"word": "LOG", "emoji": "🪵"},
-  {"word": "ANT", "emoji": "🐜"},
-  {"word": "APE", "emoji": "🦍"},
-  {"word": "ARM", "emoji": "💪"},
-  {"word": "BOW", "emoji": "🎀"},
-  {"word": "CAN", "emoji": "🥫"},
-  {"word": "EAR", "emoji": "👂"},
-  {"word": "EYE", "emoji": "👁️"},
-  {"word": "GEM", "emoji": "💎"},
-  {"word": "JAM", "emoji": "🍯"},
-  {"word": "LIP", "emoji": "👄"},
-  {"word": "MUD", "emoji": "🛤️"},
-  {"word": "PAN", "emoji": "🍳"},
-  {"word": "PIN", "emoji": "📍"},
-  {"word": "RAT", "emoji": "🐀"},
-  {"word": "RUG", "emoji": "🪶"},
-  {"word": "TIE", "emoji": "👔"},
-  {"word": "WEB", "emoji": "🕸️"},
-  {"word": "YAM", "emoji": "🍠"},
-  {"word": "ZOO", "emoji": "🦁"}
+  {
+    "word": "CAT",
+    "emoji": "🐱"
+  },
+  {
+    "word": "DOG",
+    "emoji": "🐶"
+  },
+  {
+    "word": "SUN",
+    "emoji": "☀️"
+  },
+  {
+    "word": "CAR",
+    "emoji": "🚗"
+  },
+  {
+    "word": "COW",
+    "emoji": "🐮"
+  },
+  {
+    "word": "PIG",
+    "emoji": "🐷"
+  },
+  {
+    "word": "HAT",
+    "emoji": "🎩"
+  },
+  {
+    "word": "BUG",
+    "emoji": "🐛"
+  },
+  {
+    "word": "BED",
+    "emoji": "🛌"
+  },
+  {
+    "word": "BOX",
+    "emoji": "📦"
+  },
+  {
+    "word": "SAD",
+    "emoji": "😢"
+  },
+  {
+    "word": "BAT",
+    "emoji": "🦇"
+  },
+  {
+    "word": "FOX",
+    "emoji": "🦊"
+  },
+  {
+    "word": "MUG",
+    "emoji": "☕"
+  },
+  {
+    "word": "JAR",
+    "emoji": "🫙"
+  },
+  {
+    "word": "NUT",
+    "emoji": "🥜"
+  },
+  {
+    "word": "OWL",
+    "emoji": "🦉"
+  },
+  {
+    "word": "PEN",
+    "emoji": "🖊️"
+  },
+  {
+    "word": "KEY",
+    "emoji": "🔑"
+  },
+  {
+    "word": "BOY",
+    "emoji": "👦"
+  },
+  {
+    "word": "CUP",
+    "emoji": "🍵"
+  },
+  {
+    "word": "EGG",
+    "emoji": "🥚"
+  },
+  {
+    "word": "FLY",
+    "emoji": "🪰"
+  },
+  {
+    "word": "ICE",
+    "emoji": "🧊"
+  },
+  {
+    "word": "LEG",
+    "emoji": "🦵"
+  },
+  {
+    "word": "MAP",
+    "emoji": "🗺️"
+  },
+  {
+    "word": "NET",
+    "emoji": "🥅"
+  },
+  {
+    "word": "PIE",
+    "emoji": "🥧"
+  },
+  {
+    "word": "SEA",
+    "emoji": "🌊"
+  },
+  {
+    "word": "TOY",
+    "emoji": "🧸"
+  },
+  {
+    "word": "LOG",
+    "emoji": "🪵"
+  },
+  {
+    "word": "ANT",
+    "emoji": "🐜"
+  },
+  {
+    "word": "APE",
+    "emoji": "🦍"
+  },
+  {
+    "word": "ARM",
+    "emoji": "💪"
+  },
+  {
+    "word": "BOW",
+    "emoji": "🎀"
+  },
+  {
+    "word": "CAN",
+    "emoji": "🥫"
+  },
+  {
+    "word": "EAR",
+    "emoji": "👂"
+  },
+  {
+    "word": "EYE",
+    "emoji": "👁️"
+  },
+  {
+    "word": "GEM",
+    "emoji": "💎"
+  },
+  {
+    "word": "JAM",
+    "emoji": "🍯"
+  },
+  {
+    "word": "LIP",
+    "emoji": "👄"
+  },
+  {
+    "word": "MUD",
+    "emoji": "🛤️"
+  },
+  {
+    "word": "PAN",
+    "emoji": "🍳"
+  },
+  {
+    "word": "PIN",
+    "emoji": "📍"
+  },
+  {
+    "word": "RAT",
+    "emoji": "🐀"
+  },
+  {
+    "word": "RUG",
+    "emoji": "🪶"
+  },
+  {
+    "word": "TIE",
+    "emoji": "👔"
+  },
+  {
+    "word": "WEB",
+    "emoji": "🕸️"
+  },
+  {
+    "word": "YAM",
+    "emoji": "🍠"
+  },
+  {
+    "word": "ZOO",
+    "emoji": "🦁"
+  }
 ]

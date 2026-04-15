@@ -1,52 +1,202 @@
 [
-  {"word": "APPLE", "emoji": "🍎"},
-  {"word": "MOUSE", "emoji": "🐁"},
-  {"word": "TRAIN", "emoji": "🚂"},
-  {"word": "CHAIR", "emoji": "🪑"},
-  {"word": "TIGER", "emoji": "🐅"},
-  {"word": "PANDA", "emoji": "🐼"},
-  {"word": "ZEBRA", "emoji": "🦓"},
-  {"word": "HORSE", "emoji": "🐴"},
-  {"word": "SNAKE", "emoji": "🐍"},
-  {"word": "HOUSE", "emoji": "🏠"},
-  {"word": "CLOCK", "emoji": "🕒"},
-  {"word": "BREAD", "emoji": "🍞"},
-  {"word": "WATER", "emoji": "💧"},
-  {"word": "PLANT", "emoji": "🪴"},
-  {"word": "SMILE", "emoji": "😁"},
-  {"word": "HEART", "emoji": "❤️"},
-  {"word": "CLOUD", "emoji": "☁️"},
-  {"word": "GHOST", "emoji": "👻"},
-  {"word": "BROWN", "emoji": "🟤"},
-  {"word": "BLACK", "emoji": "⚫"},
-  {"word": "WHITE", "emoji": "⚪"},
-  {"word": "GREEN", "emoji": "🟢"},
-  {"word": "LEMON", "emoji": "🍋"},
-  {"word": "MELON", "emoji": "🍈"},
-  {"word": "PEACH", "emoji": "🍑"},
-  {"word": "BERRY", "emoji": "🍓"},
-  {"word": "SPOON", "emoji": "🥄"},
-  {"word": "KNIFE", "emoji": "🔪"},
-  {"word": "GLASS", "emoji": "🥛"},
-  {"word": "PLATE", "emoji": "🍽️"},
-  {"word": "TABLE", "emoji": "🪑"},
-  {"word": "PHONE", "emoji": "📱"},
-  {"word": "RADIO", "emoji": "📻"},
-  {"word": "VIDEO", "emoji": "📼"},
-  {"word": "PENCIL", "emoji": "✏️"},
-  {"word": "PAPER", "emoji": "📄"},
-  {"word": "RULER", "emoji": "📏"},
-  {"word": "BRUSH", "emoji": "🖌️"},
-  {"word": "PAINT", "emoji": "🎨"},
-  {"word": "DRINK", "emoji": "🥤"},
-  {"word": "SWEET", "emoji": "🍬"},
-  {"word": "PIZZA", "emoji": "🍕"},
-  {"word": "ONION", "emoji": "🧅"},
-  {"word": "MANGO", "emoji": "🥭"},
-  {"word": "JUICE", "emoji": "🧃"},
-  {"word": "BACON", "emoji": "🥓"},
-  {"word": "CHICK", "emoji": "🐥"},
-  {"word": "EAGLE", "emoji": "🦅"},
-  {"word": "PUPPY", "emoji": "🐶"},
-  {"word": "KITTY", "emoji": "🐱"}
+  {
+    "word": "APPLE",
+    "emoji": "🍎"
+  },
+  {
+    "word": "MOUSE",
+    "emoji": "🐁"
+  },
+  {
+    "word": "TRAIN",
+    "emoji": "🚂"
+  },
+  {
+    "word": "CHAIR",
+    "emoji": "🪑"
+  },
+  {
+    "word": "TIGER",
+    "emoji": "🐅"
+  },
+  {
+    "word": "PANDA",
+    "emoji": "🐼"
+  },
+  {
+    "word": "ZEBRA",
+    "emoji": "🦓"
+  },
+  {
+    "word": "HORSE",
+    "emoji": "🐴"
+  },
+  {
+    "word": "SNAKE",
+    "emoji": "🐍"
+  },
+  {
+    "word": "HOUSE",
+    "emoji": "🏠"
+  },
+  {
+    "word": "CLOCK",
+    "emoji": "🕒"
+  },
+  {
+    "word": "BREAD",
+    "emoji": "🍞"
+  },
+  {
+    "word": "WATER",
+    "emoji": "💧"
+  },
+  {
+    "word": "PLANT",
+    "emoji": "🪴"
+  },
+  {
+    "word": "SMILE",
+    "emoji": "😁"
+  },
+  {
+    "word": "HEART",
+    "emoji": "❤️"
+  },
+  {
+    "word": "CLOUD",
+    "emoji": "☁️"
+  },
+  {
+    "word": "SHEEP",
+    "emoji": "🐑"
+  },
+  {
+    "word": "BROWN",
+    "emoji": "🟤"
+  },
+  {
+    "word": "BLACK",
+    "emoji": "⚫"
+  },
+  {
+    "word": "WHITE",
+    "emoji": "⚪"
+  },
+  {
+    "word": "GREEN",
+    "emoji": "🟢"
+  },
+  {
+    "word": "LEMON",
+    "emoji": "🍋"
+  },
+  {
+    "word": "MELON",
+    "emoji": "🍈"
+  },
+  {
+    "word": "PEACH",
+    "emoji": "🍑"
+  },
+  {
+    "word": "BERRY",
+    "emoji": "🍓"
+  },
+  {
+    "word": "SPOON",
+    "emoji": "🥄"
+  },
+  {
+    "word": "BOWL",
+    "emoji": "🥣"
+  },
+  {
+    "word": "GLASS",
+    "emoji": "🥛"
+  },
+  {
+    "word": "PLATE",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "TABLE",
+    "emoji": "🪵"
+  },
+  {
+    "word": "PHONE",
+    "emoji": "📱"
+  },
+  {
+    "word": "RADIO",
+    "emoji": "📻"
+  },
+  {
+    "word": "VIDEO",
+    "emoji": "📼"
+  },
+  {
+    "word": "PENCIL",
+    "emoji": "✏️"
+  },
+  {
+    "word": "PAPER",
+    "emoji": "📄"
+  },
+  {
+    "word": "RULER",
+    "emoji": "📏"
+  },
+  {
+    "word": "BRUSH",
+    "emoji": "🖌️"
+  },
+  {
+    "word": "PAINT",
+    "emoji": "🎨"
+  },
+  {
+    "word": "DRINK",
+    "emoji": "🥤"
+  },
+  {
+    "word": "SWEET",
+    "emoji": "🍬"
+  },
+  {
+    "word": "PIZZA",
+    "emoji": "🍕"
+  },
+  {
+    "word": "ONION",
+    "emoji": "🧅"
+  },
+  {
+    "word": "MANGO",
+    "emoji": "🥭"
+  },
+  {
+    "word": "JUICE",
+    "emoji": "🧃"
+  },
+  {
+    "word": "BACON",
+    "emoji": "🥓"
+  },
+  {
+    "word": "CHICK",
+    "emoji": "🐥"
+  },
+  {
+    "word": "EAGLE",
+    "emoji": "🦅"
+  },
+  {
+    "word": "PUPPY",
+    "emoji": "🐶"
+  },
+  {
+    "word": "KITTY",
+    "emoji": "🐱"
+  }
 ]

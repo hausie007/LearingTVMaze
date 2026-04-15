@@ -1,90 +1,90 @@
 [
-    {
-        "word": "SLON",
-        "emoji": "🐘"
-    },
-    {
-        "word": "PES",
-        "emoji": "🐶"
-    },
-    {
-        "word": "MAČKA",
-        "emoji": "🐱"
-    },
-    {
-        "word": "AUTO",
-        "emoji": "🚗"
-    },
-    {
-        "word": "DOM",
-        "emoji": "🏠"
-    },
-    {
-        "word": "LES",
-        "emoji": "🌲"
-    },
-    {
-        "word": "LEV",
-        "emoji": "🦁"
-    },
-    {
-        "word": "SOVA",
-        "emoji": "🦉"
-    },
-    {
-        "word": "MYŠ",
-        "emoji": "🐭"
-    },
-    {
-        "word": "HAD",
-        "emoji": "🐍"
-    },
-    {
-        "word": "VLK",
-        "emoji": "🐺"
-    },
-    {
-        "word": "KôŇ",
-        "emoji": "🐴"
-    },
-    {
-        "word": "RÝBA",
-        "emoji": "🐟"
-    },
-    {
-        "word": "RAK",
-        "emoji": "🦞"
-    },
-    {
-        "word": "NOS",
-        "emoji": "👃"
-    },
-    {
-        "word": "OKO",
-        "emoji": "👁️"
-    },
-    {
-        "word": "ZUB",
-        "emoji": "🦷"
-    },
-    {
-        "word": "KRK",
-        "emoji": "🦒"
-    },
-    {
-        "word": "HRÍB",
-        "emoji": "🍄"
-    },
-    {
-        "word": "MED",
-        "emoji": "🍯"
-    },
-    {
-        "word": "CHLIEB",
-        "emoji": "🍞"
-    },
-    {
-        "word": "MEDVEĎ",
-        "emoji": "🐻"
-    }
+  {
+    "word": "SLON",
+    "emoji": "🐘"
+  },
+  {
+    "word": "PES",
+    "emoji": "🐶"
+  },
+  {
+    "word": "MAČKA",
+    "emoji": "🐱"
+  },
+  {
+    "word": "AUTO",
+    "emoji": "🚗"
+  },
+  {
+    "word": "DOM",
+    "emoji": "🏠"
+  },
+  {
+    "word": "LES",
+    "emoji": "🌲"
+  },
+  {
+    "word": "LEV",
+    "emoji": "🦁"
+  },
+  {
+    "word": "SOVA",
+    "emoji": "🦉"
+  },
+  {
+    "word": "MYŠ",
+    "emoji": "🐭"
+  },
+  {
+    "word": "HAD",
+    "emoji": "🐍"
+  },
+  {
+    "word": "VLK",
+    "emoji": "🐺"
+  },
+  {
+    "word": "KÔŇ",
+    "emoji": "🐴"
+  },
+  {
+    "word": "RYBA",
+    "emoji": "🐟"
+  },
+  {
+    "word": "RAK",
+    "emoji": "🦞"
+  },
+  {
+    "word": "NOS",
+    "emoji": "👃"
+  },
+  {
+    "word": "OKO",
+    "emoji": "👁️"
+  },
+  {
+    "word": "ZUB",
+    "emoji": "🦷"
+  },
+  {
+    "word": "PRST",
+    "emoji": "🖐️"
+  },
+  {
+    "word": "HRÍB",
+    "emoji": "🍄"
+  },
+  {
+    "word": "MED",
+    "emoji": "🍯"
+  },
+  {
+    "word": "CHLIEB",
+    "emoji": "🍞"
+  },
+  {
+    "word": "LIETAK",
+    "emoji": "🪁"
+  }
 ]

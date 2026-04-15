@@ -1,22 +1,82 @@
 [
-  {"word": "HEI YSTÄVÄT", "emoji": "👋"},
-  {"word": "KIRKAS AURINKO", "emoji": "☀️"},
-  {"word": "PIENI TALO", "emoji": "🏠"},
-  {"word": "LEIKISÄ KOIRA", "emoji": "🐕"},
-  {"word": "UNELIAS KISSA", "emoji": "🐈"},
-  {"word": "MEREN SININEN", "emoji": "🌊"},
-  {"word": "VIHREÄ METSÄ", "emoji": "🌲"},
-  {"word": "KELTAINEN AURINKO", "emoji": "🟡"},
-  {"word": "PUNAINEN OMENA", "emoji": "🍎"},
-  {"word": "KAUNIS KUKKA", "emoji": "🌸"},
-  {"word": "LENTÄVÄ LINTU", "emoji": "🐦"},
-  {"word": "UIVA KALA", "emoji": "🐟"},
-  {"word": "ILONEN LAPSI", "emoji": "👦"},
-  {"word": "ILOINEN TYTTÖ", "emoji": "👧"},
-  {"word": "MAKEA KARKKI", "emoji": "🍭"},
-  {"word": "TUORE HEDELMÄ", "emoji": "🍎"},
-  {"word": "SYÖ TERVEELLISESTI", "emoji": "🥦"},
-  {"word": "JUO VETTÄ", "emoji": "💧"},
-  {"word": "LEIKKIKÄÄTE", "emoji": "🤝"},
-  {"word": "LAULA LAULU", "emoji": "🎤"}
+  {
+    "word": "HEI YSTÄVÄT",
+    "emoji": "👋"
+  },
+  {
+    "word": "KIRKAS AURINKO",
+    "emoji": "☀️"
+  },
+  {
+    "word": "PIENI TALO",
+    "emoji": "🏠"
+  },
+  {
+    "word": "LEIKISÄ KOIRA",
+    "emoji": "🐕"
+  },
+  {
+    "word": "UNELIAS KISSA",
+    "emoji": "🐈"
+  },
+  {
+    "word": "MEREN SININEN",
+    "emoji": "🌊"
+  },
+  {
+    "word": "VIHREÄ METSÄ",
+    "emoji": "🌲"
+  },
+  {
+    "word": "KELTAINEN AURINKO",
+    "emoji": "🟡"
+  },
+  {
+    "word": "PUNAINEN OMENA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "KAUNIS KUKKA",
+    "emoji": "🌸"
+  },
+  {
+    "word": "LENTÄVÄ LINTU",
+    "emoji": "🐦"
+  },
+  {
+    "word": "UIVA KALA",
+    "emoji": "🐟"
+  },
+  {
+    "word": "ILONEN LAPSI",
+    "emoji": "👦"
+  },
+  {
+    "word": "ILOINEN TYTTÖ",
+    "emoji": "👧"
+  },
+  {
+    "word": "MAKEA KARKKI",
+    "emoji": "🍭"
+  },
+  {
+    "word": "TUORE HEDELMÄ",
+    "emoji": "🍐"
+  },
+  {
+    "word": "SYÖ TERVEELLISESTI",
+    "emoji": "🥦"
+  },
+  {
+    "word": "JUO VETTÄ",
+    "emoji": "💧"
+  },
+  {
+    "word": "LEIKKIKÄÄTE",
+    "emoji": "🤝"
+  },
+  {
+    "word": "LAULA LAULU",
+    "emoji": "🎤"
+  }
 ]

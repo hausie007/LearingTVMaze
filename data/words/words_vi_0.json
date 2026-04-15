@@ -1,22 +1,82 @@
 [
-  {"word": "NHA", "emoji": "🏠"},
-  {"word": "MEO", "emoji": "🐱"},
-  {"word": "CHO", "emoji": "🐶"},
-  {"word": "ME", "emoji": "👩"},
-  {"word": "BO", "emoji": "👨"},
-  {"word": "TROI", "emoji": "☀️"},
-  {"word": "BIEN", "emoji": "🌊"},
-  {"word": "TAO", "emoji": "🍎"},
-  {"word": "BANH", "emoji": "🍞"},
-  {"word": "SUA", "emoji": "🥛"},
-  {"word": "HOA", "emoji": "🌸"},
-  {"word": "CAY", "emoji": "🌳"},
-  {"word": "SACH", "emoji": "📖"},
-  {"word": "TRUONG", "emoji": "🏫"},
-  {"word": "CHOI", "emoji": "🧸"},
-  {"word": "BE", "emoji": "🧒"},
-  {"word": "SAO", "emoji": "⭐"},
-  {"word": "TRANG", "emoji": "🌙"},
-  {"word": "TRO", "emoji": "🌌"},
-  {"word": "BAN", "emoji": "🤝"}
+  {
+    "word": "NHÀ",
+    "emoji": "🏠"
+  },
+  {
+    "word": "MÈO",
+    "emoji": "🐱"
+  },
+  {
+    "word": "CHÓ",
+    "emoji": "🐶"
+  },
+  {
+    "word": "MẸ",
+    "emoji": "👩"
+  },
+  {
+    "word": "BỐ",
+    "emoji": "👨"
+  },
+  {
+    "word": "TRỜI",
+    "emoji": "☀️"
+  },
+  {
+    "word": "BIỂN",
+    "emoji": "🌊"
+  },
+  {
+    "word": "TÁO",
+    "emoji": "🍎"
+  },
+  {
+    "word": "BÁNH",
+    "emoji": "🍞"
+  },
+  {
+    "word": "SỮA",
+    "emoji": "🥛"
+  },
+  {
+    "word": "HOA",
+    "emoji": "🌸"
+  },
+  {
+    "word": "CÂY",
+    "emoji": "🌳"
+  },
+  {
+    "word": "SÁCH",
+    "emoji": "📖"
+  },
+  {
+    "word": "TRƯỜNG",
+    "emoji": "🏫"
+  },
+  {
+    "word": "ĐỒ CHƠI",
+    "emoji": "🧸"
+  },
+  {
+    "word": "BÉ",
+    "emoji": "🧒"
+  },
+  {
+    "word": "SAO",
+    "emoji": "⭐"
+  },
+  {
+    "word": "TRĂNG",
+    "emoji": "🌙"
+  },
+  {
+    "word": "MÂY",
+    "emoji": "☁️"
+  },
+  {
+    "word": "BẠN",
+    "emoji": "🤝"
+  }
 ]

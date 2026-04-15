@@ -1,22 +1,82 @@
 [
-  {"word": "DIE SONNE SCHEINT", "emoji": "☀️"},
-  {"word": "ICH LIEBE DICH", "emoji": "❤️"},
-  {"word": "WIR SPIELEN HEUTE", "emoji": "🧸"},
-  {"word": "EIN SCHÖNER TAG", "emoji": "🌻"},
-  {"word": "LÄCHELN UND FREUEN", "emoji": "😊"},
-  {"word": "MACH DEINE AUGEN ZU", "emoji": "😴"},
-  {"word": "KLEINES KÄTZCHEN", "emoji": "🐱"},
-  {"word": "MEIN LIEBER FREUND", "emoji": "🤝"},
-  {"word": "PIPA POPA PAPA", "emoji": "🤡"},
-  {"word": "GROSSER BÄR SCHLÄFT", "emoji": "🐻"},
-  {"word": "DER MOND IST HELL", "emoji": "🌙"},
-  {"word": "WIR ESSEN GESUND", "emoji": "🍏"},
-  {"word": "FREUNDE SPIELEN ZUSAMMEN", "emoji": "🤝"},
-  {"word": "VÖGEL FLIEGEN HOCH", "emoji": "🦅"},
-  {"word": "DIE ERDE IST RUND", "emoji": "🌍"},
-  {"word": "GÜTE IST MAGIE", "emoji": "✨"},
-  {"word": "SEI MUTIG UND STARK", "emoji": "🦁"},
-  {"word": "WASSER IST GUT FÜR DICH", "emoji": "💧"},
-  {"word": "LIES EIN GUTES BUCH", "emoji": "📖"},
-  {"word": "TEILE DEINE SPIELZEUGE", "emoji": "🧸"}
+  {
+    "word": "DIE SONNE SCHEINT",
+    "emoji": "☀️"
+  },
+  {
+    "word": "ICH LIEBE DICH",
+    "emoji": "❤️"
+  },
+  {
+    "word": "WIR SPIELEN HEUTE",
+    "emoji": "🧸"
+  },
+  {
+    "word": "EIN SCHÖNER TAG",
+    "emoji": "🌻"
+  },
+  {
+    "word": "LÄCHLE UND FREUE DICH",
+    "emoji": "😊"
+  },
+  {
+    "word": "MACH DEINE AUGEN ZU",
+    "emoji": "😴"
+  },
+  {
+    "word": "KLEINES KÄTZCHEN",
+    "emoji": "🐱"
+  },
+  {
+    "word": "DU BIST MEIN FREUND",
+    "emoji": "🤝"
+  },
+  {
+    "word": "PAPA LIEST MIR VOR",
+    "emoji": "🤡"
+  },
+  {
+    "word": "GROSSER BÄR SCHLÄFT",
+    "emoji": "🐻"
+  },
+  {
+    "word": "DER MOND IST HELL",
+    "emoji": "🌙"
+  },
+  {
+    "word": "WIR ESSEN GESUND",
+    "emoji": "🍏"
+  },
+  {
+    "word": "FREUNDE SPIELEN ZUSAMMEN",
+    "emoji": "👭"
+  },
+  {
+    "word": "VÖGEL FLIEGEN HOCH",
+    "emoji": "🦅"
+  },
+  {
+    "word": "DIE ERDE IST RUND",
+    "emoji": "🌍"
+  },
+  {
+    "word": "GÜTE IST MAGIE",
+    "emoji": "✨"
+  },
+  {
+    "word": "SEI MUTIG UND STARK",
+    "emoji": "🦁"
+  },
+  {
+    "word": "WASSER IST GUT FÜR DICH",
+    "emoji": "💧"
+  },
+  {
+    "word": "LIES EIN GUTES BUCH",
+    "emoji": "📖"
+  },
+  {
+    "word": "TEILE DEINE SPIELZEUGE",
+    "emoji": "🤲"
+  }
 ]

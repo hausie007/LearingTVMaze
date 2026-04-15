@@ -1,22 +1,82 @@
 [
-  {"word": "CASA", "emoji": "🏠"},
-  {"word": "GATTO", "emoji": "🐱"},
-  {"word": "CANE", "emoji": "🐶"},
-  {"word": "MAMMA", "emoji": "👩"},
-  {"word": "PAPA", "emoji": "👨"},
-  {"word": "SOLE", "emoji": "☀️"},
-  {"word": "MARE", "emoji": "🌊"},
-  {"word": "MELA", "emoji": "🍎"},
-  {"word": "PANE", "emoji": "🍞"},
-  {"word": "LATTE", "emoji": "🥛"},
-  {"word": "FIORE", "emoji": "🌸"},
-  {"word": "ALBERO", "emoji": "🌳"},
-  {"word": "LIBRO", "emoji": "📖"},
-  {"word": "SCUOLA", "emoji": "🏫"},
-  {"word": "GIOCO", "emoji": "🧸"},
-  {"word": "BIMBO", "emoji": "🧒"},
-  {"word": "STELLA", "emoji": "⭐"},
-  {"word": "LUNA", "emoji": "🌙"},
-  {"word": "CIELO", "emoji": "🌌"},
-  {"word": "AMICO", "emoji": "🤝"}
+  {
+    "word": "CASA",
+    "emoji": "🏠"
+  },
+  {
+    "word": "GATTO",
+    "emoji": "🐱"
+  },
+  {
+    "word": "CANE",
+    "emoji": "🐶"
+  },
+  {
+    "word": "MAMMA",
+    "emoji": "👩"
+  },
+  {
+    "word": "PAPA",
+    "emoji": "👨"
+  },
+  {
+    "word": "SOLE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "MARE",
+    "emoji": "🌊"
+  },
+  {
+    "word": "MELA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "PANE",
+    "emoji": "🍞"
+  },
+  {
+    "word": "LATTE",
+    "emoji": "🥛"
+  },
+  {
+    "word": "FIORE",
+    "emoji": "🌸"
+  },
+  {
+    "word": "ALBERO",
+    "emoji": "🌳"
+  },
+  {
+    "word": "LIBRO",
+    "emoji": "📖"
+  },
+  {
+    "word": "SCUOLA",
+    "emoji": "🏫"
+  },
+  {
+    "word": "GIOCO",
+    "emoji": "🧸"
+  },
+  {
+    "word": "BIMBO",
+    "emoji": "🧒"
+  },
+  {
+    "word": "STELLA",
+    "emoji": "⭐"
+  },
+  {
+    "word": "LUNA",
+    "emoji": "🌙"
+  },
+  {
+    "word": "CIELO",
+    "emoji": "🌌"
+  },
+  {
+    "word": "AMICO",
+    "emoji": "🤝"
+  }
 ]

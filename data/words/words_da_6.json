@@ -1,22 +1,82 @@
 [
-  {"word": "SOLEN SKINNER NU", "emoji": "☀️"},
-  {"word": "ELSK DIN PLANET", "emoji": "🌍"},
-  {"word": "SMIL OG VÆR GLAD", "emoji": "😊"},
-  {"word": "MIN FAMILIE ER KÆRLIGHED", "emoji": "❤️"},
-  {"word": "VENNER DELER UD", "emoji": "🤝"},
-  {"word": "FUGLE FLYVER HØJT", "emoji": "🦅"},
-  {"word": "VORES BLÅ HAV", "emoji": "🌊"},
-  {"word": "SKOV FULD AF LIV", "emoji": "🌲"},
-  {"word": "SPIS MEGET FRUGT", "emoji": "🍏"},
-  {"word": "DRIK VAND NU", "emoji": "💧"},
-  {"word": "SIG TAK ALTID", "emoji": "🙏"},
-  {"word": "HJÆLP ALLE ANDRE", "emoji": "🤝"},
-  {"word": "SOV GODT I NAT", "emoji": "😴"},
-  {"word": "LÆS EN FIN SAGA", "emoji": "📖"},
-  {"word": "LEG MED LEGETØJ", "emoji": "🧸"},
-  {"word": "LÆR NOGET NYT", "emoji": "📚"},
-  {"word": "REGNBUEN HAR FARVER", "emoji": "🌈"},
-  {"word": "STJERNERNE LYSER", "emoji": "⭐"},
-  {"word": "MÅNEN LYSER OP", "emoji": "🌙"},
-  {"word": "GÅ MED GLÆDE", "emoji": "🚶"}
+  {
+    "word": "SOLEN SKINNER NU",
+    "emoji": "☀️"
+  },
+  {
+    "word": "ELSK DIN PLANET",
+    "emoji": "🌍"
+  },
+  {
+    "word": "SMIL OG VÆR GLAD",
+    "emoji": "😊"
+  },
+  {
+    "word": "JEG ELSKER MIN FAMILIE",
+    "emoji": "❤️"
+  },
+  {
+    "word": "VENNER DELER LEGETØJ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "FUGLE FLYVER HØJT",
+    "emoji": "🦅"
+  },
+  {
+    "word": "VORES BLÅ HAV",
+    "emoji": "🌊"
+  },
+  {
+    "word": "SKOV FULD AF LIV",
+    "emoji": "🌲"
+  },
+  {
+    "word": "SPIS MEGET FRUGT",
+    "emoji": "🍏"
+  },
+  {
+    "word": "DRIK VAND NU",
+    "emoji": "💧"
+  },
+  {
+    "word": "SIG TAK ALTID",
+    "emoji": "🙏"
+  },
+  {
+    "word": "HJÆLP ALLE ANDRE",
+    "emoji": "🫶"
+  },
+  {
+    "word": "SOV GODT I NAT",
+    "emoji": "😴"
+  },
+  {
+    "word": "LÆS ET GODT EVENTYR",
+    "emoji": "📖"
+  },
+  {
+    "word": "LEG MED LEGETØJ",
+    "emoji": "🧸"
+  },
+  {
+    "word": "LÆR NOGET NYT",
+    "emoji": "📚"
+  },
+  {
+    "word": "REGNBUEN HAR FARVER",
+    "emoji": "🌈"
+  },
+  {
+    "word": "STJERNERNE LYSER",
+    "emoji": "⭐"
+  },
+  {
+    "word": "MÅNEN LYSER OP",
+    "emoji": "🌙"
+  },
+  {
+    "word": "GÅ MED GLÆDE",
+    "emoji": "🚶"
+  }
 ]

@@ -1,22 +1,82 @@
 [
-  {"word": "JABŁKO", "emoji": "🍎"},
-  {"word": "BANAN", "emoji": "🍌"},
-  {"word": "GRUSZA", "emoji": "🍐"},
-  {"word": "ŚLIWKA", "emoji": "🫐"},
-  {"word": "CYTRYNA", "emoji": "🍋"},
-  {"word": "ARBUZ", "emoji": "🍉"},
-  {"word": "TRUSKAWKA", "emoji": "🍓"},
-  {"word": "BORÓWKA", "emoji": "🫐"},
-  {"word": "MALINA", "emoji": "🍇"},
-  {"word": "CUKIERKI", "emoji": "🍬"},
-  {"word": "CIASTKO", "emoji": "🍪"},
-  {"word": "DORT", "emoji": "🎂"},
-  {"word": "LODY", "emoji": "🍦"},
-  {"word": "MLEKO", "emoji": "🥛"},
-  {"word": "WODA", "emoji": "💧"},
-  {"word": "SOK", "emoji": "🧃"},
-  {"word": "CHLEB", "emoji": "🍞"},
-  {"word": "MASŁO", "emoji": "🧈"},
-  {"word": "JAJKO", "emoji": "🥚"},
-  {"word": "MIÓD", "emoji": "🍯"}
+  {
+    "word": "JABŁKO",
+    "emoji": "🍎"
+  },
+  {
+    "word": "BANAN",
+    "emoji": "🍌"
+  },
+  {
+    "word": "GRUSZKA",
+    "emoji": "🍐"
+  },
+  {
+    "word": "ŚLIWKA",
+    "emoji": "🍑"
+  },
+  {
+    "word": "CYTRYNA",
+    "emoji": "🍋"
+  },
+  {
+    "word": "ARBUZ",
+    "emoji": "🍉"
+  },
+  {
+    "word": "TRUSKAWKA",
+    "emoji": "🍓"
+  },
+  {
+    "word": "BORÓWKA",
+    "emoji": "🫐"
+  },
+  {
+    "word": "MALINA",
+    "emoji": "🍇"
+  },
+  {
+    "word": "CUKIERKI",
+    "emoji": "🍬"
+  },
+  {
+    "word": "CIASTKO",
+    "emoji": "🍪"
+  },
+  {
+    "word": "TORCIK",
+    "emoji": "🎂"
+  },
+  {
+    "word": "LODY",
+    "emoji": "🍦"
+  },
+  {
+    "word": "MLEKO",
+    "emoji": "🥛"
+  },
+  {
+    "word": "WODA",
+    "emoji": "💧"
+  },
+  {
+    "word": "CHLEB",
+    "emoji": "🍞"
+  },
+  {
+    "word": "MASŁO",
+    "emoji": "🧈"
+  },
+  {
+    "word": "JAJKO",
+    "emoji": "🥚"
+  },
+  {
+    "word": "MIÓD",
+    "emoji": "🍯"
+  },
+  {
+    "word": "SERNIK",
+    "emoji": "🍰"
+  }
 ]

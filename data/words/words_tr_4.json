@@ -1,150 +1,154 @@
 [
   {
-    "word": "WONDERFUL",
-    "emoji": "✨"
+    "word": "AİLE",
+    "emoji": "👨‍👩‍👧‍👦"
   },
   {
-    "word": "BUTTERFLY",
-    "emoji": "🦋"
+    "word": "ARKADAŞLIK",
+    "emoji": "🤝"
   },
   {
-    "word": "STRAWBERRY",
-    "emoji": "🍓"
+    "word": "OYUNCAK",
+    "emoji": "🧸"
   },
   {
-    "word": "SANDWICHES",
-    "emoji": "🥪"
-  },
-  {
-    "word": "WATERMELON",
-    "emoji": "🍉"
-  },
-  {
-    "word": "DINOSAURS",
-    "emoji": "🦖"
-  },
-  {
-    "word": "ADVENTURE",
-    "emoji": "🗺️"
-  },
-  {
-    "word": "TREASURE",
-    "emoji": "💎"
-  },
-  {
-    "word": "CHOCOLATE",
-    "emoji": "🍫"
-  },
-  {
-    "word": "UMBRELLAS",
-    "emoji": "☂️"
-  },
-  {
-    "word": "PENGUINS",
-    "emoji": "🐧"
-  },
-  {
-    "word": "SNOWMAN",
-    "emoji": "☃️"
-  },
-  {
-    "word": "HALLOWEEN",
-    "emoji": "🎃"
-  },
-  {
-    "word": "FIREWORKS",
-    "emoji": "🎆"
-  },
-  {
-    "word": "STARFISH",
-    "emoji": "⭐"
-  },
-  {
-    "word": "SUNFLOWER",
-    "emoji": "🌻"
-  },
-  {
-    "word": "PINEAPPLE",
-    "emoji": "🍍"
-  },
-  {
-    "word": "LADYBUG",
-    "emoji": "🐞"
-  },
-  {
-    "word": "FROGPRINCE",
-    "emoji": "🐸"
-  },
-  {
-    "word": "SPACESHIP",
-    "emoji": "🚀"
-  },
-  {
-    "word": "TELESCOPE",
-    "emoji": "🔭"
-  },
-  {
-    "word": "MICROSCOPE",
-    "emoji": "🔬"
-  },
-  {
-    "word": "HOSPITAL",
-    "emoji": "🏥"
-  },
-  {
-    "word": "FIRETRUCK",
-    "emoji": "🚒"
-  },
-  {
-    "word": "BICYCLE",
-    "emoji": "🚲"
-  },
-  {
-    "word": "HELICOPTER",
-    "emoji": "🚁"
-  },
-  {
-    "word": "SCARECROW",
-    "emoji": "🌾"
-  },
-  {
-    "word": "RAINBOWS",
+    "word": "GÖKKUŞAĞI",
     "emoji": "🌈"
   },
   {
-    "word": "LIGHTNING",
+    "word": "DONDURMACI",
+    "emoji": "🍦"
+  },
+  {
+    "word": "GÜVE",
+    "emoji": "🦋"
+  },
+  {
+    "word": "AHUDUDU",
+    "emoji": "🍓"
+  },
+  {
+    "word": "SANDVİÇ",
+    "emoji": "🥪"
+  },
+  {
+    "word": "KAVUN",
+    "emoji": "🍈"
+  },
+  {
+    "word": "DİNOZOR",
+    "emoji": "🦖"
+  },
+  {
+    "word": "MACERA",
+    "emoji": "🗺️"
+  },
+  {
+    "word": "HAZİNE",
+    "emoji": "💎"
+  },
+  {
+    "word": "ÇİKOLATA",
+    "emoji": "🍫"
+  },
+  {
+    "word": "ŞEMSİYE",
+    "emoji": "☂️"
+  },
+  {
+    "word": "PENGUEN",
+    "emoji": "🐧"
+  },
+  {
+    "word": "KARDAN ADAM",
+    "emoji": "☃️"
+  },
+  {
+    "word": "HAVAİ FİŞEK",
+    "emoji": "🎆"
+  },
+  {
+    "word": "DENİZYILDIZI",
+    "emoji": "⭐"
+  },
+  {
+    "word": "AYÇİÇEĞİ",
+    "emoji": "🌻"
+  },
+  {
+    "word": "ANANAS",
+    "emoji": "🍍"
+  },
+  {
+    "word": "UĞUR BÖCEĞİ",
+    "emoji": "🐞"
+  },
+  {
+    "word": "UZAY GEMİSİ",
+    "emoji": "🚀"
+  },
+  {
+    "word": "TELESKOP",
+    "emoji": "🔭"
+  },
+  {
+    "word": "MİKROSKOP",
+    "emoji": "🔬"
+  },
+  {
+    "word": "HASTANE",
+    "emoji": "🏥"
+  },
+  {
+    "word": "İTFAİYE ARACI",
+    "emoji": "🚒"
+  },
+  {
+    "word": "ÜÇ TEKER",
+    "emoji": "🚲"
+  },
+  {
+    "word": "HAVA TAKSİ",
+    "emoji": "🚁"
+  },
+  {
+    "word": "KORKULUK",
+    "emoji": "🌾"
+  },
+  {
+    "word": "ŞİMŞEK",
     "emoji": "⚡"
   },
   {
-    "word": "SQUIRREL",
+    "word": "SİNCAP",
     "emoji": "🐿️"
   },
   {
-    "word": "KANGAROO",
+    "word": "KANGURU",
     "emoji": "🦘"
   },
   {
-    "word": "ELEPHANT",
-    "emoji": "🐘"
+    "word": "MAMUT",
+    "emoji": "🦣"
   },
   {
-    "word": "GIRAFFE",
-    "emoji": "🦒"
+    "word": "TEKBOYNUZ",
+    "emoji": "🦄"
   },
   {
-    "word": "CROCODILE",
+    "word": "TİMSAH",
     "emoji": "🐊"
   },
   {
-    "word": "FLAMINGO",
+    "word": "FLAMİNGO",
     "emoji": "🦩"
   },
   {
-    "word": "OCTOPUS",
+    "word": "AHTAPOT",
     "emoji": "🐙"
   },
   {
-    "word": "HEDGEHOG",
+    "word": "KİRPİ",
     "emoji": "🦔"
   },
   {
@@ -152,51 +156,47 @@
     "emoji": "🐹"
   },
   {
-    "word": "PARROT",
+    "word": "PAPAĞAN",
     "emoji": "🦜"
   },
   {
-    "word": "PEACOCK",
+    "word": "TAVUS KUŞU",
     "emoji": "🦚"
   },
   {
-    "word": "LITTLE BIRD",
+    "word": "KÜÇÜK KUŞ",
     "emoji": "🐦"
   },
   {
-    "word": "SWEET CANDY",
+    "word": "TATLI ŞEKER",
     "emoji": "🍭"
   },
   {
-    "word": "FRUIT JUICE",
+    "word": "MEYVE SUYU",
     "emoji": "🧃"
   },
   {
-    "word": "BIG CASTLE",
+    "word": "BÜYÜK ŞATO",
     "emoji": "🏰"
   },
   {
-    "word": "MAGIC WAND",
+    "word": "SİHİRLİ DEĞNEK",
     "emoji": "🪄"
   },
   {
-    "word": "TOY TRAIN",
+    "word": "OYUNCAK TREN",
     "emoji": "🚂"
   },
   {
-    "word": "BLUE OCEAN",
+    "word": "MAVİ OKYANUS",
     "emoji": "🌊"
   },
   {
-    "word": "GREEN GRASS",
+    "word": "YEŞİL ÇİM",
     "emoji": "🌱"
   },
   {
-    "word": "COLD WATER",
-    "emoji": "🧊"
-  },
-  {
-    "word": "HAPPY FACE",
+    "word": "MUTLU YÜZ",
     "emoji": "😊"
   }
 ]

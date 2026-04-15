@@ -1,50 +1,50 @@
 [
   {
-    "word": "WONDERFUL",
+    "word": "ÉTINCELLE",
     "emoji": "✨"
   },
   {
-    "word": "BUTTERFLY",
-    "emoji": "🦋"
+    "word": "CHENILLE",
+    "emoji": "🐛"
   },
   {
-    "word": "STRAWBERRY",
+    "word": "FRAMBOISE",
     "emoji": "🍓"
   },
   {
-    "word": "SANDWICHES",
+    "word": "SANDWICH",
     "emoji": "🥪"
   },
   {
-    "word": "WATERMELON",
+    "word": "PASTÈQUE",
     "emoji": "🍉"
   },
   {
-    "word": "DINOSAURS",
-    "emoji": "🦖"
+    "word": "DINOSAURES",
+    "emoji": "🦕"
   },
   {
-    "word": "ADVENTURE",
+    "word": "AVENTURE",
     "emoji": "🗺️"
   },
   {
-    "word": "TREASURE",
+    "word": "TRÉSOR",
     "emoji": "💎"
   },
   {
-    "word": "CHOCOLATE",
+    "word": "CHOCOLAT",
     "emoji": "🍫"
   },
   {
-    "word": "UMBRELLAS",
+    "word": "PARAPLUIE",
     "emoji": "☂️"
   },
   {
-    "word": "PENGUINS",
+    "word": "MANCHOTS",
     "emoji": "🐧"
   },
   {
-    "word": "SNOWMAN",
+    "word": "BONHOMME DE NEIGE",
     "emoji": "☃️"
   },
   {
@@ -52,35 +52,31 @@
     "emoji": "🎃"
   },
   {
-    "word": "FIREWORKS",
+    "word": "FEU D'ARTIFICE",
     "emoji": "🎆"
   },
   {
-    "word": "STARFISH",
+    "word": "ÉTOILE DE MER",
     "emoji": "⭐"
   },
   {
-    "word": "SUNFLOWER",
+    "word": "TOURNESOL",
     "emoji": "🌻"
   },
   {
-    "word": "PINEAPPLE",
+    "word": "ANANAS",
     "emoji": "🍍"
   },
   {
-    "word": "LADYBUG",
+    "word": "COCCINELLE",
     "emoji": "🐞"
   },
   {
-    "word": "FROGPRINCE",
-    "emoji": "🐸"
-  },
-  {
-    "word": "SPACESHIP",
+    "word": "VAISSEAU SPATIAL",
     "emoji": "🚀"
   },
   {
-    "word": "TELESCOPE",
+    "word": "TÉLESCOPE",
     "emoji": "🔭"
   },
   {
@@ -88,63 +84,63 @@
     "emoji": "🔬"
   },
   {
-    "word": "HOSPITAL",
-    "emoji": "🏥"
+    "word": "AIRE DE JEUX",
+    "emoji": "🛝"
   },
   {
-    "word": "FIRETRUCK",
-    "emoji": "🚒"
+    "word": "BUS SCOLAIRE",
+    "emoji": "🚌"
   },
   {
-    "word": "BICYCLE",
-    "emoji": "🚲"
+    "word": "TROTTINETTE",
+    "emoji": "🛴"
   },
   {
-    "word": "HELICOPTER",
-    "emoji": "🚁"
+    "word": "PARACHUTE",
+    "emoji": "🪂"
   },
   {
-    "word": "SCARECROW",
+    "word": "ÉPOUVANTAIL",
     "emoji": "🌾"
   },
   {
-    "word": "RAINBOWS",
+    "word": "ARC-EN-CIEL",
     "emoji": "🌈"
   },
   {
-    "word": "LIGHTNING",
+    "word": "ÉCLAIR",
     "emoji": "⚡"
   },
   {
-    "word": "SQUIRREL",
+    "word": "ÉCUREUIL",
     "emoji": "🐿️"
   },
   {
-    "word": "KANGAROO",
-    "emoji": "🦘"
+    "word": "KOALA",
+    "emoji": "🐨"
   },
   {
-    "word": "ELEPHANT",
-    "emoji": "🐘"
+    "word": "RHINOCÉROS",
+    "emoji": "🦏"
   },
   {
-    "word": "GIRAFFE",
-    "emoji": "🦒"
+    "word": "HIPPOPOTAME",
+    "emoji": "🦛"
   },
   {
     "word": "CROCODILE",
     "emoji": "🐊"
   },
   {
-    "word": "FLAMINGO",
+    "word": "FLAMANT ROSE",
     "emoji": "🦩"
   },
   {
-    "word": "OCTOPUS",
+    "word": "PIEUVRE",
     "emoji": "🐙"
   },
   {
-    "word": "HEDGEHOG",
+    "word": "HÉRISSON",
     "emoji": "🦔"
   },
   {
@@ -152,51 +148,55 @@
     "emoji": "🐹"
   },
   {
-    "word": "PARROT",
+    "word": "PERROQUET",
     "emoji": "🦜"
   },
   {
-    "word": "PEACOCK",
+    "word": "PAON",
     "emoji": "🦚"
   },
   {
-    "word": "LITTLE BIRD",
+    "word": "OISEAU BLEU",
     "emoji": "🐦"
   },
   {
-    "word": "SWEET CANDY",
+    "word": "BONBON DOUX",
     "emoji": "🍭"
   },
   {
-    "word": "FRUIT JUICE",
+    "word": "JUS DE FRUITS",
     "emoji": "🧃"
   },
   {
-    "word": "BIG CASTLE",
+    "word": "GRAND CHÂTEAU",
     "emoji": "🏰"
   },
   {
-    "word": "MAGIC WAND",
+    "word": "BAGUETTE MAGIQUE",
     "emoji": "🪄"
   },
   {
-    "word": "TOY TRAIN",
+    "word": "TRAIN JOUET",
     "emoji": "🚂"
   },
   {
-    "word": "BLUE OCEAN",
+    "word": "VAGUE BLEUE",
     "emoji": "🌊"
   },
   {
-    "word": "GREEN GRASS",
+    "word": "HERBE VERTE",
     "emoji": "🌱"
   },
   {
-    "word": "COLD WATER",
+    "word": "EAU FRAÎCHE",
     "emoji": "🧊"
   },
   {
-    "word": "HAPPY FACE",
+    "word": "VISAGE JOYEUX",
     "emoji": "😊"
+  },
+  {
+    "word": "BALLON COLORÉ",
+    "emoji": "🎈"
   }
 ]

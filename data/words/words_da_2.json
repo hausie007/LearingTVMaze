@@ -1,22 +1,82 @@
 [
-  {"word": "CYKEL", "emoji": "🚲"},
-  {"word": "ÆBLE", "emoji": "🍎"},
-  {"word": "STOL", "emoji": "🪑"},
-  {"word": "PIGE", "emoji": "👧"},
-  {"word": "DRENG", "emoji": "👦"},
-  {"word": "VAND", "emoji": "💧"},
-  {"word": "MÆLK", "emoji": "🥛"},
-  {"word": "BOLD", "emoji": "⚽"},
-  {"word": "SKIB", "emoji": "🚢"},
-  {"word": "SENG", "emoji": "🛏️"},
-  {"word": "HUE", "emoji": "🧢"},
-  {"word": "STJERNE", "emoji": "⭐"},
-  {"word": "MÅNE", "emoji": "🌙"},
-  {"word": "SKO", "emoji": "👟"},
-  {"word": "FISK", "emoji": "🐟"},
-  {"word": "BRØD", "emoji": "🍞"},
-  {"word": "OST", "emoji": "🧀"},
-  {"word": "AGURK", "emoji": "🥒"},
-  {"word": "TOMAT", "emoji": "🍅"},
-  {"word": "PÆRE", "emoji": "🍐"}
+  {
+    "word": "CYKEL",
+    "emoji": "🚲"
+  },
+  {
+    "word": "ÆBLE",
+    "emoji": "🍎"
+  },
+  {
+    "word": "STOL",
+    "emoji": "🪑"
+  },
+  {
+    "word": "PIGE",
+    "emoji": "👧"
+  },
+  {
+    "word": "DRENG",
+    "emoji": "👦"
+  },
+  {
+    "word": "VAND",
+    "emoji": "💧"
+  },
+  {
+    "word": "MÆLK",
+    "emoji": "🥛"
+  },
+  {
+    "word": "BOLD",
+    "emoji": "⚽"
+  },
+  {
+    "word": "SKIB",
+    "emoji": "🚢"
+  },
+  {
+    "word": "SENG",
+    "emoji": "🛏️"
+  },
+  {
+    "word": "HUE",
+    "emoji": "🧢"
+  },
+  {
+    "word": "STJERNE",
+    "emoji": "⭐"
+  },
+  {
+    "word": "LAMPE",
+    "emoji": "💡"
+  },
+  {
+    "word": "HJELM",
+    "emoji": "⛑️"
+  },
+  {
+    "word": "LOSOS",
+    "emoji": "🐟"
+  },
+  {
+    "word": "BRØD",
+    "emoji": "🍞"
+  },
+  {
+    "word": "OST",
+    "emoji": "🧀"
+  },
+  {
+    "word": "AGURK",
+    "emoji": "🥒"
+  },
+  {
+    "word": "TOMAT",
+    "emoji": "🍅"
+  },
+  {
+    "word": "PÆRE",
+    "emoji": "🍐"
+  }
 ]

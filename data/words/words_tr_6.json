@@ -1,22 +1,82 @@
 [
-  {"word": "GÜNEŞ PARLIYOR", "emoji": "☀️"},
-  {"word": "DÜNYANI ÇOK SEV", "emoji": "🌍"},
-  {"word": "GÜLÜMSE VE MUTLU", "emoji": "😊"},
-  {"word": "AİLEM SEVGİDİR", "emoji": "❤️"},
-  {"word": "ARKADAŞLAR PAYLAŞIR", "emoji": "🤝"},
-  {"word": "KUŞLAR YÜKSEK UÇAR", "emoji": "🦅"},
-  {"word": "MAVİ DENİZİMİZ", "emoji": "🌊"},
-  {"word": "ORMAN HAYAT DOLU", "emoji": "🌲"},
-  {"word": "BOL MEYVE YE", "emoji": "🍏"},
-  {"word": "SU İÇELİM HEMEN", "emoji": "💧"},
-  {"word": "TEŞEKKÜR EDERİM", "emoji": "🙏"},
-  {"word": "BAŞKALARINA YARDIM ET", "emoji": "🤝"},
-  {"word": "BU GECE İYİ UYU", "emoji": "😴"},
-  {"word": "GÜZEL BİR MASAL", "emoji": "📖"},
-  {"word": "OYUNCAKLARLA OYNA", "emoji": "🧸"},
-  {"word": "HER GÜN ÖĞREN", "emoji": "📚"},
-  {"word": "GÖKKUŞAĞI RENKLERİ", "emoji": "🌈"},
-  {"word": "YILDIZLAR PARLIYOR", "emoji": "⭐"},
-  {"word": "AY BİZİ AYDINLATIR", "emoji": "🌙"},
-  {"word": "NEŞEYLE YÜRÜ", "emoji": "🚶"}
+  {
+    "word": "GÜNEŞ PARLIYOR",
+    "emoji": "☀️"
+  },
+  {
+    "word": "DÜNYANI ÇOK SEV",
+    "emoji": "🌍"
+  },
+  {
+    "word": "GÜLÜMSE VE MUTLU OL",
+    "emoji": "😊"
+  },
+  {
+    "word": "AİLEM SEVGİDİR",
+    "emoji": "❤️"
+  },
+  {
+    "word": "ARKADAŞLAR PAYLAŞIR",
+    "emoji": "🤝"
+  },
+  {
+    "word": "KUŞLAR YÜKSEK UÇAR",
+    "emoji": "🦅"
+  },
+  {
+    "word": "DENİZİMİZ MAVİDİR",
+    "emoji": "🌊"
+  },
+  {
+    "word": "ORMAN HAYAT DOLUDUR",
+    "emoji": "🌲"
+  },
+  {
+    "word": "BOL MEYVE YE",
+    "emoji": "🍏"
+  },
+  {
+    "word": "HER GÜN SU İÇ",
+    "emoji": "💧"
+  },
+  {
+    "word": "HEP TEŞEKKÜR ET",
+    "emoji": "🙏"
+  },
+  {
+    "word": "BAŞKALARINA YARDIM ET",
+    "emoji": "🫶"
+  },
+  {
+    "word": "BU GECE İYİ UYU",
+    "emoji": "😴"
+  },
+  {
+    "word": "GÜZEL BİR MASAL OKU",
+    "emoji": "📖"
+  },
+  {
+    "word": "OYUNCAKLARLA OYNA",
+    "emoji": "🧸"
+  },
+  {
+    "word": "HER GÜN BİR ŞEY ÖĞREN",
+    "emoji": "📚"
+  },
+  {
+    "word": "GÖKKUŞAĞININ RENKLERİ VAR",
+    "emoji": "🌈"
+  },
+  {
+    "word": "YILDIZLAR PARLIYOR",
+    "emoji": "⭐"
+  },
+  {
+    "word": "AY BİZİ AYDINLATIR",
+    "emoji": "🌙"
+  },
+  {
+    "word": "NEŞEYLE YÜRÜ",
+    "emoji": "🚶"
+  }
 ]

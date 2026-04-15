@@ -1,202 +1,202 @@
 [
   {
-    "word": "WONDERFUL",
-    "emoji": "✨"
+    "word": "FAMIGLIA",
+    "emoji": "👨‍👩‍👧‍👦"
   },
   {
-    "word": "BUTTERFLY",
-    "emoji": "🦋"
+    "word": "GIOCATTOLO",
+    "emoji": "🧸"
   },
   {
-    "word": "STRAWBERRY",
-    "emoji": "🍓"
-  },
-  {
-    "word": "SANDWICHES",
-    "emoji": "🥪"
-  },
-  {
-    "word": "WATERMELON",
-    "emoji": "🍉"
-  },
-  {
-    "word": "DINOSAURS",
-    "emoji": "🦖"
-  },
-  {
-    "word": "ADVENTURE",
-    "emoji": "🗺️"
-  },
-  {
-    "word": "TREASURE",
-    "emoji": "💎"
-  },
-  {
-    "word": "CHOCOLATE",
-    "emoji": "🍫"
-  },
-  {
-    "word": "UMBRELLAS",
-    "emoji": "☂️"
-  },
-  {
-    "word": "PENGUINS",
-    "emoji": "🐧"
-  },
-  {
-    "word": "SNOWMAN",
-    "emoji": "☃️"
-  },
-  {
-    "word": "HALLOWEEN",
-    "emoji": "🎃"
-  },
-  {
-    "word": "FIREWORKS",
-    "emoji": "🎆"
-  },
-  {
-    "word": "STARFISH",
-    "emoji": "⭐"
-  },
-  {
-    "word": "SUNFLOWER",
-    "emoji": "🌻"
-  },
-  {
-    "word": "PINEAPPLE",
-    "emoji": "🍍"
-  },
-  {
-    "word": "LADYBUG",
-    "emoji": "🐞"
-  },
-  {
-    "word": "FROGPRINCE",
-    "emoji": "🐸"
-  },
-  {
-    "word": "SPACESHIP",
-    "emoji": "🚀"
-  },
-  {
-    "word": "TELESCOPE",
-    "emoji": "🔭"
-  },
-  {
-    "word": "MICROSCOPE",
-    "emoji": "🔬"
-  },
-  {
-    "word": "HOSPITAL",
-    "emoji": "🏥"
-  },
-  {
-    "word": "FIRETRUCK",
-    "emoji": "🚒"
-  },
-  {
-    "word": "BICYCLE",
-    "emoji": "🚲"
-  },
-  {
-    "word": "HELICOPTER",
-    "emoji": "🚁"
-  },
-  {
-    "word": "SCARECROW",
-    "emoji": "🌾"
-  },
-  {
-    "word": "RAINBOWS",
+    "word": "ARCOBALENO",
     "emoji": "🌈"
   },
   {
-    "word": "LIGHTNING",
+    "word": "LIBELLULA",
+    "emoji": "🪽"
+  },
+  {
+    "word": "FRAGOLA",
+    "emoji": "🍓"
+  },
+  {
+    "word": "PANINO",
+    "emoji": "🥪"
+  },
+  {
+    "word": "ANGURIA",
+    "emoji": "🍉"
+  },
+  {
+    "word": "DINOSAURO",
+    "emoji": "🦖"
+  },
+  {
+    "word": "AVVENTURA",
+    "emoji": "🗺️"
+  },
+  {
+    "word": "TESORO",
+    "emoji": "💎"
+  },
+  {
+    "word": "CIOCCOLATO",
+    "emoji": "🍫"
+  },
+  {
+    "word": "OMBRELLO",
+    "emoji": "☂️"
+  },
+  {
+    "word": "PINGUINO",
+    "emoji": "🐧"
+  },
+  {
+    "word": "PUPAZZO DI NEVE",
+    "emoji": "☃️"
+  },
+  {
+    "word": "FUOCHI D'ARTIFICIO",
+    "emoji": "🎆"
+  },
+  {
+    "word": "STELLA MARINA",
+    "emoji": "⭐"
+  },
+  {
+    "word": "GIRASOLE",
+    "emoji": "🌻"
+  },
+  {
+    "word": "ANANAS",
+    "emoji": "🍍"
+  },
+  {
+    "word": "COCCINELLA",
+    "emoji": "🐞"
+  },
+  {
+    "word": "ASTRONAVE",
+    "emoji": "🚀"
+  },
+  {
+    "word": "TELESCOPIO",
+    "emoji": "🔭"
+  },
+  {
+    "word": "MICROSCOPIO",
+    "emoji": "🔬"
+  },
+  {
+    "word": "OSPEDALE",
+    "emoji": "🏥"
+  },
+  {
+    "word": "AUTOPOMPA",
+    "emoji": "🚒"
+  },
+  {
+    "word": "BICICLETTA",
+    "emoji": "🚲"
+  },
+  {
+    "word": "ELICOTTERO",
+    "emoji": "🚁"
+  },
+  {
+    "word": "SPAVENTAPASSERI",
+    "emoji": "🌾"
+  },
+  {
+    "word": "FULMINE",
     "emoji": "⚡"
   },
   {
-    "word": "SQUIRREL",
+    "word": "SCOIATTOLO",
     "emoji": "🐿️"
   },
   {
-    "word": "KANGAROO",
+    "word": "CANGURO",
     "emoji": "🦘"
   },
   {
-    "word": "ELEPHANT",
-    "emoji": "🐘"
+    "word": "MAMMUT",
+    "emoji": "🦣"
   },
   {
-    "word": "GIRAFFE",
-    "emoji": "🦒"
+    "word": "UNICORNO",
+    "emoji": "🦄"
   },
   {
-    "word": "CROCODILE",
+    "word": "COCCODRILLO",
     "emoji": "🐊"
   },
   {
-    "word": "FLAMINGO",
+    "word": "FENICOTTERO",
     "emoji": "🦩"
   },
   {
-    "word": "OCTOPUS",
+    "word": "POLPO",
     "emoji": "🐙"
   },
   {
-    "word": "HEDGEHOG",
+    "word": "RICCIO",
     "emoji": "🦔"
   },
   {
-    "word": "HAMSTER",
+    "word": "CRICETO",
     "emoji": "🐹"
   },
   {
-    "word": "PARROT",
+    "word": "PAPPAGALLO",
     "emoji": "🦜"
   },
   {
-    "word": "PEACOCK",
+    "word": "PAVONE",
     "emoji": "🦚"
   },
   {
-    "word": "LITTLE BIRD",
+    "word": "UCCELLINO",
     "emoji": "🐦"
   },
   {
-    "word": "SWEET CANDY",
+    "word": "CARAMELLA",
     "emoji": "🍭"
   },
   {
-    "word": "FRUIT JUICE",
+    "word": "SUCCO DI FRUTTA",
     "emoji": "🧃"
   },
   {
-    "word": "BIG CASTLE",
+    "word": "GRANDE CASTELLO",
     "emoji": "🏰"
   },
   {
-    "word": "MAGIC WAND",
+    "word": "BACCHETTA MAGICA",
     "emoji": "🪄"
   },
   {
-    "word": "TOY TRAIN",
+    "word": "TRENINO",
     "emoji": "🚂"
   },
   {
-    "word": "BLUE OCEAN",
+    "word": "OCEANO BLU",
     "emoji": "🌊"
   },
   {
-    "word": "GREEN GRASS",
+    "word": "ERBA VERDE",
     "emoji": "🌱"
   },
   {
-    "word": "COLD WATER",
+    "word": "ACQUA FREDDA",
     "emoji": "🧊"
   },
   {
-    "word": "HAPPY FACE",
+    "word": "FACCIA FELICE",
     "emoji": "😊"
+  },
+  {
+    "word": "AQUILONE",
+    "emoji": "🪁"
   }
 ]

@@ -1,42 +1,162 @@
 [
-  {"word": "FAMILJEN", "emoji": "👨‍👩‍👧‍👦"},
-  {"word": "KOMPISEN", "emoji": "👫"},
-  {"word": "LEKSAKER", "emoji": "🧸"},
-  {"word": "REGNBÅGE", "emoji": "🌈"},
-  {"word": "GLASSBIL", "emoji": "🍦"},
-  {"word": "FJÄRILEN", "emoji": "🦋"},
-  {"word": "JORDGUBBE", "emoji": "🍓"},
-  {"word": "SANDWICH", "emoji": "🥪"},
-  {"word": "VATTENMELON", "emoji": "🍉"},
-  {"word": "DINOSAURIE", "emoji": "🦖"},
-  {"word": "ÄVENTYRET", "emoji": "🗺️"},
-  {"word": "SKATTEN", "emoji": "💎"},
-  {"word": "CHOKLADEN", "emoji": "🍫"},
-  {"word": "PARAPLYET", "emoji": "☂️"},
-  {"word": "PINGVINEN", "emoji": "🐧"},
-  {"word": "SNÖGUBBEN", "emoji": "☃️"},
-  {"word": "HALLOWEEN", "emoji": "🎃"},
-  {"word": "FYRVERKERI", "emoji": "🎆"},
-  {"word": "SJÖSTJÄRNA", "emoji": "⭐"},
-  {"word": "SOLROSEN", "emoji": "🌻"},
-  {"word": "ANANASEN", "emoji": "🍍"},
-  {"word": "NYCKELPIGA", "emoji": "🐞"},
-  {"word": "RYMDSKEPP", "emoji": "🚀"},
-  {"word": "TELESKOP", "emoji": "🔭"},
-  {"word": "SJUKHUS", "emoji": "🏥"},
-  {"word": "BRANDBIL", "emoji": "🚒"},
-  {"word": "CYKELN", "emoji": "🚲"},
-  {"word": "HELIKOPTER", "emoji": "🚁"},
-  {"word": "BLIXTEN", "emoji": "⚡"},
-  {"word": "EKORRE", "emoji": "🐿️"},
-  {"word": "KÄNGURU", "emoji": "🦘"},
-  {"word": "ELEFANT", "emoji": "🐘"},
-  {"word": "GIRAFF", "emoji": "🦒"},
-  {"word": "KROKODIL", "emoji": "🐊"},
-  {"word": "FLAMINGO", "emoji": "🦩"},
-  {"word": "BLÄCKFISK", "emoji": "🐙"},
-  {"word": "IGELKOTT", "emoji": "🦔"},
-  {"word": "HAMSTER", "emoji": "🐹"},
-  {"word": "PAVEGOJA", "emoji": "🦜"},
-  {"word": "PÅFÅGEL", "emoji": "🦚"}
+  {
+    "word": "FAMILJEN",
+    "emoji": "👨‍👩‍👧‍👦"
+  },
+  {
+    "word": "KOMPISEN",
+    "emoji": "👫"
+  },
+  {
+    "word": "LEKSAKER",
+    "emoji": "🧸"
+  },
+  {
+    "word": "REGNBÅGE",
+    "emoji": "🌈"
+  },
+  {
+    "word": "GLASSBIL",
+    "emoji": "🍦"
+  },
+  {
+    "word": "FJÄRILEN",
+    "emoji": "🦋"
+  },
+  {
+    "word": "JORDGUBBE",
+    "emoji": "🍓"
+  },
+  {
+    "word": "SMÖRGÅS",
+    "emoji": "🥪"
+  },
+  {
+    "word": "VATTENMELON",
+    "emoji": "🍉"
+  },
+  {
+    "word": "DINOSAUR",
+    "emoji": "🦖"
+  },
+  {
+    "word": "ÄVENTYRET",
+    "emoji": "🗺️"
+  },
+  {
+    "word": "SKATTEN",
+    "emoji": "💎"
+  },
+  {
+    "word": "CHOKLADEN",
+    "emoji": "🍫"
+  },
+  {
+    "word": "PARAPLYET",
+    "emoji": "☂️"
+  },
+  {
+    "word": "PINGVINEN",
+    "emoji": "🐧"
+  },
+  {
+    "word": "SNÖGUBBEN",
+    "emoji": "☃️"
+  },
+  {
+    "word": "HALLOWEEN",
+    "emoji": "🎃"
+  },
+  {
+    "word": "FYRVERKERI",
+    "emoji": "🎆"
+  },
+  {
+    "word": "SJÖSTJÄRNA",
+    "emoji": "⭐"
+  },
+  {
+    "word": "SOLROSEN",
+    "emoji": "🌻"
+  },
+  {
+    "word": "ANANASEN",
+    "emoji": "🍍"
+  },
+  {
+    "word": "NYCKELPIGA",
+    "emoji": "🐞"
+  },
+  {
+    "word": "RYMDSKEPP",
+    "emoji": "🚀"
+  },
+  {
+    "word": "TELESKOP",
+    "emoji": "🔭"
+  },
+  {
+    "word": "SJUKHUS",
+    "emoji": "🏥"
+  },
+  {
+    "word": "BRANDBIL",
+    "emoji": "🚒"
+  },
+  {
+    "word": "CYKELN",
+    "emoji": "🚲"
+  },
+  {
+    "word": "HELIKOPTER",
+    "emoji": "🚁"
+  },
+  {
+    "word": "BLIXTEN",
+    "emoji": "⚡"
+  },
+  {
+    "word": "EKORRE",
+    "emoji": "🐿️"
+  },
+  {
+    "word": "KÄNGURU",
+    "emoji": "🦘"
+  },
+  {
+    "word": "ELEFANT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "GIRAFF",
+    "emoji": "🦒"
+  },
+  {
+    "word": "KROKODIL",
+    "emoji": "🐊"
+  },
+  {
+    "word": "FLAMINGO",
+    "emoji": "🦩"
+  },
+  {
+    "word": "BLÄCKFISK",
+    "emoji": "🐙"
+  },
+  {
+    "word": "IGELKOTT",
+    "emoji": "🦔"
+  },
+  {
+    "word": "HAMSTER",
+    "emoji": "🐹"
+  },
+  {
+    "word": "PAPEGOJA",
+    "emoji": "🦜"
+  },
+  {
+    "word": "PÅFÅGEL",
+    "emoji": "🦚"
+  }
 ]

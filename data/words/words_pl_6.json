@@ -1,22 +1,82 @@
 [
-  {"word": "SŁOŃCE ŚWIECI", "emoji": "☀️"},
-  {"word": "KOCHAJ SWOJĄ PLANETĘ", "emoji": "🌍"},
-  {"word": "UŚMIECHNIJ SIĘ", "emoji": "😊"},
-  {"word": "MOJA RODZINA TO MIŁOŚĆ", "emoji": "❤️"},
-  {"word": "NASI KOLEDZY", "emoji": "🤝"},
-  {"word": "PTAKI LATAJĄ WYSOKO", "emoji": "🦅"},
-  {"word": "NASZE MODRE MORZE", "emoji": "🌊"},
-  {"word": "LAS PEŁEN ŻYCIA", "emoji": "🌲"},
-  {"word": "JEDZ DUŻO OWOCÓW", "emoji": "🍏"},
-  {"word": "PIJ WODĘ TERAZ", "emoji": "💧"},
-  {"word": "MÓW DZIĘKUJĘ ZAWSZE", "emoji": "🙏"},
-  {"word": "POMAGAJ INNYM DZIECIOM", "emoji": "🤝"},
-  {"word": "ŚPIJ DOBRZE DZISIAJ", "emoji": "😴"},
-  {"word": "CZYTAJ ŁADNĄ BAJKĘ", "emoji": "📖"},
-  {"word": "BAW SIĘ ZABAWKAMI", "emoji": "🧸"},
-  {"word": "UCZ SIĘ KAŻDEGO DNIA", "emoji": "📚"},
-  {"word": "TĘCZA MA KOLORY", "emoji": "🌈"},
-  {"word": "GWIAZDY ŚWIECĄ", "emoji": "⭐"},
-  {"word": "KSIĘŻYC NAS OŚWIECA", "emoji": "🌙"},
-  {"word": "IDŹ Z RADOŚCIĄ", "emoji": "🚶"}
+  {
+    "word": "SŁOŃCE ŚWIECI",
+    "emoji": "☀️"
+  },
+  {
+    "word": "KOCHAJ SWOJĄ PLANETĘ",
+    "emoji": "🌍"
+  },
+  {
+    "word": "UŚMIECHNIJ SIĘ I BĄDŹ SZCZĘŚLIWY",
+    "emoji": "😊"
+  },
+  {
+    "word": "MOJA RODZINA TO MIŁOŚĆ",
+    "emoji": "❤️"
+  },
+  {
+    "word": "PRZYJACIELE SIĘ DZIELĄ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "PTAKI LATAJĄ WYSOKO",
+    "emoji": "🦅"
+  },
+  {
+    "word": "NASZE MORZE JEST BŁĘKITNE",
+    "emoji": "🌊"
+  },
+  {
+    "word": "LAS PEŁEN JEST ŻYCIA",
+    "emoji": "🌲"
+  },
+  {
+    "word": "JEDZ DUŻO OWOCÓW",
+    "emoji": "🍏"
+  },
+  {
+    "word": "PIJ WODĘ CODZIENNIE",
+    "emoji": "💧"
+  },
+  {
+    "word": "MÓW DZIĘKUJĘ ZAWSZE",
+    "emoji": "🙏"
+  },
+  {
+    "word": "POMAGAJ INNYM DZIECIOM",
+    "emoji": "🫶"
+  },
+  {
+    "word": "ŚPIJ DOBRZE DZIŚ W NOCY",
+    "emoji": "😴"
+  },
+  {
+    "word": "CZYTAJ ŁADNĄ BAJKĘ",
+    "emoji": "📖"
+  },
+  {
+    "word": "BAW SIĘ SWOIMI ZABAWKAMI",
+    "emoji": "🧸"
+  },
+  {
+    "word": "UCZ SIĘ KAŻDEGO DNIA",
+    "emoji": "📚"
+  },
+  {
+    "word": "TĘCZA MA WIELE KOLORÓW",
+    "emoji": "🌈"
+  },
+  {
+    "word": "GWIAZDY ŚWIECĄ",
+    "emoji": "⭐"
+  },
+  {
+    "word": "KSIĘŻYC NAS OŚWIETLA",
+    "emoji": "🌙"
+  },
+  {
+    "word": "IDŹ Z RADOŚCIĄ",
+    "emoji": "🚶"
+  }
 ]

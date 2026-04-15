@@ -1,22 +1,82 @@
 [
-  {"word": "WINTERWALD", "emoji": "❄️"},
-  {"word": "SCHNEEMANN", "emoji": "☃️"},
-  {"word": "RODELBAHN", "emoji": "🛷"},
-  {"word": "EISBÄRCHEN", "emoji": "🐻"},
-  {"word": "PINGUINE", "emoji": "🐧"},
-  {"word": "KUCHENESSEN", "emoji": "🍰"},
-  {"word": "TEEPARTY", "emoji": "🍵"},
-  {"word": "KINDERFEST", "emoji": "🎈"},
-  {"word": "LUFTBALLON", "emoji": "🎈"},
-  {"word": "ZAUBERER", "emoji": "🧙"},
-  {"word": "FEUERWEHR", "emoji": "🚒"},
-  {"word": "POLIZEIAUTO", "emoji": "🚓"},
-  {"word": "KRANKENWAGEN", "emoji": "🚑"},
-  {"word": "MÜLLFUHR", "emoji": "🚛"},
-  {"word": "TRAKTORFAHRT", "emoji": "🚜"},
-  {"word": "BAUERNHOF", "emoji": "🏡"},
-  {"word": "KUHSTALL", "emoji": "🐄"},
-  {"word": "PFERDESTALL", "emoji": "🐎"},
-  {"word": "HÜHNERHOF", "emoji": "🐔"},
-  {"word": "ENTENTEICH", "emoji": "🦆"}
+  {
+    "word": "WINTERWALD",
+    "emoji": "❄️"
+  },
+  {
+    "word": "SCHNEEMANN",
+    "emoji": "☃️"
+  },
+  {
+    "word": "RODELBAHN",
+    "emoji": "🛷"
+  },
+  {
+    "word": "EISBÄRCHEN",
+    "emoji": "🐻"
+  },
+  {
+    "word": "PINGUINE",
+    "emoji": "🐧"
+  },
+  {
+    "word": "KUCHENESSEN",
+    "emoji": "🍰"
+  },
+  {
+    "word": "TEEPARTY",
+    "emoji": "🍵"
+  },
+  {
+    "word": "KINDERFEST",
+    "emoji": "🎉"
+  },
+  {
+    "word": "LUFTBALLON",
+    "emoji": "🎈"
+  },
+  {
+    "word": "ZAUBERER",
+    "emoji": "🧙"
+  },
+  {
+    "word": "FEUERWEHR",
+    "emoji": "🚒"
+  },
+  {
+    "word": "POLIZEIAUTO",
+    "emoji": "🚓"
+  },
+  {
+    "word": "KRANKENWAGEN",
+    "emoji": "🚑"
+  },
+  {
+    "word": "MÜLLAUTO",
+    "emoji": "🚛"
+  },
+  {
+    "word": "TRAKTORFAHRT",
+    "emoji": "🚜"
+  },
+  {
+    "word": "BAUERNHOF",
+    "emoji": "🏡"
+  },
+  {
+    "word": "KUHSTALL",
+    "emoji": "🐄"
+  },
+  {
+    "word": "PFERDESTALL",
+    "emoji": "🐎"
+  },
+  {
+    "word": "HÜHNERHOF",
+    "emoji": "🐔"
+  },
+  {
+    "word": "ENTENTEICH",
+    "emoji": "🦆"
+  }
 ]

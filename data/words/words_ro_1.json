@@ -1,22 +1,82 @@
 [
-  {"word": "PISICĂ", "emoji": "🐱"},
-  {"word": "CĂȚEL", "emoji": "🐶"},
-  {"word": "CASĂ", "emoji": "🏠"},
-  {"word": "SOARE", "emoji": "☀️"},
-  {"word": "APĂ", "emoji": "💧"},
-  {"word": "MĂR", "emoji": "🍎"},
-  {"word": "CARTE", "emoji": "📖"},
-  {"word": "COPAC", "emoji": "🌳"},
-  {"word": "FLOARE", "emoji": "🌸"},
-  {"word": "PRIETEN", "emoji": "🤝"},
-  {"word": "MAMA", "emoji": "👩"},
-  {"word": "TATA", "emoji": "👨"},
-  {"word": "COPIL", "emoji": "🧒"},
-  {"word": "ȘCOALĂ", "emoji": "🏫"},
-  {"word": "JUCĂRIE", "emoji": "🧸"},
-  {"word": "MARE", "emoji": "🌊"},
-  {"word": "CER", "emoji": "🌌"},
-  {"word": "STEA", "emoji": "⭐"},
-  {"word": "LUNĂ", "emoji": "🌙"},
-  {"word": "BUCURIE", "emoji": "😊"}
+  {
+    "word": "PISICĂ",
+    "emoji": "🐱"
+  },
+  {
+    "word": "CĂȚEL",
+    "emoji": "🐶"
+  },
+  {
+    "word": "CASĂ",
+    "emoji": "🏠"
+  },
+  {
+    "word": "SOARE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "PLAJĂ",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "CARTE",
+    "emoji": "📖"
+  },
+  {
+    "word": "COPAC",
+    "emoji": "🌳"
+  },
+  {
+    "word": "FLOARE",
+    "emoji": "🌸"
+  },
+  {
+    "word": "PRIETEN",
+    "emoji": "🤝"
+  },
+  {
+    "word": "MAMA",
+    "emoji": "👩"
+  },
+  {
+    "word": "TATA",
+    "emoji": "👨"
+  },
+  {
+    "word": "COPIL",
+    "emoji": "🧒"
+  },
+  {
+    "word": "ȘCOALĂ",
+    "emoji": "🏫"
+  },
+  {
+    "word": "JUCĂRIE",
+    "emoji": "🧸"
+  },
+  {
+    "word": "MARE",
+    "emoji": "🌊"
+  },
+  {
+    "word": "CERUL",
+    "emoji": "🌌"
+  },
+  {
+    "word": "LUNĂ",
+    "emoji": "🌙"
+  },
+  {
+    "word": "BUCURIE",
+    "emoji": "😊"
+  },
+  {
+    "word": "MINGE",
+    "emoji": "⚽"
+  },
+  {
+    "word": "PĂLĂRIE",
+    "emoji": "👒"
+  }
 ]

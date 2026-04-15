@@ -1,22 +1,82 @@
 [
-  {"word": "SATEENKAARI", "emoji": "🌈"},
-  {"word": "AURINGONPAISTE", "emoji": "☀️"},
-  {"word": "PILVINEN", "emoji": "☁️"},
-  {"word": "SADEPISARA", "emoji": "💧"},
-  {"word": "LUMISADE", "emoji": "❄️"},
-  {"word": "UKKONEN", "emoji": "⚡"},
-  {"word": "TUULI", "emoji": "🌬️"},
-  {"word": "VUODENAIKA", "emoji": "📅"},
-  {"word": "KEVÄT", "emoji": "🌱"},
-  {"word": "KESÄ", "emoji": "🏖️"},
-  {"word": "SYKSY", "emoji": "🍂"},
-  {"word": "TALVI", "emoji": "⛄"},
-  {"word": "AURINKO", "emoji": "☀️"},
-  {"word": "MERELLÄ", "emoji": "🌊"},
-  {"word": "SAARELLA", "emoji": "🏝️"},
-  {"word": "VUORELLA", "emoji": "⛰️"},
-  {"word": "LAAKSOSSA", "emoji": "🏜️"},
-  {"word": "JOELLA", "emoji": "🛶"},
-  {"word": "PUISTO", "emoji": "🏞️"},
-  {"word": "PIHA", "emoji": "🏡"}
+  {
+    "word": "SATEENKAARI",
+    "emoji": "🌈"
+  },
+  {
+    "word": "AURINGONPAISTE",
+    "emoji": "☀️"
+  },
+  {
+    "word": "PILVITAIVAS",
+    "emoji": "☁️"
+  },
+  {
+    "word": "SADEPISARA",
+    "emoji": "💧"
+  },
+  {
+    "word": "LUMISADE",
+    "emoji": "❄️"
+  },
+  {
+    "word": "UKKONEN",
+    "emoji": "⛈️"
+  },
+  {
+    "word": "TUULENPUUSKA",
+    "emoji": "🌬️"
+  },
+  {
+    "word": "VUODENAIKA",
+    "emoji": "🍂"
+  },
+  {
+    "word": "KEVÄTPÄIVÄ",
+    "emoji": "🌷"
+  },
+  {
+    "word": "KESÄLOMA",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "SYYSMETSÄ",
+    "emoji": "🍁"
+  },
+  {
+    "word": "TALVIILTA",
+    "emoji": "🌨️"
+  },
+  {
+    "word": "MERIRANTA",
+    "emoji": "🏝️"
+  },
+  {
+    "word": "SAARISTO",
+    "emoji": "🛶"
+  },
+  {
+    "word": "VUORISTO",
+    "emoji": "⛰️"
+  },
+  {
+    "word": "LAAKSO",
+    "emoji": "🌄"
+  },
+  {
+    "word": "JOKIRANTA",
+    "emoji": "🌊"
+  },
+  {
+    "word": "PUISTOPOLKU",
+    "emoji": "🌳"
+  },
+  {
+    "word": "LEIKKIPIHA",
+    "emoji": "🛝"
+  },
+  {
+    "word": "AAMUKASTE",
+    "emoji": "✨"
+  }
 ]

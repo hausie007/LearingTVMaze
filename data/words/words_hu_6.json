@@ -1,22 +1,82 @@
 [
-  {"word": "A NAP SÜT MOST", "emoji": "☀️"},
-  {"word": "SZERESD A BOLYGÓT", "emoji": "🌍"},
-  {"word": "MOSOLYOGJ ÉS LÉGY", "emoji": "😊"},
-  {"word": "CSALÁDOM A SZERETET", "emoji": "❤️"},
-  {"word": "BARÁTOK OSZTOZNAK", "emoji": "🤝"},
-  {"word": "MADARAK SZÁLLNAK", "emoji": "🦅"},
-  {"word": "A MI KÉK TENGERÜNK", "emoji": "🌊"},
-  {"word": "ERDŐ TELE ÉLETTEL", "emoji": "🌲"},
-  {"word": "EGYÉL SOK GYÜMÖLCSÖT", "emoji": "🍏"},
-  {"word": "IGYÁL VIZET MOST", "emoji": "💧"},
-  {"word": "MONDJ KÖSZÖNÖMÖT", "emoji": "🙏"},
-  {"word": "SEGÍTS MÁSOKNAK", "emoji": "🤝"},
-  {"word": "ALUDJ JÓL MA ESTE", "emoji": "😴"},
-  {"word": "OLVASS EGY MESÉT", "emoji": "📖"},
-  {"word": "JÁTSSZ A JÁTÉKAIDDAL", "emoji": "🧸"},
-  {"word": "TANULJ MINDEN NAP", "emoji": "📚"},
-  {"word": "A SZIVÁRVÁNY SZÍNES", "emoji": "🌈"},
-  {"word": "CSILLAGOK RAGYOGNAK", "emoji": "⭐"},
-  {"word": "HOLNAP ÚJ NAP", "emoji": "🌅"},
-  {"word": "SÉTÁLJ VIDÁMAN", "emoji": "🚶"}
+  {
+    "word": "A NAP SÜT MOST",
+    "emoji": "☀️"
+  },
+  {
+    "word": "SZERESD A BOLYGÓT",
+    "emoji": "🌍"
+  },
+  {
+    "word": "MOSOLYOGJ ÉS LÉGY VIDÁM",
+    "emoji": "😊"
+  },
+  {
+    "word": "SZERETEM A CSALÁDOMAT",
+    "emoji": "❤️"
+  },
+  {
+    "word": "A BARÁTOK MEGOSZTJÁK",
+    "emoji": "🤝"
+  },
+  {
+    "word": "A MADARAK MAGASRA SZÁLLNAK",
+    "emoji": "🦅"
+  },
+  {
+    "word": "A MI KÉK TENGERÜNK",
+    "emoji": "🌊"
+  },
+  {
+    "word": "ERDŐ TELE ÉLETTEL",
+    "emoji": "🌲"
+  },
+  {
+    "word": "EGYÉL SOK GYÜMÖLCSÖT",
+    "emoji": "🍏"
+  },
+  {
+    "word": "IGYÁL VIZET MOST",
+    "emoji": "💧"
+  },
+  {
+    "word": "MONDJ KÖSZÖNÖMÖT",
+    "emoji": "🙏"
+  },
+  {
+    "word": "SEGÍTS MÁSOKNAK",
+    "emoji": "🫶"
+  },
+  {
+    "word": "ALUDJ JÓL MA ESTE",
+    "emoji": "😴"
+  },
+  {
+    "word": "OLVASS EGY MESÉT",
+    "emoji": "📖"
+  },
+  {
+    "word": "JÁTSSZ A JÁTÉKAIDDAL",
+    "emoji": "🧸"
+  },
+  {
+    "word": "TANULJ MINDEN NAP",
+    "emoji": "📚"
+  },
+  {
+    "word": "A SZIVÁRVÁNY SZÍNES",
+    "emoji": "🌈"
+  },
+  {
+    "word": "CSILLAGOK RAGYOGNAK",
+    "emoji": "⭐"
+  },
+  {
+    "word": "HOLNAP ÚJ NAP",
+    "emoji": "🌅"
+  },
+  {
+    "word": "SÉTÁLJ VIDÁMAN",
+    "emoji": "🚶"
+  }
 ]

@@ -1,22 +1,82 @@
 [
-  {"word": "ELEFANT", "emoji": "🐘"},
-  {"word": "GIRAFĂ", "emoji": "🦒"},
-  {"word": "LEU", "emoji": "🦁"},
-  {"word": "TIGRU", "emoji": "🐯"},
-  {"word": "URS", "emoji": "🐻"},
-  {"word": "MAMUȚĂ", "emoji": "🐒"},
-  {"word": "IEPURE", "emoji": "🐰"},
-  {"word": "CAL", "emoji": "🐎"},
-  {"word": "OAIE", "emoji": "🐑"},
-  {"word": "PORC", "emoji": "🐷"},
-  {"word": "GĂINĂ", "emoji": "🐔"},
-  {"word": "PASĂRE", "emoji": "🐦"},
-  {"word": "FLUTURE", "emoji": "🦋"},
-  {"word": "ALBINĂ", "emoji": "🐝"},
-  {"word": "FURNIZĂ", "emoji": "🐜"},
-  {"word": "PAIANJEN", "emoji": "🕷️"},
-  {"word": "ȘARPE", "emoji": "🐍"},
-  {"word": "BROASCĂ", "emoji": "🐢"},
-  {"word": "BROASCĂ", "emoji": "🐸"},
-  {"word": "DELFIN", "emoji": "🐬"}
+  {
+    "word": "ELEFANT",
+    "emoji": "🐘"
+  },
+  {
+    "word": "GIRAFĂ",
+    "emoji": "🦒"
+  },
+  {
+    "word": "TIGRU",
+    "emoji": "🐯"
+  },
+  {
+    "word": "URS",
+    "emoji": "🐻"
+  },
+  {
+    "word": "MAIMUȚĂ",
+    "emoji": "🐒"
+  },
+  {
+    "word": "IEPURE",
+    "emoji": "🐰"
+  },
+  {
+    "word": "OAIE",
+    "emoji": "🐑"
+  },
+  {
+    "word": "PORC",
+    "emoji": "🐷"
+  },
+  {
+    "word": "GĂINĂ",
+    "emoji": "🐔"
+  },
+  {
+    "word": "PASĂRE",
+    "emoji": "🐦"
+  },
+  {
+    "word": "FLUTURE",
+    "emoji": "🦋"
+  },
+  {
+    "word": "ALBINĂ",
+    "emoji": "🐝"
+  },
+  {
+    "word": "FURNICĂ",
+    "emoji": "🐜"
+  },
+  {
+    "word": "PAIANJEN",
+    "emoji": "🕷️"
+  },
+  {
+    "word": "ȘARPE",
+    "emoji": "🐍"
+  },
+  {
+    "word": "ȚESTOASĂ",
+    "emoji": "🐢"
+  },
+  {
+    "word": "BROASCĂ",
+    "emoji": "🐸"
+  },
+  {
+    "word": "DELFIN",
+    "emoji": "🐬"
+  },
+  {
+    "word": "ZEBRĂ",
+    "emoji": "🦓"
+  },
+  {
+    "word": "CĂMILĂ",
+    "emoji": "🐫"
+  }
 ]

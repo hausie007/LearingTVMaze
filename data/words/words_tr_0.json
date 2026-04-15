@@ -1,22 +1,82 @@
 [
-  {"word": "EV", "emoji": "🏠"},
-  {"word": "KEDI", "emoji": "🐱"},
-  {"word": "KOPEK", "emoji": "🐶"},
-  {"word": "ANNE", "emoji": "👩"},
-  {"word": "BABA", "emoji": "👨"},
-  {"word": "GUNEŞ", "emoji": "☀️"},
-  {"word": "DENIZ", "emoji": "🌊"},
-  {"word": "ELMA", "emoji": "🍎"},
-  {"word": "EKMEK", "emoji": "🍞"},
-  {"word": "SUT", "emoji": "🥛"},
-  {"word": "ÇIÇEK", "emoji": "🌸"},
-  {"word": "AĞAÇ", "emoji": "🌳"},
-  {"word": "KITAP", "emoji": "📖"},
-  {"word": "OKUL", "emoji": "🏫"},
-  {"word": "OYUN", "emoji": "🧸"},
-  {"word": "ÇOCUK", "emoji": "🧒"},
-  {"word": "YILDIZ", "emoji": "⭐"},
-  {"word": "AY", "emoji": "🌙"},
-  {"word": "GOK", "emoji": "🌌"},
-  {"word": "ARKADAŞ", "emoji": "🤝"}
+  {
+    "word": "EV",
+    "emoji": "🏠"
+  },
+  {
+    "word": "KEDİ",
+    "emoji": "🐱"
+  },
+  {
+    "word": "KÖPEK",
+    "emoji": "🐶"
+  },
+  {
+    "word": "ANNE",
+    "emoji": "👩"
+  },
+  {
+    "word": "BABA",
+    "emoji": "👨"
+  },
+  {
+    "word": "GÜNEŞ",
+    "emoji": "☀️"
+  },
+  {
+    "word": "DENİZ",
+    "emoji": "🌊"
+  },
+  {
+    "word": "ELMA",
+    "emoji": "🍎"
+  },
+  {
+    "word": "EKMEK",
+    "emoji": "🍞"
+  },
+  {
+    "word": "SÜT",
+    "emoji": "🥛"
+  },
+  {
+    "word": "ÇİÇEK",
+    "emoji": "🌸"
+  },
+  {
+    "word": "AĞAÇ",
+    "emoji": "🌳"
+  },
+  {
+    "word": "KİTAP",
+    "emoji": "📖"
+  },
+  {
+    "word": "OKUL",
+    "emoji": "🏫"
+  },
+  {
+    "word": "OYUN",
+    "emoji": "🧸"
+  },
+  {
+    "word": "ÇOCUK",
+    "emoji": "🧒"
+  },
+  {
+    "word": "YILDIZ",
+    "emoji": "⭐"
+  },
+  {
+    "word": "AY",
+    "emoji": "🌙"
+  },
+  {
+    "word": "GÖK",
+    "emoji": "🌌"
+  },
+  {
+    "word": "ARKADAŞ",
+    "emoji": "🤝"
+  }
 ]

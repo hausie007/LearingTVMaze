@@ -9,7 +9,7 @@
   },
   {
     "word": "LIT",
-    "emoji": "🛌"
+    "emoji": "🛏️"
   },
   {
     "word": "SAC",
@@ -24,20 +24,12 @@
     "emoji": "🦴"
   },
   {
-    "word": "NOE",
-    "emoji": "🚢"
-  },
-  {
-    "word": "ARC",
-    "emoji": "🏹"
+    "word": "AIR",
+    "emoji": "💨"
   },
   {
     "word": "COQ",
     "emoji": "🐓"
-  },
-  {
-    "word": "RIL",
-    "emoji": "🏞️"
   },
   {
     "word": "MER",
@@ -49,19 +41,15 @@
   },
   {
     "word": "BEC",
-    "emoji": "🦆"
+    "emoji": "🐤"
   },
   {
     "word": "SEL",
     "emoji": "🧂"
   },
   {
-    "word": "ROSE",
-    "emoji": "🌹"
-  },
-  {
     "word": "AMI",
-    "emoji": "👨‍❤️‍👨"
+    "emoji": "🧒"
   },
   {
     "word": "ZOO",
@@ -70,10 +58,6 @@
   {
     "word": "BUS",
     "emoji": "🚌"
-  },
-  {
-    "word": "GAZ",
-    "emoji": "⛽"
   },
   {
     "word": "MUR",
@@ -85,14 +69,30 @@
   },
   {
     "word": "OIE",
-    "emoji": "🦆"
+    "emoji": "🪿"
   },
   {
-    "word": "RIT",
-    "emoji": "😄"
+    "word": "RIZ",
+    "emoji": "🍚"
   },
   {
-    "word": "SUD",
-    "emoji": "🧭"
+    "word": "THÉ",
+    "emoji": "🍵"
+  },
+  {
+    "word": "ROI",
+    "emoji": "👑"
+  },
+  {
+    "word": "FEU",
+    "emoji": "🔥"
+  },
+  {
+    "word": "NID",
+    "emoji": "🪺"
+  },
+  {
+    "word": "ARC",
+    "emoji": "🌈"
   }
 ]

@@ -1,22 +1,82 @@
 [
-  {"word": "BUNA AMICI", "emoji": "👋"},
-  {"word": "SOARE STRALUCITOR", "emoji": "☀️"},
-  {"word": "CASA MICA", "emoji": "🏠"},
-  {"word": "CAINE JUCĂUŞ", "emoji": "🐕"},
-  {"word": "PISICĂ SOMNOROASĂ", "emoji": "🐈"},
-  {"word": "ALBASTRU DE MARE", "emoji": "🌊"},
-  {"word": "VERDE DE PADURE", "emoji": "🌲"},
-  {"word": "GALBEN SORE", "emoji": "🟡"},
-  {"word": "ROȘIE MĂR", "emoji": "🍎"},
-  {"word": "FRUMOASA FLOARE", "emoji": "🌸"},
-  {"word": "PASARE ZBURAND", "emoji": "🐦"},
-  {"word": "PESTE INOTAND", "emoji": "🐟"},
-  {"word": "COPIL FERICIT", "emoji": "👦"},
-  {"word": "FATA VESELA", "emoji": "👧"},
-  {"word": "DULCE BOMBOANA", "emoji": "🍭"},
-  {"word": "FRUCT PROASPAT", "emoji": "🍎"},
-  {"word": "MANANCĂ SĂNĂTOS", "emoji": "🥦"},
-  {"word": "BEA APA", "emoji": "💧"},
-  {"word": "JOACA IMPREUNA", "emoji": "🤝"},
-  {"word": "CANTA CANTEC", "emoji": "🎤"}
+  {
+    "word": "BUNĂ AMICI",
+    "emoji": "👋"
+  },
+  {
+    "word": "SOARE STRĂLUCITOR",
+    "emoji": "☀️"
+  },
+  {
+    "word": "CASĂ MICĂ",
+    "emoji": "🏠"
+  },
+  {
+    "word": "CÂINE JUCĂUȘ",
+    "emoji": "🐕"
+  },
+  {
+    "word": "PISICĂ SOMNOROASĂ",
+    "emoji": "🐈"
+  },
+  {
+    "word": "MARE ALBASTRĂ",
+    "emoji": "🌊"
+  },
+  {
+    "word": "PĂDURE VERDE",
+    "emoji": "🌲"
+  },
+  {
+    "word": "SOARE GALBEN",
+    "emoji": "🟡"
+  },
+  {
+    "word": "MĂR ROȘU",
+    "emoji": "🍎"
+  },
+  {
+    "word": "FLOARE FRUMOASĂ",
+    "emoji": "🌸"
+  },
+  {
+    "word": "PASĂRE ZBURĂTOARE",
+    "emoji": "🐦"
+  },
+  {
+    "word": "PEȘTE ÎNOTĂTOR",
+    "emoji": "🐟"
+  },
+  {
+    "word": "COPIL FERICIT",
+    "emoji": "👦"
+  },
+  {
+    "word": "FATĂ VESELĂ",
+    "emoji": "👧"
+  },
+  {
+    "word": "BOMBOANĂ DULCE",
+    "emoji": "🍭"
+  },
+  {
+    "word": "FRUCT PROASPĂT",
+    "emoji": "🍏"
+  },
+  {
+    "word": "MĂNÂNCĂ SĂNĂTOS",
+    "emoji": "🥦"
+  },
+  {
+    "word": "BEA APĂ",
+    "emoji": "💧"
+  },
+  {
+    "word": "JOACĂ ÎMPREUNĂ",
+    "emoji": "🤝"
+  },
+  {
+    "word": "CÂNTĂ UN CÂNTEC",
+    "emoji": "🎤"
+  }
 ]

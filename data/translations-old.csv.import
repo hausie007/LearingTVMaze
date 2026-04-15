@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bngk3bytg7nkm"
+
+[deps]
+
+files=["res://data/translations-old.en.translation", "res://data/translations-old.cs.translation", "res://data/translations-old.de.translation", "res://data/translations-old.es.translation", "res://data/translations-old.fr.translation", "res://data/translations-old.pt.translation", "res://data/translations-old.vi.translation", "res://data/translations-old.tr.translation", "res://data/translations-old.it.translation", "res://data/translations-old.pl.translation", "res://data/translations-old.sv.translation", "res://data/translations-old.nb.translation", "res://data/translations-old.nl.translation", "res://data/translations-old.uk.translation", "res://data/translations-old.fi.translation", "res://data/translations-old.da.translation", "res://data/translations-old.hu.translation", "res://data/translations-old.ro.translation", "res://data/translations-old.el.translation", "res://data/translations-old.sk.translation", "res://data/translations-old.he.translation"]
+
+source_file="res://data/translations-old.csv"
+dest_files=["res://data/translations-old.en.translation", "res://data/translations-old.cs.translation", "res://data/translations-old.de.translation", "res://data/translations-old.es.translation", "res://data/translations-old.fr.translation", "res://data/translations-old.pt.translation", "res://data/translations-old.vi.translation", "res://data/translations-old.tr.translation", "res://data/translations-old.it.translation", "res://data/translations-old.pl.translation", "res://data/translations-old.sv.translation", "res://data/translations-old.nb.translation", "res://data/translations-old.nl.translation", "res://data/translations-old.uk.translation", "res://data/translations-old.fi.translation", "res://data/translations-old.da.translation", "res://data/translations-old.hu.translation", "res://data/translations-old.ro.translation", "res://data/translations-old.el.translation", "res://data/translations-old.sk.translation", "res://data/translations-old.he.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
