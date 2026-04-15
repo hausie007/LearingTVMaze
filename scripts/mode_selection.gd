@@ -6,21 +6,26 @@ extends Control
 @onready var words_card: Button = %WordsCard
 @onready var lang_btn: Button = %LangButton
 @onready var theme_btn: Button = %ThemeButton
+@onready var diff_btn: Button = %DiffButton
 
 @onready var title_lbl: Label = %TitleLabel
 @onready var lang_title_lbl: Label = %LangTitleLabel
 @onready var theme_title_lbl: Label = %ThemeTitleLabel
+@onready var diff_title_lbl: Label = %DiffTitleLabel
 
 @onready var lang_left: Label = %LangLeftArrow
 @onready var lang_right: Label = %LangRightArrow
 @onready var theme_left: Label = %ThemeLeftArrow
 @onready var theme_right: Label = %ThemeRightArrow
+@onready var diff_left: Label = %DiffLeftArrow
+@onready var diff_right: Label = %DiffRightArrow
 
 @onready var _player_preview: CharacterPreview = %PlayerAnchor
 @onready var _chaser_preview: CharacterPreview = %ChaserAnchor
 
 var temp_lang_idx: int = 0
 var temp_theme_idx: int = 0
+var temp_diff_idx: int = 0
 var themes: Array[String] = []
 var _theme_preview_loader: ThemeLoader = null
 var _last_theme_idx: int = -1
@@ -43,6 +48,8 @@ func _ready() -> void:
 		themes = ThemeLoader.get_available_themes()
 		temp_theme_idx = themes.find(Config.theme_dir_name)
 		if temp_theme_idx < 0: temp_theme_idx = 0
+		
+		temp_diff_idx = Config.difficulty
 	
 	# Connect cards
 	numbers_card.pressed.connect(func(): _start_game(Config.GameMode.NUMBERS))
@@ -50,16 +57,37 @@ func _ready() -> void:
 	words_card.pressed.connect(func(): _start_game(Config.GameMode.WORDS))
 	maze_card.pressed.connect(func(): _start_game(Config.GameMode.NORMAL))
 	
+	# Explicit Focus Routing for bullet-proof D-pad navigation
+	numbers_card.focus_neighbor_right = numbers_card.get_path_to(words_card)
+	numbers_card.focus_neighbor_left = numbers_card.get_path_to(letters_card)
+	numbers_card.focus_neighbor_bottom = numbers_card.get_path_to(maze_card)
+	
+	words_card.focus_neighbor_left = words_card.get_path_to(numbers_card)
+	words_card.focus_neighbor_right = words_card.get_path_to(letters_card)
+	words_card.focus_neighbor_bottom = words_card.get_path_to(maze_card)
+	
+	letters_card.focus_neighbor_left = letters_card.get_path_to(words_card)
+	letters_card.focus_neighbor_right = letters_card.get_path_to(numbers_card)
+	letters_card.focus_neighbor_bottom = letters_card.get_path_to(maze_card)
+	
+	maze_card.focus_neighbor_top = maze_card.get_path_to(words_card)
+	maze_card.focus_neighbor_left = maze_card.get_path_to(maze_card)
+	maze_card.focus_neighbor_right = maze_card.get_path_to(maze_card)
+	maze_card.focus_neighbor_bottom = maze_card.get_path_to(diff_btn)
+
 	lang_btn.pressed.connect(func(): _cycle_lang(1))
 	theme_btn.pressed.connect(func(): _cycle_theme(1))
+	diff_btn.pressed.connect(func(): _cycle_diff(1))
 	
 	# D-pad for cycling
 	_setup_cycling(lang_btn, _cycle_lang)
 	_setup_cycling(theme_btn, _cycle_theme)
+	_setup_cycling(diff_btn, _cycle_diff)
 	
 	# Show arrows only on focus
 	_setup_arrow_visibility(lang_btn, lang_left, lang_right)
 	_setup_arrow_visibility(theme_btn, theme_left, theme_right)
+	_setup_arrow_visibility(diff_btn, diff_left, diff_right)
 	
 	_localize_ui()
 	_update_labels()
@@ -67,6 +95,7 @@ func _ready() -> void:
 	# Apply styles for non-card buttons
 	UIHelpers.apply_style_to_button(lang_btn, UIColors.YELLOW)
 	UIHelpers.apply_style_to_button(theme_btn, UIColors.YELLOW)
+	UIHelpers.apply_style_to_button(diff_btn, UIColors.YELLOW)
 	
 	# Responsive D-pad layout 
 	UIHelpers.apply_dpad_layout($CenterContainer, Config.on_screen_controls)
@@ -102,6 +131,7 @@ func _localize_ui() -> void:
 	
 	lang_title_lbl.text = tr("setting_learning_lang")
 	theme_title_lbl.text = tr("setting_theme")
+	diff_title_lbl.text = tr("setting_diff")
 
 func _cycle_lang(dir: int) -> void:
 	temp_lang_idx = (temp_lang_idx + dir + Config.LANG_CODES.size()) % Config.LANG_CODES.size()
@@ -112,9 +142,22 @@ func _cycle_theme(dir: int) -> void:
 	temp_theme_idx = (temp_theme_idx + dir + themes.size()) % themes.size()
 	_update_labels()
 
+const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
+
+func _cycle_diff(dir: int) -> void:
+	if DIFF_KEYS.size() == 0: return
+	temp_diff_idx = (temp_diff_idx + dir + DIFF_KEYS.size()) % DIFF_KEYS.size()
+	_update_labels()
+
 func _update_labels() -> void:
 	# Language
-	lang_btn.text = Config.get_lang_display_name(temp_lang_idx, true)
+	var ui_idx: int = Config.LANG_CODES.find(Config.ui_language)
+	if ui_idx < 0: ui_idx = 0
+	lang_btn.text = Config.get_lang_display_name(temp_lang_idx, true, ui_idx)
+	
+	# Difficulty
+	if temp_diff_idx < DIFF_KEYS.size():
+		diff_btn.text = tr(DIFF_KEYS[temp_diff_idx])
 	
 	# Theme
 	if temp_theme_idx < themes.size():
@@ -140,6 +183,7 @@ func _start_game(mode: int) -> void:
 	# Commit temp selections to Config only when the user starts a game
 	Config.learning_language = Config.LANG_CODES[temp_lang_idx]
 	Config.theme_dir_name = themes[temp_theme_idx] if temp_theme_idx < themes.size() else _original_theme_dir_name
+	Config.difficulty = temp_diff_idx
 	Config.save_settings()
 	UIHelpers.go_to_scene_with_loading(get_tree(), "res://scenes/main.tscn")
 

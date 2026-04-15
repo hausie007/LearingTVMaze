@@ -109,7 +109,7 @@ func _update_slide() -> void:
 	match slide.type:
 		"welcome":
 			_icon_rect.visible = true
-			_icon_rect.texture = load("res://images/lm_icon_new.png")
+			_icon_rect.texture = load("res://images/lm_icon_new2.png")
 		"maze":
 			_spawn_maze_preview()
 		"icon":
@@ -254,7 +254,7 @@ func _spawn_themes_preview() -> void:
 	if count == 0:
 		# Fallback if no other themes installed
 		var tex_rect = TextureRect.new()
-		tex_rect.texture = load("res://images/lm_icon_new.png")
+		tex_rect.texture = load("res://images/lm_icon_new2.png")
 		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		tex_rect.custom_minimum_size = Vector2(180, 180)
@@ -272,7 +272,7 @@ func _spawn_themes_preview() -> void:
 			tex = loader.chaser_texture
 			
 		# Fallback to default icon if theme is totally missing player/chaser
-		if not tex: tex = load("res://images/lm_icon_new.png")
+		if not tex: tex = load("res://images/lm_icon_new2.png")
 			
 		var tex_rect = TextureRect.new()
 		tex_rect.texture = tex

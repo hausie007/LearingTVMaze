@@ -255,7 +255,7 @@ func get_lang_display_name(idx: int, is_learning: bool = false, ui_lang_idx: int
 			var detected := get_auto_detected_language()
 			var det_idx := LANG_CODES.find(detected)
 			if det_idx > 0:
-				lang_name += " - " + TranslationServer.translate(LANG_KEYS[det_idx]).to_lower()
+				lang_name += " (" + TranslationServer.translate(LANG_KEYS[det_idx]) + ")"
 	return lang_name
 
 ## Perform true OS/System language auto-detection, ignoring any saved preference.

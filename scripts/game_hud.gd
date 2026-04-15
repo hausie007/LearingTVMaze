@@ -49,6 +49,12 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 	if game_mode != Config.GameMode.WORDS or word_data.is_empty():
 		return
 
+	var lang: String = word_data.get("lang", "")
+	if lang in ["ar", "fa", "he", "ur"]:
+		_word_container.layout_direction = Control.LAYOUT_DIRECTION_RTL
+	else:
+		_word_container.layout_direction = Control.LAYOUT_DIRECTION_LTR
+
 	var emoji: String = word_data.get("emoji", "")
 	var word: String = word_data.get("word", "")
 	if word.is_empty():
