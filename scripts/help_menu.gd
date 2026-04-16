@@ -1,3 +1,4 @@
+class_name HelpMenu
 extends Control
 
 ## help_menu.gd
@@ -40,6 +41,10 @@ func _ready() -> void:
 	_left_btn.focus_mode = Control.FOCUS_NONE
 	_right_btn.focus_mode = Control.FOCUS_NONE
 	
+	if is_layout_rtl():
+		_left_btn.text = ">"
+		_right_btn.text = "<"
+	
 	_update_slide()
 	_apply_layout_shift()
 
@@ -51,16 +56,22 @@ func _apply_layout_shift() -> void:
 	var controls_mode = Config.on_screen_controls
 	UIHelpers.apply_dpad_layout(center_container, controls_mode)
 	
+	# Override the default 100px bias from apply_dpad_layout to use 
+	# the "vast majority" of the 75% space without overlapping the D-pad.
+	if controls_mode != Config.ControlsMode.OFF:
+		center_container.offset_left = 0
+		center_container.offset_right = 0
+	
 	var panel = get_node_or_null("%Panel")
 	var text_label = get_node_or_null("%TextLabel")
 	var icon_rect = get_node_or_null("%IconRect")
 	
 	if panel and text_label:
 		if controls_mode != Config.ControlsMode.OFF:
-			panel.custom_minimum_size = Vector2(900, 700)
-			text_label.custom_minimum_size = Vector2(650, 200)
-			text_label.add_theme_font_size_override("font_size", 38)
-			if icon_rect: icon_rect.custom_minimum_size = Vector2(250, 250)
+			panel.custom_minimum_size = Vector2(1280, 820)
+			text_label.custom_minimum_size = Vector2(900, 240)
+			text_label.add_theme_font_size_override("font_size", 44)
+			if icon_rect: icon_rect.custom_minimum_size = Vector2(280, 280)
 		else:
 			panel.custom_minimum_size = Vector2(1500, 900)
 			text_label.custom_minimum_size = Vector2(1000, 280)
@@ -72,10 +83,6 @@ func _process(delta: float) -> void:
 	_anim_time += delta
 	_update_animations()
 
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_on_back_pressed()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -263,8 +270,7 @@ func _spawn_themes_preview() -> void:
 	
 	for i in range(count):
 		var t_name = others[i]
-		var loader = ThemeLoader.new()
-		loader.load_theme(t_name)
+		var loader = ThemeLoader.get_cached(t_name)
 		
 		# Pick randomly between player and chaser
 		var tex = loader.player_texture

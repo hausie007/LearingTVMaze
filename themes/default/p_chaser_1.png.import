@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd8768scu7ngi"
-path="res://.godot/imported/background.png-4468734ad1af662f6bcc3f2deffcb2c4.ctex"
+uid="uid://c4th0ndelponv"
+path="res://.godot/imported/p_chaser_1.png-d12b75dbbd9c6cc1a78373af6317646e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/karkulka/background.png"
-dest_files=["res://.godot/imported/background.png-4468734ad1af662f6bcc3f2deffcb2c4.ctex"]
+source_file="res://themes/default/p_chaser_1.png"
+dest_files=["res://.godot/imported/p_chaser_1.png-d12b75dbbd9c6cc1a78373af6317646e.ctex"]
 
 [params]
 

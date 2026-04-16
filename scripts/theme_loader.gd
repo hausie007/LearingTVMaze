@@ -55,6 +55,26 @@ var col_text_color: Color = Color(0.1, 0.1, 0.15) # Default dark slate
 
 var manifest: Dictionary = {}
 
+
+# ── Static Cache ─────────────────────────────────────────────────────────────
+
+## Cache of loaded ThemeLoader instances, keyed by directory name.
+## Avoids redundant disk I/O when cycling themes in settings/mode selection.
+static var _cache: Dictionary = {}  # Dictionary<String, ThemeLoader>
+
+## Return a cached ThemeLoader for the given dir name, loading it if needed.
+static func get_cached(dir_name: String) -> ThemeLoader:
+	if _cache.has(dir_name):
+		return _cache[dir_name]
+	var loader := ThemeLoader.new()
+	loader.load_theme(dir_name)
+	_cache[dir_name] = loader
+	return loader
+
+## Clear the theme cache (e.g., when the theme list changes).
+static func clear_cache() -> void:
+	_cache.clear()
+
 ## Load theme resources from the directory specified in Config, or override.
 func load_theme(override_dir_name: String = "") -> void:
 	var dir_path: String = Config.theme_dir

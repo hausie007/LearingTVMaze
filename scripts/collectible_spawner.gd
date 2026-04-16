@@ -183,7 +183,7 @@ func _instantiate_collectible(cell: MazeData.CellData, val_str: String, idx: int
 	col.collect_index = idx
 
 	add_child(col)
-	col.setup(renderer.get_cell_size(), renderer.theme)
+	col.setup(renderer.get_cell_size(), renderer.maze_theme)
 	col.position = renderer.grid_to_pixel(cell.coords)
 	_collectibles[cell.coords] = col
 

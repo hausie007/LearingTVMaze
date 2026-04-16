@@ -1,3 +1,4 @@
+class_name SettingsMenu
 extends Control
 
 var temp_ui_lang_idx: int
@@ -10,11 +11,6 @@ var temp_perf: bool
 var temp_controls: int
 var themes: Array[String] = []
 @onready var player_preview: CharacterPreview = %ThemePlayerAnchor
-# Mode/diff keys for tr()
-const MODE_KEYS = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
-const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
-const CHASER_LEVEL_KEYS = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast", "chaser_turbo"]
-const CONTROLS_KEYS = ["controls_off", "controls_left", "controls_right"]
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
@@ -28,10 +24,6 @@ var _original_controls: int = 0
 # Animated Theme Previews
 var _theme_preview_loader: ThemeLoader = null
 var _last_theme_idx: int = -1
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_on_save_pressed()
 
 func _ready() -> void:
 	# Warp mouse off-screen to prevent phantom hover highlights on TV
@@ -66,7 +58,7 @@ func _ready() -> void:
 	# Apply D-Pad layout shift using shared utility
 	UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 	_apply_title_colors()
-	# Wire up buttons
+	# Wire up buttons with consistent brand styling
 	_setup_cycling_button(%UILangButton, func(dir): _cycle_ui_lang(dir))
 	_setup_cycling_button(%DiffButton, func(dir): _cycle_diff(dir))
 	_setup_cycling_button(%LearningLangButton, func(dir): _cycle_learning_lang(dir))
@@ -74,7 +66,9 @@ func _ready() -> void:
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	_setup_cycling_button(%ChaserButton, func(dir): _cycle_chaser(dir))
 	_setup_cycling_button(%PerfButton, func(dir): _cycle_perf(dir))
-	_setup_cycling_button(get_node_or_null("%ControlsButton"), func(dir): _cycle_controls(dir))
+	var ctrl_btn = get_node_or_null("%ControlsButton")
+	if ctrl_btn:
+		_setup_cycling_button(ctrl_btn, func(dir): _cycle_controls(dir))
 	
 	_update_labels()
 	_update_static_labels()
@@ -168,9 +162,7 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 				get_viewport().set_input_as_handled()
 	)
 	
-	var focus_color: Color = UIColors.BLUE
-	if btn.name in ["ThemeButton", "UILangButton", "LearningLangButton", "VoiceButton", "PerfButton", "ControlsButton"]:
-		focus_color = UIColors.YELLOW
+	var focus_color: Color = UIColors.YELLOW
 		
 	if left_arrow: left_arrow.add_theme_color_override("font_color", focus_color)
 	if right_arrow: right_arrow.add_theme_color_override("font_color", focus_color)
@@ -183,13 +175,15 @@ func _cycle_ui_lang(dir: int) -> void:
 	temp_ui_lang_idx = (temp_ui_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
 	var preview_lang := _get_preview_language(false)
 	TranslationServer.set_locale(preview_lang)
+	# Re-apply D-pad layout immediately to update anchors if RTL status changed
+	UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 	_trigger_warmup_ui()
 	_update_labels()
 	_update_static_labels()
 
 func _cycle_diff(dir: int) -> void:
-	if DIFF_KEYS.size() == 0: return
-	temp_diff = (temp_diff + dir + DIFF_KEYS.size()) % DIFF_KEYS.size()
+	if Config.DIFF_KEYS.size() == 0: return
+	temp_diff = (temp_diff + dir + Config.DIFF_KEYS.size()) % Config.DIFF_KEYS.size()
 	_update_labels()
 
 func _trigger_warmup_ui() -> void:
@@ -222,8 +216,8 @@ func _cycle_voice(_dir: int) -> void:
 		_trigger_warmup_ui()
 
 func _cycle_chaser(dir: int) -> void:
-	if CHASER_LEVEL_KEYS.size() == 0: return
-	temp_chaser_level = (temp_chaser_level + dir + CHASER_LEVEL_KEYS.size()) % CHASER_LEVEL_KEYS.size()
+	if Config.CHASER_LEVEL_KEYS.size() == 0: return
+	temp_chaser_level = (temp_chaser_level + dir + Config.CHASER_LEVEL_KEYS.size()) % Config.CHASER_LEVEL_KEYS.size()
 	_update_labels()
 
 func _cycle_perf(_dir: int) -> void:
@@ -231,8 +225,8 @@ func _cycle_perf(_dir: int) -> void:
 	_update_labels()
 
 func _cycle_controls(dir: int) -> void:
-	if CONTROLS_KEYS.size() == 0: return
-	temp_controls = (temp_controls + dir + CONTROLS_KEYS.size()) % CONTROLS_KEYS.size()
+	if Config.CONTROLS_KEYS.size() == 0: return
+	temp_controls = (temp_controls + dir + Config.CONTROLS_KEYS.size()) % Config.CONTROLS_KEYS.size()
 	# Immediately update Config so the d-pad previews live
 	if Config: 
 		Config.on_screen_controls = temp_controls
@@ -247,14 +241,14 @@ func _update_labels() -> void:
 	if has_node("%UILangButton"):
 		%UILangButton.text = _get_lang_display_name(temp_ui_lang_idx, false)
 	
-	if has_node("%DiffButton") and temp_diff < DIFF_KEYS.size():
-		%DiffButton.text = tr(DIFF_KEYS[temp_diff])
+	if has_node("%DiffButton") and temp_diff < Config.DIFF_KEYS.size():
+		%DiffButton.text = tr(Config.DIFF_KEYS[temp_diff])
 
 	if has_node("%LearningLangButton"):
 		%LearningLangButton.text = _get_lang_display_name(temp_learning_lang_idx, true)
 	
-	if has_node("%ChaserButton") and temp_chaser_level < CHASER_LEVEL_KEYS.size():
-		%ChaserButton.text = tr(CHASER_LEVEL_KEYS[temp_chaser_level])
+	if has_node("%ChaserButton") and temp_chaser_level < Config.CHASER_LEVEL_KEYS.size():
+		%ChaserButton.text = tr(Config.CHASER_LEVEL_KEYS[temp_chaser_level])
 		
 	if has_node("%ThemeButton") and temp_theme_idx < themes.size():
 		var display_title: String = _theme_preview_loader.get_display_title(themes[temp_theme_idx]) if _theme_preview_loader else themes[temp_theme_idx].capitalize()
@@ -300,16 +294,15 @@ func _update_labels() -> void:
 	if has_node("%PerfButton"):
 		%PerfButton.text = tr("quality_high") if not temp_perf else tr("quality_standard")
 
-	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < CONTROLS_KEYS.size():
-		%ControlsButton.text = tr(CONTROLS_KEYS[temp_controls])
+	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < Config.CONTROLS_KEYS.size():
+		%ControlsButton.text = tr(Config.CONTROLS_KEYS[temp_controls])
 
 func _update_previews() -> void:
 	if themes.size() == 0: return
 	
 	if temp_theme_idx != _last_theme_idx:
 		_last_theme_idx = temp_theme_idx
-		_theme_preview_loader = ThemeLoader.new()
-		_theme_preview_loader.load_theme(themes[temp_theme_idx])
+		_theme_preview_loader = ThemeLoader.get_cached(themes[temp_theme_idx])
 	
 	var player_preview: CharacterPreview = get_node_or_null("%ThemePlayerAnchor") as CharacterPreview
 	if player_preview:

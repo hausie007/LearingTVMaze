@@ -1,3 +1,4 @@
+class_name ModeSelection
 extends Control
 
 @onready var maze_card: Button = %MazeCard
@@ -58,17 +59,17 @@ func _ready() -> void:
 	maze_card.pressed.connect(func(): _start_game(Config.GameMode.NORMAL))
 	
 	# Explicit Focus Routing for bullet-proof D-pad navigation
-	numbers_card.focus_neighbor_right = numbers_card.get_path_to(words_card)
-	numbers_card.focus_neighbor_left = numbers_card.get_path_to(letters_card)
-	numbers_card.focus_neighbor_bottom = numbers_card.get_path_to(maze_card)
-	
-	words_card.focus_neighbor_left = words_card.get_path_to(numbers_card)
-	words_card.focus_neighbor_right = words_card.get_path_to(letters_card)
-	words_card.focus_neighbor_bottom = words_card.get_path_to(maze_card)
-	
-	letters_card.focus_neighbor_left = letters_card.get_path_to(words_card)
-	letters_card.focus_neighbor_right = letters_card.get_path_to(numbers_card)
-	letters_card.focus_neighbor_bottom = letters_card.get_path_to(maze_card)
+	var cards: Array[Button] = [numbers_card, words_card, letters_card]
+	if is_layout_rtl():
+		cards.reverse()
+		
+	for i in range(cards.size()):
+		var c = cards[i]
+		var prev = cards[(i - 1 + cards.size()) % cards.size()]
+		var next = cards[(i + 1) % cards.size()]
+		c.focus_neighbor_left = c.get_path_to(prev)
+		c.focus_neighbor_right = c.get_path_to(next)
+		c.focus_neighbor_bottom = c.get_path_to(maze_card)
 	
 	maze_card.focus_neighbor_top = maze_card.get_path_to(words_card)
 	maze_card.focus_neighbor_left = maze_card.get_path_to(maze_card)
@@ -142,11 +143,9 @@ func _cycle_theme(dir: int) -> void:
 	temp_theme_idx = (temp_theme_idx + dir + themes.size()) % themes.size()
 	_update_labels()
 
-const DIFF_KEYS = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
-
 func _cycle_diff(dir: int) -> void:
-	if DIFF_KEYS.size() == 0: return
-	temp_diff_idx = (temp_diff_idx + dir + DIFF_KEYS.size()) % DIFF_KEYS.size()
+	if Config.DIFF_KEYS.size() == 0: return
+	temp_diff_idx = (temp_diff_idx + dir + Config.DIFF_KEYS.size()) % Config.DIFF_KEYS.size()
 	_update_labels()
 
 func _update_labels() -> void:
@@ -156,15 +155,14 @@ func _update_labels() -> void:
 	lang_btn.text = Config.get_lang_display_name(temp_lang_idx, true, ui_idx)
 	
 	# Difficulty
-	if temp_diff_idx < DIFF_KEYS.size():
-		diff_btn.text = tr(DIFF_KEYS[temp_diff_idx])
+	if temp_diff_idx < Config.DIFF_KEYS.size():
+		diff_btn.text = tr(Config.DIFF_KEYS[temp_diff_idx])
 	
 	# Theme
 	if temp_theme_idx < themes.size():
 		if temp_theme_idx != _last_theme_idx:
 			_last_theme_idx = temp_theme_idx
-			_theme_preview_loader = ThemeLoader.new()
-			_theme_preview_loader.load_theme(themes[temp_theme_idx])
+			_theme_preview_loader = ThemeLoader.get_cached(themes[temp_theme_idx])
 			
 		theme_btn.text = _theme_preview_loader.get_display_title(themes[temp_theme_idx])
 		
@@ -192,10 +190,6 @@ func _on_back_pressed() -> void:
 	Config.learning_language = _original_learning_language
 	Config.theme_dir_name = _original_theme_dir_name
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_on_back_pressed()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

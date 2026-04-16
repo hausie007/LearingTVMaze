@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cslkr5vr8vcpc"
-path="res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.ctex"
+path.s3tc="res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.s3tc.ctex"
+path.etc2="res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://themes/karkulka/background_tile_0.png"
-dest_files=["res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.ctex"]
+dest_files=["res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.s3tc.ctex", "res://.godot/imported/background_tile_0.png-2e557846c41e3d386e848ce402551696.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -23,6 +23,7 @@ func set_character(new_frames: Array[Texture2D], new_fps: float) -> void:
 		texture = null
 	else:
 		texture = frames[0]
+	set_process(frames.size() > 1)
 
 func clear() -> void:
 	frames = []

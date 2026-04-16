@@ -86,10 +86,10 @@ func _build_ui() -> void:
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_child(hbox)
 
-	var yes_btn: Button = UIHelpers.create_styled_button(tr("yes"), 200, 80, UIColors.YELLOW)
+	var yes_btn: Button = UIHelpers.create_styled_button(tr("yes"), 200, 80, UIColors.BLUE)
 	yes_btn.pressed.connect(func(): confirmed.emit())
 	hbox.add_child(yes_btn)
 
-	_no_button = UIHelpers.create_styled_button(tr("no"), 200, 80)
+	_no_button = UIHelpers.create_styled_button(tr("no"), 200, 80, UIColors.YELLOW)
 	_no_button.pressed.connect(func(): cancelled.emit())
 	hbox.add_child(_no_button)

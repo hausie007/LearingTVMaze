@@ -1,4 +1,4 @@
-﻿keys,en,cs,de,es,fr,pt,vi,tr,it,pl,sv,nb,nl,uk,fi,da,hu,ro,el,sk,he
+keys,en,cs,de,es,fr,pt,vi,tr,it,pl,sv,nb,nl,uk,fi,da,hu,ro,el,sk,he
 app_title,Learning Maze,Vzdělávací Bludiště,Lernlabyrinth,Laberinto de Aprendizaje,Labyrinthe d'Apprentissage,Labirinto de Aprendizagem,Mê Cung Học Tập,Öğrenme Labirenti,Labirinto Didattico,Labirynt Nauki,Lärandelabyrinten,Læringslabyrinten,Leerdoolhof,Навчальний Лабіринт,Oppimislabyrintti,Læringslabyrinten,Tanuló Labirintus,Labirintul de Învățare,Εκπαιδευτικός Λαβύρινθος,Vzdelávacie Bludisko,מבוך הלמידה
 play,Play,Hrát,Spielen,Jugar,Jouer,Jogar,Chơi,Oyna,Gioca,Graj,Spela,Spill,Spelen,Грати,Pelaa,Spil,Játssz,Joacă,Παίξε,Hrať,שחק
 settings,Settings,Nastavení,Einstellungen,Ajustes,Paramètres,Configurações,Cài đặt,Ayarlar,Impostazioni,Ustawienia,Inställningar,Innstillinger,Instellingen,Налаштування,Asetukset,Indstillinger,Beállítások,Setări,Ρυθμίσεις,Nastavenia,הגדרות
@@ -203,3 +203,4 @@ desc_words,Spell the words,Skládej slova z písmen,Bilde Wörter,Forma palabras
 desc_maze,Explore the maze,Jen se proběhni,Erkunde das Labyrinth,Explora el laberinto,Explore le labyrinthe,Explore o labirinto,Khám phá mê cung,Labirenti keşfet,Esplora il labirinto,Odkrywaj labirynt,Utforska labyrinten,Utforsk labyrinten,Verken het doolhof,Досліджуй лабіринт,Tutki labyrinttia,Udforsk labyrinten,Fedezd fel a labirintust,Explorează labirintul,Εξερεύνησε τον λαβύρινθο,Iba sa prebehni,חקור את המבוך
 lang_slovak,Slovak,Slovenština,Slowakisch,Eslovaco,Slovaque,Eslovaco,Tiếng Slovak,Slovakça,Slovacco,Słowacki,Slovakiska,Slovakisk,Slowaaks,Словацька,Slovakki,Slovakisk,Szlovák,Slovacă,Σλοβακικά,Slovenčina,סלובקית
 lang_hebrew,Hebrew,Hebrejština,Hebräisch,Hebreo,Hébreu,Hebraico,Tiếng Do Thái,İbranice,Ebraico,Hebrajski,Hebreiska,Hebraisk,Hebreeuws,Іврит,Heprea,Hebraisk,Héber,Ebraică,Εβραϊκά,Hebrejčina,עברית
+loading,Loading...,Načítám...,Laden...,Cargando...,Chargement...,Carregando...,Đang tải...,Yükleniyor...,Caricamento...,Ładowanie...,Laddar...,Laster...,Laden...,Завантаження...,Ladataan...,Indlæser...,Betöltés...,Se încarcă...,Φόρτωση...,Načítavam...,טוען...

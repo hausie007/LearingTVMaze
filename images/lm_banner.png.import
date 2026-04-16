@@ -3,19 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b12brvk6t1pwu"
-path="res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.ctex"
+path.s3tc="res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.s3tc.ctex"
+path.etc2="res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/lm_banner.png"
-dest_files=["res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.ctex"]
+dest_files=["res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.s3tc.ctex", "res://.godot/imported/lm_banner.png-a12c0c5aebd82f88ea4ff7b5d008b341.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

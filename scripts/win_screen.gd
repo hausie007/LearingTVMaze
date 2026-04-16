@@ -56,15 +56,19 @@ func _process(delta: float) -> void:
 			next_round_pressed.emit()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	# Any D-pad interaction during the active screen pauses the auto-countdown.
+func _input(event: InputEvent) -> void:
+	# Any action interaction during the active screen pauses the auto-countdown.
 	if _is_active and not _timer_paused:
 		if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or \
 		   event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or \
-		   event.is_action_pressed("ui_accept"):
+		   event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel"):
 			_timer_paused = true
 			if _timer_label:
 				_timer_label.text = ""
+
+	# Always consume ui_cancel when active to prevent focus loss or global pause.
+	if _is_active and event.is_action_pressed("ui_cancel"):
+		get_viewport().set_input_as_handled()
 
 
 # ── Public API ───────────────────────────────────────────────────────────────
@@ -183,7 +187,7 @@ func update_suggestions(current_mode: int) -> void:
 			hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 			_suggestion_container.add_child(hbox)
 
-			var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.BLUE)
+			var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.YELLOW)
 			btn.pressed.connect(callback)
 			hbox.add_child(btn)
 
@@ -195,7 +199,7 @@ func _add_chaser_suggestion() -> void:
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	_suggestion_container.add_child(hbox)
-	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.BLUE)
+	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.YELLOW)
 	btn.pressed.connect(func(): chaser_toggled_pressed.emit(level))
 	hbox.add_child(btn)
 
@@ -296,7 +300,7 @@ func _build_ui() -> void:
 	h_spacer_l.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_l)
 
-	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 90, UIColors.BLUE)
+	_harder_button = _create_styled_button(tr("challenge_pp"), 650, 90, UIColors.YELLOW)
 	_harder_button.pressed.connect(func(): harder_pressed.emit())
 	harder_hbox.add_child(_harder_button)
 
@@ -337,5 +341,5 @@ func _build_ui() -> void:
 
 # ── Shared Button Style ──────────────────────────────────────────────────────
 
-func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.BLUE) -> Button:
+func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW) -> Button:
 	return UIHelpers.create_styled_button(btn_text, w, h, f_color)

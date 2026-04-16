@@ -32,21 +32,11 @@ func _draw() -> void:
 	var grid_h := _maze.grid_size.y
 	# Use floori/int to ensure strictly integer cells in the preview
 	# Size is given by the Container's size property
-	var margin_x = size.x * 0.02
-	var rect_left = margin_x
-	var rect_right = size.x - margin_x
+	var controls_mode: int = Config.on_screen_controls if is_instance_valid(Config) else 0
+	var content_rect: Rect2 = UIHelpers.get_content_rect(size, controls_mode)
 	
-	var controls = -1
-	if is_instance_valid(Config) and "on_screen_controls" in Config:
-		controls = Config.on_screen_controls
-		
-	if controls == Config.ControlsMode.LEFT_HANDED:
-		rect_left = (size.x * UIHelpers.DPAD_SCREEN_FRACTION) + margin_x
-	elif controls == Config.ControlsMode.RIGHT_HANDED:
-		rect_right = (size.x * (1.0 - UIHelpers.DPAD_SCREEN_FRACTION)) - margin_x
-	
-	var available_w = maxf(10.0, rect_right - rect_left)
-	var available_h = size.y
+	var available_w: float = maxf(10.0, content_rect.size.x)
+	var available_h: float = size.y
 	
 	var max_cs_x: float = float(available_w) / float(grid_w)
 	var max_cs_y: float = float(available_h) / float(grid_h)
@@ -54,7 +44,7 @@ func _draw() -> void:
 	var cell_size := floori(minf(max_cs_x, max_cs_y))
 	var wt := int(maxf(2.0, roundf(6.0 * (float(cell_size) / 120.0)))) 
 	
-	var offset_x = floori(rect_left + (available_w - (grid_w * cell_size)) / 2.0)
+	var offset_x = floori(content_rect.position.x + (available_w - (grid_w * cell_size)) / 2.0)
 	var offset_y = floori((available_h - (grid_h * cell_size)) / 2.0)
 	var offset = Vector2(offset_x, offset_y)
 	
@@ -104,49 +94,9 @@ func _draw() -> void:
 					_draw_icon(offset + pos, int_cs, theme_loader.end_texture)
 
 func _draw_walls_immediate(cs: int, wt: int, offset: Vector2) -> void:
-	var width  := _maze.grid_size.x
-	var height := _maze.grid_size.y
-	var color  := theme_loader.color_wall
-	
-	# Horizontal Tracing
-	for y in range(height + 1):
-		var x := 0
-		while x < width:
-			var has_wall := false
-			if y < height: has_wall = _maze.get_cell(Vector2i(x,y)).wall_north
-			else: has_wall = _maze.get_cell(Vector2i(x, y-1)).wall_south
-			
-			if has_wall:
-				var x_start := x
-				while x < width:
-					var next_w := false
-					if y < height: next_w = _maze.get_cell(Vector2i(x,y)).wall_north
-					else: next_w = _maze.get_cell(Vector2i(x, y-1)).wall_south
-					if not next_w: break
-					x += 1
-				draw_line(offset + Vector2(x_start * cs, y * cs), offset + Vector2(x * cs, y * cs), color, wt, true) # true = antialiased
-			else:
-				x += 1
-
-	# Vertical Tracing
-	for x in range(width + 1):
-		var y := 0
-		while y < height:
-			var has_wall := false
-			if x < width: has_wall = _maze.get_cell(Vector2i(x,y)).wall_west
-			else: has_wall = _maze.get_cell(Vector2i(x-1, y)).wall_east
-			
-			if has_wall:
-				var y_start := y
-				while y < height:
-					var next_w := false
-					if x < width: next_w = _maze.get_cell(Vector2i(x,y)).wall_west
-					else: next_w = _maze.get_cell(Vector2i(x-1, y)).wall_east
-					if not next_w: break
-					y += 1
-				draw_line(offset + Vector2(x * cs, y_start * cs), offset + Vector2(x * cs, y * cs), color, wt, true)
-			else:
-				y += 1
+	var color := theme_loader.color_wall
+	for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, offset, cs):
+		draw_line(seg.p0, seg.p1, color, wt, true)
 
 func _draw_icon(pos: Vector2, cs: float, tex: Texture2D) -> void:
 	var margin := cs * 0.1

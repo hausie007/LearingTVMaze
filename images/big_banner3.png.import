@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o1jultc7esrg"
-path="res://.godot/imported/tile3.png-22d61cb4225ce462265335ad8499546f.ctex"
+uid="uid://baasr555kaiw6"
+path="res://.godot/imported/big_banner3.png-6683b5e82aa1c8f5e22de3dc05637eca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/scary/tile3.png"
-dest_files=["res://.godot/imported/tile3.png-22d61cb4225ce462265335ad8499546f.ctex"]
+source_file="res://images/big_banner3.png"
+dest_files=["res://.godot/imported/big_banner3.png-6683b5e82aa1c8f5e22de3dc05637eca.ctex"]
 
 [params]
 

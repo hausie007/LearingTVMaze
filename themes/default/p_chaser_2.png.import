@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6npgkmsbpjpx"
-path="res://.godot/imported/tile2.png-96630ebcd55d31649d271e6aeb016e65.ctex"
+uid="uid://bu1u8dpl6fqdl"
+path="res://.godot/imported/p_chaser_2.png-c1eaa011c007660d78fa0f351fc81f87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/scary/tile2.png"
-dest_files=["res://.godot/imported/tile2.png-96630ebcd55d31649d271e6aeb016e65.ctex"]
+source_file="res://themes/default/p_chaser_2.png"
+dest_files=["res://.godot/imported/p_chaser_2.png-c1eaa011c007660d78fa0f351fc81f87.ctex"]
 
 [params]
 

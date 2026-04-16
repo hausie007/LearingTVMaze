@@ -114,4 +114,70 @@ static func get_cell_draw_commands(
 	return {"rects": rects, "icons": icons}
 
 
+## A wall line segment defined by two endpoints.
+class WallSegment:
+	var p0: Vector2
+	var p1: Vector2
 
+	func _init(a: Vector2, b: Vector2) -> void:
+		p0 = a
+		p1 = b
+
+
+## Compute all wall line segments for the entire maze.
+##
+## Returns an array of WallSegment structs that the caller can render using
+## whichever API it needs (Line2D nodes vs immediate-mode draw_line calls).
+## This centralizes the horizontal/vertical wall-tracing algorithm.
+static func get_wall_segments(maze: MazeData, offset: Vector2, cs: float) -> Array[WallSegment]:
+	var segments: Array[WallSegment] = []
+	var width: int = maze.grid_size.x
+	var height: int = maze.grid_size.y
+
+	# Group Horizontal (North-facing) walls into continuous segments
+	for y in range(height + 1):
+		var x := 0
+		while x < width:
+			var has_wall := false
+			if y < height: has_wall = maze.get_cell(Vector2i(x, y)).wall_north
+			else: has_wall = maze.get_cell(Vector2i(x, y - 1)).wall_south
+
+			if has_wall:
+				var x_start := x
+				while x < width:
+					var next_wall := false
+					if y < height: next_wall = maze.get_cell(Vector2i(x, y)).wall_north
+					else: next_wall = maze.get_cell(Vector2i(x, y - 1)).wall_south
+					if not next_wall: break
+					x += 1
+
+				var p0 := offset + Vector2(x_start * cs, y * cs)
+				var p1 := offset + Vector2(x * cs, y * cs)
+				segments.append(WallSegment.new(p0, p1))
+			else:
+				x += 1
+
+	# Group Vertical (West-facing) walls into continuous segments
+	for x in range(width + 1):
+		var y := 0
+		while y < height:
+			var has_wall := false
+			if x < width: has_wall = maze.get_cell(Vector2i(x, y)).wall_west
+			else: has_wall = maze.get_cell(Vector2i(x - 1, y)).wall_east
+
+			if has_wall:
+				var y_start := y
+				while y < height:
+					var next_wall := false
+					if x < width: next_wall = maze.get_cell(Vector2i(x, y)).wall_west
+					else: next_wall = maze.get_cell(Vector2i(x - 1, y)).wall_east
+					if not next_wall: break
+					y += 1
+
+				var p0 := offset + Vector2(x * cs, y_start * cs)
+				var p1 := offset + Vector2(x * cs, y * cs)
+				segments.append(WallSegment.new(p0, p1))
+			else:
+				y += 1
+
+	return segments

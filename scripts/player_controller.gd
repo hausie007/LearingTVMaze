@@ -120,6 +120,13 @@ func rebuild_visual() -> void:
 	add_child(_visual)
 
 
+## NOTE: Input is polled in _process() with manual cooldown instead of using
+## _unhandled_input() with is_action_just_pressed(). This is a deliberate
+## design choice: children hold D-pad buttons and expect continuous repeated
+## movement. Using _process guarantees consistent repeat rate regardless of
+## the engine's key-repeat settings. The tradeoff is that input bypasses
+## Godot's focus-based propagation, but GameManager's process_mode guards
+## for paused/win states compensate for this.
 func _process(delta: float) -> void:
 	# Tick cooldown.
 	if _cooldown_remaining > 0.0:

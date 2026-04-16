@@ -83,12 +83,6 @@ func _ready() -> void:
 	_start_new_maze()
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		if not win_screen.is_active():
-			_toggle_pause()
-
-
 func _process(delta: float) -> void:
 	# Stopwatch (only while playing, not during win screen or pause)
 	if not win_screen.is_active() and not get_tree().paused:
@@ -127,7 +121,7 @@ func _unpause() -> void:
 
 
 func _on_pause_confirmed() -> void:
-	get_tree().paused = false
+	_unpause()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 

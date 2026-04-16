@@ -81,18 +81,22 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	# Focus / Pressed (Vibrant blue/yellow)
 	var focus := create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
 
-	# Hover (Made identical to normal to avoid phantom highlights on TV)
-	var hover := normal
+	# Hover (Made similar to focus to ensure text readability matches the brand color)
+	var hover := create_rounded_stylebox(focus_color, Color(1,1,1,0.2), 12, 2)
 
 	btn.add_theme_stylebox_override("focus", focus)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", focus)
 
 	# Text colors
-	var text_color_on_focus: Color = UIColors.TEXT_PRIMARY if focus_color == UIColors.BLUE else UIColors.TEXT_ON_BRIGHT
+	# Determine if the focus color is bright (like YELLOW) or dark (like BLUE) using luminance.
+	# Threshold of 0.6: Blue (#1188FF) is ~0.46, Yellow (#FFCC00) is ~0.78.
+	var is_bright: bool = focus_color.get_luminance() > 0.6
+	var text_color_on_focus: Color = UIColors.TEXT_ON_BRIGHT if is_bright else UIColors.TEXT_PRIMARY
+	
 	btn.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
 	btn.add_theme_color_override("font_focus_color", text_color_on_focus)
-	btn.add_theme_color_override("font_hover_color", UIColors.TEXT_PRIMARY) # Dark hover BG requires light text
+	btn.add_theme_color_override("font_hover_color", text_color_on_focus) 
 	btn.add_theme_color_override("font_pressed_color", text_color_on_focus)
 
 
@@ -147,10 +151,28 @@ static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
 			container.offset_right = 0
 
 
+## Compute the usable content rectangle, accounting for D-pad screen reservation.
+## Use this instead of manually computing rect_left/rect_right from DPAD_SCREEN_FRACTION.
+static func get_content_rect(viewport_size: Vector2, controls_mode: int, top_margin: float = 0.0) -> Rect2:
+	var margin_x: float = viewport_size.x * 0.02
+	var left: float = margin_x
+	var right: float = viewport_size.x - margin_x
+
+	if controls_mode == Config.ControlsMode.LEFT_HANDED:
+		left = (viewport_size.x * DPAD_SCREEN_FRACTION) + margin_x
+	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
+		right = (viewport_size.x * (1.0 - DPAD_SCREEN_FRACTION)) - margin_x
+
+	return Rect2(left, top_margin, right - left, viewport_size.y - top_margin)
+
 ## Transition to a target scene via the branded loading screen.
 ## Handles freeing the current scene and setting the loading screen as active.
-## Use for heavier transitions (e.g., initial startup). For lightweight menu
-## transitions, prefer `tree.change_scene_to_file()`.
+##
+## CONVENTION — Scene Transition Strategy:
+##   • Use go_to_scene_with_loading() for resource-heavy targets (main.tscn,
+##     initial startup) where loading time could cause visible stalls or ANR.
+##   • Use tree.change_scene_to_file() for lightweight menu-to-menu transitions
+##     (main_menu ↔ settings, main_menu ↔ help, etc.) where scenes load instantly.
 static func go_to_scene_with_loading(tree: SceneTree, target_path: String) -> void:
 	var loading_scene = load("res://scenes/loading_screen.tscn").instantiate()
 	loading_scene.target_scene_path = target_path

@@ -122,10 +122,11 @@ func get_end_cell() -> CellData:
 
 
 ## Return an ordered list of all main-path cells from start → end.
-## Useful for spawning sequential items along the solution later.
+## Uses the ordered main_path_coords array to guarantee correct sequence.
 func get_main_path_cells() -> Array[CellData]:
 	var result: Array[CellData] = []
-	for cell: CellData in cells.values():
-		if cell.is_main_path:
+	for coord: Vector2i in main_path_coords:
+		var cell := get_cell(coord)
+		if cell:
 			result.append(cell)
 	return result

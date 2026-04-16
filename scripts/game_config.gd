@@ -41,6 +41,23 @@ enum ControlsMode {
 }
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+#  UI LABEL KEYS — Translation keys for enum display values.
+#  Centralized here to avoid duplication across menu scripts.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## Translation keys for game modes. Indices match GameMode enum values.
+const MODE_KEYS: Array[String] = ["mode_normal", "mode_numbers", "mode_letters", "mode_words"]
+
+## Translation keys for difficulty levels. Indices match DIFFICULTY_SIZES.
+const DIFF_KEYS: Array[String] = ["diff_very_easy", "diff_easy", "diff_medium", "diff_hard", "diff_very_hard", "diff_insane", "diff_unbelievable"]
+
+## Translation keys for chaser speed tiers. Indices match ChaserLevel enum values.
+const CHASER_LEVEL_KEYS: Array[String] = ["chaser_off", "chaser_slow", "chaser_medium", "chaser_fast", "chaser_turbo"]
+
+## Translation keys for on-screen controls modes. Indices match ControlsMode enum values.
+const CONTROLS_KEYS: Array[String] = ["controls_off", "controls_left", "controls_right"]
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  PERSISTENCE & SETTINGS LOGIC
@@ -49,13 +66,13 @@ enum ControlsMode {
 const SAVE_PATH := "user://settings.cfg"
 
 ## Current game mode. See GameMode enum.
-var game_mode: int = GameMode.NUMBERS
+var game_mode: GameMode = GameMode.WORDS
 
-## 0 = Very Easy, 1 = Easy, 2 = Medium, 3 = Hard, 4 = Very Hard
+## 0 = Very Easy … 6 = Unbelievable. Indices match DIFFICULTY_SIZES and DIFF_KEYS.
 var difficulty: int = 1
 
 ## Current active theme directory name. "default" is the built-in fallback.
-var theme_dir_name: String = "default":
+var theme_dir_name: String = "thiefs":
 	set(value):
 		if theme_dir_name != value:
 			theme_dir_name = value
@@ -71,7 +88,7 @@ var learning_language: String = "auto"
 var voice_hints: bool = true
 
 ## Chaser speed tier. See ChaserLevel enum.
-var chaser_level: int = ChaserLevel.MEDIUM
+var chaser_level: ChaserLevel = ChaserLevel.MEDIUM
 
 ## Whether to prioritize smooth gameplay over visual effects (disables Glow, Anti-Aliasing).
 var performance_mode: bool = true
@@ -175,6 +192,14 @@ var player_scale: float = 0.6
 func _enter_tree() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_ui_language())
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		var ev = InputEventAction.new()
+		ev.action = "ui_cancel"
+		ev.pressed = true
+		Input.parse_input_event(ev)
 
 
 func save_settings() -> void:

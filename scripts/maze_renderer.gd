@@ -17,7 +17,7 @@ extends Node2D
 
 # ── State ────────────────────────────────────────────────────────────────────
 var _maze: MazeData = null
-var theme: ThemeLoader = null
+var maze_theme: ThemeLoader = null
 
 # Dynamic rendering parameters
 var _current_cell_size: float = 120.0
@@ -38,32 +38,18 @@ func draw_maze(maze: MazeData) -> void:
 	_clear()
 
 	# Use cached theme from Config
-	theme = Config.theme
+	maze_theme = Config.theme
 
 	# Calculate dynamic cell size to fit the screen.
 	var viewport_size := get_viewport_rect().size
 	
-	# Reserve some padding (e.g., 5% each side) and subtract top_margin
-	# Define minimum margins
-	var margin_x = viewport_size.x * 0.02
+	# Get usable content area, accounting for D-pad reservation
+	var controls_mode: int = Config.on_screen_controls if is_instance_valid(Config) else 0
+	var content_rect: Rect2 = UIHelpers.get_content_rect(viewport_size, controls_mode, top_margin)
 	
-	# Compute horizontal boundaries spanning the whole screen
-	var rect_left = margin_x
-	var rect_right = viewport_size.x - margin_x
-	
-	# If D-pad is active, carve out its reserved screen fraction
-	var controls = -1
-	if is_instance_valid(Config) and "on_screen_controls" in Config:
-		controls = Config.on_screen_controls
-		
-	if controls == Config.ControlsMode.LEFT_HANDED:
-		rect_left = (viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION) + margin_x
-	elif controls == Config.ControlsMode.RIGHT_HANDED:
-		rect_right = (viewport_size.x * (1.0 - UIHelpers.DPAD_SCREEN_FRACTION)) - margin_x
-		
-	# Compute maximum available dimensions strictly within the dynamic boundaries
-	var available_w = maxf(10.0, rect_right - rect_left)
-	var available_h = maxf(10.0, viewport_size.y - top_margin - (viewport_size.y * 0.02))
+	# Compute maximum available dimensions strictly within the content rect
+	var available_w: float = maxf(10.0, content_rect.size.x)
+	var available_h: float = maxf(10.0, content_rect.size.y - (viewport_size.y * 0.02))
 	
 	# Calculate max possible cell size for both dimensions
 	var max_cs_x: float = available_w / float(maze.grid_size.x)
@@ -81,34 +67,34 @@ func draw_maze(maze: MazeData) -> void:
 		int(maze.grid_size.y * _current_cell_size),
 	)
 	
-	# Center the maze strictly inside the newly carved out available\_w window
-	var hpad := floori(rect_left + (available_w - maze_pixel_size.x) / 2.0)
+	# Center the maze strictly inside the content rect
+	var hpad := floori(content_rect.position.x + (available_w - maze_pixel_size.x) / 2.0)
 		
 	var vpad := floori(top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0)
 	var offset := Vector2i(hpad, vpad)
 	_cached_offset = Vector2(offset)
 
 	# 1. Background Layer (Strictly contained in maze area)
-	if theme.bg_texture:
+	if maze_theme.bg_texture:
 		var bg_node: Sprite2D = null
-		if theme.bg_tiled:
-			bg_node = _add_tiled_background(offset, maze_pixel_size, theme.bg_texture)
+		if maze_theme.bg_tiled:
+			bg_node = _add_tiled_background(offset, maze_pixel_size, maze_theme.bg_texture)
 		else:
-			bg_node = _add_sprite(offset, maze_pixel_size.x, theme.bg_texture, maze_pixel_size)
+			bg_node = _add_sprite(offset, maze_pixel_size.x, maze_theme.bg_texture, maze_pixel_size)
 			
 		if bg_node:
-			bg_node.modulate = theme.bg_modulate # Apply modulation ONLY to BG
-			if not theme.bg_frames.is_empty():
+			bg_node.modulate = maze_theme.bg_modulate # Apply modulation ONLY to BG
+			if not maze_theme.bg_frames.is_empty():
 				var animator := FrameAnimator.new()
 				bg_node.add_child(animator)
-				animator.start(bg_node, theme.bg_frames, theme.bg_fps)
+				animator.start(bg_node, maze_theme.bg_frames, maze_theme.bg_fps)
 
 	# 2. Wall Base (only if no background texture, to avoid covering it)
-	if not theme.bg_texture:
-		_add_rect(offset, maze_pixel_size, theme.color_wall)
+	if not maze_theme.bg_texture:
+		_add_rect(offset, maze_pixel_size, maze_theme.color_wall)
 
 	# 3. Apply Visual Environment (Glow, MSAA, etc.)
-	UIHelpers.configure_environment(self, theme, Config.performance_mode)
+	UIHelpers.configure_environment(self, maze_theme, Config.performance_mode)
 
 	# 4. Draw Maze Surfaces (Floor)
 	# Non-wall elements (floor, icons) are still drawn per-cell
@@ -140,7 +126,7 @@ func get_cell_size() -> float:
 
 ## Return the loaded ThemeLoader (so other scripts can reuse it).
 func get_theme_loader() -> ThemeLoader:
-	return theme
+	return maze_theme
 
 
 ## Build and return an AStar2D map for navigation within the current maze.
@@ -202,9 +188,9 @@ func _clear() -> void:
 func _draw_cell_corridors(cell: MazeData.CellData, pos: Vector2, coord: Vector2i) -> void:
 	var cs := _current_cell_size
 	var wt := _current_wall_thickness
-	var has_bg := theme.bg_texture != null
+	var has_bg := maze_theme.bg_texture != null
 
-	var cmds := MazeCellDrawer.get_cell_draw_commands(cell, pos, cs, wt, theme, has_bg, _maze, coord)
+	var cmds := MazeCellDrawer.get_cell_draw_commands(cell, pos, cs, wt, maze_theme, has_bg, _maze, coord)
 
 	for r: MazeCellDrawer.RectCmd in cmds["rects"]:
 		# Floor and passage rects only — walls use Line2D (drawn separately).
@@ -216,56 +202,8 @@ func _draw_cell_corridors(cell: MazeData.CellData, pos: Vector2, coord: Vector2i
 
 ## Trace and draw walls using continuous Line2D segments.
 func _draw_walls_line2d(offset: Vector2, cs: int) -> void:
-	var width  := _maze.grid_size.x
-	var height := _maze.grid_size.y
-	
-	# Group Horizontal (North-facing) walls
-	for y in range(height + 1):
-		var x := 0
-		while x < width:
-			var has_wall := false
-			if y < height: has_wall = _maze.get_cell(Vector2i(x, y)).wall_north
-			else: has_wall = _maze.get_cell(Vector2i(x, y-1)).wall_south
-			
-			if has_wall:
-				var x_start := x
-				while x < width:
-					var next_wall := false
-					if y < height: next_wall = _maze.get_cell(Vector2i(x, y)).wall_north
-					else: next_wall = _maze.get_cell(Vector2i(x, y-1)).wall_south
-					if not next_wall: break
-					x += 1
-				
-				# Draw horizontal line from x_start to x
-				var p0 := offset + Vector2(x_start * cs, y * cs)
-				var p1 := offset + Vector2(x * cs, y * cs)
-				_add_wall_line(p0, p1)
-			else:
-				x += 1
-
-	# Group Vertical (West-facing) walls
-	for x in range(width + 1):
-		var y := 0
-		while y < height:
-			var has_wall := false
-			if x < width: has_wall = _maze.get_cell(Vector2i(x, y)).wall_west
-			else: has_wall = _maze.get_cell(Vector2i(x-1, y)).wall_east
-			
-			if has_wall:
-				var y_start := y
-				while y < height:
-					var next_wall := false
-					if x < width: next_wall = _maze.get_cell(Vector2i(x, y)).wall_west
-					else: next_wall = _maze.get_cell(Vector2i(x-1, y)).wall_east
-					if not next_wall: break
-					y += 1
-				
-				# Draw vertical line from y_start to y
-				var p0 := offset + Vector2(x * cs, y_start * cs)
-				var p1 := offset + Vector2(x * cs, y * cs)
-				_add_wall_line(p0, p1)
-			else:
-				y += 1
+	for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, Vector2(offset), cs):
+		_add_wall_line(seg.p0, seg.p1)
 
 func _add_wall_line(p0: Vector2, p1: Vector2) -> void:
 	var line := Line2D.new()
@@ -276,7 +214,7 @@ func _add_wall_line(p0: Vector2, p1: Vector2) -> void:
 	
 	# Apply glow factor only to the wall lines.
 	# Multiplier brings it above HDR threshold (1.5) if set in manifest.
-	line.default_color = theme.color_wall * theme.wall_glow_factor
+	line.default_color = maze_theme.color_wall * maze_theme.wall_glow_factor
 	
 	# Modern rounded styling
 	line.joint_mode = Line2D.LINE_JOINT_ROUND

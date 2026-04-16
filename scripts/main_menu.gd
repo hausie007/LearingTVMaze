@@ -37,14 +37,6 @@ func _ready() -> void:
 	# Release input lock after a short delay
 	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		if not _input_locked:
-			if _quit_dialog and _quit_dialog.visible:
-				_hide_quit_dialog()
-			else:
-				_show_quit_dialog()
-
 func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked: return
 	
@@ -119,11 +111,11 @@ func _create_quit_dialog() -> void:
 	hbox.add_theme_constant_override("separation", 50)
 	vbox.add_child(hbox)
 	
-	var yes_btn := _create_dialog_button(tr("yes"), UIColors.YELLOW)
+	var yes_btn := _create_dialog_button(tr("yes"), UIColors.BLUE)
 	yes_btn.pressed.connect(func(): get_tree().quit())
 	hbox.add_child(yes_btn)
 	
-	_quit_no_button = _create_dialog_button(tr("no"), UIColors.BLUE)
+	_quit_no_button = _create_dialog_button(tr("no"), UIColors.YELLOW)
 	_quit_no_button.pressed.connect(_hide_quit_dialog)
 	hbox.add_child(_quit_no_button)
 

@@ -14,8 +14,8 @@
 		"image": "chaser_1.png",
 		"fps": 1,
 		"frames": [
-	  	"chaser_1.png",
-    	"chaser_2.png"
+	  	"p_chaser_1.png",
+    	"p_chaser_2.png"
 		]
 	}
 }

@@ -18,6 +18,10 @@ corner_radius_bottom_left = 30
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 30
 shadow_offset = Vector2(0, 15)
+content_margin_left = 30.0
+content_margin_right = 30.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
 
 [node name="HelpMenu" type="Control"]
 layout_mode = 3
@@ -47,7 +51,7 @@ grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1500, 900)
+custom_minimum_size = Vector2(1280, 820)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_help")
 
@@ -58,12 +62,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constant_override/separation = 0
+theme_override_constant_override/separation = 20
 
 [node name="LeftButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 theme_override_font_sizes/font_size = 84
 text = "<"
@@ -72,9 +77,9 @@ flat = true
 [node name="ContentMargin" type="MarginContainer" parent="CenterContainer/Panel/MainHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 40
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 40
 
 [node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin"]
@@ -97,7 +102,7 @@ stretch_mode = 5
 
 [node name="TextLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 240)
+custom_minimum_size = Vector2(800, 240)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 54
@@ -117,8 +122,9 @@ horizontal_alignment = 1
 
 [node name="RightButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.53, 1, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 theme_override_font_sizes/font_size = 84
 text = ">"
