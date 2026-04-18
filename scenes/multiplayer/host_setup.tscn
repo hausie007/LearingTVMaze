@@ -1,0 +1,291 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/host_setup.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/character_preview.gd" id="2"]
+
+[node name="HostSetup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.11, 0.14, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1180, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Host Setup"
+horizontal_alignment = 1
+
+[node name="SpacerTop" type="Control" parent="CenterContainer/MainVBox"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="RowDifficulty" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="DifficultyLabel" type="Label" parent="CenterContainer/MainVBox/RowDifficulty"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Difficulty:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DifficultyButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowDifficulty"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="DifficultyLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowDifficulty/DifficultyButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyButton" type="Button" parent="CenterContainer/MainVBox/RowDifficulty/DifficultyButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Easy"
+
+[node name="DifficultyRightArrow" type="Label" parent="CenterContainer/MainVBox/RowDifficulty/DifficultyButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowTheme" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="ThemeLabel" type="Label" parent="CenterContainer/MainVBox/RowTheme"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Theme:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ThemeButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowTheme"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ThemeLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThemeButton" type="Button" parent="CenterContainer/MainVBox/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Default"
+
+[node name="ThemeRightArrow" type="Label" parent="CenterContainer/MainVBox/RowTheme/ThemeButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThemePlayerAnchor" type="TextureRect" parent="CenterContainer/MainVBox/RowTheme/ThemeButtonContainer/ThemeRightArrow"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2")
+
+[node name="RowMaxPlayers" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="MaxPlayersLabel" type="Label" parent="CenterContainer/MainVBox/RowMaxPlayers"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Max Players:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MaxPlayersButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowMaxPlayers"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="MaxPlayersLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowMaxPlayers/MaxPlayersButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxPlayersButton" type="Button" parent="CenterContainer/MainVBox/RowMaxPlayers/MaxPlayersButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "2"
+
+[node name="MaxPlayersRightArrow" type="Label" parent="CenterContainer/MainVBox/RowMaxPlayers/MaxPlayersButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RowCharacter" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="CharacterLabel" type="Label" parent="CenterContainer/MainVBox/RowCharacter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Character:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CharacterButtonContainer" type="HBoxContainer" parent="CenterContainer/MainVBox/RowCharacter"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="CharacterLeftArrow" type="Label" parent="CenterContainer/MainVBox/RowCharacter/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterButton" type="Button" parent="CenterContainer/MainVBox/RowCharacter/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Character"
+
+[node name="CharacterRightArrow" type="Label" parent="CenterContainer/MainVBox/RowCharacter/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterPlayerAnchor" type="TextureRect" parent="CenterContainer/MainVBox/RowCharacter/CharacterButtonContainer/CharacterRightArrow"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2")
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 26
+text = ""
+horizontal_alignment = 1
+
+[node name="NetworkDebugLabel" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Network: idle"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CenterContainer/MainVBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 94)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Start Game"

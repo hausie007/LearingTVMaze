@@ -51,16 +51,26 @@ custom_minimum_size = Vector2(500, 140)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_top = NodePath("../HelpButton")
-focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../MultiplayerButton")
 theme_override_font_sizes/font_size = 64
 text = "Play"
+
+[node name="MultiplayerButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+theme_override_font_sizes/font_size = 48
+text = "Multiplayer"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=911086277]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 90)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_top = NodePath("../MultiplayerButton")
 focus_neighbor_bottom = NodePath("../HelpButton")
 theme_override_font_sizes/font_size = 40
 text = "Settings"

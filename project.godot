@@ -30,6 +30,7 @@ theme/custom="res://ui/default_theme.theme"
 TTS="*res://scripts/tts_manager.gd"
 Config="*res://scripts/game_config.gd"
 DPad="*res://scripts/virtual_dpad.gd"
+NetworkManager="*res://scripts/network/network_manager.gd"
 
 [display]
 

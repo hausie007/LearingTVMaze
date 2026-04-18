@@ -1,6 +1,7 @@
 extends Control
 
 @onready var play_btn: Button = %PlayButton
+@onready var multiplayer_btn: Button = %MultiplayerButton
 @onready var settings_btn: Button = %SettingsButton
 @onready var help_btn: Button = %HelpButton
 @onready var title_banner: TextureRect = %Title
@@ -17,17 +18,20 @@ func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
 	
 	play_btn.pressed.connect(_on_play_pressed)
+	multiplayer_btn.pressed.connect(_on_multiplayer_pressed)
 	settings_btn.pressed.connect(_on_settings_pressed)
 	help_btn.pressed.connect(_on_help_pressed)
 	
 	# Localize UI
 	# title_banner is an image now, so no tr("app_title")
 	play_btn.text = tr("play")
+	multiplayer_btn.text = tr("mp_multiplayer")
 	settings_btn.text = tr("settings")
 	help_btn.text = tr("help")
 	
 	# Apply global dynamic styles to existing editor-built buttons
 	UIHelpers.apply_style_to_button(play_btn, UIColors.BLUE)
+	UIHelpers.apply_style_to_button(multiplayer_btn, UIColors.YELLOW)
 	UIHelpers.apply_style_to_button(settings_btn, UIColors.YELLOW)
 	UIHelpers.apply_style_to_button(help_btn, UIColors.YELLOW)
 	
@@ -49,6 +53,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/mode_selection.tscn")
+
+func _on_multiplayer_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")

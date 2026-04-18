@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_menu.gd" id="1"]
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.11, 0.14, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 62
+text = "Multiplayer"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(760, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Host new game"
+
+[node name="JoinGamesTitle" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Join games"
+horizontal_alignment = 1
+
+[node name="JoinGamesStatus" type="Label" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Scanning local Wi-Fi..."
+horizontal_alignment = 1
+
+[node name="HostListScroll" type="ScrollContainer" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1040, 500)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="HostListVBox" type="VBoxContainer" parent="CenterContainer/MainVBox/HostListScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16

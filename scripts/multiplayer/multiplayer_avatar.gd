@@ -1,0 +1,52 @@
+class_name MultiplayerAvatar
+extends Node2D
+
+@onready var sprite: Sprite2D = %Sprite
+
+var peer_id: int = 0
+var character_id: String = ""
+var grid_pos: Vector2i = Vector2i.ZERO
+
+var _move_tween: Tween = null
+
+func setup(p_peer_id: int, p_character_id: String, renderer: MazeRenderer, start_grid_pos: Vector2i) -> void:
+	peer_id = p_peer_id
+	character_id = p_character_id
+	grid_pos = start_grid_pos
+	var sprite_node: Sprite2D = _get_sprite()
+
+	var texture := CharacterCatalog.get_texture_by_id(character_id)
+	if texture == null:
+		var fallback := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+		fallback.fill(Color(0.25, 0.55, 0.95))
+		texture = ImageTexture.create_from_image(fallback)
+
+	if sprite_node == null:
+		push_error("MultiplayerAvatar: Sprite node is missing")
+		return
+
+	sprite_node.texture = texture
+	var cell_size: float = renderer.get_cell_size()
+	var target_size: float = cell_size * 0.72
+	var tex_size := texture.get_size()
+	if maxf(tex_size.x, tex_size.y) > 0.0:
+		var scale_factor := target_size / maxf(tex_size.x, tex_size.y)
+		sprite_node.scale = Vector2.ONE * scale_factor
+
+	position = renderer.grid_to_pixel(grid_pos)
+
+func move_to_grid(new_grid_pos: Vector2i, renderer: MazeRenderer, duration: float) -> void:
+	grid_pos = new_grid_pos
+	var target_pos := renderer.grid_to_pixel(new_grid_pos)
+
+	if _move_tween and _move_tween.is_valid():
+		_move_tween.kill()
+
+	_move_tween = create_tween()
+	_move_tween.tween_property(self, "position", target_pos, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+func _get_sprite() -> Sprite2D:
+	if sprite != null:
+		return sprite
+	sprite = get_node_or_null("Sprite") as Sprite2D
+	return sprite

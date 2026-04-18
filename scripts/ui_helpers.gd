@@ -104,6 +104,40 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	btn.add_theme_color_override("font_pressed_color", text_color_on_focus)
 
 
+## Applies a safe accent palette derived from avatar art to a button.
+## Keeps the control visually linked to the selected character while preserving contrast.
+static func apply_avatar_accent_button_style(btn: Button, palette: Dictionary) -> void:
+	if btn == null:
+		return
+
+	var accent: Color = palette.get("accent", UIColors.BLUE)
+	var accent_soft: Color = palette.get("accent_soft", accent.lerp(Color.WHITE, 0.2))
+	var accent_vivid: Color = palette.get("accent_vivid", accent.lerp(Color.WHITE, 0.35))
+	var accent_deep: Color = palette.get("accent_deep", accent.darkened(0.15))
+	var shell: Color = palette.get("shell", UIColors.BG_DARK.lerp(accent, 0.12))
+	var shell_hover: Color = palette.get("shell_hover", shell.lerp(accent_soft, 0.18))
+	var border: Color = palette.get("border", accent_soft)
+	var text_color: Color = palette.get("text", UIColors.TEXT_PRIMARY)
+
+	var normal := create_rounded_stylebox(shell, border, 16, 3)
+	var focus := create_rounded_stylebox(accent, accent_soft, 16, 4)
+	var hover := create_rounded_stylebox(shell_hover, accent_vivid, 16, 4)
+	var pressed := create_rounded_stylebox(accent_deep, accent_soft, 16, 4)
+
+	btn.add_theme_stylebox_override("normal", normal)
+	btn.add_theme_stylebox_override("focus", focus)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", pressed)
+
+	if is_likely_tv():
+		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	btn.add_theme_color_override("font_color", text_color)
+	btn.add_theme_color_override("font_focus_color", text_color)
+	btn.add_theme_color_override("font_hover_color", text_color)
+	btn.add_theme_color_override("font_pressed_color", text_color)
+
+
 
 
 ## Create a StyleBoxFlat with uniform corner radius and border width.

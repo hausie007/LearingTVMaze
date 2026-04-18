@@ -1,0 +1,328 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/join_flow.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/character_preview.gd" id="2"]
+
+[node name="JoinFlow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.11, 0.14, 1)
+
+[node name="DiscoveryPanel" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="DiscoveryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="DiscoveryPanel/CenterContainer"]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="DiscoveryTitleLabel" type="Label" parent="DiscoveryPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Find Host"
+horizontal_alignment = 1
+
+[node name="DiscoveryStatusLabel" type="Label" parent="DiscoveryPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Scanning local Wi-Fi..."
+horizontal_alignment = 1
+
+[node name="HostListScroll" type="ScrollContainer" parent="DiscoveryPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1040, 460)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="HostListVBox" type="VBoxContainer" parent="DiscoveryPanel/CenterContainer/MainVBox/HostListScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="JoinSetupPanel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="JoinSetupPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="JoinSetupPanel/CenterContainer"]
+custom_minimum_size = Vector2(1180, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="JoinTitleLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Join Host"
+horizontal_alignment = 1
+
+[node name="HostInfoLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = ""
+horizontal_alignment = 1
+
+[node name="ThemeLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Theme"
+
+[node name="ThemeValueLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = ""
+
+[node name="RemoteLayoutRow" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="RemoteLayoutLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/RemoteLayoutRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Controller layout:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RemoteLayoutButtonContainer" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox/RemoteLayoutRow"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RemoteLayoutLeftArrow" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/RemoteLayoutRow/RemoteLayoutButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemoteLayoutButton" type="Button" parent="JoinSetupPanel/CenterContainer/MainVBox/RemoteLayoutRow/RemoteLayoutButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Off"
+
+[node name="RemoteLayoutRightArrow" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/RemoteLayoutRow/RemoteLayoutButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterRow" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="CharacterLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Character:"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CharacterButtonContainer" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="CharacterLeftArrow" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterButton" type="Button" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Character"
+
+[node name="CharacterRightArrow" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow/CharacterButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 50
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterPlayerAnchor" type="TextureRect" parent="JoinSetupPanel/CenterContainer/MainVBox/CharacterRow/CharacterButtonContainer/CharacterRightArrow"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -70.0
+offset_right = 210.0
+offset_bottom = 70.0
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2")
+
+[node name="TakenAvatarsRow" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TakenAvatarsLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox/TakenAvatarsRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Taken avatars:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TakenAvatarsContainer" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox/TakenAvatarsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="JoinErrorLabel" type="Label" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.45, 1)
+theme_override_font_sizes/font_size = 28
+text = ""
+
+[node name="Buttons" type="HBoxContainer" parent="JoinSetupPanel/CenterContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="JoinGameButton" type="Button" parent="JoinSetupPanel/CenterContainer/MainVBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 96)
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Join Game"
+
+[node name="ControllerPanel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterIcon" type="TextureRect" parent="ControllerPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 160.0
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2")
+
+[node name="ControllerTitleLabel" type="Label" parent="ControllerPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 40.0
+offset_right = 260.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 42
+text = "Controller"
+horizontal_alignment = 1
+
+[node name="NetworkDebugLayer" type="CanvasLayer" parent="."]
+
+[node name="NetworkDebugMargin" type="MarginContainer" parent="NetworkDebugLayer"]
+anchors_preset = 1
+anchor_right = 1.0
+grow_horizontal = 2
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+
+[node name="NetworkDebugLabel" type="Label" parent="NetworkDebugLayer/NetworkDebugMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Network: idle"
+horizontal_alignment = 0
