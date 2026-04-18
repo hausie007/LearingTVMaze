@@ -12,6 +12,8 @@ signal action_changed(action: StringName, pressed: bool)
 
 const DEFAULT_PAD_COLOR: Color = Color(1.0, 1.0, 1.0, 0.25)
 const DEFAULT_PAD_TEXT_COLOR: Color = Color.WHITE
+const HAPTIC_DURATION_MS: int = 24
+const HAPTIC_AMPLITUDE: float = 0.18
 
 var dpad_container: Node2D
 var back_button: TouchScreenButton
@@ -58,7 +60,10 @@ func _rebuild_dpad(viewport_size: Vector2) -> void:
 		btn.action = action
 		btn.passby_press = true
 		var action_name: StringName = StringName(action)
-		btn.pressed.connect(func(): action_changed.emit(action_name, true))
+		btn.pressed.connect(func():
+			_trigger_haptic_for_action(action_name)
+			action_changed.emit(action_name, true)
+		)
 		btn.released.connect(func(): action_changed.emit(action_name, false))
 		
 		# For clickability without a texture, a shape is required
@@ -175,3 +180,8 @@ func _palette_color(key: String, fallback: Color) -> Color:
 	if value is Color:
 		return value
 	return fallback
+
+func _trigger_haptic_for_action(action: StringName) -> void:
+	match action:
+		&"ui_up", &"ui_down", &"ui_left", &"ui_right":
+			Input.vibrate_handheld(HAPTIC_DURATION_MS, HAPTIC_AMPLITUDE)
