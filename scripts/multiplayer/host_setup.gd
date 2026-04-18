@@ -1,5 +1,8 @@
 extends Control
 
+const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
+
+@onready var main_vbox: VBoxContainer = $CenterContainer/MainVBox
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var title_label: Label = %TitleLabel
 @onready var difficulty_label: Label = %DifficultyLabel
@@ -28,17 +31,41 @@ extends Control
 @onready var network_debug_label: Label = %NetworkDebugLabel
 @onready var start_button: Button = %StartButton
 
+var _style_button: Button = null
+var _style_left_arrow: Label = null
+var _style_right_arrow: Label = null
+var _chaser_button: Button = null
+var _chaser_left_arrow: Label = null
+var _chaser_right_arrow: Label = null
+var _training_cards: Array[Button] = []
+
 var _theme_dirs: Array[String] = []
 var _character_catalog: Array[Dictionary] = []
+var _selected_style_idx: int = 0
+var _selected_training_idx: int = 1
 var _selected_difficulty: int = 0
 var _selected_theme_idx: int = 0
 var _selected_max_players_idx: int = 0
 var _selected_character_idx: int = 0
+var _chaser_enabled: bool = false
 var _theme_preview_loader: ThemeLoader = null
 var _last_theme_idx: int = -1
 
+var _style_options: Array[Dictionary] = [
+	{"id": NetworkManager.STYLE_PATH, "title_key": "mp_style_path"},
+	{"id": NetworkManager.STYLE_NEXT_SYMBOL, "title_key": "mp_style_next_symbol"},
+	{"id": NetworkManager.STYLE_RACE, "title_key": "mp_style_race"},
+]
+
+var _training_options: Array[Dictionary] = [
+	{"id": NetworkManager.TRAINING_NUMBERS, "icon": "123", "title_key": "mode_numbers", "desc_key": "desc_numbers"},
+	{"id": NetworkManager.TRAINING_WORDS, "icon": "W", "title_key": "mode_words", "desc_key": "desc_words"},
+	{"id": NetworkManager.TRAINING_LETTERS, "icon": "ABC", "title_key": "mode_letters", "desc_key": "desc_letters"},
+]
+
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
+	_build_phase_one_selectors()
 	_localize_ui()
 	if network_debug_label != null:
 		network_debug_label.visible = false
@@ -49,6 +76,8 @@ func _ready() -> void:
 	_populate_characters()
 
 	_setup_cycling_button(difficulty_button, func(dir): _cycle_difficulty(dir))
+	_setup_cycling_button(_style_button, func(dir): _cycle_style(dir))
+	_setup_cycling_button(_chaser_button, func(_dir): _toggle_chaser())
 	_setup_cycling_button(theme_button, func(dir): _cycle_theme(dir))
 	_setup_cycling_button(max_players_button, func(dir): _cycle_max_players(dir))
 	_setup_cycling_button(character_button, func(dir): _cycle_character(dir))
@@ -63,7 +92,88 @@ func _ready() -> void:
 
 	_apply_dpad_layout()
 	_update_labels()
-	difficulty_button.call_deferred("grab_focus")
+	if not _training_cards.is_empty():
+		_training_cards[_selected_training_idx].call_deferred("grab_focus")
+	else:
+		difficulty_button.call_deferred("grab_focus")
+
+func _build_phase_one_selectors() -> void:
+	if main_vbox == null:
+		return
+
+	var insert_after := 2
+	var training_row := HBoxContainer.new()
+	training_row.name = "TrainingCardRow"
+	training_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	training_row.add_theme_constant_override("separation", 28)
+	main_vbox.add_child(training_row)
+	main_vbox.move_child(training_row, mini(insert_after, main_vbox.get_child_count() - 1))
+
+	for i in range(_training_options.size()):
+		var card := ModeCardScene.instantiate() as Button
+		card.custom_minimum_size = Vector2(260, 190)
+		card.pivot_offset = Vector2(130, 95)
+		card.pressed.connect(_select_training.bind(i))
+		training_row.add_child(card)
+		_training_cards.append(card)
+
+	var style_row := _create_dynamic_selector_row("mp_host_game_style")
+	_style_left_arrow = style_row["left"] as Label
+	_style_button = style_row["button"] as Button
+	_style_right_arrow = style_row["right"] as Label
+	main_vbox.add_child(style_row["row"] as Node)
+	main_vbox.move_child(style_row["row"] as Node, mini(insert_after + 1, main_vbox.get_child_count() - 1))
+
+	var chaser_row := _create_dynamic_selector_row("setting_chaser")
+	_chaser_left_arrow = chaser_row["left"] as Label
+	_chaser_button = chaser_row["button"] as Button
+	_chaser_right_arrow = chaser_row["right"] as Label
+	main_vbox.add_child(chaser_row["row"] as Node)
+	main_vbox.move_child(chaser_row["row"] as Node, mini(insert_after + 2, main_vbox.get_child_count() - 1))
+
+func _create_dynamic_selector_row(label_key: String) -> Dictionary:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 80)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+
+	var label := Label.new()
+	label.custom_minimum_size = Vector2(480, 0)
+	label.add_theme_font_size_override("font_size", 36)
+	label.text = tr(label_key)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	row.add_child(label)
+
+	var container := HBoxContainer.new()
+	container.add_theme_constant_override("separation", 20)
+	container.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_child(container)
+
+	var left := Label.new()
+	left.custom_minimum_size = Vector2(40, 0)
+	left.add_theme_color_override("font_color", UIColors.YELLOW)
+	left.add_theme_font_size_override("font_size", 50)
+	left.text = "<"
+	left.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	left.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	container.add_child(left)
+
+	var button := Button.new()
+	button.custom_minimum_size = Vector2(500, 72)
+	button.add_theme_font_size_override("font_size", 36)
+	container.add_child(button)
+
+	var right := Label.new()
+	right.custom_minimum_size = Vector2(40, 0)
+	right.add_theme_color_override("font_color", UIColors.YELLOW)
+	right.add_theme_font_size_override("font_size", 50)
+	right.text = ">"
+	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	right.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	container.add_child(right)
+
+	return {"row": row, "left": left, "button": button, "right": right}
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -95,6 +205,12 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	var base_name: String = btn.name.replace("Button", "")
 	var left_arrow: Label = get_node_or_null("%%%sLeftArrow" % base_name)
 	var right_arrow: Label = get_node_or_null("%%%sRightArrow" % base_name)
+	if btn == _style_button:
+		left_arrow = _style_left_arrow
+		right_arrow = _style_right_arrow
+	elif btn == _chaser_button:
+		left_arrow = _chaser_left_arrow
+		right_arrow = _chaser_right_arrow
 
 	if left_arrow:
 		left_arrow.modulate.a = 0.0
@@ -155,6 +271,22 @@ func _cycle_difficulty(dir: int) -> void:
 	_selected_difficulty = (_selected_difficulty + dir + Config.DIFF_KEYS.size()) % Config.DIFF_KEYS.size()
 	_update_labels()
 
+func _cycle_style(dir: int) -> void:
+	if _style_options.is_empty():
+		return
+	_selected_style_idx = (_selected_style_idx + dir + _style_options.size()) % _style_options.size()
+	_update_labels()
+
+func _toggle_chaser() -> void:
+	_chaser_enabled = not _chaser_enabled
+	_update_labels()
+
+func _select_training(idx: int) -> void:
+	if idx < 0 or idx >= _training_options.size():
+		return
+	_selected_training_idx = idx
+	_update_labels()
+
 func _cycle_theme(dir: int) -> void:
 	if _theme_dirs.is_empty():
 		return
@@ -182,9 +314,17 @@ func _cycle_character(dir: int) -> void:
 func _update_labels() -> void:
 	_update_theme_preview()
 	_update_character_preview()
+	_update_training_cards()
 
 	if Config.DIFF_KEYS.size() > 0 and _selected_difficulty < Config.DIFF_KEYS.size():
 		difficulty_button.text = tr(Config.DIFF_KEYS[_selected_difficulty])
+
+	if _style_button != null and _selected_style_idx < _style_options.size():
+		_style_button.text = tr(String(_style_options[_selected_style_idx].get("title_key", "")))
+
+	if _chaser_button != null:
+		var force_chaser_off := _selected_style_id() == NetworkManager.STYLE_NEXT_SYMBOL
+		_chaser_button.text = tr("off") if force_chaser_off or not _chaser_enabled else tr("on")
 
 	if _theme_dirs.size() > 0 and _selected_theme_idx < _theme_dirs.size():
 		var loader: ThemeLoader = ThemeLoader.get_cached(_theme_dirs[_selected_theme_idx])
@@ -196,6 +336,16 @@ func _update_labels() -> void:
 
 	if _character_catalog.size() > 0 and _selected_character_idx < _character_catalog.size():
 		character_button.text = String(_character_catalog[_selected_character_idx].get("display_name", ""))
+
+func _update_training_cards() -> void:
+	for i in range(_training_cards.size()):
+		var card := _training_cards[i]
+		if card == null:
+			continue
+		var data := _training_options[i]
+		var title := tr(String(data.get("title_key", "")))
+		card.modulate = Color(1.0, 1.0, 1.0, 1.0) if i == _selected_training_idx else Color(0.72, 0.72, 0.72, 1.0)
+		card.call("setup", String(data.get("icon", "")), title, tr(String(data.get("desc_key", ""))))
 
 func _update_theme_preview() -> void:
 	if _theme_dirs.is_empty():
@@ -243,6 +393,26 @@ func _selected_max_players() -> int:
 		return 2
 	return options[_selected_max_players_idx]
 
+func _selected_style_id() -> String:
+	if _selected_style_idx < 0 or _selected_style_idx >= _style_options.size():
+		return NetworkManager.STYLE_PATH
+	return String(_style_options[_selected_style_idx].get("id", NetworkManager.STYLE_PATH))
+
+func _selected_style_title() -> String:
+	if _selected_style_idx < 0 or _selected_style_idx >= _style_options.size():
+		return tr("mp_style_path")
+	return tr(String(_style_options[_selected_style_idx].get("title_key", "mp_style_path")))
+
+func _selected_training_id() -> String:
+	if _selected_training_idx < 0 or _selected_training_idx >= _training_options.size():
+		return NetworkManager.TRAINING_WORDS
+	return String(_training_options[_selected_training_idx].get("id", NetworkManager.TRAINING_WORDS))
+
+func _selected_training_title() -> String:
+	if _selected_training_idx < 0 or _selected_training_idx >= _training_options.size():
+		return tr("mode_words")
+	return tr(String(_training_options[_selected_training_idx].get("title_key", "mode_words")))
+
 func _on_start_pressed() -> void:
 	status_label.text = ""
 	if _character_catalog.is_empty():
@@ -252,6 +422,12 @@ func _on_start_pressed() -> void:
 	var config: Dictionary = {
 		"difficulty": _selected_difficulty,
 		"difficulty_key": Config.DIFF_KEYS[_selected_difficulty],
+		"game_style": _selected_style_id(),
+		"game_style_title": _selected_style_title(),
+		"training_type": _selected_training_id(),
+		"training_type_title": _selected_training_title(),
+		"chaser_enabled": _chaser_enabled and _selected_style_id() != NetworkManager.STYLE_NEXT_SYMBOL,
+		"rotate_roles_after_round": false,
 		"theme_dir": _selected_theme_dir(),
 		"theme_title": theme_button.text,
 		"max_players": _selected_max_players(),

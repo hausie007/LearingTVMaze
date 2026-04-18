@@ -262,7 +262,11 @@ func _populate_join_setup_from_selected_host() -> void:
 	var player_count: int = int(_selected_host.get("player_count", 1))
 
 	host_info_label.text = "%s (%s) %d/%d" % [host_name, host_ip, player_count, max_players]
-	theme_value_label.text = String(_selected_host.get("theme_title", _selected_host.get("theme_dir", "")))
+	theme_value_label.text = "%s | %s | %s" % [
+		String(_selected_host.get("game_style_title", "")),
+		String(_selected_host.get("training_type_title", "")),
+		String(_selected_host.get("theme_title", _selected_host.get("theme_dir", ""))),
+	]
 	_update_taken_character_ids_from_selected_host()
 	if character_button:
 		character_button.text = ""
@@ -370,6 +374,9 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	var host_name: String = String(host.get("host_name", "Host"))
 	var host_ip: String = String(host.get("ip", ""))
 	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
+	var style_title: String = String(host.get("game_style_title", ""))
+	var training_title: String = String(host.get("training_type_title", ""))
+	var chaser_text: String = tr("mp_roles_chaser_on") if bool(host.get("chaser_enabled", false)) else tr("mp_roles_chaser_off")
 	var player_count: int = int(host.get("player_count", 1))
 	var max_players: int = int(host.get("max_players", 2))
 
@@ -385,7 +392,12 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	text_box.add_child(subtitle)
 
 	var footer: Label = Label.new()
-	footer.text = CharacterCatalog.display_name_for_id(host_character_id)
+	footer.text = "%s | %s | %s | %s" % [
+		style_title,
+		training_title,
+		chaser_text,
+		CharacterCatalog.display_name_for_id(host_character_id),
+	]
 	footer.add_theme_font_size_override("font_size", 24)
 	footer.modulate = Color(0.92, 0.75, 0.2, 1)
 	text_box.add_child(footer)

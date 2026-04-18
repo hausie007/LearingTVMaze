@@ -13,6 +13,7 @@ const HUD_HEIGHT: float = 160.0
 
 var _time_label: Label = null
 var _moves_label: Label = null
+var _role_label: Label = null
 var _word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
 
@@ -39,6 +40,41 @@ func update_moves(count: int) -> void:
 	if _moves_label:
 		_moves_label.text = "%d" % count
 
+func update_role(role_key: String, color: Color = UIColors.YELLOW) -> void:
+	if _role_label == null:
+		return
+	if role_key.is_empty():
+		_role_label.text = ""
+		return
+	var label_key := "role_collector"
+	match role_key:
+		Config.ROLE_CHASER:
+			label_key = "role_chaser"
+		Config.ROLE_RACER:
+			label_key = "role_racer"
+		_:
+			label_key = "role_collector"
+	_role_label.text = tr(label_key)
+	_role_label.add_theme_color_override("font_color", color)
+
+func update_target_display(target: String, progress_index: int, total: int) -> void:
+	_word_letter_labels.clear()
+	for child in _word_container.get_children():
+		child.queue_free()
+
+	if target.is_empty():
+		return
+
+	var label := Label.new()
+	var progress_text := ""
+	if total > 0:
+		progress_text = " %d/%d" % [mini(progress_index + 1, total), total]
+	label.text = "%s: %s%s" % [tr("hud_target_now"), target, progress_text]
+	label.add_theme_font_size_override("font_size", 56)
+	label.add_theme_color_override("font_color", UIColors.YELLOW)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_word_container.add_child(label)
 
 ## Rebuild the word display for Words mode. Clears if not applicable.
 func update_word_display(word_data: Dictionary, game_mode: int) -> void:
@@ -157,6 +193,15 @@ func _build_ui() -> void:
 	_time_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_time_label.custom_minimum_size.x = 250
 	hbox.add_child(_time_label)
+
+	_role_label = Label.new()
+	_role_label.text = ""
+	_role_label.add_theme_font_size_override("font_size", 34)
+	_role_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_role_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_role_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_role_label.custom_minimum_size.x = 180
+	hbox.add_child(_role_label)
 
 	# Center: Word display area (flexible, fills remaining space)
 	_word_container = HBoxContainer.new()

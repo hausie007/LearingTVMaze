@@ -149,6 +149,9 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	var host_name: String = String(host.get("host_name", "Host"))
 	var host_ip: String = String(host.get("ip", ""))
 	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
+	var style_title: String = String(host.get("game_style_title", ""))
+	var training_title: String = String(host.get("training_type_title", ""))
+	var chaser_text: String = tr("mp_roles_chaser_on") if bool(host.get("chaser_enabled", false)) else tr("mp_roles_chaser_off")
 	var player_count: int = int(host.get("player_count", 1))
 	var max_players: int = int(host.get("max_players", 2))
 
@@ -164,7 +167,12 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	text_box.add_child(subtitle)
 
 	var footer: Label = Label.new()
-	footer.text = CharacterCatalog.display_name_for_id(host_character_id)
+	footer.text = "%s | %s | %s | %s" % [
+		style_title,
+		training_title,
+		chaser_text,
+		CharacterCatalog.display_name_for_id(host_character_id),
+	]
 	footer.add_theme_font_size_override("font_size", 24)
 	footer.modulate = Color(0.92, 0.75, 0.2, 1)
 	text_box.add_child(footer)

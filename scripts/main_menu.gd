@@ -24,8 +24,8 @@ func _ready() -> void:
 	
 	# Localize UI
 	# title_banner is an image now, so no tr("app_title")
-	play_btn.text = tr("play")
-	multiplayer_btn.text = tr("mp_multiplayer")
+	play_btn.text = tr("menu_play_alone")
+	multiplayer_btn.text = tr("menu_play_together")
 	settings_btn.text = tr("settings")
 	help_btn.text = tr("help")
 	

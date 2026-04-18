@@ -21,6 +21,18 @@ const DISCOVERY_INTERVAL_SEC := 0.75
 const HOST_TTL_SEC := 15.0
 const HOST_BIND_IP := "0.0.0.0"
 
+const STYLE_PATH := "path"
+const STYLE_NEXT_SYMBOL := "next_symbol"
+const STYLE_RACE := "race"
+
+const TRAINING_NUMBERS := "numbers"
+const TRAINING_LETTERS := "letters"
+const TRAINING_WORDS := "words"
+
+const ROLE_COLLECTOR := "collector"
+const ROLE_CHASER := "chaser"
+const ROLE_RACER := "racer"
+
 var host_config: Dictionary = {}
 var players: Dictionary = {}
 var current_session: Dictionary = {}
@@ -58,6 +70,7 @@ func _process(_delta: float) -> void:
 
 func configure_host(config: Dictionary) -> void:
 	host_config = config.duplicate(true)
+	_normalize_host_config()
 	_emit_debug("host", "Config updated")
 
 func start_host() -> int:
@@ -86,7 +99,9 @@ func start_host() -> int:
 		"peer_id": host_id,
 		"character_id": String(host_config.get("character_id", "")),
 		"is_host": true,
+		"role": ROLE_COLLECTOR,
 	}
+	_recalculate_roles()
 
 	current_session.clear()
 	_start_broadcasting()
@@ -100,6 +115,34 @@ func stop_host() -> void:
 func start_now() -> void:
 	if multiplayer.is_server():
 		_start_game()
+
+func set_collector_peer_id(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		return
+	if not players.has(peer_id):
+		return
+
+	host_config["collector_peer_id"] = peer_id
+	_recalculate_roles()
+	_sync_lobby_to_clients()
+
+func randomize_collector() -> void:
+	if not multiplayer.is_server():
+		return
+	var peer_ids := _ordered_player_peer_ids()
+	if peer_ids.is_empty():
+		return
+
+	var idx := randi() % peer_ids.size()
+	host_config["collector_peer_id"] = peer_ids[idx]
+	_recalculate_roles()
+	_sync_lobby_to_clients()
+
+func set_rotate_roles_after_round(enabled: bool) -> void:
+	if not multiplayer.is_server():
+		return
+	host_config["rotate_roles_after_round"] = enabled
+	_sync_lobby_to_clients()
 
 func start_discovery() -> int:
 	stop_discovery()
@@ -226,6 +269,11 @@ func _build_discovery_payload() -> Dictionary:
 		"port": GAME_PORT,
 		"theme_dir": String(host_config.get("theme_dir", "default")),
 		"theme_title": String(host_config.get("theme_title", host_config.get("theme_dir", "default"))),
+		"game_style": String(host_config.get("game_style", STYLE_PATH)),
+		"game_style_title": String(host_config.get("game_style_title", "Path")),
+		"training_type": String(host_config.get("training_type", TRAINING_WORDS)),
+		"training_type_title": String(host_config.get("training_type_title", "Words")),
+		"chaser_enabled": bool(host_config.get("chaser_enabled", false)),
 		"difficulty": int(host_config.get("difficulty", 1)),
 		"difficulty_key": String(host_config.get("difficulty_key", "diff_easy")),
 		"max_players": max_players,
@@ -323,12 +371,15 @@ func _sync_lobby_to_clients() -> void:
 	_broadcast_presence()
 
 func _build_lobby_state() -> Dictionary:
+	if multiplayer.is_server():
+		_recalculate_roles()
 	return {
 		"config": host_config.duplicate(true),
 		"players": players.duplicate(true),
 	}
 
 func _build_session_data() -> Dictionary:
+	_recalculate_roles()
 	var ordered_peers: Array[int] = []
 	for key in players.keys():
 		ordered_peers.append(int(key))
@@ -345,6 +396,7 @@ func _build_session_data() -> Dictionary:
 	return {
 		"config": host_config.duplicate(true),
 		"players": players.duplicate(true),
+		"roles": _roles_by_peer(),
 		"spawn_slots": spawn_slots,
 		"ordered_peers": ordered_peers,
 	}
@@ -374,6 +426,75 @@ func _is_character_taken(character_id: String) -> bool:
 		if String(data.get("character_id", "")) == character_id:
 			return true
 	return false
+
+func _normalize_host_config() -> void:
+	if not host_config.has("game_style"):
+		host_config["game_style"] = STYLE_PATH
+	if not host_config.has("game_style_title"):
+		host_config["game_style_title"] = "Path"
+	if not host_config.has("training_type"):
+		host_config["training_type"] = TRAINING_WORDS
+	if not host_config.has("training_type_title"):
+		host_config["training_type_title"] = "Words"
+	if not host_config.has("chaser_enabled"):
+		host_config["chaser_enabled"] = false
+	if not host_config.has("rotate_roles_after_round"):
+		host_config["rotate_roles_after_round"] = false
+
+func _ordered_player_peer_ids() -> Array[int]:
+	var peer_ids: Array[int] = []
+	for key in players.keys():
+		peer_ids.append(int(key))
+	peer_ids.sort()
+	if peer_ids.has(HOST_PEER_ID):
+		peer_ids.erase(HOST_PEER_ID)
+		peer_ids.push_front(HOST_PEER_ID)
+	return peer_ids
+
+func _recalculate_roles() -> void:
+	_normalize_host_config()
+	if players.is_empty():
+		return
+
+	var chaser_enabled := bool(host_config.get("chaser_enabled", false))
+	var game_style := String(host_config.get("game_style", STYLE_PATH))
+	var default_role := ROLE_RACER if game_style == STYLE_RACE else ROLE_COLLECTOR
+
+	if game_style == STYLE_NEXT_SYMBOL:
+		for key in players.keys():
+			var info := players[key] as Dictionary
+			info["role"] = ROLE_COLLECTOR
+			players[key] = info
+		host_config["chaser_enabled"] = false
+		host_config.erase("collector_peer_id")
+		return
+
+	if not chaser_enabled:
+		for key in players.keys():
+			var info := players[key] as Dictionary
+			info["role"] = default_role
+			players[key] = info
+		host_config.erase("collector_peer_id")
+		return
+
+	var peer_ids := _ordered_player_peer_ids()
+	var collector_peer_id := int(host_config.get("collector_peer_id", 0))
+	if not peer_ids.has(collector_peer_id):
+		collector_peer_id = peer_ids[randi() % peer_ids.size()]
+		host_config["collector_peer_id"] = collector_peer_id
+
+	for key in players.keys():
+		var peer_id := int(key)
+		var info := players[key] as Dictionary
+		info["role"] = ROLE_COLLECTOR if peer_id == collector_peer_id else ROLE_CHASER
+		players[key] = info
+
+func _roles_by_peer() -> Dictionary:
+	var result := {}
+	for key in players.keys():
+		var info := players[key] as Dictionary
+		result[int(key)] = String(info.get("role", ROLE_COLLECTOR))
+	return result
 
 func _taken_characters() -> Array[String]:
 	var result: Array[String] = []
@@ -443,13 +564,14 @@ func rpc_request_join(character_id: String) -> void:
 		"peer_id": sender_id,
 		"character_id": character_id,
 		"is_host": false,
+		"role": ROLE_COLLECTOR,
 	}
+	_recalculate_roles()
 
 	var state := _build_lobby_state()
 	rpc_id(sender_id, "rpc_join_accepted", sender_id, state)
 	_sync_lobby_to_clients()
 	_emit_debug("host", "Peer %d joined" % sender_id)
-	_check_auto_start()
 
 @rpc("authority", "call_remote", "reliable")
 func rpc_join_accepted(peer_id: int, state: Dictionary) -> void:
@@ -509,6 +631,11 @@ func _host_signature(info: Dictionary) -> String:
 		"theme_title": String(info.get("theme_title", "")),
 		"difficulty": int(info.get("difficulty", 0)),
 		"difficulty_key": String(info.get("difficulty_key", "")),
+		"game_style": String(info.get("game_style", "")),
+		"game_style_title": String(info.get("game_style_title", "")),
+		"training_type": String(info.get("training_type", "")),
+		"training_type_title": String(info.get("training_type_title", "")),
+		"chaser_enabled": bool(info.get("chaser_enabled", false)),
 		"max_players": int(info.get("max_players", 0)),
 		"player_count": int(info.get("player_count", 0)),
 		"character_id": String(info.get("character_id", "")),

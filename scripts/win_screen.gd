@@ -133,63 +133,22 @@ func update_suggestions(current_mode: int) -> void:
 	for child in _suggestion_container.get_children():
 		child.queue_free()
 
-	# 1. Always suggest the "Next" mode if available
-	var always_suggest: int = -1
-	if current_mode < Config.GameMode.WORDS:
-		always_suggest = current_mode + 1
+	var next_mode: int = Config.GameMode.NUMBERS
+	var key: String = "try_numbers"
+	match current_mode:
+		Config.GameMode.NUMBERS:
+			next_mode = Config.GameMode.LETTERS
+			key = "try_alphabet"
+		Config.GameMode.LETTERS:
+			next_mode = Config.GameMode.WORDS
+			key = "try_words"
+		Config.GameMode.WORDS:
+			next_mode = Config.GameMode.NUMBERS
+			key = "try_numbers"
 
-	# 2. Build a pool of "Others" to pick from randomly
-	var other_pool: Array = []
-	
-	# Add other modes (not current, not the "always" one)
-	for m in [Config.GameMode.NORMAL, Config.GameMode.NUMBERS, Config.GameMode.LETTERS, Config.GameMode.WORDS]:
-		if m != current_mode and m != always_suggest:
-			other_pool.append({"type": "mode", "val": m})
-	
-	# 3. Add Chaser suggestions to pool
-	if Config.chaser_level != Config.ChaserLevel.OFF:
-		other_pool.append({"type": "chaser", "key": "chaser_suggestion_off", "level": Config.ChaserLevel.OFF})
-		if Config.chaser_level < Config.ChaserLevel.FAST:
-			other_pool.append({"type": "chaser", "key": "chaser_suggestion_fast", "level": Config.chaser_level + 1})
-	else:
-		other_pool.append({"type": "chaser", "key": "chaser_suggestion_on", "level": Config.ChaserLevel.SLOW})
-
-	# 3. Selection
-	var final_suggestions: Array = []
-	
-	# Always Add "More Difficult" mode (except if we are already at max)
-	if always_suggest != -1:
-		final_suggestions.append({"type": "mode", "val": always_suggest})
-	
-	# Pick up to 1 others randomly (total 2 max suggestions)
-	other_pool.shuffle()
-	while final_suggestions.size() < 2 and not other_pool.is_empty():
-		final_suggestions.append(other_pool.pop_back())
-
-	# 4. Build Buttons
-	for sug in final_suggestions:
-		var key: String = ""
-		var callback: Callable
-		
-		if sug.type == "mode":
-			match sug.val:
-				Config.GameMode.NORMAL:  key = "try_normal"
-				Config.GameMode.NUMBERS: key = "try_numbers"
-				Config.GameMode.LETTERS: key = "try_alphabet"
-				Config.GameMode.WORDS:   key = "try_words"
-			callback = func(): suggestion_pressed.emit(sug.val)
-		else:
-			key = sug.key
-			callback = func(): chaser_toggled_pressed.emit(sug.level)
-
-		if not key.is_empty():
-			var hbox := HBoxContainer.new()
-			hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-			_suggestion_container.add_child(hbox)
-
-			var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.YELLOW)
-			btn.pressed.connect(callback)
-			hbox.add_child(btn)
+	_add_suggestion_button(tr(key), func(): suggestion_pressed.emit(next_mode))
+	if Config.game_style != Config.STYLE_NEXT_SYMBOL:
+		_add_chaser_suggestion()
 
 ## Appends a localized button to toggle the Chaser.
 func _add_chaser_suggestion() -> void:
@@ -201,6 +160,15 @@ func _add_chaser_suggestion() -> void:
 	_suggestion_container.add_child(hbox)
 	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.YELLOW)
 	btn.pressed.connect(func(): chaser_toggled_pressed.emit(level))
+	hbox.add_child(btn)
+
+func _add_suggestion_button(text: String, callback: Callable) -> void:
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_suggestion_container.add_child(hbox)
+
+	var btn: Button = _create_styled_button(text, 650, 90, UIColors.YELLOW)
+	btn.pressed.connect(callback)
 	hbox.add_child(btn)
 
 

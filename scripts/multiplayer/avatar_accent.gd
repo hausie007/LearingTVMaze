@@ -1,5 +1,4 @@
 extends RefCounted
-class_name AvatarAccent
 
 const DEFAULT_ACCENT := Color("#1188FF")
 const MIN_SATURATION := 0.58

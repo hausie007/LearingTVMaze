@@ -40,6 +40,18 @@ enum ControlsMode {
 	RIGHT_HANDED = 2,
 }
 
+const STYLE_PATH := "path"
+const STYLE_NEXT_SYMBOL := "next_symbol"
+const STYLE_RACE := "race"
+
+const TRAINING_NUMBERS := "numbers"
+const TRAINING_LETTERS := "letters"
+const TRAINING_WORDS := "words"
+
+const ROLE_COLLECTOR := "collector"
+const ROLE_CHASER := "chaser"
+const ROLE_RACER := "racer"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  UI LABEL KEYS — Translation keys for enum display values.
@@ -67,6 +79,18 @@ const SAVE_PATH := "user://settings.cfg"
 
 ## Current game mode. See GameMode enum.
 var game_mode: GameMode = GameMode.WORDS
+
+## Product-level game style. Phase 2/3 only implements STYLE_PATH.
+var game_style: String = STYLE_PATH
+
+## Product-level training content selection.
+var training_type: String = TRAINING_WORDS
+
+## Whether the current single-player session uses the chaser bot.
+var chaser_enabled: bool = false
+
+## Current player's product role label.
+var player_role: String = ROLE_COLLECTOR
 
 ## 0 = Very Easy … 6 = Unbelievable. Indices match DIFFICULTY_SIZES and DIFF_KEYS.
 var difficulty: int = 1
@@ -210,6 +234,10 @@ func _notification(what: int) -> void:
 func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("Game", "game_mode", game_mode)
+	config.set_value("Game", "game_style", game_style)
+	config.set_value("Game", "training_type", training_type)
+	config.set_value("Game", "chaser_enabled", chaser_enabled)
+	config.set_value("Game", "player_role", player_role)
 	config.set_value("Game", "difficulty", difficulty)
 	config.set_value("Game", "ui_language", ui_language)
 	config.set_value("Game", "learning_language", learning_language)
@@ -227,6 +255,10 @@ func load_settings() -> void:
 	var config := ConfigFile.new()
 	if config.load(SAVE_PATH) == OK:
 		game_mode      = config.get_value("Game", "game_mode", game_mode)
+		game_style     = config.get_value("Game", "game_style", game_style)
+		training_type  = config.get_value("Game", "training_type", training_type)
+		chaser_enabled = config.get_value("Game", "chaser_enabled", chaser_enabled)
+		player_role    = config.get_value("Game", "player_role", player_role)
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
 		ui_language       = config.get_value("Game", "ui_language", "auto")
 		learning_language = config.get_value("Game", "learning_language", "auto")
@@ -239,6 +271,8 @@ func load_settings() -> void:
 		performance_mode = config.get_value("Game", "performance_mode", true)
 		on_screen_controls = config.get_value("Game", "on_screen_controls", -1)
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
+
+	_apply_session_compatibility()
 		
 	if on_screen_controls == -1:
 		if UIHelpers.is_likely_tv():
@@ -247,6 +281,57 @@ func load_settings() -> void:
 			on_screen_controls = ControlsMode.RIGHT_HANDED
 		else:
 			on_screen_controls = ControlsMode.OFF
+
+func configure_single_player_session(
+	style: String,
+	training: String,
+	use_chaser: bool,
+	chaser_speed_level: int,
+) -> void:
+	game_style = style if [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(style) else STYLE_PATH
+	training_type = training if [TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
+	player_role = ROLE_COLLECTOR
+	game_mode = game_mode_for_training(training_type)
+	chaser_enabled = use_chaser and game_style != STYLE_NEXT_SYMBOL
+	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) if chaser_enabled else ChaserLevel.OFF
+
+func game_mode_for_training(training: String) -> int:
+	match training:
+		TRAINING_NUMBERS:
+			return GameMode.NUMBERS
+		TRAINING_LETTERS:
+			return GameMode.LETTERS
+		TRAINING_WORDS:
+			return GameMode.WORDS
+		_:
+			return GameMode.WORDS
+
+func training_for_game_mode(mode: int) -> String:
+	match mode:
+		GameMode.NUMBERS:
+			return TRAINING_NUMBERS
+		GameMode.LETTERS:
+			return TRAINING_LETTERS
+		GameMode.WORDS:
+			return TRAINING_WORDS
+		_:
+			return TRAINING_WORDS
+
+func _apply_session_compatibility() -> void:
+	if not [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(game_style):
+		game_style = STYLE_PATH
+	if not [TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training_type):
+		training_type = training_for_game_mode(game_mode)
+	game_mode = game_mode_for_training(training_type)
+	if not [ROLE_COLLECTOR, ROLE_CHASER, ROLE_RACER].has(player_role):
+		player_role = ROLE_COLLECTOR
+	if game_style == STYLE_NEXT_SYMBOL:
+		chaser_enabled = false
+		player_role = ROLE_COLLECTOR
+	if not chaser_enabled:
+		chaser_level = ChaserLevel.OFF
+	elif chaser_level == ChaserLevel.OFF:
+		chaser_level = ChaserLevel.SLOW
 
 ## Return the effective UI language code.
 func get_effective_ui_language() -> String:

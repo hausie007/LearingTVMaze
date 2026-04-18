@@ -40,6 +40,7 @@ var _elapsed_time: float = 0.0
 var _move_count: int = 0
 var _is_paused: bool = false
 var _is_gotcha_screen: bool = false
+var _completed_word_spoken: bool = false
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -139,7 +140,17 @@ func _start_new_maze() -> void:
 	get_tree().paused = false
 	_elapsed_time = 0.0
 	_move_count = 0
+	_completed_word_spoken = false
 	hud.update_moves(_move_count)
+	hud.update_role("" if Config.game_style == Config.STYLE_NEXT_SYMBOL else Config.player_role)
+
+	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(Config.game_style):
+		Config.game_style = Config.STYLE_PATH
+	Config.game_mode = Config.game_mode_for_training(Config.training_type)
+	if Config.game_style == Config.STYLE_NEXT_SYMBOL:
+		Config.chaser_enabled = false
+	if not Config.chaser_enabled:
+		Config.chaser_level = Config.ChaserLevel.OFF
 
 	# Cleanup old entities
 	collectible_spawner.clear()
@@ -162,10 +173,10 @@ func _start_new_maze() -> void:
 
 	# 4. Spawn collectibles if applicable
 	if Config.game_mode != Config.GameMode.NORMAL:
-		collectible_spawner.spawn(_current_maze, maze_renderer)
+		collectible_spawner.spawn(_current_maze, maze_renderer, Config.game_style)
 
 	# Update word display in HUD
-	hud.update_word_display(Config.current_word, Config.game_mode)
+	_refresh_target_hud()
 
 	# 5. Place player at Start cell
 	var start_cell: MazeData.CellData = _current_maze.get_start_cell()
@@ -184,6 +195,9 @@ func _start_new_maze() -> void:
 
 func _on_player_reached_end() -> void:
 	if win_screen.is_active(): return
+	if not collectible_spawner.is_complete():
+		_refresh_target_hud()
+		return
 	_is_gotcha_screen = false
 
 	# Stop Chaser
@@ -195,6 +209,7 @@ func _on_player_reached_end() -> void:
 	# Full word progress update if word mode
 	if Config.game_mode == Config.GameMode.WORDS:
 		hud.light_up_letter(collectible_spawner.get_word_next_index())
+		_speak_completed_word_once()
 
 	win_screen.show_win(_format_time(), _move_count)
 	win_screen.update_suggestions(Config.game_mode)
@@ -205,7 +220,7 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 	hud.update_moves(_move_count)
 
 	# Check chaser trigger and collision
-	if not chaser_manager.is_active():
+	if Config.chaser_enabled and not chaser_manager.is_active():
 		chaser_manager.check_trigger(_move_count)
 		if chaser_manager.is_active():
 			chaser_manager.spawn(_current_maze, maze_renderer)
@@ -232,20 +247,14 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 		for i in range(collect_index + 1, next_idx):
 			hud.light_up_letter(i)
 
-		# Check for word/sub-word boundary (spaces were skipped) or full completion
+		# Speak the whole word once when it is complete.
 		var word_full: String = Config.current_word.get("word", "")
-		var crossed_space: bool = (next_idx > collect_index + 1)
 		var word_complete: bool = (next_idx >= word_full.length())
-
-		if crossed_space or word_complete:
-			var phrase_so_far: String = word_full.substr(0, next_idx).strip_edges()
-			if not phrase_so_far.is_empty():
-				var word_lang: String = lang
-				get_tree().create_timer(1.5).timeout.connect(
-					func(): TTS.speak(phrase_so_far, 0.7, word_lang)
-				)
+		if word_complete:
+			_speak_completed_word_once(lang)
 	else:
 		TTS.speak(value_str, 0.85)
+	_refresh_target_hud()
 
 
 # ── Chaser Callbacks ─────────────────────────────────────────────────────────
@@ -288,11 +297,13 @@ func _on_home_pressed() -> void:
 
 func _on_suggestion_pressed(target_mode: int) -> void:
 	Config.game_mode = target_mode
+	Config.training_type = Config.training_for_game_mode(target_mode)
 	Config.save_settings()
 	_start_new_maze()
 
 func _on_chaser_toggled_pressed(target_level: int) -> void:
 	Config.chaser_level = target_level
+	Config.chaser_enabled = target_level != Config.ChaserLevel.OFF
 	Config.save_settings()
 	_start_new_maze()
 
@@ -310,3 +321,29 @@ func _freeze_player() -> void:
 func _format_time() -> String:
 	var elapsed_int: int = int(_elapsed_time)
 	return "%02d:%02d" % [elapsed_int / 60, elapsed_int % 60]
+
+func _refresh_target_hud() -> void:
+	if Config.game_mode == Config.GameMode.WORDS:
+		hud.update_word_display(Config.current_word, Config.game_mode)
+		for i in range(collectible_spawner.get_word_next_index()):
+			hud.light_up_letter(i)
+	else:
+		hud.update_target_display(
+			collectible_spawner.get_current_target(),
+			collectible_spawner.get_next_collect_index(),
+			collectible_spawner.get_total_collectibles()
+		)
+
+func _speak_completed_word_once(lang_override: String = "") -> void:
+	if _completed_word_spoken or not Config.voice_hints:
+		return
+	var phrase: String = String(Config.current_word.get("word", "")).strip_edges()
+	if phrase.is_empty():
+		return
+	_completed_word_spoken = true
+	var word_lang: String = lang_override
+	if word_lang.is_empty():
+		word_lang = String(Config.current_word.get("lang", ""))
+	get_tree().create_timer(1.2).timeout.connect(
+		func(): TTS.speak(phrase, 0.7, word_lang)
+	)
