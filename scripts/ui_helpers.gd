@@ -77,6 +77,10 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 		12, 2
 	)
 	btn.add_theme_stylebox_override("normal", normal)
+	
+	# Fix for phantom mouse highlights on TV
+	if is_likely_tv():
+		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	# Focus / Pressed (Vibrant blue/yellow)
 	var focus := create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)

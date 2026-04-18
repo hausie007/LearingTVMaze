@@ -192,6 +192,11 @@ var player_scale: float = 0.6
 func _enter_tree() -> void:
 	load_settings()
 	TranslationServer.set_locale(get_effective_ui_language())
+	
+	# Extra defense against phantom mouse highlights on TV
+	if UIHelpers.is_likely_tv():
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Input.warp_mouse(Vector2(-1, -1))
 
 
 func _notification(what: int) -> void:

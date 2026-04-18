@@ -116,11 +116,16 @@ func _update_slide() -> void:
 	match slide.type:
 		"welcome":
 			_icon_rect.visible = true
-			_icon_rect.texture = load("res://images/lm_icon_new2.png")
+			_icon_rect.texture = load("res://images/lm_logo_transparent2.png")
+			# Adjust size for logo (3:2 aspect ratio) to look better as a hero element
+			_icon_rect.custom_minimum_size = Vector2(450, 300)
 		"maze":
 			_spawn_maze_preview()
 		"icon":
 			_icon_rect.visible = true
+			# Reset to standard icon size (square)
+			var base_size = 300 if Config.on_screen_controls == Config.ControlsMode.OFF else 280
+			_icon_rect.custom_minimum_size = Vector2(base_size, base_size)
 			_update_icon(slide.icon)
 		"collectible":
 			_spawn_collectible_preview()
