@@ -12,15 +12,31 @@ var _preview_size: Vector2 = Vector2(112, 112)
 var _base_normal_style: StyleBox = null
 var _selected_normal_style: StyleBoxFlat = null
 var _selected: bool = false
+var _icon_color: Color = Color(1, 0.8, 0, 1)
+var _title_color: Color = UIColors.TEXT_PRIMARY
+var _normal_subtitle_color: Color = UIColors.TEXT_SUBTITLE
+var _selected_subtitle_color: Color = Color.WHITE
+var _focused: bool = false
+var _scale_tween: Tween = null
+
+const SELECTED_SCALE := Vector2(1.10, 1.10)
+const FOCUSED_SCALE := Vector2(1.16, 1.16)
+const NORMAL_SCALE := Vector2.ONE
 
 func _ready() -> void:
 	_base_normal_style = get_theme_stylebox("normal").duplicate()
 	_selected_normal_style = _create_selected_style()
 	_apply_selection_style()
+	_sync_pivot()
+	_apply_emphasis(false)
 	# Internal focus animation
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
 	mouse_entered.connect(grab_focus)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		_sync_pivot()
 
 func setup(icon_text: String, title_text: String, subtitle_text: String) -> void:
 	# Use call_deferred if icons/labels are not ready
@@ -70,49 +86,109 @@ func set_selected(selected: bool) -> void:
 	if not is_node_ready(): await ready
 	_selected = selected
 	_apply_selection_style()
+	_apply_emphasis(true)
+
+func set_custom_palette(
+	normal_bg: Color,
+	normal_border: Color,
+	accent_bg: Color,
+	accent_border: Color,
+	icon_color: Color,
+	title_color: Color,
+	subtitle_color: Color
+) -> void:
+	if not is_node_ready(): await ready
+	_base_normal_style = _create_card_style(normal_bg, normal_border, 15, 2, 0)
+	_selected_normal_style = _create_card_style(accent_bg, accent_border, 15, 4, 8)
+	var focus_style := _create_card_style(accent_bg, accent_border, 15, 6, 10)
+	add_theme_stylebox_override("focus", focus_style)
+	add_theme_stylebox_override("hover", focus_style)
+	add_theme_stylebox_override("pressed", focus_style)
+	_icon_color = icon_color
+	_title_color = title_color
+	_normal_subtitle_color = subtitle_color
+	_selected_subtitle_color = title_color
+	_apply_text_sizes()
+	_apply_selection_style()
 
 func _apply_text_sizes() -> void:
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)
 	title_label.add_theme_font_size_override("font_size", _title_font_size)
 	subtitle_label.add_theme_font_size_override("font_size", _subtitle_font_size)
+	icon_label.add_theme_color_override("font_color", _icon_color)
+	title_label.add_theme_color_override("font_color", _title_color)
 	$MarginContainer/VBox.add_theme_constant_override("separation", max(8, int(float(_subtitle_font_size) * 0.55)))
+	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	title_label.custom_minimum_size.y = maxf(34.0, float(_title_font_size) * 1.5)
 	subtitle_label.custom_minimum_size.y = maxf(28.0, float(_subtitle_font_size) * 2.0)
 	icon_label.clip_text = true
-	title_label.clip_text = true
+	title_label.clip_text = false
 	subtitle_label.clip_text = true
 
 func _create_selected_style() -> StyleBoxFlat:
+	return _create_card_style(UIColors.BLUE, Color.WHITE, 15, 4, 8)
+
+func _create_card_style(bg_color: Color, border_color: Color, corner_radius: int, border_width: int, shadow_size: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = UIColors.BLUE
-	style.corner_radius_top_left = 15
-	style.corner_radius_top_right = 15
-	style.corner_radius_bottom_right = 15
-	style.corner_radius_bottom_left = 15
-	style.border_width_left = 4
-	style.border_width_top = 4
-	style.border_width_right = 4
-	style.border_width_bottom = 4
-	style.border_color = Color.WHITE
+	style.bg_color = bg_color
+	style.corner_radius_top_left = corner_radius
+	style.corner_radius_top_right = corner_radius
+	style.corner_radius_bottom_right = corner_radius
+	style.corner_radius_bottom_left = corner_radius
+	style.border_width_left = border_width
+	style.border_width_top = border_width
+	style.border_width_right = border_width
+	style.border_width_bottom = border_width
+	style.border_color = border_color
 	style.shadow_color = Color(0, 0, 0, 0.25)
-	style.shadow_size = 8
+	style.shadow_size = shadow_size
 	return style
 
 func _apply_selection_style() -> void:
 	if _base_normal_style == null or _selected_normal_style == null:
 		return
 	add_theme_stylebox_override("normal", _selected_normal_style if _selected else _base_normal_style)
-	subtitle_label.add_theme_color_override("font_color", Color.WHITE if _selected else UIColors.TEXT_SUBTITLE)
+	subtitle_label.add_theme_color_override("font_color", _selected_subtitle_color if _selected else _normal_subtitle_color)
 
 func _on_focus_entered() -> void:
-	var tween = create_tween()
+	_focused = true
+	_apply_selection_style()
+	_apply_emphasis(true)
+	var tween: Tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(self, "scale", Vector2(1.05, 1.05), 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(subtitle_label, "theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 1.0), 0.1)
-	z_index = 1
 
 func _on_focus_exited() -> void:
-	var tween = create_tween()
+	_focused = false
+	_apply_selection_style()
+	_apply_emphasis(true)
+	var tween: Tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(subtitle_label, "theme_override_colors/font_color", Color.WHITE if _selected else UIColors.TEXT_SUBTITLE, 0.1)
-	z_index = 0
+	tween.tween_property(subtitle_label, "theme_override_colors/font_color", _selected_subtitle_color if _selected else _normal_subtitle_color, 0.1)
+
+func _sync_pivot() -> void:
+	var pivot_size: Vector2 = size
+	if pivot_size.x <= 0.0 or pivot_size.y <= 0.0:
+		pivot_size = custom_minimum_size
+	if pivot_size.x > 0.0 and pivot_size.y > 0.0:
+		pivot_offset = pivot_size * 0.5
+
+func _apply_emphasis(animated: bool) -> void:
+	_sync_pivot()
+	var target_scale: Vector2 = NORMAL_SCALE
+	if _focused:
+		target_scale = FOCUSED_SCALE
+	elif _selected:
+		target_scale = SELECTED_SCALE
+	z_index = 2 if _focused else (1 if _selected else 0)
+
+	if _scale_tween != null and _scale_tween.is_valid():
+		_scale_tween.kill()
+
+	if animated:
+		_scale_tween = create_tween()
+		_scale_tween.set_trans(Tween.TRANS_CUBIC)
+		_scale_tween.set_ease(Tween.EASE_OUT)
+		_scale_tween.tween_property(self, "scale", target_scale, 0.18)
+	else:
+		scale = target_scale

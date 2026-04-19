@@ -1,5 +1,7 @@
 extends Control
 
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+
 @onready var main_vbox: VBoxContainer = %MainVBox
 @onready var center_container: CenterContainer = %CenterContainer
 @onready var title_label: Label = %TitleLabel
@@ -70,6 +72,7 @@ func _on_controls_changed(_new_mode: int) -> void:
 	_apply_layout()
 
 func _on_host_pressed() -> void:
+	Config.prepare_setup_session(Config.selected_mission_id, Config.theme_dir_name, true)
 	NetworkManager.stop_discovery()
 	get_tree().change_scene_to_file("res://scenes/multiplayer/host_setup.tscn")
 
@@ -149,9 +152,6 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	var host_name: String = String(host.get("host_name", "Host"))
 	var host_ip: String = String(host.get("ip", ""))
 	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
-	var style_title: String = String(host.get("game_style_title", ""))
-	var training_title: String = String(host.get("training_type_title", ""))
-	var chaser_text: String = tr("mp_roles_chaser_on") if bool(host.get("chaser_enabled", false)) else tr("mp_roles_chaser_off")
 	var player_count: int = int(host.get("player_count", 1))
 	var max_players: int = int(host.get("max_players", 2))
 
@@ -168,9 +168,9 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 
 	var footer: Label = Label.new()
 	footer.text = "%s | %s | %s | %s" % [
-		style_title,
-		training_title,
-		chaser_text,
+		_host_mission_title(host),
+		_host_pickup_title(host),
+		_host_role_summary(host),
 		CharacterCatalog.display_name_for_id(host_character_id),
 	]
 	footer.add_theme_font_size_override("font_size", 24)
@@ -211,3 +211,20 @@ func _select_host_index(index: int) -> void:
 func _go_back() -> void:
 	NetworkManager.stop_discovery()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func _host_mission_title(host: Dictionary) -> String:
+	return String(host.get("mission_title", host.get("game_style_title", tr("mission_follow_trail"))))
+
+func _host_pickup_title(host: Dictionary) -> String:
+	var training := String(host.get("training_type", NetworkManager.TRAINING_WORDS))
+	if training == NetworkManager.TRAINING_NONE:
+		return tr("pickup_none")
+	var title := String(host.get("training_type_title", ""))
+	if not title.is_empty():
+		return title
+	return tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
+
+func _host_role_summary(host: Dictionary) -> String:
+	var mission_id := String(host.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
+	var chaser_enabled := bool(host.get("chaser_enabled", false))
+	return tr(String(host.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))

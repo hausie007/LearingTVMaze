@@ -1,5 +1,7 @@
 extends Node
 
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+
 signal host_discovered(info: Dictionary)
 signal discovery_updated(hosts: Array)
 signal lobby_updated(state: Dictionary)
@@ -25,9 +27,15 @@ const STYLE_PATH := "path"
 const STYLE_NEXT_SYMBOL := "next_symbol"
 const STYLE_RACE := "race"
 
+const TRAINING_NONE := "none"
 const TRAINING_NUMBERS := "numbers"
 const TRAINING_LETTERS := "letters"
 const TRAINING_WORDS := "words"
+
+const MISSION_FIND_EXIT := "find_exit"
+const MISSION_FOLLOW_TRAIL := "follow_trail"
+const MISSION_FIND_NEXT := "find_next"
+const MISSION_RACE_MIDDLE := "race_middle"
 
 const ROLE_COLLECTOR := "collector"
 const ROLE_CHASER := "chaser"
@@ -288,6 +296,13 @@ func _build_discovery_payload() -> Dictionary:
 		"port": GAME_PORT,
 		"theme_dir": String(host_config.get("theme_dir", "default")),
 		"theme_title": String(host_config.get("theme_title", host_config.get("theme_dir", "default"))),
+		"mission_id": String(host_config.get("mission_id", MISSION_FOLLOW_TRAIL)),
+		"mission_title": String(host_config.get("mission_title", "Follow the Trail")),
+		"mission_goal_key": String(host_config.get("mission_goal_key", "")),
+		"role_summary_key": String(host_config.get("role_summary_key", MissionCatalog.role_summary_key(
+			String(host_config.get("mission_id", MISSION_FOLLOW_TRAIL)),
+			bool(host_config.get("chaser_enabled", false))
+		))),
 		"game_style": String(host_config.get("game_style", STYLE_PATH)),
 		"game_style_title": String(host_config.get("game_style_title", "Path")),
 		"training_type": String(host_config.get("training_type", TRAINING_WORDS)),
@@ -425,6 +440,11 @@ func _start_game() -> void:
 		return
 	if not current_session.is_empty():
 		return
+	_normalize_host_config()
+	if players.size() < _minimum_players_for_host_config():
+		_emit_debug("host", "Waiting for players")
+		_emit_lobby_snapshot_local()
+		return
 
 	current_session = _build_session_data()
 	rpc("rpc_game_start", current_session)
@@ -446,19 +466,51 @@ func _is_character_taken(character_id: String) -> bool:
 			return true
 	return false
 
+func _minimum_players_for_host_config() -> int:
+	return 2
+
 func _normalize_host_config() -> void:
 	if not host_config.has("game_style"):
 		host_config["game_style"] = STYLE_PATH
 	if not host_config.has("game_style_title"):
 		host_config["game_style_title"] = "Path"
+	if not host_config.has("mission_id"):
+		host_config["mission_id"] = MissionCatalog.mission_from_config(
+			String(host_config.get("game_style", STYLE_PATH)),
+			String(host_config.get("training_type", TRAINING_WORDS))
+		)
+	var mission_id := String(host_config.get("mission_id", MISSION_FOLLOW_TRAIL))
+	if not MissionCatalog.mission_ids().has(mission_id):
+		mission_id = MissionCatalog.mission_from_config(
+			String(host_config.get("game_style", STYLE_PATH)),
+			String(host_config.get("training_type", TRAINING_WORDS))
+		)
+	host_config["mission_id"] = mission_id
+	host_config["game_style"] = MissionCatalog.style_for_mission(mission_id)
+	if not host_config.has("mission_title"):
+		host_config["mission_title"] = tr(MissionCatalog.mission_title_key(mission_id))
+	host_config["game_style_title"] = String(host_config.get("mission_title", tr(MissionCatalog.mission_title_key(mission_id))))
 	if not host_config.has("training_type"):
 		host_config["training_type"] = TRAINING_WORDS
-	if not host_config.has("training_type_title"):
-		host_config["training_type_title"] = "Words"
+	var pickup_id := MissionCatalog.pickup_for_training(String(host_config.get("training_type", TRAINING_WORDS)))
+	var allowed_pickups := MissionCatalog.allowed_pickups(mission_id)
+	if not allowed_pickups.has(pickup_id):
+		pickup_id = MissionCatalog.default_pickup(mission_id)
+	host_config["training_type"] = MissionCatalog.training_for_pickup(pickup_id)
+	host_config["training_type_title"] = tr(MissionCatalog.pickup_title_key(pickup_id))
 	if not host_config.has("chaser_enabled"):
 		host_config["chaser_enabled"] = false
 	if not host_config.has("rotate_roles_after_round"):
 		host_config["rotate_roles_after_round"] = false
+	if MissionCatalog.chaser_required(mission_id, true):
+		host_config["chaser_enabled"] = true
+	if MissionCatalog.chaser_forced_off(mission_id) or String(host_config.get("game_style", STYLE_PATH)) == STYLE_RACE:
+		host_config["chaser_enabled"] = false
+	var player_options := MissionCatalog.max_players_options(mission_id, bool(host_config.get("chaser_enabled", false)))
+	var max_players := int(host_config.get("max_players", player_options[0]))
+	if not player_options.has(max_players):
+		max_players = int(player_options[0])
+	host_config["max_players"] = max_players
 
 func _ordered_player_peer_ids() -> Array[int]:
 	var peer_ids: Array[int] = []
@@ -648,6 +700,10 @@ func _host_signature(info: Dictionary) -> String:
 		"port": int(info.get("port", GAME_PORT)),
 		"theme_dir": String(info.get("theme_dir", "")),
 		"theme_title": String(info.get("theme_title", "")),
+		"mission_id": String(info.get("mission_id", "")),
+		"mission_title": String(info.get("mission_title", "")),
+		"mission_goal_key": String(info.get("mission_goal_key", "")),
+		"role_summary_key": String(info.get("role_summary_key", "")),
 		"difficulty": int(info.get("difficulty", 0)),
 		"difficulty_key": String(info.get("difficulty_key", "")),
 		"game_style": String(info.get("game_style", "")),

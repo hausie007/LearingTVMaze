@@ -2,6 +2,7 @@ extends Node
 class_name MultiplayerGameManager
 
 const CollectibleScene := preload("res://scenes/collectible.tscn")
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 
 @export var avatar_scene: PackedScene
 
@@ -20,6 +21,7 @@ var _avatars: Dictionary = {}
 var _held_directions: Dictionary = {}
 var _move_cooldowns: Dictionary = {}
 var _game_style: String = NetworkManager.STYLE_PATH
+var _mission_id: String = NetworkManager.MISSION_FOLLOW_TRAIL
 var _training_type: String = NetworkManager.TRAINING_WORDS
 var _chaser_enabled: bool = false
 var _collector_peer_id: int = 0
@@ -44,6 +46,7 @@ var _win_screen: WinScreen = null
 var _saved_theme_dir: String = ""
 var _saved_difficulty: int = 0
 var _saved_game_style: String = ""
+var _saved_mission_id: String = ""
 var _saved_training_type: String = ""
 var _saved_game_mode: int = 0
 var _saved_current_word: Dictionary = {}
@@ -62,6 +65,7 @@ func _ready() -> void:
 	_saved_theme_dir = Config.theme_dir_name
 	_saved_difficulty = Config.difficulty
 	_saved_game_style = Config.game_style
+	_saved_mission_id = Config.mission_id
 	_saved_training_type = Config.training_type
 	_saved_game_mode = Config.game_mode
 	_saved_current_word = Config.current_word.duplicate(true)
@@ -102,6 +106,7 @@ func _exit_tree() -> void:
 	Config.theme_dir_name = _saved_theme_dir
 	Config.difficulty = _saved_difficulty
 	Config.game_style = _saved_game_style
+	Config.mission_id = _saved_mission_id
 	Config.training_type = _saved_training_type
 	Config.game_mode = _saved_game_mode
 	Config.current_word = _saved_current_word
@@ -134,14 +139,20 @@ func _apply_session(session: Dictionary) -> void:
 	if not cfg.is_empty():
 		Config.theme_dir_name = String(cfg.get("theme_dir", Config.theme_dir_name))
 		Config.difficulty = int(cfg.get("difficulty", Config.difficulty))
+		_mission_id = String(cfg.get("mission_id", MissionCatalog.mission_from_config(
+			String(cfg.get("game_style", NetworkManager.STYLE_PATH)),
+			String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
+		)))
 		_game_style = String(cfg.get("game_style", NetworkManager.STYLE_PATH))
 		_training_type = String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
 		Config.game_style = _game_style if [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(_game_style) else Config.STYLE_PATH
-		Config.training_type = _training_type if [Config.TRAINING_NUMBERS, Config.TRAINING_LETTERS, Config.TRAINING_WORDS].has(_training_type) else Config.TRAINING_WORDS
+		Config.mission_id = _mission_id
+		Config.training_type = _training_type if [Config.TRAINING_NONE, Config.TRAINING_NUMBERS, Config.TRAINING_LETTERS, Config.TRAINING_WORDS].has(_training_type) else Config.TRAINING_WORDS
 		Config.game_mode = Config.game_mode_for_training(Config.training_type)
 		_chaser_enabled = bool(cfg.get("chaser_enabled", false)) and Config.game_style != Config.STYLE_RACE
 		_collector_peer_id = int(cfg.get("collector_peer_id", 0))
 		Config.chaser_enabled = _chaser_enabled
+		Config.chaser_level = int(cfg.get("chaser_level", Config.ChaserLevel.SLOW)) if Config.chaser_enabled else Config.ChaserLevel.OFF
 		if Config.chaser_enabled and Config.chaser_level == Config.ChaserLevel.OFF:
 			Config.chaser_level = Config.ChaserLevel.SLOW
 		if Config.game_style == Config.STYLE_RACE:
@@ -156,7 +167,7 @@ func _apply_session(session: Dictionary) -> void:
 	_collector_caught = false
 	_catching_chaser_peer_id = 0
 	_collector_move_count = 0
-	_path_chasers_released = not (_is_path_mode() and _is_chaser_variant())
+	_path_chasers_released = not _is_chaser_variant()
 	_delayed_chaser_peer_ids.clear()
 	_race_finished = false
 	_race_winner_peer_id = 0
@@ -216,6 +227,8 @@ func _spawn_avatars(session: Dictionary) -> void:
 		var role := String(roles.get(peer_id, roles.get(str(peer_id), info.get("role", NetworkManager.ROLE_COLLECTOR))))
 		if _is_roleless_next_symbol_mode():
 			role = ""
+		if _is_maze_race_mode():
+			role = NetworkManager.ROLE_RACER
 		if _is_race_mode():
 			role = NetworkManager.ROLE_RACER
 		var spawn_grid := _spawn_for_mode(role, slot, corners)
@@ -257,6 +270,8 @@ func _spawn_positions_for_session(session: Dictionary) -> Array[Vector2i]:
 		var role := String(roles.get(peer_id, roles.get(str(peer_id), info.get("role", NetworkManager.ROLE_COLLECTOR))))
 		if _is_roleless_next_symbol_mode():
 			role = ""
+		if _is_maze_race_mode():
+			role = NetworkManager.ROLE_RACER
 		if _is_race_mode():
 			role = NetworkManager.ROLE_RACER
 
@@ -355,7 +370,7 @@ func _try_move(peer_id: int, direction: Vector2i) -> void:
 	_display_move_count += 1
 	if hud != null:
 		hud.update_moves(_display_move_count)
-	if _is_path_mode() and _is_chaser_variant() and avatar.role == NetworkManager.ROLE_COLLECTOR:
+	if _is_chaser_variant() and avatar.role == NetworkManager.ROLE_COLLECTOR:
 		_collector_move_count += 1
 		_check_path_chaser_release()
 	if _uses_shared_collectibles() and _collectible_spawner != null and not _round_complete:
@@ -383,6 +398,9 @@ func _is_path_mode() -> bool:
 
 func _is_race_mode() -> bool:
 	return Config.game_style == Config.STYLE_RACE
+
+func _is_maze_race_mode() -> bool:
+	return _is_path_mode() and not _chaser_enabled and Config.game_mode == Config.GameMode.NORMAL
 
 func _is_chaser_variant() -> bool:
 	return _chaser_enabled and (Config.game_style == Config.STYLE_PATH or Config.game_style == Config.STYLE_NEXT_SYMBOL)
@@ -414,6 +432,11 @@ func _refresh_status_label() -> void:
 	if not _uses_shared_collectibles() or _collectible_spawner == null:
 		if status_label != null:
 			status_label.text = tr("mp_game_running")
+		return
+	if _is_maze_race_mode():
+		if status_label != null:
+			status_label.text = tr("mission_goal_exit_multi")
+		_refresh_shared_hud()
 		return
 
 	var total := _collectible_spawner.get_total_collectibles()
@@ -483,6 +506,8 @@ func _race_leader_peer_id() -> int:
 func _hud_role_key() -> String:
 	if _is_race_mode():
 		return Config.ROLE_RACER
+	if _is_maze_race_mode():
+		return Config.ROLE_RACER
 	if _is_roleless_next_symbol_mode():
 		return ""
 	if _is_chaser_variant():
@@ -540,7 +565,7 @@ func _spawn_for_mode(role: String, slot: int, corners: Array) -> Vector2i:
 	return corners[clamped_slot] as Vector2i
 
 func _should_delay_path_chaser(role: String) -> bool:
-	return _is_path_mode() and _is_chaser_variant() and role == NetworkManager.ROLE_CHASER
+	return _is_chaser_variant() and role == NetworkManager.ROLE_CHASER
 
 func _check_path_chaser_release() -> void:
 	if _path_chasers_released:
@@ -607,6 +632,8 @@ func _check_shared_finish(peer_id: int, pos: Vector2i) -> void:
 	_held_directions.clear()
 	_speak_completed_word_if_needed()
 	_refresh_status_label()
+	if Config.game_mode == Config.GameMode.NORMAL or _is_chaser_variant():
+		_show_shared_win_screen(peer_id)
 
 func _check_chaser_catch() -> void:
 	if not _is_chaser_variant() or _round_complete:
@@ -641,7 +668,12 @@ func _collector_avatar() -> MultiplayerAvatar:
 func _show_gotcha_screen() -> void:
 	if _win_screen == null:
 		return
-	_win_screen.show_gotcha("00:00", _collector_move_count)
+	_win_screen.show_gotcha(_format_time(), _collector_move_count)
+
+func _show_shared_win_screen(peer_id: int) -> void:
+	if _win_screen == null:
+		return
+	_win_screen.show_race_win(_format_time(), _display_move_count, _character_id_for_peer(peer_id))
 
 func _on_next_round_pressed() -> void:
 	if _win_screen != null:
@@ -664,6 +696,8 @@ func _on_home_pressed() -> void:
 func _build_race_sequence() -> void:
 	_race_sequence.clear()
 	if _maze == null:
+		return
+	if Config.game_mode == Config.GameMode.NORMAL:
 		return
 	var path_cells := _eligible_main_path_cells()
 	if path_cells.is_empty():
@@ -796,7 +830,11 @@ func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 	_refresh_status_label()
 	_speak_race_completion_once()
 	if _win_screen != null:
-		_win_screen.show_race_win("00:00", int(_race_progress.get(peer_id, 0)), _character_id_for_peer(peer_id))
+		_win_screen.show_race_win(_format_time(), int(_race_progress.get(peer_id, 0)), _character_id_for_peer(peer_id))
+
+func _format_time() -> String:
+	var elapsed_int: int = int(_elapsed_time)
+	return "%02d:%02d" % [elapsed_int / 60, elapsed_int % 60]
 
 func _format_race_status() -> String:
 	var total := _race_sequence.size()

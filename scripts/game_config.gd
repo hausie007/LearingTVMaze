@@ -11,6 +11,7 @@
 class_name GameConfig
 extends Node
 
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  ENUMS
@@ -44,9 +45,15 @@ const STYLE_PATH := "path"
 const STYLE_NEXT_SYMBOL := "next_symbol"
 const STYLE_RACE := "race"
 
+const TRAINING_NONE := "none"
 const TRAINING_NUMBERS := "numbers"
 const TRAINING_LETTERS := "letters"
 const TRAINING_WORDS := "words"
+
+const MISSION_FIND_EXIT := "find_exit"
+const MISSION_FOLLOW_TRAIL := "follow_trail"
+const MISSION_FIND_NEXT := "find_next"
+const MISSION_RACE_MIDDLE := "race_middle"
 
 const ROLE_COLLECTOR := "collector"
 const ROLE_CHASER := "chaser"
@@ -82,6 +89,16 @@ var game_mode: GameMode = GameMode.WORDS
 
 ## Product-level game style. Phase 2/3 only implements STYLE_PATH.
 var game_style: String = STYLE_PATH
+
+## Product-level mission selected by the setup UI.
+var mission_id: String = MISSION_FOLLOW_TRAIL
+
+## Transient setup handoff from the mission-first home screen.
+var selected_mission_id: String = MISSION_FOLLOW_TRAIL
+var selected_theme_dir: String = "thiefs"
+var is_multiplayer_host: bool = false
+var show_join_list_on_home: bool = false
+var join_status_override: String = ""
 
 ## Product-level training content selection.
 var training_type: String = TRAINING_WORDS
@@ -235,6 +252,7 @@ func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("Game", "game_mode", game_mode)
 	config.set_value("Game", "game_style", game_style)
+	config.set_value("Game", "mission_id", mission_id)
 	config.set_value("Game", "training_type", training_type)
 	config.set_value("Game", "chaser_enabled", chaser_enabled)
 	config.set_value("Game", "player_role", player_role)
@@ -256,6 +274,7 @@ func load_settings() -> void:
 	if config.load(SAVE_PATH) == OK:
 		game_mode      = config.get_value("Game", "game_mode", game_mode)
 		game_style     = config.get_value("Game", "game_style", game_style)
+		mission_id     = config.get_value("Game", "mission_id", mission_id)
 		training_type  = config.get_value("Game", "training_type", training_type)
 		chaser_enabled = config.get_value("Game", "chaser_enabled", chaser_enabled)
 		player_role    = config.get_value("Game", "player_role", player_role)
@@ -287,16 +306,25 @@ func configure_single_player_session(
 	training: String,
 	use_chaser: bool,
 	chaser_speed_level: int,
+	mission: String = "",
 ) -> void:
 	game_style = style if [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(style) else STYLE_PATH
-	training_type = training if [TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
+	training_type = training if [TRAINING_NONE, TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
+	mission_id = mission if [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission) else MissionCatalog.mission_from_config(game_style, training_type)
 	player_role = ROLE_RACER if game_style == STYLE_RACE else ROLE_COLLECTOR
 	game_mode = game_mode_for_training(training_type)
 	chaser_enabled = use_chaser and game_style != STYLE_RACE
 	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) if chaser_enabled else ChaserLevel.OFF
 
+func prepare_setup_session(mission: String, theme_dir: String, multiplayer_host: bool) -> void:
+	selected_mission_id = mission if [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission) else MissionCatalog.DEFAULT_MISSION
+	selected_theme_dir = theme_dir if not theme_dir.is_empty() else theme_dir_name
+	is_multiplayer_host = multiplayer_host
+
 func game_mode_for_training(training: String) -> int:
 	match training:
+		TRAINING_NONE:
+			return GameMode.NORMAL
 		TRAINING_NUMBERS:
 			return GameMode.NUMBERS
 		TRAINING_LETTERS:
@@ -308,6 +336,8 @@ func game_mode_for_training(training: String) -> int:
 
 func training_for_game_mode(mode: int) -> String:
 	match mode:
+		GameMode.NORMAL:
+			return TRAINING_NONE
 		GameMode.NUMBERS:
 			return TRAINING_NUMBERS
 		GameMode.LETTERS:
@@ -320,8 +350,10 @@ func training_for_game_mode(mode: int) -> String:
 func _apply_session_compatibility() -> void:
 	if not [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(game_style):
 		game_style = STYLE_PATH
-	if not [TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training_type):
+	if not [TRAINING_NONE, TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training_type):
 		training_type = training_for_game_mode(game_mode)
+	if not [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission_id):
+		mission_id = MissionCatalog.mission_from_config(game_style, training_type)
 	game_mode = game_mode_for_training(training_type)
 	if not [ROLE_COLLECTOR, ROLE_CHASER, ROLE_RACER].has(player_role):
 		player_role = ROLE_COLLECTOR

@@ -1,5 +1,7 @@
 extends Control
 
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var title_label: Label = %TitleLabel
 @onready var config_label: Label = %ConfigLabel
@@ -46,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if viewport != null:
 			viewport.set_input_as_handled()
 		NetworkManager.leave_session()
-		get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _localize_ui() -> void:
 	title_label.text = tr("mp_host_lobby_title")
@@ -95,9 +97,27 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	var player_map: Dictionary = state.get("players", {}) as Dictionary
 	var max_players: int = int(cfg.get("max_players", 2))
 
-	config_label.text = "%s | %s | %s: %s | %s: %s | %s: %d" % [
-		String(cfg.get("game_style_title", tr("mp_style_path"))),
-		String(cfg.get("training_type_title", tr("mode_words"))),
+	var pickup_text := String(cfg.get("training_type_title", ""))
+	if String(cfg.get("training_type", NetworkManager.TRAINING_WORDS)) == NetworkManager.TRAINING_NONE:
+		pickup_text = tr("pickup_none")
+	elif pickup_text.is_empty():
+		pickup_text = tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(
+			String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
+		)))
+	var role_summary := tr(String(cfg.get("role_summary_key", MissionCatalog.role_summary_key(
+		String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL)),
+		bool(cfg.get("chaser_enabled", false))
+	))))
+	var goal_text := tr(String(cfg.get("mission_goal_key", MissionCatalog.goal_key(
+		String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL)),
+		MissionCatalog.pickup_for_training(String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))),
+		bool(cfg.get("chaser_enabled", false)),
+		true
+	))))
+	config_label.text = "%s | %s | %s | %s: %s | %s: %s | %s: %d" % [
+		String(cfg.get("mission_title", cfg.get("game_style_title", tr("mp_style_path")))),
+		pickup_text,
+		role_summary,
 		tr("mp_host_difficulty"),
 		tr(String(cfg.get("difficulty_key", "diff_easy"))),
 		tr("mp_host_theme"),
@@ -105,6 +125,8 @@ func _on_lobby_updated(state: Dictionary) -> void:
 		tr("mp_host_max_players"),
 		max_players,
 	]
+	if not goal_text.is_empty():
+		config_label.text += "\n%s" % goal_text
 
 	players_list.clear()
 	for key in player_map.keys():
@@ -118,6 +140,8 @@ func _on_lobby_updated(state: Dictionary) -> void:
 		var char_name: String = CharacterCatalog.display_name_for_id(char_id)
 		if _is_roleless_next_symbol_config(cfg):
 			players_list.add_item("%s %d | %s" % [role, peer_id, char_name])
+		elif _is_maze_race_config(cfg):
+			players_list.add_item("%s %d | %s | %s" % [role, peer_id, char_name, tr("mp_role_racer")])
 		else:
 			var assigned_role: String = String(info.get("role", NetworkManager.ROLE_COLLECTOR))
 			players_list.add_item("%s %d | %s | %s" % [role, peer_id, char_name, _role_title(assigned_role)])
@@ -195,9 +219,12 @@ func _role_title(role: String) -> String:
 func _is_roleless_next_symbol_config(cfg: Dictionary) -> bool:
 	return String(cfg.get("game_style", NetworkManager.STYLE_PATH)) == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false))
 
+func _is_maze_race_config(cfg: Dictionary) -> bool:
+	return String(cfg.get("mission_id", "")) == MissionCatalog.MISSION_FIND_EXIT and not bool(cfg.get("chaser_enabled", false))
+
 func _is_roleless_or_race_config(cfg: Dictionary) -> bool:
 	var style := String(cfg.get("game_style", NetworkManager.STYLE_PATH))
-	return style == NetworkManager.STYLE_RACE or (style == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false)))
+	return style == NetworkManager.STYLE_RACE or _is_maze_race_config(cfg) or (style == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false)))
 
 func _on_peer_disconnected(_peer_id: int) -> void:
 	_on_lobby_updated({

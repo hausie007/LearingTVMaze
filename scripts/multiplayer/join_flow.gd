@@ -1,6 +1,7 @@
 extends Control
 
 const DEFAULT_GAME_PORT: int = 42020
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 
 @onready var discovery_panel: Control = %DiscoveryPanel
 @onready var discovery_title_label: Label = %DiscoveryTitleLabel
@@ -76,7 +77,7 @@ func _ready() -> void:
 	_character_catalog = CharacterCatalog.build_catalog()
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
 	if pending_host.is_empty():
-		get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		return
 
 	_selected_host = pending_host.duplicate(true)
@@ -262,11 +263,7 @@ func _populate_join_setup_from_selected_host() -> void:
 	var player_count: int = int(_selected_host.get("player_count", 1))
 
 	host_info_label.text = "%s (%s) %d/%d" % [host_name, host_ip, player_count, max_players]
-	theme_value_label.text = "%s | %s | %s" % [
-		String(_selected_host.get("game_style_title", "")),
-		String(_selected_host.get("training_type_title", "")),
-		String(_selected_host.get("theme_title", _selected_host.get("theme_dir", ""))),
-	]
+	theme_value_label.text = _host_setup_summary(_selected_host)
 	_update_taken_character_ids_from_selected_host()
 	if character_button:
 		character_button.text = ""
@@ -374,9 +371,6 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 	var host_name: String = String(host.get("host_name", "Host"))
 	var host_ip: String = String(host.get("ip", ""))
 	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
-	var style_title: String = String(host.get("game_style_title", ""))
-	var training_title: String = String(host.get("training_type_title", ""))
-	var chaser_text: String = tr("mp_roles_chaser_on") if bool(host.get("chaser_enabled", false)) else tr("mp_roles_chaser_off")
 	var player_count: int = int(host.get("player_count", 1))
 	var max_players: int = int(host.get("max_players", 2))
 
@@ -393,9 +387,9 @@ func _create_host_card(host: Dictionary, index: int) -> Button:
 
 	var footer: Label = Label.new()
 	footer.text = "%s | %s | %s | %s" % [
-		style_title,
-		training_title,
-		chaser_text,
+		_host_mission_title(host),
+		_host_pickup_title(host),
+		_host_role_summary(host),
 		CharacterCatalog.display_name_for_id(host_character_id),
 	]
 	footer.add_theme_font_size_override("font_size", 24)
@@ -434,7 +428,9 @@ func _go_back_to_multiplayer_menu() -> void:
 	_reset_global_dpad_accent()
 	_restore_local_dpad()
 	NetworkManager.leave_session()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
+	Config.show_join_list_on_home = true
+	Config.join_status_override = ""
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _return_to_discovery(status_override: String = "") -> void:
 	_reset_global_dpad_accent()
@@ -445,7 +441,9 @@ func _return_to_discovery(status_override: String = "") -> void:
 	_selected_character_id = ""
 	_taken_character_ids.clear()
 	NetworkManager.leave_session()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
+	Config.show_join_list_on_home = true
+	Config.join_status_override = status_override
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _find_next_enabled_character(start_idx: int, dir: int) -> int:
 	if _character_catalog.is_empty():
@@ -531,7 +529,7 @@ func _on_lobby_updated(state: Dictionary) -> void:
 
 	var cfg: Dictionary = state.get("config", {}) as Dictionary
 	if not cfg.is_empty():
-		theme_value_label.text = String(cfg.get("theme_title", cfg.get("theme_dir", theme_value_label.text)))
+		theme_value_label.text = _host_setup_summary(cfg)
 
 	var players: Dictionary = state.get("players", {}) as Dictionary
 	_taken_character_ids.clear()
@@ -718,6 +716,31 @@ func _is_selected_host_available() -> bool:
 func _should_return_to_discovery(reason: String) -> bool:
 	return reason == "Host unavailable" or reason == "Could not connect to host" or reason == "Disconnected from host" or reason == "Game already started" or reason == "Lobby is full"
 
+func _host_setup_summary(host: Dictionary) -> String:
+	return "%s | %s | %s | %s" % [
+		_host_mission_title(host),
+		_host_pickup_title(host),
+		_host_role_summary(host),
+		String(host.get("theme_title", host.get("theme_dir", ""))),
+	]
+
+func _host_mission_title(host: Dictionary) -> String:
+	return String(host.get("mission_title", host.get("game_style_title", tr("mission_follow_trail"))))
+
+func _host_pickup_title(host: Dictionary) -> String:
+	var training := String(host.get("training_type", NetworkManager.TRAINING_WORDS))
+	if training == NetworkManager.TRAINING_NONE:
+		return tr("pickup_none")
+	var title := String(host.get("training_type_title", ""))
+	if not title.is_empty():
+		return title
+	return tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
+
+func _host_role_summary(host: Dictionary) -> String:
+	var mission_id := String(host.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
+	var chaser_enabled := bool(host.get("chaser_enabled", false))
+	return tr(String(host.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
+
 func _cache_local_dpad() -> void:
 	_local_dpad_node = get_node_or_null("/root/DPad") as CanvasLayer
 	if _local_dpad_node != null:
@@ -747,7 +770,9 @@ func _on_controller_leave_pressed() -> void:
 	_reset_global_dpad_accent()
 	_restore_local_dpad()
 	NetworkManager.leave_session()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_menu.tscn")
+	Config.show_join_list_on_home = true
+	Config.join_status_override = ""
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_local_dpad_action(action: StringName, pressed: bool) -> void:
 	if not controller_panel.visible:
