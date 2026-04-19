@@ -323,7 +323,7 @@ func _update_labels() -> void:
 		_style_button.text = tr(String(_style_options[_selected_style_idx].get("title_key", "")))
 
 	if _chaser_button != null:
-		var force_chaser_off := _selected_style_id() == NetworkManager.STYLE_NEXT_SYMBOL
+		var force_chaser_off := _selected_style_id() == NetworkManager.STYLE_RACE
 		_chaser_button.text = tr("off") if force_chaser_off or not _chaser_enabled else tr("on")
 
 	if _theme_dirs.size() > 0 and _selected_theme_idx < _theme_dirs.size():
@@ -426,7 +426,7 @@ func _on_start_pressed() -> void:
 		"game_style_title": _selected_style_title(),
 		"training_type": _selected_training_id(),
 		"training_type_title": _selected_training_title(),
-		"chaser_enabled": _chaser_enabled and _selected_style_id() != NetworkManager.STYLE_NEXT_SYMBOL,
+		"chaser_enabled": _chaser_enabled and _selected_style_id() != NetworkManager.STYLE_RACE,
 		"rotate_roles_after_round": false,
 		"theme_dir": _selected_theme_dir(),
 		"theme_title": theme_button.text,

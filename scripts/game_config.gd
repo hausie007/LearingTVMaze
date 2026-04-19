@@ -290,9 +290,9 @@ func configure_single_player_session(
 ) -> void:
 	game_style = style if [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(style) else STYLE_PATH
 	training_type = training if [TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
-	player_role = ROLE_COLLECTOR
+	player_role = ROLE_RACER if game_style == STYLE_RACE else ROLE_COLLECTOR
 	game_mode = game_mode_for_training(training_type)
-	chaser_enabled = use_chaser and game_style != STYLE_NEXT_SYMBOL
+	chaser_enabled = use_chaser and game_style != STYLE_RACE
 	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) if chaser_enabled else ChaserLevel.OFF
 
 func game_mode_for_training(training: String) -> int:
@@ -325,9 +325,9 @@ func _apply_session_compatibility() -> void:
 	game_mode = game_mode_for_training(training_type)
 	if not [ROLE_COLLECTOR, ROLE_CHASER, ROLE_RACER].has(player_role):
 		player_role = ROLE_COLLECTOR
-	if game_style == STYLE_NEXT_SYMBOL:
+	if game_style == STYLE_RACE:
 		chaser_enabled = false
-		player_role = ROLE_COLLECTOR
+		player_role = ROLE_RACER
 	if not chaser_enabled:
 		chaser_level = ChaserLevel.OFF
 	elif chaser_level == ChaserLevel.OFF:

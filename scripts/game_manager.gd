@@ -41,6 +41,13 @@ var _move_count: int = 0
 var _is_paused: bool = false
 var _is_gotcha_screen: bool = false
 var _completed_word_spoken: bool = false
+var _last_spoken_word_segment_end: int = 0
+var _race_robot: Node2D = null
+var _race_robot_path: Array[Vector2i] = []
+var _race_robot_index: int = 0
+var _race_robot_timer: float = 0.0
+var _race_robot_finished: bool = false
+var _race_collect_player: AudioStreamPlayer = null
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -81,6 +88,7 @@ func _ready() -> void:
 	maze_renderer.top_margin = hud.get_height()
 
 	# Generate and display the first maze.
+	_build_race_collect_sound()
 	_start_new_maze()
 
 
@@ -89,6 +97,7 @@ func _process(delta: float) -> void:
 	if not win_screen.is_active() and not get_tree().paused:
 		_elapsed_time += delta
 		hud.update_time(_elapsed_time)
+		_process_race_robot(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -141,13 +150,15 @@ func _start_new_maze() -> void:
 	_elapsed_time = 0.0
 	_move_count = 0
 	_completed_word_spoken = false
+	_last_spoken_word_segment_end = 0
+	_race_robot_finished = false
 	hud.update_moves(_move_count)
 	hud.update_role("" if Config.game_style == Config.STYLE_NEXT_SYMBOL else Config.player_role)
 
-	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(Config.game_style):
+	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style):
 		Config.game_style = Config.STYLE_PATH
 	Config.game_mode = Config.game_mode_for_training(Config.training_type)
-	if Config.game_style == Config.STYLE_NEXT_SYMBOL:
+	if Config.game_style == Config.STYLE_RACE:
 		Config.chaser_enabled = false
 	if not Config.chaser_enabled:
 		Config.chaser_level = Config.ChaserLevel.OFF
@@ -155,6 +166,7 @@ func _start_new_maze() -> void:
 	# Cleanup old entities
 	collectible_spawner.clear()
 	chaser_manager.cleanup()
+	_cleanup_race_robot()
 
 	# Re-enable player
 	player.set_process(true)
@@ -162,7 +174,12 @@ func _start_new_maze() -> void:
 	player.set_process_input(true)
 
 	# 1. Generate
-	_current_maze = maze_generator.generate()
+	_current_maze = maze_generator.generate_race(Config.grid_size) if Config.game_style == Config.STYLE_RACE else maze_generator.generate()
+	if Config.game_style == Config.STYLE_RACE:
+		_set_start_markers([
+			Vector2i(0, 0),
+			Vector2i(_current_maze.grid_size.x - 1, _current_maze.grid_size.y - 1),
+		])
 
 	# 2. Render
 	maze_renderer.draw_maze(_current_maze)
@@ -173,6 +190,10 @@ func _start_new_maze() -> void:
 
 	# 4. Spawn collectibles if applicable
 	if Config.game_mode != Config.GameMode.NORMAL:
+		collectible_spawner.configure_dynamic_threat(
+			func() -> Vector2i: return player.grid_pos,
+			func() -> Array[Vector2i]: return chaser_manager.get_chaser_positions()
+		)
 		collectible_spawner.spawn(_current_maze, maze_renderer, Config.game_style)
 
 	# Update word display in HUD
@@ -180,6 +201,8 @@ func _start_new_maze() -> void:
 
 	# 5. Place player at Start cell
 	var start_cell: MazeData.CellData = _current_maze.get_start_cell()
+	if Config.game_style == Config.STYLE_RACE:
+		start_cell = _current_maze.get_cell(Vector2i(0, 0))
 	if start_cell:
 		player.reset_movement()
 		player.grid_pos      = start_cell.coords
@@ -189,6 +212,9 @@ func _start_new_maze() -> void:
 
 	# Rebuild the player visual (picks up theme sprites if available).
 	player.rebuild_visual()
+
+	if Config.game_style == Config.STYLE_RACE:
+		_spawn_race_robot()
 
 
 # ── Player Event Handlers ────────────────────────────────────────────────────
@@ -210,8 +236,13 @@ func _on_player_reached_end() -> void:
 	if Config.game_mode == Config.GameMode.WORDS:
 		hud.light_up_letter(collectible_spawner.get_word_next_index())
 		_speak_completed_word_once()
+	elif Config.game_style == Config.STYLE_RACE:
+		_speak_race_completion_once()
 
-	win_screen.show_win(_format_time(), _move_count)
+	if Config.game_style == Config.STYLE_RACE:
+		win_screen.show_race_win(_format_time(), _move_count, _race_player_character_id())
+	else:
+		win_screen.show_win(_format_time(), _move_count)
 	win_screen.update_suggestions(Config.game_mode)
 
 
@@ -235,6 +266,10 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 # ── Collectible Callbacks ────────────────────────────────────────────────────
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
+	if Config.game_style == Config.STYLE_RACE:
+		_play_race_collect_sound()
+		_refresh_target_hud()
+		return
 	if not Config.voice_hints: return
 	
 	if Config.game_mode == Config.GameMode.WORDS:
@@ -252,6 +287,8 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 		var word_complete: bool = (next_idx >= word_full.length())
 		if word_complete:
 			_speak_completed_word_once(lang)
+		elif next_idx > collect_index + 1:
+			_speak_completed_word_segment(next_idx, lang)
 	else:
 		TTS.speak(value_str, 0.85)
 	_refresh_target_hud()
@@ -302,6 +339,8 @@ func _on_suggestion_pressed(target_mode: int) -> void:
 	_start_new_maze()
 
 func _on_chaser_toggled_pressed(target_level: int) -> void:
+	if Config.game_style == Config.STYLE_RACE:
+		return
 	Config.chaser_level = target_level
 	Config.chaser_enabled = target_level != Config.ChaserLevel.OFF
 	Config.save_settings()
@@ -341,9 +380,183 @@ func _speak_completed_word_once(lang_override: String = "") -> void:
 	if phrase.is_empty():
 		return
 	_completed_word_spoken = true
+	_last_spoken_word_segment_end = phrase.length()
 	var word_lang: String = lang_override
 	if word_lang.is_empty():
 		word_lang = String(Config.current_word.get("lang", ""))
 	get_tree().create_timer(1.2).timeout.connect(
 		func(): TTS.speak(phrase, 0.7, word_lang)
 	)
+
+func _speak_completed_word_segment(segment_end: int, lang_override: String = "") -> void:
+	if not Config.voice_hints:
+		return
+	var word_full: String = String(Config.current_word.get("word", ""))
+	var clamped_end := clampi(segment_end, 0, word_full.length())
+	if clamped_end <= _last_spoken_word_segment_end:
+		return
+	var phrase := word_full.substr(0, clamped_end).strip_edges()
+	if phrase.is_empty():
+		return
+	_last_spoken_word_segment_end = clamped_end
+	var word_lang: String = lang_override
+	if word_lang.is_empty():
+		word_lang = String(Config.current_word.get("lang", ""))
+	get_tree().create_timer(1.45).timeout.connect(
+		func(): TTS.speak(phrase, 0.7, word_lang)
+	)
+
+func _spawn_race_robot() -> void:
+	if _current_maze == null or maze_renderer == null:
+		return
+	var center := _race_center()
+	var robot_start := Vector2i(_current_maze.grid_size.x - 1, _current_maze.grid_size.y - 1)
+	_race_robot_path = _race_path_from_corner(robot_start, center)
+	if _race_robot_path.is_empty():
+		return
+
+	_race_robot = Node2D.new()
+	_race_robot.name = "RaceRobot"
+	var sprite := Sprite2D.new()
+	var texture := Config.theme.chaser_texture if Config.theme != null else null
+	if texture != null:
+		sprite.texture = texture
+		var cell_size := maze_renderer.get_cell_size()
+		var tex_size := texture.get_size()
+		if maxf(tex_size.x, tex_size.y) > 0.0:
+			sprite.scale = Vector2.ONE * ((cell_size * 0.62) / maxf(tex_size.x, tex_size.y))
+	else:
+		var fallback := ColorRect.new()
+		var size := maze_renderer.get_cell_size() * 0.52
+		fallback.size = Vector2(size, size)
+		fallback.position = -fallback.size / 2.0
+		fallback.color = Color(1.0, 0.35, 0.35, 1.0)
+		_race_robot.add_child(fallback)
+		sprite = null
+	if sprite != null:
+		_race_robot.add_child(sprite)
+	add_child(_race_robot)
+	_race_robot_index = 0
+	_race_robot_timer = _race_robot_step_interval()
+	_race_robot.position = maze_renderer.grid_to_pixel(_race_robot_path[0])
+
+func _cleanup_race_robot() -> void:
+	if _race_robot != null and is_instance_valid(_race_robot):
+		_race_robot.queue_free()
+	_race_robot = null
+	_race_robot_path.clear()
+	_race_robot_index = 0
+	_race_robot_timer = 0.0
+	_race_robot_finished = false
+
+func _process_race_robot(delta: float) -> void:
+	if Config.game_style != Config.STYLE_RACE:
+		return
+	if _race_robot == null or _race_robot_finished or win_screen.is_active():
+		return
+	if _race_robot_path.is_empty():
+		return
+	_race_robot_timer -= delta
+	if _race_robot_timer > 0.0:
+		return
+	_race_robot_timer = _race_robot_step_interval()
+	_race_robot_index += 1
+	if _race_robot_index >= _race_robot_path.size():
+		_race_robot_finished = true
+		_is_gotcha_screen = true
+		_freeze_player()
+		win_screen.show_race_gotcha(_format_time(), _move_count, _race_robot_character_id())
+		return
+	var target := maze_renderer.grid_to_pixel(_race_robot_path[_race_robot_index])
+	var tween := _race_robot.create_tween()
+	tween.tween_property(_race_robot, "position", target, Config.tween_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+func _race_robot_step_interval() -> float:
+	var base := 0.72
+	var difficulty_factor := 1.0 - (float(clampi(Config.difficulty, 0, 6)) * 0.055)
+	return maxf(0.34, base * difficulty_factor)
+
+func _speak_race_completion_once() -> void:
+	if not Config.voice_hints:
+		return
+	if Config.game_mode == Config.GameMode.WORDS:
+		_speak_completed_word_once()
+
+func _race_center() -> Vector2i:
+	var end_cell := _current_maze.get_end_cell() if _current_maze != null else null
+	if end_cell != null:
+		return end_cell.coords
+	return Vector2i.ZERO
+
+func _race_player_character_id() -> String:
+	return "%s:player" % Config.theme_dir_name
+
+func _race_robot_character_id() -> String:
+	return "%s:chaser" % Config.theme_dir_name
+
+func _race_path_from_corner(start: Vector2i, center: Vector2i) -> Array[Vector2i]:
+	if _current_maze == null:
+		return []
+	var queue: Array[Vector2i] = [start]
+	var came_from: Dictionary = {start: start}
+	var head := 0
+	while head < queue.size():
+		var pos := queue[head]
+		head += 1
+		if pos == center:
+			break
+		for dir in MazeGenerator.DIRECTIONS:
+			var next := pos + dir
+			if came_from.has(next):
+				continue
+			if not _current_maze.is_wall_open(pos, dir):
+				continue
+			came_from[next] = pos
+			queue.append(next)
+
+	if not came_from.has(center):
+		return [start]
+
+	var reversed_path: Array[Vector2i] = []
+	var cursor := center
+	while cursor != start:
+		reversed_path.append(cursor)
+		cursor = came_from[cursor]
+	reversed_path.append(start)
+	reversed_path.reverse()
+	return reversed_path
+
+func _set_start_markers(spawn_cells: Array[Vector2i]) -> void:
+	if _current_maze == null:
+		return
+	for raw_cell in _current_maze.cells.values():
+		var cell := raw_cell as MazeData.CellData
+		if cell != null:
+			cell.is_start = false
+	for coords in spawn_cells:
+		var cell := _current_maze.get_cell(coords)
+		if cell != null:
+			cell.is_start = true
+			cell.is_visited = true
+
+func _build_race_collect_sound() -> void:
+	_race_collect_player = AudioStreamPlayer.new()
+	var stream := AudioStreamGenerator.new()
+	stream.mix_rate = 22050.0
+	stream.buffer_length = 0.08
+	_race_collect_player.stream = stream
+	add_child(_race_collect_player)
+
+func _play_race_collect_sound() -> void:
+	if _race_collect_player == null:
+		return
+	_race_collect_player.play()
+	var playback := _race_collect_player.get_stream_playback() as AudioStreamGeneratorPlayback
+	if playback == null:
+		return
+	var mix_rate := 22050.0
+	var frames := int(mix_rate * 0.055)
+	for i in range(frames):
+		var fade := 1.0 - (float(i) / float(frames))
+		var sample := sin(TAU * 880.0 * float(i) / mix_rate) * 0.12 * fade
+		playback.push_frame(Vector2(sample, sample))

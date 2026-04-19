@@ -17,6 +17,7 @@ var collect_index: int = -1
 @onready var sprite: Sprite2D = Sprite2D.new()
 
 var _animator: FrameAnimator = null
+var _accent_tint: Color = Color(0, 0, 0, 0)
 
 func _ready() -> void:
 	# Add sprite as child 0 so it's behind everything else
@@ -42,6 +43,11 @@ func setup(cs: float, theme: ThemeLoader = null) -> void:
 	self.scale = Vector2.ONE
 	_apply_visuals(cs)
 
+func set_accent_tint(color: Color) -> void:
+	_accent_tint = color
+	if _last_cs > 0.0:
+		_apply_visuals(_last_cs)
+
 ## Internal helper to render the visuals at a specific absolute pixel size.
 func _apply_visuals(effective_cs: float) -> void:
 	# Default colors
@@ -53,6 +59,10 @@ func _apply_visuals(effective_cs: float) -> void:
 		bg_color = _last_theme.col_color
 		text_color = _last_theme.col_text_color
 		texture = _last_theme.col_texture
+
+	if _accent_tint.a > 0.0:
+		bg_color = _accent_tint.lerp(Color.WHITE, 0.20)
+		text_color = Color(0.08, 0.08, 0.10, 1.0) if bg_color.get_luminance() > 0.58 else Color.WHITE
 
 	# Common setup for both labels
 	for l in [bg_label, text_label]:
@@ -73,6 +83,7 @@ func _apply_visuals(effective_cs: float) -> void:
 		var target_size := effective_cs * 0.7
 		sprite.scale = Vector2(target_size / img_size.x, target_size / img_size.y)
 		sprite.position = Vector2.ZERO
+		sprite.modulate = _accent_tint.lerp(Color.WHITE, 0.22) if _accent_tint.a > 0.0 else Color.WHITE
 		
 		if _last_theme and not _last_theme.col_frames.is_empty():
 			_animator.start(sprite, _last_theme.col_frames, _last_theme.col_fps)
@@ -81,6 +92,7 @@ func _apply_visuals(effective_cs: float) -> void:
 	else:
 		bg_label.visible = true
 		sprite.visible = false
+		sprite.modulate = Color.WHITE
 		_animator.stop()
 		bg_label.text = "⬤"
 		bg_label.add_theme_font_size_override("font_size", int(effective_cs * 0.6))

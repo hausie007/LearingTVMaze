@@ -116,7 +116,7 @@ func _on_lobby_updated(state: Dictionary) -> void:
 		if is_host:
 			role = tr("mp_host_player_host")
 		var char_name: String = CharacterCatalog.display_name_for_id(char_id)
-		if _is_next_symbol_config(cfg):
+		if _is_roleless_next_symbol_config(cfg):
 			players_list.add_item("%s %d | %s" % [role, peer_id, char_name])
 		else:
 			var assigned_role: String = String(info.get("role", NetworkManager.ROLE_COLLECTOR))
@@ -126,7 +126,7 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	_update_role_controls(cfg, player_map)
 
 func _update_role_controls(cfg: Dictionary, player_map: Dictionary) -> void:
-	var chaser_enabled := bool(cfg.get("chaser_enabled", false)) and not _is_next_symbol_config(cfg)
+	var chaser_enabled := bool(cfg.get("chaser_enabled", false)) and not _is_roleless_or_race_config(cfg)
 	if _collector_button != null:
 		_collector_button.visible = chaser_enabled
 	if _random_collector_button != null:
@@ -192,8 +192,12 @@ func _role_title(role: String) -> String:
 		_:
 			return tr("mp_role_collector")
 
-func _is_next_symbol_config(cfg: Dictionary) -> bool:
-	return String(cfg.get("game_style", NetworkManager.STYLE_PATH)) == NetworkManager.STYLE_NEXT_SYMBOL
+func _is_roleless_next_symbol_config(cfg: Dictionary) -> bool:
+	return String(cfg.get("game_style", NetworkManager.STYLE_PATH)) == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false))
+
+func _is_roleless_or_race_config(cfg: Dictionary) -> bool:
+	var style := String(cfg.get("game_style", NetworkManager.STYLE_PATH))
+	return style == NetworkManager.STYLE_RACE or (style == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false)))
 
 func _on_peer_disconnected(_peer_id: int) -> void:
 	_on_lobby_updated({

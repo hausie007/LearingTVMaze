@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_game_manager.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/maze_generator.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/maze_renderer.gd" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/multiplayer/multiplayer_avatar.tscn" id="4"]
+[ext_resource type="Script" path="res://scripts/game_hud.gd" id="5"]
 
 [node name="MultiplayerGameManager" type="Node"]
 script = ExtResource("1")
@@ -14,6 +15,9 @@ script = ExtResource("2")
 
 [node name="MazeRenderer" type="Node2D" parent="."]
 script = ExtResource("3")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("5")
 
 [node name="Players" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -33,6 +37,7 @@ offset_bottom = -20.0
 
 [node name="StatusLabel" type="Label" parent="StatusLayer/TopMargin"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Multiplayer"

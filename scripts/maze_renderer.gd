@@ -69,8 +69,8 @@ func draw_maze(maze: MazeData) -> void:
 	
 	# Center the maze strictly inside the content rect
 	var hpad := floori(content_rect.position.x + (available_w - maze_pixel_size.x) / 2.0)
-		
-	var vpad := floori(top_margin + (viewport_size.y - top_margin - maze_pixel_size.y) / 2.0)
+	var vpad := floori(content_rect.position.y + (available_h - maze_pixel_size.y) / 2.0)
+	vpad = maxi(vpad, floori(content_rect.position.y))
 	var offset := Vector2i(hpad, vpad)
 	_cached_offset = Vector2(offset)
 

@@ -56,6 +56,51 @@ func generate_custom(custom_size: Vector2i) -> MazeData:
 
 	return maze
 
+## Generate a symmetric race maze by creating one real quarter-maze and mirroring
+## its walls into all four quadrants. Every corner gets the same maze shape and
+## path length to the central finish, but the layout still has real choices.
+func generate_race(custom_size: Vector2i) -> MazeData:
+	var race_size := Vector2i(maxi(5, custom_size.x), maxi(5, custom_size.y))
+	if race_size.x % 2 == 0:
+		race_size.x += 1
+	if race_size.y % 2 == 0:
+		race_size.y += 1
+
+	var center := Vector2i(race_size.x / 2, race_size.y / 2)
+	var quadrant_size := center + Vector2i.ONE
+	var quadrant := _generate_race_quadrant(quadrant_size)
+
+	var maze := MazeData.new()
+	maze.init_grid(race_size)
+
+	var starts: Array[Vector2i] = [
+		Vector2i(0, 0),
+		Vector2i(race_size.x - 1, 0),
+		Vector2i(0, race_size.y - 1),
+		Vector2i(race_size.x - 1, race_size.y - 1),
+	]
+
+	_mirror_quadrant_into_race_maze(quadrant, maze, race_size)
+
+	for start in starts:
+		var cell := maze.get_cell(start)
+		if cell != null:
+			cell.is_start = true
+			cell.is_visited = true
+
+	var end_cell := maze.get_cell(center)
+	if end_cell != null:
+		end_cell.is_end = true
+		end_cell.is_visited = true
+
+	maze.main_path_coords = quadrant.main_path_coords.duplicate()
+	for coord in maze.main_path_coords:
+		var cell := maze.get_cell(coord)
+		if cell != null:
+			cell.is_main_path = true
+
+	return maze
+
 
 # ── Private: main-path generation ────────────────────────────────────────────
 
@@ -164,6 +209,57 @@ func _fill_remaining_cells(
 			# Backtrack.
 			stack.pop_back()
 
+func _generate_race_quadrant(quadrant_size: Vector2i) -> MazeData:
+	var quadrant := MazeData.new()
+	quadrant.init_grid(quadrant_size)
+	var start := Vector2i.ZERO
+	var goal := quadrant_size - Vector2i.ONE
+	quadrant.get_cell(start).is_start = true
+	quadrant.get_cell(goal).is_end = true
+
+	var visited: Dictionary = {}
+	var path: Array[Vector2i] = []
+	_build_main_path(quadrant, start, goal, visited, path, quadrant_size)
+	_fill_remaining_cells(quadrant, visited, quadrant_size)
+	return quadrant
+
+func _mirror_quadrant_into_race_maze(quadrant: MazeData, maze: MazeData, race_size: Vector2i) -> void:
+	var mirrors := [
+		Vector2i(0, 0),
+		Vector2i(1, 0),
+		Vector2i(0, 1),
+		Vector2i(1, 1),
+	]
+
+	for raw_mirror in mirrors:
+		var mirror := raw_mirror as Vector2i
+		for source in quadrant.cells.values():
+			var source_cell := source as MazeData.CellData
+			if source_cell == null:
+				continue
+			var target_coord := _mirror_race_coord(source_cell.coords, race_size, mirror.x == 1, mirror.y == 1)
+			var target_cell := maze.get_cell(target_coord)
+			if target_cell == null:
+				continue
+			target_cell.is_visited = source_cell.is_visited
+			target_cell.is_main_path = source_cell.is_main_path
+
+		for source in quadrant.cells.values():
+			var source_cell := source as MazeData.CellData
+			if source_cell == null:
+				continue
+			for dir in DIRECTIONS:
+				if not quadrant.is_wall_open(source_cell.coords, dir):
+					continue
+				var source_next := source_cell.coords + dir
+				var a := _mirror_race_coord(source_cell.coords, race_size, mirror.x == 1, mirror.y == 1)
+				var b := _mirror_race_coord(source_next, race_size, mirror.x == 1, mirror.y == 1)
+				maze.open_wall_between(a, b)
+
+func _mirror_race_coord(coord: Vector2i, race_size: Vector2i, mirror_x: bool, mirror_y: bool) -> Vector2i:
+	var x := race_size.x - 1 - coord.x if mirror_x else coord.x
+	var y := race_size.y - 1 - coord.y if mirror_y else coord.y
+	return Vector2i(x, y)
 
 # ── Private: utility ─────────────────────────────────────────────────────────
 

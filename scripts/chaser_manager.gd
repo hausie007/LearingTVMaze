@@ -29,6 +29,12 @@ var _active: bool = false
 func is_active() -> bool:
 	return _active
 
+func get_chaser_positions() -> Array[Vector2i]:
+	var positions: Array[Vector2i] = []
+	if _chaser != null and is_instance_valid(_chaser):
+		positions.append(_chaser.grid_pos)
+	return positions
+
 
 ## Build a navigation map from the rendered maze for pathfinding.
 func build_nav_map(renderer: MazeRenderer) -> void:

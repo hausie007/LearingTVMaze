@@ -31,7 +31,13 @@ var _total_collectibles: int = 0
 var _game_style: String = Config.STYLE_PATH
 var _sequence: Array[Dictionary] = []
 var _renderer: MazeRenderer = null
+var _maze: MazeData = null
 var _revealed_sequence_pos: int = 0
+var _used_next_symbol_cells: Dictionary = {}
+var _recent_next_symbol_cells: Array[Vector2i] = []
+var _last_next_symbol_exit_dist: int = -1
+var _player_pos_getter: Callable = Callable()
+var _chaser_positions_getter: Callable = Callable()
 
 
 # ── Public API ───────────────────────────────────────────────────────────────
@@ -47,13 +53,21 @@ func clear() -> void:
 	_total_collectibles = 0
 	_sequence.clear()
 	_renderer = null
+	_maze = null
 	_revealed_sequence_pos = 0
+	_used_next_symbol_cells.clear()
+	_recent_next_symbol_cells.clear()
+	_last_next_symbol_exit_dist = -1
 
+func configure_dynamic_threat(player_pos_getter: Callable, chaser_positions_getter: Callable) -> void:
+	_player_pos_getter = player_pos_getter
+	_chaser_positions_getter = chaser_positions_getter
 
 ## Spawn collectibles based on current game mode into the given maze.
 func spawn(maze: MazeData, renderer: MazeRenderer, game_style: String = "") -> void:
 	clear()
 	_renderer = renderer
+	_maze = maze
 	_game_style = game_style if not game_style.is_empty() else Config.game_style
 	if Config.game_mode == Config.GameMode.NORMAL:
 		return
@@ -148,9 +162,10 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 
 func _spawn_word_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 	var lang: String = Config.get_effective_learning_language()
-	var word_data: Dictionary = WordList.get_random_word(lang, Config.difficulty)
+	var word_difficulty := _word_difficulty_for_current_style()
+	var word_data: Dictionary = WordList.get_random_word(lang, word_difficulty)
 	if word_data.is_empty():
-		push_warning("CollectibleSpawner: No word found for lang=%s diff=%d" % [lang, Config.difficulty])
+		push_warning("CollectibleSpawner: No word found for lang=%s diff=%d" % [lang, word_difficulty])
 		return
 
 	Config.current_word = word_data
@@ -191,6 +206,11 @@ func _spawn_word_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		_sequence.append({"cell": cell, "value": word[char_idx], "index": char_idx})
 
 	_spawn_sequence(renderer)
+
+func _word_difficulty_for_current_style() -> int:
+	if _game_style == Config.STYLE_RACE:
+		return maxi(0, Config.difficulty - 1)
+	return Config.difficulty
 
 
 # ── Private: Word Collection Logic ───────────────────────────────────────────
@@ -245,6 +265,9 @@ func _instantiate_collectible(cell: MazeData.CellData, val_str: String, idx: int
 	col.setup(renderer.get_cell_size(), renderer.maze_theme)
 	col.position = renderer.grid_to_pixel(cell.coords)
 	_collectibles[cell.coords] = col
+	if _game_style == Config.STYLE_NEXT_SYMBOL:
+		_used_next_symbol_cells[cell.coords] = true
+		_remember_next_symbol_cell(cell.coords)
 
 func _spawn_sequence(renderer: MazeRenderer) -> void:
 	if _game_style == Config.STYLE_NEXT_SYMBOL:
@@ -275,12 +298,372 @@ func _reveal_next_symbol() -> void:
 	var cell := item.get("cell") as MazeData.CellData
 	if cell == null:
 		return
+	cell = _pick_next_symbol_cell(cell)
 	_instantiate_collectible(
 		cell,
 		String(item.get("value", "")),
 		int(item.get("index", -1)),
 		_renderer
 	)
+
+func _pick_next_symbol_cell(default_cell: MazeData.CellData) -> MazeData.CellData:
+	if _maze == null:
+		return default_cell
+	if not Config.chaser_enabled:
+		return default_cell
+	if _player_pos_getter.is_null() or _chaser_positions_getter.is_null():
+		return default_cell
+
+	var player_pos: Vector2i = _player_pos_getter.call()
+	var raw_chasers: Array = _chaser_positions_getter.call()
+	var chaser_positions: Array[Vector2i] = []
+	for item in raw_chasers:
+		if item is Vector2i:
+			chaser_positions.append(item)
+	if chaser_positions.is_empty():
+		return default_cell
+
+	var player_dist := _distance_map_from([player_pos])
+	var chaser_dist := _distance_map_from(chaser_positions)
+	if player_dist.is_empty() or chaser_dist.is_empty():
+		return default_cell
+
+	var end_cell := _maze.get_end_cell()
+	if end_cell == null:
+		return default_cell
+	var exit_dist := _distance_map_from([end_cell.coords])
+	if not exit_dist.has(player_pos):
+		return default_cell
+	var current_exit_dist := int(exit_dist[player_pos])
+	var chaser_exit_dist := int(chaser_dist.get(end_cell.coords, 1000000))
+	var start_cell := _maze.get_start_cell()
+	var total_exit_dist := current_exit_dist
+	if start_cell != null and exit_dist.has(start_cell.coords):
+		total_exit_dist = maxi(1, int(exit_dist[start_cell.coords]))
+
+	var best_cell: MazeData.CellData = null
+	var best_score := -INF
+	var safety_margin := _next_symbol_safety_margin()
+	var sequence_progress := _next_symbol_sequence_progress()
+	var remaining_items := maxi(0, _sequence.size() - _revealed_sequence_pos)
+	var exploration_wave := sin(sequence_progress * PI)
+	var route_progress_target := _next_symbol_route_progress_target(sequence_progress)
+	var route_progress_limit := _next_symbol_route_progress_limit(sequence_progress)
+	var allowed_backtrack := int(round(lerpf(9.0, 3.0, sequence_progress))) + floori(float(clampi(Config.difficulty, 0, 6)) / 3.0)
+	var last_backtrack_limit := int(round(lerpf(8.0, 3.0, sequence_progress)))
+	var ideal_exit_dist := maxf(1.0, float(total_exit_dist) * (1.0 - route_progress_target))
+	var min_exit_dist_before_finish := maxf(1.0, float(total_exit_dist) * (1.0 - route_progress_limit))
+	var desired_player_steps := lerpf(8.0 + float(Config.difficulty), 5.0 + float(Config.difficulty) * 0.35, sequence_progress)
+	var min_player_steps := 3 if remaining_items <= 1 else maxi(4, int(round(desired_player_steps * 0.55)))
+	for candidate in _maze.cells.values():
+		var cell := candidate as MazeData.CellData
+		if cell == null or not cell.is_visited or cell.is_start or cell.is_end:
+			continue
+		if _collectibles.has(cell.coords):
+			continue
+		if _used_next_symbol_cells.has(cell.coords):
+			continue
+		if not player_dist.has(cell.coords):
+			continue
+		if not chaser_dist.has(cell.coords):
+			continue
+		if not exit_dist.has(cell.coords):
+			continue
+		var p_steps := int(player_dist[cell.coords])
+		var c_steps := int(chaser_dist[cell.coords])
+		var e_steps := int(exit_dist[cell.coords])
+		if p_steps <= 0:
+			continue
+		if p_steps + safety_margin >= c_steps:
+			continue
+		var progress_delta := current_exit_dist - e_steps
+		if remaining_items > 2 and float(e_steps) < min_exit_dist_before_finish:
+			continue
+		if progress_delta < -allowed_backtrack:
+			continue
+		if _last_next_symbol_exit_dist >= 0 and e_steps > _last_next_symbol_exit_dist + last_backtrack_limit:
+			continue
+		if p_steps <= 2 and remaining_items > 1:
+			continue
+		if _is_too_close_to_recent_next_symbol(cell.coords, sequence_progress):
+			continue
+
+		# Avoid tempting the player into a backwards branch while the chaser is
+		# already better positioned toward the finish.
+		if progress_delta < 0 and chaser_exit_dist + safety_margin < current_exit_dist:
+			continue
+		var route_buffer := _next_symbol_exit_route_buffer(
+			cell.coords,
+			p_steps,
+			exit_dist,
+			chaser_dist,
+			safety_margin
+		)
+		if route_buffer < -safety_margin:
+			continue
+		if progress_delta <= 0 and route_buffer < 1:
+			continue
+
+		var distance_fit := -absf(float(p_steps) - desired_player_steps) * 0.42
+		var safety := float(c_steps - p_steps)
+		var pressure := -absf(safety - float(safety_margin + 4)) * 0.28
+		var pacing_fit := -absf(float(e_steps) - ideal_exit_dist) * 0.38
+		var too_far_ahead_penalty := maxf(0.0, min_exit_dist_before_finish - float(e_steps)) * 2.4
+		var forward_bonus := maxf(0.0, float(progress_delta)) * lerpf(0.04, 0.50, sequence_progress)
+		var backtrack_penalty := absf(minf(0.0, float(progress_delta))) * lerpf(0.50, 2.20, sequence_progress)
+		var exit_safety := float(chaser_exit_dist - e_steps)
+		var exit_safety_bonus := clampf(exit_safety, -8.0, 10.0) * 0.18
+		var route_safety_bonus := clampf(float(route_buffer), -4.0, 8.0) * 0.22
+		var side_route_bonus := _next_symbol_side_route_bonus(cell, exploration_wave)
+		var close_penalty := maxf(0.0, float(min_player_steps - p_steps)) * 3.5
+		var recent_penalty := _recent_next_symbol_penalty(cell.coords, sequence_progress)
+		var score := (
+			distance_fit
+			+ pressure
+			+ pacing_fit
+			+ forward_bonus
+			+ exit_safety_bonus
+			+ route_safety_bonus
+			+ side_route_bonus
+			+ float(p_steps) * 0.10
+			- backtrack_penalty
+			- close_penalty
+			- too_far_ahead_penalty
+			- recent_penalty
+			+ randf() * 0.01
+		)
+		if score > best_score:
+			best_score = score
+			best_cell = cell
+
+	if best_cell != null:
+		_last_next_symbol_exit_dist = int(exit_dist.get(best_cell.coords, _last_next_symbol_exit_dist))
+		return best_cell
+	var relaxed_cell := _pick_relaxed_next_symbol_cell(
+		default_cell,
+		player_dist,
+		chaser_dist,
+		exit_dist,
+		safety_margin,
+		sequence_progress,
+		desired_player_steps,
+		min_exit_dist_before_finish,
+		remaining_items
+	)
+	if relaxed_cell != null:
+		_last_next_symbol_exit_dist = int(exit_dist.get(relaxed_cell.coords, _last_next_symbol_exit_dist))
+		return relaxed_cell
+	if exit_dist.has(default_cell.coords):
+		_last_next_symbol_exit_dist = int(exit_dist[default_cell.coords])
+	return default_cell
+
+func _pick_relaxed_next_symbol_cell(
+	default_cell: MazeData.CellData,
+	player_dist: Dictionary,
+	chaser_dist: Dictionary,
+	exit_dist: Dictionary,
+	safety_margin: int,
+	sequence_progress: float,
+	desired_player_steps: float,
+	min_exit_dist_before_finish: float,
+	remaining_items: int
+) -> MazeData.CellData:
+	var fallback_cell: MazeData.CellData = null
+	var fallback_score := -INF
+	var exploration_wave := sin(sequence_progress * PI)
+	for candidate in _maze.cells.values():
+		var cell := candidate as MazeData.CellData
+		if cell == null or not cell.is_visited or cell.is_start or cell.is_end:
+			continue
+		if cell.coords == default_cell.coords:
+			continue
+		if _collectibles.has(cell.coords):
+			continue
+		if _used_next_symbol_cells.has(cell.coords):
+			continue
+		if not player_dist.has(cell.coords) or not chaser_dist.has(cell.coords) or not exit_dist.has(cell.coords):
+			continue
+
+		var p_steps := int(player_dist[cell.coords])
+		var c_steps := int(chaser_dist[cell.coords])
+		var e_steps := int(exit_dist[cell.coords])
+		if p_steps <= 2:
+			continue
+		if p_steps + safety_margin >= c_steps:
+			continue
+		if remaining_items > 2 and float(e_steps) < min_exit_dist_before_finish:
+			continue
+
+		var route_buffer := _next_symbol_exit_route_buffer(
+			cell.coords,
+			p_steps,
+			exit_dist,
+			chaser_dist,
+			safety_margin
+		)
+		if route_buffer < -safety_margin:
+			continue
+
+		var distance_fit := -absf(float(p_steps) - desired_player_steps) * 0.46
+		var safety_bonus := clampf(float(c_steps - p_steps), 0.0, 10.0) * 0.22
+		var route_safety_bonus := clampf(float(route_buffer), -4.0, 8.0) * 0.20
+		var too_far_ahead_penalty := maxf(0.0, min_exit_dist_before_finish - float(e_steps)) * 2.4
+		var recent_penalty := _recent_next_symbol_penalty(cell.coords, sequence_progress) * 1.35
+		var score := (
+			distance_fit
+			+ safety_bonus
+			+ route_safety_bonus
+			+ _next_symbol_side_route_bonus(cell, exploration_wave)
+			- too_far_ahead_penalty
+			- recent_penalty
+			+ randf() * 0.01
+		)
+		if score > fallback_score:
+			fallback_score = score
+			fallback_cell = cell
+	return fallback_cell
+
+func _next_symbol_sequence_progress() -> float:
+	if _sequence.is_empty():
+		return 0.0
+	return clampf(float(_revealed_sequence_pos) / float(_sequence.size()), 0.0, 1.0)
+
+func _next_symbol_route_progress_target(sequence_progress: float) -> float:
+	if sequence_progress < 0.78:
+		var t := smoothstep(0.0, 0.78, sequence_progress)
+		return lerpf(0.08, 0.52, t)
+	var end_t := smoothstep(0.78, 1.0, sequence_progress)
+	return lerpf(0.52, 0.96, end_t)
+
+func _next_symbol_route_progress_limit(sequence_progress: float) -> float:
+	if sequence_progress < 0.82:
+		var t := smoothstep(0.0, 0.82, sequence_progress)
+		return lerpf(0.18, 0.66, t)
+	var end_t := smoothstep(0.82, 1.0, sequence_progress)
+	return lerpf(0.66, 0.99, end_t)
+
+func _remember_next_symbol_cell(coords: Vector2i) -> void:
+	_recent_next_symbol_cells.append(coords)
+	while _recent_next_symbol_cells.size() > 7:
+		_recent_next_symbol_cells.pop_front()
+
+func _recent_next_symbol_penalty(coords: Vector2i, sequence_progress: float) -> float:
+	var penalty := 0.0
+	var late_multiplier := lerpf(1.0, 2.0, sequence_progress)
+	for recent in _recent_next_symbol_cells:
+		var distance := absi(coords.x - recent.x) + absi(coords.y - recent.y)
+		if distance <= 2:
+			penalty += 6.0 * late_multiplier
+		elif distance <= 4:
+			penalty += 2.8 * late_multiplier
+		elif distance <= 6:
+			penalty += 0.9 * late_multiplier
+	return penalty
+
+func _is_too_close_to_recent_next_symbol(coords: Vector2i, sequence_progress: float) -> bool:
+	var hard_radius := 2 if sequence_progress < 0.65 else 3
+	for recent in _recent_next_symbol_cells:
+		var distance := absi(coords.x - recent.x) + absi(coords.y - recent.y)
+		if distance <= hard_radius:
+			return true
+	return false
+
+func _next_symbol_side_route_bonus(cell: MazeData.CellData, exploration_wave: float) -> float:
+	var bonus := 0.0
+	if not cell.is_main_path:
+		bonus += 1.2 + exploration_wave * 1.4
+	if _open_neighbor_count(cell.coords) <= 1:
+		bonus += 0.8
+	return bonus
+
+func _open_neighbor_count(coords: Vector2i) -> int:
+	var count := 0
+	for dir in MazeGenerator.DIRECTIONS:
+		if _maze.is_wall_open(coords, dir):
+			count += 1
+	return count
+
+func _next_symbol_exit_route_buffer(
+	start: Vector2i,
+	player_steps_to_start: int,
+	exit_dist: Dictionary,
+	chaser_dist: Dictionary,
+	safety_margin: int
+) -> int:
+	if not exit_dist.has(start):
+		return -1000000
+
+	var cursor := start
+	var remaining := int(exit_dist[start])
+	var steps_after_pickup := 0
+	var lookahead := mini(remaining, 8 + safety_margin * 2)
+	var weakest_buffer := 1000000
+	while steps_after_pickup <= lookahead:
+		var player_arrival := player_steps_to_start + steps_after_pickup
+		var chaser_arrival := int(chaser_dist.get(cursor, 1000000))
+		weakest_buffer = mini(weakest_buffer, chaser_arrival - player_arrival)
+		if remaining <= 0:
+			break
+
+		var best_next := cursor
+		var best_remaining := remaining
+		for dir in MazeGenerator.DIRECTIONS:
+			var next := cursor + dir
+			if not _maze.is_wall_open(cursor, dir):
+				continue
+			if not exit_dist.has(next):
+				continue
+			var next_remaining := int(exit_dist[next])
+			if next_remaining < best_remaining:
+				best_next = next
+				best_remaining = next_remaining
+		if best_next == cursor:
+			break
+		cursor = best_next
+		remaining = best_remaining
+		steps_after_pickup += 1
+	return weakest_buffer
+
+func _distance_map_from(starts: Array[Vector2i]) -> Dictionary:
+	var result: Dictionary = {}
+	if _maze == null:
+		return result
+	var queue: Array[Vector2i] = []
+	for start in starts:
+		if _maze.get_cell(start) == null:
+			continue
+		if result.has(start):
+			continue
+		result[start] = 0
+		queue.append(start)
+
+	var head := 0
+	while head < queue.size():
+		var pos := queue[head]
+		head += 1
+		var base_dist := int(result[pos])
+		for dir in MazeGenerator.DIRECTIONS:
+			var next := pos + dir
+			if result.has(next):
+				continue
+			if not _maze.is_wall_open(pos, dir):
+				continue
+			result[next] = base_dist + 1
+			queue.append(next)
+	return result
+
+func _next_symbol_safety_margin() -> int:
+	match Config.chaser_level:
+		Config.ChaserLevel.SLOW:
+			return 2
+		Config.ChaserLevel.MEDIUM:
+			return 3
+		Config.ChaserLevel.FAST:
+			return 4
+		Config.ChaserLevel.TURBO:
+			return 5
+		_:
+			return 3
 
 
 func _shake_collectible(col: Collectible) -> void:

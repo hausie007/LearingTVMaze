@@ -16,6 +16,7 @@ signal harder_pressed
 signal home_pressed
 signal suggestion_pressed(target_mode: int)
 signal chaser_toggled_pressed(target_level: int)
+signal swap_roles_pressed
 
 ## Emitted when the screen becomes visible (GameManager should pause the tree).
 signal screen_shown
@@ -26,12 +27,15 @@ signal screen_hidden
 # ── UI References ────────────────────────────────────────────────────────────
 
 var _container: Control = null
+var _winner_preview: CharacterPreview = null
 var _win_label: Label = null
 var _score_label: Label = null
 var _next_button: Button = null
 var _harder_button: Button = null
 var _timer_label: Label = null
 var _suggestion_container: VBoxContainer = null
+var _swap_roles_enabled: bool = false
+var _chaser_suggestion_enabled: bool = true
 
 ## Countdown state.
 var _timer_remaining: float = 0.0
@@ -77,12 +81,18 @@ func _input(event: InputEvent) -> void:
 func is_active() -> bool:
 	return _is_active
 
+func set_swap_roles_enabled(enabled: bool) -> void:
+	_swap_roles_enabled = enabled
+
+func set_chaser_suggestion_enabled(enabled: bool) -> void:
+	_chaser_suggestion_enabled = enabled
 
 ## Show the "You Win!" screen with score info.
 func show_win(time_str: String, move_count: int) -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
+	_set_winner_character("")
 
 	_win_label.text = tr("you_win")
 	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
@@ -105,6 +115,7 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
+	_set_winner_character("")
 
 	_win_label.text = tr("gotcha")
 	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
@@ -125,7 +136,20 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	# Gotcha screen has zero mode suggestions, so always show chaser toggle.
 	for child in _suggestion_container.get_children():
 		child.queue_free()
-	_add_chaser_suggestion()
+	if _swap_roles_enabled:
+		_add_suggestion_button(tr("mp_role_swap_roles"), func(): swap_roles_pressed.emit())
+	if _chaser_suggestion_enabled and Config.game_style != Config.STYLE_RACE:
+		_add_chaser_suggestion()
+
+func show_race_win(time_str: String, move_count: int, winner_character_id: String) -> void:
+	show_win(time_str, move_count)
+	_win_label.text = tr("race_i_won")
+	_set_winner_character(winner_character_id)
+
+func show_race_gotcha(time_str: String, move_count: int, winner_character_id: String) -> void:
+	show_gotcha(time_str, move_count)
+	_win_label.text = tr("race_i_won")
+	_set_winner_character(winner_character_id)
 
 
 ## Update mode suggestions on the win screen.
@@ -147,7 +171,7 @@ func update_suggestions(current_mode: int) -> void:
 			key = "try_numbers"
 
 	_add_suggestion_button(tr(key), func(): suggestion_pressed.emit(next_mode))
-	if Config.game_style != Config.STYLE_NEXT_SYMBOL:
+	if _chaser_suggestion_enabled and not [Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style):
 		_add_chaser_suggestion()
 
 ## Appends a localized button to toggle the Chaser.
@@ -214,6 +238,16 @@ func _build_ui() -> void:
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 20)
 	main_panel.add_child(vbox)
+
+	var preview_hbox := HBoxContainer.new()
+	preview_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	vbox.add_child(preview_hbox)
+
+	_winner_preview = CharacterPreview.new()
+	_winner_preview.custom_minimum_size = Vector2(140, 140)
+	_winner_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_winner_preview.visible = false
+	preview_hbox.add_child(_winner_preview)
 
 	# Header
 	_win_label = Label.new()
@@ -311,3 +345,28 @@ func _build_ui() -> void:
 
 func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW) -> Button:
 	return UIHelpers.create_styled_button(btn_text, w, h, f_color)
+
+func _set_winner_character(character_id: String) -> void:
+	if _winner_preview == null:
+		return
+	if character_id.is_empty():
+		_winner_preview.clear()
+		_winner_preview.visible = false
+		return
+	var preview_data := CharacterCatalog.get_preview_data_by_id(character_id)
+	var frames: Array[Texture2D] = []
+	if preview_data.has("frames"):
+		for item in (preview_data.get("frames", []) as Array):
+			var texture := item as Texture2D
+			if texture != null:
+				frames.append(texture)
+	if frames.is_empty():
+		var fallback := CharacterCatalog.get_texture_by_id(character_id)
+		if fallback != null:
+			frames.append(fallback)
+	if frames.is_empty():
+		_winner_preview.clear()
+		_winner_preview.visible = false
+		return
+	_winner_preview.set_character(frames, float(preview_data.get("fps", 1.0)))
+	_winner_preview.visible = true

@@ -144,6 +144,25 @@ func set_rotate_roles_after_round(enabled: bool) -> void:
 	host_config["rotate_roles_after_round"] = enabled
 	_sync_lobby_to_clients()
 
+func swap_collector_with_peer(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		return
+	if not players.has(peer_id):
+		return
+	_normalize_host_config()
+	if not bool(host_config.get("chaser_enabled", false)):
+		return
+	if String(host_config.get("game_style", STYLE_PATH)) == STYLE_RACE:
+		return
+
+	host_config["collector_peer_id"] = peer_id
+	_recalculate_roles()
+	if not current_session.is_empty():
+		current_session["config"] = host_config.duplicate(true)
+		current_session["players"] = players.duplicate(true)
+		current_session["roles"] = _roles_by_peer()
+	_sync_lobby_to_clients()
+
 func start_discovery() -> int:
 	stop_discovery()
 	_discovered_hosts.clear()
@@ -460,10 +479,10 @@ func _recalculate_roles() -> void:
 	var game_style := String(host_config.get("game_style", STYLE_PATH))
 	var default_role := ROLE_RACER if game_style == STYLE_RACE else ROLE_COLLECTOR
 
-	if game_style == STYLE_NEXT_SYMBOL:
+	if game_style == STYLE_RACE:
 		for key in players.keys():
 			var info := players[key] as Dictionary
-			info["role"] = ROLE_COLLECTOR
+			info["role"] = ROLE_RACER
 			players[key] = info
 		host_config["chaser_enabled"] = false
 		host_config.erase("collector_peer_id")

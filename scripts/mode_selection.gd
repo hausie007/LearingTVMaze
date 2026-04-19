@@ -150,7 +150,7 @@ func _initialize_temp_state() -> void:
 		temp_theme_idx = 0
 
 	temp_diff_idx = Config.difficulty
-	_selected_style = Config.game_style if [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(Config.game_style) else Config.STYLE_PATH
+	_selected_style = Config.game_style if [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style) else Config.STYLE_PATH
 	_selected_training = Config.training_type
 	if not [Config.TRAINING_NUMBERS, Config.TRAINING_LETTERS, Config.TRAINING_WORDS].has(_selected_training):
 		_selected_training = Config.TRAINING_WORDS
@@ -342,9 +342,9 @@ func _select_training(training: String) -> void:
 	_configure_dpad_navigation()
 
 func _on_play_pressed() -> void:
-	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(_selected_style):
+	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(_selected_style):
 		return
-	if _selected_style == Config.STYLE_NEXT_SYMBOL:
+	if _selected_style == Config.STYLE_RACE:
 		_chaser_enabled = false
 		_start_game()
 		return
@@ -370,14 +370,14 @@ func _update_labels() -> void:
 	var speed_level := CHASER_SPEED_LEVELS[temp_chaser_speed_idx]
 	_chaser_speed_button.text = tr(Config.CHASER_LEVEL_KEYS[speed_level])
 	if _start_button != null:
-		var style_ready := [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(_selected_style)
+		var style_ready := [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(_selected_style)
 		_start_button.text = tr("play") if style_ready else tr("style_coming_soon")
 	_apply_step_visibility()
 
 func _update_style_cards() -> void:
 	style_path_card.setup(">", _selected_title("style_path", Config.STYLE_PATH), tr("desc_maze"))
 	style_next_card.setup("1", tr("style_next_symbol"), tr("hud_target_now"))
-	style_race_card.setup(">>", tr("style_race"), tr("style_coming_soon"))
+	style_race_card.setup(">>", tr("style_race"), tr("role_racer"))
 	_apply_card_selection(style_path_card, _selected_style == Config.STYLE_PATH)
 	_apply_card_selection(style_next_card, _selected_style == Config.STYLE_NEXT_SYMBOL)
 	_apply_card_selection(style_race_card, _selected_style == Config.STYLE_RACE)
@@ -422,7 +422,7 @@ func _apply_card_selection(card: Button, selected: bool) -> void:
 	card.call("set_selected", selected)
 
 func _show_step(step: int) -> void:
-	if step == Step.VARIANT and _selected_style == Config.STYLE_NEXT_SYMBOL:
+	if step == Step.VARIANT and _selected_style == Config.STYLE_RACE:
 		_start_game()
 		return
 	_step = step
@@ -465,9 +465,9 @@ func _update_theme_preview() -> void:
 		_chaser_preview.set_character(_theme_preview_loader.chaser_frames, _theme_preview_loader.chaser_fps)
 
 func _start_game() -> void:
-	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL].has(_selected_style):
+	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(_selected_style):
 		return
-	if _selected_style == Config.STYLE_NEXT_SYMBOL:
+	if _selected_style == Config.STYLE_RACE:
 		_chaser_enabled = false
 	Config.learning_language = Config.LANG_CODES[temp_lang_idx]
 	Config.theme_dir_name = themes[temp_theme_idx] if temp_theme_idx < themes.size() else _original_theme_dir_name
