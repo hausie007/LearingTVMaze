@@ -36,16 +36,22 @@ theme_override_constants/separation = 18
 [node name="TitleLabel" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_color/font_color = Color(0.92, 0.75, 0.2, 1)
 theme_override_font_sizes/font_size = 56
-text = "Lobby"
+text = "Multiplayer Lobby"
 horizontal_alignment = 1
 
-[node name="ConfigLabel" type="Label" parent="CenterContainer/MainVBox"]
+[node name="CardsRow" type="HBoxContainer" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = ""
-horizontal_alignment = 1
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="SettingsRow" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
 
 [node name="StatusLabel" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
@@ -54,6 +60,13 @@ theme_override_font_sizes/font_size = 30
 text = "Waiting for players..."
 horizontal_alignment = 1
 
+[node name="PlayersRow" type="HBoxContainer" parent="CenterContainer/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
 [node name="NetworkDebugLabel" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -61,14 +74,6 @@ theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "Network: idle"
 horizontal_alignment = 1
-
-[node name="PlayersList" type="ItemList" parent="CenterContainer/MainVBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(1040, 340)
-layout_mode = 2
-same_column_width = true
-auto_height = true
-allow_reselect = true
 
 [node name="Buttons" type="HBoxContainer" parent="CenterContainer/MainVBox"]
 layout_mode = 2

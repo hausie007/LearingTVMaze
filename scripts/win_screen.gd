@@ -244,7 +244,8 @@ func _build_ui() -> void:
 	vbox.add_child(preview_hbox)
 
 	_winner_preview = CharacterPreview.new()
-	_winner_preview.custom_minimum_size = Vector2(140, 140)
+	_winner_preview.custom_minimum_size = Vector2(180, 180)
+	_winner_preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_winner_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_winner_preview.visible = false
 	preview_hbox.add_child(_winner_preview)

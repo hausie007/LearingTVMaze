@@ -29,10 +29,14 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 @onready var controller_panel: Control = %ControllerPanel
 @onready var character_icon: CharacterPreview = %CharacterIcon
 @onready var controller_title_label: Label = %ControllerTitleLabel
+@onready var controller_goal_label: Label = %ControllerGoalLabel
 @onready var remote_layout_label: Label = %RemoteLayoutLabel
 @onready var remote_layout_button: Button = %RemoteLayoutButton
 @onready var remote_layout_left_arrow: Label = %RemoteLayoutLeftArrow
 @onready var remote_layout_right_arrow: Label = %RemoteLayoutRightArrow
+
+@onready var chaser_ready_label: Label = get_node_or_null("%ChaserReadyLabel")
+@onready var chaser_countdown_label: Label = get_node_or_null("%ChaserCountdownLabel")
 
 var _hosts: Array = []
 var _host_cards: Array[Button] = []
@@ -40,7 +44,7 @@ var _selected_host_index: int = -1
 var _selected_host: Dictionary = {}
 var _character_catalog: Array[Dictionary] = []
 var _taken_character_ids: Array[String] = []
-var _selected_character_idx: int = 0
+var _selected_character_idx: int = -1
 var _selected_character_id: String = ""
 var _selected_character_palette: Dictionary = {}
 var _selected_host_available: bool = false
@@ -71,6 +75,12 @@ func _ready() -> void:
 	NetworkManager.join_rejected.connect(_on_join_rejected)
 	NetworkManager.game_started.connect(_on_game_started)
 	NetworkManager.debug_status_changed.connect(_on_network_debug_changed)
+	if NetworkManager.has_signal("chaser_countdown_updated"):
+		NetworkManager.chaser_countdown_updated.connect(_on_chaser_countdown_updated)
+	if NetworkManager.has_signal("chaser_released"):
+		NetworkManager.chaser_released.connect(_on_chaser_released)
+	if NetworkManager.has_signal("remote_goal_updated"):
+		NetworkManager.remote_goal_updated.connect(_on_remote_goal_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
 
@@ -280,7 +290,14 @@ func _update_character_selector() -> void:
 		return
 
 	if _selected_character_idx < 0 or _selected_character_idx >= _character_catalog.size():
-		_selected_character_idx = _find_next_enabled_character(-1, 1)
+		var target_id := Config.theme_dir_name + ":player"
+		for i in range(_character_catalog.size()):
+			var cat_id := String(_character_catalog[i].get("id", ""))
+			if cat_id == target_id and not _taken_character_ids.has(cat_id):
+				_selected_character_idx = i
+				break
+		if _selected_character_idx < 0:
+			_selected_character_idx = _find_next_enabled_character(-1, 1)
 
 	if _selected_character_idx >= 0:
 		var current_character_id: String = String(_character_catalog[_selected_character_idx].get("id", ""))
@@ -437,7 +454,7 @@ func _return_to_discovery(status_override: String = "") -> void:
 	_selected_host.clear()
 	_selected_host_index = -1
 	_selected_host_available = false
-	_selected_character_idx = 0
+	_selected_character_idx = -1
 	_selected_character_id = ""
 	_taken_character_ids.clear()
 	NetworkManager.leave_session()
@@ -552,6 +569,36 @@ func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null:
 		return
 	network_debug_label.text = "Network [%s]: %s" % [scope, message]
+
+func _on_chaser_countdown_updated(remaining: int) -> void:
+	if chaser_ready_label == null or chaser_countdown_label == null:
+		return
+	chaser_ready_label.visible = true
+	chaser_countdown_label.visible = true
+	if remaining > 0:
+		chaser_countdown_label.text = str(remaining)
+
+func _on_chaser_released() -> void:
+	if chaser_ready_label == null or chaser_countdown_label == null:
+		return
+	chaser_countdown_label.text = "GO!"
+	chaser_ready_label.visible = true
+	chaser_countdown_label.visible = true
+	
+	if OS.has_feature("mobile"):
+		Input.vibrate_handheld(500)
+		
+	var timer := get_tree().create_timer(1.0)
+	timer.connect("timeout", func():
+		if is_instance_valid(chaser_ready_label):
+			chaser_ready_label.visible = false
+		if is_instance_valid(chaser_countdown_label):
+			chaser_countdown_label.visible = false
+	)
+
+func _on_remote_goal_updated(goal_text: String) -> void:
+	if controller_goal_label != null:
+		controller_goal_label.text = goal_text
 
 func _cycle_character(dir: int) -> void:
 	if _character_catalog.is_empty():

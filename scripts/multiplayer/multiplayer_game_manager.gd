@@ -42,6 +42,7 @@ var _race_markers_by_peer: Dictionary = {}
 var _race_marker_root: Node2D = null
 var _race_collect_player: AudioStreamPlayer = null
 var _win_screen: WinScreen = null
+var _finished_peers: Dictionary = {}
 
 var _saved_theme_dir: String = ""
 var _saved_difficulty: int = 0
@@ -176,6 +177,7 @@ func _apply_session(session: Dictionary) -> void:
 	_race_progress.clear()
 	_race_colors_by_peer.clear()
 	_race_markers_by_peer.clear()
+	_finished_peers.clear()
 
 	_maze = maze_generator.generate_race(Config.grid_size) if _is_race_mode() else maze_generator.generate()
 	_set_start_markers(_spawn_positions_for_session(session))
@@ -188,13 +190,15 @@ func _apply_session(session: Dictionary) -> void:
 		maze_renderer.top_margin = GameHUD.HUD_HEIGHT
 	maze_renderer.draw_maze(_maze)
 	_clear_race_markers()
+	_spawn_avatars(session)
 	if _collectible_spawner != null:
 		_collectible_spawner.clear()
 		if _uses_shared_collectibles():
+			if _is_roleless_next_symbol_mode():
+				_collectible_spawner.configure_competitive_mode(_get_all_player_positions)
 			_collectible_spawner.spawn(_maze, maze_renderer, Config.game_style)
 	if _is_race_mode():
 		_build_race_sequence()
-	_spawn_avatars(session)
 	if _is_race_mode():
 		_spawn_race_markers()
 	_refresh_status_label()
@@ -237,6 +241,9 @@ func _spawn_avatars(session: Dictionary) -> void:
 		if _should_delay_path_chaser(role):
 			avatar.visible = false
 			_delayed_chaser_peer_ids.append(peer_id)
+			var initial_moves := _path_chaser_trigger_moves()
+			if initial_moves <= 3 and initial_moves > 0:
+				NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", initial_moves)
 		players_root.add_child(avatar)
 		_avatars[peer_id] = avatar
 		_move_cooldowns[peer_id] = 0.0
@@ -445,11 +452,23 @@ func _refresh_status_label() -> void:
 		if status_label != null:
 			status_label.text = tr("gotcha")
 		return
-	if _round_complete or (_is_next_symbol_mode() and total > 0 and current >= total):
+	if _round_complete:
 		if status_label != null:
 			status_label.text = "%s  %d/%d" % [tr("you_win"), total, total]
 		_refresh_shared_hud()
 		return
+
+	if (_is_next_symbol_mode() and total > 0 and current >= total):
+		if _is_roleless_next_symbol_mode():
+			if status_label != null:
+				status_label.text = tr("mission_goal_exit_multi")
+			_refresh_shared_hud()
+			return
+		else:
+			if status_label != null:
+				status_label.text = "%s  %d/%d" % [tr("you_win"), total, total]
+			_refresh_shared_hud()
+			return
 
 	var target := _collectible_spawner.get_current_target()
 	var progress := ""
@@ -477,7 +496,7 @@ func _refresh_shared_hud() -> void:
 			_collectible_spawner.get_next_collect_index(),
 			_collectible_spawner.get_total_collectibles()
 		)
-	hud.update_role(_hud_role_key())
+	_update_hud_mission_description()
 
 func _refresh_race_hud() -> void:
 	if hud == null:
@@ -490,7 +509,63 @@ func _refresh_race_hud() -> void:
 	var progress := int(_race_progress.get(leader_peer_id, 0)) if leader_peer_id != 0 else 0
 	var target := _race_target_for_peer(leader_peer_id) if leader_peer_id != 0 else ""
 	hud.update_target_display(target, progress, total)
-	hud.update_role(Config.ROLE_RACER)
+	_update_hud_mission_description()
+
+func _update_hud_mission_description() -> void:
+	if _avatars.is_empty():
+		return
+		
+	var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
+	
+	for key in _avatars.keys():
+		var peer_id := int(key)
+		var goal_str := _get_role_goal(peer_id)
+		
+		if peer_id == NetworkManager.HOST_PEER_ID:
+			if hud != null:
+				hud.set_mission_description(goal_str, enlarge_hud)
+		else:
+			NetworkManager.rpc_id(peer_id, "rpc_update_remote_goal", goal_str)
+
+func _get_role_goal(peer_id: int) -> String:
+	var role := _role_for_peer(peer_id)
+	
+	if _is_race_mode():
+		return "Run to the middle first."
+		
+	var is_phase_one := false
+	if _uses_shared_collectibles() and _collectible_spawner != null:
+		is_phase_one = not _collectible_spawner.is_complete()
+		
+	if _is_maze_race_mode():
+		if role == NetworkManager.ROLE_CHASER:
+			return "Catch the player."
+		return "Find the exit from the maze."
+		
+	if role == NetworkManager.ROLE_CHASER:
+		return "Catch the player."
+		
+	var payload_text := "all letters"
+	if Config.game_mode == Config.GameMode.NUMBERS:
+		payload_text = "all numbers"
+	elif Config.game_mode == Config.GameMode.WORDS:
+		payload_text = "the words"
+		
+	if is_phase_one:
+		if _is_chaser_variant():
+			return "Collect %s and do not get caught." % payload_text
+		else:
+			if _avatars.size() > 1:
+				return "Collect %s together." % payload_text
+			else:
+				return "Collect %s." % payload_text
+	else:
+		if _is_roleless_next_symbol_mode():
+			return "Find the exit from the maze."
+		elif _is_path_mode():
+			return "Find the exit from the maze."
+		else:
+			return "Done!"
 
 func _race_leader_peer_id() -> int:
 	var best_peer_id := 0
@@ -570,7 +645,14 @@ func _should_delay_path_chaser(role: String) -> bool:
 func _check_path_chaser_release() -> void:
 	if _path_chasers_released:
 		return
-	if _collector_move_count < _path_chaser_trigger_moves():
+	var trigger_moves := _path_chaser_trigger_moves()
+	var remaining := trigger_moves - _collector_move_count
+	
+	if remaining <= 3 and remaining > 0:
+		for peer_id in _delayed_chaser_peer_ids:
+			NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", remaining)
+			
+	if _collector_move_count < trigger_moves:
 		return
 	_release_path_chasers()
 
@@ -596,6 +678,7 @@ func _release_path_chasers() -> void:
 		var avatar := _avatars.get(peer_id, null) as MultiplayerAvatar
 		if avatar != null and is_instance_valid(avatar):
 			avatar.visible = true
+		NetworkManager.rpc_id(peer_id, "rpc_chaser_released")
 	_delayed_chaser_peer_ids.clear()
 
 func _can_collect(peer_id: int) -> bool:
@@ -614,10 +697,26 @@ func _check_shared_finish(peer_id: int, pos: Vector2i) -> void:
 		return
 	if _is_next_symbol_mode():
 		if _collectible_spawner.is_complete():
-			_round_complete = true
-			_held_directions.clear()
-			_speak_completed_word_if_needed()
-			_refresh_status_label()
+			if _is_roleless_next_symbol_mode():
+				var end_cell := _maze.get_end_cell() if _maze != null else null
+				if end_cell != null and end_cell.coords == pos:
+					_finished_peers[peer_id] = true
+					if _avatars.has(peer_id):
+						var avatar = _avatars[peer_id] as MultiplayerAvatar
+						avatar.visible = false
+						_held_directions.erase(peer_id)
+					if _finished_peers.size() >= _avatars.size():
+						_round_complete = true
+						_held_directions.clear()
+						_speak_completed_word_if_needed()
+						_refresh_status_label()
+						_show_shared_win_screen(peer_id)
+				_refresh_status_label()
+			else:
+				_round_complete = true
+				_held_directions.clear()
+				_speak_completed_word_if_needed()
+				_refresh_status_label()
 		return
 	if not _is_path_mode():
 		return
@@ -655,6 +754,14 @@ func _check_chaser_catch() -> void:
 			_refresh_status_label()
 			_show_gotcha_screen()
 			return
+
+func _get_all_player_positions() -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for avatar_value in _avatars.values():
+		var avatar := avatar_value as MultiplayerAvatar
+		if avatar != null:
+			result.append(avatar.grid_pos)
+	return result
 
 func _collector_avatar() -> MultiplayerAvatar:
 	if _collector_peer_id != 0 and _avatars.has(_collector_peer_id):

@@ -47,7 +47,6 @@ var _race_robot_path: Array[Vector2i] = []
 var _race_robot_index: int = 0
 var _race_robot_timer: float = 0.0
 var _race_robot_finished: bool = false
-var _race_collect_player: AudioStreamPlayer = null
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -88,7 +87,6 @@ func _ready() -> void:
 	maze_renderer.top_margin = hud.get_height()
 
 	# Generate and display the first maze.
-	_build_race_collect_sound()
 	_start_new_maze()
 
 
@@ -266,10 +264,6 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 # ── Collectible Callbacks ────────────────────────────────────────────────────
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
-	if Config.game_style == Config.STYLE_RACE:
-		_play_race_collect_sound()
-		_refresh_target_hud()
-		return
 	if not Config.voice_hints: return
 	
 	if Config.game_mode == Config.GameMode.WORDS:
@@ -372,6 +366,39 @@ func _refresh_target_hud() -> void:
 			collectible_spawner.get_next_collect_index(),
 			collectible_spawner.get_total_collectibles()
 		)
+	_update_hud_mission_description()
+
+func _update_hud_mission_description() -> void:
+	var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
+	var goal_str := _get_solo_goal()
+	
+	if hud != null:
+		hud.set_mission_description(goal_str, enlarge_hud)
+
+func _get_solo_goal() -> String:
+	if Config.game_style == Config.STYLE_RACE:
+		return "Run to the middle first."
+		
+	var is_phase_one := false
+	if Config.game_style in [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL] and collectible_spawner != null:
+		is_phase_one = not collectible_spawner.is_complete()
+		
+	if Config.game_style == Config.STYLE_PATH and not Config.chaser_enabled and Config.game_mode == Config.GameMode.NORMAL:
+		return "Find the exit from the maze."
+		
+	var payload_text := "all letters"
+	if Config.game_mode == Config.GameMode.NUMBERS:
+		payload_text = "all numbers"
+	elif Config.game_mode == Config.GameMode.WORDS:
+		payload_text = "the words"
+		
+	if is_phase_one:
+		if Config.chaser_enabled:
+			return "Collect %s and do not get caught." % payload_text
+		else:
+			return "Collect %s." % payload_text
+	else:
+		return "Find the exit from the maze."
 
 func _speak_completed_word_once(lang_override: String = "") -> void:
 	if _completed_word_spoken or not Config.voice_hints:
@@ -538,25 +565,3 @@ func _set_start_markers(spawn_cells: Array[Vector2i]) -> void:
 		if cell != null:
 			cell.is_start = true
 			cell.is_visited = true
-
-func _build_race_collect_sound() -> void:
-	_race_collect_player = AudioStreamPlayer.new()
-	var stream := AudioStreamGenerator.new()
-	stream.mix_rate = 22050.0
-	stream.buffer_length = 0.08
-	_race_collect_player.stream = stream
-	add_child(_race_collect_player)
-
-func _play_race_collect_sound() -> void:
-	if _race_collect_player == null:
-		return
-	_race_collect_player.play()
-	var playback := _race_collect_player.get_stream_playback() as AudioStreamGeneratorPlayback
-	if playback == null:
-		return
-	var mix_rate := 22050.0
-	var frames := int(mix_rate * 0.055)
-	for i in range(frames):
-		var fade := 1.0 - (float(i) / float(frames))
-		var sample := sin(TAU * 880.0 * float(i) / mix_rate) * 0.12 * fade
-		playback.push_frame(Vector2(sample, sample))

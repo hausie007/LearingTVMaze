@@ -13,7 +13,7 @@ const HUD_HEIGHT: float = 160.0
 
 var _time_label: Label = null
 var _moves_label: Label = null
-var _role_label: Label = null
+var _desc_label: Label = null
 var _word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
 
@@ -40,41 +40,13 @@ func update_moves(count: int) -> void:
 	if _moves_label:
 		_moves_label.text = "%d" % count
 
-func update_role(role_key: String, color: Color = UIColors.YELLOW) -> void:
-	if _role_label == null:
-		return
-	if role_key.is_empty():
-		_role_label.text = ""
-		return
-	var label_key := "role_collector"
-	match role_key:
-		Config.ROLE_CHASER:
-			label_key = "role_chaser"
-		Config.ROLE_RACER:
-			label_key = "role_racer"
-		_:
-			label_key = "role_collector"
-	_role_label.text = tr(label_key)
-	_role_label.add_theme_color_override("font_color", color)
+func update_role(_role_key: String, _color: Color = UIColors.YELLOW) -> void:
+	pass
 
-func update_target_display(target: String, progress_index: int, total: int) -> void:
+func update_target_display(_target: String, _progress_index: int, _total: int) -> void:
 	_word_letter_labels.clear()
 	for child in _word_container.get_children():
 		child.queue_free()
-
-	if target.is_empty():
-		return
-
-	var label := Label.new()
-	var progress_text := ""
-	if total > 0:
-		progress_text = " %d/%d" % [mini(progress_index + 1, total), total]
-	label.text = "%s: %s%s" % [tr("hud_target_now"), target, progress_text]
-	label.add_theme_font_size_override("font_size", 56)
-	label.add_theme_color_override("font_color", UIColors.YELLOW)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_word_container.add_child(label)
 
 ## Rebuild the word display for Words mode. Clears if not applicable.
 func update_word_display(word_data: Dictionary, game_mode: int) -> void:
@@ -101,7 +73,7 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 		var emoji_label := Label.new()
 		emoji_label.text = emoji
 		emoji_label.add_theme_font_override("font", UIHelpers.get_emoji_font())
-		emoji_label.add_theme_font_size_override("font_size", 96)
+		emoji_label.add_theme_font_size_override("font_size", 76)
 		emoji_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_word_container.add_child(emoji_label)
 
@@ -111,15 +83,15 @@ func update_word_display(word_data: Dictionary, game_mode: int) -> void:
 
 	# Letter labels — dimmed by default
 	# Dynamic font scaling to fit longer phrases (1920 viewport width)
-	var font_size: int = 80
-	var min_w: float = 72.0
+	var font_size: int = 68
+	var min_w: float = 60.0
 	
 	if word.length() > 24:
-		font_size = 48
-		min_w = 42.0
+		font_size = 42
+		min_w = 38.0
 	elif word.length() > 16:
-		font_size = 60
-		min_w = 54.0
+		font_size = 52
+		min_w = 48.0
 
 	for i in range(word.length()):
 		if word[i] == " ":
@@ -154,6 +126,16 @@ func light_up_letter(index: int) -> void:
 	var tw := create_tween()
 	tw.tween_property(lbl, "scale", Vector2(1.3, 1.3), 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tw.tween_property(lbl, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+func set_mission_description(desc: String, enlarge: bool = false) -> void:
+	if _desc_label:
+		_desc_label.text = desc
+		if enlarge:
+			_desc_label.add_theme_font_size_override("font_size", 42)
+			_desc_label.add_theme_color_override("font_color", UIColors.YELLOW)
+		else:
+			_desc_label.add_theme_font_size_override("font_size", 25)
+			_desc_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.95))
 
 
 ## Return the HUD height for maze layout calculations.
@@ -194,21 +176,27 @@ func _build_ui() -> void:
 	_time_label.custom_minimum_size.x = 250
 	hbox.add_child(_time_label)
 
-	_role_label = Label.new()
-	_role_label.text = ""
-	_role_label.add_theme_font_size_override("font_size", 34)
-	_role_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	_role_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_role_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_role_label.custom_minimum_size.x = 180
-	hbox.add_child(_role_label)
+	# Center VBox: Word display area + bottom description
+	var center_vbox := VBoxContainer.new()
+	center_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	center_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.add_child(center_vbox)
 
-	# Center: Word display area (flexible, fills remaining space)
 	_word_container = HBoxContainer.new()
-	_word_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_word_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_word_container.alignment = BoxContainer.ALIGNMENT_CENTER
 	_word_container.add_theme_constant_override("separation", 4)
-	hbox.add_child(_word_container)
+	center_vbox.add_child(_word_container)
+
+	_desc_label = Label.new()
+	_desc_label.add_theme_font_size_override("font_size", 25)
+	_desc_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.95))
+	_desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER  # Changed from BOTTOM to CENTER when enlarged
+	_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_desc_label.custom_minimum_size.x = 400
+	_desc_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	center_vbox.add_child(_desc_label)
 
 	# Right: Move counter
 	_moves_label = Label.new()

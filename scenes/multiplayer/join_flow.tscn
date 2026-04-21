@@ -308,6 +308,58 @@ theme_override_font_sizes/font_size = 42
 text = "Controller"
 horizontal_alignment = 1
 
+[node name="ControllerGoalLabel" type="Label" parent="ControllerPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 96.0
+offset_right = 300.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 28
+text = "Goal text..."
+horizontal_alignment = 1
+
+[node name="ChaserMessageContainer" type="Control" parent="ControllerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ChaserReadyLabel" type="Label" parent="ControllerPanel/ChaserMessageContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "Get ready"
+
+[node name="ChaserCountdownLabel" type="Label" parent="ControllerPanel/ChaserMessageContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 120
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "3"
+
 [node name="NetworkDebugLayer" type="CanvasLayer" parent="."]
 
 [node name="NetworkDebugMargin" type="MarginContainer" parent="NetworkDebugLayer"]

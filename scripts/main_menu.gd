@@ -28,6 +28,7 @@ var _maze_size_right: Label = null
 var _start_multiplayer_button: Button = null
 var _settings_button: Button = null
 var _help_button: Button = null
+var _theme_preview_container: Control = null
 var _secondary_overlay: Control = null
 var _secondary_row: HBoxContainer = null
 var _host_list_scroll: ScrollContainer = null
@@ -195,12 +196,16 @@ func _build_layout() -> void:
 	_setup_cycling(_maze_size_button, _cycle_maze_size)
 	_setup_arrow_visibility(_maze_size_button, _maze_size_left, _maze_size_right)
 
+	_theme_preview_container = Control.new()
+	_theme_preview_container.name = "ThemePreviewContainer"
+	settings_block.add_child(_theme_preview_container)
+
 	_theme_preview = CharacterPreview.new()
 	_theme_preview.name = "ThemePlayerPreview"
-	_theme_preview.custom_minimum_size = Vector2(100, 100)
 	_theme_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	_theme_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	settings_block.add_child(_theme_preview)
+	_theme_preview.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_theme_preview_container.add_child(_theme_preview)
 
 	_build_secondary_overlay()
 	_build_join_list()
@@ -246,7 +251,7 @@ func _build_secondary_overlay() -> void:
 	_secondary_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_secondary_overlay)
 
-	_start_multiplayer_button = _create_corner_button(tr("home_start_multiplayer"))
+	_start_multiplayer_button = _create_corner_button(tr("home_start_multiplayer"), UIColors.BLUE)
 	_start_multiplayer_button.pressed.connect(_open_host_setup)
 	_secondary_overlay.add_child(_start_multiplayer_button)
 
@@ -311,12 +316,12 @@ func _create_secondary_button(text: String) -> Button:
 func _create_tertiary_button(text: String) -> Button:
 	return _create_corner_button(text)
 
-func _create_corner_button(text: String) -> Button:
+func _create_corner_button(text: String, color: Color = UIColors.YELLOW) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(260, 58)
 	button.add_theme_font_size_override("font_size", 24)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
+	UIHelpers.apply_style_to_button(button, color)
 	return button
 
 func _create_home_selector_row(label_key: String) -> HBoxContainer:
@@ -402,6 +407,7 @@ func _select_mission(mission_id: String) -> void:
 	_selected_mission = mission_id
 	Config.selected_mission_id = mission_id
 	_update_mission_cards()
+	_configure_home_focus()
 
 func _on_join_card_focus_entered() -> void:
 	_join_card_focused = true
@@ -475,7 +481,7 @@ func _update_join_button() -> void:
 	_join_card.call("setup", "!", tr("mp_join_game"), tr("mp_join_discovery_found"))
 	if not has_hosts:
 		_join_card_focused = false
-		_update_mission_cards()
+	_update_mission_cards()
 	if not has_hosts and focus_owner == _join_card:
 		var fallback := _mission_cards.get(MissionCatalog.MISSION_FIND_NEXT, _selected_mission_card()) as Button
 		if fallback != null:
@@ -655,10 +661,10 @@ func _apply_responsive_layout() -> void:
 	if _join_vbox != null:
 		_join_vbox.custom_minimum_size.x = minf(available_width, 1180.0)
 	if _top_spacer != null:
-		_top_spacer.custom_minimum_size.y = clampf(viewport_height * (0.032 if short_screen else 0.045), 18.0, 54.0)
+		_top_spacer.custom_minimum_size.y = clampf(viewport_height * 0.0075, 3.0, 8.0)
 	if _logo != null:
-		var logo_width: float = clampf(available_width * (0.40 if short_screen else 0.44), 400.0, 720.0)
-		var logo_height: float = clampf(logo_width * 0.214, 82.0, 154.0)
+		var logo_width: float = clampf(available_width * (0.52 if short_screen else 0.58), 480.0, 930.0)
+		var logo_height: float = clampf(logo_width * 0.214, 102.0, 198.0)
 		_logo.custom_minimum_size = Vector2(logo_width, logo_height)
 	if _logo_cards_spacer != null:
 		_logo_cards_spacer.custom_minimum_size.y = 16.0 if short_screen else 24.0
@@ -686,28 +692,32 @@ func _apply_responsive_layout() -> void:
 				card.call("configure_compact", icon_size, title_size, subtitle_size)
 	if _mission_settings_spacer != null:
 		_mission_settings_spacer.custom_minimum_size.y = 56.0 if short_screen else 74.0
+	var selector_width: float = clampf(available_width * 0.32, 380.0, 500.0)
+	var selector_height: float = 58.0 if short_screen else 66.0
+	var selector_font_size: int = 28 if short_screen else 31
+
 	if _theme_button != null:
-		var selector_width: float = clampf(available_width * 0.32, 380.0, 500.0)
-		_theme_button.custom_minimum_size.x = selector_width
-		_theme_button.custom_minimum_size.y = 58.0 if short_screen else 66.0
-		_theme_button.add_theme_font_size_override("font_size", 28 if short_screen else 31)
-		_maze_size_button.custom_minimum_size.x = selector_width
-		_maze_size_button.custom_minimum_size.y = 58.0 if short_screen else 66.0
-		_maze_size_button.add_theme_font_size_override("font_size", 28 if short_screen else 31)
-	if _theme_preview != null:
-		var preview_size: float = 86.0 if short_screen else 112.0
-		_theme_preview.custom_minimum_size = Vector2(preview_size, preview_size)
+		_theme_button.custom_minimum_size = Vector2(selector_width, selector_height)
+		_theme_button.add_theme_font_size_override("font_size", selector_font_size)
+		_maze_size_button.custom_minimum_size = Vector2(selector_width, selector_height)
+		_maze_size_button.add_theme_font_size_override("font_size", selector_font_size)
+
+	if _theme_preview_container != null:
+		var preview_size: float = 94.0 if short_screen else 124.0
+		_theme_preview_container.custom_minimum_size = Vector2(preview_size, preview_size)
+		_theme_preview_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		if _theme_preview != null:
+			_theme_preview.custom_minimum_size = Vector2(preview_size, preview_size)
+
 	if _start_multiplayer_button != null:
-		var action_width: float = 260.0 if not short_screen else 232.0
-		var action_height: float = 58.0 if not short_screen else 52.0
-		_start_multiplayer_button.custom_minimum_size = Vector2(action_width, action_height)
-		_start_multiplayer_button.add_theme_font_size_override("font_size", 24 if not short_screen else 22)
+		_start_multiplayer_button.custom_minimum_size = Vector2(selector_width, selector_height)
+		_start_multiplayer_button.add_theme_font_size_override("font_size", selector_font_size)
 		if _settings_button != null:
-			_settings_button.custom_minimum_size = Vector2(action_width, action_height)
-			_settings_button.add_theme_font_size_override("font_size", 24 if not short_screen else 22)
+			_settings_button.custom_minimum_size = Vector2(selector_width, selector_height)
+			_settings_button.add_theme_font_size_override("font_size", selector_font_size)
 		if _help_button != null:
-			_help_button.custom_minimum_size = Vector2(action_width, action_height)
-			_help_button.add_theme_font_size_override("font_size", 24 if not short_screen else 22)
+			_help_button.custom_minimum_size = Vector2(selector_width, selector_height)
+			_help_button.add_theme_font_size_override("font_size", selector_font_size)
 	if _secondary_row != null:
 		_position_secondary_row()
 	if _host_list_scroll != null:
@@ -784,12 +794,12 @@ func _join_card_width() -> float:
 
 func _configure_home_focus() -> void:
 	var cards: Array[Button] = _primary_card_buttons()
-	_configure_grid_navigation(cards, _mission_columns, _help_button, _theme_button)
+	_configure_grid_navigation(cards, _mission_columns, null, _theme_button)
 	_configure_single_navigation(_theme_button, _selected_mission_card(), _maze_size_button)
-	_configure_single_navigation(_maze_size_button, _theme_button, _start_multiplayer_button)
+	_configure_single_navigation(_maze_size_button, _theme_button, _settings_button)
 
 	var bottom_buttons: Array[Button] = [_start_multiplayer_button, _settings_button, _help_button]
-	_configure_row_navigation(bottom_buttons, _maze_size_button, _selected_mission_card())
+	_configure_row_navigation(bottom_buttons, _maze_size_button, null)
 
 func _configure_join_focus() -> void:
 	for i in range(_host_cards.size()):

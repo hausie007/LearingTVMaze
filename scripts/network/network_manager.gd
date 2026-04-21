@@ -11,6 +11,9 @@ signal game_started(session: Dictionary)
 signal peer_disconnected(peer_id: int)
 signal input_received(peer_id: int, direction: Vector2i, pressed: bool)
 signal debug_status_changed(scope: String, message: String)
+signal chaser_countdown_updated(remaining: int)
+signal chaser_released()
+signal remote_goal_updated(goal_text: String)
 
 const APP_ID := "learning_maze"
 const PROTOCOL_VERSION := 1
@@ -684,6 +687,14 @@ func rpc_dpad_input(direction: Vector2i, pressed: bool) -> void:
 
 	input_received.emit(sender_id, direction, pressed)
 
+@rpc("authority", "call_remote", "reliable")
+func rpc_chaser_countdown(remaining: int) -> void:
+	chaser_countdown_updated.emit(remaining)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_chaser_released() -> void:
+	chaser_released.emit()
+
 func _emit_debug(scope: String, message: String) -> void:
 	debug_status_changed.emit(scope, message)
 
@@ -717,3 +728,8 @@ func _host_signature(info: Dictionary) -> String:
 		"taken_characters": taken_characters,
 	}
 	return JSON.stringify(normalized)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_update_remote_goal(goal_text: String) -> void:
+	if not multiplayer.is_server():
+		remote_goal_updated.emit(goal_text)

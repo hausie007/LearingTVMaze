@@ -33,25 +33,25 @@ static func missions() -> Array[Dictionary]:
 	return [
 		{
 			"id": MISSION_FIND_EXIT,
-			"icon": ">",
+			"icon": "res://images/lm_maze.png",
 			"title_key": "mission_find_exit",
 			"subtitle_key": "mission_find_exit_short",
 		},
 		{
 			"id": MISSION_FOLLOW_TRAIL,
-			"icon": "123",
+			"icon": "res://images/lm_trail.png",
 			"title_key": "mission_follow_trail",
 			"subtitle_key": "mission_follow_trail_short",
 		},
 		{
 			"id": MISSION_FIND_NEXT,
-			"icon": "1",
+			"icon": "res://images/lm_next.png",
 			"title_key": "mission_find_next",
 			"subtitle_key": "mission_find_next_short",
 		},
 		{
 			"id": MISSION_RACE_MIDDLE,
-			"icon": ">>",
+			"icon": "res://images/lm_center.png",
 			"title_key": "mission_race_middle",
 			"subtitle_key": "mission_race_middle_short",
 		},

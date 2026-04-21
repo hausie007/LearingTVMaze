@@ -5,6 +5,7 @@ extends Button
 @onready var subtitle_label: Label = $MarginContainer/VBox/SubtitleLabel
 
 var _preview: CharacterPreview = null
+var _image_icon: TextureRect = null
 var _icon_font_size: int = 80
 var _title_font_size: int = 42
 var _subtitle_font_size: int = 24
@@ -42,8 +43,25 @@ func setup(icon_text: String, title_text: String, subtitle_text: String) -> void
 	# Use call_deferred if icons/labels are not ready
 	if not is_node_ready(): await ready
 	
-	icon_label.text = icon_text
-	icon_label.visible = not icon_text.is_empty()
+	if icon_text.begins_with("res://"):
+		icon_label.visible = false
+		if _image_icon == null:
+			_image_icon = TextureRect.new()
+			_image_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			_image_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			$MarginContainer/VBox.add_child(_image_icon)
+			$MarginContainer/VBox.move_child(_image_icon, icon_label.get_index())
+		var tex := load(icon_text) as Texture2D
+		if tex != null:
+			_image_icon.texture = tex
+		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.6)
+		_image_icon.visible = true
+	else:
+		if _image_icon != null:
+			_image_icon.visible = false
+		icon_label.text = icon_text
+		icon_label.visible = not icon_text.is_empty()
+		
 	title_label.text = title_text
 	subtitle_label.text = subtitle_text
 	subtitle_label.visible = not subtitle_text.is_empty()
@@ -80,13 +98,16 @@ func clear_character_preview() -> void:
 		return
 	_preview.clear()
 	_preview.visible = false
-	icon_label.visible = not icon_label.text.is_empty()
+	if _image_icon != null and _image_icon.texture != null:
+		_image_icon.visible = true
+	else:
+		icon_label.visible = not icon_label.text.is_empty()
 
-func set_selected(selected: bool) -> void:
+func set_selected(selected: bool, animated: bool = true) -> void:
 	if not is_node_ready(): await ready
 	_selected = selected
 	_apply_selection_style()
-	_apply_emphasis(true)
+	_apply_emphasis(animated)
 
 func set_custom_palette(
 	normal_bg: Color,
@@ -113,6 +134,8 @@ func set_custom_palette(
 
 func _apply_text_sizes() -> void:
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)
+	if _image_icon != null:
+		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.6)
 	title_label.add_theme_font_size_override("font_size", _title_font_size)
 	subtitle_label.add_theme_font_size_override("font_size", _subtitle_font_size)
 	icon_label.add_theme_color_override("font_color", _icon_color)

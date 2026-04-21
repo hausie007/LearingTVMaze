@@ -37,14 +37,14 @@ static func _append_entries_for_type(
 	if frames.is_empty():
 		return
 
-	var role_name: String = "Player" if char_type == "player" else "Chaser"
+	var numeral: String = "I" if char_type == "player" else "II"
 	catalog.append({
 		"id": "%s:%s" % [theme_dir, char_type],
 		"theme_dir": theme_dir,
 		"theme_title": theme_title,
 		"type": char_type,
 		"frame_index": 0,
-		"display_name": "%s | %s" % [theme_title, role_name],
+		"display_name": "%s %s" % [theme_title, numeral],
 	})
 
 static func _frames_for(loader: ThemeLoader, char_type: String) -> Array[Texture2D]:

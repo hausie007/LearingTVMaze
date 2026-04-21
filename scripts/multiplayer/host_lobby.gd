@@ -1,20 +1,17 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
 
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var title_label: Label = %TitleLabel
-@onready var config_label: Label = %ConfigLabel
+@onready var cards_row: HBoxContainer = %CardsRow
+@onready var settings_row: HBoxContainer = %SettingsRow
+@onready var players_row: HBoxContainer = %PlayersRow
 @onready var status_label: Label = %StatusLabel
 @onready var network_debug_label: Label = %NetworkDebugLabel
-@onready var players_list: ItemList = %PlayersList
 @onready var start_now_button: Button = %StartNowButton
-@onready var buttons_row: HBoxContainer = $CenterContainer/MainVBox/Buttons
 
-var _collector_button: Button = null
-var _random_collector_button: Button = null
-var _rotate_roles_button: Button = null
-var _selected_collector_idx: int = 0
 var _last_lobby_state: Dictionary = {}
 
 func _ready() -> void:
@@ -23,9 +20,7 @@ func _ready() -> void:
 	if network_debug_label != null:
 		network_debug_label.visible = false
 
-	_build_role_controls()
 	UIHelpers.apply_style_to_button(start_now_button, UIColors.BLUE)
-
 	start_now_button.pressed.connect(_on_start_now_pressed)
 
 	NetworkManager.lobby_updated.connect(_on_lobby_updated)
@@ -51,38 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _localize_ui() -> void:
-	title_label.text = tr("mp_host_lobby_title")
-	status_label.text = tr("mp_host_lobby_waiting")
-	start_now_button.text = tr("mp_host_start_now")
-
-func _build_role_controls() -> void:
-	if buttons_row == null:
-		return
-
-	_collector_button = Button.new()
-	_collector_button.custom_minimum_size = Vector2(330, 96)
-	_collector_button.add_theme_font_size_override("font_size", 28)
-	_collector_button.pressed.connect(func(): _cycle_collector(1))
-	UIHelpers.apply_style_to_button(_collector_button, UIColors.YELLOW)
-	buttons_row.add_child(_collector_button)
-	buttons_row.move_child(_collector_button, 0)
-
-	_random_collector_button = Button.new()
-	_random_collector_button.custom_minimum_size = Vector2(260, 96)
-	_random_collector_button.add_theme_font_size_override("font_size", 28)
-	_random_collector_button.text = tr("mp_role_random_collector")
-	_random_collector_button.pressed.connect(Callable(NetworkManager, "randomize_collector"))
-	UIHelpers.apply_style_to_button(_random_collector_button, UIColors.YELLOW)
-	buttons_row.add_child(_random_collector_button)
-	buttons_row.move_child(_random_collector_button, 1)
-
-	_rotate_roles_button = Button.new()
-	_rotate_roles_button.custom_minimum_size = Vector2(280, 96)
-	_rotate_roles_button.add_theme_font_size_override("font_size", 28)
-	_rotate_roles_button.pressed.connect(_toggle_rotate_roles)
-	UIHelpers.apply_style_to_button(_rotate_roles_button, UIColors.YELLOW)
-	buttons_row.add_child(_rotate_roles_button)
-	buttons_row.move_child(_rotate_roles_button, 2)
+	title_label.text = "Multiplayer Lobby" # As requested by user
+	start_now_button.text = "Start Game" # As requested by user
 
 func _apply_dpad_layout() -> void:
 	if center_container != null and Config != null:
@@ -95,101 +60,107 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	_last_lobby_state = state.duplicate(true)
 	var cfg: Dictionary = state.get("config", {}) as Dictionary
 	var player_map: Dictionary = state.get("players", {}) as Dictionary
-	var max_players: int = int(cfg.get("max_players", 2))
+	
+	# Make sure host is collector, and only update if not already set to avoid infinite recursion
+	if multiplayer.is_server():
+		if bool(cfg.get("rotate_roles_after_round", true)) != false:
+			NetworkManager.set_rotate_roles_after_round(false)
+		if int(cfg.get("collector_peer_id", -1)) != NetworkManager.HOST_PEER_ID:
+			NetworkManager.set_collector_peer_id(NetworkManager.HOST_PEER_ID)
+	
+	_build_cards(cfg)
+	_build_settings(cfg, player_map)
+	_build_players(player_map)
 
-	var pickup_text := String(cfg.get("training_type_title", ""))
-	if String(cfg.get("training_type", NetworkManager.TRAINING_WORDS)) == NetworkManager.TRAINING_NONE:
-		pickup_text = tr("pickup_none")
-	elif pickup_text.is_empty():
-		pickup_text = tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(
-			String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
-		)))
-	var role_summary := tr(String(cfg.get("role_summary_key", MissionCatalog.role_summary_key(
-		String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL)),
-		bool(cfg.get("chaser_enabled", false))
-	))))
-	var goal_text := tr(String(cfg.get("mission_goal_key", MissionCatalog.goal_key(
-		String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL)),
-		MissionCatalog.pickup_for_training(String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))),
-		bool(cfg.get("chaser_enabled", false)),
-		true
-	))))
-	config_label.text = "%s | %s | %s | %s: %s | %s: %s | %s: %d" % [
-		String(cfg.get("mission_title", cfg.get("game_style_title", tr("mp_style_path")))),
-		pickup_text,
-		role_summary,
-		tr("mp_host_difficulty"),
-		tr(String(cfg.get("difficulty_key", "diff_easy"))),
-		tr("mp_host_theme"),
-		String(cfg.get("theme_title", "")),
-		tr("mp_host_max_players"),
-		max_players,
+func _build_cards(cfg: Dictionary) -> void:
+	for c in cards_row.get_children():
+		c.queue_free()
+	
+	var mission_id := String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
+	var md := MissionCatalog.mission_data(mission_id)
+	
+	var mode_card = ModeCardScene.instantiate() as Button
+	mode_card.custom_minimum_size = Vector2(300, 230)
+	mode_card.call("configure_compact", 48, 30, 22)
+	mode_card.call("setup", String(md.get("icon", "?")), tr(String(md.get("title_key", ""))), tr(String(md.get("subtitle_key", ""))))
+	mode_card.focus_mode = Control.FOCUS_NONE
+	cards_row.add_child(mode_card)
+	
+	var training := String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
+	var pickup_title := String(cfg.get("training_type_title", ""))
+	if training == NetworkManager.TRAINING_NONE:
+		pickup_title = tr("pickup_none")
+	elif pickup_title.is_empty():
+		pickup_title = tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
+	
+	var pickup_icon := "A"
+	if training == NetworkManager.TRAINING_NUMBERS:
+		pickup_icon = "1"
+	elif training == NetworkManager.TRAINING_NONE:
+		pickup_icon = "?"
+		
+	var chaser_enabled := bool(cfg.get("chaser_enabled", false))
+	var role_summary := tr(String(cfg.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
+	
+	var training_card = ModeCardScene.instantiate() as Button
+	training_card.custom_minimum_size = Vector2(300, 230)
+	training_card.call("configure_compact", 48, 30, 22)
+	training_card.call("setup", pickup_icon, pickup_title, role_summary)
+	training_card.focus_mode = Control.FOCUS_NONE
+	cards_row.add_child(training_card)
+
+func _build_settings(cfg: Dictionary, player_map: Dictionary) -> void:
+	for c in settings_row.get_children():
+		c.queue_free()
+		
+	var diff_val := tr(String(cfg.get("difficulty_key", "diff_easy")))
+	var theme_val := String(cfg.get("theme_title", ""))
+	var max_players := int(cfg.get("max_players", 2))
+	
+	var label := Label.new()
+	label.text = "%s: %s    |    %s: %s" % [
+		tr("mp_host_difficulty"), diff_val, 
+		tr("mp_host_theme"), theme_val
 	]
-	if not goal_text.is_empty():
-		config_label.text += "\n%s" % goal_text
-
-	players_list.clear()
-	for key in player_map.keys():
-		var peer_id: int = int(key)
-		var info: Dictionary = player_map[key] as Dictionary
-		var char_id: String = String(info.get("character_id", ""))
-		var is_host: bool = bool(info.get("is_host", false))
-		var role: String = tr("mp_host_player")
-		if is_host:
-			role = tr("mp_host_player_host")
-		var char_name: String = CharacterCatalog.display_name_for_id(char_id)
-		if _is_roleless_next_symbol_config(cfg):
-			players_list.add_item("%s %d | %s" % [role, peer_id, char_name])
-		elif _is_maze_race_config(cfg):
-			players_list.add_item("%s %d | %s | %s" % [role, peer_id, char_name, tr("mp_role_racer")])
-		else:
-			var assigned_role: String = String(info.get("role", NetworkManager.ROLE_COLLECTOR))
-			players_list.add_item("%s %d | %s | %s" % [role, peer_id, char_name, _role_title(assigned_role)])
-
+	label.add_theme_font_size_override("font_size", 30)
+	label.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	settings_row.add_child(label)
+	
 	status_label.text = "%s %d/%d" % [tr("mp_host_lobby_players"), player_map.size(), max_players]
-	_update_role_controls(cfg, player_map)
 
-func _update_role_controls(cfg: Dictionary, player_map: Dictionary) -> void:
-	var chaser_enabled := bool(cfg.get("chaser_enabled", false)) and not _is_roleless_or_race_config(cfg)
-	if _collector_button != null:
-		_collector_button.visible = chaser_enabled
-	if _random_collector_button != null:
-		_random_collector_button.visible = chaser_enabled
-	if _rotate_roles_button != null:
-		_rotate_roles_button.visible = chaser_enabled
-		_rotate_roles_button.text = "%s: %s" % [
-			tr("mp_role_rotate_roles"),
-			tr("on") if bool(cfg.get("rotate_roles_after_round", false)) else tr("off"),
-		]
-	if not chaser_enabled or _collector_button == null:
-		return
-
+func _build_players(player_map: Dictionary) -> void:
+	for c in players_row.get_children():
+		c.queue_free()
+		
 	var peer_ids := _ordered_peer_ids(player_map)
-	if peer_ids.is_empty():
-		_collector_button.text = tr("mp_role_collector")
-		return
-
-	var collector_peer_id := int(cfg.get("collector_peer_id", peer_ids[0]))
-	var collector_idx := peer_ids.find(collector_peer_id)
-	if collector_idx < 0:
-		collector_idx = 0
-	_selected_collector_idx = collector_idx
-	_collector_button.text = "%s: %s" % [
-		tr("mp_role_collector"),
-		_player_label(player_map, peer_ids[collector_idx]),
-	]
-
-func _cycle_collector(dir: int) -> void:
-	var player_map: Dictionary = _last_lobby_state.get("players", {}) as Dictionary
-	var peer_ids := _ordered_peer_ids(player_map)
-	if peer_ids.is_empty():
-		return
-	_selected_collector_idx = (_selected_collector_idx + dir + peer_ids.size()) % peer_ids.size()
-	NetworkManager.set_collector_peer_id(peer_ids[_selected_collector_idx])
-
-func _toggle_rotate_roles() -> void:
-	var cfg: Dictionary = _last_lobby_state.get("config", {}) as Dictionary
-	NetworkManager.set_rotate_roles_after_round(not bool(cfg.get("rotate_roles_after_round", false)))
+	for peer_id in peer_ids:
+		var info := player_map[peer_id] as Dictionary
+		var char_id := String(info.get("character_id", ""))
+		
+		var vbox := VBoxContainer.new()
+		vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+		vbox.add_theme_constant_override("separation", 10)
+		
+		var preview := CharacterPreview.new()
+		preview.custom_minimum_size = Vector2(100, 100)
+		preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		_apply_character_preview(char_id, preview)
+		vbox.add_child(preview)
+		
+		var label := Label.new()
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.add_theme_font_size_override("font_size", 24)
+		
+		if bool(info.get("is_host", false)):
+			label.text = "You"
+			label.add_theme_color_override("font_color", UIColors.YELLOW)
+		else:
+			label.text = CharacterCatalog.display_name_for_id(char_id)
+		vbox.add_child(label)
+		
+		players_row.add_child(vbox)
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
 	var peer_ids: Array[int] = []
@@ -201,30 +172,24 @@ func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
 		peer_ids.push_front(NetworkManager.HOST_PEER_ID)
 	return peer_ids
 
-func _player_label(player_map: Dictionary, peer_id: int) -> String:
-	if not player_map.has(peer_id):
-		return str(peer_id)
-	var info := player_map[peer_id] as Dictionary
-	return "%d %s" % [peer_id, CharacterCatalog.display_name_for_id(String(info.get("character_id", "")))]
-
-func _role_title(role: String) -> String:
-	match role:
-		NetworkManager.ROLE_CHASER:
-			return tr("mp_role_chaser")
-		NetworkManager.ROLE_RACER:
-			return tr("mp_role_racer")
-		_:
-			return tr("mp_role_collector")
-
-func _is_roleless_next_symbol_config(cfg: Dictionary) -> bool:
-	return String(cfg.get("game_style", NetworkManager.STYLE_PATH)) == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false))
-
-func _is_maze_race_config(cfg: Dictionary) -> bool:
-	return String(cfg.get("mission_id", "")) == MissionCatalog.MISSION_FIND_EXIT and not bool(cfg.get("chaser_enabled", false))
-
-func _is_roleless_or_race_config(cfg: Dictionary) -> bool:
-	var style := String(cfg.get("game_style", NetworkManager.STYLE_PATH))
-	return style == NetworkManager.STYLE_RACE or _is_maze_race_config(cfg) or (style == NetworkManager.STYLE_NEXT_SYMBOL and not bool(cfg.get("chaser_enabled", false)))
+func _apply_character_preview(character_id: String, preview: CharacterPreview) -> void:
+	if preview == null:
+		return
+	var preview_data: Dictionary = CharacterCatalog.get_preview_data_by_id(character_id)
+	var frames_data: Array = preview_data.get("frames", [])
+	var frames: Array[Texture2D] = []
+	for item in frames_data:
+		if item is Texture2D:
+			frames.append(item)
+	var fps: float = float(preview_data.get("fps", 1.0))
+	if not frames.is_empty():
+		preview.set_character(frames, fps)
+	else:
+		var fallback: Texture2D = CharacterCatalog.get_texture_by_id(character_id)
+		if fallback != null:
+			preview.set_character([fallback], 1.0)
+		else:
+			preview.clear()
 
 func _on_peer_disconnected(_peer_id: int) -> void:
 	_on_lobby_updated({

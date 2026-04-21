@@ -85,8 +85,8 @@ static func get_cell_draw_commands(
 	# If has_bg is true, the background image IS the floor, so we don't draw solid rects.
 	if not has_bg:
 		var floor_color := theme.color_floor
-		if cell.is_start: floor_color = theme.color_start
-		elif cell.is_end: floor_color = theme.color_end
+		if cell.is_end: floor_color = theme.color_end
+		elif cell.is_start: floor_color = theme.color_start
 
 		# Central floor area
 		rects.append(RectCmd.new(r_pos + Vector2(r_wt, r_wt), Vector2(r_cs - r_wt * 2, r_cs - r_wt * 2), floor_color))
@@ -106,10 +106,10 @@ static func get_cell_draw_commands(
 	# (Borders/rims removed to ensure high contrast and zero visual artifacts)
 
 	# ── Icons ──
-	if cell.is_start and theme.start_texture:
-		icons.append(IconCmd.new(r_pos, r_cs, theme.start_texture))
-	elif cell.is_end and theme.end_texture:
+	if cell.is_end and theme.end_texture:
 		icons.append(IconCmd.new(r_pos, r_cs, theme.end_texture))
+	elif cell.is_start and theme.start_texture:
+		icons.append(IconCmd.new(r_pos, r_cs, theme.start_texture))
 
 	return {"rects": rects, "icons": icons}
 
