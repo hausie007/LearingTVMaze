@@ -5,6 +5,8 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_horizontal.png")
 
 const JOIN_GREEN := Color("#2FAE66")
+const MP_GREEN := Color("#2D9B58")
+const MP_GREEN_BORDER := Color("#3DC878")
 const MISSION_CARD_GAP := 42
 
 @onready var center_container: CenterContainer = $CenterContainer
@@ -15,6 +17,8 @@ var _top_spacer: Control = null
 var _logo: TextureRect = null
 var _logo_cards_spacer: Control = null
 var _mission_row: GridContainer = null
+var _action_row: HBoxContainer = null
+var _start_single_button: Button = null
 var _mission_settings_spacer: Control = null
 var _join_card: Button = null
 var _join_card_focused: bool = false
@@ -29,8 +33,8 @@ var _start_multiplayer_button: Button = null
 var _settings_button: Button = null
 var _help_button: Button = null
 var _theme_preview_container: Control = null
+var _settings_block: HBoxContainer = null
 var _secondary_overlay: Control = null
-var _secondary_row: HBoxContainer = null
 var _host_list_scroll: ScrollContainer = null
 var _host_list_vbox: VBoxContainer = null
 var _join_status_label: Label = null
@@ -161,22 +165,45 @@ func _build_layout() -> void:
 	if _join_card == null:
 		_create_join_card()
 
+	# Action buttons row: [Play Alone] [Play Together] — centered below cards
+	var action_spacer := Control.new()
+	action_spacer.name = "ActionSpacer"
+	action_spacer.custom_minimum_size = Vector2(0, 10)
+	_home_vbox.add_child(action_spacer)
+
+	_action_row = HBoxContainer.new()
+	_action_row.name = "ActionRow"
+	_action_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_action_row.add_theme_constant_override("separation", 24)
+	_home_vbox.add_child(_action_row)
+
+	_start_single_button = _create_action_button(tr("menu_play_alone"), UIColors.BLUE)
+	_start_single_button.pressed.connect(func(): _open_solo_setup(_selected_mission))
+	_action_row.add_child(_start_single_button)
+
+	_start_multiplayer_button = _create_action_button(tr("menu_play_together"), MP_GREEN)
+	_start_multiplayer_button.pressed.connect(_open_host_setup)
+	# Give the normal state a greenish border so it stands out visually
+	var mp_normal := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, MP_GREEN_BORDER, 12, 2)
+	_start_multiplayer_button.add_theme_stylebox_override("normal", mp_normal)
+	_action_row.add_child(_start_multiplayer_button)
+
 	_mission_settings_spacer = Control.new()
 	_mission_settings_spacer.name = "MissionSettingsSpacer"
 	_mission_settings_spacer.custom_minimum_size = Vector2(0, 22)
 	_home_vbox.add_child(_mission_settings_spacer)
 
-	var settings_block := HBoxContainer.new()
-	settings_block.name = "HomeSettingsBlock"
-	settings_block.alignment = BoxContainer.ALIGNMENT_CENTER
-	settings_block.add_theme_constant_override("separation", 22)
-	_home_vbox.add_child(settings_block)
+	_settings_block = HBoxContainer.new()
+	_settings_block.name = "HomeSettingsBlock"
+	_settings_block.alignment = BoxContainer.ALIGNMENT_CENTER
+	_settings_block.add_theme_constant_override("separation", 22)
+	_home_vbox.add_child(_settings_block)
 
 	var selector_vbox := VBoxContainer.new()
 	selector_vbox.name = "SelectorRows"
 	selector_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	selector_vbox.add_theme_constant_override("separation", 12)
-	settings_block.add_child(selector_vbox)
+	_settings_block.add_child(selector_vbox)
 
 	var theme_row := _create_home_selector_row("setting_theme")
 	selector_vbox.add_child(theme_row)
@@ -198,7 +225,7 @@ func _build_layout() -> void:
 
 	_theme_preview_container = Control.new()
 	_theme_preview_container.name = "ThemePreviewContainer"
-	settings_block.add_child(_theme_preview_container)
+	_settings_block.add_child(_theme_preview_container)
 
 	_theme_preview = CharacterPreview.new()
 	_theme_preview.name = "ThemePlayerPreview"
@@ -207,7 +234,7 @@ func _build_layout() -> void:
 	_theme_preview.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_theme_preview_container.add_child(_theme_preview)
 
-	_build_secondary_overlay()
+	_build_corner_buttons()
 	_build_join_list()
 
 func _create_mission_card(mission_id: String) -> Button:
@@ -244,29 +271,20 @@ func _create_join_card() -> void:
 	_join_card.focus_entered.connect(_on_join_card_focus_entered)
 	_join_card.focus_exited.connect(_on_join_card_focus_exited)
 
-func _build_secondary_overlay() -> void:
+func _build_corner_buttons() -> void:
 	_secondary_overlay = Control.new()
-	_secondary_overlay.name = "SecondaryActions"
+	_secondary_overlay.name = "CornerButtons"
 	_secondary_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_secondary_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_secondary_overlay)
 
-	_start_multiplayer_button = _create_corner_button(tr("home_start_multiplayer"), UIColors.BLUE)
-	_start_multiplayer_button.pressed.connect(_open_host_setup)
-	_secondary_overlay.add_child(_start_multiplayer_button)
-
-	_secondary_row = HBoxContainer.new()
-	_secondary_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_secondary_row.add_theme_constant_override("separation", 12)
-	_secondary_overlay.add_child(_secondary_row)
-
-	_settings_button = _create_tertiary_button(tr("settings"))
+	_settings_button = _create_corner_button(tr("settings"))
 	_settings_button.pressed.connect(_on_settings_pressed)
-	_secondary_row.add_child(_settings_button)
+	_secondary_overlay.add_child(_settings_button)
 
-	_help_button = _create_tertiary_button(tr("help"))
+	_help_button = _create_corner_button(tr("help"))
 	_help_button.pressed.connect(_on_help_pressed)
-	_secondary_row.add_child(_help_button)
+	_secondary_overlay.add_child(_help_button)
 
 func _build_join_list() -> void:
 	_join_vbox = VBoxContainer.new()
@@ -313,14 +331,19 @@ func _create_secondary_button(text: String) -> Button:
 	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
 	return button
 
-func _create_tertiary_button(text: String) -> Button:
-	return _create_corner_button(text)
+func _create_action_button(text: String, color: Color) -> Button:
+	var button := Button.new()
+	button.text = text
+	button.custom_minimum_size = Vector2(320, 68)
+	button.add_theme_font_size_override("font_size", 30)
+	UIHelpers.apply_style_to_button(button, color)
+	return button
 
 func _create_corner_button(text: String, color: Color = UIColors.YELLOW) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(260, 58)
-	button.add_theme_font_size_override("font_size", 24)
+	button.custom_minimum_size = Vector2(220, 52)
+	button.add_theme_font_size_override("font_size", 22)
 	UIHelpers.apply_style_to_button(button, color)
 	return button
 
@@ -412,10 +435,35 @@ func _select_mission(mission_id: String) -> void:
 func _on_join_card_focus_entered() -> void:
 	_join_card_focused = true
 	_update_mission_cards()
+	_update_action_buttons_state()
+	_configure_home_focus()
 
 func _on_join_card_focus_exited() -> void:
 	_join_card_focused = false
 	_update_mission_cards()
+	_update_action_buttons_state()
+	_configure_home_focus()
+
+func _update_action_buttons_state() -> void:
+	var disabled := _join_card_focused
+	if _start_single_button != null:
+		_start_single_button.disabled = disabled
+		_start_single_button.focus_mode = Control.FOCUS_NONE if disabled else Control.FOCUS_ALL
+	if _start_multiplayer_button != null:
+		_start_multiplayer_button.disabled = disabled
+		_start_multiplayer_button.focus_mode = Control.FOCUS_NONE if disabled else Control.FOCUS_ALL
+	# Dim / disable settings that don't affect the multiplayer join
+	var dim_alpha := 0.35 if disabled else 1.0
+	if _theme_button != null:
+		_theme_button.disabled = disabled
+		_theme_button.focus_mode = Control.FOCUS_NONE if disabled else Control.FOCUS_ALL
+	if _maze_size_button != null:
+		_maze_size_button.disabled = disabled
+		_maze_size_button.focus_mode = Control.FOCUS_NONE if disabled else Control.FOCUS_ALL
+	if _settings_block != null:
+		_settings_block.modulate.a = dim_alpha
+	if _action_row != null:
+		_action_row.modulate.a = dim_alpha
 
 func _cycle_theme(dir: int) -> void:
 	if _themes.is_empty():
@@ -691,10 +739,21 @@ func _apply_responsive_layout() -> void:
 				card.pivot_offset = Vector2(card_width * 0.5, card_height * 0.5)
 				card.call("configure_compact", icon_size, title_size, subtitle_size)
 	if _mission_settings_spacer != null:
-		_mission_settings_spacer.custom_minimum_size.y = 56.0 if short_screen else 74.0
+		_mission_settings_spacer.custom_minimum_size.y = 20.0 if short_screen else 30.0
 	var selector_width: float = clampf(available_width * 0.32, 380.0, 500.0)
 	var selector_height: float = 58.0 if short_screen else 66.0
 	var selector_font_size: int = 28 if short_screen else 31
+
+	# Action buttons row
+	var action_btn_width: float = clampf(available_width * 0.22, 260.0, 380.0)
+	var action_btn_height: float = 62.0 if short_screen else 68.0
+	var action_font_size: int = 26 if short_screen else 30
+	if _start_single_button != null:
+		_start_single_button.custom_minimum_size = Vector2(action_btn_width, action_btn_height)
+		_start_single_button.add_theme_font_size_override("font_size", action_font_size)
+	if _start_multiplayer_button != null:
+		_start_multiplayer_button.custom_minimum_size = Vector2(action_btn_width, action_btn_height)
+		_start_multiplayer_button.add_theme_font_size_override("font_size", action_font_size)
 
 	if _theme_button != null:
 		_theme_button.custom_minimum_size = Vector2(selector_width, selector_height)
@@ -709,17 +768,7 @@ func _apply_responsive_layout() -> void:
 		if _theme_preview != null:
 			_theme_preview.custom_minimum_size = Vector2(preview_size, preview_size)
 
-	if _start_multiplayer_button != null:
-		_start_multiplayer_button.custom_minimum_size = Vector2(selector_width, selector_height)
-		_start_multiplayer_button.add_theme_font_size_override("font_size", selector_font_size)
-		if _settings_button != null:
-			_settings_button.custom_minimum_size = Vector2(selector_width, selector_height)
-			_settings_button.add_theme_font_size_override("font_size", selector_font_size)
-		if _help_button != null:
-			_help_button.custom_minimum_size = Vector2(selector_width, selector_height)
-			_help_button.add_theme_font_size_override("font_size", selector_font_size)
-	if _secondary_row != null:
-		_position_secondary_row()
+	_position_corner_buttons()
 	if _host_list_scroll != null:
 		_host_list_scroll.custom_minimum_size.x = minf(available_width, 1100.0)
 		for card in _host_cards:
@@ -762,44 +811,57 @@ func _home_spacing() -> int:
 		return 12
 	return 20
 
-func _position_secondary_row() -> void:
-	if _secondary_row == null or _start_multiplayer_button == null:
-		return
+func _position_corner_buttons() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var controls_mode: int = Config.on_screen_controls if Config != null else Config.ControlsMode.OFF
 	var content_rect: Rect2 = UIHelpers.get_content_rect(viewport_size, controls_mode)
-	var button_size: Vector2 = _start_multiplayer_button.custom_minimum_size
-	var row_width: float = (_settings_button.custom_minimum_size.x + _help_button.custom_minimum_size.x + 12.0) if _settings_button != null and _help_button != null else 532.0
-	var row_height: float = button_size.y
-	var margin: float = 30.0
+	var margin: float = 24.0
 
-	_start_multiplayer_button.custom_minimum_size = button_size
-	_start_multiplayer_button.size = button_size
-	_start_multiplayer_button.anchor_left = 0.0
-	_start_multiplayer_button.anchor_right = 0.0
-	_start_multiplayer_button.anchor_top = 0.0
-	_start_multiplayer_button.anchor_bottom = 0.0
-	_start_multiplayer_button.position = Vector2(content_rect.position.x + margin, viewport_size.y - row_height - margin)
+	if _settings_button != null:
+		var btn_size: Vector2 = _settings_button.custom_minimum_size
+		_settings_button.size = btn_size
+		_settings_button.anchor_left = 0.0
+		_settings_button.anchor_right = 0.0
+		_settings_button.anchor_top = 0.0
+		_settings_button.anchor_bottom = 0.0
+		_settings_button.position = Vector2(content_rect.position.x + margin, viewport_size.y - btn_size.y - margin)
 
-	_secondary_row.custom_minimum_size = Vector2(row_width, row_height)
-	_secondary_row.size = Vector2(row_width, row_height)
-	_secondary_row.anchor_left = 0.0
-	_secondary_row.anchor_right = 0.0
-	_secondary_row.anchor_top = 0.0
-	_secondary_row.anchor_bottom = 0.0
-	_secondary_row.position = Vector2(content_rect.end.x - row_width - margin, viewport_size.y - row_height - margin)
+	if _help_button != null:
+		var btn_size: Vector2 = _help_button.custom_minimum_size
+		_help_button.size = btn_size
+		_help_button.anchor_left = 0.0
+		_help_button.anchor_right = 0.0
+		_help_button.anchor_top = 0.0
+		_help_button.anchor_bottom = 0.0
+		_help_button.position = Vector2(content_rect.end.x - btn_size.x - margin, viewport_size.y - btn_size.y - margin)
 
 func _join_card_width() -> float:
 	return minf(_available_home_width() - 60.0, 1040.0)
 
 func _configure_home_focus() -> void:
 	var cards: Array[Button] = _primary_card_buttons()
-	_configure_grid_navigation(cards, _mission_columns, null, _theme_button)
-	_configure_single_navigation(_theme_button, _selected_mission_card(), _maze_size_button)
+
+	if _join_card_focused:
+		# When join card is selected, action buttons + settings are disabled.
+		# Cards navigate down directly to corner buttons.
+		_configure_grid_navigation(cards, _mission_columns, null, _settings_button)
+		var corner_buttons: Array[Button] = [_settings_button, _help_button]
+		_configure_row_navigation(corner_buttons, _join_card if _join_card != null else _selected_mission_card(), null)
+		return
+
+	# Normal flow: cards → action row → theme → maze_size → corners
+	var action_target: Control = _start_single_button if _start_single_button != null and not _start_single_button.disabled else _start_multiplayer_button
+	_configure_grid_navigation(cards, _mission_columns, null, action_target)
+
+	# Action row navigation
+	var action_buttons: Array[Button] = [_start_single_button, _start_multiplayer_button]
+	_configure_row_navigation(action_buttons, _selected_mission_card(), _theme_button)
+
+	_configure_single_navigation(_theme_button, action_target, _maze_size_button)
 	_configure_single_navigation(_maze_size_button, _theme_button, _settings_button)
 
-	var bottom_buttons: Array[Button] = [_start_multiplayer_button, _settings_button, _help_button]
-	_configure_row_navigation(bottom_buttons, _maze_size_button, null)
+	var corner_buttons: Array[Button] = [_settings_button, _help_button]
+	_configure_row_navigation(corner_buttons, _maze_size_button, null)
 
 func _configure_join_focus() -> void:
 	for i in range(_host_cards.size()):

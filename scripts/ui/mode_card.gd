@@ -19,6 +19,7 @@ var _normal_subtitle_color: Color = UIColors.TEXT_SUBTITLE
 var _selected_subtitle_color: Color = Color.WHITE
 var _focused: bool = false
 var _scale_tween: Tween = null
+var _badge_label: Label = null
 
 const SELECTED_SCALE := Vector2(1.10, 1.10)
 const FOCUSED_SCALE := Vector2(1.16, 1.16)
@@ -131,6 +132,29 @@ func set_custom_palette(
 	_selected_subtitle_color = title_color
 	_apply_text_sizes()
 	_apply_selection_style()
+
+## Set a player-count badge in the top-left corner of the card.
+## Pass empty text to hide.
+func set_badge(text: String, badge_color: Color = UIColors.BLUE) -> void:
+	if not is_node_ready(): await ready
+	if text.is_empty():
+		if _badge_label != null:
+			_badge_label.visible = false
+		return
+	if _badge_label == null:
+		_badge_label = Label.new()
+		_badge_label.name = "BadgeLabel"
+		_badge_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(_badge_label)
+	_badge_label.text = text
+	_badge_label.add_theme_font_size_override("font_size", 23)
+	_badge_label.add_theme_color_override("font_color", Color.WHITE)
+	_badge_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_badge_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	# Position in top-left corner
+	_badge_label.position = Vector2(12, 8)
+	_badge_label.size = Vector2(220, 32)
+	_badge_label.visible = true
 
 func _apply_text_sizes() -> void:
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)

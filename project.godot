@@ -13,17 +13,13 @@ config_version=5
 config/name="Bludiste"
 config/description="Educational maze game for toddlers"
 run/main_scene="res://scenes/splash.tscn"
-boot_splash/bg_color=Color(0.15, 0.17, 0.22, 1)
-boot_splash/image="res://images/lm_logo_transparent2.png"
-boot_splash/use_filter=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "Mobile")
+boot_splash/bg_color=Color(0.15, 0.17, 0.22, 1)
+boot_splash/use_filter=false
+boot_splash/image="res://images/lm_logo_transparent2.png"
 config/icon="res://images/lm_icon_new2.png"
 config/android_tv_banner="res://images/big_banner3.png"
-
-[gui]
-
-theme/custom="res://ui/default_theme.theme"
 
 [autoload]
 
@@ -39,6 +35,23 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="res://ui/default_theme.theme"
+
+[input]
+
+ui_cancel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194308,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://data/translations.en.translation", "res://data/translations.cs.translation", "res://data/translations.de.translation", "res://data/translations.es.translation", "res://data/translations.fr.translation", "res://data/translations.pt.translation", "res://data/translations.vi.translation", "res://data/translations.tr.translation", "res://data/translations.it.translation", "res://data/translations.pl.translation", "res://data/translations.sv.translation", "res://data/translations.nb.translation", "res://data/translations.nl.translation", "res://data/translations.uk.translation", "res://data/translations.fi.translation", "res://data/translations.da.translation", "res://data/translations.hu.translation", "res://data/translations.ro.translation", "res://data/translations.el.translation", "res://data/translations.sk.translation", "res://data/translations.he.translation")
@@ -49,19 +62,6 @@ locale/translations=PackedStringArray("res://data/translations.en.translation", 
 
 [rendering]
 
-text/canvas_item_default_antialiasing=1
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
-[input]
-
-ui_cancel={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194308,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
+text/canvas_item_default_antialiasing=1

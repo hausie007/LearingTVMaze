@@ -38,6 +38,7 @@ var _player_preview: CharacterPreview = null
 var _chaser_preview: CharacterPreview = null
 var _title_cards_spacer: Control = null
 var _pickup_row: HBoxContainer = null
+var _start_button: Button = null
 var _cards_settings_spacer: Control = null
 var _settings_vbox: VBoxContainer = null
 
@@ -176,7 +177,26 @@ func _build_layout() -> void:
 	_home_vbox.add_child(_pickup_row)
 	_build_pickup_cards()
 
-	# Spacer between cards and settings
+	# Action button row: [Start Adventure] — centered below cards
+	var action_spacer := Control.new()
+	action_spacer.name = "ActionSpacer"
+	action_spacer.custom_minimum_size = Vector2(0, 10)
+	_home_vbox.add_child(action_spacer)
+
+	var action_row := HBoxContainer.new()
+	action_row.name = "ActionRow"
+	action_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_home_vbox.add_child(action_row)
+
+	_start_button = Button.new()
+	_start_button.text = tr("setup_start_adventure")
+	_start_button.custom_minimum_size = Vector2(320, 68)
+	_start_button.add_theme_font_size_override("font_size", 30)
+	UIHelpers.apply_style_to_button(_start_button, UIColors.BLUE)
+	_start_button.pressed.connect(_start_game)
+	action_row.add_child(_start_button)
+
+	# Spacer between action button and settings
 	_cards_settings_spacer = Control.new()
 	_cards_settings_spacer.name = "CardsSettingsSpacer"
 	_cards_settings_spacer.custom_minimum_size = Vector2(0, 56)
@@ -448,7 +468,7 @@ func _apply_responsive_layout() -> void:
 		_title_cards_spacer.custom_minimum_size.y = 16.0 if short_screen else 24.0
 
 	if _cards_settings_spacer != null:
-		_cards_settings_spacer.custom_minimum_size.y = 56.0 if short_screen else 74.0
+		_cards_settings_spacer.custom_minimum_size.y = 20.0 if short_screen else 30.0
 
 	var visible_cards := _pickup_card_buttons(true)
 	if not visible_cards.is_empty() and _pickup_row.visible:
@@ -476,6 +496,14 @@ func _apply_responsive_layout() -> void:
 			var title_size: int = 24 if card_width < 220.0 else (28 if card_width < 270.0 else 31)
 			var subtitle_size: int = 17 if card_width < 250.0 else 19
 			card.call("configure_compact", icon_size, title_size, subtitle_size)
+
+	# Responsive action button size
+	var action_btn_width: float = clampf(available_width * 0.22, 260.0, 380.0)
+	var action_btn_height: float = 62.0 if short_screen else 68.0
+	var action_font_size: int = 26 if short_screen else 30
+	if _start_button != null:
+		_start_button.custom_minimum_size = Vector2(action_btn_width, action_btn_height)
+		_start_button.add_theme_font_size_override("font_size", action_font_size)
 
 	# Responsive selector sizes — match main menu
 	var selector_width: float = clampf(available_width * 0.32, 380.0, 500.0)
@@ -545,15 +573,16 @@ func _on_controls_changed(_new_mode: int) -> void:
 func _configure_dpad_navigation() -> void:
 	var pickup_buttons := _pickup_card_buttons(true)
 	var active_lang_btn = _lang_button if _is_focusable(_lang_button) else null
-	# Order: cards → lang → trouble → chaser speed
+	# Order: cards → start button → lang → trouble → chaser speed
 	if not pickup_buttons.is_empty() and _pickup_row.visible:
-		var next_after_cards = active_lang_btn if active_lang_btn != null else _first_chaser_button()
-		_configure_card_row_navigation(pickup_buttons, null, next_after_cards)
-	var lang_top: Control = _selected_pickup_button() if _pickup_row.visible else null
+		_configure_card_row_navigation(pickup_buttons, null, _start_button)
+	if _start_button != null:
+		_configure_single_button_navigation(_start_button, _selected_pickup_button() if _pickup_row.visible else null, active_lang_btn if active_lang_btn != null else _first_chaser_button())
+	var lang_top: Control = _start_button
 	if active_lang_btn != null:
 		_configure_single_button_navigation(_lang_button, lang_top, _first_chaser_button())
 	if _is_focusable(_trouble_button):
-		var trouble_top = active_lang_btn if active_lang_btn != null else lang_top
+		var trouble_top = active_lang_btn if active_lang_btn != null else _start_button
 		_configure_single_button_navigation(_trouble_button, trouble_top, _next_after_trouble_button())
 	if _is_focusable(_chaser_speed_button):
 		_configure_single_button_navigation(_chaser_speed_button, _previous_before_speed_button(), null)

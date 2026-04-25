@@ -61,11 +61,12 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	var cfg: Dictionary = state.get("config", {}) as Dictionary
 	var player_map: Dictionary = state.get("players", {}) as Dictionary
 	
-	# Make sure host is collector, and only update if not already set to avoid infinite recursion
+	# Make sure host is collector when chaser is enabled, avoid infinite recursion
 	if multiplayer.is_server():
 		if bool(cfg.get("rotate_roles_after_round", true)) != false:
 			NetworkManager.set_rotate_roles_after_round(false)
-		if int(cfg.get("collector_peer_id", -1)) != NetworkManager.HOST_PEER_ID:
+		var chaser_on := bool(cfg.get("chaser_enabled", false))
+		if chaser_on and int(cfg.get("collector_peer_id", -1)) != NetworkManager.HOST_PEER_ID:
 			NetworkManager.set_collector_peer_id(NetworkManager.HOST_PEER_ID)
 	
 	_build_cards(cfg)

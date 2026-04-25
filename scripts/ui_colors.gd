@@ -28,6 +28,13 @@ const BG_PAGE := Color(0.1, 0.11, 0.14)
 ## Semi-transparent black overlay for modals.
 const OVERLAY := Color(0, 0, 0, 0.7)
 
+## Emerald Green — multiplayer card accent and selected/focus state.
+const GREEN := Color("#22AA44")
+const GREEN_DARK := Color(0.10, 0.22, 0.13)
+const GREEN_BORDER := Color(0.18, 0.38, 0.22)
+const GREEN_ACCENT := Color(0.12, 0.55, 0.28)
+const GREEN_HINT := Color(0.45, 0.82, 0.52)
+
 ## Dark text color for buttons with bright backgrounds.
 const TEXT_ON_BRIGHT := Color("#112244")
 
