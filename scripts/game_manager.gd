@@ -20,6 +20,9 @@
 class_name GameManager
 extends Node
 
+# ── Preloads ─────────────────────────────────────────────────────────────────
+
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 
 # ── Child-node references ────────────────────────────────────────────────────
 
@@ -67,10 +70,10 @@ func _ready() -> void:
 	win_screen.next_round_pressed.connect(_on_next_round_pressed)
 	win_screen.harder_pressed.connect(_on_harder_pressed)
 	win_screen.home_pressed.connect(_on_home_pressed)
-	win_screen.suggestion_pressed.connect(_on_suggestion_pressed)
-	win_screen.chaser_toggled_pressed.connect(_on_chaser_toggled_pressed)
+	win_screen.play_together_pressed.connect(_on_play_together_pressed)
 	win_screen.screen_shown.connect(_on_win_screen_shown)
 	win_screen.screen_hidden.connect(_on_win_screen_hidden)
+	win_screen.set_is_multiplayer(false)
 
 	# Wire up the pause dialog signals.
 	pause_dialog.confirmed.connect(_on_pause_confirmed)
@@ -241,7 +244,6 @@ func _on_player_reached_end() -> void:
 		win_screen.show_race_win(_format_time(), _move_count, _race_player_character_id())
 	else:
 		win_screen.show_win(_format_time(), _move_count)
-	win_screen.update_suggestions(Config.game_mode)
 
 
 func _on_player_moved(new_pos: Vector2i) -> void:
@@ -326,19 +328,51 @@ func _on_home_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
-func _on_suggestion_pressed(target_mode: int) -> void:
-	Config.game_mode = target_mode
-	Config.training_type = Config.training_for_game_mode(target_mode)
-	Config.save_settings()
-	_start_new_maze()
+func _on_play_together_pressed() -> void:
+	# Build a MP host config from the current SP game settings
+	var mission_id := Config.mission_id
+	var style := Config.game_style
+	var training := Config.training_type
+	var chaser_enabled := Config.chaser_enabled
+	var chaser_level := Config.chaser_level
+	var difficulty := Config.difficulty
+	var theme_dir := Config.theme_dir_name
 
-func _on_chaser_toggled_pressed(target_level: int) -> void:
-	if Config.game_style == Config.STYLE_RACE:
+	var loader := ThemeLoader.get_cached(theme_dir)
+	var theme_title := loader.get_display_title(theme_dir) if loader != null else theme_dir.capitalize()
+	var mission_title_key := MissionCatalog.mission_title_key(mission_id)
+	var pickup_id := MissionCatalog.pickup_for_training(training)
+	var pickup_title_key := MissionCatalog.pickup_title_key(pickup_id)
+
+	var config: Dictionary = {
+		"difficulty": difficulty,
+		"difficulty_key": Config.DIFF_KEYS[difficulty] if difficulty < Config.DIFF_KEYS.size() else "medium",
+		"mission_id": mission_id,
+		"mission_title": tr(mission_title_key),
+		"mission_goal_key": MissionCatalog.goal_key(mission_id, pickup_id, chaser_enabled, true),
+		"role_summary_key": MissionCatalog.role_summary_key(mission_id, chaser_enabled),
+		"game_style": style,
+		"game_style_title": tr(mission_title_key),
+		"training_type": training,
+		"training_type_title": tr(pickup_title_key),
+		"chaser_enabled": chaser_enabled and style != Config.STYLE_RACE,
+		"chaser_level": chaser_level,
+		"rotate_roles_after_round": false,
+		"theme_dir": theme_dir,
+		"theme_title": theme_title,
+		"max_players": 2,
+		"character_id": "",
+	}
+
+	win_screen.hide_screen()
+	get_tree().paused = false
+	NetworkManager.configure_host(config)
+	var err := NetworkManager.start_host()
+	if err != OK:
+		push_error("Failed to start host from win screen: %d" % err)
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		return
-	Config.chaser_level = target_level
-	Config.chaser_enabled = target_level != Config.ChaserLevel.OFF
-	Config.save_settings()
-	_start_new_maze()
+	get_tree().change_scene_to_file("res://scenes/multiplayer/host_lobby.tscn")
 
 
 # ── Private Helpers ──────────────────────────────────────────────────────────

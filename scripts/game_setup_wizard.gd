@@ -611,7 +611,7 @@ func _post_step_transition(step: int) -> void:
 		3: _step3.focus_selected_card()
 
 func _on_step1_card_focus_changed(_card_id: String) -> void:
-	pass  # Could update a preview if needed
+	_configure_navigation()
 
 func _on_step2_card_focus_changed(_card_id: String) -> void:
 	_update_step2_labels(_card_id)
@@ -801,11 +801,17 @@ func _position_character_preview() -> void:
 		return
 	var short_screen: bool = get_viewport_rect().size.y < 820.0
 	var ps: float = 94.0 if short_screen else 124.0
-	# Position: to the right of the right arrow, top aligned with button top
+	# Position next to the button, RTL-aware
 	var btn_rect := _character_button.get_global_rect()
-	var arrow_right_edge: float = btn_rect.end.x + 30  # past the ">" arrow
 	var top: float = btn_rect.position.y  # top aligned with button
-	_character_preview_container.global_position = Vector2(arrow_right_edge, top)
+	var x: float
+	if is_layout_rtl():
+		# RTL: place to the left of the button (before the "<" arrow)
+		x = btn_rect.position.x - 30 - ps
+	else:
+		# LTR: place to the right of the button (after the ">" arrow)
+		x = btn_rect.end.x + 30
+	_character_preview_container.global_position = Vector2(x, top)
 	_character_preview_container.size = Vector2(ps, ps)
 
 func _theme_display_name() -> String:
@@ -823,9 +829,11 @@ func _configure_navigation() -> void:
 
 func _configure_step1_nav() -> void:
 	var cards := _step1.get_card_buttons()
+	var selected := _step1.get_selected_card_button()
 	var first_setting := _theme_button
 	_configure_card_row_nav(cards, null, first_setting)
-	_configure_single_nav(_theme_button, _last_card(cards), _maze_size_button)
+	var sel_or_last: Control = selected if selected != null else _last_card(cards)
+	_configure_single_nav(_theme_button, sel_or_last, _maze_size_button)
 	_configure_single_nav(_maze_size_button, _theme_button, _settings_button)
 	_configure_corner_nav(_maze_size_button)
 
@@ -881,10 +889,14 @@ func _first_visible_step3_setting() -> Control:
 
 func _configure_card_row_nav(cards: Array[Button], above: Control, below: Control) -> void:
 	if cards.is_empty(): return
+	var is_rtl := is_layout_rtl()
 	for i in range(cards.size()):
 		var card := cards[i]
-		card.focus_neighbor_left = card.get_path_to(cards[(i - 1 + cards.size()) % cards.size()])
-		card.focus_neighbor_right = card.get_path_to(cards[(i + 1) % cards.size()])
+		# In RTL, visual left = next index, visual right = previous index
+		var left_idx := (i + 1) % cards.size() if is_rtl else (i - 1 + cards.size()) % cards.size()
+		var right_idx := (i - 1 + cards.size()) % cards.size() if is_rtl else (i + 1) % cards.size()
+		card.focus_neighbor_left = card.get_path_to(cards[left_idx])
+		card.focus_neighbor_right = card.get_path_to(cards[right_idx])
 		if above != null:
 			card.focus_neighbor_top = card.get_path_to(above)
 		if below != null:

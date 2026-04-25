@@ -1,7 +1,7 @@
 ## win_screen.gd
 ## ---------------------------------------------------------------------------
 ## Overlay UI for both the "You Win!" screen and "Gotcha!" (chaser caught)
-## screen.  Handles button creation, mode suggestions, and auto-countdown.
+## screen.  Handles button creation, mode switch buttons, and auto-countdown.
 ##
 ## Emits signals so GameManager can respond without tight coupling.
 ## ---------------------------------------------------------------------------
@@ -14,8 +14,8 @@ extends CanvasLayer
 signal next_round_pressed
 signal harder_pressed
 signal home_pressed
-signal suggestion_pressed(target_mode: int)
-signal chaser_toggled_pressed(target_level: int)
+signal play_together_pressed
+signal play_alone_pressed
 signal swap_roles_pressed
 
 ## Emitted when the screen becomes visible (GameManager should pause the tree).
@@ -35,7 +35,7 @@ var _harder_button: Button = null
 var _timer_label: Label = null
 var _suggestion_container: VBoxContainer = null
 var _swap_roles_enabled: bool = false
-var _chaser_suggestion_enabled: bool = true
+var _is_multiplayer: bool = false
 
 ## Countdown state.
 var _timer_remaining: float = 0.0
@@ -84,8 +84,8 @@ func is_active() -> bool:
 func set_swap_roles_enabled(enabled: bool) -> void:
 	_swap_roles_enabled = enabled
 
-func set_chaser_suggestion_enabled(enabled: bool) -> void:
-	_chaser_suggestion_enabled = enabled
+func set_is_multiplayer(is_mp: bool) -> void:
+	_is_multiplayer = is_mp
 
 ## Show the "You Win!" screen with score info.
 func show_win(time_str: String, move_count: int) -> void:
@@ -104,6 +104,8 @@ func show_win(time_str: String, move_count: int) -> void:
 
 	if _container and is_instance_valid(Config):
 		UIHelpers.apply_dpad_layout(_container, Config.on_screen_controls)
+
+	_build_mode_switch_buttons()
 
 	_container.visible = true
 	_next_button.grab_focus()
@@ -129,17 +131,11 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	if _container and is_instance_valid(Config):
 		UIHelpers.apply_dpad_layout(_container, Config.on_screen_controls)
 
+	_build_mode_switch_buttons()
+
 	_container.visible = true
 	_next_button.grab_focus()
 	screen_shown.emit()
-
-	# Gotcha screen has zero mode suggestions, so always show chaser toggle.
-	for child in _suggestion_container.get_children():
-		child.queue_free()
-	if _swap_roles_enabled:
-		_add_suggestion_button(tr("mp_role_swap_roles"), func(): swap_roles_pressed.emit())
-	if _chaser_suggestion_enabled and Config.game_style != Config.STYLE_RACE:
-		_add_chaser_suggestion()
 
 func show_race_win(time_str: String, move_count: int, winner_character_id: String) -> void:
 	show_win(time_str, move_count)
@@ -152,48 +148,20 @@ func show_race_gotcha(time_str: String, move_count: int, winner_character_id: St
 	_set_winner_character(winner_character_id)
 
 
-## Update mode suggestions on the win screen.
-func update_suggestions(current_mode: int) -> void:
+## Build the "Play Together" / "Play Alone" / "Swap Roles" buttons.
+func _build_mode_switch_buttons() -> void:
 	for child in _suggestion_container.get_children():
 		child.queue_free()
 
-	var next_mode: int = Config.GameMode.NUMBERS
-	var key: String = "try_numbers"
-	match current_mode:
-		Config.GameMode.NUMBERS:
-			next_mode = Config.GameMode.LETTERS
-			key = "try_alphabet"
-		Config.GameMode.LETTERS:
-			next_mode = Config.GameMode.WORDS
-			key = "try_words"
-		Config.GameMode.WORDS:
-			next_mode = Config.GameMode.NUMBERS
-			key = "try_numbers"
+	if _swap_roles_enabled:
+		_add_suggestion_button(tr("mp_role_swap_roles"), func(): swap_roles_pressed.emit(), UIColors.YELLOW)
 
-	_add_suggestion_button(tr(key), func(): suggestion_pressed.emit(next_mode))
-	if _chaser_suggestion_enabled and not [Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style):
-		_add_chaser_suggestion()
-
-## Appends a localized button to toggle the Chaser.
-func _add_chaser_suggestion() -> void:
-	var key: String = "chaser_suggestion_off" if Config.chaser_level != Config.ChaserLevel.OFF else "chaser_suggestion_on"
-	var level: int = Config.ChaserLevel.OFF if Config.chaser_level != Config.ChaserLevel.OFF else Config.ChaserLevel.SLOW
-	
-	var hbox := HBoxContainer.new()
-	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_suggestion_container.add_child(hbox)
-	var btn: Button = _create_styled_button(tr(key), 650, 90, UIColors.YELLOW)
-	btn.pressed.connect(func(): chaser_toggled_pressed.emit(level))
-	hbox.add_child(btn)
-
-func _add_suggestion_button(text: String, callback: Callable) -> void:
-	var hbox := HBoxContainer.new()
-	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_suggestion_container.add_child(hbox)
-
-	var btn: Button = _create_styled_button(text, 650, 90, UIColors.YELLOW)
-	btn.pressed.connect(callback)
-	hbox.add_child(btn)
+	if _is_multiplayer:
+		# MP mode → offer "Play Alone" in blue
+		_add_suggestion_button(tr("play_alone"), func(): play_alone_pressed.emit(), UIColors.BLUE)
+	else:
+		# SP mode → offer "Play Together" in green
+		_add_suggestion_button(tr("play_together"), func(): play_together_pressed.emit(), UIColors.GREEN)
 
 
 ## Hide the screen and reset state.
@@ -311,7 +279,7 @@ func _build_ui() -> void:
 	h_spacer_r.custom_minimum_size.x = 80
 	harder_hbox.add_child(h_spacer_r)
 
-	# Mode Suggestions
+	# Mode Switch Buttons (Play Together / Play Alone / Swap Roles)
 	_suggestion_container = VBoxContainer.new()
 	_suggestion_container.add_theme_constant_override("separation", 12)
 	button_vbox.add_child(_suggestion_container)
@@ -346,6 +314,15 @@ func _build_ui() -> void:
 
 func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW) -> Button:
 	return UIHelpers.create_styled_button(btn_text, w, h, f_color)
+
+func _add_suggestion_button(text: String, callback: Callable, color: Color = UIColors.YELLOW) -> void:
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_suggestion_container.add_child(hbox)
+
+	var btn: Button = _create_styled_button(text, 650, 90, color)
+	btn.pressed.connect(callback)
+	hbox.add_child(btn)
 
 func _set_winner_character(character_id: String) -> void:
 	if _winner_preview == null:

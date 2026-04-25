@@ -82,10 +82,11 @@ func _ready() -> void:
 
 	_win_screen = WinScreen.new()
 	_win_screen.set_swap_roles_enabled(true)
-	_win_screen.set_chaser_suggestion_enabled(false)
+	_win_screen.set_is_multiplayer(true)
 	_win_screen.next_round_pressed.connect(_on_next_round_pressed)
 	_win_screen.home_pressed.connect(_on_home_pressed)
 	_win_screen.swap_roles_pressed.connect(_on_swap_roles_pressed)
+	_win_screen.play_alone_pressed.connect(_on_play_alone_pressed)
 	add_child(_win_screen)
 
 	_build_race_collect_sound()
@@ -799,6 +800,26 @@ func _on_home_pressed() -> void:
 		_win_screen.hide_screen()
 	NetworkManager.leave_session()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func _on_play_alone_pressed() -> void:
+	if _win_screen != null:
+		_win_screen.hide_screen()
+
+	# Determine closest SP variant:
+	# - Coop (no chaser) → SP solo (no chaser)
+	# - Versus (chaser) → SP with chaser
+	var session := NetworkManager.current_session
+	var style: String = String(session.get("game_style", Config.game_style))
+	var training: String = String(session.get("training_type", Config.training_type))
+	var has_chaser: bool = bool(session.get("chaser_enabled", false))
+	var chaser_lvl: int = int(session.get("chaser_level", Config.ChaserLevel.SLOW))
+	var mission: String = String(session.get("mission_id", Config.mission_id))
+
+	NetworkManager.leave_session()
+
+	Config.configure_single_player_session(style, training, has_chaser, chaser_lvl, mission)
+	Config.save_settings()
+	UIHelpers.go_to_scene_with_loading(get_tree(), "res://scenes/main.tscn")
 
 func _build_race_sequence() -> void:
 	_race_sequence.clear()
