@@ -1,27 +1,41 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
+const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
+const LogoTexture := preload("res://images/lm_horizontal.png")
+
+const MP_GREEN := Color("#2D9B58")
+const MP_GREEN_BORDER := Color("#3DC878")
+const SLOT_EMPTY_COLOR := Color(1, 1, 1, 0.18)
+const SLOT_EMPTY_BG := Color(0.15, 0.17, 0.22, 0.6)
 
 @onready var center_container: CenterContainer = $CenterContainer
-@onready var title_label: Label = %TitleLabel
-@onready var cards_row: HBoxContainer = %CardsRow
-@onready var settings_row: HBoxContainer = %SettingsRow
-@onready var players_row: HBoxContainer = %PlayersRow
-@onready var status_label: Label = %StatusLabel
 @onready var network_debug_label: Label = %NetworkDebugLabel
-@onready var start_now_button: Button = %StartNowButton
+
+# ── Layout nodes ────────────────────────────────────────────────────────────
+var _main_vbox: VBoxContainer = null
+var _top_spacer: Control = null
+var _logo: TextureRect = null
+var _logo_bread_spacer: Control = null
+var _breadcrumb1: Button = null   # Mission • Theme • Maze Size
+var _breadcrumb2: Button = null   # Pickup • Language • Action mode + badge
+var _bread_players_spacer: Control = null
+var _players_row: HBoxContainer = null   # Combined: slots + button
+var _slots_row: HBoxContainer = null
+var _start_button: Button = null
+var _banner_panel: PanelContainer = null
+
+var _slot_nodes: Array[Dictionary] = []  # [{vbox, preview, label, is_filled}]
+var _pulse_tween: Tween = null
 
 var _last_lobby_state: Dictionary = {}
 
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
-	_localize_ui()
 	if network_debug_label != null:
 		network_debug_label.visible = false
 
-	UIHelpers.apply_style_to_button(start_now_button, UIColors.BLUE)
-	start_now_button.pressed.connect(_on_start_now_pressed)
+	_build_layout()
 
 	NetworkManager.lobby_updated.connect(_on_lobby_updated)
 	NetworkManager.game_started.connect(_on_game_started)
@@ -35,7 +49,8 @@ func _ready() -> void:
 		"config": NetworkManager.host_config,
 		"players": NetworkManager.players,
 	})
-	start_now_button.call_deferred("grab_focus")
+	_apply_responsive_layout()
+	_start_button.call_deferred("grab_focus")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -45,123 +60,500 @@ func _unhandled_input(event: InputEvent) -> void:
 		NetworkManager.leave_session()
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
-func _localize_ui() -> void:
-	title_label.text = "Multiplayer Lobby" # As requested by user
-	start_now_button.text = "Start Game" # As requested by user
-
-func _apply_dpad_layout() -> void:
-	if center_container != null and Config != null:
-		UIHelpers.apply_dpad_layout(center_container, Config.on_screen_controls)
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and is_node_ready():
+		_apply_dpad_layout()
+		_apply_responsive_layout()
 
 func _on_controls_changed(_new_mode: int) -> void:
 	_apply_dpad_layout()
+	_apply_responsive_layout()
+
+# ── Layout Building ─────────────────────────────────────────────────────────
+
+func _build_layout() -> void:
+	for child in center_container.get_children():
+		center_container.remove_child(child)
+		child.queue_free()
+
+	_main_vbox = VBoxContainer.new()
+	_main_vbox.name = "LobbyVBox"
+	_main_vbox.alignment = BoxContainer.ALIGNMENT_BEGIN
+	_main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_main_vbox.custom_minimum_size = Vector2(1500, 0)
+	_main_vbox.add_theme_constant_override("separation", 10)
+	center_container.add_child(_main_vbox)
+
+	# Top spacer
+	_top_spacer = Control.new()
+	_top_spacer.name = "TopSpacer"
+	_top_spacer.custom_minimum_size = Vector2(0, 16)
+	_main_vbox.add_child(_top_spacer)
+
+	# Logo
+	_logo = TextureRect.new()
+	_logo.name = "AppLogo"
+	_logo.texture = LogoTexture
+	_logo.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_logo.clip_contents = false
+	_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_main_vbox.add_child(_logo)
+
+	# Logo → Breadcrumbs spacer
+	_logo_bread_spacer = Control.new()
+	_logo_bread_spacer.name = "LogoBreadSpacer"
+	_logo_bread_spacer.custom_minimum_size = Vector2(0, 4)
+	_main_vbox.add_child(_logo_bread_spacer)
+
+	# Breadcrumb 1: Mission • Theme • Maze Size
+	_breadcrumb1 = _build_breadcrumb_row()
+	_main_vbox.add_child(_breadcrumb1)
+
+	# Breadcrumb 2: Pickup • Language • Action mode (with badge)
+	_breadcrumb2 = _build_breadcrumb_row()
+	_main_vbox.add_child(_breadcrumb2)
+
+	# Breadcrumbs → Players row spacer
+	_bread_players_spacer = Control.new()
+	_bread_players_spacer.name = "BreadPlayersSpacer"
+	_bread_players_spacer.custom_minimum_size = Vector2(0, 24)
+	_main_vbox.add_child(_bread_players_spacer)
+
+	# Combined row: [Slots] ── [Start Button]
+	_players_row = HBoxContainer.new()
+	_players_row.name = "PlayersRow"
+	_players_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_players_row.add_theme_constant_override("separation", 0)
+	_players_row.custom_minimum_size = Vector2(0, 160)
+	_main_vbox.add_child(_players_row)
+
+	# Slots sub-row (inside the combined row)
+	_slots_row = HBoxContainer.new()
+	_slots_row.name = "SlotsRow"
+	_slots_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_slots_row.add_theme_constant_override("separation", 32)
+	_players_row.add_child(_slots_row)
+
+	# Separator between slots and button
+	var slot_btn_gap := Control.new()
+	slot_btn_gap.name = "SlotBtnGap"
+	slot_btn_gap.custom_minimum_size = Vector2(48, 0)
+	_players_row.add_child(slot_btn_gap)
+
+	# Start Game button (green, inside the combined row)
+	_start_button = Button.new()
+	_start_button.text = "Waiting for players to join..."
+	_start_button.disabled = true
+	_start_button.custom_minimum_size = Vector2(380, 68)
+	_start_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_start_button.add_theme_font_size_override("font_size", 30)
+	UIHelpers.apply_style_to_button(_start_button, MP_GREEN)
+	# Disabled style: outline only (dark bg, bright green border, readable text)
+	var disabled_style := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, MP_GREEN_BORDER, 12, 2)
+	_start_button.add_theme_stylebox_override("disabled", disabled_style)
+	_start_button.add_theme_color_override("font_disabled_color", Color(0.6, 0.8, 0.6))
+	_start_button.pressed.connect(_on_start_now_pressed)
+	_players_row.add_child(_start_button)
+
+	# "How to Join" banner
+	var banner_spacer := Control.new()
+	banner_spacer.custom_minimum_size = Vector2(0, 24)
+	_main_vbox.add_child(banner_spacer)
+
+	_build_join_banner()
+
+func _build_breadcrumb_row() -> Button:
+	var btn := Button.new()
+	btn.flat = true
+	btn.custom_minimum_size = Vector2(0, 48)
+	btn.focus_mode = Control.FOCUS_NONE
+	btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Style matching WizardStep collapse row
+	var normal_style := UIHelpers.create_rounded_stylebox(
+		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.6),
+		Color(1, 1, 1, 0.08), 10, 1
+	)
+	normal_style.content_margin_left = 24
+	normal_style.content_margin_right = 24
+	btn.add_theme_stylebox_override("normal", normal_style)
+	btn.add_theme_stylebox_override("focus", normal_style)
+	btn.add_theme_stylebox_override("hover", normal_style)
+	btn.add_theme_stylebox_override("pressed", normal_style)
+
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_BEGIN
+	hbox.add_theme_constant_override("separation", 12)
+	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	btn.add_child(hbox)
+
+	var chevron := Label.new()
+	chevron.text = "▾"
+	chevron.add_theme_font_size_override("font_size", 26)
+	chevron.add_theme_color_override("font_color", UIColors.YELLOW)
+	chevron.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	chevron.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	chevron.custom_minimum_size = Vector2(28, 0)
+	hbox.add_child(chevron)
+
+	var summary := Label.new()
+	summary.name = "SummaryText"
+	summary.add_theme_font_size_override("font_size", 28)
+	summary.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	summary.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	summary.text = ""
+	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hbox.add_child(summary)
+
+	btn.set_meta("summary", summary)
+	btn.set_meta("chevron", chevron)
+	return btn
+
+func _build_join_banner() -> void:
+	_banner_panel = PanelContainer.new()
+	_banner_panel.name = "JoinBanner"
+	var panel_style := UIHelpers.create_rounded_stylebox(
+		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.85),
+		Color(1, 1, 1, 0.12), 14, 1
+	)
+	panel_style.content_margin_left = 48
+	panel_style.content_margin_right = 48
+	panel_style.content_margin_top = 30
+	panel_style.content_margin_bottom = 30
+	_banner_panel.add_theme_stylebox_override("panel", panel_style)
+	_banner_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_banner_panel.custom_minimum_size = Vector2(1100, 0)
+	_main_vbox.add_child(_banner_panel)
+
+	var banner_vbox := VBoxContainer.new()
+	banner_vbox.add_theme_constant_override("separation", 16)
+	_banner_panel.add_child(banner_vbox)
+
+	var banner_title := Label.new()
+	banner_title.text = "How to Join"
+	banner_title.add_theme_font_size_override("font_size", 34)
+	banner_title.add_theme_color_override("font_color", UIColors.YELLOW)
+	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	banner_vbox.add_child(banner_title)
+
+	var wifi_name := WiFiHelper.get_wifi_name()
+	var wifi_text := ""
+	if wifi_name.is_empty():
+		wifi_text = "the same WiFi as this device"
+	else:
+		wifi_text = "the same WiFi as this device  (%s)" % wifi_name
+
+	# Steps 1, 2, 4 as plain labels
+	var plain_steps := [
+		"1.  Install the \"Learning Maze\" app on your phone",
+		"2.  Connect the phone to %s" % wifi_text,
+	]
+
+	for step_text in plain_steps:
+		var step_label := Label.new()
+		step_label.text = step_text
+		step_label.add_theme_font_size_override("font_size", 26)
+		step_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+		step_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		banner_vbox.add_child(step_label)
+
+	# Step 3 with green bold "Play Together"
+	var step3 := RichTextLabel.new()
+	step3.bbcode_enabled = true
+	step3.fit_content = true
+	step3.scroll_active = false
+	step3.add_theme_font_size_override("normal_font_size", 26)
+	step3.add_theme_color_override("default_color", UIColors.TEXT_SECONDARY)
+	var green_hex := MP_GREEN_BORDER.to_html(false)
+	step3.text = "3.  Open the \"Learning Maze\" app and tap the green [b][color=#%s]\"Play Together\"[/color][/b] card" % green_hex
+	banner_vbox.add_child(step3)
+
+	# Step 4
+	var step4 := Label.new()
+	step4.text = "4.  Select your player and join the game"
+	step4.add_theme_font_size_override("font_size", 26)
+	step4.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	step4.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	banner_vbox.add_child(step4)
+
+# ── Lobby Updates ───────────────────────────────────────────────────────────
 
 func _on_lobby_updated(state: Dictionary) -> void:
 	_last_lobby_state = state.duplicate(true)
 	var cfg: Dictionary = state.get("config", {}) as Dictionary
 	var player_map: Dictionary = state.get("players", {}) as Dictionary
-	
-	# Make sure host is collector when chaser is enabled, avoid infinite recursion
+
+	# Ensure host is collector when chaser is enabled, avoid infinite recursion
 	if multiplayer.is_server():
 		if bool(cfg.get("rotate_roles_after_round", true)) != false:
 			NetworkManager.set_rotate_roles_after_round(false)
 		var chaser_on := bool(cfg.get("chaser_enabled", false))
 		if chaser_on and int(cfg.get("collector_peer_id", -1)) != NetworkManager.HOST_PEER_ID:
 			NetworkManager.set_collector_peer_id(NetworkManager.HOST_PEER_ID)
-	
-	_build_cards(cfg)
-	_build_settings(cfg, player_map)
-	_build_players(player_map)
 
-func _build_cards(cfg: Dictionary) -> void:
-	for c in cards_row.get_children():
-		c.queue_free()
-	
+	_update_breadcrumbs(cfg)
+	_update_player_slots(cfg, player_map)
+	_update_broadcast_state(cfg, player_map)
+
+func _update_breadcrumbs(cfg: Dictionary) -> void:
+	# Breadcrumb 1: Mission • Theme • Maze Size
 	var mission_id := String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
-	var md := MissionCatalog.mission_data(mission_id)
-	
-	var mode_card = ModeCardScene.instantiate() as Button
-	mode_card.custom_minimum_size = Vector2(300, 230)
-	mode_card.call("configure_compact", 48, 30, 22)
-	mode_card.call("setup", String(md.get("icon", "?")), tr(String(md.get("title_key", ""))), tr(String(md.get("subtitle_key", ""))))
-	mode_card.focus_mode = Control.FOCUS_NONE
-	cards_row.add_child(mode_card)
-	
-	var training := String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
+	var mission_title := String(cfg.get("mission_title", tr(MissionCatalog.mission_title_key(mission_id))))
+	var theme_title := String(cfg.get("theme_title", ""))
+	var diff_key := String(cfg.get("difficulty_key", "diff_easy"))
+
+	var summary1 := "%s  •  %s  •  %s" % [mission_title, theme_title, tr(diff_key)]
+	var summary_label_1 := _breadcrumb1.get_meta("summary") as Label
+	if summary_label_1 != null:
+		summary_label_1.text = summary1
+
+	# Breadcrumb 2: Pickup • Language • Action mode
 	var pickup_title := String(cfg.get("training_type_title", ""))
+	var training := String(cfg.get("training_type", NetworkManager.TRAINING_WORDS))
 	if training == NetworkManager.TRAINING_NONE:
 		pickup_title = tr("pickup_none")
 	elif pickup_title.is_empty():
 		pickup_title = tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
-	
-	var pickup_icon := "A"
-	if training == NetworkManager.TRAINING_NUMBERS:
-		pickup_icon = "1"
-	elif training == NetworkManager.TRAINING_NONE:
-		pickup_icon = "?"
-		
+
 	var chaser_enabled := bool(cfg.get("chaser_enabled", false))
-	var role_summary := tr(String(cfg.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
-	
-	var training_card = ModeCardScene.instantiate() as Button
-	training_card.custom_minimum_size = Vector2(300, 230)
-	training_card.call("configure_compact", 48, 30, 22)
-	training_card.call("setup", pickup_icon, pickup_title, role_summary)
-	training_card.focus_mode = Control.FOCUS_NONE
-	cards_row.add_child(training_card)
+	var action_text := tr("start_vs_chaser") if chaser_enabled else tr("start_together")
 
-func _build_settings(cfg: Dictionary, player_map: Dictionary) -> void:
-	for c in settings_row.get_children():
-		c.queue_free()
-		
-	var diff_val := tr(String(cfg.get("difficulty_key", "diff_easy")))
-	var theme_val := String(cfg.get("theme_title", ""))
+	# Language display
+	var lang_text := ""
+	if training != NetworkManager.TRAINING_NONE:
+		var ui_idx := Config.LANG_CODES.find(Config.ui_language)
+		if ui_idx < 0: ui_idx = 0
+		var lang_idx := Config.LANG_CODES.find(Config.learning_language)
+		if lang_idx < 0: lang_idx = 0
+		lang_text = "  •  " + Config.get_lang_display_name(lang_idx, true, ui_idx)
+
+	# Player count tag — derive range from mission catalog
+	var chaser_on := bool(cfg.get("chaser_enabled", false))
+	var player_options := MissionCatalog.max_players_options(mission_id, chaser_on)
+	var players_tag := ""
+	if player_options.size() <= 1:
+		var n := int(player_options[0]) if not player_options.is_empty() else 2
+		players_tag = "%d %s" % [n, tr("badge_players_word")]
+	else:
+		var mn := int(player_options[0])
+		var mx := int(player_options[player_options.size() - 1])
+		players_tag = "%d-%d %s" % [mn, mx, tr("badge_players_word")]
+
+	var summary2 := "%s%s  •  %s  •  🟢 %s" % [pickup_title, lang_text, action_text, players_tag]
+	var summary_label_2 := _breadcrumb2.get_meta("summary") as Label
+	if summary_label_2 != null:
+		summary_label_2.text = summary2
+
+func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 	var max_players := int(cfg.get("max_players", 2))
-	
-	var label := Label.new()
-	label.text = "%s: %s    |    %s: %s" % [
-		tr("mp_host_difficulty"), diff_val, 
-		tr("mp_host_theme"), theme_val
-	]
-	label.add_theme_font_size_override("font_size", 30)
-	label.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	settings_row.add_child(label)
-	
-	status_label.text = "%s %d/%d" % [tr("mp_host_lobby_players"), player_map.size(), max_players]
+	var player_count := player_map.size()
 
-func _build_players(player_map: Dictionary) -> void:
-	for c in players_row.get_children():
-		c.queue_free()
-		
-	var peer_ids := _ordered_peer_ids(player_map)
-	for peer_id in peer_ids:
-		var info := player_map[peer_id] as Dictionary
-		var char_id := String(info.get("character_id", ""))
-		
-		var vbox := VBoxContainer.new()
-		vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-		vbox.add_theme_constant_override("separation", 10)
-		
-		var preview := CharacterPreview.new()
-		preview.custom_minimum_size = Vector2(100, 100)
-		preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-		preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		_apply_character_preview(char_id, preview)
-		vbox.add_child(preview)
-		
-		var label := Label.new()
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.add_theme_font_size_override("font_size", 24)
-		
-		if bool(info.get("is_host", false)):
-			label.text = "You"
-			label.add_theme_color_override("font_color", UIColors.YELLOW)
+	# Update button text and state
+	var min_players := 2
+	var is_ready := player_count >= min_players
+	_start_button.disabled = not is_ready
+
+	if is_ready:
+		if player_count == 1:
+			_start_button.text = "Start Game with 1 player"
 		else:
-			label.text = CharacterCatalog.display_name_for_id(char_id)
-		vbox.add_child(label)
-		
-		players_row.add_child(vbox)
+			_start_button.text = "Start Game with %d players" % player_count
+		# Filled green style when enabled
+		var filled := UIHelpers.create_rounded_stylebox(MP_GREEN.darkened(0.15), MP_GREEN_BORDER, 12, 2)
+		_start_button.add_theme_stylebox_override("normal", filled)
+		_start_button.add_theme_color_override("font_color", Color.WHITE)
+	else:
+		_start_button.text = "Waiting for players to join..."
+		# Outline-only style when disabled (dark bg, green border)
+		var outline := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, MP_GREEN_BORDER, 12, 2)
+		_start_button.add_theme_stylebox_override("normal", outline)
+
+	# Rebuild slots only if max_players changed
+	var needs_rebuild := _slot_nodes.size() != max_players
+	if needs_rebuild:
+		_clear_slots()
+		for i in range(max_players):
+			_create_slot(i)
+
+	# Fill slots with player data
+	var peer_ids := _ordered_peer_ids(player_map)
+	for i in range(max_players):
+		if i < peer_ids.size():
+			var peer_id: int = peer_ids[i]
+			var info := player_map[peer_id] as Dictionary
+			_fill_slot(i, info)
+		else:
+			_empty_slot(i)
+
+	_update_pulse_animation()
+
+func _update_broadcast_state(cfg: Dictionary, player_map: Dictionary) -> void:
+	if not multiplayer.is_server():
+		return
+	var max_players := int(cfg.get("max_players", 2))
+	if player_map.size() >= max_players:
+		if NetworkManager.is_broadcasting():
+			NetworkManager.pause_broadcasting()
+	else:
+		if not NetworkManager.is_broadcasting():
+			NetworkManager.resume_broadcasting()
+
+# ── Slot Management ─────────────────────────────────────────────────────────
+
+func _create_slot(index: int) -> void:
+	var slot_vbox := VBoxContainer.new()
+	slot_vbox.name = "Slot%d" % index
+	slot_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	slot_vbox.add_theme_constant_override("separation", 8)
+	slot_vbox.custom_minimum_size = Vector2(130, 150)
+
+	# Slot frame
+	var frame := PanelContainer.new()
+	frame.name = "SlotFrame"
+	frame.custom_minimum_size = Vector2(110, 110)
+	frame.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	slot_vbox.add_child(frame)
+
+	# Character preview (hidden when empty)
+	var preview := CharacterPreview.new()
+	preview.name = "SlotPreview"
+	preview.custom_minimum_size = Vector2(90, 90)
+	preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	preview.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	preview.visible = false
+	frame.add_child(preview)
+
+	# Label below slot
+	var label := Label.new()
+	label.name = "SlotLabel"
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 22)
+	label.text = "Waiting..."
+	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	slot_vbox.add_child(label)
+
+	_slots_row.add_child(slot_vbox)
+	_slot_nodes.append({
+		"vbox": slot_vbox,
+		"frame": frame,
+		"preview": preview,
+		"label": label,
+		"is_filled": false,
+	})
+
+	_apply_empty_frame_style(frame)
+
+func _fill_slot(index: int, info: Dictionary) -> void:
+	if index >= _slot_nodes.size():
+		return
+	var slot := _slot_nodes[index]
+	var preview := slot["preview"] as CharacterPreview
+	var label := slot["label"] as Label
+	var frame := slot["frame"] as PanelContainer
+
+	var char_id := String(info.get("character_id", ""))
+	_apply_character_preview(char_id, preview)
+	preview.visible = true
+
+	if bool(info.get("is_host", false)):
+		label.text = "You"
+		label.add_theme_color_override("font_color", UIColors.YELLOW)
+	else:
+		label.text = CharacterCatalog.display_name_for_id(char_id)
+		label.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
+
+	_apply_filled_frame_style(frame)
+	slot["is_filled"] = true
+
+func _empty_slot(index: int) -> void:
+	if index >= _slot_nodes.size():
+		return
+	var slot := _slot_nodes[index]
+	var preview := slot["preview"] as CharacterPreview
+	var label := slot["label"] as Label
+	var frame := slot["frame"] as PanelContainer
+
+	preview.visible = false
+	label.text = "Waiting..."
+	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+
+	_apply_empty_frame_style(frame)
+	slot["is_filled"] = false
+
+func _clear_slots() -> void:
+	for slot in _slot_nodes:
+		var vbox := slot["vbox"] as Control
+		if is_instance_valid(vbox):
+			vbox.queue_free()
+	_slot_nodes.clear()
+	if _pulse_tween != null and _pulse_tween.is_valid():
+		_pulse_tween.kill()
+		_pulse_tween = null
+
+func _apply_filled_frame_style(frame: PanelContainer) -> void:
+	var style := UIHelpers.create_rounded_stylebox(
+		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.9),
+		MP_GREEN_BORDER, 12, 2
+	)
+	style.content_margin_left = 10
+	style.content_margin_right = 10
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	frame.add_theme_stylebox_override("panel", style)
+
+func _apply_empty_frame_style(frame: PanelContainer) -> void:
+	var style := UIHelpers.create_rounded_stylebox(
+		SLOT_EMPTY_BG,
+		SLOT_EMPTY_COLOR, 12, 2
+	)
+	style.content_margin_left = 10
+	style.content_margin_right = 10
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	# Dashed border effect via draw_style
+	style.draw_center = true
+	frame.add_theme_stylebox_override("panel", style)
+
+func _update_pulse_animation() -> void:
+	# Kill any existing pulse
+	if _pulse_tween != null and _pulse_tween.is_valid():
+		_pulse_tween.kill()
+		_pulse_tween = null
+
+	# Collect empty slot frames for pulsing
+	var empty_frames: Array[PanelContainer] = []
+	for slot in _slot_nodes:
+		if not slot["is_filled"]:
+			empty_frames.append(slot["frame"] as PanelContainer)
+
+	if empty_frames.is_empty():
+		return
+
+	# Create repeating pulse tween on empty frames
+	_pulse_tween = create_tween()
+	_pulse_tween.set_loops()
+
+	for frame in empty_frames:
+		frame.modulate = Color(1, 1, 1, 1)
+
+	# Pulse: fade to 0.45 then back to 1.0
+	_pulse_tween.tween_method(func(alpha: float):
+		for f in empty_frames:
+			if is_instance_valid(f):
+				f.modulate.a = alpha
+	, 1.0, 0.45, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	_pulse_tween.tween_method(func(alpha: float):
+		for f in empty_frames:
+			if is_instance_valid(f):
+				f.modulate.a = alpha
+	, 0.45, 1.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+# ── Helpers ─────────────────────────────────────────────────────────────────
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
 	var peer_ids: Array[int] = []
@@ -203,6 +595,111 @@ func _on_start_now_pressed() -> void:
 
 func _on_game_started(_session: Dictionary) -> void:
 	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_game.tscn")
+
+# ── Layout ──────────────────────────────────────────────────────────────────
+
+func _apply_dpad_layout() -> void:
+	if center_container != null and Config != null:
+		UIHelpers.apply_dpad_layout(center_container, Config.on_screen_controls)
+
+func _apply_responsive_layout() -> void:
+	var available_width := _available_width()
+	var viewport_height: float = get_viewport_rect().size.y
+	var short_screen: bool = viewport_height < 820.0
+
+	if _main_vbox != null:
+		_main_vbox.custom_minimum_size = Vector2(available_width, viewport_height)
+		_main_vbox.add_theme_constant_override("separation", _vbox_spacing())
+
+	if _top_spacer != null:
+		_top_spacer.custom_minimum_size.y = clampf(viewport_height * 0.0075, 3.0, 8.0)
+
+	if _logo != null:
+		var logo_width: float = clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
+		var logo_height: float = clampf(logo_width * 0.214, 80.0, 166.0)
+		_logo.custom_minimum_size = Vector2(logo_width, logo_height)
+
+	if _logo_bread_spacer != null:
+		_logo_bread_spacer.custom_minimum_size.y = 4.0 if short_screen else 8.0
+
+	# Breadcrumb sizing
+	var bread_font_size := 26 if short_screen else 30
+	var bread_height := 42.0 if short_screen else 50.0
+	for bread in [_breadcrumb1, _breadcrumb2]:
+		if bread == null:
+			continue
+		bread.custom_minimum_size = Vector2(clampf(available_width * 0.8, 600.0, 1200.0), bread_height)
+		var summary := bread.get_meta("summary") as Label
+		if summary != null:
+			summary.add_theme_font_size_override("font_size", bread_font_size)
+		var chevron := bread.get_meta("chevron") as Label
+		if chevron != null:
+			chevron.add_theme_font_size_override("font_size", bread_font_size - 2)
+
+	if _bread_players_spacer != null:
+		_bread_players_spacer.custom_minimum_size.y = 16.0 if short_screen else 28.0
+
+	# Slot sizing
+	var slot_size: float = 100.0 if short_screen else 120.0
+	var frame_size: float = slot_size * 0.9
+	var preview_size: float = frame_size * 0.78
+	for slot in _slot_nodes:
+		var vbox := slot["vbox"] as Control
+		vbox.custom_minimum_size = Vector2(slot_size + 20, slot_size + 40)
+		var frame := slot["frame"] as PanelContainer
+		frame.custom_minimum_size = Vector2(frame_size, frame_size)
+		var preview := slot["preview"] as CharacterPreview
+		preview.custom_minimum_size = Vector2(preview_size, preview_size)
+		var label := slot["label"] as Label
+		label.add_theme_font_size_override("font_size", 20 if short_screen else 22)
+
+	if _slots_row != null:
+		_slots_row.add_theme_constant_override("separation", 28 if short_screen else 36)
+
+	if _players_row != null:
+		_players_row.custom_minimum_size.y = slot_size + 62
+
+	# Start button (inside the combined row)
+	var action_btn_width: float = clampf(available_width * 0.28, 320.0, 460.0)
+	var action_btn_height: float = 60.0 if short_screen else 68.0
+	var action_font_size: int = 26 if short_screen else 30
+	if _start_button != null:
+		_start_button.custom_minimum_size = Vector2(action_btn_width, action_btn_height)
+		_start_button.add_theme_font_size_override("font_size", action_font_size)
+
+	# Banner
+	if _banner_panel != null:
+		_banner_panel.custom_minimum_size.x = clampf(available_width * 0.92, 880.0, 1380.0)
+		var banner_font_size := 24 if short_screen else 28
+		var title_font_size := 30 if short_screen else 34
+		var vbox := _banner_panel.get_child(0) as VBoxContainer
+		if vbox != null:
+			for i in range(vbox.get_child_count()):
+				var child := vbox.get_child(i)
+				if child is Label:
+					if i == 0:
+						child.add_theme_font_size_override("font_size", title_font_size)
+					else:
+						child.add_theme_font_size_override("font_size", banner_font_size)
+				elif child is RichTextLabel:
+					child.add_theme_font_size_override("normal_font_size", banner_font_size)
+					child.add_theme_font_size_override("bold_font_size", banner_font_size)
+
+func _available_width() -> float:
+	var viewport_size := get_viewport_rect().size
+	var controls_mode := Config.ControlsMode.OFF
+	if Config != null:
+		controls_mode = Config.on_screen_controls
+	var content_rect := UIHelpers.get_content_rect(viewport_size, controls_mode)
+	return clampf(content_rect.size.x * 0.985, 760.0, 1640.0)
+
+func _vbox_spacing() -> int:
+	var height: float = get_viewport_rect().size.y
+	if height < 650.0:
+		return 6
+	if height < 820.0:
+		return 8
+	return 12
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null:

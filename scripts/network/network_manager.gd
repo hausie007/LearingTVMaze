@@ -23,7 +23,7 @@ const GAME_PORT := 42020
 const DISCOVERY_PORT := 42021
 const DISCOVERY_BROADCAST_IP := "255.255.255.255"
 const DISCOVERY_INTERVAL_SEC := 0.75
-const HOST_TTL_SEC := 15.0
+const HOST_TTL_SEC := 6.0
 const HOST_BIND_IP := "0.0.0.0"
 
 const STYLE_PATH := "path"
@@ -260,6 +260,20 @@ func get_discovered_hosts() -> Array:
 	for value in _discovered_hosts.values():
 		hosts.append((value as Dictionary).get("info", {}))
 	return hosts
+
+## Pause broadcasting — lobby calls this when all player slots are full.
+## Phones will stop seeing this host in their discovery list.
+func pause_broadcasting() -> void:
+	_stop_broadcasting()
+
+## Resume broadcasting — lobby calls this when a slot opens up.
+func resume_broadcasting() -> void:
+	if multiplayer.is_server() and _broadcast_socket == null and current_session.is_empty():
+		_start_broadcasting()
+
+## Check whether the host is currently broadcasting discovery.
+func is_broadcasting() -> bool:
+	return _broadcast_socket != null
 
 func _start_broadcasting() -> void:
 	if _broadcast_socket != null:

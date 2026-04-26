@@ -361,7 +361,7 @@ func _on_play_together_pressed() -> void:
 		"theme_dir": theme_dir,
 		"theme_title": theme_title,
 		"max_players": 2,
-		"character_id": "",
+		"character_id": "%s:player" % theme_dir,
 	}
 
 	win_screen.hide_screen()

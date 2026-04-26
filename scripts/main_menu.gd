@@ -260,13 +260,13 @@ func _create_join_card() -> void:
 		"set_custom_palette",
 		JOIN_GREEN.darkened(0.06),
 		JOIN_GREEN.lightened(0.16),
-		UIColors.BLUE,
-		Color.WHITE,
+		JOIN_GREEN.darkened(0.02),  # accent bg stays green
+		JOIN_GREEN.lightened(0.32), # accent border brighter green
 		UIColors.YELLOW,
 		Color.WHITE,
 		Color(1, 1, 1, 0.86)
 	)
-	_join_card.call("setup", "!", tr("mp_join_game"), tr("mp_join_discovery_found"))
+	_join_card.call("setup", "🤝", tr("start_together"), tr("mp_hint_remote"))
 	_join_card.pressed.connect(func(): _show_join_list())
 	_join_card.focus_entered.connect(_on_join_card_focus_entered)
 	_join_card.focus_exited.connect(_on_join_card_focus_exited)
@@ -526,7 +526,7 @@ func _update_join_button() -> void:
 	_join_card.disabled = not has_hosts
 	_join_card.mouse_filter = Control.MOUSE_FILTER_STOP if has_hosts else Control.MOUSE_FILTER_IGNORE
 	_join_card.focus_mode = Control.FOCUS_ALL if has_hosts else Control.FOCUS_NONE
-	_join_card.call("setup", "!", tr("mp_join_game"), tr("mp_join_discovery_found"))
+	_join_card.call("setup", "🤝", tr("start_together"), tr("mp_hint_remote"))
 	if not has_hosts:
 		_join_card_focused = false
 	_update_mission_cards()
