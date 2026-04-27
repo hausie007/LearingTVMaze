@@ -249,8 +249,8 @@ func _rebuild_cards() -> void:
 
 		var card := ModeCardScene.instantiate() as Button
 		var id := String(data.get("id", ""))
-		card.custom_minimum_size = Vector2(300, 230)
-		card.pivot_offset = Vector2(150, 115)
+		card.custom_minimum_size = Vector2(300, 260)
+		card.pivot_offset = Vector2(150, 130)
 		card.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		card.call("configure_compact", 52, 30, 19)
 		card.call(

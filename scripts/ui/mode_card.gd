@@ -79,6 +79,7 @@ func configure_compact(icon_size: int, title_size: int, subtitle_size: int, prev
 		_apply_text_sizes()
 		if _preview != null:
 			_preview.custom_minimum_size = _preview_size
+		_apply_emphasis(true)
 
 func set_character_preview(frames: Array[Texture2D], fps: float) -> void:
 	if not is_node_ready(): await ready
@@ -164,10 +165,21 @@ func _apply_text_sizes() -> void:
 	subtitle_label.add_theme_font_size_override("font_size", _subtitle_font_size)
 	icon_label.add_theme_color_override("font_color", _icon_color)
 	title_label.add_theme_color_override("font_color", _title_color)
-	$MarginContainer/VBox.add_theme_constant_override("separation", max(8, int(float(_subtitle_font_size) * 0.55)))
+	$MarginContainer/VBox.add_theme_constant_override("separation", max(6, int(float(_subtitle_font_size) * 0.45)))
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title_label.custom_minimum_size.y = maxf(34.0, float(_title_font_size) * 1.5)
-	subtitle_label.custom_minimum_size.y = maxf(28.0, float(_subtitle_font_size) * 2.0)
+	
+	# Force labels to allow shrinking horizontally. Godot autowrap labels 
+	# get stuck at their max expanded width otherwise.
+	title_label.custom_minimum_size.x = 10
+	subtitle_label.custom_minimum_size.x = 10
+	icon_label.custom_minimum_size.x = 10
+	title_label.size.x = 0
+	subtitle_label.size.x = 0
+	icon_label.size.x = 0
+	
+	# Always reserve height for 2 lines so wrapping titles don't shift the icon
+	title_label.custom_minimum_size.y = maxf(34.0, ceilf(float(_title_font_size) * 2.6))
+	subtitle_label.custom_minimum_size.y = maxf(20.0, float(_subtitle_font_size) * 1.4)
 	icon_label.clip_text = true
 	title_label.clip_text = false
 	subtitle_label.clip_text = true

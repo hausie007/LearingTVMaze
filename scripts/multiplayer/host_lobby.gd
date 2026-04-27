@@ -4,10 +4,10 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
 const LogoTexture := preload("res://images/lm_horizontal.png")
 
-const MP_GREEN := Color("#2D9B58")
-const MP_GREEN_BORDER := Color("#3DC878")
-const SLOT_EMPTY_COLOR := Color(1, 1, 1, 0.18)
-const SLOT_EMPTY_BG := Color(0.15, 0.17, 0.22, 0.6)
+const MP_GREEN := PlayerSlotPanel.MP_GREEN
+const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
+const SLOT_EMPTY_COLOR := PlayerSlotPanel.SLOT_EMPTY_COLOR
+const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
 
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var network_debug_label: Label = %NetworkDebugLabel
@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if viewport != null:
 			viewport.set_input_as_handled()
 		NetworkManager.leave_session()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HOME)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
@@ -143,7 +143,7 @@ func _build_layout() -> void:
 
 	# Start Game button (green, inside the combined row)
 	_start_button = Button.new()
-	_start_button.text = "Waiting for players to join..."
+	_start_button.text = tr("mp_waiting_for_players")
 	_start_button.disabled = true
 	_start_button.custom_minimum_size = Vector2(380, 68)
 	_start_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -164,53 +164,7 @@ func _build_layout() -> void:
 	_build_join_banner()
 
 func _build_breadcrumb_row() -> Button:
-	var btn := Button.new()
-	btn.flat = true
-	btn.custom_minimum_size = Vector2(0, 48)
-	btn.focus_mode = Control.FOCUS_NONE
-	btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	# Style matching WizardStep collapse row
-	var normal_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.6),
-		Color(1, 1, 1, 0.08), 10, 1
-	)
-	normal_style.content_margin_left = 24
-	normal_style.content_margin_right = 24
-	btn.add_theme_stylebox_override("normal", normal_style)
-	btn.add_theme_stylebox_override("focus", normal_style)
-	btn.add_theme_stylebox_override("hover", normal_style)
-	btn.add_theme_stylebox_override("pressed", normal_style)
-
-	var hbox := HBoxContainer.new()
-	hbox.alignment = BoxContainer.ALIGNMENT_BEGIN
-	hbox.add_theme_constant_override("separation", 12)
-	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	btn.add_child(hbox)
-
-	var chevron := Label.new()
-	chevron.text = "▾"
-	chevron.add_theme_font_size_override("font_size", 26)
-	chevron.add_theme_color_override("font_color", UIColors.YELLOW)
-	chevron.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	chevron.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	chevron.custom_minimum_size = Vector2(28, 0)
-	hbox.add_child(chevron)
-
-	var summary := Label.new()
-	summary.name = "SummaryText"
-	summary.add_theme_font_size_override("font_size", 28)
-	summary.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
-	summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	summary.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	summary.text = ""
-	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	hbox.add_child(summary)
-
-	btn.set_meta("summary", summary)
-	btn.set_meta("chevron", chevron)
-	return btn
+	return BreadcrumbRow.create()
 
 func _build_join_banner() -> void:
 	_banner_panel = PanelContainer.new()
@@ -233,7 +187,7 @@ func _build_join_banner() -> void:
 	_banner_panel.add_child(banner_vbox)
 
 	var banner_title := Label.new()
-	banner_title.text = "How to Join"
+	banner_title.text = tr("mp_how_to_join")
 	banner_title.add_theme_font_size_override("font_size", 34)
 	banner_title.add_theme_color_override("font_color", UIColors.YELLOW)
 	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -242,14 +196,14 @@ func _build_join_banner() -> void:
 	var wifi_name := WiFiHelper.get_wifi_name()
 	var wifi_text := ""
 	if wifi_name.is_empty():
-		wifi_text = "the same WiFi as this device"
+		wifi_text = tr("mp_wifi_same_as_device")
 	else:
-		wifi_text = "the same WiFi as this device  (%s)" % wifi_name
+		wifi_text = tr("mp_wifi_same_as_device_named") % wifi_name
 
 	# Steps 1, 2, 4 as plain labels
 	var plain_steps := [
-		"1.  Install the \"Learning Maze\" app on your phone",
-		"2.  Connect the phone to %s" % wifi_text,
+		tr("mp_join_step_1"),
+		tr("mp_join_step_2") % wifi_text,
 	]
 
 	for step_text in plain_steps:
@@ -268,12 +222,12 @@ func _build_join_banner() -> void:
 	step3.add_theme_font_size_override("normal_font_size", 26)
 	step3.add_theme_color_override("default_color", UIColors.TEXT_SECONDARY)
 	var green_hex := MP_GREEN_BORDER.to_html(false)
-	step3.text = "3.  Open the \"Learning Maze\" app and tap the green [b][color=#%s]\"Play Together\"[/color][/b] card" % green_hex
+	step3.text = tr("mp_join_step_3") % green_hex
 	banner_vbox.add_child(step3)
 
 	# Step 4
 	var step4 := Label.new()
-	step4.text = "4.  Select your player and join the game"
+	step4.text = tr("mp_join_step_4")
 	step4.add_theme_font_size_override("font_size", 26)
 	step4.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	step4.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -358,15 +312,15 @@ func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 
 	if is_ready:
 		if player_count == 1:
-			_start_button.text = "Start Game with 1 player"
+			_start_button.text = tr("mp_start_game_1")
 		else:
-			_start_button.text = "Start Game with %d players" % player_count
+			_start_button.text = tr("mp_start_game_n") % player_count
 		# Filled green style when enabled
 		var filled := UIHelpers.create_rounded_stylebox(MP_GREEN.darkened(0.15), MP_GREEN_BORDER, 12, 2)
 		_start_button.add_theme_stylebox_override("normal", filled)
 		_start_button.add_theme_color_override("font_color", Color.WHITE)
 	else:
-		_start_button.text = "Waiting for players to join..."
+		_start_button.text = tr("mp_waiting_for_players")
 		# Outline-only style when disabled (dark bg, green border)
 		var outline := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, MP_GREEN_BORDER, 12, 2)
 		_start_button.add_theme_stylebox_override("normal", outline)
@@ -432,7 +386,7 @@ func _create_slot(index: int) -> void:
 	label.name = "SlotLabel"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
-	label.text = "Waiting..."
+	label.text = tr("mp_slot_waiting")
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 	slot_vbox.add_child(label)
 
@@ -460,7 +414,7 @@ func _fill_slot(index: int, info: Dictionary) -> void:
 	preview.visible = true
 
 	if bool(info.get("is_host", false)):
-		label.text = "You"
+		label.text = tr("mp_slot_you")
 		label.add_theme_color_override("font_color", UIColors.YELLOW)
 	else:
 		label.text = CharacterCatalog.display_name_for_id(char_id)
@@ -478,7 +432,7 @@ func _empty_slot(index: int) -> void:
 	var frame := slot["frame"] as PanelContainer
 
 	preview.visible = false
-	label.text = "Waiting..."
+	label.text = tr("mp_slot_waiting")
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 
 	_apply_empty_frame_style(frame)
@@ -556,33 +510,10 @@ func _update_pulse_animation() -> void:
 # ── Helpers ─────────────────────────────────────────────────────────────────
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
-	var peer_ids: Array[int] = []
-	for key in player_map.keys():
-		peer_ids.append(int(key))
-	peer_ids.sort()
-	if peer_ids.has(NetworkManager.HOST_PEER_ID):
-		peer_ids.erase(NetworkManager.HOST_PEER_ID)
-		peer_ids.push_front(NetworkManager.HOST_PEER_ID)
-	return peer_ids
+	return PlayerSlotPanel.ordered_peer_ids(player_map)
 
 func _apply_character_preview(character_id: String, preview: CharacterPreview) -> void:
-	if preview == null:
-		return
-	var preview_data: Dictionary = CharacterCatalog.get_preview_data_by_id(character_id)
-	var frames_data: Array = preview_data.get("frames", [])
-	var frames: Array[Texture2D] = []
-	for item in frames_data:
-		if item is Texture2D:
-			frames.append(item)
-	var fps: float = float(preview_data.get("fps", 1.0))
-	if not frames.is_empty():
-		preview.set_character(frames, fps)
-	else:
-		var fallback: Texture2D = CharacterCatalog.get_texture_by_id(character_id)
-		if fallback != null:
-			preview.set_character([fallback], 1.0)
-		else:
-			preview.clear()
+	PlayerSlotPanel.apply_character_preview(character_id, preview)
 
 func _on_peer_disconnected(_peer_id: int) -> void:
 	_on_lobby_updated({
@@ -594,7 +525,7 @@ func _on_start_now_pressed() -> void:
 	NetworkManager.start_now()
 
 func _on_game_started(_session: Dictionary) -> void:
-	get_tree().change_scene_to_file("res://scenes/multiplayer/multiplayer_game.tscn")
+	get_tree().change_scene_to_file(Scenes.MP_GAME)
 
 # ── Layout ──────────────────────────────────────────────────────────────────
 

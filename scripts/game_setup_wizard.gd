@@ -494,7 +494,7 @@ func _build_corner_buttons() -> void:
 	_settings_button.pressed.connect(func():
 		_persist_state()
 		NetworkManager.stop_discovery()
-		get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.SETTINGS)
 	)
 	_corner_overlay.add_child(_settings_button)
 
@@ -502,7 +502,7 @@ func _build_corner_buttons() -> void:
 	_help_button.pressed.connect(func():
 		_persist_state()
 		NetworkManager.stop_discovery()
-		get_tree().change_scene_to_file("res://scenes/help_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HELP)
 	)
 	_corner_overlay.add_child(_help_button)
 
@@ -693,7 +693,7 @@ func _start_single_player(with_chaser: bool) -> void:
 	)
 	Config.save_settings()
 	NetworkManager.stop_discovery()
-	UIHelpers.go_to_scene_with_loading(get_tree(), "res://scenes/main.tscn")
+	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
 
 func _start_multiplayer(with_chaser: bool) -> void:
 	Config.learning_language = Config.LANG_CODES[_lang_idx]
@@ -744,7 +744,7 @@ func _start_multiplayer(with_chaser: bool) -> void:
 	if err != OK:
 		push_error("Failed to start host: %d" % err)
 		return
-	get_tree().change_scene_to_file("res://scenes/multiplayer/host_lobby.tscn")
+	get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
 
 # ── Value Cycling ─────────────────────────────────────────────────────────────
 
@@ -995,6 +995,9 @@ func _apply_responsive_layout() -> void:
 		_main_vbox.custom_minimum_size = Vector2(available_width, viewport_size.y)
 		_main_vbox.add_theme_constant_override("separation", _spacing())
 
+	# Deferred logging so we see the exact post-layout state of every single node
+	call_deferred("_dump_layout_state")
+
 	if _top_spacer != null:
 		_top_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.005, 2.0, 8.0)
 
@@ -1029,31 +1032,57 @@ func _apply_responsive_layout() -> void:
 		call_deferred("_position_character_preview")
 
 	_position_corner_buttons()
+	
+	# After all cards are resized and elements positioned, force the main container
+	# to discard any bloated sizes from the previous layout pass.
+	if _main_vbox != null:
+		_main_vbox.size = Vector2.ZERO
+	
+func _dump_layout_state() -> void:
+	print("\n--- DEFERRED POST-LAYOUT DUMP ---")
+	print("CenterContainer size/pos: ", center_container.size, " / ", center_container.global_position)
+	print("MainVBox size/pos/min: ", _main_vbox.size, " / ", _main_vbox.global_position, " / ", _main_vbox.custom_minimum_size)
+	if _logo != null:
+		print("  Logo size/pos/min: ", _logo.size, " / ", _logo.global_position, " / ", _logo.custom_minimum_size)
+	var row = _step1.get_card_row() if _step1 != null else null
+	if row != null:
+		print("  CardRow size/pos/min: ", row.size, " / ", row.global_position, " / ", row.custom_minimum_size)
+		for i in range(row.get_child_count()):
+			var child = row.get_child(i)
+			print("    Card ", i, " (", child.name, ") vis:", child.visible, " size/min: ", child.size, " / ", child.custom_minimum_size, " x pos: ", child.global_position.x)
+	print("---------------------------------\n")
 
 func _apply_card_sizing(step: WizardStep, available_width: float, viewport_height: float, short_screen: bool) -> void:
 	if step == null or step.get_state() != WizardStep.State.ACTIVE: return
 	var cards := step.get_card_buttons()
 	if cards.is_empty(): return
 	var count := cards.size()
-	
-	# Lock step 1 card calculations to ALWAYS expect 5 cards (4 mission + 1 join).
-	# This ensures card sizes NEVER change or pop when the join card appears.
-	if step == _step1:
-		count = 5
-		
 	var columns: int = count if available_width >= 760.0 else mini(count, 2)
-	var gap: int = 48 if available_width >= 1200.0 else (34 if available_width >= 900.0 else 24)
+	var space_per_card := available_width / float(columns)
+	var gap: int = 48 if space_per_card >= 260.0 else (34 if space_per_card >= 200.0 else 24)
 	var gaps := float(gap * maxi(0, columns - 1))
-	var card_width := clampf(floorf((available_width - gaps) / float(columns)), 160.0, 390.0)
-	var card_height := clampf(viewport_height * (0.30 if short_screen else 0.28), 220.0, 310.0)
+	var card_width := clampf(floorf((available_width - gaps) / float(columns)), 140.0, 390.0)
+	var card_height := clampf(viewport_height * (0.34 if short_screen else 0.32), 250.0, 340.0)
 	var icon_size: int = 46 if card_width < 220.0 else (52 if card_width < 270.0 else 58)
 	var title_size: int = 24 if card_width < 220.0 else (28 if card_width < 270.0 else 31)
 	var subtitle_size: int = 17 if card_width < 250.0 else 19
 	step.set_card_gap(gap)
+	
+	if step == _step1:
+		print("Step1 Sizing: count=", count, " cols=", columns, " width=", card_width, " gap=", gap)
+		
 	for card in cards:
 		card.custom_minimum_size = Vector2(card_width, card_height)
+		card.size = Vector2.ZERO # Force card to shrink if previously larger
 		card.pivot_offset = Vector2(card_width * 0.5, card_height * 0.5)
 		card.call("configure_compact", icon_size, title_size, subtitle_size)
+
+	# Step 1: lock card row width to the full available width so the layout
+	# never shifts horizontally when the join card appears or disappears.
+	# The HBox center alignment keeps 4 cards centered within the fixed row.
+	if step == _step1:
+		step.get_card_row().custom_minimum_size.x = available_width
+		step.get_card_row().size = Vector2.ZERO # Force shrink to minimum size
 
 func _position_corner_buttons() -> void:
 	var viewport_size := get_viewport_rect().size
@@ -1112,60 +1141,10 @@ func _spacing() -> int:
 # ── Utility ───────────────────────────────────────────────────────────────────
 
 func _create_selector_row(label_key: String) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 12)
-	row.custom_minimum_size = Vector2(0, 68)
-
-	var label := Label.new()
-	label.text = tr(label_key)
-	label.custom_minimum_size = Vector2(245, 0)
-	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	row.add_child(label)
-
-	var gap := Control.new()
-	gap.custom_minimum_size = Vector2(12, 0)
-	row.add_child(gap)
-
-	var left := _create_arrow_label()
-	row.add_child(left)
-
-	var button := Button.new()
-	button.custom_minimum_size = Vector2(430, 64)
-	button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
-	row.add_child(button)
-
-	var right := _create_arrow_label()
-	right.text = ">"
-	row.add_child(right)
-
-	# Extras slot for character preview etc.
-	var extras := HBoxContainer.new()
-	extras.custom_minimum_size = Vector2(80, 0)
-	extras.add_theme_constant_override("separation", 8)
-	extras.alignment = BoxContainer.ALIGNMENT_BEGIN
-	row.add_child(extras)
-
-	row.set_meta("title", label)
-	row.set_meta("left", left)
-	row.set_meta("button", button)
-	row.set_meta("right", right)
-	row.set_meta("extras", extras)
-	return row
+	return CyclingSelector.create_row(label_key)
 
 func _create_arrow_label() -> Label:
-	var label := Label.new()
-	label.custom_minimum_size = Vector2(36, 0)
-	label.add_theme_color_override("font_color", UIColors.YELLOW)
-	label.add_theme_font_size_override("font_size", 38)
-	label.text = "<"
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	return label
+	return CyclingSelector.create_arrow_label()
 
 func _create_corner_button(text: String) -> Button:
 	var button := Button.new()
@@ -1176,27 +1155,10 @@ func _create_corner_button(text: String) -> Button:
 	return button
 
 func _setup_arrow_visibility(button: Button, left: Label, right: Label) -> void:
-	left.modulate.a = 0.0
-	right.modulate.a = 0.0
-	button.focus_entered.connect(func():
-		left.modulate.a = 1.0
-		right.modulate.a = 1.0
-	)
-	button.focus_exited.connect(func():
-		left.modulate.a = 0.0
-		right.modulate.a = 0.0
-	)
+	CyclingSelector.setup_arrow_visibility(button, left, right)
 
 func _setup_cycling(button: Button, cycle_func: Callable) -> void:
-	button.gui_input.connect(func(event: InputEvent):
-		if event.is_pressed():
-			if event.is_action("ui_left"):
-				cycle_func.call(-1)
-				get_viewport().set_input_as_handled()
-			elif event.is_action("ui_right"):
-				cycle_func.call(1)
-				get_viewport().set_input_as_handled()
-	)
+	CyclingSelector.setup_cycling(button, cycle_func)
 
 func _persist_state() -> void:
 	Config.selected_mission_id = _selected_mission
@@ -1322,4 +1284,4 @@ func _navigate_to_join_flow() -> void:
 		return
 	NetworkManager.set_pending_join_host((_hosts[0] as Dictionary).duplicate(true))
 	NetworkManager.stop_discovery()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/join_flow.tscn")
+	get_tree().change_scene_to_file(Scenes.JOIN_FLOW)

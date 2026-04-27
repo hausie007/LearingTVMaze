@@ -3,33 +3,14 @@ extends Control
 const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 
-const MP_GREEN := Color("#2D9B58")
-const MP_GREEN_BORDER := Color("#3DC878")
+const MP_GREEN := PlayerSlotPanel.MP_GREEN
+const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
 
-const PICKUP_CARD_ORDER: Array[String] = [
-	MissionCatalog.PICKUP_NUMBERS,
-	MissionCatalog.PICKUP_WORDS,
-	MissionCatalog.PICKUP_LETTERS,
-	MissionCatalog.PICKUP_NONE,
-]
-const PICKUP_CARD_ICONS := {
-	"numbers": "123",
-	"words": "W",
-	"letters": "ABC",
-	"none": ">",
-}
-const PICKUP_CARD_TITLE_KEYS := {
-	"numbers": "training_numbers",
-	"words": "training_words",
-	"letters": "training_letters",
-	"none": "pickup_just_maze",
-}
-const PICKUP_CARD_SUBTITLE_KEYS := {
-	"numbers": "pickup_numbers_short",
-	"words": "pickup_words_short",
-	"letters": "pickup_letters_short",
-	"none": "pickup_none_short",
-}
+# Pickup card constants — aliased from MissionCatalog (single source of truth).
+const PICKUP_CARD_ORDER = MissionCatalog.PICKUP_CARD_ORDER
+const PICKUP_CARD_ICONS = MissionCatalog.PICKUP_CARD_ICONS
+const PICKUP_CARD_TITLE_KEYS = MissionCatalog.PICKUP_CARD_TITLE_KEYS
+const PICKUP_CARD_SUBTITLE_KEYS = MissionCatalog.PICKUP_CARD_SUBTITLE_KEYS
 
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var status_label: Label = %StatusLabel
@@ -222,32 +203,32 @@ func _build_layout() -> void:
 	_home_vbox.add_child(_settings_vbox)
 
 	# Language row (always visible — first to avoid shift when toggling chaser)
-	var lang := _create_selector_row("setting_learning_lang")
+	var lang := CyclingSelector.create_row_dict("setting_learning_lang")
 	_lang_row = lang["row"] as HBoxContainer
 	_lang_left = lang["left"] as Label
 	_lang_button = lang["button"] as Button
 	_lang_right = lang["right"] as Label
 	_lang_button.pressed.connect(func(): _cycle_lang(1))
-	_setup_cycling(_lang_button, _cycle_lang)
-	_setup_arrow_visibility(_lang_button, _lang_left, _lang_right)
+	CyclingSelector.setup_cycling(_lang_button, _cycle_lang)
+	CyclingSelector.setup_arrow_visibility(_lang_button, _lang_left, _lang_right)
 	_settings_vbox.add_child(_lang_row)
 
 	# Character row (with preview in the extras slot)
-	var character := _create_selector_row("mp_host_you")
+	var character := CyclingSelector.create_row_dict("mp_host_you")
 	_character_row = character["row"] as HBoxContainer
 	_character_left = character["left"] as Label
 	_character_button = character["button"] as Button
 	_character_right = character["right"] as Label
 	_character_button.pressed.connect(func(): _cycle_character(1))
-	_setup_cycling(_character_button, _cycle_character)
-	_setup_arrow_visibility(_character_button, _character_left, _character_right)
+	CyclingSelector.setup_cycling(_character_button, _cycle_character)
+	CyclingSelector.setup_arrow_visibility(_character_button, _character_left, _character_right)
 	_character_preview = CharacterPreview.new()
 	_character_preview.name = "CharacterPreview"
 	_character_preview.custom_minimum_size = Vector2(56, 56)
 	_character_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	_character_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	var char_extras := character["extras"] as HBoxContainer
-	char_extras.add_child(_character_preview)
+	# Note: create_row_dict doesn't include extras, add preview directly to row
+	_character_row.add_child(_character_preview)
 	_settings_vbox.add_child(_character_row)
 
 	# Role description — standalone label between character and trouble
@@ -261,25 +242,25 @@ func _build_layout() -> void:
 	_settings_vbox.add_child(_role_label)
 
 	# Trouble row
-	var trouble := _create_selector_row("setting_trouble")
+	var trouble := CyclingSelector.create_row_dict("setting_trouble")
 	_trouble_row = trouble["row"] as HBoxContainer
 	_trouble_left = trouble["left"] as Label
 	_trouble_button = trouble["button"] as Button
 	_trouble_right = trouble["right"] as Label
 	_trouble_button.pressed.connect(_toggle_chaser)
-	_setup_toggle_cycling(_trouble_button, _toggle_chaser)
-	_setup_arrow_visibility(_trouble_button, _trouble_left, _trouble_right)
+	CyclingSelector.setup_toggle_cycling(_trouble_button, _toggle_chaser)
+	CyclingSelector.setup_arrow_visibility(_trouble_button, _trouble_left, _trouble_right)
 	_settings_vbox.add_child(_trouble_row)
 
 	# Head start row
-	var head_start := _create_selector_row("setting_head_start")
+	var head_start := CyclingSelector.create_row_dict("setting_head_start")
 	_head_start_row = head_start["row"] as HBoxContainer
 	_head_start_left = head_start["left"] as Label
 	_head_start_button = head_start["button"] as Button
 	_head_start_right = head_start["right"] as Label
 	_head_start_button.pressed.connect(func(): _cycle_head_start(1))
-	_setup_cycling(_head_start_button, _cycle_head_start)
-	_setup_arrow_visibility(_head_start_button, _head_start_left, _head_start_right)
+	CyclingSelector.setup_cycling(_head_start_button, _cycle_head_start)
+	CyclingSelector.setup_arrow_visibility(_head_start_button, _head_start_left, _head_start_right)
 	_settings_vbox.add_child(_head_start_row)
 
 func _build_pickup_cards() -> void:
@@ -301,56 +282,10 @@ func _on_card_pressed(pickup_id: String) -> void:
 	_on_start_pressed()
 
 func _create_selector_row(label_key: String) -> Dictionary:
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 0)
-	row.custom_minimum_size = Vector2(0, 68)
-
-	var label := Label.new()
-	label.custom_minimum_size = Vector2(245, 0)
-	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
-	label.text = tr(label_key)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	row.add_child(label)
-
-	# Small gap between label and arrows
-	var gap1 := Control.new()
-	gap1.custom_minimum_size = Vector2(12, 0)
-	row.add_child(gap1)
-
-	var left := _create_arrow_label()
-	row.add_child(left)
-
-	var button := Button.new()
-	button.custom_minimum_size = Vector2(430, 64)
-	button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
-	row.add_child(button)
-
-	var right := _create_arrow_label()
-	right.text = ">"
-	row.add_child(right)
-
-	# Fixed-width extras slot — same size for all rows to keep alignment stable
-	var extras := HBoxContainer.new()
-	extras.custom_minimum_size = Vector2(180, 0)
-	extras.add_theme_constant_override("separation", 8)
-	extras.alignment = BoxContainer.ALIGNMENT_BEGIN
-	row.add_child(extras)
-
-	return {"row": row, "left": left, "button": button, "right": right, "extras": extras}
+	return CyclingSelector.create_row_dict(label_key)
 
 func _create_arrow_label() -> Label:
-	var label := Label.new()
-	label.custom_minimum_size = Vector2(36, 0)
-	label.add_theme_color_override("font_color", UIColors.YELLOW)
-	label.add_theme_font_size_override("font_size", 38)
-	label.text = "<"
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	return label
+	return CyclingSelector.create_arrow_label()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -369,45 +304,13 @@ func _on_controls_changed(_new_mode: int) -> void:
 	_configure_dpad_navigation()
 
 func _setup_toggle_cycling(btn: Button, callback: Callable) -> void:
-	if btn == null:
-		return
-	btn.gui_input.connect(func(event: InputEvent):
-		if event.is_pressed() and (event.is_action("ui_left") or event.is_action("ui_right")):
-			var viewport: Viewport = get_viewport()
-			callback.call()
-			if viewport != null:
-				viewport.set_input_as_handled()
-	)
+	CyclingSelector.setup_toggle_cycling(btn, callback)
 
 func _setup_arrow_visibility(btn: Button, left: Label, right: Label) -> void:
-	if btn == null or left == null or right == null:
-		return
-	left.modulate.a = 0.0
-	right.modulate.a = 0.0
-	btn.focus_entered.connect(func():
-		left.modulate.a = 1.0
-		right.modulate.a = 1.0
-	)
-	btn.focus_exited.connect(func():
-		left.modulate.a = 0.0
-		right.modulate.a = 0.0
-	)
+	CyclingSelector.setup_arrow_visibility(btn, left, right)
 
 func _setup_cycling(btn: Button, cycle_func: Callable) -> void:
-	if btn == null:
-		return
-	btn.gui_input.connect(func(event: InputEvent):
-		if event.is_pressed():
-			var viewport: Viewport = get_viewport()
-			if event.is_action("ui_left"):
-				cycle_func.call(-1)
-				if viewport != null:
-					viewport.set_input_as_handled()
-			elif event.is_action("ui_right"):
-				cycle_func.call(1)
-				if viewport != null:
-					viewport.set_input_as_handled()
-	)
+	CyclingSelector.setup_cycling(btn, cycle_func)
 
 func _populate_characters() -> void:
 	_character_catalog = CharacterCatalog.build_catalog()
@@ -513,15 +416,7 @@ func _update_character_preview() -> void:
 	if _character_preview == null or _character_catalog.is_empty():
 		return
 	var character_id: String = String(_character_catalog[_selected_character_idx].get("id", ""))
-	var preview_data: Dictionary = CharacterCatalog.get_preview_data_by_id(character_id)
-	var frames_data: Array = preview_data.get("frames", [])
-	var frames: Array[Texture2D] = []
-	for item in frames_data:
-		if item is Texture2D:
-			frames.append(item)
-	var fps: float = float(preview_data.get("fps", 1.0))
-	if not frames.is_empty():
-		_character_preview.set_character(frames, fps)
+	PlayerSlotPanel.apply_character_preview(character_id, _character_preview)
 
 func _update_pickup_cards() -> void:
 	var allowed_pickups := MissionCatalog.allowed_pickups(_selected_mission)
@@ -642,7 +537,7 @@ func _on_start_pressed() -> void:
 		return
 
 	_set_network_debug("host", "Host started")
-	get_tree().change_scene_to_file("res://scenes/multiplayer/host_lobby.tscn")
+	get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
 
 func _go_back() -> void:
 	# Persist current selections so they're restored on return
@@ -653,7 +548,7 @@ func _go_back() -> void:
 	Config.chaser_level = MissionCatalog.CHASER_TUNING_LEVELS[_selected_head_start_idx] if _chaser_enabled else Config.ChaserLevel.OFF
 	Config.save_settings()
 	NetworkManager.leave_session()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _apply_responsive_layout() -> void:
 	var available_width := _available_setup_width()
@@ -747,64 +642,39 @@ func _home_spacing() -> int:
 		return 12
 	return 20
 
-func _configure_card_row_navigation(cards: Array, above: Control, below: Control) -> void:
-	var row := _valid_buttons(cards)
-	if row.is_empty():
-		return
-	for i in range(row.size()):
-		var card := row[i] as Button
-		var left := row[(i - 1 + row.size()) % row.size()] as Button
-		var right := row[(i + 1) % row.size()] as Button
-		card.focus_neighbor_left = card.get_path_to(left)
-		card.focus_neighbor_right = card.get_path_to(right)
-		if above != null:
-			card.focus_neighbor_top = card.get_path_to(above)
-		if below != null:
-			card.focus_neighbor_bottom = card.get_path_to(below)
-
-func _configure_single_button_navigation(button: Control, top: Control, bottom: Control) -> void:
-	if button == null:
-		return
-	button.focus_neighbor_left = button.get_path_to(button)
-	button.focus_neighbor_right = button.get_path_to(button)
-	if top != null:
-		button.focus_neighbor_top = button.get_path_to(top)
-	if bottom != null:
-		button.focus_neighbor_bottom = button.get_path_to(bottom)
-
 func _configure_dpad_navigation() -> void:
 	var pickup_buttons := _pickup_card_buttons(true)
-	var active_lang_btn = _lang_button if _is_focusable(_lang_button) else null
+	var active_lang_btn = _lang_button if FocusNavigator.is_focusable(_lang_button) else null
 
 	# Order: cards → start button → lang → character → trouble → head start
 	if not pickup_buttons.is_empty() and _pickup_row.visible:
-		_configure_card_row_navigation(pickup_buttons, null, _start_button)
+		FocusNavigator.configure_row(pickup_buttons, null, _start_button)
 	if _start_button != null:
-		_configure_single_button_navigation(_start_button, _selected_pickup_button() if _pickup_row.visible else null, active_lang_btn if active_lang_btn != null else _character_button)
+		FocusNavigator.configure_single(_start_button, _selected_pickup_button() if _pickup_row.visible else null, active_lang_btn if active_lang_btn != null else _character_button)
 	var lang_top: Control = _start_button
 	if active_lang_btn != null:
-		_configure_single_button_navigation(_lang_button, lang_top, _character_button)
+		FocusNavigator.configure_single(_lang_button, lang_top, _character_button)
 	var char_top = active_lang_btn if active_lang_btn != null else _start_button
-	_configure_single_button_navigation(_character_button, char_top, _first_chaser_button())
-	if _is_focusable(_trouble_button):
-		_configure_single_button_navigation(_trouble_button, _character_button, _next_after_trouble_button())
-	if _is_focusable(_head_start_button):
-		_configure_single_button_navigation(_head_start_button, _previous_before_head_start_button(), null)
+	FocusNavigator.configure_single(_character_button, char_top, _first_chaser_button())
+	if FocusNavigator.is_focusable(_trouble_button):
+		FocusNavigator.configure_single(_trouble_button, _character_button, _next_after_trouble_button())
+	if FocusNavigator.is_focusable(_head_start_button):
+		FocusNavigator.configure_single(_head_start_button, _previous_before_head_start_button(), null)
 
 func _first_chaser_button() -> Button:
-	if _is_focusable(_trouble_button):
+	if FocusNavigator.is_focusable(_trouble_button):
 		return _trouble_button
-	if _is_focusable(_head_start_button):
+	if FocusNavigator.is_focusable(_head_start_button):
 		return _head_start_button
 	return null
 
 func _next_after_trouble_button() -> Button:
-	if _is_focusable(_head_start_button):
+	if FocusNavigator.is_focusable(_head_start_button):
 		return _head_start_button
 	return null
 
 func _previous_before_head_start_button() -> Button:
-	if _is_focusable(_trouble_button):
+	if FocusNavigator.is_focusable(_trouble_button):
 		return _trouble_button
 	return _character_button
 
@@ -814,35 +684,17 @@ func _pickup_card_buttons(only_focusable: bool = false) -> Array[Button]:
 		var button := _pickup_cards.get(pickup_id, null) as Button
 		if button == null:
 			continue
-		if only_focusable and not _is_focusable(button):
+		if only_focusable and not FocusNavigator.is_focusable(button):
 			continue
 		buttons.append(button)
 	return buttons
 
 func _selected_pickup_button() -> Button:
 	var selected := _pickup_cards.get(_selected_pickup, null) as Button
-	if _is_focusable(selected):
+	if FocusNavigator.is_focusable(selected):
 		return selected
 	var buttons := _pickup_card_buttons(true)
 	return buttons[0] if not buttons.is_empty() else null
-
-func _is_focusable(button: Control) -> bool:
-	if button == null:
-		return false
-	if button is Button:
-		var btn := button as Button
-		if btn.disabled:
-			return false
-	return button.visible and button.focus_mode != Control.FOCUS_NONE
-
-func _valid_buttons(items: Array) -> Array[Button]:
-	var result: Array[Button] = []
-	for item in items:
-		if item is Button and is_instance_valid(item):
-			var button := item as Button
-			if button.visible:
-				result.append(button)
-	return result
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	_set_network_debug(scope, message)

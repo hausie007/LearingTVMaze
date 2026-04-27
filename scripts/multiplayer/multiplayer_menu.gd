@@ -74,7 +74,7 @@ func _on_controls_changed(_new_mode: int) -> void:
 func _on_host_pressed() -> void:
 	Config.prepare_setup_session(Config.selected_mission_id, Config.theme_dir_name, true)
 	NetworkManager.stop_discovery()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/host_setup.tscn")
+	get_tree().change_scene_to_file(Scenes.HOST_SETUP)
 
 func _on_discovery_updated(hosts: Array) -> void:
 	_hosts = hosts.duplicate(true)
@@ -206,11 +206,11 @@ func _select_host_index(index: int) -> void:
 	_selected_host_index = index
 	NetworkManager.set_pending_join_host((_hosts[index] as Dictionary).duplicate(true))
 	NetworkManager.stop_discovery()
-	get_tree().change_scene_to_file("res://scenes/multiplayer/join_flow.tscn")
+	get_tree().change_scene_to_file(Scenes.JOIN_FLOW)
 
 func _go_back() -> void:
 	NetworkManager.stop_discovery()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _host_mission_title(host: Dictionary) -> String:
 	return String(host.get("mission_title", host.get("game_style_title", tr("mission_follow_trail"))))

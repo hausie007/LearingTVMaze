@@ -2,8 +2,8 @@
 ## ---------------------------------------------------------------------------
 ## Static utility class providing shared UI styling functions.
 ##
-## Eliminates copy-pasted StyleBoxFlat button creation across game_manager.gd,
-## main_menu.gd, and settings_menu.gd.
+## Eliminates copy-pasted StyleBoxFlat button creation across game_setup_wizard.gd,
+## game_manager.gd, and settings_menu.gd.
 ##
 ## Usage:
 ##   var btn := UIHelpers.create_styled_button("Play", 300, 80)
@@ -212,7 +212,7 @@ static func get_content_rect(viewport_size: Vector2, controls_mode: int, top_mar
 ##   • Use tree.change_scene_to_file() for lightweight menu-to-menu transitions
 ##     (main_menu ↔ settings, main_menu ↔ help, etc.) where scenes load instantly.
 static func go_to_scene_with_loading(tree: SceneTree, target_path: String) -> void:
-	var loading_scene = load("res://scenes/loading_screen.tscn").instantiate()
+	var loading_scene = load(Scenes.LOADING).instantiate()
 	loading_scene.target_scene_path = target_path
 	tree.root.add_child(loading_scene)
 	tree.current_scene.queue_free()

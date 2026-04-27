@@ -41,23 +41,24 @@ enum ControlsMode {
 	RIGHT_HANDED = 2,
 }
 
-const STYLE_PATH := "path"
-const STYLE_NEXT_SYMBOL := "next_symbol"
-const STYLE_RACE := "race"
+# Domain constants — aliases to MissionCatalog (single source of truth).
+const STYLE_PATH = MissionCatalog.STYLE_PATH
+const STYLE_NEXT_SYMBOL = MissionCatalog.STYLE_NEXT_SYMBOL
+const STYLE_RACE = MissionCatalog.STYLE_RACE
 
-const TRAINING_NONE := "none"
-const TRAINING_NUMBERS := "numbers"
-const TRAINING_LETTERS := "letters"
-const TRAINING_WORDS := "words"
+const TRAINING_NONE = MissionCatalog.TRAINING_NONE
+const TRAINING_NUMBERS = MissionCatalog.TRAINING_NUMBERS
+const TRAINING_LETTERS = MissionCatalog.TRAINING_LETTERS
+const TRAINING_WORDS = MissionCatalog.TRAINING_WORDS
 
-const MISSION_FIND_EXIT := "find_exit"
-const MISSION_FOLLOW_TRAIL := "follow_trail"
-const MISSION_FIND_NEXT := "find_next"
-const MISSION_RACE_MIDDLE := "race_middle"
+const MISSION_FIND_EXIT = MissionCatalog.MISSION_FIND_EXIT
+const MISSION_FOLLOW_TRAIL = MissionCatalog.MISSION_FOLLOW_TRAIL
+const MISSION_FIND_NEXT = MissionCatalog.MISSION_FIND_NEXT
+const MISSION_RACE_MIDDLE = MissionCatalog.MISSION_RACE_MIDDLE
 
-const ROLE_COLLECTOR := "collector"
-const ROLE_CHASER := "chaser"
-const ROLE_RACER := "racer"
+const ROLE_COLLECTOR = MissionCatalog.ROLE_COLLECTOR
+const ROLE_CHASER = MissionCatalog.ROLE_CHASER
+const ROLE_RACER = MissionCatalog.ROLE_RACER
 
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -14,6 +14,42 @@ const STYLE_PATH := "path"
 const STYLE_NEXT_SYMBOL := "next_symbol"
 const STYLE_RACE := "race"
 
+const ROLE_COLLECTOR := "collector"
+const ROLE_CHASER := "chaser"
+const ROLE_RACER := "racer"
+
+const TRAINING_NONE := "none"
+const TRAINING_NUMBERS := "numbers"
+const TRAINING_LETTERS := "letters"
+const TRAINING_WORDS := "words"
+
+# ── Pickup Card UI Constants ─────────────────────────────────────────────────
+# Canonical order and display metadata for the pickup card row.
+# Used by mode_selection.gd, host_setup.gd, and game_setup_wizard.gd.
+
+const PICKUP_CARD_ORDER: Array[String] = [PICKUP_NUMBERS, PICKUP_WORDS, PICKUP_LETTERS, PICKUP_NONE]
+
+const PICKUP_CARD_ICONS := {
+	"numbers": "123",
+	"words": "W",
+	"letters": "ABC",
+	"none": ">",
+}
+
+const PICKUP_CARD_TITLE_KEYS := {
+	"numbers": "training_numbers",
+	"words": "training_words",
+	"letters": "training_letters",
+	"none": "pickup_just_maze",
+}
+
+const PICKUP_CARD_SUBTITLE_KEYS := {
+	"numbers": "pickup_numbers_short",
+	"words": "pickup_words_short",
+	"letters": "pickup_letters_short",
+	"none": "pickup_none_short",
+}
+
 const CHASER_LEVEL_SLOW := 1
 const CHASER_LEVEL_MEDIUM := 2
 const CHASER_LEVEL_FAST := 3

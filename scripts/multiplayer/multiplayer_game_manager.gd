@@ -119,7 +119,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if viewport != null:
 			viewport.set_input_as_handled()
 		NetworkManager.leave_session()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HOME)
 
 func _process(delta: float) -> void:
 	if _maze != null and (_win_screen == null or not _win_screen.is_active()):
@@ -799,7 +799,7 @@ func _on_home_pressed() -> void:
 	if _win_screen != null:
 		_win_screen.hide_screen()
 	NetworkManager.leave_session()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _on_play_alone_pressed() -> void:
 	if _win_screen != null:
@@ -819,7 +819,7 @@ func _on_play_alone_pressed() -> void:
 
 	Config.configure_single_player_session(style, training, has_chaser, chaser_lvl, mission)
 	Config.save_settings()
-	UIHelpers.go_to_scene_with_loading(get_tree(), "res://scenes/main.tscn")
+	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
 
 func _build_race_sequence() -> void:
 	_race_sequence.clear()

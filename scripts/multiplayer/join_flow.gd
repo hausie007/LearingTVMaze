@@ -4,10 +4,10 @@ const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
 
-const MP_GREEN := Color("#2D9B58")
-const MP_GREEN_BORDER := Color("#3DC878")
-const SLOT_EMPTY_COLOR := Color(1, 1, 1, 0.18)
-const SLOT_EMPTY_BG := Color(0.15, 0.17, 0.22, 0.6)
+const MP_GREEN := PlayerSlotPanel.MP_GREEN
+const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
+const SLOT_EMPTY_COLOR := PlayerSlotPanel.SLOT_EMPTY_COLOR
+const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
 
 # ── Scene nodes ─────────────────────────────────────────────────────────────
 @onready var discovery_panel: Control = %DiscoveryPanel
@@ -89,7 +89,7 @@ func _ready() -> void:
 
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
 	if pending_host.is_empty():
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HOME)
 		return
 	_selected_host = pending_host.duplicate(true)
 	_hosts = [_selected_host.duplicate(true)]
@@ -132,7 +132,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if join_setup_panel.visible:
 		_leave_session()
 	else:
-		_go_back_to_main_menu()
+		_leave_session()
 
 func _exit_tree() -> void:
 	_reset_global_dpad_accent()
@@ -326,113 +326,19 @@ func _build_setup_layout() -> void:
 	_instruction_panel.add_child(_instruction_label)
 
 func _build_breadcrumb_row() -> Button:
-	var btn := Button.new()
-	btn.flat = true
-	btn.custom_minimum_size = Vector2(0, 48)
-	btn.focus_mode = Control.FOCUS_NONE
-	btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var normal_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.6),
-		Color(1, 1, 1, 0.08), 10, 1
-	)
-	normal_style.content_margin_left = 24
-	normal_style.content_margin_right = 24
-	for state_name in ["normal", "focus", "hover", "pressed"]:
-		btn.add_theme_stylebox_override(state_name, normal_style)
-	var hbox := HBoxContainer.new()
-	hbox.alignment = BoxContainer.ALIGNMENT_BEGIN
-	hbox.add_theme_constant_override("separation", 12)
-	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	btn.add_child(hbox)
-	var chevron := Label.new()
-	chevron.text = "▾"
-	chevron.add_theme_font_size_override("font_size", 26)
-	chevron.add_theme_color_override("font_color", UIColors.YELLOW)
-	chevron.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	chevron.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	chevron.custom_minimum_size = Vector2(28, 0)
-	hbox.add_child(chevron)
-	var summary := Label.new()
-	summary.name = "SummaryText"
-	summary.add_theme_font_size_override("font_size", 28)
-	summary.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
-	summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	summary.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	hbox.add_child(summary)
-	btn.set_meta("summary", summary)
-	btn.set_meta("chevron", chevron)
-	return btn
+	return BreadcrumbRow.create()
 
 func _create_selector_row(label_key: String) -> Dictionary:
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 0)
-	row.custom_minimum_size = Vector2(0, 68)
-	var label := Label.new()
-	label.custom_minimum_size = Vector2(245, 0)
-	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
-	label.text = tr(label_key)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	row.add_child(label)
-	var gap := Control.new()
-	gap.custom_minimum_size = Vector2(12, 0)
-	row.add_child(gap)
-	var left := _create_arrow_label()
-	row.add_child(left)
-	var button := Button.new()
-	button.custom_minimum_size = Vector2(430, 64)
-	button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
-	row.add_child(button)
-	var right := _create_arrow_label()
-	right.text = ">"
-	row.add_child(right)
-	var extras := HBoxContainer.new()
-	extras.custom_minimum_size = Vector2(80, 0)
-	extras.add_theme_constant_override("separation", 8)
-	extras.alignment = BoxContainer.ALIGNMENT_BEGIN
-	row.add_child(extras)
-	return {"row": row, "left": left, "button": button, "right": right, "extras": extras}
+	return CyclingSelector.create_row_dict(label_key)
 
 func _create_arrow_label() -> Label:
-	var label := Label.new()
-	label.custom_minimum_size = Vector2(36, 0)
-	label.add_theme_color_override("font_color", UIColors.YELLOW)
-	label.add_theme_font_size_override("font_size", 38)
-	label.text = "<"
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	return label
+	return CyclingSelector.create_arrow_label()
 
 func _setup_cycling(btn: Button, cycle_func: Callable) -> void:
-	if btn == null: return
-	btn.gui_input.connect(func(event: InputEvent):
-		if event.is_pressed():
-			var vp: Viewport = get_viewport()
-			if event.is_action("ui_left"):
-				cycle_func.call(-1)
-				if vp != null: vp.set_input_as_handled()
-			elif event.is_action("ui_right"):
-				cycle_func.call(1)
-				if vp != null: vp.set_input_as_handled()
-	)
+	CyclingSelector.setup_cycling(btn, cycle_func)
 
 func _setup_arrow_visibility(btn: Button, left: Label, right: Label) -> void:
-	if btn == null or left == null or right == null: return
-	left.modulate.a = 0.0
-	right.modulate.a = 0.0
-	btn.focus_entered.connect(func():
-		left.modulate.a = 1.0
-		right.modulate.a = 1.0
-	)
-	btn.focus_exited.connect(func():
-		left.modulate.a = 0.0
-		right.modulate.a = 0.0
-	)
+	CyclingSelector.setup_arrow_visibility(btn, left, right)
 
 # ── Character & Controller Cycling ──────────────────────────────────────────
 
@@ -636,7 +542,7 @@ func _transition_to_joined(character_id: String) -> void:
 		_char_button.disabled = true
 		_char_button.focus_mode = Control.FOCUS_NONE
 	if _instruction_label != null:
-		_instruction_label.text = "Waiting for host to start the game."
+		_instruction_label.text = tr("mp_waiting_for_host")
 	_apply_character_preview(character_id, _char_preview)
 	_cache_character_palette(character_id)
 	_apply_selected_avatar_to_global_dpad()
@@ -746,21 +652,7 @@ func _available_width() -> float:
 # ── Helpers ─────────────────────────────────────────────────────────────────
 
 func _apply_character_preview(character_id: String, preview: CharacterPreview) -> void:
-	if preview == null: return
-	var preview_data: Dictionary = CharacterCatalog.get_preview_data_by_id(character_id)
-	var frames_data: Array = preview_data.get("frames", [])
-	var frames: Array[Texture2D] = []
-	for item in frames_data:
-		if item is Texture2D: frames.append(item)
-	var fps: float = float(preview_data.get("fps", 1.0))
-	if not frames.is_empty():
-		preview.set_character(frames, fps)
-	else:
-		var fallback: Texture2D = CharacterCatalog.get_texture_by_id(character_id)
-		if fallback != null:
-			preview.set_character([fallback], 1.0)
-		else:
-			preview.clear()
+	PlayerSlotPanel.apply_character_preview(character_id, preview)
 
 func _cache_character_palette(character_id: String) -> void:
 	if character_id.is_empty():
@@ -822,15 +714,8 @@ func _leave_session() -> void:
 	NetworkManager.leave_session()
 	Config.show_join_list_on_home = true
 	Config.join_status_override = ""
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
-func _go_back_to_main_menu() -> void:
-	_reset_global_dpad_accent()
-	_restore_local_dpad()
-	NetworkManager.leave_session()
-	Config.show_join_list_on_home = true
-	Config.join_status_override = ""
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _update_taken_character_ids_from_selected_host() -> void:
 	_taken_character_ids.clear()
@@ -1006,7 +891,7 @@ func _update_breadcrumbs(cfg: Dictionary) -> void:
 func _update_instruction_text(cfg: Dictionary) -> void:
 	if _instruction_label == null: return
 	if _joined:
-		_instruction_label.text = "Waiting for host to start the game."
+		_instruction_label.text = tr("mp_waiting_for_host")
 		return
 
 	var goal_key := String(cfg.get("mission_goal_key", ""))
@@ -1036,7 +921,7 @@ func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 			(slot["preview"] as CharacterPreview).visible = true
 			var is_host := bool(info.get("is_host", false))
 			var lbl := slot["label"] as Label
-			lbl.text = "Host" if is_host else CharacterCatalog.display_name_for_id(char_id)
+			lbl.text = tr("mp_slot_host") if is_host else CharacterCatalog.display_name_for_id(char_id)
 			lbl.add_theme_color_override("font_color", UIColors.YELLOW if is_host else UIColors.TEXT_PRIMARY)
 			var frame := slot["frame"] as PanelContainer
 			_apply_filled_frame_style(frame)
@@ -1044,7 +929,7 @@ func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 		else:
 			(slot["preview"] as CharacterPreview).visible = false
 			var lbl := slot["label"] as Label
-			lbl.text = "Waiting..."
+			lbl.text = tr("mp_slot_waiting")
 			lbl.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 			_apply_empty_frame_style(slot["frame"] as PanelContainer)
 			slot["is_filled"] = false
@@ -1069,7 +954,7 @@ func _create_slot(_index: int) -> void:
 	var label := Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
-	label.text = "Waiting..."
+	label.text = tr("mp_slot_waiting")
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 	slot_vbox.add_child(label)
 	_slots_row.add_child(slot_vbox)
@@ -1123,11 +1008,4 @@ func _update_pulse_animation() -> void:
 	, 0.45, 1.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
-	var peer_ids: Array[int] = []
-	for key in player_map.keys():
-		peer_ids.append(int(key))
-	peer_ids.sort()
-	if peer_ids.has(NetworkManager.HOST_PEER_ID):
-		peer_ids.erase(NetworkManager.HOST_PEER_ID)
-		peer_ids.push_front(NetworkManager.HOST_PEER_ID)
-	return peer_ids
+	return PlayerSlotPanel.ordered_peer_ids(player_map)

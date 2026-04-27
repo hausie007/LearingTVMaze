@@ -30,7 +30,7 @@ func _ready() -> void:
 	else:
 		# Fallback if somehow empty
 		push_error("LoadingScreen: No target scene path provided!")
-		get_tree().create_timer(1.0).timeout.connect(func(): get_tree().change_scene_to_file("res://scenes/main_menu.tscn"))
+		get_tree().create_timer(1.0).timeout.connect(func(): get_tree().change_scene_to_file(Scenes.HOME))
 
 func _process(_delta: float) -> void:
 	var status = ResourceLoader.load_threaded_get_status(target_scene_path)
@@ -43,4 +43,4 @@ func _process(_delta: float) -> void:
 			get_tree().change_scene_to_packed(packed_scene)
 	elif status == ResourceLoader.THREAD_LOAD_FAILED:
 		push_error("LoadingScreen: Failed to load target scene: " + target_scene_path)
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HOME)

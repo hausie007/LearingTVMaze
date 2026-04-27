@@ -276,7 +276,7 @@ func _on_save_pressed() -> void:
 		Config.on_screen_controls = temp_controls
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_ui_language())
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _exit_tree() -> void:
 	if not _is_saving and Config:

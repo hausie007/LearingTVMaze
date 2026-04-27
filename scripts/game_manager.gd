@@ -133,7 +133,7 @@ func _unpause() -> void:
 
 func _on_pause_confirmed() -> void:
 	_unpause()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 
 func _on_pause_cancelled() -> void:
@@ -326,7 +326,7 @@ func _on_harder_pressed() -> void:
 func _on_home_pressed() -> void:
 	win_screen.hide_screen()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _on_play_together_pressed() -> void:
 	# Build a MP host config from the current SP game settings
@@ -370,9 +370,9 @@ func _on_play_together_pressed() -> void:
 	var err := NetworkManager.start_host()
 	if err != OK:
 		push_error("Failed to start host from win screen: %d" % err)
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file(Scenes.HOME)
 		return
-	get_tree().change_scene_to_file("res://scenes/multiplayer/host_lobby.tscn")
+	get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
 
 
 # ── Private Helpers ──────────────────────────────────────────────────────────
@@ -411,28 +411,28 @@ func _update_hud_mission_description() -> void:
 
 func _get_solo_goal() -> String:
 	if Config.game_style == Config.STYLE_RACE:
-		return "Run to the middle first."
-		
+		return tr("hud_desc_sp_race")
+
 	var is_phase_one := false
 	if Config.game_style in [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL] and collectible_spawner != null:
 		is_phase_one = not collectible_spawner.is_complete()
-		
+
 	if Config.game_style == Config.STYLE_PATH and not Config.chaser_enabled and Config.game_mode == Config.GameMode.NORMAL:
-		return "Find the exit from the maze."
-		
-	var payload_text := "all letters"
-	if Config.game_mode == Config.GameMode.NUMBERS:
-		payload_text = "all numbers"
-	elif Config.game_mode == Config.GameMode.WORDS:
-		payload_text = "the words"
-		
+		return tr("hud_desc_sp_path")
+
 	if is_phase_one:
+		var payload_key := "hud_desc_word_letters"
+		if Config.game_mode == Config.GameMode.NUMBERS:
+			payload_key = "hud_desc_word_numbers"
+		elif Config.game_mode == Config.GameMode.WORDS:
+			payload_key = "hud_desc_word_words"
+		var payload_text := tr(payload_key)
 		if Config.chaser_enabled:
-			return "Collect %s and do not get caught." % payload_text
+			return tr("hud_desc_sp_collect_chaser") % payload_text
 		else:
-			return "Collect %s." % payload_text
+			return tr("hud_desc_sp_collect") % payload_text
 	else:
-		return "Find the exit from the maze."
+		return tr("hud_desc_sp_path")
 
 func _speak_completed_word_once(lang_override: String = "") -> void:
 	if _completed_word_spoken or not Config.voice_hints:
