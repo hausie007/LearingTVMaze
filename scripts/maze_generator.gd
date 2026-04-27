@@ -66,7 +66,7 @@ func generate_race(custom_size: Vector2i) -> MazeData:
 	if race_size.y % 2 == 0:
 		race_size.y += 1
 
-	var center := Vector2i(race_size.x / 2, race_size.y / 2)
+	var center := Vector2i(int(race_size.x / 2.0), int(race_size.y / 2.0))
 	var quadrant_size := center + Vector2i.ONE
 	var quadrant := _generate_race_quadrant(quadrant_size)
 

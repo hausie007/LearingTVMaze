@@ -88,25 +88,25 @@ static func _extract_accent_from_frames(frames: Array[Texture2D]) -> Color:
 					continue
 
 				var hsv: Vector3 = _rgb_to_hsv(color)
-				var hue: float = hsv.x
-				var saturation: float = hsv.y
-				var value: float = hsv.z
+				var pixel_hue: float = hsv.x
+				var pixel_sat: float = hsv.y
+				var pixel_val: float = hsv.z
 
-				var weight: float = color.a * (0.16 + saturation * 1.55) * (0.30 + value * 0.70)
-				if saturation < MIN_SAT_FOR_WEIGHT:
+				var weight: float = color.a * (0.16 + pixel_sat * 1.55) * (0.30 + pixel_val * 0.70)
+				if pixel_sat < MIN_SAT_FOR_WEIGHT:
 					# Keep grayscale pixels from dominating the result.
-					weight *= 0.10 + saturation * 0.90
-				if value < 0.16:
+					weight *= 0.10 + pixel_sat * 0.90
+				if pixel_val < 0.16:
 					weight *= 0.35
 				if weight <= 0.0:
 					continue
 
-				var bucket: int = int(floor(hue * float(HUE_BUCKETS))) % HUE_BUCKETS
+				var bucket: int = int(floor(pixel_hue * float(HUE_BUCKETS))) % HUE_BUCKETS
 				bucket_weight[bucket] += weight
-				bucket_sat[bucket] += saturation * weight
-				bucket_val[bucket] += value * weight
-				bucket_hx[bucket] += cos(hue * TAU) * weight
-				bucket_hy[bucket] += sin(hue * TAU) * weight
+				bucket_sat[bucket] += pixel_sat * weight
+				bucket_val[bucket] += pixel_val * weight
+				bucket_hx[bucket] += cos(pixel_hue * TAU) * weight
+				bucket_hy[bucket] += sin(pixel_hue * TAU) * weight
 
 	var best_bucket: int = -1
 	var best_weight: float = 0.0

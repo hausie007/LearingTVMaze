@@ -1,7 +1,6 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
 const LogoTexture := preload("res://images/lm_horizontal.png")
 
 const MP_GREEN := PlayerSlotPanel.MP_GREEN
@@ -179,59 +178,70 @@ func _build_join_banner() -> void:
 	panel_style.content_margin_bottom = 30
 	_banner_panel.add_theme_stylebox_override("panel", panel_style)
 	_banner_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_banner_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_banner_panel.custom_minimum_size = Vector2(1100, 0)
 	_main_vbox.add_child(_banner_panel)
 
+	var main_hbox := HBoxContainer.new()
+	main_hbox.add_theme_constant_override("separation", 60)
+	main_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_banner_panel.add_child(main_hbox)
+
 	var banner_vbox := VBoxContainer.new()
+	banner_vbox.name = "BannerVBox"
+	banner_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	banner_vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	banner_vbox.add_theme_constant_override("separation", 16)
-	_banner_panel.add_child(banner_vbox)
+	main_hbox.add_child(banner_vbox)
 
 	var banner_title := Label.new()
-	banner_title.text = tr("mp_how_to_join")
-	banner_title.add_theme_font_size_override("font_size", 34)
+	banner_title.text = "Join this game with Your Phone or Tablet"
+	banner_title.add_theme_font_size_override("font_size", 40)
 	banner_title.add_theme_color_override("font_color", UIColors.YELLOW)
-	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	banner_vbox.add_child(banner_title)
 
-	var wifi_name := WiFiHelper.get_wifi_name()
-	var wifi_text := ""
-	if wifi_name.is_empty():
-		wifi_text = tr("mp_wifi_same_as_device")
-	else:
-		wifi_text = tr("mp_wifi_same_as_device_named") % wifi_name
-
-	# Steps 1, 2, 4 as plain labels
-	var plain_steps := [
-		tr("mp_join_step_1"),
-		tr("mp_join_step_2") % wifi_text,
+	var green_hex := MP_GREEN_BORDER.to_html(false)
+	var steps := [
+		"1. Open [b]Learning Maze[/b] on your phone or tablet.",
+		"2. Check you are connected to the same WiFi/network.",
+		"3. Tap the green [color=#%s]Play Together[/color] card." % green_hex,
+		"4. Choose your player avatar and click \"[color=#%s]Join[/color]\"." % green_hex,
+		"5. Use your device as the controller for this screen."
 	]
 
-	for step_text in plain_steps:
-		var step_label := Label.new()
+	for step_text in steps:
+		var step_label := RichTextLabel.new()
+		step_label.bbcode_enabled = true
+		step_label.fit_content = true
+		step_label.scroll_active = false
 		step_label.text = step_text
-		step_label.add_theme_font_size_override("font_size", 26)
-		step_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
-		step_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		step_label.add_theme_font_size_override("normal_font_size", 30)
+		step_label.add_theme_font_size_override("bold_font_size", 30)
+		step_label.add_theme_color_override("default_color", UIColors.TEXT_SECONDARY)
 		banner_vbox.add_child(step_label)
 
-	# Step 3 with green bold "Play Together"
-	var step3 := RichTextLabel.new()
-	step3.bbcode_enabled = true
-	step3.fit_content = true
-	step3.scroll_active = false
-	step3.add_theme_font_size_override("normal_font_size", 26)
-	step3.add_theme_color_override("default_color", UIColors.TEXT_SECONDARY)
-	var green_hex := MP_GREEN_BORDER.to_html(false)
-	step3.text = tr("mp_join_step_3") % green_hex
-	banner_vbox.add_child(step3)
+	var qr_vbox := VBoxContainer.new()
+	qr_vbox.name = "QrVBox"
+	qr_vbox.add_theme_constant_override("separation", 16)
+	qr_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	qr_vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main_hbox.add_child(qr_vbox)
 
-	# Step 4
-	var step4 := Label.new()
-	step4.text = tr("mp_join_step_4")
-	step4.add_theme_font_size_override("font_size", 26)
-	step4.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
-	step4.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	banner_vbox.add_child(step4)
+	var qr_title := Label.new()
+	qr_title.text = "Don’t have the app yet?"
+	qr_title.add_theme_font_size_override("font_size", 30)
+	qr_title.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	qr_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	qr_vbox.add_child(qr_title)
+
+	var qr_rect := TextureRect.new()
+	qr_rect.texture = preload("res://images/qr_playstore.png")
+	qr_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	qr_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	qr_rect.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	qr_rect.custom_minimum_size = Vector2(250, 250)
+	qr_vbox.add_child(qr_rect)
 
 # ── Lobby Updates ───────────────────────────────────────────────────────────
 
@@ -601,26 +611,34 @@ func _apply_responsive_layout() -> void:
 	# Banner
 	if _banner_panel != null:
 		_banner_panel.custom_minimum_size.x = clampf(available_width * 0.92, 880.0, 1380.0)
-		var banner_font_size := 24 if short_screen else 28
-		var title_font_size := 30 if short_screen else 34
-		var vbox := _banner_panel.get_child(0) as VBoxContainer
-		if vbox != null:
-			for i in range(vbox.get_child_count()):
-				var child := vbox.get_child(i)
-				if child is Label:
-					if i == 0:
-						child.add_theme_font_size_override("font_size", title_font_size)
-					else:
-						child.add_theme_font_size_override("font_size", banner_font_size)
-				elif child is RichTextLabel:
-					child.add_theme_font_size_override("normal_font_size", banner_font_size)
-					child.add_theme_font_size_override("bold_font_size", banner_font_size)
+		var banner_font_size := 28 if short_screen else 30
+		var title_font_size := 36 if short_screen else 40
+		var hbox := _banner_panel.get_child(0) as HBoxContainer
+		if hbox != null:
+			var vbox := hbox.get_node_or_null("BannerVBox") as VBoxContainer
+			if vbox != null:
+				for i in range(vbox.get_child_count()):
+					var child := vbox.get_child(i)
+					if child is Label:
+						if i == 0:
+							child.add_theme_font_size_override("font_size", title_font_size)
+						else:
+							child.add_theme_font_size_override("font_size", banner_font_size)
+					elif child is RichTextLabel:
+						child.add_theme_font_size_override("normal_font_size", banner_font_size)
+						child.add_theme_font_size_override("bold_font_size", banner_font_size)
+			
+			var qr_vbox := hbox.get_node_or_null("QrVBox") as VBoxContainer
+			if qr_vbox != null:
+				var qr_title := qr_vbox.get_child(0) as Label
+				if qr_title != null:
+					qr_title.add_theme_font_size_override("font_size", banner_font_size)
 
 func _available_width() -> float:
 	var viewport_size := get_viewport_rect().size
 	var controls_mode := Config.ControlsMode.OFF
 	if Config != null:
-		controls_mode = Config.on_screen_controls
+		controls_mode = Config.on_screen_controls as Config.ControlsMode
 	var content_rect := UIHelpers.get_content_rect(viewport_size, controls_mode)
 	return clampf(content_rect.size.x * 0.985, 760.0, 1640.0)
 

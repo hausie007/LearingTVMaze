@@ -104,7 +104,6 @@ func start_host() -> int:
 
 	multiplayer.multiplayer_peer = _peer
 	_emit_debug("host", "Listening on ENet %s:%d" % [HOST_BIND_IP, GAME_PORT])
-	print("Learning Maze host listening on ENet %s:%d and discovery UDP %d" % [HOST_BIND_IP, GAME_PORT, DISCOVERY_PORT])
 
 	var host_id: int = multiplayer.get_unique_id()
 	players.clear()
@@ -304,7 +303,6 @@ func _broadcast_presence() -> void:
 	var payload := _build_discovery_payload()
 	var packet := JSON.stringify(payload).to_utf8_buffer()
 	_broadcast_socket.put_packet(packet)
-	print("Learning Maze discovery broadcast -> %s:%d" % [DISCOVERY_BROADCAST_IP, DISCOVERY_PORT])
 
 func _build_discovery_payload() -> Dictionary:
 	var max_players: int = clampi(int(host_config.get("max_players", 2)), 2, 4)

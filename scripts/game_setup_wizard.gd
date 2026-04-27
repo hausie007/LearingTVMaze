@@ -14,7 +14,6 @@ extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_horizontal.png")
-const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
 
 const CARD_GAP := 42
 
@@ -269,9 +268,7 @@ func _build_layout() -> void:
 
 	_build_corner_buttons()
 
-	# Add character preview overlay (must be after corner buttons so it's on top)
-	if _character_preview_container != null:
-		add_child(_character_preview_container)
+	# Character preview is now part of the step3 extras container.
 
 # ── Card Data Builders ───────────────────────────────────────────────────────
 
@@ -456,8 +453,7 @@ func _build_step3_settings() -> void:
 	_setup_cycling(_character_button, _cycle_character)
 	_setup_arrow_visibility(_character_button, _character_left, _character_right)
 
-	# Character preview — added as overlay child of the wizard (NOT in the row)
-	# so it has zero effect on row alignment. Positioned dynamically.
+	# Character preview — embedded directly in the row's 'extras' container
 	_character_preview_container = Control.new()
 	_character_preview_container.name = "CharPreviewOverlay"
 	_character_preview_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -467,10 +463,12 @@ func _build_step3_settings() -> void:
 	_character_preview.name = "CharPreview"
 	_character_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	_character_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_character_preview.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_character_preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_character_preview_container.add_child(_character_preview)
-	# Will be added to `self` after build completes (see _build_layout)
+	
+	var extras := _character_row.get_meta("extras") as Container
+	if extras != null:
+		extras.add_child(_character_preview_container)
 
 	# Chaser speed/delay row (visible only when chaser action is focused)
 	_chaser_speed_row = _create_selector_row("setting_chaser_speed")
@@ -828,7 +826,7 @@ func _update_step3_settings_visibility() -> void:
 	if _character_preview_container != null:
 		_character_preview_container.visible = is_mp
 	if is_mp:
-		call_deferred("_position_character_preview")
+		_resize_character_preview()
 	# Refresh chaser button text (speed vs delay labels)
 	_update_step3_labels()
 
@@ -850,29 +848,25 @@ func _update_character_preview() -> void:
 	var fps: float = float(preview_data.get("fps", 1.0))
 	if not frames.is_empty():
 		_character_preview.set_character(frames, fps)
-	call_deferred("_position_character_preview")
+	_resize_character_preview()
 
-## Position the character preview overlay next to the button.
-## Top of preview aligns with top of button. Placed to the right of the right arrow.
-func _position_character_preview() -> void:
-	if _character_preview_container == null or _character_button == null:
+## Resize the character preview container (it's auto-positioned by the HBoxContainer).
+func _resize_character_preview() -> void:
+	if _character_preview_container == null:
 		return
 	if not _character_preview_container.visible:
 		return
 	var short_screen: bool = get_viewport_rect().size.y < 820.0
 	var ps: float = 94.0 if short_screen else 124.0
-	# Position next to the button, RTL-aware
-	var btn_rect := _character_button.get_global_rect()
-	var top: float = btn_rect.position.y  # top aligned with button
-	var x: float
-	if is_layout_rtl():
-		# RTL: place to the left of the button (before the "<" arrow)
-		x = btn_rect.position.x - 30 - ps
-	else:
-		# LTR: place to the right of the button (after the ">" arrow)
-		x = btn_rect.end.x + 30
-	_character_preview_container.global_position = Vector2(x, top)
-	_character_preview_container.size = Vector2(ps, ps)
+	
+	# Keep container height at 0 so it doesn't stretch the row (and therefore the button)
+	_character_preview_container.custom_minimum_size = Vector2(ps, 0)
+	
+	# Manually position the preview to overflow the row height (row is ~68px)
+	var row_height := 68.0
+	_character_preview.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	_character_preview.size = Vector2(ps, ps)
+	_character_preview.position = Vector2(0, (row_height - ps) / 2.0)
 
 func _theme_display_name() -> String:
 	var theme_name := _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
@@ -996,7 +990,7 @@ func _apply_responsive_layout() -> void:
 		_main_vbox.add_theme_constant_override("separation", _spacing())
 
 	# Deferred logging so we see the exact post-layout state of every single node
-	call_deferred("_dump_layout_state")
+
 
 	if _top_spacer != null:
 		_top_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.005, 2.0, 8.0)
@@ -1029,7 +1023,7 @@ func _apply_responsive_layout() -> void:
 			_theme_preview.custom_minimum_size = Vector2(ps, ps)
 
 	if _character_preview_container != null and _character_preview_container.visible:
-		call_deferred("_position_character_preview")
+		_resize_character_preview()
 
 	_position_corner_buttons()
 	
@@ -1038,19 +1032,6 @@ func _apply_responsive_layout() -> void:
 	if _main_vbox != null:
 		_main_vbox.size = Vector2.ZERO
 	
-func _dump_layout_state() -> void:
-	print("\n--- DEFERRED POST-LAYOUT DUMP ---")
-	print("CenterContainer size/pos: ", center_container.size, " / ", center_container.global_position)
-	print("MainVBox size/pos/min: ", _main_vbox.size, " / ", _main_vbox.global_position, " / ", _main_vbox.custom_minimum_size)
-	if _logo != null:
-		print("  Logo size/pos/min: ", _logo.size, " / ", _logo.global_position, " / ", _logo.custom_minimum_size)
-	var row = _step1.get_card_row() if _step1 != null else null
-	if row != null:
-		print("  CardRow size/pos/min: ", row.size, " / ", row.global_position, " / ", row.custom_minimum_size)
-		for i in range(row.get_child_count()):
-			var child = row.get_child(i)
-			print("    Card ", i, " (", child.name, ") vis:", child.visible, " size/min: ", child.size, " / ", child.custom_minimum_size, " x pos: ", child.global_position.x)
-	print("---------------------------------\n")
 
 func _apply_card_sizing(step: WizardStep, available_width: float, viewport_height: float, short_screen: bool) -> void:
 	if step == null or step.get_state() != WizardStep.State.ACTIVE: return
@@ -1069,8 +1050,7 @@ func _apply_card_sizing(step: WizardStep, available_width: float, viewport_heigh
 	step.set_card_gap(gap)
 	
 	if step == _step1:
-		print("Step1 Sizing: count=", count, " cols=", columns, " width=", card_width, " gap=", gap)
-		
+		pass
 	for card in cards:
 		card.custom_minimum_size = Vector2(card_width, card_height)
 		card.size = Vector2.ZERO # Force card to shrink if previously larger
@@ -1128,7 +1108,7 @@ func _available_width() -> float:
 	var viewport_size := get_viewport_rect().size
 	var controls_mode := Config.ControlsMode.OFF
 	if Config != null:
-		controls_mode = Config.on_screen_controls
+		controls_mode = Config.on_screen_controls as Config.ControlsMode
 	var content_rect := UIHelpers.get_content_rect(viewport_size, controls_mode)
 	return clampf(content_rect.size.x * 0.985, 760.0, 1640.0)
 

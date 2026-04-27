@@ -30,7 +30,7 @@ func _ready() -> void:
 ## Update the stopwatch display.
 func update_time(elapsed: float) -> void:
 	if _time_label:
-		var mins: int = int(elapsed) / 60
+		var mins: int = int(elapsed / 60.0)
 		var secs: int = int(elapsed) % 60
 		_time_label.text = "%02d:%02d" % [mins, secs]
 

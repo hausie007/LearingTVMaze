@@ -136,9 +136,9 @@ func set_custom_palette(
 
 ## Set a player-count badge in the top-left corner of the card.
 ## Pass empty text to hide.
-func set_badge(text: String, badge_color: Color = UIColors.BLUE) -> void:
+func set_badge(badge_text: String, _badge_color: Color = UIColors.BLUE) -> void:
 	if not is_node_ready(): await ready
-	if text.is_empty():
+	if badge_text.is_empty():
 		if _badge_label != null:
 			_badge_label.visible = false
 		return
@@ -147,7 +147,7 @@ func set_badge(text: String, badge_color: Color = UIColors.BLUE) -> void:
 		_badge_label.name = "BadgeLabel"
 		_badge_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(_badge_label)
-	_badge_label.text = text
+	_badge_label.text = badge_text
 	_badge_label.add_theme_font_size_override("font_size", 23)
 	_badge_label.add_theme_color_override("font_color", Color.WHITE)
 	_badge_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT

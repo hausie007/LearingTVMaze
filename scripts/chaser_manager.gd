@@ -133,6 +133,7 @@ func _on_chaser_request_move() -> void:
 	var path: PackedInt64Array = _nav_map.get_id_path(id_start, id_end)
 	if path.size() > 1:
 		var next_id: int = path[1]
+		@warning_ignore("integer_division")
 		var next_pos: Vector2i = Vector2i(next_id % grid_size_x, next_id / grid_size_x)
 		_chaser.move_to(next_pos)
 

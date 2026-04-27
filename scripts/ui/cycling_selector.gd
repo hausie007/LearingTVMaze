@@ -38,6 +38,7 @@ static func create_row(label_key: String) -> HBoxContainer:
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 
 	var gap := Control.new()
@@ -62,6 +63,7 @@ static func create_row(label_key: String) -> HBoxContainer:
 	extras.custom_minimum_size = Vector2(80, 0)
 	extras.add_theme_constant_override("separation", 8)
 	extras.alignment = BoxContainer.ALIGNMENT_BEGIN
+	extras.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(extras)
 
 	row.set_meta("title", label)
@@ -89,6 +91,7 @@ static func create_row_dict(label_key: String) -> Dictionary:
 	label.text = TranslationServer.translate(label_key)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 
 	var left := create_arrow_label()
@@ -109,6 +112,7 @@ static func create_row_dict(label_key: String) -> Dictionary:
 	extras.custom_minimum_size = Vector2(80, 0)
 	extras.add_theme_constant_override("separation", 8)
 	extras.alignment = BoxContainer.ALIGNMENT_BEGIN
+	extras.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(extras)
 	
 	return {"row": row, "left": left, "button": button, "right": right, "extras": extras}

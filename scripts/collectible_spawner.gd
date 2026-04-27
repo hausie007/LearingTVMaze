@@ -142,7 +142,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		return
 
 	var max_items: int = 26 if Config.game_mode == Config.GameMode.LETTERS else 50
-	var num_items: int = maxi(1, mini(max_items, L / 3))
+	var num_items: int = maxi(1, mini(max_items, int(float(L) / 3.0)))
 	_total_collectibles = num_items
 	var step: float = float(L) / float(num_items)
 

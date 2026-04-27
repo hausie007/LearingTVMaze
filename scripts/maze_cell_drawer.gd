@@ -74,12 +74,7 @@ static func get_cell_draw_commands(
 		rects.append(RectCmd.new(r_pos, Vector2(r_cs, r_cs), theme.color_wall))
 		return {"rects": rects, "icons": icons}
 
-	# Helper for neighbor checks
-	var wall_continues = func(direction: Vector2i, wall_type: String):
-		if not maze: return false
-		var neighbor := maze.get_cell(coord + direction)
-		if not neighbor: return false
-		return neighbor.get(wall_type) == true
+
 
 	# ── VISITED: Corridor Mode ──
 	# If has_bg is true, the background image IS the floor, so we don't draw solid rects.

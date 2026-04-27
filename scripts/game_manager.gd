@@ -158,7 +158,7 @@ func _start_new_maze() -> void:
 
 	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style):
 		Config.game_style = Config.STYLE_PATH
-	Config.game_mode = Config.game_mode_for_training(Config.training_type)
+	Config.game_mode = Config.game_mode_for_training(Config.training_type) as Config.GameMode
 	if Config.game_style == Config.STYLE_RACE:
 		Config.chaser_enabled = false
 	if not Config.chaser_enabled:
@@ -387,7 +387,7 @@ func _freeze_player() -> void:
 ## Format elapsed time as MM:SS string.
 func _format_time() -> String:
 	var elapsed_int: int = int(_elapsed_time)
-	return "%02d:%02d" % [elapsed_int / 60, elapsed_int % 60]
+	return "%02d:%02d" % [int(elapsed_int / 60.0), elapsed_int % 60]
 
 func _refresh_target_hud() -> void:
 	if Config.game_mode == Config.GameMode.WORDS:

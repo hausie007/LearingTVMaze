@@ -313,13 +313,13 @@ func configure_single_player_session(
 	training_type = training if [TRAINING_NONE, TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
 	mission_id = mission if [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission) else MissionCatalog.mission_from_config(game_style, training_type)
 	player_role = ROLE_RACER if game_style == STYLE_RACE else ROLE_COLLECTOR
-	game_mode = game_mode_for_training(training_type)
+	game_mode = game_mode_for_training(training_type) as GameMode
 	chaser_enabled = use_chaser and game_style != STYLE_RACE
-	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) if chaser_enabled else ChaserLevel.OFF
+	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) as ChaserLevel if chaser_enabled else ChaserLevel.OFF
 
-func prepare_setup_session(mission: String, theme_dir: String, multiplayer_host: bool) -> void:
+func prepare_setup_session(mission: String, setup_theme_dir: String, multiplayer_host: bool) -> void:
 	selected_mission_id = mission if [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission) else MissionCatalog.DEFAULT_MISSION
-	selected_theme_dir = theme_dir if not theme_dir.is_empty() else theme_dir_name
+	selected_theme_dir = setup_theme_dir if not setup_theme_dir.is_empty() else theme_dir_name
 	is_multiplayer_host = multiplayer_host
 
 func game_mode_for_training(training: String) -> int:
@@ -355,7 +355,7 @@ func _apply_session_compatibility() -> void:
 		training_type = training_for_game_mode(game_mode)
 	if not [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission_id):
 		mission_id = MissionCatalog.mission_from_config(game_style, training_type)
-	game_mode = game_mode_for_training(training_type)
+	game_mode = game_mode_for_training(training_type) as GameMode
 	if not [ROLE_COLLECTOR, ROLE_CHASER, ROLE_RACER].has(player_role):
 		player_role = ROLE_COLLECTOR
 	if game_style == STYLE_RACE:

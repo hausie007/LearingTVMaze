@@ -2,7 +2,6 @@ extends Control
 
 const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const CharacterCatalog := preload("res://scripts/multiplayer/character_catalog.gd")
 
 const MP_GREEN := PlayerSlotPanel.MP_GREEN
 const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
@@ -503,8 +502,23 @@ func _on_join_rejected(reason: String) -> void:
 	if _join_error_label != null: _join_error_label.text = reason
 
 func _on_game_started(_session: Dictionary) -> void:
-	# Controller stays on this screen. Game is visible on host only.
-	pass
+	# Hide all setup controls to turn the device into a pure controller during gameplay
+	if _title_row != null: _title_row.visible = false
+	if _breadcrumb1 != null: _breadcrumb1.visible = false
+	if _breadcrumb2 != null: _breadcrumb2.visible = false
+	if _slots_row != null: _slots_row.visible = false
+	if _char_row != null: _char_row.visible = false
+	if _controller_row != null: _controller_row.visible = false
+	
+	if _main_vbox != null:
+		var settings_vbox := _main_vbox.get_node_or_null("SettingsVBox") as VBoxContainer
+		if settings_vbox != null:
+			settings_vbox.visible = false
+			
+	if _join_button != null:
+		var join_row := _join_button.get_parent().get_parent() if _join_button.get_parent() != null else null
+		if join_row is VBoxContainer:
+			join_row.visible = false
 
 func _on_chaser_countdown_updated(remaining: int) -> void:
 	if chaser_ready_label == null or chaser_countdown_label == null: return
@@ -645,7 +659,7 @@ func _apply_responsive_layout() -> void:
 func _available_width() -> float:
 	var viewport_size := get_viewport_rect().size
 	var controls_mode := Config.ControlsMode.OFF
-	if Config != null: controls_mode = Config.on_screen_controls
+	if Config != null: controls_mode = Config.on_screen_controls as Config.ControlsMode
 	var content_rect := UIHelpers.get_content_rect(viewport_size, controls_mode)
 	return clampf(content_rect.size.x * 0.985, 760.0, 1640.0)
 
