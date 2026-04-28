@@ -2,11 +2,15 @@ extends Control
 
 const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+const LogoTexture := preload("res://images/lm_horizontal.png")
 
 const MP_GREEN := PlayerSlotPanel.MP_GREEN
 const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
 const SLOT_EMPTY_COLOR := PlayerSlotPanel.SLOT_EMPTY_COLOR
 const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
+const MP_RED        := Color("#C84848")
+const MP_RED_BORDER := Color("#E05050")
+const JOIN_GREEN    := Color(0.18, 0.62, 0.34)
 
 # ── Scene nodes ─────────────────────────────────────────────────────────────
 @onready var discovery_panel: Control = %DiscoveryPanel
@@ -24,7 +28,7 @@ const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
 # ── Code-built layout ──────────────────────────────────────────────────────
 var _main_vbox: VBoxContainer = null
 var _top_spacer: Control = null
-var _title_row: HBoxContainer = null
+var _logo: TextureRect = null
 var _title_label: Label = null
 var _breadcrumb1: Button = null
 var _breadcrumb2: Button = null
@@ -43,7 +47,19 @@ var _char_right: Label = null
 var _char_preview: CharacterPreview = null
 var _instruction_panel: PanelContainer = null
 var _instruction_label: Label = null
+var _settings_vbox: VBoxContainer = null
+var _join_card_container: MarginContainer = null
+var _join_card_panel: PanelContainer = null
+var _join_card_normal: StyleBoxFlat = null
+var _join_card_focus: StyleBoxFlat = null
+var _join_card_tween: Tween = null
 var _pulse_tween: Tween = null
+var _pause_dialog: PauseDialog = null
+var _gameplay_banner: PanelContainer = null
+var _gameplay_banner_label: Label = null
+var _gameplay_char_preview: CharacterPreview = null
+var _current_goal_text: String = ""
+var _is_chaser_waiting: bool = false
 
 # ── State ───────────────────────────────────────────────────────────────────
 var _hosts: Array = []
@@ -56,6 +72,7 @@ var _selected_character_idx: int = -1
 var _selected_character_id: String = ""
 var _selected_character_palette: Dictionary = {}
 var _selected_host_available: bool = false
+var _my_role: String = ""
 var _saved_local_dpad_visible: bool = true
 var _local_dpad_node: CanvasLayer = null
 var _leaving: bool = false
@@ -85,6 +102,11 @@ func _ready() -> void:
 		NetworkManager.remote_goal_updated.connect(_on_remote_goal_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
+
+	_pause_dialog = PauseDialog.new()
+	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); _leave_session())
+	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog())
+	add_child(_pause_dialog)
 
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
 	if pending_host.is_empty():
@@ -122,16 +144,22 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 		if event.is_action_pressed("ui_cancel"):
 			if viewport != null: viewport.set_input_as_handled()
-			_leave_session()
+			_toggle_pause()
 			return
 
 	if not event.is_action_pressed("ui_cancel"):
 		return
 	if viewport != null: viewport.set_input_as_handled()
-	if join_setup_panel.visible:
-		_leave_session()
+	if _joined:
+		_toggle_pause()
 	else:
 		_leave_session()
+
+func _toggle_pause() -> void:
+	if _pause_dialog.visible:
+		_pause_dialog.hide_dialog()
+	else:
+		_pause_dialog.show_dialog()
 
 func _exit_tree() -> void:
 	_reset_global_dpad_accent()
@@ -168,10 +196,10 @@ func _enter_join_setup_mode() -> void:
 	_refresh_controller_layout()
 	_apply_responsive_layout()
 	_configure_navigation()
-	if _char_button != null and not _char_button.disabled:
-		_char_button.call_deferred("grab_focus")
-	elif _join_button != null:
+	if _join_button != null and not _join_button.disabled:
 		_join_button.call_deferred("grab_focus")
+	elif _char_button != null and not _char_button.disabled:
+		_char_button.call_deferred("grab_focus")
 
 func _build_setup_layout() -> void:
 	for child in join_setup_center.get_children():
@@ -185,27 +213,55 @@ func _build_setup_layout() -> void:
 	_main_vbox.add_theme_constant_override("separation", 10)
 	join_setup_center.add_child(_main_vbox)
 
+	_gameplay_char_preview = CharacterPreview.new()
+	_gameplay_char_preview.visible = false
+	_gameplay_char_preview.custom_minimum_size = Vector2(256, 256)
+	join_setup_center.add_child(_gameplay_char_preview)
+	
+	_gameplay_banner = PanelContainer.new()
+	_gameplay_banner.visible = false
+	var banner_style := UIHelpers.create_rounded_stylebox(Color(0.12, 0.13, 0.18, 0.95), UIColors.YELLOW, 12, 2)
+	banner_style.content_margin_left = 32; banner_style.content_margin_right = 32
+	banner_style.content_margin_top = 24; banner_style.content_margin_bottom = 24
+	_gameplay_banner.add_theme_stylebox_override("panel", banner_style)
+	
+	var banner_margin := MarginContainer.new()
+	banner_margin.add_theme_constant_override("margin_left", 48)
+	banner_margin.add_theme_constant_override("margin_right", 48)
+	banner_margin.add_theme_constant_override("margin_top", 32)
+	_gameplay_banner.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	banner_margin.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	banner_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_gameplay_banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	_gameplay_banner_label = Label.new()
+	_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
+	_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_gameplay_banner_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_gameplay_banner_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_gameplay_banner_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_gameplay_banner.add_child(_gameplay_banner_label)
+	banner_margin.add_child(_gameplay_banner)
+	join_setup_panel.add_child(banner_margin)
+
 	# Top spacer
 	_top_spacer = Control.new()
 	_top_spacer.custom_minimum_size = Vector2(0, 8)
 	_main_vbox.add_child(_top_spacer)
 
-	# Title row: [Title]
-	_title_row = HBoxContainer.new()
-	_title_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_title_row.add_theme_constant_override("separation", 20)
-	_main_vbox.add_child(_title_row)
+	# Logo
+	_logo = TextureRect.new()
+	_logo.name = "AppLogo"
+	_logo.texture = LogoTexture
+	_logo.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_logo.clip_contents = false
+	_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_main_vbox.add_child(_logo)
 
-	_title_label = Label.new()
-	_title_label.add_theme_font_size_override("font_size", 52)
-	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_title_row.add_child(_title_label)
-
-	# Spacer
+	# Logo -> Breadcrumbs spacer
 	var sp1 := Control.new()
-	sp1.custom_minimum_size = Vector2(0, 4)
+	sp1.custom_minimum_size = Vector2(0, 16)
 	_main_vbox.add_child(sp1)
 
 	# Breadcrumb 1
@@ -216,16 +272,109 @@ func _build_setup_layout() -> void:
 	_breadcrumb2 = _build_breadcrumb_row()
 	_main_vbox.add_child(_breadcrumb2)
 
-	# Spacer
+	# Breadcrumbs -> Title spacer
+	var logo_title_spacer := Control.new()
+	logo_title_spacer.custom_minimum_size = Vector2(0, 8)
+	_main_vbox.add_child(logo_title_spacer)
+
+	# Title
+	_title_label = Label.new()
+	_title_label.text = tr("mp_join_title")
+	_title_label.add_theme_font_size_override("font_size", 36)
+	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_main_vbox.add_child(_title_label)
+
+	# Title -> Join Card spacer
 	var sp2 := Control.new()
 	sp2.custom_minimum_size = Vector2(0, 16)
 	_main_vbox.add_child(sp2)
 
-	# Settings block (Character & Controller) ABOVE player slots
-	var settings_vbox := VBoxContainer.new()
-	settings_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	settings_vbox.add_theme_constant_override("separation", 12)
-	_main_vbox.add_child(settings_vbox)
+	# ── Join Card (MarginContainer wrapping Panel and Overlay Button) ───────
+	var card_center := HBoxContainer.new()
+	card_center.alignment = BoxContainer.ALIGNMENT_CENTER
+	_main_vbox.add_child(card_center)
+
+	_join_card_container = MarginContainer.new()
+	card_center.add_child(_join_card_container)
+
+	_join_card_panel = PanelContainer.new()
+	_join_card_normal = UIHelpers.create_rounded_stylebox(JOIN_GREEN.darkened(0.06), JOIN_GREEN.lightened(0.16), 15, 2)
+	_join_card_normal.content_margin_left = 32; _join_card_normal.content_margin_right = 32
+	_join_card_normal.content_margin_top = 16; _join_card_normal.content_margin_bottom = 16
+	_join_card_panel.add_theme_stylebox_override("panel", _join_card_normal)
+	
+	_join_card_focus = UIHelpers.create_rounded_stylebox(JOIN_GREEN.darkened(0.02), Color.WHITE, 15, 6)
+	_join_card_focus.content_margin_left = 32; _join_card_focus.content_margin_right = 32
+	_join_card_focus.content_margin_top = 16; _join_card_focus.content_margin_bottom = 16
+	_join_card_focus.shadow_color = Color(0, 0, 0, 0.25)
+	_join_card_focus.shadow_size = 10
+	
+	_join_card_container.add_child(_join_card_panel)
+
+	var card_vbox := VBoxContainer.new()
+	card_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	card_vbox.add_theme_constant_override("separation", 4)
+	_join_card_panel.add_child(card_vbox)
+
+	var card_title := Label.new()
+	card_title.text = tr("mp_join_game")
+	card_title.add_theme_font_size_override("font_size", 36)
+	card_title.add_theme_color_override("font_color", Color.WHITE)
+	card_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	card_vbox.add_child(card_title)
+
+	var sp_card := Control.new()
+	sp_card.custom_minimum_size = Vector2(0, 12)
+	card_vbox.add_child(sp_card)
+
+	# ── Player slots (inside the card) ──────────────────────────────────────
+	_slots_row = HBoxContainer.new()
+	_slots_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_slots_row.add_theme_constant_override("separation", 32)
+	_slots_row.custom_minimum_size = Vector2(0, 140)
+	card_vbox.add_child(_slots_row)
+
+	# ── The clickable button overlay ────────────────────────────────────────
+	_join_button = Button.new()
+	_join_button.name = "JoinCardButton"
+	_join_button.focus_mode = Control.FOCUS_ALL
+	_join_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	
+	var empty_style := StyleBoxEmpty.new()
+	
+	_join_button.add_theme_stylebox_override("normal", empty_style)
+	_join_button.add_theme_stylebox_override("hover", empty_style)
+	_join_button.add_theme_stylebox_override("pressed", empty_style)
+	_join_button.add_theme_stylebox_override("focus", empty_style)
+	
+	_join_button.pressed.connect(_on_join_pressed)
+	_join_button.focus_entered.connect(func(): _apply_card_zoom(true))
+	_join_button.focus_exited.connect(func(): _apply_card_zoom(false))
+	_join_button.mouse_entered.connect(_join_button.grab_focus)
+	
+	_join_card_container.add_child(_join_button)
+
+	# ── Error Label ─────────────────────────────────────────────────────────
+	_join_error_label = Label.new()
+	_join_error_label.add_theme_font_size_override("font_size", 22)
+	_join_error_label.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
+	_join_error_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_join_error_label.text = ""
+	_main_vbox.add_child(_join_error_label)
+
+	# Card -> Settings spacer
+	var sp3 := Control.new()
+	sp3.custom_minimum_size = Vector2(0, 16)
+	_main_vbox.add_child(sp3)
+
+	# ── Settings block (Character & Controller) ──────────────────────────────
+	_settings_vbox = VBoxContainer.new()
+	_settings_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_settings_vbox.add_theme_constant_override("separation", 12)
+	_main_vbox.add_child(_settings_vbox)
 
 	# Character row
 	var char_data := _create_selector_row("mp_join_character")
@@ -242,7 +391,7 @@ func _build_setup_layout() -> void:
 	_char_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	var char_extras := char_data["extras"] as HBoxContainer
 	char_extras.add_child(_char_preview)
-	settings_vbox.add_child(_char_row)
+	_settings_vbox.add_child(_char_row)
 
 	# Controller layout row
 	var ctrl_data := _create_selector_row("mp_join_remote_layout")
@@ -253,55 +402,14 @@ func _build_setup_layout() -> void:
 	_controller_button.pressed.connect(func(): _cycle_controller_layout(1))
 	_setup_cycling(_controller_button, _cycle_controller_layout)
 	_setup_arrow_visibility(_controller_button, _controller_left, _controller_right)
-	settings_vbox.add_child(_controller_row)
+	_settings_vbox.add_child(_controller_row)
 
-	# Spacer
-	var sp3 := Control.new()
-	sp3.custom_minimum_size = Vector2(0, 24)
-	_main_vbox.add_child(sp3)
+	# Settings -> Panel spacer
+	var sp5 := Control.new()
+	sp5.custom_minimum_size = Vector2(0, 8)
+	_main_vbox.add_child(sp5)
 
-	# Player slots
-	_slots_row = HBoxContainer.new()
-	_slots_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_slots_row.add_theme_constant_override("separation", 32)
-	_slots_row.custom_minimum_size = Vector2(0, 160)
-	_main_vbox.add_child(_slots_row)
-
-	# Join button + error
-	var join_row := VBoxContainer.new()
-	join_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	join_row.add_theme_constant_override("separation", 8)
-	_main_vbox.add_child(join_row)
-
-	_join_error_label = Label.new()
-	_join_error_label.add_theme_font_size_override("font_size", 24)
-	_join_error_label.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
-	_join_error_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_join_error_label.text = ""
-	join_row.add_child(_join_error_label)
-
-	var join_btn_row := HBoxContainer.new()
-	join_btn_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	join_row.add_child(join_btn_row)
-
-	_join_button = Button.new()
-	_join_button.text = tr("mp_join_game")
-	_join_button.custom_minimum_size = Vector2(320, 68)
-	_join_button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(_join_button, MP_GREEN)
-	var mp_normal := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, MP_GREEN_BORDER, 12, 2)
-	_join_button.add_theme_stylebox_override("normal", mp_normal)
-	_join_button.pressed.connect(_on_join_pressed)
-	join_btn_row.add_child(_join_button)
-
-
-
-	# Spacer
-	var sp4 := Control.new()
-	sp4.custom_minimum_size = Vector2(0, 8)
-	_main_vbox.add_child(sp4)
-
-	# Instruction panel
+	# ── Instruction panel (goal text only) ──────────────────────────────────
 	_instruction_panel = PanelContainer.new()
 	var panel_style := UIHelpers.create_rounded_stylebox(
 		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.85),
@@ -309,15 +417,15 @@ func _build_setup_layout() -> void:
 	)
 	panel_style.content_margin_left = 36
 	panel_style.content_margin_right = 36
-	panel_style.content_margin_top = 20
-	panel_style.content_margin_bottom = 20
+	panel_style.content_margin_top = 16
+	panel_style.content_margin_bottom = 16
 	_instruction_panel.add_theme_stylebox_override("panel", panel_style)
 	_instruction_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_instruction_panel.custom_minimum_size = Vector2(800, 0)
 	_main_vbox.add_child(_instruction_panel)
 
 	_instruction_label = Label.new()
-	_instruction_label.add_theme_font_size_override("font_size", 28)
+	_instruction_label.add_theme_font_size_override("font_size", 26)
 	_instruction_label.add_theme_color_override("font_color", Color(1, 0.92, 0.6))
 	_instruction_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_instruction_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -353,10 +461,13 @@ func _update_character_selector() -> void:
 		_update_join_action_state()
 		return
 	if _selected_character_idx < 0 or _selected_character_idx >= _character_catalog.size():
-		var target_id := Config.theme_dir_name + ":player"
+		var host_theme := String(_last_host_cfg.get("theme_dir", ""))
+		if host_theme.is_empty():
+			host_theme = Config.theme_dir_name
+		var prefix := host_theme + ":"
 		for i in range(_character_catalog.size()):
 			var cat_id := String(_character_catalog[i].get("id", ""))
-			if cat_id == target_id and not _taken_character_ids.has(cat_id):
+			if cat_id.begins_with(prefix) and not _taken_character_ids.has(cat_id):
 				_selected_character_idx = i
 				break
 		if _selected_character_idx < 0:
@@ -489,10 +600,15 @@ func _on_join_pressed() -> void:
 func _on_join_accepted(peer_id: int, state: Dictionary) -> void:
 	var character_id: String = _selected_character_id
 	var players: Dictionary = state.get("players", {}) as Dictionary
+	var my_info: Dictionary = {}
 	if players.has(peer_id):
-		character_id = String((players[peer_id] as Dictionary).get("character_id", character_id))
+		my_info = players[peer_id] as Dictionary
+		character_id = String(my_info.get("character_id", character_id))
 	elif players.has(str(peer_id)):
-		character_id = String((players[str(peer_id)] as Dictionary).get("character_id", character_id))
+		my_info = players[str(peer_id)] as Dictionary
+		character_id = String(my_info.get("character_id", character_id))
+	_my_role = String(my_info.get("role", ""))
+	_update_instruction_text(_last_host_cfg)
 	_transition_to_joined(character_id)
 
 func _on_join_rejected(reason: String) -> void:
@@ -502,47 +618,57 @@ func _on_join_rejected(reason: String) -> void:
 	if _join_error_label != null: _join_error_label.text = reason
 
 func _on_game_started(_session: Dictionary) -> void:
-	# Hide all setup controls to turn the device into a pure controller during gameplay
-	if _title_row != null: _title_row.visible = false
-	if _breadcrumb1 != null: _breadcrumb1.visible = false
-	if _breadcrumb2 != null: _breadcrumb2.visible = false
-	if _slots_row != null: _slots_row.visible = false
-	if _char_row != null: _char_row.visible = false
-	if _controller_row != null: _controller_row.visible = false
+	if _main_vbox != null: _main_vbox.visible = false
+	if _instruction_panel != null: _instruction_panel.visible = false
 	
-	if _main_vbox != null:
-		var settings_vbox := _main_vbox.get_node_or_null("SettingsVBox") as VBoxContainer
-		if settings_vbox != null:
-			settings_vbox.visible = false
-			
-	if _join_button != null:
-		var join_row := _join_button.get_parent().get_parent() if _join_button.get_parent() != null else null
-		if join_row is VBoxContainer:
-			join_row.visible = false
+	if _gameplay_char_preview != null:
+		_gameplay_char_preview.visible = true
+		_apply_character_preview(_selected_character_id, _gameplay_char_preview)
+		
+	var players := _session.get("players", {}) as Dictionary
+	var my_id := multiplayer.get_unique_id()
+	var my_info := players.get(my_id, players.get(str(my_id), {})) as Dictionary
+	var session_role := String(my_info.get("role", ""))
+	if not session_role.is_empty():
+		_my_role = session_role
+		
+	var session_config := _session.get("config", _last_host_cfg) as Dictionary
+	_update_instruction_text(session_config)
+		
+	if _gameplay_banner != null:
+		_gameplay_banner.visible = true
 
 func _on_chaser_countdown_updated(remaining: int) -> void:
-	if chaser_ready_label == null or chaser_countdown_label == null: return
-	if chaser_overlay != null: chaser_overlay.visible = true
-	chaser_ready_label.visible = true
-	chaser_countdown_label.visible = true
-	if remaining > 0: chaser_countdown_label.text = str(remaining)
+	if _gameplay_banner_label == null: return
+	if remaining > 0:
+		_gameplay_banner_label.text = tr("mp_chaser_get_ready_steps") % remaining
+		_gameplay_banner_label.add_theme_font_size_override("font_size", 48)
+		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
 
 func _on_chaser_released() -> void:
-	if chaser_ready_label == null or chaser_countdown_label == null: return
-	chaser_countdown_label.text = "GO!"
-	chaser_ready_label.visible = true
-	chaser_countdown_label.visible = true
+	_is_chaser_waiting = false
 	if OS.has_feature("mobile"): Input.vibrate_handheld(500)
-	var timer := get_tree().create_timer(1.0)
+	if _gameplay_banner_label != null:
+		_gameplay_banner_label.text = "GO!"
+		_gameplay_banner_label.add_theme_font_size_override("font_size", 64)
+		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
+		
+	var timer := get_tree().create_timer(1.5)
 	timer.connect("timeout", func():
-		if is_instance_valid(chaser_ready_label): chaser_ready_label.visible = false
-		if is_instance_valid(chaser_countdown_label): chaser_countdown_label.visible = false
-		if is_instance_valid(chaser_overlay): chaser_overlay.visible = false
+		if is_instance_valid(_gameplay_banner_label):
+			_gameplay_banner_label.text = _current_goal_text
+			_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
+			_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
 	)
 
 func _on_remote_goal_updated(goal_text: String) -> void:
-	if _instruction_label != null:
-		_instruction_label.text = goal_text
+	_current_goal_text = goal_text
+	if not _joined:
+		if _instruction_label != null:
+			_instruction_label.text = goal_text
+	else:
+		if _gameplay_banner_label != null and not _is_chaser_waiting:
+			_gameplay_banner_label.text = goal_text
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null: return
@@ -552,9 +678,7 @@ func _transition_to_joined(character_id: String) -> void:
 	_joined = true
 	if _join_button != null: _join_button.visible = false
 	if _join_error_label != null: _join_error_label.visible = false
-	if _char_button != null:
-		_char_button.disabled = true
-		_char_button.focus_mode = Control.FOCUS_NONE
+	if _settings_vbox != null: _settings_vbox.visible = false
 	if _instruction_label != null:
 		_instruction_label.text = tr("mp_waiting_for_host")
 	_apply_character_preview(character_id, _char_preview)
@@ -563,8 +687,6 @@ func _transition_to_joined(character_id: String) -> void:
 	_show_local_dpad_for_setup()
 	_configure_navigation()
 	NetworkManager.stop_discovery()
-	if _controller_button != null:
-		_controller_button.call_deferred("grab_focus")
 
 # ── Layout / Navigation / Helpers ───────────────────────────────────────────
 
@@ -602,12 +724,13 @@ func _apply_responsive_layout() -> void:
 	if _top_spacer != null:
 		_top_spacer.custom_minimum_size.y = clampf(viewport_height * 0.005, 2.0, 8.0)
 
-	if _title_row != null:
-		var sim_w: float = clampf(available_width * (0.52 if short_screen else 0.58), 480.0, 930.0)
-		var sim_h: float = clampf(sim_w * 0.214, 80.0, 160.0)
-		_title_row.custom_minimum_size.y = sim_h
-		if _title_label != null:
-			_title_label.add_theme_font_size_override("font_size", int(sim_h * 0.32))
+	if _logo != null:
+		var logo_width: float = clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
+		var logo_height: float = clampf(logo_width * 0.214, 80.0, 166.0)
+		_logo.custom_minimum_size = Vector2(logo_width, logo_height)
+
+	if _title_label != null:
+		_title_label.add_theme_font_size_override("font_size", 30 if short_screen else 36)
 
 	# Breadcrumbs
 	var bread_font := 26 if short_screen else 30
@@ -718,7 +841,7 @@ func _on_local_dpad_action(action: StringName, pressed: bool) -> void:
 		&"ui_left": _send_controller_direction(Vector2i.LEFT, pressed)
 		&"ui_right": _send_controller_direction(Vector2i.RIGHT, pressed)
 		&"ui_cancel":
-			if pressed: _leave_session()
+			if pressed: _toggle_pause()
 
 func _leave_session() -> void:
 	if _leaving: return
@@ -847,7 +970,6 @@ func _populate_from_host() -> void:
 	if _selected_host.is_empty(): return
 	var host_char_id := String(_selected_host.get("character_id", ""))
 	_last_host_cfg = _selected_host.duplicate(true)
-	_update_title(_selected_host)
 	_update_breadcrumbs(_selected_host)
 	var initial_players := {
 		NetworkManager.HOST_PEER_ID: {
@@ -858,11 +980,6 @@ func _populate_from_host() -> void:
 	_update_player_slots(_selected_host, initial_players)
 	_update_instruction_text(_selected_host)
 	_update_taken_character_ids_from_selected_host()
-
-func _update_title(cfg: Dictionary) -> void:
-	if _title_label == null: return
-	var max_p := int(cfg.get("max_players", 2))
-	_title_label.text = "%s (%d %s)" % [tr("start_together"), max_p, tr("badge_players_word")]
 
 func _update_breadcrumbs(cfg: Dictionary) -> void:
 	var mission_id := String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
@@ -903,18 +1020,40 @@ func _update_breadcrumbs(cfg: Dictionary) -> void:
 	if sl2 != null: sl2.text = s2
 
 func _update_instruction_text(cfg: Dictionary) -> void:
-	if _instruction_label == null: return
-	if _joined:
-		_instruction_label.text = tr("mp_waiting_for_host")
-		return
-
 	var goal_key := String(cfg.get("mission_goal_key", ""))
 	if goal_key.is_empty():
 		var mission_id := String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
 		var pickup := MissionCatalog.pickup_for_training(String(cfg.get("training_type", "words")))
 		var chaser := bool(cfg.get("chaser_enabled", false))
 		goal_key = MissionCatalog.goal_key(mission_id, pickup, chaser, true)
-	_instruction_label.text = tr(goal_key) if not goal_key.is_empty() else ""
+	_current_goal_text = tr(goal_key) if not goal_key.is_empty() else ""
+	
+	var chaser_enabled := bool(cfg.get("chaser_enabled", false))
+	var game_style := String(cfg.get("game_style", ""))
+	var is_chaser_variant := chaser_enabled and (game_style == NetworkManager.STYLE_PATH or game_style == NetworkManager.STYLE_NEXT_SYMBOL)
+	var display_text := _current_goal_text
+	
+	if is_chaser_variant and _my_role == NetworkManager.ROLE_CHASER:
+		_is_chaser_waiting = true
+		var chaser_level := int(cfg.get("chaser_level", 1))
+		var difficulty := int(cfg.get("difficulty", 1))
+		var initial_moves := 10
+		match chaser_level:
+			1: initial_moves = 10 + difficulty * 5
+			2: initial_moves = 6 + difficulty * 3
+			3: initial_moves = 3 + difficulty * 1
+			4: initial_moves = 2
+		display_text = tr("mp_chaser_waiting_steps") % initial_moves
+	else:
+		_is_chaser_waiting = false
+	
+	if _gameplay_banner_label != null: _gameplay_banner_label.text = display_text
+	
+	if _instruction_label == null: return
+	if _joined:
+		_instruction_label.text = tr("mp_waiting_for_host")
+		return
+	_instruction_label.text = display_text
 
 # ── Player Slots ────────────────────────────────────────────────────────────
 
@@ -925,6 +1064,10 @@ func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 		for i in range(max_players):
 			_create_slot(i)
 	var peer_ids := _ordered_peer_ids(player_map)
+	var my_peer_id := multiplayer.get_unique_id() if multiplayer != null else -1
+	var chaser_enabled := bool(cfg.get("chaser_enabled", false))
+	var game_style := String(cfg.get("game_style", ""))
+	var is_race := game_style == NetworkManager.STYLE_RACE
 	for i in range(max_players):
 		var slot := _slot_nodes[i]
 		if i < peer_ids.size():
@@ -934,18 +1077,54 @@ func _update_player_slots(cfg: Dictionary, player_map: Dictionary) -> void:
 			_apply_character_preview(char_id, slot["preview"] as CharacterPreview)
 			(slot["preview"] as CharacterPreview).visible = true
 			var is_host := bool(info.get("is_host", false))
+			var is_me := (peer_id == my_peer_id)
+			# Determine role
+			var role := String(info.get("role", ""))
+			if role.is_empty():
+				if is_race:
+					role = NetworkManager.ROLE_RACER
+				elif chaser_enabled and not is_host:
+					role = NetworkManager.ROLE_CHASER
+				else:
+					role = NetworkManager.ROLE_COLLECTOR
+			var role_color: Color = MP_RED if role == NetworkManager.ROLE_CHASER else MP_GREEN
+			var role_border: Color = MP_RED_BORDER if role == NetworkManager.ROLE_CHASER else MP_GREEN_BORDER
+			var role_name := tr("mp_role_" + role) if not role.is_empty() else ""
 			var lbl := slot["label"] as Label
-			lbl.text = tr("mp_slot_host") if is_host else CharacterCatalog.display_name_for_id(char_id)
-			lbl.add_theme_color_override("font_color", UIColors.YELLOW if is_host else UIColors.TEXT_PRIMARY)
 			var frame := slot["frame"] as PanelContainer
-			_apply_filled_frame_style(frame)
+			# Label text
+			if is_host and is_me:
+				lbl.text = tr("mp_slot_host") + ": " + role_name
+			elif is_host:
+				lbl.text = tr("mp_slot_host") + ": " + role_name
+			elif is_me:
+				lbl.text = tr("mp_slot_you") + ": " + role_name
+			else:
+				lbl.text = role_name
+			lbl.add_theme_color_override("font_color", Color.WHITE)
+			# Frame border colour matches role
+			_apply_filled_frame_style(frame, role_border)
 			slot["is_filled"] = true
 		else:
+			# Empty slot — predict the role for this slot index and pre-color it
+			var empty_role: String
+			if is_race:
+				empty_role = NetworkManager.ROLE_RACER
+			elif chaser_enabled and i > 0:
+				empty_role = NetworkManager.ROLE_CHASER
+			else:
+				empty_role = NetworkManager.ROLE_COLLECTOR
+			var empty_role_color: Color = MP_RED if empty_role == NetworkManager.ROLE_CHASER else MP_GREEN
+			var empty_border: Color = MP_RED_BORDER if empty_role == NetworkManager.ROLE_CHASER else MP_GREEN_BORDER
+			var empty_role_name := tr("mp_role_" + empty_role)
 			(slot["preview"] as CharacterPreview).visible = false
 			var lbl := slot["label"] as Label
-			lbl.text = tr("mp_slot_waiting")
-			lbl.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
-			_apply_empty_frame_style(slot["frame"] as PanelContainer)
+			if i == peer_ids.size() and not _joined:
+				lbl.text = tr("mp_slot_join_as") % empty_role_name
+			else:
+				lbl.text = tr("mp_slot_waiting")
+			lbl.add_theme_color_override("font_color", Color.WHITE)
+			_apply_empty_frame_style_colored(slot["frame"] as PanelContainer, empty_border)
 			slot["is_filled"] = false
 	_update_pulse_animation()
 
@@ -984,16 +1163,20 @@ func _clear_slots() -> void:
 		_pulse_tween.kill()
 		_pulse_tween = null
 
-func _apply_filled_frame_style(frame: PanelContainer) -> void:
+func _apply_filled_frame_style(frame: PanelContainer, border_color: Color = MP_GREEN_BORDER) -> void:
 	var style := UIHelpers.create_rounded_stylebox(
 		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.9),
-		MP_GREEN_BORDER, 12, 2)
+		border_color, 12, 2)
 	style.content_margin_left = 10; style.content_margin_right = 10
 	style.content_margin_top = 10; style.content_margin_bottom = 10
 	frame.add_theme_stylebox_override("panel", style)
 
 func _apply_empty_frame_style(frame: PanelContainer) -> void:
-	var style := UIHelpers.create_rounded_stylebox(SLOT_EMPTY_BG, SLOT_EMPTY_COLOR, 12, 2)
+	_apply_empty_frame_style_colored(frame, SLOT_EMPTY_COLOR)
+
+func _apply_empty_frame_style_colored(frame: PanelContainer, border_color: Color) -> void:
+	var bg := SLOT_EMPTY_BG if border_color == SLOT_EMPTY_COLOR else Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.5)
+	var style := UIHelpers.create_rounded_stylebox(bg, border_color, 12, 2)
 	style.content_margin_left = 10; style.content_margin_right = 10
 	style.content_margin_top = 10; style.content_margin_bottom = 10
 	style.draw_center = true
@@ -1020,6 +1203,28 @@ func _update_pulse_animation() -> void:
 		for f in empty_frames:
 			if is_instance_valid(f): f.modulate.a = alpha
 	, 0.45, 1.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _apply_card_zoom(focused: bool) -> void:
+	if _join_card_panel != null:
+		_join_card_panel.add_theme_stylebox_override("panel", _join_card_focus if focused else _join_card_normal)
+		
+	if _join_card_container == null: return
+	
+	var pivot_size := _join_card_container.size
+	if pivot_size.x <= 0 or pivot_size.y <= 0:
+		pivot_size = _join_card_container.get_minimum_size()
+	if pivot_size.x > 0 and pivot_size.y > 0:
+		_join_card_container.pivot_offset = pivot_size * 0.5
+		
+	var target_scale := Vector2(1.16, 1.16) if focused else Vector2.ONE
+	
+	if _join_card_tween != null and _join_card_tween.is_valid():
+		_join_card_tween.kill()
+		
+	_join_card_tween = create_tween()
+	_join_card_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_join_card_tween.tween_property(_join_card_container, "scale", target_scale, 0.18)
+	_join_card_container.z_index = 2 if focused else 0
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
 	return PlayerSlotPanel.ordered_peer_ids(player_map)

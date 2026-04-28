@@ -15,6 +15,7 @@ const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
 var _main_vbox: VBoxContainer = null
 var _top_spacer: Control = null
 var _logo: TextureRect = null
+var _title_label: Label = null
 var _logo_bread_spacer: Control = null
 var _breadcrumb1: Button = null   # Mission • Theme • Maze Size
 var _breadcrumb2: Button = null   # Pickup • Language • Action mode + badge
@@ -99,10 +100,10 @@ func _build_layout() -> void:
 	_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_main_vbox.add_child(_logo)
 
-	# Logo → Breadcrumbs spacer
+	# Logo -> Breadcrumbs spacer
 	_logo_bread_spacer = Control.new()
 	_logo_bread_spacer.name = "LogoBreadSpacer"
-	_logo_bread_spacer.custom_minimum_size = Vector2(0, 4)
+	_logo_bread_spacer.custom_minimum_size = Vector2(0, 16)
 	_main_vbox.add_child(_logo_bread_spacer)
 
 	# Breadcrumb 1: Mission • Theme • Maze Size
@@ -113,7 +114,24 @@ func _build_layout() -> void:
 	_breadcrumb2 = _build_breadcrumb_row()
 	_main_vbox.add_child(_breadcrumb2)
 
-	# Breadcrumbs → Players row spacer
+	# Breadcrumbs -> Title spacer
+	var logo_title_spacer := Control.new()
+	logo_title_spacer.name = "LogoTitleSpacer"
+	logo_title_spacer.custom_minimum_size = Vector2(0, 8)
+	_main_vbox.add_child(logo_title_spacer)
+
+	# Title
+	_title_label = Label.new()
+	_title_label.name = "HostLobbyTitle"
+	_title_label.text = tr("mp_host_lobby_title")
+	_title_label.add_theme_font_size_override("font_size", 36)
+	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_main_vbox.add_child(_title_label)
+
+	# Title -> Players row spacer
 	_bread_players_spacer = Control.new()
 	_bread_players_spacer.name = "BreadPlayersSpacer"
 	_bread_players_spacer.custom_minimum_size = Vector2(0, 24)
@@ -559,6 +577,9 @@ func _apply_responsive_layout() -> void:
 		var logo_width: float = clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
 		var logo_height: float = clampf(logo_width * 0.214, 80.0, 166.0)
 		_logo.custom_minimum_size = Vector2(logo_width, logo_height)
+
+	if _title_label != null:
+		_title_label.add_theme_font_size_override("font_size", 30 if short_screen else 36)
 
 	if _logo_bread_spacer != null:
 		_logo_bread_spacer.custom_minimum_size.y = 4.0 if short_screen else 8.0

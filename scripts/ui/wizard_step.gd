@@ -41,6 +41,9 @@ var _summary_label: Label = null
 var _settings_area: VBoxContainer = null
 var _active_container: VBoxContainer = null  # holds card_row + settings_area
 
+var _title_label: Label = null
+var _title_text: String = ""
+
 var _fade_tween: Tween = null
 
 # ── Public API ────────────────────────────────────────────────────────────
@@ -70,6 +73,17 @@ func setup_cards(cards_data: Array[Dictionary]) -> void:
 func select_card(card_id: String) -> void:
 	_selected_card_id = card_id
 	_update_card_selection()
+
+## Set the step title text
+func set_step_title(text: String) -> void:
+	_title_text = text
+	if _title_label != null:
+		_title_label.text = text
+
+## Update the title font size based on responsive layout
+func set_title_font_size(size: int) -> void:
+	if _title_label != null:
+		_title_label.add_theme_font_size_override("font_size", size)
 
 ## Transition to ACTIVE state (show cards + settings, hide collapse row).
 func activate(animated: bool = true) -> void:
@@ -208,8 +222,23 @@ func _build_active_container() -> void:
 	# Top spacer — room for card scale-up without overlapping breadcrumbs
 	var top_pad := Control.new()
 	top_pad.name = "CardTopPad"
-	top_pad.custom_minimum_size = Vector2(0, 32)
+	top_pad.custom_minimum_size = Vector2(0, 16)
 	_active_container.add_child(top_pad)
+
+	_title_label = Label.new()
+	_title_label.name = "StepTitle"
+	_title_label.add_theme_font_size_override("font_size", 36)
+	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_title_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_title_label.text = _title_text
+	_active_container.add_child(_title_label)
+	
+	var title_pad := Control.new()
+	title_pad.name = "TitleBottomPad"
+	title_pad.custom_minimum_size = Vector2(0, 28)
+	_active_container.add_child(title_pad)
 
 	_card_row = HBoxContainer.new()
 	_card_row.name = "CardRow"

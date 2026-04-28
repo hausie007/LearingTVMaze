@@ -223,6 +223,7 @@ func _build_layout() -> void:
 	_step1.name = "Step1_Mission"
 	_step1.setup_cards(_build_mission_card_data())
 	_step1.select_card(_selected_mission)
+	_step1.set_step_title(tr("step1_title"))
 	_step1.card_confirmed.connect(_on_step1_confirmed)
 	_step1.expand_requested.connect(_on_step1_expand_requested)
 	_step1.card_focus_changed.connect(_on_step1_card_focus_changed)
@@ -232,6 +233,7 @@ func _build_layout() -> void:
 	# Step 2: Pickup
 	_step2 = WizardStep.new()
 	_step2.name = "Step2_Pickup"
+	_step2.set_step_title(tr("step2_title"))
 	_step2.card_confirmed.connect(_on_step2_confirmed)
 	_step2.expand_requested.connect(_on_step2_expand_requested)
 	_step2.card_focus_changed.connect(_on_step2_card_focus_changed)
@@ -241,6 +243,7 @@ func _build_layout() -> void:
 	# Step 3: Start Action
 	_step3 = WizardStep.new()
 	_step3.name = "Step3_Action"
+	_step3.set_step_title(tr("step3_title"))
 	_step3.card_confirmed.connect(_on_step3_confirmed)
 	_step3.expand_requested.connect(_on_step3_expand_requested)
 	_step3.card_focus_changed.connect(_on_step3_card_focus_changed)
@@ -1043,11 +1046,12 @@ func _apply_card_sizing(step: WizardStep, available_width: float, viewport_heigh
 	var gap: int = 48 if space_per_card >= 260.0 else (34 if space_per_card >= 200.0 else 24)
 	var gaps := float(gap * maxi(0, columns - 1))
 	var card_width := clampf(floorf((available_width - gaps) / float(columns)), 140.0, 390.0)
-	var card_height := clampf(viewport_height * (0.34 if short_screen else 0.32), 250.0, 340.0)
+	var card_height := clampf(viewport_height * (0.30 if short_screen else 0.28), 220.0, 310.0)
 	var icon_size: int = 46 if card_width < 220.0 else (52 if card_width < 270.0 else 58)
 	var title_size: int = 24 if card_width < 220.0 else (28 if card_width < 270.0 else 31)
 	var subtitle_size: int = 17 if card_width < 250.0 else 19
 	step.set_card_gap(gap)
+	step.set_title_font_size(title_size + 8)
 	
 	if step == _step1:
 		pass
@@ -1240,7 +1244,7 @@ func _update_join_card_visibility() -> void:
 		_join_card.set_meta("styled", true)
 		_join_card.call("set_custom_palette",
 			JOIN_GREEN.darkened(0.06), JOIN_GREEN.lightened(0.16),
-			JOIN_GREEN.darkened(0.02), JOIN_GREEN.lightened(0.32),
+			JOIN_GREEN.darkened(0.02), Color.WHITE,
 			UIColors.YELLOW, Color.WHITE, Color(1, 1, 1, 0.86))
 			
 	var has_hosts := not _hosts.is_empty()

@@ -42,6 +42,7 @@ var _race_markers_by_peer: Dictionary = {}
 var _race_marker_root: Node2D = null
 var _race_collect_player: AudioStreamPlayer = null
 var _win_screen: WinScreen = null
+var _pause_dialog: PauseDialog = null
 var _finished_peers: Dictionary = {}
 
 var _saved_theme_dir: String = ""
@@ -89,6 +90,11 @@ func _ready() -> void:
 	_win_screen.play_alone_pressed.connect(_on_play_alone_pressed)
 	add_child(_win_screen)
 
+	_pause_dialog = PauseDialog.new()
+	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); NetworkManager.leave_session(); get_tree().change_scene_to_file(Scenes.HOME))
+	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog())
+	add_child(_pause_dialog)
+
 	_build_race_collect_sound()
 
 	NetworkManager.input_received.connect(_on_input_received)
@@ -116,10 +122,17 @@ func _exit_tree() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		var viewport: Viewport = get_viewport()
+		if _win_screen != null and _win_screen.is_active():
+			return
 		if viewport != null:
 			viewport.set_input_as_handled()
-		NetworkManager.leave_session()
-		get_tree().change_scene_to_file(Scenes.HOME)
+		_toggle_pause()
+
+func _toggle_pause() -> void:
+	if _pause_dialog.visible:
+		_pause_dialog.hide_dialog()
+	else:
+		_pause_dialog.show_dialog()
 
 func _process(delta: float) -> void:
 	if _maze != null and (_win_screen == null or not _win_screen.is_active()):
@@ -524,7 +537,11 @@ func _update_hud_mission_description() -> void:
 		
 		if peer_id == NetworkManager.HOST_PEER_ID:
 			if hud != null:
-				hud.set_mission_description(goal_str, enlarge_hud)
+				if _should_delay_path_chaser(_role_for_peer(peer_id)) and not _path_chasers_released:
+					var initial_moves := _path_chaser_trigger_moves()
+					hud.set_mission_description(tr("mp_chaser_waiting_steps") % initial_moves, enlarge_hud)
+				else:
+					hud.set_mission_description(goal_str, enlarge_hud)
 		else:
 			NetworkManager.rpc_id(peer_id, "rpc_update_remote_goal", goal_str)
 
@@ -611,7 +628,7 @@ func _spawn_for_role(role: String, slot: int) -> Vector2i:
 	var collector_start := Vector2i(0, _maze.grid_size.y - 1)
 	if role == NetworkManager.ROLE_COLLECTOR:
 		return collector_start
-	if _is_path_mode():
+	if _is_chaser_variant():
 		return collector_start
 
 	var candidates: Array[Vector2i] = []
@@ -651,7 +668,11 @@ func _check_path_chaser_release() -> void:
 	
 	if remaining <= 3 and remaining > 0:
 		for peer_id in _delayed_chaser_peer_ids:
-			NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", remaining)
+			if peer_id == NetworkManager.HOST_PEER_ID:
+				if hud != null:
+					hud.set_mission_description(tr("mp_chaser_get_ready_steps") % remaining, false)
+			else:
+				NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", remaining)
 			
 	if _collector_move_count < trigger_moves:
 		return
@@ -679,7 +700,18 @@ func _release_path_chasers() -> void:
 		var avatar := _avatars.get(peer_id, null) as MultiplayerAvatar
 		if avatar != null and is_instance_valid(avatar):
 			avatar.visible = true
-		NetworkManager.rpc_id(peer_id, "rpc_chaser_released")
+		
+		if peer_id == NetworkManager.HOST_PEER_ID:
+			if hud != null:
+				hud.set_mission_description("GO!", false)
+				var timer := get_tree().create_timer(1.5)
+				timer.connect("timeout", func():
+					if hud != null and is_instance_valid(hud):
+						var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
+						hud.set_mission_description(_get_role_goal(NetworkManager.HOST_PEER_ID), enlarge_hud)
+				)
+		else:
+			NetworkManager.rpc_id(peer_id, "rpc_chaser_released")
 	_delayed_chaser_peer_ids.clear()
 
 func _can_collect(peer_id: int) -> bool:
