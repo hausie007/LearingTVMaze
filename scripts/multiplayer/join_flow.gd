@@ -89,6 +89,9 @@ var _game_prev_button: Button = null     # ‹ left of card
 var _game_next_button: Button = null     # › right of card
 var _game_unavailable_label: Label = null
 
+# OLED burn-in protection for the idle join-setup screen.
+var _oled_guard: OledIdleGuard = null
+
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
 	_localize_ui()
@@ -218,6 +221,41 @@ func _enter_join_setup_mode() -> void:
 		_join_button.call_deferred("grab_focus")
 	elif _char_button != null and not _char_button.disabled:
 		_char_button.call_deferred("grab_focus")
+
+	# OLED: join screen is static while waiting — keep wake-lock OFF.
+	DisplayServer.screen_set_keep_on(false)
+
+	# Lazy-create the idle guard (could be called multiple times from unjoin).
+	if _oled_guard == null:
+		_oled_guard = OledIdleGuard.new()
+		_oled_guard.name = "JoinFlowOledGuard"
+		add_child(_oled_guard)
+		_oled_guard.idle_tier_1.connect(func(): _on_join_oled_tier1())
+		_oled_guard.idle_tier_2.connect(func(): _on_join_oled_tier2())
+		_oled_guard.idle_reset.connect(func(): _on_join_oled_reset())
+	_oled_guard.reset()
+	_oled_guard.start(180.0, 300.0)
+
+
+## Called after 3 min of join-screen idle — dim the overlay and D-pad.
+func _on_join_oled_tier1() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 0.30, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if DPad and DPad.visible:
+		DPad.dim(0.05, 3.0)
+
+
+## Called after 5 min of join-screen idle — leave and go home.
+func _on_join_oled_tier2() -> void:
+	_leave_session()
+
+
+## Called on any input — restore brightness.
+func _on_join_oled_reset() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if DPad:
+		DPad.undim(0.3)
 
 func _build_setup_layout() -> void:
 	for child in join_setup_center.get_children():
@@ -824,7 +862,13 @@ func _on_join_rejected(reason: String) -> void:
 
 func _on_game_started(_session: Dictionary) -> void:
 	_game_started = true
+	# Game started — restore the wake lock and stop the idle guard.
+	DisplayServer.screen_set_keep_on(true)
+	if _oled_guard:
+		_oled_guard.stop()
+	modulate.a = 1.0  # Restore opacity in case tier-1 had dimmed us
 	if _main_vbox != null: _main_vbox.visible = false
+
 	if _instruction_panel != null: _instruction_panel.visible = false
 	
 	if _gameplay_char_preview != null:

@@ -16,6 +16,7 @@ var _moves_label: Label = null
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
+var _root_panel: Control = null   # dimmed by OLED guard
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -143,11 +144,30 @@ func get_height() -> float:
 	return HUD_HEIGHT
 
 
+## Dim the HUD to the given opacity (animated).
+## Call when the player has been idle — reduces burn-in risk for static top bar.
+func dim(target_alpha: float = 0.28, duration: float = 2.0) -> void:
+	if _root_panel == null:
+		return
+	var tw := create_tween()
+	tw.tween_property(_root_panel, "modulate:a", target_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+## Restore the HUD to full opacity.
+## Call immediately when the player interacts again.
+func undim(duration: float = 0.25) -> void:
+	if _root_panel == null:
+		return
+	var tw := create_tween()
+	tw.tween_property(_root_panel, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
 # ── UI Construction ──────────────────────────────────────────────────────────
 
 func _build_ui() -> void:
 	# Background panel spanning full width at the top
 	var bg_panel := PanelContainer.new()
+	_root_panel = bg_panel
 	var bg_style := StyleBoxFlat.new()
 	bg_style.bg_color = UIColors.BG_HUD
 	bg_style.content_margin_left = 20

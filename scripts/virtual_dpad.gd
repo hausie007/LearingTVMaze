@@ -27,6 +27,22 @@ func reset_accent_palette() -> void:
 	_accent_palette.clear()
 	_apply_dpad_style()
 
+
+## Dim the D-pad to reduce OLED burn-in during idle periods.
+func dim(target_alpha: float = 0.1, duration: float = 2.0) -> void:
+	if dpad_container == null:
+		return
+	var tw := create_tween()
+	tw.tween_property(dpad_container, "modulate:a", target_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+## Restore the D-pad to full opacity.
+func undim(duration: float = 0.25) -> void:
+	if dpad_container == null:
+		return
+	var tw := create_tween()
+	tw.tween_property(dpad_container, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 func _ready() -> void:
 	# Configure layer to sit securely above the maze and pause menus (which use 100)
 	layer = 150

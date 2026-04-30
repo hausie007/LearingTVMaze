@@ -30,6 +30,9 @@ var _pulse_tween: Tween = null
 
 var _last_lobby_state: Dictionary = {}
 
+# OLED burn-in protection
+var _oled_guard: OledIdleGuard = null
+
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
 	if network_debug_label != null:
@@ -51,6 +54,19 @@ func _ready() -> void:
 	})
 	_apply_responsive_layout()
 	_start_button.call_deferred("grab_focus")
+
+	# OLED: lobby is a static waiting screen — keep the display wake-lock OFF
+	# so the system can enter Ambient Mode if the host leaves it unattended.
+	DisplayServer.screen_set_keep_on(false)
+
+	# OLED idle guard: dim overlay after 3 min, go home after 5 min.
+	_oled_guard = OledIdleGuard.new()
+	_oled_guard.name = "HostLobbyOledGuard"
+	add_child(_oled_guard)
+	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
+	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
+	_oled_guard.idle_reset.connect(_on_oled_reset)
+	_oled_guard.start(180.0, 300.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -213,7 +229,7 @@ func _build_join_banner() -> void:
 	main_hbox.add_child(banner_vbox)
 
 	var banner_title := Label.new()
-	banner_title.text = tr("mp_banner_join_title")
+	banner_title.text = tr("mp_how_to_join")
 	banner_title.add_theme_font_size_override("font_size", 40)
 	banner_title.add_theme_color_override("font_color", UIColors.YELLOW)
 	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -221,14 +237,10 @@ func _build_join_banner() -> void:
 
 	var green_hex := MP_GREEN_BORDER.to_html(false)
 	var steps := [
-		tr("mp_banner_step_1"),
-		tr("mp_banner_step_2"),
-		tr("mp_banner_step_3").replace(
-			tr("menu_play_together"),
-			"[color=#%s]%s[/color]" % [green_hex, tr("menu_play_together")]
-		),
-		tr("mp_banner_step_4"),
-		tr("mp_banner_step_5"),
+		tr("mp_join_step_1"),
+		tr("mp_join_step_2") % tr("mp_wifi_same_as_device"),
+		tr("mp_join_step_3") % [green_hex],
+		tr("mp_join_step_4"),
 	]
 
 	for step_text in steps:
@@ -556,7 +568,33 @@ func _on_start_now_pressed() -> void:
 	NetworkManager.start_now()
 
 func _on_game_started(_session: Dictionary) -> void:
+	# Game is starting — restore the wake lock before handing off to the game scene.
+	DisplayServer.screen_set_keep_on(true)
+	if _oled_guard:
+		_oled_guard.stop()
 	get_tree().change_scene_to_file(Scenes.MP_GAME)
+
+
+## Called after 3 min of lobby idle — dim the whole screen and D-pad.
+func _on_oled_tier1() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 0.30, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if DPad and DPad.visible:
+		DPad.dim(0.05, 3.0)
+
+
+## Called after 5 min of lobby idle — leave and go home.
+func _on_oled_tier2() -> void:
+	NetworkManager.leave_session()
+	get_tree().change_scene_to_file(Scenes.HOME)
+
+
+## Called on any input — restore brightness.
+func _on_oled_reset() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if DPad:
+		DPad.undim(0.3)
 
 # ── Layout ──────────────────────────────────────────────────────────────────
 

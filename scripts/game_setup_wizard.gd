@@ -104,6 +104,9 @@ var _input_locked: bool = true
 var _hosts: Array = []
 var _join_card: Button = null  # Reference to the join card in Step 1
 
+# OLED burn-in protection for the idle setup/home screen.
+var _oled_guard: OledIdleGuard = null
+
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
@@ -133,8 +136,43 @@ func _ready() -> void:
 	_step1.focus_selected_card()
 	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
 
+	# OLED: home/setup screen is a menu — release the wake lock.
+	DisplayServer.screen_set_keep_on(false)
+
+	# OLED idle guard: dim after 5 min, reload scene after 10 min.
+	_oled_guard = OledIdleGuard.new()
+	_oled_guard.name = "WizardOledGuard"
+	add_child(_oled_guard)
+	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
+	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
+	_oled_guard.idle_reset.connect(_on_oled_reset)
+	_oled_guard.start(300.0, 600.0)
+
 func _exit_tree() -> void:
 	NetworkManager.stop_discovery()
+
+
+# ── OLED Idle Callbacks ───────────────────────────────────────────────────────
+
+## Called after 5 min of home-screen idle: dim the entire wizard and D-pad.
+func _on_oled_tier1() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 0.25, 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if DPad and DPad.visible:
+		DPad.dim(0.05, 4.0)
+
+
+## Called after 10 min of home-screen idle: reload the scene to reset any animations.
+func _on_oled_tier2() -> void:
+	get_tree().reload_current_scene()
+
+
+## Called when a deliberate input is detected — restore full brightness.
+func _on_oled_reset() -> void:
+	var tw := create_tween()
+	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if DPad:
+		DPad.undim(0.3)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
@@ -694,7 +732,10 @@ func _start_single_player(with_chaser: bool) -> void:
 	)
 	Config.save_settings()
 	NetworkManager.stop_discovery()
+	# Player is starting a game — restore the display wake lock.
+	DisplayServer.screen_set_keep_on(true)
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
+
 
 func _start_multiplayer(with_chaser: bool) -> void:
 	Config.learning_language = Config.LANG_CODES[_lang_idx]
