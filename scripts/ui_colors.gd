@@ -35,6 +35,18 @@ const GREEN_BORDER := Color(0.18, 0.38, 0.22)
 const GREEN_ACCENT := Color(0.12, 0.55, 0.28)
 const GREEN_HINT := Color(0.45, 0.82, 0.52)
 
+## Warm Gold — Play Now card accent.
+const GOLD := Color("#FFB800")
+const GOLD_DARK := Color(0.28, 0.20, 0.08)
+const GOLD_BORDER := Color(0.45, 0.35, 0.12)
+const GOLD_ACCENT := Color(0.65, 0.48, 0.08)
+
+## Teal — Join Game card accent (distinct from Play Together green).
+const TEAL := Color("#1AA89E")
+const TEAL_DARK := Color(0.08, 0.20, 0.19)
+const TEAL_BORDER := Color(0.12, 0.35, 0.32)
+const TEAL_ACCENT := Color(0.10, 0.55, 0.50)
+
 ## Dark text color for buttons with bright backgrounds.
 const TEXT_ON_BRIGHT := Color("#112244")
 

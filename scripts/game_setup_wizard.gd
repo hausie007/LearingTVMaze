@@ -23,10 +23,7 @@ const ACTION_SOLO_CHASER := "solo_chaser"
 const ACTION_COOP := "coop"
 const ACTION_VERSUS := "versus"
 
-# Step 1 special card ID — Join multiplayer game
-const ACTION_JOIN_GAME := "join_game"
 
-const JOIN_GREEN := Color(0.18, 0.62, 0.34)
 
 const PICKUP_CARD_ICONS := {"numbers": "123", "words": "W", "letters": "ABC", "none": ">"}
 const PICKUP_CARD_TITLE_KEYS := {"numbers": "training_numbers", "words": "training_words", "letters": "training_letters", "none": "pickup_just_maze"}
@@ -44,9 +41,7 @@ var _step1: WizardStep = null  # Mission
 var _step2: WizardStep = null  # Pickup
 var _step3: WizardStep = null  # Action
 
-var _corner_overlay: Control = null
-var _settings_button: Button = null
-var _help_button: Button = null
+
 
 # Step 1 settings (Theme, Maze Size)
 var _theme_button: Button = null
@@ -78,8 +73,6 @@ var _character_row: HBoxContainer = null
 var _character_preview_container: Control = null
 var _character_preview: CharacterPreview = null
 
-# MP hint
-var _mp_hint_label: Label = null
 
 # ── State ────────────────────────────────────────────────────────────────────
 var _current_step: int = 1
@@ -96,13 +89,9 @@ var _chaser_speed_idx: int = 1
 var _character_catalog: Array[Dictionary] = []
 var _character_idx: int = 0
 
-var _quit_dialog: CanvasLayer = null
-var _quit_no_button: Button = null
+
 var _input_locked: bool = true
 
-# Discovery state (for join card in Step 1)
-var _hosts: Array = []
-var _join_card: Button = null  # Reference to the join card in Step 1
 
 # OLED burn-in protection for the idle setup/home screen.
 var _oled_guard: OledIdleGuard = null
@@ -118,20 +107,9 @@ func _ready() -> void:
 	_apply_responsive_layout()
 	_configure_navigation()
 
-	NetworkManager.discovery_updated.connect(_on_discovery_updated)
+
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
-
-	# Start background discovery so we can show the join card when a host appears
-	var err := NetworkManager.start_discovery()
-	if err != OK:
-		_hosts.clear()
-	_update_join_card_visibility()
-
-	# If returning from join_flow, re-open the join list
-	if Config.show_join_list_on_home:
-		Config.show_join_list_on_home = false
-		Config.join_status_override = ""
 
 	_step1.focus_selected_card()
 	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
@@ -148,8 +126,7 @@ func _ready() -> void:
 	_oled_guard.idle_reset.connect(_on_oled_reset)
 	_oled_guard.start(300.0, 600.0)
 
-func _exit_tree() -> void:
-	NetworkManager.stop_discovery()
+
 
 
 # ── OLED Idle Callbacks ───────────────────────────────────────────────────────
@@ -288,26 +265,11 @@ func _build_layout() -> void:
 	_main_vbox.add_child(_step3)
 	_build_step3_settings()
 
-	# MP hint label — positioned dynamically in _position_corner_buttons
-	_mp_hint_label = Label.new()
-	_mp_hint_label.name = "MPHintLabel"
-	_mp_hint_label.text = tr("mp_hint_remote")
-	_mp_hint_label.add_theme_font_size_override("font_size", 30)
-	_mp_hint_label.add_theme_color_override("font_color", UIColors.GREEN_HINT)
-	_mp_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_mp_hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_mp_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_mp_hint_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_mp_hint_label.visible = false
-	add_child(_mp_hint_label)  # add to root Control, not the VBox
-
 	# Start at Step 1
 	_step1.activate(false)
 	_step2.hide_step(false)
 	_step3.hide_step(false)
 	_current_step = 1
-
-	_build_corner_buttons()
 
 	# Character preview is now part of the step3 extras container.
 
@@ -322,15 +284,6 @@ func _build_mission_card_data() -> Array[Dictionary]:
 			"title": tr(String(mission.get("title_key", ""))),
 			"subtitle": tr(String(mission.get("subtitle_key", "")))
 		})
-	
-	# Insert in the middle (index 2) so it natively centers with the other cards
-	data.insert(2, {
-		"id": ACTION_JOIN_GAME,
-		"icon": "🤝",
-		"title": tr("start_together"),
-		"subtitle": tr("play on another screen"),
-	})
-	
 	return data
 
 func _build_pickup_card_data() -> Array[Dictionary]:
@@ -352,10 +305,11 @@ func _build_action_card_data() -> Array[Dictionary]:
 	var chaser_forced_off := MissionCatalog.chaser_forced_off(_selected_mission)
 	var chaser_required_mp := MissionCatalog.chaser_required(_selected_mission, true)
 
-	# Single player options
-	data.append({"id": ACTION_SOLO, "icon": "▶", "title": tr("start_alone"), "subtitle": tr("start_alone_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
-	if chaser_allowed and not chaser_forced_off:
-		data.append({"id": ACTION_SOLO_CHASER, "icon": "👹", "title": tr("start_with_chaser"), "subtitle": tr("start_with_chaser_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
+	# Single player options (skip in multiplayer-host context)
+	if not Config.is_multiplayer_host:
+		data.append({"id": ACTION_SOLO, "icon": "▶", "title": tr("start_alone"), "subtitle": tr("start_alone_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
+		if chaser_allowed and not chaser_forced_off:
+			data.append({"id": ACTION_SOLO_CHASER, "icon": "👹", "title": tr("start_with_chaser"), "subtitle": tr("start_with_chaser_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
 
 	# Multiplayer options — dynamic player count
 	var mp_options_coop := MissionCatalog.max_players_options(_selected_mission, false)
@@ -522,35 +476,11 @@ func _build_step3_settings() -> void:
 	_setup_cycling(_chaser_speed_button, _cycle_chaser_speed)
 	_setup_arrow_visibility(_chaser_speed_button, _chaser_speed_left, _chaser_speed_right)
 
-func _build_corner_buttons() -> void:
-	_corner_overlay = Control.new()
-	_corner_overlay.name = "CornerButtons"
-	_corner_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_corner_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(_corner_overlay)
-
-	_settings_button = _create_corner_button(tr("settings"))
-	_settings_button.pressed.connect(func():
-		_persist_state()
-		NetworkManager.stop_discovery()
-		get_tree().change_scene_to_file(Scenes.SETTINGS)
-	)
-	_corner_overlay.add_child(_settings_button)
-
-	_help_button = _create_corner_button(tr("help"))
-	_help_button.pressed.connect(func():
-		_persist_state()
-		NetworkManager.stop_discovery()
-		get_tree().change_scene_to_file(Scenes.HELP)
-	)
-	_corner_overlay.add_child(_help_button)
 
 # ── Step Transition Handlers ─────────────────────────────────────────────────
 
 func _on_step1_confirmed(mission_id: String) -> void:
-	if mission_id == ACTION_JOIN_GAME:
-		_navigate_to_join_flow()
-		return
+
 
 	_selected_mission = mission_id
 	Config.selected_mission_id = mission_id
@@ -657,8 +587,7 @@ func _go_back_to_step(target: int) -> void:
 	# Hide all steps after target
 	if target <= 2:
 		_step3.hide_step()
-		if _mp_hint_label != null:
-			_mp_hint_label.visible = false
+
 		if _character_preview_container != null:
 			_character_preview_container.visible = false
 	if target <= 1:
@@ -675,31 +604,12 @@ func _go_back_to_step(target: int) -> void:
 func _post_step_transition(step: int) -> void:
 	_configure_navigation()
 	_apply_responsive_layout()
-	_update_join_card_visibility()
 	match step:
 		1: _step1.focus_selected_card()
 		2: _step2.focus_selected_card()
 		3: _step3.focus_selected_card()
 
 func _on_step1_card_focus_changed(_card_id: String) -> void:
-	var is_mp := _card_id == ACTION_JOIN_GAME
-	var alpha := 0.3 if is_mp else 1.0
-	
-	if _theme_button != null:
-		_theme_button.disabled = is_mp
-		_theme_button.focus_mode = Control.FOCUS_NONE if is_mp else Control.FOCUS_ALL
-		_theme_button.mouse_filter = Control.MOUSE_FILTER_IGNORE if is_mp else Control.MOUSE_FILTER_STOP
-		_theme_button.modulate.a = alpha
-		if _theme_title != null: _theme_title.modulate.a = alpha
-	if _maze_size_button != null:
-		_maze_size_button.disabled = is_mp
-		_maze_size_button.focus_mode = Control.FOCUS_NONE if is_mp else Control.FOCUS_ALL
-		_maze_size_button.mouse_filter = Control.MOUSE_FILTER_IGNORE if is_mp else Control.MOUSE_FILTER_STOP
-		_maze_size_button.modulate.a = alpha
-		if _maze_size_title != null: _maze_size_title.modulate.a = alpha
-	if _theme_preview != null:
-		_theme_preview.modulate.a = alpha
-
 	_configure_navigation()
 
 func _on_step2_card_focus_changed(_card_id: String) -> void:
@@ -711,10 +621,6 @@ func _on_step3_card_focus_changed(_card_id: String) -> void:
 	_configure_navigation()
 	# Show/hide MP hint
 	var is_mp := _card_id == ACTION_COOP or _card_id == ACTION_VERSUS
-	if _mp_hint_label != null:
-		_mp_hint_label.visible = is_mp
-		if is_mp:
-			call_deferred("_position_corner_buttons")
 
 # ── Game Start Logic ──────────────────────────────────────────────────────────
 
@@ -731,7 +637,6 @@ func _start_single_player(with_chaser: bool) -> void:
 		_selected_mission,
 	)
 	Config.save_settings()
-	NetworkManager.stop_discovery()
 	# Player is starting a game — restore the display wake lock.
 	DisplayServer.screen_set_keep_on(true)
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
@@ -780,7 +685,6 @@ func _start_multiplayer(with_chaser: bool) -> void:
 
 	Config.difficulty = difficulty
 	Config.save_settings()
-	NetworkManager.stop_discovery()
 	NetworkManager.configure_host(config)
 	var err: int = NetworkManager.start_host()
 	if err != OK:
@@ -932,22 +836,18 @@ func _configure_step1_nav() -> void:
 	_configure_card_row_nav(cards, null, first_setting)
 	var sel_or_last: Control = selected if selected != null else _last_card(cards)
 	_configure_single_nav(_theme_button, sel_or_last, _maze_size_button)
-	_configure_single_nav(_maze_size_button, _theme_button, _settings_button)
-	_configure_corner_nav(_maze_size_button)
+	_configure_single_nav(_maze_size_button, _theme_button, null)
 
 func _configure_step2_nav() -> void:
 	var cards := _step2.get_card_buttons()
 	var collapse1 := _step1.get_collapse_row()
 	var selected := _step2.get_selected_card_button()
-	var first_setting := _lang_button if _lang_button != null and _lang_button.get_parent().visible else _settings_button
+	var first_setting := _lang_button if _lang_button != null and _lang_button.get_parent().visible else null
 	_configure_single_nav(collapse1, null, null)  # Left/Right locked
 	collapse1.focus_neighbor_bottom = collapse1.get_path_to(selected if selected != null else cards[0]) if not cards.is_empty() else NodePath()
 	_configure_card_row_nav(cards, collapse1, first_setting)
 	if _lang_button != null and _lang_button.get_parent().visible:
-		_configure_single_nav(_lang_button, selected if selected != null else _last_card(cards), _settings_button)
-		_configure_corner_nav(_lang_button)
-	else:
-		_configure_corner_nav(selected if selected != null else _last_card(cards))
+		_configure_single_nav(_lang_button, selected if selected != null else _last_card(cards), null)
 
 func _configure_step3_nav() -> void:
 	var cards := _step3.get_card_buttons()
@@ -972,18 +872,15 @@ func _configure_step3_nav() -> void:
 	var sel_or_last: Control = selected if selected != null else _last_card(cards)
 	for i in range(visible_settings.size()):
 		var above: Control = sel_or_last if i == 0 else visible_settings[i - 1]
-		var below: Control = visible_settings[i + 1] if i + 1 < visible_settings.size() else _settings_button
+		var below: Control = visible_settings[i + 1] if i + 1 < visible_settings.size() else null
 		_configure_single_nav(visible_settings[i], above, below)
-
-	var last_in_chain: Control = visible_settings[-1] if not visible_settings.is_empty() else sel_or_last
-	_configure_corner_nav(last_in_chain)
 
 func _first_visible_step3_setting() -> Control:
 	if _character_row != null and _character_row.visible:
 		return _character_button
 	if _chaser_speed_row != null and _chaser_speed_row.visible:
 		return _chaser_speed_button
-	return _settings_button
+	return null
 
 func _configure_card_row_nav(cards: Array[Button], above: Control, below: Control) -> void:
 	if cards.is_empty(): return
@@ -1009,15 +906,6 @@ func _configure_single_nav(button: Control, top: Control, bottom: Control) -> vo
 	if bottom != null:
 		button.focus_neighbor_bottom = button.get_path_to(bottom)
 
-func _configure_corner_nav(above: Control) -> void:
-	if _settings_button == null or _help_button == null: return
-	_settings_button.focus_neighbor_right = _settings_button.get_path_to(_help_button)
-	_help_button.focus_neighbor_left = _help_button.get_path_to(_settings_button)
-	_settings_button.focus_neighbor_left = _settings_button.get_path_to(_settings_button)
-	_help_button.focus_neighbor_right = _help_button.get_path_to(_help_button)
-	if above != null:
-		_settings_button.focus_neighbor_top = _settings_button.get_path_to(above)
-		_help_button.focus_neighbor_top = _help_button.get_path_to(above)
 
 func _last_card(cards: Array[Button]) -> Button:
 	return cards[-1] if not cards.is_empty() else null
@@ -1069,7 +957,7 @@ func _apply_responsive_layout() -> void:
 	if _character_preview_container != null and _character_preview_container.visible:
 		_resize_character_preview()
 
-	_position_corner_buttons()
+
 	
 	# After all cards are resized and elements positioned, force the main container
 	# to discard any bloated sizes from the previous layout pass.
@@ -1093,57 +981,13 @@ func _apply_card_sizing(step: WizardStep, available_width: float, viewport_heigh
 	var subtitle_size: int = 17 if card_width < 250.0 else 19
 	step.set_card_gap(gap)
 	step.set_title_font_size(title_size + 8)
-	
-	if step == _step1:
-		pass
+
 	for card in cards:
 		card.custom_minimum_size = Vector2(card_width, card_height)
-		card.size = Vector2.ZERO # Force card to shrink if previously larger
+		card.size = Vector2.ZERO
 		card.pivot_offset = Vector2(card_width * 0.5, card_height * 0.5)
 		card.call("configure_compact", icon_size, title_size, subtitle_size)
 
-	# Step 1: lock card row width to the full available width so the layout
-	# never shifts horizontally when the join card appears or disappears.
-	# The HBox center alignment keeps 4 cards centered within the fixed row.
-	if step == _step1:
-		step.get_card_row().custom_minimum_size.x = available_width
-		step.get_card_row().size = Vector2.ZERO # Force shrink to minimum size
-
-func _position_corner_buttons() -> void:
-	var viewport_size := get_viewport_rect().size
-	var controls_mode: int = Config.on_screen_controls if Config != null else Config.ControlsMode.OFF
-	# RTL-flip the controls mode for correct content rect side
-	var eff_mode := controls_mode
-	if is_layout_rtl():
-		if eff_mode == Config.ControlsMode.LEFT_HANDED:
-			eff_mode = Config.ControlsMode.RIGHT_HANDED
-		elif eff_mode == Config.ControlsMode.RIGHT_HANDED:
-			eff_mode = Config.ControlsMode.LEFT_HANDED
-	var content_rect := UIHelpers.get_content_rect(viewport_size, eff_mode)
-	var margin: float = 24.0
-	if _settings_button != null:
-		var s := _settings_button.custom_minimum_size
-		_settings_button.size = s
-		_settings_button.position = Vector2(content_rect.position.x + margin, viewport_size.y - s.y - margin)
-	if _help_button != null:
-		var s := _help_button.custom_minimum_size
-		_help_button.size = s
-		_help_button.position = Vector2(content_rect.end.x - s.x - margin, viewport_size.y - s.y - margin)
-	# MP hint label: position within the content rect, above the corner buttons
-	if _mp_hint_label != null:
-		_mp_hint_label.anchor_left = 0.0
-		_mp_hint_label.anchor_right = 0.0
-		_mp_hint_label.anchor_top = 0.0
-		_mp_hint_label.anchor_bottom = 0.0
-		var hint_margin_x: float = 10.0
-		var settings_w: float = _settings_button.custom_minimum_size.x if _settings_button != null else 0.0
-		var help_w: float = _help_button.custom_minimum_size.x if _help_button != null else 0.0
-		var hint_left: float = content_rect.position.x + settings_w + margin + hint_margin_x
-		var hint_right: float = content_rect.end.x - help_w - margin - hint_margin_x
-		var hint_top: float = viewport_size.y - 80.0
-		var hint_bottom: float = viewport_size.y - 16.0
-		_mp_hint_label.position = Vector2(hint_left, hint_top)
-		_mp_hint_label.size = Vector2(hint_right - hint_left, hint_bottom - hint_top)
 
 func _apply_dpad_layout() -> void:
 	if center_container != null and Config != null:
@@ -1171,13 +1015,7 @@ func _create_selector_row(label_key: String) -> HBoxContainer:
 func _create_arrow_label() -> Label:
 	return CyclingSelector.create_arrow_label()
 
-func _create_corner_button(text: String) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.custom_minimum_size = Vector2(220, 52)
-	button.add_theme_font_size_override("font_size", 22)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
-	return button
+
 
 func _setup_arrow_visibility(button: Button, left: Label, right: Label) -> void:
 	CyclingSelector.setup_arrow_visibility(button, left, right)
@@ -1199,114 +1037,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked: return
 	if not event.is_action_pressed("ui_cancel"): return
 
-	if _quit_dialog and _quit_dialog.visible:
-		_hide_quit_dialog()
-	elif _current_step > 1:
+	if _current_step > 1:
 		_go_back_smart()
+		get_viewport().set_input_as_handled()
 	else:
-		_show_quit_dialog()
-	get_viewport().set_input_as_handled()
-
-# ── Quit Dialog ───────────────────────────────────────────────────────────────
-
-func _show_quit_dialog() -> void:
-	if _quit_dialog == null:
-		_create_quit_dialog()
-	_quit_dialog.visible = true
-	if _quit_no_button:
-		_quit_no_button.grab_focus()
-
-func _hide_quit_dialog() -> void:
-	if _quit_dialog != null:
-		_quit_dialog.visible = false
-	_step1.focus_selected_card()
-
-func _create_quit_dialog() -> void:
-	_quit_dialog = CanvasLayer.new()
-	_quit_dialog.layer = 100
-	add_child(_quit_dialog)
-
-	var overlay := ColorRect.new()
-	overlay.color = UIColors.OVERLAY
-	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_quit_dialog.add_child(overlay)
-
-	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	overlay.add_child(center)
-
-	var panel := PanelContainer.new()
-	var style := UIHelpers.create_rounded_stylebox(UIColors.BG_DARK, UIColors.BLUE, 20, 4)
-	style.content_margin_left = 60
-	style.content_margin_right = 60
-	style.content_margin_top = 40
-	style.content_margin_bottom = 40
-	panel.add_theme_stylebox_override("panel", style)
-	center.add_child(panel)
-
-	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 40)
-	panel.add_child(vbox)
-
-	var label := Label.new()
-	label.text = tr("quit_confirm")
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 48)
-	vbox.add_child(label)
-
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 50)
-	vbox.add_child(row)
-
-	var yes_button := UIHelpers.create_styled_button(tr("yes"), 250, 100, UIColors.BLUE, 36)
-	yes_button.pressed.connect(func(): get_tree().quit())
-	row.add_child(yes_button)
-
-	_quit_no_button = UIHelpers.create_styled_button(tr("no"), 250, 100, UIColors.YELLOW, 36)
-	_quit_no_button.pressed.connect(_hide_quit_dialog)
-	row.add_child(_quit_no_button)
-
-# ── Discovery (preserved for future Join Multiplayer) ─────────────────────────
-
-func _on_discovery_updated(hosts: Array) -> void:
-	_hosts = hosts.duplicate(true)
-	_update_join_card_visibility()
-
-## Show/hide the naturally laid-out join card in Step 1 based on discovered hosts.
-func _update_join_card_visibility() -> void:
-	if _join_card == null:
-		_join_card = _step1._cards.get(ACTION_JOIN_GAME, null) as Button
-	if _join_card == null:
-		return
-		
-	# Apply green palette once upon initial discovery
-	if not _join_card.has_meta("styled"):
-		_join_card.set_meta("styled", true)
-		_join_card.call("set_custom_palette",
-			JOIN_GREEN.darkened(0.06), JOIN_GREEN.lightened(0.16),
-			JOIN_GREEN.darkened(0.02), Color.WHITE,
-			UIColors.YELLOW, Color.WHITE, Color(1, 1, 1, 0.86))
-			
-	var has_hosts := not _hosts.is_empty()
-	var focus_owner: Control = get_viewport().gui_get_focus_owner() if get_viewport() != null else null
-	var was_showing := _join_card.visible
-
-	_join_card.visible = has_hosts
-	_join_card.disabled = not has_hosts
-	_join_card.mouse_filter = Control.MOUSE_FILTER_STOP if has_hosts else Control.MOUSE_FILTER_IGNORE
-	_join_card.focus_mode = Control.FOCUS_ALL if has_hosts else Control.FOCUS_NONE
-
-	if not has_hosts and focus_owner == _join_card:
-		_step1.focus_selected_card()
-
-	if was_showing != has_hosts:
-		_apply_responsive_layout()
-		_configure_navigation()
-
-func _navigate_to_join_flow() -> void:
-	if _hosts.is_empty():
-		return
-	NetworkManager.set_pending_join_host((_hosts[0] as Dictionary).duplicate(true))
-	NetworkManager.stop_discovery()
-	get_tree().change_scene_to_file(Scenes.JOIN_FLOW)
+		# Return to the top-level menu
+		get_viewport().set_input_as_handled()
+		_persist_state()
+		get_tree().change_scene_to_file(Scenes.HOME)

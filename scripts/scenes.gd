@@ -10,7 +10,8 @@ class_name Scenes
 extends RefCounted
 
 # ── Menu / UI ────────────────────────────────────────────────────────────────
-const HOME := "res://scenes/main_menu.tscn"
+const HOME := "res://scenes/top_menu.tscn"
+const WIZARD := "res://scenes/main_menu.tscn"
 const GAME := "res://scenes/main.tscn"
 const SETTINGS := "res://scenes/settings_menu.tscn"
 const HELP := "res://scenes/help_menu.tscn"
