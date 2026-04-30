@@ -9,6 +9,7 @@ var role: String = ""
 var grid_pos: Vector2i = Vector2i.ZERO
 
 var _move_tween: Tween = null
+var _shake_tween: Tween = null
 
 func setup(p_peer_id: int, p_character_id: String, renderer: MazeRenderer, start_grid_pos: Vector2i, p_role: String = "") -> void:
 	peer_id = p_peer_id
@@ -48,6 +49,20 @@ func move_to_grid(new_grid_pos: Vector2i, renderer: MazeRenderer, duration: floa
 
 	_move_tween = create_tween()
 	_move_tween.tween_property(self, "position", target_pos, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+func shake_wall(direction: Vector2i, renderer: MazeRenderer) -> void:
+	var sprite_node := _get_sprite()
+	if sprite_node == null:
+		return
+	var cs := renderer.get_cell_size()
+	var bump_offset := Vector2(direction) * (cs * 0.15)
+	if _shake_tween and _shake_tween.is_valid():
+		_shake_tween.kill()
+	sprite_node.position = Vector2.ZERO
+	_shake_tween = create_tween()
+	_shake_tween.bind_node(sprite_node)
+	_shake_tween.tween_property(sprite_node, "position", bump_offset, 0.05).set_trans(Tween.TRANS_SINE)
+	_shake_tween.tween_property(sprite_node, "position", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 
 func _get_sprite() -> Sprite2D:
 	if sprite != null:

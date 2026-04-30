@@ -77,7 +77,17 @@ var _saved_local_dpad_visible: bool = true
 var _local_dpad_node: CanvasLayer = null
 var _leaving: bool = false
 var _joined: bool = false
+var _join_pending: bool = false  # true between join press and accept/reject
+var _game_started: bool = false
+var _unjoining: bool = false
 var _last_host_cfg: Dictionary = {}
+
+# ── Game Switcher UI (multi-game support) ───────────────────────────────────
+# Arrows flank the green join card: [‹]  [card]  [›]
+var _game_switcher_label: Label = null   # "Game N of M" shown below the card
+var _game_prev_button: Button = null     # ‹ left of card
+var _game_next_button: Button = null     # › right of card
+var _game_unavailable_label: Label = null
 
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
@@ -144,18 +154,26 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 		if event.is_action_pressed("ui_cancel"):
 			if viewport != null: viewport.set_input_as_handled()
-			_toggle_pause()
+			if _game_started:
+				_toggle_pause()
+			else:
+				_unjoin()
 			return
 
 	if not event.is_action_pressed("ui_cancel"):
 		return
 	if viewport != null: viewport.set_input_as_handled()
 	if _joined:
-		_toggle_pause()
+		if _game_started:
+			_toggle_pause()
+		else:
+			_unjoin()
 	else:
 		_leave_session()
 
 func _toggle_pause() -> void:
+	if _pause_dialog == null:
+		return
 	if _pause_dialog.visible:
 		_pause_dialog.hide_dialog()
 	else:
@@ -210,7 +228,7 @@ func _build_setup_layout() -> void:
 	_main_vbox.name = "SetupVBox"
 	_main_vbox.alignment = BoxContainer.ALIGNMENT_BEGIN
 	_main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_main_vbox.add_theme_constant_override("separation", 10)
+	_main_vbox.add_theme_constant_override("separation", 6)
 	join_setup_center.add_child(_main_vbox)
 
 	_gameplay_char_preview = CharacterPreview.new()
@@ -246,7 +264,7 @@ func _build_setup_layout() -> void:
 
 	# Top spacer
 	_top_spacer = Control.new()
-	_top_spacer.custom_minimum_size = Vector2(0, 8)
+	_top_spacer.custom_minimum_size = Vector2(0, 4)
 	_main_vbox.add_child(_top_spacer)
 
 	# Logo
@@ -259,9 +277,10 @@ func _build_setup_layout() -> void:
 	_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_main_vbox.add_child(_logo)
 
+
 	# Logo -> Breadcrumbs spacer
 	var sp1 := Control.new()
-	sp1.custom_minimum_size = Vector2(0, 16)
+	sp1.custom_minimum_size = Vector2(0, 8)
 	_main_vbox.add_child(sp1)
 
 	# Breadcrumb 1
@@ -274,13 +293,13 @@ func _build_setup_layout() -> void:
 
 	# Breadcrumbs -> Title spacer
 	var logo_title_spacer := Control.new()
-	logo_title_spacer.custom_minimum_size = Vector2(0, 8)
+	logo_title_spacer.custom_minimum_size = Vector2(0, 4)
 	_main_vbox.add_child(logo_title_spacer)
 
 	# Title
 	_title_label = Label.new()
 	_title_label.text = tr("mp_join_title")
-	_title_label.add_theme_font_size_override("font_size", 36)
+	_title_label.add_theme_font_size_override("font_size", 30)
 	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -289,16 +308,52 @@ func _build_setup_layout() -> void:
 
 	# Title -> Join Card spacer
 	var sp2 := Control.new()
-	sp2.custom_minimum_size = Vector2(0, 16)
+	sp2.custom_minimum_size = Vector2(0, 8)
 	_main_vbox.add_child(sp2)
 
-	# ── Join Card (MarginContainer wrapping Panel and Overlay Button) ───────
+	# ── Join Card row: [‹]  [card]  [›] ────────────────────────────────────
 	var card_center := HBoxContainer.new()
 	card_center.alignment = BoxContainer.ALIGNMENT_CENTER
+	card_center.add_theme_constant_override("separation", 40)
 	_main_vbox.add_child(card_center)
+
+	# Prev arrow — always in the HBox (uses modulate to hide, not visible,
+	# so the card stays centered at all times).
+	_game_prev_button = Button.new()
+	_game_prev_button.text = "‹"
+	_game_prev_button.add_theme_font_size_override("font_size", 48)
+	_game_prev_button.add_theme_color_override("font_color", Color.WHITE)
+	_game_prev_button.focus_mode = Control.FOCUS_NONE
+	_game_prev_button.custom_minimum_size = Vector2(56, 0)
+	_game_prev_button.modulate.a = 0.0
+	_game_prev_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_game_prev_button.pressed.connect(func(): _cycle_game(-1))
+	var prev_style := StyleBoxEmpty.new()
+	_game_prev_button.add_theme_stylebox_override("normal", prev_style)
+	_game_prev_button.add_theme_stylebox_override("hover", prev_style)
+	_game_prev_button.add_theme_stylebox_override("pressed", prev_style)
+	_game_prev_button.add_theme_stylebox_override("focus", prev_style)
+	card_center.add_child(_game_prev_button)
 
 	_join_card_container = MarginContainer.new()
 	card_center.add_child(_join_card_container)
+
+	# Next arrow — same approach as prev (opacity, not visibility).
+	_game_next_button = Button.new()
+	_game_next_button.text = "›"
+	_game_next_button.add_theme_font_size_override("font_size", 48)
+	_game_next_button.add_theme_color_override("font_color", Color.WHITE)
+	_game_next_button.focus_mode = Control.FOCUS_NONE
+	_game_next_button.custom_minimum_size = Vector2(56, 0)
+	_game_next_button.modulate.a = 0.0
+	_game_next_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_game_next_button.pressed.connect(func(): _cycle_game(1))
+	var next_style := StyleBoxEmpty.new()
+	_game_next_button.add_theme_stylebox_override("normal", next_style)
+	_game_next_button.add_theme_stylebox_override("hover", next_style)
+	_game_next_button.add_theme_stylebox_override("pressed", next_style)
+	_game_next_button.add_theme_stylebox_override("focus", next_style)
+	card_center.add_child(_game_next_button)
 
 	_join_card_panel = PanelContainer.new()
 	_join_card_normal = UIHelpers.create_rounded_stylebox(JOIN_GREEN.darkened(0.06), JOIN_GREEN.lightened(0.16), 15, 2)
@@ -337,7 +392,7 @@ func _build_setup_layout() -> void:
 	_slots_row.custom_minimum_size = Vector2(0, 140)
 	card_vbox.add_child(_slots_row)
 
-	# ── The clickable button overlay ────────────────────────────────────────
+	# ── The clickable button overlay (also handles left/right to cycle games) ─
 	_join_button = Button.new()
 	_join_button.name = "JoinCardButton"
 	_join_button.focus_mode = Control.FOCUS_ALL
@@ -354,26 +409,46 @@ func _build_setup_layout() -> void:
 	_join_button.focus_entered.connect(func(): _apply_card_zoom(true))
 	_join_button.focus_exited.connect(func(): _apply_card_zoom(false))
 	_join_button.mouse_entered.connect(_join_button.grab_focus)
+	# Left/right on the focused card cycles through available games.
+	_join_button.gui_input.connect(_on_join_button_gui_input)
 	
 	_join_card_container.add_child(_join_button)
 
-	# ── Error Label ─────────────────────────────────────────────────────────
+	# Small spacer so the counter clears the card's drop shadow.
+	var counter_spacer := Control.new()
+	counter_spacer.custom_minimum_size = Vector2(0, 6)
+	_main_vbox.add_child(counter_spacer)
+
+	# ── "Game N of M" counter label (always reserves height via min size) ──
+	_game_switcher_label = Label.new()
+	_game_switcher_label.add_theme_font_size_override("font_size", 20)
+	_game_switcher_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
+	_game_switcher_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_game_switcher_label.custom_minimum_size = Vector2(0, 20)
+	_game_switcher_label.text = ""
+	_main_vbox.add_child(_game_switcher_label)
+
+	# ── Single status label (unavailable, no-games, error — one at a time) ──
+	# Using _join_error_label for all status messages; _game_unavailable_label
+	# points to the same node so existing call-sites work unchanged.
 	_join_error_label = Label.new()
 	_join_error_label.add_theme_font_size_override("font_size", 22)
 	_join_error_label.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
 	_join_error_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_join_error_label.custom_minimum_size = Vector2(0, 24)
 	_join_error_label.text = ""
 	_main_vbox.add_child(_join_error_label)
+	_game_unavailable_label = _join_error_label  # alias — same node
 
 	# Card -> Settings spacer
 	var sp3 := Control.new()
-	sp3.custom_minimum_size = Vector2(0, 16)
+	sp3.custom_minimum_size = Vector2(0, 8)
 	_main_vbox.add_child(sp3)
 
 	# ── Settings block (Character & Controller) ──────────────────────────────
 	_settings_vbox = VBoxContainer.new()
 	_settings_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_settings_vbox.add_theme_constant_override("separation", 12)
+	_settings_vbox.add_theme_constant_override("separation", 8)
 	_main_vbox.add_child(_settings_vbox)
 
 	# Character row
@@ -531,21 +606,139 @@ func _update_join_action_state() -> void:
 	var host_available: bool = _is_selected_host_available()
 	var character_available: bool = not _selected_character_id.is_empty() and not _taken_character_ids.has(_selected_character_id)
 	_join_button.disabled = not (host_available and character_available)
-	if not host_available and _join_error_label != null:
-		_join_error_label.text = tr("mp_join_host_unavailable")
+	# Only write the host-unavailable message if the status label is empty
+	# (don't overwrite "Connecting…", "No games", or "Game unavailable" notices).
+	if not host_available and _join_error_label != null and not _unjoining:
+		if _join_error_label.text.is_empty():
+			_join_error_label.text = tr("mp_join_host_unavailable")
+
+# ── Game Switcher (multi-game support) ──────────────────────────────────────
+
+func _cycle_game(dir: int) -> void:
+	if _hosts.is_empty() or _joined: return
+	_selected_host_index = (_selected_host_index + dir + _hosts.size()) % _hosts.size()
+	_selected_host = (_hosts[_selected_host_index] as Dictionary).duplicate(true)
+	_selected_host_available = true
+	if _game_unavailable_label != null:
+		_game_unavailable_label.text = ""
+	_populate_from_host()
+	_update_character_selector()
+	_update_game_switcher()
+	_update_join_action_state()
+
+func _update_game_switcher() -> void:
+	var count := _hosts.size()
+	var show_arrows := count > 1 and not _joined
+	var arrow_alpha := 1.0 if show_arrows else 0.0
+	var arrow_filter := Control.MOUSE_FILTER_STOP if show_arrows else Control.MOUSE_FILTER_IGNORE
+	if _game_prev_button != null:
+		_game_prev_button.modulate.a = arrow_alpha
+		_game_prev_button.mouse_filter = arrow_filter
+	if _game_next_button != null:
+		_game_next_button.modulate.a = arrow_alpha
+		_game_next_button.mouse_filter = arrow_filter
+	if _game_switcher_label != null:
+		if show_arrows:
+			var idx := clampi(_selected_host_index, 0, count - 1) + 1
+			_game_switcher_label.text = tr("mp_join_game_counter") % [idx, count]
+		else:
+			_game_switcher_label.text = ""
+
+func _show_no_games_state() -> void:
+	_selected_host = {}
+	_selected_host_available = false
+	if _join_card_panel != null:
+		_join_card_panel.modulate = Color(1, 1, 1, 0.3)
+	if _join_button != null:
+		_join_button.disabled = true
+	if _game_unavailable_label != null:
+		_game_unavailable_label.text = tr("mp_join_no_games")
+	# Hide arrows (opacity) and clear counter text.
+	if _game_prev_button != null:
+		_game_prev_button.modulate.a = 0.0
+		_game_prev_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if _game_next_button != null:
+		_game_next_button.modulate.a = 0.0
+		_game_next_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if _game_switcher_label != null:
+		_game_switcher_label.text = ""
+	# Suppress secondary error so only one message shows at a time.
+	if _join_error_label != null:
+		_join_error_label.text = ""
+
+func _restore_from_no_games_state() -> void:
+	if _join_card_panel != null:
+		_join_card_panel.modulate = Color(1, 1, 1, 1)
+	if _game_unavailable_label != null:
+		_game_unavailable_label.text = ""
+
+func _on_join_button_gui_input(event: InputEvent) -> void:
+	# Allow left/right D-pad / keyboard to cycle between available games.
+	if _joined or _hosts.size() <= 1: return
+	if event.is_action_pressed("ui_left"):
+		_cycle_game(-1)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_right"):
+		_cycle_game(1)
+		get_viewport().set_input_as_handled()
 
 # ── Network Callbacks ───────────────────────────────────────────────────────
+
 
 func _on_host_discovered(_info: Dictionary) -> void:
 	pass
 
 func _on_discovery_updated(hosts: Array) -> void:
 	_hosts = hosts.duplicate(true)
-	if join_setup_panel.visible and not _selected_host.is_empty():
+	_update_game_switcher()
+
+	if join_setup_panel.visible and not _joined and not _join_pending:
+		# We are on the pre-join setup panel — try to keep the same game.
+		var was_available := _selected_host_available
+
+		# Recovery from "no games" state: auto-select first game.
+		if _selected_host.is_empty() and not _hosts.is_empty():
+			_selected_host_index = 0
+			_selected_host = (_hosts[0] as Dictionary).duplicate(true)
+			_selected_host_available = true
+			_restore_from_no_games_state()
+			_populate_from_host()
+			_update_character_selector()
+			_update_game_switcher()
+			_update_join_action_state()
+			return
+
 		_selected_host_available = _sync_selected_host_from_list()
-		_populate_from_host()
-		_update_character_selector()
+
+		if not _selected_host_available:
+			# The currently-shown game disappeared.
+			if not _hosts.is_empty():
+				# Auto-switch to first available.
+				_selected_host_index = 0
+				_selected_host = (_hosts[0] as Dictionary).duplicate(true)
+				_selected_host_available = true
+				_populate_from_host()
+				_update_character_selector()
+				# Show brief notice.
+				if _game_unavailable_label != null:
+					_game_unavailable_label.text = tr("mp_join_game_unavailable")
+					get_tree().create_timer(3.0).timeout.connect(
+						func(): if is_instance_valid(_game_unavailable_label): _game_unavailable_label.text = ""
+					)
+				_update_game_switcher()
+			else:
+				_show_no_games_state()
+		else:
+			# Game still present — refresh player count and taken chars.
+			_populate_from_host()
+			_update_character_selector()
+			# Dismiss any stale unavailable notice.
+			if not was_available and _game_unavailable_label != null:
+				_game_unavailable_label.text = ""
+		_update_join_action_state()
 		return
+
+	# Discovery panel (pre-selection): rebuild host card list.
 	_rebuild_host_cards()
 	if _hosts.is_empty():
 		discovery_status_label.text = tr("mp_join_discovery_none")
@@ -561,6 +754,13 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	if not join_setup_panel.visible: return
 	var cfg: Dictionary = state.get("config", {}) as Dictionary
 	var players: Dictionary = state.get("players", {}) as Dictionary
+	
+	var my_id := multiplayer.get_unique_id()
+	var my_info := players.get(my_id, players.get(str(my_id), {})) as Dictionary
+	var session_role := String(my_info.get("role", ""))
+	if not session_role.is_empty():
+		_my_role = session_role
+		
 	if not cfg.is_empty():
 		_last_host_cfg = cfg.duplicate(true)
 		_update_breadcrumbs(cfg)
@@ -595,9 +795,11 @@ func _on_join_pressed() -> void:
 		if _join_error_label != null:
 			_join_error_label.text = "%s: %d" % [tr("mp_join_error_connect"), err]
 		return
+	_join_pending = true
 	if _join_error_label != null: _join_error_label.text = tr("mp_join_connecting")
 
 func _on_join_accepted(peer_id: int, state: Dictionary) -> void:
+	_join_pending = false
 	var character_id: String = _selected_character_id
 	var players: Dictionary = state.get("players", {}) as Dictionary
 	var my_info: Dictionary = {}
@@ -612,12 +814,16 @@ func _on_join_accepted(peer_id: int, state: Dictionary) -> void:
 	_transition_to_joined(character_id)
 
 func _on_join_rejected(reason: String) -> void:
+	_join_pending = false
+	# Suppress network callbacks that fire as a side-effect of a voluntary unjoin.
+	if _unjoining: return
 	if _should_return_to_discovery(reason):
 		_leave_session()
 		return
 	if _join_error_label != null: _join_error_label.text = reason
 
 func _on_game_started(_session: Dictionary) -> void:
+	_game_started = true
 	if _main_vbox != null: _main_vbox.visible = false
 	if _instruction_panel != null: _instruction_panel.visible = false
 	
@@ -640,7 +846,12 @@ func _on_game_started(_session: Dictionary) -> void:
 
 func _on_chaser_countdown_updated(remaining: int) -> void:
 	if _gameplay_banner_label == null: return
-	if remaining > 0:
+	_is_chaser_waiting = true
+	if remaining > 3:
+		_gameplay_banner_label.text = tr("mp_chaser_waiting_steps") % remaining
+		_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
+		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	elif remaining > 0:
 		_gameplay_banner_label.text = tr("mp_chaser_get_ready_steps") % remaining
 		_gameplay_banner_label.add_theme_font_size_override("font_size", 48)
 		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
@@ -667,6 +878,9 @@ func _on_remote_goal_updated(goal_text: String) -> void:
 		if _instruction_label != null:
 			_instruction_label.text = goal_text
 	else:
+		if _my_role != NetworkManager.ROLE_CHASER:
+			_is_chaser_waiting = false
+			
 		if _gameplay_banner_label != null and not _is_chaser_waiting:
 			_gameplay_banner_label.text = goal_text
 
@@ -834,14 +1048,59 @@ func _show_local_dpad_for_setup() -> void:
 	_local_dpad_node.visible = controls_mode != off_mode
 
 func _on_local_dpad_action(action: StringName, pressed: bool) -> void:
-	if not _joined or not join_setup_panel.visible: return
+	if not join_setup_panel.visible: return
+	# ui_cancel is intentionally NOT handled here in any branch — TouchScreenButton
+	# also injects it through the input system, so _unhandled_input handles it.
+	# Handling it here too would double-fire the back action.
+	if not _joined:
+		return
 	match action:
 		&"ui_up": _send_controller_direction(Vector2i.UP, pressed)
 		&"ui_down": _send_controller_direction(Vector2i.DOWN, pressed)
 		&"ui_left": _send_controller_direction(Vector2i.LEFT, pressed)
 		&"ui_right": _send_controller_direction(Vector2i.RIGHT, pressed)
-		&"ui_cancel":
-			if pressed: _toggle_pause()
+
+## Disconnect from the current session and restore the pre-join UI so the
+## player can reconfigure and join again without going back to the home screen.
+func _unjoin() -> void:
+	if _leaving or _unjoining: return
+	_unjoining = true
+	NetworkManager.leave_session()
+	NetworkManager.start_discovery()
+	_joined = false
+	_game_started = false
+	# Hide gameplay-only overlays
+	if _gameplay_banner != null: _gameplay_banner.visible = false
+	if _gameplay_char_preview != null: _gameplay_char_preview.visible = false
+	# Restore pre-join UI elements
+	if _main_vbox != null: _main_vbox.visible = true
+	if _instruction_panel != null: _instruction_panel.visible = true
+	if _join_button != null: _join_button.visible = true
+	if _settings_vbox != null: _settings_vbox.visible = true
+	# Show a neutral, localized "disconnected" message briefly.
+	# _unjoining stays true for the same 3 s so _update_join_action_state()
+	# cannot overwrite the message with "host unavailable" during that window.
+	if _join_error_label != null:
+		_join_error_label.visible = true
+		_join_error_label.add_theme_color_override("font_color", Color(0.6, 0.9, 0.6, 1.0))
+		_join_error_label.text = tr("mp_join_disconnected")
+	var lbl_ref := _join_error_label
+	get_tree().create_timer(3.0).timeout.connect(func():
+		_unjoining = false
+		if is_instance_valid(lbl_ref) and lbl_ref.text == tr("mp_join_disconnected"):
+			lbl_ref.text = ""
+		if is_instance_valid(lbl_ref):
+			lbl_ref.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
+	)
+	_update_instruction_text(_last_host_cfg)
+	_update_join_action_state()
+	_configure_navigation()
+	# Focus the join card button and zoom the card unconditionally so the user
+	# can press it again as soon as the host is re-discovered (even if the button
+	# starts out disabled while discovery is still scanning).
+	if _join_button != null:
+		_join_button.call_deferred("grab_focus")
+		_apply_card_zoom(true)
 
 func _leave_session() -> void:
 	if _leaving: return
@@ -864,6 +1123,10 @@ func _update_taken_character_ids_from_selected_host() -> void:
 				_taken_character_ids.append(character_id)
 
 func _host_key(host: Dictionary) -> String:
+	# Prefer session_id (unique per hosting session) over ip:port.
+	var sid := String(host.get("session_id", ""))
+	if not sid.is_empty():
+		return sid
 	return "%s:%d" % [String(host.get("ip", "")), int(host.get("port", DEFAULT_GAME_PORT))]
 
 func _selected_host_key() -> String:

@@ -147,6 +147,48 @@ func show_race_gotcha(time_str: String, move_count: int, winner_character_id: St
 	_win_label.text = tr("race_i_won")
 	_set_winner_character(winner_character_id)
 
+func show_coop_win(time_str: String, move_count: int, character_ids: Array[String]) -> void:
+	show_win(time_str, move_count)
+	_win_label.text = tr("mp_you_won_together")
+	# Show all player avatars scaled to fit. Clear first.
+	_winner_preview.visible = false
+	# Build multi-avatar row in the preview area.
+	var preview_container := _winner_preview.get_parent()
+	# Remove previous coop previews if any (tagged by metadata).
+	for child in preview_container.get_children():
+		if child != _winner_preview and child.get_meta("coop_preview", false):
+			child.queue_free()
+	if character_ids.is_empty():
+		return
+	# Scale by player count.
+	var base_size := 180
+	var scale_factor := 1.0
+	if character_ids.size() == 3:
+		scale_factor = 0.75
+	elif character_ids.size() >= 4:
+		scale_factor = 0.6
+	var preview_size := int(base_size * scale_factor)
+	for cid in character_ids:
+		var p := CharacterPreview.new()
+		p.custom_minimum_size = Vector2(preview_size, preview_size)
+		p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		p.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		p.set_meta("coop_preview", true)
+		var preview_data := CharacterCatalog.get_preview_data_by_id(cid)
+		var frames: Array[Texture2D] = []
+		if preview_data.has("frames"):
+			for item in (preview_data.get("frames", []) as Array):
+				var texture := item as Texture2D
+				if texture != null:
+					frames.append(texture)
+		if frames.is_empty():
+			var fallback := CharacterCatalog.get_texture_by_id(cid)
+			if fallback != null:
+				frames.append(fallback)
+		if not frames.is_empty():
+			p.set_character(frames, float(preview_data.get("fps", 1.0)))
+		preview_container.add_child(p)
+
 
 ## Build the "Play Together" / "Play Alone" / "Swap Roles" buttons.
 func _build_mode_switch_buttons() -> void:
@@ -169,6 +211,13 @@ func hide_screen() -> void:
 	_is_active = false
 	if _container:
 		_container.visible = false
+	# Clean up coop character previews added dynamically.
+	if _winner_preview != null:
+		var preview_container := _winner_preview.get_parent()
+		if preview_container != null:
+			for child in preview_container.get_children():
+				if child != _winner_preview and child.get_meta("coop_preview", false):
+					child.queue_free()
 	screen_hidden.emit()
 
 

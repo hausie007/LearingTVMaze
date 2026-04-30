@@ -61,6 +61,7 @@ var _pending_host_port: int = GAME_PORT
 var _pending_host_info: Dictionary = {}
 
 var _discovered_hosts: Dictionary = {}
+var _session_id: String = ""  # Unique ID generated per hosting session.
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
@@ -116,6 +117,7 @@ func start_host() -> int:
 	_recalculate_roles()
 
 	current_session.clear()
+	_session_id = "%d_%d" % [randi(), Time.get_ticks_msec()]
 	_start_broadcasting()
 	_emit_lobby_snapshot_local()
 	return OK
@@ -237,6 +239,7 @@ func leave_session() -> void:
 	host_config.clear()
 	players.clear()
 	current_session.clear()
+	_session_id = ""
 	_pending_join_character_id = ""
 	_pending_host_ip = ""
 	_pending_host_port = GAME_PORT
@@ -309,6 +312,7 @@ func _build_discovery_payload() -> Dictionary:
 	return {
 		"app": APP_ID,
 		"version": PROTOCOL_VERSION,
+		"session_id": _session_id,
 		"host_name": "Learning Maze Host",
 		"port": GAME_PORT,
 		"theme_dir": String(host_config.get("theme_dir", "default")),
@@ -356,7 +360,10 @@ func _poll_discovery_socket() -> void:
 		info["ip"] = ip
 		info["port"] = port
 
-		var key := "%s:%d" % [ip, port]
+		# Use session_id as the deduplication key when available (handles
+		# same-config games on different devices and same-device re-hosts).
+		var sid := String(info.get("session_id", ""))
+		var key := sid if not sid.is_empty() else "%s:%d" % [ip, port]
 		var now_sec := _now_sec()
 		var was_known := _discovered_hosts.has(key)
 		var old_signature := ""

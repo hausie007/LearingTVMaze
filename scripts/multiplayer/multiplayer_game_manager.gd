@@ -39,6 +39,7 @@ var _race_sequences_by_peer: Dictionary = {}
 var _race_progress: Dictionary = {}
 var _race_colors_by_peer: Dictionary = {}
 var _race_markers_by_peer: Dictionary = {}
+var _race_used_cells: Dictionary = {}  # Cross-peer occupied cell registry for collision-free placement.
 var _race_marker_root: Node2D = null
 var _race_collect_player: AudioStreamPlayer = null
 var _win_screen: WinScreen = null
@@ -82,9 +83,10 @@ func _ready() -> void:
 	add_child(_race_marker_root)
 
 	_win_screen = WinScreen.new()
-	_win_screen.set_swap_roles_enabled(true)
+	_win_screen.set_swap_roles_enabled(false)
 	_win_screen.set_is_multiplayer(true)
 	_win_screen.next_round_pressed.connect(_on_next_round_pressed)
+	_win_screen.harder_pressed.connect(_on_harder_pressed)
 	_win_screen.home_pressed.connect(_on_home_pressed)
 	_win_screen.swap_roles_pressed.connect(_on_swap_roles_pressed)
 	_win_screen.play_alone_pressed.connect(_on_play_alone_pressed)
@@ -191,7 +193,9 @@ func _apply_session(session: Dictionary) -> void:
 	_race_progress.clear()
 	_race_colors_by_peer.clear()
 	_race_markers_by_peer.clear()
+	_race_used_cells.clear()
 	_finished_peers.clear()
+	_update_win_screen_options()
 
 	_maze = maze_generator.generate_race(Config.grid_size) if _is_race_mode() else maze_generator.generate()
 	_set_start_markers(_spawn_positions_for_session(session))
@@ -204,6 +208,9 @@ func _apply_session(session: Dictionary) -> void:
 		maze_renderer.top_margin = GameHUD.HUD_HEIGHT
 	maze_renderer.draw_maze(_maze)
 	_clear_race_markers()
+	if _is_race_mode():
+		_build_race_sequence()  # Must run before _spawn_avatars so per-peer paths are populated.
+	_race_used_cells.clear()
 	_spawn_avatars(session)
 	if _collectible_spawner != null:
 		_collectible_spawner.clear()
@@ -211,8 +218,6 @@ func _apply_session(session: Dictionary) -> void:
 			if _is_roleless_next_symbol_mode():
 				_collectible_spawner.configure_competitive_mode(_get_all_player_positions)
 			_collectible_spawner.spawn(_maze, maze_renderer, Config.game_style)
-	if _is_race_mode():
-		_build_race_sequence()
 	if _is_race_mode():
 		_spawn_race_markers()
 	_refresh_status_label()
@@ -256,15 +261,20 @@ func _spawn_avatars(session: Dictionary) -> void:
 			avatar.visible = false
 			_delayed_chaser_peer_ids.append(peer_id)
 			var initial_moves := _path_chaser_trigger_moves()
-			if initial_moves <= 3 and initial_moves > 0:
+			if peer_id == NetworkManager.HOST_PEER_ID:
+				if hud != null:
+					hud.set_mission_description(tr("mp_chaser_waiting_steps") % initial_moves, false)
+			else:
 				NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", initial_moves)
 		players_root.add_child(avatar)
 		_avatars[peer_id] = avatar
 		_move_cooldowns[peer_id] = 0.0
 		if _is_race_mode():
 			_race_progress[peer_id] = 0
-			_race_sequences_by_peer[peer_id] = _race_sequence_for_start(spawn_grid)
 			_race_colors_by_peer[peer_id] = _distinct_race_color(peer_id, String(info.get("character_id", "")))
+			# Build per-peer sequence after colors are assigned; _race_used_cells accumulates
+			# across peers to guarantee no two items land on the same maze cell.
+			_race_sequences_by_peer[peer_id] = _race_sequence_for_start(spawn_grid)
 
 func _spawn_positions_for_session(session: Dictionary) -> Array[Vector2i]:
 	var positions: Array[Vector2i] = []
@@ -333,6 +343,8 @@ func _on_peer_disconnected(peer_id: int) -> void:
 		_avatars.erase(peer_id)
 		_held_directions.erase(peer_id)
 		_move_cooldowns.erase(peer_id)
+	_finished_peers.erase(peer_id)
+	_delayed_chaser_peer_ids.erase(peer_id)
 
 func _process_host_local_input() -> void:
 	var host_id := multiplayer.get_unique_id()
@@ -385,6 +397,7 @@ func _try_move(peer_id: int, direction: Vector2i) -> void:
 	if _maze == null:
 		return
 	if not _maze.is_wall_open(avatar.grid_pos, direction):
+		avatar.shake_wall(direction, maze_renderer)
 		return
 
 	avatar.move_to_grid(target, maze_renderer, Config.tween_duration)
@@ -439,9 +452,9 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 			_speak_completed_word_if_needed(lang)
 		else:
 			TTS.speak(value_str, 0.85)
-	if _is_next_symbol_mode() and _collectible_spawner != null and _collectible_spawner.is_complete():
-		_round_complete = true
-		_held_directions.clear()
+	# For next-symbol mode, do NOT set _round_complete here.
+	# Coop: finish requires all players on end cell (handled by _check_shared_finish).
+	# Chaser variant: collector must still reach exit AND can still be caught.
 	_refresh_status_label()
 
 func _refresh_status_label() -> void:
@@ -549,7 +562,7 @@ func _get_role_goal(peer_id: int) -> String:
 	var role := _role_for_peer(peer_id)
 	
 	if _is_race_mode():
-		return "Run to the middle first."
+		return tr("mp_goal_maze_race_first")
 		
 	var is_phase_one := false
 	if _uses_shared_collectibles() and _collectible_spawner != null:
@@ -558,7 +571,7 @@ func _get_role_goal(peer_id: int) -> String:
 	if _is_maze_race_mode():
 		if role == NetworkManager.ROLE_CHASER:
 			return "Catch the player."
-		return "Find the exit from the maze."
+		return tr("mp_goal_maze_race_first")
 		
 	if role == NetworkManager.ROLE_CHASER:
 		return "Catch the player."
@@ -579,8 +592,10 @@ func _get_role_goal(peer_id: int) -> String:
 				return "Collect %s." % payload_text
 	else:
 		if _is_roleless_next_symbol_mode():
-			return "Find the exit from the maze."
+			return tr("mp_goal_exit_together")
 		elif _is_path_mode():
+			if _is_chaser_variant():
+				return tr("mp_goal_exit_no_catch")
 			return "Find the exit from the maze."
 		else:
 			return "Done!"
@@ -731,6 +746,7 @@ func _check_shared_finish(peer_id: int, pos: Vector2i) -> void:
 	if _is_next_symbol_mode():
 		if _collectible_spawner.is_complete():
 			if _is_roleless_next_symbol_mode():
+				# Coop: all active players must reach the end cell.
 				var end_cell := _maze.get_end_cell() if _maze != null else null
 				if end_cell != null and end_cell.coords == pos:
 					_finished_peers[peer_id] = true
@@ -743,12 +759,19 @@ func _check_shared_finish(peer_id: int, pos: Vector2i) -> void:
 						_held_directions.clear()
 						_speak_completed_word_if_needed()
 						_refresh_status_label()
-						_show_shared_win_screen(peer_id)
+						_show_coop_win_screen()
 				_refresh_status_label()
 			else:
-				_round_complete = true
-				_held_directions.clear()
-				_speak_completed_word_if_needed()
+				# Chaser variant: collector must reach end cell to win.
+				if _is_chaser_variant() and _role_for_peer(peer_id) == NetworkManager.ROLE_COLLECTOR:
+					var end_cell := _maze.get_end_cell() if _maze != null else null
+					if end_cell != null and end_cell.coords == pos:
+						_round_complete = true
+						_held_directions.clear()
+						_speak_completed_word_if_needed()
+						_refresh_status_label()
+						_show_shared_win_screen(peer_id)
+			if not _is_chaser_variant():
 				_refresh_status_label()
 		return
 	if not _is_path_mode():
@@ -815,14 +838,58 @@ func _show_shared_win_screen(peer_id: int) -> void:
 		return
 	_win_screen.show_race_win(_format_time(), _display_move_count, _character_id_for_peer(peer_id))
 
+func _show_coop_win_screen() -> void:
+	if _win_screen == null:
+		return
+	var ids: Array[String] = []
+	for key in _avatars.keys():
+		var avatar := _avatars[key] as MultiplayerAvatar
+		if avatar != null:
+			ids.append(avatar.character_id)
+	_win_screen.show_coop_win(_format_time(), _display_move_count, ids)
+
+func _update_win_screen_options() -> void:
+	if _win_screen == null:
+		return
+	_win_screen.set_swap_roles_enabled(_is_chaser_variant())
+
 func _on_next_round_pressed() -> void:
 	if _win_screen != null:
 		_win_screen.hide_screen()
 	_apply_session(NetworkManager.current_session)
 
 func _on_swap_roles_pressed() -> void:
-	if _catching_chaser_peer_id != 0:
-		NetworkManager.swap_collector_with_peer(_catching_chaser_peer_id)
+	# Find the chaser peer — works for both gotcha (catching chaser) and win (any chaser avatar).
+	var chaser_peer_id := _catching_chaser_peer_id
+	if chaser_peer_id == 0:
+		for key in _avatars.keys():
+			var avatar := _avatars[key] as MultiplayerAvatar
+			if avatar != null and avatar.role == NetworkManager.ROLE_CHASER:
+				chaser_peer_id = avatar.peer_id
+				break
+	if chaser_peer_id != 0:
+		NetworkManager.swap_collector_with_peer(chaser_peer_id)
+	if _win_screen != null:
+		_win_screen.hide_screen()
+	_apply_session(NetworkManager.current_session)
+
+func _on_harder_pressed() -> void:
+	var max_diff := Config.DIFFICULTY_SIZES.size() - 1
+	if _collector_caught:
+		# Gotcha screen → make it easier
+		Config.difficulty = clampi(Config.difficulty - 1, 0, max_diff)
+	else:
+		# Win screen → make it harder
+		if Config.difficulty >= max_diff:
+			return
+		Config.difficulty = clampi(Config.difficulty + 1, 0, max_diff)
+	Config.save_settings()
+	# Update session config difficulty so all peers receive the new value.
+	var session := NetworkManager.current_session
+	if not session.is_empty():
+		var cfg := session.get("config", {}) as Dictionary
+		cfg["difficulty"] = Config.difficulty
+		session["config"] = cfg
 	if _win_screen != null:
 		_win_screen.hide_screen()
 	_apply_session(NetworkManager.current_session)
@@ -857,6 +924,8 @@ func _build_race_sequence() -> void:
 	_race_sequence.clear()
 	if _maze == null:
 		return
+	# NORMAL (no collectibles) still builds no sequence — that is correct.
+	# But only skip for true NORMAL; LETTERS/NUMBERS/WORDS must get their sequence.
 	if Config.game_mode == Config.GameMode.NORMAL:
 		return
 	var path_cells := _eligible_main_path_cells()
@@ -1037,6 +1106,8 @@ func _race_sequence_for_start(start: Vector2i) -> Array[Dictionary]:
 	var cells := _eligible_cells_from_path(path)
 	if cells.is_empty():
 		return result
+	# Track which cells this peer has already claimed (avoid same-peer duplicates too).
+	var peer_used: Dictionary = {}
 	for item in _race_sequence:
 		var source := item as Dictionary
 		var source_cell := source.get("cell") as MazeData.CellData
@@ -1045,9 +1116,30 @@ func _race_sequence_for_start(start: Vector2i) -> Array[Dictionary]:
 		var canonical_idx := canonical_cells.find(source_cell)
 		if canonical_idx < 0:
 			canonical_idx = int(source.get("index", 0))
-		var cell := cells[clampi(canonical_idx, 0, cells.size() - 1)]
+		# Find the nearest cell on this peer's path that is not already taken
+		# by any other peer (cross-peer collision) or this peer's own items.
+		var ideal := clampi(canonical_idx, 0, cells.size() - 1)
+		var chosen := -1
+		for radius in range(cells.size()):
+			for sign in [0, 1]:  # 0 = forward offset, 1 = backward offset
+				var offset := radius if sign == 0 else -radius
+				if offset == 0 and radius > 0:
+					continue  # already tried 0
+				var candidate_idx := clampi(ideal + offset, 0, cells.size() - 1)
+				var candidate_cell := cells[candidate_idx]
+				var key := candidate_cell.coords
+				if not _race_used_cells.has(key) and not peer_used.has(key):
+					chosen = candidate_idx
+					break
+			if chosen >= 0:
+				break
+		if chosen < 0:
+			chosen = ideal  # Fallback: allow overlap only if all cells are exhausted.
+		var final_cell := cells[chosen]
+		_race_used_cells[final_cell.coords] = true
+		peer_used[final_cell.coords] = true
 		result.append({
-			"cell": cell,
+			"cell": final_cell,
 			"value": String(source.get("value", "")),
 			"index": int(source.get("index", 0)),
 		})

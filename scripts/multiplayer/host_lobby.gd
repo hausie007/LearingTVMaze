@@ -213,7 +213,7 @@ func _build_join_banner() -> void:
 	main_hbox.add_child(banner_vbox)
 
 	var banner_title := Label.new()
-	banner_title.text = "Join this game with Your Phone or Tablet"
+	banner_title.text = tr("mp_banner_join_title")
 	banner_title.add_theme_font_size_override("font_size", 40)
 	banner_title.add_theme_color_override("font_color", UIColors.YELLOW)
 	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -221,11 +221,14 @@ func _build_join_banner() -> void:
 
 	var green_hex := MP_GREEN_BORDER.to_html(false)
 	var steps := [
-		"1. Open [b]Learning Maze[/b] on your phone or tablet.",
-		"2. Check you are connected to the same WiFi/network.",
-		"3. Tap the green [color=#%s]Play Together[/color] card." % green_hex,
-		"4. Choose your player avatar and click \"[color=#%s]Join[/color]\"." % green_hex,
-		"5. Use your device as the controller for this screen."
+		tr("mp_banner_step_1"),
+		tr("mp_banner_step_2"),
+		tr("mp_banner_step_3").replace(
+			tr("menu_play_together"),
+			"[color=#%s]%s[/color]" % [green_hex, tr("menu_play_together")]
+		),
+		tr("mp_banner_step_4"),
+		tr("mp_banner_step_5"),
 	]
 
 	for step_text in steps:
@@ -247,7 +250,7 @@ func _build_join_banner() -> void:
 	main_hbox.add_child(qr_vbox)
 
 	var qr_title := Label.new()
-	qr_title.text = "Don’t have the app yet?"
+	qr_title.text = tr("mp_banner_qr_title")
 	qr_title.add_theme_font_size_override("font_size", 30)
 	qr_title.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	qr_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
