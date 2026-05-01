@@ -116,7 +116,7 @@ func _update_slide() -> void:
 	match slide.type:
 		"welcome":
 			_icon_rect.visible = true
-			_icon_rect.texture = load("res://images/lm_logo_transparent2.png")
+			_icon_rect.texture = load("res://images/lm_paper_logo.png")
 			# Adjust size for logo (3:2 aspect ratio) to look better as a hero element
 			_icon_rect.custom_minimum_size = Vector2(450, 300)
 		"maze":

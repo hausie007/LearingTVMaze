@@ -156,13 +156,13 @@ var chaser_speed: float:
 			_:                  return 0.65  # Slow (default)
 
 ## All language codes including "auto" sentinel. Canonical source for UI cycling.
-const LANG_CODES: Array[String] = ["auto", "en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el", "sk", "he"]
+const LANG_CODES: Array[String] = ["auto", "en", "es", "fr", "de", "it", "pt", "pl", "uk", "nl", "tr", "ro", "cs", "hu", "el", "sv", "da", "fi", "nb", "sk", "he", "vi"]
 
 ## Translation keys matching LANG_CODES 1:1. Used by settings and mode-selection UI.
-const LANG_KEYS: Array[String] = ["lang_auto", "lang_english", "lang_czech", "lang_german", "lang_spanish", "lang_french", "lang_portuguese", "lang_vietnamese", "lang_turkish", "lang_italian", "lang_polish", "lang_swedish", "lang_norwegian", "lang_dutch", "lang_ukrainian", "lang_finnish", "lang_danish", "lang_hungarian", "lang_romanian", "lang_greek", "lang_slovak", "lang_hebrew"]
+const LANG_KEYS: Array[String] = ["lang_auto", "lang_english", "lang_spanish", "lang_french", "lang_german", "lang_italian", "lang_portuguese", "lang_polish", "lang_ukrainian", "lang_dutch", "lang_turkish", "lang_romanian", "lang_czech", "lang_hungarian", "lang_greek", "lang_swedish", "lang_danish", "lang_finnish", "lang_norwegian", "lang_slovak", "lang_hebrew", "lang_vietnamese"]
 
 ## Language codes without "auto" — used for validation and TTS scanning.
-const SUPPORTED_LANGS: Array[String] = ["en", "cs", "de", "es", "fr", "pt", "vi", "tr", "it", "pl", "sv", "nb", "nl", "uk", "fi", "da", "hu", "ro", "el", "sk", "he"]
+const SUPPORTED_LANGS: Array[String] = ["en", "es", "fr", "de", "it", "pt", "pl", "uk", "nl", "tr", "ro", "cs", "hu", "el", "sv", "da", "fi", "nb", "sk", "he", "vi"]
 
 ## Transient: the active word + emoji for the current Words-mode round.
 ## Format: {"word": "CAT", "emoji": "🐱"}  — NOT persisted.

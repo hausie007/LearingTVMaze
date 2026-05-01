@@ -17,7 +17,7 @@ config/quit_on_go_back=false
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/bg_color=Color(0.15, 0.17, 0.22, 1)
 boot_splash/use_filter=false
-boot_splash/image="res://images/lm_logo_transparent2.png"
+boot_splash/image="res://images/lm_paper_logo.png"
 config/icon="res://images/lm_icon_new2.png"
 config/android_tv_banner="res://images/big_banner3.png"
 

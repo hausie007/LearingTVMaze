@@ -2,7 +2,7 @@ extends Control
 
 const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const LogoTexture := preload("res://images/lm_horizontal.png")
+const LogoTexture := preload("res://images/lm_paper_horizontal.png")
 
 const MP_GREEN := PlayerSlotPanel.MP_GREEN
 const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER

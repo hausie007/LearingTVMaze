@@ -13,7 +13,7 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const LogoTexture := preload("res://images/lm_horizontal.png")
+const LogoTexture := preload("res://images/lm_paper_horizontal.png")
 const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
 
 # Card IDs

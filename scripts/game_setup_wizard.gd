@@ -13,7 +13,7 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
-const LogoTexture := preload("res://images/lm_horizontal.png")
+const LogoTexture := preload("res://images/lm_paper_horizontal.png")
 
 const CARD_GAP := 42
 
