@@ -25,9 +25,9 @@ const ACTION_VERSUS := "versus"
 
 
 
-const PICKUP_CARD_ICONS := {"numbers": "123", "words": "W", "letters": "ABC", "none": ">"}
-const PICKUP_CARD_TITLE_KEYS := {"numbers": "training_numbers", "words": "training_words", "letters": "training_letters", "none": "pickup_just_maze"}
-const PICKUP_CARD_SUBTITLE_KEYS := {"numbers": "pickup_numbers_short", "words": "pickup_words_short", "letters": "pickup_letters_short", "none": "pickup_none_short"}
+const PICKUP_CARD_ICONS = MissionCatalog.PICKUP_CARD_ICONS
+const PICKUP_CARD_TITLE_KEYS = MissionCatalog.PICKUP_CARD_TITLE_KEYS
+const PICKUP_CARD_SUBTITLE_KEYS = MissionCatalog.PICKUP_CARD_SUBTITLE_KEYS
 
 @onready var center_container: CenterContainer = $CenterContainer
 
@@ -307,9 +307,9 @@ func _build_action_card_data() -> Array[Dictionary]:
 
 	# Single player options (skip in multiplayer-host context)
 	if not Config.is_multiplayer_host:
-		data.append({"id": ACTION_SOLO, "icon": "▶", "title": tr("start_alone"), "subtitle": tr("start_alone_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
+		data.append({"id": ACTION_SOLO, "icon": "res://images/icons/i_play_alone.png", "title": tr("start_alone"), "subtitle": tr("start_alone_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
 		if chaser_allowed and not chaser_forced_off:
-			data.append({"id": ACTION_SOLO_CHASER, "icon": "👹", "title": tr("start_with_chaser"), "subtitle": tr("start_with_chaser_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
+			data.append({"id": ACTION_SOLO_CHASER, "icon": "res://images/icons/i_with_chaser.png", "title": tr("start_with_chaser"), "subtitle": tr("start_with_chaser_desc"), "group": "sp", "badge": "🔵 " + tr("badge_1_player")})
 
 	# Multiplayer options — dynamic player count
 	var mp_options_coop := MissionCatalog.max_players_options(_selected_mission, false)
@@ -318,9 +318,9 @@ func _build_action_card_data() -> Array[Dictionary]:
 	var chaser_badge := _player_count_badge(mp_options_chaser)
 
 	if not chaser_required_mp:
-		data.append({"id": ACTION_COOP, "icon": "🤝", "title": tr("start_together"), "subtitle": tr("start_together_desc"), "group": "mp", "badge": coop_badge})
+		data.append({"id": ACTION_COOP, "icon": "res://images/icons/i_play_together2.png", "title": tr("start_together"), "subtitle": tr("start_together_desc"), "group": "mp", "badge": coop_badge})
 	if chaser_allowed and not chaser_forced_off:
-		data.append({"id": ACTION_VERSUS, "icon": "⚔", "title": tr("start_vs_chaser"), "subtitle": tr("start_vs_chaser_desc"), "group": "mp", "badge": chaser_badge})
+		data.append({"id": ACTION_VERSUS, "icon": "res://images/icons/i_runner_vs_chaser.png", "title": tr("start_vs_chaser"), "subtitle": tr("start_vs_chaser_desc"), "group": "mp", "badge": chaser_badge})
 
 	return data
 
@@ -362,11 +362,7 @@ func _apply_step3_card_styles(action_data: Array[Dictionary]) -> void:
 				Color(0.7, 0.9, 0.7)    # subtitle color
 			)
 
-		# Apply theme character previews for SP action cards
-		if id == ACTION_SOLO:
-			_apply_theme_preview_to_card(card, theme_dir + ":player")
-		elif id == ACTION_SOLO_CHASER:
-			_apply_theme_preview_to_card(card, theme_dir + ":chaser")
+		# Theme character previews are no longer applied here.
 
 func _apply_theme_preview_to_card(card: Button, character_id: String) -> void:
 	var preview_data: Dictionary = CharacterCatalog.get_preview_data_by_id(character_id)

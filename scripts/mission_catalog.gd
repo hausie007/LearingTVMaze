@@ -30,10 +30,10 @@ const TRAINING_WORDS := "words"
 const PICKUP_CARD_ORDER: Array[String] = [PICKUP_NUMBERS, PICKUP_WORDS, PICKUP_LETTERS, PICKUP_NONE]
 
 const PICKUP_CARD_ICONS := {
-	"numbers": "123",
-	"words": "W",
-	"letters": "ABC",
-	"none": ">",
+	"numbers": "res://images/icons/i_numbers.png",
+	"words": "res://images/icons/i_words.png",
+	"letters": "res://images/icons/i_letters.png",
+	"none": "res://images/icons/i_just_maze.png",
 }
 
 const PICKUP_CARD_TITLE_KEYS := {
@@ -69,25 +69,25 @@ static func missions() -> Array[Dictionary]:
 	return [
 		{
 			"id": MISSION_FIND_EXIT,
-			"icon": "res://images/lm_maze.png",
+			"icon": "res://images/icons/i_find_the_exit.png",
 			"title_key": "mission_find_exit",
 			"subtitle_key": "mission_find_exit_short",
 		},
 		{
 			"id": MISSION_FOLLOW_TRAIL,
-			"icon": "res://images/lm_trail.png",
+			"icon": "res://images/icons/i_follow_the_trail.png",
 			"title_key": "mission_follow_trail",
 			"subtitle_key": "mission_follow_trail_short",
 		},
 		{
 			"id": MISSION_FIND_NEXT,
-			"icon": "res://images/lm_next.png",
+			"icon": "res://images/icons/i_find_the_next_one.png",
 			"title_key": "mission_find_next",
 			"subtitle_key": "mission_find_next_short",
 		},
 		{
 			"id": MISSION_RACE_MIDDLE,
-			"icon": "res://images/lm_center.png",
+			"icon": "res://images/icons/i_race_to_the_center.png",
 			"title_key": "mission_race_middle",
 			"subtitle_key": "mission_race_middle_short",
 		},

@@ -89,3 +89,20 @@ const TTS_ERROR := Color(1.0, 0.4, 0.4)
 
 ## TTS ready/available state.
 const TTS_OK := Color(0.4, 0.8, 0.4)
+
+# ── Collectible Tracker ─────────────────────────────────────────────────────
+
+## Collected item chip background (matches YELLOW).
+const TRACKER_COLLECTED := Color("#FFCC00")
+
+## Current target chip background (matches BLUE).
+const TRACKER_CURRENT := Color("#1188FF")
+
+## Future item chip background.
+const TRACKER_FUTURE := Color(0.22, 0.24, 0.30)
+
+## Future item chip text color.
+const TRACKER_FUTURE_TEXT := Color(0.55, 0.58, 0.65)
+
+## Highlight halo color for the current target collectible in the maze.
+const HIGHLIGHT_HALO := Color(0.07, 0.53, 1.0, 0.35)

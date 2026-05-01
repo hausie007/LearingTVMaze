@@ -53,6 +53,9 @@ var wall_glow_factor: float = 1.0
 var col_color:      Color = Color(1.0, 0.95, 0.6)  # Default pale yellow
 var col_text_color: Color = Color(0.1, 0.1, 0.15) # Default dark slate
 
+# Highlight color for current target collectible in the maze.
+var highlight_color: Color = UIColors.HIGHLIGHT_HALO
+
 var manifest: Dictionary = {}
 
 
@@ -149,6 +152,13 @@ func load_theme(override_dir_name: String = "") -> void:
 				col_text_color = Color.from_string(col_cfg["text-color"], col_text_color)
 			if col_cfg.has("image"):
 				col_texture = _try_load(dir_path, col_cfg["image"])
+
+	# Highlight color — per-theme override for the collectible target halo.
+	var hl_raw := _get_color("highlight", Color(0, 0, 0, 0))
+	if hl_raw.a > 0.0:
+		highlight_color = hl_raw
+	else:
+		highlight_color = UIColors.HIGHLIGHT_HALO
 
 	# Animation Options
 	var p_anim: Dictionary = _parse_anim_cfg("player", _get_asset("player", "player.png"), dir_path)

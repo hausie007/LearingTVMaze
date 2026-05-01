@@ -188,7 +188,7 @@ func _build_card_data() -> Array[Dictionary]:
 	# Play Now — gold
 	data.append({
 		"id": CARD_PLAY_NOW,
-		"icon": "▶",
+		"icon": "res://images/icons/i_play_now.png",
 		"title": tr("menu_play_now"),
 		"subtitle": tr("menu_play_now_desc"),
 	})
@@ -196,7 +196,7 @@ func _build_card_data() -> Array[Dictionary]:
 	# Your Adventure — blue
 	data.append({
 		"id": CARD_YOUR_ADVENTURE,
-		"icon": "🧭",
+		"icon": "res://images/icons/i_your_adventure.png",
 		"title": tr("menu_your_adventure"),
 		"subtitle": tr("menu_your_adventure_desc"),
 	})
@@ -204,7 +204,7 @@ func _build_card_data() -> Array[Dictionary]:
 	# Play Together — green
 	data.append({
 		"id": CARD_PLAY_TOGETHER,
-		"icon": "🤝",
+		"icon": "res://images/icons/i_play_together.png",
 		"title": tr("start_together"),
 		"subtitle": tr("menu_play_together_desc"),
 	})
@@ -212,7 +212,7 @@ func _build_card_data() -> Array[Dictionary]:
 	# Join Game — teal (dynamic, shown/hidden based on discovery)
 	data.append({
 		"id": CARD_JOIN_GAME,
-		"icon": "📱",
+		"icon": "res://images/icons/i_join_game.png",
 		"title": tr("menu_join_game"),
 		"subtitle": tr("menu_join_searching"),
 	})

@@ -442,7 +442,36 @@ func _create_slot(index: int) -> void:
 		"is_filled": false,
 	})
 
+	frame.gui_input.connect(_on_slot_gui_input.bind(index))
+
 	_apply_empty_frame_style(frame)
+
+func _on_slot_gui_input(event: InputEvent, index: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if index < _slot_nodes.size() and not _slot_nodes[index]["is_filled"]:
+			_emulate_player_join()
+			
+func _emulate_player_join() -> void:
+	var prefix = Config.theme_dir_name + ":"
+	var used_chars = []
+	for p in NetworkManager.players.values():
+		used_chars.append(p.get("character_id", ""))
+		
+	var available = []
+	for cat in CharacterCatalog.build_catalog():
+		var cid = cat.get("id", "")
+		if cid.begins_with(prefix) and not used_chars.has(cid):
+			available.append(cid)
+			
+	if available.is_empty():
+		for cat in CharacterCatalog.build_catalog():
+			var cid = cat.get("id", "")
+			if not used_chars.has(cid):
+				available.append(cid)
+				
+	if not available.is_empty():
+		var random_char = available[randi() % available.size()]
+		NetworkManager.emulate_remote_player_join(random_char)
 
 func _fill_slot(index: int, info: Dictionary) -> void:
 	if index >= _slot_nodes.size():

@@ -14,7 +14,8 @@
     "floor": "#B0B0B0",
     "start_cell": "#FFFFFF",
     "end_cell": "#FFFAD6",
-    "player": "#5A78B5"
+    "player": "#5A78B5",
+    "highlight": "#FFCC0059"
   },
   "background": {
     "tiled": false,

@@ -1,9 +1,11 @@
 ## game_hud.gd
 ## ---------------------------------------------------------------------------
-## Top-bar HUD showing stopwatch, word progress, and move counter.
+## Top-bar HUD showing collectible tracker, player icons, and mission text.
 ##
 ## Attach to a CanvasLayer child of GameManager. The GameManager calls
 ## public methods to update displays as the game state changes.
+##
+## Timer and move counter have been removed from the visual HUD.
 ## ---------------------------------------------------------------------------
 class_name GameHUD
 extends CanvasLayer
@@ -11,12 +13,18 @@ extends CanvasLayer
 
 const HUD_HEIGHT: float = 160.0
 
-var _time_label: Label = null
-var _moves_label: Label = null
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
 var _root_panel: Control = null   # dimmed by OLED guard
+var _player_strip: VBoxContainer = null
+var _right_player_strip: VBoxContainer = null
+var _tracker: CollectibleTracker = null
+var _last_tracker_hash: String = ""
+
+## Per-player race trackers (race mode only).
+var _race_container: VBoxContainer = null
+var _race_trackers: Dictionary = {}  # peer_id -> CollectibleTracker
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -28,21 +36,157 @@ func _ready() -> void:
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-## Update the stopwatch display.
-func update_time(elapsed: float) -> void:
-	if _time_label:
-		var mins: int = int(elapsed / 60.0)
-		var secs: int = int(elapsed) % 60
-		_time_label.text = "%02d:%02d" % [mins, secs]
-
-
-## Update the move counter display.
-func update_moves(count: int) -> void:
-	if _moves_label:
-		_moves_label.text = "%d" % count
-
 func update_role(_role_key: String, _color: Color = UIColors.YELLOW) -> void:
 	pass
+
+
+## Unified tracker update. Replaces the old target/word/letter APIs.
+func update_tracker(sequence: Array[String], current_index: int, collected_count: int,
+					learning_type: String, word_emoji: String = "") -> void:
+	if _tracker != null:
+		_tracker.visible = true
+		# Only rebuild chips when the sequence itself changes.
+		var seq_hash := str(sequence) + learning_type + word_emoji
+		if seq_hash != _last_tracker_hash:
+			_last_tracker_hash = seq_hash
+			_tracker.setup(sequence, learning_type, word_emoji)
+		_tracker.update_progress(current_index, collected_count)
+	# Hide legacy containers when the new tracker is active.
+	if _word_container != null:
+		_word_container.visible = false
+	if _desc_label != null:
+		_desc_label.visible = false
+	# Hide race trackers when the shared tracker is active.
+	if _race_container != null:
+		_race_container.visible = false
+
+
+## ── Race Mode: Per-Player Trackers ──────────────────────────────────────────
+
+## Set up per-player race tracker rows alongside player badges.
+## Layout moves sliding trackers to the outer edges next to enlarged badges.
+func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
+							learning_type: String) -> void:
+	if _player_strip == null or _right_player_strip == null:
+		return
+		
+	# Hide central legacy tracker elements
+	if _tracker != null: _tracker.visible = false
+	if _desc_label != null: _desc_label.visible = false
+	if _word_container != null: _word_container.visible = false
+	if _race_container != null: _race_container.visible = false
+
+	# Clear and show outer strips
+	for child in _player_strip.get_children():
+		child.queue_free()
+	for child in _right_player_strip.get_children():
+		child.queue_free()
+	
+	_race_trackers.clear()
+	
+	var count := players.size()
+	if count <= 0:
+		return
+		
+	_player_strip.visible = true
+	_right_player_strip.visible = count > 1
+
+	for i in range(count):
+		var p: Dictionary = players[i]
+		var peer_id: int = p.get("peer_id", 0)
+		var color: Color = p.get("color", UIColors.YELLOW)
+		var is_left := (i % 2 == 0)
+		
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 16)
+		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		
+		# Enlarged badge
+		var badge := UIHelpers.build_player_chip(p, count, 1.4)
+		badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+		# Tracker
+		var font := 48 if count <= 2 else 36
+		var max_vis := 7 if count <= 2 else 5
+		var tracker := CollectibleTracker.new()
+		tracker._collected_color = color
+		tracker.font_size_override = font
+		tracker.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		tracker.set_max_visible(max_vis)
+		_race_trackers[peer_id] = tracker
+		tracker.setup(sequence, learning_type)
+		
+		if is_left:
+			row.add_child(badge)
+			row.add_child(tracker)
+			_player_strip.add_child(row)
+		else:
+			row.add_child(tracker)
+			row.add_child(badge)
+			_right_player_strip.add_child(row)
+			
+			# Ensure the tracker's letters grow outwards from the badge.
+			# By default it's [A][B][C]. If the badge is on the right, 'C' would be next to it.
+			# Flipping layout direction makes it [C][B][A], so 'A' is next to the badge.
+			if _right_player_strip.is_layout_rtl():
+				tracker.layout_direction = Control.LAYOUT_DIRECTION_LTR
+			else:
+				tracker.layout_direction = Control.LAYOUT_DIRECTION_RTL
+
+
+## Update a single racer's progress in race mode.
+func update_race_tracker(peer_id: int, current_index: int, collected_count: int) -> void:
+	var tracker := _race_trackers.get(peer_id) as CollectibleTracker
+	if tracker != null:
+		tracker.update_progress(current_index, collected_count)
+
+
+## Show/hide the player strip for multiplayer modes.
+## Each dict: {"character_id": String, "color": Color, "role": String}
+func set_players(players: Array[Dictionary]) -> void:
+	if _player_strip == null:
+		return
+	for child in _player_strip.get_children():
+		child.queue_free()
+	if _right_player_strip != null:
+		for child in _right_player_strip.get_children():
+			child.queue_free()
+
+	_player_strip.visible = players.size() > 0
+	if _right_player_strip != null:
+		_right_player_strip.visible = players.size() > 1
+
+	for i in range(players.size()):
+		var chip := UIHelpers.build_player_chip(players[i], players.size())
+		if i % 2 == 1 and _right_player_strip != null:
+			_right_player_strip.add_child(chip)
+		else:
+			_player_strip.add_child(chip)
+
+
+## Update the countdown on the chaser's chip.
+func update_chaser_countdown(steps: int) -> void:
+	var update_in_strip = func(strip: Control) -> void:
+		if strip == null: return
+		for chip in strip.get_children():
+			var hbox = chip.get_child(0)
+			if hbox == null: continue
+			var lbl = hbox.get_node_or_null("ChaserCountdownLabel") as Label
+			if lbl != null:
+				if steps > 0:
+					lbl.text = tr("hud_chaser_in") % steps
+					lbl.visible = true
+				else:
+					lbl.text = ""
+					lbl.visible = false
+
+	update_in_strip.call(_player_strip)
+	update_in_strip.call(_right_player_strip)
+
+
+# ── Backward Compatibility Bridges ──────────────────────────────────────────
+# These methods are called by the existing game managers and will continue
+# to work until they are migrated to the new update_tracker() API.
 
 func update_target_display(_target: String, _progress_index: int, _total: int) -> void:
 	_word_letter_labels.clear()
@@ -128,19 +272,17 @@ func light_up_letter(index: int) -> void:
 	tw.tween_property(lbl, "scale", Vector2(1.3, 1.3), 0.1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tw.tween_property(lbl, "scale", Vector2(1.0, 1.0), 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 
-func set_mission_description(desc: String, enlarge: bool = false) -> void:
-	if _desc_label:
-		_desc_label.text = desc
-		if enlarge:
-			_desc_label.add_theme_font_size_override("font_size", 42)
-			_desc_label.add_theme_color_override("font_color", UIColors.YELLOW)
-		else:
-			_desc_label.add_theme_font_size_override("font_size", 25)
-			_desc_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.95))
+
+func set_mission_description(_desc: String, _enlarge: bool = false) -> void:
+	# Textual goals are removed — the collectible tracker is the visual instruction.
+	if _desc_label != null:
+		_desc_label.visible = false
 
 
 ## Return the HUD height for maze layout calculations.
 func get_height() -> float:
+	if _root_panel != null:
+		return maxf(HUD_HEIGHT, _root_panel.get_combined_minimum_size().y)
 	return HUD_HEIGHT
 
 
@@ -180,28 +322,50 @@ func _build_ui() -> void:
 	bg_panel.custom_minimum_size.y = HUD_HEIGHT
 	add_child(bg_panel)
 
-	# Main HBox: [Stopwatch] [center word area] [Moves]
+	# Main HBox: [Player Strip (MP only)] [Center: tracker + desc]
 	var hbox := HBoxContainer.new()
 	hbox.anchors_preset = Control.PRESET_FULL_RECT
 	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hbox.add_theme_constant_override("separation", 12)
 	bg_panel.add_child(hbox)
 
-	# Left: Stopwatch
-	_time_label = Label.new()
-	_time_label.text = "00:00"
-	_time_label.add_theme_font_size_override("font_size", 64)
-	_time_label.add_theme_color_override("font_color", UIColors.TEXT_HUD)
-	_time_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_time_label.custom_minimum_size.x = 250
-	hbox.add_child(_time_label)
+	# Left: Player Strip (hidden by default — shown in multiplayer)
+	_player_strip = VBoxContainer.new()
+	_player_strip.visible = false
+	_player_strip.add_theme_constant_override("separation", 8)
+	_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	hbox.add_child(_player_strip)
 
-	# Center VBox: Word display area + bottom description
+	# Center: Container for tracker and descriptions
 	var center_vbox := VBoxContainer.new()
 	center_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	center_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	center_vbox.add_theme_constant_override("separation", 8)
 	hbox.add_child(center_vbox)
+	
+	# Tracker (new component)
+	_tracker = CollectibleTracker.new()
+	_tracker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_tracker.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	center_vbox.add_child(_tracker)
 
+	# Right: Player Strip for symmetrical layout in 3+ players
+	_right_player_strip = VBoxContainer.new()
+	_right_player_strip.visible = false
+	_right_player_strip.add_theme_constant_override("separation", 8)
+	_right_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	hbox.add_child(_right_player_strip)
+
+	# Race mode: per-player tracker rows (hidden by default)
+	_race_container = VBoxContainer.new()
+	_race_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_race_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_race_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	_race_container.add_theme_constant_override("separation", 2)
+	_race_container.visible = false
+	center_vbox.add_child(_race_container)
+
+	# Legacy word container (backward compat — used until full migration)
 	_word_container = HBoxContainer.new()
 	_word_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_word_container.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -212,18 +376,12 @@ func _build_ui() -> void:
 	_desc_label.add_theme_font_size_override("font_size", 25)
 	_desc_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.95))
 	_desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER  # Changed from BOTTOM to CENTER when enlarged
+	_desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_desc_label.custom_minimum_size.x = 400
 	_desc_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	center_vbox.add_child(_desc_label)
 
-	# Right: Move counter
-	_moves_label = Label.new()
-	_moves_label.text = "0"
-	_moves_label.add_theme_font_size_override("font_size", 64)
-	_moves_label.add_theme_color_override("font_color", UIColors.TEXT_HUD)
-	_moves_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_moves_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_moves_label.custom_minimum_size.x = 200
-	hbox.add_child(_moves_label)
+
+
+# ── Player Chip Builder moved to UIHelpers ──

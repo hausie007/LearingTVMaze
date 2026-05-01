@@ -58,6 +58,7 @@ var _pause_dialog: PauseDialog = null
 var _gameplay_banner: PanelContainer = null
 var _gameplay_banner_label: Label = null
 var _gameplay_char_preview: CharacterPreview = null
+var _gameplay_badge: Control = null
 var _current_goal_text: String = ""
 var _is_chaser_waiting: bool = false
 
@@ -872,8 +873,7 @@ func _on_game_started(_session: Dictionary) -> void:
 	if _instruction_panel != null: _instruction_panel.visible = false
 	
 	if _gameplay_char_preview != null:
-		_gameplay_char_preview.visible = true
-		_apply_character_preview(_selected_character_id, _gameplay_char_preview)
+		_gameplay_char_preview.visible = false
 		
 	var players := _session.get("players", {}) as Dictionary
 	var my_id := multiplayer.get_unique_id()
@@ -886,35 +886,61 @@ func _on_game_started(_session: Dictionary) -> void:
 	_update_instruction_text(session_config)
 		
 	if _gameplay_banner != null:
-		_gameplay_banner.visible = true
+		_gameplay_banner.visible = false
+
+	# Construct the player badge
+	if _gameplay_badge != null:
+		_gameplay_badge.queue_free()
+	
+	# Pass my_info to build the chip. We use scale_mult=2.0 to make it large on the phone screen
+	_gameplay_badge = UIHelpers.build_player_chip(my_info, 1, 2.0)
+	
+	# Position the badge in the center vertically, opposite the D-Pad horizontally
+	var margin_container := MarginContainer.new()
+	margin_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+	margin_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	var alignment := MarginContainer.new()
+	alignment.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if _is_rtl:
+		# D-Pad is on the right, put badge on the left
+		alignment.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	else:
+		# D-Pad is on the left, put badge on the right
+		alignment.size_flags_horizontal = Control.SIZE_SHRINK_END
+	alignment.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	
+	# Add generous padding so it's not glued to the edge
+	var horizontal_pad = int(get_viewport_rect().size.x * 0.1)
+	alignment.add_theme_constant_override("margin_left", horizontal_pad if not _is_rtl else 40)
+	alignment.add_theme_constant_override("margin_right", horizontal_pad if _is_rtl else 40)
+	
+	alignment.add_child(_gameplay_badge)
+	margin_container.add_child(alignment)
+	join_setup_panel.add_child(margin_container)
 
 func _on_chaser_countdown_updated(remaining: int) -> void:
-	if _gameplay_banner_label == null: return
 	_is_chaser_waiting = true
-	if remaining > 3:
-		_gameplay_banner_label.text = tr("mp_chaser_waiting_steps") % remaining
-		_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
-		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	elif remaining > 0:
-		_gameplay_banner_label.text = tr("mp_chaser_get_ready_steps") % remaining
-		_gameplay_banner_label.add_theme_font_size_override("font_size", 48)
-		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	if _gameplay_badge == null: return
+	
+	var lbl := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
+	if lbl != null:
+		if remaining > 0:
+			lbl.text = tr("hud_chaser_in") % remaining
+			lbl.visible = true
+		else:
+			lbl.text = ""
+			lbl.visible = false
 
 func _on_chaser_released() -> void:
 	_is_chaser_waiting = false
 	if OS.has_feature("mobile"): Input.vibrate_handheld(500)
-	if _gameplay_banner_label != null:
-		_gameplay_banner_label.text = "GO!"
-		_gameplay_banner_label.add_theme_font_size_override("font_size", 64)
-		_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
-		
-	var timer := get_tree().create_timer(1.5)
-	timer.connect("timeout", func():
-		if is_instance_valid(_gameplay_banner_label):
-			_gameplay_banner_label.text = _current_goal_text
-			_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
-			_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	)
+	if _gameplay_badge != null:
+		var lbl := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
+		if lbl != null:
+			lbl.text = ""
+			lbl.visible = false
 
 func _on_remote_goal_updated(goal_text: String) -> void:
 	_current_goal_text = goal_text
@@ -924,9 +950,6 @@ func _on_remote_goal_updated(goal_text: String) -> void:
 	else:
 		if _my_role != NetworkManager.ROLE_CHASER:
 			_is_chaser_waiting = false
-			
-		if _gameplay_banner_label != null and not _is_chaser_waiting:
-			_gameplay_banner_label.text = goal_text
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null: return

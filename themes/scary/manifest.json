@@ -12,7 +12,8 @@
 	"xwall_border": "#5B4A73",
 	"start_cell": "#6A2E5E",
 	"end_cell": "#A85A2A",
-	"player": "#38A9FF"
+	"player": "#38A9FF",
+	"highlight": "#FFB83366"
   },
   "background": {
 	"tiled": true,

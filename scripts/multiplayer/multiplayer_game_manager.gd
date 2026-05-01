@@ -14,7 +14,6 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 @onready var network_debug_label: Label = %NetworkDebugLabel
 
 var _maze: MazeData = null
-var _elapsed_time: float = 0.0
 var _display_move_count: int = 0
 var _collectible_spawner: CollectibleSpawner = null
 var _avatars: Dictionary = {}
@@ -138,9 +137,7 @@ func _toggle_pause() -> void:
 
 func _process(delta: float) -> void:
 	if _maze != null and (_win_screen == null or not _win_screen.is_active()):
-		_elapsed_time += delta
-		if hud != null:
-			hud.update_time(_elapsed_time)
+		pass  # Timer removed; nothing to tick per-frame for HUD.
 	if not multiplayer.is_server():
 		return
 
@@ -179,7 +176,6 @@ func _apply_session(session: Dictionary) -> void:
 			Config.player_role = Config.ROLE_COLLECTOR
 	_completed_word_spoken = false
 	_round_complete = false
-	_elapsed_time = 0.0
 	_display_move_count = 0
 	_collector_caught = false
 	_catching_chaser_peer_id = 0
@@ -201,8 +197,6 @@ func _apply_session(session: Dictionary) -> void:
 	_set_start_markers(_spawn_positions_for_session(session))
 	if hud != null:
 		maze_renderer.top_margin = hud.get_height()
-		hud.update_time(_elapsed_time)
-		hud.update_moves(_display_move_count)
 		hud.update_role(_hud_role_key())
 	else:
 		maze_renderer.top_margin = GameHUD.HUD_HEIGHT
@@ -212,6 +206,7 @@ func _apply_session(session: Dictionary) -> void:
 		_build_race_sequence()  # Must run before _spawn_avatars so per-peer paths are populated.
 	_race_used_cells.clear()
 	_spawn_avatars(session)
+	_setup_mp_player_badges(session)
 	if _collectible_spawner != null:
 		_collectible_spawner.clear()
 		if _uses_shared_collectibles():
@@ -220,8 +215,47 @@ func _apply_session(session: Dictionary) -> void:
 			_collectible_spawner.spawn(_maze, maze_renderer, Config.game_style)
 	if _is_race_mode():
 		_spawn_race_markers()
+		_setup_race_hud()
+		_update_all_race_highlights()
 	_refresh_status_label()
 	_set_network_debug("net", "Game running on host")
+
+func _setup_mp_player_badges(session: Dictionary) -> void:
+	if hud == null:
+		return
+	var players_data: Array[Dictionary] = []
+	var players := session.get("players", {}) as Dictionary
+	var roles := session.get("roles", {}) as Dictionary
+
+	var peer_ids: Array[int] = []
+	for raw_key in players.keys():
+		peer_ids.append(int(raw_key))
+	peer_ids.sort()
+
+	for peer_id in peer_ids:
+		var info := players.get(peer_id, players.get(str(peer_id), {})) as Dictionary
+		var role := String(roles.get(peer_id, roles.get(str(peer_id), info.get("role", NetworkManager.ROLE_COLLECTOR))))
+		
+		# Skip role assignment visually if roleless mode, but keep badge
+		if _is_roleless_next_symbol_mode():
+			role = ""
+		if _is_maze_race_mode() or _is_race_mode():
+			role = NetworkManager.ROLE_RACER
+			
+		var color: Color
+		if _is_race_mode():
+			color = _distinct_race_color(peer_id, String(info.get("character_id", "")))
+		else:
+			# Co-op modes: Host is Blue, Client is Red
+			color = UIColors.BLUE if peer_id == NetworkManager.HOST_PEER_ID else Color("#FF5555")
+			
+		players_data.append({
+			"character_id": String(info.get("character_id", "")),
+			"color": color,
+			"role": role,
+		})
+
+	hud.set_players(players_data)
 
 func _spawn_avatars(session: Dictionary) -> void:
 	for child in players_root.get_children():
@@ -402,8 +436,6 @@ func _try_move(peer_id: int, direction: Vector2i) -> void:
 
 	avatar.move_to_grid(target, maze_renderer, Config.tween_duration)
 	_display_move_count += 1
-	if hud != null:
-		hud.update_moves(_display_move_count)
 	if _is_chaser_variant() and avatar.role == NetworkManager.ROLE_COLLECTOR:
 		_collector_move_count += 1
 		_check_path_chaser_release()
@@ -513,36 +545,96 @@ func _refresh_status_label() -> void:
 func _refresh_shared_hud() -> void:
 	if hud == null or _collectible_spawner == null:
 		return
+	var seq := _collectible_spawner.get_sequence_strings()
+	var current_idx: int
+	var collected: int
+	var lt := _learning_type_string()
+	var emoji := ""
+
 	if Config.game_mode == Config.GameMode.WORDS:
-		hud.update_word_display(Config.current_word, Config.game_mode)
-		for i in range(_collectible_spawner.get_word_next_index()):
-			hud.light_up_letter(i)
+		current_idx = _collectible_spawner.get_word_next_index()
+		collected = current_idx
+		emoji = String(Config.current_word.get("emoji", ""))
 	else:
-		hud.update_target_display(
-			_collectible_spawner.get_current_target(),
-			_collectible_spawner.get_next_collect_index(),
-			_collectible_spawner.get_total_collectibles()
-		)
+		current_idx = _collectible_spawner.get_next_collect_index()
+		collected = current_idx
+
+	hud.update_tracker(seq, current_idx, collected, lt, emoji)
 	_update_hud_mission_description()
 
 func _refresh_race_hud() -> void:
 	if hud == null:
 		return
-	var total := _race_sequence.size()
-	if _race_finished:
-		hud.update_target_display(_player_name(_race_winner_peer_id), total, total)
+	var seq_len := _race_sequence.size()
+	# Update each player's individual tracker.
+	for key in _race_progress.keys():
+		var peer_id := int(key)
+		var progress := int(_race_progress.get(peer_id, 0))
+		var display_idx := progress
+		if Config.game_mode == Config.GameMode.WORDS:
+			if progress < seq_len:
+				display_idx = _race_sequence[progress].get("word_index", progress)
+			else:
+				var word_full := String(Config.current_word.get("word", ""))
+				display_idx = word_full.length()
+		hud.update_race_tracker(peer_id, display_idx, display_idx)
+
+
+func _setup_race_hud() -> void:
+	if hud == null:
 		return
-	var leader_peer_id := _race_leader_peer_id()
-	var progress := int(_race_progress.get(leader_peer_id, 0)) if leader_peer_id != 0 else 0
-	var target := _race_target_for_peer(leader_peer_id) if leader_peer_id != 0 else ""
-	hud.update_target_display(target, progress, total)
-	_update_hud_mission_description()
+	# Build the per-player race sequence for the tracker display.
+	var seq: Array[String] = []
+	if Config.game_mode == Config.GameMode.WORDS:
+		var word: String = Config.current_word.get("word", "")
+		for i in range(word.length()):
+			seq.append(word[i])
+	else:
+		for item in _race_sequence:
+			seq.append(String(item.get("value", "")))
+	var lt := _learning_type_string()
+
+	# Collect player data for each racer.
+	var players_data: Array[Dictionary] = []
+	var peer_ids: Array[int] = []
+	for raw_key in _avatars.keys():
+		peer_ids.append(int(raw_key))
+	peer_ids.sort()
+
+	for peer_id in peer_ids:
+		var color: Color = _race_colors_by_peer.get(peer_id, Color("#5AC8FF"))
+		var character_id := _character_id_for_peer(peer_id)
+		var role := _role_for_peer(peer_id)
+		players_data.append({
+			"peer_id": peer_id,
+			"character_id": character_id,
+			"color": color,
+			"role": role,
+		})
+
+	hud.setup_race_trackers(players_data, seq, lt)
+
+func _learning_type_string() -> String:
+	match Config.game_mode:
+		Config.GameMode.NUMBERS:
+			return "numbers"
+		Config.GameMode.LETTERS:
+			return "letters"
+		Config.GameMode.WORDS:
+			return "words"
+		_:
+			return ""
 
 func _update_hud_mission_description() -> void:
 	if _avatars.is_empty():
 		return
 		
 	var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
+	
+	# When the tracker is active (collectible phase), suppress verbose goal text
+	# on the host HUD — the tracker itself is the visual instruction.
+	# Remote D-Pad peers still receive the full text.
+	var is_collecting := _collectible_spawner != null and not _collectible_spawner.is_complete()
 	
 	for key in _avatars.keys():
 		var peer_id := int(key)
@@ -553,6 +645,9 @@ func _update_hud_mission_description() -> void:
 				if _should_delay_path_chaser(_role_for_peer(peer_id)) and not _path_chasers_released:
 					var initial_moves := _path_chaser_trigger_moves()
 					hud.set_mission_description(tr("mp_chaser_waiting_steps") % initial_moves, enlarge_hud)
+				elif is_collecting and not _is_race_mode():
+					# Tracker handles the display during collection.
+					hud.set_mission_description("", false)
 				else:
 					hud.set_mission_description(goal_str, enlarge_hud)
 		else:
@@ -681,7 +776,10 @@ func _check_path_chaser_release() -> void:
 	var trigger_moves := _path_chaser_trigger_moves()
 	var remaining := trigger_moves - _collector_move_count
 	
-	if remaining <= 3 and remaining > 0:
+	if hud != null:
+		hud.update_chaser_countdown(maxi(0, remaining))
+	
+	if remaining > 0:
 		for peer_id in _delayed_chaser_peer_ids:
 			if peer_id == NetworkManager.HOST_PEER_ID:
 				if hud != null:
@@ -692,6 +790,8 @@ func _check_path_chaser_release() -> void:
 	if _collector_move_count < trigger_moves:
 		return
 	_release_path_chasers()
+	if hud != null:
+		hud.update_chaser_countdown(0)
 
 func _path_chaser_trigger_moves() -> int:
 	var level := Config.chaser_level
@@ -831,12 +931,12 @@ func _collector_avatar() -> MultiplayerAvatar:
 func _show_gotcha_screen() -> void:
 	if _win_screen == null:
 		return
-	_win_screen.show_gotcha(_format_time(), _collector_move_count)
+	_win_screen.show_gotcha()
 
 func _show_shared_win_screen(peer_id: int) -> void:
 	if _win_screen == null:
 		return
-	_win_screen.show_race_win(_format_time(), _display_move_count, _character_id_for_peer(peer_id))
+	_win_screen.show_race_win(_character_id_for_peer(peer_id))
 
 func _show_coop_win_screen() -> void:
 	if _win_screen == null:
@@ -846,7 +946,7 @@ func _show_coop_win_screen() -> void:
 		var avatar := _avatars[key] as MultiplayerAvatar
 		if avatar != null:
 			ids.append(avatar.character_id)
-	_win_screen.show_coop_win(_format_time(), _display_move_count, ids)
+	_win_screen.show_coop_win(ids)
 
 func _update_win_screen_options() -> void:
 	if _win_screen == null:
@@ -1042,6 +1142,27 @@ func _check_race_collection(peer_id: int, pos: Vector2i) -> void:
 	_race_progress[peer_id] = progress + 1
 	_play_race_collect_sound()
 	_refresh_status_label()
+	# Highlight the next target for this player.
+	_update_race_highlight_for_peer(peer_id)
+
+
+## Highlight the current target collectible for each player in race mode.
+func _update_all_race_highlights() -> void:
+	for key in _race_markers_by_peer.keys():
+		_update_race_highlight_for_peer(int(key))
+
+
+## Highlight the next uncollected marker for a single player.
+func _update_race_highlight_for_peer(peer_id: int) -> void:
+	var markers := _race_markers_by_peer.get(peer_id, []) as Array
+	var progress := int(_race_progress.get(peer_id, 0))
+	for i in range(markers.size()):
+		var m = markers[i]
+		if typeof(m) != TYPE_OBJECT or not is_instance_valid(m):
+			continue
+		var marker := m as Collectible
+		if marker != null:
+			marker.set_target_highlight(i == progress)
 
 func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 	if _race_finished:
@@ -1059,11 +1180,8 @@ func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 	_refresh_status_label()
 	_speak_race_completion_once()
 	if _win_screen != null:
-		_win_screen.show_race_win(_format_time(), int(_race_progress.get(peer_id, 0)), _character_id_for_peer(peer_id))
+		_win_screen.show_race_win(_character_id_for_peer(peer_id))
 
-func _format_time() -> String:
-	var elapsed_int: int = int(_elapsed_time)
-	return "%02d:%02d" % [elapsed_int / 60, elapsed_int % 60]
 
 func _format_race_status() -> String:
 	var total := _race_sequence.size()

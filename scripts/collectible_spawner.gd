@@ -127,6 +127,30 @@ func get_current_target() -> String:
 	return ""
 
 
+## Return the full ordered sequence of value strings for the HUD tracker.
+func get_sequence_strings() -> Array[String]:
+	var result: Array[String] = []
+	if Config.game_mode == Config.GameMode.WORDS:
+		var word: String = Config.current_word.get("word", "")
+		for i in range(word.length()):
+			result.append(word[i])
+	else:
+		for entry in _sequence:
+			result.append(String(entry.get("value", "")))
+	return result
+
+
+## Update which collectible has the target highlight based on current progress.
+func update_target_highlights() -> void:
+	var target_index := _next_collect_index
+	if Config.game_mode == Config.GameMode.WORDS:
+		target_index = _word_next_index
+	for col in _collectibles.values():
+		var collectible := col as Collectible
+		if collectible != null:
+			collectible.set_target_highlight(collectible.collect_index == target_index)
+
+
 # ── Private: Numbers / Letters ───────────────────────────────────────────────
 
 func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
@@ -235,6 +259,7 @@ func _try_collect_ordered(col: Collectible, pos: Vector2i) -> bool:
 	_next_collect_index += 1
 	_reveal_next_symbol()
 	collectible_gathered.emit(col.value_str, col.collect_index, "")
+	update_target_highlights()
 	return true
 
 func _collect_word_letter(col: Collectible, pos: Vector2i) -> bool:
@@ -252,7 +277,7 @@ func _collect_word_letter(col: Collectible, pos: Vector2i) -> bool:
 
 	_reveal_next_symbol()
 	collectible_gathered.emit(col.value_str, current_idx, word_lang)
-
+	update_target_highlights()
 	return true
 
 
@@ -288,6 +313,7 @@ func _spawn_sequence(renderer: MazeRenderer) -> void:
 			int(item.get("index", -1)),
 			renderer
 		)
+	update_target_highlights()
 
 func _reveal_next_symbol() -> void:
 	if _game_style != Config.STYLE_NEXT_SYMBOL:
@@ -309,6 +335,7 @@ func _reveal_next_symbol() -> void:
 		int(item.get("index", -1)),
 		_renderer
 	)
+	update_target_highlights()
 
 func _pick_next_symbol_cell(default_cell: MazeData.CellData) -> MazeData.CellData:
 	if _maze == null:

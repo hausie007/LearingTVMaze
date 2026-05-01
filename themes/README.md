@@ -21,6 +21,7 @@ The manifest defines the basic metadata and colors for the theme.
 - `color_start` (string): Color for the start cell floor. If omitted, the app will generate a subtle tint from `color_floor`.
 - `color_end` (string): Color for the end cell floor. If omitted, generates a subtle tint from `color_floor`.
 - `color_wall_border` (string): If provided, draws a secondary color on the inside border of the walls. Usually semi-transparent (e.g., "#00000044").
+- `highlight` (string, in `colors`): Hex color (with optional alpha, e.g. "#FFB83366") for the halo glow around the current target collectible. If omitted, defaults to a translucent blue.
 - `bg_tiled` (boolean): If you provide a `bg.png`, this determines if the background should stretch to fit the screen (`false`) or tile infinitely (`true`). Default is `false`.
 
 ### Supported Images

@@ -668,6 +668,30 @@ func rpc_request_join(character_id: String) -> void:
 	_sync_lobby_to_clients()
 	_emit_debug("host", "Peer %d joined" % sender_id)
 
+func emulate_remote_player_join(character_id: String) -> void:
+	if not multiplayer.is_server():
+		return
+	
+	var max_players: int = clampi(int(host_config.get("max_players", 2)), 2, 4)
+	if players.size() >= max_players:
+		return
+		
+	var fake_peer_id = randi_range(1000, 9999)
+	while players.has(fake_peer_id) or fake_peer_id == HOST_PEER_ID:
+		fake_peer_id = randi_range(1000, 9999)
+		
+	players[fake_peer_id] = {
+		"peer_id": fake_peer_id,
+		"character_id": character_id,
+		"is_host": false,
+		"role": ROLE_COLLECTOR,
+		"is_ai": true
+	}
+	_recalculate_roles()
+	_sync_lobby_to_clients()
+	lobby_updated.emit(_build_lobby_state())
+	_emit_debug("host", "Emulated peer %d joined" % fake_peer_id)
+
 @rpc("authority", "call_remote", "reliable")
 func rpc_join_accepted(peer_id: int, state: Dictionary) -> void:
 	host_config = (state.get("config", {}) as Dictionary).duplicate(true)

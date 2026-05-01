@@ -313,3 +313,106 @@ static func is_likely_tv() -> bool:
 		return true
 		
 	return false
+
+
+# ── Player Badge Builders ──────────────────────────────────────────────────
+
+static func get_role_emoji(role: String) -> String:
+	match role:
+		Config.ROLE_COLLECTOR:
+			return "⭐"
+		Config.ROLE_CHASER:
+			return "⚡"
+		Config.ROLE_RACER:
+			return "🏁"
+		_:
+			return ""
+
+static func get_role_translation_key(role: String) -> String:
+	match role:
+		Config.ROLE_COLLECTOR:
+			return "hud_role_collect"
+		Config.ROLE_CHASER:
+			return "hud_role_chase"
+		Config.ROLE_RACER:
+			return "hud_role_race"
+		_:
+			return ""
+
+## Builds a standardized player chip used in the HUD and remote clients.
+## If scale_mult is provided, it scales up or down all paddings and fonts (e.g. 2.0 for huge UI on mobile).
+static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mult: float = 1.0) -> PanelContainer:
+	var scale_down := total_players > 2
+
+	var chip := PanelContainer.new()
+	var chip_style := StyleBoxFlat.new()
+	var accent_color: Color = data.get("color", UIColors.BLUE)
+	chip_style.bg_color = Color(accent_color, 0.15)
+	chip_style.border_color = accent_color
+	chip_style.set_border_width_all(int((4 if not scale_down else 2) * scale_mult))
+	chip_style.set_corner_radius_all(int((16 if not scale_down else 8) * scale_mult))
+	chip_style.content_margin_left = int((12 if not scale_down else 6) * scale_mult)
+	chip_style.content_margin_right = int((12 if not scale_down else 6) * scale_mult)
+	chip_style.content_margin_top = int((8 if not scale_down else 4) * scale_mult)
+	chip_style.content_margin_bottom = int((8 if not scale_down else 4) * scale_mult)
+	chip.add_theme_stylebox_override("panel", chip_style)
+
+	var chip_hbox := HBoxContainer.new()
+	chip_hbox.add_theme_constant_override("separation", int((8 if not scale_down else 4) * scale_mult))
+	chip_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	chip.add_child(chip_hbox)
+
+	var icon_size = int((72 if not scale_down else 40) * scale_mult)
+	var emoji_size = int((48 if not scale_down else 28) * scale_mult)
+	var text_size = int((36 if not scale_down else 20) * scale_mult)
+
+	# Character icon
+	var character_id: String = data.get("character_id", "")
+	var tex := CharacterCatalog.get_texture_by_id(character_id) if not character_id.is_empty() else null
+	if tex != null:
+		var icon := TextureRect.new()
+		icon.texture = tex
+		icon.custom_minimum_size = Vector2(icon_size, icon_size)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		chip_hbox.add_child(icon)
+
+	var is_ai: bool = data.get("is_ai", false)
+	if tex == null:
+		var spacer := Control.new()
+		spacer.custom_minimum_size = Vector2(icon_size, icon_size)
+		chip_hbox.add_child(spacer)
+
+	# Role emoji and localized word
+	var role: String = data.get("role", "")
+	var role_emoji := get_role_emoji(role)
+	var role_key := get_role_translation_key(role)
+
+	if not role_emoji.is_empty():
+		var emoji_lbl := Label.new()
+		emoji_lbl.text = role_emoji
+		emoji_lbl.add_theme_font_size_override("font_size", emoji_size)
+		emoji_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		chip_hbox.add_child(emoji_lbl)
+
+	if not role_key.is_empty():
+		var role_lbl := Label.new()
+		role_lbl.text = TranslationServer.translate(role_key)
+		role_lbl.add_theme_font_size_override("font_size", text_size)
+		var text_color = accent_color.lightened(0.2)
+		role_lbl.add_theme_color_override("font_color", text_color)
+		role_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		chip_hbox.add_child(role_lbl)
+
+	if is_ai or role == Config.ROLE_CHASER:
+		var countdown_lbl := Label.new()
+		countdown_lbl.name = "ChaserCountdownLabel"
+		countdown_lbl.add_theme_font_size_override("font_size", text_size)
+		countdown_lbl.add_theme_color_override("font_color", accent_color.lightened(0.2))
+		countdown_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		countdown_lbl.custom_minimum_size = Vector2(int((90 if not scale_down else 50) * scale_mult), 0)
+		countdown_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		countdown_lbl.visible = false
+		chip_hbox.add_child(countdown_lbl)
+
+	return chip

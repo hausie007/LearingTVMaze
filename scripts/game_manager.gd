@@ -39,7 +39,6 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 # ── Game State ───────────────────────────────────────────────────────────────
 
 var _current_maze: MazeData = null
-var _elapsed_time: float = 0.0
 var _move_count: int = 0
 var _is_paused: bool = false
 var _is_gotcha_screen: bool = false
@@ -130,10 +129,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Stopwatch (only while playing, not during win screen or pause)
 	if not win_screen.is_active() and not get_tree().paused:
-		_elapsed_time += delta
-		hud.update_time(_elapsed_time)
 		_process_race_robot(delta)
 
 
@@ -212,12 +208,10 @@ func _start_new_maze() -> void:
 	
 	# Ensure tree is unpaused (win/gotcha screens pause the tree via signal)
 	get_tree().paused = false
-	_elapsed_time = 0.0
 	_move_count = 0
 	_completed_word_spoken = false
 	_last_spoken_word_segment_end = 0
 	_race_robot_finished = false
-	hud.update_moves(_move_count)
 	hud.update_role("" if Config.game_style == Config.STYLE_NEXT_SYMBOL else Config.player_role)
 
 	if not [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL, Config.STYLE_RACE].has(Config.game_style):
@@ -268,6 +262,9 @@ func _start_new_maze() -> void:
 	# Update word display in HUD
 	_refresh_target_hud()
 
+	# Show player role badges in single player
+	_setup_sp_player_badges()
+
 	# 5. Place player at Start cell
 	var start_cell: MazeData.CellData = _current_maze.get_start_cell()
 	if Config.game_style == Config.STYLE_RACE:
@@ -303,20 +300,19 @@ func _on_player_reached_end() -> void:
 
 	# Full word progress update if word mode
 	if Config.game_mode == Config.GameMode.WORDS:
-		hud.light_up_letter(collectible_spawner.get_word_next_index())
+		_refresh_target_hud()
 		_speak_completed_word_once()
 	elif Config.game_style == Config.STYLE_RACE:
 		_speak_race_completion_once()
 
 	if Config.game_style == Config.STYLE_RACE:
-		win_screen.show_race_win(_format_time(), _move_count, _race_player_character_id())
+		win_screen.show_race_win(_race_player_character_id())
 	else:
-		win_screen.show_win(_format_time(), _move_count)
+		win_screen.show_win()
 
 
 func _on_player_moved(new_pos: Vector2i) -> void:
 	_move_count += 1
-	hud.update_moves(_move_count)
 	# Any player movement counts as interaction → reset idle guard
 	if _oled_guard:
 		_oled_guard.reset()
@@ -326,6 +322,10 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 		chaser_manager.check_trigger(_move_count)
 		if chaser_manager.is_active():
 			chaser_manager.spawn(_current_maze, maze_renderer)
+			if hud != null:
+				hud.update_chaser_countdown(0)
+		elif hud != null:
+			hud.update_chaser_countdown(chaser_manager.get_remaining_steps(_move_count))
 
 	chaser_manager.check_collision_at(new_pos)
 
@@ -340,16 +340,11 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 	if not Config.voice_hints: return
 	
 	if Config.game_mode == Config.GameMode.WORDS:
-		# Words mode: light up letter and speak it
-		hud.light_up_letter(collect_index)
+		# Words mode: speak collected letter
 		TTS.speak(value_str, 0.85, lang)
 
-		# Auto-advanced spaces: light them up in the HUD
-		var next_idx: int = collectible_spawner.get_word_next_index()
-		for i in range(collect_index + 1, next_idx):
-			hud.light_up_letter(i)
-
 		# Speak the whole word once when it is complete.
+		var next_idx: int = collectible_spawner.get_word_next_index()
 		var word_full: String = Config.current_word.get("word", "")
 		var word_complete: bool = (next_idx >= word_full.length())
 		if word_complete:
@@ -366,7 +361,7 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 func _on_chaser_caught_player() -> void:
 	_is_gotcha_screen = true
 	_freeze_player()
-	win_screen.show_gotcha(_format_time(), _move_count)
+	win_screen.show_gotcha()
 
 
 # ── Win Screen Pause Ownership ───────────────────────────────────────────────
@@ -455,23 +450,67 @@ func _freeze_player() -> void:
 	player.set_process_input(false)
 
 
-## Format elapsed time as MM:SS string.
-func _format_time() -> String:
-	var elapsed_int: int = int(_elapsed_time)
-	return "%02d:%02d" % [int(elapsed_int / 60.0), elapsed_int % 60]
+
 
 func _refresh_target_hud() -> void:
+	var seq := collectible_spawner.get_sequence_strings()
+	var current_idx: int
+	var collected: int
+	var lt := _learning_type_string()
+	var emoji := ""
+
 	if Config.game_mode == Config.GameMode.WORDS:
-		hud.update_word_display(Config.current_word, Config.game_mode)
-		for i in range(collectible_spawner.get_word_next_index()):
-			hud.light_up_letter(i)
+		current_idx = collectible_spawner.get_word_next_index()
+		collected = current_idx
+		emoji = String(Config.current_word.get("emoji", ""))
 	else:
-		hud.update_target_display(
-			collectible_spawner.get_current_target(),
-			collectible_spawner.get_next_collect_index(),
-			collectible_spawner.get_total_collectibles()
-		)
+		current_idx = collectible_spawner.get_next_collect_index()
+		collected = current_idx
+
+	hud.update_tracker(seq, current_idx, collected, lt, emoji)
 	_update_hud_mission_description()
+
+
+func _learning_type_string() -> String:
+	match Config.game_mode:
+		Config.GameMode.NUMBERS:
+			return "numbers"
+		Config.GameMode.LETTERS:
+			return "letters"
+		Config.GameMode.WORDS:
+			return "words"
+		_:
+			return ""
+
+func _setup_sp_player_badges() -> void:
+	if hud == null:
+		return
+	var players: Array[Dictionary] = []
+
+	# Player badge
+	var player_role := Config.ROLE_RACER if Config.game_style == Config.STYLE_RACE else Config.ROLE_COLLECTOR
+	var player_char_id := "%s:player" % Config.theme_dir_name
+	players.append({
+		"character_id": player_char_id,
+		"color": UIColors.YELLOW,
+		"role": player_role,
+	})
+
+	# AI Opponent badge (Chaser or Robot Racer)
+	if Config.chaser_enabled or Config.game_style == Config.STYLE_RACE:
+		var ai_role := Config.ROLE_RACER if Config.game_style == Config.STYLE_RACE else Config.ROLE_CHASER
+		var ai_char_id := _race_robot_character_id()
+		players.append({
+			"character_id": ai_char_id,
+			"color": Color("#FF5555"),
+			"role": ai_role,
+			"is_ai": true,
+		})
+
+	hud.set_players(players)
+	if Config.chaser_enabled and not chaser_manager.is_active():
+		hud.update_chaser_countdown(chaser_manager.get_remaining_steps(_move_count))
+
 
 func _update_hud_mission_description() -> void:
 	var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
@@ -482,26 +521,18 @@ func _update_hud_mission_description() -> void:
 
 func _get_solo_goal() -> String:
 	if Config.game_style == Config.STYLE_RACE:
-		return tr("hud_desc_sp_race")
+		return ""  # Tracker shows race progress
+
+	if Config.game_style == Config.STYLE_PATH and not Config.chaser_enabled and Config.game_mode == Config.GameMode.NORMAL:
+		return tr("hud_desc_sp_path")
 
 	var is_phase_one := false
 	if Config.game_style in [Config.STYLE_PATH, Config.STYLE_NEXT_SYMBOL] and collectible_spawner != null:
 		is_phase_one = not collectible_spawner.is_complete()
 
-	if Config.game_style == Config.STYLE_PATH and not Config.chaser_enabled and Config.game_mode == Config.GameMode.NORMAL:
-		return tr("hud_desc_sp_path")
-
 	if is_phase_one:
-		var payload_key := "hud_desc_word_letters"
-		if Config.game_mode == Config.GameMode.NUMBERS:
-			payload_key = "hud_desc_word_numbers"
-		elif Config.game_mode == Config.GameMode.WORDS:
-			payload_key = "hud_desc_word_words"
-		var payload_text := tr(payload_key)
-		if Config.chaser_enabled:
-			return tr("hud_desc_sp_collect_chaser") % payload_text
-		else:
-			return tr("hud_desc_sp_collect") % payload_text
+		# Tracker handles the visual instruction during collection phase.
+		return ""
 	else:
 		return tr("hud_desc_sp_path")
 
@@ -597,7 +628,7 @@ func _process_race_robot(delta: float) -> void:
 		_race_robot_finished = true
 		_is_gotcha_screen = true
 		_freeze_player()
-		win_screen.show_race_gotcha(_format_time(), _move_count, _race_robot_character_id())
+		win_screen.show_race_gotcha(_race_robot_character_id())
 		return
 	var target := maze_renderer.grid_to_pixel(_race_robot_path[_race_robot_index])
 	var tween := _race_robot.create_tween()

@@ -19,6 +19,11 @@ var collect_index: int = -1
 var _animator: FrameAnimator = null
 var _accent_tint: Color = Color(0, 0, 0, 0)
 
+## Target highlight state — shows a halo + pulse on the current target collectible.
+var _highlight_ring: HighlightHalo = null
+var _highlight_tween: Tween = null
+var is_current_target: bool = false
+
 func _ready() -> void:
 	# Add sprite as child 0 so it's behind everything else
 	add_child(sprite)
@@ -117,8 +122,56 @@ func _apply_visuals(effective_cs: float) -> void:
 	text_label.add_theme_constant_override("outline_size", out_size)
 	text_label.position.y += effective_cs * 0.06
 
+
+# ── Target Highlight ─────────────────────────────────────────────────────────
+
+## Enable/disable the target highlight effect (halo + pulse).
+func set_target_highlight(enabled: bool) -> void:
+	is_current_target = enabled
+	if enabled:
+		_start_highlight()
+	else:
+		_stop_highlight()
+
+
+func _start_highlight() -> void:
+	# 1. Add halo ring behind the collectible
+	if _highlight_ring == null:
+		_highlight_ring = HighlightHalo.new()
+		_highlight_ring.name = "TargetHighlight"
+		add_child(_highlight_ring)
+		move_child(_highlight_ring, 0)  # Behind everything
+	_highlight_ring.radius = _last_cs * 0.45
+	# Use player accent tint for race mode, otherwise theme highlight color.
+	if _accent_tint.a > 0.0:
+		_highlight_ring.halo_color = _accent_tint
+	else:
+		_highlight_ring.halo_color = _last_theme.highlight_color if _last_theme else UIColors.HIGHLIGHT_HALO
+	_highlight_ring.visible = true
+	_highlight_ring.queue_redraw()
+
+	# 2. Start pronounced pulse animation
+	if _highlight_tween and _highlight_tween.is_valid():
+		_highlight_tween.kill()
+	self.scale = Vector2.ONE
+	_highlight_tween = create_tween().set_loops()
+	_highlight_tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.45) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_highlight_tween.tween_property(self, "scale", Vector2.ONE, 0.45) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func _stop_highlight() -> void:
+	if _highlight_tween and _highlight_tween.is_valid():
+		_highlight_tween.kill()
+		_highlight_tween = null
+	self.scale = Vector2.ONE
+	if _highlight_ring != null:
+		_highlight_ring.visible = false
+
 ## Called when the player steps on this collectible.
 func collect() -> void:
+	_stop_highlight()
 	# 1. Hot-swap to High-Res rendering immediately
 	# We render at the LARGE size, then immediately scale node down by the same factor
 	# so it *looks* identical to the player initially but is ready to zoom sharply.

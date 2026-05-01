@@ -29,7 +29,6 @@ signal screen_hidden
 var _container: Control = null
 var _winner_preview: CharacterPreview = null
 var _win_label: Label = null
-var _score_label: Label = null
 var _next_button: Button = null
 var _harder_button: Button = null
 var _timer_label: Label = null
@@ -104,15 +103,14 @@ func set_swap_roles_enabled(enabled: bool) -> void:
 func set_is_multiplayer(is_mp: bool) -> void:
 	_is_multiplayer = is_mp
 
-## Show the "You Win!" screen with score info.
-func show_win(time_str: String, move_count: int) -> void:
+## Show the "You Win!" screen.
+func show_win() -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
 	_set_winner_character("")
 
 	_win_label.text = tr("you_win")
-	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
 	_next_button.text = tr("next_round")
 
 	if _harder_button:
@@ -130,14 +128,13 @@ func show_win(time_str: String, move_count: int) -> void:
 
 
 ## Show the "Gotcha!" screen when the chaser catches the player.
-func show_gotcha(time_str: String, move_count: int) -> void:
+func show_gotcha() -> void:
 	_is_active = true
 	_timer_remaining = 10.0
 	_timer_paused = false
 	_set_winner_character("")
 
 	_win_label.text = tr("gotcha")
-	_score_label.text = tr("score_time") % time_str + " | " + tr("score_steps") % move_count
 	_next_button.text = tr("try_again")
 
 	# Show "Easier" if possible (button handler checks text to decide direction)
@@ -154,18 +151,18 @@ func show_gotcha(time_str: String, move_count: int) -> void:
 	_next_button.grab_focus()
 	screen_shown.emit()
 
-func show_race_win(time_str: String, move_count: int, winner_character_id: String) -> void:
-	show_win(time_str, move_count)
+func show_race_win(winner_character_id: String) -> void:
+	show_win()
 	_win_label.text = tr("race_i_won")
 	_set_winner_character(winner_character_id)
 
-func show_race_gotcha(time_str: String, move_count: int, winner_character_id: String) -> void:
-	show_gotcha(time_str, move_count)
+func show_race_gotcha(winner_character_id: String) -> void:
+	show_gotcha()
 	_win_label.text = tr("race_i_won")
 	_set_winner_character(winner_character_id)
 
-func show_coop_win(time_str: String, move_count: int, character_ids: Array[String]) -> void:
-	show_win(time_str, move_count)
+func show_coop_win(character_ids: Array[String]) -> void:
+	show_win()
 	_win_label.text = tr("mp_you_won_together")
 	# Show all player avatars scaled to fit. Clear first.
 	_winner_preview.visible = false
@@ -342,14 +339,6 @@ func _build_ui() -> void:
 	_win_label.add_theme_font_size_override("font_size", 90)
 	_win_label.add_theme_color_override("font_color", UIColors.YELLOW)
 	vbox.add_child(_win_label)
-
-	_score_label = Label.new()
-	_score_label.text = ""
-	_score_label.add_theme_font_size_override("font_size", 40)
-	_score_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
-	_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_score_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	vbox.add_child(_score_label)
 
 	var button_vbox := VBoxContainer.new()
 	button_vbox.add_theme_constant_override("separation", 15)
