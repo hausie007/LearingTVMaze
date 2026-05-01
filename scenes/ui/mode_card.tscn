@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/mode_card.gd" id="1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
-bg_color = Color(0.15, 0.17, 0.22, 1)
+bg_color = Color(0.145, 0.169, 0.220, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -12,21 +12,21 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.25, 0.28, 0.35, 1)
+border_color = Color(0.220, 0.259, 0.329, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
-bg_color = Color(0.13, 0.53, 1, 1)
+bg_color = Color(0.169, 0.451, 0.710, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(1, 1, 1, 1)
-shadow_color = Color(0, 0, 0, 0.3)
-shadow_size = 10
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.969, 0.890, 0.678, 1)
+shadow_color = Color(0.906, 0.714, 0.180, 0.28)
+shadow_size = 14
 
 [node name="ModeCard" type="Button"]
 custom_minimum_size = Vector2(320, 360)
@@ -54,13 +54,14 @@ alignment = 1
 
 [node name="IconLabel" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_colors/font_color = Color(0.969, 0.890, 0.678, 1)
 theme_override_font_sizes/font_size = 80
 text = "?"
 horizontal_alignment = 1
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.969, 0.961, 0.929, 1)
 theme_override_font_sizes/font_size = 42
 text = "Adventure"
 horizontal_alignment = 1
@@ -68,7 +69,7 @@ horizontal_alignment = 1
 [node name="SubtitleLabel" type="Label" parent="MarginContainer/VBox"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 80)
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.725, 0.729, 0.761, 1)
 theme_override_font_sizes/font_size = 24
 text = "Coming soon..."
 horizontal_alignment = 1

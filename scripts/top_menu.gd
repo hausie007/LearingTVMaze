@@ -221,33 +221,33 @@ func _build_card_data() -> Array[Dictionary]:
 
 
 func _apply_card_styles() -> void:
-	# Play Now — gold palette
+	# Play Now — warm yellow / gold palette
 	var play_now: Button = _cards.get(CARD_PLAY_NOW, null) as Button
 	if play_now != null:
 		play_now.call("set_custom_palette",
-			UIColors.GOLD_DARK, UIColors.GOLD_BORDER,
-			UIColors.GOLD_ACCENT, UIColors.GOLD,
-			UIColors.GOLD, Color.WHITE, Color(1, 0.9, 0.6)
+			UIColors.CARD_YELLOW_DARK, UIColors.CARD_BORDER_SOFT,
+			UIColors.UI_YELLOW, UIColors.HEADING_YELLOW,
+			UIColors.HEADING_YELLOW, Color.WHITE, UIColors.TEXT_SECONDARY
 		)
 
-	# Your Adventure — blue (default, no custom palette needed)
+	# Your Adventure — blue (default selected style from mode_card handles this)
 
-	# Play Together — green palette
+	# Play Together — green co-op palette
 	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
 	if play_together != null:
 		play_together.call("set_custom_palette",
-			UIColors.GREEN_DARK, UIColors.GREEN_BORDER,
-			UIColors.GREEN_ACCENT, UIColors.GREEN,
-			Color(0.5, 1.0, 0.5), Color.WHITE, Color(0.7, 0.9, 0.7)
+			UIColors.CARD_GREEN_DARK, UIColors.CARD_BORDER_SOFT,
+			UIColors.UI_GREEN, UIColors.GREEN,
+			UIColors.GREEN_HINT, Color.WHITE, UIColors.TEXT_SECONDARY
 		)
 
-	# Join Game — teal palette
+	# Join Game — blue palette (uses same semantic blue as adventure)
 	var join_game: Button = _cards.get(CARD_JOIN_GAME, null) as Button
 	if join_game != null:
 		join_game.call("set_custom_palette",
-			UIColors.TEAL_DARK, UIColors.TEAL_BORDER,
-			UIColors.TEAL_ACCENT, UIColors.TEAL,
-			UIColors.TEAL, Color.WHITE, Color(0.6, 0.9, 0.88)
+			UIColors.CARD_BLUE_DARK, UIColors.CARD_BORDER_SOFT,
+			UIColors.UI_BLUE, UIColors.TEAL,
+			UIColors.TEAL, Color.WHITE, UIColors.TEXT_SECONDARY
 		)
 
 

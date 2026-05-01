@@ -243,6 +243,7 @@ func _build_layout() -> void:
 	_step1.expand_requested.connect(_on_step1_expand_requested)
 	_step1.card_focus_changed.connect(_on_step1_card_focus_changed)
 	_main_vbox.add_child(_step1)
+	_apply_step1_card_styles()
 	_build_step1_settings()
 
 	# Step 2: Pickup
@@ -333,7 +334,17 @@ func _player_count_badge(options: Array[int]) -> String:
 		return "🟢 %d %s" % [mn, tr("badge_players_word")]
 	return "🟢 %d-%d %s" % [mn, mx, tr("badge_players_word")]
 
-## Apply green palette to multiplayer cards and badges to all Step 3 cards.
+## Apply orange-red palette to the competitive "Race to the Middle" card in Step 1.
+func _apply_step1_card_styles() -> void:
+	var race_card: Button = _step1._cards.get(MissionCatalog.MISSION_RACE_MIDDLE, null) as Button
+	if race_card != null:
+		race_card.call("set_custom_palette",
+			UIColors.CARD_ORANGE_RED_DARK, UIColors.CARD_BORDER_SOFT,
+			UIColors.UI_ORANGE_RED, UIColors.PAPER_CREAM,
+			UIColors.PAPER_CREAM, Color.WHITE, UIColors.TEXT_SECONDARY
+		)
+
+## Apply semantic palette to multiplayer cards and badges to all Step 3 cards.
 ## Also set player/chaser preview icons from the selected theme.
 func _apply_step3_card_styles(action_data: Array[Dictionary]) -> void:
 	var theme_dir := _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
@@ -348,18 +359,15 @@ func _apply_step3_card_styles(action_data: Array[Dictionary]) -> void:
 
 		# Apply badge
 		if not badge_text.is_empty():
-			card.call("set_badge", badge_text, UIColors.GREEN if group == "mp" else UIColors.BLUE)
+			var badge_color := UIColors.UI_GREEN if group == "mp" else UIColors.UI_BLUE
+			card.call("set_badge", badge_text, badge_color)
 
-		# Apply green palette to MP cards
+		# Apply green palette to all multiplayer cards (coop and versus alike)
 		if group == "mp":
 			card.call("set_custom_palette",
-				UIColors.GREEN_DARK,     # normal bg
-				UIColors.GREEN_BORDER,   # normal border
-				UIColors.GREEN_ACCENT,   # accent bg (selected/focus)
-				UIColors.GREEN,          # accent border
-				Color(0.5, 1.0, 0.5),   # icon color (light green)
-				Color.WHITE,             # title color
-				Color(0.7, 0.9, 0.7)    # subtitle color
+				UIColors.CARD_GREEN_DARK, UIColors.CARD_BORDER_SOFT,
+				UIColors.UI_GREEN, UIColors.GREEN,
+				UIColors.GREEN_HINT, Color.WHITE, UIColors.TEXT_SECONDARY
 			)
 
 		# Theme character previews are no longer applied here.

@@ -143,7 +143,7 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 				get_viewport().set_input_as_handled()
 	)
 	
-	var focus_color: Color = UIColors.YELLOW
+	var focus_color: Color = UIColors.FOCUS_GOLD
 		
 	if left_arrow: left_arrow.add_theme_color_override("font_color", focus_color)
 	if right_arrow: right_arrow.add_theme_color_override("font_color", focus_color)
@@ -252,7 +252,7 @@ func _update_labels() -> void:
 func _update_static_labels() -> void:
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
-		%Title.add_theme_color_override("font_color", UIColors.YELLOW)
+		%Title.add_theme_color_override("font_color", UIColors.HEADING_YELLOW)
 	if has_node("%UILangTitle"): %UILangTitle.text = tr("setting_ui_lang")
 	if has_node("%LearningLangTitle"): %LearningLangTitle.text = tr("setting_learning_lang")
 	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")

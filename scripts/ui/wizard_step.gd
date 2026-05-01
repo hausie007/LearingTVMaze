@@ -176,7 +176,7 @@ func _build_collapse_row() -> void:
 	normal_style.content_margin_right = 24
 	var focus_style := UIHelpers.create_rounded_stylebox(
 		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.85),
-		UIColors.YELLOW, 10, 2
+		UIColors.FOCUS_GOLD, 10, 2
 	)
 	focus_style.content_margin_left = 24
 	focus_style.content_margin_right = 24
@@ -195,7 +195,7 @@ func _build_collapse_row() -> void:
 	_chevron_label = Label.new()
 	_chevron_label.text = "▾"
 	_chevron_label.add_theme_font_size_override("font_size", 28)
-	_chevron_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_chevron_label.add_theme_color_override("font_color", UIColors.HEADING_YELLOW)
 	_chevron_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_chevron_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_chevron_label.custom_minimum_size = Vector2(30, 0)
@@ -228,7 +228,7 @@ func _build_active_container() -> void:
 	_title_label = Label.new()
 	_title_label.name = "StepTitle"
 	_title_label.add_theme_font_size_override("font_size", 36)
-	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
+	_title_label.add_theme_color_override("font_color", UIColors.HEADING_YELLOW)
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_title_label.mouse_filter = Control.MOUSE_FILTER_IGNORE

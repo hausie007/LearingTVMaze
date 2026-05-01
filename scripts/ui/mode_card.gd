@@ -13,10 +13,10 @@ var _preview_size: Vector2 = Vector2(112, 112)
 var _base_normal_style: StyleBox = null
 var _selected_normal_style: StyleBoxFlat = null
 var _selected: bool = false
-var _icon_color: Color = Color(1, 0.8, 0, 1)
+var _icon_color: Color = UIColors.PAPER_CREAM
 var _title_color: Color = UIColors.TEXT_PRIMARY
-var _normal_subtitle_color: Color = UIColors.TEXT_SUBTITLE
-var _selected_subtitle_color: Color = Color.WHITE
+var _normal_subtitle_color: Color = UIColors.TEXT_SECONDARY
+var _selected_subtitle_color: Color = UIColors.TEXT_PRIMARY
 var _focused: bool = false
 var _scale_tween: Tween = null
 var _badge_label: Label = null
@@ -55,7 +55,7 @@ func setup(icon_text: String, title_text: String, subtitle_text: String) -> void
 		var tex := load(icon_text) as Texture2D
 		if tex != null:
 			_image_icon.texture = tex
-		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.6)
+		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.9)
 		_image_icon.visible = true
 	else:
 		if _image_icon != null:
@@ -122,8 +122,10 @@ func set_custom_palette(
 ) -> void:
 	if not is_node_ready(): await ready
 	_base_normal_style = _create_card_style(normal_bg, normal_border, 15, 2, 0)
-	_selected_normal_style = _create_card_style(accent_bg, accent_border, 15, 4, 8)
-	var focus_style := _create_card_style(accent_bg, accent_border, 15, 6, 10)
+	# Use warm cream border for selected / focus states
+	var sel_border := UIColors.SELECTED_BORDER_CREAM
+	_selected_normal_style = _create_card_style(accent_bg, sel_border, 15, 4, 8)
+	var focus_style := _create_card_style(accent_bg, sel_border, 15, 5, 12, UIColors.SELECTED_GLOW)
 	add_theme_stylebox_override("focus", focus_style)
 	add_theme_stylebox_override("hover", focus_style)
 	add_theme_stylebox_override("pressed", focus_style)
@@ -136,7 +138,7 @@ func set_custom_palette(
 
 ## Set a player-count badge in the top-left corner of the card.
 ## Pass empty text to hide.
-func set_badge(badge_text: String, _badge_color: Color = UIColors.BLUE) -> void:
+func set_badge(badge_text: String, _badge_color: Color = UIColors.FOCUS_GOLD) -> void:
 	if not is_node_ready(): await ready
 	if badge_text.is_empty():
 		if _badge_label != null:
@@ -149,7 +151,7 @@ func set_badge(badge_text: String, _badge_color: Color = UIColors.BLUE) -> void:
 		add_child(_badge_label)
 	_badge_label.text = badge_text
 	_badge_label.add_theme_font_size_override("font_size", 23)
-	_badge_label.add_theme_color_override("font_color", Color.WHITE)
+	_badge_label.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
 	_badge_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_badge_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	# Position in top-left corner
@@ -160,7 +162,7 @@ func set_badge(badge_text: String, _badge_color: Color = UIColors.BLUE) -> void:
 func _apply_text_sizes() -> void:
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)
 	if _image_icon != null:
-		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.6)
+		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.9)
 	title_label.add_theme_font_size_override("font_size", _title_font_size)
 	subtitle_label.add_theme_font_size_override("font_size", _subtitle_font_size)
 	icon_label.add_theme_color_override("font_color", _icon_color)
@@ -185,9 +187,9 @@ func _apply_text_sizes() -> void:
 	subtitle_label.clip_text = true
 
 func _create_selected_style() -> StyleBoxFlat:
-	return _create_card_style(UIColors.BLUE, Color.WHITE, 15, 4, 8)
+	return _create_card_style(UIColors.UI_BLUE, UIColors.SELECTED_BORDER_CREAM, 15, 4, 8)
 
-func _create_card_style(bg_color: Color, border_color: Color, corner_radius: int, border_width: int, shadow_size: int) -> StyleBoxFlat:
+func _create_card_style(bg_color: Color, border_color: Color, corner_radius: int, border_width: int, shadow_sz: int, expand_shadow_color: Color = Color(0, 0, 0, 0)) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg_color
 	style.corner_radius_top_left = corner_radius
@@ -199,8 +201,13 @@ func _create_card_style(bg_color: Color, border_color: Color, corner_radius: int
 	style.border_width_right = border_width
 	style.border_width_bottom = border_width
 	style.border_color = border_color
-	style.shadow_color = Color(0, 0, 0, 0.25)
-	style.shadow_size = shadow_size
+	# Use warm shadow, with optional glow overlay
+	if expand_shadow_color.a > 0.01:
+		style.shadow_color = expand_shadow_color
+		style.shadow_size = shadow_sz + 4
+	else:
+		style.shadow_color = UIColors.SELECTED_SHADOW
+		style.shadow_size = shadow_sz
 	return style
 
 func _apply_selection_style() -> void:
