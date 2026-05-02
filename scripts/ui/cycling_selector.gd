@@ -35,10 +35,11 @@ static func create_row(label_key: String) -> HBoxContainer:
 	label.text = TranslationServer.translate(label_key)
 	label.custom_minimum_size = Vector2(245, 0)
 	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	UIHelpers.apply_medium(label)
 	row.add_child(label)
 
 	var gap := Control.new()
@@ -51,7 +52,8 @@ static func create_row(label_key: String) -> HBoxContainer:
 	var button := Button.new()
 	button.custom_minimum_size = Vector2(430, 64)
 	button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
+	_apply_field_style(button)
+	UIHelpers.apply_semibold(button)
 	row.add_child(button)
 
 	var right := create_arrow_label()
@@ -87,11 +89,12 @@ static func create_row_dict(label_key: String) -> Dictionary:
 	var label := Label.new()
 	label.custom_minimum_size = Vector2(245, 0)
 	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	label.text = TranslationServer.translate(label_key)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	UIHelpers.apply_medium(label)
 	row.add_child(label)
 
 	var left := create_arrow_label()
@@ -100,7 +103,8 @@ static func create_row_dict(label_key: String) -> Dictionary:
 	var button := Button.new()
 	button.custom_minimum_size = Vector2(430, 64)
 	button.add_theme_font_size_override("font_size", 30)
-	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
+	_apply_field_style(button)
+	UIHelpers.apply_semibold(button)
 	row.add_child(button)
 
 	var right := create_arrow_label()
@@ -122,12 +126,48 @@ static func create_row_dict(label_key: String) -> Dictionary:
 static func create_arrow_label() -> Label:
 	var label := Label.new()
 	label.custom_minimum_size = Vector2(36, 0)
-	label.add_theme_color_override("font_color", UIColors.YELLOW)
+	label.add_theme_color_override("font_color", UIColors.FOCUS_GOLD)
 	label.add_theme_font_size_override("font_size", 38)
 	label.text = "<"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	return label
+
+
+## Apply dark-field styling to a settings button so it reads as secondary UI.
+## Unfocused: dark fill + panel border.
+## Focused: dark fill + gold border + subtle glow.
+static func _apply_field_style(btn: Button) -> void:
+	# Normal state — dark quiet field
+	var normal := UIHelpers.create_rounded_stylebox(
+		UIColors.PANEL_BG_DARK, UIColors.CARD_BORDER, 12, 2
+	)
+	btn.add_theme_stylebox_override("normal", normal)
+
+	# Focused state — dark fill with gold border and warm glow
+	var focus := UIHelpers.create_rounded_stylebox(
+		UIColors.PANEL_BG_DARK, UIColors.FOCUS_GOLD, 12, 3
+	)
+	focus.shadow_color = UIColors.FOCUS_GLOW
+	focus.shadow_size = 6
+
+	var hover := UIHelpers.create_rounded_stylebox(
+		UIColors.PANEL_BG_DARK, UIColors.FOCUS_GOLD_SOFT, 12, 2
+	)
+
+	btn.add_theme_stylebox_override("focus", focus)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", focus)
+
+	# Text stays light in all states (no dark-on-bright flip)
+	btn.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
+	btn.add_theme_color_override("font_focus_color", UIColors.TEXT_PRIMARY)
+	btn.add_theme_color_override("font_hover_color", UIColors.TEXT_PRIMARY)
+	btn.add_theme_color_override("font_pressed_color", UIColors.TEXT_PRIMARY)
+
+	# Suppress phantom hover on TV
+	if UIHelpers.is_likely_tv():
+		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 ## Wire a Button's gui_input so D-pad Left/Right cycles the value.

@@ -13,7 +13,7 @@ var _preview_size: Vector2 = Vector2(112, 112)
 var _base_normal_style: StyleBox = null
 var _selected_normal_style: StyleBoxFlat = null
 var _selected: bool = false
-var _icon_color: Color = UIColors.PAPER_CREAM
+var _icon_color: Color = UIColors.PARCHMENT
 var _title_color: Color = UIColors.TEXT_PRIMARY
 var _normal_subtitle_color: Color = UIColors.TEXT_SECONDARY
 var _selected_subtitle_color: Color = UIColors.TEXT_PRIMARY
@@ -121,11 +121,11 @@ func set_custom_palette(
 	subtitle_color: Color
 ) -> void:
 	if not is_node_ready(): await ready
-	_base_normal_style = _create_card_style(normal_bg, normal_border, 15, 2, 0)
+	_base_normal_style = _create_card_style(normal_bg, normal_border, 16, 2, 0)
 	# Use warm cream border for selected / focus states
-	var sel_border := UIColors.SELECTED_BORDER_CREAM
-	_selected_normal_style = _create_card_style(accent_bg, sel_border, 15, 4, 8)
-	var focus_style := _create_card_style(accent_bg, sel_border, 15, 5, 12, UIColors.SELECTED_GLOW)
+	var sel_border := UIColors.SELECTED_BORDER
+	_selected_normal_style = _create_card_style(accent_bg, sel_border, 16, 4, 8)
+	var focus_style := _create_card_style(accent_bg, sel_border, 16, 5, 12, UIColors.SELECTED_GLOW)
 	add_theme_stylebox_override("focus", focus_style)
 	add_theme_stylebox_override("hover", focus_style)
 	add_theme_stylebox_override("pressed", focus_style)
@@ -158,6 +158,7 @@ func set_badge(badge_text: String, _badge_color: Color = UIColors.FOCUS_GOLD) ->
 	_badge_label.position = Vector2(12, 8)
 	_badge_label.size = Vector2(220, 32)
 	_badge_label.visible = true
+	UIHelpers.apply_semibold(_badge_label)
 
 func _apply_text_sizes() -> void:
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)
@@ -167,6 +168,9 @@ func _apply_text_sizes() -> void:
 	subtitle_label.add_theme_font_size_override("font_size", _subtitle_font_size)
 	icon_label.add_theme_color_override("font_color", _icon_color)
 	title_label.add_theme_color_override("font_color", _title_color)
+	# Font weights: SemiBold for titles, Medium for subtitles
+	UIHelpers.apply_semibold(title_label)
+	UIHelpers.apply_medium(subtitle_label)
 	$MarginContainer/VBox.add_theme_constant_override("separation", max(6, int(float(_subtitle_font_size) * 0.45)))
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
@@ -187,15 +191,12 @@ func _apply_text_sizes() -> void:
 	subtitle_label.clip_text = true
 
 func _create_selected_style() -> StyleBoxFlat:
-	return _create_card_style(UIColors.UI_BLUE, UIColors.SELECTED_BORDER_CREAM, 15, 4, 8)
+	return _create_card_style(UIColors.UI_BLUE, UIColors.SELECTED_BORDER, 16, 4, 8)
 
 func _create_card_style(bg_color: Color, border_color: Color, corner_radius: int, border_width: int, shadow_sz: int, expand_shadow_color: Color = Color(0, 0, 0, 0)) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg_color
-	style.corner_radius_top_left = corner_radius
-	style.corner_radius_top_right = corner_radius
-	style.corner_radius_bottom_right = corner_radius
-	style.corner_radius_bottom_left = corner_radius
+	style.set_corner_radius_all(corner_radius)
 	style.border_width_left = border_width
 	style.border_width_top = border_width
 	style.border_width_right = border_width

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/top_menu.gd" id="1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
-bg_color = Color(0.090, 0.106, 0.141, 1)
+bg_color = Color(0.082, 0.102, 0.137, 1)
 
 [node name="TopMenu" type="Control"]
 layout_mode = 3

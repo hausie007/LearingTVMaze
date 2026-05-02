@@ -16,6 +16,38 @@ extends RefCounted
 ## Preloaded bundled emoji font for 100% compatibility across Android versions.
 const EMOJI_FONT = preload("res://assets/fonts/NotoColorEmoji-Regular.ttf")
 
+## Preloaded Quicksand variable font for weight variations.
+const QUICKSAND_FONT = preload("res://assets/fonts/Quicksand-VariableFont_wght.ttf")
+
+## OpenType tag for 'wght' axis (w=119, g=103, h=104, t=116).
+const OT_WGHT := 2003265652
+
+## Standard Fredoka weight values.
+const WEIGHT_MEDIUM := 500
+const WEIGHT_SEMIBOLD := 600
+const WEIGHT_BOLD := 700
+
+## Cached font variations by weight to avoid creating duplicates.
+static var _font_cache: Dictionary = {}
+
+## Get a FontVariation at a specific weight. Cached for reuse.
+static func get_font_at_weight(weight: int) -> Font:
+	if _font_cache.has(weight):
+		return _font_cache[weight]
+	var fv := FontVariation.new()
+	fv.base_font = QUICKSAND_FONT
+	fv.variation_opentype = {OT_WGHT: weight}
+	_font_cache[weight] = fv
+	return fv
+
+## Apply SemiBold (600) font weight to a Control (Label or Button).
+static func apply_semibold(control: Control) -> void:
+	control.add_theme_font_override("font", get_font_at_weight(WEIGHT_SEMIBOLD))
+
+## Apply Medium (500) font weight to a Control (Label or Button).
+static func apply_medium(control: Control) -> void:
+	control.add_theme_font_override("font", get_font_at_weight(WEIGHT_MEDIUM))
+
 
 ## Return a Font configured specifically for Emoji rendering with multi-platform fallbacks.
 ## Essential for Android (Samsung) where default fonts often lack emoji glyphs.

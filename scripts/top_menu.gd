@@ -227,7 +227,7 @@ func _apply_card_styles() -> void:
 		play_now.call("set_custom_palette",
 			UIColors.CARD_YELLOW_DARK, UIColors.CARD_BORDER_SOFT,
 			UIColors.UI_YELLOW, UIColors.HEADING_YELLOW,
-			UIColors.HEADING_YELLOW, Color.WHITE, UIColors.TEXT_SECONDARY
+			UIColors.HEADING_YELLOW, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
 		)
 
 	# Your Adventure — blue (default selected style from mode_card handles this)
@@ -237,8 +237,8 @@ func _apply_card_styles() -> void:
 	if play_together != null:
 		play_together.call("set_custom_palette",
 			UIColors.CARD_GREEN_DARK, UIColors.CARD_BORDER_SOFT,
-			UIColors.UI_GREEN, UIColors.GREEN,
-			UIColors.GREEN_HINT, Color.WHITE, UIColors.TEXT_SECONDARY
+			UIColors.UI_GREEN, UIColors.GREEN_ACCENT,
+			UIColors.GREEN_ACCENT, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
 		)
 
 	# Join Game — blue palette (uses same semantic blue as adventure)
@@ -246,8 +246,8 @@ func _apply_card_styles() -> void:
 	if join_game != null:
 		join_game.call("set_custom_palette",
 			UIColors.CARD_BLUE_DARK, UIColors.CARD_BORDER_SOFT,
-			UIColors.UI_BLUE, UIColors.TEAL,
-			UIColors.TEAL, Color.WHITE, UIColors.TEXT_SECONDARY
+			UIColors.UI_BLUE, UIColors.BLUE_ACCENT,
+			UIColors.BLUE_ACCENT, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
 		)
 
 

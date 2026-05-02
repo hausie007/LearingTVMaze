@@ -169,15 +169,17 @@ func _build_collapse_row() -> void:
 
 	# Style: subtle dark background, lighter on focus
 	var normal_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.6),
+		Color(UIColors.PANEL_BG_DARK.r, UIColors.PANEL_BG_DARK.g, UIColors.PANEL_BG_DARK.b, 0.6),
 		Color(1, 1, 1, 0.08), 10, 1
 	)
 	normal_style.content_margin_left = 24
 	normal_style.content_margin_right = 24
 	var focus_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.85),
+		Color(UIColors.PANEL_BG_DARK.r, UIColors.PANEL_BG_DARK.g, UIColors.PANEL_BG_DARK.b, 0.85),
 		UIColors.FOCUS_GOLD, 10, 2
 	)
+	focus_style.shadow_color = UIColors.FOCUS_GLOW
+	focus_style.shadow_size = 4
 	focus_style.content_margin_left = 24
 	focus_style.content_margin_right = 24
 	_collapse_row.add_theme_stylebox_override("normal", normal_style)
@@ -204,10 +206,11 @@ func _build_collapse_row() -> void:
 	_summary_label = Label.new()
 	_summary_label.name = "SummaryText"
 	_summary_label.add_theme_font_size_override("font_size", 30)
-	_summary_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	_summary_label.add_theme_color_override("font_color", Color("#C8CED8"))
 	_summary_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_summary_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_summary_label.text = ""
+	UIHelpers.apply_medium(_summary_label)
 	hbox.add_child(_summary_label)
 
 	_collapse_row.pressed.connect(_on_collapse_row_pressed)
@@ -233,6 +236,7 @@ func _build_active_container() -> void:
 	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_title_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_title_label.text = _title_text
+	UIHelpers.apply_semibold(_title_label)
 	_active_container.add_child(_title_label)
 	
 	var title_pad := Control.new()

@@ -5,12 +5,12 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_help"]
-bg_color = Color(0.067, 0.082, 0.114, 0.98)
+bg_color = Color(0.090, 0.110, 0.145, 0.98)
 border_width_left = 6
 border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
-border_color = Color(0.906, 0.714, 0.180, 0.5)
+border_color = Color(0.949, 0.788, 0.298, 0.5)
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -68,7 +68,7 @@ theme_override_constant_override/separation = 20
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.906, 0.714, 0.180, 1)
+theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 theme_override_font_sizes/font_size = 84
 text = "<"
@@ -124,7 +124,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.906, 0.714, 0.180, 1)
+theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 theme_override_font_sizes/font_size = 84
 text = ">"

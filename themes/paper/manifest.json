@@ -1,0 +1,29 @@
+{
+  "title":"Paper",
+  "assets": {
+    "player": "p_player.png",
+    "chaser": "p_chaser.png",
+    "background": "background.png",
+    "start": "p_start.png",
+    "end": "p_finish.png",
+    "collectible": "p_collectible.png"
+  },
+  "colors": {
+    "wall": "#2E5A63",
+    "wall_border": "#152B31",
+    "floor": "#F6EDD8",
+    "start_cell": "#E8D9AD",
+    "end_cell": "#FFE39B",
+    "player": "#3E7FD1"
+  },
+  "background": {
+    "tiled": true,
+    "full_screen": false,
+    "color": "#F6EDD8"
+  },
+  "collectible": {
+    "color": "#F2C94C",
+    "text_color": "#3F6670",
+    "image": "p_collectible.png"
+  }
+}

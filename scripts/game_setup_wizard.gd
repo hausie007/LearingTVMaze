@@ -54,6 +54,7 @@ var _maze_size_left: Label = null
 var _maze_size_right: Label = null
 var _theme_preview_container: Control = null
 var _theme_preview: CharacterPreview = null
+var _theme_backplate: Panel = null
 
 # Step 2 settings (Language)
 var _lang_button: Button = null
@@ -72,6 +73,7 @@ var _character_right: Label = null
 var _character_row: HBoxContainer = null
 var _character_preview_container: Control = null
 var _character_preview: CharacterPreview = null
+var _character_backplate: Panel = null
 
 
 # ── State ────────────────────────────────────────────────────────────────────
@@ -340,8 +342,8 @@ func _apply_step1_card_styles() -> void:
 	if race_card != null:
 		race_card.call("set_custom_palette",
 			UIColors.CARD_ORANGE_RED_DARK, UIColors.CARD_BORDER_SOFT,
-			UIColors.UI_ORANGE_RED, UIColors.PAPER_CREAM,
-			UIColors.PAPER_CREAM, Color.WHITE, UIColors.TEXT_SECONDARY
+			UIColors.UI_ORANGE_RED, UIColors.RED_ACCENT,
+			UIColors.RED_ACCENT, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
 		)
 
 ## Apply semantic palette to multiplayer cards and badges to all Step 3 cards.
@@ -366,8 +368,8 @@ func _apply_step3_card_styles(action_data: Array[Dictionary]) -> void:
 		if group == "mp":
 			card.call("set_custom_palette",
 				UIColors.CARD_GREEN_DARK, UIColors.CARD_BORDER_SOFT,
-				UIColors.UI_GREEN, UIColors.GREEN,
-				UIColors.GREEN_HINT, Color.WHITE, UIColors.TEXT_SECONDARY
+				UIColors.UI_GREEN, UIColors.GREEN_ACCENT,
+				UIColors.GREEN_ACCENT, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
 			)
 
 		# Theme character previews are no longer applied here.
@@ -420,7 +422,13 @@ func _build_step1_settings() -> void:
 
 	_theme_preview_container = Control.new()
 	_theme_preview_container.name = "ThemePreviewContainer"
+	_theme_preview_container.clip_contents = false
 	settings_row.add_child(_theme_preview_container)
+
+	# Parchment backplate — paper-cutout backing behind the character sprite
+	_theme_backplate = _create_parchment_backplate()
+	_theme_preview_container.add_child(_theme_backplate)
+
 	_theme_preview = CharacterPreview.new()
 	_theme_preview.name = "ThemePreview"
 	_theme_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
@@ -456,7 +464,12 @@ func _build_step3_settings() -> void:
 	_character_preview_container = Control.new()
 	_character_preview_container.name = "CharPreviewOverlay"
 	_character_preview_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_character_preview_container.clip_contents = false
 	_character_preview_container.visible = false
+
+	# Parchment backplate for character preview
+	_character_backplate = _create_parchment_backplate()
+	_character_preview_container.add_child(_character_backplate)
 
 	_character_preview = CharacterPreview.new()
 	_character_preview.name = "CharPreview"
@@ -819,6 +832,33 @@ func _resize_character_preview() -> void:
 	_character_preview.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_character_preview.size = Vector2(ps, ps)
 	_character_preview.position = Vector2(0, (row_height - ps) / 2.0)
+	
+	# Position backplate to match the preview with padding
+	if _character_backplate != null:
+		_position_backplate(_character_backplate, _character_preview.position, Vector2(ps, ps))
+
+
+## Create a parchment backplate Panel for behind character preview icons.
+func _create_parchment_backplate() -> Panel:
+	var backplate := Panel.new()
+	backplate.name = "ParchmentBackplate"
+	backplate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(UIColors.PARCHMENT.r, UIColors.PARCHMENT.g, UIColors.PARCHMENT.b, 0.95)
+	style.set_corner_radius_all(18)
+	style.set_border_width_all(2)
+	style.border_color = UIColors.PARCHMENT_DARK
+	style.shadow_color = Color(0, 0, 0, 0.27)
+	style.shadow_size = 5
+	backplate.add_theme_stylebox_override("panel", style)
+	return backplate
+
+
+## Position a backplate Panel to cover the given preview rect with ~10px padding.
+func _position_backplate(bp: Panel, preview_pos: Vector2, preview_size: Vector2) -> void:
+	var pad := 10.0
+	bp.position = preview_pos - Vector2(pad, pad)
+	bp.size = preview_size + Vector2(pad * 2, pad * 2)
 
 func _theme_display_name() -> String:
 	var theme_name := _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
@@ -957,6 +997,8 @@ func _apply_responsive_layout() -> void:
 		_theme_preview_container.custom_minimum_size = Vector2(ps, ps)
 		if _theme_preview != null:
 			_theme_preview.custom_minimum_size = Vector2(ps, ps)
+		if _theme_backplate != null:
+			_position_backplate(_theme_backplate, Vector2.ZERO, Vector2(ps, ps))
 
 	if _character_preview_container != null and _character_preview_container.visible:
 		_resize_character_preview()

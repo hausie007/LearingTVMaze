@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game_setup_wizard.gd" id="1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
-bg_color = Color(0.090, 0.106, 0.141, 1)
+bg_color = Color(0.082, 0.102, 0.137, 1)
 
 [node name="MainMenu" type="Control" unique_id=914623005]
 layout_mode = 3

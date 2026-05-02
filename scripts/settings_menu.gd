@@ -148,7 +148,8 @@ func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	if left_arrow: left_arrow.add_theme_color_override("font_color", focus_color)
 	if right_arrow: right_arrow.add_theme_color_override("font_color", focus_color)
 		
-	UIHelpers.apply_style_to_button(btn, focus_color)
+	CyclingSelector._apply_field_style(btn)
+	UIHelpers.apply_semibold(btn)
 
 
 func _cycle_ui_lang(dir: int) -> void:
@@ -253,11 +254,22 @@ func _update_static_labels() -> void:
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
 		%Title.add_theme_color_override("font_color", UIColors.HEADING_YELLOW)
-	if has_node("%UILangTitle"): %UILangTitle.text = tr("setting_ui_lang")
-	if has_node("%LearningLangTitle"): %LearningLangTitle.text = tr("setting_learning_lang")
-	if has_node("%VoiceTitle"): %VoiceTitle.text = tr("setting_voice")
-	if has_node("%PerfTitle"): %PerfTitle.text = tr("setting_quality")
-	if has_node("%ControlsTitle"): %ControlsTitle.text = tr("setting_controls")
+		UIHelpers.apply_semibold(%Title)
+	if has_node("%UILangTitle"):
+		%UILangTitle.text = tr("setting_ui_lang")
+		UIHelpers.apply_medium(%UILangTitle)
+	if has_node("%LearningLangTitle"):
+		%LearningLangTitle.text = tr("setting_learning_lang")
+		UIHelpers.apply_medium(%LearningLangTitle)
+	if has_node("%VoiceTitle"):
+		%VoiceTitle.text = tr("setting_voice")
+		UIHelpers.apply_medium(%VoiceTitle)
+	if has_node("%PerfTitle"):
+		%PerfTitle.text = tr("setting_quality")
+		UIHelpers.apply_medium(%PerfTitle)
+	if has_node("%ControlsTitle"):
+		%ControlsTitle.text = tr("setting_controls")
+		UIHelpers.apply_medium(%ControlsTitle)
 	
 func _apply_title_colors() -> void:
 	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ControlsTitle"]

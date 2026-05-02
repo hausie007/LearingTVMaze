@@ -13,40 +13,56 @@ extends RefCounted
 # ── Foundation ───────────────────────────────────────────────────────────────
 
 ## Main dark ink background for all menu screens.
-const BG_INK := Color("#171B24")
+const BG_INK := Color("#151A23")
 
 ## Slightly deeper ink for vignette edges or overlays.
 const BG_INK_DEEP := Color("#11151D")
 
-## Default inactive card fill — quiet but distinct from background.
-const CARD_NEUTRAL := Color("#252B38")
+## Default inactive card / panel fill — quiet but distinct from background.
+const CARD_NEUTRAL := Color("#242B38")
 
 ## Alternate inactive card fill for subtle variety.
 const CARD_NEUTRAL_ALT := Color("#202633")
 
-## Inactive card border.
-const CARD_BORDER := Color("#465166")
+## Inactive card / panel border.
+const CARD_BORDER := Color("#3A4658")
 
 ## Softer inactive card border variant.
-const CARD_BORDER_SOFT := Color("#384254")
+const CARD_BORDER_SOFT := Color("#2F394A")
+
+## Dark fill for secondary setting fields (unfocused state).
+const PANEL_BG_DARK := Color("#171C25")
+
+# ── Text ─────────────────────────────────────────────────────────────────────
 
 ## Warm off-white for primary text on dark backgrounds.
-const TEXT_PRIMARY := Color("#F7F5ED")
+const TEXT_PRIMARY := Color("#F5F1E8")
 
 ## Muted secondary text — subtitles, descriptions.
-const TEXT_SECONDARY := Color("#B9BAC2")
+const TEXT_SECONDARY := Color("#C9CCD4")
 
-## Disabled / very low-emphasis text.
-const TEXT_DISABLED := Color("#7E838E")
+## Very low-emphasis text / disabled.
+const TEXT_MUTED := Color("#9EA4B2")
 
-## Cream matching the paper-cutout icon outlines.
-const PAPER_CREAM := Color("#F7E3AD")
+# ── Parchment & Focus ───────────────────────────────────────────────────────
 
-## Lighter cream for highlights.
-const PAPER_CREAM_LIGHT := Color("#FFF0C8")
+## Parchment cream matching the paper-cutout icon outlines / card borders.
+const PARCHMENT := Color("#F6EDD8")
 
-## Warm gold used for focus indicators and selected card glow.
-const FOCUS_GOLD := Color("#E7B62E")
+## Darker parchment — borders of backplates, icon outline shadows.
+const PARCHMENT_DARK := Color("#D9C48A")
+
+## Deep warm shadow for parchment elements.
+const PARCHMENT_SHADOW := Color("#8A6A2E")
+
+## Warm gold used for focus indicators and field borders.
+const FOCUS_GOLD := Color("#F2C94C")
+
+## Softer gold for selected card borders.
+const FOCUS_GOLD_SOFT := Color("#FFE8A3")
+
+## Semi-transparent gold glow for focus states.
+const FOCUS_GLOW := Color(0.949, 0.788, 0.298, 0.33)
 
 ## Bright heading yellow.
 const HEADING_YELLOW := Color("#F6C51A")
@@ -56,17 +72,23 @@ const HEADING_YELLOW := Color("#F6C51A")
 ## Yellow — Play Now / quick primary action.
 const UI_YELLOW := Color("#95690F")
 
-## Blue — learning / adventure selection.
-const UI_BLUE := Color("#2B73B5")
+## Blue — learning / adventure / default selected.
+const UI_BLUE := Color("#2F7DBB")
 
 ## Green — friendly co-op / Play Together.
-const UI_GREEN := Color("#267C42")
+const UI_GREEN := Color("#2F8A4E")
 
-## Orange-Red — chaser / competitive / race.
-const UI_ORANGE_RED := Color("#A94D3B")
+## Orange-Red — competitive / race.
+const UI_ORANGE_RED := Color("#B95746")
 
 ## Purple — settings or special utility (reserved).
 const UI_PURPLE := Color("#6A4BA3")
+
+# ── Accent Colors (brighter, for icons & highlights on selected cards) ──────
+
+const BLUE_ACCENT := Color("#2F8DE4")
+const GREEN_ACCENT := Color("#8DBB4A")
+const RED_ACCENT := Color("#E86A4A")
 
 # ── Dark Category Tints (inactive card backgrounds for themed cards) ────────
 
@@ -77,11 +99,11 @@ const CARD_ORANGE_RED_DARK := Color("#3B211D")
 
 # ── Selected Card Accents ────────────────────────────────────────────────────
 
-## Warm cream border for selected/focused cards — matches paper icons.
-const SELECTED_BORDER_CREAM := Color("#F7E3AD")
+## Warm parchment border for selected/focused cards.
+const SELECTED_BORDER := Color("#F6EDD8")
 
-## Warm gold glow around focused cards (rgba 231,182,46, 0.28).
-const SELECTED_GLOW := Color(0.906, 0.714, 0.180, 0.28)
+## Semi-transparent warm glow around focused cards.
+const SELECTED_GLOW := Color(0.949, 0.788, 0.298, 0.33)
 
 ## Soft warm shadow for selected cards.
 const SELECTED_SHADOW := Color(0, 0, 0, 0.35)
@@ -93,36 +115,42 @@ const SELECTED_SHADOW := Color(0, 0, 0, 0.35)
 
 const BLUE := Color("#1188FF")
 const YELLOW := Color("#FFCC00")
-const BG_DARK := Color("#171B24")          # → BG_INK
+const BG_DARK := Color("#151A23")          # → BG_INK
 const BG_PAGE := Color("#11151D")          # → BG_INK_DEEP
 const OVERLAY := Color(0, 0, 0, 0.7)
 
 const GREEN := Color("#22AA44")
 const GREEN_DARK := Color("#14381F")       # → CARD_GREEN_DARK
-const GREEN_BORDER := Color("#384254")     # → CARD_BORDER_SOFT
-const GREEN_ACCENT := Color("#267C42")     # → UI_GREEN
+const GREEN_BORDER := Color("#2F394A")     # → CARD_BORDER_SOFT
+const GREEN_ACCENT_LEGACY := Color("#2F8A4E")  # → UI_GREEN
 const GREEN_HINT := Color(0.45, 0.82, 0.52)
 
 const GOLD := Color("#FFB800")
 const GOLD_DARK := Color("#3E2B08")        # → CARD_YELLOW_DARK
-const GOLD_BORDER := Color("#465166")      # → CARD_BORDER
+const GOLD_BORDER := Color("#3A4658")      # → CARD_BORDER
 const GOLD_ACCENT := Color("#95690F")      # → UI_YELLOW
 
 const TEAL := Color("#1AA89E")
 const TEAL_DARK := Color("#1C3148")        # → CARD_BLUE_DARK
-const TEAL_BORDER := Color("#384254")      # → CARD_BORDER_SOFT
-const TEAL_ACCENT := Color("#2B73B5")      # → UI_BLUE
+const TEAL_BORDER := Color("#2F394A")      # → CARD_BORDER_SOFT
+const TEAL_ACCENT := Color("#2F7DBB")      # → UI_BLUE
 
 const TEXT_ON_BRIGHT := Color("#112244")
 const BORDER_SUBTLE := Color(1, 1, 1, 0.1)
-const TEXT_SUBTITLE := Color("#B9BAC2")    # → TEXT_SECONDARY
+const TEXT_SUBTITLE := Color("#C9CCD4")    # → TEXT_SECONDARY
+const TEXT_DISABLED := Color("#9EA4B2")    # → TEXT_MUTED
 
 # Storybook-palette aliases used in earlier pass (keep for compat)
-const SELECTED_BLUE := Color("#2B73B5")    # → UI_BLUE
-const SELECTED_GREEN := Color("#267C42")   # → UI_GREEN
+const SELECTED_BLUE := Color("#2F7DBB")    # → UI_BLUE
+const SELECTED_GREEN := Color("#2F8A4E")   # → UI_GREEN
 const SELECTED_AMBER := Color("#95690F")   # → UI_YELLOW
-const SELECTED_TEAL := Color("#2B73B5")    # → UI_BLUE
-const SELECTED_ACCENT_YELLOW := Color("#E7B62E")  # → FOCUS_GOLD
+const SELECTED_TEAL := Color("#2F7DBB")    # → UI_BLUE
+const SELECTED_ACCENT_YELLOW := Color("#F2C94C")  # → FOCUS_GOLD
+const SELECTED_BORDER_CREAM := Color("#F6EDD8")  # → SELECTED_BORDER
+
+# Old names for paper cream
+const PAPER_CREAM := Color("#F6EDD8")      # → PARCHMENT
+const PAPER_CREAM_LIGHT := Color("#FFF0C8")
 
 # ── HUD & In-Game UI ────────────────────────────────────────────────────────
 
