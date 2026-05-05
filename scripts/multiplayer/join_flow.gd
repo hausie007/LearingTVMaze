@@ -11,6 +11,7 @@ const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
 const MP_RED        := Color("#C84848")
 const MP_RED_BORDER := Color("#E05050")
 const JOIN_GREEN    := Color(0.18, 0.62, 0.34)
+const REMOTE_GOAL_HAPTIC_MS := 500
 
 # ── Scene nodes ─────────────────────────────────────────────────────────────
 @onready var discovery_panel: Control = %DiscoveryPanel
@@ -40,13 +41,15 @@ var _controller_row: HBoxContainer = null
 var _controller_button: Button = null
 var _controller_left: Label = null
 var _controller_right: Label = null
+var _controller_size_row: HBoxContainer = null
+var _controller_size_button: Button = null
+var _controller_size_left: Label = null
+var _controller_size_right: Label = null
 var _char_row: HBoxContainer = null
 var _char_button: Button = null
 var _char_left: Label = null
 var _char_right: Label = null
 var _char_preview: CharacterPreview = null
-var _instruction_panel: PanelContainer = null
-var _instruction_label: Label = null
 var _settings_vbox: VBoxContainer = null
 var _join_card_container: MarginContainer = null
 var _join_card_panel: PanelContainer = null
@@ -55,12 +58,10 @@ var _join_card_focus: StyleBoxFlat = null
 var _join_card_tween: Tween = null
 var _pulse_tween: Tween = null
 var _pause_dialog: PauseDialog = null
-var _gameplay_banner: PanelContainer = null
-var _gameplay_banner_label: Label = null
 var _gameplay_char_preview: CharacterPreview = null
 var _gameplay_badge: Control = null
-var _current_goal_text: String = ""
-var _is_chaser_waiting: bool = false
+var _gameplay_badge_data: Dictionary = {}
+var _gameplay_badge_slot: Control = null
 
 # ── State ───────────────────────────────────────────────────────────────────
 var _hosts: Array = []
@@ -82,6 +83,8 @@ var _join_pending: bool = false  # true between join press and accept/reject
 var _game_started: bool = false
 var _unjoining: bool = false
 var _last_host_cfg: Dictionary = {}
+var _current_remote_goal_text: String = ""
+var _current_remote_role_tag: String = ""
 
 # ── Game Switcher UI (multi-game support) ───────────────────────────────────
 # Arrows flank the green join card: [‹]  [card]  [›]
@@ -114,8 +117,12 @@ func _ready() -> void:
 		NetworkManager.chaser_released.connect(_on_chaser_released)
 	if NetworkManager.has_signal("remote_goal_updated"):
 		NetworkManager.remote_goal_updated.connect(_on_remote_goal_updated)
+	if NetworkManager.has_signal("remote_result_updated"):
+		NetworkManager.remote_result_updated.connect(_on_remote_result_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
+	if Config != null and not Config.controller_size_changed.is_connected(_on_controller_size_changed):
+		Config.controller_size_changed.connect(_on_controller_size_changed)
 
 	_pause_dialog = PauseDialog.new()
 	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); _leave_session())
@@ -124,7 +131,7 @@ func _ready() -> void:
 
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
 	if pending_host.is_empty():
-		get_tree().change_scene_to_file(Scenes.HOME)
+		get_tree().call_deferred("change_scene_to_file", Scenes.HOME)
 		return
 	_selected_host = pending_host.duplicate(true)
 	_hosts = [_selected_host.duplicate(true)]
@@ -200,6 +207,10 @@ func _on_controls_changed(_new_mode: int) -> void:
 	if _joined:
 		_show_local_dpad_for_setup()
 
+func _on_controller_size_changed(_new_size: int) -> void:
+	_apply_dpad_layout()
+	_apply_responsive_layout()
+
 func _localize_ui() -> void:
 	discovery_title_label.text = tr("mp_join_discovery_title")
 	discovery_status_label.text = tr("mp_join_discovery_scanning")
@@ -216,6 +227,7 @@ func _enter_join_setup_mode() -> void:
 	_populate_from_host()
 	_update_character_selector()
 	_refresh_controller_layout()
+	_refresh_controller_size()
 	_apply_responsive_layout()
 	_configure_navigation()
 	if _join_button != null and not _join_button.disabled:
@@ -274,32 +286,6 @@ func _build_setup_layout() -> void:
 	_gameplay_char_preview.visible = false
 	_gameplay_char_preview.custom_minimum_size = Vector2(256, 256)
 	join_setup_center.add_child(_gameplay_char_preview)
-	
-	_gameplay_banner = PanelContainer.new()
-	_gameplay_banner.visible = false
-	var banner_style := UIHelpers.create_rounded_stylebox(Color(0.12, 0.13, 0.18, 0.95), UIColors.YELLOW, 12, 2)
-	banner_style.content_margin_left = 32; banner_style.content_margin_right = 32
-	banner_style.content_margin_top = 24; banner_style.content_margin_bottom = 24
-	_gameplay_banner.add_theme_stylebox_override("panel", banner_style)
-	
-	var banner_margin := MarginContainer.new()
-	banner_margin.add_theme_constant_override("margin_left", 48)
-	banner_margin.add_theme_constant_override("margin_right", 48)
-	banner_margin.add_theme_constant_override("margin_top", 32)
-	_gameplay_banner.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	banner_margin.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	banner_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_gameplay_banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	_gameplay_banner_label = Label.new()
-	_gameplay_banner_label.add_theme_font_size_override("font_size", 36)
-	_gameplay_banner_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	_gameplay_banner_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_gameplay_banner_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_gameplay_banner_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_gameplay_banner.add_child(_gameplay_banner_label)
-	banner_margin.add_child(_gameplay_banner)
-	join_setup_panel.add_child(banner_margin)
 
 	# Top spacer
 	_top_spacer = Control.new()
@@ -518,33 +504,16 @@ func _build_setup_layout() -> void:
 	_setup_arrow_visibility(_controller_button, _controller_left, _controller_right)
 	_settings_vbox.add_child(_controller_row)
 
-	# Settings -> Panel spacer
-	var sp5 := Control.new()
-	sp5.custom_minimum_size = Vector2(0, 8)
-	_main_vbox.add_child(sp5)
-
-	# ── Instruction panel (goal text only) ──────────────────────────────────
-	_instruction_panel = PanelContainer.new()
-	var panel_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.85),
-		Color(1, 1, 1, 0.12), 14, 1
-	)
-	panel_style.content_margin_left = 36
-	panel_style.content_margin_right = 36
-	panel_style.content_margin_top = 16
-	panel_style.content_margin_bottom = 16
-	_instruction_panel.add_theme_stylebox_override("panel", panel_style)
-	_instruction_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	_instruction_panel.custom_minimum_size = Vector2(800, 0)
-	_main_vbox.add_child(_instruction_panel)
-
-	_instruction_label = Label.new()
-	_instruction_label.add_theme_font_size_override("font_size", 26)
-	_instruction_label.add_theme_color_override("font_color", Color(1, 0.92, 0.6))
-	_instruction_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_instruction_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_instruction_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_instruction_panel.add_child(_instruction_label)
+	# Controller size row
+	var ctrl_size_data := _create_selector_row("setting_controller_size")
+	_controller_size_row = ctrl_size_data["row"] as HBoxContainer
+	_controller_size_left = ctrl_size_data["left"] as Label
+	_controller_size_button = ctrl_size_data["button"] as Button
+	_controller_size_right = ctrl_size_data["right"] as Label
+	_controller_size_button.pressed.connect(func(): _cycle_controller_size(1))
+	_setup_cycling(_controller_size_button, _cycle_controller_size)
+	_setup_arrow_visibility(_controller_size_button, _controller_size_left, _controller_size_right)
+	_settings_vbox.add_child(_controller_size_row)
 
 func _build_breadcrumb_row() -> Button:
 	return BreadcrumbRow.create()
@@ -622,10 +591,23 @@ func _cycle_controller_layout(dir: int) -> void:
 	_refresh_controller_layout()
 	_apply_dpad_layout()
 
+func _cycle_controller_size(dir: int) -> void:
+	if Config == null or Config.CONTROLLER_SIZE_KEYS.is_empty(): return
+	Config.controller_size = (Config.controller_size + dir + Config.CONTROLLER_SIZE_KEYS.size()) % Config.CONTROLLER_SIZE_KEYS.size()
+	Config.save_settings()
+	_refresh_controller_size()
+	_apply_dpad_layout()
+	_apply_responsive_layout()
+
 func _refresh_controller_layout() -> void:
 	if Config == null or _controller_button == null: return
 	if Config.on_screen_controls >= 0 and Config.on_screen_controls < Config.CONTROLS_KEYS.size():
 		_controller_button.text = tr(Config.CONTROLS_KEYS[Config.on_screen_controls])
+
+func _refresh_controller_size() -> void:
+	if Config == null or _controller_size_button == null: return
+	if Config.controller_size >= 0 and Config.controller_size < Config.CONTROLLER_SIZE_KEYS.size():
+		_controller_size_button.text = tr(Config.CONTROLLER_SIZE_KEYS[Config.controller_size])
 
 func _find_next_enabled_character(start_idx: int, dir: int) -> int:
 	if _character_catalog.is_empty(): return -1
@@ -803,7 +785,6 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	if not cfg.is_empty():
 		_last_host_cfg = cfg.duplicate(true)
 		_update_breadcrumbs(cfg)
-		_update_instruction_text(cfg)
 	_update_player_slots(_last_host_cfg, players)
 	_taken_character_ids.clear()
 	for info in players.values():
@@ -849,13 +830,15 @@ func _on_join_accepted(peer_id: int, state: Dictionary) -> void:
 		my_info = players[str(peer_id)] as Dictionary
 		character_id = String(my_info.get("character_id", character_id))
 	_my_role = String(my_info.get("role", ""))
-	_update_instruction_text(_last_host_cfg)
 	_transition_to_joined(character_id)
 
 func _on_join_rejected(reason: String) -> void:
 	_join_pending = false
 	# Suppress network callbacks that fire as a side-effect of a voluntary unjoin.
 	if _unjoining: return
+	if reason == "mp_kicked_by_host":
+		_unjoin("mp_kicked_by_host")
+		return
 	if _should_return_to_discovery(reason):
 		_leave_session()
 		return
@@ -869,8 +852,6 @@ func _on_game_started(_session: Dictionary) -> void:
 		_oled_guard.stop()
 	modulate.a = 1.0  # Restore opacity in case tier-1 had dimmed us
 	if _main_vbox != null: _main_vbox.visible = false
-
-	if _instruction_panel != null: _instruction_panel.visible = false
 	
 	if _gameplay_char_preview != null:
 		_gameplay_char_preview.visible = false
@@ -883,16 +864,22 @@ func _on_game_started(_session: Dictionary) -> void:
 		_my_role = session_role
 		
 	var session_config := _session.get("config", _last_host_cfg) as Dictionary
-	_update_instruction_text(session_config)
+	_last_host_cfg = session_config.duplicate(true)
+	var role_tag := _role_tag_for_session(session_role, session_config)
+	_current_remote_role_tag = role_tag
+	_current_remote_goal_text = ""
+	my_info["role"] = role_tag
+	if not _selected_character_palette.is_empty():
+		my_info["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
 		
-	if _gameplay_banner != null:
-		_gameplay_banner.visible = false
-
 	# Construct the player badge
-	if _gameplay_badge != null:
-		_gameplay_badge.queue_free()
+	if _gameplay_badge_slot != null:
+		_gameplay_badge_slot.queue_free()
+		_gameplay_badge_slot = null
+		_gameplay_badge = null
 	
 	# Pass my_info to build the chip. We use scale_mult=2.0 to make it large on the phone screen
+	_gameplay_badge_data = my_info.duplicate(true)
 	_gameplay_badge = UIHelpers.build_player_chip(my_info, 1, 2.0)
 	
 	# Position the badge in the center vertically, opposite the D-Pad horizontally
@@ -902,7 +889,9 @@ func _on_game_started(_session: Dictionary) -> void:
 	
 	var alignment := MarginContainer.new()
 	alignment.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_gameplay_badge_slot = alignment
 	
+	var _is_rtl := Config.on_screen_controls == Config.ControlsMode.RIGHT_HANDED
 	if _is_rtl:
 		# D-Pad is on the right, put badge on the left
 		alignment.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
@@ -921,7 +910,6 @@ func _on_game_started(_session: Dictionary) -> void:
 	join_setup_panel.add_child(margin_container)
 
 func _on_chaser_countdown_updated(remaining: int) -> void:
-	_is_chaser_waiting = true
 	if _gameplay_badge == null: return
 	
 	var lbl := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
@@ -934,22 +922,28 @@ func _on_chaser_countdown_updated(remaining: int) -> void:
 			lbl.visible = false
 
 func _on_chaser_released() -> void:
-	_is_chaser_waiting = false
-	if OS.has_feature("mobile"): Input.vibrate_handheld(500)
+	_vibrate_remote_goal_change()
 	if _gameplay_badge != null:
 		var lbl := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
 		if lbl != null:
 			lbl.text = ""
 			lbl.visible = false
 
-func _on_remote_goal_updated(goal_text: String) -> void:
-	_current_goal_text = goal_text
-	if not _joined:
-		if _instruction_label != null:
-			_instruction_label.text = goal_text
-	else:
-		if _my_role != NetworkManager.ROLE_CHASER:
-			_is_chaser_waiting = false
+func _on_remote_goal_updated(goal_text: String, role_tag: String = "") -> void:
+	var changed := goal_text != _current_remote_goal_text
+	changed = changed or role_tag != _current_remote_role_tag
+	_current_remote_role_tag = role_tag
+	_refresh_gameplay_badge_role(role_tag)
+	_current_remote_goal_text = goal_text
+	if changed:
+		_vibrate_remote_goal_change()
+
+func _on_remote_result_updated(title_text: String, character_ids: Array[String]) -> void:
+	if _gameplay_badge_slot == null:
+		return
+	var header := WinScreen.build_title_header(title_text, character_ids, 124, 90)
+	_replace_gameplay_badge_control(header)
+	_vibrate_remote_goal_change()
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null: return
@@ -960,8 +954,6 @@ func _transition_to_joined(character_id: String) -> void:
 	if _join_button != null: _join_button.visible = false
 	if _join_error_label != null: _join_error_label.visible = false
 	if _settings_vbox != null: _settings_vbox.visible = false
-	if _instruction_label != null:
-		_instruction_label.text = tr("mp_waiting_for_host")
 	_apply_character_preview(character_id, _char_preview)
 	_cache_character_palette(character_id)
 	_apply_selected_avatar_to_global_dpad()
@@ -976,12 +968,14 @@ func _apply_dpad_layout() -> void:
 		UIHelpers.apply_dpad_layout(join_setup_center, Config.on_screen_controls)
 
 func _configure_navigation() -> void:
-	# Chain: char_button → controller_button → join_button
+	# Chain: char_button → controller layout → controller size → join_button
 	var focusable: Array[Button] = []
 	if _char_button != null and not _char_button.disabled and _char_button.visible:
 		focusable.append(_char_button)
 	if _controller_button != null and _controller_button.visible:
 		focusable.append(_controller_button)
+	if _controller_size_button != null and _controller_size_button.visible:
+		focusable.append(_controller_size_button)
 	if _join_button != null and _join_button.visible and not _join_button.disabled:
 		focusable.append(_join_button)
 	for i in range(focusable.size()):
@@ -1006,8 +1000,8 @@ func _apply_responsive_layout() -> void:
 		_top_spacer.custom_minimum_size.y = clampf(viewport_height * 0.005, 2.0, 8.0)
 
 	if _logo != null:
-		var logo_width: float = clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
-		var logo_height: float = clampf(logo_width * 0.214, 80.0, 166.0)
+		var logo_width: float = clampf(available_width * (0.24 if short_screen else 0.30), 200.0, 500.0)
+		var logo_height: float = clampf(logo_width * 0.214, 40.0, 107.0)
 		_logo.custom_minimum_size = Vector2(logo_width, logo_height)
 
 	if _title_label != null:
@@ -1041,7 +1035,7 @@ func _apply_responsive_layout() -> void:
 	var sel_w := clampf(available_width * 0.32, 380.0, 500.0)
 	var sel_h: float = 58.0 if short_screen else 66.0
 	var sel_fs: int = 28 if short_screen else 31
-	for btn in [_char_button, _controller_button]:
+	for btn in [_char_button, _controller_button, _controller_size_button]:
 		if btn != null:
 			btn.custom_minimum_size = Vector2(sel_w, sel_h)
 			btn.add_theme_font_size_override("font_size", sel_fs)
@@ -1051,14 +1045,6 @@ func _apply_responsive_layout() -> void:
 		var jw := clampf(available_width * 0.22, 260.0, 380.0)
 		_join_button.custom_minimum_size = Vector2(jw, 62.0 if short_screen else 68.0)
 		_join_button.add_theme_font_size_override("font_size", 26 if short_screen else 30)
-
-	# Instruction panel
-	if _instruction_panel != null:
-		_instruction_panel.custom_minimum_size.x = clampf(available_width * 0.7, 600.0, 1100.0)
-		if _instruction_label != null:
-			_instruction_label.add_theme_font_size_override("font_size", 24 if short_screen else 28)
-
-
 
 func _available_width() -> float:
 	var viewport_size := get_viewport_rect().size
@@ -1079,6 +1065,51 @@ func _cache_character_palette(character_id: String) -> void:
 	_selected_character_palette = AvatarAccent.palette_from_character_id(character_id)
 	if _selected_character_palette.is_empty():
 		_selected_character_palette = AvatarAccent.safe_palette()
+
+func _role_tag_for_session(role: String, session_config: Dictionary) -> String:
+	var game_style := String(session_config.get("game_style", NetworkManager.STYLE_PATH))
+	var mission_id := String(session_config.get("mission_id", ""))
+	var chaser_enabled := bool(session_config.get("chaser_enabled", false))
+	if game_style == NetworkManager.STYLE_RACE:
+		return NetworkManager.ROLE_RACER
+	if game_style == NetworkManager.STYLE_NEXT_SYMBOL and not chaser_enabled:
+		return ""
+	if role == NetworkManager.ROLE_CHASER:
+		return NetworkManager.ROLE_CHASER
+	if mission_id == MissionCatalog.MISSION_FIND_EXIT:
+		return "exit"
+	return role
+
+func _refresh_gameplay_badge_role(role_tag: String) -> void:
+	if _gameplay_badge == null:
+		return
+	var countdown_text := ""
+	var countdown_visible := false
+	var old_countdown := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
+	if old_countdown != null:
+		countdown_text = old_countdown.text
+		countdown_visible = old_countdown.visible
+	_gameplay_badge_data["role"] = role_tag
+	if not _selected_character_palette.is_empty():
+		_gameplay_badge_data["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
+	var new_badge := UIHelpers.build_player_chip(_gameplay_badge_data, 1, 2.0)
+	_replace_gameplay_badge_control(new_badge)
+	var new_countdown := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
+	if new_countdown != null:
+		new_countdown.text = countdown_text
+		new_countdown.visible = countdown_visible
+
+func _replace_gameplay_badge_control(new_control: Control) -> void:
+	if _gameplay_badge_slot == null:
+		return
+	for child in _gameplay_badge_slot.get_children():
+		child.queue_free()
+	_gameplay_badge_slot.add_child(new_control)
+	_gameplay_badge = new_control
+
+func _vibrate_remote_goal_change() -> void:
+	if OS.has_feature("mobile"):
+		Input.vibrate_handheld(REMOTE_GOAL_HAPTIC_MS)
 
 func _apply_selected_avatar_to_global_dpad() -> void:
 	if _local_dpad_node == null: return
@@ -1129,7 +1160,7 @@ func _on_local_dpad_action(action: StringName, pressed: bool) -> void:
 
 ## Disconnect from the current session and restore the pre-join UI so the
 ## player can reconfigure and join again without going back to the home screen.
-func _unjoin() -> void:
+func _unjoin(message_key: String = "mp_join_disconnected") -> void:
 	if _leaving or _unjoining: return
 	_unjoining = true
 	NetworkManager.leave_session()
@@ -1137,11 +1168,9 @@ func _unjoin() -> void:
 	_joined = false
 	_game_started = false
 	# Hide gameplay-only overlays
-	if _gameplay_banner != null: _gameplay_banner.visible = false
 	if _gameplay_char_preview != null: _gameplay_char_preview.visible = false
 	# Restore pre-join UI elements
 	if _main_vbox != null: _main_vbox.visible = true
-	if _instruction_panel != null: _instruction_panel.visible = true
 	if _join_button != null: _join_button.visible = true
 	if _settings_vbox != null: _settings_vbox.visible = true
 	# Show a neutral, localized "disconnected" message briefly.
@@ -1149,17 +1178,19 @@ func _unjoin() -> void:
 	# cannot overwrite the message with "host unavailable" during that window.
 	if _join_error_label != null:
 		_join_error_label.visible = true
-		_join_error_label.add_theme_color_override("font_color", Color(0.6, 0.9, 0.6, 1.0))
-		_join_error_label.text = tr("mp_join_disconnected")
+		if message_key == "mp_kicked_by_host":
+			_join_error_label.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
+		else:
+			_join_error_label.add_theme_color_override("font_color", Color(0.6, 0.9, 0.6, 1.0))
+		_join_error_label.text = tr(message_key)
 	var lbl_ref := _join_error_label
 	get_tree().create_timer(3.0).timeout.connect(func():
 		_unjoining = false
-		if is_instance_valid(lbl_ref) and lbl_ref.text == tr("mp_join_disconnected"):
+		if is_instance_valid(lbl_ref) and lbl_ref.text == tr(message_key):
 			lbl_ref.text = ""
 		if is_instance_valid(lbl_ref):
 			lbl_ref.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
 	)
-	_update_instruction_text(_last_host_cfg)
 	_update_join_action_state()
 	_configure_navigation()
 	# Focus the join card button and zoom the card unconditionally so the user
@@ -1308,7 +1339,6 @@ func _populate_from_host() -> void:
 		}
 	}
 	_update_player_slots(_selected_host, initial_players)
-	_update_instruction_text(_selected_host)
 	_update_taken_character_ids_from_selected_host()
 
 func _update_breadcrumbs(cfg: Dictionary) -> void:
@@ -1348,42 +1378,6 @@ func _update_breadcrumbs(cfg: Dictionary) -> void:
 	var s2 := "%s%s  •  %s  •  🟢 %s" % [pickup_title, lang_text, action_text, players_tag]
 	var sl2 := _breadcrumb2.get_meta("summary") as Label
 	if sl2 != null: sl2.text = s2
-
-func _update_instruction_text(cfg: Dictionary) -> void:
-	var goal_key := String(cfg.get("mission_goal_key", ""))
-	if goal_key.is_empty():
-		var mission_id := String(cfg.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
-		var pickup := MissionCatalog.pickup_for_training(String(cfg.get("training_type", "words")))
-		var chaser := bool(cfg.get("chaser_enabled", false))
-		goal_key = MissionCatalog.goal_key(mission_id, pickup, chaser, true)
-	_current_goal_text = tr(goal_key) if not goal_key.is_empty() else ""
-	
-	var chaser_enabled := bool(cfg.get("chaser_enabled", false))
-	var game_style := String(cfg.get("game_style", ""))
-	var is_chaser_variant := chaser_enabled and (game_style == NetworkManager.STYLE_PATH or game_style == NetworkManager.STYLE_NEXT_SYMBOL)
-	var display_text := _current_goal_text
-	
-	if is_chaser_variant and _my_role == NetworkManager.ROLE_CHASER:
-		_is_chaser_waiting = true
-		var chaser_level := int(cfg.get("chaser_level", 1))
-		var difficulty := int(cfg.get("difficulty", 1))
-		var initial_moves := 10
-		match chaser_level:
-			1: initial_moves = 10 + difficulty * 5
-			2: initial_moves = 6 + difficulty * 3
-			3: initial_moves = 3 + difficulty * 1
-			4: initial_moves = 2
-		display_text = tr("mp_chaser_waiting_steps") % initial_moves
-	else:
-		_is_chaser_waiting = false
-	
-	if _gameplay_banner_label != null: _gameplay_banner_label.text = display_text
-	
-	if _instruction_label == null: return
-	if _joined:
-		_instruction_label.text = tr("mp_waiting_for_host")
-		return
-	_instruction_label.text = display_text
 
 # ── Player Slots ────────────────────────────────────────────────────────────
 

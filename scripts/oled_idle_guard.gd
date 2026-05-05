@@ -33,7 +33,7 @@ signal idle_reset
 # ── Configuration ─────────────────────────────────────────────────────────────
 
 ## Set to 1.0 for release. Set to 0.1 to run all timers 10× faster for testing.
-const DEBUG_TIME_SCALE: float = 0.1
+const DEBUG_TIME_SCALE: float = 1.0
 
 ## Seconds of no input before tier-1 fires. Default: 45 s.
 var tier1_sec: float = 45.0

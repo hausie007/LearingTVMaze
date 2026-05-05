@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4th0ndelponv"
-path="res://.godot/imported/p_chaser_1.png-d12b75dbbd9c6cc1a78373af6317646e.ctex"
+uid="uid://pqh01fhb46oa"
+path="res://.godot/imported/i_2players_crop.png-5793ff9d85cd06b963a1149a4bfe0212.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/default/p_chaser_1.png"
-dest_files=["res://.godot/imported/p_chaser_1.png-d12b75dbbd9c6cc1a78373af6317646e.ctex"]
+source_file="res://images/icons/i_2players_crop.png"
+dest_files=["res://.godot/imported/i_2players_crop.png-5793ff9d85cd06b963a1149a4bfe0212.ctex"]
 
 [params]
 

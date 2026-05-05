@@ -166,8 +166,10 @@ func _build_ui() -> void:
 
 	_panel = PanelContainer.new()
 	_panel_style = UIHelpers.create_rounded_stylebox(
-		UIColors.BG_DARK, UIColors.BLUE, 20, 4
+		UIColors.CARD_NEUTRAL, UIColors.SELECTED_BORDER, 20, 6
 	)
+	_panel_style.shadow_color = UIColors.SELECTED_SHADOW
+	_panel_style.shadow_size = 12
 	_panel_style.content_margin_left = 60
 	_panel_style.content_margin_right = 60
 	_panel_style.content_margin_top = 40

@@ -14,7 +14,8 @@ signal input_received(peer_id: int, direction: Vector2i, pressed: bool)
 signal debug_status_changed(scope: String, message: String)
 signal chaser_countdown_updated(remaining: int)
 signal chaser_released()
-signal remote_goal_updated(goal_text: String)
+signal remote_goal_updated(goal_text: String, role_tag: String)
+signal remote_result_updated(title_text: String, character_ids: Array[String])
 
 const APP_ID := "learning_maze"
 const PROTOCOL_VERSION := 1
@@ -613,6 +614,27 @@ func _on_peer_disconnected(peer_id: int) -> void:
 		players.erase(peer_id)
 		_sync_lobby_to_clients()
 
+func kick_player(peer_id: int) -> void:
+	if not multiplayer.is_server() or peer_id == multiplayer.get_unique_id():
+		return
+	if players.has(peer_id):
+		var info = players[peer_id] as Dictionary
+		if info.get("is_ai", false):
+			players.erase(peer_id)
+			_sync_lobby_to_clients()
+			lobby_updated.emit(_build_lobby_state())
+			return
+			
+		rpc_id(peer_id, "rpc_kicked_by_host")
+		var enet_peer := multiplayer.multiplayer_peer as ENetMultiplayerPeer
+		if enet_peer != null:
+			enet_peer.disconnect_peer(peer_id, true)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_kicked_by_host() -> void:
+	join_rejected.emit("mp_kicked_by_host")
+	leave_session()
+
 func _on_connected_to_server() -> void:
 	if _pending_join_character_id.is_empty():
 		join_rejected.emit("Character not selected")
@@ -775,6 +797,11 @@ func _host_signature(info: Dictionary) -> String:
 	return JSON.stringify(normalized)
 
 @rpc("authority", "call_remote", "reliable")
-func rpc_update_remote_goal(goal_text: String) -> void:
+func rpc_update_remote_goal(goal_text: String, role_tag: String = "") -> void:
 	if not multiplayer.is_server():
-		remote_goal_updated.emit(goal_text)
+		remote_goal_updated.emit(goal_text, role_tag)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_update_remote_result(title_text: String, character_ids: Array[String]) -> void:
+	if not multiplayer.is_server():
+		remote_result_updated.emit(title_text, character_ids)

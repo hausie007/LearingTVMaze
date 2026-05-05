@@ -1,21 +1,28 @@
 {
-  "title": "Cars",
+  "title":"Paper",
   "assets": {
-		"start": "start.png",
-		"end": "end.png"
+	"player": "p_player.png",
+	"chaser": "p_chaser.png",
+	"background": "background.png",
+	"start": "p_start.png",
+	"end": "p_finish.png",
+	"collectible": "p_collectible.png"
   },
   "colors": {
-		"wall": "#bfc7d1",
-		"floor": "#2e3340",
-		"start_cell": "#365c49",
-		"end_cell": "#324d6c"
+	"wall": "#0F1720",
+	"wall_border": "#00000000",
+	"start_cell": "#DCE7BF",
+	"end_cell": "#FFE59A",
+	"player": "#3E7FD1"
   },
-	"chaser":{
-		"image": "chaser_1.png",
-		"fps": 1,
-		"frames": [
-	  	"p_chaser_1.png",
-    	"p_chaser_2.png"
-		]
-	}
+  "background": {
+	"tiled": true,
+	"full_screen": false,
+	"color": "#0F1720"
+  },
+  "collectible": {
+	"color": "#F2C94C",
+	"text_color": "#3F6670",
+	"image": "p_collectible.png"
+  }
 }

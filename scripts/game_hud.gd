@@ -157,7 +157,7 @@ func set_players(players: Array[Dictionary]) -> void:
 		_right_player_strip.visible = players.size() > 1
 
 	for i in range(players.size()):
-		var chip := UIHelpers.build_player_chip(players[i], players.size())
+		var chip := UIHelpers.build_player_chip(players[i], players.size(), 1.4)
 		if i % 2 == 1 and _right_player_strip != null:
 			_right_player_strip.add_child(chip)
 		else:

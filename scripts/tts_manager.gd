@@ -46,10 +46,7 @@ var _semaphore: Semaphore = Semaphore.new()
 var _exit_flag: bool = false
 
 ## Pending TTS request (only the LATEST request is kept; older ones are dropped).
-var _pending_text: String = ""
-var _pending_voice: String = ""
-var _pending_rate: float = 1.0
-var _pending_volume: float = 70.0
+var _pending_segments: Array[Dictionary] = []
 var _pending_version: int = 0
 
 ## Track latest request ID to allow interrupting the worker thread (main thread only).
@@ -165,6 +162,9 @@ func is_available(lang_code: String) -> bool:
 ## Queue text to be spoken. Only the most recent request is kept.
 func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: float = 70.0) -> void:
 	var lang: String = lang_override if not lang_override.is_empty() else Config.get_effective_learning_language()
+	var segment := _make_segment(text, lang, rate, volume)
+	if segment.is_empty():
+		return
 
 	_current_version += 1
 	
@@ -172,18 +172,39 @@ func speak(text: String, rate: float = 1.0, lang_override: String = "", volume: 
 	DisplayServer.tts_stop()
 
 	_mutex.lock()
-	# Always lowercase for TTS to suppress "Capital/Big" announcements (common in cs, el, etc.)
-	var processed_text = text.to_lower()
-	
-	# For single letters in specific languages, adding a period often helps the engine
-	# just speak the letter name instead of identifying the case.
-	if processed_text.length() == 1 and lang in ["el", "cs"]:
-		processed_text += "."
-		
-	_pending_text = processed_text
-	_pending_voice = lang
-	_pending_rate = rate
-	_pending_volume = volume
+	_pending_segments = [segment]
+	_pending_version = _current_version
+	_mutex.unlock()
+
+	_semaphore.post()
+
+
+## Queue multiple speech segments in order. Each segment can specify:
+## {"text": String, "lang": String, "rate": float, "volume": float, "pause_ms": int}
+func speak_segments(segments: Array[Dictionary]) -> void:
+	var prepared_segments: Array[Dictionary] = []
+	for segment in segments:
+		var text := String(segment.get("text", ""))
+		var lang := String(segment.get("lang", ""))
+		if lang.is_empty():
+			lang = Config.get_effective_learning_language()
+		var prepared := _make_segment(
+			text,
+			lang,
+			float(segment.get("rate", 1.0)),
+			float(segment.get("volume", 70.0)),
+			int(segment.get("pause_ms", 400))
+		)
+		if not prepared.is_empty():
+			prepared_segments.append(prepared)
+	if prepared_segments.is_empty():
+		return
+
+	_current_version += 1
+	DisplayServer.tts_stop()
+
+	_mutex.lock()
+	_pending_segments = prepared_segments
 	_pending_version = _current_version
 	_mutex.unlock()
 
@@ -196,7 +217,7 @@ func stop() -> void:
 	DisplayServer.tts_stop()
 	
 	_mutex.lock()
-	_pending_text = ""
+	_pending_segments.clear()
 	_pending_version = _current_version
 	_mutex.unlock()
 	
@@ -211,6 +232,40 @@ func warm_up(lang: String, text: String = "") -> void:
 	speak(text, 1.0, lang, 40.0)
 
 
+# ── Speech Segment Helpers ───────────────────────────────────────────────────
+
+func _make_segment(
+	text: String,
+	lang: String,
+	rate: float = 1.0,
+	volume: float = 70.0,
+	pause_ms: int = 400
+) -> Dictionary:
+	var processed_text := text.strip_edges().to_lower()
+	if processed_text.is_empty():
+		return {}
+
+	# For single letters in specific languages, adding a period often helps the engine
+	# just speak the letter name instead of identifying the case.
+	if processed_text.length() == 1 and lang in ["el", "cs"]:
+		processed_text += "."
+
+	return {
+		"text": processed_text,
+		"lang": lang,
+		"rate": rate,
+		"volume": volume,
+		"pause_ms": pause_ms,
+	}
+
+
+func _is_interrupted(local_version: int) -> bool:
+	_mutex.lock()
+	var interrupted := _pending_version > local_version
+	_mutex.unlock()
+	return interrupted
+
+
 # ── Worker Thread ────────────────────────────────────────────────────────────
 
 ## Runs in a background thread. Waits for semaphore posts, then speaks.
@@ -218,30 +273,38 @@ func _worker_loop() -> void:
 	while true:
 		_semaphore.wait()
 
-		var text: String = ""
-		var lang: String = ""
-		var rate: float = 1.0
-		var volume: float = 70.0
+		var segments: Array[Dictionary] = []
 
 		_mutex.lock()
 		if _exit_flag:
 			_mutex.unlock()
 			break
 
-		text = _pending_text
-		lang = _pending_voice
-		rate = _pending_rate
-		volume = _pending_volume
+		segments = _pending_segments.duplicate(true)
 		var local_version: int = _pending_version
-		_pending_text = ""
+		_pending_segments.clear()
 		_mutex.unlock()
 
-		if not text.is_empty():
-			# Wait for voice scan to complete before resolving voice ID
+		for segment in segments:
+			if _exit_flag or _is_interrupted(local_version):
+				break
+
+			var text := String(segment.get("text", ""))
+			var lang := String(segment.get("lang", ""))
+			var rate := float(segment.get("rate", 1.0))
+			var volume := float(segment.get("volume", 70.0))
+			var pause_ms := int(segment.get("pause_ms", 400))
+			if text.is_empty():
+				continue
+
+			# Wait for voice scan to complete before resolving voice ID.
 			while not tts_ready:
 				OS.delay_msec(50)
-				if _exit_flag: return
-				
+				if _exit_flag or _is_interrupted(local_version):
+					break
+			if _exit_flag or _is_interrupted(local_version):
+				break
+
 			var final_voice_id := get_voice(lang)
 
 			DisplayServer.tts_stop()
@@ -257,9 +320,7 @@ func _worker_loop() -> void:
 					continue
 
 				# INTERRUPT CHECK: Before starting speech
-				_mutex.lock()
-				var interrupted = (_pending_version > local_version)
-				_mutex.unlock()
+				var interrupted = _is_interrupted(local_version)
 				
 				if interrupted or _exit_flag:
 					break
@@ -272,9 +333,7 @@ func _worker_loop() -> void:
 				
 				# Polling loop: block this background thread until this specific sentence is finished
 				while DisplayServer.tts_is_speaking() and not _exit_flag:
-					_mutex.lock()
-					interrupted = (_pending_version > local_version)
-					_mutex.unlock()
+					interrupted = _is_interrupted(local_version)
 					
 					if interrupted:
 						break
@@ -285,17 +344,15 @@ func _worker_loop() -> void:
 					break
 					
 				# Force a clean, deliberate pause between sentences naturally
-				var pause_ms = 400
-				while pause_ms > 0 and not _exit_flag:
-					_mutex.lock()
-					interrupted = (_pending_version > local_version)
-					_mutex.unlock()
+				var remaining_pause_ms := pause_ms
+				while remaining_pause_ms > 0 and not _exit_flag:
+					interrupted = _is_interrupted(local_version)
 					
 					if interrupted:
 						break
 						
 					OS.delay_msec(50)
-					pause_ms -= 50
+					remaining_pause_ms -= 50
 					
 				if interrupted or _exit_flag:
 					break

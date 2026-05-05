@@ -52,9 +52,8 @@ var _maze_size_button: Button = null
 var _maze_size_title: Label = null
 var _maze_size_left: Label = null
 var _maze_size_right: Label = null
-var _theme_preview_container: Control = null
+var _theme_preview_container: PanelContainer = null
 var _theme_preview: CharacterPreview = null
-var _theme_backplate: Panel = null
 
 # Step 2 settings (Language)
 var _lang_button: Button = null
@@ -71,9 +70,9 @@ var _character_button: Button = null
 var _character_left: Label = null
 var _character_right: Label = null
 var _character_row: HBoxContainer = null
-var _character_preview_container: Control = null
+var _character_preview_wrapper: Control = null
+var _character_preview_container: PanelContainer = null
 var _character_preview: CharacterPreview = null
-var _character_backplate: Panel = null
 
 
 # ── State ────────────────────────────────────────────────────────────────────
@@ -88,6 +87,7 @@ var _theme_preview_loader: ThemeLoader = null
 var _maze_size_idx: int = 0
 var _lang_idx: int = 0
 var _chaser_speed_idx: int = 1
+var _chaser_delay_idx: int = 0
 var _character_catalog: Array[Dictionary] = []
 var _character_idx: int = 0
 
@@ -198,6 +198,9 @@ func _initialize_state() -> void:
 	var saved_level: int = int(Config.chaser_level)
 	var level_idx := MissionCatalog.CHASER_TUNING_LEVELS.find(saved_level)
 	_chaser_speed_idx = level_idx if level_idx >= 0 else 1
+	var delays := MissionCatalog.get_unique_delay_levels(_maze_size_idx)
+	var delay_idx := delays.find(saved_level)
+	_chaser_delay_idx = delay_idx if delay_idx >= 0 else 0
 
 # ── Layout Building ──────────────────────────────────────────────────────────
 
@@ -420,21 +423,25 @@ func _build_step1_settings() -> void:
 	_setup_cycling(_maze_size_button, _cycle_maze_size)
 	_setup_arrow_visibility(_maze_size_button, _maze_size_left, _maze_size_right)
 
-	_theme_preview_container = Control.new()
+	_theme_preview_container = PanelContainer.new()
 	_theme_preview_container.name = "ThemePreviewContainer"
-	_theme_preview_container.clip_contents = false
+	_theme_preview_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_theme_preview_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_theme_preview_container.add_theme_stylebox_override("panel", _create_parchment_style())
 	settings_row.add_child(_theme_preview_container)
 
-	# Parchment backplate — paper-cutout backing behind the character sprite
-	_theme_backplate = _create_parchment_backplate()
-	_theme_preview_container.add_child(_theme_backplate)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 8)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_right", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	_theme_preview_container.add_child(margin)
 
 	_theme_preview = CharacterPreview.new()
 	_theme_preview.name = "ThemePreview"
-	_theme_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	_theme_preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_theme_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_theme_preview.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_theme_preview_container.add_child(_theme_preview)
+	margin.add_child(_theme_preview)
 
 func _build_step2_settings() -> void:
 	var settings := _step2.get_settings_area()
@@ -460,27 +467,37 @@ func _build_step3_settings() -> void:
 	_setup_cycling(_character_button, _cycle_character)
 	_setup_arrow_visibility(_character_button, _character_left, _character_right)
 
-	# Character preview — embedded directly in the row's 'extras' container
-	_character_preview_container = Control.new()
+	# We wrap the PanelContainer in a raw Control so it doesn't force the row height to expand.
+	_character_preview_wrapper = Control.new()
+	_character_preview_wrapper.name = "CharPreviewWrapper"
+	_character_preview_wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_character_preview_wrapper.visible = false
+
+	_character_preview_container = PanelContainer.new()
 	_character_preview_container.name = "CharPreviewOverlay"
 	_character_preview_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_character_preview_container.clip_contents = false
-	_character_preview_container.visible = false
+	_character_preview_container.add_theme_stylebox_override("panel", _create_parchment_style())
+	_character_preview_container.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_character_preview_wrapper.add_child(_character_preview_container)
 
-	# Parchment backplate for character preview
-	_character_backplate = _create_parchment_backplate()
-	_character_preview_container.add_child(_character_backplate)
+	var char_margin := MarginContainer.new()
+	char_margin.add_theme_constant_override("margin_left", 8)
+	char_margin.add_theme_constant_override("margin_top", 8)
+	char_margin.add_theme_constant_override("margin_right", 8)
+	char_margin.add_theme_constant_override("margin_bottom", 8)
+	char_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_character_preview_container.add_child(char_margin)
 
 	_character_preview = CharacterPreview.new()
 	_character_preview.name = "CharPreview"
-	_character_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	_character_preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_character_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_character_preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_character_preview_container.add_child(_character_preview)
+	char_margin.add_child(_character_preview)
 	
 	var extras := _character_row.get_meta("extras") as Container
 	if extras != null:
-		extras.add_child(_character_preview_container)
+		extras.add_child(_character_preview_wrapper)
 
 	# Chaser speed/delay row (visible only when chaser action is focused)
 	_chaser_speed_row = _create_selector_row("setting_chaser_speed")
@@ -605,8 +622,8 @@ func _go_back_to_step(target: int) -> void:
 	if target <= 2:
 		_step3.hide_step()
 
-		if _character_preview_container != null:
-			_character_preview_container.visible = false
+		if _character_preview_wrapper != null:
+			_character_preview_wrapper.visible = false
 	if target <= 1:
 		_step2.hide_step()
 	# Re-expand target
@@ -668,7 +685,15 @@ func _start_multiplayer(with_chaser: bool) -> void:
 	var training := MissionCatalog.training_for_pickup(_selected_pickup)
 	var mission_title := tr(MissionCatalog.mission_title_key(_selected_mission))
 	var pickup_title := tr(MissionCatalog.pickup_title_key(_selected_pickup))
-	var chaser_level: int = MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx] if with_chaser else Config.ChaserLevel.OFF
+	var chaser_level: int = Config.ChaserLevel.OFF
+	if with_chaser:
+		if _selected_action == ACTION_VERSUS:
+			var delays := MissionCatalog.get_unique_delay_levels(_maze_size_idx)
+			_chaser_delay_idx = clampi(_chaser_delay_idx, 0, max(0, delays.size() - 1))
+			chaser_level = delays[_chaser_delay_idx]
+		else:
+			chaser_level = MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx]
+	
 	var difficulty := clampi(_maze_size_idx, 0, max(0, Config.DIFF_KEYS.size() - 1))
 
 	var character_id := ""
@@ -726,7 +751,14 @@ func _cycle_lang(dir: int) -> void:
 	_update_all_labels()
 
 func _cycle_chaser_speed(dir: int) -> void:
-	_chaser_speed_idx = (_chaser_speed_idx + dir + MissionCatalog.CHASER_TUNING_LEVELS.size()) % MissionCatalog.CHASER_TUNING_LEVELS.size()
+	var focused_action := _step3._selected_card_id if _step3.get_state() == WizardStep.State.ACTIVE else ""
+	var is_versus := focused_action == ACTION_VERSUS
+	if is_versus:
+		var delays := MissionCatalog.get_unique_delay_levels(_maze_size_idx)
+		if delays.size() > 0:
+			_chaser_delay_idx = (_chaser_delay_idx + dir + delays.size()) % delays.size()
+	else:
+		_chaser_speed_idx = (_chaser_speed_idx + dir + MissionCatalog.CHASER_TUNING_LEVELS.size()) % MissionCatalog.CHASER_TUNING_LEVELS.size()
 	_update_step3_labels()
 
 func _cycle_character(dir: int) -> void:
@@ -762,20 +794,27 @@ func _update_step2_labels(focused_pickup: String = "") -> void:
 
 func _update_step3_labels() -> void:
 	if _chaser_speed_button != null:
-		var level := MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx]
-		# Use delay-specific labels when in versus ("Chaser Delay") mode
-		var focused_action := _step3.get_focused_card_id() if _step3.get_state() == WizardStep.State.ACTIVE else ""
+		var focused_action := _step3._selected_card_id if _step3.get_state() == WizardStep.State.ACTIVE else ""
 		var is_versus := focused_action == ACTION_VERSUS
 		if is_versus:
-			_chaser_speed_button.text = tr(MissionCatalog.head_start_title_key(level))
+			var delays := MissionCatalog.get_unique_delay_levels(_maze_size_idx)
+			_chaser_delay_idx = clampi(_chaser_delay_idx, 0, max(0, delays.size() - 1))
+			var level := delays[_chaser_delay_idx]
+			var steps := MissionCatalog.calculate_head_start_steps(level, _maze_size_idx)
+			var lang := String(Config.ui_language)
+			if steps >= 2 and steps <= 4 and lang.begins_with("cs"):
+				_chaser_speed_button.text = "%d kroky" % steps
+			else:
+				_chaser_speed_button.text = tr("head_start_steps") % steps
 		else:
+			var level := MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx]
 			_chaser_speed_button.text = tr(Config.CHASER_LEVEL_KEYS[level])
 	if _character_button != null and not _character_catalog.is_empty() and _character_idx < _character_catalog.size():
 		_character_button.text = String(_character_catalog[_character_idx].get("display_name", ""))
 		_update_character_preview()
 
 func _update_step3_settings_visibility() -> void:
-	var focused_action := _step3.get_focused_card_id() if _step3.get_state() == WizardStep.State.ACTIVE else ""
+	var focused_action := _step3._selected_card_id if _step3.get_state() == WizardStep.State.ACTIVE else ""
 	var is_chaser := focused_action in [ACTION_SOLO_CHASER, ACTION_VERSUS]
 	var is_mp := focused_action in [ACTION_COOP, ACTION_VERSUS]
 	var is_versus := focused_action == ACTION_VERSUS
@@ -785,11 +824,13 @@ func _update_step3_settings_visibility() -> void:
 	# Switch label between "Chaser Speed" (solo) and "Chaser Delay" (versus)
 	if _chaser_speed_label != null:
 		_chaser_speed_label.text = tr("setting_chaser_delay") if is_versus else tr("setting_chaser_speed")
+	_update_step3_labels()
+
 	if _character_row != null:
 		_character_row.visible = is_mp
 	# Sync overlay visibility
-	if _character_preview_container != null:
-		_character_preview_container.visible = is_mp
+	if _character_preview_wrapper != null:
+		_character_preview_wrapper.visible = is_mp
 	if is_mp:
 		_resize_character_preview()
 	# Refresh chaser button text (speed vs delay labels)
@@ -817,32 +858,22 @@ func _update_character_preview() -> void:
 
 ## Resize the character preview container (it's auto-positioned by the HBoxContainer).
 func _resize_character_preview() -> void:
-	if _character_preview_container == null:
+	if _character_preview_wrapper == null:
 		return
-	if not _character_preview_container.visible:
+	if not _character_preview_wrapper.visible:
 		return
 	var short_screen: bool = get_viewport_rect().size.y < 820.0
 	var ps: float = 94.0 if short_screen else 124.0
 	
-	# Keep container height at 0 so it doesn't stretch the row (and therefore the button)
-	_character_preview_container.custom_minimum_size = Vector2(ps, 0)
+	# Keep wrapper width = ps, height = 0 so it pushes other horizontal items but doesn't push row height.
+	_character_preview_wrapper.custom_minimum_size = Vector2(ps, 0)
 	
-	# Manually position the preview to overflow the row height (row is ~68px)
-	var row_height := 68.0
-	_character_preview.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	_character_preview.size = Vector2(ps, ps)
-	_character_preview.position = Vector2(0, (row_height - ps) / 2.0)
-	
-	# Position backplate to match the preview with padding
-	if _character_backplate != null:
-		_position_backplate(_character_backplate, _character_preview.position, Vector2(ps, ps))
+	# Simply force the preview's minimum size, Godot's MarginContainer handles the rest
+	_character_preview.custom_minimum_size = Vector2(ps, ps)
 
 
-## Create a parchment backplate Panel for behind character preview icons.
-func _create_parchment_backplate() -> Panel:
-	var backplate := Panel.new()
-	backplate.name = "ParchmentBackplate"
-	backplate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+## Create the StyleBox for parchment backplates.
+func _create_parchment_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(UIColors.PARCHMENT.r, UIColors.PARCHMENT.g, UIColors.PARCHMENT.b, 0.95)
 	style.set_corner_radius_all(18)
@@ -850,15 +881,7 @@ func _create_parchment_backplate() -> Panel:
 	style.border_color = UIColors.PARCHMENT_DARK
 	style.shadow_color = Color(0, 0, 0, 0.27)
 	style.shadow_size = 5
-	backplate.add_theme_stylebox_override("panel", style)
-	return backplate
-
-
-## Position a backplate Panel to cover the given preview rect with ~10px padding.
-func _position_backplate(bp: Panel, preview_pos: Vector2, preview_size: Vector2) -> void:
-	var pad := 10.0
-	bp.position = preview_pos - Vector2(pad, pad)
-	bp.size = preview_size + Vector2(pad * 2, pad * 2)
+	return style
 
 func _theme_display_name() -> String:
 	var theme_name := _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
@@ -972,10 +995,20 @@ func _apply_responsive_layout() -> void:
 		_top_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.005, 2.0, 8.0)
 
 	if _logo != null:
-		var logo_width := clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
+		var logo_width := clampf(available_width * (0.24 if short_screen else 0.30), 200.0, 500.0)
 		_logo.custom_minimum_size = Vector2(logo_width, logo_width * 0.214)
 
+
+	for step in [_step1, _step2, _step3]:
+		if step == null:
+			continue
+		var collapse_row = step.get_collapse_row()
+		if collapse_row != null:
+			collapse_row.custom_minimum_size.x = clampf(available_width * 0.85, 600.0, 1300.0)
+			collapse_row.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
 	if _logo_step_spacer != null:
+
 		_logo_step_spacer.custom_minimum_size.y = 6.0 if short_screen else 12.0
 
 	# Card sizing for active step
@@ -994,13 +1027,12 @@ func _apply_responsive_layout() -> void:
 
 	if _theme_preview_container != null:
 		var ps: float = 94.0 if short_screen else 124.0
-		_theme_preview_container.custom_minimum_size = Vector2(ps, ps)
+		# We don't need to force the container size anymore, the preview size + margins will dictate it.
+		# Just set the preview minimum size, MarginContainer handles the rest.
 		if _theme_preview != null:
 			_theme_preview.custom_minimum_size = Vector2(ps, ps)
-		if _theme_backplate != null:
-			_position_backplate(_theme_backplate, Vector2.ZERO, Vector2(ps, ps))
 
-	if _character_preview_container != null and _character_preview_container.visible:
+	if _character_preview_wrapper != null and _character_preview_wrapper.visible:
 		_resize_character_preview()
 
 

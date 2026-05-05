@@ -6,6 +6,7 @@ var temp_learning_lang_idx: int
 var temp_voice: bool
 var temp_perf: bool
 var temp_controls: int
+var temp_controller_size: int
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
 
@@ -15,6 +16,7 @@ var _original_learning_language: String = ""
 
 ## Original controls state so we can restore on cancel (controls are live-previewed).
 var _original_controls: int = 0
+var _original_controller_size: int = 0
 
 func _ready() -> void:
 	# Warp mouse off-screen to prevent phantom hover highlights on TV
@@ -32,7 +34,9 @@ func _ready() -> void:
 		temp_voice = Config.voice_hints
 		temp_perf = Config.performance_mode
 		temp_controls = Config.on_screen_controls
+		temp_controller_size = Config.controller_size
 		_original_controls = Config.on_screen_controls
+		_original_controller_size = Config.controller_size
 		_original_ui_language = Config.ui_language
 		_original_learning_language = Config.learning_language
 		# Listen for async TTS completion
@@ -50,6 +54,9 @@ func _ready() -> void:
 	var ctrl_btn = get_node_or_null("%ControlsButton")
 	if ctrl_btn:
 		_setup_cycling_button(ctrl_btn, func(dir): _cycle_controls(dir))
+	var size_btn = get_node_or_null("%ControllerSizeButton")
+	if size_btn:
+		_setup_cycling_button(size_btn, func(dir): _cycle_controller_size(dir))
 	
 	_update_labels()
 	_update_static_labels()
@@ -200,6 +207,14 @@ func _cycle_controls(dir: int) -> void:
 		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 	_update_labels()
 
+func _cycle_controller_size(dir: int) -> void:
+	if Config.CONTROLLER_SIZE_KEYS.size() == 0: return
+	temp_controller_size = (temp_controller_size + dir + Config.CONTROLLER_SIZE_KEYS.size()) % Config.CONTROLLER_SIZE_KEYS.size()
+	if Config:
+		Config.controller_size = temp_controller_size
+		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
+	_update_labels()
+
 func _update_labels() -> void:
 	if has_node("%UILangButton"):
 		%UILangButton.text = _get_lang_display_name(temp_ui_lang_idx, false)
@@ -250,6 +265,9 @@ func _update_labels() -> void:
 	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < Config.CONTROLS_KEYS.size():
 		%ControlsButton.text = tr(Config.CONTROLS_KEYS[temp_controls])
 
+	if has_node("%ControllerSizeButton") and temp_controller_size >= 0 and temp_controller_size < Config.CONTROLLER_SIZE_KEYS.size():
+		%ControllerSizeButton.text = tr(Config.CONTROLLER_SIZE_KEYS[temp_controller_size])
+
 func _update_static_labels() -> void:
 	if has_node("%Title"): 
 		%Title.text = tr("settings_title")
@@ -270,9 +288,12 @@ func _update_static_labels() -> void:
 	if has_node("%ControlsTitle"):
 		%ControlsTitle.text = tr("setting_controls")
 		UIHelpers.apply_medium(%ControlsTitle)
+	if has_node("%ControllerSizeTitle"):
+		%ControllerSizeTitle.text = tr("setting_controller_size")
+		UIHelpers.apply_medium(%ControllerSizeTitle)
 	
 func _apply_title_colors() -> void:
-	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ControlsTitle"]
+	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ControlsTitle", "%ControllerSizeTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
@@ -286,6 +307,7 @@ func _on_save_pressed() -> void:
 		Config.voice_hints = temp_voice
 		Config.performance_mode = temp_perf
 		Config.on_screen_controls = temp_controls
+		Config.controller_size = temp_controller_size
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_ui_language())
 	get_tree().change_scene_to_file(Scenes.HOME)
@@ -293,3 +315,4 @@ func _on_save_pressed() -> void:
 func _exit_tree() -> void:
 	if not _is_saving and Config:
 		Config.on_screen_controls = _original_controls
+		Config.controller_size = _original_controller_size

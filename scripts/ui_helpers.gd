@@ -76,6 +76,12 @@ static func get_emoji_font() -> Font:
 ## Screen fraction reserved for the on-screen D-Pad when active.
 ## Used by MazeRenderer, Help, and Settings to shift content away from the D-Pad area.
 const DPAD_SCREEN_FRACTION := 0.25
+const DPAD_SCREEN_FRACTION_LARGE := 0.325
+
+static func get_dpad_screen_fraction() -> float:
+	if is_instance_valid(Config) and int(Config.controller_size) == Config.ControllerSize.LARGE:
+		return DPAD_SCREEN_FRACTION_LARGE
+	return DPAD_SCREEN_FRACTION
 
 
 ## Create a fully styled Button matching the game's brand design.
@@ -102,7 +108,16 @@ static func create_styled_button(
 
 ## Applies standardized game button styles (normal, focus, hover layers and text colors) to an existing button node.
 static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
-	# Normal state
+	# Map legacy bright colors to the new muted storybook palette
+	var mapped_color: Color = focus_color
+	if focus_color == UIColors.BLUE:
+		mapped_color = UIColors.UI_BLUE
+	elif focus_color == UIColors.YELLOW:
+		mapped_color = UIColors.UI_YELLOW
+	elif focus_color == UIColors.GREEN or focus_color == UIColors.GREEN_ACCENT_LEGACY:
+		mapped_color = UIColors.UI_GREEN
+
+	# Normal state (dark background, subtle border)
 	var normal := create_rounded_stylebox(
 		UIColors.BG_DARK,
 		UIColors.BORDER_SUBTLE,
@@ -114,26 +129,24 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	if is_likely_tv():
 		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# Focus / Pressed (Vibrant blue/yellow)
-	var focus := create_rounded_stylebox(focus_color, Color.WHITE, 12, 4)
+	# Focus / Pressed (Muted fill, Parchment border)
+	var focus := create_rounded_stylebox(mapped_color, UIColors.SELECTED_BORDER, 12, 4)
 
-	# Hover (Made similar to focus to ensure text readability matches the brand color)
-	var hover := create_rounded_stylebox(focus_color, Color(1,1,1,0.2), 12, 2)
+	# Hover (Similar to focus)
+	var hover := create_rounded_stylebox(mapped_color, UIColors.SELECTED_BORDER, 12, 2)
 
 	btn.add_theme_stylebox_override("focus", focus)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", focus)
 
-	# Text colors
-	# Determine if the focus color is bright (like YELLOW) or dark (like BLUE) using luminance.
-	# Threshold of 0.6: Blue (#1188FF) is ~0.46, Yellow (#FFCC00) is ~0.78.
-	var is_bright: bool = focus_color.get_luminance() > 0.6
-	var text_color_on_focus: Color = UIColors.TEXT_ON_BRIGHT if is_bright else UIColors.TEXT_PRIMARY
-	
+	# Text colors — uniform primary text for both dark and bright mapped colors
 	btn.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
-	btn.add_theme_color_override("font_focus_color", text_color_on_focus)
-	btn.add_theme_color_override("font_hover_color", text_color_on_focus) 
-	btn.add_theme_color_override("font_pressed_color", text_color_on_focus)
+	btn.add_theme_color_override("font_focus_color", UIColors.TEXT_PRIMARY)
+	btn.add_theme_color_override("font_hover_color", UIColors.TEXT_PRIMARY) 
+	btn.add_theme_color_override("font_pressed_color", UIColors.TEXT_PRIMARY)
+	
+	# Ensure the button text has confident weight
+	apply_semibold(btn)
 
 
 ## Applies a safe accent palette derived from avatar art to a button.
@@ -197,6 +210,7 @@ static func create_rounded_stylebox(
 ## Call from any screen that needs to shift its layout when D-Pad is active.
 static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
 	var eff_mode = controls_mode
+	var dpad_fraction := get_dpad_screen_fraction()
 	if container.is_layout_rtl():
 		if eff_mode == Config.ControlsMode.LEFT_HANDED:
 			eff_mode = Config.ControlsMode.RIGHT_HANDED
@@ -205,13 +219,13 @@ static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
 			
 	match eff_mode:
 		Config.ControlsMode.LEFT_HANDED:
-			container.anchor_left = DPAD_SCREEN_FRACTION
+			container.anchor_left = dpad_fraction
 			container.anchor_right = 1.0
 			container.offset_left = -100 # Slight bias towards d-pad as requested
 			container.offset_right = -100
 		Config.ControlsMode.RIGHT_HANDED:
 			container.anchor_left = 0.0
-			container.anchor_right = 1.0 - DPAD_SCREEN_FRACTION
+			container.anchor_right = 1.0 - dpad_fraction
 			container.offset_left = 100
 			container.offset_right = 100
 		_:
@@ -224,14 +238,15 @@ static func apply_dpad_layout(container: Control, controls_mode: int) -> void:
 ## Compute the usable content rectangle, accounting for D-pad screen reservation.
 ## Use this instead of manually computing rect_left/rect_right from DPAD_SCREEN_FRACTION.
 static func get_content_rect(viewport_size: Vector2, controls_mode: int, top_margin: float = 0.0) -> Rect2:
+	var dpad_fraction := get_dpad_screen_fraction()
 	var margin_x: float = viewport_size.x * 0.02
 	var left: float = margin_x
 	var right: float = viewport_size.x - margin_x
 
 	if controls_mode == Config.ControlsMode.LEFT_HANDED:
-		left = (viewport_size.x * DPAD_SCREEN_FRACTION) + margin_x
+		left = (viewport_size.x * dpad_fraction) + margin_x
 	elif controls_mode == Config.ControlsMode.RIGHT_HANDED:
-		right = (viewport_size.x * (1.0 - DPAD_SCREEN_FRACTION)) - margin_x
+		right = (viewport_size.x * (1.0 - dpad_fraction)) - margin_x
 
 	return Rect2(left, top_margin, right - left, viewport_size.y - top_margin)
 
@@ -357,6 +372,8 @@ static func get_role_emoji(role: String) -> String:
 			return "⚡"
 		Config.ROLE_RACER:
 			return "🏁"
+		"exit":
+			return "🚪"
 		_:
 			return ""
 
@@ -368,6 +385,8 @@ static func get_role_translation_key(role: String) -> String:
 			return "hud_role_chase"
 		Config.ROLE_RACER:
 			return "hud_role_race"
+		"exit":
+			return "hud_role_find_exit"
 		_:
 			return ""
 
@@ -429,6 +448,7 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 
 	if not role_key.is_empty():
 		var role_lbl := Label.new()
+		role_lbl.name = "RoleLabel"
 		role_lbl.text = TranslationServer.translate(role_key)
 		role_lbl.add_theme_font_size_override("font_size", text_size)
 		var text_color = accent_color.lightened(0.2)

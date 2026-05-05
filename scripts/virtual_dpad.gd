@@ -18,6 +18,9 @@ const HAPTIC_AMPLITUDE: float = 0.18
 var dpad_container: Node2D
 var back_button: TouchScreenButton
 var _accent_palette: Dictionary = {}
+var _alpha_tween: Tween = null
+var _last_build_viewport_size: Vector2 = Vector2.ZERO
+var _last_build_controller_size: int = -1
 
 func set_accent_palette(palette: Dictionary) -> void:
 	_accent_palette = palette.duplicate(true)
@@ -32,16 +35,20 @@ func reset_accent_palette() -> void:
 func dim(target_alpha: float = 0.1, duration: float = 2.0) -> void:
 	if dpad_container == null:
 		return
-	var tw := create_tween()
-	tw.tween_property(dpad_container, "modulate:a", target_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if _alpha_tween and _alpha_tween.is_valid():
+		_alpha_tween.kill()
+	_alpha_tween = create_tween()
+	_alpha_tween.tween_property(dpad_container, "modulate:a", target_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 ## Restore the D-pad to full opacity.
 func undim(duration: float = 0.25) -> void:
 	if dpad_container == null:
 		return
-	var tw := create_tween()
-	tw.tween_property(dpad_container, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if _alpha_tween and _alpha_tween.is_valid():
+		_alpha_tween.kill()
+	_alpha_tween = create_tween()
+	_alpha_tween.tween_property(dpad_container, "modulate:a", 1.0, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func _ready() -> void:
 	# Configure layer to sit securely above the maze and pause menus (which use 100)
@@ -57,13 +64,14 @@ func _ready() -> void:
 	# React to controls mode changes instead of polling every frame
 	if is_instance_valid(Config):
 		Config.on_screen_controls_changed.connect(_update_visibility_and_layout.unbind(1))
+		Config.controller_size_changed.connect(_update_visibility_and_layout.unbind(1))
 
 func _rebuild_dpad(viewport_size: Vector2) -> void:
 	for child in dpad_container.get_children():
 		child.queue_free()
 		
-	# Scale up to use almost all of the 25% zone
-	var quarter_screen: float = viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION
+	# Scale up to use almost all of the reserved controller zone.
+	var quarter_screen: float = viewport_size.x * UIHelpers.get_dpad_screen_fraction()
 	# D-pad needs to fit 3 buttons width-wise (Left, OK, Right) + 2 spacings
 	var btn_size_val: int = floori(quarter_screen / 3.5) 
 	var btn_size: Vector2 = Vector2(btn_size_val, btn_size_val)
@@ -78,6 +86,7 @@ func _rebuild_dpad(viewport_size: Vector2) -> void:
 		var action_name: StringName = StringName(action)
 		btn.pressed.connect(func():
 			_trigger_haptic_for_action(action_name)
+			undim()
 			action_changed.emit(action_name, true)
 		)
 		btn.released.connect(func(): action_changed.emit(action_name, false))
@@ -130,6 +139,8 @@ func _rebuild_dpad(viewport_size: Vector2) -> void:
 	back_button = make_btn.call("ui_cancel", Vector2(0, -center_gap * 2.5), "↰") as TouchScreenButton
 	if back_button != null:
 		back_button.passby_press = false
+	_last_build_viewport_size = viewport_size
+	_last_build_controller_size = Config.controller_size if is_instance_valid(Config) else -1
 	_apply_dpad_style()
 
 
@@ -147,11 +158,12 @@ func _update_visibility_and_layout() -> void:
 		
 	visible = true
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var controller_size: int = Config.controller_size if is_instance_valid(Config) else 0
 	
-	if dpad_container.get_child_count() == 0:
+	if dpad_container.get_child_count() == 0 or viewport_size != _last_build_viewport_size or controller_size != _last_build_controller_size:
 		_rebuild_dpad(viewport_size)
 	
-	var quarter_screen: float = viewport_size.x * UIHelpers.DPAD_SCREEN_FRACTION
+	var quarter_screen: float = viewport_size.x * UIHelpers.get_dpad_screen_fraction()
 	var center_x: float = quarter_screen / 2.0
 	
 	# D-Pad button size was calculated as quarter_screen / 3.5. 

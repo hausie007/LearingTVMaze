@@ -65,6 +65,34 @@ const CHASER_TUNING_LEVELS: Array[int] = [
 	CHASER_LEVEL_TURBO,
 ]
 
+static func calculate_head_start_steps(chaser_level: int, difficulty: int) -> int:
+	var base_steps: int = 0
+	match chaser_level:
+		CHASER_LEVEL_SLOW:   base_steps = 10
+		CHASER_LEVEL_MEDIUM: base_steps = 7
+		CHASER_LEVEL_FAST:   base_steps = 4
+		CHASER_LEVEL_TURBO:  base_steps = 2
+	
+	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
+	var size_mult: float = multipliers[clampi(difficulty, 0, 4)]
+	return clampi(int(base_steps * size_mult), 2, 30)
+
+static func get_unique_delay_levels(difficulty: int) -> Array[int]:
+	var levels_to_check: Array[int] = [
+		CHASER_LEVEL_TURBO,
+		CHASER_LEVEL_FAST,
+		CHASER_LEVEL_MEDIUM,
+		CHASER_LEVEL_SLOW,
+	]
+	var unique_levels: Array[int] = []
+	var seen_steps: Array[int] = []
+	for lvl in levels_to_check:
+		var steps: int = calculate_head_start_steps(lvl, difficulty)
+		if not seen_steps.has(steps):
+			seen_steps.append(steps)
+			unique_levels.append(lvl)
+	return unique_levels
+
 static func missions() -> Array[Dictionary]:
 	return [
 		{

@@ -41,6 +41,12 @@ enum ControlsMode {
 	RIGHT_HANDED = 2,
 }
 
+## On-Screen Controls size.
+enum ControllerSize {
+	NORMAL = 0,
+	LARGE = 1,
+}
+
 # Domain constants — aliases to MissionCatalog (single source of truth).
 const STYLE_PATH = MissionCatalog.STYLE_PATH
 const STYLE_NEXT_SYMBOL = MissionCatalog.STYLE_NEXT_SYMBOL
@@ -77,6 +83,9 @@ const CHASER_LEVEL_KEYS: Array[String] = ["chaser_off", "chaser_slow", "chaser_m
 
 ## Translation keys for on-screen controls modes. Indices match ControlsMode enum values.
 const CONTROLS_KEYS: Array[String] = ["controls_off", "controls_left", "controls_right"]
+
+## Translation keys for on-screen controls sizes. Indices match ControllerSize enum values.
+const CONTROLLER_SIZE_KEYS: Array[String] = ["controller_size_normal", "controller_size_large"]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -138,6 +147,9 @@ var performance_mode: bool = true
 ## Emitted when the on-screen controls mode changes (for D-Pad layout updates).
 signal on_screen_controls_changed(new_mode: int)
 
+## Emitted when the on-screen controls size changes (for D-Pad layout updates).
+signal controller_size_changed(new_size: int)
+
 ## On-Screen Controls preference (-1 = not set/autodetect).
 var on_screen_controls: int = -1:
 	set(value):
@@ -145,6 +157,13 @@ var on_screen_controls: int = -1:
 			on_screen_controls = value
 			on_screen_controls_changed.emit(value)
 
+## On-Screen Controls size preference.
+var controller_size: int = ControllerSize.NORMAL:
+	set(value):
+		var clamped := clampi(value, ControllerSize.NORMAL, ControllerSize.LARGE)
+		if controller_size != clamped:
+			controller_size = clamped
+			controller_size_changed.emit(clamped)
 
 ## Moves per second for the Chaser. Read-only, based on chaser_level.
 var chaser_speed: float:
@@ -264,6 +283,7 @@ func save_settings() -> void:
 	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Game", "performance_mode", performance_mode)
 	config.set_value("Game", "on_screen_controls", on_screen_controls)
+	config.set_value("Game", "controller_size", controller_size)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	
 	var err := config.save(SAVE_PATH)
@@ -290,6 +310,7 @@ func load_settings() -> void:
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
 		on_screen_controls = config.get_value("Game", "on_screen_controls", -1)
+		controller_size = int(config.get_value("Game", "controller_size", ControllerSize.NORMAL))
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
 
 	_apply_session_compatibility()

@@ -104,8 +104,9 @@ func _initialize_state() -> void:
 		_chaser_enabled = true
 	else:
 		_chaser_enabled = Config.chaser_enabled and MissionCatalog.chaser_allowed(_selected_mission)
-	var head_start_idx := MissionCatalog.CHASER_TUNING_LEVELS.find(Config.chaser_level)
-	_selected_head_start_idx = head_start_idx if head_start_idx >= 0 else 1
+	var delays := MissionCatalog.get_unique_delay_levels(Config.difficulty)
+	var head_start_idx := delays.find(Config.chaser_level)
+	_selected_head_start_idx = head_start_idx if head_start_idx >= 0 else 0
 	_temp_lang_idx = Config.LANG_CODES.find(Config.learning_language)
 	if _temp_lang_idx < 0:
 		_temp_lang_idx = 0
@@ -351,7 +352,9 @@ func _select_pickup_from_focus(pickup_id: String) -> void:
 		_select_pickup(pickup_id)
 
 func _cycle_head_start(dir: int) -> void:
-	_selected_head_start_idx = (_selected_head_start_idx + dir + MissionCatalog.CHASER_TUNING_LEVELS.size()) % MissionCatalog.CHASER_TUNING_LEVELS.size()
+	var delays := MissionCatalog.get_unique_delay_levels(_selected_difficulty)
+	if delays.size() > 0:
+		_selected_head_start_idx = (_selected_head_start_idx + dir + delays.size()) % delays.size()
 	_update_labels()
 
 func _toggle_chaser() -> void:
@@ -464,8 +467,18 @@ func _update_context_rows() -> void:
 
 	_set_option_button_enabled(_head_start_button, _chaser_enabled)
 	_head_start_row.visible = _chaser_enabled
-	var head_start_level := MissionCatalog.CHASER_TUNING_LEVELS[_selected_head_start_idx]
-	_head_start_button.text = tr(MissionCatalog.head_start_title_key(head_start_level)) if _chaser_enabled else tr("trouble_no_chaser")
+	if not _chaser_enabled:
+		_head_start_button.text = tr("trouble_no_chaser")
+	else:
+		var delays := MissionCatalog.get_unique_delay_levels(Config.difficulty)
+		_selected_head_start_idx = clampi(_selected_head_start_idx, 0, max(0, delays.size() - 1))
+		var head_start_level := delays[_selected_head_start_idx]
+		var steps := MissionCatalog.calculate_head_start_steps(head_start_level, Config.difficulty)
+		var lang := String(Config.ui_language)
+		if steps >= 2 and steps <= 4 and lang.begins_with("cs"):
+			_head_start_button.text = "%d kroky" % steps
+		else:
+			_head_start_button.text = tr("head_start_steps") % steps
 
 func _set_option_button_enabled(button: Button, enabled: bool) -> void:
 	if button == null:
@@ -500,7 +513,9 @@ func _on_start_pressed() -> void:
 	var training := MissionCatalog.training_for_pickup(_selected_pickup)
 	var mission_title := tr(MissionCatalog.mission_title_key(_selected_mission))
 	var pickup_title := tr(MissionCatalog.pickup_title_key(_selected_pickup))
-	var chaser_level := MissionCatalog.CHASER_TUNING_LEVELS[_selected_head_start_idx] if _chaser_enabled else Config.ChaserLevel.OFF
+	var delays := MissionCatalog.get_unique_delay_levels(_selected_difficulty)
+	_selected_head_start_idx = clampi(_selected_head_start_idx, 0, max(0, delays.size() - 1))
+	var chaser_level := delays[_selected_head_start_idx] if _chaser_enabled else Config.ChaserLevel.OFF
 	_selected_difficulty = clampi(Config.difficulty, 0, max(0, Config.DIFF_KEYS.size() - 1))
 	Config.learning_language = Config.LANG_CODES[_temp_lang_idx]
 	var config: Dictionary = {
@@ -545,7 +560,9 @@ func _go_back() -> void:
 	Config.selected_mission_id = _selected_mission
 	Config.training_type = MissionCatalog.training_for_pickup(_selected_pickup)
 	Config.chaser_enabled = _chaser_enabled
-	Config.chaser_level = MissionCatalog.CHASER_TUNING_LEVELS[_selected_head_start_idx] if _chaser_enabled else Config.ChaserLevel.OFF
+	var delays := MissionCatalog.get_unique_delay_levels(Config.difficulty)
+	_selected_head_start_idx = clampi(_selected_head_start_idx, 0, max(0, delays.size() - 1))
+	Config.chaser_level = delays[_selected_head_start_idx] if _chaser_enabled else Config.ChaserLevel.OFF
 	Config.save_settings()
 	NetworkManager.leave_session()
 	get_tree().change_scene_to_file(Scenes.HOME)

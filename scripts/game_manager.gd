@@ -23,6 +23,7 @@ extends Node
 # ── Preloads ─────────────────────────────────────────────────────────────────
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+const LearningRecapBuilder := preload("res://scripts/learning_recap.gd")
 
 # ── Child-node references ────────────────────────────────────────────────────
 
@@ -33,7 +34,7 @@ const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 @onready var win_screen:         WinScreen           = $WinScreen
 @onready var pause_dialog:       PauseDialog         = $PauseDialog
 @onready var collectible_spawner: CollectibleSpawner = $CollectibleSpawner
-@onready var chaser_manager:     ChaserManager       = $ChaserManager
+@onready var chaser_manager: Variant = $ChaserManager
 
 
 # ── Game State ───────────────────────────────────────────────────────────────
@@ -205,6 +206,7 @@ func _on_pause_guard_tier2() -> void:
 ## Generate a fresh maze, render it, and place the player.
 func _start_new_maze() -> void:
 	win_screen.hide_screen()
+	win_screen.set_learning_recap({})
 	
 	# Ensure tree is unpaused (win/gotcha screens pause the tree via signal)
 	get_tree().paused = false
@@ -305,6 +307,7 @@ func _on_player_reached_end() -> void:
 	elif Config.game_style == Config.STYLE_RACE:
 		_speak_race_completion_once()
 
+	win_screen.set_learning_recap(_build_learning_recap())
 	if Config.game_style == Config.STYLE_RACE:
 		win_screen.show_race_win(_race_player_character_id())
 	else:
@@ -354,6 +357,9 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 	else:
 		TTS.speak(value_str, 0.85)
 	_refresh_target_hud()
+	# If all collectibles are now done, switch chip tag to "Find Exit"
+	if collectible_spawner != null and collectible_spawner.is_complete():
+		_update_sp_hud_role_tag_to_exit()
 
 
 # ── Chaser Callbacks ─────────────────────────────────────────────────────────
@@ -361,6 +367,7 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 func _on_chaser_caught_player() -> void:
 	_is_gotcha_screen = true
 	_freeze_player()
+	win_screen.set_learning_recap({})
 	win_screen.show_gotcha()
 
 
@@ -450,6 +457,15 @@ func _freeze_player() -> void:
 	player.set_process_input(false)
 
 
+func _build_learning_recap() -> Dictionary:
+	if Config.game_mode == Config.GameMode.NORMAL:
+		return {}
+	if collectible_spawner == null or not collectible_spawner.is_complete():
+		return {}
+	var sequence := collectible_spawner.get_sequence_strings()
+	var word := String(Config.current_word.get("word", ""))
+	var word_lang := String(Config.current_word.get("lang", ""))
+	return LearningRecapBuilder.build(Config.game_mode, sequence, word, word_lang)
 
 
 func _refresh_target_hud() -> void:
@@ -487,12 +503,25 @@ func _setup_sp_player_badges() -> void:
 		return
 	var players: Array[Dictionary] = []
 
-	# Player badge
-	var player_role := Config.ROLE_RACER if Config.game_style == Config.STYLE_RACE else Config.ROLE_COLLECTOR
+	# Determine the correct role tag for the player chip.
+	# ROLE_COLLECTOR is only right when there are actually collectibles to collect.
+	# For find-exit missions and normal (no-collectible) path mode, show "Find Exit".
+	var player_role: String
+	if Config.game_style == Config.STYLE_RACE:
+		player_role = Config.ROLE_RACER
+	elif Config.game_mode == Config.GameMode.NORMAL:
+		# No collectibles — always show "Find Exit"
+		player_role = "exit"
+	else:
+		# Collectible mission — show "Collect" until done, then "Find Exit"
+		var done := collectible_spawner != null and collectible_spawner.is_complete()
+		player_role = "exit" if done else Config.ROLE_COLLECTOR
+
 	var player_char_id := "%s:player" % Config.theme_dir_name
+	var player_palette := AvatarAccent.palette_from_character_id(player_char_id)
 	players.append({
 		"character_id": player_char_id,
-		"color": UIColors.YELLOW,
+		"color": player_palette.get("accent", UIColors.YELLOW),
 		"role": player_role,
 	})
 
@@ -500,9 +529,10 @@ func _setup_sp_player_badges() -> void:
 	if Config.chaser_enabled or Config.game_style == Config.STYLE_RACE:
 		var ai_role := Config.ROLE_RACER if Config.game_style == Config.STYLE_RACE else Config.ROLE_CHASER
 		var ai_char_id := _race_robot_character_id()
+		var palette := AvatarAccent.palette_from_character_id(ai_char_id)
 		players.append({
 			"character_id": ai_char_id,
-			"color": Color("#FF5555"),
+			"color": palette.get("accent", Color("#FF5555")),
 			"role": ai_role,
 			"is_ai": true,
 		})
@@ -510,6 +540,23 @@ func _setup_sp_player_badges() -> void:
 	hud.set_players(players)
 	if Config.chaser_enabled and not chaser_manager.is_active():
 		hud.update_chaser_countdown(chaser_manager.get_remaining_steps(_move_count))
+
+
+## Update the player chip RoleLabel to "Find Exit" once all collectibles are gathered.
+func _update_sp_hud_role_tag_to_exit() -> void:
+	if hud == null:
+		return
+	var new_text := TranslationServer.translate(UIHelpers.get_role_translation_key("exit"))
+	var chase_text := TranslationServer.translate("hud_role_chase")
+	for strip in [hud._player_strip, hud._right_player_strip]:
+		if strip == null: continue
+		for chip in strip.get_children():
+			var hbox: Node = chip.get_child(0) if chip.get_child_count() > 0 else null
+			if hbox == null: continue
+			var lbl := hbox.get_node_or_null("RoleLabel") as Label
+			if lbl != null and lbl.text != chase_text:
+				lbl.text = new_text
+
 
 
 func _update_hud_mission_description() -> void:
@@ -548,7 +595,10 @@ func _speak_completed_word_once(lang_override: String = "") -> void:
 	if word_lang.is_empty():
 		word_lang = String(Config.current_word.get("lang", ""))
 	get_tree().create_timer(1.2).timeout.connect(
-		func(): TTS.speak(phrase, 0.7, word_lang)
+		func():
+			if win_screen != null and win_screen.is_active():
+				return
+			TTS.speak(phrase, 0.7, word_lang)
 	)
 
 func _speak_completed_word_segment(segment_end: int, lang_override: String = "") -> void:
@@ -566,7 +616,10 @@ func _speak_completed_word_segment(segment_end: int, lang_override: String = "")
 	if word_lang.is_empty():
 		word_lang = String(Config.current_word.get("lang", ""))
 	get_tree().create_timer(1.45).timeout.connect(
-		func(): TTS.speak(phrase, 0.7, word_lang)
+		func():
+			if win_screen != null and win_screen.is_active():
+				return
+			TTS.speak(phrase, 0.7, word_lang)
 	)
 
 func _spawn_race_robot() -> void:

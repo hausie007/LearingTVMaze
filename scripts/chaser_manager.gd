@@ -15,6 +15,7 @@ extends Node
 signal caught_player
 
 
+const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const ChaserScene = preload("res://scenes/chaser.tscn")
 
 
@@ -46,17 +47,7 @@ func check_trigger(move_count: int) -> void:
 	if Config.chaser_level == Config.ChaserLevel.OFF or _active:
 		return
 
-	# Calculate threshold based on speed level and maze size
-	var base_steps: int = 0
-	match Config.chaser_level:
-		Config.ChaserLevel.SLOW:   base_steps = 10
-		Config.ChaserLevel.MEDIUM: base_steps = 7
-		Config.ChaserLevel.FAST:   base_steps = 4
-		Config.ChaserLevel.TURBO:  base_steps = 2
-	
-	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
-	var size_mult: float = multipliers[clampi(Config.difficulty, 0, 4)]
-	var threshold: int = clampi(int(base_steps * size_mult), 2, 30)
+	var threshold: int = MissionCatalog.calculate_head_start_steps(Config.chaser_level, Config.difficulty)
 	if move_count >= threshold:
 		# Signal to GameManager that we need spawn context (maze + renderer)
 		_active = true
@@ -67,17 +58,7 @@ func get_remaining_steps(move_count: int) -> int:
 	if Config.chaser_level == Config.ChaserLevel.OFF or _active:
 		return 0
 
-	var base_steps: int = 0
-	match Config.chaser_level:
-		Config.ChaserLevel.SLOW:   base_steps = 10
-		Config.ChaserLevel.MEDIUM: base_steps = 7
-		Config.ChaserLevel.FAST:   base_steps = 4
-		Config.ChaserLevel.TURBO:  base_steps = 2
-	
-	var multipliers: Array[float] = [0.6, 0.8, 1.0, 1.3, 1.6]
-	var size_mult: float = multipliers[clampi(Config.difficulty, 0, 4)]
-	var threshold: int = clampi(int(base_steps * size_mult), 2, 30)
-	
+	var threshold: int = MissionCatalog.calculate_head_start_steps(Config.chaser_level, Config.difficulty)
 	return max(0, threshold - move_count)
 
 
