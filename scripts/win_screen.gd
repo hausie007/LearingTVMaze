@@ -39,6 +39,7 @@ var _swap_roles_enabled: bool = false
 var _is_multiplayer: bool = false
 var _learning_recap: Dictionary = {}
 var _recap_played: bool = false
+var _last_focused_button: Button = null
 
 ## Countdown state.
 var _timer_remaining: float = 0.0
@@ -56,6 +57,7 @@ func _ready() -> void:
 	layer = 10
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_ui()
+	_connect_virtual_dpad()
 
 	_oled_guard = OledIdleGuard.new()
 	_oled_guard.name = "WinScreenOledGuard"
@@ -86,16 +88,105 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or \
 		   event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or \
 		   event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel"):
-			_timer_paused = true
-			if _timer_label:
-				_timer_label.text = ""
-			# Countdown cancelled by player — start secondary OLED idle guard
-			if _oled_guard:
-				_oled_guard.start(60.0, 180.0)
+			_pause_countdown_from_input()
 
 	# Always consume ui_cancel when active to prevent focus loss or global pause.
 	if _is_active and event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
+
+func _connect_virtual_dpad() -> void:
+	if not is_instance_valid(DPad):
+		return
+	var action_callable := Callable(self, "_on_virtual_dpad_action")
+	if DPad.has_signal("action_changed") and not DPad.is_connected("action_changed", action_callable):
+		DPad.connect("action_changed", action_callable)
+
+func _on_virtual_dpad_action(action: StringName, pressed: bool) -> void:
+	if not _is_active or not pressed:
+		return
+	_pause_countdown_from_input()
+	match action:
+		&"ui_up":
+			_focus_relative_button(-1)
+		&"ui_down":
+			_focus_relative_button(1)
+		&"ui_left":
+			_focus_relative_button(-1)
+		&"ui_right":
+			_focus_relative_button(1)
+		&"ui_accept":
+			_press_focused_button()
+		&"ui_cancel":
+			_refocus_win_button()
+	call_deferred("_refocus_win_button")
+
+func _pause_countdown_from_input() -> void:
+	if not _is_active or _timer_paused:
+		return
+	_timer_paused = true
+	if _timer_label:
+		_timer_label.text = ""
+	if _oled_guard:
+		_oled_guard.start(60.0, 180.0)
+
+func _focus_relative_button(delta: int) -> void:
+	var buttons := _win_buttons()
+	if buttons.is_empty():
+		return
+	var current := get_viewport().gui_get_focus_owner() as Button
+	var current_idx := buttons.find(current)
+	if current_idx < 0:
+		current_idx = buttons.find(_last_focused_button)
+	if current_idx < 0:
+		current_idx = 0 if delta >= 0 else buttons.size() - 1
+	else:
+		current_idx = (current_idx + delta + buttons.size()) % buttons.size()
+	_focus_win_button(buttons[current_idx])
+
+func _press_focused_button() -> void:
+	var button := get_viewport().gui_get_focus_owner() as Button
+	if button == null or not _is_win_button_focusable(button):
+		button = _last_focused_button
+	if button == null or not _is_win_button_focusable(button):
+		var buttons := _win_buttons()
+		if buttons.is_empty():
+			return
+		button = buttons[0]
+	_focus_win_button(button)
+	button.emit_signal("pressed")
+
+func _refocus_win_button() -> void:
+	if not _is_active:
+		return
+	if _is_win_button_focusable(_last_focused_button):
+		_focus_win_button(_last_focused_button)
+		return
+	var buttons := _win_buttons()
+	if not buttons.is_empty():
+		_focus_win_button(buttons[0])
+
+func _focus_win_button(button: Button) -> void:
+	if not _is_win_button_focusable(button):
+		return
+	_last_focused_button = button
+	button.grab_focus()
+
+func _is_win_button_focusable(button: Button) -> bool:
+	return button != null and is_instance_valid(button) and button.visible and not button.disabled and button.focus_mode != Control.FOCUS_NONE
+
+func _win_buttons() -> Array[Button]:
+	var result: Array[Button] = []
+	_collect_win_buttons(_container, result)
+	return result
+
+func _collect_win_buttons(node: Node, result: Array[Button]) -> void:
+	if node == null:
+		return
+	var button := node as Button
+	if _is_win_button_focusable(button):
+		result.append(button)
+	for child in node.get_children():
+		_collect_win_buttons(child, result)
 
 
 # ── Public API ───────────────────────────────────────────────────────────────
@@ -137,7 +228,7 @@ func show_win() -> void:
 	_build_mode_switch_buttons()
 
 	_container.visible = true
-	_next_button.grab_focus()
+	_focus_win_button(_next_button)
 	screen_shown.emit()
 	_play_learning_recap_once()
 
@@ -168,7 +259,7 @@ func show_gotcha(chaser_id: String = "") -> void:
 	_build_mode_switch_buttons()
 
 	_container.visible = true
-	_next_button.grab_focus()
+	_focus_win_button(_next_button)
 	screen_shown.emit()
 
 func show_race_win(winner_character_id: String) -> void:
@@ -492,7 +583,9 @@ func _build_ui() -> void:
 # ── Shared Button Style ──────────────────────────────────────────────────────
 
 func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW) -> Button:
-	return UIHelpers.create_styled_button(btn_text, w, h, f_color)
+	var button := UIHelpers.create_styled_button(btn_text, w, h, f_color)
+	button.focus_entered.connect(func(): _last_focused_button = button)
+	return button
 
 func _add_suggestion_button(text: String, callback: Callable, color: Color = UIColors.YELLOW, icon_path: String = "") -> void:
 	var hbox := HBoxContainer.new()

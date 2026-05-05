@@ -136,7 +136,7 @@ func _rebuild_dpad(viewport_size: Vector2) -> void:
 	if _ok != null:
 		_ok.passby_press = false
 	
-	back_button = make_btn.call("ui_cancel", Vector2(0, -center_gap * 2.5), "↰") as TouchScreenButton
+	back_button = make_btn.call("ui_cancel", Vector2(0, -center_gap * 2.0), "↰") as TouchScreenButton
 	if back_button != null:
 		back_button.passby_press = false
 	_last_build_viewport_size = viewport_size
