@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ddn51sscwl1ch"
+
+[deps]
+
+files=["res://data/old-translations.csv.xx.en.translation", "res://data/old-translations.csv.xx.cs.translation", "res://data/old-translations.csv.xx.de.translation", "res://data/old-translations.csv.xx.es.translation", "res://data/old-translations.csv.xx.fr.translation", "res://data/old-translations.csv.xx.pt.translation", "res://data/old-translations.csv.xx.vi.translation", "res://data/old-translations.csv.xx.tr.translation", "res://data/old-translations.csv.xx.it.translation", "res://data/old-translations.csv.xx.pl.translation", "res://data/old-translations.csv.xx.sv.translation", "res://data/old-translations.csv.xx.nb.translation", "res://data/old-translations.csv.xx.nl.translation", "res://data/old-translations.csv.xx.uk.translation", "res://data/old-translations.csv.xx.fi.translation", "res://data/old-translations.csv.xx.da.translation", "res://data/old-translations.csv.xx.hu.translation", "res://data/old-translations.csv.xx.ro.translation", "res://data/old-translations.csv.xx.el.translation", "res://data/old-translations.csv.xx.sk.translation", "res://data/old-translations.csv.xx.he.translation"]
+
+source_file="res://data/old-translations.csv.xx.csv"
+dest_files=["res://data/old-translations.csv.xx.en.translation", "res://data/old-translations.csv.xx.cs.translation", "res://data/old-translations.csv.xx.de.translation", "res://data/old-translations.csv.xx.es.translation", "res://data/old-translations.csv.xx.fr.translation", "res://data/old-translations.csv.xx.pt.translation", "res://data/old-translations.csv.xx.vi.translation", "res://data/old-translations.csv.xx.tr.translation", "res://data/old-translations.csv.xx.it.translation", "res://data/old-translations.csv.xx.pl.translation", "res://data/old-translations.csv.xx.sv.translation", "res://data/old-translations.csv.xx.nb.translation", "res://data/old-translations.csv.xx.nl.translation", "res://data/old-translations.csv.xx.uk.translation", "res://data/old-translations.csv.xx.fi.translation", "res://data/old-translations.csv.xx.da.translation", "res://data/old-translations.csv.xx.hu.translation", "res://data/old-translations.csv.xx.ro.translation", "res://data/old-translations.csv.xx.el.translation", "res://data/old-translations.csv.xx.sk.translation", "res://data/old-translations.csv.xx.he.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

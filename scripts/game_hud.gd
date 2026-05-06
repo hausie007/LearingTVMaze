@@ -12,11 +12,16 @@ extends CanvasLayer
 
 
 const HUD_HEIGHT: float = 160.0
+const SIDE_LANE_MIN_WIDTH: float = 300.0
+const SIDE_LANE_MAX_WIDTH: float = 560.0
+const SIDE_LANE_VIEWPORT_FRACTION: float = 0.27
 
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
 var _word_letter_labels: Array[Label] = []
 var _root_panel: Control = null   # dimmed by OLED guard
+var _left_lane: Control = null
+var _right_lane: Control = null
 var _player_strip: VBoxContainer = null
 var _right_player_strip: VBoxContainer = null
 var _tracker: CollectibleTracker = null
@@ -32,6 +37,8 @@ var _race_trackers: Dictionary = {}  # peer_id -> CollectibleTracker
 func _ready() -> void:
 	layer = 5
 	_build_ui()
+	if get_viewport() != null and not get_viewport().size_changed.is_connected(_on_viewport_size_changed):
+		get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 # ── Public API ───────────────────────────────────────────────────────────────
@@ -86,8 +93,10 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 	
 	var count := players.size()
 	if count <= 0:
+		_set_side_lanes_visible(false)
 		return
 		
+	_set_side_lanes_visible(true)
 	_player_strip.visible = true
 	_right_player_strip.visible = count > 1
 
@@ -100,10 +109,13 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 16)
 		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		row.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if is_left else Control.SIZE_SHRINK_END
 		
 		# Enlarged badge
 		var badge := UIHelpers.build_player_chip(p, count, 1.4)
 		badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		badge.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if is_left else Control.SIZE_SHRINK_END
+		var badge_slot := _create_badge_slot(badge, not is_left)
 		
 		# Tracker
 		var font := 48 if count <= 2 else 36
@@ -115,19 +127,20 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		tracker.set_max_visible(max_vis)
 		_race_trackers[peer_id] = tracker
 		tracker.setup(sequence, learning_type)
-		
+
 		if is_left:
-			row.add_child(badge)
+			row.add_child(badge_slot)
 			row.add_child(tracker)
 			_player_strip.add_child(row)
 		else:
 			row.add_child(tracker)
-			row.add_child(badge)
+			row.add_child(badge_slot)
 			_right_player_strip.add_child(row)
 			
-			# Ensure the tracker's letters grow outwards from the badge.
-			# By default it's [A][B][C]. If the badge is on the right, 'C' would be next to it.
-			# Flipping layout direction makes it [C][B][A], so 'A' is next to the badge.
+		# Ensure the tracker's letters grow outwards from the badge.
+		# By default it's [A][B][C]. If the badge is on the right, 'C' would be next to it.
+		# Flipping layout direction makes it [C][B][A], so 'A' is next to the badge.
+		if not is_left:
 			if _right_player_strip.is_layout_rtl():
 				tracker.layout_direction = Control.LAYOUT_DIRECTION_LTR
 			else:
@@ -153,14 +166,17 @@ func set_players(players: Array[Dictionary]) -> void:
 			child.queue_free()
 
 	_player_strip.visible = players.size() > 0
+	_set_side_lanes_visible(players.size() > 0)
 	if _right_player_strip != null:
 		_right_player_strip.visible = players.size() > 1
 
 	for i in range(players.size()):
 		var chip := UIHelpers.build_player_chip(players[i], players.size(), 1.4)
 		if i % 2 == 1 and _right_player_strip != null:
+			chip.size_flags_horizontal = Control.SIZE_SHRINK_END
 			_right_player_strip.add_child(chip)
 		else:
+			chip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 			_player_strip.add_child(chip)
 
 
@@ -169,9 +185,7 @@ func update_chaser_countdown(steps: int) -> void:
 	var update_in_strip = func(strip: Control) -> void:
 		if strip == null: return
 		for chip in strip.get_children():
-			var hbox = chip.get_child(0)
-			if hbox == null: continue
-			var lbl = hbox.get_node_or_null("ChaserCountdownLabel") as Label
+			var lbl := chip.find_child("ChaserCountdownLabel", true, false) as Label
 			if lbl != null:
 				if steps > 0:
 					lbl.text = tr("hud_chaser_in") % steps
@@ -322,19 +336,31 @@ func _build_ui() -> void:
 	bg_panel.custom_minimum_size.y = HUD_HEIGHT
 	add_child(bg_panel)
 
-	# Main HBox: [Player Strip (MP only)] [Center: tracker + desc]
+	# Main HBox: [stable side lane] [Center: tracker + desc] [stable side lane]
 	var hbox := HBoxContainer.new()
 	hbox.anchors_preset = Control.PRESET_FULL_RECT
 	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hbox.add_theme_constant_override("separation", 12)
 	bg_panel.add_child(hbox)
 
+	_left_lane = Control.new()
+	_left_lane.visible = false
+	_left_lane.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_left_lane.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	hbox.add_child(_left_lane)
+
+	var left_lane_row := HBoxContainer.new()
+	left_lane_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	left_lane_row.alignment = BoxContainer.ALIGNMENT_BEGIN
+	_left_lane.add_child(left_lane_row)
+
 	# Left: Player Strip (hidden by default — shown in multiplayer)
 	_player_strip = VBoxContainer.new()
 	_player_strip.visible = false
 	_player_strip.add_theme_constant_override("separation", 8)
 	_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	hbox.add_child(_player_strip)
+	_player_strip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	left_lane_row.add_child(_player_strip)
 
 	# Center: Container for tracker and descriptions
 	var center_vbox := VBoxContainer.new()
@@ -349,12 +375,25 @@ func _build_ui() -> void:
 	_tracker.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	center_vbox.add_child(_tracker)
 
+	_right_lane = Control.new()
+	_right_lane.visible = false
+	_right_lane.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_right_lane.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	hbox.add_child(_right_lane)
+
+	var right_lane_row := HBoxContainer.new()
+	right_lane_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	right_lane_row.alignment = BoxContainer.ALIGNMENT_END
+	_right_lane.add_child(right_lane_row)
+
 	# Right: Player Strip for symmetrical layout in 3+ players
 	_right_player_strip = VBoxContainer.new()
 	_right_player_strip.visible = false
 	_right_player_strip.add_theme_constant_override("separation", 8)
 	_right_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	hbox.add_child(_right_player_strip)
+	_right_player_strip.size_flags_horizontal = Control.SIZE_SHRINK_END
+	right_lane_row.add_child(_right_player_strip)
+	_update_side_lane_widths()
 
 	# Race mode: per-player tracker rows (hidden by default)
 	_race_container = VBoxContainer.new()
@@ -384,4 +423,51 @@ func _build_ui() -> void:
 
 
 
-# ── Player Chip Builder moved to UIHelpers ──
+	# ── Player Chip Builder moved to UIHelpers ──
+
+func _create_badge_slot(badge: Control, align_right: bool) -> Control:
+	var slot := Control.new()
+	slot.set_meta("hud_badge_slot", true)
+	slot.custom_minimum_size.x = _side_lane_width()
+	slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+	var row := HBoxContainer.new()
+	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	row.alignment = BoxContainer.ALIGNMENT_END if align_right else BoxContainer.ALIGNMENT_BEGIN
+	slot.add_child(row)
+	row.add_child(badge)
+	return slot
+
+func _set_side_lanes_visible(show_lanes: bool) -> void:
+	if _left_lane != null:
+		_left_lane.visible = show_lanes
+	if _right_lane != null:
+		_right_lane.visible = show_lanes
+
+func _on_viewport_size_changed() -> void:
+	_update_side_lane_widths()
+
+func _update_side_lane_widths() -> void:
+	var lane_width := _side_lane_width()
+	for lane in [_left_lane, _right_lane]:
+		if lane != null:
+			lane.custom_minimum_size.x = lane_width
+	for strip in [_player_strip, _right_player_strip]:
+		if strip == null:
+			continue
+		for row in strip.get_children():
+			_update_badge_slot_widths(row, lane_width)
+
+func _update_badge_slot_widths(node: Node, lane_width: float) -> void:
+	if node == null:
+		return
+	var control := node as Control
+	if control != null and bool(control.get_meta("hud_badge_slot", false)):
+		control.custom_minimum_size.x = lane_width
+	for child in node.get_children():
+		_update_badge_slot_widths(child, lane_width)
+
+func _side_lane_width() -> float:
+	var viewport_width := get_viewport().get_visible_rect().size.x if get_viewport() != null else 1920.0
+	return clampf(viewport_width * SIDE_LANE_VIEWPORT_FRACTION, SIDE_LANE_MIN_WIDTH, SIDE_LANE_MAX_WIDTH)

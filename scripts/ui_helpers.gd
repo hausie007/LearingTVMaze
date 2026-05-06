@@ -451,6 +451,8 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 		role_lbl.name = "RoleLabel"
 		role_lbl.text = TranslationServer.translate(role_key)
 		role_lbl.add_theme_font_size_override("font_size", text_size)
+		role_lbl.add_theme_font_override("font", get_font_at_weight(WEIGHT_SEMIBOLD))
+		role_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		var text_color = accent_color.lightened(0.2)
 		role_lbl.add_theme_color_override("font_color", text_color)
 		role_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -462,7 +464,6 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 		countdown_lbl.add_theme_font_size_override("font_size", text_size)
 		countdown_lbl.add_theme_color_override("font_color", accent_color.lightened(0.2))
 		countdown_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		countdown_lbl.custom_minimum_size = Vector2(int((90 if not scale_down else 50) * scale_mult), 0)
 		countdown_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		countdown_lbl.visible = false
 		chip_hbox.add_child(countdown_lbl)
