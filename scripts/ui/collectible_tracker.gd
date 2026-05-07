@@ -36,6 +36,9 @@ const SLIDE_FADE_DURATION: float = 0.18
 
 ## Spacing between labels.
 const LABEL_SEPARATION: int = 14
+const OUTER_SEPARATION: int = 6
+const WORD_EMOJI_WIDTH: float = 100.0
+const WORD_MIN_WINDOW: int = 3
 
 
 # ── State ────────────────────────────────────────────────────────────────────
@@ -73,12 +76,24 @@ var _pulse_tween: Tween = null
 ## Pending delayed slide timer.
 var _slide_timer: SceneTreeTimer = null
 
+## Coalesces resize-driven word layout rebuilds.
+var _word_fit_rebuild_queued: bool = false
+
+## Optional external width budget. Used by the HUD because the tracker's own
+## minimum size can be made too wide by the labels it already created.
+var _available_width_limit: float = 0.0
+
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
 	add_theme_constant_override("margin_bottom", 16)
 	_ensure_layout()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and _learning_type == "words":
+		_queue_word_fit_rebuild()
 
 
 func _ensure_layout() -> void:
@@ -106,6 +121,7 @@ func setup(sequence: Array[String], learning_type: String, word_emoji: String = 
 			_ellipsis_right.add_theme_font_size_override("font_size", font_size_override)
 	_compute_max_visible()
 	_rebuild_labels_instant()
+	_queue_word_fit_rebuild()
 
 
 ## Update the tracker to reflect new collection state.
@@ -138,6 +154,16 @@ func update_progress(current_index: int, collected_count: int) -> void:
 ## Override the max visible count.
 func set_max_visible(count: int) -> void:
 	_max_visible = clampi(count, 3, 50)
+
+
+## Limit the word tracker to the parent layout's real center-lane budget.
+func set_available_width_limit(width: float) -> void:
+	var next_width := maxf(width, 0.0)
+	if is_equal_approx(_available_width_limit, next_width):
+		return
+	_available_width_limit = next_width
+	if _learning_type == "words":
+		_queue_word_fit_rebuild()
 
 
 # ── Window Calculation ───────────────────────────────────────────────────────
@@ -211,18 +237,26 @@ func _build_layout() -> void:
 
 
 func _compute_max_visible() -> void:
-	if _learning_type == "words":
-		var avail := get_viewport_rect().size.x - 200.0
-		if not _word_emoji.is_empty():
-			avail -= 100.0
-		var min_w := _min_width_for_count(_sequence.size())
-		var needed := float(_sequence.size()) * (min_w + float(LABEL_SEPARATION))
-		if needed <= avail:
-			_max_visible = _sequence.size()
-		else:
-			_max_visible = NUM_LETTER_WINDOW
-	else:
+	if _learning_type != "words":
 		_max_visible = NUM_LETTER_WINDOW
+		return
+
+	if _sequence.is_empty():
+		_max_visible = 0
+		return
+
+	var avail := _available_width_for_words()
+	if _estimated_word_tracker_width(_sequence.size(), false) <= avail:
+		_max_visible = _sequence.size()
+		return
+
+	var largest_page := mini(_sequence.size(), NUM_LETTER_WINDOW)
+	for count in range(largest_page, WORD_MIN_WINDOW - 1, -1):
+		if _estimated_word_tracker_width(count, true) <= avail:
+			_max_visible = count
+			return
+
+	_max_visible = mini(_sequence.size(), WORD_MIN_WINDOW)
 
 
 # ── Build / Rebuild ──────────────────────────────────────────────────────────
@@ -480,3 +514,85 @@ func _set_emoji_visible(vis: bool) -> void:
 		var spacer = _emoji_label.get_meta("spacer", null)
 		if spacer != null:
 			spacer.visible = vis
+
+
+func _queue_word_fit_rebuild() -> void:
+	if _word_fit_rebuild_queued or _sequence.is_empty():
+		return
+	_word_fit_rebuild_queued = true
+	call_deferred("_rebuild_for_current_word_width_if_needed")
+
+
+func _rebuild_for_current_word_width_if_needed() -> void:
+	_word_fit_rebuild_queued = false
+	if _learning_type != "words" or _sequence.is_empty():
+		return
+
+	var old_max_visible := _max_visible
+	var old_window_start := _window_start
+	_compute_max_visible()
+	_clamp_window_start()
+	if _max_visible != old_max_visible or _window_start != old_window_start:
+		_rebuild_labels_instant()
+
+
+func _clamp_window_start() -> void:
+	if _sequence.size() <= _max_visible:
+		_window_start = 0
+		return
+	_window_start = clampi(_window_start, 0, _sequence.size() - _max_visible)
+
+
+func _available_width_for_words() -> float:
+	if _available_width_limit > 1.0:
+		return _available_width_limit
+	if size.x > 1.0:
+		return size.x
+	var parent_control := get_parent() as Control
+	if parent_control != null and parent_control.size.x > 1.0:
+		return parent_control.size.x
+	if get_viewport() != null:
+		return get_viewport_rect().size.x - 200.0
+	return 1920.0 - 200.0
+
+
+func _estimated_word_tracker_width(visible_count: int, include_paging_chrome: bool) -> float:
+	if visible_count <= 0:
+		return 0.0
+
+	var width := 0.0
+	if not _word_emoji.is_empty():
+		width += WORD_EMOJI_WIDTH
+
+	width += _widest_word_page_width(visible_count)
+
+	if include_paging_chrome and _sequence.size() > visible_count:
+		var ellipsis_width := _ellipsis_width_for_count(visible_count)
+		width += (ellipsis_width * 2.0) + (float(OUTER_SEPARATION) * 2.0)
+
+	return width
+
+
+func _widest_word_page_width(visible_count: int) -> float:
+	var min_w := float(_min_width_for_count(visible_count))
+	var widest := 0.0
+	var max_start := maxi(_sequence.size() - visible_count, 0)
+
+	for start in range(max_start + 1):
+		var end := mini(start + visible_count, _sequence.size())
+		var page_width := 0.0
+		for i in range(start, end):
+			if _sequence[i] == " ":
+				page_width += min_w * 0.6
+			else:
+				page_width += min_w
+		if end > start:
+			page_width += float(end - start - 1) * float(LABEL_SEPARATION)
+		widest = maxf(widest, page_width)
+
+	return widest
+
+
+func _ellipsis_width_for_count(visible_count: int) -> float:
+	var font_size := _font_size_for_count(visible_count)
+	return maxf(float(font_size) * 0.65, 36.0)

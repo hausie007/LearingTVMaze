@@ -12,9 +12,12 @@ extends CanvasLayer
 
 
 const HUD_HEIGHT: float = 160.0
+const HUD_CONTENT_MARGIN_X: float = 20.0
+const HUD_MAIN_SEPARATION: float = 12.0
 const SIDE_LANE_MIN_WIDTH: float = 300.0
 const SIDE_LANE_MAX_WIDTH: float = 560.0
 const SIDE_LANE_VIEWPORT_FRACTION: float = 0.27
+const CHASER_COUNTDOWN_WIDTH_SAMPLE: int = 999
 
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
@@ -26,6 +29,7 @@ var _player_strip: VBoxContainer = null
 var _right_player_strip: VBoxContainer = null
 var _tracker: CollectibleTracker = null
 var _last_tracker_hash: String = ""
+var _hud_players: Array[Dictionary] = []
 
 ## Per-player race trackers (race mode only).
 var _race_container: VBoxContainer = null
@@ -52,6 +56,7 @@ func update_tracker(sequence: Array[String], current_index: int, collected_count
 					learning_type: String, word_emoji: String = "") -> void:
 	if _tracker != null:
 		_tracker.visible = true
+		_update_tracker_width_limits()
 		# Only rebuild chips when the sequence itself changes.
 		var seq_hash := str(sequence) + learning_type + word_emoji
 		if seq_hash != _last_tracker_hash:
@@ -76,6 +81,7 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 							learning_type: String) -> void:
 	if _player_strip == null or _right_player_strip == null:
 		return
+	_hud_players = players.duplicate(true)
 		
 	# Hide central legacy tracker elements
 	if _tracker != null: _tracker.visible = false
@@ -96,7 +102,8 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		_set_side_lanes_visible(false)
 		return
 		
-	_set_side_lanes_visible(true)
+	_set_side_lanes_visible(true, count > 1)
+	_update_side_lane_widths()
 	_player_strip.visible = true
 	_right_player_strip.visible = count > 1
 
@@ -159,6 +166,7 @@ func update_race_tracker(peer_id: int, current_index: int, collected_count: int)
 func set_players(players: Array[Dictionary]) -> void:
 	if _player_strip == null:
 		return
+	_hud_players = players.duplicate(true)
 	for child in _player_strip.get_children():
 		child.queue_free()
 	if _right_player_strip != null:
@@ -166,9 +174,10 @@ func set_players(players: Array[Dictionary]) -> void:
 			child.queue_free()
 
 	_player_strip.visible = players.size() > 0
-	_set_side_lanes_visible(players.size() > 0)
+	_set_side_lanes_visible(players.size() > 0, _should_reserve_right_lane(players))
+	_update_side_lane_widths()
 	if _right_player_strip != null:
-		_right_player_strip.visible = players.size() > 1
+		_right_player_strip.visible = _right_lane != null and _right_lane.visible
 
 	for i in range(players.size()):
 		var chip := UIHelpers.build_player_chip(players[i], players.size(), 1.4)
@@ -178,6 +187,7 @@ func set_players(players: Array[Dictionary]) -> void:
 		else:
 			chip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 			_player_strip.add_child(chip)
+	_update_tracker_width_limits()
 
 
 ## Update the countdown on the chaser's chip.
@@ -196,6 +206,8 @@ func update_chaser_countdown(steps: int) -> void:
 
 	update_in_strip.call(_player_strip)
 	update_in_strip.call(_right_player_strip)
+	_update_side_lane_widths()
+	_update_tracker_width_limits()
 
 
 # ── Backward Compatibility Bridges ──────────────────────────────────────────
@@ -439,14 +451,15 @@ func _create_badge_slot(badge: Control, align_right: bool) -> Control:
 	row.add_child(badge)
 	return slot
 
-func _set_side_lanes_visible(show_lanes: bool) -> void:
+func _set_side_lanes_visible(show_left: bool, show_right: bool = false) -> void:
 	if _left_lane != null:
-		_left_lane.visible = show_lanes
+		_left_lane.visible = show_left
 	if _right_lane != null:
-		_right_lane.visible = show_lanes
+		_right_lane.visible = show_right
 
 func _on_viewport_size_changed() -> void:
 	_update_side_lane_widths()
+	_update_tracker_width_limits()
 
 func _update_side_lane_widths() -> void:
 	var lane_width := _side_lane_width()
@@ -470,4 +483,66 @@ func _update_badge_slot_widths(node: Node, lane_width: float) -> void:
 
 func _side_lane_width() -> float:
 	var viewport_width := get_viewport().get_visible_rect().size.x if get_viewport() != null else 1920.0
-	return clampf(viewport_width * SIDE_LANE_VIEWPORT_FRACTION, SIDE_LANE_MIN_WIDTH, SIDE_LANE_MAX_WIDTH)
+	var base_width := clampf(viewport_width * SIDE_LANE_VIEWPORT_FRACTION, SIDE_LANE_MIN_WIDTH, SIDE_LANE_MAX_WIDTH)
+	return maxf(base_width, _estimated_largest_player_chip_width())
+
+func _update_tracker_width_limits() -> void:
+	if _tracker == null:
+		return
+	var viewport_width := get_viewport().get_visible_rect().size.x if get_viewport() != null else 1920.0
+	var lane_width := _side_lane_width()
+	var lane_count := 0.0
+	if _left_lane != null and _left_lane.visible:
+		lane_count += 1.0
+	if _right_lane != null and _right_lane.visible:
+		lane_count += 1.0
+	var width := viewport_width - (HUD_CONTENT_MARGIN_X * 2.0)
+	width -= lane_width * lane_count
+	width -= HUD_MAIN_SEPARATION * lane_count
+	_tracker.set_available_width_limit(maxf(width, 0.0))
+
+func _should_reserve_right_lane(players: Array[Dictionary]) -> bool:
+	return players.size() > 1
+
+func _estimated_largest_player_chip_width() -> float:
+	var largest := 0.0
+	var count := maxi(_hud_players.size(), 1)
+	for player in _hud_players:
+		largest = maxf(largest, _estimated_player_chip_width(player, count, 1.4))
+	return largest
+
+func _estimated_player_chip_width(data: Dictionary, total_players: int, scale_mult: float) -> float:
+	var scale_down := total_players > 2
+	var margin_x := float((12 if not scale_down else 6) * scale_mult) * 2.0
+	var separation := float((8 if not scale_down else 4) * scale_mult)
+	var icon_size := float((72 if not scale_down else 40) * scale_mult)
+	var emoji_size := float((48 if not scale_down else 28) * scale_mult)
+	var text_size := int((36 if not scale_down else 20) * scale_mult)
+	var parts: Array[float] = []
+
+	parts.append(icon_size)
+
+	var role: String = data.get("role", "")
+	var role_emoji := UIHelpers.get_role_emoji(role)
+	if not role_emoji.is_empty():
+		parts.append(emoji_size)
+
+	var role_key := UIHelpers.get_role_translation_key(role)
+	if not role_key.is_empty():
+		parts.append(_text_width(TranslationServer.translate(role_key), text_size))
+
+	var is_ai: bool = data.get("is_ai", false)
+	if is_ai or role == Config.ROLE_CHASER:
+		var countdown_text := TranslationServer.translate("hud_chaser_in") % CHASER_COUNTDOWN_WIDTH_SAMPLE
+		parts.append(_text_width(countdown_text, text_size))
+
+	var width := margin_x
+	for i in range(parts.size()):
+		width += parts[i]
+		if i > 0:
+			width += separation
+	return width
+
+func _text_width(text: String, font_size: int) -> float:
+	var font := UIHelpers.get_font_at_weight(UIHelpers.WEIGHT_SEMIBOLD)
+	return font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x
