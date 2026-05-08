@@ -389,13 +389,9 @@ func _update_labels() -> void:
 
 	var num_players := ""
 	var options := MissionCatalog.max_players_options(_selected_mission, _chaser_enabled)
-	if not options.is_empty():
-		if options.size() == 1:
-			num_players = str(options[0]) + " players"
-		else:
-			num_players = str(options[0]) + "-" + str(options[options.size() - 1]) + " players"
+	num_players = _format_player_count(options)
 
-	_title_label.text = "Play Together: " + tr(MissionCatalog.mission_title_key(_selected_mission)) + " (" + num_players + ")"
+	_title_label.text = tr("mp_host_setup_title") % [tr(MissionCatalog.mission_title_key(_selected_mission)), num_players]
 
 	var ui_idx: int = Config.LANG_CODES.find(Config.ui_language)
 	if ui_idx < 0:
@@ -474,17 +470,24 @@ func _update_context_rows() -> void:
 		_selected_head_start_idx = clampi(_selected_head_start_idx, 0, max(0, delays.size() - 1))
 		var head_start_level := delays[_selected_head_start_idx]
 		var steps := MissionCatalog.calculate_head_start_steps(head_start_level, Config.difficulty)
-		var lang := String(Config.ui_language)
-		if steps >= 2 and steps <= 4 and lang.begins_with("cs"):
-			_head_start_button.text = "%d kroky" % steps
-		else:
-			_head_start_button.text = tr("head_start_steps") % steps
+		_head_start_button.text = MissionCatalog.format_head_start_steps(steps, Config.get_effective_ui_language())
 
 func _set_option_button_enabled(button: Button, enabled: bool) -> void:
 	if button == null:
 		return
 	button.disabled = not enabled
 	button.focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
+
+func _format_player_count(options: Array[int]) -> String:
+	if options.is_empty():
+		return tr("badge_2_players")
+	var min_players := int(options[0])
+	var max_players := int(options[options.size() - 1])
+	if min_players == 2 and max_players == 2:
+		return tr("badge_2_players")
+	if min_players == max_players:
+		return "%d %s" % [min_players, tr("badge_players_word")]
+	return "%d-%d %s" % [min_players, max_players, tr("badge_players_word")]
 
 func _is_character_enabled(idx: int) -> bool:
 	return idx >= 0 and idx < _character_catalog.size()

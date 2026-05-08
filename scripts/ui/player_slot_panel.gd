@@ -130,7 +130,7 @@ func _create_slot(index: int) -> void:
 	label.name = "SlotLabel"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
-	label.text = "Waiting..."
+	label.text = tr("mp_slot_waiting")
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 	slot_vbox.add_child(label)
 
@@ -158,7 +158,7 @@ func _fill_slot(index: int, info: Dictionary) -> void:
 	preview.visible = true
 
 	if bool(info.get("is_host", false)):
-		label.text = "You"
+		label.text = tr("mp_slot_you")
 		label.add_theme_color_override("font_color", UIColors.YELLOW)
 	else:
 		label.text = CharacterCatalog.display_name_for_id(char_id)
@@ -177,7 +177,7 @@ func _empty_slot(index: int) -> void:
 	var frame := slot["frame"] as PanelContainer
 
 	preview.visible = false
-	label.text = "Waiting..."
+	label.text = tr("mp_slot_waiting")
 	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
 	_apply_empty_frame_style(frame)
 	slot["is_filled"] = false

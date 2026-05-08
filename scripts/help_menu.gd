@@ -1,82 +1,113 @@
 class_name HelpMenu
 extends Control
 
-## help_menu.gd
-## ---------------------------------------------------------------------------
 ## Displays a kid-friendly slideshow explaining the game mechanics.
-## Uses theme-aware icons and localized strings.
-## ---------------------------------------------------------------------------
+## Uses existing textures and simple UI shapes so help cards stay lightweight.
+
+const SLIDES = [
+	{"title": "help_card_01_title", "text": "help_card_01_text", "type": "overview"},
+	{"title": "help_card_02_title", "text": "help_card_02_text", "type": "play_now"},
+	{"title": "help_card_03_title", "text": "help_card_03_text", "type": "custom_game"},
+	{"title": "help_card_04_title", "text": "help_card_04_text", "type": "maze_sizes"},
+	{"title": "help_card_05_title", "text": "help_card_05_text", "type": "worlds"},
+	{"title": "help_card_06_title", "text": "help_card_06_text", "type": "numbers"},
+	{"title": "help_card_07_title", "text": "help_card_07_text", "type": "letters"},
+	{"title": "help_card_08_title", "text": "help_card_08_text", "type": "word_voice"},
+	{"title": "help_card_09_title", "text": "help_card_09_text", "type": "clean_maze"},
+	{"title": "help_card_10_title", "text": "help_card_10_text", "type": "chaser"},
+	{"title": "help_card_11_title", "text": "help_card_11_text", "type": "center_race"},
+	{"title": "help_card_12_title", "text": "help_card_12_text", "type": "multiplayer"},
+	{"title": "help_card_13_title", "text": "help_card_13_text", "type": "phone_controller"},
+]
+
+const ICON_NUMBERS := "res://images/icons/i_numbers.png"
+const ICON_WORDS := "res://images/icons/i_words.png"
+const ICON_LETTERS := "res://images/icons/i_letters.png"
+const ICON_CHASER := "res://images/icons/i_with_chaser.png"
+const ICON_PLAYERS := "res://images/icons/i_play_together2.png"
+const ICON_PLAY_NOW := "res://images/icons/i_play_now.png"
+const ICON_ADVENTURE := "res://images/icons/i_your_adventure.png"
+const ICON_EXIT := "res://images/icons/i_find_the_exit.png"
+const ICON_RACE := "res://images/icons/i_race_to_the_center.png"
+const ICON_JOIN := "res://images/icons/i_join_game.png"
+const ICON_MAZE := "res://images/icons/i_just_maze.png"
 
 var _current_slide: int = 0
 var _theme: ThemeLoader = null
 var _anim_time: float = 0.0
 
-# Slide data: {icon_type: "player"|"finish"|"collectible"|"chaser"|"", text_key: "help_slide_1_text"}
-const SLIDES = [
-	{"icon": "",            "text": "help_slide_1_text",    "type": "welcome"},
-	{"icon": "",            "text": "help_slide_maze_text", "type": "maze"},
-	{"icon": "player",      "text": "help_slide_2_text",    "type": "icon"},
-	{"icon": "finish",      "text": "help_slide_3_text",    "type": "icon"},
-	{"icon": "collectible", "text": "help_slide_4_text",    "type": "collectible"},
-	{"icon": "chaser",      "text": "help_slide_5_text",    "type": "icon"},
-	{"icon": "settings",    "text": "help_slide_6_text",    "type": "themes"},
-]
-
 @onready var _visual_container: CenterContainer = %VisualContainer
 @onready var _icon_rect: TextureRect = %IconRect
+@onready var _title_label: Label = %TitleLabel
 @onready var _text_label: Label = %TextLabel
 @onready var _page_label: Label = %PageLabel
 @onready var _left_btn: Button = %LeftButton
 @onready var _right_btn: Button = %RightButton
 
+
 func _ready() -> void:
-	# Load cached theme to get icons
 	_theme = Config.theme
-	
+
 	_left_btn.pressed.connect(_on_left_pressed)
 	_right_btn.pressed.connect(_on_right_pressed)
-	
-	# Disable focus for buttons so D-pad always triggers direct slide transitions
-	# without "getting stuck" on a button.
+
 	_left_btn.focus_mode = Control.FOCUS_NONE
 	_right_btn.focus_mode = Control.FOCUS_NONE
-	
+
 	if is_layout_rtl():
 		_left_btn.text = ">"
 		_right_btn.text = "<"
-	
+
 	_update_slide()
 	_apply_layout_shift()
 
 
 func _apply_layout_shift() -> void:
 	var center_container = $CenterContainer
-	if not center_container: return
-	
+	if not center_container:
+		return
+
 	var controls_mode = Config.on_screen_controls
 	UIHelpers.apply_dpad_layout(center_container, controls_mode)
-	
-	# Override the default 100px bias from apply_dpad_layout to use 
-	# the "vast majority" of the 75% space without overlapping the D-pad.
+
 	if controls_mode != Config.ControlsMode.OFF:
 		center_container.offset_left = 0
 		center_container.offset_right = 0
-	
-	var panel = get_node_or_null("%Panel")
-	var text_label = get_node_or_null("%TextLabel")
-	var icon_rect = get_node_or_null("%IconRect")
-	
-	if panel and text_label:
-		if controls_mode != Config.ControlsMode.OFF:
-			panel.custom_minimum_size = Vector2(1280, 820)
-			text_label.custom_minimum_size = Vector2(900, 240)
-			text_label.add_theme_font_size_override("font_size", 44)
-			if icon_rect: icon_rect.custom_minimum_size = Vector2(280, 280)
-		else:
-			panel.custom_minimum_size = Vector2(1500, 900)
-			text_label.custom_minimum_size = Vector2(1000, 280)
-			text_label.add_theme_font_size_override("font_size", 50)
-			if icon_rect: icon_rect.custom_minimum_size = Vector2(300, 300)
+
+	var panel: Control = get_node_or_null("%Panel")
+	var visual_container: Control = get_node_or_null("%VisualContainer")
+	var title_label: Label = get_node_or_null("%TitleLabel")
+	var text_label: Label = get_node_or_null("%TextLabel")
+	var icon_rect: TextureRect = get_node_or_null("%IconRect")
+	var vbox: VBoxContainer = get_node_or_null("CenterContainer/Panel/MainHBox/ContentMargin/VBox")
+
+	if panel == null or text_label == null or title_label == null:
+		return
+
+	if controls_mode != Config.ControlsMode.OFF:
+		panel.custom_minimum_size = Vector2(1280, 820)
+		if visual_container:
+			visual_container.custom_minimum_size = Vector2(0, 230)
+		title_label.custom_minimum_size = Vector2(900, 56)
+		title_label.add_theme_font_size_override("font_size", 40)
+		text_label.custom_minimum_size = Vector2(900, 290)
+		text_label.add_theme_font_size_override("font_size", 33)
+		if icon_rect:
+			icon_rect.custom_minimum_size = Vector2(230, 230)
+		if vbox:
+			vbox.add_theme_constant_override("separation", 18)
+	else:
+		panel.custom_minimum_size = Vector2(1500, 900)
+		if visual_container:
+			visual_container.custom_minimum_size = Vector2(0, 300)
+		title_label.custom_minimum_size = Vector2(1000, 66)
+		title_label.add_theme_font_size_override("font_size", 46)
+		text_label.custom_minimum_size = Vector2(1000, 300)
+		text_label.add_theme_font_size_override("font_size", 39)
+		if icon_rect:
+			icon_rect.custom_minimum_size = Vector2(300, 300)
+		if vbox:
+			vbox.add_theme_constant_override("separation", 22)
 
 
 func _process(delta: float) -> void:
@@ -88,209 +119,548 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_on_back_pressed()
-	
+
 	if event.is_action_pressed("ui_left"):
 		get_viewport().set_input_as_handled()
 		_on_left_pressed()
-		
+
 	if event.is_action_pressed("ui_right"):
 		get_viewport().set_input_as_handled()
 		_on_right_pressed()
 
 
 func _update_slide() -> void:
-	var slide = SLIDES[_current_slide]
-	
-	# 1. Update Text & Page
-	_text_label.text = tr(slide.text)
+	var slide: Dictionary = SLIDES[_current_slide]
+	var title_key := String(slide.get("title", ""))
+	var text_key := String(slide.get("text", ""))
+	var text := tr(text_key)
+
+	_title_label.text = tr(title_key)
+	_text_label.text = text
 	_page_label.text = "%d / %d" % [_current_slide + 1, SLIDES.size()]
-	
-	# 2. Cleanup custom visuals
-	for child in _visual_container.get_children():
-		if child != _icon_rect:
-			child.queue_free()
-	
-	_icon_rect.visible = false
-	
-	# 3. Update Visuals
-	match slide.type:
-		"welcome":
-			_icon_rect.visible = true
-			_icon_rect.texture = load("res://images/lm_paper_logo.png")
-			# Adjust size for logo (3:2 aspect ratio) to look better as a hero element
-			_icon_rect.custom_minimum_size = Vector2(450, 300)
-		"maze":
-			_spawn_maze_preview()
-		"icon":
-			_icon_rect.visible = true
-			# Reset to standard icon size (square)
-			var base_size = 300 if Config.on_screen_controls == Config.ControlsMode.OFF else 280
-			_icon_rect.custom_minimum_size = Vector2(base_size, base_size)
-			_update_icon(slide.icon)
-		"collectible":
-			_spawn_collectible_preview()
-		"themes":
-			_spawn_themes_preview()
-	
-	# 4. Arrow Visibility
+
+	_clear_visuals()
+
+	match String(slide.get("type", "")):
+		"overview":
+			_spawn_overview_visual()
+		"play_now":
+			_spawn_play_now_visual()
+		"custom_game":
+			_spawn_custom_game_visual()
+		"maze_sizes":
+			_spawn_maze_sizes_visual()
+		"worlds":
+			_spawn_worlds_visual()
+		"numbers":
+			_spawn_numbers_visual()
+		"letters":
+			_spawn_letters_visual()
+		"word_voice":
+			_spawn_word_voice_visual()
+		"clean_maze":
+			_spawn_clean_maze_visual()
+		"chaser":
+			_spawn_chaser_visual()
+		"center_race":
+			_spawn_center_race_visual()
+		"multiplayer":
+			_spawn_multiplayer_visual()
+		"phone_controller":
+			_spawn_phone_controller_visual()
+		_:
+			_show_icon(_theme_player_texture(), 260)
+
 	var is_first := (_current_slide == 0)
 	_left_btn.disabled = is_first
 	_left_btn.modulate.a = 0.0 if is_first else 1.0
-	
-	# Right button stays enabled even on last slide to act as "exit/finish"
 	_right_btn.disabled = false
 	_right_btn.modulate.a = 1.0
-	
+
 	_update_animations()
-	
+
 	if Config.voice_hints:
-		TTS.speak(tr(slide.text), 0.8, Config.get_effective_ui_language())
+		TTS.speak(text, 0.8, Config.get_effective_ui_language())
 
 
-func _update_icon(icon_name: String) -> void:
-	match icon_name:
-		"player":
-			_icon_rect.texture = _theme.player_texture
-		"finish":
-			_icon_rect.texture = _theme.end_texture
-		"chaser":
-			_icon_rect.texture = _theme.chaser_texture
+func _clear_visuals() -> void:
+	for child in _visual_container.get_children():
+		if child != _icon_rect:
+			child.queue_free()
+	_icon_rect.visible = false
 
 
 func _update_animations() -> void:
-	var slide = SLIDES[_current_slide]
-	
-	# 1. Backgrounds in Maze
 	var maze_node = _visual_container.get_node_or_null("MazePreview")
-	if maze_node:
+	if maze_node and _theme:
 		if _theme.bg_frames.size() > 1:
-			var idx = int(_anim_time * _theme.bg_fps) % _theme.bg_frames.size()
+			var idx := int(_anim_time * _theme.bg_fps) % _theme.bg_frames.size()
 			maze_node.bg_texture = _theme.bg_frames[idx]
-			maze_node.queue_redraw()
 		else:
 			maze_node.bg_texture = _theme.bg_texture
-			maze_node.queue_redraw()
-			
-	# 2. Icon animations
-	if _icon_rect.visible:
-		var frames: Array[Texture2D] = []
-		var fps: float = 5.0
-		
-		match slide.icon:
-			"player":
-				frames = _theme.player_frames
-				fps = _theme.player_fps
-			"chaser":
-				frames = _theme.chaser_frames
-				fps = _theme.chaser_fps
-			"collectible":
-				frames = _theme.col_frames
-				fps = _theme.col_fps
-		
-		if frames.size() > 1:
-			var idx = int(_anim_time * fps) % frames.size()
-			_icon_rect.texture = frames[idx]
+		maze_node.queue_redraw()
+
+	if not _icon_rect.visible or _theme == null:
+		return
+
+	var slide: Dictionary = SLIDES[_current_slide]
+	var frames: Array[Texture2D] = []
+	var fps := 5.0
+
+	match String(slide.get("type", "")):
+		"worlds", "overview", "phone_controller":
+			frames = _theme.player_frames
+			fps = _theme.player_fps
+		"chaser":
+			frames = _theme.chaser_frames
+			fps = _theme.chaser_fps
+
+	if frames.size() > 1:
+		var idx := int(_anim_time * fps) % frames.size()
+		_icon_rect.texture = frames[idx]
 
 
-func _spawn_maze_preview() -> void:
+func _spawn_overview_visual() -> void:
+	var root := VBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 14)
+	_visual_container.add_child(root)
+
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 16)
+	root.add_child(row)
+
+	row.add_child(_create_icon_tile(ICON_NUMBERS, "1 2 3", UIColors.CARD_BLUE_DARK))
+	row.add_child(_create_icon_tile(ICON_WORDS, "A B C", UIColors.CARD_GREEN_DARK))
+	row.add_child(_create_icon_tile(ICON_CHASER, tr("mp_role_chaser"), UIColors.CARD_ORANGE_RED_DARK))
+	row.add_child(_create_icon_tile(ICON_PLAYERS, tr("help_visual_together"), UIColors.CARD_YELLOW_DARK))
+
+	var player := _create_texture_rect(_theme_player_texture(), Vector2(90, 90))
+	root.add_child(player)
+
+
+func _spawn_play_now_visual() -> void:
+	var root := VBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(root)
+
+	var button_panel := _create_panel(UIColors.CARD_YELLOW_DARK, UIColors.HEADING_YELLOW, 22, Vector2(420, 86))
+	var button_row := HBoxContainer.new()
+	button_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	button_row.add_theme_constant_override("separation", 18)
+	button_panel.add_child(button_row)
+	button_row.add_child(_create_texture_rect(load(ICON_PLAY_NOW) as Texture2D, Vector2(58, 58)))
+	button_row.add_child(_create_label(tr("help_card_02_title"), 38, UIColors.HEADING_YELLOW, Vector2(240, 70)))
+	root.add_child(button_panel)
+
+	var path := HBoxContainer.new()
+	path.alignment = BoxContainer.ALIGNMENT_CENTER
+	path.add_theme_constant_override("separation", 12)
+	root.add_child(path)
+	path.add_child(_create_number_tile("1"))
+	path.add_child(_create_arrow_label())
+	path.add_child(_create_number_tile("2"))
+	path.add_child(_create_arrow_label())
+	path.add_child(_create_number_tile("3"))
+	path.add_child(_create_arrow_label())
+	path.add_child(_create_texture_rect(_theme_finish_texture(), Vector2(78, 78)))
+
+
+func _spawn_custom_game_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(row)
+
+	var size_label := tr("help_visual_size")
+	row.add_child(_create_symbol_tile(_first_visual_letter(size_label), size_label, UIColors.CARD_BLUE_DARK))
+	row.add_child(_create_icon_tile(ICON_NUMBERS, tr("help_visual_collect"), UIColors.CARD_GREEN_DARK))
+	row.add_child(_create_icon_tile(ICON_CHASER, tr("mp_role_chaser"), UIColors.CARD_ORANGE_RED_DARK))
+	row.add_child(_create_icon_tile(ICON_PLAYERS, tr("badge_players_word"), UIColors.CARD_YELLOW_DARK))
+
+
+func _spawn_maze_sizes_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(row)
+
+	row.add_child(_create_mini_maze_panel(Vector2i(4, 3), Vector2(132, 108), tr("diff_easy")))
+	row.add_child(_create_mini_maze_panel(Vector2i(6, 4), Vector2(172, 124), tr("diff_medium")))
+	row.add_child(_create_mini_maze_panel(Vector2i(8, 5), Vector2(218, 144), tr("diff_hard")))
+
+
+func _spawn_worlds_visual() -> void:
+	var root := VBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 12)
+	_visual_container.add_child(root)
+
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 16)
+	root.add_child(row)
+
+	var shown := 0
+	var available := ThemeLoader.get_available_themes()
+	for theme_name in available:
+		var loader := ThemeLoader.get_cached(theme_name)
+		if loader == null:
+			continue
+		var tex := loader.player_texture if loader.player_texture != null else _theme_player_texture()
+		row.add_child(_create_texture_card(tex, Vector2(120, 120), loader.color_floor))
+		shown += 1
+		if shown >= 3:
+			break
+
+	while shown < 3:
+		row.add_child(_create_texture_card(_theme_player_texture(), Vector2(120, 120), UIColors.CARD_BLUE_DARK))
+		shown += 1
+
+	var portraits := HBoxContainer.new()
+	portraits.alignment = BoxContainer.ALIGNMENT_CENTER
+	portraits.add_theme_constant_override("separation", 8)
+	root.add_child(portraits)
+	portraits.add_child(_create_texture_rect(_theme_player_texture(), Vector2(54, 54)))
+	portraits.add_child(_create_texture_rect(_theme_chaser_texture(), Vector2(54, 54)))
+	portraits.add_child(_create_texture_rect(_theme_finish_texture(), Vector2(54, 54)))
+
+
+func _spawn_numbers_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 14)
+	_visual_container.add_child(row)
+	row.add_child(_create_number_tile("1"))
+	row.add_child(_create_arrow_label())
+	row.add_child(_create_number_tile("2"))
+	row.add_child(_create_arrow_label())
+	row.add_child(_create_number_tile("3"))
+	row.add_child(_create_arrow_label())
+	row.add_child(_create_number_tile("4"))
+
+
+func _spawn_letters_visual() -> void:
+	var root := HBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(root)
+	var word := tr("help_visual_demo_word")
+	for letter in _word_letters(word):
+		root.add_child(_create_letter_tile(letter))
+	root.add_child(_create_arrow_label())
+	root.add_child(_create_word_card(word))
+
+
+func _spawn_word_voice_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 24)
+	_visual_container.add_child(row)
+	row.add_child(_create_word_card(tr("help_visual_demo_word")))
+	row.add_child(_create_speaker_visual())
+	row.add_child(_create_speech_bubble(tr("help_visual_speech_local")))
+	row.add_child(_create_speech_bubble(tr("help_visual_speech_foreign")))
+
+
+func _spawn_clean_maze_visual() -> void:
+	_spawn_maze_preview(Vector2(640, 300))
+
+
+func _spawn_chaser_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(row)
+	row.add_child(_create_texture_rect(_theme_player_texture(), Vector2(120, 120)))
+	row.add_child(_create_countdown_visual())
+	row.add_child(_create_texture_rect(_theme_chaser_texture(), Vector2(120, 120)))
+
+
+func _spawn_center_race_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(row)
+	row.add_child(_create_texture_rect(_theme_player_texture(), Vector2(86, 86)))
+	row.add_child(_create_arrow_label())
+	row.add_child(_create_icon_tile(ICON_RACE, tr("help_visual_middle"), UIColors.CARD_ORANGE_RED_DARK, Vector2(160, 160)))
+	row.add_child(_create_arrow_label("<"))
+	row.add_child(_create_texture_rect(_theme_chaser_texture(), Vector2(86, 86)))
+
+
+func _spawn_multiplayer_visual() -> void:
+	var root := HBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(root)
+
+	var screen := _create_panel(UIColors.BG_DARK, UIColors.BLUE, 14, Vector2(310, 190))
+	var screen_vbox := VBoxContainer.new()
+	screen_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	screen_vbox.add_theme_constant_override("separation", 8)
+	screen.add_child(screen_vbox)
+	screen_vbox.add_child(_create_mini_maze_panel(Vector2i(6, 4), Vector2(220, 108), ""))
+	screen_vbox.add_child(_create_label("Wi-Fi", 24, UIColors.HEADING_YELLOW, Vector2(160, 34)))
+	root.add_child(screen)
+
+	var players := VBoxContainer.new()
+	players.alignment = BoxContainer.ALIGNMENT_CENTER
+	players.add_theme_constant_override("separation", 8)
+	root.add_child(players)
+	players.add_child(_create_icon_tile(ICON_PLAYERS, "2-4", UIColors.CARD_GREEN_DARK, Vector2(128, 128)))
+	players.add_child(_create_icon_tile(ICON_JOIN, tr("help_visual_join"), UIColors.CARD_BLUE_DARK, Vector2(128, 128)))
+
+
+func _spawn_phone_controller_visual() -> void:
+	var root := HBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 26)
+	_visual_container.add_child(root)
+
+	var screen := _create_panel(UIColors.BG_DARK, UIColors.BLUE, 14, Vector2(330, 200))
+	var screen_vbox := VBoxContainer.new()
+	screen_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	screen.add_child(screen_vbox)
+	screen_vbox.add_child(_create_mini_maze_panel(Vector2i(7, 4), Vector2(250, 130), ""))
+	root.add_child(screen)
+
+	var phone := _create_panel(UIColors.CARD_NEUTRAL_ALT, UIColors.HEADING_YELLOW, 22, Vector2(170, 230))
+	var phone_vbox := VBoxContainer.new()
+	phone_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	phone_vbox.add_theme_constant_override("separation", 8)
+	phone.add_child(phone_vbox)
+	phone_vbox.add_child(_create_label(tr("help_visual_collect_numbers"), 18, UIColors.TEXT_PRIMARY, Vector2(140, 32)))
+	phone_vbox.add_child(_create_dpad_visual())
+	root.add_child(phone)
+
+
+func _spawn_maze_preview(min_size: Vector2 = Vector2(640, 320)) -> void:
 	var maze_script = load("res://scripts/help_maze_preview.gd")
 	var maze_node = Control.new()
 	maze_node.name = "MazePreview"
 	maze_node.set_script(maze_script)
 	maze_node.theme_loader = _theme
-	maze_node.custom_minimum_size = Vector2(640, 320)
+	maze_node.custom_minimum_size = min_size
 	_visual_container.add_child(maze_node)
-	maze_node.bg_texture = _theme.bg_texture
+	maze_node.bg_texture = _theme.bg_texture if _theme != null else null
 
 
-func _spawn_collectible_preview() -> void:
-	# Centered container for the whole collectible (Image + Label)
-	var root := Control.new()
-	root.name = "ColPreview"
-	root.custom_minimum_size = Vector2(300, 300)
-	_visual_container.add_child(root)
-	
-	# 1. Base (Theme Image or Procedural Circle)
-	if _theme.col_texture:
-		var tex_rect := TextureRect.new()
-		tex_rect.name = "BaseImage"
-		tex_rect.texture = _theme.col_texture
-		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.size = Vector2(250, 250)
-		tex_rect.position = Vector2(25, 25)
-		root.add_child(tex_rect)
-	else:
-		var panel := PanelContainer.new()
-		var style := StyleBoxFlat.new()
-		style.bg_color = _theme.col_color
-		style.corner_radius_top_left = 60
-		style.corner_radius_top_right = 60
-		style.corner_radius_bottom_right = 60
-		style.corner_radius_bottom_left = 60
-		panel.add_theme_stylebox_override("panel", style)
-		panel.size = Vector2(180, 180)
-		panel.position = Vector2(60, 60)
-		root.add_child(panel)
+func _create_icon_tile(path: String, caption: String, color: Color, min_size: Vector2 = Vector2(132, 132)) -> PanelContainer:
+	var panel := _create_panel(color, UIColors.CARD_BORDER_SOFT, 16, min_size)
+	var vbox := VBoxContainer.new()
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	vbox.add_theme_constant_override("separation", 4)
+	panel.add_child(vbox)
+	vbox.add_child(_create_texture_rect(load(path) as Texture2D, Vector2(min_size.x * 0.45, min_size.y * 0.45)))
+	vbox.add_child(_create_label(caption, 20, UIColors.TEXT_PRIMARY, Vector2(min_size.x - 16, 30)))
+	return panel
 
-	# 2. Identifier Label (Always show "A")
+
+func _create_symbol_tile(symbol: String, caption: String, color: Color) -> PanelContainer:
+	var panel := _create_panel(color, UIColors.CARD_BORDER_SOFT, 16, Vector2(132, 132))
+	var vbox := VBoxContainer.new()
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	vbox.add_theme_constant_override("separation", 4)
+	panel.add_child(vbox)
+	vbox.add_child(_create_label(symbol, 54, UIColors.HEADING_YELLOW, Vector2(110, 66)))
+	vbox.add_child(_create_label(caption, 20, UIColors.TEXT_PRIMARY, Vector2(116, 30)))
+	return panel
+
+
+func _create_texture_card(texture: Texture2D, min_size: Vector2, color: Color) -> PanelContainer:
+	var panel := _create_panel(Color(color.r, color.g, color.b, 0.85), UIColors.CARD_BORDER_SOFT, 18, min_size)
+	panel.add_child(_create_texture_rect(texture, min_size * 0.78))
+	return panel
+
+
+func _create_number_tile(value: String) -> PanelContainer:
+	return _create_tile(value, 52, UIColors.CARD_BLUE_DARK, UIColors.HEADING_YELLOW, Vector2(82, 82))
+
+
+func _create_letter_tile(value: String) -> PanelContainer:
+	return _create_tile(value, 52, UIColors.CARD_GREEN_DARK, UIColors.TEXT_PRIMARY, Vector2(82, 82))
+
+
+func _create_word_card(value: String) -> PanelContainer:
+	return _create_tile(value, 48, UIColors.CARD_YELLOW_DARK, UIColors.HEADING_YELLOW, Vector2(170, 92))
+
+
+func _create_tile(value: String, font_size: int, bg_color: Color, text_color: Color, min_size: Vector2) -> PanelContainer:
+	var panel := _create_panel(bg_color, UIColors.CARD_BORDER_SOFT, 16, min_size)
+	panel.add_child(_create_label(value, font_size, text_color, min_size))
+	return panel
+
+
+func _create_mini_maze_panel(grid: Vector2i, min_size: Vector2, caption: String) -> VBoxContainer:
+	var root := VBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 6)
+
+	var maze_panel := _create_panel(UIColors.BG_DARK, UIColors.CARD_BORDER_SOFT, 10, min_size)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 8)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_right", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	maze_panel.add_child(margin)
+
+	var cells := GridContainer.new()
+	cells.columns = grid.x
+	cells.add_theme_constant_override("h_separation", 2)
+	cells.add_theme_constant_override("v_separation", 2)
+	margin.add_child(cells)
+
+	var cell_w := maxf(10.0, (min_size.x - 20.0) / float(grid.x))
+	var cell_h := maxf(10.0, (min_size.y - 20.0) / float(grid.y))
+	for y in range(grid.y):
+		for x in range(grid.x):
+			var cell := ColorRect.new()
+			cell.custom_minimum_size = Vector2(cell_w, cell_h)
+			var on_path := y == grid.y - 1 or x == grid.x - 1 or (x == 1 and y >= 1)
+			cell.color = UIColors.PARCHMENT if on_path else UIColors.CARD_BLUE_DARK
+			cells.add_child(cell)
+
+	root.add_child(maze_panel)
+	if not caption.is_empty():
+		root.add_child(_create_label(caption, 18, UIColors.TEXT_SECONDARY, Vector2(min_size.x, 26)))
+	return root
+
+
+func _create_speaker_visual() -> PanelContainer:
+	var panel := _create_panel(UIColors.CARD_BLUE_DARK, UIColors.BLUE, 18, Vector2(120, 110))
+	var label := _create_label(")))", 42, UIColors.HEADING_YELLOW, Vector2(100, 86))
+	panel.add_child(label)
+	return panel
+
+
+func _create_speech_bubble(text: String) -> PanelContainer:
+	var panel := _create_panel(UIColors.CARD_NEUTRAL_ALT, UIColors.CARD_BORDER_SOFT, 18, Vector2(110, 72))
+	panel.add_child(_create_label(text, 22, UIColors.TEXT_PRIMARY, Vector2(96, 58)))
+	return panel
+
+
+func _create_countdown_visual() -> VBoxContainer:
+	var root := VBoxContainer.new()
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
+	root.add_theme_constant_override("separation", 4)
+	root.add_child(_create_label("3  2  1", 32, UIColors.HEADING_YELLOW, Vector2(160, 54)))
+	root.add_child(_create_label(tr("help_visual_head_start"), 20, UIColors.TEXT_SECONDARY, Vector2(150, 30)))
+	return root
+
+
+func _create_dpad_visual() -> GridContainer:
+	var grid := GridContainer.new()
+	grid.columns = 3
+	grid.add_theme_constant_override("h_separation", 4)
+	grid.add_theme_constant_override("v_separation", 4)
+	var values := ["", "^", "", "<", "o", ">", "", "v", ""]
+	for value in values:
+		var tile := _create_tile(value, 22, UIColors.BG_DARK, UIColors.TEXT_PRIMARY, Vector2(38, 38))
+		tile.modulate.a = 0.35 if value.is_empty() else 1.0
+		grid.add_child(tile)
+	return grid
+
+
+func _create_arrow_label(text: String = ">") -> Label:
+	return _create_label(text, 30, UIColors.HEADING_YELLOW, Vector2(32, 60))
+
+
+func _create_panel(bg_color: Color, border_color: Color, radius: int, min_size: Vector2) -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size = min_size
+	panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var style := StyleBoxFlat.new()
+	style.bg_color = bg_color
+	style.border_color = border_color
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(radius)
+	style.content_margin_left = 8
+	style.content_margin_right = 8
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	panel.add_theme_stylebox_override("panel", style)
+	return panel
+
+
+func _create_texture_rect(texture: Texture2D, min_size: Vector2) -> TextureRect:
+	var rect := TextureRect.new()
+	rect.texture = texture
+	rect.custom_minimum_size = min_size
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	return rect
+
+
+func _create_label(text: String, font_size: int, color: Color, min_size: Vector2) -> Label:
 	var label := Label.new()
-	label.text = "A"
-	label.add_theme_color_override("font_color", _theme.col_text_color if not _theme.col_texture else Color.WHITE)
-	label.add_theme_font_size_override("font_size", 100)
+	label.text = text
+	label.custom_minimum_size = min_size
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# Outline for visibility on images
-	label.add_theme_color_override("font_outline_color", Color.BLACK)
-	label.add_theme_constant_override("outline_size", 12)
-	label.size = root.custom_minimum_size
-	root.add_child(label)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("font_size", _fit_font_size(text, font_size, min_size.x - 6.0))
+	label.add_theme_color_override("font_color", color)
+	UIHelpers.apply_semibold(label)
+	return label
 
 
-func _spawn_themes_preview() -> void:
-	var hbox = HBoxContainer.new()
-	hbox.name = "ThemesPreview"
-	hbox.add_theme_constant_override("separation", 30)
-	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_visual_container.add_child(hbox)
-	
-	var available = ThemeLoader.get_available_themes()
-	var others: Array[String] = []
-	for t in available:
-		if t != Config.theme_dir_name:
-			others.append(t)
-			
-	others.shuffle()
-	var count = min(3, others.size())
-	
-	if count == 0:
-		# Fallback if no other themes installed
-		var tex_rect = TextureRect.new()
-		tex_rect.texture = load("res://images/lm_paper_icon.png")
-		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.custom_minimum_size = Vector2(180, 180)
-		hbox.add_child(tex_rect)
-		return
-	
-	for i in range(count):
-		var t_name = others[i]
-		var loader = ThemeLoader.get_cached(t_name)
-		
-		# Pick randomly between player and chaser
-		var tex = loader.player_texture
-		if loader.chaser_texture and randf() > 0.5:
-			tex = loader.chaser_texture
-			
-		# Fallback to default icon if theme is totally missing player/chaser
-		if not tex: tex = load("res://images/lm_paper_icon.png")
-			
-		var tex_rect = TextureRect.new()
-		tex_rect.texture = tex
-		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.custom_minimum_size = Vector2(180, 180)
-		hbox.add_child(tex_rect)
+func _word_letters(word: String) -> Array[String]:
+	var letters: Array[String] = []
+	for i in range(word.length()):
+		letters.append(word.substr(i, 1))
+	if is_layout_rtl():
+		letters.reverse()
+	return letters
+
+
+func _first_visual_letter(text: String) -> String:
+	var trimmed := text.strip_edges()
+	if trimmed.is_empty():
+		return ""
+	return trimmed.substr(0, 1).to_upper()
+
+
+func _fit_font_size(text: String, font_size: int, available_width: float) -> int:
+	if text.is_empty() or available_width <= 0.0:
+		return font_size
+
+	var font := UIHelpers.get_font_at_weight(UIHelpers.WEIGHT_SEMIBOLD)
+	var width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1.0, font_size).x
+	if width <= available_width:
+		return font_size
+
+	var scale := available_width / maxf(width, 1.0)
+	return maxi(12, int(floor(float(font_size) * scale)))
+
+
+func _show_icon(texture: Texture2D, size: int) -> void:
+	_icon_rect.visible = true
+	_icon_rect.texture = texture
+	_icon_rect.custom_minimum_size = Vector2(size, size)
+
+
+func _theme_player_texture() -> Texture2D:
+	if _theme != null and _theme.player_texture != null:
+		return _theme.player_texture
+	return load("res://images/lm_paper_icon.png") as Texture2D
+
+
+func _theme_chaser_texture() -> Texture2D:
+	if _theme != null and _theme.chaser_texture != null:
+		return _theme.chaser_texture
+	return load(ICON_CHASER) as Texture2D
+
+
+func _theme_finish_texture() -> Texture2D:
+	if _theme != null and _theme.end_texture != null:
+		return _theme.end_texture
+	return load(ICON_EXIT) as Texture2D
 
 
 func _on_left_pressed() -> void:

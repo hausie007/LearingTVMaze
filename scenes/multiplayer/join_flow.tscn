@@ -48,14 +48,14 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
-text = "Find Host"
+text = "mp_join_discovery_title"
 horizontal_alignment = 1
 
 [node name="DiscoveryStatusLabel" type="Label" parent="DiscoveryPanel/CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Scanning local Wi-Fi..."
+text = "mp_join_discovery_scanning"
 horizontal_alignment = 1
 
 [node name="HostListScroll" type="ScrollContainer" parent="DiscoveryPanel/CenterContainer/MainVBox"]
@@ -109,7 +109,7 @@ offset_top = 40.0
 offset_right = 240.0
 offset_bottom = 80.0
 theme_override_font_sizes/font_size = 28
-text = "Get ready"
+text = "mp_chaser_get_ready"
 
 [node name="ChaserCountdownLabel" type="Label" parent="ChaserOverlay"]
 unique_name_in_owner = true
@@ -144,5 +144,5 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "Network: idle"
+text = ""
 horizontal_alignment = 0

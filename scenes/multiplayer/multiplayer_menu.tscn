@@ -40,7 +40,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 62
-text = "Multiplayer"
+text = "mp_multiplayer_title"
 horizontal_alignment = 1
 
 [node name="HostButton" type="Button" parent="CenterContainer/MainVBox"]
@@ -48,20 +48,20 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(760, 120)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Host new game"
+text = "mp_host_new_game"
 
 [node name="JoinGamesTitle" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
-text = "Join games"
+text = "mp_join_games"
 horizontal_alignment = 1
 
 [node name="JoinGamesStatus" type="Label" parent="CenterContainer/MainVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-text = "Scanning local Wi-Fi..."
+text = "mp_join_discovery_scanning"
 horizontal_alignment = 1
 
 [node name="HostListScroll" type="ScrollContainer" parent="CenterContainer/MainVBox"]

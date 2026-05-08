@@ -84,7 +84,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin"]
 layout_mode = 2
-theme_override_constant_override/separation = 40
+theme_override_constant_override/separation = 22
 alignment = 1
 
 [node name="VisualContainer" type="CenterContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
@@ -100,13 +100,24 @@ layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 66)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
+theme_override_font_sizes/font_size = 46
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="TextLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(800, 240)
+custom_minimum_size = Vector2(800, 300)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.969, 0.961, 0.929, 1)
-theme_override_font_sizes/font_size = 54
-text = "Slide Text Placeholder"
+theme_override_font_sizes/font_size = 39
+text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -117,7 +128,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.48, 0.55, 1)
 theme_override_font_sizes/font_size = 32
-text = "1 / 7"
+text = "1 / 13"
 horizontal_alignment = 1
 
 [node name="RightButton" type="Button" parent="CenterContainer/Panel/MainHBox"]

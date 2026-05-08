@@ -77,6 +77,12 @@ static func calculate_head_start_steps(chaser_level: int, difficulty: int) -> in
 	var size_mult: float = multipliers[clampi(difficulty, 0, 4)]
 	return clampi(int(base_steps * size_mult), 2, 30)
 
+static func format_head_start_steps(steps: int, lang: String) -> String:
+	var key := "head_start_steps"
+	if steps >= 2 and steps <= 4 and (lang.begins_with("cs") or lang.begins_with("sk")):
+		key = "head_start_steps_few"
+	return TranslationServer.translate(key) % steps
+
 static func get_unique_delay_levels(difficulty: int) -> Array[int]:
 	var levels_to_check: Array[int] = [
 		CHASER_LEVEL_TURBO,

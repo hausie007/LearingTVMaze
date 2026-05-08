@@ -801,11 +801,7 @@ func _update_step3_labels() -> void:
 			_chaser_delay_idx = clampi(_chaser_delay_idx, 0, max(0, delays.size() - 1))
 			var level := delays[_chaser_delay_idx]
 			var steps := MissionCatalog.calculate_head_start_steps(level, _maze_size_idx)
-			var lang := String(Config.ui_language)
-			if steps >= 2 and steps <= 4 and lang.begins_with("cs"):
-				_chaser_speed_button.text = "%d kroky" % steps
-			else:
-				_chaser_speed_button.text = tr("head_start_steps") % steps
+			_chaser_speed_button.text = MissionCatalog.format_head_start_steps(steps, Config.get_effective_ui_language())
 		else:
 			var level := MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx]
 			_chaser_speed_button.text = tr(Config.CHASER_LEVEL_KEYS[level])

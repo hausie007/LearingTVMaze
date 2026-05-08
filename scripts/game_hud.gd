@@ -17,7 +17,13 @@ const HUD_MAIN_SEPARATION: float = 12.0
 const SIDE_LANE_MIN_WIDTH: float = 300.0
 const SIDE_LANE_MAX_WIDTH: float = 560.0
 const SIDE_LANE_VIEWPORT_FRACTION: float = 0.27
+const RACE_SIDE_LANE_MAX_WIDTH: float = 720.0
+const RACE_SIDE_LANE_VIEWPORT_FRACTION: float = 0.33
 const CHASER_COUNTDOWN_WIDTH_SAMPLE: int = 999
+const RACE_ROW_SEPARATION: float = 16.0
+const PLAYER_STRIP_SEPARATION: int = 8
+const RACE_PLAYER_STRIP_SEPARATION: int = 2
+const RACE_BADGE_Y_OFFSET: float = -20.0
 
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
@@ -34,6 +40,7 @@ var _hud_players: Array[Dictionary] = []
 ## Per-player race trackers (race mode only).
 var _race_container: VBoxContainer = null
 var _race_trackers: Dictionary = {}  # peer_id -> CollectibleTracker
+var _race_hud_sequence: Array[String] = []
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -96,12 +103,16 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		child.queue_free()
 	
 	_race_trackers.clear()
+	_race_hud_sequence = sequence.duplicate()
 	
 	var count := players.size()
 	if count <= 0:
+		_race_hud_sequence.clear()
+		_set_player_strip_race_layout(false)
 		_set_side_lanes_visible(false)
 		return
 		
+	_set_player_strip_race_layout(true)
 	_set_side_lanes_visible(true, count > 1)
 	_update_side_lane_widths()
 	_player_strip.visible = true
@@ -114,7 +125,7 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		var is_left := (i % 2 == 0)
 		
 		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 16)
+		row.add_theme_constant_override("separation", int(RACE_ROW_SEPARATION))
 		row.alignment = BoxContainer.ALIGNMENT_CENTER
 		row.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if is_left else Control.SIZE_SHRINK_END
 		
@@ -122,7 +133,7 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		var badge := UIHelpers.build_player_chip(p, count, 1.4)
 		badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		badge.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if is_left else Control.SIZE_SHRINK_END
-		var badge_slot := _create_badge_slot(badge, not is_left)
+		var badge_slot := _create_badge_slot(badge, not is_left, RACE_BADGE_Y_OFFSET)
 		
 		# Tracker
 		var font := 48 if count <= 2 else 36
@@ -152,6 +163,7 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 				tracker.layout_direction = Control.LAYOUT_DIRECTION_LTR
 			else:
 				tracker.layout_direction = Control.LAYOUT_DIRECTION_RTL
+	_update_side_lane_widths()
 
 
 ## Update a single racer's progress in race mode.
@@ -167,6 +179,9 @@ func set_players(players: Array[Dictionary]) -> void:
 	if _player_strip == null:
 		return
 	_hud_players = players.duplicate(true)
+	_race_hud_sequence.clear()
+	_race_trackers.clear()
+	_set_player_strip_race_layout(false)
 	for child in _player_strip.get_children():
 		child.queue_free()
 	if _right_player_strip != null:
@@ -369,7 +384,7 @@ func _build_ui() -> void:
 	# Left: Player Strip (hidden by default — shown in multiplayer)
 	_player_strip = VBoxContainer.new()
 	_player_strip.visible = false
-	_player_strip.add_theme_constant_override("separation", 8)
+	_player_strip.add_theme_constant_override("separation", PLAYER_STRIP_SEPARATION)
 	_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_player_strip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	left_lane_row.add_child(_player_strip)
@@ -401,7 +416,7 @@ func _build_ui() -> void:
 	# Right: Player Strip for symmetrical layout in 3+ players
 	_right_player_strip = VBoxContainer.new()
 	_right_player_strip.visible = false
-	_right_player_strip.add_theme_constant_override("separation", 8)
+	_right_player_strip.add_theme_constant_override("separation", PLAYER_STRIP_SEPARATION)
 	_right_player_strip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_right_player_strip.size_flags_horizontal = Control.SIZE_SHRINK_END
 	right_lane_row.add_child(_right_player_strip)
@@ -437,15 +452,17 @@ func _build_ui() -> void:
 
 	# ── Player Chip Builder moved to UIHelpers ──
 
-func _create_badge_slot(badge: Control, align_right: bool) -> Control:
+func _create_badge_slot(badge: Control, align_right: bool, y_offset: float = 0.0) -> Control:
 	var slot := Control.new()
 	slot.set_meta("hud_badge_slot", true)
-	slot.custom_minimum_size.x = _side_lane_width()
+	slot.custom_minimum_size.x = badge.get_combined_minimum_size().x
 	slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 	var row := HBoxContainer.new()
 	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	row.offset_top = y_offset
+	row.offset_bottom = y_offset
 	row.alignment = BoxContainer.ALIGNMENT_END if align_right else BoxContainer.ALIGNMENT_BEGIN
 	slot.add_child(row)
 	row.add_child(badge)
@@ -470,21 +487,24 @@ func _update_side_lane_widths() -> void:
 		if strip == null:
 			continue
 		for row in strip.get_children():
-			_update_badge_slot_widths(row, lane_width)
+			_update_badge_slot_widths(row)
 
-func _update_badge_slot_widths(node: Node, lane_width: float) -> void:
+func _update_badge_slot_widths(node: Node) -> void:
 	if node == null:
 		return
 	var control := node as Control
 	if control != null and bool(control.get_meta("hud_badge_slot", false)):
-		control.custom_minimum_size.x = lane_width
+		control.custom_minimum_size.x = _badge_slot_child_width(control)
 	for child in node.get_children():
-		_update_badge_slot_widths(child, lane_width)
+		_update_badge_slot_widths(child)
 
 func _side_lane_width() -> float:
 	var viewport_width := get_viewport().get_visible_rect().size.x if get_viewport() != null else 1920.0
-	var base_width := clampf(viewport_width * SIDE_LANE_VIEWPORT_FRACTION, SIDE_LANE_MIN_WIDTH, SIDE_LANE_MAX_WIDTH)
-	return maxf(base_width, _estimated_largest_player_chip_width())
+	var is_race_layout := not _race_trackers.is_empty()
+	var fraction := RACE_SIDE_LANE_VIEWPORT_FRACTION if is_race_layout else SIDE_LANE_VIEWPORT_FRACTION
+	var max_width := RACE_SIDE_LANE_MAX_WIDTH if is_race_layout else SIDE_LANE_MAX_WIDTH
+	var base_width := clampf(viewport_width * fraction, SIDE_LANE_MIN_WIDTH, max_width)
+	return maxf(base_width, maxf(_estimated_largest_player_chip_width(), _estimated_largest_race_row_width()))
 
 func _update_tracker_width_limits() -> void:
 	if _tracker == null:
@@ -504,11 +524,50 @@ func _update_tracker_width_limits() -> void:
 func _should_reserve_right_lane(players: Array[Dictionary]) -> bool:
 	return players.size() > 1
 
+func _set_player_strip_race_layout(enabled: bool) -> void:
+	var separation := RACE_PLAYER_STRIP_SEPARATION if enabled else PLAYER_STRIP_SEPARATION
+	var vertical_flags := Control.SIZE_SHRINK_BEGIN if enabled else Control.SIZE_SHRINK_CENTER
+	for strip in [_player_strip, _right_player_strip]:
+		if strip == null:
+			continue
+		strip.add_theme_constant_override("separation", separation)
+		strip.size_flags_vertical = vertical_flags
+
 func _estimated_largest_player_chip_width() -> float:
 	var largest := 0.0
 	var count := maxi(_hud_players.size(), 1)
 	for player in _hud_players:
 		largest = maxf(largest, _estimated_player_chip_width(player, count, 1.4))
+	return largest
+
+func _estimated_largest_race_row_width() -> float:
+	if _race_trackers.is_empty() or _race_hud_sequence.is_empty():
+		return 0.0
+	var count := maxi(_hud_players.size(), 1)
+	var max_visible := 7 if count <= 2 else 5
+	var font_size := 48 if count <= 2 else 36
+	var visible_count := mini(max_visible, _race_hud_sequence.size())
+	var tracker_width := _estimated_race_tracker_width(visible_count, font_size, _race_hud_sequence.size() > visible_count)
+	return _estimated_largest_player_chip_width() + tracker_width + RACE_ROW_SEPARATION
+
+func _estimated_race_tracker_width(visible_count: int, font_size: int, has_ellipsis: bool) -> float:
+	if visible_count <= 0:
+		return 0.0
+	var label_width := float(font_size) * 0.85
+	var width := float(visible_count) * label_width
+	width += float(maxi(visible_count - 1, 0)) * float(CollectibleTracker.LABEL_SEPARATION)
+	if has_ellipsis:
+		width += maxf(float(font_size) * 0.65, 36.0) + float(CollectibleTracker.OUTER_SEPARATION)
+	return width
+
+func _badge_slot_child_width(slot: Control) -> float:
+	if slot == null:
+		return 0.0
+	var largest := 0.0
+	for child in slot.get_children():
+		var control := child as Control
+		if control != null:
+			largest = maxf(largest, control.get_combined_minimum_size().x)
 	return largest
 
 func _estimated_player_chip_width(data: Dictionary, total_players: int, scale_mult: float) -> float:

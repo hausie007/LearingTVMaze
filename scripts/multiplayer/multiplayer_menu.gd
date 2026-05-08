@@ -57,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _localize_ui() -> void:
 	title_label.text = tr("mp_multiplayer_title")
 	host_button.text = tr("mp_host_new_game")
-	join_games_title.text = "Join games"
+	join_games_title.text = tr("mp_join_games")
 	join_games_status.text = tr("mp_join_discovery_scanning")
 
 func _apply_layout() -> void:

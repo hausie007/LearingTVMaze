@@ -40,11 +40,11 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Multiplayer"
+text = "mp_multiplayer_title"
 
 [node name="NetworkDebugLabel" type="Label" parent="StatusLayer/TopMargin"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
 theme_override_font_sizes/font_size = 18
-text = "Network: idle"
+text = ""

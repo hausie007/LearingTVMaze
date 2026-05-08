@@ -5,6 +5,15 @@ const CollectibleScene := preload("res://scenes/collectible.tscn")
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LearningRecapBuilder := preload("res://scripts/learning_recap.gd")
 
+const FINISH_SHORTCUT_MP_CHASER := "mp_chaser"
+const FINISH_SHORTCUT_PICKUP_PREFIX := "pickup:"
+const FINISH_PICKUP_PROGRESSION: Array[String] = [
+	MissionCatalog.PICKUP_NONE,
+	MissionCatalog.PICKUP_NUMBERS,
+	MissionCatalog.PICKUP_LETTERS,
+	MissionCatalog.PICKUP_WORDS,
+]
+
 @export var avatar_scene: PackedScene
 
 @onready var maze_generator: MazeGenerator = $MazeGenerator
@@ -39,7 +48,6 @@ var _race_sequences_by_peer: Dictionary = {}
 var _race_progress: Dictionary = {}
 var _race_colors_by_peer: Dictionary = {}
 var _race_markers_by_peer: Dictionary = {}
-var _race_used_cells: Dictionary = {}  # Cross-peer occupied cell registry for collision-free placement.
 var _race_marker_root: Node2D = null
 var _race_collect_player: AudioStreamPlayer = null
 var _win_screen: WinScreen = null
@@ -90,6 +98,7 @@ func _ready() -> void:
 	_win_screen.home_pressed.connect(_on_home_pressed)
 	_win_screen.swap_roles_pressed.connect(_on_swap_roles_pressed)
 	_win_screen.play_alone_pressed.connect(_on_play_alone_pressed)
+	_win_screen.finish_shortcut_pressed.connect(_on_finish_shortcut_pressed)
 	add_child(_win_screen)
 
 	_pause_dialog = PauseDialog.new()
@@ -190,7 +199,6 @@ func _apply_session(session: Dictionary) -> void:
 	_race_progress.clear()
 	_race_colors_by_peer.clear()
 	_race_markers_by_peer.clear()
-	_race_used_cells.clear()
 	_finished_peers.clear()
 	_update_win_screen_options()
 	if _win_screen != null:
@@ -207,7 +215,6 @@ func _apply_session(session: Dictionary) -> void:
 	_clear_race_markers()
 	if _is_race_mode():
 		_build_race_sequence()  # Must run before _spawn_avatars so per-peer paths are populated.
-	_race_used_cells.clear()
 	_spawn_avatars(session)
 	_setup_mp_player_badges(session)
 	if _collectible_spawner != null:
@@ -307,8 +314,8 @@ func _spawn_avatars(session: Dictionary) -> void:
 		if _is_race_mode():
 			_race_progress[peer_id] = 0
 			_race_colors_by_peer[peer_id] = _distinct_race_color(peer_id, String(info.get("character_id", "")))
-			# Build per-peer sequence after colors are assigned; _race_used_cells accumulates
-			# across peers to guarantee no two items land on the same maze cell.
+			# Build each racer's mirrored version of the canonical route so bottom
+			# spawns stay in the bottom half and every racer follows the same path shape.
 			_race_sequences_by_peer[peer_id] = _race_sequence_for_start(spawn_grid)
 
 func _spawn_positions_for_session(session: Dictionary) -> Array[Vector2i]:
@@ -1018,6 +1025,7 @@ func _show_gotcha_screen() -> void:
 	if chaser_id.is_empty() and not Config.theme_dir_name.is_empty():
 		chaser_id = Config.theme_dir_name + ":chaser"
 	_win_screen.set_learning_recap({})
+	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(true))
 	_win_screen.show_gotcha(chaser_id)
 	_send_remote_result(tr("gotcha"), _mirrored_character_ids(chaser_id))
 
@@ -1026,6 +1034,7 @@ func _show_shared_win_screen(peer_id: int) -> void:
 		return
 	var winner_id := _character_id_for_peer(peer_id)
 	_win_screen.set_learning_recap(_build_shared_learning_recap())
+	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 	_win_screen.show_race_win(winner_id)
 	_send_remote_result(tr("race_i_won"), _mirrored_character_ids(winner_id))
 
@@ -1038,6 +1047,7 @@ func _show_coop_win_screen() -> void:
 		if avatar != null:
 			ids.append(avatar.character_id)
 	_win_screen.set_learning_recap(_build_shared_learning_recap())
+	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 	_win_screen.show_coop_win(ids)
 	_send_remote_result(tr("mp_you_won_together"), ids)
 
@@ -1045,6 +1055,7 @@ func _update_win_screen_options() -> void:
 	if _win_screen == null:
 		return
 	_win_screen.set_swap_roles_enabled(_is_chaser_variant())
+	_win_screen.set_finish_shortcuts([])
 
 func _on_next_round_pressed() -> void:
 	if _win_screen != null:
@@ -1112,6 +1123,153 @@ func _on_play_alone_pressed() -> void:
 	Config.configure_single_player_session(style, training, has_chaser, chaser_lvl, mission)
 	Config.save_settings()
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
+
+func _on_finish_shortcut_pressed(shortcut_id: String) -> void:
+	if not multiplayer.is_server():
+		return
+
+	var cfg := _current_session_config()
+	if cfg.is_empty():
+		return
+
+	var handled := true
+	if shortcut_id == FINISH_SHORTCUT_MP_CHASER:
+		_apply_multiplayer_config_values(cfg, _current_mission_id(), MissionCatalog.pickup_for_training(_training_type), true, Config.ChaserLevel.SLOW)
+	elif shortcut_id.begins_with(FINISH_SHORTCUT_PICKUP_PREFIX):
+		var target_pickup := shortcut_id.substr(FINISH_SHORTCUT_PICKUP_PREFIX.length())
+		var mission_id := _mission_for_multiplayer_pickup_shortcut(target_pickup)
+		var keep_chaser := _chaser_enabled and MissionCatalog.chaser_allowed(mission_id) and mission_id != MissionCatalog.MISSION_RACE_MIDDLE
+		_apply_multiplayer_config_values(cfg, mission_id, target_pickup, keep_chaser, int(Config.chaser_level))
+	else:
+		handled = false
+
+	if not handled:
+		return
+
+	NetworkManager.update_current_session_config(cfg)
+	if _win_screen != null:
+		_win_screen.hide_screen()
+	_apply_session(NetworkManager.current_session)
+
+func _build_finish_shortcuts(is_gotcha: bool) -> Array[Dictionary]:
+	var shortcuts: Array[Dictionary] = []
+	var pressure_shortcut := _build_pressure_shortcut(is_gotcha)
+	if not pressure_shortcut.is_empty():
+		shortcuts.append(pressure_shortcut)
+	var task_shortcut := _build_task_mix_shortcut(is_gotcha)
+	if not task_shortcut.is_empty():
+		shortcuts.append(task_shortcut)
+	return shortcuts
+
+func _build_pressure_shortcut(is_gotcha: bool) -> Dictionary:
+	if is_gotcha or _is_race_mode() or _chaser_enabled:
+		return {}
+	if _avatars.size() != 2:
+		return {}
+	if not MissionCatalog.chaser_allowed(_current_mission_id()):
+		return {}
+	return _finish_shortcut(
+		FINISH_SHORTCUT_MP_CHASER,
+		tr("start_vs_chaser"),
+		UIColors.YELLOW,
+	)
+
+func _build_task_mix_shortcut(is_gotcha: bool) -> Dictionary:
+	var current_pickup := MissionCatalog.pickup_for_training(_training_type)
+	var pickup_idx := FINISH_PICKUP_PROGRESSION.find(current_pickup)
+	if pickup_idx < 0:
+		return {}
+	var target_idx := pickup_idx - 1 if is_gotcha else pickup_idx + 1
+	if target_idx < 0 or target_idx >= FINISH_PICKUP_PROGRESSION.size():
+		return {}
+	var target_pickup: String = FINISH_PICKUP_PROGRESSION[target_idx]
+	return _finish_shortcut(
+		FINISH_SHORTCUT_PICKUP_PREFIX + target_pickup,
+		tr(_pickup_title_key(target_pickup)),
+		UIColors.BLUE,
+	)
+
+func _finish_shortcut(shortcut_id: String, text: String, color: Color) -> Dictionary:
+	return {
+		"id": shortcut_id,
+		"text": text,
+		"color": color,
+	}
+
+func _current_session_config() -> Dictionary:
+	var session := NetworkManager.current_session
+	if session.is_empty():
+		return {}
+	var cfg := session.get("config", {}) as Dictionary
+	return cfg.duplicate(true)
+
+func _current_mission_id() -> String:
+	if MissionCatalog.mission_ids().has(_mission_id):
+		return _mission_id
+	return MissionCatalog.mission_from_config(_game_style, _training_type)
+
+func _mission_for_multiplayer_pickup_shortcut(target_pickup: String) -> String:
+	if _is_race_mode():
+		return MissionCatalog.MISSION_RACE_MIDDLE
+	if target_pickup == MissionCatalog.PICKUP_NONE:
+		return MissionCatalog.MISSION_FIND_EXIT
+	var mission_id := _current_mission_id()
+	if [MissionCatalog.MISSION_FOLLOW_TRAIL, MissionCatalog.MISSION_FIND_NEXT].has(mission_id):
+		return mission_id
+	return MissionCatalog.MISSION_FOLLOW_TRAIL if _chaser_enabled else MissionCatalog.MISSION_FIND_NEXT
+
+func _apply_multiplayer_config_values(cfg: Dictionary, mission_id: String, pickup: String, use_chaser: bool, chaser_level: int) -> void:
+	var style := MissionCatalog.style_for_mission(mission_id)
+	var chaser_enabled := use_chaser and MissionCatalog.chaser_allowed(mission_id) and style != MissionCatalog.STYLE_RACE
+	if MissionCatalog.chaser_required(mission_id, true):
+		chaser_enabled = true
+	if MissionCatalog.chaser_forced_off(mission_id):
+		chaser_enabled = false
+
+	var training := MissionCatalog.training_for_pickup(pickup)
+	var difficulty := clampi(int(cfg.get("difficulty", Config.difficulty)), 0, max(0, Config.DIFF_KEYS.size() - 1))
+	var pickup_key := _pickup_title_key(pickup)
+	var mission_title_key := MissionCatalog.mission_title_key(mission_id)
+
+	cfg["difficulty"] = difficulty
+	cfg["difficulty_key"] = Config.DIFF_KEYS[difficulty]
+	cfg["mission_id"] = mission_id
+	cfg["mission_title"] = tr(mission_title_key)
+	cfg["mission_goal_key"] = MissionCatalog.goal_key(mission_id, pickup, chaser_enabled, true)
+	cfg["role_summary_key"] = MissionCatalog.role_summary_key(mission_id, chaser_enabled)
+	cfg["game_style"] = style
+	cfg["game_style_title"] = tr(mission_title_key)
+	cfg["training_type"] = training
+	cfg["training_type_title"] = tr(pickup_key)
+	cfg["chaser_enabled"] = chaser_enabled
+	cfg["chaser_level"] = _normalized_chaser_level(chaser_level, chaser_enabled)
+	_apply_max_players_for_config(cfg, mission_id, chaser_enabled)
+
+func _normalized_chaser_level(chaser_level: int, chaser_enabled: bool) -> int:
+	if not chaser_enabled:
+		return Config.ChaserLevel.OFF
+	if chaser_level == Config.ChaserLevel.OFF:
+		return Config.ChaserLevel.SLOW
+	return clampi(chaser_level, Config.ChaserLevel.SLOW, Config.ChaserLevel.TURBO)
+
+func _apply_max_players_for_config(cfg: Dictionary, mission_id: String, chaser_enabled: bool) -> void:
+	var player_options := MissionCatalog.max_players_options(mission_id, chaser_enabled)
+	if player_options.is_empty():
+		cfg["max_players"] = maxi(2, _avatars.size())
+		return
+	var current_players := maxi(2, _avatars.size())
+	var desired_max := int(cfg.get("max_players", current_players))
+	if player_options.has(desired_max):
+		cfg["max_players"] = desired_max
+	elif player_options.has(current_players):
+		cfg["max_players"] = current_players
+	else:
+		cfg["max_players"] = int(player_options[0])
+
+func _pickup_title_key(pickup: String) -> String:
+	if pickup == MissionCatalog.PICKUP_NONE:
+		return "pickup_just_maze"
+	return MissionCatalog.pickup_title_key(pickup)
 
 func _build_race_sequence() -> void:
 	_race_sequence.clear()
@@ -1282,9 +1440,12 @@ func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 	_race_winner_peer_id = peer_id
 	_held_directions.clear()
 	_refresh_status_label()
-	_speak_race_completion_once()
+	if _should_play_race_learning_recap():
+		_speak_race_completion_once()
 	if _win_screen != null:
-		_win_screen.set_learning_recap(_build_race_learning_recap(peer_id))
+		var recap := _build_race_learning_recap(peer_id) if _should_play_race_learning_recap() else {}
+		_win_screen.set_learning_recap(recap)
+		_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 		var winner_id := _character_id_for_peer(peer_id)
 		_win_screen.show_race_win(winner_id)
 		_send_remote_result(tr("race_i_won"), _mirrored_character_ids(winner_id))
@@ -1325,98 +1486,46 @@ func _race_sequence_for_start(start: Vector2i) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	if _race_sequence.is_empty() or _maze == null:
 		return result
-	var canonical_cells := _eligible_main_path_cells()
 	var center := _race_center()
-	var path := _race_path_from_corner(start, center)
-	var cells := _eligible_cells_from_path(path)
-	if cells.is_empty():
-		return result
-	# Track which cells this peer has already claimed (avoid same-peer duplicates too).
+	var mirror_x := start.x > center.x
+	var mirror_y := start.y > center.y
 	var peer_used: Dictionary = {}
 	for item in _race_sequence:
 		var source := item as Dictionary
 		var source_cell := source.get("cell") as MazeData.CellData
 		if source_cell == null:
 			continue
-		var canonical_idx := canonical_cells.find(source_cell)
-		if canonical_idx < 0:
-			canonical_idx = int(source.get("index", 0))
-		# Find the nearest cell on this peer's path that is not already taken
-		# by any other peer (cross-peer collision) or this peer's own items.
-		var ideal := clampi(canonical_idx, 0, cells.size() - 1)
-		var chosen := -1
-		for radius in range(cells.size()):
-			for sign in [0, 1]:  # 0 = forward offset, 1 = backward offset
-				var offset := radius if sign == 0 else -radius
-				if offset == 0 and radius > 0:
-					continue  # already tried 0
-				var candidate_idx := clampi(ideal + offset, 0, cells.size() - 1)
-				var candidate_cell := cells[candidate_idx]
-				var key := candidate_cell.coords
-				if not _race_used_cells.has(key) and not peer_used.has(key):
-					chosen = candidate_idx
-					break
-			if chosen >= 0:
-				break
-		if chosen < 0:
-			chosen = ideal  # Fallback: allow overlap only if all cells are exhausted.
-		var final_cell := cells[chosen]
-		_race_used_cells[final_cell.coords] = true
+
+		var target_coords := _mirror_race_route_coord(source_cell.coords, mirror_x, mirror_y)
+		var final_cell := _maze.get_cell(target_coords)
+		if final_cell == null or final_cell.is_start or final_cell.is_end:
+			continue
+		if peer_used.has(final_cell.coords):
+			continue
 		peer_used[final_cell.coords] = true
-		result.append({
+
+		var marker_data: Dictionary = {
 			"cell": final_cell,
 			"value": String(source.get("value", "")),
 			"index": int(source.get("index", 0)),
-		})
+		}
+		if source.has("word_index"):
+			marker_data["word_index"] = int(source.get("word_index", 0))
+		result.append(marker_data)
 	return result
 
-func _eligible_cells_from_path(path: Array[Vector2i]) -> Array[MazeData.CellData]:
-	var result: Array[MazeData.CellData] = []
+func _mirror_race_route_coord(coord: Vector2i, mirror_x: bool, mirror_y: bool) -> Vector2i:
 	if _maze == null:
-		return result
-	for coord in path:
-		var cell := _maze.get_cell(coord)
-		if cell != null and not cell.is_start and not cell.is_end:
-			result.append(cell)
-	return result
+		return coord
+	var x := _maze.grid_size.x - 1 - coord.x if mirror_x else coord.x
+	var y := _maze.grid_size.y - 1 - coord.y if mirror_y else coord.y
+	return Vector2i(x, y)
 
 func _race_center() -> Vector2i:
 	var end_cell := _maze.get_end_cell() if _maze != null else null
 	if end_cell != null:
 		return end_cell.coords
 	return Vector2i.ZERO
-
-func _race_path_from_corner(start: Vector2i, center: Vector2i) -> Array[Vector2i]:
-	if _maze == null:
-		return []
-	var queue: Array[Vector2i] = [start]
-	var came_from: Dictionary = {start: start}
-	var head := 0
-	while head < queue.size():
-		var pos := queue[head]
-		head += 1
-		if pos == center:
-			break
-		for dir in MazeGenerator.DIRECTIONS:
-			var next := pos + dir
-			if came_from.has(next):
-				continue
-			if not _maze.is_wall_open(pos, dir):
-				continue
-			came_from[next] = pos
-			queue.append(next)
-
-	if not came_from.has(center):
-		return [start]
-
-	var reversed_path: Array[Vector2i] = []
-	var cursor := center
-	while cursor != start:
-		reversed_path.append(cursor)
-		cursor = came_from[cursor]
-	reversed_path.append(start)
-	reversed_path.reverse()
-	return reversed_path
 
 func _distinct_race_color(peer_id: int, character_id: String) -> Color:
 	var palette := AvatarAccent.palette_from_character_id(character_id)
@@ -1512,6 +1621,11 @@ func _speak_race_completion_once() -> void:
 			return
 		TTS.speak(phrase, 0.7, word_lang)
 	)
+
+func _should_play_race_learning_recap() -> bool:
+	# Multiplayer race markers use visual progress and a short collect sound, not
+	# per-item learning TTS. Keep the finish screen consistent with that silence.
+	return false
 
 func _build_race_collect_sound() -> void:
 	_race_collect_player = AudioStreamPlayer.new()

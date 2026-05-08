@@ -25,6 +25,17 @@ extends Node
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LearningRecapBuilder := preload("res://scripts/learning_recap.gd")
 
+const FINISH_SHORTCUT_ADD_CHASER := "add_chaser"
+const FINISH_SHORTCUT_CALM := "calm"
+const FINISH_SHORTCUT_CHASER_PREFIX := "chaser:"
+const FINISH_SHORTCUT_PICKUP_PREFIX := "pickup:"
+const FINISH_PICKUP_PROGRESSION: Array[String] = [
+	MissionCatalog.PICKUP_NONE,
+	MissionCatalog.PICKUP_NUMBERS,
+	MissionCatalog.PICKUP_LETTERS,
+	MissionCatalog.PICKUP_WORDS,
+]
+
 # ── Child-node references ────────────────────────────────────────────────────
 
 @onready var maze_generator:     MazeGenerator      = $MazeGenerator
@@ -76,6 +87,7 @@ func _ready() -> void:
 	win_screen.harder_pressed.connect(_on_harder_pressed)
 	win_screen.home_pressed.connect(_on_home_pressed)
 	win_screen.play_together_pressed.connect(_on_play_together_pressed)
+	win_screen.finish_shortcut_pressed.connect(_on_finish_shortcut_pressed)
 	win_screen.screen_shown.connect(_on_win_screen_shown)
 	win_screen.screen_hidden.connect(_on_win_screen_hidden)
 	win_screen.set_is_multiplayer(false)
@@ -207,6 +219,7 @@ func _on_pause_guard_tier2() -> void:
 func _start_new_maze() -> void:
 	win_screen.hide_screen()
 	win_screen.set_learning_recap({})
+	win_screen.set_finish_shortcuts([])
 	
 	# Ensure tree is unpaused (win/gotcha screens pause the tree via signal)
 	get_tree().paused = false
@@ -308,6 +321,7 @@ func _on_player_reached_end() -> void:
 		_speak_race_completion_once()
 
 	win_screen.set_learning_recap(_build_learning_recap())
+	win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 	if Config.game_style == Config.STYLE_RACE:
 		win_screen.show_race_win(_race_player_character_id())
 	else:
@@ -368,6 +382,7 @@ func _on_chaser_caught_player() -> void:
 	_is_gotcha_screen = true
 	_freeze_player()
 	win_screen.set_learning_recap({})
+	win_screen.set_finish_shortcuts(_build_finish_shortcuts(true))
 	win_screen.show_gotcha()
 
 
@@ -447,8 +462,148 @@ func _on_play_together_pressed() -> void:
 		return
 	get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
 
+func _on_finish_shortcut_pressed(shortcut_id: String) -> void:
+	var handled := true
+	if shortcut_id == FINISH_SHORTCUT_ADD_CHASER:
+		Config.configure_single_player_session(
+			Config.game_style,
+			Config.training_type,
+			true,
+			Config.ChaserLevel.SLOW,
+			_current_mission_id(),
+		)
+	elif shortcut_id == FINISH_SHORTCUT_CALM:
+		Config.configure_single_player_session(
+			Config.game_style,
+			Config.training_type,
+			false,
+			Config.ChaserLevel.OFF,
+			_current_mission_id(),
+		)
+	elif shortcut_id.begins_with(FINISH_SHORTCUT_CHASER_PREFIX):
+		var target_level := int(shortcut_id.substr(FINISH_SHORTCUT_CHASER_PREFIX.length()))
+		Config.configure_single_player_session(
+			Config.game_style,
+			Config.training_type,
+			true,
+			target_level,
+			_current_mission_id(),
+		)
+	elif shortcut_id.begins_with(FINISH_SHORTCUT_PICKUP_PREFIX):
+		var target_pickup := shortcut_id.substr(FINISH_SHORTCUT_PICKUP_PREFIX.length())
+		_apply_pickup_shortcut(target_pickup)
+	else:
+		handled = false
+
+	if not handled:
+		return
+	Config.save_settings()
+	_start_new_maze()
+
 
 # ── Private Helpers ──────────────────────────────────────────────────────────
+
+func _build_finish_shortcuts(is_gotcha: bool) -> Array[Dictionary]:
+	var shortcuts: Array[Dictionary] = []
+	var pressure_shortcut := _build_pressure_shortcut(is_gotcha)
+	if not pressure_shortcut.is_empty():
+		shortcuts.append(pressure_shortcut)
+	var task_shortcut := _build_task_mix_shortcut(is_gotcha)
+	if not task_shortcut.is_empty():
+		shortcuts.append(task_shortcut)
+	return shortcuts
+
+func _build_pressure_shortcut(is_gotcha: bool) -> Dictionary:
+	var mission_id := _current_mission_id()
+	if Config.game_style == Config.STYLE_RACE or not MissionCatalog.chaser_allowed(mission_id):
+		return {}
+
+	if not Config.chaser_enabled:
+		if is_gotcha:
+			return {}
+		return _finish_shortcut(
+			FINISH_SHORTCUT_ADD_CHASER,
+			tr("play_with_chaser"),
+			UIColors.YELLOW,
+		)
+
+	var level_idx := MissionCatalog.CHASER_TUNING_LEVELS.find(int(Config.chaser_level))
+	if level_idx < 0:
+		level_idx = 0
+
+	if is_gotcha:
+		if level_idx > 0:
+			var easier_level: int = MissionCatalog.CHASER_TUNING_LEVELS[level_idx - 1]
+			return _finish_shortcut(
+				FINISH_SHORTCUT_CHASER_PREFIX + str(easier_level),
+				tr("finish_slower_chaser"),
+				UIColors.YELLOW,
+			)
+		return _finish_shortcut(
+			FINISH_SHORTCUT_CALM,
+			tr("play_calm"),
+			UIColors.YELLOW,
+		)
+
+	if level_idx < MissionCatalog.CHASER_TUNING_LEVELS.size() - 1:
+		var harder_level: int = MissionCatalog.CHASER_TUNING_LEVELS[level_idx + 1]
+		return _finish_shortcut(
+			FINISH_SHORTCUT_CHASER_PREFIX + str(harder_level),
+			tr("finish_faster_chaser"),
+			UIColors.YELLOW,
+		)
+
+	return {}
+
+func _build_task_mix_shortcut(is_gotcha: bool) -> Dictionary:
+	var current_pickup := MissionCatalog.pickup_for_training(Config.training_type)
+	var pickup_idx := FINISH_PICKUP_PROGRESSION.find(current_pickup)
+	if pickup_idx < 0:
+		return {}
+	var target_idx := pickup_idx - 1 if is_gotcha else pickup_idx + 1
+	if target_idx < 0 or target_idx >= FINISH_PICKUP_PROGRESSION.size():
+		return {}
+	var target_pickup: String = FINISH_PICKUP_PROGRESSION[target_idx]
+	return _finish_shortcut(
+		FINISH_SHORTCUT_PICKUP_PREFIX + target_pickup,
+		tr(_pickup_title_key(target_pickup)),
+		UIColors.BLUE,
+	)
+
+func _finish_shortcut(shortcut_id: String, text: String, color: Color) -> Dictionary:
+	return {
+		"id": shortcut_id,
+		"text": text,
+		"color": color,
+	}
+
+func _apply_pickup_shortcut(target_pickup: String) -> void:
+	var mission_id := Config.MISSION_RACE_MIDDLE if Config.game_style == Config.STYLE_RACE else _mission_for_pickup_shortcut(target_pickup)
+	var style := MissionCatalog.style_for_mission(mission_id)
+	var training := MissionCatalog.training_for_pickup(target_pickup)
+	var use_chaser := Config.chaser_enabled and MissionCatalog.chaser_allowed(mission_id) and style != Config.STYLE_RACE
+	var chaser_level := int(Config.chaser_level) if use_chaser else Config.ChaserLevel.OFF
+	if use_chaser and chaser_level == Config.ChaserLevel.OFF:
+		chaser_level = Config.ChaserLevel.SLOW
+	Config.configure_single_player_session(style, training, use_chaser, chaser_level, mission_id)
+
+func _mission_for_pickup_shortcut(target_pickup: String) -> String:
+	if target_pickup == MissionCatalog.PICKUP_NONE:
+		return Config.MISSION_FIND_EXIT
+	var mission_id := _current_mission_id()
+	if [Config.MISSION_FOLLOW_TRAIL, Config.MISSION_FIND_NEXT].has(mission_id):
+		return mission_id
+	return Config.MISSION_FOLLOW_TRAIL
+
+func _current_mission_id() -> String:
+	if MissionCatalog.mission_ids().has(Config.mission_id):
+		return Config.mission_id
+	return MissionCatalog.mission_from_config(Config.game_style, Config.training_type)
+
+func _pickup_title_key(pickup: String) -> String:
+	if pickup == MissionCatalog.PICKUP_NONE:
+		return "pickup_just_maze"
+	return MissionCatalog.pickup_title_key(pickup)
 
 ## Freeze player processing (used when game ends or chaser catches).
 func _freeze_player() -> void:
@@ -681,6 +836,7 @@ func _process_race_robot(delta: float) -> void:
 		_race_robot_finished = true
 		_is_gotcha_screen = true
 		_freeze_player()
+		win_screen.set_finish_shortcuts(_build_finish_shortcuts(true))
 		win_screen.show_race_gotcha(_race_robot_character_id())
 		return
 	var target := maze_renderer.grid_to_pixel(_race_robot_path[_race_robot_index])

@@ -842,7 +842,7 @@ func _on_join_rejected(reason: String) -> void:
 	if _should_return_to_discovery(reason):
 		_leave_session()
 		return
-	if _join_error_label != null: _join_error_label.text = reason
+	if _join_error_label != null: _join_error_label.text = _localized_join_reason(reason)
 
 func _on_game_started(_session: Dictionary) -> void:
 	_game_started = true
@@ -1246,7 +1246,11 @@ func _is_selected_host_available() -> bool:
 	return _selected_host_available and not _selected_host_key().is_empty()
 
 func _should_return_to_discovery(reason: String) -> bool:
-	return reason in ["Host unavailable", "Could not connect to host", "Disconnected from host", "Game already started", "Lobby is full"]
+	return reason in ["mp_join_host_unavailable", "mp_join_error_connect", "mp_join_disconnected", "mp_join_game_started", "mp_join_lobby_full"]
+
+func _localized_join_reason(reason: String) -> String:
+	var localized := tr(reason)
+	return reason if localized == reason and not reason.begins_with("mp_") else localized
 
 # ── Discovery (kept for host card rebuilding) ──────────────────────────────
 

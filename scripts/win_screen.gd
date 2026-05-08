@@ -17,6 +17,7 @@ signal home_pressed
 signal play_together_pressed
 signal play_alone_pressed
 signal swap_roles_pressed
+signal finish_shortcut_pressed(shortcut_id: String)
 
 ## Emitted when the screen becomes visible (GameManager should pause the tree).
 signal screen_shown
@@ -37,6 +38,7 @@ var _timer_label: Label = null
 var _suggestion_container: VBoxContainer = null
 var _swap_roles_enabled: bool = false
 var _is_multiplayer: bool = false
+var _finish_shortcuts: Array[Dictionary] = []
 var _learning_recap: Dictionary = {}
 var _recap_played: bool = false
 var _last_focused_button: Button = null
@@ -201,6 +203,16 @@ func set_swap_roles_enabled(enabled: bool) -> void:
 func set_is_multiplayer(is_mp: bool) -> void:
 	_is_multiplayer = is_mp
 
+func set_finish_shortcuts(shortcuts: Array[Dictionary]) -> void:
+	_finish_shortcuts.clear()
+	for shortcut in shortcuts:
+		if _finish_shortcuts.size() >= 2:
+			break
+		if typeof(shortcut) == TYPE_DICTIONARY:
+			_finish_shortcuts.append((shortcut as Dictionary).duplicate(true))
+	if _is_active and _suggestion_container != null:
+		_build_mode_switch_buttons()
+
 func set_learning_recap(recap: Dictionary) -> void:
 	_learning_recap = recap.duplicate(true) if not recap.is_empty() else {}
 	_recap_played = false
@@ -333,7 +345,17 @@ static func build_title_header(title_text: String, character_ids: Array[String],
 ## Build the "Play Together" / "Play Alone" / "Swap Roles" buttons.
 func _build_mode_switch_buttons() -> void:
 	for child in _suggestion_container.get_children():
+		_suggestion_container.remove_child(child)
 		child.queue_free()
+
+	for shortcut in _finish_shortcuts:
+		var shortcut_id := String(shortcut.get("id", ""))
+		var text := String(shortcut.get("text", "")).strip_edges()
+		if shortcut_id.is_empty() or text.is_empty():
+			continue
+		var button_color: Color = shortcut.get("color", UIColors.YELLOW)
+		var icon_path := String(shortcut.get("icon", ""))
+		_add_suggestion_button(text, Callable(self, "_emit_finish_shortcut").bind(shortcut_id), button_color, icon_path)
 
 	if _swap_roles_enabled:
 		_add_suggestion_button(tr("mp_role_swap_roles"), func(): swap_roles_pressed.emit(), UIColors.YELLOW)
@@ -383,6 +405,10 @@ func _emit_harder() -> void:
 func _emit_home() -> void:
 	_stop_recap_tts()
 	home_pressed.emit()
+
+func _emit_finish_shortcut(shortcut_id: String) -> void:
+	_stop_recap_tts()
+	finish_shortcut_pressed.emit(shortcut_id)
 
 
 ## Hide the screen and reset state.
@@ -582,8 +608,8 @@ func _build_ui() -> void:
 
 # ── Shared Button Style ──────────────────────────────────────────────────────
 
-func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW) -> Button:
-	var button := UIHelpers.create_styled_button(btn_text, w, h, f_color)
+func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UIColors.YELLOW, font_size: int = 42) -> Button:
+	var button := UIHelpers.create_styled_button(btn_text, w, h, f_color, font_size)
 	button.focus_entered.connect(func(): _last_focused_button = button)
 	return button
 
@@ -592,7 +618,7 @@ func _add_suggestion_button(text: String, callback: Callable, color: Color = UIC
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	_suggestion_container.add_child(hbox)
 
-	var btn: Button = _create_styled_button(text, 650, 90, color)
+	var btn: Button = _create_styled_button(text, 650, 76, color)
 	btn.pressed.connect(func():
 		_stop_recap_tts()
 		callback.call()

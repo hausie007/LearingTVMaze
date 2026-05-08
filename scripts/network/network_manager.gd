@@ -178,6 +178,18 @@ func swap_collector_with_peer(peer_id: int) -> void:
 		current_session["roles"] = _roles_by_peer()
 	_sync_lobby_to_clients()
 
+func update_current_session_config(config: Dictionary) -> void:
+	if not multiplayer.is_server():
+		return
+	host_config = config.duplicate(true)
+	_normalize_host_config()
+	_recalculate_roles()
+	if current_session.is_empty():
+		return
+	current_session["config"] = host_config.duplicate(true)
+	current_session["players"] = players.duplicate(true)
+	current_session["roles"] = _roles_by_peer()
+
 func start_discovery() -> int:
 	stop_discovery()
 	_discovered_hosts.clear()
@@ -637,7 +649,7 @@ func rpc_kicked_by_host() -> void:
 
 func _on_connected_to_server() -> void:
 	if _pending_join_character_id.is_empty():
-		join_rejected.emit("Character not selected")
+		join_rejected.emit("mp_join_error_character")
 		leave_session()
 		return
 
@@ -645,12 +657,12 @@ func _on_connected_to_server() -> void:
 	rpc_id(HOST_PEER_ID, "rpc_request_join", _pending_join_character_id)
 
 func _on_connection_failed() -> void:
-	join_rejected.emit("Host unavailable")
+	join_rejected.emit("mp_join_host_unavailable")
 	_emit_debug("join", "Connection failed")
 	leave_session()
 
 func _on_server_disconnected() -> void:
-	join_rejected.emit("Host unavailable")
+	join_rejected.emit("mp_join_host_unavailable")
 	_emit_debug("join", "Server disconnected")
 	leave_session()
 
@@ -661,20 +673,20 @@ func rpc_request_join(character_id: String) -> void:
 
 	var sender_id := multiplayer.get_remote_sender_id()
 	if not current_session.is_empty():
-		rpc_id(sender_id, "rpc_join_rejected", "Game already started")
+		rpc_id(sender_id, "rpc_join_rejected", "mp_join_game_started")
 		return
 
 	if character_id.is_empty():
-		rpc_id(sender_id, "rpc_join_rejected", "Character not selected")
+		rpc_id(sender_id, "rpc_join_rejected", "mp_join_error_character")
 		return
 
 	var max_players: int = clampi(int(host_config.get("max_players", 2)), 2, 4)
 	if players.size() >= max_players:
-		rpc_id(sender_id, "rpc_join_rejected", "Lobby is full")
+		rpc_id(sender_id, "rpc_join_rejected", "mp_join_lobby_full")
 		return
 
 	if _is_character_taken(character_id):
-		rpc_id(sender_id, "rpc_join_rejected", "Character is already taken")
+		rpc_id(sender_id, "rpc_join_rejected", "mp_join_error_character_taken")
 		return
 
 	players[sender_id] = {

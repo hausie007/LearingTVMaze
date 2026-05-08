@@ -190,8 +190,20 @@ func load_theme(override_dir_name: String = "") -> void:
 		col_texture = col_frames[0]
 
 ## Return the human-readable display title for this loaded theme.
-## Uses the manifest "title" field if present, otherwise capitalizes the dir name.
+## Uses a translation key when available, then falls back to manifest text.
 func get_display_title(fallback_dir_name: String = "") -> String:
+	var title_key := ""
+	if manifest.has("title_key"):
+		var manifest_title_key = manifest["title_key"]
+		if manifest_title_key is String and not manifest_title_key.is_empty():
+			title_key = manifest_title_key
+	elif not fallback_dir_name.is_empty():
+		title_key = "theme_" + fallback_dir_name
+	if not title_key.is_empty():
+		var translated_title := TranslationServer.translate(title_key)
+		if translated_title != title_key:
+			return translated_title
+
 	var display_title: String = fallback_dir_name.capitalize() if not fallback_dir_name.is_empty() else "Theme"
 	if manifest.has("title"):
 		var manifest_title = manifest["title"]
