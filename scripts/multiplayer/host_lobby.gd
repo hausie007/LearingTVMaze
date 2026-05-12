@@ -218,8 +218,6 @@ func _build_join_banner() -> void:
 	steps_vbox.custom_minimum_size.x = 0
 	steps_card_hbox.add_child(steps_vbox)
 
-	var wifi_name := WiFiHelper.get_wifi_name()
-	var wifi_suffix := " (%s)" % wifi_name if not wifi_name.is_empty() else ""
 	var join_card_title := tr("menu_join_game")
 	var join_card_name_color := JOIN_CARD_NAME_COLOR.to_html(false)
 
@@ -242,7 +240,7 @@ func _build_join_banner() -> void:
 
 	var step2 := Label.new()
 	step2.name = "Step2Label"
-	step2.text = tr("mp_join_step_wifi") % wifi_suffix
+	step2.text = tr("mp_join_step_wifi") % ""
 	step2.add_theme_font_size_override("font_size", 35)
 	step2.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	step2.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

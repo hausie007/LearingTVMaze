@@ -172,7 +172,6 @@ scripts/
 
   network/                # Networking layer
     network_manager.gd
-    wifi_helper.gd
 ```
 
 ### Rules

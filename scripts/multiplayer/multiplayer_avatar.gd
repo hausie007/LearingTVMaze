@@ -10,6 +10,7 @@ var grid_pos: Vector2i = Vector2i.ZERO
 
 var _move_tween: Tween = null
 var _shake_tween: Tween = null
+var _animator: FrameAnimator = null
 
 func setup(p_peer_id: int, p_character_id: String, renderer: MazeRenderer, start_grid_pos: Vector2i, p_role: String = "") -> void:
 	peer_id = p_peer_id
@@ -18,11 +19,13 @@ func setup(p_peer_id: int, p_character_id: String, renderer: MazeRenderer, start
 	grid_pos = start_grid_pos
 	var sprite_node: Sprite2D = _get_sprite()
 
-	var texture := CharacterCatalog.get_texture_by_id(character_id)
+	var frames := _character_frames(character_id)
+	var texture: Texture2D = frames[0] if not frames.is_empty() else CharacterCatalog.get_texture_by_id(character_id)
 	if texture == null:
 		var fallback := Image.create(64, 64, false, Image.FORMAT_RGBA8)
 		fallback.fill(Color(0.25, 0.55, 0.95))
 		texture = ImageTexture.create_from_image(fallback)
+		frames.append(texture)
 
 	if sprite_node == null:
 		push_error("MultiplayerAvatar: Sprite node is missing")
@@ -30,6 +33,7 @@ func setup(p_peer_id: int, p_character_id: String, renderer: MazeRenderer, start
 
 	sprite_node.texture = texture
 	sprite_node.modulate = Color.WHITE
+	_start_animation(sprite_node, frames, _character_fps(character_id))
 
 	var cell_size: float = renderer.get_cell_size()
 	var target_size: float = cell_size * 0.72
@@ -69,3 +73,26 @@ func _get_sprite() -> Sprite2D:
 		return sprite
 	sprite = get_node_or_null("Sprite") as Sprite2D
 	return sprite
+
+func _character_frames(p_character_id: String) -> Array[Texture2D]:
+	var preview_data := CharacterCatalog.get_preview_data_by_id(p_character_id)
+	var frames_data: Array = preview_data.get("frames", [])
+	var frames: Array[Texture2D] = []
+	for item in frames_data:
+		if item is Texture2D:
+			frames.append(item)
+	return frames
+
+func _character_fps(p_character_id: String) -> float:
+	var preview_data := CharacterCatalog.get_preview_data_by_id(p_character_id)
+	return float(preview_data.get("fps", 5.0))
+
+func _start_animation(sprite_node: Sprite2D, frames: Array[Texture2D], fps: float) -> void:
+	if frames.size() <= 1:
+		if _animator != null:
+			_animator.stop()
+		return
+	if _animator == null:
+		_animator = FrameAnimator.new()
+		add_child(_animator)
+	_animator.start(sprite_node, frames, fps)

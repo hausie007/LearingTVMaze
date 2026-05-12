@@ -371,9 +371,9 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 	else:
 		TTS.speak(value_str, 0.85)
 	_refresh_target_hud()
-	# If all collectibles are now done, switch chip tag to "Find Exit"
+	# If all collectibles are now done, rebuild the chip with the exit role.
 	if collectible_spawner != null and collectible_spawner.is_complete():
-		_update_sp_hud_role_tag_to_exit()
+		_refresh_sp_player_badges()
 
 
 # ── Chaser Callbacks ─────────────────────────────────────────────────────────
@@ -697,20 +697,9 @@ func _setup_sp_player_badges() -> void:
 		hud.update_chaser_countdown(chaser_manager.get_remaining_steps(_move_count))
 
 
-## Update the player chip RoleLabel to "Find Exit" once all collectibles are gathered.
-func _update_sp_hud_role_tag_to_exit() -> void:
-	if hud == null:
-		return
-	var new_text := TranslationServer.translate(UIHelpers.get_role_translation_key("exit"))
-	var chase_text := TranslationServer.translate("hud_role_chase")
-	for strip in [hud._player_strip, hud._right_player_strip]:
-		if strip == null: continue
-		for chip in strip.get_children():
-			var hbox: Node = chip.get_child(0) if chip.get_child_count() > 0 else null
-			if hbox == null: continue
-			var lbl := hbox.get_node_or_null("RoleLabel") as Label
-			if lbl != null and lbl.text != chase_text:
-				lbl.text = new_text
+## Rebuild player chips after a role phase change so label and emoji stay in sync.
+func _refresh_sp_player_badges() -> void:
+	_setup_sp_player_badges()
 
 
 

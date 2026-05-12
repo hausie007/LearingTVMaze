@@ -373,7 +373,7 @@ static func get_role_emoji(role: String) -> String:
 		Config.ROLE_RACER:
 			return "🏁"
 		"exit":
-			return "🚪"
+			return ""
 		_:
 			return ""
 

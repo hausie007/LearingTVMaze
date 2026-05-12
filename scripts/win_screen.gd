@@ -108,16 +108,6 @@ func _on_virtual_dpad_action(action: StringName, pressed: bool) -> void:
 		return
 	_pause_countdown_from_input()
 	match action:
-		&"ui_up":
-			_focus_relative_button(-1)
-		&"ui_down":
-			_focus_relative_button(1)
-		&"ui_left":
-			_focus_relative_button(-1)
-		&"ui_right":
-			_focus_relative_button(1)
-		&"ui_accept":
-			_press_focused_button()
 		&"ui_cancel":
 			_refocus_win_button()
 	call_deferred("_refocus_win_button")
@@ -130,32 +120,6 @@ func _pause_countdown_from_input() -> void:
 		_timer_label.text = ""
 	if _oled_guard:
 		_oled_guard.start(60.0, 180.0)
-
-func _focus_relative_button(delta: int) -> void:
-	var buttons := _win_buttons()
-	if buttons.is_empty():
-		return
-	var current := get_viewport().gui_get_focus_owner() as Button
-	var current_idx := buttons.find(current)
-	if current_idx < 0:
-		current_idx = buttons.find(_last_focused_button)
-	if current_idx < 0:
-		current_idx = 0 if delta >= 0 else buttons.size() - 1
-	else:
-		current_idx = (current_idx + delta + buttons.size()) % buttons.size()
-	_focus_win_button(buttons[current_idx])
-
-func _press_focused_button() -> void:
-	var button := get_viewport().gui_get_focus_owner() as Button
-	if button == null or not _is_win_button_focusable(button):
-		button = _last_focused_button
-	if button == null or not _is_win_button_focusable(button):
-		var buttons := _win_buttons()
-		if buttons.is_empty():
-			return
-		button = buttons[0]
-	_focus_win_button(button)
-	button.emit_signal("pressed")
 
 func _refocus_win_button() -> void:
 	if not _is_active:
@@ -366,6 +330,22 @@ func _build_mode_switch_buttons() -> void:
 	else:
 		# SP mode → offer "Play Together" in green
 		_add_suggestion_button(tr("play_together"), func(): play_together_pressed.emit(), UIColors.GREEN, "res://images/icons/i_2players_crop.png")
+
+	_configure_focus_order()
+
+
+func _configure_focus_order() -> void:
+	var buttons := _win_buttons()
+	if buttons.is_empty():
+		return
+	for i in range(buttons.size()):
+		var button := buttons[i]
+		var prev_button := buttons[(i - 1 + buttons.size()) % buttons.size()]
+		var next_button := buttons[(i + 1) % buttons.size()]
+		button.focus_neighbor_top = button.get_path_to(prev_button)
+		button.focus_neighbor_bottom = button.get_path_to(next_button)
+		button.focus_neighbor_left = button.get_path_to(button)
+		button.focus_neighbor_right = button.get_path_to(button)
 
 
 func _update_recap_label() -> void:

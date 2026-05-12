@@ -1073,7 +1073,7 @@ func _role_tag_for_session(role: String, session_config: Dictionary) -> String:
 	if game_style == NetworkManager.STYLE_RACE:
 		return NetworkManager.ROLE_RACER
 	if game_style == NetworkManager.STYLE_NEXT_SYMBOL and not chaser_enabled:
-		return ""
+		return NetworkManager.ROLE_COLLECTOR
 	if role == NetworkManager.ROLE_CHASER:
 		return NetworkManager.ROLE_CHASER
 	if mission_id == MissionCatalog.MISSION_FIND_EXIT:

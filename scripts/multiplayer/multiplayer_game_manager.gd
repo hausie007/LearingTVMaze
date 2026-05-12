@@ -216,13 +216,13 @@ func _apply_session(session: Dictionary) -> void:
 	if _is_race_mode():
 		_build_race_sequence()  # Must run before _spawn_avatars so per-peer paths are populated.
 	_spawn_avatars(session)
-	_setup_mp_player_badges(session)
 	if _collectible_spawner != null:
 		_collectible_spawner.clear()
 		if _uses_shared_collectibles():
 			if _is_roleless_next_symbol_mode():
 				_collectible_spawner.configure_competitive_mode(_get_all_player_positions)
 			_collectible_spawner.spawn(_maze, maze_renderer, Config.game_style)
+	_setup_mp_player_badges(session)
 	if _is_race_mode():
 		_spawn_race_markers()
 		_setup_race_hud()
@@ -485,6 +485,16 @@ func _is_roleless_next_symbol_mode() -> bool:
 func _uses_shared_collectibles() -> bool:
 	return _is_path_mode() or _is_next_symbol_mode()
 
+func _has_shared_collectibles() -> bool:
+	return (
+		_uses_shared_collectibles()
+		and _collectible_spawner != null
+		and _collectible_spawner.get_total_collectibles() > 0
+	)
+
+func _is_shared_collectible_phase_active() -> bool:
+	return _has_shared_collectibles() and not _collectible_spawner.is_complete()
+
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
 	if Config.voice_hints:
 		if Config.game_mode == Config.GameMode.WORDS:
@@ -531,13 +541,13 @@ func _refresh_status_label() -> void:
 		if _is_roleless_next_symbol_mode():
 			if status_label != null:
 				status_label.text = tr("mission_goal_exit_multi")
-			_update_hud_collector_role_tags("exit")
+			_refresh_mp_player_badges()
 			_refresh_shared_hud()
 			return
 		else:
 			if status_label != null:
 				status_label.text = "%s  %d/%d" % [tr("you_win"), total, total]
-			_update_hud_collector_role_tags("exit")
+			_refresh_mp_player_badges()
 			_refresh_shared_hud()
 			return
 
@@ -548,28 +558,23 @@ func _refresh_status_label() -> void:
 	if _is_path_mode() and total > 0 and current >= total:
 		if status_label != null:
 			status_label.text = "%s  %d/%d" % [tr("style_path"), total, total]
-		_update_hud_collector_role_tags("exit")
+		_refresh_mp_player_badges()
 		_refresh_shared_hud()
 		return
 	if status_label != null:
 		status_label.text = "%s: %s%s" % [tr("hud_target_now"), target, progress]
 	_refresh_shared_hud()
 
-## Walk both HUD player strips and update all non-chaser chips' RoleLabel
-## to a new role key (e.g. switch "Collect" → "Find Exit" after phase 1 ends).
-func _update_hud_collector_role_tags(new_role: String) -> void:
+## Rebuild player chips after a role phase change so label and emoji stay in sync.
+func _refresh_mp_player_badges() -> void:
 	if hud == null:
 		return
-	var new_text := TranslationServer.translate(UIHelpers.get_role_translation_key(new_role))
-	var chase_text := TranslationServer.translate("hud_role_chase")
-	for strip in [hud._player_strip, hud._right_player_strip]:
-		if strip == null: continue
-		for chip in strip.get_children():
-			var hbox: Node = chip.get_child(0) if chip.get_child_count() > 0 else null
-			if hbox == null: continue
-			var lbl := hbox.get_node_or_null("RoleLabel") as Label
-			if lbl != null and lbl.text != chase_text:
-				lbl.text = new_text
+	_setup_mp_player_badges(NetworkManager.current_session)
+	if _is_chaser_variant():
+		var remaining := 0
+		if not _path_chasers_released:
+			remaining = maxi(0, _path_chaser_trigger_moves() - _collector_move_count)
+		hud.update_chaser_countdown(remaining)
 
 func _refresh_shared_hud() -> void:
 	if hud == null or _collectible_spawner == null:
@@ -699,9 +704,7 @@ func _get_role_goal(peer_id: int) -> String:
 	if _is_race_mode():
 		return tr("mp_goal_maze_race_first")
 
-	var is_phase_one := false
-	if _uses_shared_collectibles() and _collectible_spawner != null:
-		is_phase_one = not _collectible_spawner.is_complete()
+	var is_phase_one := _is_shared_collectible_phase_active()
 
 	# Chaser role is the same regardless of phase
 	if role == NetworkManager.ROLE_CHASER:
@@ -710,10 +713,6 @@ func _get_role_goal(peer_id: int) -> String:
 	# Maze race (find-exit multiplayer) — no collectibles
 	if _is_maze_race_mode():
 		return tr("mp_goal_maze_race_first")
-
-	# Find-exit mission has no collectibles — always show "find the exit"
-	if _mission_id == MissionCatalog.MISSION_FIND_EXIT:
-		return tr("mp_goal_find_exit")
 
 	# Collectible phase: pick key based on game mode, player count, and chaser
 	if is_phase_one:
@@ -733,6 +732,10 @@ func _get_role_goal(peer_id: int) -> String:
 				Config.GameMode.WORDS:   return tr("mp_goal_collect_words")
 				_:                       return tr("mp_goal_collect_letters")
 
+	# Find-exit mission with no active collectibles — show "find the exit"
+	if _mission_id == MissionCatalog.MISSION_FIND_EXIT:
+		return tr("mp_goal_find_exit")
+
 	# Phase 2: all collectibles gathered — find the exit
 	if _is_roleless_next_symbol_mode():
 		return tr("mp_goal_exit_together")
@@ -748,14 +751,16 @@ func _chip_role_for_peer(peer_id: int, role_override: String = "") -> String:
 		role = _role_for_peer(peer_id)
 	if _is_race_mode() or _is_maze_race_mode():
 		return NetworkManager.ROLE_RACER
-	if _is_roleless_next_symbol_mode():
-		return ""
 	if role == NetworkManager.ROLE_CHASER:
 		return NetworkManager.ROLE_CHASER
+	if _is_shared_collectible_phase_active():
+		return role
 	if _mission_id == MissionCatalog.MISSION_FIND_EXIT:
 		return "exit"
-	if _uses_shared_collectibles() and _collectible_spawner != null and _collectible_spawner.is_complete():
+	if _has_shared_collectibles() and _collectible_spawner.is_complete():
 		return "exit"
+	if _is_roleless_next_symbol_mode():
+		return ""
 	return role
 
 func _race_leader_peer_id() -> int:
@@ -775,7 +780,7 @@ func _hud_role_key() -> String:
 	if _is_maze_race_mode():
 		return Config.ROLE_RACER
 	if _is_roleless_next_symbol_mode():
-		return ""
+		return Config.ROLE_COLLECTOR
 	if _is_chaser_variant():
 		return Config.ROLE_COLLECTOR
 	return Config.ROLE_COLLECTOR
