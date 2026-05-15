@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maze Theme Preview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Maze Theme Preview</h1>
+      <p>Manifest-driven maze texture preview for real Godot sizes and seam inspection.</p>
+    </div>
+    <form class="controls" id="controls">
+      <label>
+        Theme
+        <input id="themeName" list="knownThemes" value="cars" spellcheck="false">
+      </label>
+      <label>
+        Board
+        <select id="boardPreset">
+          <option value="very_easy">Very Easy 5x4</option>
+          <option value="easy">Easy 7x6</option>
+          <option value="medium">Medium 9x8</option>
+          <option value="hard">Hard 13x10</option>
+          <option value="very_hard">Very Hard 20x12</option>
+          <option value="insane">Insane 26x13</option>
+          <option value="unbelievable">Unbelievable 36x15</option>
+          <option value="all_masks">All Masks Zoom</option>
+        </select>
+      </label>
+      <datalist id="knownThemes">
+        <option value="cars"></option>
+        <option value="castle"></option>
+      </datalist>
+      <label>
+        Cell
+        <input id="cellSize" type="number" min="36" max="160" step="4" value="56">
+      </label>
+      <label class="check">
+        <input id="showLabels" type="checkbox">
+        labels
+      </label>
+      <label class="check">
+        <input id="showSwatches" type="checkbox" checked>
+        swatches
+      </label>
+      <button type="submit">Render</button>
+      <button id="exportPng" type="button">Export PNG</button>
+    </form>
+  </header>
+
+  <main class="layout">
+    <section class="stage" aria-label="Theme preview canvas">
+      <canvas id="previewCanvas"></canvas>
+    </section>
+    <aside class="inspector">
+      <section class="panel">
+        <h2>Manifest</h2>
+        <div id="summary" class="summary">Loading...</div>
+      </section>
+      <section class="panel">
+        <h2>Shape Fixture</h2>
+        <p id="fixtureDescription" class="small"></p>
+        <div id="maskList" class="mask-list"></div>
+      </section>
+      <section class="panel">
+        <h2>Asset Swatches</h2>
+        <div id="swatches" class="swatches"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="preview.js"></script>
+</body>
+</html>

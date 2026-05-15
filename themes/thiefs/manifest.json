@@ -1,34 +1,167 @@
 {
-  "title":"Thieves",
+  "title": "Thieves",
   "assets": {
     "player": "t_player_0.png",
     "chaser": "t_chaser_0.png",
     "start": "t_start.png",
     "end": "t_finish.png",
-    "background": "t_background_tile_0.png",
-    "collectible": "t_collectible_0.png"
+    "background": "t_background_tile_city.png",
+    "collectible": "t_collectible_money_bag.png"
   },
   "colors": {
-    "wall": "#051c3c",
-    "wall_glow_factor": 1.2,
-    "floor": "#BBC2C2",
+    "wall": "#0B3F9E",
+    "wall_glow_factor": 1.05,
+    "wall_border": "#24303E",
+    "floor": "#B3BBBB",
     "start_cell": "#DCEBFF",
     "end_cell": "#FFF1A8",
     "player": "#1A1A1A",
     "highlight": "#FFD54A66"
   },
   "background": {
-    "modulate": "#DDDDDD",
+    "modulate": "#FFFFFF",
     "tiled": true
   },
   "glow": {
     "enabled": true,
-    "strength": 0.3,
-    "bloom": 0.1
+    "strength": 0.18,
+    "bloom": 0.08
+  },
+  "maze_rendering": {
+    "wall_mode": "painted_raised_2d_assets",
+    "top_width_ratio": 0.24,
+    "front_depth_ratio": 0.12,
+    "shadow_depth_ratio": 0.055,
+    "node_scale_ratio": 0.245,
+    "assets": {
+      "floor_tile": "maze/floor_00.png",
+      "floor_tiles": [
+        "maze/floor_00.png",
+        "maze/floor_01.png"
+      ],
+      "wall_top_h_variants": [
+        "maze/wall_top_h_00.png",
+        "maze/wall_top_h_01.png",
+        "maze/wall_top_h_02.png",
+        "maze/wall_top_h_03.png"
+      ],
+      "wall_top_v_variants": [
+        "maze/wall_top_v_00.png",
+        "maze/wall_top_v_01.png",
+        "maze/wall_top_v_02.png",
+        "maze/wall_top_v_03.png"
+      ],
+      "wall_face_h_variants": [
+        "maze/wall_face_h_00.png",
+        "maze/wall_face_h_01.png",
+        "maze/wall_face_h_02.png",
+        "maze/wall_face_h_03.png"
+      ],
+      "wall_h_combined_variants": [
+        "maze/wall_h_combined_00.png",
+        "maze/wall_h_combined_01.png",
+        "maze/wall_h_combined_02.png",
+        "maze/wall_h_combined_03.png"
+      ],
+      "wall_face_end_left_variants": [
+        "maze/wall_face_end_left_blue.png",
+        "maze/wall_face_end_left_blue_alt.png"
+      ],
+      "wall_face_end_right_variants": [
+        "maze/wall_face_end_right_blue.png",
+        "maze/wall_face_end_right_blue_alt.png"
+      ],
+      "wall_face_corner_left_variants": [
+        "maze/wall_face_corner_left_blue.png",
+        "maze/wall_face_corner_left_blue_alt.png"
+      ],
+      "wall_face_corner_right_variants": [
+        "maze/wall_face_corner_right_blue.png",
+        "maze/wall_face_corner_right_blue_alt.png"
+      ],
+      "wall_top_end_left_variants": [
+        "maze/wall_top_end_left_blue.png",
+        "maze/wall_top_end_left_blue_alt.png"
+      ],
+      "wall_top_end_right_variants": [
+        "maze/wall_top_end_right_blue.png",
+        "maze/wall_top_end_right_blue_alt.png"
+      ],
+      "wall_top_end_north_variants": [
+        "maze/wall_top_end_north_blue.png",
+        "maze/wall_top_end_north_blue_alt.png"
+      ],
+      "wall_top_end_south_variants": [
+        "maze/wall_top_end_south_blue.png",
+        "maze/wall_top_end_south_blue_alt.png"
+      ],
+      "wall_shadow_h": "maze/wall_shadow_h.png",
+      "wall_shadow_h_end_left": "maze/wall_shadow_h_end_left.png",
+      "wall_shadow_h_end_right": "maze/wall_shadow_h_end_right.png",
+      "wall_shadow_v": "maze/wall_shadow_v.png",
+      "wall_joints": {
+        "3": [
+          "maze/wall_joint_mask_03_blue.png",
+          "maze/wall_joint_mask_03_blue_alt.png"
+        ],
+        "6": [
+          "maze/wall_joint_mask_06_blue.png",
+          "maze/wall_joint_mask_06_blue_alt.png"
+        ],
+        "7": [
+          "maze/wall_joint_mask_07_blue.png",
+          "maze/wall_joint_mask_07_blue_alt.png"
+        ],
+        "9": [
+          "maze/wall_joint_mask_09_blue.png",
+          "maze/wall_joint_mask_09_blue_alt.png"
+        ],
+        "11": [
+          "maze/wall_joint_mask_11_blue.png",
+          "maze/wall_joint_mask_11_blue_alt.png"
+        ],
+        "12": [
+          "maze/wall_joint_mask_12_blue.png",
+          "maze/wall_joint_mask_12_blue_alt.png"
+        ],
+        "13": [
+          "maze/wall_joint_mask_13_blue.png",
+          "maze/wall_joint_mask_13_blue_alt.png"
+        ],
+        "14": [
+          "maze/wall_joint_mask_14_blue.png",
+          "maze/wall_joint_mask_14_blue_alt.png"
+        ],
+        "15": [
+          "maze/wall_joint_mask_15_blue.png",
+          "maze/wall_joint_mask_15_blue_alt.png"
+        ]
+      }
+    }
+  },
+  "player": {
+    "image": "t_player_0.png",
+    "fps": 1,
+    "frames": [
+      "t_player_0.png"
+    ]
   },
   "collectible": {
     "color": "#FFD54A",
-    "text_color": "#FF3963",
-    "image": "t_collectible_0.png"
+    "text-color": "#4A2600",
+    "text_color": "#4A2600",
+    "text-outline-color": "#FFFFFF",
+    "image": "t_collectible_money_bag.png",
+    "fps": 1,
+    "frames": [
+      "t_collectible_money_bag.png"
+    ]
+  },
+  "chaser": {
+    "image": "t_chaser_0.png",
+    "fps": 1,
+    "frames": [
+      "t_chaser_0.png"
+    ]
   }
 }

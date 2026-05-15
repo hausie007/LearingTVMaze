@@ -20,6 +20,40 @@ var player_texture: Texture2D = null
 var bg_texture:     Texture2D = null
 var col_texture:    Texture2D = null
 var chaser_texture: Texture2D = null
+var floor_texture:  Texture2D = null
+
+var wall_mode: String = "simple"
+var wall_top_h_texture: Texture2D = null
+var wall_top_v_texture: Texture2D = null
+var wall_face_h_texture: Texture2D = null
+var wall_shadow_h_texture: Texture2D = null
+var wall_shadow_v_texture: Texture2D = null
+var wall_shadow_h_end_left_texture: Texture2D = null
+var wall_shadow_h_end_right_texture: Texture2D = null
+var wall_node_texture: Texture2D = null
+var wall_top_h_textures: Array[Texture2D] = []
+var wall_top_v_textures: Array[Texture2D] = []
+var wall_face_h_textures: Array[Texture2D] = []
+var wall_h_combined_textures: Array[Texture2D] = []
+var floor_textures: Array[Texture2D] = []
+var wall_face_end_left_textures: Array[Texture2D] = []
+var wall_face_end_right_textures: Array[Texture2D] = []
+var wall_face_corner_left_textures: Array[Texture2D] = []
+var wall_face_corner_right_textures: Array[Texture2D] = []
+var wall_top_end_left_textures: Array[Texture2D] = []
+var wall_top_end_right_textures: Array[Texture2D] = []
+var wall_top_end_north_textures: Array[Texture2D] = []
+var wall_top_end_south_textures: Array[Texture2D] = []
+var wall_joint_textures: Dictionary = {}
+var wall_top_width_ratio: float = 0.24
+var wall_face_depth_ratio: float = 0.17
+var wall_shadow_depth_ratio: float = 0.13
+var wall_node_scale_ratio: float = 0.29
+var road_markings_enabled: bool = false
+var road_marking_color: Color = Color(1.0, 1.0, 1.0, 0.42)
+var road_marking_shadow_color: Color = Color(0.0, 0.0, 0.0, 0.20)
+var road_marking_dash_length_ratio: float = 0.38
+var road_marking_width_ratio: float = 0.026
 
 var player_frames: Array[Texture2D] = []
 var chaser_frames: Array[Texture2D] = []
@@ -52,6 +86,7 @@ var wall_glow_factor: float = 1.0
 # Collectible Styling
 var col_color:      Color = Color(1.0, 0.95, 0.6)  # Default pale yellow
 var col_text_color: Color = Color(0.1, 0.1, 0.15) # Default dark slate
+var col_text_offset_y_ratio: float = 0.06
 
 # Highlight color for current target collectible in the maze.
 var highlight_color: Color = UIColors.HIGHLIGHT_HALO
@@ -109,6 +144,40 @@ func load_theme(override_dir_name: String = "") -> void:
 	end_texture    = _try_load(dir_path, _get_asset("end", "end.png"))
 	bg_texture     = _try_load(dir_path, _get_asset("background", "background.png"))
 	chaser_texture = _try_load(dir_path, _get_asset("chaser", "chaser.png"))
+	floor_texture  = null
+
+	wall_mode = "simple"
+	wall_top_h_texture = null
+	wall_top_v_texture = null
+	wall_face_h_texture = null
+	wall_shadow_h_texture = null
+	wall_shadow_v_texture = null
+	wall_shadow_h_end_left_texture = null
+	wall_shadow_h_end_right_texture = null
+	wall_node_texture = null
+	wall_top_h_textures.clear()
+	wall_top_v_textures.clear()
+	wall_face_h_textures.clear()
+	wall_h_combined_textures.clear()
+	floor_textures.clear()
+	wall_face_end_left_textures.clear()
+	wall_face_end_right_textures.clear()
+	wall_face_corner_left_textures.clear()
+	wall_face_corner_right_textures.clear()
+	wall_top_end_left_textures.clear()
+	wall_top_end_right_textures.clear()
+	wall_top_end_north_textures.clear()
+	wall_top_end_south_textures.clear()
+	wall_joint_textures.clear()
+	wall_top_width_ratio = 0.24
+	wall_face_depth_ratio = 0.17
+	wall_shadow_depth_ratio = 0.13
+	wall_node_scale_ratio = 0.29
+	road_markings_enabled = false
+	road_marking_color = Color(1.0, 1.0, 1.0, 0.42)
+	road_marking_shadow_color = Color(0.0, 0.0, 0.0, 0.20)
+	road_marking_dash_length_ratio = 0.38
+	road_marking_width_ratio = 0.026
 
 	# Colors
 	color_wall    = _get_color("wall", color_wall)
@@ -130,6 +199,82 @@ func load_theme(override_dir_name: String = "") -> void:
 			if bg_cfg.has("modulate"):
 				bg_modulate = Color.from_string(bg_cfg["modulate"], Color.WHITE)
 
+	# Maze Rendering Options
+	if manifest.has("maze_rendering"):
+		var maze_cfg: Variant = manifest["maze_rendering"]
+		if maze_cfg is Dictionary:
+			wall_mode = String(maze_cfg.get("wall_mode", wall_mode))
+			wall_top_width_ratio = float(maze_cfg.get("top_width_ratio", wall_top_width_ratio))
+			wall_face_depth_ratio = float(maze_cfg.get("front_depth_ratio", wall_face_depth_ratio))
+			wall_shadow_depth_ratio = float(maze_cfg.get("shadow_depth_ratio", wall_shadow_depth_ratio))
+			wall_node_scale_ratio = float(maze_cfg.get("node_scale_ratio", wall_node_scale_ratio))
+			var road_cfg: Variant = maze_cfg.get("road_markings", {})
+			if road_cfg is Dictionary:
+				road_markings_enabled = bool(road_cfg.get("enabled", road_markings_enabled))
+				road_marking_color = Color.from_string(String(road_cfg.get("color", "#FFFFFF6B")), road_marking_color)
+				road_marking_shadow_color = Color.from_string(String(road_cfg.get("shadow_color", "#00000033")), road_marking_shadow_color)
+				road_marking_dash_length_ratio = float(road_cfg.get("dash_length_ratio", road_marking_dash_length_ratio))
+				road_marking_width_ratio = float(road_cfg.get("width_ratio", road_marking_width_ratio))
+			var maze_assets: Variant = maze_cfg.get("assets", {})
+			if maze_assets is Dictionary:
+				if maze_assets.has("floor_tile"):
+					floor_texture = _try_load(dir_path, String(maze_assets["floor_tile"]))
+				floor_textures = _load_optional_texture_list(dir_path, maze_assets.get("floor_tiles", []), floor_texture)
+				if floor_texture == null and not floor_textures.is_empty():
+					floor_texture = floor_textures[0]
+				if maze_assets.has("wall_top_h"):
+					wall_top_h_texture = _try_load(dir_path, String(maze_assets["wall_top_h"]))
+				if maze_assets.has("wall_top_v"):
+					wall_top_v_texture = _try_load(dir_path, String(maze_assets["wall_top_v"]))
+				if maze_assets.has("wall_face_h"):
+					wall_face_h_texture = _try_load(dir_path, String(maze_assets["wall_face_h"]))
+				wall_top_h_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_h_variants", []), wall_top_h_texture)
+				wall_top_v_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_v_variants", []), wall_top_v_texture)
+				wall_face_h_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_face_h_variants", []), wall_face_h_texture)
+				wall_h_combined_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_h_combined_variants", []))
+				wall_face_end_left_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_face_end_left_variants", []))
+				wall_face_end_right_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_face_end_right_variants", []))
+				wall_face_corner_left_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_face_corner_left_variants", []))
+				wall_face_corner_right_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_face_corner_right_variants", []))
+				wall_top_end_left_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_end_left_variants", []))
+				wall_top_end_right_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_end_right_variants", []))
+				wall_top_end_north_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_end_north_variants", []))
+				wall_top_end_south_textures = _load_optional_texture_list(dir_path, maze_assets.get("wall_top_end_south_variants", []))
+				if maze_assets.has("wall_shadow_h"):
+					wall_shadow_h_texture = _try_load(dir_path, String(maze_assets["wall_shadow_h"]))
+				if maze_assets.has("wall_shadow_v"):
+					wall_shadow_v_texture = _try_load(dir_path, String(maze_assets["wall_shadow_v"]))
+				if maze_assets.has("wall_shadow_h_end_left"):
+					wall_shadow_h_end_left_texture = _try_load(dir_path, String(maze_assets["wall_shadow_h_end_left"]))
+				if maze_assets.has("wall_shadow_h_end_right"):
+					wall_shadow_h_end_right_texture = _try_load(dir_path, String(maze_assets["wall_shadow_h_end_right"]))
+				if maze_assets.has("wall_node"):
+					wall_node_texture = _try_load(dir_path, String(maze_assets["wall_node"]))
+				if maze_assets.has("wall_joint_prefix"):
+					var joint_prefix := String(maze_assets["wall_joint_prefix"])
+					for mask in range(1, 16):
+						var joint_tex := _try_load(dir_path, joint_prefix + str(mask) + ".png")
+						if joint_tex == null:
+							joint_tex = _try_load(dir_path, joint_prefix + "%02d.png" % mask)
+						if joint_tex != null:
+							wall_joint_textures[mask] = joint_tex
+				if maze_assets.has("wall_joints") and maze_assets["wall_joints"] is Dictionary:
+					var joint_map: Dictionary = maze_assets["wall_joints"]
+					for key in joint_map.keys():
+						var mask := String(key).to_int()
+						if mask <= 0:
+							continue
+						var joint_value: Variant = joint_map[key]
+						if joint_value is Array:
+							var joint_textures := _load_optional_texture_list(dir_path, joint_value)
+							if not joint_textures.is_empty():
+								wall_joint_textures[mask] = joint_textures
+						elif joint_value is String:
+							var joint_path := String(joint_value)
+							var joint_tex := _try_load(dir_path, joint_path)
+							if joint_tex != null:
+								wall_joint_textures[mask] = joint_tex
+
 	# Glow Options
 	if manifest.has("glow"):
 		var glow_cfg: Variant = manifest["glow"]
@@ -150,6 +295,8 @@ func load_theme(override_dir_name: String = "") -> void:
 				col_color = Color.from_string(col_cfg["color"], col_color)
 			if col_cfg.has("text-color"):
 				col_text_color = Color.from_string(col_cfg["text-color"], col_text_color)
+			if col_cfg.has("text-offset-y-ratio"):
+				col_text_offset_y_ratio = float(col_cfg["text-offset-y-ratio"])
 			if col_cfg.has("image"):
 				col_texture = _try_load(dir_path, col_cfg["image"])
 
@@ -301,6 +448,19 @@ func _load_list_frames(dir_path: String, file_list: Array) -> Array[Texture2D]:
 	return frames
 
 
+func _load_optional_texture_list(dir_path: String, value: Variant, fallback: Texture2D = null) -> Array[Texture2D]:
+	var textures: Array[Texture2D] = []
+	if value is Array:
+		for item in value:
+			if item is String:
+				var tex := _try_load(dir_path, item)
+				if tex != null:
+					textures.append(tex)
+	if textures.is_empty() and fallback != null:
+		textures.append(fallback)
+	return textures
+
+
 func _load_auto_frames(dir_path: String, base_name: String) -> Array[Texture2D]:
 	var frames: Array[Texture2D] = []
 	var clean_name: String = base_name.replace(".png", "")
@@ -339,12 +499,10 @@ func _get_color(key: String, default: Color) -> Color:
 func _try_load(dir_path: String, file_name: String) -> Texture2D:
 	var full_path := dir_path.path_join(file_name)
 	
-	# 1. Standard Godot way (works for already imported assets with .import files)
 	if ResourceLoader.exists(full_path):
 		return ResourceLoader.load(full_path) as Texture2D
-			
-	# 2. Manual Fallback: Raw image load (essential for files added by the AI that lack .import records)
-	# Image.load_from_file and FileAccess handle res://, user:// and absolute paths correctly on most platforms.
+
+	# Fallback for user:// themes and freshly dropped PNGs that have not been imported.
 	if FileAccess.file_exists(full_path):
 		var img := Image.load_from_file(full_path)
 		if img:

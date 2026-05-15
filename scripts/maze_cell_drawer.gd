@@ -113,10 +113,12 @@ static func get_cell_draw_commands(
 class WallSegment:
 	var p0: Vector2
 	var p1: Vector2
+	var orientation: String
 
-	func _init(a: Vector2, b: Vector2) -> void:
+	func _init(a: Vector2, b: Vector2, p_orientation: String = "") -> void:
 		p0 = a
 		p1 = b
+		orientation = p_orientation
 
 
 ## Compute all wall line segments for the entire maze.
@@ -148,7 +150,7 @@ static func get_wall_segments(maze: MazeData, offset: Vector2, cs: float) -> Arr
 
 				var p0 := offset + Vector2(x_start * cs, y * cs)
 				var p1 := offset + Vector2(x * cs, y * cs)
-				segments.append(WallSegment.new(p0, p1))
+				segments.append(WallSegment.new(p0, p1, "h"))
 			else:
 				x += 1
 
@@ -171,7 +173,7 @@ static func get_wall_segments(maze: MazeData, offset: Vector2, cs: float) -> Arr
 
 				var p0 := offset + Vector2(x * cs, y_start * cs)
 				var p1 := offset + Vector2(x * cs, y * cs)
-				segments.append(WallSegment.new(p0, p1))
+				segments.append(WallSegment.new(p0, p1, "v"))
 			else:
 				y += 1
 

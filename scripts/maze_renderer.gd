@@ -15,6 +15,8 @@
 class_name MazeRenderer
 extends Node2D
 
+const PaintedMazeLayerScript = preload("res://scripts/painted_maze_layer.gd")
+
 # ── State ────────────────────────────────────────────────────────────────────
 var _maze: MazeData = null
 var maze_theme: ThemeLoader = null
@@ -50,10 +52,16 @@ func draw_maze(maze: MazeData) -> void:
 	# Compute maximum available dimensions strictly within the content rect
 	var available_w: float = maxf(10.0, content_rect.size.x)
 	var available_h: float = maxf(10.0, content_rect.size.y - (viewport_size.y * 0.02))
+	var painted_layout := MazeWallPainter.is_enabled(maze_theme)
 	
 	# Calculate max possible cell size for both dimensions
-	var max_cs_x: float = available_w / float(maze.grid_size.x)
-	var max_cs_y: float = available_h / float(maze.grid_size.y)
+	var layout_cols := float(maze.grid_size.x)
+	var layout_rows := float(maze.grid_size.y)
+	if painted_layout:
+		layout_cols += maze_theme.wall_top_width_ratio * 1.1
+		layout_rows += maze_theme.wall_top_width_ratio * 0.55 + maze_theme.wall_face_depth_ratio + maze_theme.wall_shadow_depth_ratio
+	var max_cs_x: float = available_w / layout_cols
+	var max_cs_y: float = available_h / layout_rows
 	
 	# Pick the smaller one to fit the whole maze while keeping aspect ratio
 	_current_cell_size = floorf(minf(max_cs_x, max_cs_y))
@@ -67,12 +75,28 @@ func draw_maze(maze: MazeData) -> void:
 		int(maze.grid_size.y * _current_cell_size),
 	)
 	
-	# Center the maze strictly inside the content rect
-	var hpad := floori(content_rect.position.x + (available_w - maze_pixel_size.x) / 2.0)
-	var vpad := floori(content_rect.position.y + (available_h - maze_pixel_size.y) / 2.0)
+	var visual_bleed := Vector4.ZERO
+	if painted_layout:
+		visual_bleed = MazeWallPainter.get_visual_bleed(_current_cell_size, maze_theme)
+	var visual_pixel_size := Vector2(
+		maze_pixel_size.x + visual_bleed.x + visual_bleed.z,
+		maze_pixel_size.y + visual_bleed.y + visual_bleed.w
+	)
+
+	# Center the complete visual footprint inside the content rect. The cached
+	# offset still marks the logical grid origin, so movement math remains pure.
+	var hpad := floori(content_rect.position.x + (available_w - visual_pixel_size.x) / 2.0 + visual_bleed.x)
+	var vpad := floori(content_rect.position.y + (available_h - visual_pixel_size.y) / 2.0 + visual_bleed.y)
 	vpad = maxi(vpad, floori(content_rect.position.y))
 	var offset := Vector2i(hpad, vpad)
 	_cached_offset = Vector2(offset)
+
+	# Painted raised-2D themes render the maze as a wall graph with texture
+	# layers rather than the default ColorRect floor + Line2D wall pass.
+	if painted_layout:
+		UIHelpers.configure_environment(self, maze_theme, Config.performance_mode)
+		_draw_painted_maze(offset, maze_pixel_size, int(_current_cell_size))
+		return
 
 	# 1. Background Layer (Strictly contained in maze area)
 	if maze_theme.bg_texture:
@@ -204,6 +228,30 @@ func _draw_cell_corridors(cell: MazeData.CellData, pos: Vector2, coord: Vector2i
 func _draw_walls_line2d(offset: Vector2, cs: int) -> void:
 	for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, Vector2(offset), cs):
 		_add_wall_line(seg.p0, seg.p1)
+
+
+func _draw_painted_maze(offset: Vector2, maze_pixel_size: Vector2, cs: int) -> void:
+	var painted_layer = PaintedMazeLayerScript.new()
+	painted_layer.maze = _maze
+	painted_layer.maze_theme = maze_theme
+	painted_layer.grid_offset = offset
+	painted_layer.maze_size_px = maze_pixel_size
+	painted_layer.cell_size = float(cs)
+	add_child(painted_layer)
+	_draw_painted_icons(offset, cs)
+
+
+func _draw_painted_icons(offset: Vector2, cs: int) -> void:
+	for x in range(_maze.grid_size.x):
+		for y in range(_maze.grid_size.y):
+			var cell := _maze.get_cell(Vector2i(x, y))
+			if cell == null:
+				continue
+			var pos := offset + Vector2(x * cs, y * cs)
+			if cell.is_end and maze_theme.end_texture:
+				_add_sprite(pos, cs, maze_theme.end_texture)
+			elif cell.is_start and maze_theme.start_texture:
+				_add_sprite(pos, cs, maze_theme.start_texture)
 
 func _add_wall_line(p0: Vector2, p1: Vector2) -> void:
 	var line := Line2D.new()

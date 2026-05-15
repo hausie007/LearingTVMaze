@@ -37,16 +37,31 @@ func _draw() -> void:
 	
 	var available_w: float = maxf(10.0, content_rect.size.x)
 	var available_h: float = size.y
+	var painted_layout := MazeWallPainter.is_enabled(theme_loader)
 	
-	var max_cs_x: float = float(available_w) / float(grid_w)
-	var max_cs_y: float = float(available_h) / float(grid_h)
+	var layout_cols := float(grid_w)
+	var layout_rows := float(grid_h)
+	if painted_layout:
+		layout_cols += theme_loader.wall_top_width_ratio * 1.1
+		layout_rows += theme_loader.wall_top_width_ratio * 0.55 + theme_loader.wall_face_depth_ratio + theme_loader.wall_shadow_depth_ratio
+	var max_cs_x: float = float(available_w) / layout_cols
+	var max_cs_y: float = float(available_h) / layout_rows
 	
 	var cell_size := floori(minf(max_cs_x, max_cs_y))
 	var wt := int(maxf(2.0, roundf(6.0 * (float(cell_size) / 120.0)))) 
 	
-	var offset_x = floori(content_rect.position.x + (available_w - (grid_w * cell_size)) / 2.0)
-	var offset_y = floori((available_h - (grid_h * cell_size)) / 2.0)
+	var visual_bleed := Vector4.ZERO
+	if painted_layout:
+		visual_bleed = MazeWallPainter.get_visual_bleed(float(cell_size), theme_loader)
+	var visual_w := grid_w * cell_size + visual_bleed.x + visual_bleed.z
+	var visual_h := grid_h * cell_size + visual_bleed.y + visual_bleed.w
+	var offset_x = floori(content_rect.position.x + (available_w - visual_w) / 2.0 + visual_bleed.x)
+	var offset_y = floori((available_h - visual_h) / 2.0 + visual_bleed.y)
 	var offset = Vector2(offset_x, offset_y)
+
+	if painted_layout:
+		_draw_painted_preview(offset, Vector2(grid_w * cell_size, grid_h * cell_size), int(cell_size))
+		return
 	
 	# 1. Background layer
 	if bg_texture:
@@ -106,3 +121,19 @@ func _draw_icon(pos: Vector2, cs: float, tex: Texture2D) -> void:
 	var final_sz := tex_sz * scale_f
 	var offset := (Vector2(cs, cs) - final_sz) / 2.0
 	draw_texture_rect(tex, Rect2(pos + offset, final_sz), false)
+
+
+func _draw_painted_preview(offset: Vector2, maze_size_px: Vector2, cs: int) -> void:
+	MazeWallPainter.draw_maze(self, _maze, offset, maze_size_px, float(cs), theme_loader)
+
+	for y in range(_maze.grid_size.y):
+		for x in range(_maze.grid_size.x):
+			var coord := Vector2i(x, y)
+			var cell = _maze.get_cell(coord)
+			if cell == null:
+				continue
+			var pos := offset + Vector2(x * cs, y * cs)
+			if cell.is_start and theme_loader.start_texture:
+				_draw_icon(pos, cs, theme_loader.start_texture)
+			elif cell.is_end and theme_loader.end_texture:
+				_draw_icon(pos, cs, theme_loader.end_texture)

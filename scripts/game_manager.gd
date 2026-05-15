@@ -425,6 +425,12 @@ func _on_play_together_pressed() -> void:
 	var chaser_level := Config.chaser_level
 	var difficulty := Config.difficulty
 	var theme_dir := Config.theme_dir_name
+	var multiplayer_chaser_enabled := chaser_enabled and MissionCatalog.chaser_allowed(mission_id) and style != Config.STYLE_RACE
+	var multiplayer_chaser_level := chaser_level if multiplayer_chaser_enabled else Config.ChaserLevel.OFF
+	var player_options := MissionCatalog.max_players_options(mission_id, multiplayer_chaser_enabled)
+	var max_players := 2
+	if not player_options.is_empty():
+		max_players = int(player_options[player_options.size() - 1])
 
 	var loader := ThemeLoader.get_cached(theme_dir)
 	var theme_title := loader.get_display_title(theme_dir) if loader != null else theme_dir.capitalize()
@@ -437,18 +443,18 @@ func _on_play_together_pressed() -> void:
 		"difficulty_key": Config.DIFF_KEYS[difficulty] if difficulty < Config.DIFF_KEYS.size() else "medium",
 		"mission_id": mission_id,
 		"mission_title": tr(mission_title_key),
-		"mission_goal_key": MissionCatalog.goal_key(mission_id, pickup_id, chaser_enabled, true),
-		"role_summary_key": MissionCatalog.role_summary_key(mission_id, chaser_enabled),
+		"mission_goal_key": MissionCatalog.goal_key(mission_id, pickup_id, multiplayer_chaser_enabled, true),
+		"role_summary_key": MissionCatalog.role_summary_key(mission_id, multiplayer_chaser_enabled),
 		"game_style": style,
 		"game_style_title": tr(mission_title_key),
 		"training_type": training,
 		"training_type_title": tr(pickup_title_key),
-		"chaser_enabled": chaser_enabled and style != Config.STYLE_RACE,
-		"chaser_level": chaser_level,
+		"chaser_enabled": multiplayer_chaser_enabled,
+		"chaser_level": multiplayer_chaser_level,
 		"rotate_roles_after_round": false,
 		"theme_dir": theme_dir,
 		"theme_title": theme_title,
-		"max_players": 2,
+		"max_players": max_players,
 		"character_id": "%s:player" % theme_dir,
 	}
 

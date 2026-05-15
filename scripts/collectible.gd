@@ -120,7 +120,8 @@ func _apply_visuals(effective_cs: float) -> void:
 	# Proportional outline
 	var out_size: int = maxi(1, int(effective_cs * 0.04))
 	text_label.add_theme_constant_override("outline_size", out_size)
-	text_label.position.y += effective_cs * 0.06
+	var offset_ratio := _last_theme.col_text_offset_y_ratio if _last_theme else 0.06
+	text_label.position.y += effective_cs * offset_ratio
 
 
 # ── Target Highlight ─────────────────────────────────────────────────────────
