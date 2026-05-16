@@ -154,15 +154,6 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 			row.add_child(tracker)
 			row.add_child(badge_slot)
 			_right_player_strip.add_child(row)
-			
-		# Ensure the tracker's letters grow outwards from the badge.
-		# By default it's [A][B][C]. If the badge is on the right, 'C' would be next to it.
-		# Flipping layout direction makes it [C][B][A], so 'A' is next to the badge.
-		if not is_left:
-			if _right_player_strip.is_layout_rtl():
-				tracker.layout_direction = Control.LAYOUT_DIRECTION_LTR
-			else:
-				tracker.layout_direction = Control.LAYOUT_DIRECTION_RTL
 	_update_side_lane_widths()
 
 
