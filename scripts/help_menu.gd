@@ -15,6 +15,7 @@ const SLIDES = [
 	{"title": "help_card_08_title", "text": "help_card_08_text", "type": "word_voice"},
 	{"title": "help_card_09_title", "text": "help_card_09_text", "type": "clean_maze"},
 	{"title": "help_card_10_title", "text": "help_card_10_text", "type": "chaser"},
+	{"title": "help_card_14_title", "text": "help_card_14_text", "type": "traps"},
 	{"title": "help_card_11_title", "text": "help_card_11_text", "type": "center_race"},
 	{"title": "help_card_12_title", "text": "help_card_12_text", "type": "multiplayer"},
 	{"title": "help_card_13_title", "text": "help_card_13_text", "type": "phone_controller"},
@@ -162,6 +163,8 @@ func _update_slide() -> void:
 			_spawn_clean_maze_visual()
 		"chaser":
 			_spawn_chaser_visual()
+		"traps":
+			_spawn_traps_visual()
 		"center_race":
 			_spawn_center_race_visual()
 		"multiplayer":
@@ -379,6 +382,35 @@ func _spawn_chaser_visual() -> void:
 	row.add_child(_create_texture_rect(_theme_chaser_texture(), Vector2(120, 120)))
 
 
+func _spawn_traps_visual() -> void:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 18)
+	_visual_container.add_child(row)
+
+	var trap_panel := _create_panel(UIColors.CARD_BLUE_DARK, UIColors.BLUE, 18, Vector2(160, 160))
+	trap_panel.add_child(_create_texture_rect(_theme_trap_texture(), Vector2(122, 122)))
+	row.add_child(trap_panel)
+
+	row.add_child(_create_arrow_label())
+
+	var status := VBoxContainer.new()
+	status.alignment = BoxContainer.ALIGNMENT_CENTER
+	status.add_theme_constant_override("separation", 0)
+	var player := _create_texture_rect(_theme_player_texture(), Vector2(96, 96))
+	player.pivot_offset = Vector2(48, 48)
+	player.rotation_degrees = 180.0
+	status.add_child(player)
+	status.add_child(_create_label(str(Config.TRAP_CONFUSION_MOVES), 34, UIColors.HEADING_YELLOW, Vector2(96, 44)))
+	row.add_child(status)
+
+	row.add_child(_create_arrow_label())
+
+	var dpad_panel := _create_panel(UIColors.CARD_NEUTRAL_ALT, UIColors.BLUE, 16, Vector2(168, 168))
+	dpad_panel.add_child(_create_reversed_dpad_visual())
+	row.add_child(dpad_panel)
+
+
 func _spawn_center_race_visual() -> void:
 	var row := HBoxContainer.new()
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -564,6 +596,19 @@ func _create_dpad_visual() -> GridContainer:
 	return grid
 
 
+func _create_reversed_dpad_visual() -> GridContainer:
+	var grid := GridContainer.new()
+	grid.columns = 3
+	grid.add_theme_constant_override("h_separation", 4)
+	grid.add_theme_constant_override("v_separation", 4)
+	var values := ["", "v", "", ">", "OK", "<", "", "^", ""]
+	for value in values:
+		var tile := _create_tile(value, 20, UIColors.BG_DARK, UIColors.TEXT_PRIMARY, Vector2(42, 42))
+		tile.modulate.a = 0.35 if value.is_empty() else 1.0
+		grid.add_child(tile)
+	return grid
+
+
 func _create_arrow_label(text: String = ">") -> Label:
 	return _create_label(text, 30, UIColors.HEADING_YELLOW, Vector2(32, 60))
 
@@ -661,6 +706,12 @@ func _theme_finish_texture() -> Texture2D:
 	if _theme != null and _theme.end_texture != null:
 		return _theme.end_texture
 	return load(ICON_EXIT) as Texture2D
+
+
+func _theme_trap_texture() -> Texture2D:
+	if _theme != null and _theme.trap_texture != null:
+		return _theme.trap_texture
+	return load("res://themes/default/trap.png") as Texture2D
 
 
 func _on_left_pressed() -> void:

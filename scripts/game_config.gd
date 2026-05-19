@@ -66,6 +66,12 @@ const ROLE_COLLECTOR = MissionCatalog.ROLE_COLLECTOR
 const ROLE_CHASER = MissionCatalog.ROLE_CHASER
 const ROLE_RACER = MissionCatalog.ROLE_RACER
 
+const TRAP_CONFUSION_MOVES := 5
+const TRAP_INPUT_LOCKOUT_SEC := 0.5
+
+const LAST_SESSION_SINGLE_PLAYER := "single_player"
+const LAST_SESSION_MULTIPLAYER_HOST := "multiplayer_host"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  UI LABEL KEYS — Translation keys for enum display values.
@@ -115,6 +121,13 @@ var training_type: String = TRAINING_WORDS
 
 ## Whether the current single-player session uses the chaser bot.
 var chaser_enabled: bool = false
+
+## Whether the current round gives each human player one drop-once trap.
+var traps_enabled: bool = false
+
+## Snapshot of the last actually started game, used by the home-screen Replay card.
+var has_last_played_game: bool = false
+var last_played_game: Dictionary = {}
 
 ## Current player's product role label.
 var player_role: String = ROLE_COLLECTOR
@@ -275,6 +288,7 @@ func save_settings() -> void:
 	config.set_value("Game", "mission_id", mission_id)
 	config.set_value("Game", "training_type", training_type)
 	config.set_value("Game", "chaser_enabled", chaser_enabled)
+	config.set_value("Game", "traps_enabled", traps_enabled)
 	config.set_value("Game", "player_role", player_role)
 	config.set_value("Game", "difficulty", difficulty)
 	config.set_value("Game", "ui_language", ui_language)
@@ -285,6 +299,8 @@ func save_settings() -> void:
 	config.set_value("Game", "on_screen_controls", on_screen_controls)
 	config.set_value("Game", "controller_size", controller_size)
 	config.set_value("Theme", "dir_name", theme_dir_name)
+	config.set_value("LastGame", "has_last_played_game", has_last_played_game)
+	config.set_value("LastGame", "session", last_played_game)
 	
 	var err := config.save(SAVE_PATH)
 	if err != OK:
@@ -298,6 +314,7 @@ func load_settings() -> void:
 		mission_id     = config.get_value("Game", "mission_id", mission_id)
 		training_type  = config.get_value("Game", "training_type", training_type)
 		chaser_enabled = config.get_value("Game", "chaser_enabled", chaser_enabled)
+		traps_enabled  = config.get_value("Game", "traps_enabled", traps_enabled)
 		player_role    = config.get_value("Game", "player_role", player_role)
 		difficulty     = config.get_value("Game", "difficulty", difficulty)
 		ui_language       = config.get_value("Game", "ui_language", "auto")
@@ -312,6 +329,10 @@ func load_settings() -> void:
 		on_screen_controls = config.get_value("Game", "on_screen_controls", -1)
 		controller_size = int(config.get_value("Game", "controller_size", ControllerSize.NORMAL))
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)
+		has_last_played_game = bool(config.get_value("LastGame", "has_last_played_game", false))
+		var loaded_last: Variant = config.get_value("LastGame", "session", {})
+		last_played_game = loaded_last.duplicate(true) if loaded_last is Dictionary else {}
+		has_last_played_game = has_last_played_game and has_replayable_last_game()
 
 	_apply_session_compatibility()
 		
@@ -329,6 +350,7 @@ func configure_single_player_session(
 	use_chaser: bool,
 	chaser_speed_level: int,
 	mission: String = "",
+	use_traps: bool = false,
 ) -> void:
 	game_style = style if [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(style) else STYLE_PATH
 	training_type = training if [TRAINING_NONE, TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(training) else TRAINING_WORDS
@@ -337,6 +359,79 @@ func configure_single_player_session(
 	game_mode = game_mode_for_training(training_type) as GameMode
 	chaser_enabled = use_chaser and game_style != STYLE_RACE
 	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) as ChaserLevel if chaser_enabled else ChaserLevel.OFF
+	traps_enabled = use_traps and traps_allowed_for_session(game_style, chaser_enabled, mission_id)
+
+func remember_last_single_player_session() -> void:
+	last_played_game = {
+		"kind": LAST_SESSION_SINGLE_PLAYER,
+		"game_style": game_style,
+		"training_type": training_type,
+		"mission_id": mission_id,
+		"chaser_enabled": chaser_enabled,
+		"chaser_level": int(chaser_level),
+		"traps_enabled": traps_enabled,
+		"difficulty": difficulty,
+		"theme_dir_name": theme_dir_name,
+		"learning_language": learning_language,
+	}
+	has_last_played_game = true
+
+func remember_last_multiplayer_host_session(host_config: Dictionary) -> void:
+	if host_config.is_empty():
+		return
+	var replay_config := host_config.duplicate(true)
+	last_played_game = {
+		"kind": LAST_SESSION_MULTIPLAYER_HOST,
+		"host_config": replay_config,
+		"difficulty": int(replay_config.get("difficulty", difficulty)),
+		"theme_dir_name": String(replay_config.get("theme_dir", theme_dir_name)),
+		"learning_language": learning_language,
+	}
+	has_last_played_game = true
+
+func has_replayable_last_game() -> bool:
+	if last_played_game.is_empty():
+		return false
+	var kind := String(last_played_game.get("kind", ""))
+	if kind == LAST_SESSION_SINGLE_PLAYER:
+		return _is_valid_single_player_replay(last_played_game)
+	if kind == LAST_SESSION_MULTIPLAYER_HOST:
+		var host_cfg: Variant = last_played_game.get("host_config", {})
+		return host_cfg is Dictionary and not (host_cfg as Dictionary).is_empty()
+	return false
+
+func apply_last_single_player_session() -> bool:
+	if not has_replayable_last_game():
+		return false
+	if String(last_played_game.get("kind", "")) != LAST_SESSION_SINGLE_PLAYER:
+		return false
+	learning_language = String(last_played_game.get("learning_language", learning_language))
+	difficulty = clampi(int(last_played_game.get("difficulty", difficulty)), 0, DIFFICULTY_SIZES.size() - 1)
+	theme_dir_name = String(last_played_game.get("theme_dir_name", theme_dir_name))
+	configure_single_player_session(
+		String(last_played_game.get("game_style", STYLE_PATH)),
+		String(last_played_game.get("training_type", TRAINING_WORDS)),
+		bool(last_played_game.get("chaser_enabled", false)),
+		int(last_played_game.get("chaser_level", ChaserLevel.SLOW)),
+		String(last_played_game.get("mission_id", MISSION_FOLLOW_TRAIL)),
+		bool(last_played_game.get("traps_enabled", false)),
+	)
+	return true
+
+func get_last_multiplayer_host_config() -> Dictionary:
+	if not has_replayable_last_game():
+		return {}
+	if String(last_played_game.get("kind", "")) != LAST_SESSION_MULTIPLAYER_HOST:
+		return {}
+	var host_cfg: Variant = last_played_game.get("host_config", {})
+	return host_cfg.duplicate(true) if host_cfg is Dictionary else {}
+
+func _is_valid_single_player_replay(session: Dictionary) -> bool:
+	return (
+		[STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(String(session.get("game_style", "")))
+		and [TRAINING_NONE, TRAINING_NUMBERS, TRAINING_LETTERS, TRAINING_WORDS].has(String(session.get("training_type", "")))
+		and [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(String(session.get("mission_id", "")))
+	)
 
 func prepare_setup_session(mission: String, setup_theme_dir: String, multiplayer_host: bool) -> void:
 	selected_mission_id = mission if [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission) else MissionCatalog.DEFAULT_MISSION
@@ -369,6 +464,15 @@ func training_for_game_mode(mode: int) -> String:
 		_:
 			return TRAINING_WORDS
 
+func traps_allowed_for_session(style: String, use_chaser: bool, mission: String = "") -> bool:
+	var mission_to_check := mission
+	if not [MISSION_FIND_EXIT, MISSION_FOLLOW_TRAIL, MISSION_FIND_NEXT, MISSION_RACE_MIDDLE].has(mission_to_check):
+		mission_to_check = MissionCatalog.mission_from_config(style, training_type)
+	var style_to_check := MissionCatalog.style_for_mission(mission_to_check)
+	if style_to_check == STYLE_RACE:
+		return mission_to_check == MISSION_RACE_MIDDLE
+	return use_chaser and MissionCatalog.chaser_allowed(mission_to_check) and not MissionCatalog.chaser_forced_off(mission_to_check)
+
 func _apply_session_compatibility() -> void:
 	if not [STYLE_PATH, STYLE_NEXT_SYMBOL, STYLE_RACE].has(game_style):
 		game_style = STYLE_PATH
@@ -386,6 +490,8 @@ func _apply_session_compatibility() -> void:
 		chaser_level = ChaserLevel.OFF
 	elif chaser_level == ChaserLevel.OFF:
 		chaser_level = ChaserLevel.SLOW
+	if not traps_allowed_for_session(game_style, chaser_enabled, mission_id):
+		traps_enabled = false
 
 ## Return the effective UI language code.
 func get_effective_ui_language() -> String:

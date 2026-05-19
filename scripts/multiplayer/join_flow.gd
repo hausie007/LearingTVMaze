@@ -119,6 +119,8 @@ func _ready() -> void:
 		NetworkManager.remote_goal_updated.connect(_on_remote_goal_updated)
 	if NetworkManager.has_signal("remote_result_updated"):
 		NetworkManager.remote_result_updated.connect(_on_remote_result_updated)
+	if NetworkManager.has_signal("remote_trap_status_updated"):
+		NetworkManager.remote_trap_status_updated.connect(_on_remote_trap_status_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
 	if Config != null and not Config.controller_size_changed.is_connected(_on_controller_size_changed):
@@ -126,7 +128,7 @@ func _ready() -> void:
 
 	_pause_dialog = PauseDialog.new()
 	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); _leave_session())
-	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog())
+	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog(); _apply_remote_dpad_confusion_visual())
 	add_child(_pause_dialog)
 
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
@@ -163,6 +165,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				_send_controller_direction(Vector2i.RIGHT, event.is_pressed())
 				if viewport != null: viewport.set_input_as_handled()
 				return
+			if event.is_action_pressed("ui_accept") and _game_started and _pause_dialog != null and not _pause_dialog.visible:
+				_send_use_trap()
+				if viewport != null: viewport.set_input_as_handled()
+				return
 		if event.is_action_pressed("ui_cancel"):
 			if viewport != null: viewport.set_input_as_handled()
 			if _game_started:
@@ -187,10 +193,14 @@ func _toggle_pause() -> void:
 		return
 	if _pause_dialog.visible:
 		_pause_dialog.hide_dialog()
+		_apply_remote_dpad_confusion_visual()
 	else:
 		_pause_dialog.show_dialog()
+		_set_remote_dpad_confusion_visual(false)
 
 func _exit_tree() -> void:
+	if _local_dpad_node != null and _local_dpad_node.has_method("set_controls_reversed_visual"):
+		_local_dpad_node.call("set_controls_reversed_visual", false)
 	_reset_global_dpad_accent()
 	_restore_local_dpad()
 
@@ -871,6 +881,7 @@ func _on_game_started(_session: Dictionary) -> void:
 	my_info["role"] = role_tag
 	if not _selected_character_palette.is_empty():
 		my_info["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
+	my_info["trap_texture"] = _remote_trap_texture()
 		
 	# Construct the player badge
 	if _gameplay_badge_slot != null:
@@ -944,6 +955,24 @@ func _on_remote_result_updated(title_text: String, character_ids: Array[String])
 	var header := WinScreen.build_title_header(title_text, character_ids, 124, 90)
 	_replace_gameplay_badge_control(header)
 	_vibrate_remote_goal_change()
+
+func _on_remote_trap_status_updated(trap_available: bool, confusion_moves: int) -> void:
+	_gameplay_badge_data["trap_available"] = trap_available
+	_gameplay_badge_data["trap_texture"] = _remote_trap_texture()
+	_gameplay_badge_data["confusion_moves"] = confusion_moves
+	_gameplay_badge_data["is_confused"] = confusion_moves > 0
+	_apply_remote_dpad_confusion_visual()
+	_refresh_gameplay_badge_role(_current_remote_role_tag)
+
+func _apply_remote_dpad_confusion_visual() -> void:
+	var enabled := int(_gameplay_badge_data.get("confusion_moves", 0)) > 0
+	if _pause_dialog != null and _pause_dialog.visible:
+		enabled = false
+	_set_remote_dpad_confusion_visual(enabled)
+
+func _set_remote_dpad_confusion_visual(enabled: bool) -> void:
+	if _local_dpad_node != null and _local_dpad_node.has_method("set_controls_reversed_visual"):
+		_local_dpad_node.call("set_controls_reversed_visual", enabled)
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label == null: return
@@ -1092,6 +1121,7 @@ func _refresh_gameplay_badge_role(role_tag: String) -> void:
 	_gameplay_badge_data["role"] = role_tag
 	if not _selected_character_palette.is_empty():
 		_gameplay_badge_data["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
+	_gameplay_badge_data["trap_texture"] = _remote_trap_texture()
 	var new_badge := UIHelpers.build_player_chip(_gameplay_badge_data, 1, 2.0)
 	_replace_gameplay_badge_control(new_badge)
 	var new_countdown := _gameplay_badge.find_child("ChaserCountdownLabel", true, false) as Label
@@ -1123,6 +1153,20 @@ func _reset_global_dpad_accent() -> void:
 
 func _send_controller_direction(direction: Vector2i, pressed: bool) -> void:
 	NetworkManager.send_dpad(direction, pressed)
+
+func _send_use_trap() -> void:
+	if not _joined or not _game_started:
+		return
+	if _pause_dialog != null and _pause_dialog.visible:
+		return
+	NetworkManager.send_use_trap()
+
+func _remote_trap_texture() -> Texture2D:
+	var theme_dir := String(_last_host_cfg.get("theme_dir", Config.theme_dir_name if Config != null else "default"))
+	if theme_dir.is_empty():
+		theme_dir = "default"
+	var loader := ThemeLoader.get_cached(theme_dir)
+	return loader.trap_texture if loader != null else null
 
 func _cache_local_dpad() -> void:
 	_local_dpad_node = get_node_or_null("/root/DPad") as CanvasLayer
@@ -1157,6 +1201,9 @@ func _on_local_dpad_action(action: StringName, pressed: bool) -> void:
 		&"ui_down": _send_controller_direction(Vector2i.DOWN, pressed)
 		&"ui_left": _send_controller_direction(Vector2i.LEFT, pressed)
 		&"ui_right": _send_controller_direction(Vector2i.RIGHT, pressed)
+		&"ui_accept":
+			if pressed:
+				_send_use_trap()
 
 ## Disconnect from the current session and restore the pre-join UI so the
 ## player can reconfigure and join again without going back to the home screen.
@@ -1169,6 +1216,8 @@ func _unjoin(message_key: String = "mp_join_disconnected") -> void:
 	_game_started = false
 	# Hide gameplay-only overlays
 	if _gameplay_char_preview != null: _gameplay_char_preview.visible = false
+	if _local_dpad_node != null and _local_dpad_node.has_method("set_controls_reversed_visual"):
+		_local_dpad_node.call("set_controls_reversed_visual", false)
 	# Restore pre-join UI elements
 	if _main_vbox != null: _main_vbox.visible = true
 	if _join_button != null: _join_button.visible = true

@@ -20,6 +20,7 @@ var player_texture: Texture2D = null
 var bg_texture:     Texture2D = null
 var col_texture:    Texture2D = null
 var chaser_texture: Texture2D = null
+var trap_texture:   Texture2D = null
 var floor_texture:  Texture2D = null
 
 var wall_mode: String = "simple"
@@ -144,6 +145,9 @@ func load_theme(override_dir_name: String = "") -> void:
 	end_texture    = _try_load(dir_path, _get_asset("end", "end.png"))
 	bg_texture     = _try_load(dir_path, _get_asset("background", "background.png"))
 	chaser_texture = _try_load(dir_path, _get_asset("chaser", "chaser.png"))
+	trap_texture   = _try_load(dir_path, _get_asset("trap", "trap.png"))
+	if trap_texture == null and dir_path != "res://themes/default":
+		trap_texture = _try_load("res://themes/default", "trap.png")
 	floor_texture  = null
 
 	wall_mode = "simple"

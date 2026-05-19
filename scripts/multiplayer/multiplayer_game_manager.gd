@@ -7,6 +7,7 @@ const LearningRecapBuilder := preload("res://scripts/learning_recap.gd")
 
 const FINISH_SHORTCUT_MP_CHASER := "mp_chaser"
 const FINISH_SHORTCUT_PICKUP_PREFIX := "pickup:"
+const FINISH_SHORTCUT_TRAPS := "traps"
 const FINISH_PICKUP_PROGRESSION: Array[String] = [
 	MissionCatalog.PICKUP_NONE,
 	MissionCatalog.PICKUP_NUMBERS,
@@ -26,13 +27,18 @@ const FINISH_PICKUP_PROGRESSION: Array[String] = [
 var _maze: MazeData = null
 var _display_move_count: int = 0
 var _collectible_spawner: CollectibleSpawner = null
+var _trap_manager: TrapManager = null
 var _avatars: Dictionary = {}
 var _held_directions: Dictionary = {}
 var _move_cooldowns: Dictionary = {}
+var _previous_cells_by_peer: Dictionary = {}
+var _trap_available_by_peer: Dictionary = {}
+var _confusion_moves_by_peer: Dictionary = {}
 var _game_style: String = NetworkManager.STYLE_PATH
 var _mission_id: String = NetworkManager.MISSION_FOLLOW_TRAIL
 var _training_type: String = NetworkManager.TRAINING_WORDS
 var _chaser_enabled: bool = false
+var _traps_enabled: bool = false
 var _collector_peer_id: int = 0
 var _collector_caught: bool = false
 var _catching_chaser_peer_id: int = 0
@@ -53,6 +59,7 @@ var _race_collect_player: AudioStreamPlayer = null
 var _win_screen: WinScreen = null
 var _pause_dialog: PauseDialog = null
 var _finished_peers: Dictionary = {}
+var _trap_input_unlock_msec: int = 0
 
 var _saved_theme_dir: String = ""
 var _saved_difficulty: int = 0
@@ -61,6 +68,7 @@ var _saved_mission_id: String = ""
 var _saved_training_type: String = ""
 var _saved_game_mode: int = 0
 var _saved_current_word: Dictionary = {}
+var _saved_traps_enabled: bool = false
 
 func _ready() -> void:
 	if avatar_scene == null:
@@ -80,11 +88,16 @@ func _ready() -> void:
 	_saved_training_type = Config.training_type
 	_saved_game_mode = Config.game_mode
 	_saved_current_word = Config.current_word.duplicate(true)
+	_saved_traps_enabled = Config.traps_enabled
 
 	_collectible_spawner = CollectibleSpawner.new()
 	_collectible_spawner.name = "CollectibleSpawner"
 	add_child(_collectible_spawner)
 	_collectible_spawner.collectible_gathered.connect(_on_collectible_gathered)
+
+	_trap_manager = TrapManager.new()
+	_trap_manager.name = "TrapManager"
+	add_child(_trap_manager)
 
 	_race_marker_root = Node2D.new()
 	_race_marker_root.name = "RaceMarkers"
@@ -103,12 +116,13 @@ func _ready() -> void:
 
 	_pause_dialog = PauseDialog.new()
 	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); NetworkManager.leave_session(); get_tree().change_scene_to_file(Scenes.HOME))
-	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog())
+	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog(); _arm_trap_input_lockout(); _update_local_dpad_confusion_visual(_is_peer_confused(NetworkManager.HOST_PEER_ID)))
 	add_child(_pause_dialog)
 
 	_build_race_collect_sound()
 
 	NetworkManager.input_received.connect(_on_input_received)
+	NetworkManager.trap_use_received.connect(_on_trap_use_received)
 	NetworkManager.peer_disconnected.connect(_on_peer_disconnected)
 	NetworkManager.game_started.connect(_on_game_started)
 	NetworkManager.debug_status_changed.connect(_on_network_debug_changed)
@@ -122,6 +136,7 @@ func _ready() -> void:
 	_apply_session(session)
 
 func _exit_tree() -> void:
+	_update_local_dpad_confusion_visual(false)
 	Config.theme_dir_name = _saved_theme_dir
 	Config.difficulty = _saved_difficulty
 	Config.game_style = _saved_game_style
@@ -129,6 +144,7 @@ func _exit_tree() -> void:
 	Config.training_type = _saved_training_type
 	Config.game_mode = _saved_game_mode
 	Config.current_word = _saved_current_word
+	Config.traps_enabled = _saved_traps_enabled
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -142,8 +158,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _toggle_pause() -> void:
 	if _pause_dialog.visible:
 		_pause_dialog.hide_dialog()
+		_arm_trap_input_lockout()
+		_update_local_dpad_confusion_visual(_is_peer_confused(NetworkManager.HOST_PEER_ID))
 	else:
 		_pause_dialog.show_dialog()
+		_update_local_dpad_confusion_visual(false)
 
 func _process(delta: float) -> void:
 	if _maze != null and (_win_screen == null or not _win_screen.is_active()):
@@ -184,6 +203,8 @@ func _apply_session(session: Dictionary) -> void:
 			Config.player_role = Config.ROLE_RACER
 		else:
 			Config.player_role = Config.ROLE_COLLECTOR
+		_traps_enabled = bool(cfg.get("traps_enabled", false)) and Config.traps_allowed_for_session(Config.game_style, _chaser_enabled, _mission_id)
+		Config.traps_enabled = _traps_enabled
 	_completed_word_spoken = false
 	_round_complete = false
 	_display_move_count = 0
@@ -192,6 +213,9 @@ func _apply_session(session: Dictionary) -> void:
 	_collector_move_count = 0
 	_path_chasers_released = not _is_chaser_variant()
 	_delayed_chaser_peer_ids.clear()
+	_previous_cells_by_peer.clear()
+	_trap_available_by_peer.clear()
+	_confusion_moves_by_peer.clear()
 	_race_finished = false
 	_race_winner_peer_id = 0
 	_race_sequence.clear()
@@ -212,10 +236,13 @@ func _apply_session(session: Dictionary) -> void:
 	else:
 		maze_renderer.top_margin = GameHUD.HUD_HEIGHT
 	maze_renderer.draw_maze(_maze)
+	if _trap_manager != null:
+		_trap_manager.setup(_maze, maze_renderer)
 	_clear_race_markers()
 	if _is_race_mode():
 		_build_race_sequence()  # Must run before _spawn_avatars so per-peer paths are populated.
 	_spawn_avatars(session)
+	_initialize_trap_state_for_session(session)
 	if _collectible_spawner != null:
 		_collectible_spawner.clear()
 		if _uses_shared_collectibles():
@@ -228,6 +255,7 @@ func _apply_session(session: Dictionary) -> void:
 		_setup_race_hud()
 		_update_all_race_highlights()
 	_check_path_chaser_release()
+	_arm_trap_input_lockout()
 	_refresh_status_label()
 	_set_network_debug("net", "Game running on host")
 
@@ -261,6 +289,10 @@ func _setup_mp_player_badges(session: Dictionary) -> void:
 			"character_id": String(info.get("character_id", "")),
 			"color": color,
 			"role": _chip_role_for_peer(peer_id, role),
+			"trap_available": bool(_trap_available_by_peer.get(peer_id, false)),
+			"trap_texture": _trap_texture(),
+			"confusion_moves": int(_confusion_moves_by_peer.get(peer_id, 0)),
+			"is_confused": int(_confusion_moves_by_peer.get(peer_id, 0)) > 0,
 		})
 
 	hud.set_players(players_data)
@@ -271,6 +303,7 @@ func _spawn_avatars(session: Dictionary) -> void:
 	_avatars.clear()
 	_held_directions.clear()
 	_move_cooldowns.clear()
+	_previous_cells_by_peer.clear()
 
 	var players := session.get("players", {}) as Dictionary
 	var roles := session.get("roles", {}) as Dictionary
@@ -317,6 +350,21 @@ func _spawn_avatars(session: Dictionary) -> void:
 			# Build each racer's mirrored version of the canonical route so bottom
 			# spawns stay in the bottom half and every racer follows the same path shape.
 			_race_sequences_by_peer[peer_id] = _race_sequence_for_start(spawn_grid)
+
+func _initialize_trap_state_for_session(session: Dictionary) -> void:
+	_trap_available_by_peer.clear()
+	_confusion_moves_by_peer.clear()
+	var players := session.get("players", {}) as Dictionary
+	for key in _avatars.keys():
+		var peer_id := int(key)
+		var info := players.get(peer_id, players.get(str(peer_id), {})) as Dictionary
+		var is_ai := bool(info.get("is_ai", false))
+		_trap_available_by_peer[peer_id] = _traps_enabled and not is_ai
+		_confusion_moves_by_peer[peer_id] = 0
+		var avatar := _avatars[peer_id] as MultiplayerAvatar
+		if avatar != null:
+			avatar.set_confused_visual(false)
+		_send_trap_status(peer_id)
 
 func _spawn_positions_for_session(session: Dictionary) -> Array[Vector2i]:
 	var positions: Array[Vector2i] = []
@@ -377,6 +425,11 @@ func _on_input_received(peer_id: int, direction: Vector2i, pressed: bool) -> voi
 	else:
 		_held_directions.erase(peer_id)
 
+func _on_trap_use_received(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		return
+	_try_drop_trap(peer_id)
+
 func _on_peer_disconnected(peer_id: int) -> void:
 	if _avatars.has(peer_id):
 		var avatar := _avatars[peer_id] as MultiplayerAvatar
@@ -385,6 +438,9 @@ func _on_peer_disconnected(peer_id: int) -> void:
 		_avatars.erase(peer_id)
 		_held_directions.erase(peer_id)
 		_move_cooldowns.erase(peer_id)
+		_previous_cells_by_peer.erase(peer_id)
+		_trap_available_by_peer.erase(peer_id)
+		_confusion_moves_by_peer.erase(peer_id)
 	_finished_peers.erase(peer_id)
 	_delayed_chaser_peer_ids.erase(peer_id)
 
@@ -407,6 +463,8 @@ func _process_host_local_input() -> void:
 		_held_directions.erase(host_id)
 	else:
 		_held_directions[host_id] = direction
+	if Input.is_action_just_pressed("ui_accept"):
+		_try_drop_trap(host_id)
 
 func _process_held_input(delta: float) -> void:
 	for key in _avatars.keys():
@@ -435,14 +493,17 @@ func _try_move(peer_id: int, direction: Vector2i) -> void:
 		return
 
 	var avatar := _avatars[peer_id] as MultiplayerAvatar
-	var target := avatar.grid_pos + direction
+	var actual_direction := -direction if _is_peer_confused(peer_id) else direction
+	var target := avatar.grid_pos + actual_direction
 	if _maze == null:
 		return
-	if not _maze.is_wall_open(avatar.grid_pos, direction):
-		avatar.shake_wall(direction, maze_renderer)
+	if not _maze.is_wall_open(avatar.grid_pos, actual_direction):
+		avatar.shake_wall(actual_direction, maze_renderer)
 		return
 
+	_previous_cells_by_peer[peer_id] = avatar.grid_pos
 	avatar.move_to_grid(target, maze_renderer, Config.tween_duration)
+	_consume_peer_confusion_move(peer_id)
 	_display_move_count += 1
 	if _is_chaser_variant() and avatar.role == NetworkManager.ROLE_COLLECTOR:
 		_collector_move_count += 1
@@ -455,6 +516,145 @@ func _try_move(peer_id: int, direction: Vector2i) -> void:
 	elif _is_race_mode() and not _race_finished:
 		_check_race_collection(peer_id, target)
 		_check_race_finish(peer_id, target)
+	_trigger_trap_for_peer(peer_id, target)
+
+func _can_accept_trap_input(peer_id: int) -> bool:
+	if not _traps_enabled:
+		return false
+	if not _avatars.has(peer_id):
+		return false
+	if _win_screen != null and _win_screen.is_active():
+		return false
+	if _pause_dialog != null and _pause_dialog.visible:
+		return false
+	if _round_complete or _race_finished:
+		return false
+	if Time.get_ticks_msec() < _trap_input_unlock_msec:
+		return false
+	return bool(_trap_available_by_peer.get(peer_id, false))
+
+func _arm_trap_input_lockout() -> void:
+	_trap_input_unlock_msec = Time.get_ticks_msec() + int(Config.TRAP_INPUT_LOCKOUT_SEC * 1000.0)
+
+func _try_drop_trap(peer_id: int) -> void:
+	if not _can_accept_trap_input(peer_id):
+		return
+	if not _previous_cells_by_peer.has(peer_id):
+		return
+	var coord := _previous_cells_by_peer[peer_id] as Vector2i
+	if _trap_manager == null or not _trap_manager.can_drop_on(coord, _important_trap_blocked_cells(peer_id)):
+		return
+	if not _trap_manager.drop_trap(peer_id, coord):
+		return
+	var avatar := _avatars.get(peer_id, null) as MultiplayerAvatar
+	if avatar != null:
+		avatar.play_confusion_shake(maze_renderer)
+	_trap_available_by_peer[peer_id] = false
+	_send_trap_status(peer_id)
+	_refresh_player_badges_for_traps()
+
+func _important_trap_blocked_cells(dropper_peer_id: int = 0) -> Dictionary:
+	var blocked := {}
+	for key in _avatars.keys():
+		var avatar := _avatars[key] as MultiplayerAvatar
+		if avatar != null:
+			blocked[avatar.grid_pos] = true
+	if _collectible_spawner != null:
+		for pos in _collectible_spawner.get_collectible_positions():
+			blocked[pos] = true
+	for pos in _race_marker_positions():
+		blocked[pos] = true
+	if _trap_manager != null:
+		for pos in _trap_manager.get_trap_positions():
+			blocked[pos] = true
+	if dropper_peer_id != 0 and _avatars.has(dropper_peer_id):
+		var dropper := _avatars[dropper_peer_id] as MultiplayerAvatar
+		if dropper != null:
+			blocked[dropper.grid_pos] = true
+	return blocked
+
+func _race_marker_positions() -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for markers_value in _race_markers_by_peer.values():
+		var markers := markers_value as Array
+		for marker_value in markers:
+			var marker := marker_value as Collectible
+			if marker != null and is_instance_valid(marker):
+				result.append(marker.grid_pos)
+	return result
+
+func _trigger_trap_for_peer(peer_id: int, pos: Vector2i) -> void:
+	if not _traps_enabled or _trap_manager == null:
+		return
+	if _round_complete or _race_finished:
+		return
+	if not _trap_manager.trigger_at(pos):
+		return
+	var remaining := int(_confusion_moves_by_peer.get(peer_id, 0)) + Config.TRAP_CONFUSION_MOVES
+	_set_peer_confusion(peer_id, remaining, Config.tween_duration)
+
+func _is_peer_confused(peer_id: int) -> bool:
+	return int(_confusion_moves_by_peer.get(peer_id, 0)) > 0
+
+func _consume_peer_confusion_move(peer_id: int) -> void:
+	var remaining := int(_confusion_moves_by_peer.get(peer_id, 0))
+	if remaining <= 0:
+		return
+	var next_remaining := maxi(0, remaining - 1)
+	var recovered := remaining > 0 and next_remaining == 0
+	_set_peer_confusion(peer_id, next_remaining, Config.tween_duration if recovered else 0.0)
+
+func _set_peer_confusion(peer_id: int, remaining: int, visual_delay_sec: float = 0.0) -> void:
+	var old_remaining := int(_confusion_moves_by_peer.get(peer_id, 0))
+	var new_remaining := maxi(0, remaining)
+	_confusion_moves_by_peer[peer_id] = new_remaining
+	var avatar := _avatars.get(peer_id, null) as MultiplayerAvatar
+	if avatar != null:
+		var should_shake := new_remaining > old_remaining or (old_remaining > 0 and new_remaining == 0)
+		avatar.set_confused_visual(new_remaining > 0, should_shake, maze_renderer, visual_delay_sec if should_shake else 0.0)
+	if peer_id == NetworkManager.HOST_PEER_ID:
+		_update_local_dpad_confusion_visual(new_remaining > 0)
+	_send_trap_status(peer_id)
+	_refresh_player_badges_for_traps()
+
+func _clear_all_traps_and_confusion() -> void:
+	if _trap_manager != null:
+		_trap_manager.clear()
+	for key in _avatars.keys():
+		var peer_id := int(key)
+		_confusion_moves_by_peer[peer_id] = 0
+		var avatar := _avatars[peer_id] as MultiplayerAvatar
+		if avatar != null:
+			avatar.set_confused_visual(false)
+		if peer_id == NetworkManager.HOST_PEER_ID:
+			_update_local_dpad_confusion_visual(false)
+		_send_trap_status(peer_id)
+	_refresh_player_badges_for_traps()
+
+func _send_trap_status(peer_id: int) -> void:
+	var available := bool(_trap_available_by_peer.get(peer_id, false))
+	var remaining := int(_confusion_moves_by_peer.get(peer_id, 0))
+	if peer_id != NetworkManager.HOST_PEER_ID:
+		NetworkManager.rpc_id(peer_id, "rpc_update_remote_trap_status", available, remaining)
+
+func _refresh_player_badges_for_traps() -> void:
+	if hud == null:
+		return
+	if _is_race_mode():
+		_setup_race_hud()
+		_refresh_race_hud()
+	else:
+		_refresh_mp_player_badges()
+
+func _trap_texture() -> Texture2D:
+	if maze_renderer == null:
+		return null
+	var theme := maze_renderer.get_theme_loader()
+	return theme.trap_texture if theme != null else null
+
+func _update_local_dpad_confusion_visual(enabled: bool) -> void:
+	if DPad != null and DPad.has_method("set_controls_reversed_visual"):
+		DPad.call("set_controls_reversed_visual", enabled)
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	_set_network_debug(scope, message)
@@ -655,6 +855,10 @@ func _setup_race_hud() -> void:
 			"character_id": character_id,
 			"color": color,
 			"role": role,
+			"trap_available": bool(_trap_available_by_peer.get(peer_id, false)),
+			"trap_texture": _trap_texture(),
+			"confusion_moves": int(_confusion_moves_by_peer.get(peer_id, 0)),
+			"is_confused": int(_confusion_moves_by_peer.get(peer_id, 0)) > 0,
 		})
 
 	hud.setup_race_trackers(players_data, seq, lt)
@@ -1024,6 +1228,7 @@ func _race_sequence_values_for_peer(peer_id: int) -> Array[String]:
 func _show_gotcha_screen() -> void:
 	if _win_screen == null:
 		return
+	_clear_all_traps_and_confusion()
 	var chaser_id := ""
 	if _catching_chaser_peer_id != 0:
 		chaser_id = _character_id_for_peer(_catching_chaser_peer_id)
@@ -1037,6 +1242,7 @@ func _show_gotcha_screen() -> void:
 func _show_shared_win_screen(peer_id: int) -> void:
 	if _win_screen == null:
 		return
+	_clear_all_traps_and_confusion()
 	var winner_id := _character_id_for_peer(peer_id)
 	_win_screen.set_learning_recap(_build_shared_learning_recap())
 	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
@@ -1046,6 +1252,7 @@ func _show_shared_win_screen(peer_id: int) -> void:
 func _show_coop_win_screen() -> void:
 	if _win_screen == null:
 		return
+	_clear_all_traps_and_confusion()
 	var ids: Array[String] = []
 	for key in _avatars.keys():
 		var avatar := _avatars[key] as MultiplayerAvatar
@@ -1099,6 +1306,9 @@ func _on_harder_pressed() -> void:
 		var cfg := session.get("config", {}) as Dictionary
 		cfg["difficulty"] = Config.difficulty
 		session["config"] = cfg
+		if multiplayer.is_server():
+			Config.remember_last_multiplayer_host_session(cfg)
+			Config.save_settings()
 	if _win_screen != null:
 		_win_screen.hide_screen()
 	_apply_session(NetworkManager.current_session)
@@ -1117,15 +1327,18 @@ func _on_play_alone_pressed() -> void:
 	# - Coop (no chaser) → SP solo (no chaser)
 	# - Versus (chaser) → SP with chaser
 	var session := NetworkManager.current_session
-	var style: String = String(session.get("game_style", Config.game_style))
-	var training: String = String(session.get("training_type", Config.training_type))
-	var has_chaser: bool = bool(session.get("chaser_enabled", false))
-	var chaser_lvl: int = int(session.get("chaser_level", Config.ChaserLevel.SLOW))
-	var mission: String = String(session.get("mission_id", Config.mission_id))
+	var cfg := session.get("config", {}) as Dictionary
+	var style: String = String(cfg.get("game_style", Config.game_style))
+	var training: String = String(cfg.get("training_type", Config.training_type))
+	var has_chaser: bool = bool(cfg.get("chaser_enabled", false))
+	var chaser_lvl: int = int(cfg.get("chaser_level", Config.ChaserLevel.SLOW))
+	var mission: String = String(cfg.get("mission_id", Config.mission_id))
+	var traps_enabled: bool = bool(cfg.get("traps_enabled", false))
 
 	NetworkManager.leave_session()
 
-	Config.configure_single_player_session(style, training, has_chaser, chaser_lvl, mission)
+	Config.configure_single_player_session(style, training, has_chaser, chaser_lvl, mission, traps_enabled)
+	Config.remember_last_single_player_session()
 	Config.save_settings()
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
 
@@ -1140,6 +1353,8 @@ func _on_finish_shortcut_pressed(shortcut_id: String) -> void:
 	var handled := true
 	if shortcut_id == FINISH_SHORTCUT_MP_CHASER:
 		_apply_multiplayer_config_values(cfg, _current_mission_id(), MissionCatalog.pickup_for_training(_training_type), true, Config.ChaserLevel.SLOW)
+	elif shortcut_id == FINISH_SHORTCUT_TRAPS:
+		cfg["traps_enabled"] = _traps_allowed_for_config(cfg)
 	elif shortcut_id.begins_with(FINISH_SHORTCUT_PICKUP_PREFIX):
 		var target_pickup := shortcut_id.substr(FINISH_SHORTCUT_PICKUP_PREFIX.length())
 		var mission_id := _mission_for_multiplayer_pickup_shortcut(target_pickup)
@@ -1152,19 +1367,26 @@ func _on_finish_shortcut_pressed(shortcut_id: String) -> void:
 		return
 
 	NetworkManager.update_current_session_config(cfg)
+	Config.remember_last_multiplayer_host_session(cfg)
+	Config.save_settings()
 	if _win_screen != null:
 		_win_screen.hide_screen()
 	_apply_session(NetworkManager.current_session)
 
 func _build_finish_shortcuts(is_gotcha: bool) -> Array[Dictionary]:
 	var shortcuts: Array[Dictionary] = []
+	var traps_shortcut := _build_traps_shortcut()
+	_append_finish_shortcut(shortcuts, traps_shortcut)
 	var pressure_shortcut := _build_pressure_shortcut(is_gotcha)
-	if not pressure_shortcut.is_empty():
-		shortcuts.append(pressure_shortcut)
+	_append_finish_shortcut(shortcuts, pressure_shortcut)
 	var task_shortcut := _build_task_mix_shortcut(is_gotcha)
-	if not task_shortcut.is_empty():
-		shortcuts.append(task_shortcut)
+	_append_finish_shortcut(shortcuts, task_shortcut)
 	return shortcuts
+
+func _append_finish_shortcut(shortcuts: Array[Dictionary], shortcut: Dictionary) -> void:
+	if shortcuts.size() >= 2 or shortcut.is_empty():
+		return
+	shortcuts.append(shortcut)
 
 func _build_pressure_shortcut(is_gotcha: bool) -> Dictionary:
 	if is_gotcha or _is_race_mode() or _chaser_enabled:
@@ -1194,12 +1416,39 @@ func _build_task_mix_shortcut(is_gotcha: bool) -> Dictionary:
 		UIColors.BLUE,
 	)
 
-func _finish_shortcut(shortcut_id: String, text: String, color: Color) -> Dictionary:
+func _build_traps_shortcut() -> Dictionary:
+	var cfg := _current_session_config()
+	if cfg.is_empty() or bool(cfg.get("traps_enabled", false)):
+		return {}
+	if not _traps_allowed_for_config(cfg):
+		return {}
+	return _finish_shortcut(
+		FINISH_SHORTCUT_TRAPS,
+		tr("setting_use_traps"),
+		UIColors.BLUE,
+		_trap_icon_path(String(cfg.get("theme_dir", Config.theme_dir_name))),
+	)
+
+func _finish_shortcut(shortcut_id: String, text: String, color: Color, icon_path: String = "") -> Dictionary:
 	return {
 		"id": shortcut_id,
 		"text": text,
 		"color": color,
+		"icon": icon_path,
 	}
+
+func _traps_allowed_for_config(cfg: Dictionary) -> bool:
+	return Config.traps_allowed_for_session(
+		String(cfg.get("game_style", _game_style)),
+		bool(cfg.get("chaser_enabled", _chaser_enabled)),
+		String(cfg.get("mission_id", _mission_id)),
+	)
+
+func _trap_icon_path(theme_dir: String) -> String:
+	var path := "res://themes/%s/trap.png" % theme_dir
+	if FileAccess.file_exists(path):
+		return path
+	return "res://themes/default/trap.png"
 
 func _current_session_config() -> Dictionary:
 	var session := NetworkManager.current_session
@@ -1248,6 +1497,7 @@ func _apply_multiplayer_config_values(cfg: Dictionary, mission_id: String, picku
 	cfg["training_type_title"] = tr(pickup_key)
 	cfg["chaser_enabled"] = chaser_enabled
 	cfg["chaser_level"] = _normalized_chaser_level(chaser_level, chaser_enabled)
+	cfg["traps_enabled"] = bool(cfg.get("traps_enabled", false)) and Config.traps_allowed_for_session(style, chaser_enabled, mission_id)
 	_apply_max_players_for_config(cfg, mission_id, chaser_enabled)
 
 func _normalized_chaser_level(chaser_level: int, chaser_enabled: bool) -> int:
@@ -1444,6 +1694,7 @@ func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 	_race_finished = true
 	_race_winner_peer_id = peer_id
 	_held_directions.clear()
+	_clear_all_traps_and_confusion()
 	_refresh_status_label()
 	if _should_play_race_learning_recap():
 		_speak_race_completion_once()

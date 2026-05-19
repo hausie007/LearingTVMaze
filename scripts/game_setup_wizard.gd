@@ -14,6 +14,7 @@ extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_paper_horizontal.png")
+const SetupMazePreviewScript := preload("res://scripts/setup_maze_preview.gd")
 
 const CARD_GAP := 42
 
@@ -52,6 +53,9 @@ var _maze_size_button: Button = null
 var _maze_size_title: Label = null
 var _maze_size_left: Label = null
 var _maze_size_right: Label = null
+var _maze_preview_anchor: Control = null
+var _maze_preview_container: Control = null
+var _maze_preview: Control = null
 var _theme_preview_container: PanelContainer = null
 var _theme_preview: CharacterPreview = null
 
@@ -66,6 +70,10 @@ var _chaser_speed_left: Label = null
 var _chaser_speed_right: Label = null
 var _chaser_speed_row: HBoxContainer = null
 var _chaser_speed_label: Label = null  # the text label in the row
+var _traps_button: Button = null
+var _traps_left: Label = null
+var _traps_right: Label = null
+var _traps_row: HBoxContainer = null
 var _character_button: Button = null
 var _character_left: Label = null
 var _character_right: Label = null
@@ -88,6 +96,7 @@ var _maze_size_idx: int = 0
 var _lang_idx: int = 0
 var _chaser_speed_idx: int = 1
 var _chaser_delay_idx: int = 0
+var _traps_enabled: bool = false
 var _character_catalog: Array[Dictionary] = []
 var _character_idx: int = 0
 
@@ -201,6 +210,7 @@ func _initialize_state() -> void:
 	var delays := MissionCatalog.get_unique_delay_levels(_maze_size_idx)
 	var delay_idx := delays.find(saved_level)
 	_chaser_delay_idx = delay_idx if delay_idx >= 0 else 0
+	_traps_enabled = bool(Config.traps_enabled)
 
 # ── Layout Building ──────────────────────────────────────────────────────────
 
@@ -423,6 +433,24 @@ func _build_step1_settings() -> void:
 	_setup_cycling(_maze_size_button, _cycle_maze_size)
 	_setup_arrow_visibility(_maze_size_button, _maze_size_left, _maze_size_right)
 
+	_maze_preview_anchor = Control.new()
+	_maze_preview_anchor.name = "MazePreviewAnchor"
+	_maze_preview_anchor.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_maze_preview_anchor.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_maze_preview_anchor.clip_contents = false
+	selector_vbox.add_child(_maze_preview_anchor)
+
+	_maze_preview_container = Control.new()
+	_maze_preview_container.name = "MazePreviewContainer"
+	_maze_preview_container.clip_contents = false
+	_maze_preview_anchor.add_child(_maze_preview_container)
+
+	_maze_preview = SetupMazePreviewScript.new() as Control
+	_maze_preview.name = "MazePreview"
+	_maze_preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_maze_preview.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_maze_preview_container.add_child(_maze_preview)
+
 	_theme_preview_container = PanelContainer.new()
 	_theme_preview_container.name = "ThemePreviewContainer"
 	_theme_preview_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -509,6 +537,16 @@ func _build_step3_settings() -> void:
 	_chaser_speed_button.pressed.connect(func(): _cycle_chaser_speed(1))
 	_setup_cycling(_chaser_speed_button, _cycle_chaser_speed)
 	_setup_arrow_visibility(_chaser_speed_button, _chaser_speed_left, _chaser_speed_right)
+
+	# Trap row (visible for chaser actions and Race to the Middle)
+	_traps_row = _create_selector_row("setting_use_traps")
+	settings.add_child(_traps_row)
+	_traps_left = _traps_row.get_meta("left") as Label
+	_traps_button = _traps_row.get_meta("button") as Button
+	_traps_right = _traps_row.get_meta("right") as Label
+	_traps_button.pressed.connect(func(): _cycle_traps(1))
+	_setup_cycling(_traps_button, _cycle_traps)
+	_setup_arrow_visibility(_traps_button, _traps_left, _traps_right)
 
 
 # ── Step Transition Handlers ─────────────────────────────────────────────────
@@ -663,13 +701,16 @@ func _start_single_player(with_chaser: bool) -> void:
 	Config.difficulty = _maze_size_idx
 	Config.theme_dir_name = _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
 	var speed_level: int = MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx] if with_chaser else Config.ChaserLevel.OFF
+	var traps_enabled := _traps_enabled_for_action(ACTION_SOLO_CHASER if with_chaser else ACTION_SOLO)
 	Config.configure_single_player_session(
 		MissionCatalog.style_for_mission(_selected_mission),
 		MissionCatalog.training_for_pickup(_selected_pickup),
 		with_chaser,
 		speed_level,
 		_selected_mission,
+		traps_enabled,
 	)
+	Config.remember_last_single_player_session()
 	Config.save_settings()
 	# Player is starting a game — restore the display wake lock.
 	DisplayServer.screen_set_keep_on(true)
@@ -718,6 +759,7 @@ func _start_multiplayer(with_chaser: bool) -> void:
 		"training_type_title": pickup_title,
 		"chaser_enabled": with_chaser and style != NetworkManager.STYLE_RACE,
 		"chaser_level": chaser_level,
+		"traps_enabled": _traps_enabled_for_action(ACTION_VERSUS if with_chaser else ACTION_COOP),
 		"rotate_roles_after_round": false,
 		"theme_dir": Config.theme_dir_name,
 		"theme_title": _theme_display_name(),
@@ -733,6 +775,16 @@ func _start_multiplayer(with_chaser: bool) -> void:
 		push_error("Failed to start host: %d" % err)
 		return
 	get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
+
+func _traps_allowed_for_action(action_id: String) -> bool:
+	var style := MissionCatalog.style_for_mission(_selected_mission)
+	if style == MissionCatalog.STYLE_RACE:
+		return _selected_mission == MissionCatalog.MISSION_RACE_MIDDLE
+	var action_has_chaser := action_id in [ACTION_SOLO_CHASER, ACTION_VERSUS]
+	return Config.traps_allowed_for_session(style, action_has_chaser, _selected_mission)
+
+func _traps_enabled_for_action(action_id: String) -> bool:
+	return _traps_enabled and _traps_allowed_for_action(action_id)
 
 # ── Value Cycling ─────────────────────────────────────────────────────────────
 
@@ -761,6 +813,10 @@ func _cycle_chaser_speed(dir: int) -> void:
 		_chaser_speed_idx = (_chaser_speed_idx + dir + MissionCatalog.CHASER_TUNING_LEVELS.size()) % MissionCatalog.CHASER_TUNING_LEVELS.size()
 	_update_step3_labels()
 
+func _cycle_traps(_dir: int) -> void:
+	_traps_enabled = not _traps_enabled
+	_update_step3_labels()
+
 func _cycle_character(dir: int) -> void:
 	if _character_catalog.is_empty(): return
 	_character_idx = (_character_idx + dir + _character_catalog.size()) % _character_catalog.size()
@@ -779,6 +835,7 @@ func _update_step1_labels() -> void:
 	if _maze_size_button != null:
 		_maze_size_button.text = tr(Config.DIFF_KEYS[_maze_size_idx])
 	_update_theme_preview()
+	_update_maze_preview()
 
 func _update_step2_labels(focused_pickup: String = "") -> void:
 	if _lang_button == null: return
@@ -805,6 +862,8 @@ func _update_step3_labels() -> void:
 		else:
 			var level := MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx]
 			_chaser_speed_button.text = tr(Config.CHASER_LEVEL_KEYS[level])
+	if _traps_button != null:
+		_traps_button.text = tr("yes") if _traps_enabled else tr("no")
 	if _character_button != null and not _character_catalog.is_empty() and _character_idx < _character_catalog.size():
 		_character_button.text = String(_character_catalog[_character_idx].get("display_name", ""))
 		_update_character_preview()
@@ -822,6 +881,9 @@ func _update_step3_settings_visibility() -> void:
 		_chaser_speed_label.text = tr("setting_chaser_delay") if is_versus else tr("setting_chaser_speed")
 	_update_step3_labels()
 
+	if _traps_row != null:
+		_traps_row.visible = _traps_allowed_for_action(focused_action)
+
 	if _character_row != null:
 		_character_row.visible = is_mp
 	# Sync overlay visibility
@@ -837,6 +899,13 @@ func _update_theme_preview() -> void:
 	_theme_preview_loader = ThemeLoader.get_cached(theme_name)
 	if _theme_preview_loader != null and _theme_preview != null:
 		_theme_preview.set_character(_theme_preview_loader.player_frames, _theme_preview_loader.player_fps)
+
+func _update_maze_preview() -> void:
+	if _maze_preview == null:
+		return
+	var theme_name := _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
+	if _maze_preview.has_method("configure"):
+		_maze_preview.call("configure", theme_name, _maze_size_idx)
 
 func _update_character_preview() -> void:
 	if _character_preview == null or _character_catalog.is_empty(): return
@@ -932,6 +1001,8 @@ func _configure_step3_nav() -> void:
 		visible_settings.append(_character_button)
 	if _chaser_speed_row != null and _chaser_speed_row.visible:
 		visible_settings.append(_chaser_speed_button)
+	if _traps_row != null and _traps_row.visible:
+		visible_settings.append(_traps_button)
 	var sel_or_last: Control = selected if selected != null else _last_card(cards)
 	for i in range(visible_settings.size()):
 		var above: Control = sel_or_last if i == 0 else visible_settings[i - 1]
@@ -943,6 +1014,8 @@ func _first_visible_step3_setting() -> Control:
 		return _character_button
 	if _chaser_speed_row != null and _chaser_speed_row.visible:
 		return _chaser_speed_button
+	if _traps_row != null and _traps_row.visible:
+		return _traps_button
 	return null
 
 func _configure_card_row_nav(cards: Array[Button], above: Control, below: Control) -> void:
@@ -1016,7 +1089,7 @@ func _apply_responsive_layout() -> void:
 	var sel_w := clampf(available_width * 0.32, 380.0, 500.0)
 	var sel_h: float = 58.0 if short_screen else 66.0
 	var sel_fs: int = 28 if short_screen else 31
-	for btn in [_theme_button, _maze_size_button, _lang_button, _chaser_speed_button, _character_button]:
+	for btn in [_theme_button, _maze_size_button, _lang_button, _chaser_speed_button, _traps_button, _character_button]:
 		if btn != null:
 			btn.custom_minimum_size = Vector2(sel_w, sel_h)
 			btn.add_theme_font_size_override("font_size", sel_fs)
@@ -1027,6 +1100,16 @@ func _apply_responsive_layout() -> void:
 		# Just set the preview minimum size, MarginContainer handles the rest.
 		if _theme_preview != null:
 			_theme_preview.custom_minimum_size = Vector2(ps, ps)
+	if _maze_preview_container != null:
+		var preview_w := clampf(available_width * (0.38 if short_screen else 0.42), 500.0 if short_screen else 600.0, 680.0 if short_screen else 760.0)
+		var preview_h := clampf(viewport_size.y * (0.18 if short_screen else 0.235), 145.0 if short_screen else 210.0, 205.0 if short_screen else 280.0)
+		if _maze_preview_anchor != null:
+			_maze_preview_anchor.custom_minimum_size = Vector2(preview_w + 360.0, preview_h)
+		_maze_preview_container.custom_minimum_size = Vector2(preview_w, preview_h)
+		_maze_preview_container.size = Vector2(preview_w, preview_h)
+	if _maze_preview != null:
+		_maze_preview.custom_minimum_size = _maze_preview_container.custom_minimum_size if _maze_preview_container != null else Vector2(sel_w, 240.0)
+	call_deferred("_align_maze_preview_to_size_selector")
 
 	if _character_preview_wrapper != null and _character_preview_wrapper.visible:
 		_resize_character_preview()
@@ -1037,6 +1120,22 @@ func _apply_responsive_layout() -> void:
 	# to discard any bloated sizes from the previous layout pass.
 	if _main_vbox != null:
 		_main_vbox.size = Vector2.ZERO
+
+func _align_maze_preview_to_size_selector() -> void:
+	if _maze_preview_anchor == null or _maze_preview_container == null or _maze_size_button == null:
+		return
+	if not _maze_preview_anchor.is_inside_tree() or not _maze_size_button.is_inside_tree():
+		return
+	var anchor_rect := _maze_preview_anchor.get_global_rect()
+	var button_rect := _maze_size_button.get_global_rect()
+	if anchor_rect.size.x <= 0.0:
+		return
+	var preview_size := _maze_preview_container.custom_minimum_size
+	if preview_size == Vector2.ZERO:
+		preview_size = _maze_preview_container.size
+	var target_x := button_rect.position.x + button_rect.size.x * 0.5 - anchor_rect.position.x - preview_size.x * 0.5
+	target_x = clampf(target_x, 0.0, maxf(0.0, anchor_rect.size.x - preview_size.x))
+	_maze_preview_container.position = Vector2(roundf(target_x), 0.0)
 	
 
 func _apply_card_sizing(step: WizardStep, available_width: float, viewport_height: float, short_screen: bool) -> void:
@@ -1103,6 +1202,7 @@ func _persist_state() -> void:
 	Config.difficulty = _maze_size_idx
 	Config.theme_dir_name = _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
 	Config.training_type = MissionCatalog.training_for_pickup(_selected_pickup)
+	Config.traps_enabled = _traps_enabled_for_action(_selected_action)
 	Config.save_settings()
 
 # ── Input ─────────────────────────────────────────────────────────────────────

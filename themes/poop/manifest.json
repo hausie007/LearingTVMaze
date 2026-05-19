@@ -6,22 +6,100 @@
     "background": "background_tile_0.png",
     "start": "start.png",
     "end": "end.png",
-    "collectible": "collectible_0.png"
+    "collectible": "collectible_0.png",
+    "trap": "trap.png"
   },
   "colors": {
-    "wall": "#051c3c",
+    "wall": "#022154",
     "wall_glow_factor": 1.0,
-    "wall_border": "#163A70",
-    "floor": "#F7FCFF",
+    "wall_border": "#021A44",
+    "floor": "#EBFCFF",
     "start_cell": "#B9F6CA",
     "end_cell": "#A8E6FF",
-    "player": "#8B5A2B"
+    "player": "#8B5A2B",
+    "highlight": "#FFCC0059"
   },
   "background": {
     "modulate": "#999999",
     "tiled": true,
-    "full_screen": false,
-    "color": "#EAF7FF"
+    "full_screen": false
+  },
+  "maze_rendering": {
+    "wall_mode": "painted_raised_2d_assets",
+    "top_width_ratio": 0.27,
+    "front_depth_ratio": 0.16,
+    "shadow_depth_ratio": 0.065,
+    "node_scale_ratio": 0.255,
+    "assets": {
+      "floor_tile": "maze/floor_00.png",
+      "floor_tiles": [
+        "maze/floor_00.png",
+        "maze/floor_01.png"
+      ],
+      "wall_top_h_variants": [
+        "maze/wall_top_h_00.png",
+        "maze/wall_top_h_01.png",
+        "maze/wall_top_h_02.png",
+        "maze/wall_top_h_03.png"
+      ],
+      "wall_top_v_variants": [
+        "maze/wall_top_v_00.png",
+        "maze/wall_top_v_01.png",
+        "maze/wall_top_v_02.png",
+        "maze/wall_top_v_03.png"
+      ],
+      "wall_face_h_variants": [
+        "maze/wall_face_h_00.png",
+        "maze/wall_face_h_01.png",
+        "maze/wall_face_h_02.png",
+        "maze/wall_face_h_03.png"
+      ],
+      "wall_h_combined_variants": [
+        "maze/wall_h_combined_00.png",
+        "maze/wall_h_combined_01.png",
+        "maze/wall_h_combined_02.png",
+        "maze/wall_h_combined_03.png"
+      ],
+      "wall_face_end_left_variants": [
+        "maze/wall_face_end_left_00.png"
+      ],
+      "wall_face_end_right_variants": [
+        "maze/wall_face_end_right_00.png"
+      ],
+      "wall_face_corner_left_variants": [
+        "maze/wall_face_corner_left_00.png"
+      ],
+      "wall_face_corner_right_variants": [
+        "maze/wall_face_corner_right_00.png"
+      ],
+      "wall_top_end_left_variants": [
+        "maze/wall_top_end_left_00.png"
+      ],
+      "wall_top_end_right_variants": [
+        "maze/wall_top_end_right_00.png"
+      ],
+      "wall_top_end_north_variants": [
+        "maze/wall_top_end_north_00.png"
+      ],
+      "wall_top_end_south_variants": [
+        "maze/wall_top_end_south_00.png"
+      ],
+      "wall_shadow_h": "maze/wall_shadow_h.png",
+      "wall_shadow_h_end_left": "maze/wall_shadow_h_end_left.png",
+      "wall_shadow_h_end_right": "maze/wall_shadow_h_end_right.png",
+      "wall_shadow_v": "maze/wall_shadow_v.png",
+      "wall_joints": {
+        "3": "maze/wall_joint_mask_03.png",
+        "6": "maze/wall_joint_mask_06.png",
+        "7": "maze/wall_joint_mask_07.png",
+        "9": "maze/wall_joint_mask_09.png",
+        "11": "maze/wall_joint_mask_11.png",
+        "12": "maze/wall_joint_mask_12.png",
+        "13": "maze/wall_joint_mask_13.png",
+        "14": "maze/wall_joint_mask_14.png",
+        "15": "maze/wall_joint_mask_15.png"
+      }
+    }
   },
   "glow": {
     "enabled": true,
@@ -30,6 +108,7 @@
   },
   "collectible": {
     "color": "#DFF4FF",
+    "text-color": "#17324D",
     "text_color": "#17324D",
     "image": "collectible_0.png"
   },

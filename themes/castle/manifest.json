@@ -5,7 +5,8 @@
     "chaser": "c_chaser.png",
     "start": "c_start.png",
     "end": "c_end.png",
-    "collectible": "c_collectible_shield_0.png"
+    "collectible": "c_collectible_shield_0.png",
+    "trap": "trap.png"
   },
   "colors": {
     "wall": "#000000",

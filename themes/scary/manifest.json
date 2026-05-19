@@ -4,7 +4,8 @@
 	"player": "player.png",
 	"start": "start.png",
 	"end": "finish.png",
-	"background": "tile4.png"
+	"background": "tile4.png",
+	"trap": "trap.png"
   },
   "colors": {
 	"wall": "#4A3A73",

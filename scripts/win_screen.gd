@@ -35,6 +35,7 @@ var _recap_label: Label = null
 var _next_button: Button = null
 var _harder_button: Button = null
 var _timer_label: Label = null
+var _priority_suggestion_container: VBoxContainer = null
 var _suggestion_container: VBoxContainer = null
 var _swap_roles_enabled: bool = false
 var _is_multiplayer: bool = false
@@ -308,11 +309,25 @@ static func build_title_header(title_text: String, character_ids: Array[String],
 
 ## Build the "Play Together" / "Play Alone" / "Swap Roles" buttons.
 func _build_mode_switch_buttons() -> void:
+	if _priority_suggestion_container != null:
+		for child in _priority_suggestion_container.get_children():
+			_priority_suggestion_container.remove_child(child)
+			child.queue_free()
+		_priority_suggestion_container.visible = _swap_roles_enabled
+		if _swap_roles_enabled:
+			_add_suggestion_button_to(
+				_priority_suggestion_container,
+				tr("mp_role_swap_roles"),
+				func(): swap_roles_pressed.emit(),
+				UIColors.GREEN,
+			)
+
 	for child in _suggestion_container.get_children():
 		_suggestion_container.remove_child(child)
 		child.queue_free()
 
-	for shortcut in _finish_shortcuts:
+	for i in range(_finish_shortcuts.size()):
+		var shortcut: Dictionary = _finish_shortcuts[i]
 		var shortcut_id := String(shortcut.get("id", ""))
 		var text := String(shortcut.get("text", "")).strip_edges()
 		if shortcut_id.is_empty() or text.is_empty():
@@ -320,9 +335,6 @@ func _build_mode_switch_buttons() -> void:
 		var button_color: Color = shortcut.get("color", UIColors.YELLOW)
 		var icon_path := String(shortcut.get("icon", ""))
 		_add_suggestion_button(text, Callable(self, "_emit_finish_shortcut").bind(shortcut_id), button_color, icon_path)
-
-	if _swap_roles_enabled:
-		_add_suggestion_button(tr("mp_role_swap_roles"), func(): swap_roles_pressed.emit(), UIColors.YELLOW)
 
 	if _is_multiplayer:
 		# MP mode → offer "Play Alone" in blue
@@ -537,6 +549,11 @@ func _build_ui() -> void:
 	_timer_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	next_hbox.add_child(_timer_label)
 
+	_priority_suggestion_container = VBoxContainer.new()
+	_priority_suggestion_container.visible = false
+	_priority_suggestion_container.add_theme_constant_override("separation", 12)
+	button_vbox.add_child(_priority_suggestion_container)
+
 	# Harder / Easier
 	var harder_hbox := HBoxContainer.new()
 	harder_hbox.add_theme_constant_override("separation", 20)
@@ -594,9 +611,14 @@ func _create_styled_button(btn_text: String, w: int, h: int, f_color: Color = UI
 	return button
 
 func _add_suggestion_button(text: String, callback: Callable, color: Color = UIColors.YELLOW, icon_path: String = "") -> void:
+	_add_suggestion_button_to(_suggestion_container, text, callback, color, icon_path)
+
+func _add_suggestion_button_to(parent: VBoxContainer, text: String, callback: Callable, color: Color = UIColors.YELLOW, icon_path: String = "") -> void:
+	if parent == null:
+		return
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_suggestion_container.add_child(hbox)
+	parent.add_child(hbox)
 
 	var btn: Button = _create_styled_button(text, 650, 76, color)
 	btn.pressed.connect(func():

@@ -414,6 +414,7 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 	chip.add_child(chip_hbox)
 
 	var icon_size = int((72 if not scale_down else 40) * scale_mult)
+	var trap_icon_size = int((34 if not scale_down else 24) * scale_mult)
 	var emoji_size = int((48 if not scale_down else 28) * scale_mult)
 	var text_size = int((36 if not scale_down else 20) * scale_mult)
 
@@ -421,18 +422,59 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 	var character_id: String = data.get("character_id", "")
 	var tex := CharacterCatalog.get_texture_by_id(character_id) if not character_id.is_empty() else null
 	if tex != null:
+		var icon_slot := Control.new()
+		icon_slot.custom_minimum_size = Vector2(icon_size, icon_size)
+		icon_slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		icon_slot.clip_contents = false
+
 		var icon := TextureRect.new()
 		icon.texture = tex
-		icon.custom_minimum_size = Vector2(icon_size, icon_size)
+		icon.set_anchors_preset(Control.PRESET_FULL_RECT)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		chip_hbox.add_child(icon)
+		icon.pivot_offset = Vector2(icon_size, icon_size) / 2.0
+		icon.resized.connect(func(): icon.pivot_offset = icon.size * 0.5)
+		if bool(data.get("is_confused", false)) or int(data.get("confusion_moves", 0)) > 0:
+			icon.rotation = PI
+		icon_slot.add_child(icon)
+		chip_hbox.add_child(icon_slot)
 
 	var is_ai: bool = data.get("is_ai", false)
 	if tex == null:
 		var spacer := Control.new()
 		spacer.custom_minimum_size = Vector2(icon_size, icon_size)
 		chip_hbox.add_child(spacer)
+
+	if bool(data.get("trap_available", false)):
+		var trap_tex: Texture2D = data.get("trap_texture", null) as Texture2D
+		if trap_tex != null:
+			var trap_icon := TextureRect.new()
+			trap_icon.name = "TrapAvailableIcon"
+			trap_icon.texture = trap_tex
+			trap_icon.custom_minimum_size = Vector2(trap_icon_size, trap_icon_size)
+			trap_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			trap_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			chip_hbox.add_child(trap_icon)
+		else:
+			var trap_lbl := Label.new()
+			trap_lbl.name = "TrapAvailableIcon"
+			trap_lbl.text = "?"
+			trap_lbl.add_theme_font_size_override("font_size", trap_icon_size)
+			trap_lbl.add_theme_color_override("font_color", accent_color.lightened(0.2))
+			trap_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			chip_hbox.add_child(trap_lbl)
+
+	var confusion_moves := int(data.get("confusion_moves", 0))
+	if confusion_moves > 0:
+		var confusion_lbl := Label.new()
+		confusion_lbl.name = "ConfusionCountLabel"
+		confusion_lbl.text = str(confusion_moves)
+		confusion_lbl.add_theme_font_size_override("font_size", text_size)
+		confusion_lbl.add_theme_font_override("font", get_font_at_weight(WEIGHT_SEMIBOLD))
+		confusion_lbl.add_theme_color_override("font_color", accent_color.lightened(0.2))
+		confusion_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		confusion_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		chip_hbox.add_child(confusion_lbl)
 
 	# Role emoji and localized word
 	var role: String = data.get("role", "")

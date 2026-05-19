@@ -458,6 +458,7 @@ func _start_game() -> void:
 		MissionCatalog.CHASER_TUNING_LEVELS[temp_chaser_speed_idx],
 		_selected_mission,
 	)
+	Config.remember_last_single_player_session()
 	Config.save_settings()
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
 

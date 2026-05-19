@@ -4,18 +4,20 @@
     "player": "player.png",
     "start": "start.png",
     "end": "finish.png",
-    "chaser": "chaser.png"
+    "chaser": "chaser.png",
+    "trap": "trap.png"
   },
   "colors": {
-    "wall": "#8abbd0",
-    "floor": "#a5d6e7",
-    "start_cell": "#98e29a",
-    "end_cell": "#f7e58a",
+    "wall": "#0F678B",
+    "wall_glow_factor": 1.0,
+    "wall_border": "#08415E",
+    "floor": "#BCEEFF",
+    "start_cell": "#A6EFA8",
+    "end_cell": "#FFE889",
     "player": "#ffcc00",
     "highlight": "#FFD70059"
   },
   "background": {
-    "color": "#8abbd0",
     "tiled": false
   }
 }

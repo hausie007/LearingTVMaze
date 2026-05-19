@@ -566,6 +566,7 @@ func _estimated_player_chip_width(data: Dictionary, total_players: int, scale_mu
 	var margin_x := float((12 if not scale_down else 6) * scale_mult) * 2.0
 	var separation := float((8 if not scale_down else 4) * scale_mult)
 	var icon_size := float((72 if not scale_down else 40) * scale_mult)
+	var trap_icon_size := float((34 if not scale_down else 24) * scale_mult)
 	var emoji_size := float((48 if not scale_down else 28) * scale_mult)
 	var text_size := int((36 if not scale_down else 20) * scale_mult)
 	var parts: Array[float] = []
@@ -580,6 +581,13 @@ func _estimated_player_chip_width(data: Dictionary, total_players: int, scale_mu
 	var role_key := UIHelpers.get_role_translation_key(role)
 	if not role_key.is_empty():
 		parts.append(_text_width(TranslationServer.translate(role_key), text_size))
+
+	if bool(data.get("trap_available", false)):
+		parts.append(trap_icon_size)
+
+	var confusion_moves := int(data.get("confusion_moves", 0))
+	if confusion_moves > 0:
+		parts.append(_text_width(str(confusion_moves), text_size))
 
 	var is_ai: bool = data.get("is_ai", false)
 	if is_ai or role == Config.ROLE_CHASER:

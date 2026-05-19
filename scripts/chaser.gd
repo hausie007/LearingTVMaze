@@ -11,6 +11,7 @@ var _maze_renderer: MazeRenderer = null
 var _animator: FrameAnimator = null
 var _move_timer: Timer = null
 var _is_moving: bool = false
+var _confusion_shake_tween: Tween = null
 
 func setup(renderer: MazeRenderer) -> void:
 	_maze_renderer = renderer
@@ -80,3 +81,21 @@ func _on_timer_timeout() -> void:
 func stop() -> void:
 	if _move_timer:
 		_move_timer.stop()
+
+func set_confused_visual(enabled: bool) -> void:
+	if sprite != null:
+		sprite.rotation = PI if enabled else 0.0
+
+func play_confusion_shake() -> void:
+	if sprite == null:
+		return
+	if _confusion_shake_tween and _confusion_shake_tween.is_valid():
+		_confusion_shake_tween.kill()
+	sprite.position = Vector2.ZERO
+	var offset := Vector2(12.0, 0.0)
+	_confusion_shake_tween = create_tween()
+	_confusion_shake_tween.bind_node(sprite)
+	_confusion_shake_tween.tween_property(sprite, "position", offset, 0.045).set_trans(Tween.TRANS_SINE)
+	_confusion_shake_tween.tween_property(sprite, "position", -offset, 0.065).set_trans(Tween.TRANS_SINE)
+	_confusion_shake_tween.tween_property(sprite, "position", offset * 0.45, 0.045).set_trans(Tween.TRANS_SINE)
+	_confusion_shake_tween.tween_property(sprite, "position", Vector2.ZERO, 0.08).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)

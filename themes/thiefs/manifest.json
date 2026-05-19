@@ -6,7 +6,8 @@
     "start": "t_start.png",
     "end": "t_finish.png",
     "background": "t_background_tile_city.png",
-    "collectible": "t_collectible_money_bag.png"
+    "collectible": "t_collectible_money_bag.png",
+    "trap": "trap.png"
   },
   "colors": {
     "wall": "#0B3F9E",

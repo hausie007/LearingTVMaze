@@ -108,6 +108,13 @@ func get_next_collect_index() -> int:
 func get_total_collectibles() -> int:
 	return _total_collectibles
 
+func get_collectible_positions() -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for key in _collectibles.keys():
+		if key is Vector2i:
+			result.append(key)
+	return result
+
 func is_complete() -> bool:
 	return _total_collectibles <= 0 or _next_collect_index >= _total_collectibles
 

@@ -5,7 +5,7 @@
 ## Four navigation cards:
 ##   1. Play Now     — instant solo game with safe defaults
 ##   2. Your Adventure — custom setup wizard (Scenes.WIZARD)
-##   3. Play Together  — setup wizard in multiplayer-host context
+##   3. Replay         — repeats the last started game/session
 ##   4. Join Game      — appears when a host is discovered on the network
 ##
 ## Settings and Help corner buttons live here (moved from the wizard).
@@ -19,6 +19,7 @@ const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
 # Card IDs
 const CARD_PLAY_NOW := "play_now"
 const CARD_YOUR_ADVENTURE := "your_adventure"
+const CARD_REPLAY := "replay"
 const CARD_PLAY_TOGETHER := "play_together"
 const CARD_JOIN_GAME := "join_game"
 
@@ -63,6 +64,7 @@ func _ready() -> void:
 	if err != OK:
 		_hosts.clear()
 	_update_join_card_visibility()
+	_update_replay_card_state()
 
 	# Focus the Play Now card
 	var play_now_card: Button = _cards.get(CARD_PLAY_NOW, null) as Button
@@ -180,6 +182,7 @@ func _build_cards() -> void:
 
 	# Apply palettes
 	_apply_card_styles()
+	_update_hidden_play_together_card()
 
 
 func _build_card_data() -> Array[Dictionary]:
@@ -201,7 +204,15 @@ func _build_card_data() -> Array[Dictionary]:
 		"subtitle": tr("menu_your_adventure_desc"),
 	})
 
-	# Play Together — green
+	# Replay — repeats the last played configuration
+	data.append({
+		"id": CARD_REPLAY,
+		"icon": "res://images/icons/i_replay.png",
+		"title": tr("menu_replay"),
+		"subtitle": tr("menu_replay_desc"),
+	})
+
+	# Play Together — currently hidden, kept ready for the multiplayer entry point
 	data.append({
 		"id": CARD_PLAY_TOGETHER,
 		"icon": "res://images/icons/i_play_together.png",
@@ -231,6 +242,15 @@ func _apply_card_styles() -> void:
 		)
 
 	# Your Adventure — blue (default selected style from mode_card handles this)
+
+	# Replay — same warm red family as Race to the Middle.
+	var replay: Button = _cards.get(CARD_REPLAY, null) as Button
+	if replay != null:
+		replay.call("set_custom_palette",
+			UIColors.CARD_ORANGE_RED_DARK, UIColors.CARD_BORDER_SOFT,
+			UIColors.UI_ORANGE_RED, UIColors.SELECTED_BORDER,
+			UIColors.RED_ACCENT, UIColors.TEXT_PRIMARY, UIColors.TEXT_SECONDARY
+		)
 
 	# Play Together — green co-op palette
 	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
@@ -292,6 +312,8 @@ func _on_card_pressed(card_id: String) -> void:
 			_start_play_now()
 		CARD_YOUR_ADVENTURE:
 			_navigate_to_wizard(false)
+		CARD_REPLAY:
+			_start_replay()
 		CARD_PLAY_TOGETHER:
 			_navigate_to_wizard(true)
 		CARD_JOIN_GAME:
@@ -308,10 +330,53 @@ func _start_play_now() -> void:
 		MissionCatalog.MISSION_FOLLOW_TRAIL,
 	)
 	Config.difficulty = 0  # Very Small maze
+	Config.remember_last_single_player_session()
 	Config.save_settings()
 	NetworkManager.stop_discovery()
 	DisplayServer.screen_set_keep_on(true)
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
+
+func _start_replay() -> void:
+	if not Config.has_replayable_last_game():
+		_update_replay_card_state()
+		return
+
+	NetworkManager.stop_discovery()
+	var replay_kind := String(Config.last_played_game.get("kind", ""))
+	if replay_kind == Config.LAST_SESSION_SINGLE_PLAYER:
+		if not Config.apply_last_single_player_session():
+			_update_replay_card_state()
+			return
+		Config.remember_last_single_player_session()
+		Config.save_settings()
+		DisplayServer.screen_set_keep_on(true)
+		UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
+	elif replay_kind == Config.LAST_SESSION_MULTIPLAYER_HOST:
+		var host_config := Config.get_last_multiplayer_host_config()
+		if host_config.is_empty():
+			_update_replay_card_state()
+			return
+		_apply_replay_host_config_to_settings(host_config)
+		Config.save_settings()
+		NetworkManager.configure_host(host_config)
+		var err := NetworkManager.start_host()
+		if err != OK:
+			push_error("Failed to replay hosted game: %d" % err)
+			_update_replay_card_state()
+			return
+		get_tree().change_scene_to_file(Scenes.HOST_LOBBY)
+
+func _apply_replay_host_config_to_settings(host_config: Dictionary) -> void:
+	Config.difficulty = clampi(int(host_config.get("difficulty", Config.difficulty)), 0, Config.DIFFICULTY_SIZES.size() - 1)
+	Config.theme_dir_name = String(host_config.get("theme_dir", Config.theme_dir_name))
+	Config.game_style = String(host_config.get("game_style", Config.game_style))
+	Config.training_type = String(host_config.get("training_type", Config.training_type))
+	Config.mission_id = String(host_config.get("mission_id", Config.mission_id))
+	Config.chaser_enabled = bool(host_config.get("chaser_enabled", false))
+	Config.chaser_level = clampi(int(host_config.get("chaser_level", Config.chaser_level)), Config.ChaserLevel.OFF, Config.ChaserLevel.TURBO) as Config.ChaserLevel
+	Config.game_mode = Config.game_mode_for_training(Config.training_type) as Config.GameMode
+	Config.player_role = Config.ROLE_RACER if Config.game_style == Config.STYLE_RACE else Config.ROLE_COLLECTOR
+	Config.traps_enabled = bool(host_config.get("traps_enabled", false)) and Config.traps_allowed_for_session(Config.game_style, Config.chaser_enabled, Config.mission_id)
 
 
 func _navigate_to_wizard(multiplayer_host: bool) -> void:
@@ -358,14 +423,40 @@ func _update_join_card_visibility() -> void:
 		_apply_responsive_layout()
 		_configure_navigation()
 
+func _update_replay_card_state() -> void:
+	var replay_card: Button = _cards.get(CARD_REPLAY, null) as Button
+	if replay_card == null:
+		return
+
+	var can_replay := Config.has_replayable_last_game()
+	var focus_owner: Control = get_viewport().gui_get_focus_owner() if get_viewport() != null else null
+	replay_card.disabled = not can_replay
+	replay_card.focus_mode = Control.FOCUS_ALL if can_replay else Control.FOCUS_NONE
+	replay_card.mouse_filter = Control.MOUSE_FILTER_STOP if can_replay else Control.MOUSE_FILTER_IGNORE
+	replay_card.modulate = Color.WHITE if can_replay else Color(1.0, 1.0, 1.0, 0.42)
+	if not can_replay and focus_owner == replay_card:
+		var play_now: Button = _cards.get(CARD_PLAY_NOW, null) as Button
+		if play_now != null:
+			play_now.grab_focus()
+	_configure_navigation()
+
+func _update_hidden_play_together_card() -> void:
+	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
+	if play_together == null:
+		return
+	play_together.visible = false
+	play_together.disabled = true
+	play_together.focus_mode = Control.FOCUS_NONE
+	play_together.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 
 # ── Navigation ───────────────────────────────────────────────────────────────
 
 func _configure_navigation() -> void:
 	var visible_cards: Array[Button] = []
-	for id in [CARD_PLAY_NOW, CARD_YOUR_ADVENTURE, CARD_PLAY_TOGETHER, CARD_JOIN_GAME]:
+	for id in _card_order():
 		var card: Button = _cards.get(id, null) as Button
-		if card != null and card.visible:
+		if card != null and card.visible and not card.disabled and card.focus_mode != Control.FOCUS_NONE:
 			visible_cards.append(card)
 
 	if visible_cards.is_empty():
@@ -434,7 +525,7 @@ func _apply_responsive_layout() -> void:
 
 func _apply_card_sizing(available_width: float, viewport_height: float, short_screen: bool) -> void:
 	var visible_cards: Array[Button] = []
-	for id in [CARD_PLAY_NOW, CARD_YOUR_ADVENTURE, CARD_PLAY_TOGETHER, CARD_JOIN_GAME]:
+	for id in _card_order():
 		var card: Button = _cards.get(id, null) as Button
 		if card != null and card.visible:
 			visible_cards.append(card)
@@ -465,6 +556,9 @@ func _apply_card_sizing(available_width: float, viewport_height: float, short_sc
 	if _card_row != null:
 		_card_row.custom_minimum_size.x = available_width
 		_card_row.size = Vector2.ZERO
+
+func _card_order() -> Array[String]:
+	return [CARD_PLAY_NOW, CARD_YOUR_ADVENTURE, CARD_REPLAY, CARD_PLAY_TOGETHER, CARD_JOIN_GAME]
 
 
 func _position_corner_buttons() -> void:

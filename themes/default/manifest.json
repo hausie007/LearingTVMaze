@@ -6,7 +6,8 @@
 	"background": "background.png",
 	"start": "p_start.png",
 	"end": "p_finish.png",
-	"collectible": "p_collectible.png"
+	"collectible": "p_collectible.png",
+	"trap": "trap.png"
   },
   "colors": {
 	"wall": "#0F1720",

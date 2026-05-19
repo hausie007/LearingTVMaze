@@ -21,6 +21,7 @@ var _accent_palette: Dictionary = {}
 var _alpha_tween: Tween = null
 var _last_build_viewport_size: Vector2 = Vector2.ZERO
 var _last_build_controller_size: int = -1
+var _controls_reversed_visual: bool = false
 
 func set_accent_palette(palette: Dictionary) -> void:
 	_accent_palette = palette.duplicate(true)
@@ -29,6 +30,10 @@ func set_accent_palette(palette: Dictionary) -> void:
 func reset_accent_palette() -> void:
 	_accent_palette.clear()
 	_apply_dpad_style()
+
+func set_controls_reversed_visual(enabled: bool) -> void:
+	_controls_reversed_visual = enabled
+	_apply_direction_icons()
 
 
 ## Dim the D-pad to reduce OLED burn-in during idle periods.
@@ -141,6 +146,7 @@ func _rebuild_dpad(viewport_size: Vector2) -> void:
 		back_button.passby_press = false
 	_last_build_viewport_size = viewport_size
 	_last_build_controller_size = Config.controller_size if is_instance_valid(Config) else -1
+	_apply_direction_icons()
 	_apply_dpad_style()
 
 
@@ -202,6 +208,29 @@ func _apply_dpad_style() -> void:
 			var label: Label = visual.get_node_or_null("IconLabel") as Label
 			if label != null:
 				label.add_theme_color_override("font_color", text_color)
+
+func _apply_direction_icons() -> void:
+	if dpad_container == null:
+		return
+	for child in dpad_container.get_children():
+		var button := child as TouchScreenButton
+		if button == null:
+			continue
+		var visual := button.get_node_or_null("Visual") as ColorRect
+		if visual == null:
+			continue
+		var label := visual.get_node_or_null("IconLabel") as Label
+		if label == null:
+			continue
+		match StringName(button.action):
+			&"ui_up":
+				label.text = "↓" if _controls_reversed_visual else "↑"
+			&"ui_down":
+				label.text = "↑" if _controls_reversed_visual else "↓"
+			&"ui_left":
+				label.text = "→" if _controls_reversed_visual else "←"
+			&"ui_right":
+				label.text = "←" if _controls_reversed_visual else "→"
 
 func _palette_color(key: String, fallback: Color) -> Color:
 	var value: Variant = _accent_palette.get(key, fallback)

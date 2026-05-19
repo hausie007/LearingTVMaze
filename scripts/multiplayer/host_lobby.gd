@@ -780,6 +780,8 @@ func _on_start_now_pressed() -> void:
 
 func _on_game_started(_session: Dictionary) -> void:
 	# Game is starting — restore the wake lock before handing off to the game scene.
+	Config.remember_last_multiplayer_host_session(NetworkManager.host_config)
+	Config.save_settings()
 	DisplayServer.screen_set_keep_on(true)
 	if _oled_guard:
 		_oled_guard.stop()

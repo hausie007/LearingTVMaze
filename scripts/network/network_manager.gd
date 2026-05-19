@@ -11,11 +11,13 @@ signal join_rejected(reason: String)
 signal game_started(session: Dictionary)
 signal peer_disconnected(peer_id: int)
 signal input_received(peer_id: int, direction: Vector2i, pressed: bool)
+signal trap_use_received(peer_id: int)
 signal debug_status_changed(scope: String, message: String)
 signal chaser_countdown_updated(remaining: int)
 signal chaser_released()
 signal remote_goal_updated(goal_text: String, role_tag: String)
 signal remote_result_updated(title_text: String, character_ids: Array[String])
+signal remote_trap_status_updated(trap_available: bool, confusion_moves: int)
 
 const APP_ID := "learning_maze"
 const PROTOCOL_VERSION := 1
@@ -272,6 +274,14 @@ func send_dpad(direction: Vector2i, pressed: bool) -> void:
 
 	rpc_id(HOST_PEER_ID, "rpc_dpad_input", direction, pressed)
 
+func send_use_trap() -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
+	if multiplayer.is_server():
+		trap_use_received.emit(multiplayer.get_unique_id())
+		return
+	rpc_id(HOST_PEER_ID, "rpc_use_trap")
+
 func get_discovered_hosts() -> Array:
 	var hosts: Array = []
 	for value in _discovered_hosts.values():
@@ -342,6 +352,7 @@ func _build_discovery_payload() -> Dictionary:
 		"training_type": String(host_config.get("training_type", TRAINING_WORDS)),
 		"training_type_title": String(host_config.get("training_type_title", "Words")),
 		"chaser_enabled": bool(host_config.get("chaser_enabled", false)),
+		"traps_enabled": bool(host_config.get("traps_enabled", false)),
 		"difficulty": int(host_config.get("difficulty", 1)),
 		"difficulty_key": String(host_config.get("difficulty_key", "diff_easy")),
 		"max_players": max_players,
@@ -543,6 +554,12 @@ func _normalize_host_config() -> void:
 		host_config["chaser_enabled"] = true
 	if MissionCatalog.chaser_forced_off(mission_id) or String(host_config.get("game_style", STYLE_PATH)) == STYLE_RACE:
 		host_config["chaser_enabled"] = false
+	var traps_requested := bool(host_config.get("traps_enabled", false))
+	host_config["traps_enabled"] = traps_requested and Config.traps_allowed_for_session(
+		String(host_config.get("game_style", STYLE_PATH)),
+		bool(host_config.get("chaser_enabled", false)),
+		mission_id
+	)
 	var player_options := MissionCatalog.max_players_options(mission_id, bool(host_config.get("chaser_enabled", false)))
 	var max_players := int(host_config.get("max_players", player_options[0]))
 	if not player_options.has(max_players):
@@ -766,6 +783,15 @@ func rpc_dpad_input(direction: Vector2i, pressed: bool) -> void:
 
 	input_received.emit(sender_id, direction, pressed)
 
+@rpc("any_peer", "call_remote", "reliable")
+func rpc_use_trap() -> void:
+	if not multiplayer.is_server():
+		return
+	var sender_id := multiplayer.get_remote_sender_id()
+	if not players.has(sender_id):
+		return
+	trap_use_received.emit(sender_id)
+
 @rpc("authority", "call_remote", "reliable")
 func rpc_chaser_countdown(remaining: int) -> void:
 	chaser_countdown_updated.emit(remaining)
@@ -801,6 +827,7 @@ func _host_signature(info: Dictionary) -> String:
 		"training_type": String(info.get("training_type", "")),
 		"training_type_title": String(info.get("training_type_title", "")),
 		"chaser_enabled": bool(info.get("chaser_enabled", false)),
+		"traps_enabled": bool(info.get("traps_enabled", false)),
 		"max_players": int(info.get("max_players", 0)),
 		"player_count": int(info.get("player_count", 0)),
 		"character_id": String(info.get("character_id", "")),
@@ -817,3 +844,8 @@ func rpc_update_remote_goal(goal_text: String, role_tag: String = "") -> void:
 func rpc_update_remote_result(title_text: String, character_ids: Array[String]) -> void:
 	if not multiplayer.is_server():
 		remote_result_updated.emit(title_text, character_ids)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_update_remote_trap_status(trap_available: bool, confusion_moves: int) -> void:
+	if not multiplayer.is_server():
+		remote_trap_status_updated.emit(trap_available, confusion_moves)

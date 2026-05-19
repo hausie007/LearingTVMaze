@@ -36,6 +36,9 @@ signal reached_end
 
 ## Current grid coordinate.
 var grid_pos: Vector2i = Vector2i.ZERO
+var previous_grid_pos: Vector2i = Vector2i.ZERO
+var has_previous_grid_pos: bool = false
+var controls_reversed: bool = false
 
 ## References injected by GameManager.
 var maze_data: MazeData       = null
@@ -52,6 +55,7 @@ var _visual: Node = null
 var _shake_tween: Tween = null
 var _move_tween: Tween = null
 var _animator: FrameAnimator = null
+var _confusion_visual_version: int = 0
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -114,10 +118,12 @@ func rebuild_visual() -> void:
 		var sprite_size := cs * Config.player_scale
 		rect.size = Vector2(sprite_size, sprite_size)
 		rect.position = Vector2(-sprite_size / 2.0, -sprite_size / 2.0)
+		rect.pivot_offset = rect.size / 2.0
 		rect.color = theme_color
 		_visual = rect
 
 	add_child(_visual)
+	set_confused_visual(controls_reversed)
 
 
 ## NOTE: Input is polled in _process() with manual cooldown instead of using
@@ -148,7 +154,7 @@ func _process(delta: float) -> void:
 	if direction == Vector2i.ZERO:
 		return  # No input this frame.
 
-	_try_move(direction)
+	_try_move(-direction if controls_reversed else direction)
 
 
 # ── Movement ─────────────────────────────────────────────────────────────────
@@ -165,6 +171,8 @@ func _try_move(direction: Vector2i) -> void:
 		return
 
 	# Update logical position.
+	previous_grid_pos = grid_pos
+	has_previous_grid_pos = true
 	grid_pos += direction
 
 	# Start cooldown.
@@ -197,9 +205,56 @@ func reset_movement() -> void:
 	if _shake_tween and _shake_tween.is_valid():
 		_shake_tween.kill()
 	_cooldown_remaining = 0.0
+	has_previous_grid_pos = false
 	
 	if _visual:
 		_visual.position = Vector2.ZERO if _visual is Sprite2D else Vector2(-_visual.size.x / 2.0, -_visual.size.y / 2.0)
+		_visual.rotation = PI if controls_reversed else 0.0
+
+func set_controls_reversed(enabled: bool, shake: bool = false, visual_delay_sec: float = 0.0) -> void:
+	controls_reversed = enabled
+	_confusion_visual_version += 1
+	var version := _confusion_visual_version
+	if visual_delay_sec > 0.0:
+		_apply_confused_visual_later(enabled, shake, visual_delay_sec, version)
+	else:
+		set_confused_visual(enabled)
+		if shake:
+			play_confusion_shake()
+
+func _apply_confused_visual_later(enabled: bool, shake: bool, delay_sec: float, version: int) -> void:
+	await get_tree().create_timer(delay_sec).timeout
+	if not is_inside_tree() or version != _confusion_visual_version or controls_reversed != enabled:
+		return
+	set_confused_visual(enabled)
+	if shake:
+		play_confusion_shake()
+
+func set_confused_visual(enabled: bool) -> void:
+	if _visual == null:
+		return
+	if _visual is Control:
+		var control := _visual as Control
+		control.pivot_offset = control.size / 2.0
+	_visual.rotation = PI if enabled else 0.0
+
+func play_confusion_shake() -> void:
+	if _visual == null:
+		return
+	var cs: float = 120.0
+	if maze_renderer:
+		cs = maze_renderer.get_cell_size()
+	var base_pos: Vector2 = Vector2.ZERO if _visual is Sprite2D else Vector2(-_visual.size.x / 2.0, -_visual.size.y / 2.0)
+	if _shake_tween and _shake_tween.is_valid():
+		_shake_tween.kill()
+	_visual.position = base_pos
+	var offset := Vector2(cs * 0.13, 0.0)
+	_shake_tween = create_tween()
+	_shake_tween.bind_node(_visual)
+	_shake_tween.tween_property(_visual, "position", base_pos + offset, 0.045).set_trans(Tween.TRANS_SINE)
+	_shake_tween.tween_property(_visual, "position", base_pos - offset, 0.065).set_trans(Tween.TRANS_SINE)
+	_shake_tween.tween_property(_visual, "position", base_pos + offset * 0.45, 0.045).set_trans(Tween.TRANS_SINE)
+	_shake_tween.tween_property(_visual, "position", base_pos, 0.08).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 
 
 ## Apply a short shake animation when bumping into a wall.
