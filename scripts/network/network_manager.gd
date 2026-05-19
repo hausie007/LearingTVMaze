@@ -658,6 +658,10 @@ func kick_player(peer_id: int) -> void:
 		var enet_peer := multiplayer.multiplayer_peer as ENetMultiplayerPeer
 		if enet_peer != null:
 			enet_peer.disconnect_peer(peer_id, true)
+		
+		# Immediately clean up locally since peer_disconnected might not fire for server-initiated disconnects
+		players.erase(peer_id)
+		_sync_lobby_to_clients()
 
 @rpc("authority", "call_remote", "reliable")
 func rpc_kicked_by_host() -> void:

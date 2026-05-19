@@ -701,14 +701,13 @@ func _start_single_player(with_chaser: bool) -> void:
 	Config.difficulty = _maze_size_idx
 	Config.theme_dir_name = _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
 	var speed_level: int = MissionCatalog.CHASER_TUNING_LEVELS[_chaser_speed_idx] if with_chaser else Config.ChaserLevel.OFF
-	var traps_enabled := _traps_enabled_for_action(ACTION_SOLO_CHASER if with_chaser else ACTION_SOLO)
 	Config.configure_single_player_session(
 		MissionCatalog.style_for_mission(_selected_mission),
 		MissionCatalog.training_for_pickup(_selected_pickup),
 		with_chaser,
 		speed_level,
 		_selected_mission,
-		traps_enabled,
+		_traps_enabled,
 	)
 	Config.remember_last_single_player_session()
 	Config.save_settings()
@@ -1202,7 +1201,7 @@ func _persist_state() -> void:
 	Config.difficulty = _maze_size_idx
 	Config.theme_dir_name = _themes[_theme_idx] if _theme_idx < _themes.size() else "default"
 	Config.training_type = MissionCatalog.training_for_pickup(_selected_pickup)
-	Config.traps_enabled = _traps_enabled_for_action(_selected_action)
+	Config.traps_enabled = _traps_enabled
 	Config.save_settings()
 
 # ── Input ─────────────────────────────────────────────────────────────────────

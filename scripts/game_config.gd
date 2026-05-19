@@ -359,7 +359,7 @@ func configure_single_player_session(
 	game_mode = game_mode_for_training(training_type) as GameMode
 	chaser_enabled = use_chaser and game_style != STYLE_RACE
 	chaser_level = clampi(chaser_speed_level, ChaserLevel.SLOW, ChaserLevel.TURBO) as ChaserLevel if chaser_enabled else ChaserLevel.OFF
-	traps_enabled = use_traps and traps_allowed_for_session(game_style, chaser_enabled, mission_id)
+	traps_enabled = use_traps
 
 func remember_last_single_player_session() -> void:
 	last_played_game = {
@@ -490,8 +490,6 @@ func _apply_session_compatibility() -> void:
 		chaser_level = ChaserLevel.OFF
 	elif chaser_level == ChaserLevel.OFF:
 		chaser_level = ChaserLevel.SLOW
-	if not traps_allowed_for_session(game_style, chaser_enabled, mission_id):
-		traps_enabled = false
 
 ## Return the effective UI language code.
 func get_effective_ui_language() -> String:

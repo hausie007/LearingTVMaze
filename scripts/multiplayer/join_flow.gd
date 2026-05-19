@@ -62,6 +62,8 @@ var _gameplay_char_preview: CharacterPreview = null
 var _gameplay_badge: Control = null
 var _gameplay_badge_data: Dictionary = {}
 var _gameplay_badge_slot: Control = null
+var _gameplay_badge_container: MarginContainer = null
+var _gameplay_result_node: Control = null
 
 # ── State ───────────────────────────────────────────────────────────────────
 var _hosts: Array = []
@@ -884,19 +886,25 @@ func _on_game_started(_session: Dictionary) -> void:
 	my_info["trap_texture"] = _remote_trap_texture()
 		
 	# Construct the player badge
-	if _gameplay_badge_slot != null:
-		_gameplay_badge_slot.queue_free()
+	if _gameplay_badge_container != null:
+		_gameplay_badge_container.queue_free()
+		_gameplay_badge_container = null
 		_gameplay_badge_slot = null
 		_gameplay_badge = null
+	
+	if _gameplay_result_node != null:
+		_gameplay_result_node.queue_free()
+		_gameplay_result_node = null
 	
 	# Pass my_info to build the chip. We use scale_mult=2.0 to make it large on the phone screen
 	_gameplay_badge_data = my_info.duplicate(true)
 	_gameplay_badge = UIHelpers.build_player_chip(my_info, 1, 2.0)
 	
-	# Position the badge in the center vertically, opposite the D-Pad horizontally
+	# Position the badge almost in the top corner, opposite the D-Pad horizontally
 	var margin_container := MarginContainer.new()
 	margin_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	margin_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_gameplay_badge_container = margin_container
 	
 	var alignment := MarginContainer.new()
 	alignment.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -909,12 +917,15 @@ func _on_game_started(_session: Dictionary) -> void:
 	else:
 		# D-Pad is on the left, put badge on the right
 		alignment.size_flags_horizontal = Control.SIZE_SHRINK_END
-	alignment.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	
+	# Position almost in the top corner
+	alignment.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	
 	# Add generous padding so it's not glued to the edge
 	var horizontal_pad = int(get_viewport_rect().size.x * 0.1)
 	alignment.add_theme_constant_override("margin_left", horizontal_pad if not _is_rtl else 40)
 	alignment.add_theme_constant_override("margin_right", horizontal_pad if _is_rtl else 40)
+	alignment.add_theme_constant_override("margin_top", 40)
 	
 	alignment.add_child(_gameplay_badge)
 	margin_container.add_child(alignment)
@@ -950,10 +961,43 @@ func _on_remote_goal_updated(goal_text: String, role_tag: String = "") -> void:
 		_vibrate_remote_goal_change()
 
 func _on_remote_result_updated(title_text: String, character_ids: Array[String]) -> void:
-	if _gameplay_badge_slot == null:
-		return
-	var header := WinScreen.build_title_header(title_text, character_ids, 124, 90)
-	_replace_gameplay_badge_control(header)
+	# Clean up any existing result container first
+	if _gameplay_result_node != null:
+		_gameplay_result_node.queue_free()
+		_gameplay_result_node = null
+		
+	# Hide the gameplay badge container so the screen is clean for result display
+	if _gameplay_badge_container != null:
+		_gameplay_badge_container.visible = false
+		
+	# Create a premium rounded banner container for the result
+	var panel := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = UIColors.BG_PANEL
+	style.corner_radius_top_left = 32
+	style.corner_radius_top_right = 32
+	style.corner_radius_bottom_right = 32
+	style.corner_radius_bottom_left = 32
+	style.border_width_left = 6
+	style.border_width_top = 6
+	style.border_width_right = 6
+	style.border_width_bottom = 6
+	style.border_color = UIColors.SELECTED_BORDER
+	style.shadow_color = Color(0, 0, 0, 0.5)
+	style.shadow_size = 16
+	style.content_margin_left = 60
+	style.content_margin_right = 60
+	style.content_margin_top = 40
+	style.content_margin_bottom = 40
+	panel.add_theme_stylebox_override("panel", style)
+	
+	# Make it large and gorgeous
+	var header := WinScreen.build_title_header(title_text, character_ids, 180, 130)
+	panel.add_child(header)
+	
+	_gameplay_result_node = panel
+	join_setup_center.add_child(panel)
+	
 	_vibrate_remote_goal_change()
 
 func _on_remote_trap_status_updated(trap_available: bool, confusion_moves: int) -> void:
@@ -1216,6 +1260,14 @@ func _unjoin(message_key: String = "mp_join_disconnected") -> void:
 	_game_started = false
 	# Hide gameplay-only overlays
 	if _gameplay_char_preview != null: _gameplay_char_preview.visible = false
+	if _gameplay_badge_container != null:
+		_gameplay_badge_container.queue_free()
+		_gameplay_badge_container = null
+		_gameplay_badge_slot = null
+		_gameplay_badge = null
+	if _gameplay_result_node != null:
+		_gameplay_result_node.queue_free()
+		_gameplay_result_node = null
 	if _local_dpad_node != null and _local_dpad_node.has_method("set_controls_reversed_visual"):
 		_local_dpad_node.call("set_controls_reversed_visual", false)
 	# Restore pre-join UI elements
