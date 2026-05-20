@@ -64,6 +64,7 @@ els.exportPng.addEventListener("click", () => {
 els.showLabels.addEventListener("change", render);
 els.showSwatches.addEventListener("change", render);
 els.cellSize.addEventListener("change", render);
+els.themeName.addEventListener("change", render);
 els.boardPreset.addEventListener("change", () => {
   els.cellSize.value = String(suggestedCellForBoard(els.boardPreset.value));
   render();
@@ -107,7 +108,7 @@ async function loadTheme(themeName) {
   const mazeAssets = mazeCfg.assets || {};
   const missing = [];
 
-  const load = (path, label, required = false) => loadImage(base, path, label, required, missing);
+  const load = (path, label, required = false) => loadImage(base, path, label, required, missing, themeName);
   const loadList = async (value, fallback, label) => {
     const paths = normalizeList(value, fallback);
     const images = await Promise.all(paths.map((path, index) => load(path, `${label} ${index}`, true)));
@@ -148,7 +149,9 @@ async function loadTheme(themeName) {
     chaserTexture: await load(spritePath(manifest, "chaser", "chaser.png"), "chaser"),
     startTexture: await load(spritePath(manifest, "start", "start.png"), "start"),
     endTexture: await load(spritePath(manifest, "end", "end.png"), "end"),
-    collectibleTexture: await load(spritePath(manifest, "collectible", null), "collectible")
+    collectibleTexture: await load(spritePath(manifest, "collectible", null), "collectible"),
+    trapTexture: await load(spritePath(manifest, "trap", "trap.png"), "trap"),
+    backgroundTexture: await load(spritePath(manifest, "background", "background.png"), "background")
   };
 
   return { themeName, base, manifest, mazeCfg, mazeAssets, assets, missing };
@@ -198,8 +201,119 @@ function drawPreview(loaded, graph, cellSize) {
   }
 }
 
+function drawFlatMaze(ctx, graph, metrics, offset, board, manifest, assets) {
+  const wallColor = manifest.colors?.wall || "#0F1720";
+  const floorColor = manifest.colors?.floor || "#202932";
+  const startColor = manifest.colors?.start_cell || "#DCE7BF";
+  const endColor = manifest.colors?.end_cell || "#FFE59A";
+
+  const cs = metrics.cs;
+  const wt = Math.max(2, Math.round(6 * (cs / 120)));
+
+  // 1. Draw the wall base (the background wall block or background image)
+  if (assets && assets.backgroundTexture) {
+    const tiled = manifest.background?.tiled || false;
+    const modulate = manifest.background?.modulate || null;
+    drawBackgroundTexture(ctx, assets.backgroundTexture, { x: offset.x, y: offset.y, w: board.width, h: board.height }, tiled, modulate);
+  } else {
+    ctx.fillStyle = wallColor;
+    ctx.fillRect(offset.x, offset.y, board.width, board.height);
+  }
+
+  // 2. Draw visited cell corridors (only if there is no background texture, matching Godot)
+  if (!(assets && assets.backgroundTexture)) {
+    const props = graph.props || {};
+    const startX = props.start ? Math.floor(props.start.x) : 0;
+    const startY = props.start ? Math.floor(props.start.y) : graph.height - 1;
+    const endX = props.end ? Math.floor(props.end.x) : graph.width - 1;
+    const endY = props.end ? Math.floor(props.end.y) : 0;
+
+    for (let y = 0; y < graph.height; y += 1) {
+      for (let x = 0; x < graph.width; x += 1) {
+        // Determine corridor floor color
+        let cellColor = floorColor;
+        if (x === startX && y === startY) {
+          cellColor = startColor;
+        } else if (x === endX && y === endY) {
+          cellColor = endColor;
+        }
+
+        ctx.fillStyle = cellColor;
+
+        // Cell bounds
+        const cellX = offset.x + x * cs;
+        const cellY = offset.y + y * cs;
+
+        // Draw central floor
+        ctx.fillRect(cellX + wt, cellY + wt, cs - wt * 2, cs - wt * 2);
+
+        // Draw passages (bleed = 1 pixel for overlap)
+        const bleed = 1;
+        const northOpen = !graph.hasH(x, y);
+        const southOpen = !graph.hasH(x, y + 1);
+        const westOpen = !graph.hasV(x, y);
+        const eastOpen = !graph.hasV(x + 1, y);
+
+        if (northOpen) {
+          ctx.fillRect(cellX + wt, cellY - bleed, cs - wt * 2, wt + bleed * 2);
+        }
+        if (southOpen) {
+          ctx.fillRect(cellX + wt, cellY + cs - wt - bleed, cs - wt * 2, wt + bleed * 2);
+        }
+        if (westOpen) {
+          ctx.fillRect(cellX - bleed, cellY + wt, wt + bleed * 2, cs - wt * 2);
+        }
+        if (eastOpen) {
+          ctx.fillRect(cellX + cs - wt - bleed, cellY + wt, wt + bleed * 2, cs - wt * 2);
+        }
+      }
+    }
+  }
+
+  // 3. Draw wall lines using continuous line runs
+  ctx.strokeStyle = wallColor;
+  ctx.lineWidth = wt;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  const hRuns = graph.horizontalRuns();
+  const vRuns = graph.verticalRuns();
+
+  for (const run of hRuns) {
+    const x0 = offset.x + run.x0 * cs;
+    const x1 = offset.x + run.x1 * cs;
+    const y = offset.y + run.y * cs;
+    ctx.beginPath();
+    ctx.moveTo(x0, y);
+    ctx.lineTo(x1, y);
+    ctx.stroke();
+  }
+
+  for (const run of vRuns) {
+    const x = offset.x + run.x * cs;
+    const y0 = offset.y + run.y0 * cs;
+    const y1 = offset.y + run.y1 * cs;
+    ctx.beginPath();
+    ctx.moveTo(x, y0);
+    ctx.lineTo(x, y1);
+    ctx.stroke();
+  }
+}
+
 function drawAssetMaze(ctx, graph, assets, metrics, offset, board, manifest) {
-  drawFloor(ctx, assets, offset, board, manifest);
+  const isFlat = !manifest.maze_rendering || manifest.maze_rendering.wall_mode !== "painted_raised_2d_assets";
+  if (isFlat) {
+    drawFlatMaze(ctx, graph, metrics, offset, board, manifest, assets);
+    return;
+  }
+
+  if (assets.backgroundTexture) {
+    const tiled = manifest.background?.tiled || false;
+    const modulate = manifest.background?.modulate || null;
+    drawBackgroundTexture(ctx, assets.backgroundTexture, { x: offset.x, y: offset.y, w: board.width, h: board.height }, tiled, modulate);
+  } else {
+    drawFloor(ctx, assets, offset, board, manifest);
+  }
   drawRoadMarkings(ctx, graph, metrics, offset, manifest.maze_rendering || {});
 
   const hRuns = graph.horizontalRuns();
@@ -478,6 +592,11 @@ function drawFixtureSprites(ctx, assets, metrics, offset, graph, manifest) {
       drawCollectible(ctx, assets.collectibleTexture, offset, metrics, item.x, item.y, item.label, colors);
     }
   }
+  if (props.traps) {
+    for (const item of props.traps) {
+      drawSprite(ctx, assets.trapTexture, offset, metrics, item.x, item.y, 0.70);
+    }
+  }
   if (props.chaser) drawSprite(ctx, assets.chaserTexture, offset, metrics, props.chaser.x, props.chaser.y, 0.75);
   if (props.player) drawSprite(ctx, assets.playerTexture, offset, metrics, props.player.x, props.player.y, 0.80);
 }
@@ -635,6 +754,10 @@ function buildFixtureGraph() {
       { x: 11.4, y: 3.6, label: "A" },
       { x: 12.0, y: 7.9, label: "B" },
       { x: 5.9, y: 8.8, label: "C" }
+    ],
+    traps: [
+      { x: 3.5, y: 9.3 },
+      { x: 8.5, y: 9.3 }
     ]
   };
   graph.addRect(0, 0, 16, 11);
@@ -666,7 +789,6 @@ function buildDifficultyGraph(preset) {
   const graph = new WallGraph(preset.width, preset.height);
   graph.kind = "difficulty";
   graph.label = `${preset.name} ${preset.width}x${preset.height}`;
-  graph.props = buildDifficultyProps(preset.width, preset.height);
 
   for (let y = 0; y < preset.height; y += 1) {
     for (let x = 0; x < preset.width; x += 1) {
@@ -678,10 +800,11 @@ function buildDifficultyGraph(preset) {
     }
   }
 
+  graph.props = buildDifficultyProps(preset.width, preset.height, graph);
   return graph;
 }
 
-function buildDifficultyProps(width, height) {
+function buildDifficultyProps(width, height, graph) {
   const used = new Set([`0,${height - 1}`, `${width - 1},0`, `${width - 1},${height - 1}`]);
   const collectibles = [];
   for (const item of [
@@ -701,12 +824,43 @@ function buildDifficultyProps(width, height) {
     }
   }
 
+  const traps = [];
+  const trapCell = {
+    x: clamp(Math.floor(width * 0.5), 0, width - 1),
+    y: clamp(Math.floor(height * 0.5), 0, height - 1)
+  };
+  const trapKey = `${trapCell.x},${trapCell.y}`;
+  if (!used.has(trapKey)) {
+    traps.push(trapCell);
+    used.add(trapKey);
+  } else {
+    const altCell = {
+      x: clamp(Math.floor(width * 0.7), 0, width - 1),
+      y: clamp(Math.floor(height * 0.2), 0, height - 1)
+    };
+    if (!used.has(`${altCell.x},${altCell.y}`)) {
+      traps.push(altCell);
+      used.add(`${altCell.x},${altCell.y}`);
+    }
+  }
+
+  let playerX = 0;
+  let playerY = height - 1;
+  if (graph) {
+    if (!graph.hasH(0, height - 1) && height > 1) {
+      playerY = height - 2;
+    } else if (width > 1) {
+      playerX = 1;
+    }
+  }
+
   return {
     start: { x: 0, y: height - 1 },
     end: { x: width - 1, y: 0 },
-    player: { x: 0, y: height - 1 },
+    player: { x: playerX, y: playerY },
     chaser: { x: width - 1, y: height - 1 },
-    collectibles
+    collectibles,
+    traps
   };
 }
 
@@ -921,7 +1075,8 @@ function updateSwatches(loaded) {
     ["top dead-end caps", [...a.wallTopEndLeftTextures, ...a.wallTopEndRightTextures, ...a.wallTopEndNorthTextures, ...a.wallTopEndSouthTextures]],
     ["shadows", [a.wallShadowHTexture, a.wallShadowHEndLeftTexture, a.wallShadowHEndRightTexture, a.wallShadowVTexture].filter(Boolean)],
     ["junction masks", Object.entries(a.wallJointTextures).sort(([left], [right]) => Number(left) - Number(right)).flatMap(([, image]) => Array.isArray(image) ? image : [image])],
-    ["sprites", [a.playerTexture, a.chaserTexture, a.startTexture, a.endTexture, a.collectibleTexture].filter(Boolean)]
+    ["background", [a.backgroundTexture].filter(Boolean)],
+    ["sprites", [a.playerTexture, a.chaserTexture, a.startTexture, a.endTexture, a.collectibleTexture, a.trapTexture].filter(Boolean)]
   ].filter(([, images]) => images.length);
 
   els.swatches.innerHTML = groups.map(([title, images]) => {
@@ -944,7 +1099,19 @@ async function fetchJson(url) {
   return response.json();
 }
 
-function loadImage(base, path, label, required, missing) {
+let defaultManifest = null;
+async function getDefaultManifest() {
+  if (!defaultManifest) {
+    try {
+      defaultManifest = await fetchJson(`${THEME_ROOT}/default/manifest.json`);
+    } catch (e) {
+      console.error("Failed to load default manifest", e);
+    }
+  }
+  return defaultManifest;
+}
+
+function loadImage(base, path, label, required, missing, themeName) {
   if (!path || typeof path !== "string") return Promise.resolve(null);
   const url = `${base}${path}`;
   return new Promise(resolve => {
@@ -953,9 +1120,34 @@ function loadImage(base, path, label, required, missing) {
       image.dataset.path = path;
       resolve(image);
     };
-    image.onerror = () => {
-      if (required) missing.push({ path, label, required });
-      resolve(null);
+    image.onerror = async () => {
+      // Fallback to default theme for common gameplay sprites if they fail to load and we aren't already looking in "default"
+      if (themeName && themeName !== "default" && label !== "background") {
+        const defManifest = await getDefaultManifest();
+        let fallbackPath = path;
+        if (defManifest) {
+          if (label === "player") fallbackPath = spritePath(defManifest, "player", "player.png");
+          else if (label === "chaser") fallbackPath = spritePath(defManifest, "chaser", "chaser.png");
+          else if (label === "start") fallbackPath = spritePath(defManifest, "start", "start.png");
+          else if (label === "end") fallbackPath = spritePath(defManifest, "end", "end.png");
+          else if (label === "trap") fallbackPath = spritePath(defManifest, "trap", "trap.png");
+          else if (label === "collectible") fallbackPath = spritePath(defManifest, "collectible", null) || "collectible.png";
+        }
+        const defaultUrl = `${THEME_ROOT}/default/${fallbackPath}`;
+        const fallbackImage = new Image();
+        fallbackImage.onload = () => {
+          fallbackImage.dataset.path = `default/${fallbackPath} (fallback)`;
+          resolve(fallbackImage);
+        };
+        fallbackImage.onerror = () => {
+          if (required) missing.push({ path, label, required });
+          resolve(null);
+        };
+        fallbackImage.src = `${defaultUrl}?v=${Date.now()}`;
+      } else {
+        if (required) missing.push({ path, label, required });
+        resolve(null);
+      }
     };
     image.src = `${url}?v=${Date.now()}`;
   });
@@ -1044,4 +1236,43 @@ function escapeHtml(value) {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function drawBackgroundTexture(ctx, image, rect, tiled, modulate) {
+  if (!image) return;
+
+  ctx.save();
+  if (tiled) {
+    const pattern = ctx.createPattern(image, "repeat");
+    ctx.fillStyle = pattern || "#121820";
+    ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+  } else {
+    const imgW = image.naturalWidth || image.width;
+    const imgH = image.naturalHeight || image.height;
+    if (imgW > 0 && imgH > 0 && rect.w > 0 && rect.h > 0) {
+      const destAspect = rect.w / rect.h;
+      const imgAspect = imgW / imgH;
+
+      let sx = 0;
+      let sy = 0;
+      let sw = imgW;
+      let sh = imgH;
+
+      if (imgAspect > destAspect) {
+        sw = imgH * destAspect;
+        sx = (imgW - sw) * 0.5;
+      } else if (imgAspect < destAspect) {
+        sh = imgW / destAspect;
+        sy = (imgH - sh) * 0.5;
+      }
+      ctx.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+    }
+  }
+
+  if (modulate) {
+    ctx.globalCompositeOperation = "multiply";
+    ctx.fillStyle = modulate;
+    ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+  }
+  ctx.restore();
 }

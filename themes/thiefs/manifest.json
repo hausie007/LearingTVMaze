@@ -5,8 +5,7 @@
     "chaser": "t_chaser_0.png",
     "start": "t_start.png",
     "end": "t_finish.png",
-    "background": "t_background_tile_city.png",
-    "collectible": "t_collectible_money_bag.png",
+    "collectible": "t_collectible_0.png",
     "trap": "trap.png"
   },
   "colors": {
@@ -152,10 +151,10 @@
     "text-color": "#4A2600",
     "text_color": "#4A2600",
     "text-outline-color": "#FFFFFF",
-    "image": "t_collectible_money_bag.png",
+    "image": "t_collectible_0.png",
     "fps": 1,
     "frames": [
-      "t_collectible_money_bag.png"
+      "t_collectible_0.png"
     ]
   },
   "chaser": {

@@ -20,6 +20,9 @@ var _selected_subtitle_color: Color = UIColors.TEXT_PRIMARY
 var _focused: bool = false
 var _scale_tween: Tween = null
 var _badge_label: Label = null
+var _is_horizontal: bool = false
+var _hbox: HBoxContainer = null
+var _text_vbox: VBoxContainer = null
 
 const SELECTED_SCALE := Vector2(1.10, 1.10)
 const FOCUSED_SCALE := Vector2(1.16, 1.16)
@@ -161,6 +164,10 @@ func set_badge(badge_text: String, _badge_color: Color = UIColors.FOCUS_GOLD) ->
 	UIHelpers.apply_semibold(_badge_label)
 
 func _apply_text_sizes() -> void:
+	if _is_horizontal:
+		_apply_horizontal_sizes()
+		return
+		
 	icon_label.add_theme_font_size_override("font_size", _icon_font_size)
 	if _image_icon != null:
 		_image_icon.custom_minimum_size = Vector2(0, _icon_font_size * 2.9)
@@ -173,6 +180,7 @@ func _apply_text_sizes() -> void:
 	UIHelpers.apply_medium(subtitle_label)
 	$MarginContainer/VBox.add_theme_constant_override("separation", max(6, int(float(_subtitle_font_size) * 0.45)))
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
 	# Force labels to allow shrinking horizontally. Godot autowrap labels 
 	# get stuck at their max expanded width otherwise.
@@ -188,7 +196,7 @@ func _apply_text_sizes() -> void:
 	subtitle_label.custom_minimum_size.y = maxf(20.0, float(_subtitle_font_size) * 1.4)
 	icon_label.clip_text = true
 	title_label.clip_text = false
-	subtitle_label.clip_text = true
+	subtitle_label.clip_text = false
 
 func _create_selected_style() -> StyleBoxFlat:
 	return _create_card_style(UIColors.UI_BLUE, UIColors.SELECTED_BORDER, 16, 4, 8)
@@ -241,16 +249,18 @@ func _sync_pivot() -> void:
 		pivot_offset = pivot_size * 0.5
 
 func _apply_emphasis(animated: bool) -> void:
-	_sync_pivot()
+	z_index = 2 if _focused else (1 if _selected else 0)
+
+	if _scale_tween != null and _scale_tween.is_valid():
+		_scale_tween.kill()
+
 	var target_scale: Vector2 = NORMAL_SCALE
 	if _focused:
 		target_scale = FOCUSED_SCALE
 	elif _selected:
 		target_scale = SELECTED_SCALE
-	z_index = 2 if _focused else (1 if _selected else 0)
 
-	if _scale_tween != null and _scale_tween.is_valid():
-		_scale_tween.kill()
+	_sync_pivot()
 
 	if animated:
 		_scale_tween = create_tween()
@@ -259,3 +269,103 @@ func _apply_emphasis(animated: bool) -> void:
 		_scale_tween.tween_property(self, "scale", target_scale, 0.18)
 	else:
 		scale = target_scale
+
+func set_horizontal_layout() -> void:
+	if _is_horizontal:
+		return
+	_is_horizontal = true
+	
+	if not is_node_ready(): await ready
+	
+	var vbox = $MarginContainer/VBox
+	vbox.visible = false
+	
+	$MarginContainer.add_theme_constant_override("margin_left", 24)
+	$MarginContainer.add_theme_constant_override("margin_right", 24)
+	$MarginContainer.add_theme_constant_override("margin_top", 12)
+	$MarginContainer.add_theme_constant_override("margin_bottom", 12)
+	
+	_hbox = HBoxContainer.new()
+	_hbox.name = "HBox"
+	_hbox.alignment = BoxContainer.ALIGNMENT_BEGIN
+	_hbox.add_theme_constant_override("separation", 24)
+	_hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	$MarginContainer.add_child(_hbox)
+	
+	_text_vbox = VBoxContainer.new()
+	_text_vbox.name = "TextVBox"
+	_text_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	_text_vbox.add_theme_constant_override("separation", 2)
+	_text_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	_reparent_children_for_horizontal()
+	
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	subtitle_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	
+	title_label.custom_minimum_size.y = 0
+	subtitle_label.custom_minimum_size.y = 0
+	
+	_apply_horizontal_sizes()
+
+func _reparent_children_for_horizontal() -> void:
+	if not _is_horizontal or _hbox == null or _text_vbox == null:
+		return
+		
+	var vbox = $MarginContainer/VBox
+	
+	var icon_nodes: Array[Control] = []
+	if _preview != null and _preview.get_parent() == vbox:
+		icon_nodes.append(_preview)
+	if icon_label.get_parent() == vbox:
+		icon_nodes.append(icon_label)
+	if _image_icon != null and _image_icon.get_parent() == vbox:
+		icon_nodes.append(_image_icon)
+		
+	var text_nodes: Array[Control] = []
+	if title_label.get_parent() == vbox:
+		text_nodes.append(title_label)
+	if subtitle_label.get_parent() == vbox:
+		text_nodes.append(subtitle_label)
+		
+	for node in icon_nodes:
+		vbox.remove_child(node)
+		_hbox.add_child(node)
+		
+	if _text_vbox.get_parent() == null:
+		_hbox.add_child(_text_vbox)
+		
+	for node in text_nodes:
+		vbox.remove_child(node)
+		_text_vbox.add_child(node)
+
+func _apply_horizontal_sizes() -> void:
+	var icon_sz := 56
+	var title_sz := 28
+	var subtitle_sz := 18
+	
+	icon_label.add_theme_font_size_override("font_size", icon_sz)
+	if _image_icon != null:
+		_image_icon.custom_minimum_size = Vector2(icon_sz * 1.3, icon_sz * 1.3)
+	if _preview != null:
+		_preview.custom_minimum_size = Vector2(icon_sz * 1.5, icon_sz * 1.5)
+		
+	title_label.add_theme_font_size_override("font_size", title_sz)
+	subtitle_label.add_theme_font_size_override("font_size", subtitle_sz)
+	
+	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	
+	title_label.custom_minimum_size.x = 10
+	subtitle_label.custom_minimum_size.x = 10
+	icon_label.custom_minimum_size.x = 10
+	title_label.size.x = 0
+	subtitle_label.size.x = 0
+	icon_label.size.x = 0
+	
+	title_label.clip_text = false
+	subtitle_label.clip_text = false
+	
+	UIHelpers.apply_semibold(title_label)
+	UIHelpers.apply_medium(subtitle_label)

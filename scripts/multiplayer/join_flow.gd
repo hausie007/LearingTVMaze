@@ -952,6 +952,22 @@ func _on_chaser_released() -> void:
 			lbl.visible = false
 
 func _on_remote_goal_updated(goal_text: String, role_tag: String = "") -> void:
+	# Clean up any leftover win/gotcha result overlay from the previous round
+	if _gameplay_result_node != null:
+		_gameplay_result_node.queue_free()
+		_gameplay_result_node = null
+
+	# Ensure the gameplay badge container is visible again
+	if _gameplay_badge_container != null:
+		_gameplay_badge_container.visible = true
+
+	# Defensively reset any stuck D-Pad confusion visual from the previous round
+	if _gameplay_badge_data != null and _gameplay_badge_data.has("confusion_moves"):
+		if int(_gameplay_badge_data.get("confusion_moves", 0)) > 0:
+			_gameplay_badge_data["confusion_moves"] = 0
+			_gameplay_badge_data["is_confused"] = false
+			_apply_remote_dpad_confusion_visual()
+
 	var changed := goal_text != _current_remote_goal_text
 	changed = changed or role_tag != _current_remote_role_tag
 	_current_remote_role_tag = role_tag

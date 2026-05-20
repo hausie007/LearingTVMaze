@@ -88,6 +88,7 @@ input {
 
 #themeName {
   width: 138px;
+  padding: 0 9px;
 }
 
 #boardPreset {

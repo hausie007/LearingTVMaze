@@ -8,17 +8,16 @@
 	"trap": "trap.png"
   },
   "colors": {
-	"wall": "#4A3A73",
-	"wall_glow_factor": 2.0,
-	"xwall_border": "#5B4A73",
+	"wall": "#D670FF",
+	"wall_glow_factor": 1.0,
+	"wall_border": "#0D0714",
 	"start_cell": "#6A2E5E",
 	"end_cell": "#A85A2A",
 	"player": "#38A9FF",
 	"highlight": "#FFB83366"
   },
   "background": {
-	"tiled": true,
-	"xmodulate": "#AAAAAA"
+	"tiled": true
   },
   "glow": {
 	"enabled": true,

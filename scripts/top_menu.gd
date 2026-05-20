@@ -31,6 +31,9 @@ var _top_spacer: Control = null
 var _logo: TextureRect = null
 var _logo_card_spacer: Control = null
 var _card_row: HBoxContainer = null
+var _cards_pt_spacer: Control = null
+var _play_together_row: HBoxContainer = null
+var _bottom_spacer: Control = null
 var _cards: Dictionary = {}  # id → ModeCard (Button)
 
 var _corner_overlay: Control = null
@@ -71,6 +74,7 @@ func _ready() -> void:
 	if play_now_card != null:
 		play_now_card.grab_focus()
 
+	z_index = 0
 	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
 
 	# OLED: home screen is a menu — release the wake lock.
@@ -162,6 +166,24 @@ func _build_layout() -> void:
 	_card_row.add_theme_constant_override("separation", 48)
 	_main_vbox.add_child(_card_row)
 
+	# Spacer between cards and Play Together
+	_cards_pt_spacer = Control.new()
+	_cards_pt_spacer.name = "CardsPlayTogetherSpacer"
+	_cards_pt_spacer.custom_minimum_size = Vector2(0, 16)
+	_main_vbox.add_child(_cards_pt_spacer)
+
+	# Play together row (centered)
+	_play_together_row = HBoxContainer.new()
+	_play_together_row.name = "PlayTogetherRow"
+	_play_together_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_main_vbox.add_child(_play_together_row)
+
+	# Bottom spacer to push the entire layout up
+	_bottom_spacer = Control.new()
+	_bottom_spacer.name = "BottomSpacer"
+	_bottom_spacer.custom_minimum_size = Vector2(0, 80)
+	_main_vbox.add_child(_bottom_spacer)
+
 	_build_cards()
 	_build_corner_buttons()
 
@@ -177,12 +199,16 @@ func _build_cards() -> void:
 			String(data.get("subtitle", ""))
 		)
 		card.pressed.connect(_on_card_pressed.bind(card_id))
-		_card_row.add_child(card)
+		if card_id == CARD_PLAY_TOGETHER:
+			_play_together_row.add_child(card)
+		else:
+			_card_row.add_child(card)
 		_cards[card_id] = card
 
 	# Apply palettes
 	_apply_card_styles()
-	_update_hidden_play_together_card()
+	_setup_play_together_card()
+
 
 
 func _build_card_data() -> Array[Dictionary]:
@@ -216,7 +242,7 @@ func _build_card_data() -> Array[Dictionary]:
 	data.append({
 		"id": CARD_PLAY_TOGETHER,
 		"icon": "res://images/icons/i_play_together.png",
-		"title": tr("start_together"),
+		"title": tr("start_together") + " " + tr("local_multiplayer_suffix"),
 		"subtitle": tr("menu_play_together_desc"),
 	})
 
@@ -440,57 +466,98 @@ func _update_replay_card_state() -> void:
 			play_now.grab_focus()
 	_configure_navigation()
 
-func _update_hidden_play_together_card() -> void:
+func _setup_play_together_card() -> void:
 	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
 	if play_together == null:
 		return
-	play_together.visible = false
-	play_together.disabled = true
-	play_together.focus_mode = Control.FOCUS_NONE
-	play_together.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	play_together.visible = true
+	play_together.disabled = false
+	play_together.focus_mode = Control.FOCUS_ALL
+	play_together.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	if play_together.has_method("set_horizontal_layout"):
+		play_together.call("set_horizontal_layout")
+
 
 
 # ── Navigation ───────────────────────────────────────────────────────────────
 
 func _configure_navigation() -> void:
-	var visible_cards: Array[Button] = []
-	for id in _card_order():
+	var visible_main_cards: Array[Button] = []
+	for id in [CARD_PLAY_NOW, CARD_YOUR_ADVENTURE, CARD_REPLAY, CARD_JOIN_GAME]:
 		var card: Button = _cards.get(id, null) as Button
 		if card != null and card.visible and not card.disabled and card.focus_mode != Control.FOCUS_NONE:
-			visible_cards.append(card)
+			visible_main_cards.append(card)
 
-	if visible_cards.is_empty():
+	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
+	var pt_active := play_together != null and play_together.visible and not play_together.disabled and play_together.focus_mode != Control.FOCUS_NONE
+
+	if visible_main_cards.is_empty():
 		return
 
 	var is_rtl := is_layout_rtl()
 
-	# Horizontal navigation wraps within visible cards
-	for i in range(visible_cards.size()):
-		var card := visible_cards[i]
-		var left_idx := (i + 1) % visible_cards.size() if is_rtl else (i - 1 + visible_cards.size()) % visible_cards.size()
-		var right_idx := (i - 1 + visible_cards.size()) % visible_cards.size() if is_rtl else (i + 1) % visible_cards.size()
-		card.focus_neighbor_left = card.get_path_to(visible_cards[left_idx])
-		card.focus_neighbor_right = card.get_path_to(visible_cards[right_idx])
-		# Top: lock to self (no row above)
+	# 1. Configure top row cards
+	for i in range(visible_main_cards.size()):
+		var card := visible_main_cards[i]
+		var left_idx := (i + 1) % visible_main_cards.size() if is_rtl else (i - 1 + visible_main_cards.size()) % visible_main_cards.size()
+		var right_idx := (i - 1 + visible_main_cards.size()) % visible_main_cards.size() if is_rtl else (i + 1) % visible_main_cards.size()
+		
+		card.focus_neighbor_left = card.get_path_to(visible_main_cards[left_idx])
+		card.focus_neighbor_right = card.get_path_to(visible_main_cards[right_idx])
+		
+		# Top: lock to self
 		card.focus_neighbor_top = card.get_path_to(card)
-		# Bottom: go to Settings button
-		if _settings_button != null:
+		
+		# Bottom: go to Play Together if active, otherwise go to Settings button
+		if pt_active:
+			card.focus_neighbor_bottom = card.get_path_to(play_together)
+		elif _settings_button != null:
 			card.focus_neighbor_bottom = card.get_path_to(_settings_button)
 
-	# Corner buttons
+	# 2. Configure Play Together card (middle row)
+	if play_together != null and pt_active:
+		if _settings_button != null:
+			play_together.focus_neighbor_left = play_together.get_path_to(_settings_button)
+		else:
+			play_together.focus_neighbor_left = play_together.get_path_to(play_together)
+			
+		if _help_button != null:
+			play_together.focus_neighbor_right = play_together.get_path_to(_help_button)
+		else:
+			play_together.focus_neighbor_right = play_together.get_path_to(play_together)
+		
+		# Up: go to the center card of the main cards row (e.g. CARD_YOUR_ADVENTURE if visible, else the middle of visible_main_cards)
+		var up_card: Button = _cards.get(CARD_YOUR_ADVENTURE, null) as Button
+		if up_card == null or not up_card.visible or up_card.disabled or up_card.focus_mode == Control.FOCUS_NONE:
+			var mid_idx := visible_main_cards.size() / 2
+			up_card = visible_main_cards[mid_idx]
+		play_together.focus_neighbor_top = play_together.get_path_to(up_card)
+		
+		# Bottom: go to Settings button
+		if _settings_button != null:
+			play_together.focus_neighbor_bottom = play_together.get_path_to(_settings_button)
+
+	# 3. Configure corner buttons (bottom row)
 	if _settings_button != null and _help_button != null:
 		_settings_button.focus_neighbor_right = _settings_button.get_path_to(_help_button)
 		_help_button.focus_neighbor_left = _help_button.get_path_to(_settings_button)
 		_settings_button.focus_neighbor_left = _settings_button.get_path_to(_settings_button)
 		_help_button.focus_neighbor_right = _help_button.get_path_to(_help_button)
-		# Top: go to the first visible card (or Play Now if available)
-		var top_card: Button = visible_cards[0] if not visible_cards.is_empty() else null
-		if top_card != null:
+		
+		# Top: go to Play Together if active, else first main card
+		if pt_active:
+			_settings_button.focus_neighbor_top = _settings_button.get_path_to(play_together)
+			_help_button.focus_neighbor_top = _help_button.get_path_to(play_together)
+		else:
+			var top_card: Button = visible_main_cards[0]
 			_settings_button.focus_neighbor_top = _settings_button.get_path_to(top_card)
 			_help_button.focus_neighbor_top = _help_button.get_path_to(top_card)
+			
 		# Bottom: lock to self
 		_settings_button.focus_neighbor_bottom = _settings_button.get_path_to(_settings_button)
 		_help_button.focus_neighbor_bottom = _help_button.get_path_to(_help_button)
+
 
 
 # ── Responsive Layout ────────────────────────────────────────────────────────
@@ -505,14 +572,22 @@ func _apply_responsive_layout() -> void:
 		_main_vbox.add_theme_constant_override("separation", _spacing())
 
 	if _top_spacer != null:
-		_top_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.005, 2.0, 8.0)
+		_top_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.04, 32.0, 64.0)
 
 	if _logo != null:
 		var logo_width := clampf(available_width * (0.42 if short_screen else 0.48), 380.0, 780.0)
 		_logo.custom_minimum_size = Vector2(logo_width, logo_width * 0.214)
 
 	if _logo_card_spacer != null:
-		_logo_card_spacer.custom_minimum_size.y = 12.0 if short_screen else 24.0
+		_logo_card_spacer.custom_minimum_size.y = 24.0 if short_screen else 48.0
+
+	if _cards_pt_spacer != null:
+		_cards_pt_spacer.custom_minimum_size.y = 24.0 if short_screen else 36.0
+
+	# Bottom spacer pushes the entire layout up.
+	# Scale it dynamically based on the screen height.
+	if _bottom_spacer != null:
+		_bottom_spacer.custom_minimum_size.y = clampf(viewport_size.y * 0.12, 60.0, 140.0)
 
 	# Card sizing
 	_apply_card_sizing(available_width, viewport_size.y, short_screen)
@@ -524,38 +599,57 @@ func _apply_responsive_layout() -> void:
 
 
 func _apply_card_sizing(available_width: float, viewport_height: float, short_screen: bool) -> void:
-	var visible_cards: Array[Button] = []
+	var visible_main_cards: Array[Button] = []
+	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
+	
 	for id in _card_order():
+		if id == CARD_PLAY_TOGETHER:
+			continue
 		var card: Button = _cards.get(id, null) as Button
 		if card != null and card.visible:
-			visible_cards.append(card)
-	if visible_cards.is_empty():
-		return
+			visible_main_cards.append(card)
 
-	var count := visible_cards.size()
-	var columns: int = count if available_width >= 760.0 else mini(count, 2)
-	var space_per_card := available_width / float(columns)
-	var gap: int = 48 if space_per_card >= 260.0 else (34 if space_per_card >= 200.0 else 24)
-	var gaps := float(gap * maxi(0, columns - 1))
-	var card_width := clampf(floorf((available_width - gaps) / float(columns)), 140.0, 390.0)
-	var card_height := clampf(viewport_height * (0.34 if short_screen else 0.32), 240.0, 340.0)
-	var icon_size: int = 46 if card_width < 220.0 else (52 if card_width < 270.0 else 58)
-	var title_size: int = 24 if card_width < 220.0 else (28 if card_width < 270.0 else 31)
-	var subtitle_size: int = 17 if card_width < 250.0 else 19
+	# Size top row cards
+	if not visible_main_cards.is_empty():
+		var count := visible_main_cards.size()
+		var columns: int = count if available_width >= 760.0 else mini(count, 2)
+		var space_per_card := available_width / float(columns)
+		var gap: int = 48 if space_per_card >= 260.0 else (34 if space_per_card >= 200.0 else 24)
+		var gaps := float(gap * maxi(0, columns - 1))
+		var card_width := clampf(floorf((available_width - gaps) / float(columns)), 140.0, 390.0)
+		var card_height := clampf(viewport_height * (0.34 if short_screen else 0.32), 240.0, 340.0)
+		var icon_size: int = 46 if card_width < 220.0 else (52 if card_width < 270.0 else 58)
+		var title_size: int = 24 if card_width < 220.0 else (28 if card_width < 270.0 else 31)
+		var subtitle_size: int = 17 if card_width < 250.0 else 19
 
-	if _card_row != null:
-		_card_row.add_theme_constant_override("separation", gap)
+		if _card_row != null:
+			_card_row.add_theme_constant_override("separation", gap)
 
-	for card in visible_cards:
-		card.custom_minimum_size = Vector2(card_width, card_height)
-		card.size = Vector2.ZERO
-		card.pivot_offset = Vector2(card_width * 0.5, card_height * 0.5)
-		card.call("configure_compact", icon_size, title_size, subtitle_size)
+		for card in visible_main_cards:
+			card.custom_minimum_size = Vector2(card_width, card_height)
+			card.size = Vector2.ZERO
+			card.pivot_offset = Vector2(card_width * 0.5, card_height * 0.5)
+			card.call("configure_compact", icon_size, title_size, subtitle_size)
 
-	# Lock card row width so layout doesn't shift when join card appears/disappears
-	if _card_row != null:
-		_card_row.custom_minimum_size.x = available_width
-		_card_row.size = Vector2.ZERO
+		# Lock card row width so layout doesn't shift when join card appears/disappears
+		if _card_row != null:
+			_card_row.custom_minimum_size.x = available_width
+			_card_row.size = Vector2.ZERO
+
+	# Size Play Together card (horizontal row)
+	if play_together != null and play_together.visible:
+		var pt_width := clampf(available_width * 0.45, 500.0, 680.0)
+		var pt_height := 106.0 if short_screen else 120.0
+		play_together.custom_minimum_size = Vector2(pt_width, pt_height)
+		play_together.size = Vector2.ZERO
+		play_together.pivot_offset = Vector2(pt_width * 0.5, pt_height * 0.5)
+		
+		# Triggers custom horizontal size settings in mode_card.gd
+		play_together.call("configure_compact", 56, 28, 18)
+
+		if _play_together_row != null:
+			_play_together_row.custom_minimum_size.x = available_width
+			_play_together_row.size = Vector2.ZERO
 
 func _card_order() -> Array[String]:
 	return [CARD_PLAY_NOW, CARD_YOUR_ADVENTURE, CARD_REPLAY, CARD_PLAY_TOGETHER, CARD_JOIN_GAME]

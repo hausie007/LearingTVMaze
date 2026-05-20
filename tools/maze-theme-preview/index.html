@@ -15,7 +15,17 @@
     <form class="controls" id="controls">
       <label>
         Theme
-        <input id="themeName" list="knownThemes" value="cars" spellcheck="false">
+        <select id="themeName">
+          <option value="arcade">arcade</option>
+          <option value="cars">cars</option>
+          <option value="castle">castle</option>
+          <option value="default">default</option>
+          <option value="ducks">ducks</option>
+          <option value="karkulka">karkulka</option>
+          <option value="poop">poop</option>
+          <option value="scary">scary</option>
+          <option value="thiefs">thiefs</option>
+        </select>
       </label>
       <label>
         Board
@@ -30,10 +40,6 @@
           <option value="all_masks">All Masks Zoom</option>
         </select>
       </label>
-      <datalist id="knownThemes">
-        <option value="cars"></option>
-        <option value="castle"></option>
-      </datalist>
       <label>
         Cell
         <input id="cellSize" type="number" min="36" max="160" step="4" value="56">

@@ -6,8 +6,8 @@
 	"start": "k_start.png",
 	"end": "k_end.png",
 	"background": "background_tile_0.png",
-	"collectible": "k_collectible.png",
-	"trap": "trap.png"
+	"collectible": "collectible_berry.png",
+	"trap": "k_trap.png"
   },
   "colors": {
 	"wall": "#FFFFFF",
@@ -32,8 +32,8 @@
   },
   "collectible": {
 	"color": "#F7C948",
-	"text_color": "#1C2A1F",
-	"image": "k_collectible.png"
+	"text-color": "#FCEAFF",
+	"image": "collectible_berry.png"
   },
   "player": {
 	"frames": [

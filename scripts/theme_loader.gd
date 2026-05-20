@@ -299,6 +299,8 @@ func load_theme(override_dir_name: String = "") -> void:
 				col_color = Color.from_string(col_cfg["color"], col_color)
 			if col_cfg.has("text-color"):
 				col_text_color = Color.from_string(col_cfg["text-color"], col_text_color)
+			elif col_cfg.has("text_color"):
+				col_text_color = Color.from_string(col_cfg["text_color"], col_text_color)
 			if col_cfg.has("text-offset-y-ratio"):
 				col_text_offset_y_ratio = float(col_cfg["text-offset-y-ratio"])
 			if col_cfg.has("image"):
