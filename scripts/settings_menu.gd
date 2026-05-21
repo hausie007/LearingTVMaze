@@ -217,10 +217,24 @@ func _cycle_controller_size(dir: int) -> void:
 
 func _update_labels() -> void:
 	if has_node("%UILangButton"):
-		%UILangButton.text = _get_lang_display_name(temp_ui_lang_idx, false)
+		var ui_code := Config.LANG_CODES[temp_ui_lang_idx]
+		var flag_code := ui_code
+		if flag_code == "auto":
+			flag_code = Config.get_auto_detected_language()
+		var ui_text := _get_lang_display_name(temp_ui_lang_idx, false)
+		UIHelpers.apply_flag_to_button(%UILangButton, flag_code, ui_text)
 
 	if has_node("%LearningLangButton"):
-		%LearningLangButton.text = _get_lang_display_name(temp_learning_lang_idx, true)
+		var learn_code := Config.LANG_CODES[temp_learning_lang_idx]
+		var flag_code := learn_code
+		if flag_code == "auto":
+			var ui_code := Config.LANG_CODES[temp_ui_lang_idx]
+			if ui_code == "auto":
+				flag_code = Config.get_auto_detected_language()
+			else:
+				flag_code = ui_code
+		var learn_text := _get_lang_display_name(temp_learning_lang_idx, true)
+		UIHelpers.apply_flag_to_button(%LearningLangButton, flag_code, learn_text)
 	
 	if has_node("%VoiceButton"):
 		if not _tts_warning_label: _create_tts_warning()

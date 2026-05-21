@@ -37,6 +37,14 @@ static func get_font_at_weight(weight: int) -> Font:
 	var fv := FontVariation.new()
 	fv.base_font = QUICKSAND_FONT
 	fv.variation_opentype = {OT_WGHT: weight}
+	
+	# Explicitly configure a system font fallback with matched weight 
+	# to prevent Cyrillic/Greek/Hebrew characters from defaulting to ultra-bold faces.
+	var sf := SystemFont.new()
+	sf.font_weight = weight
+	sf.font_names = PackedStringArray(["Sans-Serif", "Segoe UI", "Arial", "Helvetica", "Roboto", "Noto Sans", "DejaVu Sans"])
+	fv.fallbacks = [sf]
+	
 	_font_cache[weight] = fv
 	return fv
 
@@ -147,6 +155,29 @@ static func apply_style_to_button(btn: Button, focus_color: Color) -> void:
 	
 	# Ensure the button text has confident weight
 	apply_semibold(btn)
+
+	# Dynamic organic scale-up and scale-down on focus
+	if not btn.has_meta("styled_focus_animations"):
+		btn.set_meta("styled_focus_animations", true)
+		
+		btn.item_rect_changed.connect(func():
+			if is_instance_valid(btn):
+				btn.pivot_offset = btn.size * 0.5
+		)
+		btn.pivot_offset = btn.size * 0.5
+
+		btn.focus_entered.connect(func():
+			if is_instance_valid(btn):
+				var tw := btn.create_tween()
+				tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				tw.tween_property(btn, "scale", Vector2(1.06, 1.06), 0.15)
+		)
+		btn.focus_exited.connect(func():
+			if is_instance_valid(btn):
+				var tw := btn.create_tween()
+				tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				tw.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15)
+		)
 
 
 ## Applies a safe accent palette derived from avatar art to a button.
@@ -511,3 +542,83 @@ static func build_player_chip(data: Dictionary, total_players: int = 1, scale_mu
 		chip_hbox.add_child(countdown_lbl)
 
 	return chip
+
+
+## Dynamically fits a label's font size to prevent visual clipping when localized strings are long.
+static func fit_font_size_to_width(label: Label, max_width: float, base_font_size: int) -> void:
+	if label == null or label.text.is_empty() or max_width <= 0.0:
+		return
+	var font := get_font_at_weight(WEIGHT_SEMIBOLD)
+	var width := font.get_string_size(label.text, label.horizontal_alignment, -1.0, base_font_size).x
+	if width <= max_width:
+		label.add_theme_font_size_override("font_size", base_font_size)
+		return
+	var scale := max_width / maxf(width, 1.0)
+	var new_size := maxi(14, int(floor(float(base_font_size) * scale)))
+	label.add_theme_font_size_override("font_size", new_size)
+
+
+## Preloaded circular flag shader for high-performance anti-aliased rendering.
+const FLAG_SHADER = preload("res://assets/shaders/flag_circle.gdshader")
+
+## Dynamically applies circular flag icons and formatted text inside a language selection button.
+static func apply_flag_to_button(btn: Button, lang_code: String, display_text: String) -> void:
+	if btn == null:
+		return
+	
+	btn.text = ""
+	for child in btn.get_children():
+		child.queue_free()
+		
+	var btn_hbox := HBoxContainer.new()
+	btn_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	btn_hbox.add_theme_constant_override("separation", 16)
+	btn_hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	btn_hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	btn.add_child(btn_hbox)
+	
+	# Flag Display using Shader
+	var flag_info: Dictionary = Config.get_flag_info(lang_code)
+	if flag_info.texture_a != null:
+		var tex_rect := TextureRect.new()
+		tex_rect.texture = flag_info.texture_a
+		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tex_rect.stretch_mode = TextureRect.STRETCH_SCALE
+		tex_rect.custom_minimum_size = Vector2(48, 48)
+		tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+		# Set up custom shader material for circle clip and split flag
+		var mat := ShaderMaterial.new()
+		mat.shader = FLAG_SHADER
+		mat.set_shader_parameter("is_split", flag_info.is_split)
+		
+		var aspect_a: float = flag_info.texture_a.get_size().x / flag_info.texture_a.get_size().y
+		mat.set_shader_parameter("aspect_ratio_a", aspect_a)
+		
+		var is_pt := (lang_code == "pt") or (lang_code == "auto" and Config.get_auto_detected_language() == "pt")
+		if is_pt:
+			mat.set_shader_parameter("uv_offset_a", Vector2(0.15, 0.0))
+			
+		if flag_info.is_split and flag_info.texture_b != null:
+			mat.set_shader_parameter("texture_b", flag_info.texture_b)
+			var aspect_b: float = flag_info.texture_b.get_size().x / flag_info.texture_b.get_size().y
+			mat.set_shader_parameter("aspect_ratio_b", aspect_b)
+			
+		tex_rect.material = mat
+		
+		btn_hbox.add_child(tex_rect)
+		
+	# Text Label
+	var lbl := Label.new()
+	lbl.text = display_text
+	lbl.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
+	apply_semibold(lbl)
+	
+	# Prevent visual clipping/overflow by dynamically scaling font sizes of long values
+	var btn_w := btn.custom_minimum_size.x if btn.custom_minimum_size.x > 0 else btn.size.x
+	if btn_w <= 0:
+		btn_w = 500.0 # Standard fallback button width
+	var max_text_width := btn_w - 48 - 16 - 36 # Subtract flag (48), HBox separation (16), and borders/padding margin (36)
+	fit_font_size_to_width(lbl, max_text_width, 38)
+	
+	btn_hbox.add_child(lbl)

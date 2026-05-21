@@ -289,6 +289,7 @@ static func build_title_header(title_text: String, character_ids: Array[String],
 	title_label.add_theme_font_size_override("font_size", title_font_size)
 	title_label.add_theme_color_override("font_color", UIColors.TEXT_PRIMARY)
 	UIHelpers.apply_semibold(title_label)
+	UIHelpers.fit_font_size_to_width(title_label, 900.0, title_font_size)
 	title_hbox.add_child(title_label)
 
 	var right_previews := HBoxContainer.new()

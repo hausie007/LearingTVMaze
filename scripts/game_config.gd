@@ -570,3 +570,54 @@ func get_alphabet_char(index: int, lang: String) -> String:
 	
 	# Default to Latin A-Z
 	return String.chr(65 + (index % 26))
+
+
+## Returns flag texture(s) and whether it is a split flag.
+## Format: {"texture_a": Texture2D, "texture_b": Texture2D, "is_split": bool}
+func get_flag_info(lang_code: String) -> Dictionary:
+	var effective_code = lang_code
+	if effective_code == "auto":
+		effective_code = get_auto_detected_language()
+	
+	var info := {
+		"texture_a": null,
+		"texture_b": null,
+		"is_split": false
+	}
+	
+	match effective_code:
+		"en":
+			info.texture_a = load("res://assets/flags/gb.png")
+			info.texture_b = load("res://assets/flags/us.png")
+			info.is_split = true
+		"pt":
+			info.texture_a = load("res://assets/flags/pt.png")
+			info.texture_b = load("res://assets/flags/br.png")
+			info.is_split = true
+		"es":
+			info.texture_a = load("res://assets/flags/es.png")
+			info.texture_b = load("res://assets/flags/mx.png")
+			info.is_split = true
+		"cs":
+			info.texture_a = load("res://assets/flags/cz.png")
+		"uk":
+			info.texture_a = load("res://assets/flags/ua.png")
+		"el":
+			info.texture_a = load("res://assets/flags/gr.png")
+		"sv":
+			info.texture_a = load("res://assets/flags/se.png")
+		"da":
+			info.texture_a = load("res://assets/flags/dk.png")
+		"nb":
+			info.texture_a = load("res://assets/flags/no.png")
+		"he":
+			info.texture_a = load("res://assets/flags/il.png")
+		"vi":
+			info.texture_a = load("res://assets/flags/vn.png")
+		_:
+			# Default: map code directly if exists
+			var path = "res://assets/flags/".path_join(effective_code + ".png")
+			if ResourceLoader.exists(path):
+				info.texture_a = load(path)
+	
+	return info

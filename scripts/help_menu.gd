@@ -52,8 +52,17 @@ func _ready() -> void:
 	_left_btn.pressed.connect(_on_left_pressed)
 	_right_btn.pressed.connect(_on_right_pressed)
 
-	_left_btn.focus_mode = Control.FOCUS_NONE
-	_right_btn.focus_mode = Control.FOCUS_NONE
+	_left_btn.focus_mode = Control.FOCUS_ALL
+	_right_btn.focus_mode = Control.FOCUS_ALL
+
+	# Configure explicit focus neighbors to enable natural D-pad navigation
+	_left_btn.focus_neighbor_right = _right_btn.get_path()
+	_left_btn.focus_neighbor_left = _left_btn.get_path()
+	_right_btn.focus_neighbor_left = _left_btn.get_path()
+	_right_btn.focus_neighbor_right = _right_btn.get_path()
+
+	# Initially focus the right button so TV focus starts active
+	_right_btn.grab_focus.call_deferred()
 
 	if is_layout_rtl():
 		_left_btn.text = ">"
@@ -123,10 +132,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("ui_left"):
 		get_viewport().set_input_as_handled()
+		if not _left_btn.disabled:
+			_left_btn.grab_focus()
 		_on_left_pressed()
 
 	if event.is_action_pressed("ui_right"):
 		get_viewport().set_input_as_handled()
+		if not _right_btn.disabled:
+			_right_btn.grab_focus()
 		_on_right_pressed()
 
 
@@ -179,6 +192,9 @@ func _update_slide() -> void:
 	_left_btn.modulate.a = 0.0 if is_first else 1.0
 	_right_btn.disabled = false
 	_right_btn.modulate.a = 1.0
+
+	if is_first and _left_btn.has_focus():
+		_right_btn.grab_focus()
 
 	_update_animations()
 

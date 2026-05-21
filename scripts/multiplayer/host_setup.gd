@@ -393,10 +393,15 @@ func _update_labels() -> void:
 
 	_title_label.text = tr("mp_host_setup_title") % [tr(MissionCatalog.mission_title_key(_selected_mission)), num_players]
 
-	var ui_idx: int = Config.LANG_CODES.find(Config.ui_language)
+	var ui_idx := Config.LANG_CODES.find(Config.ui_language)
 	if ui_idx < 0:
 		ui_idx = 0
-	_lang_button.text = Config.get_lang_display_name(_temp_lang_idx, true, ui_idx)
+	var lang_code := Config.LANG_CODES[_temp_lang_idx]
+	var flag_code := lang_code
+	if flag_code == "auto":
+		flag_code = Config.get_effective_ui_language()
+	var lang_text := Config.get_lang_display_name(_temp_lang_idx, true, ui_idx)
+	UIHelpers.apply_flag_to_button(_lang_button, flag_code, lang_text)
 
 	if _character_catalog.size() > 0 and _selected_character_idx < _character_catalog.size():
 		_character_button.text = String(_character_catalog[_selected_character_idx].get("display_name", ""))

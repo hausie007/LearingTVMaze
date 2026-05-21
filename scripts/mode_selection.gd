@@ -290,10 +290,16 @@ func _update_labels() -> void:
 	_update_context_rows()
 	_title_label.text = tr(MissionCatalog.mission_title_key(_selected_mission))
 
-	var ui_idx: int = Config.LANG_CODES.find(Config.ui_language)
+	var ui_idx := Config.LANG_CODES.find(Config.ui_language)
 	if ui_idx < 0:
 		ui_idx = 0
-	_lang_button.text = Config.get_lang_display_name(temp_lang_idx, true, ui_idx)
+	var lang_code := Config.LANG_CODES[temp_lang_idx]
+	var flag_code := lang_code
+	if flag_code == "auto":
+		flag_code = Config.get_effective_ui_language()
+	var lang_text := Config.get_lang_display_name(temp_lang_idx, true, ui_idx)
+	UIHelpers.apply_flag_to_button(_lang_button, flag_code, lang_text)
+
 
 func _update_theme_preview() -> void:
 	_theme_preview_loader = ThemeLoader.get_cached(Config.theme_dir_name)

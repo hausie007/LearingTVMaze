@@ -840,7 +840,13 @@ func _update_step2_labels(focused_pickup: String = "") -> void:
 	if _lang_button == null: return
 	var ui_idx := Config.LANG_CODES.find(Config.ui_language)
 	if ui_idx < 0: ui_idx = 0
-	_lang_button.text = Config.get_lang_display_name(_lang_idx, true, ui_idx)
+	var lang_code := Config.LANG_CODES[_lang_idx]
+	var flag_code := lang_code
+	if flag_code == "auto":
+		flag_code = Config.get_effective_ui_language()
+	var lang_text := Config.get_lang_display_name(_lang_idx, true, ui_idx)
+	UIHelpers.apply_flag_to_button(_lang_button, flag_code, lang_text)
+
 	# Hide language selector if the focused pickup is "only the maze" (no collecting)
 	var pickup_to_check := focused_pickup if not focused_pickup.is_empty() else _selected_pickup
 	var is_collecting := pickup_to_check != MissionCatalog.PICKUP_NONE
