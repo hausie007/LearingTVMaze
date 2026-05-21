@@ -10,4 +10,4 @@ func _ready() -> void:
 	get_tree().create_timer(0.1).timeout.connect(_start_loading)
 
 func _start_loading() -> void:
-	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.HOME)
+	get_tree().change_scene_to_file(Scenes.HOME)

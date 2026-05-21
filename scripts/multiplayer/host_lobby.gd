@@ -504,7 +504,7 @@ func _on_network_debug_changed(scope: String, message: String) -> void:
 func _leave_session() -> void:
 	NetworkManager.leave_session()
 	NetworkManager.stop_broadcasting()
-	var main_scene = load("res://scenes/main_menu.tscn")
+	var main_scene = load(Scenes.WIZARD)
 	get_tree().change_scene_to_packed(main_scene)
 
 # ── Slot Management ─────────────────────────────────────────────────────────
@@ -558,7 +558,7 @@ func _create_slot(index: int) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
 	label.text = tr("mp_slot_waiting")
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	slot_vbox.add_child(label)
 
 	_slots_row.add_child(slot_vbox)
@@ -669,7 +669,7 @@ func _empty_slot(index: int) -> void:
 
 	preview.visible = false
 	label.text = tr("mp_slot_waiting")
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	frame.focus_mode = Control.FOCUS_NONE
 
 	_apply_empty_frame_style(frame)

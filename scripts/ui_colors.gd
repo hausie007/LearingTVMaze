@@ -109,6 +109,30 @@ const SELECTED_GLOW := Color(0.949, 0.788, 0.298, 0.33)
 const SELECTED_SHADOW := Color(0, 0, 0, 0.35)
 
 
+# ── Multiplayer & Game Roles ───────────────────────────────────────────────
+
+## Base green for cooperative play / host slots / join setups
+const MP_GREEN := Color("#2D9B58")
+
+## Highlight/border color for green multiplayer elements
+const MP_GREEN_BORDER := Color("#3DC878")
+
+## Base red for chaser role slots / join setups
+const MP_RED := Color("#C84848")
+
+## Highlight/border color for red multiplayer elements
+const MP_RED_BORDER := Color("#E05050")
+
+## Inactive/empty multiplayer slots outline tone
+const SLOT_EMPTY_COLOR := Color(1, 1, 1, 0.18)
+
+## Inactive/empty multiplayer slots background plate tone
+const SLOT_EMPTY_BG := Color(0.15, 0.17, 0.22, 0.6)
+
+## Action success button accent for join flow
+const JOIN_GREEN := Color(0.18, 0.62, 0.34)
+
+
 # ── Legacy Aliases ───────────────────────────────────────────────────────────
 # Kept so that non-menu code (HUD, D-Pad, dialogs, TTS indicators, etc.)
 # continues to compile without changes.  Prefer the new names in new code.

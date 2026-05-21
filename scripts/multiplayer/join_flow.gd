@@ -4,13 +4,13 @@ const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_paper_horizontal.png")
 
-const MP_GREEN := PlayerSlotPanel.MP_GREEN
-const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
-const SLOT_EMPTY_COLOR := PlayerSlotPanel.SLOT_EMPTY_COLOR
-const SLOT_EMPTY_BG := PlayerSlotPanel.SLOT_EMPTY_BG
-const MP_RED        := Color("#C84848")
-const MP_RED_BORDER := Color("#E05050")
-const JOIN_GREEN    := Color(0.18, 0.62, 0.34)
+const MP_GREEN := UIColors.MP_GREEN
+const MP_GREEN_BORDER := UIColors.MP_GREEN_BORDER
+const SLOT_EMPTY_COLOR := UIColors.SLOT_EMPTY_COLOR
+const SLOT_EMPTY_BG := UIColors.SLOT_EMPTY_BG
+const MP_RED := UIColors.MP_RED
+const MP_RED_BORDER := UIColors.MP_RED_BORDER
+const JOIN_GREEN := UIColors.JOIN_GREEN
 const REMOTE_GOAL_HAPTIC_MS := 500
 
 # ── Scene nodes ─────────────────────────────────────────────────────────────
@@ -1074,14 +1074,8 @@ func _configure_navigation() -> void:
 		focusable.append(_controller_size_button)
 	if _join_button != null and _join_button.visible and not _join_button.disabled:
 		focusable.append(_join_button)
-	for i in range(focusable.size()):
-		var btn := focusable[i]
-		btn.focus_neighbor_left = btn.get_path_to(btn)
-		btn.focus_neighbor_right = btn.get_path_to(btn)
-		if i > 0:
-			btn.focus_neighbor_top = btn.get_path_to(focusable[i - 1])
-		if i < focusable.size() - 1:
-			btn.focus_neighbor_bottom = btn.get_path_to(focusable[i + 1])
+	
+	FocusNavigator.configure_vertical_chain(focusable)
 
 func _apply_responsive_layout() -> void:
 	var available_width := _available_width()
@@ -1600,7 +1594,7 @@ func _create_slot(_index: int) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
 	label.text = tr("mp_slot_waiting")
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	slot_vbox.add_child(label)
 	_slots_row.add_child(slot_vbox)
 	_slot_nodes.append({"vbox": slot_vbox, "frame": frame, "preview": preview, "label": label, "is_filled": false})

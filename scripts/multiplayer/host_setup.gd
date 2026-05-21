@@ -236,7 +236,7 @@ func _build_layout() -> void:
 	_role_label = Label.new()
 	_role_label.name = "RoleLabel"
 	_role_label.add_theme_font_size_override("font_size", 24)
-	_role_label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	_role_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	_role_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_role_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_role_label.custom_minimum_size = Vector2(0, 32)

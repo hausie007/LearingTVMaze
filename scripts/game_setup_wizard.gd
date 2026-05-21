@@ -1024,28 +1024,10 @@ func _first_visible_step3_setting() -> Control:
 	return null
 
 func _configure_card_row_nav(cards: Array[Button], above: Control, below: Control) -> void:
-	if cards.is_empty(): return
-	var is_rtl := is_layout_rtl()
-	for i in range(cards.size()):
-		var card := cards[i]
-		# In RTL, visual left = next index, visual right = previous index
-		var left_idx := (i + 1) % cards.size() if is_rtl else (i - 1 + cards.size()) % cards.size()
-		var right_idx := (i - 1 + cards.size()) % cards.size() if is_rtl else (i + 1) % cards.size()
-		card.focus_neighbor_left = card.get_path_to(cards[left_idx])
-		card.focus_neighbor_right = card.get_path_to(cards[right_idx])
-		if above != null:
-			card.focus_neighbor_top = card.get_path_to(above)
-		if below != null:
-			card.focus_neighbor_bottom = card.get_path_to(below)
+	FocusNavigator.configure_row(cards, above, below, is_layout_rtl())
 
 func _configure_single_nav(button: Control, top: Control, bottom: Control) -> void:
-	if button == null: return
-	button.focus_neighbor_left = button.get_path_to(button)
-	button.focus_neighbor_right = button.get_path_to(button)
-	if top != null:
-		button.focus_neighbor_top = button.get_path_to(top)
-	if bottom != null:
-		button.focus_neighbor_bottom = button.get_path_to(bottom)
+	FocusNavigator.configure_single(button, top, bottom)
 
 
 func _last_card(cards: Array[Button]) -> Button:

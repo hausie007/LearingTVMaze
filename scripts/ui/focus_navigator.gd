@@ -29,15 +29,18 @@ static func configure_single(button: Control, top: Control, bottom: Control) -> 
 
 
 ## Wire a horizontal row of buttons with wrapping Left/Right navigation.
-## All buttons share the same top and bottom neighbors.
-static func configure_row(buttons: Array, above: Control, below: Control) -> void:
+## All buttons share the same top and bottom neighbors. Swaps directions if [is_rtl] is true.
+static func configure_row(buttons: Array, above: Control, below: Control, is_rtl: bool = false) -> void:
 	var row := valid_buttons(buttons)
 	if row.is_empty():
 		return
 	for i in range(row.size()):
 		var card := row[i] as Button
-		var left := row[(i - 1 + row.size()) % row.size()] as Button
-		var right := row[(i + 1) % row.size()] as Button
+		# Swapped Left/Right mapping for RTL languages
+		var left_idx := (i + 1) % row.size() if is_rtl else (i - 1 + row.size()) % row.size()
+		var right_idx := (i - 1 + row.size()) % row.size() if is_rtl else (i + 1) % row.size()
+		var left := row[left_idx] as Button
+		var right := row[right_idx] as Button
 		card.focus_neighbor_left = card.get_path_to(left)
 		card.focus_neighbor_right = card.get_path_to(right)
 		if above != null:
@@ -47,9 +50,9 @@ static func configure_row(buttons: Array, above: Control, below: Control) -> voi
 
 
 ## Wire a multi-row grid with wrapping Left/Right and column-aware Up/Down.
-## [columns] defines how many buttons per row.
+## [columns] defines how many buttons per row. Swaps Left/Right if [is_rtl] is true.
 ## [above] is the control above the first row, [below] is below the last row.
-static func configure_grid(buttons: Array, columns: int, above: Control, below: Control) -> void:
+static func configure_grid(buttons: Array, columns: int, above: Control, below: Control, is_rtl: bool = false) -> void:
 	var valid := valid_buttons(buttons)
 	if valid.is_empty():
 		return
@@ -60,8 +63,9 @@ static func configure_grid(buttons: Array, columns: int, above: Control, below: 
 		var row_end := mini(row_start + columns, valid.size())
 		var row_size := row_end - row_start
 		var pos_in_row := i - row_start
-		var left_idx := row_start + ((pos_in_row - 1 + row_size) % row_size)
-		var right_idx := row_start + ((pos_in_row + 1) % row_size)
+		# Swapped Left/Right mapping for RTL languages
+		var left_idx := row_start + ((pos_in_row + 1) % row_size) if is_rtl else row_start + ((pos_in_row - 1 + row_size) % row_size)
+		var right_idx := row_start + ((pos_in_row - 1 + row_size) % row_size) if is_rtl else row_start + ((pos_in_row + 1) % row_size)
 		btn.focus_neighbor_left = btn.get_path_to(valid[left_idx])
 		btn.focus_neighbor_right = btn.get_path_to(valid[right_idx])
 
@@ -76,6 +80,28 @@ static func configure_grid(buttons: Array, columns: int, above: Control, below: 
 			btn.focus_neighbor_bottom = btn.get_path_to(valid[i + columns])
 		elif below != null:
 			btn.focus_neighbor_bottom = btn.get_path_to(below)
+
+
+## Wire a list of controls in a vertical chain, locking Left/Right to self.
+static func configure_vertical_chain(controls: Array, wrap: bool = false) -> void:
+	var valid: Array[Control] = []
+	for item in controls:
+		if item is Control and is_instance_valid(item) and item.visible:
+			valid.append(item)
+	if valid.is_empty():
+		return
+	for i in range(valid.size()):
+		var ctrl := valid[i]
+		ctrl.focus_neighbor_left = ctrl.get_path_to(ctrl)
+		ctrl.focus_neighbor_right = ctrl.get_path_to(ctrl)
+		
+		var top_idx := (i - 1 + valid.size()) % valid.size() if wrap else i - 1
+		var bottom_idx := (i + 1) % valid.size() if wrap else i + 1
+		
+		if top_idx >= 0:
+			ctrl.focus_neighbor_top = ctrl.get_path_to(valid[top_idx])
+		if bottom_idx < valid.size():
+			ctrl.focus_neighbor_bottom = ctrl.get_path_to(valid[bottom_idx])
 
 
 ## Filter an array to only visible, valid Button instances.

@@ -17,10 +17,10 @@ class_name PlayerSlotPanel
 extends HBoxContainer
 
 ## Multiplayer green palette — single source of truth.
-const MP_GREEN := Color("#2D9B58")
-const MP_GREEN_BORDER := Color("#3DC878")
-const SLOT_EMPTY_COLOR := Color(1, 1, 1, 0.18)
-const SLOT_EMPTY_BG := Color(0.15, 0.17, 0.22, 0.6)
+const MP_GREEN := UIColors.MP_GREEN
+const MP_GREEN_BORDER := UIColors.MP_GREEN_BORDER
+const SLOT_EMPTY_COLOR := UIColors.SLOT_EMPTY_COLOR
+const SLOT_EMPTY_BG := UIColors.SLOT_EMPTY_BG
 
 var _slot_nodes: Array[Dictionary] = []
 var _pulse_tween: Tween = null
@@ -131,7 +131,7 @@ func _create_slot(index: int) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 22)
 	label.text = tr("mp_slot_waiting")
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	slot_vbox.add_child(label)
 
 	add_child(slot_vbox)
@@ -178,7 +178,7 @@ func _empty_slot(index: int) -> void:
 
 	preview.visible = false
 	label.text = tr("mp_slot_waiting")
-	label.add_theme_color_override("font_color", UIColors.TEXT_SUBTITLE)
+	label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	_apply_empty_frame_style(frame)
 	slot["is_filled"] = false
 
