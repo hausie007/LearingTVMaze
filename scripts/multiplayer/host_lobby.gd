@@ -3,6 +3,8 @@ extends Control
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_paper_horizontal.png")
 const ModeCardScene := preload("res://scenes/ui/mode_card.tscn")
+const PulseAnimator := preload("res://scripts/ui/pulse_animator.gd")
+const SlotStyler := preload("res://scripts/ui/slot_styler.gd")
 
 const MP_GREEN := PlayerSlotPanel.MP_GREEN
 const MP_GREEN_BORDER := PlayerSlotPanel.MP_GREEN_BORDER
@@ -65,6 +67,18 @@ func _ready() -> void:
 	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
 	_oled_guard.idle_reset.connect(_on_oled_reset)
 	_oled_guard.start(180.0, 300.0)
+
+func _exit_tree() -> void:
+	if NetworkManager.lobby_updated.is_connected(_on_lobby_updated):
+		NetworkManager.lobby_updated.disconnect(_on_lobby_updated)
+	if NetworkManager.game_started.is_connected(_on_game_started):
+		NetworkManager.game_started.disconnect(_on_game_started)
+	if NetworkManager.peer_disconnected.is_connected(_on_peer_disconnected):
+		NetworkManager.peer_disconnected.disconnect(_on_peer_disconnected)
+	if NetworkManager.debug_status_changed.is_connected(_on_network_debug_changed):
+		NetworkManager.debug_status_changed.disconnect(_on_network_debug_changed)
+	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
+		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -681,55 +695,16 @@ func _clear_slots() -> void:
 		if is_instance_valid(vbox):
 			vbox.queue_free()
 	_slot_nodes.clear()
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		_pulse_tween.kill()
-		_pulse_tween = null
+	_pulse_tween = PulseAnimator.stop_pulse(_pulse_tween)
 
 func _apply_filled_frame_style(frame: Button) -> void:
-	var style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.9),
-		MP_GREEN_BORDER, 12, 2
-	)
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 10
-	style.content_margin_bottom = 10
-	frame.add_theme_stylebox_override("normal", style)
-	frame.add_theme_stylebox_override("hover", style)
-	frame.add_theme_stylebox_override("pressed", style)
-	frame.add_theme_stylebox_override("disabled", style)
-
-	var focus_style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.9),
-		UIColors.FOCUS_GOLD, 12, 6
-	)
-	focus_style.content_margin_left = 10
-	focus_style.content_margin_right = 10
-	focus_style.content_margin_top = 10
-	focus_style.content_margin_bottom = 10
-	frame.add_theme_stylebox_override("focus", focus_style)
+	SlotStyler.apply_filled_style(frame, MP_GREEN_BORDER, UIColors.FOCUS_GOLD)
 
 func _apply_empty_frame_style(frame: Button) -> void:
-	var style := UIHelpers.create_rounded_stylebox(
-		SLOT_EMPTY_BG,
-		SLOT_EMPTY_COLOR, 12, 2
-	)
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 10
-	style.content_margin_bottom = 10
-	# Dashed border effect via draw_style
-	style.draw_center = true
-	frame.add_theme_stylebox_override("normal", style)
-	frame.add_theme_stylebox_override("hover", style)
-	frame.add_theme_stylebox_override("pressed", style)
-	frame.add_theme_stylebox_override("disabled", style)
+	SlotStyler.apply_empty_style(frame, SLOT_EMPTY_COLOR, SLOT_EMPTY_BG)
 
 func _update_pulse_animation() -> void:
-	# Kill any existing pulse
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		_pulse_tween.kill()
-		_pulse_tween = null
+	_pulse_tween = PulseAnimator.stop_pulse(_pulse_tween)
 
 	# Collect empty slot frames for pulsing
 	var empty_frames: Array[Button] = []
@@ -740,25 +715,7 @@ func _update_pulse_animation() -> void:
 	if empty_frames.is_empty():
 		return
 
-	# Create repeating pulse tween on empty frames
-	_pulse_tween = create_tween()
-	_pulse_tween.set_loops()
-
-	for frame in empty_frames:
-		frame.modulate = Color(1, 1, 1, 1)
-
-	# Pulse: fade to 0.45 then back to 1.0
-	_pulse_tween.tween_method(func(alpha: float):
-		for f in empty_frames:
-			if is_instance_valid(f):
-				f.modulate.a = alpha
-	, 1.0, 0.45, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	_pulse_tween.tween_method(func(alpha: float):
-		for f in empty_frames:
-			if is_instance_valid(f):
-				f.modulate.a = alpha
-	, 0.45, 1.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_pulse_tween = PulseAnimator.start_pulse(self, empty_frames)
 
 # ── Helpers ─────────────────────────────────────────────────────────────────
 

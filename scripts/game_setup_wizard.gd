@@ -137,6 +137,10 @@ func _ready() -> void:
 	_oled_guard.idle_reset.connect(_on_oled_reset)
 	_oled_guard.start(300.0, 600.0)
 
+func _exit_tree() -> void:
+	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
+		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
+
 
 
 

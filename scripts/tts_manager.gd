@@ -52,6 +52,9 @@ var _pending_version: int = 0
 ## Track latest request ID to allow interrupting the worker thread (main thread only).
 var _current_version: int = 0
 
+## Main-thread cached speaking status from DisplayServer.
+var _main_tts_speaking: bool = false
+
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
@@ -75,13 +78,44 @@ func _exit_tree() -> void:
 		_thread.wait_to_finish()
 
 
+func _process(_delta: float) -> void:
+	var is_speaking := DisplayServer.tts_is_speaking()
+	_mutex.lock()
+	_main_tts_speaking = is_speaking
+	_mutex.unlock()
+
+
+func _main_tts_speak(text: String, voice_id: String, volume: int, rate: float) -> void:
+	DisplayServer.tts_speak(text, voice_id, volume, 1.0, rate, 0, false)
+
+
+func _main_tts_stop() -> void:
+	DisplayServer.tts_stop()
+
+
+func _is_tts_speaking() -> bool:
+	_mutex.lock()
+	var speaking := _main_tts_speaking
+	_mutex.unlock()
+	return speaking
+
+
+func _is_tts_ready() -> bool:
+	_mutex.lock()
+	var ready := tts_ready
+	_mutex.unlock()
+	return ready
+
+
 # ── Public API: Voice Scanning ───────────────────────────────────────────────
 
 ## Asynchronously scan for available TTS voices for all supported languages.
 ## Uses a non-blocking retry mechanism for Android/Google TV where the voice
 ## service can be slow to bind on cold start.
 func refresh_cache() -> void:
+	_mutex.lock()
 	tts_ready = false
+	_mutex.unlock()
 	status_changed.emit()
 	
 	var max_attempts := 10
@@ -96,7 +130,9 @@ func refresh_cache() -> void:
 	
 	if all_voices.is_empty():
 		push_warning("TTS: No voices found after %d attempts. Initialization aborted." % max_attempts)
+		_mutex.lock()
 		tts_ready = true  # Allow system to proceed but log warning
+		_mutex.unlock()
 		status_changed.emit()
 		return
 
@@ -122,9 +158,11 @@ func refresh_cache() -> void:
 			new_langs.append(lang_code)
 			new_cache[lang_code] = found_voice_id
 	
+	_mutex.lock()
 	_installed_tts_langs = new_langs
 	_tts_voice_cache = new_cache
 	tts_ready = true
+	_mutex.unlock()
 	status_changed.emit()
 	
 	# Announce app title ONLY on first boot to confirm readiness
@@ -137,8 +175,10 @@ func refresh_cache() -> void:
 
 ## Quick retrieval of cached voice ID for a given language code.
 func get_voice(lang_code: String) -> String:
+	_mutex.lock()
 	var exact_id = _tts_voice_cache.get(lang_code, "")
 	if not exact_id.is_empty():
+		_mutex.unlock()
 		return exact_id
 	
 	# Best-effort fallback: Search all cached IDs for anything matching the prefix
@@ -147,14 +187,20 @@ func get_voice(lang_code: String) -> String:
 		var dash_prefix := lang_code.to_lower() + "-"
 		for k in _tts_voice_cache.keys():
 			if k.to_lower().begins_with(prefix) or k.to_lower().begins_with(dash_prefix):
-				return _tts_voice_cache[k]
+				var res = _tts_voice_cache[k]
+				_mutex.unlock()
+				return res
 				
+	_mutex.unlock()
 	return ""
 
 
 ## Instantaneous cached check for voice availability.
 func is_available(lang_code: String) -> bool:
-	return _installed_tts_langs.has(lang_code)
+	_mutex.lock()
+	var available := _installed_tts_langs.has(lang_code)
+	_mutex.unlock()
+	return available
 
 
 # ── Public API: Speech ───────────────────────────────────────────────────────
@@ -298,7 +344,7 @@ func _worker_loop() -> void:
 				continue
 
 			# Wait for voice scan to complete before resolving voice ID.
-			while not tts_ready:
+			while not _is_tts_ready():
 				OS.delay_msec(50)
 				if _exit_flag or _is_interrupted(local_version):
 					break
@@ -307,7 +353,7 @@ func _worker_loop() -> void:
 
 			var final_voice_id := get_voice(lang)
 
-			DisplayServer.tts_stop()
+			self.call_deferred("_main_tts_stop")
 			
 			# Force natural pauses by splitting text into separate utterances
 			# which tells the OS TTS engine to take a breath between them.
@@ -326,13 +372,13 @@ func _worker_loop() -> void:
 					break
 					
 				# Send ONLY one sentence to the OS to avoid its internal queueing problems
-				DisplayServer.tts_speak(clean_part, final_voice_id, int(volume), 1.0, rate, 0, false)
+				self.call_deferred("_main_tts_speak", clean_part, final_voice_id, int(volume), rate)
 				
-				# Wait a moment for the OS engine to physically start processing
-				OS.delay_msec(100)
+				# Wait a moment for the OS engine to physically start processing and process loop to update flag
+				OS.delay_msec(150)
 				
 				# Polling loop: block this background thread until this specific sentence is finished
-				while DisplayServer.tts_is_speaking() and not _exit_flag:
+				while _is_tts_speaking() and not _exit_flag:
 					interrupted = _is_interrupted(local_version)
 					
 					if interrupted:

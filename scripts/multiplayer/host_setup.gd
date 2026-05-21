@@ -82,6 +82,12 @@ func _ready() -> void:
 		if first_btn != null:
 			first_btn.call_deferred("grab_focus")
 
+func _exit_tree() -> void:
+	if NetworkManager.debug_status_changed.is_connected(_on_network_debug_changed):
+		NetworkManager.debug_status_changed.disconnect(_on_network_debug_changed)
+	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
+		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
 		_apply_dpad_layout()

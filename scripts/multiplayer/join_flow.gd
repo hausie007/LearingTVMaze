@@ -3,6 +3,11 @@ extends Control
 const DEFAULT_GAME_PORT: int = 42020
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LogoTexture := preload("res://images/lm_paper_horizontal.png")
+const JoinSetupLayoutBuilder := preload("res://scripts/ui/join_setup_layout_builder.gd")
+const JoinCardHelper := preload("res://scripts/ui/join_card_helper.gd")
+const HostCardBuilder := preload("res://scripts/ui/host_card_builder.gd")
+const PulseAnimator := preload("res://scripts/ui/pulse_animator.gd")
+const SlotStyler := preload("res://scripts/ui/slot_styler.gd")
 
 const MP_GREEN := UIColors.MP_GREEN
 const MP_GREEN_BORDER := UIColors.MP_GREEN_BORDER
@@ -206,6 +211,36 @@ func _exit_tree() -> void:
 	_reset_global_dpad_accent()
 	_restore_local_dpad()
 
+	if NetworkManager.host_discovered.is_connected(_on_host_discovered):
+		NetworkManager.host_discovered.disconnect(_on_host_discovered)
+	if NetworkManager.discovery_updated.is_connected(_on_discovery_updated):
+		NetworkManager.discovery_updated.disconnect(_on_discovery_updated)
+	if NetworkManager.lobby_updated.is_connected(_on_lobby_updated):
+		NetworkManager.lobby_updated.disconnect(_on_lobby_updated)
+	if NetworkManager.join_accepted.is_connected(_on_join_accepted):
+		NetworkManager.join_accepted.disconnect(_on_join_accepted)
+	if NetworkManager.join_rejected.is_connected(_on_join_rejected):
+		NetworkManager.join_rejected.disconnect(_on_join_rejected)
+	if NetworkManager.game_started.is_connected(_on_game_started):
+		NetworkManager.game_started.disconnect(_on_game_started)
+	if NetworkManager.debug_status_changed.is_connected(_on_network_debug_changed):
+		NetworkManager.debug_status_changed.disconnect(_on_network_debug_changed)
+	if NetworkManager.chaser_countdown_updated.is_connected(_on_chaser_countdown_updated):
+		NetworkManager.chaser_countdown_updated.disconnect(_on_chaser_countdown_updated)
+	if NetworkManager.chaser_released.is_connected(_on_chaser_released):
+		NetworkManager.chaser_released.disconnect(_on_chaser_released)
+	if NetworkManager.remote_goal_updated.is_connected(_on_remote_goal_updated):
+		NetworkManager.remote_goal_updated.disconnect(_on_remote_goal_updated)
+	if NetworkManager.remote_result_updated.is_connected(_on_remote_result_updated):
+		NetworkManager.remote_result_updated.disconnect(_on_remote_result_updated)
+	if NetworkManager.remote_trap_status_updated.is_connected(_on_remote_trap_status_updated):
+		NetworkManager.remote_trap_status_updated.disconnect(_on_remote_trap_status_updated)
+	if Config != null:
+		if Config.on_screen_controls_changed.is_connected(_on_controls_changed):
+			Config.on_screen_controls_changed.disconnect(_on_controls_changed)
+		if Config.controller_size_changed.is_connected(_on_controller_size_changed):
+			Config.controller_size_changed.disconnect(_on_controller_size_changed)
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
 		_apply_dpad_layout()
@@ -283,264 +318,39 @@ func _on_join_oled_reset() -> void:
 		DPad.undim(0.3)
 
 func _build_setup_layout() -> void:
-	for child in join_setup_center.get_children():
-		join_setup_center.remove_child(child)
-		child.queue_free()
-
-	_main_vbox = VBoxContainer.new()
-	_main_vbox.name = "SetupVBox"
-	_main_vbox.alignment = BoxContainer.ALIGNMENT_BEGIN
-	_main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_main_vbox.add_theme_constant_override("separation", 6)
-	join_setup_center.add_child(_main_vbox)
-
-	_gameplay_char_preview = CharacterPreview.new()
-	_gameplay_char_preview.visible = false
-	_gameplay_char_preview.custom_minimum_size = Vector2(256, 256)
-	join_setup_center.add_child(_gameplay_char_preview)
-
-	# Top spacer
-	_top_spacer = Control.new()
-	_top_spacer.custom_minimum_size = Vector2(0, 4)
-	_main_vbox.add_child(_top_spacer)
-
-	# Logo
-	_logo = TextureRect.new()
-	_logo.name = "AppLogo"
-	_logo.texture = LogoTexture
-	_logo.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_logo.clip_contents = false
-	_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	_main_vbox.add_child(_logo)
-
-
-	# Logo -> Breadcrumbs spacer
-	var sp1 := Control.new()
-	sp1.custom_minimum_size = Vector2(0, 8)
-	_main_vbox.add_child(sp1)
-
-	# Breadcrumb 1
-	_breadcrumb1 = _build_breadcrumb_row()
-	_main_vbox.add_child(_breadcrumb1)
-
-	# Breadcrumb 2
-	_breadcrumb2 = _build_breadcrumb_row()
-	_main_vbox.add_child(_breadcrumb2)
-
-	# Breadcrumbs -> Title spacer
-	var logo_title_spacer := Control.new()
-	logo_title_spacer.custom_minimum_size = Vector2(0, 4)
-	_main_vbox.add_child(logo_title_spacer)
-
-	# Title
-	_title_label = Label.new()
-	_title_label.text = tr("mp_join_title")
-	_title_label.add_theme_font_size_override("font_size", 30)
-	_title_label.add_theme_color_override("font_color", UIColors.YELLOW)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_main_vbox.add_child(_title_label)
-
-	# Title -> Join Card spacer
-	var sp2 := Control.new()
-	sp2.custom_minimum_size = Vector2(0, 8)
-	_main_vbox.add_child(sp2)
-
-	# ── Join Card row: [‹]  [card]  [›] ────────────────────────────────────
-	var card_center := HBoxContainer.new()
-	card_center.alignment = BoxContainer.ALIGNMENT_CENTER
-	card_center.add_theme_constant_override("separation", 40)
-	_main_vbox.add_child(card_center)
-
-	# Prev arrow — always in the HBox (uses modulate to hide, not visible,
-	# so the card stays centered at all times).
-	_game_prev_button = Button.new()
-	_game_prev_button.text = "‹"
-	_game_prev_button.add_theme_font_size_override("font_size", 48)
-	_game_prev_button.add_theme_color_override("font_color", Color.WHITE)
-	_game_prev_button.focus_mode = Control.FOCUS_NONE
-	_game_prev_button.custom_minimum_size = Vector2(56, 0)
-	_game_prev_button.modulate.a = 0.0
-	_game_prev_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_game_prev_button.pressed.connect(func(): _cycle_game(-1))
-	var prev_style := StyleBoxEmpty.new()
-	_game_prev_button.add_theme_stylebox_override("normal", prev_style)
-	_game_prev_button.add_theme_stylebox_override("hover", prev_style)
-	_game_prev_button.add_theme_stylebox_override("pressed", prev_style)
-	_game_prev_button.add_theme_stylebox_override("focus", prev_style)
-	card_center.add_child(_game_prev_button)
-
-	_join_card_container = MarginContainer.new()
-	card_center.add_child(_join_card_container)
-
-	# Next arrow — same approach as prev (opacity, not visibility).
-	_game_next_button = Button.new()
-	_game_next_button.text = "›"
-	_game_next_button.add_theme_font_size_override("font_size", 48)
-	_game_next_button.add_theme_color_override("font_color", Color.WHITE)
-	_game_next_button.focus_mode = Control.FOCUS_NONE
-	_game_next_button.custom_minimum_size = Vector2(56, 0)
-	_game_next_button.modulate.a = 0.0
-	_game_next_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_game_next_button.pressed.connect(func(): _cycle_game(1))
-	var next_style := StyleBoxEmpty.new()
-	_game_next_button.add_theme_stylebox_override("normal", next_style)
-	_game_next_button.add_theme_stylebox_override("hover", next_style)
-	_game_next_button.add_theme_stylebox_override("pressed", next_style)
-	_game_next_button.add_theme_stylebox_override("focus", next_style)
-	card_center.add_child(_game_next_button)
-
-	_join_card_panel = PanelContainer.new()
-	_join_card_normal = UIHelpers.create_rounded_stylebox(JOIN_GREEN.darkened(0.06), JOIN_GREEN.lightened(0.16), 15, 2)
-	_join_card_normal.content_margin_left = 32; _join_card_normal.content_margin_right = 32
-	_join_card_normal.content_margin_top = 16; _join_card_normal.content_margin_bottom = 16
-	_join_card_panel.add_theme_stylebox_override("panel", _join_card_normal)
-	
-	_join_card_focus = UIHelpers.create_rounded_stylebox(JOIN_GREEN.darkened(0.02), Color.WHITE, 15, 6)
-	_join_card_focus.content_margin_left = 32; _join_card_focus.content_margin_right = 32
-	_join_card_focus.content_margin_top = 16; _join_card_focus.content_margin_bottom = 16
-	_join_card_focus.shadow_color = Color(0, 0, 0, 0.25)
-	_join_card_focus.shadow_size = 10
-	
-	_join_card_container.add_child(_join_card_panel)
-
-	var card_vbox := VBoxContainer.new()
-	card_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	card_vbox.add_theme_constant_override("separation", 4)
-	_join_card_panel.add_child(card_vbox)
-
-	var card_title := Label.new()
-	card_title.text = tr("mp_join_game")
-	card_title.add_theme_font_size_override("font_size", 36)
-	card_title.add_theme_color_override("font_color", Color.WHITE)
-	card_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	card_vbox.add_child(card_title)
-
-	var sp_card := Control.new()
-	sp_card.custom_minimum_size = Vector2(0, 12)
-	card_vbox.add_child(sp_card)
-
-	# ── Player slots (inside the card) ──────────────────────────────────────
-	_slots_row = HBoxContainer.new()
-	_slots_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_slots_row.add_theme_constant_override("separation", 32)
-	_slots_row.custom_minimum_size = Vector2(0, 140)
-	card_vbox.add_child(_slots_row)
-
-	# ── The clickable button overlay (also handles left/right to cycle games) ─
-	_join_button = Button.new()
-	_join_button.name = "JoinCardButton"
-	_join_button.focus_mode = Control.FOCUS_ALL
-	_join_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	
-	var empty_style := StyleBoxEmpty.new()
-	
-	_join_button.add_theme_stylebox_override("normal", empty_style)
-	_join_button.add_theme_stylebox_override("hover", empty_style)
-	_join_button.add_theme_stylebox_override("pressed", empty_style)
-	_join_button.add_theme_stylebox_override("focus", empty_style)
-	
-	_join_button.pressed.connect(_on_join_pressed)
-	_join_button.focus_entered.connect(func(): _apply_card_zoom(true))
-	_join_button.focus_exited.connect(func(): _apply_card_zoom(false))
-	_join_button.mouse_entered.connect(_join_button.grab_focus)
-	# Left/right on the focused card cycles through available games.
-	_join_button.gui_input.connect(_on_join_button_gui_input)
-	
-	_join_card_container.add_child(_join_button)
-
-	# Small spacer so the counter clears the card's drop shadow.
-	var counter_spacer := Control.new()
-	counter_spacer.custom_minimum_size = Vector2(0, 6)
-	_main_vbox.add_child(counter_spacer)
-
-	# ── "Game N of M" counter label (always reserves height via min size) ──
-	_game_switcher_label = Label.new()
-	_game_switcher_label.add_theme_font_size_override("font_size", 20)
-	_game_switcher_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
-	_game_switcher_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_game_switcher_label.custom_minimum_size = Vector2(0, 20)
-	_game_switcher_label.text = ""
-	_main_vbox.add_child(_game_switcher_label)
-
-	# ── Single status label (unavailable, no-games, error — one at a time) ──
-	# Using _join_error_label for all status messages; _game_unavailable_label
-	# points to the same node so existing call-sites work unchanged.
-	_join_error_label = Label.new()
-	_join_error_label.add_theme_font_size_override("font_size", 22)
-	_join_error_label.add_theme_color_override("font_color", Color(1, 0.45, 0.45, 1))
-	_join_error_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_join_error_label.custom_minimum_size = Vector2(0, 24)
-	_join_error_label.text = ""
-	_main_vbox.add_child(_join_error_label)
-	_game_unavailable_label = _join_error_label  # alias — same node
-
-	# Card -> Settings spacer
-	var sp3 := Control.new()
-	sp3.custom_minimum_size = Vector2(0, 8)
-	_main_vbox.add_child(sp3)
-
-	# ── Settings block (Character & Controller) ──────────────────────────────
-	_settings_vbox = VBoxContainer.new()
-	_settings_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	_settings_vbox.add_theme_constant_override("separation", 8)
-	_main_vbox.add_child(_settings_vbox)
-
-	# Character row
-	var char_data := _create_selector_row("mp_join_character")
-	_char_row = char_data["row"] as HBoxContainer
-	_char_left = char_data["left"] as Label
-	_char_button = char_data["button"] as Button
-	_char_right = char_data["right"] as Label
-	_char_button.pressed.connect(func(): _cycle_character(1))
-	_setup_cycling(_char_button, _cycle_character)
-	_setup_arrow_visibility(_char_button, _char_left, _char_right)
-	_char_preview = CharacterPreview.new()
-	_char_preview.custom_minimum_size = Vector2(56, 56)
-	_char_preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	_char_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	var char_extras := char_data["extras"] as HBoxContainer
-	char_extras.add_child(_char_preview)
-	_settings_vbox.add_child(_char_row)
-
-	# Controller layout row
-	var ctrl_data := _create_selector_row("mp_join_remote_layout")
-	_controller_row = ctrl_data["row"] as HBoxContainer
-	_controller_left = ctrl_data["left"] as Label
-	_controller_button = ctrl_data["button"] as Button
-	_controller_right = ctrl_data["right"] as Label
-	_controller_button.pressed.connect(func(): _cycle_controller_layout(1))
-	_setup_cycling(_controller_button, _cycle_controller_layout)
-	_setup_arrow_visibility(_controller_button, _controller_left, _controller_right)
-	_settings_vbox.add_child(_controller_row)
-
-	# Controller size row
-	var ctrl_size_data := _create_selector_row("setting_controller_size")
-	_controller_size_row = ctrl_size_data["row"] as HBoxContainer
-	_controller_size_left = ctrl_size_data["left"] as Label
-	_controller_size_button = ctrl_size_data["button"] as Button
-	_controller_size_right = ctrl_size_data["right"] as Label
-	_controller_size_button.pressed.connect(func(): _cycle_controller_size(1))
-	_setup_cycling(_controller_size_button, _cycle_controller_size)
-	_setup_arrow_visibility(_controller_size_button, _controller_size_left, _controller_size_right)
-	_settings_vbox.add_child(_controller_size_row)
-
-func _build_breadcrumb_row() -> Button:
-	return BreadcrumbRow.create()
-
-func _create_selector_row(label_key: String) -> Dictionary:
-	return CyclingSelector.create_row_dict(label_key)
-
-func _create_arrow_label() -> Label:
-	return CyclingSelector.create_arrow_label()
-
-func _setup_cycling(btn: Button, cycle_func: Callable) -> void:
-	CyclingSelector.setup_cycling(btn, cycle_func)
-
-func _setup_arrow_visibility(btn: Button, left: Label, right: Label) -> void:
-	CyclingSelector.setup_arrow_visibility(btn, left, right)
+	var nodes := JoinSetupLayoutBuilder.build(self)
+	_main_vbox = nodes["main_vbox"]
+	_gameplay_char_preview = nodes["gameplay_char_preview"]
+	_top_spacer = nodes["top_spacer"]
+	_logo = nodes["logo"]
+	_breadcrumb1 = nodes["breadcrumb1"]
+	_breadcrumb2 = nodes["breadcrumb2"]
+	_title_label = nodes["title_label"]
+	_game_prev_button = nodes["game_prev_button"]
+	_game_next_button = nodes["game_next_button"]
+	_join_card_container = nodes["join_card_container"]
+	_join_card_panel = nodes["join_card_panel"]
+	_slots_row = nodes["slots_row"]
+	_join_button = nodes["join_button"]
+	_game_switcher_label = nodes["game_switcher_label"]
+	_join_error_label = nodes["join_error_label"]
+	_game_unavailable_label = nodes["game_unavailable_label"]
+	_settings_vbox = nodes["settings_vbox"]
+	_char_row = nodes["char_row"]
+	_char_left = nodes["char_left"]
+	_char_button = nodes["char_button"]
+	_char_right = nodes["char_right"]
+	_char_preview = nodes["char_preview"]
+	_controller_row = nodes["controller_row"]
+	_controller_left = nodes["controller_left"]
+	_controller_button = nodes["controller_button"]
+	_controller_right = nodes["controller_right"]
+	_controller_size_row = nodes["controller_size_row"]
+	_controller_size_left = nodes["controller_size_left"]
+	_controller_size_button = nodes["controller_size_button"]
+	_controller_size_right = nodes["controller_size_right"]
+	_join_card_normal = nodes["join_card_normal"]
+	_join_card_focus = nodes["join_card_focus"]
 
 # ── Character & Controller Cycling ──────────────────────────────────────────
 
@@ -1384,46 +1194,7 @@ func _rebuild_host_cards() -> void:
 		_host_cards.append(card)
 
 func _create_host_card(host: Dictionary, index: int) -> Button:
-	var button: Button = Button.new()
-	button.custom_minimum_size = Vector2(1000, 136)
-	button.text = ""
-	button.focus_mode = Control.FOCUS_ALL
-	UIHelpers.apply_style_to_button(button, UIColors.BLUE)
-	var card_margin: MarginContainer = MarginContainer.new()
-	card_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	card_margin.add_theme_constant_override("margin_left", 18)
-	card_margin.add_theme_constant_override("margin_top", 12)
-	card_margin.add_theme_constant_override("margin_right", 18)
-	card_margin.add_theme_constant_override("margin_bottom", 12)
-	button.add_child(card_margin)
-	var row: HBoxContainer = HBoxContainer.new()
-	row.add_theme_constant_override("separation", 18)
-	card_margin.add_child(row)
-	var icon: CharacterPreview = CharacterPreview.new()
-	icon.custom_minimum_size = Vector2(104, 104)
-	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	var host_character_id: String = String(host.get("character_id", ""))
-	_apply_character_preview(host_character_id, icon)
-	row.add_child(icon)
-	var text_box: VBoxContainer = VBoxContainer.new()
-	text_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text_box.add_theme_constant_override("separation", 6)
-	row.add_child(text_box)
-	var host_name: String = String(host.get("host_name", "Host"))
-	var title: Label = Label.new()
-	title.text = "%s" % host_name
-	title.add_theme_font_size_override("font_size", 34)
-	text_box.add_child(title)
-	var host_ip: String = String(host.get("ip", ""))
-	var player_count: int = int(host.get("player_count", 1))
-	var max_players: int = int(host.get("max_players", 2))
-	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
-	var subtitle: Label = Label.new()
-	subtitle.text = "%s | %d/%d | %s" % [host_ip, player_count, max_players, theme_title]
-	subtitle.add_theme_font_size_override("font_size", 24)
-	subtitle.modulate = Color(1, 1, 1, 0.8)
-	text_box.add_child(subtitle)
+	var button: Button = HostCardBuilder.create_card(host, index, false)
 	button.pressed.connect(func(): _select_host_index(index))
 	button.focus_entered.connect(func():
 		_selected_host_index = index
@@ -1605,72 +1376,29 @@ func _clear_slots() -> void:
 		var vbox := slot["vbox"] as Control
 		if is_instance_valid(vbox): vbox.queue_free()
 	_slot_nodes.clear()
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		_pulse_tween.kill()
-		_pulse_tween = null
+	_pulse_tween = PulseAnimator.stop_pulse(_pulse_tween)
 
 func _apply_filled_frame_style(frame: PanelContainer, border_color: Color = MP_GREEN_BORDER) -> void:
-	var style := UIHelpers.create_rounded_stylebox(
-		Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.9),
-		border_color, 12, 2)
-	style.content_margin_left = 10; style.content_margin_right = 10
-	style.content_margin_top = 10; style.content_margin_bottom = 10
-	frame.add_theme_stylebox_override("panel", style)
+	SlotStyler.apply_filled_style(frame, border_color)
 
 func _apply_empty_frame_style(frame: PanelContainer) -> void:
 	_apply_empty_frame_style_colored(frame, SLOT_EMPTY_COLOR)
 
 func _apply_empty_frame_style_colored(frame: PanelContainer, border_color: Color) -> void:
 	var bg := SLOT_EMPTY_BG if border_color == SLOT_EMPTY_COLOR else Color(UIColors.BG_DARK.r, UIColors.BG_DARK.g, UIColors.BG_DARK.b, 0.5)
-	var style := UIHelpers.create_rounded_stylebox(bg, border_color, 12, 2)
-	style.content_margin_left = 10; style.content_margin_right = 10
-	style.content_margin_top = 10; style.content_margin_bottom = 10
-	style.draw_center = true
-	frame.add_theme_stylebox_override("panel", style)
+	SlotStyler.apply_empty_style(frame, border_color, bg)
 
 func _update_pulse_animation() -> void:
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		_pulse_tween.kill()
-		_pulse_tween = null
+	_pulse_tween = PulseAnimator.stop_pulse(_pulse_tween)
 	var empty_frames: Array[PanelContainer] = []
 	for slot in _slot_nodes:
 		if not slot["is_filled"]:
 			empty_frames.append(slot["frame"] as PanelContainer)
 	if empty_frames.is_empty(): return
-	_pulse_tween = create_tween()
-	_pulse_tween.set_loops()
-	for frame in empty_frames:
-		frame.modulate = Color(1, 1, 1, 1)
-	_pulse_tween.tween_method(func(alpha: float):
-		for f in empty_frames:
-			if is_instance_valid(f): f.modulate.a = alpha
-	, 1.0, 0.45, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_pulse_tween.tween_method(func(alpha: float):
-		for f in empty_frames:
-			if is_instance_valid(f): f.modulate.a = alpha
-	, 0.45, 1.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_pulse_tween = PulseAnimator.start_pulse(self, empty_frames)
 
 func _apply_card_zoom(focused: bool) -> void:
-	if _join_card_panel != null:
-		_join_card_panel.add_theme_stylebox_override("panel", _join_card_focus if focused else _join_card_normal)
-		
-	if _join_card_container == null: return
-	
-	var pivot_size := _join_card_container.size
-	if pivot_size.x <= 0 or pivot_size.y <= 0:
-		pivot_size = _join_card_container.get_minimum_size()
-	if pivot_size.x > 0 and pivot_size.y > 0:
-		_join_card_container.pivot_offset = pivot_size * 0.5
-		
-	var target_scale := Vector2(1.16, 1.16) if focused else Vector2.ONE
-	
-	if _join_card_tween != null and _join_card_tween.is_valid():
-		_join_card_tween.kill()
-		
-	_join_card_tween = create_tween()
-	_join_card_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	_join_card_tween.tween_property(_join_card_container, "scale", target_scale, 0.18)
-	_join_card_container.z_index = 2 if focused else 0
+	JoinCardHelper.apply_card_zoom(self, focused)
 
 func _ordered_peer_ids(player_map: Dictionary) -> Array[int]:
 	return PlayerSlotPanel.ordered_peer_ids(player_map)

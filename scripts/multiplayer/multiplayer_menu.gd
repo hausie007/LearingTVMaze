@@ -1,6 +1,7 @@
 extends Control
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+const HostCardBuilder := preload("res://scripts/ui/host_card_builder.gd")
 
 @onready var main_vbox: VBoxContainer = %MainVBox
 @onready var center_container: CenterContainer = %CenterContainer
@@ -44,6 +45,12 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	NetworkManager.stop_discovery()
+	if NetworkManager.discovery_updated.is_connected(_on_discovery_updated):
+		NetworkManager.discovery_updated.disconnect(_on_discovery_updated)
+	if NetworkManager.host_discovered.is_connected(_on_host_discovered):
+		NetworkManager.host_discovered.disconnect(_on_host_discovered)
+	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
+		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("ui_cancel"):
@@ -108,75 +115,7 @@ func _rebuild_host_cards() -> void:
 		_host_cards.append(card)
 
 func _create_host_card(host: Dictionary, index: int) -> Button:
-	var button: Button = Button.new()
-	button.custom_minimum_size = Vector2(1000, 136)
-	button.text = ""
-	button.focus_mode = Control.FOCUS_ALL
-	UIHelpers.apply_style_to_button(button, UIColors.BLUE)
-
-	var card_margin: MarginContainer = MarginContainer.new()
-	card_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	card_margin.add_theme_constant_override("margin_left", 18)
-	card_margin.add_theme_constant_override("margin_top", 12)
-	card_margin.add_theme_constant_override("margin_right", 18)
-	card_margin.add_theme_constant_override("margin_bottom", 12)
-	button.add_child(card_margin)
-
-	var row: HBoxContainer = HBoxContainer.new()
-	row.add_theme_constant_override("separation", 18)
-	card_margin.add_child(row)
-
-	var icon: CharacterPreview = CharacterPreview.new()
-	icon.custom_minimum_size = Vector2(104, 104)
-	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	var host_character_id: String = String(host.get("character_id", ""))
-	var icon_data: Dictionary = CharacterCatalog.get_preview_data_by_id(host_character_id)
-	var icon_frames: Array[Texture2D] = []
-	for item in icon_data.get("frames", []):
-		if item is Texture2D:
-			icon_frames.append(item)
-	if not icon_frames.is_empty():
-		icon.set_character(icon_frames, float(icon_data.get("fps", 1.0)))
-	else:
-		var fallback: Texture2D = CharacterCatalog.get_texture_by_id(host_character_id)
-		if fallback != null:
-			icon.set_character([fallback], 1.0)
-	row.add_child(icon)
-
-	var text_box: VBoxContainer = VBoxContainer.new()
-	text_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text_box.add_theme_constant_override("separation", 6)
-	row.add_child(text_box)
-
-	var host_name: String = String(host.get("host_name", "Host"))
-	var host_ip: String = String(host.get("ip", ""))
-	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
-	var player_count: int = int(host.get("player_count", 1))
-	var max_players: int = int(host.get("max_players", 2))
-
-	var title: Label = Label.new()
-	title.text = host_name
-	title.add_theme_font_size_override("font_size", 34)
-	text_box.add_child(title)
-
-	var subtitle: Label = Label.new()
-	subtitle.text = "%s | %d/%d | %s" % [host_ip, player_count, max_players, theme_title]
-	subtitle.add_theme_font_size_override("font_size", 24)
-	subtitle.modulate = Color(1, 1, 1, 0.8)
-	text_box.add_child(subtitle)
-
-	var footer: Label = Label.new()
-	footer.text = "%s | %s | %s | %s" % [
-		_host_mission_title(host),
-		_host_pickup_title(host),
-		_host_role_summary(host),
-		CharacterCatalog.display_name_for_id(host_character_id),
-	]
-	footer.add_theme_font_size_override("font_size", 24)
-	footer.modulate = Color(0.92, 0.75, 0.2, 1)
-	text_box.add_child(footer)
-
+	var button: Button = HostCardBuilder.create_card(host, index, true)
 	button.pressed.connect(func():
 		_select_host_index(index)
 	)
@@ -213,18 +152,10 @@ func _go_back() -> void:
 	get_tree().change_scene_to_file(Scenes.HOME)
 
 func _host_mission_title(host: Dictionary) -> String:
-	return String(host.get("mission_title", host.get("game_style_title", tr("mission_follow_trail"))))
+	return HostCardBuilder.get_host_mission_title(host)
 
 func _host_pickup_title(host: Dictionary) -> String:
-	var training := String(host.get("training_type", NetworkManager.TRAINING_WORDS))
-	if training == NetworkManager.TRAINING_NONE:
-		return tr("pickup_none")
-	var title := String(host.get("training_type_title", ""))
-	if not title.is_empty():
-		return title
-	return tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
+	return HostCardBuilder.get_host_pickup_title(host)
 
 func _host_role_summary(host: Dictionary) -> String:
-	var mission_id := String(host.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
-	var chaser_enabled := bool(host.get("chaser_enabled", false))
-	return tr(String(host.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
+	return HostCardBuilder.get_host_role_summary(host)

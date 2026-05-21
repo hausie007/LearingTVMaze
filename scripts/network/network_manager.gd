@@ -336,21 +336,21 @@ func _build_discovery_payload() -> Dictionary:
 		"app": APP_ID,
 		"version": PROTOCOL_VERSION,
 		"session_id": _session_id,
-		"host_name": "Learning Maze Host",
+		"host_name": tr("app_title") + " (" + tr("mp_slot_host") + ")",
 		"port": GAME_PORT,
 		"theme_dir": String(host_config.get("theme_dir", "default")),
 		"theme_title": String(host_config.get("theme_title", host_config.get("theme_dir", "default"))),
 		"mission_id": String(host_config.get("mission_id", MISSION_FOLLOW_TRAIL)),
-		"mission_title": String(host_config.get("mission_title", "Follow the Trail")),
+		"mission_title": String(host_config.get("mission_title", tr("mission_follow_trail"))),
 		"mission_goal_key": String(host_config.get("mission_goal_key", "")),
 		"role_summary_key": String(host_config.get("role_summary_key", MissionCatalog.role_summary_key(
 			String(host_config.get("mission_id", MISSION_FOLLOW_TRAIL)),
 			bool(host_config.get("chaser_enabled", false))
 		))),
 		"game_style": String(host_config.get("game_style", STYLE_PATH)),
-		"game_style_title": String(host_config.get("game_style_title", "Path")),
+		"game_style_title": String(host_config.get("game_style_title", tr("style_path"))),
 		"training_type": String(host_config.get("training_type", TRAINING_WORDS)),
-		"training_type_title": String(host_config.get("training_type_title", "Words")),
+		"training_type_title": String(host_config.get("training_type_title", tr("training_words"))),
 		"chaser_enabled": bool(host_config.get("chaser_enabled", false)),
 		"traps_enabled": bool(host_config.get("traps_enabled", false)),
 		"difficulty": int(host_config.get("difficulty", 1)),
@@ -521,7 +521,7 @@ func _normalize_host_config() -> void:
 	if not host_config.has("game_style"):
 		host_config["game_style"] = STYLE_PATH
 	if not host_config.has("game_style_title"):
-		host_config["game_style_title"] = "Path"
+		host_config["game_style_title"] = tr("style_path")
 	if not host_config.has("mission_id"):
 		host_config["mission_id"] = MissionCatalog.mission_from_config(
 			String(host_config.get("game_style", STYLE_PATH)),

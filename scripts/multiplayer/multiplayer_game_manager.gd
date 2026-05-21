@@ -4,6 +4,8 @@ class_name MultiplayerGameManager
 const CollectibleScene := preload("res://scenes/collectible.tscn")
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
 const LearningRecapBuilder := preload("res://scripts/learning_recap.gd")
+const MpHudBadgeManager := preload("res://scripts/multiplayer/mp_hud_badge_manager.gd")
+const AvatarSpawner := preload("res://scripts/multiplayer/avatar_spawner.gd")
 
 const FINISH_SHORTCUT_MP_CHASER := "mp_chaser"
 const FINISH_SHORTCUT_PICKUP_PREFIX := "pickup:"
@@ -136,6 +138,17 @@ func _ready() -> void:
 	_apply_session(session)
 
 func _exit_tree() -> void:
+	if NetworkManager.input_received.is_connected(_on_input_received):
+		NetworkManager.input_received.disconnect(_on_input_received)
+	if NetworkManager.trap_use_received.is_connected(_on_trap_use_received):
+		NetworkManager.trap_use_received.disconnect(_on_trap_use_received)
+	if NetworkManager.peer_disconnected.is_connected(_on_peer_disconnected):
+		NetworkManager.peer_disconnected.disconnect(_on_peer_disconnected)
+	if NetworkManager.game_started.is_connected(_on_game_started):
+		NetworkManager.game_started.disconnect(_on_game_started)
+	if NetworkManager.debug_status_changed.is_connected(_on_network_debug_changed):
+		NetworkManager.debug_status_changed.disconnect(_on_network_debug_changed)
+
 	_update_local_dpad_confusion_visual(false)
 	Config.theme_dir_name = _saved_theme_dir
 	Config.difficulty = _saved_difficulty
@@ -260,96 +273,10 @@ func _apply_session(session: Dictionary) -> void:
 	_set_network_debug("net", "Game running on host")
 
 func _setup_mp_player_badges(session: Dictionary) -> void:
-	if hud == null:
-		return
-	var players_data: Array[Dictionary] = []
-	var players := session.get("players", {}) as Dictionary
-	var roles := session.get("roles", {}) as Dictionary
-
-	var peer_ids: Array[int] = []
-	for raw_key in players.keys():
-		peer_ids.append(int(raw_key))
-	peer_ids.sort()
-
-	for peer_id in peer_ids:
-		var info := players.get(peer_id, players.get(str(peer_id), {})) as Dictionary
-		var role := String(roles.get(peer_id, roles.get(str(peer_id), info.get("role", NetworkManager.ROLE_COLLECTOR))))
-
-		if _is_maze_race_mode() or _is_race_mode():
-			role = NetworkManager.ROLE_RACER
-
-		var color: Color
-		if _is_race_mode():
-			color = _distinct_race_color(peer_id, String(info.get("character_id", "")))
-		else:
-			var palette := AvatarAccent.palette_from_character_id(String(info.get("character_id", "")))
-			color = palette.get("accent", UIColors.BLUE if peer_id == NetworkManager.HOST_PEER_ID else Color("#FF5555"))
-
-		players_data.append({
-			"character_id": String(info.get("character_id", "")),
-			"color": color,
-			"role": _chip_role_for_peer(peer_id, role),
-			"trap_available": bool(_trap_available_by_peer.get(peer_id, false)),
-			"trap_texture": _trap_texture(),
-			"confusion_moves": int(_confusion_moves_by_peer.get(peer_id, 0)),
-			"is_confused": int(_confusion_moves_by_peer.get(peer_id, 0)) > 0,
-		})
-
-	hud.set_players(players_data)
+	MpHudBadgeManager.setup_mp_player_badges(self, session)
 
 func _spawn_avatars(session: Dictionary) -> void:
-	for child in players_root.get_children():
-		child.queue_free()
-	_avatars.clear()
-	_held_directions.clear()
-	_move_cooldowns.clear()
-	_previous_cells_by_peer.clear()
-
-	var players := session.get("players", {}) as Dictionary
-	var roles := session.get("roles", {}) as Dictionary
-	var spawn_slots := session.get("spawn_slots", {}) as Dictionary
-	var corners := [
-		Vector2i(0, 0),
-		Vector2i(_maze.grid_size.x - 1, 0),
-		Vector2i(0, _maze.grid_size.y - 1),
-		Vector2i(_maze.grid_size.x - 1, _maze.grid_size.y - 1),
-	]
-
-	var peer_ids: Array[int] = []
-	for raw_key in players.keys():
-		peer_ids.append(int(raw_key))
-	peer_ids.sort()
-	for peer_id in peer_ids:
-		var info := players.get(peer_id, players.get(str(peer_id), {})) as Dictionary
-		var slot := clampi(int(spawn_slots.get(peer_id, spawn_slots.get(str(peer_id), 0))), 0, 3)
-		var role := String(roles.get(peer_id, roles.get(str(peer_id), info.get("role", NetworkManager.ROLE_COLLECTOR))))
-		if _is_roleless_next_symbol_mode():
-			role = ""
-		if _is_maze_race_mode():
-			role = NetworkManager.ROLE_RACER
-		if _is_race_mode():
-			role = NetworkManager.ROLE_RACER
-		var spawn_grid := _spawn_for_mode(role, slot, corners)
-		var avatar := avatar_scene.instantiate() as MultiplayerAvatar
-		avatar.setup(peer_id, String(info.get("character_id", "")), maze_renderer, spawn_grid, role)
-		if _should_delay_path_chaser(role):
-			avatar.visible = false
-			_delayed_chaser_peer_ids.append(peer_id)
-			var initial_moves := _path_chaser_trigger_moves()
-			if peer_id == NetworkManager.HOST_PEER_ID:
-				if hud != null:
-					hud.set_mission_description(tr("mp_chaser_waiting_steps") % initial_moves, false)
-			else:
-				NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", initial_moves)
-		players_root.add_child(avatar)
-		_avatars[peer_id] = avatar
-		_move_cooldowns[peer_id] = 0.0
-		if _is_race_mode():
-			_race_progress[peer_id] = 0
-			_race_colors_by_peer[peer_id] = _distinct_race_color(peer_id, String(info.get("character_id", "")))
-			# Build each racer's mirrored version of the canonical route so bottom
-			# spawns stay in the bottom half and every racer follows the same path shape.
-			_race_sequences_by_peer[peer_id] = _race_sequence_for_start(spawn_grid)
+	AvatarSpawner.spawn_avatars(self, session)
 
 func _initialize_trap_state_for_session(session: Dictionary) -> void:
 	_trap_available_by_peer.clear()
@@ -636,7 +563,8 @@ func _send_trap_status(peer_id: int) -> void:
 	var available := bool(_trap_available_by_peer.get(peer_id, false))
 	var remaining := int(_confusion_moves_by_peer.get(peer_id, 0))
 	if peer_id != NetworkManager.HOST_PEER_ID:
-		NetworkManager.rpc_id(peer_id, "rpc_update_remote_trap_status", available, remaining)
+		if multiplayer.get_peers().has(peer_id):
+			NetworkManager.rpc_id(peer_id, "rpc_update_remote_trap_status", available, remaining)
 
 func _refresh_player_badges_for_traps() -> void:
 	if hud == null:
@@ -768,14 +696,7 @@ func _refresh_status_label() -> void:
 
 ## Rebuild player chips after a role phase change so label and emoji stay in sync.
 func _refresh_mp_player_badges() -> void:
-	if hud == null:
-		return
-	_setup_mp_player_badges(NetworkManager.current_session)
-	if _is_chaser_variant():
-		var remaining := 0
-		if not _path_chasers_released:
-			remaining = maxi(0, _path_chaser_trigger_moves() - _collector_move_count)
-		hud.update_chaser_countdown(remaining)
+	MpHudBadgeManager.refresh_mp_player_badges(self)
 
 func _refresh_shared_hud() -> void:
 	if hud == null or _collectible_spawner == null:
@@ -901,7 +822,8 @@ func _update_hud_mission_description() -> void:
 				else:
 					hud.set_mission_description(goal_str, enlarge_hud)
 		else:
-			NetworkManager.rpc_id(peer_id, "rpc_update_remote_goal", goal_str, _chip_role_for_peer(peer_id))
+			if multiplayer.get_peers().has(peer_id):
+				NetworkManager.rpc_id(peer_id, "rpc_update_remote_goal", goal_str, _chip_role_for_peer(peer_id))
 
 func _get_role_goal(peer_id: int) -> String:
 	var role := _role_for_peer(peer_id)
@@ -1003,6 +925,8 @@ func _speak_completed_word_if_needed(lang_override: String = "") -> void:
 	if word_lang.is_empty():
 		word_lang = String(Config.current_word.get("lang", ""))
 	get_tree().create_timer(1.0).timeout.connect(func():
+		if not is_inside_tree() or get_tree() == null:
+			return
 		if _win_screen != null and _win_screen.is_active():
 			return
 		TTS.speak(phrase, 0.7, word_lang)
@@ -1062,7 +986,8 @@ func _check_path_chaser_release() -> void:
 				if hud != null:
 					hud.set_mission_description(tr("mp_chaser_get_ready_steps") % remaining, false)
 			else:
-				NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", remaining)
+				if multiplayer.get_peers().has(peer_id):
+					NetworkManager.rpc_id(peer_id, "rpc_chaser_countdown", remaining)
 			
 	if _collector_move_count < trigger_moves:
 		return
@@ -1085,15 +1010,18 @@ func _release_path_chasers() -> void:
 		
 		if peer_id == NetworkManager.HOST_PEER_ID:
 			if hud != null:
-				hud.set_mission_description("GO!", false)
+				hud.set_mission_description(tr("mp_chaser_go"), false)
 				var timer := get_tree().create_timer(1.5)
-				timer.connect("timeout", func():
+				timer.timeout.connect(func():
+					if not is_inside_tree() or get_tree() == null:
+						return
 					if hud != null and is_instance_valid(hud):
 						var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
 						hud.set_mission_description(_get_role_goal(NetworkManager.HOST_PEER_ID), enlarge_hud)
 				)
 		else:
-			NetworkManager.rpc_id(peer_id, "rpc_chaser_released")
+			if multiplayer.get_peers().has(peer_id):
+				NetworkManager.rpc_id(peer_id, "rpc_chaser_released")
 	_delayed_chaser_peer_ids.clear()
 
 func _can_collect(peer_id: int) -> bool:
@@ -1859,7 +1787,8 @@ func _send_remote_result(title_text: String, character_ids: Array[String]) -> vo
 	for key in _avatars.keys():
 		var peer_id := int(key)
 		if peer_id != NetworkManager.HOST_PEER_ID:
-			NetworkManager.rpc_id(peer_id, "rpc_update_remote_result", title_text, character_ids)
+			if multiplayer.get_peers().has(peer_id):
+				NetworkManager.rpc_id(peer_id, "rpc_update_remote_result", title_text, character_ids)
 
 func _speak_race_completion_once() -> void:
 	if not Config.voice_hints:
@@ -1874,6 +1803,8 @@ func _speak_race_completion_once() -> void:
 	_completed_word_spoken = true
 	var word_lang := String(Config.current_word.get("lang", ""))
 	get_tree().create_timer(0.8).timeout.connect(func():
+		if not is_inside_tree() or get_tree() == null:
+			return
 		if _win_screen != null and _win_screen.is_active():
 			return
 		TTS.speak(phrase, 0.7, word_lang)
