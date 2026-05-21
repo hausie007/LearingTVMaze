@@ -11,7 +11,7 @@
   "colors": {
     "wall": "#000000",
     "wall_glow_factor": 1.0,
-    "wall_border": "#1B2433",
+    "wall_border": "#8E9AA6",
     "floor": "#B0B0B0",
     "start_cell": "#FFFFFF",
     "end_cell": "#FFFAD6",

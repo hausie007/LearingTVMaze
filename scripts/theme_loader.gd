@@ -22,6 +22,7 @@ var col_texture:    Texture2D = null
 var chaser_texture: Texture2D = null
 var trap_texture:   Texture2D = null
 var floor_texture:  Texture2D = null
+var theme_name:     String = ""
 
 var wall_mode: String = "simple"
 var wall_top_h_texture: Texture2D = null
@@ -127,6 +128,8 @@ func load_theme(override_dir_name: String = "") -> void:
 				dir_path = user_path
 			else:
 				dir_path = "res://themes/default"
+
+	theme_name = dir_path.get_file()
 
 	player_frames.clear()
 	chaser_frames.clear()

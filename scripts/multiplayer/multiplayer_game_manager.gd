@@ -578,9 +578,10 @@ func _race_marker_positions() -> Array[Vector2i]:
 	for markers_value in _race_markers_by_peer.values():
 		var markers := markers_value as Array
 		for marker_value in markers:
-			var marker := marker_value as Collectible
-			if marker != null and is_instance_valid(marker):
-				result.append(marker.grid_pos)
+			if is_instance_valid(marker_value):
+				var marker := marker_value as Collectible
+				if marker != null:
+					result.append(marker.grid_pos)
 	return result
 
 func _trigger_trap_for_peer(peer_id: int, pos: Vector2i) -> void:

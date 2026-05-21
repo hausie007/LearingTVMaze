@@ -169,6 +169,29 @@ static func _apply_field_style(btn: Button) -> void:
 	if UIHelpers.is_likely_tv():
 		btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	# Dynamic organic scale-up and scale-down on focus
+	if not btn.has_meta("styled_focus_animations"):
+		btn.set_meta("styled_focus_animations", true)
+		
+		btn.item_rect_changed.connect(func():
+			if is_instance_valid(btn):
+				btn.pivot_offset = btn.size * 0.5
+		)
+		btn.pivot_offset = btn.size * 0.5
+
+		btn.focus_entered.connect(func():
+			if is_instance_valid(btn):
+				var tw := btn.create_tween()
+				tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				tw.tween_property(btn, "scale", Vector2(1.05, 1.05), 0.15)
+		)
+		btn.focus_exited.connect(func():
+			if is_instance_valid(btn):
+				var tw := btn.create_tween()
+				tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				tw.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15)
+		)
+
 
 ## Wire a Button's gui_input so D-pad Left/Right cycles the value.
 ## [cycle_func] receives -1 (left) or +1 (right).
@@ -205,10 +228,14 @@ static func setup_arrow_visibility(btn: Button, left: Label, right: Label) -> vo
 	left.modulate.a = 0.0
 	right.modulate.a = 0.0
 	btn.focus_entered.connect(func():
-		left.modulate.a = 1.0
-		right.modulate.a = 1.0
+		if is_instance_valid(left) and is_instance_valid(right):
+			var tw := btn.create_tween().set_parallel(true)
+			tw.tween_property(left, "modulate:a", 1.0, 0.15)
+			tw.tween_property(right, "modulate:a", 1.0, 0.15)
 	)
 	btn.focus_exited.connect(func():
-		left.modulate.a = 0.0
-		right.modulate.a = 0.0
+		if is_instance_valid(left) and is_instance_valid(right):
+			var tw := btn.create_tween().set_parallel(true)
+			tw.tween_property(left, "modulate:a", 0.0, 0.15)
+			tw.tween_property(right, "modulate:a", 0.0, 0.15)
 	)

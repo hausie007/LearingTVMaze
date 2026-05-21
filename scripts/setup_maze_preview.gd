@@ -105,6 +105,10 @@ func _draw_classic_preview(offset: Vector2, maze_size_px: Vector2, cell_size: fl
 			for rect_cmd: MazeCellDrawer.RectCmd in commands["rects"]:
 				draw_rect(Rect2(rect_cmd.pos, rect_cmd.size), rect_cmd.color)
 
+	if _theme_loader.color_wall_border.a > 0.0:
+		for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, offset, int(cell_size)):
+			draw_line(seg.p0, seg.p1, _theme_loader.color_wall_border, wall_thickness + 4.0, true)
+
 	for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, offset, int(cell_size)):
 		draw_line(seg.p0, seg.p1, _theme_loader.color_wall, wall_thickness, true)
 

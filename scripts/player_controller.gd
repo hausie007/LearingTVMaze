@@ -56,6 +56,7 @@ var _shake_tween: Tween = null
 var _move_tween: Tween = null
 var _animator: FrameAnimator = null
 var _confusion_visual_version: int = 0
+var _outline_sprites: Array[Sprite2D] = []
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -71,6 +72,8 @@ func rebuild_visual() -> void:
 	if _visual:
 		_visual.queue_free()
 		_visual = null
+
+	_outline_sprites.clear()
 
 	var cs: float = 120.0
 	if maze_renderer:
@@ -103,6 +106,35 @@ func rebuild_visual() -> void:
 
 		_visual = sprite
 
+		# Add dynamic legibility outline/shadow based on active theme
+		if theme_loader:
+			var t_name := theme_loader.theme_name.to_lower()
+			if t_name == "scary":
+				var offsets := [
+					Vector2(-2.0, 0.0),
+					Vector2(2.0, 0.0),
+					Vector2(0.0, -2.0),
+					Vector2(0.0, 2.0)
+				]
+				for offset in offsets:
+					var outline_sprite := Sprite2D.new()
+					outline_sprite.texture = theme_tex
+					outline_sprite.centered = true
+					outline_sprite.show_behind_parent = true
+					outline_sprite.position = offset / scale_factor
+					outline_sprite.modulate = Color("f5f5f5")
+					sprite.add_child(outline_sprite)
+					_outline_sprites.append(outline_sprite)
+			elif t_name == "thiefs" or t_name == "thieves":
+				var shadow_sprite := Sprite2D.new()
+				shadow_sprite.texture = theme_tex
+				shadow_sprite.centered = true
+				shadow_sprite.show_behind_parent = true
+				shadow_sprite.position = Vector2(0.0, 4.0) / scale_factor
+				shadow_sprite.modulate = Color("ffea6699")
+				sprite.add_child(shadow_sprite)
+				_outline_sprites.append(shadow_sprite)
+
 		# Add animation support
 		if theme_loader and not theme_loader.player_frames.is_empty():
 			if _animator == null:
@@ -134,6 +166,13 @@ func rebuild_visual() -> void:
 ## Godot's focus-based propagation, but GameManager's process_mode guards
 ## for paused/win states compensate for this.
 func _process(delta: float) -> void:
+	# Synchronize outlines/shadow textures with the player sprite
+	if _visual is Sprite2D and not _outline_sprites.is_empty():
+		var parent_tex: Texture2D = _visual.texture
+		for outline in _outline_sprites:
+			if outline.texture != parent_tex:
+				outline.texture = parent_tex
+
 	# Tick cooldown.
 	if _cooldown_remaining > 0.0:
 		_cooldown_remaining -= delta

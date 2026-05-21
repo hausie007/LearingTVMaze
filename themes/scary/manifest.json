@@ -10,7 +10,7 @@
   "colors": {
 	"wall": "#D670FF",
 	"wall_glow_factor": 1.0,
-	"wall_border": "#0D0714",
+	"wall_border": "#8F2B91",
 	"start_cell": "#6A2E5E",
 	"end_cell": "#A85A2A",
 	"player": "#38A9FF",

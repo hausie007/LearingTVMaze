@@ -529,7 +529,7 @@ func _build_ui() -> void:
 
 	# Next Round + Timer
 	var next_hbox := HBoxContainer.new()
-	next_hbox.add_theme_constant_override("separation", 20)
+	next_hbox.add_theme_constant_override("separation", 40)
 	next_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	button_vbox.add_child(next_hbox)
 

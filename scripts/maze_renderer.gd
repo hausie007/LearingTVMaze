@@ -254,6 +254,18 @@ func _draw_painted_icons(offset: Vector2, cs: int) -> void:
 				_add_sprite(pos, cs, maze_theme.start_texture)
 
 func _add_wall_line(p0: Vector2, p1: Vector2) -> void:
+	if maze_theme.color_wall_border.a > 0.0:
+		var border := Line2D.new()
+		border.add_point(p0)
+		border.add_point(p1)
+		border.width = _current_wall_thickness + 4.0
+		border.default_color = maze_theme.color_wall_border
+		border.joint_mode = Line2D.LINE_JOINT_ROUND
+		border.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		border.end_cap_mode = Line2D.LINE_CAP_ROUND
+		border.antialiased = not Config.performance_mode
+		add_child(border)
+
 	var line := Line2D.new()
 	line.add_point(p0)
 	line.add_point(p1)

@@ -109,6 +109,11 @@ func _draw() -> void:
 					_draw_icon(offset + pos, int_cs, theme_loader.end_texture)
 
 func _draw_walls_immediate(cs: int, wt: int, offset: Vector2) -> void:
+	if theme_loader.color_wall_border.a > 0.0:
+		var border_color := theme_loader.color_wall_border
+		for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, offset, cs):
+			draw_line(seg.p0, seg.p1, border_color, wt + 4, true)
+
 	var color := theme_loader.color_wall
 	for seg: MazeCellDrawer.WallSegment in MazeCellDrawer.get_wall_segments(_maze, offset, cs):
 		draw_line(seg.p0, seg.p1, color, wt, true)

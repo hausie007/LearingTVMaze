@@ -883,6 +883,13 @@ func _on_game_started(_session: Dictionary) -> void:
 	my_info["role"] = role_tag
 	if not _selected_character_palette.is_empty():
 		my_info["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
+
+	# Resolve initial trap availability
+	var style := String(session_config.get("game_style", NetworkManager.STYLE_PATH))
+	var mission_id := String(session_config.get("mission_id", ""))
+	var chaser_enabled := bool(session_config.get("chaser_enabled", false)) and style != NetworkManager.STYLE_RACE
+	var traps_enabled := bool(session_config.get("traps_enabled", false)) and Config.traps_allowed_for_session(style, chaser_enabled, mission_id)
+	my_info["trap_available"] = traps_enabled
 	my_info["trap_texture"] = _remote_trap_texture()
 		
 	# Construct the player badge

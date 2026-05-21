@@ -12,7 +12,7 @@
   "colors": {
     "wall": "#022154",
     "wall_glow_factor": 1.0,
-    "wall_border": "#021A44",
+    "wall_border": "#E6D7C3",
     "floor": "#EBFCFF",
     "start_cell": "#B9F6CA",
     "end_cell": "#A8E6FF",
