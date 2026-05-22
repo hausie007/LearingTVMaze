@@ -91,8 +91,8 @@ func apply_screensaver_settings() -> void:
 		reset()
 	else:
 		_active = true
-		tier2_sec = float(timeout)
-		tier1_sec = float(timeout) * 0.20
+		tier1_sec = float(timeout)
+		tier2_sec = float(timeout) * 3.0
 		reset()
 
 func _dim_screen(target_alpha: float, duration: float) -> void:
