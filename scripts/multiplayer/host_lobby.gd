@@ -30,8 +30,7 @@ var _pulse_tween: Tween = null
 
 var _last_lobby_state: Dictionary = {}
 
-# OLED burn-in protection
-var _oled_guard: OledIdleGuard = null
+
 
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
@@ -59,14 +58,8 @@ func _ready() -> void:
 	# so the system can enter Ambient Mode if the host leaves it unattended.
 	DisplayServer.screen_set_keep_on(false)
 
-	# OLED idle guard: dim overlay after 3 min, go home after 5 min.
-	_oled_guard = OledIdleGuard.new()
-	_oled_guard.name = "HostLobbyOledGuard"
-	add_child(_oled_guard)
-	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
-	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
-	_oled_guard.idle_reset.connect(_on_oled_reset)
-	_oled_guard.start(180.0, 300.0)
+	# Centralized OLED idle guard transition
+	IdleManager.idle_tier_2.connect(_on_idle_tier2_global)
 
 func _exit_tree() -> void:
 	if NetworkManager.lobby_updated.is_connected(_on_lobby_updated):
@@ -740,31 +733,13 @@ func _on_game_started(_session: Dictionary) -> void:
 	Config.remember_last_multiplayer_host_session(NetworkManager.host_config)
 	Config.save_settings()
 	DisplayServer.screen_set_keep_on(true)
-	if _oled_guard:
-		_oled_guard.stop()
 	get_tree().change_scene_to_file(Scenes.MP_GAME)
 
 
-## Called after 3 min of lobby idle — dim the whole screen and D-pad.
-func _on_oled_tier1() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 0.30, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if DPad and DPad.visible:
-		DPad.dim(0.05, 3.0)
-
-
-## Called after 5 min of lobby idle — leave and go home.
-func _on_oled_tier2() -> void:
+func _on_idle_tier2_global() -> void:
+	IdleManager.reset()
 	NetworkManager.leave_session()
 	get_tree().change_scene_to_file(Scenes.HOME)
-
-
-## Called on any input — restore brightness.
-func _on_oled_reset() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if DPad:
-		DPad.undim(0.3)
 
 # ── Layout ──────────────────────────────────────────────────────────────────
 

@@ -73,10 +73,6 @@ var _player_trap_available: bool = false
 var _player_confusion_moves: int = 0
 var _trap_input_unlock_msec: int = 0
 
-# OLED burn-in protection: idle guard for active gameplay HUD dimming.
-var _oled_guard: OledIdleGuard = null
-# OLED burn-in protection: separate guard while the pause dialog is open.
-var _pause_guard: OledIdleGuard = null
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -126,36 +122,6 @@ func _ready() -> void:
 	# Generate and display the first maze.
 	_start_new_maze()
 
-	# ── OLED idle guard (gameplay HUD dimming) ───────────────────────────────
-	_oled_guard = OledIdleGuard.new()
-	_oled_guard.name = "OledIdleGuard"
-	add_child(_oled_guard)
-	_oled_guard.idle_tier_1.connect(func():
-		hud.dim()
-		var tw := create_tween()
-		tw.tween_property(maze_renderer, "modulate:a", 0.28, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		if DPad and DPad.visible:
-			DPad.dim(0.10, 2.0)
-	)
-	_oled_guard.idle_reset.connect(func():
-		hud.undim()
-		var tw := create_tween()
-		tw.tween_property(maze_renderer, "modulate:a", 1.0, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		if DPad:
-			DPad.undim()
-	)
-	_oled_guard.start(45.0, 180.0)
-
-
-	# ── OLED pause guard ─────────────────────────────────────────────────────
-	_pause_guard = OledIdleGuard.new()
-	_pause_guard.name = "OledPauseGuard"
-	add_child(_pause_guard)
-	# Tier-1: dim the pause dialog overlay after 30 s
-	_pause_guard.idle_tier_1.connect(_on_pause_guard_tier1)
-	# Tier-2: aggressive dim after 2 min
-	_pause_guard.idle_tier_2.connect(_on_pause_guard_tier2)
-	# Tier-3 is handled inside PauseDialog (5 min → go home)
 
 func _exit_tree() -> void:
 	_player_confusion_moves = 0
@@ -191,12 +157,6 @@ func _pause() -> void:
 	pause_dialog.show_dialog()
 	if DPad != null and DPad.has_method("set_controls_reversed_visual"):
 		DPad.call("set_controls_reversed_visual", false)
-	# Stop gameplay guard; start pause guard
-	if _oled_guard:
-		_oled_guard.stop()
-	if _pause_guard:
-		_pause_guard.reset()
-		_pause_guard.start(30.0, 120.0)
 	DisplayServer.screen_set_keep_on(false)
 
 
@@ -206,13 +166,6 @@ func _unpause() -> void:
 	pause_dialog.hide_dialog()
 	_arm_trap_input_lockout()
 	_update_local_dpad_confusion_visual()
-	# Stop pause guard; resume gameplay guard
-	if _pause_guard:
-		_pause_guard.stop()
-	if _oled_guard:
-		_oled_guard.reset()
-		_oled_guard.start()
-	hud.undim(0.3)
 	DisplayServer.screen_set_keep_on(true)
 
 
@@ -225,17 +178,6 @@ func _on_pause_cancelled() -> void:
 	_unpause()
 
 
-# ── OLED Pause Guard Callbacks ───────────────────────────────────────────────
-
-## Called after 30 s of pause-screen idle: ask PauseDialog to start its subtle animation.
-func _on_pause_guard_tier1() -> void:
-	pause_dialog.start_idle_animation()
-
-
-## Called after 2 min of pause-screen idle: ask PauseDialog to show aggressive dim.
-## PauseDialog owns the final tier (5 min → go home) via its own internal timer.
-func _on_pause_guard_tier2() -> void:
-	pause_dialog.show_idle_warning()
 
 
 # ── Game Flow ────────────────────────────────────────────────────────────────
@@ -275,11 +217,8 @@ func _start_new_maze() -> void:
 	player.set_process(true)
 	player.set_physics_process(true)
 	player.set_process_input(true)
-	# Reset idle guard so a fresh maze always starts at full HUD brightness
-	if _oled_guard:
-		_oled_guard.reset()
-		hud.undim(0.0)  # instant, no animation needed at maze start
-
+	# Reset global idle timer so a fresh maze always starts at full brightness
+	IdleManager.reset()
 	# 1. Generate
 	_current_maze = maze_generator.generate_race(Config.grid_size) if Config.game_style == Config.STYLE_RACE else maze_generator.generate()
 	if Config.game_style == Config.STYLE_RACE:
@@ -364,10 +303,8 @@ func _on_player_reached_end() -> void:
 func _on_player_moved(new_pos: Vector2i) -> void:
 	_move_count += 1
 	_consume_player_confusion_move()
-	# Any player movement counts as interaction → reset idle guard
-	if _oled_guard:
-		_oled_guard.reset()
-
+	# Any player movement counts as interaction → reset global idle timer
+	IdleManager.reset()
 	# Check chaser trigger and collision
 	if Config.chaser_enabled and not chaser_manager.is_active():
 		chaser_manager.check_trigger(_move_count)

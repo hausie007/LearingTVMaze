@@ -20,13 +20,13 @@ static func start_pulse(creator: Node, targets: Array, start_alpha: float = 1.0,
 		for node in targets:
 			if is_instance_valid(node) and node is Control:
 				node.modulate.a = alpha
-	, start_alpha, end_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	, start_alpha, end_alpha, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	tween.tween_method(func(alpha: float):
 		for node in targets:
 			if is_instance_valid(node) and node is Control:
 				node.modulate.a = alpha
-	, end_alpha, start_alpha, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	, end_alpha, start_alpha, duration / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	return tween
 

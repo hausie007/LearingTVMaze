@@ -49,9 +49,6 @@ var _timer_remaining: float = 0.0
 var _timer_paused: bool = false
 var _is_active: bool = false
 
-# OLED burn-in protection: secondary idle guard that activates once the
-# auto-countdown is cancelled by player input.
-var _oled_guard: OledIdleGuard = null
 var _oled_pulse_tween: Tween = null
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -62,15 +59,8 @@ func _ready() -> void:
 	_build_ui()
 	_connect_virtual_dpad()
 
-	_oled_guard = OledIdleGuard.new()
-	_oled_guard.name = "WinScreenOledGuard"
-	add_child(_oled_guard)
-	# Tier 1 (60 s): dim the panel and pulse the Next Round button
-	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
-	# Tier 2 (3 min): go home
-	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
-	# Reset: undim immediately on any input
-	_oled_guard.idle_reset.connect(_on_oled_reset)
+	# Centralized OLED idle guard transition
+	IdleManager.idle_tier_2.connect(_on_idle_tier2_global)
 
 
 func _process(delta: float) -> void:
@@ -119,8 +109,7 @@ func _pause_countdown_from_input() -> void:
 	_timer_paused = true
 	if _timer_label:
 		_timer_label.text = ""
-	if _oled_guard:
-		_oled_guard.start(60.0, 180.0)
+
 
 func _refocus_win_button() -> void:
 	if not _is_active:
@@ -412,57 +401,15 @@ func hide_screen() -> void:
 		_container.visible = false
 		_container.modulate.a = 1.0
 	_update_recap_label()
-	# Stop and reset the OLED guard
-	if _oled_guard:
-		_oled_guard.stop()
 	# Clean up coop character previews added dynamically.
 	_clear_previews()
 	screen_hidden.emit()
 
 
-# ── OLED Idle Callbacks ───────────────────────────────────────────────────────
-
-## Called after 60 s of idle on the win screen (countdown already cancelled).
-## Dims the overlay and starts a gentle brightness pulse on the Next Round button.
-func _on_oled_tier1() -> void:
+func _on_idle_tier2_global() -> void:
 	if not _is_active:
 		return
-	# Fade the container slightly
-	var tw := create_tween()
-	tw.tween_property(_container, "modulate:a", 0.50, 2.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if DPad and DPad.visible:
-		DPad.dim(0.05, 2.5)
-	# Pulse the Next Round button brightness in a loop
-	if _next_button:
-		if _oled_pulse_tween and _oled_pulse_tween.is_valid():
-			_oled_pulse_tween.kill()
-		_oled_pulse_tween = create_tween().set_loops()
-		_oled_pulse_tween.tween_property(_next_button, "modulate:v", 0.55, 1.2).set_trans(Tween.TRANS_SINE)
-		_oled_pulse_tween.tween_property(_next_button, "modulate:v", 1.0, 1.2).set_trans(Tween.TRANS_SINE)
-
-
-## Called on any input — restore full brightness of the win/gotcha overlay.
-func _on_oled_reset() -> void:
-	if not _is_active:
-		return
-	# Kill the pulse and restore button
-	if _oled_pulse_tween and _oled_pulse_tween.is_valid():
-		_oled_pulse_tween.kill()
-		_oled_pulse_tween = null
-	if _next_button:
-		_next_button.modulate.v = 1.0
-	# Fade the container back to full opacity
-	var tw := create_tween()
-	tw.tween_property(_container, "modulate:a", 1.0, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if DPad:
-		DPad.undim(0.25)
-
-
-## Called after 3 min of idle on the win/gotcha screen — nobody is watching,
-## so just go back to the home screen rather than auto-starting a new round.
-func _on_oled_tier2() -> void:
-	if not _is_active:
-		return
+	IdleManager.reset()
 	hide_screen()
 	get_tree().change_scene_to_file(Scenes.HOME)
 

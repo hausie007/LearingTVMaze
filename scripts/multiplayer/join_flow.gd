@@ -100,8 +100,7 @@ var _game_prev_button: Button = null     # ‹ left of card
 var _game_next_button: Button = null     # › right of card
 var _game_unavailable_label: Label = null
 
-# OLED burn-in protection for the idle join-setup screen.
-var _oled_guard: OledIdleGuard = null
+
 
 func _ready() -> void:
 	Input.warp_mouse(Vector2(-1, -1))
@@ -132,6 +131,9 @@ func _ready() -> void:
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
 	if Config != null and not Config.controller_size_changed.is_connected(_on_controller_size_changed):
 		Config.controller_size_changed.connect(_on_controller_size_changed)
+
+	# Centralized OLED idle guard transition
+	IdleManager.idle_tier_2.connect(_on_idle_tier2_global)
 
 	_pause_dialog = PauseDialog.new()
 	_pause_dialog.confirmed.connect(func(): _pause_dialog.hide_dialog(); _leave_session())
@@ -285,37 +287,10 @@ func _enter_join_setup_mode() -> void:
 	# OLED: join screen is static while waiting — keep wake-lock OFF.
 	DisplayServer.screen_set_keep_on(false)
 
-	# Lazy-create the idle guard (could be called multiple times from unjoin).
-	if _oled_guard == null:
-		_oled_guard = OledIdleGuard.new()
-		_oled_guard.name = "JoinFlowOledGuard"
-		add_child(_oled_guard)
-		_oled_guard.idle_tier_1.connect(func(): _on_join_oled_tier1())
-		_oled_guard.idle_tier_2.connect(func(): _on_join_oled_tier2())
-		_oled_guard.idle_reset.connect(func(): _on_join_oled_reset())
-	_oled_guard.reset()
-	_oled_guard.start(180.0, 300.0)
 
-
-## Called after 3 min of join-screen idle — dim the overlay and D-pad.
-func _on_join_oled_tier1() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 0.30, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if DPad and DPad.visible:
-		DPad.dim(0.05, 3.0)
-
-
-## Called after 5 min of join-screen idle — leave and go home.
-func _on_join_oled_tier2() -> void:
+func _on_idle_tier2_global() -> void:
+	IdleManager.reset()
 	_leave_session()
-
-
-## Called on any input — restore brightness.
-func _on_join_oled_reset() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if DPad:
-		DPad.undim(0.3)
 
 func _build_setup_layout() -> void:
 	var nodes := JoinSetupLayoutBuilder.build(self)
@@ -670,8 +645,6 @@ func _on_game_started(_session: Dictionary) -> void:
 	_game_started = true
 	# Game started — restore the wake lock and stop the idle guard.
 	DisplayServer.screen_set_keep_on(true)
-	if _oled_guard:
-		_oled_guard.stop()
 	modulate.a = 1.0  # Restore opacity in case tier-1 had dimmed us
 	if _main_vbox != null: _main_vbox.visible = false
 	
@@ -744,7 +717,46 @@ func _on_game_started(_session: Dictionary) -> void:
 	alignment.add_theme_constant_override("margin_right", horizontal_pad if _is_rtl else 40)
 	alignment.add_theme_constant_override("margin_top", 40)
 	
-	alignment.add_child(_gameplay_badge)
+	var vbox := VBoxContainer.new()
+	vbox.name = "BadgeVBox"
+	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_theme_constant_override("separation", 20)
+	alignment.add_child(vbox)
+	
+	vbox.add_child(_gameplay_badge)
+	
+	var goal_label := Label.new()
+	goal_label.name = "RemoteGoalLabel"
+	goal_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	goal_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	goal_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	goal_label.custom_minimum_size = Vector2(400, 0)
+	
+	# Stylize the goal label
+	goal_label.add_theme_font_override("font", UIHelpers.get_font_at_weight(UIHelpers.WEIGHT_SEMIBOLD))
+	goal_label.add_theme_font_size_override("font_size", 28)
+	goal_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	
+	# Semi-transparent background panel overlay (glassmorphism look)
+	var bg_style := StyleBoxFlat.new()
+	bg_style.bg_color = Color(UIColors.BG_PANEL, 0.85)
+	bg_style.corner_radius_top_left = 16
+	bg_style.corner_radius_top_right = 16
+	bg_style.corner_radius_bottom_right = 16
+	bg_style.corner_radius_bottom_left = 16
+	bg_style.set_content_margin_all(16)
+	bg_style.border_width_left = 2
+	bg_style.border_width_top = 2
+	bg_style.border_width_right = 2
+	bg_style.border_width_bottom = 2
+	bg_style.border_color = Color(UIColors.SELECTED_BORDER, 0.4)
+	goal_label.add_theme_stylebox_override("normal", bg_style)
+	
+	goal_label.text = tr(_current_remote_goal_text) if not _current_remote_goal_text.is_empty() else ""
+	goal_label.visible = not _current_remote_goal_text.is_empty()
+	
+	vbox.add_child(goal_label)
+	
 	margin_container.add_child(alignment)
 	join_setup_panel.add_child(margin_container)
 
@@ -790,6 +802,13 @@ func _on_remote_goal_updated(goal_text: String, role_tag: String = "") -> void:
 	_current_remote_role_tag = role_tag
 	_refresh_gameplay_badge_role(role_tag)
 	_current_remote_goal_text = goal_text
+	if _gameplay_badge_slot != null:
+		var vbox = _gameplay_badge_slot.get_node_or_null("BadgeVBox")
+		if vbox != null:
+			var goal_label = vbox.get_node_or_null("RemoteGoalLabel") as Label
+			if goal_label != null:
+				goal_label.text = tr(goal_text) if not goal_text.is_empty() else ""
+				goal_label.visible = not goal_text.is_empty()
 	if changed:
 		_vibrate_remote_goal_change()
 
@@ -825,7 +844,7 @@ func _on_remote_result_updated(title_text: String, character_ids: Array[String])
 	panel.add_theme_stylebox_override("panel", style)
 	
 	# Make it large and gorgeous
-	var header := WinScreen.build_title_header(title_text, character_ids, 180, 130)
+	var header := WinScreen.build_title_header(tr(title_text), character_ids, 180, 130)
 	panel.add_child(header)
 	
 	_gameplay_result_node = panel
@@ -1003,9 +1022,13 @@ func _refresh_gameplay_badge_role(role_tag: String) -> void:
 func _replace_gameplay_badge_control(new_control: Control) -> void:
 	if _gameplay_badge_slot == null:
 		return
-	for child in _gameplay_badge_slot.get_children():
-		child.queue_free()
-	_gameplay_badge_slot.add_child(new_control)
+	var vbox = _gameplay_badge_slot.get_node_or_null("BadgeVBox")
+	if vbox != null:
+		if _gameplay_badge != null and _gameplay_badge.get_parent() == vbox:
+			vbox.remove_child(_gameplay_badge)
+			_gameplay_badge.queue_free()
+		vbox.add_child(new_control)
+		vbox.move_child(new_control, 0)
 	_gameplay_badge = new_control
 
 func _vibrate_remote_goal_change() -> void:

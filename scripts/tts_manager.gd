@@ -36,6 +36,9 @@ var _tts_voice_cache: Dictionary = {}
 
 var _is_first_boot: bool = true
 
+## Whether a cache refresh scan is currently in progress (guards against re-entrancy).
+var _is_scanning: bool = false
+
 
 # ── Background Thread State ─────────────────────────────────────────────────
 
@@ -54,6 +57,9 @@ var _current_version: int = 0
 
 ## Main-thread cached speaking status from DisplayServer.
 var _main_tts_speaking: bool = false
+
+## Whether the main thread has been requested to speak but hasn't started registering in OS yet.
+var _speech_started: bool = false
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -81,15 +87,27 @@ func _exit_tree() -> void:
 func _process(_delta: float) -> void:
 	var is_speaking := DisplayServer.tts_is_speaking()
 	_mutex.lock()
-	_main_tts_speaking = is_speaking
+	if _speech_started:
+		if is_speaking:
+			_speech_started = false # Handshake complete!
+	else:
+		_main_tts_speaking = is_speaking
 	_mutex.unlock()
 
 
 func _main_tts_speak(text: String, voice_id: String, volume: int, rate: float) -> void:
+	_mutex.lock()
+	_speech_started = true
+	_main_tts_speaking = true
+	_mutex.unlock()
 	DisplayServer.tts_speak(text, voice_id, volume, 1.0, rate, 0, false)
 
 
 func _main_tts_stop() -> void:
+	_mutex.lock()
+	_speech_started = false
+	_main_tts_speaking = false
+	_mutex.unlock()
 	DisplayServer.tts_stop()
 
 
@@ -114,6 +132,10 @@ func _is_tts_ready() -> bool:
 ## service can be slow to bind on cold start.
 func refresh_cache() -> void:
 	_mutex.lock()
+	if _is_scanning:
+		_mutex.unlock()
+		return
+	_is_scanning = true
 	tts_ready = false
 	_mutex.unlock()
 	status_changed.emit()
@@ -131,6 +153,7 @@ func refresh_cache() -> void:
 	if all_voices.is_empty():
 		push_warning("TTS: No voices found after %d attempts. Initialization aborted." % max_attempts)
 		_mutex.lock()
+		_is_scanning = false
 		tts_ready = true  # Allow system to proceed but log warning
 		_mutex.unlock()
 		status_changed.emit()
@@ -161,6 +184,7 @@ func refresh_cache() -> void:
 	_mutex.lock()
 	_installed_tts_langs = new_langs
 	_tts_voice_cache = new_cache
+	_is_scanning = false
 	tts_ready = true
 	_mutex.unlock()
 	status_changed.emit()
@@ -372,10 +396,16 @@ func _worker_loop() -> void:
 					break
 					
 				# Send ONLY one sentence to the OS to avoid its internal queueing problems
+				_mutex.lock()
+				_speech_started = false
+				_mutex.unlock()
 				self.call_deferred("_main_tts_speak", clean_part, final_voice_id, int(volume), rate)
 				
-				# Wait a moment for the OS engine to physically start processing and process loop to update flag
-				OS.delay_msec(150)
+				# Wait (up to a timeout of 500ms) for the main thread to execute the deferred call and start speaking
+				var wait_time: float = 0.0
+				while not _is_tts_speaking() and not _exit_flag and wait_time < 0.5:
+					OS.delay_msec(20)
+					wait_time += 0.02
 				
 				# Polling loop: block this background thread until this specific sentence is finished
 				while _is_tts_speaking() and not _exit_flag:
@@ -383,7 +413,7 @@ func _worker_loop() -> void:
 					
 					if interrupted:
 						break
-					OS.delay_msec(50)
+					OS.delay_msec(30)
 					
 				# If we were interrupted while speaking, abort entire block
 				if interrupted or _exit_flag:

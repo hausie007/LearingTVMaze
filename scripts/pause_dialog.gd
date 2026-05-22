@@ -33,8 +33,6 @@ var _hue_tween: Tween = null
 var _hue: float = 0.22           # start hue (blue-ish)
 var _idle_anim_active: bool = false
 
-# OLED: auto-home guard (5 min total pause idle)
-var _auto_home_timer: OledIdleGuard = null
 
 
 func _init() -> void:
@@ -46,14 +44,13 @@ func _init() -> void:
 func _ready() -> void:
 	_build_ui()
 
-	# 5-minute guard: if the dialog is still open after 5 min, just go home.
-	_auto_home_timer = OledIdleGuard.new()
-	_auto_home_timer.name = "PauseAutoHomeGuard"
-	add_child(_auto_home_timer)
-	_auto_home_timer.idle_tier_1.connect(_on_auto_home_fired)
-	# tier_1 is repurposed as the single threshold here; tier_2 is unused.
-	_auto_home_timer.tier1_sec = 300.0   # 5 minutes
-	_auto_home_timer.tier2_sec = 9999.0  # never
+	# Connect to the global centralized OLED idle system.
+	IdleManager.idle_tier_1.connect(func():
+		if visible:
+			start_idle_animation()
+			show_idle_warning()
+	)
+	IdleManager.idle_tier_2.connect(_on_idle_tier2_global)
 
 
 ## Show the dialog and grab focus on "No" (safer default for children).
@@ -65,18 +62,12 @@ func show_dialog() -> void:
 	if _no_button:
 		_no_button.grab_focus()
 
-	# Start 5-min auto-home countdown
-	if _auto_home_timer:
-		_auto_home_timer.reset()
-		_auto_home_timer.start()
 
 
 ## Hide the dialog and cancel all OLED idle effects.
 func hide_dialog() -> void:
 	visible = false
 	_stop_idle_effects()
-	if _auto_home_timer:
-		_auto_home_timer.stop()
 
 
 # ── OLED Public API ───────────────────────────────────────────────────────────
@@ -142,8 +133,10 @@ func _stop_idle_effects() -> void:
 		_idle_hint_label.visible = false
 
 
-func _on_auto_home_fired() -> void:
-	# 5 minutes of idle while paused → just go home.
+func _on_idle_tier2_global() -> void:
+	if not visible:
+		return
+	IdleManager.reset()
 	hide_dialog()
 	DisplayServer.screen_set_keep_on(false)
 	get_tree().change_scene_to_file(Scenes.HOME)

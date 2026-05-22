@@ -370,6 +370,21 @@ func _on_peer_disconnected(peer_id: int) -> void:
 		_confusion_moves_by_peer.erase(peer_id)
 	_finished_peers.erase(peer_id)
 	_delayed_chaser_peer_ids.erase(peer_id)
+	
+	if multiplayer.is_server() and _is_chaser_variant() and not _round_complete:
+		var has_collectors := false
+		for avatar_value in _avatars.values():
+			var avatar := avatar_value as MultiplayerAvatar
+			if avatar != null and avatar.role == NetworkManager.ROLE_COLLECTOR:
+				has_collectors = true
+				break
+		if not has_collectors:
+			# No collectors left! Trigger gotcha round completion cleanly to prevent chaser softlocks
+			_collector_caught = true
+			_round_complete = true
+			_held_directions.clear()
+			_refresh_status_label()
+			_show_gotcha_screen()
 
 func _process_host_local_input() -> void:
 	var host_id := multiplayer.get_unique_id()
@@ -820,7 +835,7 @@ func _update_hud_mission_description() -> void:
 					# Tracker handles the display during collection.
 					hud.set_mission_description("", false)
 				else:
-					hud.set_mission_description(goal_str, enlarge_hud)
+					hud.set_mission_description(tr(goal_str), enlarge_hud)
 		else:
 			if multiplayer.get_peers().has(peer_id):
 				NetworkManager.rpc_id(peer_id, "rpc_update_remote_goal", goal_str, _chip_role_for_peer(peer_id))
@@ -829,48 +844,48 @@ func _get_role_goal(peer_id: int) -> String:
 	var role := _role_for_peer(peer_id)
 
 	if _is_race_mode():
-		return tr("mp_goal_maze_race_first")
+		return "mp_goal_maze_race_first"
 
 	var is_phase_one := _is_shared_collectible_phase_active()
 
 	# Chaser role is the same regardless of phase
 	if role == NetworkManager.ROLE_CHASER:
-		return tr("mp_goal_chaser_catch")
+		return "mp_goal_chaser_catch"
 
 	# Maze race (find-exit multiplayer) — no collectibles
 	if _is_maze_race_mode():
-		return tr("mp_goal_maze_race_first")
+		return "mp_goal_maze_race_first"
 
 	# Collectible phase: pick key based on game mode, player count, and chaser
 	if is_phase_one:
 		if _is_chaser_variant():
 			match Config.game_mode:
-				Config.GameMode.NUMBERS: return tr("mp_goal_collect_numbers_chaser")
-				Config.GameMode.WORDS:   return tr("mp_goal_collect_words_chaser")
-				_:                       return tr("mp_goal_collect_letters_chaser")
+				Config.GameMode.NUMBERS: return "mp_goal_collect_numbers_chaser"
+				Config.GameMode.WORDS:   return "mp_goal_collect_words_chaser"
+				_:                       return "mp_goal_collect_letters_chaser"
 		elif _avatars.size() > 1:
 			match Config.game_mode:
-				Config.GameMode.NUMBERS: return tr("mp_goal_collect_together_numbers")
-				Config.GameMode.WORDS:   return tr("mp_goal_collect_together_words")
-				_:                       return tr("mp_goal_collect_together_letters")
+				Config.GameMode.NUMBERS: return "mp_goal_collect_together_numbers"
+				Config.GameMode.WORDS:   return "mp_goal_collect_together_words"
+				_:                       return "mp_goal_collect_together_letters"
 		else:
 			match Config.game_mode:
-				Config.GameMode.NUMBERS: return tr("mp_goal_collect_numbers")
-				Config.GameMode.WORDS:   return tr("mp_goal_collect_words")
-				_:                       return tr("mp_goal_collect_letters")
+				Config.GameMode.NUMBERS: return "mp_goal_collect_numbers"
+				Config.GameMode.WORDS:   return "mp_goal_collect_words"
+				_:                       return "mp_goal_collect_letters"
 
 	# Find-exit mission with no active collectibles — show "find the exit"
 	if _mission_id == MissionCatalog.MISSION_FIND_EXIT:
-		return tr("mp_goal_find_exit")
+		return "mp_goal_find_exit"
 
 	# Phase 2: all collectibles gathered — find the exit
 	if _is_roleless_next_symbol_mode():
-		return tr("mp_goal_exit_together")
+		return "mp_goal_exit_together"
 	if _is_path_mode():
 		if _is_chaser_variant():
-			return tr("mp_goal_exit_no_catch")
-		return tr("mp_goal_find_exit")
-	return tr("mp_goal_exit_together")
+			return "mp_goal_exit_no_catch"
+		return "mp_goal_find_exit"
+	return "mp_goal_exit_together"
 
 func _chip_role_for_peer(peer_id: int, role_override: String = "") -> String:
 	var role := role_override
@@ -1017,7 +1032,7 @@ func _release_path_chasers() -> void:
 						return
 					if hud != null and is_instance_valid(hud):
 						var enlarge_hud := Config.game_mode != Config.GameMode.WORDS
-						hud.set_mission_description(_get_role_goal(NetworkManager.HOST_PEER_ID), enlarge_hud)
+						hud.set_mission_description(tr(_get_role_goal(NetworkManager.HOST_PEER_ID)), enlarge_hud)
 				)
 		else:
 			if multiplayer.get_peers().has(peer_id):
@@ -1166,7 +1181,7 @@ func _show_gotcha_screen() -> void:
 	_win_screen.set_learning_recap({})
 	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(true))
 	_win_screen.show_gotcha(chaser_id)
-	_send_remote_result(tr("gotcha"), _mirrored_character_ids(chaser_id))
+	_send_remote_result("gotcha", _mirrored_character_ids(chaser_id))
 
 func _show_shared_win_screen(peer_id: int) -> void:
 	if _win_screen == null:
@@ -1176,7 +1191,7 @@ func _show_shared_win_screen(peer_id: int) -> void:
 	_win_screen.set_learning_recap(_build_shared_learning_recap())
 	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 	_win_screen.show_race_win(winner_id)
-	_send_remote_result(tr("race_i_won"), _mirrored_character_ids(winner_id))
+	_send_remote_result("race_i_won", _mirrored_character_ids(winner_id))
 
 func _show_coop_win_screen() -> void:
 	if _win_screen == null:
@@ -1190,7 +1205,7 @@ func _show_coop_win_screen() -> void:
 	_win_screen.set_learning_recap(_build_shared_learning_recap())
 	_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 	_win_screen.show_coop_win(ids)
-	_send_remote_result(tr("mp_you_won_together"), ids)
+	_send_remote_result("mp_you_won_together", ids)
 
 func _update_win_screen_options() -> void:
 	if _win_screen == null:
@@ -1633,7 +1648,7 @@ func _check_race_finish(peer_id: int, pos: Vector2i) -> void:
 		_win_screen.set_finish_shortcuts(_build_finish_shortcuts(false))
 		var winner_id := _character_id_for_peer(peer_id)
 		_win_screen.show_race_win(winner_id)
-		_send_remote_result(tr("race_i_won"), _mirrored_character_ids(winner_id))
+		_send_remote_result("race_i_won", _mirrored_character_ids(winner_id))
 
 
 func _format_race_status() -> String:

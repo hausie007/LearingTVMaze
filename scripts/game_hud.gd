@@ -22,8 +22,8 @@ const RACE_SIDE_LANE_VIEWPORT_FRACTION: float = 0.33
 const CHASER_COUNTDOWN_WIDTH_SAMPLE: int = 999
 const RACE_ROW_SEPARATION: float = 16.0
 const PLAYER_STRIP_SEPARATION: int = 8
-const RACE_PLAYER_STRIP_SEPARATION: int = 2
-const RACE_BADGE_Y_OFFSET: float = -20.0
+const RACE_PLAYER_STRIP_SEPARATION: int = 12
+const RACE_BADGE_Y_OFFSET: float = 0.0
 
 var _desc_label: Label = null
 var _word_container: HBoxContainer = null
@@ -126,7 +126,7 @@ func setup_race_trackers(players: Array[Dictionary], sequence: Array[String],
 		
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", int(RACE_ROW_SEPARATION))
-		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		row.alignment = BoxContainer.ALIGNMENT_BEGIN if is_left else BoxContainer.ALIGNMENT_END
 		row.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if is_left else Control.SIZE_SHRINK_END
 		
 		# Enlarged badge
@@ -446,7 +446,8 @@ func _build_ui() -> void:
 func _create_badge_slot(badge: Control, align_right: bool, y_offset: float = 0.0) -> Control:
 	var slot := Control.new()
 	slot.set_meta("hud_badge_slot", true)
-	slot.custom_minimum_size.x = badge.get_combined_minimum_size().x
+	var min_size := badge.get_combined_minimum_size()
+	slot.custom_minimum_size = min_size
 	slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
@@ -485,7 +486,7 @@ func _update_badge_slot_widths(node: Node) -> void:
 		return
 	var control := node as Control
 	if control != null and bool(control.get_meta("hud_badge_slot", false)):
-		control.custom_minimum_size.x = _badge_slot_child_width(control)
+		control.custom_minimum_size.x = _estimated_largest_player_chip_width()
 	for child in node.get_children():
 		_update_badge_slot_widths(child)
 

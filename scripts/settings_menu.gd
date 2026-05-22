@@ -7,8 +7,12 @@ var temp_voice: bool
 var temp_perf: bool
 var temp_controls: int
 var temp_controller_size: int
+var temp_screensaver: int
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
+
+const SCREENSAVER_TIMEOUTS: Array[int] = [0, 60, 300, 600, 1200]
+const SCREENSAVER_KEYS: Array[String] = ["off", "screensaver_1m", "screensaver_5m", "screensaver_10m", "screensaver_20m"]
 
 ## Original language stored on enter so we can restore on cancel.
 var _original_ui_language: String = ""
@@ -17,6 +21,9 @@ var _original_learning_language: String = ""
 ## Original controls state so we can restore on cancel (controls are live-previewed).
 var _original_controls: int = 0
 var _original_controller_size: int = 0
+
+var _original_voice_hints: bool = false
+var _original_performance_mode: bool = false
 
 func _ready() -> void:
 	# Warp mouse off-screen to prevent phantom hover highlights on TV
@@ -33,12 +40,15 @@ func _ready() -> void:
 			
 		temp_voice = Config.voice_hints
 		temp_perf = Config.performance_mode
+		temp_screensaver = Config.screensaver_timeout
 		temp_controls = Config.on_screen_controls
 		temp_controller_size = Config.controller_size
 		_original_controls = Config.on_screen_controls
 		_original_controller_size = Config.controller_size
 		_original_ui_language = Config.ui_language
 		_original_learning_language = Config.learning_language
+		_original_voice_hints = Config.voice_hints
+		_original_performance_mode = Config.performance_mode
 		# Listen for async TTS completion
 		if not TTS.status_changed.is_connected(_update_labels):
 			TTS.status_changed.connect(_update_labels)
@@ -51,6 +61,7 @@ func _ready() -> void:
 	_setup_cycling_button(%LearningLangButton, func(dir): _cycle_learning_lang(dir))
 	_setup_cycling_button(%VoiceButton, func(dir): _cycle_voice(dir))
 	_setup_cycling_button(%PerfButton, func(dir): _cycle_perf(dir))
+	_setup_cycling_button(%ScreensaverButton, func(dir): _cycle_screensaver(dir))
 	var ctrl_btn = get_node_or_null("%ControlsButton")
 	if ctrl_btn:
 		_setup_cycling_button(ctrl_btn, func(dir): _cycle_controls(dir))
@@ -109,9 +120,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _is_saving: return
 	
 	if event.is_action_pressed("ui_cancel"):
-		# Set handled BEFORE calling save, to stop bubbling
+		# Set handled BEFORE calling cancel, to stop bubbling
 		get_viewport().set_input_as_handled()
-		_on_save_pressed()
+		_on_cancel_pressed()
 
 func _setup_cycling_button(btn: Button, cycle_func: Callable) -> void:
 	if not btn: return
@@ -169,6 +180,9 @@ func _cycle_ui_lang(dir: int) -> void:
 	_trigger_warmup_ui()
 	_update_labels()
 	_update_static_labels()
+	if Config and temp_ui_lang_idx < Config.LANG_CODES.size():
+		Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
+		Config.save_settings()
 
 func _trigger_warmup_ui() -> void:
 	if temp_voice:
@@ -187,15 +201,34 @@ func _cycle_learning_lang(dir: int) -> void:
 	if Config.LANG_KEYS.size() == 0: return
 	temp_learning_lang_idx = (temp_learning_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
 	_update_labels()
+	if Config and temp_learning_lang_idx < Config.LANG_CODES.size():
+		Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
+		Config.save_settings()
 
 func _cycle_voice(_dir: int) -> void:
 	temp_voice = !temp_voice
 	_update_labels()
 	if temp_voice:
 		_trigger_warmup_ui()
+	if Config:
+		Config.voice_hints = temp_voice
+		Config.save_settings()
 
 func _cycle_perf(_dir: int) -> void:
 	temp_perf = !temp_perf
+	_update_labels()
+	if Config:
+		Config.performance_mode = temp_perf
+		Config.save_settings()
+
+func _cycle_screensaver(dir: int) -> void:
+	var idx = SCREENSAVER_TIMEOUTS.find(temp_screensaver)
+	if idx < 0: idx = 2
+	idx = (idx + dir + SCREENSAVER_TIMEOUTS.size()) % SCREENSAVER_TIMEOUTS.size()
+	temp_screensaver = SCREENSAVER_TIMEOUTS[idx]
+	if Config:
+		Config.screensaver_timeout = temp_screensaver
+		Config.save_settings()
 	_update_labels()
 
 func _cycle_controls(dir: int) -> void:
@@ -205,6 +238,7 @@ func _cycle_controls(dir: int) -> void:
 	if Config: 
 		Config.on_screen_controls = temp_controls
 		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
+		Config.save_settings()
 	_update_labels()
 
 func _cycle_controller_size(dir: int) -> void:
@@ -213,6 +247,7 @@ func _cycle_controller_size(dir: int) -> void:
 	if Config:
 		Config.controller_size = temp_controller_size
 		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
+		Config.save_settings()
 	_update_labels()
 
 func _update_labels() -> void:
@@ -276,6 +311,11 @@ func _update_labels() -> void:
 	if has_node("%PerfButton"):
 		%PerfButton.text = tr("quality_high") if not temp_perf else tr("quality_standard")
 
+	if has_node("%ScreensaverButton"):
+		var idx = SCREENSAVER_TIMEOUTS.find(temp_screensaver)
+		if idx >= 0 and idx < SCREENSAVER_KEYS.size():
+			%ScreensaverButton.text = tr(SCREENSAVER_KEYS[idx])
+
 	if has_node("%ControlsButton") and temp_controls >= 0 and temp_controls < Config.CONTROLS_KEYS.size():
 		%ControlsButton.text = tr(Config.CONTROLS_KEYS[temp_controls])
 
@@ -299,6 +339,9 @@ func _update_static_labels() -> void:
 	if has_node("%PerfTitle"):
 		%PerfTitle.text = tr("setting_quality")
 		UIHelpers.apply_medium(%PerfTitle)
+	if has_node("%ScreensaverTitle"):
+		%ScreensaverTitle.text = tr("setting_screensaver")
+		UIHelpers.apply_medium(%ScreensaverTitle)
 	if has_node("%ControlsTitle"):
 		%ControlsTitle.text = tr("setting_controls")
 		UIHelpers.apply_medium(%ControlsTitle)
@@ -307,7 +350,7 @@ func _update_static_labels() -> void:
 		UIHelpers.apply_medium(%ControllerSizeTitle)
 	
 func _apply_title_colors() -> void:
-	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ControlsTitle", "%ControllerSizeTitle"]
+	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ScreensaverTitle", "%ControlsTitle", "%ControllerSizeTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
@@ -320,13 +363,24 @@ func _on_save_pressed() -> void:
 		if temp_learning_lang_idx < Config.LANG_CODES.size(): Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
 		Config.voice_hints = temp_voice
 		Config.performance_mode = temp_perf
+		Config.screensaver_timeout = temp_screensaver
 		Config.on_screen_controls = temp_controls
 		Config.controller_size = temp_controller_size
 		Config.save_settings()
 		TranslationServer.set_locale(Config.get_effective_ui_language())
 	get_tree().change_scene_to_file(Scenes.HOME)
 
-func _exit_tree() -> void:
-	if not _is_saving and Config:
-		Config.on_screen_controls = _original_controls
-		Config.controller_size = _original_controller_size
+func _on_cancel_pressed() -> void:
+	if _is_saving: return
+	_is_saving = true
+	if Config:
+		if temp_ui_lang_idx < Config.LANG_CODES.size(): Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
+		if temp_learning_lang_idx < Config.LANG_CODES.size(): Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
+		Config.voice_hints = temp_voice
+		Config.performance_mode = temp_perf
+		Config.screensaver_timeout = temp_screensaver
+		Config.on_screen_controls = temp_controls
+		Config.controller_size = temp_controller_size
+		Config.save_settings()
+		TranslationServer.set_locale(Config.get_effective_ui_language())
+	get_tree().change_scene_to_file(Scenes.HOME)

@@ -206,6 +206,8 @@ func _try_move(direction: Vector2i) -> void:
 	# Check wall – deny if blocked.
 	if not maze_data.is_wall_open(grid_pos, direction):
 		_shake_visual(direction)
+		if OS.has_feature("mobile") or DisplayServer.is_touchscreen_available():
+			Input.vibrate_handheld(24)
 		bumped.emit(direction)
 		return
 

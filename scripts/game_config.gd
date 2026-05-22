@@ -141,6 +141,7 @@ var theme_dir_name: String = "thiefs":
 		if theme_dir_name != value:
 			theme_dir_name = value
 			_theme_cache = null
+			ThemeLoader.clear_cache()
 
 ## Language code for the UI and system announcements. "auto" = detect from OS.
 var ui_language: String = "auto"
@@ -156,6 +157,15 @@ var chaser_level: ChaserLevel = ChaserLevel.MEDIUM
 
 ## Whether to prioritize smooth gameplay over visual effects (disables Glow, Anti-Aliasing).
 var performance_mode: bool = true
+
+## Screensaver timeout in seconds. 0 = off, 60 = 1 minute, 300 = 5 minutes, 600 = 10 minutes, 1200 = 20 minutes.
+var screensaver_timeout: int = 300:
+	set(value):
+		if screensaver_timeout != value:
+			screensaver_timeout = value
+			var idle_mgr = get_node_or_null("/root/IdleManager")
+			if idle_mgr != null and idle_mgr.has_method("apply_screensaver_settings"):
+				idle_mgr.apply_screensaver_settings()
 
 ## Emitted when the on-screen controls mode changes (for D-Pad layout updates).
 signal on_screen_controls_changed(new_mode: int)
@@ -296,6 +306,7 @@ func save_settings() -> void:
 	config.set_value("Game", "voice_hints", voice_hints)
 	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Game", "performance_mode", performance_mode)
+	config.set_value("Game", "screensaver_timeout", screensaver_timeout)
 	config.set_value("Game", "on_screen_controls", on_screen_controls)
 	config.set_value("Game", "controller_size", controller_size)
 	config.set_value("Theme", "dir_name", theme_dir_name)
@@ -326,6 +337,7 @@ func load_settings() -> void:
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
+		screensaver_timeout = config.get_value("Game", "screensaver_timeout", 300)
 		on_screen_controls = config.get_value("Game", "on_screen_controls", -1)
 		controller_size = int(config.get_value("Game", "controller_size", ControllerSize.NORMAL))
 		theme_dir_name = config.get_value("Theme", "dir_name", theme_dir_name)

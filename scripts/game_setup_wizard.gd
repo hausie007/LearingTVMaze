@@ -104,8 +104,7 @@ var _character_idx: int = 0
 var _input_locked: bool = true
 
 
-# OLED burn-in protection for the idle setup/home screen.
-var _oled_guard: OledIdleGuard = null
+
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
@@ -128,43 +127,13 @@ func _ready() -> void:
 	# OLED: home/setup screen is a menu — release the wake lock.
 	DisplayServer.screen_set_keep_on(false)
 
-	# OLED idle guard: dim after 5 min, reload scene after 10 min.
-	_oled_guard = OledIdleGuard.new()
-	_oled_guard.name = "WizardOledGuard"
-	add_child(_oled_guard)
-	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
-	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
-	_oled_guard.idle_reset.connect(_on_oled_reset)
-	_oled_guard.start(300.0, 600.0)
+
 
 func _exit_tree() -> void:
 	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
 
 
-
-
-# ── OLED Idle Callbacks ───────────────────────────────────────────────────────
-
-## Called after 5 min of home-screen idle: dim the entire wizard and D-pad.
-func _on_oled_tier1() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 0.25, 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if DPad and DPad.visible:
-		DPad.dim(0.05, 4.0)
-
-
-## Called after 10 min of home-screen idle: reload the scene to reset any animations.
-func _on_oled_tier2() -> void:
-	get_tree().reload_current_scene()
-
-
-## Called when a deliberate input is detected — restore full brightness.
-func _on_oled_reset() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if DPad:
-		DPad.undim(0.3)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
@@ -649,17 +618,32 @@ func _on_step3_expand_requested() -> void:
 
 ## Smart back: skip steps that were auto-skipped (only 1 option).
 func _go_back_smart() -> void:
+	# Ensure _current_step is within valid bounds [1, 3] before attempting back navigation
+	_current_step = clampi(_current_step, 1, 3)
+	if _current_step <= 1:
+		push_warning("game_setup_wizard: _go_back_smart called at step %d; ignoring to avoid underflow" % _current_step)
+		return
+	
 	var target := _current_step - 1
 	# Skip step 2 if it only has 1 pickup option (it was auto-skipped)
 	if target == 2:
 		var allowed := MissionCatalog.allowed_pickups(_selected_mission)
 		if allowed.size() <= 1:
 			target = 1
+	
+	# Clamp the target step to safe values [1, 3]
+	target = clampi(target, 1, 3)
 	_go_back_to_step(target)
 
 func _go_back_to_step(target: int) -> void:
-	if target >= _current_step:
+	# Clamp target and current step to safe bounds [1, 3]
+	var clamped_target := clampi(target, 1, 3)
+	_current_step = clampi(_current_step, 1, 3)
+	
+	if clamped_target >= _current_step:
 		return
+	
+	target = clamped_target
 	# Hide all steps after target
 	if target <= 2:
 		_step3.hide_step()
@@ -1202,6 +1186,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked: return
 	if not event.is_action_pressed("ui_cancel"): return
 
+	# Defensively clamp _current_step to safe bounds [1, 3]
+	_current_step = clampi(_current_step, 1, 3)
 	if _current_step > 1:
 		_go_back_smart()
 		get_viewport().set_input_as_handled()

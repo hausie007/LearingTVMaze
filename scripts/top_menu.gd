@@ -46,7 +46,7 @@ var _quit_no_button: Button = null
 # ── State ────────────────────────────────────────────────────────────────────
 var _input_locked: bool = true
 var _hosts: Array = []
-var _oled_guard: OledIdleGuard = null
+
 
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
@@ -80,36 +80,12 @@ func _ready() -> void:
 	# OLED: home screen is a menu — release the wake lock.
 	DisplayServer.screen_set_keep_on(false)
 
-	# OLED idle guard: dim after 5 min, reload scene after 10 min.
-	_oled_guard = OledIdleGuard.new()
-	_oled_guard.name = "TopMenuOledGuard"
-	add_child(_oled_guard)
-	_oled_guard.idle_tier_1.connect(_on_oled_tier1)
-	_oled_guard.idle_tier_2.connect(_on_oled_tier2)
-	_oled_guard.idle_reset.connect(_on_oled_reset)
-	_oled_guard.start(300.0, 600.0)
-
 
 func _exit_tree() -> void:
 	NetworkManager.stop_discovery()
 
 
-# ── OLED Idle Callbacks ───────────────────────────────────────────────────────
 
-func _on_oled_tier1() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 0.25, 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if DPad and DPad.visible:
-		DPad.dim(0.05, 4.0)
-
-func _on_oled_tier2() -> void:
-	get_tree().reload_current_scene()
-
-func _on_oled_reset() -> void:
-	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	if DPad:
-		DPad.undim(0.3)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED and is_node_ready():
