@@ -895,6 +895,8 @@ func _chip_role_for_peer(peer_id: int, role_override: String = "") -> String:
 		return NetworkManager.ROLE_RACER
 	if role == NetworkManager.ROLE_CHASER:
 		return NetworkManager.ROLE_CHASER
+	if _is_roleless_next_symbol_mode() and _is_shared_collectible_phase_active():
+		return NetworkManager.ROLE_COLLECTOR
 	if _is_shared_collectible_phase_active():
 		return role
 	if _mission_id == MissionCatalog.MISSION_FIND_EXIT:

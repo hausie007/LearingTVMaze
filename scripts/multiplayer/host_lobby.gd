@@ -21,6 +21,8 @@ var _top_spacer: Control = null
 var _logo: TextureRect = null
 var _unified_card: PanelContainer = null
 var _condensed_title: Label = null
+var _presence_summary_label: Label = null
+var _network_note_label: Label = null
 var _slots_row: HBoxContainer = null
 var _start_button: Button = null
 var _banner_panel: PanelContainer = null
@@ -43,6 +45,8 @@ func _ready() -> void:
 	NetworkManager.game_started.connect(_on_game_started)
 	NetworkManager.peer_disconnected.connect(_on_peer_disconnected)
 	NetworkManager.debug_status_changed.connect(_on_network_debug_changed)
+	NetworkManager.nearby_players_updated.connect(_on_nearby_players_updated)
+	NetworkManager.connecting_players_updated.connect(_on_connecting_players_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
 
@@ -70,6 +74,10 @@ func _exit_tree() -> void:
 		NetworkManager.peer_disconnected.disconnect(_on_peer_disconnected)
 	if NetworkManager.debug_status_changed.is_connected(_on_network_debug_changed):
 		NetworkManager.debug_status_changed.disconnect(_on_network_debug_changed)
+	if NetworkManager.nearby_players_updated.is_connected(_on_nearby_players_updated):
+		NetworkManager.nearby_players_updated.disconnect(_on_nearby_players_updated)
+	if NetworkManager.connecting_players_updated.is_connected(_on_connecting_players_updated):
+		NetworkManager.connecting_players_updated.disconnect(_on_connecting_players_updated)
 	if Config != null and Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.disconnect(_on_controls_changed)
 
@@ -151,6 +159,21 @@ func _build_layout() -> void:
 	_condensed_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_condensed_title.focus_mode = Control.FOCUS_NONE
 	card_vbox.add_child(_condensed_title)
+
+	var info_vbox := VBoxContainer.new()
+	info_vbox.name = "LobbyInfoVBox"
+	info_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	info_vbox.add_theme_constant_override("separation", 4)
+	card_vbox.add_child(info_vbox)
+
+	_presence_summary_label = Label.new()
+	_presence_summary_label.name = "PresenceSummaryLabel"
+	_presence_summary_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_presence_summary_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_presence_summary_label.add_theme_font_size_override("font_size", 22)
+	_presence_summary_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_presence_summary_label)
+	info_vbox.add_child(_presence_summary_label)
 
 	# Slots Row
 	_slots_row = HBoxContainer.new()
@@ -288,6 +311,22 @@ func _build_join_banner() -> void:
 	step4.custom_minimum_size.x = 0
 	steps_vbox.add_child(step4)
 
+	_network_note_label = Label.new()
+	_network_note_label.name = "NetworkNoteLabel"
+	_network_note_label.text = _lobby_network_note_text()
+	_network_note_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_network_note_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_network_note_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_network_note_label.custom_minimum_size.x = 0
+	_network_note_label.add_theme_font_size_override("font_size", 28)
+	_network_note_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_network_note_label)
+	var network_note_margin := MarginContainer.new()
+	network_note_margin.name = "NetworkNoteMargin"
+	network_note_margin.add_theme_constant_override("margin_left", 32)
+	network_note_margin.add_child(_network_note_label)
+	steps_vbox.add_child(network_note_margin)
+
 	# Join card — compact reference preview beside the steps.
 	var join_card: Button = ModeCardScene.instantiate() as Button
 	join_card.name = "JoinGameCard"
@@ -367,6 +406,13 @@ func _on_lobby_updated(state: Dictionary) -> void:
 	_update_breadcrumbs(cfg)
 	_update_player_slots(cfg, player_map)
 	_update_broadcast_state(cfg, player_map)
+	_update_presence_summary()
+
+func _on_nearby_players_updated(_count: int) -> void:
+	_update_presence_summary()
+
+func _on_connecting_players_updated(_count: int) -> void:
+	_update_presence_summary()
 
 func _update_breadcrumbs(cfg: Dictionary) -> void:
 	# Breadcrumb 1: Mission • Theme • Maze Size
@@ -503,6 +549,28 @@ func _update_broadcast_state(cfg: Dictionary, player_map: Dictionary) -> void:
 	else:
 		if not NetworkManager.is_broadcasting():
 			NetworkManager.resume_broadcasting()
+
+func _update_presence_summary() -> void:
+	if _presence_summary_label == null:
+		return
+	var cfg: Dictionary = _last_lobby_state.get("config", NetworkManager.host_config) as Dictionary
+	var player_map: Dictionary = _last_lobby_state.get("players", NetworkManager.players) as Dictionary
+	var max_players := int(cfg.get("max_players", 2))
+	var joined := player_map.size()
+	var remaining := maxi(0, max_players - joined)
+	var nearby := NetworkManager.get_nearby_player_count()
+	var connecting := NetworkManager.get_connecting_player_count()
+	_presence_summary_label.text = tr("mp_lobby_presence_summary") % [nearby, connecting, remaining]
+
+func _lobby_network_note_text() -> String:
+	var text := tr("help_multiplayer_network_note")
+	var first_sentence_end := text.find(". ")
+	if first_sentence_end < 0:
+		return text
+	return "%s\n%s" % [
+		text.substr(0, first_sentence_end + 1),
+		text.substr(first_sentence_end + 2),
+	]
 
 func _on_network_debug_changed(scope: String, message: String) -> void:
 	if network_debug_label != null:
@@ -771,6 +839,14 @@ func _apply_responsive_layout() -> void:
 	if _condensed_title != null:
 		_condensed_title.add_theme_font_size_override("font_size", 24 if short_screen else 28)
 
+	if _presence_summary_label != null:
+		_presence_summary_label.add_theme_font_size_override("font_size", 20 if short_screen else 22)
+		_presence_summary_label.custom_minimum_size.x = clampf(available_width * 0.6, 520.0, 900.0)
+
+	if _network_note_label != null:
+		_network_note_label.add_theme_font_size_override("font_size", 22 if short_screen else (25 if compact_banner else 28))
+		_network_note_label.custom_minimum_size.x = 0
+
 	# Slot sizing
 	var slot_size: float = 120.0 if short_screen else 140.0
 	var frame_size: float = slot_size * 0.9
@@ -833,6 +909,8 @@ func _apply_responsive_layout() -> void:
 					elif child is Label:
 						child.add_theme_font_size_override("font_size", step_font_size)
 						child.custom_minimum_size.x = 0
+					elif child is MarginContainer:
+						child.add_theme_constant_override("margin_left", 22 if short_screen else 32)
 
 			# Resize join card via configure_compact
 			var join_card := banner_vbox.get_node_or_null("StepsCardHBox/JoinGameCard") as Button

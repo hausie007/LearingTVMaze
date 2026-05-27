@@ -1,5 +1,7 @@
-# HostCardBuilder
-# Static helper utility to construct a uniform Host Card UI component.
+## host_card_builder.gd
+## ---------------------------------------------------------------------------
+## Static helper utility to construct a uniform Host Card UI component.
+## ---------------------------------------------------------------------------
 class_name HostCardBuilder
 extends RefCounted
 
@@ -39,7 +41,7 @@ static func create_card(host: Dictionary, index: int, include_footer: bool = tru
 	text_box.add_theme_constant_override("separation", 6)
 	row.add_child(text_box)
 
-	var host_name: String = String(host.get("host_name", "Host"))
+	var host_name: String = String(host.get("host_name", _translate("mp_slot_host")))
 	var host_ip: String = String(host.get("ip", ""))
 	var theme_title: String = String(host.get("theme_title", host.get("theme_dir", "")))
 	var player_count: int = int(host.get("player_count", 1))
@@ -71,18 +73,21 @@ static func create_card(host: Dictionary, index: int, include_footer: bool = tru
 	return button
 
 static func get_host_mission_title(host: Dictionary) -> String:
-	return String(host.get("mission_title", host.get("game_style_title", tr("mission_follow_trail"))))
+	return String(host.get("mission_title", host.get("game_style_title", _translate("mission_follow_trail"))))
 
 static func get_host_pickup_title(host: Dictionary) -> String:
-	var training := String(host.get("training_type", NetworkManager.TRAINING_WORDS))
-	if training == NetworkManager.TRAINING_NONE:
-		return tr("pickup_none")
+	var training := String(host.get("training_type", MissionCatalog.TRAINING_WORDS))
+	if training == MissionCatalog.TRAINING_NONE:
+		return _translate("pickup_none")
 	var title := String(host.get("training_type_title", ""))
 	if not title.is_empty():
 		return title
-	return tr(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
+	return _translate(MissionCatalog.pickup_title_key(MissionCatalog.pickup_for_training(training)))
 
 static func get_host_role_summary(host: Dictionary) -> String:
 	var mission_id := String(host.get("mission_id", MissionCatalog.MISSION_FOLLOW_TRAIL))
 	var chaser_enabled := bool(host.get("chaser_enabled", false))
-	return tr(String(host.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
+	return _translate(String(host.get("role_summary_key", MissionCatalog.role_summary_key(mission_id, chaser_enabled))))
+
+static func _translate(key: String) -> String:
+	return String(TranslationServer.translate(key))

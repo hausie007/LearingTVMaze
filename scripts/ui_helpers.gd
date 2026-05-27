@@ -558,6 +558,21 @@ static func fit_font_size_to_width(label: Label, max_width: float, base_font_siz
 	label.add_theme_font_size_override("font_size", new_size)
 
 
+## Dynamically fits a button's font size to prevent translated text from clipping.
+static func fit_button_font_size_to_width(button: Button, max_width: float, base_font_size: int, min_font_size: int = 14, horizontal_padding: float = 36.0) -> void:
+	if button == null or button.text.is_empty() or max_width <= 0.0:
+		return
+	var font := get_font_at_weight(WEIGHT_SEMIBOLD)
+	var available_width := maxf(1.0, max_width - horizontal_padding)
+	var width := font.get_string_size(button.text, HORIZONTAL_ALIGNMENT_CENTER, -1.0, base_font_size).x
+	if width <= available_width:
+		button.add_theme_font_size_override("font_size", base_font_size)
+		return
+	var scale := available_width / maxf(width, 1.0)
+	var new_size := maxi(min_font_size, int(floor(float(base_font_size) * scale)))
+	button.add_theme_font_size_override("font_size", new_size)
+
+
 ## Preloaded circular flag shader for high-performance anti-aliased rendering.
 const FLAG_SHADER = preload("res://assets/shaders/flag_circle.gdshader")
 

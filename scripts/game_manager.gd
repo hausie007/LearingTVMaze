@@ -326,22 +326,22 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 # ── Collectible Callbacks ────────────────────────────────────────────────────
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
-	if not Config.voice_hints: return
-	
-	if Config.game_mode == Config.GameMode.WORDS:
-		# Words mode: speak collected letter
-		TTS.speak(value_str, 0.85, lang)
+	if Config.voice_hints:
+		if Config.game_mode == Config.GameMode.WORDS:
+			# Words mode: speak collected letter
+			TTS.speak(value_str, 0.85, lang)
 
-		# Speak the whole word once when it is complete.
-		var next_idx: int = collectible_spawner.get_word_next_index()
-		var word_full: String = Config.current_word.get("word", "")
-		var word_complete: bool = (next_idx >= word_full.length())
-		if word_complete:
-			_speak_completed_word_once(lang)
-		elif next_idx > collect_index + 1:
-			_speak_completed_word_segment(next_idx, lang)
-	else:
-		TTS.speak(value_str, 0.85)
+			# Speak the whole word once when it is complete.
+			var next_idx: int = collectible_spawner.get_word_next_index()
+			var word_full: String = Config.current_word.get("word", "")
+			var word_complete: bool = (next_idx >= word_full.length())
+			if word_complete:
+				_speak_completed_word_once(lang)
+			elif next_idx > collect_index + 1:
+				_speak_completed_word_segment(next_idx, lang)
+		else:
+			TTS.speak(value_str, 0.85)
+
 	_refresh_target_hud()
 	# If all collectibles are now done, rebuild the chip with the exit role.
 	if collectible_spawner != null and collectible_spawner.is_complete():

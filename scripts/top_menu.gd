@@ -38,7 +38,9 @@ var _cards: Dictionary = {}  # id → ModeCard (Button)
 
 var _corner_overlay: Control = null
 var _settings_button: Button = null
+var _exit_button: Button = null
 var _help_button: Button = null
+var _nearby_players_label: Label = null
 
 var _quit_dialog: CanvasLayer = null
 var _quit_no_button: Button = null
@@ -46,6 +48,7 @@ var _quit_no_button: Button = null
 # ── State ────────────────────────────────────────────────────────────────────
 var _input_locked: bool = true
 var _hosts: Array = []
+var _preserve_client_presence_on_exit: bool = false
 
 
 
@@ -59,6 +62,7 @@ func _ready() -> void:
 	_configure_navigation()
 
 	NetworkManager.discovery_updated.connect(_on_discovery_updated)
+	NetworkManager.nearby_players_updated.connect(_on_nearby_players_updated)
 	if Config != null and not Config.on_screen_controls_changed.is_connected(_on_controls_changed):
 		Config.on_screen_controls_changed.connect(_on_controls_changed)
 
@@ -66,7 +70,9 @@ func _ready() -> void:
 	var err := NetworkManager.start_discovery()
 	if err != OK:
 		_hosts.clear()
+	NetworkManager.start_client_presence()
 	_update_join_card_visibility()
+	_update_nearby_players_label(NetworkManager.get_nearby_player_count())
 	_update_replay_card_state()
 
 	# Focus the Play Now card
@@ -83,6 +89,12 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	NetworkManager.stop_discovery()
+	if not _preserve_client_presence_on_exit:
+		NetworkManager.stop_client_presence()
+	if NetworkManager.discovery_updated.is_connected(_on_discovery_updated):
+		NetworkManager.discovery_updated.disconnect(_on_discovery_updated)
+	if NetworkManager.nearby_players_updated.is_connected(_on_nearby_players_updated):
+		NetworkManager.nearby_players_updated.disconnect(_on_nearby_players_updated)
 
 
 
@@ -283,6 +295,7 @@ func _build_corner_buttons() -> void:
 	_settings_button = _create_corner_button(tr("settings"))
 	_settings_button.pressed.connect(func():
 		NetworkManager.stop_discovery()
+		NetworkManager.stop_client_presence()
 		get_tree().change_scene_to_file(Scenes.SETTINGS)
 	)
 	_corner_overlay.add_child(_settings_button)
@@ -290,16 +303,33 @@ func _build_corner_buttons() -> void:
 	_help_button = _create_corner_button(tr("help"))
 	_help_button.pressed.connect(func():
 		NetworkManager.stop_discovery()
+		NetworkManager.stop_client_presence()
 		get_tree().change_scene_to_file(Scenes.HELP)
 	)
 	_corner_overlay.add_child(_help_button)
+
+	_exit_button = _create_corner_button(tr("exit_game"))
+	_exit_button.pressed.connect(func():
+		if not _input_locked:
+			_show_quit_dialog()
+	)
+	_corner_overlay.add_child(_exit_button)
+
+	_nearby_players_label = Label.new()
+	_nearby_players_label.name = "NearbyPlayersLabel"
+	_nearby_players_label.visible = false
+	_nearby_players_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_nearby_players_label.add_theme_font_size_override("font_size", 22)
+	_nearby_players_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_nearby_players_label)
+	_corner_overlay.add_child(_nearby_players_label)
 
 
 func _create_corner_button(text: String) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(220, 52)
-	button.add_theme_font_size_override("font_size", 22)
+	button.custom_minimum_size = Vector2(260, 72)
+	button.add_theme_font_size_override("font_size", 28)
 	UIHelpers.apply_style_to_button(button, UIColors.YELLOW)
 	return button
 
@@ -335,6 +365,7 @@ func _start_play_now() -> void:
 	Config.remember_last_single_player_session()
 	Config.save_settings()
 	NetworkManager.stop_discovery()
+	NetworkManager.stop_client_presence()
 	DisplayServer.screen_set_keep_on(true)
 	UIHelpers.go_to_scene_with_loading(get_tree(), Scenes.GAME)
 
@@ -344,6 +375,7 @@ func _start_replay() -> void:
 		return
 
 	NetworkManager.stop_discovery()
+	NetworkManager.stop_client_presence()
 	var replay_kind := String(Config.last_played_game.get("kind", ""))
 	if replay_kind == Config.LAST_SESSION_SINGLE_PLAYER:
 		if not Config.apply_last_single_player_session():
@@ -384,14 +416,18 @@ func _apply_replay_host_config_to_settings(host_config: Dictionary) -> void:
 func _navigate_to_wizard(multiplayer_host: bool) -> void:
 	Config.is_multiplayer_host = multiplayer_host
 	NetworkManager.stop_discovery()
+	NetworkManager.stop_client_presence()
 	get_tree().change_scene_to_file(Scenes.WIZARD)
 
 
 func _navigate_to_join_flow() -> void:
 	if _hosts.is_empty():
 		return
-	NetworkManager.set_pending_join_host((_hosts[0] as Dictionary).duplicate(true))
+	var host := (_hosts[0] as Dictionary).duplicate(true)
+	NetworkManager.set_pending_join_host(host)
 	NetworkManager.stop_discovery()
+	NetworkManager.start_client_presence(host)
+	_preserve_client_presence_on_exit = true
 	get_tree().change_scene_to_file(Scenes.JOIN_FLOW)
 
 
@@ -400,6 +436,19 @@ func _navigate_to_join_flow() -> void:
 func _on_discovery_updated(hosts: Array) -> void:
 	_hosts = hosts.duplicate(true)
 	_update_join_card_visibility()
+
+func _on_nearby_players_updated(count: int) -> void:
+	_update_nearby_players_label(count)
+
+func _update_nearby_players_label(count: int) -> void:
+	if _nearby_players_label == null:
+		return
+	if count <= 0:
+		_nearby_players_label.visible = false
+		_nearby_players_label.text = ""
+		return
+	_nearby_players_label.visible = true
+	_nearby_players_label.text = tr("nearby_players_one") if count == 1 else tr("nearby_players_many") % count
 
 
 func _update_join_card_visibility() -> void:
@@ -515,23 +564,28 @@ func _configure_navigation() -> void:
 			play_together.focus_neighbor_bottom = play_together.get_path_to(_settings_button)
 
 	# 3. Configure corner buttons (bottom row)
-	if _settings_button != null and _help_button != null:
-		_settings_button.focus_neighbor_right = _settings_button.get_path_to(_help_button)
-		_help_button.focus_neighbor_left = _help_button.get_path_to(_settings_button)
+	if _settings_button != null and _help_button != null and _exit_button != null:
+		_settings_button.focus_neighbor_right = _settings_button.get_path_to(_exit_button)
+		_exit_button.focus_neighbor_left = _exit_button.get_path_to(_settings_button)
+		_exit_button.focus_neighbor_right = _exit_button.get_path_to(_help_button)
+		_help_button.focus_neighbor_left = _help_button.get_path_to(_exit_button)
 		_settings_button.focus_neighbor_left = _settings_button.get_path_to(_settings_button)
 		_help_button.focus_neighbor_right = _help_button.get_path_to(_help_button)
 		
 		# Top: go to Play Together if active, else first main card
 		if pt_active:
 			_settings_button.focus_neighbor_top = _settings_button.get_path_to(play_together)
+			_exit_button.focus_neighbor_top = _exit_button.get_path_to(play_together)
 			_help_button.focus_neighbor_top = _help_button.get_path_to(play_together)
 		else:
 			var top_card: Button = visible_main_cards[0]
 			_settings_button.focus_neighbor_top = _settings_button.get_path_to(top_card)
+			_exit_button.focus_neighbor_top = _exit_button.get_path_to(top_card)
 			_help_button.focus_neighbor_top = _help_button.get_path_to(top_card)
 			
 		# Bottom: lock to self
 		_settings_button.focus_neighbor_bottom = _settings_button.get_path_to(_settings_button)
+		_exit_button.focus_neighbor_bottom = _exit_button.get_path_to(_exit_button)
 		_help_button.focus_neighbor_bottom = _help_button.get_path_to(_help_button)
 
 
@@ -641,15 +695,25 @@ func _position_corner_buttons() -> void:
 		elif eff_mode == Config.ControlsMode.RIGHT_HANDED:
 			eff_mode = Config.ControlsMode.LEFT_HANDED
 	var content_rect := UIHelpers.get_content_rect(viewport_size, eff_mode)
-	var margin: float = 24.0
-	if _settings_button != null:
-		var s := _settings_button.custom_minimum_size
-		_settings_button.size = s
-		_settings_button.position = Vector2(content_rect.position.x + margin, viewport_size.y - s.y - margin)
-	if _help_button != null:
-		var s := _help_button.custom_minimum_size
-		_help_button.size = s
-		_help_button.position = Vector2(content_rect.end.x - s.x - margin, viewport_size.y - s.y - margin)
+	var buttons: Array[Button] = [_settings_button, _exit_button, _help_button]
+	var margin: float = clampf(viewport_size.y * 0.045, 34.0, 56.0)
+	var gap: float = clampf(content_rect.size.x * 0.03, 16.0, 28.0)
+	var button_width: float = clampf((content_rect.size.x - gap * float(buttons.size() - 1)) / float(buttons.size()), 190.0, 260.0)
+	var button_size := Vector2(button_width, 72.0)
+	var total_width := button_size.x * buttons.size() + gap * float(buttons.size() - 1)
+	var start_x := content_rect.position.x + maxf(0.0, (content_rect.size.x - total_width) * 0.5)
+	var y := viewport_size.y - button_size.y - margin
+	for i in range(buttons.size()):
+		var button := buttons[i]
+		if button == null:
+			continue
+		button.custom_minimum_size = button_size
+		button.size = button_size
+		button.position = Vector2(start_x + float(i) * (button_size.x + gap), y)
+
+	if _nearby_players_label != null:
+		_nearby_players_label.size = Vector2(content_rect.size.x, 30.0)
+		_nearby_players_label.position = Vector2(content_rect.position.x, y - 38.0)
 
 
 func _apply_dpad_layout() -> void:
@@ -747,3 +811,8 @@ func _create_quit_dialog() -> void:
 	_quit_no_button = UIHelpers.create_styled_button(tr("no"), 250, 100, UIColors.YELLOW, 36)
 	_quit_no_button.pressed.connect(_hide_quit_dialog)
 	row.add_child(_quit_no_button)
+
+	FocusNavigator.configure_row([yes_button, _quit_no_button], null, null, is_layout_rtl())
+	for button in [yes_button, _quit_no_button]:
+		button.focus_neighbor_top = button.get_path_to(button)
+		button.focus_neighbor_bottom = button.get_path_to(button)

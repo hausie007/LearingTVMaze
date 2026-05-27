@@ -18,8 +18,11 @@ signal chaser_released()
 signal remote_goal_updated(goal_text: String, role_tag: String)
 signal remote_result_updated(title_text: String, character_ids: Array[String])
 signal remote_trap_status_updated(trap_available: bool, confusion_moves: int)
+signal nearby_players_updated(count: int)
+signal connecting_players_updated(count: int)
 
 const APP_ID := "learning_maze"
+const PRESENCE_APP_ID := "learning_maze_presence"
 const PROTOCOL_VERSION := 1
 const HOST_PEER_ID := 1
 
@@ -27,8 +30,17 @@ const GAME_PORT := 42020
 const DISCOVERY_PORT := 42021
 const DISCOVERY_BROADCAST_IP := "255.255.255.255"
 const DISCOVERY_INTERVAL_SEC := 0.75
-const HOST_TTL_SEC := 6.0
+const HOST_BURST_INTERVAL_SEC := 0.20
+const HOST_BURST_PACKETS := 24
+const HOST_TTL_SEC := 20.0
 const HOST_BIND_IP := "0.0.0.0"
+const CLIENT_PRESENCE_INTERVAL_SEC := 1.25
+const CLIENT_PRESENCE_BURST_INTERVAL_SEC := 0.25
+const CLIENT_PRESENCE_BURST_PACKETS := 12
+const CLIENT_PRESENCE_TTL_SEC := 9.0
+const HOST_VIEWER_TTL_SEC := 5.0
+const DISCOVERY_TARGET_CACHE_SEC := 5.0
+const MAX_DISCOVERY_TARGETS := 4
 
 # Domain constants — aliases to MissionCatalog (single source of truth).
 const STYLE_PATH = MissionCatalog.STYLE_PATH
@@ -57,14 +69,27 @@ var _peer: ENetMultiplayerPeer = null
 var _broadcast_socket: PacketPeerUDP = null
 var _listen_socket: PacketPeerUDP = null
 var _broadcast_timer: Timer = null
+var _broadcast_burst_timer: Timer = null
+var _client_presence_socket: PacketPeerUDP = null
+var _client_presence_timer: Timer = null
+var _client_presence_burst_timer: Timer = null
 
 var _pending_join_character_id: String = ""
 var _pending_host_ip: String = ""
 var _pending_host_port: int = GAME_PORT
 var _pending_host_info: Dictionary = {}
+var _client_presence_target_host: Dictionary = {}
 
 var _discovered_hosts: Dictionary = {}
+var _nearby_clients: Dictionary = {}
+var _host_viewers: Dictionary = {}
 var _session_id: String = ""  # Unique ID generated per hosting session.
+var _client_presence_id: String = ""
+var _host_burst_packets_remaining: int = 0
+var _client_presence_burst_packets_remaining: int = 0
+var _discovery_active: bool = false
+var _discovery_targets_cache := PackedStringArray()
+var _discovery_targets_cache_time_sec := -9999.0
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
@@ -79,11 +104,31 @@ func _ready() -> void:
 	_broadcast_timer.timeout.connect(_broadcast_presence)
 	add_child(_broadcast_timer)
 
+	_broadcast_burst_timer = Timer.new()
+	_broadcast_burst_timer.wait_time = HOST_BURST_INTERVAL_SEC
+	_broadcast_burst_timer.one_shot = false
+	_broadcast_burst_timer.timeout.connect(_broadcast_burst_presence)
+	add_child(_broadcast_burst_timer)
+
+	_client_presence_timer = Timer.new()
+	_client_presence_timer.wait_time = CLIENT_PRESENCE_INTERVAL_SEC
+	_client_presence_timer.one_shot = false
+	_client_presence_timer.timeout.connect(_broadcast_client_presence)
+	add_child(_client_presence_timer)
+
+	_client_presence_burst_timer = Timer.new()
+	_client_presence_burst_timer.wait_time = CLIENT_PRESENCE_BURST_INTERVAL_SEC
+	_client_presence_burst_timer.one_shot = false
+	_client_presence_burst_timer.timeout.connect(_broadcast_client_presence_burst)
+	add_child(_client_presence_burst_timer)
+
 	set_process(true)
 
 func _process(_delta: float) -> void:
 	_poll_discovery_socket()
 	_prune_stale_hosts()
+	_prune_stale_nearby_clients()
+	_prune_stale_host_viewers()
 
 func configure_host(config: Dictionary) -> void:
 	host_config = config.duplicate(true)
@@ -197,10 +242,10 @@ func start_discovery() -> int:
 	_discovered_hosts.clear()
 	_emit_discovery_updated()
 
-	_listen_socket = PacketPeerUDP.new()
-	var err := _listen_socket.bind(DISCOVERY_PORT, "0.0.0.0")
+	_discovery_active = true
+	var err := _ensure_listen_socket()
 	if err != OK:
-		_listen_socket = null
+		_discovery_active = false
 		_emit_debug("join", "Discovery bind failed (%d)" % err)
 		return err
 	_emit_debug("join", "Scanning on UDP %d" % DISCOVERY_PORT)
@@ -208,15 +253,15 @@ func start_discovery() -> int:
 	return OK
 
 func stop_discovery() -> void:
-	if _listen_socket != null:
-		_listen_socket.close()
-		_listen_socket = null
+	_discovery_active = false
+	_release_listen_socket_if_unused()
 
 	if not _discovered_hosts.is_empty():
 		_discovered_hosts.clear()
 		_emit_discovery_updated()
 
 func join_host(host_ip: String, host_port: int, character_id: String) -> int:
+	stop_client_presence()
 	leave_session()
 
 	_pending_host_ip = host_ip
@@ -243,6 +288,7 @@ func consume_pending_join_host() -> Dictionary:
 	return host
 
 func leave_session() -> void:
+	stop_client_presence()
 	_stop_broadcasting()
 	stop_discovery()
 
@@ -259,7 +305,106 @@ func leave_session() -> void:
 	_pending_host_ip = ""
 	_pending_host_port = GAME_PORT
 	_pending_host_info.clear()
+	_client_presence_target_host.clear()
+	if not _host_viewers.is_empty():
+		_host_viewers.clear()
+		_emit_connecting_players_updated()
 	_emit_debug("net", "Session cleared")
+
+func start_client_presence(target_host: Dictionary = {}) -> int:
+	if _client_presence_socket != null:
+		set_client_presence_target_host(target_host)
+		return OK
+	set_client_presence_target_host(target_host)
+
+	_ensure_client_presence_id()
+	var err := _ensure_listen_socket()
+	if err != OK:
+		return err
+
+	_client_presence_socket = PacketPeerUDP.new()
+	_client_presence_socket.set_broadcast_enabled(true)
+	_client_presence_timer.start()
+	_client_presence_burst_packets_remaining = CLIENT_PRESENCE_BURST_PACKETS
+	_client_presence_burst_timer.start()
+	_broadcast_client_presence()
+	return OK
+
+func set_client_presence_target_host(host_info: Dictionary) -> void:
+	var old_target_session_id := _client_presence_target_session_id()
+	var old_target_ip := String(_client_presence_target_host.get("ip", ""))
+	var new_target := host_info.duplicate(true)
+	var new_target_session_id := String(new_target.get("session_id", ""))
+	var new_target_ip := String(new_target.get("ip", ""))
+	var target_changed := old_target_session_id != new_target_session_id or old_target_ip != new_target_ip
+
+	if _client_presence_socket != null and not old_target_session_id.is_empty() and target_changed:
+		_broadcast_client_presence(false)
+
+	_client_presence_target_host = new_target
+	if _client_presence_socket != null and target_changed:
+		_restart_client_presence_burst()
+		_broadcast_client_presence()
+
+func clear_client_presence_target_host() -> void:
+	set_client_presence_target_host({})
+
+func stop_client_presence() -> void:
+	if _client_presence_timer != null:
+		_client_presence_timer.stop()
+	if _client_presence_burst_timer != null:
+		_client_presence_burst_timer.stop()
+	_client_presence_burst_packets_remaining = 0
+
+	if _client_presence_socket != null:
+		_broadcast_client_presence(false)
+		_client_presence_socket.close()
+		_client_presence_socket = null
+
+	_client_presence_target_host.clear()
+	_release_listen_socket_if_unused()
+
+func get_nearby_player_count() -> int:
+	return _nearby_clients.size()
+
+func get_connecting_player_count() -> int:
+	return _host_viewers.size()
+
+func _ensure_listen_socket() -> int:
+	if _listen_socket != null:
+		return OK
+
+	_listen_socket = PacketPeerUDP.new()
+	var err := _listen_socket.bind(DISCOVERY_PORT, "0.0.0.0")
+	if err != OK:
+		_listen_socket = null
+	return err
+
+func _release_listen_socket_if_unused() -> void:
+	if _discovery_active or _broadcast_socket != null or _client_presence_socket != null:
+		return
+	if _listen_socket != null:
+		_listen_socket.close()
+		_listen_socket = null
+	if not _nearby_clients.is_empty():
+		_nearby_clients.clear()
+		_emit_nearby_players_updated()
+	if not _host_viewers.is_empty():
+		_host_viewers.clear()
+		_emit_connecting_players_updated()
+
+func _ensure_client_presence_id() -> void:
+	if _client_presence_id.is_empty():
+		_client_presence_id = "%d_%d" % [randi(), Time.get_ticks_msec()]
+
+func _client_presence_target_session_id() -> String:
+	return String(_client_presence_target_host.get("session_id", ""))
+
+func _restart_client_presence_burst() -> void:
+	if _client_presence_burst_timer == null:
+		return
+	_client_presence_burst_packets_remaining = CLIENT_PRESENCE_BURST_PACKETS
+	_client_presence_burst_timer.start()
 
 func send_dpad(direction: Vector2i, pressed: bool) -> void:
 	if multiplayer.multiplayer_peer == null:
@@ -306,19 +451,27 @@ func _start_broadcasting() -> void:
 	if _broadcast_socket != null:
 		return
 
+	var err := _ensure_listen_socket()
+	if err != OK:
+		push_warning("Multiplayer presence listen failed: %d" % err)
+
 	_broadcast_socket = PacketPeerUDP.new()
 	_broadcast_socket.set_broadcast_enabled(true)
-	_broadcast_socket.set_dest_address(DISCOVERY_BROADCAST_IP, DISCOVERY_PORT)
 	_broadcast_timer.start()
+	_host_burst_packets_remaining = HOST_BURST_PACKETS
+	_broadcast_burst_timer.start()
 	_broadcast_presence()
 	_emit_debug("host", "Broadcasting discovery on UDP %d" % DISCOVERY_PORT)
 
 func _stop_broadcasting() -> void:
 	_broadcast_timer.stop()
+	_broadcast_burst_timer.stop()
+	_host_burst_packets_remaining = 0
 	if _broadcast_socket != null:
 		_broadcast_socket.close()
 		_broadcast_socket = null
 		_emit_debug("host", "Broadcast stopped")
+	_release_listen_socket_if_unused()
 
 func _broadcast_presence() -> void:
 	if not multiplayer.is_server():
@@ -328,13 +481,24 @@ func _broadcast_presence() -> void:
 
 	var payload := _build_discovery_payload()
 	var packet := JSON.stringify(payload).to_utf8_buffer()
-	_broadcast_socket.put_packet(packet)
+	_send_discovery_packet(_broadcast_socket, packet)
+
+func _broadcast_burst_presence() -> void:
+	if _host_burst_packets_remaining <= 0:
+		_broadcast_burst_timer.stop()
+		return
+
+	_host_burst_packets_remaining -= 1
+	_broadcast_presence()
+	if _host_burst_packets_remaining <= 0:
+		_broadcast_burst_timer.stop()
 
 func _build_discovery_payload() -> Dictionary:
 	var max_players: int = clampi(int(host_config.get("max_players", 2)), 2, 4)
 	return {
 		"app": APP_ID,
 		"version": PROTOCOL_VERSION,
+		"type": "host",
 		"session_id": _session_id,
 		"host_name": tr("app_title") + " (" + tr("mp_slot_host") + ")",
 		"port": GAME_PORT,
@@ -361,6 +525,101 @@ func _build_discovery_payload() -> Dictionary:
 		"taken_characters": _taken_characters(),
 	}
 
+func _broadcast_client_presence(joinable: bool = true) -> void:
+	if _client_presence_socket == null:
+		return
+	_ensure_client_presence_id()
+
+	var target_session_id := _client_presence_target_session_id()
+	var payload := {
+		"app": PRESENCE_APP_ID,
+		"version": PROTOCOL_VERSION,
+		"type": "client_presence",
+		"presence_id": _client_presence_id,
+		"joinable": joinable,
+		"state": "viewing_host" if not target_session_id.is_empty() else "available",
+	}
+	if not target_session_id.is_empty():
+		payload["target_session_id"] = target_session_id
+	var packet := JSON.stringify(payload).to_utf8_buffer()
+	var direct_targets := _client_presence_direct_targets()
+	var include_broadcast := target_session_id.is_empty() or direct_targets.is_empty()
+	_send_discovery_packet(_client_presence_socket, packet, direct_targets, include_broadcast)
+
+func _broadcast_client_presence_burst() -> void:
+	if _client_presence_burst_packets_remaining <= 0:
+		_client_presence_burst_timer.stop()
+		return
+
+	_client_presence_burst_packets_remaining -= 1
+	_broadcast_client_presence()
+	if _client_presence_burst_packets_remaining <= 0:
+		_client_presence_burst_timer.stop()
+
+func _client_presence_direct_targets() -> PackedStringArray:
+	var targets := PackedStringArray()
+	var host_ip := String(_client_presence_target_host.get("ip", ""))
+	if not host_ip.is_empty():
+		targets.append(host_ip)
+	return targets
+
+func _send_discovery_packet(socket: PacketPeerUDP, packet: PackedByteArray, extra_targets: PackedStringArray = PackedStringArray(), include_broadcast: bool = true) -> void:
+	if socket == null:
+		return
+	var targets := PackedStringArray()
+	if include_broadcast:
+		for target_ip in _discovery_target_ips():
+			if not targets.has(target_ip):
+				targets.append(target_ip)
+	for target_ip in extra_targets:
+		if not target_ip.is_empty() and not targets.has(target_ip):
+			targets.append(target_ip)
+	for target_ip in targets:
+		socket.set_dest_address(target_ip, DISCOVERY_PORT)
+		socket.put_packet(packet)
+
+func _discovery_target_ips() -> PackedStringArray:
+	var now_sec := _now_sec()
+	if now_sec - _discovery_targets_cache_time_sec <= DISCOVERY_TARGET_CACHE_SEC and not _discovery_targets_cache.is_empty():
+		return _discovery_targets_cache
+
+	var targets := PackedStringArray([DISCOVERY_BROADCAST_IP])
+	for address in IP.get_local_addresses():
+		var directed_broadcast := _directed_broadcast_for_ipv4(address)
+		if directed_broadcast.is_empty() or targets.has(directed_broadcast):
+			continue
+		targets.append(directed_broadcast)
+		if targets.size() >= MAX_DISCOVERY_TARGETS:
+			break
+	_discovery_targets_cache = targets
+	_discovery_targets_cache_time_sec = now_sec
+	return targets
+
+func _directed_broadcast_for_ipv4(address: String) -> String:
+	var parts := address.split(".")
+	if parts.size() != 4:
+		return ""
+	var octets: Array[int] = []
+	for part in parts:
+		if not part.is_valid_int():
+			return ""
+		var value := int(part)
+		if value < 0 or value > 255:
+			return ""
+		octets.append(value)
+	if not _is_private_ipv4(octets):
+		return ""
+	return "%d.%d.%d.255" % [octets[0], octets[1], octets[2]]
+
+func _is_private_ipv4(octets: Array[int]) -> bool:
+	if octets[0] == 10:
+		return true
+	if octets[0] == 172 and octets[1] >= 16 and octets[1] <= 31:
+		return true
+	if octets[0] == 192 and octets[1] == 168:
+		return true
+	return false
+
 func _poll_discovery_socket() -> void:
 	if _listen_socket == null:
 		return
@@ -374,9 +633,25 @@ func _poll_discovery_socket() -> void:
 			continue
 
 		var info := (parsed as Dictionary).duplicate(true)
-		if String(info.get("app", "")) != APP_ID:
+		var app_marker := String(info.get("app", ""))
+		if app_marker != APP_ID and app_marker != PRESENCE_APP_ID:
 			continue
 		if int(info.get("version", -1)) != PROTOCOL_VERSION:
+			continue
+
+		var packet_type := String(info.get("type", "host"))
+		if app_marker == PRESENCE_APP_ID:
+			if packet_type != "client_presence":
+				continue
+			_handle_client_presence_packet(info)
+			continue
+		if packet_type == "client_presence":
+			continue
+		if packet_type != "host":
+			continue
+		if not _discovery_active:
+			continue
+		if multiplayer.is_server() and String(info.get("session_id", "")) == _session_id:
 			continue
 
 		var ip := _listen_socket.get_packet_ip()
@@ -411,6 +686,56 @@ func _poll_discovery_socket() -> void:
 	if changed:
 		_emit_discovery_updated()
 
+func _handle_client_presence_packet(info: Dictionary) -> bool:
+	var presence_id := String(info.get("presence_id", ""))
+	if presence_id.is_empty() or presence_id == _client_presence_id:
+		return false
+
+	var now_sec := _now_sec()
+	var changed := false
+	var was_known := _nearby_clients.has(presence_id)
+	if not bool(info.get("joinable", true)):
+		if was_known:
+			_nearby_clients.erase(presence_id)
+			_emit_nearby_players_updated()
+			changed = true
+	else:
+		_nearby_clients[presence_id] = {
+			"last_seen": now_sec,
+		}
+		if not was_known:
+			_emit_nearby_players_updated()
+			changed = true
+
+	if _update_host_viewer_presence(presence_id, info, now_sec):
+		changed = true
+	return changed
+
+func _update_host_viewer_presence(presence_id: String, info: Dictionary, now_sec: float) -> bool:
+	var was_known := _host_viewers.has(presence_id)
+	var target_session_id := String(info.get("target_session_id", ""))
+	var viewing_this_host := (
+		multiplayer.is_server()
+		and not _session_id.is_empty()
+		and bool(info.get("joinable", true))
+		and target_session_id == _session_id
+	)
+
+	if viewing_this_host:
+		_host_viewers[presence_id] = {
+			"last_seen": now_sec,
+		}
+		if not was_known:
+			_emit_connecting_players_updated()
+			return true
+		return false
+
+	if was_known:
+		_host_viewers.erase(presence_id)
+		_emit_connecting_players_updated()
+		return true
+	return false
+
 func _prune_stale_hosts() -> void:
 	if _discovered_hosts.is_empty():
 		return
@@ -427,6 +752,38 @@ func _prune_stale_hosts() -> void:
 	if changed:
 		_emit_discovery_updated()
 
+func _prune_stale_nearby_clients() -> void:
+	if _nearby_clients.is_empty():
+		return
+
+	var now_sec := _now_sec()
+	var changed := false
+	for key in _nearby_clients.keys():
+		var item := _nearby_clients[key] as Dictionary
+		var last_seen: float = float(item.get("last_seen", 0.0))
+		if now_sec - last_seen > CLIENT_PRESENCE_TTL_SEC:
+			_nearby_clients.erase(key)
+			changed = true
+
+	if changed:
+		_emit_nearby_players_updated()
+
+func _prune_stale_host_viewers() -> void:
+	if _host_viewers.is_empty():
+		return
+
+	var now_sec := _now_sec()
+	var changed := false
+	for key in _host_viewers.keys():
+		var item := _host_viewers[key] as Dictionary
+		var last_seen: float = float(item.get("last_seen", 0.0))
+		if now_sec - last_seen > HOST_VIEWER_TTL_SEC:
+			_host_viewers.erase(key)
+			changed = true
+
+	if changed:
+		_emit_connecting_players_updated()
+
 func _emit_discovery_updated() -> void:
 	var hosts: Array = []
 	for item in _discovered_hosts.values():
@@ -439,6 +796,12 @@ func _emit_discovery_updated() -> void:
 	)
 
 	discovery_updated.emit(hosts)
+
+func _emit_nearby_players_updated() -> void:
+	nearby_players_updated.emit(_nearby_clients.size())
+
+func _emit_connecting_players_updated() -> void:
+	connecting_players_updated.emit(_host_viewers.size())
 
 func _emit_lobby_snapshot_local() -> void:
 	lobby_updated.emit(_build_lobby_state())

@@ -12,6 +12,7 @@ class_name GameConfig
 extends Node
 
 const MissionCatalog := preload("res://scripts/mission_catalog.gd")
+const ReleaseVersionInfoScript := preload("res://scripts/release_version_info.gd")
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  ENUMS
@@ -99,6 +100,9 @@ const CONTROLLER_SIZE_KEYS: Array[String] = ["controller_size_normal", "controll
 # ─────────────────────────────────────────────────────────────────────────────
 
 const SAVE_PATH := "user://settings.cfg"
+const PRIVACY_POLICY_URL := "https://sites.google.com/view/learning-maze-privacy-policy/"
+const ANDROID_PACKAGE_ID := "com.hauzirek.learningmaze"
+const PLAY_STORE_URL := "https://play.google.com/store/apps/details?id=com.hauzirek.learningmaze"
 
 ## Current game mode. See GameMode enum.
 var game_mode: GameMode = GameMode.WORDS
@@ -115,6 +119,115 @@ var selected_theme_dir: String = "thiefs"
 var is_multiplayer_host: bool = false
 var show_join_list_on_home: bool = false
 var join_status_override: String = ""
+
+func get_release_version_label() -> String:
+	var packaged_label := _packaged_release_version_label()
+	if not packaged_label.is_empty():
+		return packaged_label
+
+	var android_label := _android_release_version_label()
+	if not android_label.is_empty():
+		return android_label
+
+	var export_label := _export_preset_release_version_label()
+	if not export_label.is_empty():
+		return export_label
+
+	var project_version := _variant_to_clean_string(ProjectSettings.get_setting("application/config/version", ""))
+	var project_build := _variant_to_clean_string(ProjectSettings.get_setting("application/config/build", ""))
+	return _format_release_version(project_version, project_build)
+
+func _packaged_release_version_label() -> String:
+	return ReleaseVersionInfoScript.read_packaged_label()
+
+func _android_release_version_label() -> String:
+	if OS.get_name() != "Android":
+		return ""
+
+	var activity = _android_activity()
+	if activity == null:
+		return ""
+
+	var package_manager = activity.call("getPackageManager")
+	if package_manager == null:
+		return ""
+
+	var package_name := _variant_to_clean_string(activity.call("getPackageName"))
+	if package_name.is_empty():
+		return ""
+
+	var package_info = package_manager.call("getPackageInfo", package_name, 0)
+	if package_info == null:
+		return ""
+
+	var version_name := _java_member_string(package_info, "versionName")
+	var version_code := _java_member_string(package_info, "versionCode")
+	return _format_release_version(version_name, version_code)
+
+func _android_activity() -> Variant:
+	if Engine.has_singleton("AndroidRuntime"):
+		var runtime = Engine.get_singleton("AndroidRuntime")
+		if runtime != null:
+			var activity = runtime.call("getActivity")
+			if activity != null:
+				return activity
+
+	if Engine.has_singleton("GodotAndroid"):
+		var bridge = Engine.get_singleton("GodotAndroid")
+		if bridge != null:
+			var activity = bridge.call("get_activity")
+			if activity != null:
+				return activity
+
+	if Engine.has_singleton("GodotAndroidBridge"):
+		var bridge = Engine.get_singleton("GodotAndroidBridge")
+		if bridge != null:
+			var activity = bridge.call("get_activity")
+			if activity != null:
+				return activity
+
+	return null
+
+func _java_member_string(java_object: Variant, member_name: String) -> String:
+	if java_object == null:
+		return ""
+	var value = java_object.get(member_name)
+	if value != null:
+		return _variant_to_clean_string(value)
+	var java_class = java_object.call("getClass")
+	if java_class == null:
+		return ""
+	var field = java_class.call("getField", member_name)
+	if field == null:
+		return ""
+	value = field.call("get", java_object)
+	if value == null:
+		return ""
+	return _variant_to_clean_string(value)
+
+func _export_preset_release_version_label() -> String:
+	var export_config := ConfigFile.new()
+	var err := export_config.load("res://export_presets.cfg")
+	if err != OK:
+		return ""
+
+	var version_name := _variant_to_clean_string(export_config.get_value("preset.0.options", "version/name", ""))
+	var version_code := _variant_to_clean_string(export_config.get_value("preset.0.options", "version/code", ""))
+	return _format_release_version(version_name, version_code)
+
+func _format_release_version(version_name: String, build_code: String) -> String:
+	return ReleaseVersionInfoScript.format_label(version_name, build_code)
+
+func _variant_to_clean_string(value: Variant) -> String:
+	if value == null:
+		return ""
+	var text := str(value).strip_edges()
+	if text.begins_with("<JavaObject:") and text.contains("\""):
+		var first_quote := text.find("\"")
+		var last_quote := text.rfind("\"")
+		if first_quote >= 0 and last_quote > first_quote:
+			return text.substr(first_quote + 1, last_quote - first_quote - 1).strip_edges()
+	return text
 
 ## Product-level training content selection.
 var training_type: String = TRAINING_WORDS
@@ -151,6 +264,7 @@ var learning_language: String = "auto"
 
 ## Whether to read collected items and words aloud using TTS.
 var voice_hints: bool = true
+var _voice_hints_build_67_reset: bool = true
 
 ## Chaser speed tier. See ChaserLevel enum.
 var chaser_level: ChaserLevel = ChaserLevel.MEDIUM
@@ -309,6 +423,7 @@ func save_settings() -> void:
 	config.set_value("Game", "screensaver_timeout", screensaver_timeout)
 	config.set_value("Game", "on_screen_controls", on_screen_controls)
 	config.set_value("Game", "controller_size", controller_size)
+	config.set_value("Migrations", "voice_hints_build_67_reset", _voice_hints_build_67_reset)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	config.set_value("LastGame", "has_last_played_game", has_last_played_game)
 	config.set_value("LastGame", "session", last_played_game)
@@ -319,7 +434,9 @@ func save_settings() -> void:
 
 func load_settings() -> void:
 	var config := ConfigFile.new()
+	var should_save_after_load := false
 	if config.load(SAVE_PATH) == OK:
+		_voice_hints_build_67_reset = bool(config.get_value("Migrations", "voice_hints_build_67_reset", false))
 		game_mode      = config.get_value("Game", "game_mode", game_mode)
 		game_style     = config.get_value("Game", "game_style", game_style)
 		mission_id     = config.get_value("Game", "mission_id", mission_id)
@@ -335,6 +452,10 @@ func load_settings() -> void:
 		if config.has_section_key("Game", "language"):
 			learning_language = config.get_value("Game", "language", learning_language)
 		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
+		if not _voice_hints_build_67_reset:
+			voice_hints = true
+			_voice_hints_build_67_reset = true
+			should_save_after_load = true
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
 		screensaver_timeout = config.get_value("Game", "screensaver_timeout", 300)
@@ -355,6 +476,9 @@ func load_settings() -> void:
 			on_screen_controls = ControlsMode.RIGHT_HANDED
 		else:
 			on_screen_controls = ControlsMode.OFF
+
+	if should_save_after_load:
+		save_settings()
 
 func configure_single_player_session(
 	style: String,

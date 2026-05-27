@@ -10,6 +10,11 @@ var temp_controller_size: int
 var temp_screensaver: int
 var _is_saving: bool = false
 var _tts_warning_label: Label = null
+var _release_section: VBoxContainer = null
+var _version_label: Label = null
+var _release_actions_row: HBoxContainer = null
+var _privacy_button: Button = null
+var _rate_button: Button = null
 
 const SCREENSAVER_TIMEOUTS: Array[int] = [0, 60, 300, 600, 1200]
 const SCREENSAVER_KEYS: Array[String] = ["off", "screensaver_1m", "screensaver_5m", "screensaver_10m", "screensaver_20m"]
@@ -68,13 +73,21 @@ func _ready() -> void:
 	var size_btn = get_node_or_null("%ControllerSizeButton")
 	if size_btn:
 		_setup_cycling_button(size_btn, func(dir): _cycle_controller_size(dir))
+	_build_release_section()
 	
 	_update_labels()
 	_update_static_labels()
+	_apply_release_layout()
+	_configure_navigation()
 	
 	# Focus first interactive element for TV
 	if has_node("%PerfButton"):
 		%PerfButton.call_deferred("grab_focus")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and is_node_ready():
+		_apply_release_layout()
+		_configure_navigation()
 
 func _get_preview_language(is_learning: bool = false) -> String:
 	var idx = temp_learning_lang_idx if is_learning else temp_ui_lang_idx
@@ -180,9 +193,11 @@ func _cycle_ui_lang(dir: int) -> void:
 	_trigger_warmup_ui()
 	_update_labels()
 	_update_static_labels()
+	_apply_release_layout()
 	if Config and temp_ui_lang_idx < Config.LANG_CODES.size():
 		Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
 		Config.save_settings()
+	_configure_navigation()
 
 func _trigger_warmup_ui() -> void:
 	if temp_voice:
@@ -240,6 +255,8 @@ func _cycle_controls(dir: int) -> void:
 		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 		Config.save_settings()
 	_update_labels()
+	_apply_release_layout()
+	_configure_navigation()
 
 func _cycle_controller_size(dir: int) -> void:
 	if Config.CONTROLLER_SIZE_KEYS.size() == 0: return
@@ -249,6 +266,8 @@ func _cycle_controller_size(dir: int) -> void:
 		UIHelpers.apply_dpad_layout($CenterContainer, temp_controls)
 		Config.save_settings()
 	_update_labels()
+	_apply_release_layout()
+	_configure_navigation()
 
 func _update_labels() -> void:
 	if has_node("%UILangButton"):
@@ -283,8 +302,8 @@ func _update_labels() -> void:
 				_tts_warning_label.text = tr("checking_tts")
 				_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_PENDING)
 		else:
-			var ui_lang_code = Config.LANG_CODES[temp_ui_lang_idx]
-			var learning_lang_code = Config.LANG_CODES[temp_learning_lang_idx]
+			var ui_lang_code := _get_preview_language(false)
+			var learning_lang_code := _get_preview_language(true)
 			var ui_available = TTS.is_available(ui_lang_code)
 			var learning_available = TTS.is_available(learning_lang_code)
 			var is_available = ui_available and learning_available
@@ -348,12 +367,139 @@ func _update_static_labels() -> void:
 	if has_node("%ControllerSizeTitle"):
 		%ControllerSizeTitle.text = tr("setting_controller_size")
 		UIHelpers.apply_medium(%ControllerSizeTitle)
+	if _version_label != null:
+		_version_label.text = _release_version_text()
+	if _privacy_button != null:
+		_privacy_button.text = tr("privacy_policy")
+	if _rate_button != null:
+		_rate_button.text = tr("rate_game")
 	
 func _apply_title_colors() -> void:
 	var titles = ["%UILangTitle", "%LearningLangTitle", "%VoiceTitle", "%PerfTitle", "%ScreensaverTitle", "%ControlsTitle", "%ControllerSizeTitle"]
 	for t in titles:
 		if has_node(t):
 			get_node(t).add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+
+func _build_release_section() -> void:
+	var main_vbox := get_node_or_null("CenterContainer/MainVBox") as VBoxContainer
+	if main_vbox == null:
+		return
+
+	var release_spacer := Control.new()
+	release_spacer.name = "ReleaseSectionSpacer"
+	release_spacer.custom_minimum_size = Vector2(0, 10)
+	main_vbox.add_child(release_spacer)
+
+	_release_section = VBoxContainer.new()
+	_release_section.name = "ReleaseSection"
+	_release_section.alignment = BoxContainer.ALIGNMENT_CENTER
+	_release_section.add_theme_constant_override("separation", 12)
+	main_vbox.add_child(_release_section)
+
+	_version_label = Label.new()
+	_version_label.name = "VersionLabel"
+	_version_label.text = _release_version_text()
+	_version_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_version_label.add_theme_font_size_override("font_size", 24)
+	_version_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_version_label)
+	_release_section.add_child(_version_label)
+
+	_release_actions_row = HBoxContainer.new()
+	_release_actions_row.name = "ReleaseActionsRow"
+	_release_actions_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_release_actions_row.add_theme_constant_override("separation", 28)
+	_release_section.add_child(_release_actions_row)
+
+	_privacy_button = UIHelpers.create_styled_button(tr("privacy_policy"), 300, 64, UIColors.YELLOW, 26)
+	_privacy_button.pressed.connect(_open_privacy_policy)
+	_release_actions_row.add_child(_privacy_button)
+
+	_rate_button = UIHelpers.create_styled_button(tr("rate_game"), 300, 64, UIColors.YELLOW, 26)
+	_rate_button.pressed.connect(_open_rate_game)
+	_release_actions_row.add_child(_rate_button)
+
+func _apply_release_layout() -> void:
+	if _release_section == null:
+		return
+	var viewport_size := get_viewport_rect().size
+	var content_rect := UIHelpers.get_content_rect(viewport_size, temp_controls)
+	var short_screen := viewport_size.y < 820.0
+	var gap := clampi(int(content_rect.size.x * 0.025), 18, 28)
+	var button_width := clampf((content_rect.size.x - float(gap)) * 0.5, 180.0, 300.0)
+	var button_height := 56.0 if short_screen else 64.0
+	var font_size := 24 if short_screen else 26
+	var main_vbox := get_node_or_null("CenterContainer/MainVBox") as VBoxContainer
+	if main_vbox != null:
+		main_vbox.add_theme_constant_override("separation", 8 if short_screen else 16)
+	if has_node("%Title"):
+		%Title.add_theme_font_size_override("font_size", 44 if short_screen else 52)
+	for row_path in ["%RowPerf", "%RowScreensaver", "%RowControls", "%RowControllerSize", "%RowUILang", "%RowLearningLang", "%RowVoice"]:
+		var row := get_node_or_null(row_path) as HBoxContainer
+		if row != null:
+			row.add_theme_constant_override("separation", 48 if short_screen else 80)
+	for title_path in ["%PerfTitle", "%ScreensaverTitle", "%ControlsTitle", "%ControllerSizeTitle", "%UILangTitle", "%LearningLangTitle", "%VoiceTitle"]:
+		var title := get_node_or_null(title_path) as Label
+		if title != null:
+			title.add_theme_font_size_override("font_size", 30 if short_screen else 36)
+	for button_path in ["%PerfButton", "%ScreensaverButton", "%ControlsButton", "%ControllerSizeButton", "%UILangButton", "%LearningLangButton", "%VoiceButton"]:
+		var settings_button := get_node_or_null(button_path) as Button
+		if settings_button != null:
+			settings_button.custom_minimum_size.y = 58.0 if short_screen else 72.0
+			settings_button.add_theme_font_size_override("font_size", 30 if short_screen else 36)
+	if _release_actions_row != null:
+		_release_actions_row.add_theme_constant_override("separation", gap)
+	if _version_label != null:
+		_version_label.add_theme_font_size_override("font_size", 22 if short_screen else 24)
+	for button in [_privacy_button, _rate_button]:
+		if button == null:
+			continue
+		button.custom_minimum_size = Vector2(button_width, button_height)
+		UIHelpers.fit_button_font_size_to_width(button, button_width, font_size, 18, 44.0)
+
+func _configure_navigation() -> void:
+	var controls: Array[Control] = []
+	for node_path in ["%PerfButton", "%ScreensaverButton", "%ControlsButton", "%ControllerSizeButton", "%UILangButton", "%LearningLangButton", "%VoiceButton"]:
+		var ctrl := get_node_or_null(node_path) as Control
+		if FocusNavigator.is_focusable(ctrl):
+			controls.append(ctrl)
+	FocusNavigator.configure_vertical_chain(controls)
+
+	var release_buttons: Array[Button] = []
+	if _privacy_button != null and _privacy_button.visible and not _privacy_button.disabled:
+		release_buttons.append(_privacy_button)
+	if _rate_button != null and _rate_button.visible and not _rate_button.disabled:
+		release_buttons.append(_rate_button)
+	if release_buttons.is_empty():
+		return
+
+	var top_control: Control = controls[controls.size() - 1] if not controls.is_empty() else release_buttons[0]
+	if not controls.is_empty():
+		top_control.focus_neighbor_bottom = top_control.get_path_to(release_buttons[0])
+	FocusNavigator.configure_row(release_buttons, top_control, null, is_layout_rtl())
+	for button in release_buttons:
+		button.focus_neighbor_bottom = button.get_path_to(button)
+
+func _open_privacy_policy() -> void:
+	var err := OS.shell_open(Config.PRIVACY_POLICY_URL)
+	if err != OK:
+		push_warning("Could not open privacy policy URL: %d" % err)
+
+func _open_rate_game() -> void:
+	if OS.get_name() == "Android":
+		var market_err := OS.shell_open("market://details?id=%s" % Config.ANDROID_PACKAGE_ID)
+		if market_err == OK:
+			return
+	var err := OS.shell_open(Config.PLAY_STORE_URL)
+	if err != OK:
+		push_warning("Could not open Play Store URL: %d" % err)
+
+func _release_version_text() -> String:
+	var template := tr("game_version")
+	var version_label := Config.get_release_version_label() if Config != null else ""
+	if template.contains("%s"):
+		return template % version_label
+	return "%s %s" % [template, version_label]
 
 func _on_save_pressed() -> void:
 	if _is_saving: return

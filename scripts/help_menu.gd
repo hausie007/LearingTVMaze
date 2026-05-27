@@ -41,6 +41,7 @@ var _anim_time: float = 0.0
 @onready var _icon_rect: TextureRect = %IconRect
 @onready var _title_label: Label = %TitleLabel
 @onready var _text_label: Label = %TextLabel
+@onready var _fineprint_label: Label = %FineprintLabel
 @onready var _page_label: Label = %PageLabel
 @onready var _left_btn: Button = %LeftButton
 @onready var _right_btn: Button = %RightButton
@@ -54,6 +55,7 @@ func _ready() -> void:
 
 	_left_btn.focus_mode = Control.FOCUS_ALL
 	_right_btn.focus_mode = Control.FOCUS_ALL
+	UIHelpers.apply_medium(_fineprint_label)
 
 	# Configure explicit focus neighbors to enable natural D-pad navigation
 	_left_btn.focus_neighbor_right = _right_btn.get_path()
@@ -88,6 +90,7 @@ func _apply_layout_shift() -> void:
 	var visual_container: Control = get_node_or_null("%VisualContainer")
 	var title_label: Label = get_node_or_null("%TitleLabel")
 	var text_label: Label = get_node_or_null("%TextLabel")
+	var fineprint_label: Label = get_node_or_null("%FineprintLabel")
 	var icon_rect: TextureRect = get_node_or_null("%IconRect")
 	var vbox: VBoxContainer = get_node_or_null("CenterContainer/Panel/MainHBox/ContentMargin/VBox")
 
@@ -102,6 +105,9 @@ func _apply_layout_shift() -> void:
 		title_label.add_theme_font_size_override("font_size", 40)
 		text_label.custom_minimum_size = Vector2(900, 290)
 		text_label.add_theme_font_size_override("font_size", 33)
+		if fineprint_label:
+			fineprint_label.custom_minimum_size = Vector2(900, 48)
+			fineprint_label.add_theme_font_size_override("font_size", 19)
 		if icon_rect:
 			icon_rect.custom_minimum_size = Vector2(230, 230)
 		if vbox:
@@ -114,6 +120,9 @@ func _apply_layout_shift() -> void:
 		title_label.add_theme_font_size_override("font_size", 46)
 		text_label.custom_minimum_size = Vector2(1000, 300)
 		text_label.add_theme_font_size_override("font_size", 39)
+		if fineprint_label:
+			fineprint_label.custom_minimum_size = Vector2(1000, 52)
+			fineprint_label.add_theme_font_size_override("font_size", 22)
 		if icon_rect:
 			icon_rect.custom_minimum_size = Vector2(300, 300)
 		if vbox:
@@ -147,15 +156,19 @@ func _update_slide() -> void:
 	var slide: Dictionary = SLIDES[_current_slide]
 	var title_key := String(slide.get("title", ""))
 	var text_key := String(slide.get("text", ""))
+	var slide_type := String(slide.get("type", ""))
+	var has_network_note := _slide_has_network_note(slide_type)
 	var text := tr(text_key)
 
-	_title_label.text = tr(title_key)
+	_title_label.text = "%s*" % tr(title_key) if has_network_note else tr(title_key)
 	_text_label.text = text
+	_fineprint_label.visible = has_network_note
+	_fineprint_label.text = tr("help_multiplayer_network_note") if has_network_note else ""
 	_page_label.text = "%d / %d" % [_current_slide + 1, SLIDES.size()]
 
 	_clear_visuals()
 
-	match String(slide.get("type", "")):
+	match slide_type:
 		"overview":
 			_spawn_overview_visual()
 		"play_now":
@@ -198,8 +211,13 @@ func _update_slide() -> void:
 
 	_update_animations()
 
+	# Keep small network caveats visual-only; TTS reads the child-facing slide text.
 	if Config.voice_hints:
 		TTS.speak(text, 0.8, Config.get_effective_ui_language())
+
+
+func _slide_has_network_note(slide_type: String) -> bool:
+	return slide_type == "multiplayer" or slide_type == "phone_controller"
 
 
 func _clear_visuals() -> void:

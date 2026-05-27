@@ -12,7 +12,7 @@ static func apply_card_zoom(flow: Control, focused: bool) -> void:
 		
 	if flow._join_card_container == null: return
 	
-	var pivot_size := flow._join_card_container.size
+	var pivot_size: Vector2 = flow._join_card_container.size
 	if pivot_size.x <= 0 or pivot_size.y <= 0:
 		pivot_size = flow._join_card_container.get_minimum_size()
 	if pivot_size.x > 0 and pivot_size.y > 0:

@@ -9,6 +9,7 @@ const HostCardBuilder := preload("res://scripts/ui/host_card_builder.gd")
 const PulseAnimator := preload("res://scripts/ui/pulse_animator.gd")
 const SlotStyler := preload("res://scripts/ui/slot_styler.gd")
 
+const NO_HOST_HINT_DELAY_SEC := 3.5
 const MP_GREEN := UIColors.MP_GREEN
 const MP_GREEN_BORDER := UIColors.MP_GREEN_BORDER
 const SLOT_EMPTY_COLOR := UIColors.SLOT_EMPTY_COLOR
@@ -17,6 +18,9 @@ const MP_RED := UIColors.MP_RED
 const MP_RED_BORDER := UIColors.MP_RED_BORDER
 const JOIN_GREEN := UIColors.JOIN_GREEN
 const REMOTE_GOAL_HAPTIC_MS := 500
+const REMOTE_GOAL_FONT_SIZE := 36
+const REMOTE_GOAL_MIN_WIDTH := 440.0
+const REMOTE_GOAL_MAX_WIDTH := 720.0
 
 # ── Scene nodes ─────────────────────────────────────────────────────────────
 @onready var discovery_panel: Control = %DiscoveryPanel
@@ -99,6 +103,9 @@ var _game_switcher_label: Label = null   # "Game N of M" shown below the card
 var _game_prev_button: Button = null     # ‹ left of card
 var _game_next_button: Button = null     # › right of card
 var _game_unavailable_label: Label = null
+var _discovery_hint_label: Label = null
+var _setup_hint_label: Label = null
+var _scan_empty_timer: Timer = null
 
 
 
@@ -107,6 +114,7 @@ func _ready() -> void:
 	_localize_ui()
 	if network_debug_label != null:
 		network_debug_label.visible = false
+	_build_discovery_helpers()
 	_cache_local_dpad()
 	_character_catalog = CharacterCatalog.build_catalog()
 
@@ -140,6 +148,12 @@ func _ready() -> void:
 	_pause_dialog.cancelled.connect(func(): _pause_dialog.hide_dialog(); _apply_remote_dpad_confusion_visual())
 	add_child(_pause_dialog)
 
+	_scan_empty_timer = Timer.new()
+	_scan_empty_timer.wait_time = NO_HOST_HINT_DELAY_SEC
+	_scan_empty_timer.one_shot = true
+	_scan_empty_timer.timeout.connect(_on_scan_empty_timeout)
+	add_child(_scan_empty_timer)
+
 	var pending_host: Dictionary = NetworkManager.consume_pending_join_host()
 	if pending_host.is_empty():
 		get_tree().call_deferred("change_scene_to_file", Scenes.HOME)
@@ -148,7 +162,7 @@ func _ready() -> void:
 	_hosts = [_selected_host.duplicate(true)]
 	_selected_host_index = 0
 	_selected_host_available = true
-	NetworkManager.start_discovery()
+	_start_discovery_scan(false)
 	_enter_join_setup_mode()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -263,6 +277,30 @@ func _on_controller_size_changed(_new_size: int) -> void:
 func _localize_ui() -> void:
 	discovery_title_label.text = tr("mp_join_discovery_title")
 	discovery_status_label.text = tr("mp_join_discovery_scanning")
+	if _discovery_hint_label != null:
+		_discovery_hint_label.text = tr("mp_same_network_hint")
+	if _setup_hint_label != null:
+		_setup_hint_label.text = tr("mp_same_network_hint")
+
+func _build_discovery_helpers() -> void:
+	if discovery_panel == null or discovery_status_label == null:
+		return
+	var discovery_vbox := discovery_status_label.get_parent() as VBoxContainer
+	if discovery_vbox == null:
+		return
+
+	_discovery_hint_label = Label.new()
+	_discovery_hint_label.name = "DiscoverySameNetworkHintLabel"
+	_discovery_hint_label.visible = false
+	_discovery_hint_label.text = tr("mp_same_network_hint")
+	_discovery_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_discovery_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_discovery_hint_label.custom_minimum_size = Vector2(760, 0)
+	_discovery_hint_label.add_theme_font_size_override("font_size", 24)
+	_discovery_hint_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_discovery_hint_label)
+	discovery_vbox.add_child(_discovery_hint_label)
+	discovery_vbox.move_child(_discovery_hint_label, discovery_status_label.get_index() + 1)
 
 # ── Layout Building ─────────────────────────────────────────────────────────
 
@@ -326,6 +364,24 @@ func _build_setup_layout() -> void:
 	_controller_size_right = nodes["controller_size_right"]
 	_join_card_normal = nodes["join_card_normal"]
 	_join_card_focus = nodes["join_card_focus"]
+	_build_setup_hint_helpers()
+
+func _build_setup_hint_helpers() -> void:
+	if _main_vbox == null or _join_error_label == null:
+		return
+
+	_setup_hint_label = Label.new()
+	_setup_hint_label.name = "SetupSameNetworkHintLabel"
+	_setup_hint_label.visible = false
+	_setup_hint_label.text = tr("mp_same_network_hint")
+	_setup_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_setup_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_setup_hint_label.custom_minimum_size = Vector2(760, 0)
+	_setup_hint_label.add_theme_font_size_override("font_size", 22)
+	_setup_hint_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_setup_hint_label)
+	_main_vbox.add_child(_setup_hint_label)
+	_main_vbox.move_child(_setup_hint_label, _join_error_label.get_index() + 1)
 
 # ── Character & Controller Cycling ──────────────────────────────────────────
 
@@ -437,6 +493,7 @@ func _cycle_game(dir: int) -> void:
 	_selected_host_index = (_selected_host_index + dir + _hosts.size()) % _hosts.size()
 	_selected_host = (_hosts[_selected_host_index] as Dictionary).duplicate(true)
 	_selected_host_available = true
+	_refresh_client_presence()
 	if _game_unavailable_label != null:
 		_game_unavailable_label.text = ""
 	_populate_from_host()
@@ -465,6 +522,8 @@ func _update_game_switcher() -> void:
 func _show_no_games_state() -> void:
 	_selected_host = {}
 	_selected_host_available = false
+	_refresh_client_presence()
+	_set_setup_hint_visible(true)
 	if _join_card_panel != null:
 		_join_card_panel.modulate = Color(1, 1, 1, 0.3)
 	if _join_button != null:
@@ -485,6 +544,7 @@ func _show_no_games_state() -> void:
 		_join_error_label.text = ""
 
 func _restore_from_no_games_state() -> void:
+	_set_setup_hint_visible(false)
 	if _join_card_panel != null:
 		_join_card_panel.modulate = Color(1, 1, 1, 1)
 	if _game_unavailable_label != null:
@@ -509,6 +569,11 @@ func _on_host_discovered(_info: Dictionary) -> void:
 func _on_discovery_updated(hosts: Array) -> void:
 	_hosts = hosts.duplicate(true)
 	_update_game_switcher()
+	if not _hosts.is_empty():
+		if _scan_empty_timer != null:
+			_scan_empty_timer.stop()
+		_set_discovery_hint_visible(false)
+		_set_setup_hint_visible(false)
 
 	if join_setup_panel.visible and not _joined and not _join_pending:
 		# We are on the pre-join setup panel — try to keep the same game.
@@ -524,6 +589,7 @@ func _on_discovery_updated(hosts: Array) -> void:
 			_update_character_selector()
 			_update_game_switcher()
 			_update_join_action_state()
+			_refresh_client_presence()
 			return
 
 		_selected_host_available = _sync_selected_host_from_list()
@@ -553,15 +619,22 @@ func _on_discovery_updated(hosts: Array) -> void:
 			# Dismiss any stale unavailable notice.
 			if not was_available and _game_unavailable_label != null:
 				_game_unavailable_label.text = ""
+		_refresh_client_presence()
 		_update_join_action_state()
 		return
 
 	# Discovery panel (pre-selection): rebuild host card list.
 	_rebuild_host_cards()
 	if _hosts.is_empty():
-		discovery_status_label.text = tr("mp_join_discovery_none")
+		if _scan_empty_timer != null and not _scan_empty_timer.is_stopped():
+			discovery_status_label.text = tr("mp_join_discovery_scanning")
+			_set_discovery_hint_visible(false)
+		else:
+			discovery_status_label.text = tr("mp_join_discovery_none")
+			_set_discovery_hint_visible(true)
 	else:
 		discovery_status_label.text = tr("mp_join_discovery_found")
+		_set_discovery_hint_visible(false)
 		if discovery_panel.visible:
 			if _selected_host_index >= 0 and _selected_host_index < _host_cards.size():
 				_focus_host_card(_selected_host_index)
@@ -611,8 +684,11 @@ func _on_join_pressed() -> void:
 	if err != OK:
 		if _join_error_label != null:
 			_join_error_label.text = "%s: %d" % [tr("mp_join_error_connect"), err]
+		_set_setup_hint_visible(true)
+		_refresh_client_presence()
 		return
 	_join_pending = true
+	_set_setup_hint_visible(false)
 	if _join_error_label != null: _join_error_label.text = tr("mp_join_connecting")
 
 func _on_join_accepted(peer_id: int, state: Dictionary) -> void:
@@ -637,7 +713,11 @@ func _on_join_rejected(reason: String) -> void:
 		_unjoin("mp_kicked_by_host")
 		return
 	if _should_return_to_discovery(reason):
-		_leave_session()
+		_show_no_games_state()
+		if _join_error_label != null:
+			_join_error_label.visible = true
+			_join_error_label.text = _localized_join_reason(reason)
+		call_deferred("_restart_discovery_after_join_rejection")
 		return
 	if _join_error_label != null: _join_error_label.text = _localized_join_reason(reason)
 
@@ -662,7 +742,7 @@ func _on_game_started(_session: Dictionary) -> void:
 	_last_host_cfg = session_config.duplicate(true)
 	var role_tag := _role_tag_for_session(session_role, session_config)
 	_current_remote_role_tag = role_tag
-	_current_remote_goal_text = ""
+	_current_remote_goal_text = _initial_remote_goal_for_session(session_role, session_config, players.size())
 	my_info["role"] = role_tag
 	if not _selected_character_palette.is_empty():
 		my_info["color"] = _selected_character_palette.get("accent", UIColors.BLUE)
@@ -730,11 +810,11 @@ func _on_game_started(_session: Dictionary) -> void:
 	goal_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	goal_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	goal_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	goal_label.custom_minimum_size = Vector2(400, 0)
+	goal_label.custom_minimum_size = Vector2(_remote_goal_label_width(), 0)
 	
 	# Stylize the goal label
 	goal_label.add_theme_font_override("font", UIHelpers.get_font_at_weight(UIHelpers.WEIGHT_SEMIBOLD))
-	goal_label.add_theme_font_size_override("font_size", 28)
+	goal_label.add_theme_font_size_override("font_size", REMOTE_GOAL_FONT_SIZE)
 	goal_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
 	
 	# Semi-transparent background panel overlay (glassmorphism look)
@@ -744,7 +824,7 @@ func _on_game_started(_session: Dictionary) -> void:
 	bg_style.corner_radius_top_right = 16
 	bg_style.corner_radius_bottom_right = 16
 	bg_style.corner_radius_bottom_left = 16
-	bg_style.set_content_margin_all(16)
+	bg_style.set_content_margin_all(20)
 	bg_style.border_width_left = 2
 	bg_style.border_width_top = 2
 	bg_style.border_width_right = 2
@@ -809,6 +889,7 @@ func _on_remote_goal_updated(goal_text: String, role_tag: String = "") -> void:
 			if goal_label != null:
 				goal_label.text = tr(goal_text) if not goal_text.is_empty() else ""
 				goal_label.visible = not goal_text.is_empty()
+				_apply_remote_goal_label_layout(goal_label)
 	if changed:
 		_vibrate_remote_goal_change()
 
@@ -885,6 +966,10 @@ func _transition_to_joined(character_id: String) -> void:
 	_show_local_dpad_for_setup()
 	_configure_navigation()
 	NetworkManager.stop_discovery()
+	NetworkManager.stop_client_presence()
+	if _scan_empty_timer != null:
+		_scan_empty_timer.stop()
+	_set_setup_hint_visible(false)
 
 # ── Layout / Navigation / Helpers ───────────────────────────────────────────
 
@@ -893,16 +978,16 @@ func _apply_dpad_layout() -> void:
 		UIHelpers.apply_dpad_layout(join_setup_center, Config.on_screen_controls)
 
 func _configure_navigation() -> void:
-	# Chain: char_button → controller layout → controller size → join_button
+	# Chain follows the visual top-to-bottom order on the setup screen.
 	var focusable: Array[Button] = []
+	if _join_button != null and _join_button.visible and not _join_button.disabled:
+		focusable.append(_join_button)
 	if _char_button != null and not _char_button.disabled and _char_button.visible:
 		focusable.append(_char_button)
 	if _controller_button != null and _controller_button.visible:
 		focusable.append(_controller_button)
 	if _controller_size_button != null and _controller_size_button.visible:
 		focusable.append(_controller_size_button)
-	if _join_button != null and _join_button.visible and not _join_button.disabled:
-		focusable.append(_join_button)
 	
 	FocusNavigator.configure_vertical_chain(focusable)
 
@@ -965,6 +1050,10 @@ func _apply_responsive_layout() -> void:
 		_join_button.custom_minimum_size = Vector2(jw, 62.0 if short_screen else 68.0)
 		_join_button.add_theme_font_size_override("font_size", 26 if short_screen else 30)
 
+	if _setup_hint_label != null:
+		_setup_hint_label.custom_minimum_size.x = clampf(available_width * 0.7, 520.0, 860.0)
+		_setup_hint_label.add_theme_font_size_override("font_size", 20 if short_screen else 22)
+	_apply_remote_goal_label_layout()
 func _available_width() -> float:
 	var viewport_size := get_viewport_rect().size
 	var controls_mode := Config.ControlsMode.OFF
@@ -989,7 +1078,10 @@ func _role_tag_for_session(role: String, session_config: Dictionary) -> String:
 	var game_style := String(session_config.get("game_style", NetworkManager.STYLE_PATH))
 	var mission_id := String(session_config.get("mission_id", ""))
 	var chaser_enabled := bool(session_config.get("chaser_enabled", false))
+	var training_type := String(session_config.get("training_type", NetworkManager.TRAINING_WORDS))
 	if game_style == NetworkManager.STYLE_RACE:
+		return NetworkManager.ROLE_RACER
+	if game_style == NetworkManager.STYLE_PATH and not chaser_enabled and training_type == NetworkManager.TRAINING_NONE:
 		return NetworkManager.ROLE_RACER
 	if game_style == NetworkManager.STYLE_NEXT_SYMBOL and not chaser_enabled:
 		return NetworkManager.ROLE_COLLECTOR
@@ -998,6 +1090,38 @@ func _role_tag_for_session(role: String, session_config: Dictionary) -> String:
 	if mission_id == MissionCatalog.MISSION_FIND_EXIT:
 		return "exit"
 	return role
+
+func _initial_remote_goal_for_session(role: String, session_config: Dictionary, player_count: int) -> String:
+	var game_style := String(session_config.get("game_style", NetworkManager.STYLE_PATH))
+	var mission_id := String(session_config.get("mission_id", MissionCatalog.mission_from_config(
+		game_style,
+		String(session_config.get("training_type", NetworkManager.TRAINING_WORDS))
+	)))
+	var training_type := String(session_config.get("training_type", NetworkManager.TRAINING_WORDS))
+	var chaser_enabled := bool(session_config.get("chaser_enabled", false)) and game_style != NetworkManager.STYLE_RACE
+
+	if game_style == NetworkManager.STYLE_RACE:
+		return "mp_goal_maze_race_first"
+	if role == NetworkManager.ROLE_CHASER:
+		return "mp_goal_chaser_catch"
+	if game_style == NetworkManager.STYLE_PATH and not chaser_enabled and training_type == NetworkManager.TRAINING_NONE:
+		return "mp_goal_maze_race_first"
+	if mission_id == MissionCatalog.MISSION_FIND_EXIT:
+		return "mp_goal_find_exit"
+	if chaser_enabled:
+		match training_type:
+			NetworkManager.TRAINING_NUMBERS: return "mp_goal_collect_numbers_chaser"
+			NetworkManager.TRAINING_WORDS: return "mp_goal_collect_words_chaser"
+			_: return "mp_goal_collect_letters_chaser"
+	if player_count > 1:
+		match training_type:
+			NetworkManager.TRAINING_NUMBERS: return "mp_goal_collect_together_numbers"
+			NetworkManager.TRAINING_WORDS: return "mp_goal_collect_together_words"
+			_: return "mp_goal_collect_together_letters"
+	match training_type:
+		NetworkManager.TRAINING_NUMBERS: return "mp_goal_collect_numbers"
+		NetworkManager.TRAINING_WORDS: return "mp_goal_collect_words"
+		_: return "mp_goal_collect_letters"
 
 func _refresh_gameplay_badge_role(role_tag: String) -> void:
 	if _gameplay_badge == null:
@@ -1030,6 +1154,25 @@ func _replace_gameplay_badge_control(new_control: Control) -> void:
 		vbox.add_child(new_control)
 		vbox.move_child(new_control, 0)
 	_gameplay_badge = new_control
+
+func _apply_remote_goal_label_layout(goal_label: Label = null) -> void:
+	if goal_label == null:
+		goal_label = _remote_goal_label()
+	if goal_label == null:
+		return
+	goal_label.custom_minimum_size = Vector2(_remote_goal_label_width(), 0)
+	goal_label.add_theme_font_size_override("font_size", REMOTE_GOAL_FONT_SIZE)
+
+func _remote_goal_label() -> Label:
+	if _gameplay_badge_slot == null:
+		return null
+	var vbox = _gameplay_badge_slot.get_node_or_null("BadgeVBox")
+	if vbox == null:
+		return null
+	return vbox.get_node_or_null("RemoteGoalLabel") as Label
+
+func _remote_goal_label_width() -> float:
+	return clampf(get_viewport_rect().size.x * 0.36, REMOTE_GOAL_MIN_WIDTH, REMOTE_GOAL_MAX_WIDTH)
 
 func _vibrate_remote_goal_change() -> void:
 	if OS.has_feature("mobile"):
@@ -1105,9 +1248,10 @@ func _unjoin(message_key: String = "mp_join_disconnected") -> void:
 	if _leaving or _unjoining: return
 	_unjoining = true
 	NetworkManager.leave_session()
-	NetworkManager.start_discovery()
+	_start_discovery_scan(false)
 	_joined = false
 	_game_started = false
+	_refresh_client_presence()
 	# Hide gameplay-only overlays
 	if _gameplay_char_preview != null: _gameplay_char_preview.visible = false
 	if _gameplay_badge_container != null:
@@ -1199,11 +1343,83 @@ func _is_selected_host_available() -> bool:
 func _should_return_to_discovery(reason: String) -> bool:
 	return reason in ["mp_join_host_unavailable", "mp_join_error_connect", "mp_join_disconnected", "mp_join_game_started", "mp_join_lobby_full"]
 
+func _restart_discovery_after_join_rejection() -> void:
+	if _leaving or _joined or _game_started:
+		return
+	NetworkManager.leave_session()
+	_start_discovery_scan(false)
+
 func _localized_join_reason(reason: String) -> String:
 	var localized := tr(reason)
 	return reason if localized == reason and not reason.begins_with("mp_") else localized
 
 # ── Discovery (kept for host card rebuilding) ──────────────────────────────
+
+func _start_discovery_scan(reset_selection: bool = false) -> void:
+	if reset_selection:
+		_hosts.clear()
+		_selected_host = {}
+		_selected_host_index = -1
+		_selected_host_available = false
+		_rebuild_host_cards()
+		_show_no_games_state()
+
+	_set_discovery_hint_visible(false)
+	_set_setup_hint_visible(false)
+	var err: int = NetworkManager.start_discovery()
+	if err != OK:
+		if _scan_empty_timer != null:
+			_scan_empty_timer.stop()
+		if discovery_panel.visible and discovery_status_label != null:
+			discovery_status_label.text = "%s: %d" % [tr("mp_join_discovery_error"), err]
+			_set_discovery_hint_visible(true)
+		if join_setup_panel.visible and _join_error_label != null:
+			_join_error_label.visible = true
+			_join_error_label.text = "%s: %d" % [tr("mp_join_discovery_error"), err]
+			_set_setup_hint_visible(true)
+		return
+
+	if discovery_panel.visible and discovery_status_label != null:
+		discovery_status_label.text = tr("mp_join_discovery_scanning")
+	if join_setup_panel.visible and _join_error_label != null and _selected_host.is_empty():
+		_join_error_label.visible = true
+		_join_error_label.text = tr("mp_join_discovery_scanning")
+	if _scan_empty_timer != null:
+		_scan_empty_timer.start()
+	_refresh_client_presence()
+
+func _refresh_client_presence() -> void:
+	if _leaving or _joined or _join_pending or _game_started:
+		NetworkManager.stop_client_presence()
+		return
+	if _selected_host.is_empty():
+		NetworkManager.start_client_presence()
+	else:
+		NetworkManager.start_client_presence(_selected_host)
+
+func _on_scan_empty_timeout() -> void:
+	if _hosts.is_empty() and discovery_panel.visible:
+		discovery_status_label.text = tr("mp_join_discovery_none")
+		_set_discovery_hint_visible(true)
+	if _hosts.is_empty() and join_setup_panel.visible and not _joined and not _join_pending:
+		_show_no_games_state()
+
+func _set_discovery_hint_visible(visible: bool) -> void:
+	if _discovery_hint_label != null:
+		_discovery_hint_label.visible = visible
+	_configure_discovery_navigation()
+
+func _set_setup_hint_visible(visible: bool) -> void:
+	if _setup_hint_label != null:
+		_setup_hint_label.visible = visible
+	_configure_navigation()
+
+func _configure_discovery_navigation() -> void:
+	var focusable: Array[Control] = []
+	for card in _host_cards:
+		if card != null and card.visible and not card.disabled:
+			focusable.append(card)
+	FocusNavigator.configure_vertical_chain(focusable)
 
 func _rebuild_host_cards() -> void:
 	if host_list_vbox == null: return
@@ -1215,6 +1431,7 @@ func _rebuild_host_cards() -> void:
 		var card: Button = _create_host_card(host, i)
 		host_list_vbox.add_child(card)
 		_host_cards.append(card)
+	_configure_discovery_navigation()
 
 func _create_host_card(host: Dictionary, index: int) -> Button:
 	var button: Button = HostCardBuilder.create_card(host, index, false)
@@ -1236,6 +1453,7 @@ func _select_host_index(index: int) -> void:
 	_selected_host_index = index
 	_selected_host = (_hosts[index] as Dictionary).duplicate(true)
 	_enter_join_setup_mode()
+	_refresh_client_presence()
 
 func _focus_host_card(index: int) -> void:
 	if index < 0 or index >= _host_cards.size(): return
