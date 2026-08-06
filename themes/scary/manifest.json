@@ -2,26 +2,27 @@
   "title": "Scary",
   "assets": {
 	"player": "player.png",
+	"chaser": "chaser.png",
 	"start": "start.png",
 	"end": "finish.png",
 	"background": "tile4.png",
 	"trap": "trap.png"
   },
   "colors": {
-	"wall": "#D670FF",
-	"wall_glow_factor": 1.0,
-	"wall_border": "#8F2B91",
-	"start_cell": "#6A2E5E",
-	"end_cell": "#A85A2A",
+	"wall": "#A88BFF",
+	"wall_glow_factor": 0.8,
+	"wall_border": "#6B5AA8",
+	"start_cell": "#3E5C6B",
+	"end_cell": "#C8873F",
 	"player": "#38A9FF",
-	"highlight": "#FFB83366"
+	"highlight": "#FFD98A66"
   },
   "background": {
 	"tiled": true
   },
   "glow": {
 	"enabled": true,
-	"strength": 0.6
+	"strength": 0.45
   },
   "collectible": {
 	"image": "pumpkin3.png",
