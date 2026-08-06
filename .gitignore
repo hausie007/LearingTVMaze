@@ -6,3 +6,6 @@
 *.apk
 *.aab
 
+
+# macOS
+.DS_Store
