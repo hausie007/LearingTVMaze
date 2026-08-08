@@ -195,7 +195,7 @@ Each theme provides a player sprite, a chaser sprite and a collectible. Themes a
 | Bathroom | Cartoon character | Plunger with a cross expression | ⚠️ See C5 |
 | Little Red | Girl with a basket | Wolf | ⚠️ See C3 |
 | Stone Castle | Knight | Three-headed dragon, cartoon style | ⚠️ See C1 |
-| Cars | Red car | Police car | ⚠️ See C4 |
+| Cars | Red car | Police car, smiling | ✅ Round friendly eyes, open smile, no teeth |
 | Arcade | Yellow wedge | Coloured ghost | ⚠️ See C6 |
 
 ### Open content items
@@ -206,7 +206,7 @@ Each theme provides a player sprite, a chaser sprite and a collectible. Themes a
 
 **C3 — Wolf chaser.** In the Little Red theme the chaser is a cartoon wolf with bared teeth and narrowed yellow eyes. The framing is a recognised European fairy tale, and the wolf never reaches or harms the player — contact simply restarts the attempt. "Scary animals" appears in Google's wording, so the sprite is listed for review notwithstanding its literary context.
 
-**C4 — Police car chaser.** In the Cars theme the chaser is a police car drawn with bared pointed teeth, narrowed eyes and a dark, red-lit, smoke-filled scene rendered into the sprite itself. Measured against the other chasers it is the most confrontational asset in the application, and its baked-in background is also a technical inconsistency: 53.4% of the sprite is fully opaque, against 35–47% for every other chaser, so it renders as a dark block rather than a cut-out character.
+**C4 — *(resolved, retained for completeness)*.** The Cars theme chaser is a cheerful smiling police car with round friendly eyes and no teeth, on a clean transparent background. An alternative sprite in the same folder is not loaded by the theme resolver and is not displayed.
 
 **C5 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
 
@@ -293,11 +293,9 @@ Sorted by implementation difficulty, easiest first. Items marked ▲ bear on the
 | 6 | Confirm the privacy policy page loads, names the developer and the application, and states no data collection | Browser check | Part 5 open item |
 | 7 | Enumerate active releases on every track before submitting | Console only | All active tracks are reviewed |
 | 8 | Re-capture screenshot 3 | One screenshot | Its breadcrumb displays a theme name that no longer matches the application |
-| 9 | ▲ Cut the baked-in background from the Cars chaser to transparency | Image edit, no redraw | C4 — removes the dark scene and fixes the rendering inconsistency in one step |
-| 10 | ▲ Soften the Cars chaser face — remove bared teeth, open the eyes | Localised sprite edit | C4 — the silhouette can be preserved, so no other asset is affected |
-| 11 | ▲ Soften the wolf face in Little Red — remove bared teeth, open the eyes | Localised sprite edit | C3 |
-| 12 | ▲ Replace the knight's sword with a shield, banner or torch | Sprite edit | C1 — a shield asset already exists in that theme's folder |
-| 13 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C6 |
-| 14 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
-| 15 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 14 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
-| 16 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C2 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |
+| 9 | ▲ Soften the wolf face in Little Red — remove bared teeth, open the eyes | Localised sprite edit | C3 |
+| 10 | ▲ Replace the knight's sword with a torch, banner or lantern | Sprite edit | C1 — not a shield; the theme's collectible is already a shield |
+| 11 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C6 |
+| 12 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
+| 13 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 12 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
+| 14 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C2 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |

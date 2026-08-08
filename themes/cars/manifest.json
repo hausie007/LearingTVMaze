@@ -4,7 +4,7 @@
     "player": "player_1_readable.png",
     "start": "start.png",
     "end": "end.png",
-    "chaser": "chaser_1.png",
+    "chaser": "p_chaser_1.png",
     "collectible": "collectible_wheels.png",
     "trap": "trap.png"
   },
@@ -158,7 +158,7 @@
     "text-offset-y-ratio": 0.015
   },
   "chaser": {
-    "image": "chaser_1.png",
+    "image": "p_chaser_1.png",
     "fps": 1,
     "frames": [
       "p_chaser_1.png",
