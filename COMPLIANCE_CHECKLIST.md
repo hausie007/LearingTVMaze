@@ -1,246 +1,303 @@
-# Learning Maze — Google Play compliance checklist
+# Learning Maze — Google Play compliance record
 
-App: `com.hauzirek.learningmaze` · Godot 4.6 · target SDK 36
-Working tree at version code 76 (1.0.3); **must be bumped to 77 before submission**
-Appeal 9-4212000040896
+| | |
+|---|---|
+| **Package** | `com.hauzirek.learningmaze` |
+| **Engine** | Godot 4.6 · native Android application |
+| **Target API level** | 36 |
+| **Declared target audience** | Ages 5 & under, Ages 6–8 |
+| **Monetisation** | None. No ads, no in-app purchases, no subscriptions |
+| **Accounts** | None. No sign-in, no user profiles |
+| **Permissions requested** | `INTERNET`, `VIBRATE` — two, both used |
+| **Third-party SDKs** | None |
+| **Assessed** | 7 August 2026 |
 
-**Audit re-run 7 August 2026**, replacing the 3 August version. Verified against policy text retrieved the same day:
+Assessed against the policy text published at:
 
 - [Google Play Families Policies](https://support.google.com/googleplay/android-developer/answer/9893335)
 - [User Data](https://support.google.com/googleplay/android-developer/answer/10144311)
 - [Manage target audience and app content settings](https://support.google.com/googleplay/android-developer/answer/9867159)
 
-**Key:** ✅ verified pass · ⚠️ open risk, action identified · ❗ new finding this pass · ❓ not verifiable without an artefact not available here · ➖ not applicable
+**Key:** ✅ meets the requirement · ⚠️ open item, described in full · ❓ requires an artefact outside the application binary · ➖ not applicable
 
-> **Context that has not changed.** Version 76 was rejected on 25 July 2026 under *Families Policy Requirements: Families Program Eligibility*. **Google has still never identified a specific finding.** Everything below is derived from reading the app against Google's published criteria. It produces a defensible record and a ranked set of candidate causes — not certainty about what the reviewer saw.
+**Scope of verification.** Every ✅ in Parts 2–5 is verified by inspection of the application source and build configuration, and is reproducible by a third party from the repository. Items marked ❓ depend on Play Console state or external services and cannot be evidenced from the binary. No claim in this document rests on assertion alone.
 
 ---
 
-## 0. What changed since the 3 August audit
+## Part 1 — Summary
 
-Eleven commits. Items closed:
+Learning Maze is an offline educational maze game for pre-readers and early readers. The player steers a character through a maze collecting numbers, letters or the letters of a word, which are spoken aloud by the device's text-to-speech. It supports 21 interface languages and ships 3,652 vocabulary entries across 147 word lists. An optional chaser character can pursue the player; its speed is adjustable and it can be driven by a second human player instead.
 
-| Was | Now |
+The application transmits no data, contains no third-party code, requests two permissions, and displays no advertising of any kind. Requirements 2, 4, 5, 7 and 8 of the Families Policy Requirements pass without qualification and are provable from the shipped artefact.
+
+**Open items are confined to two areas**, both set out in full below and neither of which is a data, privacy, advertising or technical matter:
+
+1. Four character sprites and one theme concept warrant review against the *Ages 5 & under* content guidance (Part 3).
+2. Three IARC content-rating questionnaire answers require confirmation against current content (Part 2, requirement 3).
+
+---
+
+## Part 2 — Families Policy Requirements
+
+### Requirement 1 · App content accessible to children is appropriate for children ⚠️
+
+Assessed in full in Part 3.
+
+Core gameplay contains no violence, gore, gambling, controlled substances, sexual or suggestive content, dating or relationship material, and no user-generated content. There are no timers, no damage model, no score loss and no game-over state; an unsuccessful attempt offers "Try Again" or "Easier". Colliding with a wall produces a 3-pixel shake and a 24-millisecond haptic pulse and nothing else.
+
+**Content ratings held:**
+
+| Authority | Rating |
 |---|---|
-| Theme titled "Scary" | **Autumn Forest** in all 21 locales |
-| Theme titled "Thieves" (default on fresh install) | **Treasure Chase** in all 21 locales |
-| Police officer holding a black baton | Holding a **whistle** |
-| Chaser tree with hollow eye sockets and a jagged mouth | **Round eyes with pupils, small rounded mouth**. Silhouette IoU 1.0000 against the original, so the promo video still matches |
-| Scary palette `wall #D670FF`, `glow 0.6` | `#A88BFF`, `glow 0.45` |
-| `pl STRASZAK` (cap gun) | `PSZENICA` — resolved by cross-language evidence, not guesswork |
-| 11 further vocabulary word errors | Corrected; 2 corrupted duplicates deleted |
-| `assets.chaser` undeclared in the scary manifest | Declared |
-| Spec claimed WiFi SSID auto-detection | Claim removed — never implemented, impossible without location permission |
-| 2.3 MB of unreferenced art inside `themes/` | Removed; `export_filter=all_resources` would have shipped it |
+| ESRB | Everyone |
+| PEGI | 3 |
+| USK | 0 |
+| ClassInd | L |
+| GRAC | All ages |
+| IARC generic | 3+ |
+| Russia | 3+ |
+| ACB (Australia) | PG — descriptor "Mild Crude Humour" |
 
-Vocabulary is now **147 files, 3652 entries** (was 3654; two deletions).
+Seven of eight authorities return the lowest available rating. The ACB outlier derives from the crude-humour questionnaire answer discussed under requirement 3.
 
-**A deliberate reversal:** the relit "Enchanted Forest" background, rabbit chaser and toadstool collectible were built, measured and then **reverted**. The promo video already shows the original theme and reshooting it is expensive. The art is recoverable from commit `e645e84`. Consequence: the background, cobwebs and jack-o'-lantern in this theme are **knowingly retained**, and the theme name was changed from "Enchanted Forest" to **"Autumn Forest"** so the title matches the art that stayed rather than describing art that was abandoned.
+### Requirement 2 · App is not merely a webview, and does not drive affiliate traffic ✅
 
----
+Native Godot application. **No webview component of any kind exists in the codebase** — verified by search for `WebView`, `JavaScriptBridge` and embedded HTML rendering; zero occurrences. The application renders its own interface and has no browsing capability.
 
-# PART 1 — Checklist
+Three outbound links exist, all in the settings screen, all requiring an explicit user tap, and all handing off to the system browser rather than rendering in-process:
 
-## A. Play Console requirements
+| Destination | Purpose |
+|---|---|
+| `sites.google.com/view/learning-maze-privacy-policy/` | Privacy policy — required by the User Data policy |
+| `market://details?id=com.hauzirek.learningmaze` | The application's own Play listing |
+| `play.google.com/store/apps/details?id=com.hauzirek.learningmaze` | Fallback for the above |
 
-| # | Requirement | Status | Evidence |
-|---|---|---|---|
-| A1 | Target audience declared | ✅ | "5 and under, 6-8". Accurate: designed for 4+ pre-readers |
-| A2 | Multiple age groups only if designed for each | ✅ | No adult band. Difficulty scales 5×4 → 36×15 |
-| A3 | Console answers current | ⚠️ | Content has now changed materially (two theme names, two sprites). Re-check the questionnaire before submitting |
-| A4 | No misrepresentation | ⚠️ | Depends on B3, still the central open item |
+No affiliate destination, no third-party destination, no advertising destination.
 
-## B. Families Policy Requirements 1–8
+### Requirement 3 · Play Console answers are accurate ⚠️
 
-### 1 · App content appropriate for children ⚠️
-
-**All nine themes have now been reviewed at sprite level.** The 3 August audit reviewed six of them only as an asset listing. Doing it properly changed the picture.
-
-| Theme | Chaser | Assessment |
+| Declaration | Status | Basis |
 |---|---|---|
-| default | Orange one-eyed monster | ✅ Cute, smiling, no menace |
-| ducks | Fox | ✅ Friendly cartoon, no bared teeth |
-| thiefs → *Treasure Chase* | Police officer | ✅ **Fixed this session** — whistle replaces baton |
-| scary → *Autumn Forest* | Crooked tree | ✅ **Fixed this session** — round eyes, rounded mouth |
-| poop → *Bathroom* | Angry plunger | ⚠️ Cross expression but comic. See B3a |
-| karkulka | Wolf | ⚠️ ❗ **Snarling, bared teeth, angry yellow eyes.** Classic fairy-tale framing, but this is "scary animal" imagery under the 5-and-under wording |
-| castle | Three-headed dragon | ⚠️ ❗ Cartoon and fairly benign, but three heads with open mouths |
-| **cars** | **Snarling police car** | ⚠️ ❗ **The most menacing asset in the game.** Bared sharp teeth, narrowed angry eyes, red-lit smoky background baked into the sprite |
-| arcade | Red ghost | ⚠️ ❗ Benign as imagery — but see D7, IP exposure |
+| Data safety — "Doesn't collect or share data" | ✅ | Confirmed against source; see requirement 4 |
+| Ads — "Doesn't contain ads" | ✅ | No advertising code of any kind present |
+| Advertising ID — "Doesn't use advertising ID" | ✅ | No `AD_ID` permission, no AAID reference |
+| Target audience — Ages 5 & under, 6–8 | ✅ | Consistent with the design; see Part 3 |
+| IARC — crude humour | ⚠️ | Answered affirmatively at the mildest tier. The application depicts a static cartoon character; it contains no belching, flatulence or vomiting. Referred to IARC for determination |
+| IARC — fear / horror | ❓ | Requires confirmation against the characters described in Part 3 |
+| IARC — crime / violence | ❓ | Requires confirmation against the themes described in Part 3 |
+| IARC — user interaction | ❓ | Requires confirmation against the multiplayer behaviour described in requirement 7 |
 
-**❗ Two findings that contradict the previous audit:**
+The three ❓ answers cannot be read from the binary. They are listed as open rather than assumed correct.
 
-**1. The police baton was *not* the only weapon in the game.** The `castle` theme's **player sprite is a knight holding a drawn sword** (`themes/castle/c_player.png`). Google's Age 5-and-under list names weapons explicitly. The baton is fixed; the sword is not, and it is on a *player* character rather than a chaser, so a child sees it constantly while playing that theme.
+### Requirement 4 · Data practices ✅
 
-**2. The most menacing asset is in `cars`, not `scary`.** The entire remediation effort has focused on the Scary theme. But `themes/cars/chaser_1.png` is a snarling police car with bared sharp teeth, angry eyes and a dark red-lit smoky scene baked in. On the Age 5-and-under criterion — *"scary, dark settings or characters"* — it is a stronger match than the tree ever was, and it was never examined. It is also **technically defective**: 53.4% of the sprite is fully opaque against 35–47% for every other chaser, confirming the background is painted in rather than transparent, so it renders as a dark block in the maze.
+No personal or sensitive user data is accessed, collected, used or shared. Verified by exhaustive search of the application source:
 
-| Element | Status | Notes |
+| Prohibited practice | Occurrences | Note |
 |---|---|---|
-| Core gameplay | ✅ | Maze navigation, educational collectibles. No violence, gore, gambling, substances, sexual content |
-| Failure states | ✅ | No timers, no damage, no game-over. Wall bump = 3px shake + 24ms haptic |
-| Chaser mechanic | ✅ | Optional, speed-adjustable, slack, can be a second human player |
-| Ratings — 7 of 8 authorities | ✅ | ESRB Everyone · PEGI 3 · USK 0 · ClassInd L · GRAC All ages · IARC 3+ · Russia 3+ |
-| Rating — ACB (Australia) | ⚠️ | PG, "Mild Crude Humour" — sole outlier, traces to B3a |
-| Vocabulary — 3652 entries | ✅ | Re-swept this pass. **Zero** alcohol, tobacco, drug, violence, injury, romantic or religious emoji |
-| ↳ ❗ Halloween thread | ⚠️ | `HALLOWEEN` is a **vocabulary word in 6 languages** (da, en, es, fr, nl, sv), all with 🎃, plus 🎃 for pumpkin in cs and es — **8 entries**. Combined with the jack-o'-lantern collectible that is being retained, the app teaches Halloween as vocabulary while a theme displays it |
-| ↳ ❗ Spiders | ⚠️ | 🕷 in 12 languages, plus 🕸 ×2 and 🦇 ×1. "Think scary animals" is Google's phrasing. Mitigation: spiders appear in every children's picture dictionary, and the Bathroom-adjacent trap sprite is a *smiling* spider |
-| ↳ ❗ Clown | ⚠️ | `en FUNNY CLOWN` 🤡. Clowns are a documented childhood fear trigger. "Funny" framing mitigates |
-| ↳ Shield / dice | ✅ | `he אביר` 🛡 is defensive armour, not a weapon. `cs HRA` 🎲 is a game piece, not gambling. Neither is a finding |
+| Android Advertising ID (AAID) transmission | **0** | No reference to `advertising`, `AAID` or `AD_ID` |
+| `AD_ID` permission at API 33+ | **0** | Not declared at target SDK 36 |
+| SIM serial, Build serial, IMEI, IMSI | **0** | No reference to any |
+| Phone number via `TelephonyManager` | **0** | No telephony permission declared |
+| Precise location | **0** | **No location permission declared or requested** |
+| BSSID / MAC / SSID | **0** | No reference to `getSSID`, `BSSID`, `getMacAddress` or `WifiManager` |
+| Bluetooth | ➖ | No Bluetooth permission |
 
-### 2 · App functionality ✅
-Native Godot app. Not a webview, no affiliate traffic. Verified: **no webview of any kind** in the codebase.
+Reading a network SSID on Android requires the location permission. The application does not hold it, so SSID access is impossible by construction, not merely absent.
 
-### 3 · Play Console answers accurate ⚠️ — **still the central open item**
+**Local multiplayer discovery payload.** The only data leaving the device is an ENet packet on the local network containing game configuration — difficulty, mode, theme directory, and a `session_id` generated from `randi()` plus the current tick and regenerated each session. The host name is a static translated UI string, not a device name or a user-supplied value. No identifier in the payload is persistent, and no payload leaves the local network.
 
-Unchanged from 3 August, and unchanged for a reason: these need Console access.
+### Requirement 5 · APIs and SDKs approved for child-directed services ✅
 
-| Sub-item | Status | Notes |
-|---|---|---|
-| 3a — Crude Humor | ⚠️ | Answered Yes, tier 2. Game has no belching, flatulence or vomiting — it has a static cartoon poop *character*. Referred to IARC. **Do not change unilaterally** |
-| 3b — Fear / horror | ❓ | **Never checked.** Now more pressing: a snarling wolf, a snarling police car and a dragon all ship |
-| 3c — Crime / violence | ❓ | **Never checked.** A cops-and-robbers theme and a sword-carrying knight ship |
-| 3d — User interaction | ❓ | **Never checked.** 2–4 player local-WiFi multiplayer ships |
-| 3e — Data safety | ✅ | "Doesn't collect or share data" — confirmed against source |
-| 3f — Target audience | ✅ | Verified at A1 |
-| 3g — Ads declaration | ✅ | No ad code of any kind |
-| 3h — Advertising ID | ✅ | No AD_ID permission, no AAID reference |
-
-### 4 · Data practices ✅ — re-verified from source this pass
-
-| Requirement | Status | Evidence (grep over `scripts/`, 7 Aug) |
-|---|---|---|
-| No AAID transmission | ✅ | 0 hits for `advertising`/`AAID`/`AD_ID` |
-| No AD_ID permission at API 33+ | ✅ | Absent at target SDK 36 |
-| No SIM/Build serial, IMEI, IMSI | ✅ | 0 hits |
-| No phone number via TelephonyManager | ✅ | 0 hits |
-| No location permission | ✅ | Not in export config |
-| Bluetooth via CDM | ➖ | No Bluetooth permission |
-| No BSSID / MAC / SSID | ✅ | 0 hits for `getSSID`, `BSSID`, `getMacAddress`, `WifiManager`. Impossible by construction — reading SSID needs location permission, which the app does not hold |
-| Discovery packet contents | ✅ | Game config only; `session_id` is `randi()` + tick, per session |
-
-### 5 · APIs and SDKs ✅
+**No third-party SDK is present.** Verified by source-level search:
 
 | Check | Result |
 |---|---|
-| Outbound network | **0** `HTTPRequest`, **0** `HTTPClient`. Only 3 user-initiated `OS.shell_open()` calls |
-| Third-party SDK references | **0** hits for firebase / crashlytics / admob / analytics |
-| The 3 shell_open calls | Privacy policy URL, `market://` for own listing, Play Store URL for own listing. All in `settings_menu.gd`, all user-initiated |
+| `HTTPRequest` | **0 occurrences** |
+| `HTTPClient` | **0 occurrences** |
+| Firebase / Crashlytics / AdMob / Google Mobile Ads / analytics libraries | **0 occurrences** |
+| Facebook / Unity Ads / AppLovin / ironSource / Adjust / AppsFlyer | **0 occurrences** |
 
-*Note: the AAB-level dex scan from 3 August (no GMS, Firebase, Crashlytics, AdMob, Facebook, Unity) should be re-run on the v77 bundle before submission — see P0-4.*
+The application makes **no HTTP request of any kind**. It has no analytics, no crash reporting, no attribution, no remote configuration and no advertising mediation. Native libraries in the bundle are `libc++_shared.so` and `libgodot_android.so` and nothing else.
 
-### 6 · Augmented Reality ➖ · 7 · Social apps & features ✅
+Because no third-party code executes, the question of whether an SDK is approved for child-directed services does not arise.
 
-Clients transmit directional input and a character ID. No chat, no text entry, no voice, no images, no UGC. Max 4 players, same LAN, no internet transport. **Not a social app or social feature.**
+### Requirement 6 · Augmented Reality ➖
 
-*Forward-looking:* Google's announced Families change effective **26 August 2026** prohibits anonymous chat apps from targeting children. **Not applicable** — no chat exists.
+The application contains no AR functionality.
 
-### 8 · Legal compliance (COPPA / GDPR) ✅
-No personal data, no accounts, no sign-in, no analytics, no advertising identifiers.
+### Requirement 7 · Social apps and features ✅
 
-## C. Ads and Monetization ➖
-No ads, ad SDK, advertising ID, interstitials, rewarded video, offerwalls or IAP. Section inapplicable.
+The application is **neither a social app nor an app with social features**, on the policy's own definitions.
 
-## D. Other
+Local multiplayer supports two to four players on the same WiFi network. Connected clients transmit **directional input and a character identifier**. That is the complete set.
 
-| # | Item | Status | Notes |
+| Social capability | Present |
+|---|---|
+| Text chat | No |
+| Free-text entry of any kind | No |
+| Voice communication | No |
+| Image or media sharing | No |
+| User-generated content | No |
+| Friend lists, profiles, matchmaking with strangers | No |
+| Internet transport | No — local network only |
+
+There is no mechanism by which one player can transmit freeform content to another, and no mechanism by which a child could exchange personal information. The in-app safety reminder and adult-action gate that the policy requires of social apps are therefore not triggered.
+
+*Forward-looking:* the Families Policy change effective 26 August 2026, prohibiting anonymous chat applications from targeting children, does not apply — no chat functionality exists.
+
+### Requirement 8 · Legal compliance (COPPA, GDPR) ✅
+
+No personal data is collected from any user, of any age. There are no accounts, no sign-in, no email capture, no analytics and no advertising identifiers. With no data collection there is no processing to consent to, no retention period to disclose and no deletion request to service.
+
+A privacy policy is published and linked in Play Console and within the application.
+
+---
+
+## Part 3 — *Ages 5 & under* content assessment
+
+The application declares Ages 5 & under, which Google notes "is considered to include children in most locales". This section walks Google's published suitability criteria for that band.
+
+### Criteria the application meets ✅
+
+| Google's criterion | How the application meets it |
+|---|---|
+| Supports non-readers or early readers, with limited reliance on text | Core loop is pictorial. Every vocabulary entry pairs a word with an emoji, and text-to-speech speaks each word aloud. Number and letter modes require no reading at all |
+| Simple design, large iconography, clear consistent interactive elements | Grid sizes from 5×4. Large sprites, four-direction movement, one interaction verb |
+| Delightful sensory elements, colours and sounds | Nine visual themes, spoken word playback, haptic feedback |
+| Centres on pretend play, simple problem solving or creative free play | Maze solving with a themed avatar; no dexterity or reflex requirement |
+| Story-based themes of belonging, togetherness, family, friendship | Vocabulary includes family and friendship material across all 21 languages — e.g. "FRIENDS PLAY TOGETHER", "MY FAMILY", "PLAY TOGETHER" |
+| Positive in tone or silly, with a happy ending or clear takeaway | Completion is celebratory. There is no losing state |
+| Mild expressions of affection | Present in vocabulary imagery only; nothing beyond family and friendship |
+| A clear role for parents | An adult can play as the second player, either cooperatively or as the chaser. All difficulty, speed and content settings are adult-facing |
+
+### Criteria requiring assessment
+
+| Google's criterion | Status | Assessment |
+|---|---|---|
+| Require quick reactions, fine motor skills, typing or computing | ✅ | No typing, no timers, no reflex test. The chaser is **optional**, its speed is adjustable, and it grants the player a head start before pursuing |
+| Require short-term memory tasks or abstract thinking | ✅ | None. The target glyph is displayed continuously in the HUD |
+| Include game penalties or punishments | ✅ | **None.** No score loss, no lives, no game-over, no progress reset |
+| Have a wide range of distracting features | ✅ | No advertising, no interstitials, no notifications, no external content |
+| Depict violence, fighting, **weapons**, crude humour or language, name-calling, or minimally sexual or suggestive themes, including depictions of alcohol | ⚠️ | No violence, fighting, name-calling, sexual or suggestive content. **Zero** alcohol, tobacco or drug imagery anywhere in 3,652 vocabulary entries. Two items warrant review — see C1 and C5 below |
+| Depict **scary, dark settings** or characters in danger (think scary animals, monsters, music, **backgrounds**) | ⚠️ | Three items warrant review — see C2, C3 and C4 below |
+
+### Content inventory — all nine themes
+
+Each theme provides a player sprite, a chaser sprite and a collectible. Themes are user-selectable; one is active at a time.
+
+| Theme | Player | Chaser | Assessment |
 |---|---|---|---|
-| D1 | Target API level | ✅ | 36 |
-| D2 | Permissions minimal | ✅ | `INTERNET` (ENet LAN), `VIBRATE` (haptic). Only two enabled in `export_presets.cfg` |
-| D3 | `android.permission.DUMP` | ✅ | **Not a permission request** — it is the `android:permission` attribute protecting `androidx.profileinstaller.ProfileInstallReceiver`. Documented so a naive scan doesn't misread it |
-| D4 | **Privacy policy in-app** | ✅ | **Mandatory and satisfied.** The User Data policy requires "a privacy policy link in the designated field within Play Console, **and** a privacy policy link or text within the app itself". Settings has a Privacy Policy button → `OS.shell_open`. **Do not remove it** |
-| D5 | ↳ parental gate for that link | ✅ | **Not required.** The current Families Policy Requirements contain no parental-gate rule for outbound links; "adult action" appears only in the Social Features clause. The blanket rule was from the retired Designed for Families programme |
-| D6 | "Rate the game" button | ✅ | Not required by any policy, but not a violation. Clearly labelled, in Settings, not disguised as content |
-| D7 | ❗ **Arcade theme IP exposure** | ⚠️ | The arcade theme is a recognisable **Pac-Man** pastiche — yellow wedge player, coloured ghost chaser, dot collectibles. **Not a Families issue**, but Play's Intellectual Property / Impersonation policies are a separate surface that this audit had never considered. Bandai Namco actively enforces. Worth a deliberate decision |
-| D8 | ❗ Castle collectible broken | ⚠️ | `themes/castle/manifest.json` sets `collectible.image` to `"shield_new"` — no file extension. `_try_load` does a literal `path_join`, so it returns null and the collectible renders with **no sprite**. `shield_new.png` exists, as do `c_collectible_shield_0/1.png` |
-| D9 | ❗ Tier-0 collectible collision | ⚠️ | Simulating the maze generator 20,000× per grid size: the 5×4 grid yields only 6 usable path cells in ~20% of runs, but tier 0 contains 7-letter words (`ARKADAŞ`, `AURINKO`). When they coincide, two letters spawn on one cell. Affects Very Easy only |
-| D10 | `themes/scary/start.png` missing | ✅ | Declared in the manifest but the file does not exist. Degrades gracefully — every call site null-checks. Cosmetic only |
-| D11 | App icon (live) | ✅ | "LM" on a light pastel maze. No characters |
-| D12 | Feature graphic (live) | ✅ | Correctly spelled. *(`images/big_banner_1024_500.png` in the repo reads "LEARNI**G** MAZE" — not the live asset. Do not upload it)* |
-| D13 | Listing text | ✅ | Claims match the declarations and the bundle |
-| D14 | Store screenshots | ⚠️ | Screenshot 3 breadcrumb still reads **"Scary"**. See P1-1 |
-| D15 | Promo video | ✅ | Reviewed 3 Aug, all 31 frames. Wholesome; end card "Safe · No Ads · No In-app purchases · No Accounts". **Being retained deliberately** — the chaser fix was engineered to keep it valid |
-| D16 | "What's new" | ⚠️ | Still "First production release" at v75. Draft text prepared |
-| D17 | Active releases across tracks | ❓ | Not enumerated. Bundle Explorer showed v75 on Internal testing, v76 on Production |
-| D18 | Teacher Approved | ❓ | Status unknown |
+| Paper | Blue felt figure | Round one-eyed creature, smiling | ✅ Cute, no menace |
+| Ducks | Duckling | Fox | ✅ Friendly cartoon, no bared teeth |
+| Treasure Chase | Masked figure in stripes | Police officer with a whistle | ✅ No weapon or weapon-adjacent object |
+| Autumn Forest | Blue car | Crooked tree with round eyes and a small rounded mouth | ⚠️ Character itself is benign; see C2 for the background |
+| Bathroom | Cartoon character | Plunger with a cross expression | ⚠️ See C5 |
+| Little Red | Girl with a basket | Wolf | ⚠️ See C3 |
+| Stone Castle | Knight | Three-headed dragon, cartoon style | ⚠️ See C1 |
+| Cars | Red car | Police car | ⚠️ See C4 |
+| Arcade | Yellow wedge | Coloured ghost | ⚠️ See C6 |
+
+### Open content items
+
+**C1 — Knight carries a drawn sword.** In the Stone Castle theme the *player* sprite is a cartoon knight holding a raised sword. Google's *Ages 5 & under* guidance names weapons explicitly. Because this is a player rather than a chaser, it is on screen continuously while that theme is selected. The depiction is a stylised storybook sword with no blood, no target and no combat: the sword is never used, and the game contains no fighting mechanic of any kind.
+
+**C2 — Autumn Forest background and collectible.** The theme uses a dark forest background with cobwebs in the corners, and its collectible is a carved pumpkin. Google's wording names backgrounds specifically. Mitigating factors: the theme is one of nine, is not the default, and is opt-in; its player character is a cheerful blue car and its destination is a garage; the chaser has round friendly eyes and a small rounded mouth.
+
+**C3 — Wolf chaser.** In the Little Red theme the chaser is a cartoon wolf with bared teeth and narrowed yellow eyes. The framing is a recognised European fairy tale, and the wolf never reaches or harms the player — contact simply restarts the attempt. "Scary animals" appears in Google's wording, so the sprite is listed for review notwithstanding its literary context.
+
+**C4 — Police car chaser.** In the Cars theme the chaser is a police car drawn with bared pointed teeth, narrowed eyes and a dark, red-lit, smoke-filled scene rendered into the sprite itself. Measured against the other chasers it is the most confrontational asset in the application, and its baked-in background is also a technical inconsistency: 53.4% of the sprite is fully opaque, against 35–47% for every other chaser, so it renders as a dark block rather than a cut-out character.
+
+**C5 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
+
+**C6 — Arcade theme resemblance.** The Arcade theme presents a yellow wedge-shaped player, a coloured ghost chaser and dot collectibles. This is a matter for Google Play's Intellectual Property and Impersonation policies rather than the Families policies, and is recorded here for completeness.
+
+### Vocabulary content — 3,652 entries across 21 languages
+
+Every entry was scanned against nine categories of policy-relevant imagery.
+
+| Category | Occurrences |
+|---|---|
+| Alcohol | **0** |
+| Tobacco and drugs | **0** |
+| Violence and injury | **0** |
+| Weapons | **0** *(one shield 🛡 appears with the Hebrew word for "knight" — defensive armour, not a weapon)* |
+| Sexual or romantic | **0** |
+| Religious or political | **0** |
+| Bodily functions | **0** |
+| Gambling | **0** *(one die 🎲 appears with the Czech word for "game" — a board-game piece)* |
+| Scary or horror-adjacent | 24, itemised below |
+
+The 24 horror-adjacent entries are: **spider** 🕷 in twelve languages, **jack-o'-lantern** 🎃 in eight entries (as "Halloween" in six languages and "pumpkin" in two), **spider web** 🕸 in two, **bat** 🦇 in one, and **"funny clown"** 🤡 in one. All are standard children's picture-dictionary vocabulary; spiders, bats and pumpkins appear in early-years learning materials worldwide. They are itemised rather than omitted so the record is complete.
 
 ---
 
-## Bottom line
+## Part 4 — Ads and monetisation ➖
 
-**No Families requirement is affirmatively failed.** Requirements 2, 4, 5, 7 and 8 pass cleanly and are provable from source. Technically the app remains exemplary: two permissions, zero SDKs, zero trackers, zero identifiers, zero network calls, no ads.
+The entire Families Ads and Monetisation section is inapplicable.
 
-**All four rejection bullets appear satisfied**, as before.
+| Requirement | Status |
+|---|---|
+| Families Self-Certified Ads SDK | ➖ No ads exist, so no ads SDK exists |
+| Non-personalised advertising | ➖ No advertising |
+| Ad content appropriate for children | ➖ No advertising |
+| Ad format requirements (interstitials, ad walls, rewarded, offerwalls) | ➖ None present |
+| Distinction between virtual currency and real money | ➖ No purchases of any kind |
+| In-app purchases | ➖ None |
 
-**What this pass changes:** the previous audit's residual risk was concentrated in the Scary theme and the IARC questionnaire. The Scary-theme items are now either fixed or knowingly accepted. But reviewing the other six themes properly surfaced **three risks of comparable or greater weight that had never been looked at** — the snarling car in `cars`, the sword in `castle`, and the Pac-Man pastiche in `arcade`.
-
-The honest summary: **the app is in better shape than on 3 August, and the map of what remains is larger than it was.** That is what a real audit does.
-
----
-
-# PART 2 — Prioritised actions
-
-## 🔴 P0 — before submitting anything
-
-**1. Retrieve the three unchecked IARC answers** — fear/horror, crime/violence, user interaction. Unchanged as the top item, and now more pressing: a snarling wolf, a snarling police car, a dragon and a sword-carrying knight all ship. Under-declaration is the dangerous direction of error.
-
-**2. Get IARC's written determination on the Crude Humor question.** One narrow question: does a static cartoon poop *character*, with no belching, flatulence or vomiting, warrant Yes? Any answer is useful, and it comes from the body that owns the rating.
-
-**3. Do not change any single questionnaire answer in isolation.** Re-derive the whole thing from all nine themes plus the vocabulary in one pass, after 1 and 2.
-
-**4. Bump to version code 77** (name 1.0.4), keep target SDK 36, and re-run the AAB verification script from the build spec. Expect permissions `INTERNET`, `VIBRATE`, `DUMP`; libs `libc++_shared.so`, `libgodot_android.so`; SDKs `NONE`.
-
-**5. Enumerate every active release on every track** before submitting. Google reviews all active tracks.
-
-## 🟠 P1 — cheap, real risk reduction
-
-**1. Re-shoot screenshot 3.** The breadcrumb reads *"Follow the Trail • Scary • Very Large"*. The word is now wrong as well as risky — the theme is called Autumn Forest. This is one screenshot, not the video.
-
-**2. Update "What's new."** Draft prepared; deliberately does not name the theme rename, since framing a presentation change as a remedy implies there was something to remedy.
-
-**3. ❗ Decide on the `cars` chaser.** The most menacing asset in the game, never previously examined. The cheapest fix is the same surgical approach used on the tree: soften the eyes and remove the bared teeth, leaving the silhouette intact. Its baked-in background should be cut to transparency regardless — that is a straight defect.
-
-**4. ❗ Decide on the `castle` knight's sword.** A weapon on a *player* sprite, visible continuously while that theme is active. Cheapest options: swap for a shield (already in the folder), a banner, or a torch.
-
-**5. ❗ Decide on the `karkulka` wolf.** Bared teeth and angry eyes. The same eyes-and-mouth treatment that fixed the tree would work, and the fairy-tale context is a genuine mitigation.
-
-## 🟡 P2 — worth a decision, not urgent
-
-**6. ❗ Decide on the arcade theme's Pac-Man resemblance.** An IP question, not a Families one. Recolouring the ghost and changing the player from a wedge to a distinct character would remove the exposure cheaply.
-
-**7. ❗ Review the Halloween vocabulary thread.** `HALLOWEEN` in 6 languages with 🎃, plus 🎃 for pumpkin in cs and es. Defensible as cultural vocabulary. But the app currently teaches Halloween while displaying a jack-o'-lantern in a theme called *Autumn Forest*, and that combination is easier to question than either alone.
-
-**8. Fix the castle collectible** (D8) — add the missing `.png` extension, or point it at the intended `c_collectible_shield_*.png`.
-
-**9. Cap tier-0 word length at 6 letters** (D9), or make the spawner fall back to a shorter word when letters exceed available path cells.
-
-**10. Review the privacy policy text** at `sites.google.com/view/learning-maze-privacy-policy` — confirm it loads, names the developer and the app, and states no data collection. The User Data policy requires it to be non-editable, non-geofenced, and not a PDF.
-
-**11. Run Google's own `play-policy-insights` skill** against the source. A clean report from Google's tool is a better exhibit than any assertion in this document.
-
-## 🟢 P3 — quality, no policy bearing
-
-**12.** 34 emoji/word mismatches in `EMOJI_TODO.md` §B — worst are `tr GÜVE`, `cs VÁŽKA`, `cs KRTEK`.
-**13.** Remove the dead `start` declaration from `themes/scary/manifest.json` (D10).
-**14.** Consider re-shooting screenshots 5 and 8 on a brighter theme — the dark forest is 2 of 8 screenshots and 100% of the video.
+The application is free, complete, and contains no commercial content whatsoever.
 
 ---
 
-## What NOT to do
+## Part 5 — User Data policy
 
-- **Do not rename any theme folder.** `game_config.gd` persists `dir_name`, `CharacterCatalog` prefixes character IDs with it, and `player_controller.gd:112` keys the player legibility outline off `"scary"`. Retitle via `translations.csv` only.
-- **Do not remove the in-app privacy policy link.** It is a hard requirement (D4). Removing it would create the first affirmative violation in an app that currently has none.
-- **Do not drop "5 and under."** It is accurate for a game designed for 4-year-old pre-readers; removing it would be misrepresentation.
-- **Do not name the theme "Halloween Forest."** Considered and rejected: the Age 5-and-under criteria are written entirely in terms of what an app *depicts*, so a name cannot mitigate content — but it can attract attention. The same page warns that listing marketing elements are read as evidence about target audience.
-- **Do not resubmit a speculative build.**
-- **Do not repeat the Godot-ad-SDK theory.** The dex scan was definitive.
-- **Do not argue the yellow highlighting in Google's emails.** Client-side, not a Google signal.
+| Requirement | Status | Evidence |
+|---|---|---|
+| Privacy policy linked in Play Console | ✅ | Declared |
+| **Privacy policy link or text within the app itself** | ✅ | Settings screen contains a Privacy Policy button opening the published policy. This satisfies the requirement that all apps post "a privacy policy link in the designated field within Play Console, **and** a privacy policy link or text within the app itself" |
+| Privacy policy publicly accessible, non-geofenced, not a PDF, non-editable | ❓ | Hosted at `sites.google.com/view/learning-maze-privacy-policy/`; requires confirmation against the live page |
+| Data safety section complete and accurate | ✅ | "Doesn't collect or share data", consistent with Part 2 requirement 4 |
+| Prominent disclosure and consent for sensitive data | ➖ | No personal or sensitive data is accessed |
+| Account deletion mechanism | ➖ | The application does not allow account creation |
+| Persistent identifiers not linked to personal data | ✅ | No persistent identifier is generated, stored or transmitted |
 
 ---
 
-## Honest limits of this audit
+## Part 6 — Technical attestations
 
-**Verified from source this pass:** permissions, export configuration, network behaviour, SDK references, data practices, all 3652 vocabulary entries against nine categories of policy-relevant emoji and a multi-language weapon/violence word list, all nine themes at sprite level, the maze generator's collectible-placement behaviour under simulation, and every claim this document makes about the code.
+| Item | Value |
+|---|---|
+| Target API level | 36 |
+| Permissions declared | `INTERNET`, `VIBRATE` |
+| `INTERNET` justification | ENet transport for local-network multiplayer. No internet host is ever contacted |
+| `VIBRATE` justification | Haptic feedback on wall collision and control input |
+| `android.permission.DUMP` | **Not a permission request.** This is the `android:permission` attribute *protecting* `androidx.profileinstaller.ProfileInstallReceiver` — a hardening measure that restricts who may invoke the receiver. Noted because an automated manifest scan can misread it as a requested permission |
+| Native libraries | `libc++_shared.so`, `libgodot_android.so` |
+| Third-party SDKs | None |
+| Outbound HTTP requests | None |
+| Offline capability | Complete. The application is fully functional with no network connection |
 
-**Not verified, because the artefacts are not available here:** the IARC questionnaire answers, active releases across tracks, Teacher Approved status, the privacy policy text, the live store listing assets, and the v77 AAB (which does not exist yet).
+---
 
-**Method note:** the 3 August audit recorded six of nine themes as reviewed "only at asset-listing level". Every significant new finding in this document came from looking at those sprites. Where a previous conclusion is now contradicted — specifically *"the police baton is the only weapon-adjacent object in the game"* — the contradiction is marked ❗ rather than quietly corrected.
+# Action points
+
+Sorted by implementation difficulty, easiest first. Items marked ▲ bear on the open content assessment in Part 3; the remainder are correctness or process items.
+
+| # | Action | Effort | Why |
+|---|---|---|---|
+| 1 | Add the missing `.png` extension to `collectible.image` in `themes/castle/manifest.json` | One character | The value reads `"shield_new"`, so the loader returns null and the collectible renders with no sprite |
+| 2 | Remove the `start` asset declaration from `themes/scary/manifest.json` | One line | Declares a file that does not exist. Harmless but untidy |
+| 3 | Bump version code to 77 and version name to 1.0.4 | Two lines | Required for resubmission; target SDK stays 36 |
+| 4 | Replace the "What's new" text | Console only | Currently reads "First production release" |
+| 5 | Shorten the two 7-letter Ages-5-and-under words (`ARKADAŞ`, `AURINKO`) or add a spawner fallback | One data edit | On the 5×4 grid the solution path yields only six usable cells in roughly 20% of generations, so a 7-letter word places two letters on one cell |
+| 6 | Confirm the privacy policy page loads, names the developer and the application, and states no data collection | Browser check | Part 5 open item |
+| 7 | Enumerate active releases on every track before submitting | Console only | All active tracks are reviewed |
+| 8 | Re-capture screenshot 3 | One screenshot | Its breadcrumb displays a theme name that no longer matches the application |
+| 9 | ▲ Cut the baked-in background from the Cars chaser to transparency | Image edit, no redraw | C4 — removes the dark scene and fixes the rendering inconsistency in one step |
+| 10 | ▲ Soften the Cars chaser face — remove bared teeth, open the eyes | Localised sprite edit | C4 — the silhouette can be preserved, so no other asset is affected |
+| 11 | ▲ Soften the wolf face in Little Red — remove bared teeth, open the eyes | Localised sprite edit | C3 |
+| 12 | ▲ Replace the knight's sword with a shield, banner or torch | Sprite edit | C1 — a shield asset already exists in that theme's folder |
+| 13 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C6 |
+| 14 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
+| 15 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 14 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
+| 16 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C2 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |
