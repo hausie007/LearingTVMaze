@@ -32,7 +32,7 @@ The application transmits no data, contains no third-party code, requests two pe
 
 **Open items are confined to two areas**, both set out in full below and neither of which is a data, privacy, advertising or technical matter:
 
-1. Four character sprites and one theme concept warrant review against the *Ages 5 & under* content guidance (Part 3).
+1. Two character sprites and three theme-level items warrant review against the *Ages 5 & under* content guidance (Part 3).
 2. Three IARC content-rating questionnaire answers require confirmation against current content (Part 2, requirement 3).
 
 ---
@@ -179,8 +179,8 @@ The application declares Ages 5 & under, which Google notes "is considered to in
 | Require short-term memory tasks or abstract thinking | ✅ | None. The target glyph is displayed continuously in the HUD |
 | Include game penalties or punishments | ✅ | **None.** No score loss, no lives, no game-over, no progress reset |
 | Have a wide range of distracting features | ✅ | No advertising, no interstitials, no notifications, no external content |
-| Depict violence, fighting, **weapons**, crude humour or language, name-calling, or minimally sexual or suggestive themes, including depictions of alcohol | ⚠️ | No violence, fighting, name-calling, sexual or suggestive content. **Zero** alcohol, tobacco or drug imagery anywhere in 3,652 vocabulary entries. Two items warrant review — see C1 and C5 below |
-| Depict **scary, dark settings** or characters in danger (think scary animals, monsters, music, **backgrounds**) | ⚠️ | Three items warrant review — see C2, C3 and C4 below |
+| Depict violence, fighting, **weapons**, crude humour or language, name-calling, or minimally sexual or suggestive themes, including depictions of alcohol | ⚠️ | No violence, fighting, name-calling, sexual or suggestive content. **Zero** alcohol, tobacco or drug imagery anywhere in 3,652 vocabulary entries. Two items warrant review — see C1 and C4 below |
+| Depict **scary, dark settings** or characters in danger (think scary animals, monsters, music, **backgrounds**) | ⚠️ | Two items warrant review — see C2 and C3 below |
 
 ### Content inventory — all nine themes
 
@@ -196,7 +196,7 @@ Each theme provides a player sprite, a chaser sprite and a collectible. Themes a
 | Little Red | Girl with a basket | Wolf | ⚠️ See C3 |
 | Stone Castle | Knight | Three-headed dragon, cartoon style | ⚠️ See C1 |
 | Cars | Red car | Police car, smiling | ✅ Round friendly eyes, open smile, no teeth |
-| Arcade | Yellow wedge | Coloured ghost | ⚠️ See C6 |
+| Arcade | Yellow wedge | Coloured ghost | ⚠️ See C5 |
 
 ### Open content items
 
@@ -206,11 +206,9 @@ Each theme provides a player sprite, a chaser sprite and a collectible. Themes a
 
 **C3 — Wolf chaser.** In the Little Red theme the chaser is a cartoon wolf with bared teeth and narrowed yellow eyes. The framing is a recognised European fairy tale, and the wolf never reaches or harms the player — contact simply restarts the attempt. "Scary animals" appears in Google's wording, so the sprite is listed for review notwithstanding its literary context.
 
-**C4 — *(resolved, retained for completeness)*.** The Cars theme chaser is a cheerful smiling police car with round friendly eyes and no teeth, on a clean transparent background. An alternative sprite in the same folder is not loaded by the theme resolver and is not displayed.
+**C4 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
 
-**C5 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
-
-**C6 — Arcade theme resemblance.** The Arcade theme presents a yellow wedge-shaped player, a coloured ghost chaser and dot collectibles. This is a matter for Google Play's Intellectual Property and Impersonation policies rather than the Families policies, and is recorded here for completeness.
+**C5 — Arcade theme resemblance.** The Arcade theme presents a yellow wedge-shaped player, a coloured ghost chaser and dot collectibles. This is a matter for Google Play's Intellectual Property and Impersonation policies rather than the Families policies, and is recorded here for completeness.
 
 ### Vocabulary content — 3,652 entries across 21 languages
 
@@ -295,7 +293,7 @@ Sorted by implementation difficulty, easiest first. Items marked ▲ bear on the
 | 8 | Re-capture screenshot 3 | One screenshot | Its breadcrumb displays a theme name that no longer matches the application |
 | 9 | ▲ Soften the wolf face in Little Red — remove bared teeth, open the eyes | Localised sprite edit | C3 |
 | 10 | ▲ Replace the knight's sword with a torch, banner or lantern | Sprite edit | C1 — not a shield; the theme's collectible is already a shield |
-| 11 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C6 |
+| 11 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C5 |
 | 12 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
 | 13 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 12 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
 | 14 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C2 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |
