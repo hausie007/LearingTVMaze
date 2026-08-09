@@ -10,7 +10,7 @@
 | **Accounts** | None. No sign-in, no user profiles |
 | **Permissions requested** | `INTERNET`, `VIBRATE` — two, both used |
 | **Third-party SDKs** | None |
-| **Assessed** | 7 August 2026 |
+| **Assessed** | 9 August 2026 |
 
 Assessed against the policy text published at:
 
@@ -20,7 +20,7 @@ Assessed against the policy text published at:
 
 **Key:** ✅ meets the requirement · ⚠️ open item, described in full · ❓ requires an artefact outside the application binary · ➖ not applicable
 
-**Scope of verification.** Every ✅ in Parts 2–5 is verified by inspection of the application source and build configuration, and is reproducible by a third party from the repository. Items marked ❓ depend on Play Console state or external services and cannot be evidenced from the binary. No claim in this document rests on assertion alone.
+**Scope of verification.** Every ✅ in Parts 2–5 is verified by inspection of the application source and build configuration, and is reproducible by a third party from the repository. Content assessment in Part 3 covers the assets the application actually loads, resolved by following the theme loader's own logic rather than listing directory contents. Items marked ❓ depend on Play Console state or external services and cannot be evidenced from the binary.
 
 ---
 
@@ -30,10 +30,12 @@ Learning Maze is an offline educational maze game for pre-readers and early read
 
 The application transmits no data, contains no third-party code, requests two permissions, and displays no advertising of any kind. Requirements 2, 4, 5, 7 and 8 of the Families Policy Requirements pass without qualification and are provable from the shipped artefact.
 
-**Open items are confined to two areas**, both set out in full below and neither of which is a data, privacy, advertising or technical matter:
+**Two open items remain**, both described in full below, and neither of which is a data, privacy, advertising or technical matter:
 
-1. Two character sprites and three theme-level items warrant review against the *Ages 5 & under* content guidance (Part 3).
+1. One optional theme's background and collectible warrant review against the *Ages 5 & under* guidance (Part 3, item C1).
 2. Three IARC content-rating questionnaire answers require confirmation against current content (Part 2, requirement 3).
+
+Across the nine themes, **no weapon, no bared teeth, no snarling character and no trademark-adjacent design is present** in any asset the application loads.
 
 ---
 
@@ -62,7 +64,7 @@ Seven of eight authorities return the lowest available rating. The ACB outlier d
 
 ### Requirement 2 · App is not merely a webview, and does not drive affiliate traffic ✅
 
-Native Godot application. **No webview component of any kind exists in the codebase** — verified by search for `WebView`, `JavaScriptBridge` and embedded HTML rendering; zero occurrences. The application renders its own interface and has no browsing capability.
+Native Godot application. **No webview component of any kind exists in the codebase** — verified by search for `WebView` and `JavaScriptBridge`; **zero occurrences**. The application renders its own interface and has no browsing capability.
 
 Three outbound links exist, all in the settings screen, all requiring an explicit user tap, and all handing off to the system browser rather than rendering in-process:
 
@@ -158,6 +160,8 @@ A privacy policy is published and linked in Play Console and within the applicat
 
 The application declares Ages 5 & under, which Google notes "is considered to include children in most locales". This section walks Google's published suitability criteria for that band.
 
+**Method.** Theme folders contain superseded assets that the application does not load. Every asset assessed below is the one the game **actually displays**, resolved by following `theme_loader.gd`: the `assets.<slot>` entry in each `manifest.json`, or the naming-convention default, then the top-level animation block whose frame list overrides it. Unreferenced files are excluded from the assessment and listed separately under Part 6.
+
 ### Criteria the application meets ✅
 
 | Google's criterion | How the application meets it |
@@ -179,36 +183,30 @@ The application declares Ages 5 & under, which Google notes "is considered to in
 | Require short-term memory tasks or abstract thinking | ✅ | None. The target glyph is displayed continuously in the HUD |
 | Include game penalties or punishments | ✅ | **None.** No score loss, no lives, no game-over, no progress reset |
 | Have a wide range of distracting features | ✅ | No advertising, no interstitials, no notifications, no external content |
-| Depict violence, fighting, **weapons**, crude humour or language, name-calling, or minimally sexual or suggestive themes, including depictions of alcohol | ⚠️ | No violence, fighting, name-calling, sexual or suggestive content. **Zero** alcohol, tobacco or drug imagery anywhere in 3,652 vocabulary entries. Two items warrant review — see C1 and C4 below |
-| Depict **scary, dark settings** or characters in danger (think scary animals, monsters, music, **backgrounds**) | ⚠️ | Two items warrant review — see C2 and C3 below |
+| Depict violence, fighting, **weapons**, crude humour or language, name-calling, or minimally sexual or suggestive themes, including depictions of alcohol | ⚠️ | **No weapon appears in any loaded asset.** No violence, fighting, name-calling, sexual or suggestive content. **Zero** alcohol, tobacco or drug imagery across 3,652 vocabulary entries. One item — see C2 |
+| Depict **scary, dark settings** or characters in danger (think scary animals, monsters, music, **backgrounds**) | ⚠️ | **No character in any theme bares teeth, snarls, or carries a menacing expression.** One item — see C1 |
 
 ### Content inventory — all nine themes
 
-Each theme provides a player sprite, a chaser sprite and a collectible. Themes are user-selectable; one is active at a time.
+Each theme provides a player sprite, a chaser sprite and a collectible. Themes are user-selectable; one is active at a time. Only the Paper theme is the default on a fresh install.
 
-| Theme | Player | Chaser | Assessment |
-|---|---|---|---|
-| Paper | Blue felt figure | Round one-eyed creature, smiling | ✅ Cute, no menace |
-| Ducks | Duckling | Fox | ✅ Friendly cartoon, no bared teeth |
-| Treasure Chase | Masked figure in stripes | Police officer with a whistle | ✅ No weapon or weapon-adjacent object |
-| Autumn Forest | Blue car | Crooked tree with round eyes and a small rounded mouth | ⚠️ Character itself is benign; see C2 for the background |
-| Bathroom | Cartoon character | Plunger with a cross expression | ⚠️ See C5 |
-| Little Red | Girl with a basket | Wolf | ⚠️ See C3 |
-| Stone Castle | Knight | Three-headed dragon, cartoon style | ⚠️ See C1 |
-| Cars | Red car | Police car, smiling | ✅ Round friendly eyes, open smile, no teeth |
-| Arcade | Yellow wedge | Coloured ghost | ⚠️ See C5 |
+| Theme | Player | Chaser | Collectible | Assessment |
+|---|---|---|---|---|
+| Paper | Felt figure | Round one-eyed creature, smiling | Star | ✅ |
+| Ducks | Duckling | Fox, friendly | *(coloured glyph, no sprite)* | ✅ |
+| Cars | Red car | Police car, smiling | Wheel | ✅ |
+| Treasure Chase | Masked figure in stripes | Police officer with a whistle | Gold coin | ✅ No weapon or weapon-adjacent object |
+| Stone Castle | Knight holding a lit torch | Cartoon dragon, smiling | Shield | ✅ No weapon |
+| Little Red | Girl with a basket | Wolf, smiling, no teeth | Berries | ✅ |
+| Arcade | Hover-craft | Neon insect | Energy shard | ✅ Original designs; neon-on-black arcade aesthetic |
+| Autumn Forest | Blue car | Crooked tree, round eyes, rounded mouth | Carved pumpkin | ⚠️ Characters benign; see C1 |
+| Bathroom | Cartoon character | Plunger | Toilet paper | ⚠️ See C2 |
 
 ### Open content items
 
-**C1 — Knight carries a drawn sword.** In the Stone Castle theme the *player* sprite is a cartoon knight holding a raised sword. Google's *Ages 5 & under* guidance names weapons explicitly. Because this is a player rather than a chaser, it is on screen continuously while that theme is selected. The depiction is a stylised storybook sword with no blood, no target and no combat: the sword is never used, and the game contains no fighting mechanic of any kind.
+**C1 — Autumn Forest background and collectible.** This optional theme uses a dark forest background with cobwebs in the corners, and its collectible is a carved pumpkin. Google's wording names backgrounds specifically. Mitigating factors: the theme is one of nine and is not the default; it is opt-in; its player character is a cheerful blue car and its destination is a garage; and its chaser is a crooked tree with large round eyes, pupils and a small rounded mouth, with no teeth and no menacing features.
 
-**C2 — Autumn Forest background and collectible.** The theme uses a dark forest background with cobwebs in the corners, and its collectible is a carved pumpkin. Google's wording names backgrounds specifically. Mitigating factors: the theme is one of nine, is not the default, and is opt-in; its player character is a cheerful blue car and its destination is a garage; the chaser has round friendly eyes and a small rounded mouth.
-
-**C3 — Wolf chaser.** In the Little Red theme the chaser is a cartoon wolf with bared teeth and narrowed yellow eyes. The framing is a recognised European fairy tale, and the wolf never reaches or harms the player — contact simply restarts the attempt. "Scary animals" appears in Google's wording, so the sprite is listed for review notwithstanding its literary context.
-
-**C4 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
-
-**C5 — Arcade theme resemblance.** The Arcade theme presents a yellow wedge-shaped player, a coloured ghost chaser and dot collectibles. This is a matter for Google Play's Intellectual Property and Impersonation policies rather than the Families policies, and is recorded here for completeness.
+**C2 — Bathroom theme.** An opt-in theme, one of nine, not the default, depicting a smiling cartoon character, a toilet, toilet paper and a plunger. **No defecation, flatulence or vomiting is depicted or animated** — the sprites are static objects. This theme is the origin of the ACB "Mild Crude Humour" descriptor.
 
 ### Vocabulary content — 3,652 entries across 21 languages
 
@@ -216,10 +214,10 @@ Every entry was scanned against nine categories of policy-relevant imagery.
 
 | Category | Occurrences |
 |---|---|
+| Weapons | **0** *(one shield 🛡 appears with the Hebrew word for "knight" — defensive armour, not a weapon)* |
 | Alcohol | **0** |
 | Tobacco and drugs | **0** |
 | Violence and injury | **0** |
-| Weapons | **0** *(one shield 🛡 appears with the Hebrew word for "knight" — defensive armour, not a weapon)* |
 | Sexual or romantic | **0** |
 | Religious or political | **0** |
 | Bodily functions | **0** |
@@ -275,25 +273,30 @@ The application is free, complete, and contains no commercial content whatsoever
 | Outbound HTTP requests | None |
 | Offline capability | Complete. The application is fully functional with no network connection |
 
+### Known non-policy defects
+
+| Item | Effect |
+|---|---|
+| Unreferenced assets in theme folders | Approximately **2.3 MB** of superseded sprites remain in six theme folders. `export_filter="all_resources"` includes them in the bundle. No effect on displayed content — none is loaded — but they inflate download size |
+| `themes/scary/manifest.json` declares `start.png` | The file does not exist. Degrades gracefully; every call site null-checks. Start cell renders without an icon in that theme |
+| Tier-0 collectible placement | On the 5×4 grid the solution path yields only six usable cells in roughly 20% of generations, while two Ages-5-and-under words are seven letters long (`ARKADAŞ`, `AURINKO`). When they coincide, two letters spawn on one cell. Affects the Very Easy difficulty only |
+
 ---
 
 # Action points
 
-Sorted by implementation difficulty, easiest first. Items marked ▲ bear on the open content assessment in Part 3; the remainder are correctness or process items.
+Sorted by implementation difficulty, easiest first. ▲ marks the one item bearing on the open content assessment; the rest are correctness or process items.
 
 | # | Action | Effort | Why |
 |---|---|---|---|
-| 1 | Add the missing `.png` extension to `collectible.image` in `themes/castle/manifest.json` | One character | The value reads `"shield_new"`, so the loader returns null and the collectible renders with no sprite |
-| 2 | Remove the `start` asset declaration from `themes/scary/manifest.json` | One line | Declares a file that does not exist. Harmless but untidy |
-| 3 | Bump version code to 77 and version name to 1.0.4 | Two lines | Required for resubmission; target SDK stays 36 |
-| 4 | Replace the "What's new" text | Console only | Currently reads "First production release" |
-| 5 | Shorten the two 7-letter Ages-5-and-under words (`ARKADAŞ`, `AURINKO`) or add a spawner fallback | One data edit | On the 5×4 grid the solution path yields only six usable cells in roughly 20% of generations, so a 7-letter word places two letters on one cell |
+| 1 | Remove the `start` asset declaration from `themes/scary/manifest.json` | One line | Declares a file that does not exist |
+| 2 | Bump version code to 77 and version name to 1.0.4 | Two lines | Required for resubmission; target SDK stays 36 |
+| 3 | Replace the "What's new" text | Console only | Currently reads "First production release" |
+| 4 | Shorten the two 7-letter Ages-5-and-under words (`ARKADAŞ`, `AURINKO`), or add a spawner fallback | One data edit | Prevents two letters spawning on one cell on the smallest grid |
+| 5 | Delete the ~2.3 MB of unreferenced sprites from the six theme folders | File deletion | They ship in the bundle without being used |
 | 6 | Confirm the privacy policy page loads, names the developer and the application, and states no data collection | Browser check | Part 5 open item |
 | 7 | Enumerate active releases on every track before submitting | Console only | All active tracks are reviewed |
 | 8 | Re-capture screenshot 3 | One screenshot | Its breadcrumb displays a theme name that no longer matches the application |
-| 9 | ▲ Soften the wolf face in Little Red — remove bared teeth, open the eyes | Localised sprite edit | C3 |
-| 10 | ▲ Replace the knight's sword with a torch, banner or lantern | Sprite edit | C1 — not a shield; the theme's collectible is already a shield |
-| 11 | ▲ Recolour the Arcade ghost and replace the wedge player with a distinct character | Two sprites | C5 |
-| 12 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
-| 13 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 12 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
-| 14 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C2 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |
+| 9 | Obtain IARC's written determination on the crude-humour question | External dependency | Resolves the sole rating outlier with authority from the body that owns it |
+| 10 | Confirm the fear/horror, crime/violence and user-interaction questionnaire answers against current content, re-deriving all answers in a single pass | Console, after 9 | Part 2 requirement 3 — the three answers that cannot be evidenced from the binary |
+| 11 | ▲ Lighten the Autumn Forest background, remove the cobwebs, and replace the carved-pumpkin collectible | Art commission | C1 — the largest item, and it also requires re-capturing the promotional video and two screenshots, which currently feature this theme |
