@@ -1,23 +1,23 @@
 {
   "title": "Arcade",
   "assets": {
-    "player": "player_open.png",
-    "chaser": "chaser_0.png",
-    "background": "background.png",
-    "start": "start.png",
-    "end": "end.png",
-    "collectible": "collectible_0.png",
-    "trap": "trap.png"
+    "player": "player-hovercraft-frame-1.png",
+    "chaser": "enemy-glitch-bug-frame-1.png",
+    "background": "background-circuit-tile.png",
+    "start": "start-pad.png",
+    "end": "exit-portal.png",
+    "collectible": "collectible-energy-shard-frame-1.png",
+    "trap": "glitch-node.png"
   },
   "colors": {
-    "wall": "#0000FF",
+    "wall": "#5B5BFF",
     "wall_glow_factor": 1.9,
-    "wall_border": "#000066AA",
-    "floor": "#000000",
-    "start_cell": "#000000",
-    "end_cell": "#000000",
-    "player": "#FFFF00",
-    "highlight": "#FFB8B888"
+    "wall_border": "#2A2A99AA",
+    "floor": "#05070D",
+    "start_cell": "#05070D",
+    "end_cell": "#05070D",
+    "player": "#7DF9FF",
+    "highlight": "#FFD24A88"
   },
   "background": {
     "tiled": true,
@@ -29,30 +29,30 @@
     "bloom": 0.28
   },
   "collectible": {
-    "color": "#FFB8B8",
-    "text-color": "#000000",
-    "image": "collectible_0.png",
+    "color": "#FFD24A",
+    "text-color": "#1A1000",
+    "image": "collectible-energy-shard-frame-1.png",
     "fps": 8,
     "frames": [
-      "collectible_0.png",
-      "collectible_2.png",
-      "collectible_4.png",
-      "collectible_6.png"
+      "collectible-energy-shard-frame-1.png",
+      "collectible-energy-shard-frame-2.png",
+      "collectible-energy-shard-frame-3.png",
+      "collectible-energy-shard-frame-4.png"
     ]
   },
   "player": {
     "fps": 12,
     "frames": [
-      "player_open.png",
-      "player_slight.png",
-      "player_closed.png"
+      "player-hovercraft-frame-1.png",
+      "player-hovercraft-frame-2.png",
+      "player-hovercraft-frame-3.png"
     ]
   },
   "chaser": {
     "fps": 3,
     "frames": [
-      "chaser_0.png",
-      "chaser_1.png"
+      "enemy-glitch-bug-frame-1.png",
+      "enemy-glitch-bug-frame-2.png"
     ]
   }
 }

@@ -1,0 +1,58 @@
+{
+  "title": "Arcade",
+  "assets": {
+    "player": "player_open.png",
+    "chaser": "chaser_0.png",
+    "background": "background.png",
+    "start": "start.png",
+    "end": "end.png",
+    "collectible": "collectible_0.png",
+    "trap": "trap.png"
+  },
+  "colors": {
+    "wall": "#0000FF",
+    "wall_glow_factor": 1.9,
+    "wall_border": "#000066AA",
+    "floor": "#000000",
+    "start_cell": "#000000",
+    "end_cell": "#000000",
+    "player": "#FFFF00",
+    "highlight": "#FFB8B888"
+  },
+  "background": {
+    "tiled": true,
+    "full_screen": false
+  },
+  "glow": {
+    "enabled": true,
+    "strength": 0.85,
+    "bloom": 0.28
+  },
+  "collectible": {
+    "color": "#FFB8B8",
+    "text-color": "#000000",
+    "image": "collectible_0.png",
+    "fps": 8,
+    "frames": [
+      "collectible_0.png",
+      "collectible_2.png",
+      "collectible_4.png",
+      "collectible_6.png"
+    ]
+  },
+  "player": {
+    "fps": 12,
+    "frames": [
+      "player_open.png",
+      "player_slight.png",
+      "player_closed.png"
+    ]
+  },
+  "chaser": {
+    "fps": 3,
+    "frames": [
+      "chaser_0.png",
+      "chaser_1.png"
+    ]
+  }
+}

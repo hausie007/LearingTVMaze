@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6kaiw1siw4un"
-path="res://.godot/imported/player_slight.png-97b8b4a80ac32a48e6715af71ed21568.ctex"
+uid="uid://d0ke45ehgttql"
+path="res://.godot/imported/background-circuit-tile.png-ed0a4492ee8d79140d1cf14d6f8094b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/arcade/player_slight.png"
-dest_files=["res://.godot/imported/player_slight.png-97b8b4a80ac32a48e6715af71ed21568.ctex"]
+source_file="res://themes/arcade/background-circuit-tile.png"
+dest_files=["res://.godot/imported/background-circuit-tile.png-ed0a4492ee8d79140d1cf14d6f8094b3.ctex"]
 
 [params]
 

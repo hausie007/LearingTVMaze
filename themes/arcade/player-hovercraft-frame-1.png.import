@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxt8jspvaw6x"
-path="res://.godot/imported/chaser_1.png-6fb09565a29c10776b31aa0aef9e85e5.ctex"
+uid="uid://bi8i0wuvrt4h6"
+path="res://.godot/imported/player-hovercraft-frame-1.png-5e7c46d4fb742878008c963ebeff0432.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/arcade/chaser_1.png"
-dest_files=["res://.godot/imported/chaser_1.png-6fb09565a29c10776b31aa0aef9e85e5.ctex"]
+source_file="res://themes/arcade/player-hovercraft-frame-1.png"
+dest_files=["res://.godot/imported/player-hovercraft-frame-1.png-5e7c46d4fb742878008c963ebeff0432.ctex"]
 
 [params]
 

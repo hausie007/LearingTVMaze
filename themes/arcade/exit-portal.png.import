@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3prknncj0igl"
-path="res://.godot/imported/collectible_6.png-e560bdcea32f4fb4d4d4094107b8a42e.ctex"
+uid="uid://jpdx6x7wfp4k"
+path="res://.godot/imported/exit-portal.png-0746b1df6a73ddcce3c681e9f1dbee5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/arcade/collectible_6.png"
-dest_files=["res://.godot/imported/collectible_6.png-e560bdcea32f4fb4d4d4094107b8a42e.ctex"]
+source_file="res://themes/arcade/exit-portal.png"
+dest_files=["res://.godot/imported/exit-portal.png-0746b1df6a73ddcce3c681e9f1dbee5a.ctex"]
 
 [params]
 
