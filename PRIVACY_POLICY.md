@@ -1,165 +1,124 @@
-# Learning Maze Privacy Policy
+# Learning Maze — Privacy Policy (publication source)
 
-> **Publishing notes — do not paste this block.**
+> **Notes — do not paste this block into Google Sites.**
 >
-> 1. Rename the Google Sites **page** to `Learning Maze Privacy Policy`. The page is currently
->    titled *Domovská stránka*, which is what the HTML `<title>` and any automated check reads.
->    Google's User Data policy asks for "clear labeling as a privacy policy … in title".
-> 2. Keep the page at the same URL — it is referenced in Play Console and in the app
->    (`game_config.gd`, `PRIVACY_POLICY_URL`).
-> 3. Keep the email obfuscated exactly as written below.
-> 4. I am not a lawyer and this is not legal advice. It is drafted to match Google Play's
->    published requirements and to describe your app accurately. If the app ever gains accounts,
->    analytics, ads or a server, this document must be rewritten before that ships.
+> **Publishing**
+> 1. Rename the Google Sites *page* to `Learning Maze Privacy Policy`. It is currently
+>    *Domovská stránka*, which is what the HTML title and any automated check reads. Google asks
+>    for "clear labeling as a privacy policy … in title".
+> 2. Keep the same URL — it is referenced in Play Console and in `game_config.gd`.
+> 3. Paste everything below the line as plain headings and paragraphs. No PDF, no attachment.
+> 4. Update the effective date whenever you change the text.
+>
+> **Why it is worded the way it is** — the durability rules behind each choice:
+>
+> | Rule | Example |
+> |---|---|
+> | Never state a count of anything | No "two permissions". Adding one would falsify the policy |
+> | List what will **never** be requested, not what is | A negative permission list stays true as the app grows |
+> | Describe data by **category and purpose**, never by field | "information needed to run the game" survives a protocol change |
+> | Push device features onto the platform's policy | Covers text-to-speech today and anything similar later |
+> | Never name a library, engine or file | Implementation detail belongs in code, not here |
+> | Anchor to the effective date | "as at the date below" makes drift a scheduled update, not a misstatement |
+>
+> **What would require a rewrite** — only these: adding advertising, analytics or any third-party
+> SDK; adding accounts or sign-in; adding chat or any free-text entry between users; adding
+> in-app purchases; or sending anything to a server you operate. Ordinary changes — new themes,
+> new words, new languages, new game modes, new permissions for local features — need no edit.
+>
+> I am not a lawyer and this is not legal advice. For a product aimed at children, an hour with a
+> qualified solicitor is worth buying.
 
 ---
 
 # Learning Maze Privacy Policy
 
-**Effective Date: August 2026**
+**Effective date: August 2026**
 
-## 1. Introduction and Scope
+## 1. About this Policy
 
-This Privacy Policy applies to the mobile, Android TV and Google TV application **"Learning Maze"** (the "Application"), published on Google Play by **Michal Hauzírek** ("I", "me", "my"), an individual developer.
+This Privacy Policy explains how privacy is handled in the application **"Learning Maze"** (the "Application"), an offline educational maze game for children and families, published on Google Play by **Michal Hauzírek**, an independent developer ("I", "me", "my").
 
-The Application is an offline educational maze game for children and families. This Policy explains what information the Application does and does not access, collect, use, store and share, and describes the limited on-device and local-network activity the Application performs.
+This Policy describes the Application as at the effective date above. It applies to the Application only, and not to any other service you may use alongside it.
 
-By using the Application, you acknowledge this Privacy Policy.
+## 2. The short version
 
-## 2. Summary
+I do not collect any personal information about you or your child. The Application has no accounts, no advertising, no analytics, no tracking and no in-app purchases. It works offline, and I do not receive any information from it.
 
-- The Application **does not collect, transmit, store, sell, rent or share personal information.**
-- The Application has **no user accounts, no sign-in, no advertising, no analytics and no in-app purchases.**
-- The Application **does not contact any server operated by me.** I do not receive any data from the Application.
-- The only network capability is **optional multiplayer between devices on the same local Wi-Fi network**, described in Section 5.
+## 3. Information I do not collect
 
-## 3. Information the Application Does Not Collect
+The Application does not collect, request, transmit, store, sell or share personal information about its users. In particular, it does not collect:
 
-The Application does not collect, request, access or transmit any of the following:
+- names, usernames, email addresses, postal addresses or telephone numbers
+- passwords or account credentials
+- location information
+- contacts, calendar entries or messages
+- photographs, video, camera images, or microphone or voice recordings
+- device identifiers or advertising identifiers
+- analytics, usage tracking, behavioural profiles or crash telemetry
+- payment or financial information
 
-- Names, usernames or nicknames entered by a user
-- Email addresses, postal addresses or phone numbers
-- Passwords or authentication credentials
-- Precise or approximate location data
-- Contacts, calendar or call logs
-- Photographs, videos, camera input or audio recordings
-- Microphone input
-- Device identifiers, including IMEI, IMSI, SIM serial, build serial, MAC address, SSID or BSSID
-- Advertising identifiers, including the Android Advertising ID (AAID)
-- Usage analytics, telemetry, crash reports or behavioural profiles
-- Payment or financial information
-- Any other personal or sensitive user information
+The Application does not request access to your location, contacts, camera, microphone, photographs, or the personal files on your device, and it requests only those device permissions needed for the features described in this Policy.
 
-The Application does not request the location permission and therefore cannot access location data.
+I do not sell or share personal information, and I do not use any information for advertising or profiling.
 
-## 4. Permissions Used
+## 4. How the Application works
 
-The Application requests two Android permissions, both used solely for the purposes stated:
+The Application is designed to run offline and does not need an internet connection to be played. **It does not send information to me, and it does not contact any server operated by me.**
 
-| Permission | Purpose |
-|---|---|
-| `INTERNET` | Enables optional multiplayer between devices on the same local Wi-Fi network, as described in Section 5. It is **not** used to contact any server operated by me. |
-| `VIBRATE` | Provides haptic feedback when the player's character touches a maze wall or a control is pressed. |
+**Playing together.** The Application offers an optional mode in which devices on the same local network can play together. Any information exchanged for this purpose is limited to what is needed to run the game — such as game settings and players' moves — and contains no personal information. It passes directly between the participating devices and is not sent to me or to any server I operate.
 
-The Application requests no other permissions.
+**Device features.** The Application uses features provided by your device or platform, such as reading words aloud. Where it does, the information passed to such a feature is limited to the game content shown on screen, such as a word, letter or number. Those features operate under the privacy policy of the provider of your device, platform or service, not under this Policy.
 
-## 5. Local Network Multiplayer
+**Links out of the Application.** The Application contains a small number of links, such as to this Policy and to the Application's own store listing. Selecting one opens your browser or store application, after which that service's own privacy policy applies. The Application contains no advertising links and no third-party promotional content.
 
-The Application includes an optional local multiplayer mode allowing two to four players to play together on devices connected to the **same local Wi-Fi network**. This mode is off unless a user chooses to start or join a session.
+## 5. Information stored on your device
 
-When multiplayer is used, devices exchange only the following, and only with each other:
+The Application saves preferences and game progress on your device so that it behaves consistently between sessions — for example your chosen language, appearance and difficulty settings.
 
-- Game configuration for the session — difficulty, game mode and the selected visual theme
-- Directional movement input from each connected player
-- The identifier of the game character a player has selected
-- A **randomly generated session identifier**, created fresh for each session and not derived from, or linked to, any device, user or persistent identifier
-- A fixed, translated display label for the hosting device — this is a generic text string built into the Application, **not** a device name, account name or any value supplied by a user
+This information stays on your device. It contains no personal information, and it is never sent to me or to anyone else.
 
-This exchange takes place **directly between devices on the local network**. It does not pass through, and is not sent to, any server operated by me or by any third party. No personal information is included in this exchange. The Application does not record, retain or transmit the contents of a multiplayer session.
+## 6. Children's privacy
 
-## 6. Text-to-Speech
+The Application is intended for children as well as for a general audience.
 
-The Application reads words, letters and numbers aloud using the **text-to-speech service built into your device or platform**. The Application passes only the educational word, letter or number being displayed — for example "APPLE" or "7" — to that service. No personal information is passed to it.
+I do not knowingly collect personal information from anyone, including children. Because no personal information is collected, no parental consent is required or requested, and there is nothing held by me for a parent to review, correct or delete.
 
-Any processing performed by the device's text-to-speech service is carried out by your device or platform provider under **their** privacy policy, not mine. Depending on your device and settings, that service may operate entirely on the device or may involve the provider's own network processing. I have no control over, and no visibility into, that processing.
+The Application contains **no advertising, no in-app purchases, no accounts, no chat, no free-text messaging and no user-generated content.** There is therefore no way for a child to send personal information to me, or to another person, through the Application.
 
-## 7. Links That Open Outside the Application
+The Application is intended to comply with the United States Children's Online Privacy Protection Act (COPPA), the EU and UK General Data Protection Regulation (GDPR), and Google Play's Families policies.
 
-The settings screen contains links to this Privacy Policy and to the Application's own Google Play listing. Selecting one opens your device's web browser or the Google Play application.
+If you believe a child has provided personal information through the Application, please contact me using the details in Section 10 and I will investigate.
 
-Once you leave the Application, the privacy policy of the browser, of Google Play and of the website you reach applies. This Privacy Policy does not govern those services. The Application contains no advertising links, no affiliate links and no third-party promotional content.
+## 7. Security and your rights
 
-## 8. Information Stored on Your Device
+Because I do not collect or receive personal information, I hold no personal information about you that could be lost or disclosed.
 
-The Application stores a small amount of information locally on the device so that it behaves consistently between sessions. This may include:
+Information stored on your device is kept in the Application's own private storage area and protected by your device's security. No method of electronic storage or transmission can be guaranteed to be completely secure.
 
-- Selected interface language and learning language
-- Selected visual theme
-- Difficulty, game mode, chaser and trap settings
-- On-screen control preferences and controller size
-- Accessibility, sound and voice-hint preferences
-- The configuration of the most recent game, so that it can be resumed
+Privacy laws in some regions, including the GDPR, give you rights over personal information held about you — such as rights of access, correction and deletion. As I hold no personal information about users of the Application, there is nothing for me to provide, correct or delete. You are welcome to contact me with any question.
 
-This information is stored **only on your device**, contains no personal information, and is **never transmitted to me or to any third party**.
+## 8. Keeping and deleting information
 
-## 9. Data Retention and Deletion
+I hold no personal information about users, so there is nothing on my side to retain or delete.
 
-Because the Application does not collect or receive personal information, I hold no user data and therefore have nothing to retain, disclose, correct or delete.
+Information saved on your device remains there until you remove it. You can delete it at any time by clearing the Application's data in your device settings, or by uninstalling the Application, which removes it.
 
-Information stored locally on your device (Section 8) remains there until you remove it. You may delete it at any time by clearing the Application's data through your device settings, or by uninstalling the Application. Uninstalling removes all locally stored information.
+## 9. Other services
 
-No account exists and therefore no account deletion process is required. There is no server-side copy of anything.
+The Application does not include third-party advertising, analytics, tracking or data-collection services.
 
-## 10. Security
+This Policy does not cover services outside the Application, including Google Play, the operating system on your device, your device manufacturer, your network provider, or any other application or service you use. Those organisations act under their own privacy policies, over which I have no control, and you should consult their policies for information about their practices.
 
-Because no personal information is collected, transmitted to me, or stored by me, there is no personal data store to be breached, and no personal data of yours in my possession.
+## 10. Contact
 
-Information the Application stores locally is held within the Application's private storage area, protected by the operating system's standard application sandboxing.
+If you have a question or concern about privacy in relation to the Application, please contact me:
 
-The local multiplayer exchange described in Section 5 takes place on your own local network and carries no personal information. As with any local network communication, I cannot guarantee the security of a network I do not control, and you should use multiplayer only on a network you trust. No method of electronic transmission or storage is completely secure.
-
-## 11. Children's Privacy
-
-The Application is designed as a child-safe educational experience and is directed to children, including children under 13.
-
-I do **not** knowingly collect personal information from children of any age. Because the Application collects no personal information from any user, no verifiable parental consent is required or requested, and there is no mechanism by which a child could disclose personal information to me through the Application.
-
-The Application contains **no advertising, no in-app purchases, no accounts, no chat, no free-text entry and no user-generated content**. There is no feature that allows a child to communicate with strangers or to share personal information with another person.
-
-The Application is intended to comply with the United States Children's Online Privacy Protection Act (COPPA), the EU and UK General Data Protection Regulation (GDPR) and Google Play's Families policies.
-
-If you believe that the Application has inadvertently collected personal information from a child, please contact me using the details in Section 14 so that I can investigate and take appropriate action.
-
-## 12. Your Rights
-
-Data protection laws — including the GDPR in the European Economic Area and the United Kingdom, and privacy laws in California and other jurisdictions — give individuals rights over personal data held about them, such as rights of access, correction, deletion, restriction and portability.
-
-Because I do not collect, receive, process or hold any personal information about users of the Application, I hold no personal data to which such a request could apply. If you nevertheless wish to raise a question about your privacy in relation to the Application, contact me using the details in Section 14.
-
-Note that Google Play, Android, Google TV and your device manufacturer are separate data controllers in respect of any data **they** collect. Requests concerning that data must be directed to them.
-
-## 13. Third-Party Services and Platform Data
-
-The Application does not intentionally include any third-party advertising network, analytics provider, crash-reporting service, attribution service, tracking library or data-collection software development kit.
-
-The Application is built with the **Godot Engine**, an open-source game engine. The Application uses the engine's runtime components only; it does not integrate any engine telemetry or reporting service.
-
-This Privacy Policy does **not** cover data that may be collected or processed independently by parties outside the Application, including but not limited to **Google Play, Google LLC, the Android or Google TV operating system, your device manufacturer, your network operator, or the provider of your device's text-to-speech service.** Those parties act under their own privacy policies, over which I have no control. You should review their policies for information about their practices.
-
-## 14. Contact
-
-If you have any question, concern or complaint about this Privacy Policy or about privacy in relation to the Application, please contact me:
-
-**Michal Hauzírek**
-Independent developer, Learning Maze
+**Michal Hauzírek** — independent developer, Learning Maze
 h a u s i e [at] g m a i l [dot] c o m
 
-I will respond to genuine privacy enquiries within a reasonable period.
+I aim to respond to genuine privacy enquiries within a reasonable time.
 
-## 15. Changes to This Privacy Policy
+## 11. Changes to this Policy
 
-I may update this Privacy Policy from time to time — for example, if the Application gains a new feature that affects this description.
-
-Any change will be published on this page with a revised effective date. Material changes affecting how information is handled will be reflected here before, or at the same time as, the change reaches users. Your continued use of the Application after a revised Privacy Policy is posted means the revised Policy applies to you.
-
-The version in force is the version published at this address.
+I may update this Policy from time to time, for example if the Application gains a feature that affects what is described here. Any updated version will be published on this page with a revised effective date, and applies from the date it is published. The version in force is the version published at this address.
