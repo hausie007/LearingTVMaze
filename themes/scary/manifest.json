@@ -3,7 +3,6 @@
   "assets": {
 	"player": "player.png",
 	"chaser": "chaser.png",
-	"start": "start.png",
 	"end": "finish.png",
 	"background": "tile4.png",
 	"trap": "trap.png"
