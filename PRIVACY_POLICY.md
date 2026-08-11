@@ -1,124 +1,93 @@
-# Learning Maze — Privacy Policy (publication source)
+# Learning Maze Privacy Policy
 
-> **Notes — do not paste this block into Google Sites.**
->
-> **Publishing**
-> 1. Rename the Google Sites *page* to `Learning Maze Privacy Policy`. It is currently
->    *Domovská stránka*, which is what the HTML title and any automated check reads. Google asks
->    for "clear labeling as a privacy policy … in title".
-> 2. Keep the same URL — it is referenced in Play Console and in `game_config.gd`.
-> 3. Paste everything below the line as plain headings and paragraphs. No PDF, no attachment.
-> 4. Update the effective date whenever you change the text.
->
-> **Why it is worded the way it is** — the durability rules behind each choice:
->
-> | Rule | Example |
-> |---|---|
-> | Never state a count of anything | No "two permissions". Adding one would falsify the policy |
-> | List what will **never** be requested, not what is | A negative permission list stays true as the app grows |
-> | Describe data by **category and purpose**, never by field | "information needed to run the game" survives a protocol change |
-> | Push device features onto the platform's policy | Covers text-to-speech today and anything similar later |
-> | Never name a library, engine or file | Implementation detail belongs in code, not here |
-> | Anchor to the effective date | "as at the date below" makes drift a scheduled update, not a misstatement |
->
-> **What would require a rewrite** — only these: adding advertising, analytics or any third-party
-> SDK; adding accounts or sign-in; adding chat or any free-text entry between users; adding
-> in-app purchases; or sending anything to a server you operate. Ordinary changes — new themes,
-> new words, new languages, new game modes, new permissions for local features — need no edit.
->
-> I am not a lawyer and this is not legal advice. For a product aimed at children, an hour with a
-> qualified solicitor is worth buying.
+> **Repo note — not part of the policy.** This file mirrors the text published at
+> `https://sites.google.com/view/learning-maze-privacy-policy/`. Keep that URL unchanged — it is
+> referenced in Play Console and in `scripts/game_config.gd` (`PRIVACY_POLICY_URL`). Update this
+> file whenever the published page changes, and revise the effective date in both.
 
 ---
 
 # Learning Maze Privacy Policy
 
-**Effective date: August 2026**
+**Effective date: 11 August 2026**
 
-## 1. About this Policy
+## 1. Who We Are
 
-This Privacy Policy explains how privacy is handled in the application **"Learning Maze"** (the "Application"), an offline educational maze game for children and families, published on Google Play by **Michal Hauzírek**, an independent developer ("I", "me", "my").
+This Privacy Policy applies to Learning Maze, an Android, Android TV and Google TV game published by Michal Hauzírek, an independent developer ("I", "me" or "my").
 
-This Policy describes the Application as at the effective date above. It applies to the Application only, and not to any other service you may use alongside it.
+Learning Maze is an educational game designed for children and families. This Policy explains how the game handles information and how to contact me about privacy.
 
-## 2. The short version
+## 2. Privacy at a Glance
 
-I do not collect any personal information about you or your child. The Application has no accounts, no advertising, no analytics, no tracking and no in-app purchases. It works offline, and I do not receive any information from it.
+Learning Maze does not require an account and does not include advertising, analytics, behavioural tracking, social media features or in-app purchases.
 
-## 3. Information I do not collect
+The game does not ask for or intentionally send names, email addresses, account information, contact lists, precise location, photographs, audio recordings, advertising identifiers or other personal or sensitive information to me. I do not operate a gameplay, analytics or advertising server for the game.
 
-The Application does not collect, request, transmit, store, sell or share personal information about its users. In particular, it does not collect:
+The game stores settings on the device and can optionally exchange limited game and connection information with other devices during local-network multiplayer, as explained below.
 
-- names, usernames, email addresses, postal addresses or telephone numbers
-- passwords or account credentials
-- location information
-- contacts, calendar entries or messages
-- photographs, video, camera images, or microphone or voice recordings
-- device identifiers or advertising identifiers
-- analytics, usage tracking, behavioural profiles or crash telemetry
-- payment or financial information
+## 3. Information Stored on the Device
 
-The Application does not request access to your location, contacts, camera, microphone, photographs, or the personal files on your device, and it requests only those device permissions needed for the features described in this Policy.
+The game stores information needed to remember the player's choices and continue gameplay. This may include language, theme, difficulty, game mode, control, sound, accessibility and voice-hint preferences, together with recent game progress or configuration.
 
-I do not sell or share personal information, and I do not use any information for advertising or profiling.
+The game itself does not send this information to me. Android or the device manufacturer may back up or transfer some app data when device backup, restore or device-to-device migration is enabled. That processing is controlled by the user's device and platform settings and is subject to the relevant provider's privacy policy.
 
-## 4. How the Application works
+Local game information can be removed by clearing Learning Maze's app data in the device settings or by uninstalling the game. Copies held by a platform backup service, if any, must be managed through that service or the device's backup settings.
 
-The Application is designed to run offline and does not need an internet connection to be played. **It does not send information to me, and it does not contact any server operated by me.**
+## 4. Local-Network Multiplayer
 
-**Playing together.** The Application offers an optional mode in which devices on the same local network can play together. Any information exchanged for this purpose is limited to what is needed to run the game — such as game settings and players' moves — and contains no personal information. It passes directly between the participating devices and is not sent to me or to any server I operate.
+Learning Maze offers optional multiplayer between devices on the same local network. To show available games, the app may listen for Learning Maze discovery messages while it is running. When a user hosts or joins a multiplayer session, participating devices exchange information needed to provide that session, such as:
 
-**Device features.** The Application uses features provided by your device or platform, such as reading words aloud. Where it does, the information passed to such a feature is limited to the game content shown on screen, such as a word, letter or number. Those features operate under the privacy policy of the provider of your device, platform or service, not under this Policy.
+- game and lobby configuration;
+- player choices, controls and gameplay state;
+- temporary, app-generated session identifiers; and
+- temporary connection information, such as local network addresses and ports.
 
-**Links out of the Application.** The Application contains a small number of links, such as to this Policy and to the Application's own store listing. Selecting one opens your browser or store application, after which that service's own privacy policy applies. The Application contains no advertising links and no third-party promotional content.
+This information is exchanged directly between participating devices for multiplayer functionality. It is not routed through a server operated by me, and I do not receive or retain a multiplayer history. The game does not provide free-text chat and does not intentionally include names, contact details, account identifiers, advertising identifiers or persistent device identifiers in multiplayer messages.
 
-## 5. Information stored on your device
+Multiplayer information is processed for the duration of the connection and is not intentionally saved as a multiplayer record. Local-network traffic may be observable to other people or devices with access to that network, so multiplayer should be used only on a network the user trusts.
 
-The Application saves preferences and game progress on your device so that it behaves consistently between sessions — for example your chosen language, appearance and difficulty settings.
+## 5. Text-to-Speech
 
-This information stays on your device. It contains no personal information, and it is never sent to me or to anyone else.
+Learning Maze can send fixed educational content, such as a displayed letter, number, word or instruction, to the text-to-speech service selected on the device. The game does not include personal information in that content.
 
-## 6. Children's privacy
+The text-to-speech provider determines whether speech is generated entirely on the device or through its own systems. Any processing by that provider is governed by its privacy policy and the user's device or service settings. I do not receive the spoken content or information about the use of text-to-speech.
 
-The Application is intended for children as well as for a general audience.
+## 6. Google Play, Android and External Services
 
-I do not knowingly collect personal information from anyone, including children. Because no personal information is collected, no parental consent is required or requested, and there is nothing held by me for a parent to review, correct or delete.
+Google Play, Android, the device manufacturer and network provider may independently process information needed to distribute and operate apps. Depending on the user's settings, Google Play may also collect installation, performance, crash or diagnostic information and make aggregated or technical reports available to the publisher through Play Console. Learning Maze does not combine those reports with other information to identify individual players.
 
-The Application contains **no advertising, no in-app purchases, no accounts, no chat, no free-text messaging and no user-generated content.** There is therefore no way for a child to send personal information to me, or to another person, through the Application.
+The game may open its privacy policy or Google Play listing in a browser or the Google Play app. Information processed after a user leaves Learning Maze is governed by the privacy policy of the service being used. More information about Google's practices is available in the [Google Privacy Policy](https://policies.google.com/privacy).
 
-The Application is intended to comply with the United States Children's Online Privacy Protection Act (COPPA), the EU and UK General Data Protection Regulation (GDPR), and Google Play's Families policies.
+## 7. When You Contact Me
 
-If you believe a child has provided personal information through the Application, please contact me using the details in Section 10 and I will investigate.
+If a parent, guardian or other person contacts me by email, I receive the sender's email address, message and any information the sender chooses to provide. I use that information only to respond to the enquiry, address a privacy or support issue, protect the game or my legal rights, and meet legal obligations.
 
-## 7. Security and your rights
+Correspondence is processed using my email service provider and may be disclosed when reasonably necessary to comply with law or protect legal rights. I do not sell contact information or use it for advertising. I retain correspondence only for as long as reasonably needed for these purposes and then delete it, unless longer retention is required by law. A sender may request deletion of correspondence by using the contact details below, subject to any applicable legal retention requirement.
 
-Because I do not collect or receive personal information, I hold no personal information about you that could be lost or disclosed.
+## 8. Children's Privacy
 
-Information stored on your device is kept in the Application's own private storage area and protected by your device's security. No method of electronic storage or transmission can be guaranteed to be completely secure.
+Learning Maze is directed to children, including children under 13. It is designed not to ask children for names, contact details, account information, free-form text, precise location, persistent identifiers or other personal or sensitive information. The game has no accounts, advertising, chat or user-generated content sharing.
 
-Privacy laws in some regions, including the GDPR, give you rights over personal information held about you — such as rights of access, correction and deletion. As I hold no personal information about users of the Application, there is nothing for me to provide, correct or delete. You are welcome to contact me with any question.
+If you believe that a child has sent personal information to me, for example in an email, please contact me. I will investigate and delete the information when required by applicable law.
 
-## 8. Keeping and deleting information
+## 9. Security
 
-I hold no personal information about users, so there is nothing on my side to retain or delete.
+Learning Maze limits information handling to what is needed for local settings, gameplay and optional local multiplayer. Local settings are stored in the app's private storage area, which is protected by Android's application sandbox. No method of storage or network communication is completely secure, but the game does not intentionally transmit personal or sensitive information through its multiplayer feature.
 
-Information saved on your device remains there until you remove it. You can delete it at any time by clearing the Application's data in your device settings, or by uninstalling the Application, which removes it.
+## 10. Privacy Requests
 
-## 9. Other services
+Because I do not operate user accounts or a user database, I normally have no player profile or server-side gameplay information to access, correct or delete. If you have contacted me, you may ask about or request deletion of the correspondence and personal information you provided, subject to applicable law.
 
-The Application does not include third-party advertising, analytics, tracking or data-collection services.
+Questions, concerns and privacy requests can be sent using the contact details below. I will respond without undue delay and within any period required by applicable law.
 
-This Policy does not cover services outside the Application, including Google Play, the operating system on your device, your device manufacturer, your network provider, or any other application or service you use. Those organisations act under their own privacy policies, over which I have no control, and you should consult their policies for information about their practices.
+## 11. Changes to This Policy
 
-## 10. Contact
+I may update this Privacy Policy when the game's information practices or applicable requirements change. The current version will remain available at this page, with a revised effective date. Material changes will be made available before or when they take effect. If applicable law requires notice or consent before a new type of processing begins, I will provide it.
 
-If you have a question or concern about privacy in relation to the Application, please contact me:
+## 12. Contact
 
-**Michal Hauzírek** — independent developer, Learning Maze
-h a u s i e [at] g m a i l [dot] c o m
+Michal Hauzírek
 
-I aim to respond to genuine privacy enquiries within a reasonable time.
+Independent developer and publisher of Learning Maze
 
-## 11. Changes to this Policy
-
-I may update this Policy from time to time, for example if the Application gains a feature that affects what is described here. Any updated version will be published on this page with a revised effective date, and applies from the date it is published. The version in force is the version published at this address.
+Email: [hausie@gmail.com](mailto:hausie@gmail.com)
