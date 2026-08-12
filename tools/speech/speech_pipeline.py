@@ -319,7 +319,25 @@ def word_items(cat: dict, lang: str, cspec: dict):
     return items
 
 
-def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source) -> dict:
+def load_retakes(lang: str) -> dict:
+    """Per-key retake counters. Bumping one asks for that clip to be redone.
+
+    A retake is recorded on its own, never inside a sheet. Sheets buy
+    consistency at the price of a cutting step, and when a clip is being redone
+    it is usually the cutting that went wrong — Czech sheet 7 had an inter-item
+    pause shorter than a pause inside one of its phrases, which no single
+    threshold can resolve. One request for one clip has no boundaries to find
+    and so cannot get them wrong.
+    """
+    path = SPEECH_SRC / "retakes.json"
+    if not path.exists():
+        return {}
+    doc = read_json(path)
+    return doc.get("languages", {}).get(lang, {})
+
+
+def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
+                retake: int = 0) -> dict:
     if not spoken:
         raise Fail(f"{key} ({locale}) has empty spoken text")
     spec = {
@@ -338,6 +356,13 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         "synthesis_mode": profile.get("synthesis_mode", "single"),
         "sheet": profile.get("sheet") if profile.get("synthesis_mode") == "sheet" else None,
     }
+    if retake:
+        # Only ever added when there is a retake, so that asking for one clip to
+        # be redone cannot disturb the hash — and therefore the approval — of
+        # any other clip. A retake is recorded alone, so its spec says so.
+        spec["retake"] = retake
+        spec["synthesis_mode"] = "single"
+        spec["sheet"] = None
     spec_hash = canonical_hash(spec)
     return {
         "key": key,
@@ -354,6 +379,7 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
             "ship_format": cat["ship_format"],
         }),
         "source": source,
+        "retake": retake,
         "voice_configured": bool(profile.get("voice_id")),
     }
 
@@ -380,6 +406,7 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
         if profile is None:
             raise Fail(f"voice_profiles.json has no profile for {locale} (language {lang})")
         overrides = load_overrides(locale)
+        retakes = load_retakes(lang)
 
         for category in lspec["categories"]:
             cspec = cat["categories"][category]
@@ -387,8 +414,9 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
             if category == "word":
                 for key, display, spoken, origin in word_items(cat, lang, cspec):
                     spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
-                    records.append(make_record(cat, profile, lang, locale, category,
-                                               cspec, key, display, spoken, origin))
+                    records.append(make_record(cat, profile, lang, locale, category, cspec,
+                                               key, display, spoken, origin,
+                                               int(retakes.get(key, {}).get("n", 0))))
                 continue
 
             source = SPEECH_SRC / cspec["source"].format(lang=lang)
@@ -427,8 +455,9 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
 
             for key, display, spoken in items:
                 spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
-                records.append(make_record(cat, profile, lang, locale, category,
-                                           cspec, key, display, spoken, rel(source)))
+                records.append(make_record(cat, profile, lang, locale, category, cspec,
+                                           key, display, spoken, rel(source),
+                                           int(retakes.get(key, {}).get("n", 0))))
 
     records.sort(key=lambda r: (r["lang"], r["category"], r["key"]))
 
@@ -800,18 +829,19 @@ def cmd_generate(args) -> int:
     all_records = classify(load_desired())
     sheet_groups = {}
     for r in records:
-        if profiles[r["locale"]].get("synthesis_mode") != "sheet":
+        if profiles[r["locale"]].get("synthesis_mode") != "sheet" or r.get("retake"):
             continue
         ident = (r["locale"], r["category"])
         if ident in sheet_groups:
             continue
         members = [x for x in all_records
-                   if x["locale"] == ident[0] and x["category"] == ident[1]]
+                   if x["locale"] == ident[0] and x["category"] == ident[1]
+                   and not x.get("retake")]
         if any(m["status"] == "missing" for m in members) or args.force:
             sheet_groups[ident] = members
 
     todo = [r for r in records if r["status"] == "missing"
-            and profiles[r["locale"]].get("synthesis_mode") != "sheet"]
+            and (r.get("retake") or profiles[r["locale"]].get("synthesis_mode") != "sheet")]
     if args.limit:
         todo = todo[:args.limit]
     if not todo and not sheet_groups:
@@ -2024,6 +2054,62 @@ def cmd_review(args) -> int:
 # pack
 # --------------------------------------------------------------------------
 
+def cmd_retake(args) -> int:
+    """Ask for specific clips to be recorded again, alone.
+
+    The alternative — re-recording the sheet they came from — would replace
+    fifteen clips somebody has already listened to in order to fix one. This
+    changes only the named keys, and only their hashes, so every other approval
+    stands.
+    """
+    records = load_desired()
+    known = {(r["lang"], r["key"]) for r in records}
+
+    path = SPEECH_SRC / "retakes.json"
+    doc = read_json(path) if path.exists() else {"schema_version": 1, "languages": {}}
+    doc.setdefault("languages", {})
+
+    if args.rejected:
+        wanted = []
+        for r in records:
+            if args.language and r["lang"] not in args.language:
+                continue
+            review = load_reviews(r["locale"]).get((r["key"], r["spec_hash"]))
+            if review and review.get("status") == "rejected":
+                wanted.append((r["lang"], r["key"], review.get("notes", "")))
+    else:
+        wanted = []
+        for key in args.key or []:
+            matches = [r for r in records if r["key"] == key
+                       and (not args.language or r["lang"] in args.language)]
+            if not matches:
+                raise Fail(f"{key} is not in the catalog"
+                           + (" for that language" if args.language else ""))
+            if len(matches) > 1:
+                raise Fail(f"{key} exists in {', '.join(sorted(m['lang'] for m in matches))}"
+                           " — say which with --language")
+            wanted.append((matches[0]["lang"], key, args.reason or ""))
+
+    if not wanted:
+        info("Nothing to retake.")
+        return 0
+
+    for lang, key, reason in wanted:
+        if (lang, key) not in known:
+            raise Fail(f"{key} is not in the catalog for {lang}")
+        entry = doc["languages"].setdefault(lang, {}).setdefault(key, {"n": 0})
+        entry["n"] = int(entry.get("n", 0)) + 1
+        entry["reason"] = reason or entry.get("reason", "")
+        entry["asked_on"] = time.strftime("%Y-%m-%d")
+        info(f"  {lang} {key}  -> take {entry['n']}" + (f"  ({reason})" if reason else ""))
+
+    path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    info("")
+    info(f"{len(wanted)} clip(s) staged in {rel(path)}. They will be recorded one request each,")
+    info("with no sheet and therefore no cutting. Next: extract, then generate.")
+    return 0
+
+
 def cmd_pack(args) -> int:
     cat = load_catalog()
     records = load_desired()
@@ -2425,6 +2511,14 @@ def main(argv=None) -> int:
     sp.add_argument("--import", dest="import_file", metavar="CSV",
                     help="merge a filled-in sheet into data/speech/reviews/")
     sp.set_defaults(func=cmd_review)
+
+    sp = sub.add_parser("retake", help="record specific clips again, one request each")
+    sp.add_argument("--key", "-k", action="append", metavar="KEY", help="repeatable")
+    sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--rejected", action="store_true",
+                    help="every clip currently marked rejected")
+    sp.add_argument("--reason", help="recorded alongside the counter")
+    sp.set_defaults(func=cmd_retake)
 
     sp = sub.add_parser("pack", help="write res://voices/<lang>/ from approved clips")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")

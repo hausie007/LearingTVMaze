@@ -36,6 +36,7 @@ python3 tools/speech/speech_pipeline.py doctor
 | `process` | Trims, levels, encodes to shipping MP3 | no |
 | `listen` | Named copies of the clips + a page to review them in | no |
 | `review` | Exports a review sheet, then imports the verdicts | no |
+| `retake` | Stages named clips to be recorded again, alone | no |
 | `pack` | Writes `res://voices/<lang>/` from approved clips only | no |
 | `verify` | The CI gate — run before every commit | no |
 
@@ -152,6 +153,41 @@ Things worth knowing about sheet mode:
   does not match the text that was sent, the pipeline refuses rather than
   slicing in the wrong place — you are still billed for the request, but you do
   not get 42 masters silently offset by one letter.
+
+### When a sheet cannot be cut correctly
+
+Sheet cutting assumes the pause between two items is longer than any pause
+inside one. Usually true, and when it is not, no threshold can save you.
+
+Czech sheet 7 is the worked example. Its gaps were cleanly bimodal — 0.87,
+1.04, 0.64, 0.04, 0.99, 0.84, 0.02 … — except that one pause inside
+*MÁM RÁD SVÉ RODIČE* ran to 0.59 s while *LETADLO* and *LETADÝLKO* sat only
+0.63 s apart. Matching the item count was then only possible by merging those
+two words and splitting the phrase to compensate: two errors that cancel in the
+arithmetic while every cut between them is a word out of step. Counting cannot
+tell a merge from a split.
+
+The answer is not a cleverer parser. It is to stop asking a cutter to resolve an
+ambiguous signal, and record those clips on their own instead:
+
+```bash
+python3 tools/speech/speech_pipeline.py retake --rejected --language cs
+python3 tools/speech/speech_pipeline.py extract
+python3 tools/speech/speech_pipeline.py generate --language cs --confirm
+```
+
+`retake` bumps a per-key counter in `data/speech/retakes.json`. The counter
+enters the spec hash **only for the keys named**, so the clip is re-recorded and
+every other approval stands. A retaken clip is always one request on its own —
+no sheet, no boundaries to find, and so no boundaries to get wrong.
+
+`--rejected` stages everything currently marked rejected, carrying each
+reviewer's note across as the reason.
+
+The trade is the one sheets exist to avoid: a clip recorded alone has no
+surrounding context, so its delivery can drift from the rest. For a whole word
+that is a small risk. For a two-character letter name it is the original
+problem, so prefer re-recording the sheet in that case.
 
 ## Listening to what came back
 

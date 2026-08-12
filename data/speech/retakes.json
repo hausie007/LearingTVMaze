@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "languages": {
+    "cs": {
+      "learning.word.budova": {
+        "n": 1,
+        "reason": "at the end some weird sound-clipping",
+        "asked_on": "2026-08-12"
+      },
+      "learning.word.letadlo": {
+        "n": 1,
+        "reason": "says letadlo letadylko instead of just letadlo",
+        "asked_on": "2026-08-12"
+      },
+      "learning.word.letadylko": {
+        "n": 1,
+        "reason": "wrongly cut says \"leti\" instead of letadylko",
+        "asked_on": "2026-08-12"
+      },
+      "learning.word.leti_leti_ptacek": {
+        "n": 1,
+        "reason": "says leti ptacek instead of leti leti ptacek",
+        "asked_on": "2026-08-12"
+      },
+      "learning.word.mrkvicka": {
+        "n": 1,
+        "reason": "sounds liek mrtvicka not mrKvicka",
+        "asked_on": "2026-08-12"
+      }
+    }
+  }
+}
