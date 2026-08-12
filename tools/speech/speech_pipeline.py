@@ -1624,6 +1624,8 @@ def cmd_process(args) -> int:
     records = load_desired()
     if args.language:
         records = [r for r in records if r["lang"] in args.language]
+    if args.category:
+        records = [r for r in records if r["category"] in args.category]
     classify(records)
 
     todo = [r for r in records if r["status"] == "generated" or (args.force and r["status"] in ("unreviewed", "approved"))]
@@ -2349,6 +2351,8 @@ def main(argv=None) -> int:
 
     sp = sub.add_parser("process", help="trim, level, encode masters to shipping MP3")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--category", "-c", action="append", metavar="CAT",
+                    help="number | char | word; repeatable")
     sp.add_argument("--force", action="store_true", help="re-encode clips that already exist")
     sp.set_defaults(func=cmd_process)
 
