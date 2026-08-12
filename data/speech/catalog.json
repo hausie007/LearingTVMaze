@@ -40,7 +40,7 @@
     }
   },
   "reserved_key_prefixes": [
-    "ui.help."
+    "ui."
   ],
   "languages": {
     "cs": {
@@ -251,5 +251,10 @@
     "max_characters_per_run": 5000,
     "max_concurrency": 2,
     "require_confirm_flag": true
+  },
+  "future_categories": {
+    "note": "Not generated yet, and reserved so the runtime can already resolve them. SpeechManager accepts an optional 'key' on any narration segment, so recording the menu and recap framing later is a data change rather than a code change — give the segment a key, add the category here, and it resolves.",
+    "ui.recap.*": "The finish-recap framing: 'you counted to', 'you collected the letters'. Spoken in the UI language, which is often not the learning language.",
+    "ui.help.*": "The 14 help slides. Long, rarely heard twice, and the least worthwhile to record."
   }
 }

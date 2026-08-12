@@ -314,6 +314,33 @@ of them is its own sitting:
 python3 tools/speech/speech_pipeline.py listen --language cs --category word
 ```
 
+## Recording the menu and the recap framing later
+
+The finish recap is one piece of narration built from two languages: an
+introduction in the UI language, then the collected letters or numbers in the
+learning language. Either may have a pack, both may, or neither.
+
+`SpeechManager.speak_segments()` resolves each segment on its own and plays the
+result as a queue, switching between recordings and the device voice
+mid-sentence. So the mixed case already works today: a Czech child with an
+English UI hears an English TTS introduction followed by recorded Czech
+letters.
+
+Recording the framing is therefore a data change, not a code change:
+
+1. Give the segment a `key` where it is built — `learning_recap.gd` — such as
+   `ui.recap.counted_to`.
+2. Add a `ui` category to `catalog.json` with those keys and their text.
+3. `extract`, `generate`, `review`, `pack`.
+
+A segment with a `key` that has no recording still falls back to the device
+voice, so the keys can be added before the audio exists.
+
+Worth knowing before starting: recap framing is a sentence per phrasing per
+language, and the phrasings are formatted with values inside them. Recording
+"you counted to seven" as one clip does not scale; the framing has to be split
+so the number stays a separate segment, which it already is.
+
 ## Adding a language
 
 1. Write `letters_<lang>.json` and `numbers_<lang>.json` — a native speaker
