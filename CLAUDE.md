@@ -27,15 +27,23 @@ The app has **no ads, no analytics, no third-party SDKs, no accounts, no network
 
 ```bash
 cd data/words && python3 -c "
-import json,glob
+import json,glob,re
 t=0
 for f in sorted(glob.glob('words_*.json')):
     d=json.load(open(f,encoding='utf-8')); t+=len(d)
-    for e in d: assert 'word' in e and 'emoji' in e and e['emoji'], (f,e)
+    for e in d:
+        assert 'word' in e and 'emoji' in e and e['emoji'], (f,e)
+        w=e['word']
+        assert w.count('[')==w.count(']'), ('unbalanced markers',f,w)
+        assert not re.search(r'\[[^\]]*\[|\][^\[]*\]',w), ('nested markers',f,w)
+        for g in re.findall(r'\[([^\]]*)\]',w):
+            assert len(g)>=2, ('group needs 2+ chars',f,w)
 print('OK', len(glob.glob('words_*.json')), 'files,', t, 'entries')"
 ```
 
 Expected: `OK 147 files, 3652 entries`.
+
+`[CH]` marks one letter spelled with two characters — see `data/words/README.md`. Strip markers before any length, duplicate or emoji comparison, or `MOU[CH]A` and `MOUCHA` will look like different words.
 
 ## Compliance
 

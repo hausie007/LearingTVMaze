@@ -133,19 +133,39 @@ When changing a word, check it against its tier's existing distribution, not jus
 - Scary-adjacent imagery (spiders, bats, pumpkins) exists as ordinary picture-dictionary vocabulary and is acceptable, but do not add more.
 - The emoji must match the word in every language. Cross-check a new entry against the same emoji in other languages — that is how genuine errors surface.
 
+### Grapheme markers
+
+Some languages spell one letter with two or three characters. Czech `CH` is the 15th letter of its alphabet, not a `C` followed by an `H`. Those are marked with brackets in the source word:
+
+```json
+{ "word": "MOU[CH]A", "emoji": "🪰" }
+```
+
+`MOU[CH]A` spawns five collectibles — `M O U CH A` — and is spoken as five items. Brackets never reach the screen or the speech engine; `word_list.gd` resolves them once at load, so every consumer downstream still sees a clean `MOUCHA`.
+
+Whether a digraph gets marked is a **content decision, not a code rule**. Czech `CH` is a letter, so it is marked. Spanish `CH` was dropped from the alphabet in 2010, so it is not. German `SCH` is a sound, not a letter. Beware false pairs across morpheme boundaries — Polish `MARZNĄĆ` is *mar-znąć*, Hungarian `KÖZSÉGHÁZA` is *község-háza*. Full rules in `data/words/README.md`.
+
+Only `cs` is marked so far. `sk` (6 words), `nl` (14), `pl` (46), `hu` (57) and `vi` (105) still need a native-speaker pass — an unmarked language is simply as it always was, so this can land one language at a time.
+
 ### Validation — run before every commit that touches word lists
 
 ```bash
 cd data/words && python3 -c "
-import json,glob
+import json,glob,re
 t=0
 for f in sorted(glob.glob('words_*.json')):
     d=json.load(open(f,encoding='utf-8')); t+=len(d)
-    for e in d: assert 'word' in e and 'emoji' in e and e['emoji'], (f,e)
+    for e in d:
+        assert 'word' in e and 'emoji' in e and e['emoji'], (f,e)
+        w=e['word']
+        assert w.count('[')==w.count(']'), ('unbalanced markers',f,w)
+        assert not re.search(r'\[[^\]]*\[|\][^\[]*\]',w), ('nested markers',f,w)
+        for g in re.findall(r'\[([^\]]*)\]',w):
+            assert len(g)>=2, ('group needs 2+ chars',f,w)
 print('OK', len(glob.glob('words_*.json')), 'files,', t, 'entries')"
 ```
 
-Also check for duplicates within a language — the same word in two tiers is a bug.
+Also check for duplicates within a language — the same word in two tiers is a bug. Strip markers first, or `MOU[CH]A` and `MOUCHA` won't compare equal.
 
 ---
 
