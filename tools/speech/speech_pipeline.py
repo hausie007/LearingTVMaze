@@ -856,6 +856,21 @@ def probe_duration(path: Path) -> float:
         return 0.0
 
 
+def measure_levels(path: Path):
+    """Mean and peak level in dBFS via volumedetect. (None, None) if silent.
+
+    volumedetect works on any length, which is the whole reason it is used
+    instead of an R128 measurement.
+    """
+    res = run(["ffmpeg", "-hide_banner", "-i", str(path), "-af", "volumedetect",
+               "-f", "null", "-"])
+    mean = re.search(r"mean_volume:\s*(-?\d+(?:\.\d+)?) dB", res.stderr)
+    peak = re.search(r"max_volume:\s*(-?\d+(?:\.\d+)?) dB", res.stderr)
+    if not mean or not peak:
+        return None, None
+    return float(mean.group(1)), float(peak.group(1))
+
+
 def process_one(master: Path, out: Path, cat: dict) -> dict:
     """Trim, level, fade and encode. Deterministic: same input, same output."""
     p = cat["processing"]
@@ -882,27 +897,29 @@ def process_one(master: Path, out: Path, cat: dict) -> dict:
         if duration <= 0.05:
             raise Fail(f"{rel(master)} is silent after trimming")
 
-        # Pass 1: measure. Short clips make integrated loudness twitchy, which is
-        # why every clip in a batch uses the same target rather than being
-        # maximised on its own.
-        res = run(["ffmpeg", "-hide_banner", "-i", str(trimmed), "-af",
-                   f"loudnorm=I={p['target_lufs']}:TP={p['true_peak_dbtp']}:LRA=7:print_format=json",
-                   "-f", "null", "-"])
-        measured = {}
-        match = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", res.stderr, re.S)
-        if match:
-            try:
-                measured = json.loads(match.group(0))
-            except json.JSONDecodeError:
-                measured = {}
+        # Levelling: RMS, not EBU R128.
+        #
+        # loudnorm is the obvious choice and the wrong one here. Integrated
+        # loudness needs a window these clips do not have — a Czech letter name
+        # like "bé" is under 400ms, and loudnorm returns -inf for it, which then
+        # fails as an input to its own second pass.
+        #
+        # Mean RMS with a peak ceiling works at any length, is deterministic,
+        # and gives a more consistent *batch* than per-clip R128 would: one
+        # target for the whole voice family rather than each clip maximised
+        # against itself. Consistency is what matters when a child hears these
+        # forty-two clips back to back.
+        mean_db, peak_db = measure_levels(trimmed)
+        if mean_db is None:
+            raise Fail(f"{rel(master)} has no measurable signal")
 
-        norm = f"loudnorm=I={p['target_lufs']}:TP={p['true_peak_dbtp']}:LRA=7"
-        if measured:
-            norm += (f":measured_I={measured['input_i']}:measured_TP={measured['input_tp']}"
-                     f":measured_LRA={measured['input_lra']}:measured_thresh={measured['input_thresh']}"
-                     f":linear=true")
+        gain = p["target_rms_dbfs"] - mean_db
+        headroom = p["peak_ceiling_dbfs"] - peak_db
+        gain = min(gain, headroom)          # never clip, even if that leaves it quiet
+
         fade = p["fade_ms"] / 1000.0
-        chain = (f"{norm},afade=t=in:st=0:d={fade},"
+        chain = (f"volume={gain:.2f}dB,"
+                 f"afade=t=in:st=0:d={fade},"
                  f"afade=t=out:st={max(duration - fade, 0):.4f}:d={fade},"
                  f"aresample={ship['sample_rate']}")
 
@@ -922,7 +939,9 @@ def process_one(master: Path, out: Path, cat: dict) -> dict:
         "duration_ms": int(round(final_duration * 1000)),
         "bytes": len(data),
         "sha256": hashlib.sha256(data).hexdigest(),
-        "input_i": measured.get("input_i"),
+        "mean_dbfs": mean_db,
+        "peak_dbfs": peak_db,
+        "gain_db": gain,
     }
 
 
@@ -956,10 +975,20 @@ def cmd_process(args) -> int:
             continue
 
         bounds = cat["categories"][r["category"]]["duration_ms"]
-        flag = ""
+        flags = []
         if not (bounds["min"] <= meta["duration_ms"] <= bounds["max"]):
-            flag = f"  <-- {meta['duration_ms']}ms is outside {bounds['min']}-{bounds['max']}ms"
-        info(f"[{i}/{len(todo)}] {r['key']:24s} {meta['duration_ms']:5d}ms  {meta['bytes']:6d}B{flag}")
+            flags.append(f"{meta['duration_ms']}ms outside {bounds['min']}-{bounds['max']}ms")
+        if meta["gain_db"] < cat["processing"]["target_rms_dbfs"] - meta["mean_dbfs"] - 0.5:
+            flags.append("peak-limited, quieter than target")
+        if meta["gain_db"] > 12.0:
+            # The provider hands back wildly inconsistent levels for isolated
+            # short utterances — 20 dB between two letters of the same alphabet
+            # is normal. Levelling fixes the loudness but lifts the noise floor
+            # with it, so a take this quiet is worth hearing before it is kept.
+            flags.append(f"quiet take, boosted {meta['gain_db']:+.1f}dB — listen for hiss")
+        flag = ("  <-- " + "; ".join(flags)) if flags else ""
+        info(f"[{i}/{len(todo)}] {r['key']:24s} {meta['duration_ms']:5d}ms  "
+             f"{meta['bytes']:6d}B  {meta['gain_db']:+5.1f}dB{flag}")
         done += 1
 
     info("")
