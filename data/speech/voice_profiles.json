@@ -33,7 +33,14 @@
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "v4. The cutter changed, so the takes are re-cut rather than re-recorded. The third review approved 81 of 92 and rejected eleven for a long pause at the start, some carrying a fragment of the previous item. Cause: each item was located inside a window bounded by the *reported* end of the previous item, and that report lands early, so the window opened inside the previous word and the cutter locked onto it. The sheet is now segmented as a whole at real silence, with the threshold solved per sheet against the known item count. Measured over the stored Czech sheets: clips containing more than one sound fell from 10 to 2, and both remaining ones are genuinely two words. Worst leading silence 1.107s to 0.249s."
+      "notes": "v4. The cutter changed, so the takes are re-cut rather than re-recorded. The third review approved 81 of 92 and rejected eleven for a long pause at the start, some carrying a fragment of the previous item. Cause: each item was located inside a window bounded by the *reported* end of the previous item, and that report lands early, so the window opened inside the previous word and the cutter locked onto it. The sheet is now segmented as a whole at real silence, with the threshold solved per sheet against the known item count. Measured over the stored Czech sheets: clips containing more than one sound fell from 10 to 2, and both remaining ones are genuinely two words. Worst leading silence 1.107s to 0.249s.",
+      "voice_decision": {
+        "decided_on": "2026-08-12",
+        "decided_by": "Michal Hauzírek",
+        "status": "accepted for cs",
+        "risk_accepted": "Jana is a Voice Library voice, not one we own. The contributor can withdraw it. Clips already generated stay usable indefinitely under the paid plan, but if the voice goes away, vocabulary added later cannot be recorded to match what shipped. Mitigation if that happens: re-record the whole locale from the catalog, which is a known quantity — about 40 cents for letters, numbers and the current 277 words.",
+        "revisit_when": "before a second language shares this voice, or before any large vocabulary expansion"
+      }
     },
     "en-US": {
       "version": 4,
