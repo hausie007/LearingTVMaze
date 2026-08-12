@@ -253,6 +253,31 @@ recording. That is intentional and should not be worked around.
   until Phase 5 introduces `SpeechManager`; today it correctly reports the seven
   call sites still to migrate.
 
+## Vocabulary words
+
+The `word` category reads every `data/words/words_<lang>_*.json` tier and takes
+**only the `word` field**. The emoji is a picture hint on screen and never
+reaches a recording.
+
+- Grapheme markers are stripped, so `MOU[CH]A` is recorded as *moucha*.
+- Text is sent lowercase. An all-capitals word invites the model to spell it
+  out letter by letter.
+- Keys are ASCII slugs of the word — `learning.word.chobotnice`. Where two words
+  fold to the same slug, which Czech `KOS` and `KOŠ` both do, a short digest of
+  the word is appended rather than letting one silently win.
+- A word appearing in two tiers is an error, not a duplicate clip.
+
+Because keys derive from the text, correcting a word's spelling creates a new
+key and orphans the old clip. That is the documented trade for not adding an id
+field to the word files; `plan` reports the orphan.
+
+Review words separately from letters — they are a different judgement, and 277
+of them is its own sitting:
+
+```bash
+python3 tools/speech/speech_pipeline.py listen --language cs --category word
+```
+
 ## Adding a language
 
 1. Write `letters_<lang>.json` and `numbers_<lang>.json` — a native speaker

@@ -260,6 +260,104 @@ def enabled_languages(cat: dict, only=None):
 # extract
 # --------------------------------------------------------------------------
 
+def word_slug(word: str) -> str:
+    """A stable ASCII id for a vocabulary word.
+
+    Keys are not filenames — clips are content-addressed — but a key that
+    survives a grep, a CSV and a spreadsheet is worth more than one that carries
+    diacritics through five tools unscathed.
+    """
+    folded = unicodedata.normalize("NFKD", word.lower())
+    folded = "".join(c for c in folded if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+", "_", folded).strip("_")
+
+
+def word_items(cat: dict, lang: str, cspec: dict):
+    """Every vocabulary word for a language, across all difficulty tiers.
+
+    Only the `word` field is read. The emoji is a picture hint on screen and has
+    no business in a recording; nothing here ever sees it.
+    """
+    folder = REPO / cspec["source_dir"]
+    files = sorted(folder.glob(cspec["source_glob"].format(lang=lang)))
+    if not files:
+        raise Fail(f"no word files for {lang} in {rel(folder)}")
+
+    found = {}
+    for path in files:
+        for entry in read_json(path):
+            marked = entry.get("word", "")
+            problem = grapheme_validate(marked)
+            if problem:
+                raise Fail(f"{path.name}: {marked!r} — {problem}")
+            # Markers are an authoring device for the maze; speech never sees
+            # them, and neither does the identity of the word.
+            display = nfc(grapheme_strip(marked))
+            if not display:
+                raise Fail(f"{path.name}: empty word entry")
+            if display in found:
+                raise Fail(f"{display!r} appears in both {found[display][1]} and {path.name}")
+            found[display] = (marked, path.name)
+
+    # Two words can fold to one ASCII slug — Czech KOS and KOŠ both give "kos".
+    # Rather than let the second silently win, or number them by whichever file
+    # was read first, disambiguate with a short digest of the word itself. It is
+    # stable, and it only appears where it is actually needed.
+    slugs = {}
+    for display in sorted(found):
+        slugs.setdefault(word_slug(display), []).append(display)
+
+    items = []
+    for slug, group in sorted(slugs.items()):
+        for display in group:
+            ident = slug if len(group) == 1 else (
+                f"{slug}_{hashlib.sha256(display.encode('utf-8')).hexdigest()[:4]}")
+            spoken = display.lower() if cspec.get("case") == "lower" else display
+            items.append((cspec["key_format"].format(id=ident), display, spoken,
+                          rel(REPO / cspec["source_dir"] / found[display][1])))
+    items.sort(key=lambda x: x[0])
+    return items
+
+
+def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source) -> dict:
+    if not spoken:
+        raise Fail(f"{key} ({locale}) has empty spoken text")
+    spec = {
+        "provider": profile["provider"],
+        "spoken_text": spoken,
+        "locale": locale,
+        "model_id": profile["model_id"],
+        "language_code": profile.get("language_code"),
+        "voice_id": profile.get("voice_id"),
+        "voice_profile_version": profile.get("version", 1),
+        "settings": profile.get("settings", {}),
+        "seed": profile.get("seed"),
+        "pronunciation_dictionaries": profile.get("pronunciation_dictionaries", []),
+        "output_format": profile.get("output_format"),
+        "master_format": cat["master_format"],
+        "synthesis_mode": profile.get("synthesis_mode", "single"),
+        "sheet": profile.get("sheet") if profile.get("synthesis_mode") == "sheet" else None,
+    }
+    spec_hash = canonical_hash(spec)
+    return {
+        "key": key,
+        "lang": lang,
+        "locale": locale,
+        "category": category,
+        "priority": cspec["priority"],
+        "display_text": display,
+        "spoken_text": spoken,
+        "spec_hash": spec_hash,
+        "render_hash": canonical_hash({
+            "spec": spec_hash,
+            "processing": cat["processing"],
+            "ship_format": cat["ship_format"],
+        }),
+        "source": source,
+        "voice_configured": bool(profile.get("voice_id")),
+    }
+
+
 def build_records(cat: dict, profiles: dict, langs) -> list:
     """Enumerate every clip the game wants, with the hashes that identify it.
 
@@ -285,6 +383,14 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
 
         for category in lspec["categories"]:
             cspec = cat["categories"][category]
+
+            if category == "word":
+                for key, display, spoken, origin in word_items(cat, lang, cspec):
+                    spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
+                    records.append(make_record(cat, profile, lang, locale, category,
+                                               cspec, key, display, spoken, origin))
+                continue
+
             source = SPEECH_SRC / cspec["source"].format(lang=lang)
             doc = read_json(source)
 
@@ -321,45 +427,8 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
 
             for key, display, spoken in items:
                 spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
-                if not spoken:
-                    raise Fail(f"{key} ({locale}) has empty spoken text")
-
-                spec = {
-                    "provider": profile["provider"],
-                    "spoken_text": spoken,
-                    "locale": locale,
-                    "model_id": profile["model_id"],
-                    "language_code": profile.get("language_code"),
-                    "voice_id": profile.get("voice_id"),
-                    "voice_profile_version": profile.get("version", 1),
-                    "settings": profile.get("settings", {}),
-                    "seed": profile.get("seed"),
-                    "pronunciation_dictionaries": profile.get("pronunciation_dictionaries", []),
-                    "output_format": profile.get("output_format"),
-                    "master_format": cat["master_format"],
-                    "synthesis_mode": profile.get("synthesis_mode", "single"),
-                    "sheet": profile.get("sheet") if profile.get("synthesis_mode") == "sheet" else None,
-                }
-                spec_hash = canonical_hash(spec)
-                render_hash = canonical_hash({
-                    "spec": spec_hash,
-                    "processing": cat["processing"],
-                    "ship_format": cat["ship_format"],
-                })
-
-                records.append({
-                    "key": key,
-                    "lang": lang,
-                    "locale": locale,
-                    "category": category,
-                    "priority": cspec["priority"],
-                    "display_text": display,
-                    "spoken_text": spoken,
-                    "spec_hash": spec_hash,
-                    "render_hash": render_hash,
-                    "source": rel(source),
-                    "voice_configured": bool(profile.get("voice_id")),
-                })
+                records.append(make_record(cat, profile, lang, locale, category,
+                                           cspec, key, display, spoken, rel(source)))
 
     records.sort(key=lambda r: (r["lang"], r["category"], r["key"]))
 
@@ -1771,6 +1840,8 @@ def cmd_listen(args) -> int:
         records = [r for r in records if r["lang"] in args.language]
     classify(records)
 
+    if args.category:
+        records = [r for r in records if r["category"] in args.category]
     ready = [r for r in records if r["status"] in ("unreviewed", "rejected", "approved")]
     if args.pending:
         ready = [r for r in ready if r["status"] != "approved"]
@@ -1780,7 +1851,8 @@ def cmd_listen(args) -> int:
     for locale in sorted({r["locale"] for r in ready}):
         rows = [r for r in ready if r["locale"] == locale]
         rows.sort(key=lambda r: (r["category"], r["key"]))
-        folder = BUILD / f"listen_{locale}"
+        suffix = ("_" + "_".join(sorted(args.category))) if args.category else ""
+        folder = BUILD / f"listen_{locale}{suffix}"
         if folder.exists():
             shutil.rmtree(folder)
         folder.mkdir(parents=True)
@@ -1830,6 +1902,8 @@ def cmd_review(args) -> int:
     records = load_desired()
     if args.language:
         records = [r for r in records if r["lang"] in args.language]
+    if getattr(args, "category", None) and not args.import_file:
+        records = [r for r in records if r["category"] in args.category]
     classify(records)
 
     if args.import_file:
@@ -2280,11 +2354,14 @@ def main(argv=None) -> int:
 
     sp = sub.add_parser("listen", help="named copies of the clips + a page to review them in")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--category", "-c", action="append", metavar="CAT",
+                    help="number | char | word; repeatable")
     sp.add_argument("--pending", action="store_true", help="skip clips already approved")
     sp.set_defaults(func=cmd_listen)
 
     sp = sub.add_parser("review", help="export a review sheet, or import the verdicts")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--category", "-c", action="append", metavar="CAT")
     sp.add_argument("--import", dest="import_file", metavar="CSV",
                     help="merge a filled-in sheet into data/speech/reviews/")
     sp.set_defaults(func=cmd_review)
