@@ -3,10 +3,12 @@
   "languages": {
     "cs": {
       "learning.word.budova": {
-        "n": 2,
-        "reason": "isolated take opened mid-word, no attack on the b",
+        "n": 3,
+        "reason": "v3 rejects previous_text; use a carrier word instead",
         "asked_on": "2026-08-12",
-        "previous_text": "Podívej se na obrázek."
+        "carrier_before": [
+          "auto"
+        ]
       },
       "learning.word.letadlo": {
         "n": 1,

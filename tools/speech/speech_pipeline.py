@@ -337,16 +337,24 @@ def load_retakes(lang: str) -> dict:
 
 
 def retake_context(entry: dict):
-    """The conditioning text recorded against a retake, if any.
+    """How an isolated retake is given a run-up, if it needs one.
 
-    A clip recorded on its own arrives with no run-up: the first Czech retake of
-    BUDOVA opened at -8 dBFS in its first frame, the /b/ already under way, where
-    a sheet take opens at -89 and rises into the word. previous_text gives the
-    model something to have just said, so it enters the word the way it would
-    have mid-sheet. It is never synthesised — only the clip's own text is.
+    A clip recorded alone arrives cold: the first Czech retake of BUDOVA opened
+    at -8 dBFS in its very first frame, the /b/ already under way, where a sheet
+    take of the same voice opens at -89 and rises into the word.
+
+    Two ways to fix that. `previous_text` asks the provider to behave as though
+    it had just said something — elegant, and eleven_v3 rejects it outright
+    ("not yet supported with the 'eleven_v3' model"). So the fallback is a
+    carrier: speak a throwaway word first, then the real one, and keep only the
+    second. That is a two-item sheet, which is the one sheet size whose cutting
+    is never ambiguous — a single long gap in the middle and nothing else to
+    confuse.
     """
-    keys = ("previous_text", "next_text")
-    context = {k: entry[k] for k in keys if entry.get(k)}
+    context = {k: entry[k] for k in ("previous_text", "next_text") if entry.get(k)}
+    for k in ("carrier_before", "carrier_after"):
+        if entry.get(k):
+            context[k] = list(entry[k])
     return context or None
 
 
@@ -825,6 +833,21 @@ def cmd_voices(args) -> int:
 # generate  (network, SPENDS CREDITS)
 # --------------------------------------------------------------------------
 
+def generate_with_carrier(key: str, profile: dict, record: dict, cat: dict):
+    """Record a clip preceded and/or followed by throwaway words, keep the middle."""
+    context = record["context"]
+    before = context.get("carrier_before") or []
+    after = context.get("carrier_after") or []
+    group = ([{"spoken_text": w} for w in before]
+             + [{"spoken_text": record["spoken_text"]}]
+             + [{"spoken_text": w} for w in after])
+
+    text, spans = sheet_text(profile, group)
+    audio, alignment, request_id = tts_sheet_request(key, profile, text)
+    cuts = cut_sheet(audio, alignment, text, spans, cat, profile)
+    return cuts[len(before)], request_id, text
+
+
 def cmd_generate(args) -> int:
     ensure_guards()
     cat = load_catalog()
@@ -889,7 +912,11 @@ def cmd_generate(args) -> int:
     est = 0.0
     for r in todo:
         price = prices.get(profiles[r["locale"]]["model_id"])
-        est += len(r["spoken_text"]) / 1000.0 * (price or 0)
+        billed = len(r["spoken_text"])
+        context = r.get("context") or {}
+        for word in (context.get("carrier_before") or []) + (context.get("carrier_after") or []):
+            billed += len(word) + 2      # the carrier is spoken, so it is paid for
+        est += billed / 1000.0 * (price or 0)
     for (loc, _cat), grp in sheet_groups.items():
         price = prices.get(profiles[loc]["model_id"])
         for chunk in sheet_chunks(profiles[loc], grp):
@@ -935,8 +962,14 @@ def cmd_generate(args) -> int:
     for i, r in enumerate(todo, 1):
         profile = profiles[r["locale"]]
         info(f"[{i}/{len(todo)}] {r['key']}  {r['spoken_text']!r}")
+        carrier = (r.get("context") or {}).get("carrier_before") or \
+                  (r.get("context") or {}).get("carrier_after")
         try:
-            audio, request_id = tts_request(key, profile, r["spoken_text"], r.get("context"))
+            if carrier:
+                audio, request_id, spoken_sheet = generate_with_carrier(key, profile, r, cat)
+                info(f"        recorded inside {spoken_sheet!r}, kept only the middle")
+            else:
+                audio, request_id = tts_request(key, profile, r["spoken_text"], r.get("context"))
         except Fail as exc:
             failed += 1
             warn(str(exc))
@@ -2140,13 +2173,20 @@ def cmd_retake(args) -> int:
         entry["reason"] = reason or entry.get("reason", "")
         if args.previous_text:
             entry["previous_text"] = args.previous_text
+        if args.carrier:
+            entry["carrier_before"] = list(args.carrier)
+            entry.pop("previous_text", None)
         entry["asked_on"] = time.strftime("%Y-%m-%d")
         info(f"  {lang} {key}  -> take {entry['n']}" + (f"  ({reason})" if reason else ""))
 
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     info("")
-    info(f"{len(wanted)} clip(s) staged in {rel(path)}. They will be recorded one request each,")
-    info("with no sheet and therefore no cutting. Next: extract, then generate.")
+    info(f"{len(wanted)} clip(s) staged in {rel(path)}, one request each.")
+    if args.carrier:
+        info(f"Each is recorded after {', '.join(args.carrier)!r}, which is then discarded —")
+        info("a two-item sheet, whose cutting has one long gap and nothing to be ambiguous about.")
+    else:
+        info("No sheet, and therefore no cutting. Next: extract, then generate.")
     return 0
 
 
@@ -2559,8 +2599,11 @@ def main(argv=None) -> int:
                     help="every clip currently marked rejected")
     sp.add_argument("--reason", help="recorded alongside the counter")
     sp.add_argument("--previous-text", metavar="TEXT",
-                    help="text the model should behave as though it just said; "
-                         "not synthesised, but it gives an isolated clip a natural onset")
+                    help="text the model behaves as though it just said (not supported by "
+                         "eleven_v3 — use --carrier there)")
+    sp.add_argument("--carrier", action="append", metavar="WORD",
+                    help="throwaway word spoken before the clip and then discarded, so the "
+                         "take has a run-up; repeatable")
     sp.set_defaults(func=cmd_retake)
 
     sp = sub.add_parser("pack", help="write res://voices/<lang>/ from approved clips")
