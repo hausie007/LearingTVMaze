@@ -3,7 +3,7 @@
   "note": "Per-locale voice choice. NEVER put an API key in this file — the key is read from the environment variable named in catalog.json, and `speech_pipeline.py verify` fails the build if anything key-shaped appears in the repo. Committed so a re-record years from now is reproducible: voice, model and settings together are what decide how a clip sounds.",
   "profiles": {
     "cs-CZ": {
-      "version": 2,
+      "version": 3,
       "provider": "elevenlabs",
       "voice_id": "bF7C2fCv7Zf30iT84wZ1",
       "voice_name": "Jana",
@@ -24,16 +24,17 @@
       "sheet": {
         "separator": ". ",
         "preamble": "",
-        "guard_lead_ms": 40,
-        "guard_tail_ms": 90,
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "search_window_ms": 350,
         "max_items_per_sheet": 16
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "v2 of this profile, after the first review rejected 11 of 12 clips. Three faults, three changes. (1) chá came back with a French reading: eleven_multilingual_v2 cannot take language_code, so every two-character request was language-detected on its own. eleven_v3 accepts it and it is now forced to cs. (2) Every letter sounded like a different speaker: stability 0.5 let the model reinvent an isolated token each time, so it is now 1.0 with a fixed seed. (3) The root cause of both, and of the emotive isolated vowels: two characters is no context at all. synthesis_mode is now sheet, so the whole alphabet is read in one breath and cut by the returned alignment. Separator is the knob to try first if delivery sounds clipped."
+      "notes": "v3. v2 fixed the language and the consistency; this fixes the boundaries. The second review approved 80 of 92 but rejected 11 clips as cropped, and measuring the masters showed why: clips the reviewer rejected ended with their last 30ms still at -13 to -17 dBFS, i.e. cut while the sound was still loud, while approved clips ended around -40. The API's character alignment locates an item but does not bound it. Cutting now uses alignment only to decide where to look, and the waveform to decide where to cut. The sheet audio is also stored now, so guard changes are re-cut locally and never billed again."
     },
     "en-US": {
-      "version": 2,
+      "version": 3,
       "provider": "elevenlabs",
       "voice_id": "bF7C2fCv7Zf30iT84wZ1",
       "voice_name": "Jana",
@@ -54,8 +55,9 @@
       "sheet": {
         "separator": ". ",
         "preamble": "",
-        "guard_lead_ms": 40,
-        "guard_tail_ms": 90,
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "search_window_ms": 350,
         "max_items_per_sheet": 16
       },
       "reviewed_by": null,
@@ -69,6 +71,7 @@
     "language_code": "eleven_multilingual_v2 does not accept it; leave null. eleven_flash_v2_5 and eleven_v3 do — set the ISO 639-1 code. Norwegian is \"no\", not \"nb\".",
     "speed": "Below 1.0 for a pre-reader. 0.9 is a starting point, not a decision.",
     "seed": "Best effort only; ElevenLabs does not guarantee reproducibility. Recorded so a regeneration starts from the same place.",
-    "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix."
+    "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix.",
+    "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the snapped boundary; search_window_ms is how far either side of the reported alignment the cutter may look, bounded by the midpoint to the neighbouring item so one letter cannot bleed into the next. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`."
   }
 }

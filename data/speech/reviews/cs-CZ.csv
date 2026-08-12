@@ -1,13 +1,105 @@
 key,spec_hash,status,reviewer,date,notes
 learning.char.a,29d29c9b65365969b94b6fc13352c8b06044f87661058143fce95daa17149eda,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.a,043cc2ca79947573f3b005cdbd430fe326f89f950fbe53584c5af438eef8d0b2,approved,,2026-08-12,
 learning.char.a_acute,0ede0b17583e3db4d989ff2b9c4b9eca843ef7861cfea4208c3ffbf7302b8491,rejected,,2026-08-12,"sounds like dlouhe a - as if the a was short, but it should be long"
+learning.char.a_acute,07156e1063aba951f7bcdae592f9455113507d6a4d343e04e5c90e483abf1573,approved,,2026-08-12,
 learning.char.b,10108fd345169f57b097656c207e2e169ec521d1292467946288b1ad9a5175bb,rejected,,2026-08-12,"short, should be long"
+learning.char.b,02ff15cadab43e1b5e2fae2a3266d9844106564dff1caa92dfd73e2acb2b3678,approved,,2026-08-12,
 learning.char.c,e31111844149a1ed1e286030c092a7083957bbef02f6c687432b49822d8cbb9e,approved,,2026-08-12,
+learning.char.c,a5cd321f59a462a51014c8a9fc918087b15194c177c960dccb3e4990f7db4039,rejected,,2026-08-12,too short
 learning.char.c_caron,726f070a0f461e69b3cc3af7646696bfc6fcfdc8318301fc3b027d26b13fad7c,rejected,,2026-08-12,should be longer
+learning.char.c_caron,4eff25c740841d6997ae7e760b44240c57bb0fe397321bdd30d7b859cec3209b,approved,,2026-08-12,
 learning.char.ch,77c58358943d34167c2c3727dffd734012789f7004296f49dab410209ba3e0da,rejected,,2026-08-12,"very wrong, uses french pronounciation"
+learning.char.ch,60be902745a3f090bcbe38681dd7c7a272342c0e97076df68557f1864c04ebad,approved,,2026-08-12,
 learning.char.d,dfea66c4ff4863bebfabc271edfa724f1b64dda4720bf9e4b56b2aa40fd74a66,rejected,,2026-08-12,almost as if it uses different voice 
+learning.char.d,6a1875ad0dea8ef135831c1d8c1c115790376874f73658c77f731137c77bf214,approved,,2026-08-12,
 learning.char.d_caron,ee6ccb7f1031b33d8ab902b9d4406744d3ec8fa656954d7f4602bba2a8b351fb,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.d_caron,764d4b074d57ffcd024b07a702ee991f939aa8747629ffce89f5a7c9428a8d2f,rejected,,2026-08-12,clipping
 learning.char.e,a1763d57473031e762aa0753a8f78c927397f30a77fe4b4c0b7b88cdea0e132f,rejected,,2026-08-12,
+learning.char.e,52168d8c7991ed1395bb9a64deaf611bffae61249d4f228bb3eb947b0e66e43a,rejected,,2026-08-12,might be a bit longer
 learning.char.e_acute,5e10f808a6202437cc25976a1064e3aa41a2d06bb32377545ffd1eee2590880b,rejected,,2026-08-12,"short, should be long"
+learning.char.e_acute,bc3e73d780738bfcbf627d19fb5a3c3af55292f8b8f753bdffabc73bb7955012,approved,,2026-08-12,
 learning.char.e_caron,d7d7094bb32d3a6aed8c3098a161aa190c46f462480697457103d7f0e64cf8a7,rejected,,2026-08-12,"short, should be long"
+learning.char.e_caron,1cfda7ea70f97d2fa675f4f456ebf51c63cd7a950a2675e4ef0e432c4a45270c,rejected,,2026-08-12,"the ""e"" is too short. should be rather é a háčkem then e s háčkem"
 learning.char.f,6816bd254e318fb9d4bac1de257adc97402d7db0470662fe6c95dd35ce406cfc,rejected,,2026-08-12,very short
+learning.char.f,e847794db582183279dc4c90d1e2f90f0ec97035c529baeac2bbf96bbcaa7120,approved,,2026-08-12,
+learning.char.g,d291bf1b45e255958582e25570b8344f6423415ae99659475eb80c2ce09894cb,approved,,2026-08-12,
+learning.char.h,e4f94606542d4510019332efdcb5ba877ff82060ad007a11c289066e34e99c1c,approved,,2026-08-12,
+learning.char.i,32309c7c44251726025419f9b4359064a4b23556c6aa5e25845ab12bcbd01c0e,rejected,,2026-08-12,almost different speaker
+learning.char.i_acute,5df041e5e4f2900f3deb9150fcddc9639536484d52af27e4d17d6b5987655e06,approved,,2026-08-12,
+learning.char.j,af56336acf0aaa3b4b67fc6af0ce2ea88f806b1f7e5d1d4ae8381142952c7427,approved,,2026-08-12,
+learning.char.k,4f10acfb213315d0d8f5001f799d422a2a6aa726cf983ebc7e3f43499b4e6c3c,approved,,2026-08-12,
+learning.char.l,a1b9832ecb821231d70a22e0fba8a37132fd31f550ea25a8c30eadc9d59db128,approved,,2026-08-12,
+learning.char.m,0a333eecea44e3b683a50b4819e2f0117b464084de50ef5417072ff5706686c2,approved,,2026-08-12,
+learning.char.n,bcf8eaa97e40011e7e7754f2229c2fddfdc4299d43eb2bb8c9dc3f6ba23046e5,approved,,2026-08-12,
+learning.char.n_caron,cb4c9b0990de77e83fac3ac3aa3873cb3a25193d1e90ad9205cb49e726fa1203,approved,,2026-08-12,
+learning.char.o,299376e54fb0dc98457b4a90d551009fb366883cd75da65c794f47b657d0d999,approved,,2026-08-12,
+learning.char.o_acute,cbe453e57c4b8b2bd0d3800e85871163fdf48fb1b4fbeb00b3c3945e91aa404c,approved,,2026-08-12,
+learning.char.p,62ab08e73d3f18ded199be8cd5e522fb0bedac176d999f234643aee602df9cba,approved,,2026-08-12,
+learning.char.q,6c864896f2d9ae37f55ab545e311a0637d6c66728db058e984a86a18fff9b67e,approved,,2026-08-12,
+learning.char.r,26a6e8c695a29038456073b05d9b78c8b5fefef1f821ec854f1de557735b4203,approved,,2026-08-12,
+learning.char.r_caron,3c5f401adb427cfa660fbd00ec3fecd449ec9d9208aee4fc32662158fdd1d532,approved,,2026-08-12,
+learning.char.s,8550f7d0ccc383d1fcd2f3d1084b65ba185ed8de4af5b6459440220ccb15779d,approved,,2026-08-12,
+learning.char.s_caron,17637bb2c21a53c2737f2256e60345f441c60490a1af84c50bc06a63105c38ca,approved,,2026-08-12,
+learning.char.t,5a8ff8acfa3c585db19f68cc57fba031158975e3cb1aaa4f009952dc2c720abe,approved,,2026-08-12,
+learning.char.t_caron,21d7bb2094d893f7fa2e5cffe56666a71a666497390271d4c679bbc0138e73dd,rejected,,2026-08-12,not very distinct
+learning.char.u,ad45155eb2fd05da89528bea062568556aea8e3c3a022931bc6d0f2fdba9448d,approved,,2026-08-12,
+learning.char.u_acute,ba623086961a25cab01c5afedda38aae02d3a08786587cac5b1c9130a02c11d3,approved,,2026-08-12,
+learning.char.u_ring,f39d02f64837906803ef9be9293ae97ffe4e39476cdcd2459d4721df3788e791,rejected,,2026-08-12,beginning is weirdly cropped
+learning.char.v,d7b2d01268cc2ad0eaf26c3f3060f3368e7954b6beccc0a06f899df8b0b0f06c,approved,,2026-08-12,
+learning.char.w,8e3115bc4696d411792ddf78b0ae976876191f4593de303241683d5cbeb8f375,approved,,2026-08-12,
+learning.char.x,6543f0278236649f80cceac4e0a558a4f921431fb453470f87ff5479fc0973cc,approved,,2026-08-12,
+learning.char.y,449231643b3ba0063e6b97bd4d8d1d21f03596991de7251c96a32d1a1e45d33a,approved,,2026-08-12,
+learning.char.y_acute,6cdc9f4bdac0cf2676fdf3ad928a81e22daa2717774e4137ba3273ba38f754ce,approved,,2026-08-12,
+learning.char.z,82c7c437b982a15616e2034758d149b60827a3141f5882270c3f4b489d8dfbf3,approved,,2026-08-12,
+learning.char.z_caron,87d50567537d7e05a057f112d161ed73beb88ead45d67844615d7f727a816513,approved,,2026-08-12,
+learning.number.001,046d9d007671eb1571c102a4a3f8918ed75aef8c41055a42f00b5cc120f79362,approved,,2026-08-12,
+learning.number.002,0245304b4ed1c4faeb3d2ce23be23d6d4fc14ce566785f0f91f26eb604c42a0e,approved,,2026-08-12,
+learning.number.003,43890711358cf097743ab907fc9b990f50c89b12223b150505961464909e9764,approved,,2026-08-12,
+learning.number.004,3f77040d3f377e31f5bbd23d5eabee8a0ae2086d470f3feccbdffc211e2ed654,approved,,2026-08-12,
+learning.number.005,97ac00e21dfa2cf93186e9f7ce78bfe1acafbc59a3b588808f5bd5d103a3b2c7,approved,,2026-08-12,
+learning.number.006,60b19e1917f7ddde6289397c828b3d5a967339449b06d19b015e432d49d6f6f3,approved,,2026-08-12,
+learning.number.007,11256460d319dbfa9676a87f197045e3bc92a9432e94e28bcccdf5026208916b,approved,,2026-08-12,
+learning.number.008,3ccd36971f53d2754cc739b39a5d87098c454e73949e47ed3e7020e279325052,rejected,,2026-08-12,clipped
+learning.number.009,fed304c0e6ef77361fa1ed41c3896dbcdeebf0798c38d2dd7723b206618b9a36,approved,,2026-08-12,
+learning.number.010,f797b0ad12e72306cb70c35e2808513abf2876ffd257ef05d1d13a60a83ba978,approved,,2026-08-12,
+learning.number.011,37db638990013f071fce4a882d825c4fb339d6640d6ed4d790f47fd8c9c289da,approved,,2026-08-12,
+learning.number.012,6ab38f8c8242178f4a6216ee50bf1497a72d92e94806b4044184f2fa5af86fb2,approved,,2026-08-12,
+learning.number.013,3d97199023dc6e4b1f803446f7006e7a119d302e22faeea0f719f9293782b544,approved,,2026-08-12,
+learning.number.014,3d34d823b8d021b1c0b0393c06283c0aed1048028ace667dd626ebe4cccb5d25,approved,,2026-08-12,
+learning.number.015,e2a1729ba3b3f830612a48c9ba98fe3b570316f119f94698e6a308f8cd7da964,approved,,2026-08-12,
+learning.number.016,bb057c6d01ca65d25f1c90bbff70d54aa0b514cfe15c05a23e70016ddec4f446,approved,,2026-08-12,
+learning.number.017,40b72ed82da36e0d66a4b22af02830c1af940152672c5d0f16a7de391baef3ab,approved,,2026-08-12,
+learning.number.018,f0a9d42553adb7f0817d084e84e9b4be5dfd28686950dfaa05131fd78b8e41a0,approved,,2026-08-12,
+learning.number.019,a6016870dc2d2fa64d08754778a340f8c8bdd1be57408c84f79dd2cdfc1f01ef,approved,,2026-08-12,
+learning.number.020,a00e4b9f8a5bcc6ca12ace9eb6371b9c156b7a3a2e69fca93aaf24503997387b,approved,,2026-08-12,
+learning.number.021,9170c88900e5f31ee9fbabf7917c217109973cb38af3d708ca5a9f6658e65932,approved,,2026-08-12,
+learning.number.022,1ec111128dc2e9bcba8e0885a539c7942b69be453d8a7d1f049f7463dc769fd7,approved,,2026-08-12,
+learning.number.023,cbc35cdcaea6d9d43dfbe65a3d6e355f86fc475784ec18addc818207791002a9,rejected,,2026-08-12,cropped at the end
+learning.number.024,2eee2f210c3dd10a6b7f4eda91633982561b8553c12ed13165a9d1beb5003e40,rejected,,2026-08-12,cropped at the end
+learning.number.025,97b1c6e75f10cefdcfb73037f3aa1832309060359f46eaa0d5960c98469b69ad,approved,,2026-08-12,
+learning.number.026,b93599ae9eab52dce24b1d4d41ff7350e0bb3424a308da53c3a8e08fde462043,approved,,2026-08-12,
+learning.number.027,4e61def338795f10ccf8cc94a03bc890e81bc8ca8d7d9328d3f64bc39d550d9f,approved,,2026-08-12,
+learning.number.028,4705fff317f081c053067df3fae24c59a28ce60e6f7a2e287553d6447df74d6c,approved,,2026-08-12,
+learning.number.029,526fd9abc5f020bf22916cf31211ad553156b39ba601a11b8b3a14a193b4f61f,approved,,2026-08-12,
+learning.number.030,1d9244e6a7731dcba7cec3da81adeffb626268807e9c24c3d0ec3e72e9be3a16,approved,,2026-08-12,
+learning.number.031,57432b71dd29833dbdc4231eca7bc80167de6aacce374ac22a73717bee330f6d,approved,,2026-08-12,
+learning.number.032,6b9008d93baec74749d0724c01a769738b39c8951aeb14f94f3e1aacf50f4d0d,rejected,,2026-08-12,cropped at the end
+learning.number.033,c769deff5a98efa42707fd3e78abe9fe9e3f3d01f9f441e0f670b33afc4b3f88,approved,,2026-08-12,
+learning.number.034,a74fd4d4a48e1d8cd4d47b537b609891a0770e6444cee76c0be98e1b2b743043,approved,,2026-08-12,
+learning.number.035,96a252af6e2ddeaa394313e152a2a2e8cceb9b9f92b8d6d933e0546dd87116c5,approved,,2026-08-12,
+learning.number.036,9dd9bbbce3e8f0445d9287a6803ec9809c1b32112d852f3f7ee445e87e7a5320,approved,,2026-08-12,
+learning.number.037,41f96c5c86f03b933a9ae5b41fedf8e3a033913b11d1dc2bf4c5c8a69ad1d48d,approved,,2026-08-12,
+learning.number.038,3f7a35bd7d38f921dfe06749114e6be55846d44dc369d3a45c0a2059e3108a7e,approved,,2026-08-12,
+learning.number.039,f74202fcff46782f6d099dd55c6e6c36468a28e97d61902d9475855d3910bc2d,approved,,2026-08-12,
+learning.number.040,d574dd7749f64348a2172607a4eff32959a1da4306c73ca48872962441f631ec,approved,,2026-08-12,
+learning.number.041,05e558ce63b8c34315e402bc3b2a77131a833f406da50fea746c313ab8dd5a04,approved,,2026-08-12,
+learning.number.042,a3d74690632acb1710344b65d15ec025122dd86964f24f027b581bc960a22a16,approved,,2026-08-12,
+learning.number.043,65297190b02e5f219f0ec572053351498f50b2aa83e5376cb48d38c215f4bc64,rejected,,2026-08-12,cropped at the end
+learning.number.044,5d223223deb3686f691f6e60b377ebad0da6fa24307121c6ae58d4973cd46687,rejected,,2026-08-12,cropped at the end
+learning.number.045,839229581b818ac4515ec50d655c9e09826d0d62aa4026e852de6639c0ae7a95,approved,,2026-08-12,
+learning.number.046,def2142e8509ac623cc5883315eef283389b003a6e731b8e4019d0a7ca56be01,approved,,2026-08-12,
+learning.number.047,2f7b5b7bb079718afe79b22acc0b65b6ce7888481b5d01dd1b0af96c840c7931,approved,,2026-08-12,
+learning.number.048,1ed280e9977048a8bafc46e4c15ab2571d7f56bcd92a12a2273577e9325f941f,approved,,2026-08-12,
+learning.number.049,0cc3ece8a3bc8c4bcf0bf9c48ff19520d3bef9abda9991d15ae9d8780e15be8b,approved,,2026-08-12,
+learning.number.050,f0112c5f492265c70194efa6f16c6e8071a88eb27f3f422626792cc3564fef4d,approved,,2026-08-12,

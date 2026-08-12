@@ -14,7 +14,7 @@
     { "id": "d_caron", "display": "Ď",  "spoken": "ďé" },
     { "id": "e",       "display": "E",  "spoken": "é" },
     { "id": "e_acute", "display": "É",  "spoken": "dlouhé é" },
-    { "id": "e_caron", "display": "Ě",  "spoken": "e s háčkem" },
+    { "id": "e_caron", "display": "Ě",  "spoken": "é s háčkem" },
     { "id": "f",       "display": "F",  "spoken": "ef" },
     { "id": "g",       "display": "G",  "spoken": "gé" },
     { "id": "h",       "display": "H",  "spoken": "há" },

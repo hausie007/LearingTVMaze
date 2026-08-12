@@ -32,6 +32,7 @@ python3 tools/speech/speech_pipeline.py doctor
 | `plan` | Diffs wanted against what exists; reports cost | no |
 | `voices` | Lists account and library voices with their IDs | yes, free |
 | `generate` | Synthesises missing clips | **yes, billed** |
+| `recut` | Re-derives masters from stored sheets with the current guards | no |
 | `process` | Trims, levels, encodes to shipping MP3 | no |
 | `listen` | Named copies of the clips + a page to review them in | no |
 | `review` | Exports a review sheet, then imports the verdicts | no |
@@ -87,6 +88,37 @@ the API reported, so nothing is re-encoded and no boundary is guessed.
   "max_items_per_sheet": 16
 }
 ```
+
+### The cut is decided by the waveform, not by the alignment
+
+The API returns a character alignment, which is enough to *locate* an item and
+not enough to *bound* it. The reported end time regularly lands before the sound
+has finished. Measured on a real Czech run: every clip the reviewer rejected as
+"cropped at the end" still had its last 30 ms at -13 to -17 dBFS, while approved
+clips ended around -40. It was cut mid-vowel.
+
+So the cutter uses alignment only to decide where to look, then finds the actual
+speech onset and offset by short-time RMS, and pads that. The search window is
+bounded by the midpoint of the gap to each neighbour, so widening it can never
+let one letter bleed into the next.
+
+### Re-cutting is free
+
+The sheet audio and its alignment are stored under `voice_masters/sheets/`,
+keyed by a hash of the *synthesis* inputs only — voice, model, settings, seed,
+text. The guards and the search window are deliberately **not** in that hash.
+
+That makes boundary tuning a local loop with no API call and no cost:
+
+```bash
+# edit guard_tail_ms in voice_profiles.json
+python3 tools/speech/speech_pipeline.py recut --language cs
+python3 tools/speech/speech_pipeline.py process --language cs
+python3 tools/speech/speech_pipeline.py listen --language cs
+```
+
+`recut` never touches the network; if a sheet was never stored it says so and
+skips rather than quietly re-recording.
 
 Things worth knowing about sheet mode:
 

@@ -28,9 +28,11 @@ getting an ElevenLabs account and choosing a voice.
 from __future__ import annotations
 
 import argparse
+import array
 import csv
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -749,9 +751,18 @@ def cmd_generate(args) -> int:
     if sheet_groups and (args.limit or args.key):
         warn("--limit and --key do not apply to sheet mode; a sheet is recorded whole")
 
-    sheet_chars = sum(len(sheet_text(profiles[loc], chunk)[0])
-                      for (loc, _c), grp in sheet_groups.items()
-                      for chunk in sheet_chunks(profiles[loc], grp))
+    sheet_chars = 0
+    cached_sheets = 0
+    missing_sheets = 0
+    for (loc, _c), grp in sheet_groups.items():
+        for chunk in sheet_chunks(profiles[loc], grp):
+            body = sheet_text(profiles[loc], chunk)[0]
+            if load_sheet(profiles[loc], body):
+                cached_sheets += 1
+            elif not args.cached_only:
+                sheet_chars += len(body)
+            else:
+                missing_sheets += 1
     chars = sum(len(r["spoken_text"]) for r in todo) + sheet_chars
     budget = args.max_characters if args.max_characters is not None else guards["max_characters_per_run"]
     prices = cat["pricing_usd_per_1k_chars"]
@@ -762,13 +773,19 @@ def cmd_generate(args) -> int:
     for (loc, _cat), grp in sheet_groups.items():
         price = prices.get(profiles[loc]["model_id"])
         for chunk in sheet_chunks(profiles[loc], grp):
-            est += len(sheet_text(profiles[loc], chunk)[0]) / 1000.0 * (price or 0)
+            body = sheet_text(profiles[loc], chunk)[0]
+            if not load_sheet(profiles[loc], body) and not args.cached_only:
+                est += len(body) / 1000.0 * (price or 0)
 
     clip_total = len(todo) + sum(len(g) for g in sheet_groups.values())
     info(f"{clip_total} clips, {chars} characters, estimated ~USD {est:.2f}")
     for (loc, cat_), grp in sorted(sheet_groups.items()):
         n = len(sheet_chunks(profiles[loc], grp))
-        info(f"  sheet  {loc}/{cat_}  {len(grp)} items in {n} request(s)")
+        info(f"  sheet  {loc}/{cat_}  {len(grp)} items in {n} sheet(s)")
+    if cached_sheets:
+        info(f"  {cached_sheets} sheet(s) already stored — re-cut locally, nothing billed")
+    if missing_sheets:
+        info(f"  {missing_sheets} sheet(s) not stored — skipped; `generate` would have to record them")
     for r in todo[:8]:
         info(f"  {r['key']:24s} {r['locale']}  {r['spoken_text']!r}")
     if len(todo) > 8:
@@ -779,13 +796,17 @@ def cmd_generate(args) -> int:
             f"{chars} characters exceeds the budget of {budget}. "
             "Narrow with --language/--category/--limit, or raise it deliberately with --max-characters."
         )
-    if args.dry_run or not args.confirm:
+    billable = chars > 0
+    if args.dry_run or (billable and not args.confirm):
         info("")
-        info("Dry run — nothing was generated and nothing was billed.")
-        info("Add --confirm to actually synthesise.")
+        if billable:
+            info("Dry run — nothing was generated and nothing was billed.")
+            info("Add --confirm to actually synthesise.")
+        else:
+            info("Nothing to buy; re-run without --dry-run to re-cut from stored sheets.")
         return 0
 
-    key = api_key()
+    key = api_key(required=billable)
     ok = failed = 0
 
     if sheet_groups:
@@ -916,11 +937,58 @@ def tts_sheet_request(key: str, profile: dict, text: str):
     return audio, alignment, request_id
 
 
-def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, profile: dict):
-    """Slice the sheet into one master per item, by character alignment.
+def frame_levels(samples, rate: int, frame_ms: int = 10):
+    """Short-time RMS in dBFS, one value per frame."""
+    step = max(int(rate * frame_ms / 1000), 1)
+    out = []
+    for i in range(0, len(samples) - step + 1, step):
+        acc = 0
+        for s in samples[i:i + step]:
+            acc += s * s
+        v = math.sqrt(acc / step)
+        out.append(20 * math.log10(v / 32768.0) if v > 0 else -99.0)
+    return out, step
 
-    The audio is raw signed 16-bit PCM, so a cut is a byte offset — no decoding,
-    no re-encoding, and the boundary is exactly where the API said it was.
+
+def snap_to_speech(levels, lo_f: int, hi_f: int):
+    """Find where the sound actually starts and stops inside a frame window.
+
+    The API's character alignment locates an item but does not bound it: the
+    reported end time regularly lands before the sound has finished, which is
+    audible as a clipped final vowel. So alignment is used to say *where to
+    look*, and the audio itself decides where to cut.
+    """
+    window = levels[lo_f:hi_f]
+    if not window:
+        return None
+    peak = max(window)
+    if peak < -70.0:
+        return None
+    strong = peak - 30.0          # clearly speech
+    soft = peak - 45.0            # a decaying tail or a soft onset
+
+    first = next((i for i, v in enumerate(window) if v >= strong), None)
+    if first is None:
+        return None
+    last = len(window) - 1 - next(i for i, v in enumerate(reversed(window)) if v >= strong)
+
+    while first > 0 and window[first - 1] >= soft:
+        first -= 1
+    while last < len(window) - 1 and window[last + 1] >= soft:
+        last += 1
+    return lo_f + first, lo_f + last
+
+
+def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, profile: dict):
+    """Slice the sheet into one master per item.
+
+    Alignment says roughly where each item is; the waveform says exactly where
+    it begins and ends. Cutting on the alignment alone clipped final vowels —
+    'dvacet tři' ended with its last 30ms still at -13 dBFS — and occasionally
+    started after the onset, which is what 'beginning is weirdly cropped' was.
+
+    The audio is raw signed 16-bit PCM, so a cut is a byte offset. Nothing is
+    decoded and nothing is re-encoded.
     """
     chars = alignment.get("characters") or []
     starts = alignment.get("character_start_times_seconds") or []
@@ -930,28 +998,104 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
     if "".join(chars) != text:
         raise Fail(
             "the alignment does not match the text that was sent, so cuts would "
-            "land in the wrong place. Nothing was saved; the master is still billed."
+            "land in the wrong place. Nothing was saved; the sheet is still billed."
         )
 
     fmt = cat["master_format"]
     frame = (fmt["bits"] // 8) * fmt["channels"]
     rate = fmt["sample_rate"]
-    total = len(audio) // frame
+
+    samples = array.array("h")
+    samples.frombytes(audio[:len(audio) - len(audio) % frame])
+    duration = len(samples) / rate
+    levels, step = frame_levels(samples, rate)
 
     sheet = profile.get("sheet") or {}
-    lead = sheet.get("guard_lead_ms", 40) / 1000.0
-    tail = sheet.get("guard_tail_ms", 90) / 1000.0
+    lead = sheet.get("guard_lead_ms", 30) / 1000.0
+    tail = sheet.get("guard_tail_ms", 120) / 1000.0
+    search = sheet.get("search_window_ms", 350) / 1000.0
 
-    cuts = []
-    for start, end in spans:
-        t0 = max(starts[start] - lead, 0.0)
-        t1 = min(ends[end - 1] + tail, total / rate)
-        a = max(int(t0 * rate), 0) * frame
-        b = min(int(t1 * rate), total) * frame
-        if b <= a:
-            raise Fail("the alignment produced an empty segment")
-        cuts.append(audio[a:b])
+    cuts, notes = [], []
+    for i, (start, end) in enumerate(spans):
+        t0, t1 = starts[start], ends[end - 1]
+
+        # Look either side of where the API said the item is, but never past the
+        # midpoint of the gap to a neighbour — that is what stops one letter
+        # bleeding into the next.
+        lo = max(t0 - search, 0.0)
+        hi = min(t1 + search, duration)
+        if i > 0:
+            lo = max(lo, (ends[spans[i - 1][1] - 1] + t0) / 2.0)
+        if i < len(spans) - 1:
+            hi = min(hi, (t1 + starts[spans[i + 1][0]]) / 2.0)
+
+        found = snap_to_speech(levels, int(lo * rate / step), max(int(hi * rate / step), 1))
+        if found is None:
+            notes.append(f"item {i + 1} had no measurable sound in its window")
+            a, b = t0 - lead, t1 + tail
+        else:
+            a = found[0] * step / rate - lead
+            b = (found[1] + 1) * step / rate + tail
+
+        a = max(min(a, duration), 0.0)
+        b = max(min(b, duration), 0.0)
+        if b - a < 0.05:
+            raise Fail(f"item {i + 1} of the sheet came out empty — refusing to save a bad cut")
+        cuts.append(audio[int(a * rate) * frame:int(b * rate) * frame])
+
+    for note in notes:
+        warn(note)
     return cuts
+
+
+def sheet_synth_hash(profile: dict, text: str) -> str:
+    """Identifies a *reading* — everything the provider needs to produce it.
+
+    Deliberately excludes the guards and search window, which only decide where
+    the knife falls afterwards. That is the whole point: boundary tuning is then
+    a local operation on stored audio, not another paid request.
+    """
+    return canonical_hash({
+        "text": text,
+        "voice_id": profile.get("voice_id"),
+        "model_id": profile.get("model_id"),
+        "language_code": profile.get("language_code"),
+        "settings": profile.get("settings", {}),
+        "seed": profile.get("seed"),
+        "pronunciation_dictionaries": profile.get("pronunciation_dictionaries", []),
+        "output_format": profile.get("output_format"),
+    })
+
+
+def sheet_paths(digest: str):
+    folder = MASTERS / "sheets" / digest[:2]
+    return folder / f"{digest}.pcm", folder / f"{digest}.json"
+
+
+def load_sheet(profile: dict, text: str):
+    pcm, meta = sheet_paths(sheet_synth_hash(profile, text))
+    if not (pcm.exists() and meta.exists()):
+        return None
+    doc = json.loads(meta.read_text(encoding="utf-8"))
+    return pcm.read_bytes(), doc["alignment"], doc.get("request_id", "")
+
+
+def save_sheet(profile: dict, text: str, audio: bytes, alignment: dict, request_id: str) -> None:
+    digest = sheet_synth_hash(profile, text)
+    pcm, meta = sheet_paths(digest)
+    write_atomic(pcm, audio)
+    meta.write_text(json.dumps({
+        "sheet_hash": digest,
+        "recorded_on": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "request_id": request_id,
+        "text": text,
+        "voice_id": profile.get("voice_id"),
+        "model_id": profile.get("model_id"),
+        "language_code": profile.get("language_code"),
+        "settings": profile.get("settings", {}),
+        "seed": profile.get("seed"),
+        "alignment": alignment,
+    }, ensure_ascii=False), encoding="utf-8")
 
 
 def sheet_chunks(profile: dict, group: list):
@@ -988,10 +1132,23 @@ def generate_sheets(key: str, cat: dict, profiles: dict, groups: dict, args) -> 
     for (locale, category), group in expanded:
         profile = profiles[locale]
         text, spans = sheet_text(profile, group)
-        info(f"sheet {locale}/{category}: {len(group)} items, {len(text)} characters")
-        info(f"  {text[:110]}{'…' if len(text) > 110 else ''}")
+        cached = load_sheet(profile, text)
+
+        info(f"sheet {locale}/{category}: {len(group)} items, {len(text)} characters"
+             + ("  [stored, re-cutting for free]" if cached else ""))
+        if not cached and not args.cached_only:
+            info(f"  {text[:110]}{'…' if len(text) > 110 else ''}")
+
         try:
-            audio, alignment, request_id = tts_sheet_request(key, profile, text)
+            if cached:
+                audio, alignment, request_id = cached
+            elif args.cached_only:
+                warn(f"no stored sheet for {locale}/{category} — `recut` will not call the API")
+                failed += len(group)
+                continue
+            else:
+                audio, alignment, request_id = tts_sheet_request(key, profile, text)
+                save_sheet(profile, text, audio, alignment, request_id)
             cuts = cut_sheet(audio, alignment, text, spans, cat, profile)
         except Fail as exc:
             warn(str(exc))
@@ -1175,6 +1332,23 @@ def process_one(master: Path, out: Path, cat: dict) -> dict:
         "peak_dbfs": peak_db,
         "gain_db": gain,
     }
+
+
+def cmd_recut(args) -> int:
+    """Re-cut every stored sheet with the current guards. Free, and repeatable.
+
+    This is the loop that boundary tuning should live in: change guard_lead_ms
+    or guard_tail_ms, recut, process, listen. No request, no credit, no waiting.
+    """
+    args.key = None
+    args.limit = None
+    args.confirm = True
+    args.dry_run = False
+    args.delay = 0
+    args.force = True
+    args.cached_only = True
+    args.max_characters = None
+    return cmd_generate(args)
 
 
 def cmd_process(args) -> int:
@@ -1895,7 +2069,12 @@ def main(argv=None) -> int:
     sp.add_argument("--delay", type=float, default=0.4, help="seconds between requests (default 0.4)")
     sp.add_argument("--force", action="store_true",
                     help="re-record sheet groups even when nothing is missing")
-    sp.set_defaults(func=cmd_generate)
+    sp.set_defaults(func=cmd_generate, cached_only=False)
+
+    sp = sub.add_parser("recut", help="re-derive masters from stored sheets (no network, no cost)")
+    sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--category", "-c", action="append", metavar="CAT")
+    sp.set_defaults(func=cmd_recut)
 
     sp = sub.add_parser("process", help="trim, level, encode masters to shipping MP3")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
