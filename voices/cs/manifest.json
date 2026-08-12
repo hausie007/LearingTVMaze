@@ -6,11 +6,13 @@
   "voice_profile": "cs-CZ@4",
   "coverage": {
     "number": "complete",
-    "char": "complete"
+    "char": "complete",
+    "word": "complete"
   },
   "counts": {
     "number": 50,
-    "char": 42
+    "char": 42,
+    "word": 277
   },
   "items": {
     "learning.char.a": {
@@ -656,6 +658,1945 @@
       "sha256": "01dcd074a3efa627b813e2ffa248fc172b3ceee20cfb165d712d7e640da5cc30",
       "display_text": "50",
       "spoken_text": "padesát"
+    },
+    "learning.word.auto": {
+      "asset": "clips/8e/8eaf042cb618.mp3",
+      "duration_ms": 653,
+      "sha256": "8eaf042cb618271d2d47738e8e60cdaacf08b1e3d8c2c3e7dc1dec9e9c82fa23",
+      "display_text": "AUTO",
+      "spoken_text": "auto"
+    },
+    "learning.word.banan": {
+      "asset": "clips/44/443dcd6d22d7.mp3",
+      "duration_ms": 784,
+      "sha256": "443dcd6d22d77a64d01b2d8c1f00c0be0b2658f1023afd00186d15d5810a6151",
+      "display_text": "BANÁN",
+      "spoken_text": "banán"
+    },
+    "learning.word.barevna_duha": {
+      "asset": "clips/7c/7c3f0c05cc45.mp3",
+      "duration_ms": 1097,
+      "sha256": "7c3f0c05cc45d6eb286d35246e44e452cdc8b640f4a0803cdcf8d6c4f392fbf8",
+      "display_text": "BAREVNÁ DUHA",
+      "spoken_text": "barevná duha"
+    },
+    "learning.word.barva": {
+      "asset": "clips/55/5543d8d62908.mp3",
+      "duration_ms": 627,
+      "sha256": "5543d8d629089ea9dd37e1b7441dcdf12f0cc2531fe2920083f0abe7e3ff9aba",
+      "display_text": "BARVA",
+      "spoken_text": "barva"
+    },
+    "learning.word.baseball": {
+      "asset": "clips/6b/6bdf83a8a0c8.mp3",
+      "duration_ms": 1254,
+      "sha256": "6bdf83a8a0c850e48d9e275a5414a2e49b05524fdc83f12afcaf28be403fb836",
+      "display_text": "BASEBALL",
+      "spoken_text": "baseball"
+    },
+    "learning.word.baterka": {
+      "asset": "clips/3e/3e1e9120f452.mp3",
+      "duration_ms": 784,
+      "sha256": "3e1e9120f452059577b664c99b6d3c36570a90f452b5696f72eacd09035dd191",
+      "display_text": "BATERKA",
+      "spoken_text": "baterka"
+    },
+    "learning.word.beruska": {
+      "asset": "clips/66/667fc9ead894.mp3",
+      "duration_ms": 784,
+      "sha256": "667fc9ead89409ea2f1b5fab3321ce089d495bd47eaf7d3629716267a247d368",
+      "display_text": "BERUŠKA",
+      "spoken_text": "beruška"
+    },
+    "learning.word.bonbon": {
+      "asset": "clips/8b/8b789c8818ac.mp3",
+      "duration_ms": 940,
+      "sha256": "8b789c8818accf9a43b73373c42b3a7f3efed08986b769be51b8d5ba881df416",
+      "display_text": "BONBON",
+      "spoken_text": "bonbon"
+    },
+    "learning.word.boruvky": {
+      "asset": "clips/d6/d654b505a21e.mp3",
+      "duration_ms": 810,
+      "sha256": "d654b505a21ef4ebdea51f9eaa73533649808d92647a8028aad3f3b306c3ba81",
+      "display_text": "BORŮVKY",
+      "spoken_text": "borůvky"
+    },
+    "learning.word.bota": {
+      "asset": "clips/b2/b2395a76bb54.mp3",
+      "duration_ms": 679,
+      "sha256": "b2395a76bb54440999c3382a9d88ab65a64bd5bf6462de4a2eaeb6c376eb1080",
+      "display_text": "BOTA",
+      "spoken_text": "bota"
+    },
+    "learning.word.boty": {
+      "asset": "clips/11/11e9e477ed78.mp3",
+      "duration_ms": 653,
+      "sha256": "11e9e477ed7804ae1fb298751ee0a04c48981985b5c7db44c7198185142f8f8a",
+      "display_text": "BOTY",
+      "spoken_text": "boty"
+    },
+    "learning.word.brambory": {
+      "asset": "clips/88/886a86189e9a.mp3",
+      "duration_ms": 784,
+      "sha256": "886a86189e9a98fc570a4d9ecef33c94922eb36c1d7eb2f5ac5b617ebff67e67",
+      "display_text": "BRAMBORY",
+      "spoken_text": "brambory"
+    },
+    "learning.word.brouk": {
+      "asset": "clips/6b/6ba036736bf3.mp3",
+      "duration_ms": 732,
+      "sha256": "6ba036736bf345eb517f6f777e49fc978b6b15774fb82ca6a55f2dcc6f95241c",
+      "display_text": "BROUK",
+      "spoken_text": "brouk"
+    },
+    "learning.word.bubinek": {
+      "asset": "clips/af/afeed5f6c624.mp3",
+      "duration_ms": 862,
+      "sha256": "afeed5f6c624bf231b0695e6bf0ebbb008319f59eebf12e59f2c1c6c2c83f146",
+      "display_text": "BUBÍNEK",
+      "spoken_text": "bubínek"
+    },
+    "learning.word.bud_odvazny_a_silny": {
+      "asset": "clips/32/320d026d0e37.mp3",
+      "duration_ms": 1594,
+      "sha256": "320d026d0e373cf44ed4c35400a6929cb64d7f8803f9c3b9435105a6cf36103a",
+      "display_text": "BUĎ ODVÁŽNÝ A SILNÝ",
+      "spoken_text": "buď odvážný a silný"
+    },
+    "learning.word.budova": {
+      "asset": "clips/e9/e903afa6be8c.mp3",
+      "duration_ms": 940,
+      "sha256": "e903afa6be8cbafd76976a14f4689602ce1800f7505fc47010ffc1924379f19b",
+      "display_text": "BUDOVA",
+      "spoken_text": "budova"
+    },
+    "learning.word.byk": {
+      "asset": "clips/e7/e75dc104d965.mp3",
+      "duration_ms": 732,
+      "sha256": "e75dc104d965b2ae99fc2281bae8f2cbf85bde3991bfea8a14b4c24421780288",
+      "display_text": "BÝK",
+      "spoken_text": "býk"
+    },
+    "learning.word.caj": {
+      "asset": "clips/eb/eb2062d89664.mp3",
+      "duration_ms": 522,
+      "sha256": "eb2062d89664c10bc8896b247bed86f2a20afad59afceaa63060f0cf3706c7aa",
+      "display_text": "ČAJ",
+      "spoken_text": "čaj"
+    },
+    "learning.word.carodejnice": {
+      "asset": "clips/c0/c03daeb44e23.mp3",
+      "duration_ms": 1384,
+      "sha256": "c03daeb44e237d19629db0873a2cec334f0387027d66c5e1c1dbb67eedbdfe1e",
+      "display_text": "ČARODĚJNICE",
+      "spoken_text": "čarodějnice"
+    },
+    "learning.word.chleb": {
+      "asset": "clips/e5/e5c5b126693b.mp3",
+      "duration_ms": 836,
+      "sha256": "e5c5b126693b824ad99cae557106db4c13418e37c10164fb1635d5c95b884ab4",
+      "display_text": "CHLÉB",
+      "spoken_text": "chléb"
+    },
+    "learning.word.chobotnice": {
+      "asset": "clips/d5/d52c6c9ac258.mp3",
+      "duration_ms": 966,
+      "sha256": "d52c6c9ac258d226fc40d4a333ab881210d131891f2641a5ece9a1ef16cfd396",
+      "display_text": "CHOBOTNICE",
+      "spoken_text": "chobotnice"
+    },
+    "learning.word.chutne_jablicko": {
+      "asset": "clips/74/7497e5dc7b5e.mp3",
+      "duration_ms": 1306,
+      "sha256": "7497e5dc7b5e8cee49e86c64bbae44d8cb04a3f6814630dd6e81535ee2b9fe85",
+      "display_text": "CHUTNÉ JABLÍČKO",
+      "spoken_text": "chutné jablíčko"
+    },
+    "learning.word.cibule": {
+      "asset": "clips/de/ded3c7702ac6.mp3",
+      "duration_ms": 758,
+      "sha256": "ded3c7702ac6d47871113f49a76b8b6810c99dc1ebbcac2128109e947e510d6c",
+      "display_text": "CIBULE",
+      "spoken_text": "cibule"
+    },
+    "learning.word.citron": {
+      "asset": "clips/3e/3e090704c8aa.mp3",
+      "duration_ms": 993,
+      "sha256": "3e090704c8aa0b4f24de0904e8fb3bb5f6ddbee890533df2357fb7783e610ca7",
+      "display_text": "CITRON",
+      "spoken_text": "citron"
+    },
+    "learning.word.coko": {
+      "asset": "clips/58/5895e6795a65.mp3",
+      "duration_ms": 601,
+      "sha256": "5895e6795a65c4a9e593624dfcb6820e0d5c0d17f6c0aadd0ac691d2fe8321cb",
+      "display_text": "ČOKO",
+      "spoken_text": "čoko"
+    },
+    "learning.word.cokoladovy_dort": {
+      "asset": "clips/da/da6272f12a20.mp3",
+      "duration_ms": 1332,
+      "sha256": "da6272f12a2028a4a945e5850b2db1755656e7af232e4343c2f838d855d1b09f",
+      "display_text": "ČOKOLÁDOVÝ DORT",
+      "spoken_text": "čokoládový dort"
+    },
+    "learning.word.cti_dobrou_knihu": {
+      "asset": "clips/93/933885d71677.mp3",
+      "duration_ms": 1202,
+      "sha256": "933885d7167759b02069bdb8fda4a219e443bf2647de3166ed6311a0726b2d87",
+      "display_text": "ČTI DOBROU KNIHU",
+      "spoken_text": "čti dobrou knihu"
+    },
+    "learning.word.cuketa": {
+      "asset": "clips/ba/ba7334a591f8.mp3",
+      "duration_ms": 679,
+      "sha256": "ba7334a591f80b3a6494a4dff8ee19f3cf274ee5ff018fe0e4f31eba2fbf4328",
+      "display_text": "CUKETA",
+      "spoken_text": "cuketa"
+    },
+    "learning.word.delfin": {
+      "asset": "clips/5e/5e8b2df9f144.mp3",
+      "duration_ms": 966,
+      "sha256": "5e8b2df9f1443dcc9d3678cc9ba2b42392c4bd73d0b2dcc1db5526fba9f4231e",
+      "display_text": "DELFÍN",
+      "spoken_text": "delfín"
+    },
+    "learning.word.destnik": {
+      "asset": "clips/29/2914f3a4cbd6.mp3",
+      "duration_ms": 1045,
+      "sha256": "2914f3a4cbd631bc4bc2d46e662f1bf2e473b8d940a943113220a0b5c9c719ff",
+      "display_text": "DEŠTNÍK",
+      "spoken_text": "deštník"
+    },
+    "learning.word.dinosaur": {
+      "asset": "clips/d5/d5f5c495b360.mp3",
+      "duration_ms": 940,
+      "sha256": "d5f5c495b3608ef84b31a2b95628083947ca96dce4fb6f25fd41acbe19c18a76",
+      "display_text": "DINOSAUR",
+      "spoken_text": "dinosaur"
+    },
+    "learning.word.dinozaur": {
+      "asset": "clips/b6/b62698ec5010.mp3",
+      "duration_ms": 888,
+      "sha256": "b62698ec50102937785daf832313178714558a635d33a7faf19df7780460ed0b",
+      "display_text": "DINOZAUR",
+      "spoken_text": "dinozaur"
+    },
+    "learning.word.dira": {
+      "asset": "clips/f3/f3b8e184e671.mp3",
+      "duration_ms": 601,
+      "sha256": "f3b8e184e671176e533a9cac09b4f5c948aef3b7b9a5a24223fa181c56ab08aa",
+      "display_text": "DÍRA",
+      "spoken_text": "díra"
+    },
+    "learning.word.dobrodruzstvi": {
+      "asset": "clips/fe/fe094b3f2b05.mp3",
+      "duration_ms": 1254,
+      "sha256": "fe094b3f2b0592df67ffb6fef77a29bcb4a437865188e0d3c8fac355347775c4",
+      "display_text": "DOBRODRUŽSTVÍ",
+      "spoken_text": "dobrodružství"
+    },
+    "learning.word.dobrota_je_magie": {
+      "asset": "clips/37/37df21d85984.mp3",
+      "duration_ms": 1202,
+      "sha256": "37df21d8598414d874c16249035c53acd6fdcca4e70bbbd7b02833d8f5935ae3",
+      "display_text": "DOBROTA JE MAGIE",
+      "spoken_text": "dobrota je magie"
+    },
+    "learning.word.dobrou_noc_a_spi": {
+      "asset": "clips/0d/0dce59d1ad4e.mp3",
+      "duration_ms": 1228,
+      "sha256": "0dce59d1ad4ef4fbb3c2be8dc55bfd188ffbb354748b4066819009e5b992e78e",
+      "display_text": "DOBROU NOC A SPI",
+      "spoken_text": "dobrou noc a spi"
+    },
+    "learning.word.dort": {
+      "asset": "clips/2e/2e2b7775aa39.mp3",
+      "duration_ms": 732,
+      "sha256": "2e2b7775aa39e14cf6047254e00b438a2a2dc23dc136f73218298f0b019d1a5c",
+      "display_text": "DORT",
+      "spoken_text": "dort"
+    },
+    "learning.word.dracek": {
+      "asset": "clips/48/4862b7534e9a.mp3",
+      "duration_ms": 888,
+      "sha256": "4862b7534e9a8c796240b44b31e8e50bd0da9e63d9126e09f9b850660e7dcf56",
+      "display_text": "DRÁČEK",
+      "spoken_text": "dráček"
+    },
+    "learning.word.drak": {
+      "asset": "clips/b3/b3e8d8466bab.mp3",
+      "duration_ms": 653,
+      "sha256": "b3e8d8466bab589f97729411801aa4d24afe3ed530d862830ea979ab76784128",
+      "display_text": "DRAK",
+      "spoken_text": "drak"
+    },
+    "learning.word.duha": {
+      "asset": "clips/19/19b7962aacb7.mp3",
+      "duration_ms": 601,
+      "sha256": "19b7962aacb73fcf49de6b46932e5e9031bf9c5a2b03b4bc5b8bc168dd47a2ce",
+      "display_text": "DUHA",
+      "spoken_text": "duha"
+    },
+    "learning.word.dum": {
+      "asset": "clips/ef/ef6f1d1e17bf.mp3",
+      "duration_ms": 758,
+      "sha256": "ef6f1d1e17bf855c5332c010d28c21fa25a4f11a1c4bb78f2705aec5bcc1810a",
+      "display_text": "DŮM",
+      "spoken_text": "dům"
+    },
+    "learning.word.dyne": {
+      "asset": "clips/b0/b0e40081fba5.mp3",
+      "duration_ms": 758,
+      "sha256": "b0e40081fba53e2379a652711d532821cdeba02ec732b619e70f8e9e430bffcc",
+      "display_text": "DÝNĚ",
+      "spoken_text": "dýně"
+    },
+    "learning.word.fotbal": {
+      "asset": "clips/49/4901fdfa99c4.mp3",
+      "duration_ms": 784,
+      "sha256": "4901fdfa99c49772abbe6a9b8909d0567ca1e75386050230fd0c35ff0e7296d7",
+      "display_text": "FOTBAL",
+      "spoken_text": "fotbal"
+    },
+    "learning.word.fotoalbum": {
+      "asset": "clips/e6/e6ada804e76e.mp3",
+      "duration_ms": 1019,
+      "sha256": "e6ada804e76ea193a089ed65c531b8835b001f58f82cdc5b0bfc9784a5390e8a",
+      "display_text": "FOTOALBUM",
+      "spoken_text": "fotoalbum"
+    },
+    "learning.word.gol": {
+      "asset": "clips/a7/a741d5cdca10.mp3",
+      "duration_ms": 732,
+      "sha256": "a741d5cdca10557ca0fc8247e5045daf3f283813732f7dd05052fc9f67004300",
+      "display_text": "GÓL",
+      "spoken_text": "gól"
+    },
+    "learning.word.had": {
+      "asset": "clips/61/61a09146cd82.mp3",
+      "duration_ms": 548,
+      "sha256": "61a09146cd82bc8b574ad1686e381946d5c28b562cfd63cd43c7ba5699221603",
+      "display_text": "HAD",
+      "spoken_text": "had"
+    },
+    "learning.word.hasici": {
+      "asset": "clips/36/360fadc10117.mp3",
+      "duration_ms": 836,
+      "sha256": "360fadc10117b7ed84a77a3049e206d00984a0174756dd72e1b0affac4a6f3a2",
+      "display_text": "HASIČI",
+      "spoken_text": "hasiči"
+    },
+    "learning.word.hluk": {
+      "asset": "clips/5c/5c499bb7cadb.mp3",
+      "duration_ms": 548,
+      "sha256": "5c499bb7cadbe3bfd871cbb1c1652b8b4eca69a3338fe5758a25918f308be9e0",
+      "display_text": "HLUK",
+      "spoken_text": "hluk"
+    },
+    "learning.word.hodny_kluk": {
+      "asset": "clips/42/423b3a5af761.mp3",
+      "duration_ms": 940,
+      "sha256": "423b3a5af7616dae3847dbec54903ab6dac914d121f4e5846e2eca41ee6e5641",
+      "display_text": "HODNÝ KLUK",
+      "spoken_text": "hodný kluk"
+    },
+    "learning.word.hokejka": {
+      "asset": "clips/f5/f54d33e43e0f.mp3",
+      "duration_ms": 810,
+      "sha256": "f54d33e43e0f78b966aa0f6b4d978837647176c482b67c01c8e33a4ec7c2e758",
+      "display_text": "HOKEJKA",
+      "spoken_text": "hokejka"
+    },
+    "learning.word.hra": {
+      "asset": "clips/da/dade59b9e695.mp3",
+      "duration_ms": 601,
+      "sha256": "dade59b9e695b9a596897a5da842e6ca796a5382d8670cbb6e8695e24e93e820",
+      "display_text": "HRA",
+      "spoken_text": "hra"
+    },
+    "learning.word.hrad": {
+      "asset": "clips/57/57093b402993.mp3",
+      "duration_ms": 784,
+      "sha256": "57093b402993a912991f4ab64aed6e56216c191dd9a4bc85da9ef32673146057",
+      "display_text": "HRAD",
+      "spoken_text": "hrad"
+    },
+    "learning.word.hrnek": {
+      "asset": "clips/50/50bf21dadf52.mp3",
+      "duration_ms": 810,
+      "sha256": "50bf21dadf52a504b3947e90c5e9da08509b0d3eb580170da8655f1d832b8028",
+      "display_text": "HRNEK",
+      "spoken_text": "hrnek"
+    },
+    "learning.word.hruska": {
+      "asset": "clips/24/241a03b46c74.mp3",
+      "duration_ms": 1202,
+      "sha256": "241a03b46c7471e3b6b400f1477d2a74fb46fd3559f6750861ac30c37e991810",
+      "display_text": "HRUŠKA",
+      "spoken_text": "hruška"
+    },
+    "learning.word.hrusticka": {
+      "asset": "clips/d5/d5f95992c0b5.mp3",
+      "duration_ms": 862,
+      "sha256": "d5f95992c0b5486b3c33d22692b03bb2a368c5ae1f7b02fb6e1af3064d6660bd",
+      "display_text": "HRUŠTIČKA",
+      "spoken_text": "hruštička"
+    },
+    "learning.word.jablicko": {
+      "asset": "clips/8f/8f9edcd8e5d4.mp3",
+      "duration_ms": 1045,
+      "sha256": "8f9edcd8e5d47b3540d51110fcdedd94fea03288c1d2fa512686a66d423e99da",
+      "display_text": "JABLÍČKO",
+      "spoken_text": "jablíčko"
+    },
+    "learning.word.jablko": {
+      "asset": "clips/47/47b1b5461f29.mp3",
+      "duration_ms": 1202,
+      "sha256": "47b1b5461f2979e63d1e3aa381e11da5cdd7f4889f5457de430d950cfda2a2e9",
+      "display_text": "JABLKO",
+      "spoken_text": "jablko"
+    },
+    "learning.word.jahoda": {
+      "asset": "clips/ea/eabef9cbf7d1.mp3",
+      "duration_ms": 836,
+      "sha256": "eabef9cbf7d1b252a80cd798aec2d137da63b4ee03ccfc0ed246c000ea432383",
+      "display_text": "JAHODA",
+      "spoken_text": "jahoda"
+    },
+    "learning.word.jahodnik": {
+      "asset": "clips/99/99a9ee8212eb.mp3",
+      "duration_ms": 940,
+      "sha256": "99a9ee8212eb401c19b014fd89c53a718b5eb0234dc33f4aefa9ba57b2909396",
+      "display_text": "JAHODNÍK",
+      "spoken_text": "jahodník"
+    },
+    "learning.word.jaro": {
+      "asset": "clips/95/95b1f967f560.mp3",
+      "duration_ms": 732,
+      "sha256": "95b1f967f5608e631a35797513d23d17dd11e0d5a1398e1bd3152ab55da171cd",
+      "display_text": "JARO",
+      "spoken_text": "jaro"
+    },
+    "learning.word.jednorozec": {
+      "asset": "clips/1e/1eea11f22abd.mp3",
+      "duration_ms": 1045,
+      "sha256": "1eea11f22abdefb55c1717f0103fb96063da6b775c43ed5b85a57c9bef4164e2",
+      "display_text": "JEDNOROŽEC",
+      "spoken_text": "jednorožec"
+    },
+    "learning.word.jime_zdrave_jidlo": {
+      "asset": "clips/4c/4cec7f16c33a.mp3",
+      "duration_ms": 1489,
+      "sha256": "4cec7f16c33ad74d59ef2aa262deeaa3f49c23a4abf1a1702704f59ebfdd2123",
+      "display_text": "JÍME ZDRAVÉ JÍDLO",
+      "spoken_text": "jíme zdravé jídlo"
+    },
+    "learning.word.kachnicka": {
+      "asset": "clips/11/11495b5988a0.mp3",
+      "duration_ms": 862,
+      "sha256": "11495b5988a05b274b45e79206fa8871267050f86388da7a4c5e339eb01fb602",
+      "display_text": "KACHNIČKA",
+      "spoken_text": "kachnička"
+    },
+    "learning.word.kamaradi_si_hraji": {
+      "asset": "clips/b3/b367e6bba460.mp3",
+      "duration_ms": 1280,
+      "sha256": "b367e6bba4603e38373b020b8956b223c5a4e3bcb82b59620a5c2b108031d89f",
+      "display_text": "KAMARÁDI SI HRAJÍ",
+      "spoken_text": "kamarádi si hrají"
+    },
+    "learning.word.kava": {
+      "asset": "clips/b5/b541d6ac6c1c.mp3",
+      "duration_ms": 601,
+      "sha256": "b541d6ac6c1c66ae17702b8659c7ca56188e2991209b7aa2f1bc0303d624f338",
+      "display_text": "KÁVA",
+      "spoken_text": "káva"
+    },
+    "learning.word.klavesnice": {
+      "asset": "clips/2f/2f3d8c9af202.mp3",
+      "duration_ms": 966,
+      "sha256": "2f3d8c9af2027b315b74d96cf67ae323222ae80353922d59a068e9d77a055e78",
+      "display_text": "KLÁVESNICE",
+      "spoken_text": "klávesnice"
+    },
+    "learning.word.klic": {
+      "asset": "clips/24/24205115280b.mp3",
+      "duration_ms": 758,
+      "sha256": "24205115280bcee3052dbf789b98cc0ce5f824fd0dc56ceee145d0fffb60f5f8",
+      "display_text": "KLÍČ",
+      "spoken_text": "klíč"
+    },
+    "learning.word.klokan": {
+      "asset": "clips/3a/3a0e10bdf425.mp3",
+      "duration_ms": 784,
+      "sha256": "3a0e10bdf425e86888878fccffbf9ab11f7151eefa6c3171d49a6ad20256a7ca",
+      "display_text": "KLOKAN",
+      "spoken_text": "klokan"
+    },
+    "learning.word.kniha": {
+      "asset": "clips/50/509705822eb6.mp3",
+      "duration_ms": 705,
+      "sha256": "509705822eb677c6bf2ac45cd1dd6c40e4e0eac534285fc9099a9ff2ce597fb4",
+      "display_text": "KNIHA",
+      "spoken_text": "kniha"
+    },
+    "learning.word.kocicka": {
+      "asset": "clips/9f/9f7b60cd0158.mp3",
+      "duration_ms": 888,
+      "sha256": "9f7b60cd01584020b6de4035be08a169873a188853d41fd5b15503865bc10ac5",
+      "display_text": "KOČIČKA",
+      "spoken_text": "kočička"
+    },
+    "learning.word.kocka": {
+      "asset": "clips/a2/a28d11762110.mp3",
+      "duration_ms": 627,
+      "sha256": "a28d117621102b3777ea676822d782d431c92fef4cfe18f1186dc85476a4d4b6",
+      "display_text": "KOČKA",
+      "spoken_text": "kočka"
+    },
+    "learning.word.kocka_leze_dirou": {
+      "asset": "clips/a0/a0a448f79657.mp3",
+      "duration_ms": 1306,
+      "sha256": "a0a448f79657739b48fdc79ea5d416c5b6486ccfb7e66655724da35290500eac",
+      "display_text": "KOČKA LEZE DÍROU",
+      "spoken_text": "kočka leze dírou"
+    },
+    "learning.word.kohoutek": {
+      "asset": "clips/ce/ce17cbd03397.mp3",
+      "duration_ms": 810,
+      "sha256": "ce17cbd03397970f453bd347025d0ee4f9d628199bdd8ebb93f10d7701e139d8",
+      "display_text": "KOHOUTEK",
+      "spoken_text": "kohoutek"
+    },
+    "learning.word.kolac": {
+      "asset": "clips/2b/2b16f484fc1b.mp3",
+      "duration_ms": 758,
+      "sha256": "2b16f484fc1bc7357ab4086de004cbc750ce5f8dd899b2f9c2fc513c901e2ffb",
+      "display_text": "KOLÁČ",
+      "spoken_text": "koláč"
+    },
+    "learning.word.kolo": {
+      "asset": "clips/34/34e6d4042fea.mp3",
+      "duration_ms": 548,
+      "sha256": "34e6d4042fea45b5797a6855d7d27f6aa43412d8598506e4dcc5bfbab5bbc159",
+      "display_text": "KOLO",
+      "spoken_text": "kolo"
+    },
+    "learning.word.kolobezka": {
+      "asset": "clips/d4/d4d9a3e5765e.mp3",
+      "duration_ms": 914,
+      "sha256": "d4d9a3e5765eed978e389a2f712ecd3f18207e1f744cdf70c901f8f79d37d273",
+      "display_text": "KOLOBĚŽKA",
+      "spoken_text": "koloběžka"
+    },
+    "learning.word.konicek": {
+      "asset": "clips/c2/c2725e632077.mp3",
+      "duration_ms": 914,
+      "sha256": "c2725e632077b1e2660ba0338d9dd53097f029daf02df8dfcd27258eca89b5fd",
+      "display_text": "KONÍČEK",
+      "spoken_text": "koníček"
+    },
+    "learning.word.kopretina": {
+      "asset": "clips/b9/b9bdef1a7621.mp3",
+      "duration_ms": 862,
+      "sha256": "b9bdef1a76212e71b049baa8feac6494ec12257fc11d781cfd9545c4766906f3",
+      "display_text": "KOPRETINA",
+      "spoken_text": "kopretina"
+    },
+    "learning.word.koruna": {
+      "asset": "clips/d2/d2ebb35a7153.mp3",
+      "duration_ms": 548,
+      "sha256": "d2ebb35a7153351048d7092a180573633b926dd92793e968432a9108a4d5f6bb",
+      "display_text": "KORUNA",
+      "spoken_text": "koruna"
+    },
+    "learning.word.kos_c62e": {
+      "asset": "clips/33/334880558225.mp3",
+      "duration_ms": 522,
+      "sha256": "334880558225c9acae81ed43098f1e3469dee28256cfd2969eaefc1117659c40",
+      "display_text": "KOŠ",
+      "spoken_text": "koš"
+    },
+    "learning.word.kos_e981": {
+      "asset": "clips/12/125493bc22f6.mp3",
+      "duration_ms": 548,
+      "sha256": "125493bc22f6e1d410fb07227decc82f23cee05ab704af490a2b45be32694dbe",
+      "display_text": "KOS",
+      "spoken_text": "kos"
+    },
+    "learning.word.kouzleni": {
+      "asset": "clips/44/441e8e97f9af.mp3",
+      "duration_ms": 784,
+      "sha256": "441e8e97f9afc90a995887842cc6123459b2477b0f37892592b7ad7a2c08b317",
+      "display_text": "KOUZLENÍ",
+      "spoken_text": "kouzlení"
+    },
+    "learning.word.krab": {
+      "asset": "clips/71/71db12776a5b.mp3",
+      "duration_ms": 653,
+      "sha256": "71db12776a5b8191afaa345cc881a9878f6e93bf3477b6c2679a0d3006be82a3",
+      "display_text": "KRAB",
+      "spoken_text": "krab"
+    },
+    "learning.word.kralicek": {
+      "asset": "clips/8d/8d59b6b54efc.mp3",
+      "duration_ms": 914,
+      "sha256": "8d59b6b54efc944757937b9f91d5d2931910f0531a7cf69202aac5968260d9a1",
+      "display_text": "KRÁLÍČEK",
+      "spoken_text": "králíček"
+    },
+    "learning.word.krasny_letni_den": {
+      "asset": "clips/df/df440dd0ae0c.mp3",
+      "duration_ms": 1515,
+      "sha256": "df440dd0ae0c0f70066a61d1556d25c5a2d450ffdf020ff1575a76647ca2aea6",
+      "display_text": "KRÁSNÝ LETNÍ DEN",
+      "spoken_text": "krásný letní den"
+    },
+    "learning.word.krasny_motyl": {
+      "asset": "clips/6f/6f76ce00f78c.mp3",
+      "duration_ms": 1176,
+      "sha256": "6f76ce00f78c499d92fda793a16410aff365fd0d3a7b3e9fa635b312f62a42bb",
+      "display_text": "KRÁSNÝ MOTÝL",
+      "spoken_text": "krásný motýl"
+    },
+    "learning.word.krava": {
+      "asset": "clips/a7/a721855e385b.mp3",
+      "duration_ms": 601,
+      "sha256": "a721855e385b5a6a2828977ddb1b977f1bbe69116da218345f7247a5ba666ad1",
+      "display_text": "KRÁVA",
+      "spoken_text": "kráva"
+    },
+    "learning.word.krtek": {
+      "asset": "clips/5d/5d5c75653357.mp3",
+      "duration_ms": 732,
+      "sha256": "5d5c75653357cc8c7cb550fb3ba6f22fddee0425be90faee87a7de5a2d4b7d5a",
+      "display_text": "KRTEK",
+      "spoken_text": "krtek"
+    },
+    "learning.word.kruh": {
+      "asset": "clips/46/466e052db247.mp3",
+      "duration_ms": 705,
+      "sha256": "466e052db247a2f0595dd440815476d57792221ac5d80a2034665ba65ebd3c22",
+      "display_text": "KRUH",
+      "spoken_text": "kruh"
+    },
+    "learning.word.kun": {
+      "asset": "clips/5c/5c6487fcae4c.mp3",
+      "duration_ms": 705,
+      "sha256": "5c6487fcae4cce5769808044fe6734f2787e04f8b3f9ca95d05b2a2429863450",
+      "display_text": "KŮŇ",
+      "spoken_text": "kůň"
+    },
+    "learning.word.kvet": {
+      "asset": "clips/75/75a4f6e83879.mp3",
+      "duration_ms": 653,
+      "sha256": "75a4f6e838792041cb122cd8d0f9b7b413ac24af93b87c990a2cd423ee8d665c",
+      "display_text": "KVĚT",
+      "spoken_text": "květ"
+    },
+    "learning.word.kvetina": {
+      "asset": "clips/90/90db352d8041.mp3",
+      "duration_ms": 653,
+      "sha256": "90db352d804121048207cff030c4a176e4f1ec6dc9e7808b4b130226179b4040",
+      "display_text": "KVĚTINA",
+      "spoken_text": "květina"
+    },
+    "learning.word.kvetiny": {
+      "asset": "clips/ee/ee4fb1d7036a.mp3",
+      "duration_ms": 705,
+      "sha256": "ee4fb1d7036af6565fd39b18015a5c1d384e5515aed1f7190aecc8c7fba00df2",
+      "display_text": "KVĚTINY",
+      "spoken_text": "květiny"
+    },
+    "learning.word.kytara": {
+      "asset": "clips/bd/bdb063a10ef8.mp3",
+      "duration_ms": 653,
+      "sha256": "bdb063a10ef85bd6ef1019315dd982a0430ab22a8dd59c38b26bcc5773d0cb82",
+      "display_text": "KYTARA",
+      "spoken_text": "kytara"
+    },
+    "learning.word.led": {
+      "asset": "clips/1b/1bb99e2c873f.mp3",
+      "duration_ms": 705,
+      "sha256": "1bb99e2c873f7f9e02c2758be07a7dee148e535e21f3a5121197ce634af301db",
+      "display_text": "LED",
+      "spoken_text": "led"
+    },
+    "learning.word.ledy": {
+      "asset": "clips/66/6648b7784a8e.mp3",
+      "duration_ms": 627,
+      "sha256": "6648b7784a8eee3cd59cd750f6b4d19324651ebf81ffcb91c3831f5fdbc73060",
+      "display_text": "LEDY",
+      "spoken_text": "ledy"
+    },
+    "learning.word.les": {
+      "asset": "clips/91/91be6c1e4b1d.mp3",
+      "duration_ms": 732,
+      "sha256": "91be6c1e4b1d5e16ab4848ef28b6e08bd96fab161902566efce7cad12228413f",
+      "display_text": "LES",
+      "spoken_text": "les"
+    },
+    "learning.word.lesni_jahoda": {
+      "asset": "clips/5b/5bfb58f45df7.mp3",
+      "duration_ms": 993,
+      "sha256": "5bfb58f45df7cf76a542644d1eebdc80a25b78af44289f302d740bc57160b1b9",
+      "display_text": "LESNÍ JAHODA",
+      "spoken_text": "lesní jahoda"
+    },
+    "learning.word.letadlo": {
+      "asset": "clips/bb/bb3704104eba.mp3",
+      "duration_ms": 836,
+      "sha256": "bb3704104eba9949ce7bce85246aa88dc2b182babca86385f0730453cc9ab529",
+      "display_text": "LETADLO",
+      "spoken_text": "letadlo"
+    },
+    "learning.word.letadylko": {
+      "asset": "clips/06/0633412732d8.mp3",
+      "duration_ms": 1019,
+      "sha256": "0633412732d8016efbbc2d8a68fa3e2c2ba2c1e30a0f65f50a3aa48be1b6403f",
+      "display_text": "LETADÝLKO",
+      "spoken_text": "letadýlko"
+    },
+    "learning.word.leti_leti_ptacek": {
+      "asset": "clips/6e/6ed6657548e2.mp3",
+      "duration_ms": 1698,
+      "sha256": "6ed6657548e2160c89e84b1a0f7fd9a8a02bf36851720597242ba8ed33ebbfbb",
+      "display_text": "LETÍ LETÍ PTÁČEK",
+      "spoken_text": "letí letí ptáček"
+    },
+    "learning.word.leto": {
+      "asset": "clips/8a/8a0587c3d6ce.mp3",
+      "duration_ms": 732,
+      "sha256": "8a0587c3d6ce00bd58855d5fc866a0f26fce3ec2278fce932daa7598476eb693",
+      "display_text": "LÉTO",
+      "spoken_text": "léto"
+    },
+    "learning.word.lev": {
+      "asset": "clips/e5/e539a8ba27d9.mp3",
+      "duration_ms": 653,
+      "sha256": "e539a8ba27d97b704eab4a46f0f927354f0c9e0db2031c1a52188d5fcb9dbed9",
+      "display_text": "LEV",
+      "spoken_text": "lev"
+    },
+    "learning.word.liska": {
+      "asset": "clips/54/54eb3bcaa654.mp3",
+      "duration_ms": 732,
+      "sha256": "54eb3bcaa6549f1d49cd8c56a345020476a29c3b08b67b89b709ffe06521e922",
+      "display_text": "LIŠKA",
+      "spoken_text": "liška"
+    },
+    "learning.word.lizatko": {
+      "asset": "clips/c5/c55291780e1b.mp3",
+      "duration_ms": 966,
+      "sha256": "c55291780e1b4c40d3cb8962489b1be5a5ec8df08ffb7315f708554948be9f00",
+      "display_text": "LÍZÁTKO",
+      "spoken_text": "lízátko"
+    },
+    "learning.word.lod": {
+      "asset": "clips/f1/f146956308c8.mp3",
+      "duration_ms": 679,
+      "sha256": "f146956308c844f0a76ce142075ec84e3e1a19f570c307c924c74670b951002a",
+      "display_text": "LOĎ",
+      "spoken_text": "loď"
+    },
+    "learning.word.lodka": {
+      "asset": "clips/b5/b5b1977df194.mp3",
+      "duration_ms": 705,
+      "sha256": "b5b1977df194263ca5f9e6a31a0140da9e9b4921f932bec97309340cf40f18f0",
+      "display_text": "LOĎKA",
+      "spoken_text": "loďka"
+    },
+    "learning.word.lzice": {
+      "asset": "clips/1c/1c7cc56eb03d.mp3",
+      "duration_ms": 1123,
+      "sha256": "1c7cc56eb03df76c0f9db6f94629a7226d3ca49fddca8caacbd2ef6006c8376b",
+      "display_text": "LŽÍCE",
+      "spoken_text": "lžíce"
+    },
+    "learning.word.mak": {
+      "asset": "clips/72/728a14de1376.mp3",
+      "duration_ms": 1150,
+      "sha256": "728a14de1376d18d13d613b2d54a6b40b09bc4df8f67be74ed907bdadd4074e2",
+      "display_text": "MÁK",
+      "spoken_text": "mák"
+    },
+    "learning.word.mala_beruska": {
+      "asset": "clips/3d/3d55f62a07c4.mp3",
+      "duration_ms": 1019,
+      "sha256": "3d55f62a07c47c947908c3030e2964ee6afc8d46d377c106a1b78436887bf52b",
+      "display_text": "MALÁ BERUŠKA",
+      "spoken_text": "malá beruška"
+    },
+    "learning.word.maly_domecek": {
+      "asset": "clips/2e/2ec075727912.mp3",
+      "duration_ms": 1045,
+      "sha256": "2ec075727912ade7c69cf7a0a20d107e5a8e5eb0189ed6718c90a73b04c15178",
+      "display_text": "MALÝ DOMEČEK",
+      "spoken_text": "malý domeček"
+    },
+    "learning.word.mam_rad_sve_rodice": {
+      "asset": "clips/00/00d928dd9481.mp3",
+      "duration_ms": 1280,
+      "sha256": "00d928dd9481eeb7fe6cf9023c413262481f9cd147d54eec16fb48492e4b438a",
+      "display_text": "MÁM RÁD SVÉ RODIČE",
+      "spoken_text": "mám rád své rodiče"
+    },
+    "learning.word.mama": {
+      "asset": "clips/8c/8c14da0d2087.mp3",
+      "duration_ms": 653,
+      "sha256": "8c14da0d20875bbb0728339ae5a741e6c8f024a6bdbfd9d23ad578338932b777",
+      "display_text": "MÁMA",
+      "spoken_text": "máma"
+    },
+    "learning.word.mamut": {
+      "asset": "clips/77/7739a061e30b.mp3",
+      "duration_ms": 679,
+      "sha256": "7739a061e30b75c9d19058d4b99ac5305d91337c4a10d85b024840f403499065",
+      "display_text": "MAMUT",
+      "spoken_text": "mamut"
+    },
+    "learning.word.med": {
+      "asset": "clips/3d/3d2cc74cf28b.mp3",
+      "duration_ms": 1332,
+      "sha256": "3d2cc74cf28b226fe25ad682308ddcbe694370056b811e7f5d3ae3e8a0729f90",
+      "display_text": "MED",
+      "spoken_text": "med"
+    },
+    "learning.word.medved": {
+      "asset": "clips/99/996b7b563202.mp3",
+      "duration_ms": 732,
+      "sha256": "996b7b563202c8f4169245ceabc08d5a470ed6c396e270c8734c3acf7a369a91",
+      "display_text": "MEDVĚD",
+      "spoken_text": "medvěd"
+    },
+    "learning.word.mekky_polstar": {
+      "asset": "clips/84/844342074d5e.mp3",
+      "duration_ms": 1228,
+      "sha256": "844342074d5e158dd29fb5abfe8bb4fa36166ba6ee092b41ef107f59a2a43847",
+      "display_text": "MĚKKÝ POLŠTÁŘ",
+      "spoken_text": "měkký polštář"
+    },
+    "learning.word.meloun": {
+      "asset": "clips/bb/bb19ddf294a9.mp3",
+      "duration_ms": 732,
+      "sha256": "bb19ddf294a937f7ec3941ac4e2cb60f1f0447aec594e708ab5b2cd5ffbf0e50",
+      "display_text": "MELOUN",
+      "spoken_text": "meloun"
+    },
+    "learning.word.mesic": {
+      "asset": "clips/a9/a935b651c89d.mp3",
+      "duration_ms": 862,
+      "sha256": "a935b651c89ddd178cd588b62c2f8d487d05c3adcc66883373a12b92c6aebc6c",
+      "display_text": "MĚSÍC",
+      "spoken_text": "měsíc"
+    },
+    "learning.word.mesic_jasno_sviti": {
+      "asset": "clips/3c/3c5c08603961.mp3",
+      "duration_ms": 1567,
+      "sha256": "3c5c0860396167c53837d2c878aa47a4f96cd0c7981c24d9cb6c6ad65cd6a862",
+      "display_text": "MĚSÍC JASNO SVÍTÍ",
+      "spoken_text": "měsíc jasno svítí"
+    },
+    "learning.word.mic": {
+      "asset": "clips/e2/e284009a239e.mp3",
+      "duration_ms": 914,
+      "sha256": "e284009a239ee79471578d8d665d43fa31d25094ac30267d2db8e66024f8f239",
+      "display_text": "MÍČ",
+      "spoken_text": "míč"
+    },
+    "learning.word.mikrofon": {
+      "asset": "clips/8a/8aa4f7528f37.mp3",
+      "duration_ms": 862,
+      "sha256": "8aa4f7528f37b8de0475f673fcb87d404cbed684255ffaaf3d56961686f109aa",
+      "display_text": "MIKROFON",
+      "spoken_text": "mikrofon"
+    },
+    "learning.word.misa": {
+      "asset": "clips/92/92fd2e7a101b.mp3",
+      "duration_ms": 732,
+      "sha256": "92fd2e7a101be8b64f4ff418cc1db1f6b6da96b0c42908524608dd4718f00fa3",
+      "display_text": "MÍSA",
+      "spoken_text": "mísa"
+    },
+    "learning.word.mleko": {
+      "asset": "clips/42/4238436f2c7a.mp3",
+      "duration_ms": 758,
+      "sha256": "4238436f2c7af880df98ae63c2888f80d88467ab8e594fad7a4cce4c864238fe",
+      "display_text": "MLÉKO",
+      "spoken_text": "mléko"
+    },
+    "learning.word.modre_auticko": {
+      "asset": "clips/b9/b9f3e0b98c66.mp3",
+      "duration_ms": 1332,
+      "sha256": "b9f3e0b98c66fc1a3e9701791d4d0973a148d4b8b790bd8bc9f108b4f50ead6f",
+      "display_text": "MODRÉ AUTÍČKO",
+      "spoken_text": "modré autíčko"
+    },
+    "learning.word.modre_nebe": {
+      "asset": "clips/d4/d4a24a080ba1.mp3",
+      "duration_ms": 966,
+      "sha256": "d4a24a080ba1cba723558f7a99df6794aa14b0d6ddb4cdf4d8e2e7009c0b413c",
+      "display_text": "MODRÉ NEBE",
+      "spoken_text": "modré nebe"
+    },
+    "learning.word.moje_nejlepsi_hra": {
+      "asset": "clips/64/64a36b4282bb.mp3",
+      "duration_ms": 1254,
+      "sha256": "64a36b4282bb61b45ccb830bd066e2aba4f1971b2d82c7982807db7a5cf3d77c",
+      "display_text": "MOJE NEJLEPŠÍ HRA",
+      "spoken_text": "moje nejlepší hra"
+    },
+    "learning.word.moje_rodina": {
+      "asset": "clips/ec/ec9b0910635c.mp3",
+      "duration_ms": 888,
+      "sha256": "ec9b0910635ce08e9f89b5955ef19c737d321e5cbbea152424e579151f4abed5",
+      "display_text": "MOJE RODINA",
+      "spoken_text": "moje rodina"
+    },
+    "learning.word.motyl": {
+      "asset": "clips/e3/e344db169427.mp3",
+      "duration_ms": 862,
+      "sha256": "e344db16942773303ccf877ed1e42784697a93d64bf2a57b87dcd7b5033a5239",
+      "display_text": "MOTÝL",
+      "spoken_text": "motýl"
+    },
+    "learning.word.motylek": {
+      "asset": "clips/5d/5dfdd44f1a43.mp3",
+      "duration_ms": 1202,
+      "sha256": "5dfdd44f1a43237d90231dbcc85ca359b97da455d80f6f38ce93a6c3b3740358",
+      "display_text": "MOTÝLEK",
+      "spoken_text": "motýlek"
+    },
+    "learning.word.moucha": {
+      "asset": "clips/56/56d2bd4c27f2.mp3",
+      "duration_ms": 679,
+      "sha256": "56d2bd4c27f25a33e9b955e550282fcb2d8a5137f9831aa47660ca64ff3c2562",
+      "display_text": "MOUCHA",
+      "spoken_text": "moucha"
+    },
+    "learning.word.mrak": {
+      "asset": "clips/2d/2d2223ca94ad.mp3",
+      "duration_ms": 705,
+      "sha256": "2d2223ca94adc7e47550c1a99ccbd1e82a6b7296850c73b7927013cd16013eac",
+      "display_text": "MRAK",
+      "spoken_text": "mrak"
+    },
+    "learning.word.mravenec": {
+      "asset": "clips/86/86f9523c0a7e.mp3",
+      "duration_ms": 940,
+      "sha256": "86f9523c0a7ed4991802c41871881b2d344a576b5ac4a0a1cd86079529698107",
+      "display_text": "MRAVENEC",
+      "spoken_text": "mravenec"
+    },
+    "learning.word.mraveniste": {
+      "asset": "clips/31/3117a57e3e8f.mp3",
+      "duration_ms": 940,
+      "sha256": "3117a57e3e8fa4e0d7af97f57e54e6beedd602488a9a0500bf9870c4c4b7f6be",
+      "display_text": "MRAVENIŠTĚ",
+      "spoken_text": "mraveniště"
+    },
+    "learning.word.mraz": {
+      "asset": "clips/fc/fc3dcf1bf50d.mp3",
+      "duration_ms": 810,
+      "sha256": "fc3dcf1bf50d0edc226da8915ac0461e0dbf512cab01fa0be84eb12f29fd9ba0",
+      "display_text": "MRÁZ",
+      "spoken_text": "mráz"
+    },
+    "learning.word.mrkev": {
+      "asset": "clips/59/59ac1a298b32.mp3",
+      "duration_ms": 758,
+      "sha256": "59ac1a298b32cd899315d172e56800f97f6f8aec144882f7b410b987cc769e09",
+      "display_text": "MRKEV",
+      "spoken_text": "mrkev"
+    },
+    "learning.word.mrkvicka": {
+      "asset": "clips/4d/4d2719229f3f.mp3",
+      "duration_ms": 940,
+      "sha256": "4d2719229f3f0281b41d758513f6b9d79b18b3a65c0293442d60595ca471e100",
+      "display_text": "MRKVIČKA",
+      "spoken_text": "mrkvička"
+    },
+    "learning.word.mys": {
+      "asset": "clips/d4/d41737af9490.mp3",
+      "duration_ms": 1280,
+      "sha256": "d41737af94900bcee34435287d7ad4fdc99fac50733574b4334a69bd85e99ecc",
+      "display_text": "MYŠ",
+      "spoken_text": "myš"
+    },
+    "learning.word.myska": {
+      "asset": "clips/ae/ae7c7c5a44af.mp3",
+      "duration_ms": 653,
+      "sha256": "ae7c7c5a44afff6fa6aaf7b06b8d0199e0c1b8ff99091c7e999a1153ec00d202",
+      "display_text": "MYŠKA",
+      "spoken_text": "myška"
+    },
+    "learning.word.nemocnice": {
+      "asset": "clips/09/0918196cb4b2.mp3",
+      "duration_ms": 1045,
+      "sha256": "0918196cb4b2f50fca309d7eac5616270fcbe53a7b5d924704b1503626f7bdae",
+      "display_text": "NEMOCNICE",
+      "spoken_text": "nemocnice"
+    },
+    "learning.word.noha": {
+      "asset": "clips/ec/ec584a3dd2ad.mp3",
+      "duration_ms": 653,
+      "sha256": "ec584a3dd2ade3f86ce4bd762621ac171e8433d0e4b8868099be7b44b9bf486f",
+      "display_text": "NOHA",
+      "spoken_text": "noha"
+    },
+    "learning.word.nos": {
+      "asset": "clips/e1/e12c90e27265.mp3",
+      "duration_ms": 575,
+      "sha256": "e12c90e2726544f7bc82cbde8b724d146cfb38cf093ba6dd0b8cee2148451569",
+      "display_text": "NOS",
+      "spoken_text": "nos"
+    },
+    "learning.word.obrazek": {
+      "asset": "clips/18/1846507a89b9.mp3",
+      "duration_ms": 862,
+      "sha256": "1846507a89b9f566cab607efadaefa709fe2a248662f4cd11cbd6c6deb06cd17",
+      "display_text": "OBRÁZEK",
+      "spoken_text": "obrázek"
+    },
+    "learning.word.oci": {
+      "asset": "clips/94/94e29a381031.mp3",
+      "duration_ms": 601,
+      "sha256": "94e29a3810310c6e603c19b20d46ab4be0f6799caba8b4c1211c97be83686a52",
+      "display_text": "OČI",
+      "spoken_text": "oči"
+    },
+    "learning.word.odrazedlo": {
+      "asset": "clips/ad/ad6ce41303dc.mp3",
+      "duration_ms": 940,
+      "sha256": "ad6ce41303dcea7619a681bd2a36984fa64ad76218022b21110160f9e5b13d61",
+      "display_text": "ODRÁŽEDLO",
+      "spoken_text": "odrážedlo"
+    },
+    "learning.word.ohen": {
+      "asset": "clips/a5/a5f4e356ace0.mp3",
+      "duration_ms": 653,
+      "sha256": "a5f4e356ace0d49c655cc8f7c778c54756c09197bbe9c4d15884a7db3b5749f1",
+      "display_text": "OHEŇ",
+      "spoken_text": "oheň"
+    },
+    "learning.word.okno": {
+      "asset": "clips/ce/ce0604bc52d0.mp3",
+      "duration_ms": 653,
+      "sha256": "ce0604bc52d0c974ea7bde9a077df67fe17df1e5780acecfdb8bd61331418b2d",
+      "display_text": "OKNO",
+      "spoken_text": "okno"
+    },
+    "learning.word.oko": {
+      "asset": "clips/e6/e67d942d1329.mp3",
+      "duration_ms": 575,
+      "sha256": "e67d942d1329bd7af0f3e88c24064cd2c9de81d27e9aace1847bae2fcfdc8c56",
+      "display_text": "OKO",
+      "spoken_text": "oko"
+    },
+    "learning.word.opice": {
+      "asset": "clips/df/df522bd68e89.mp3",
+      "duration_ms": 732,
+      "sha256": "df522bd68e89fa42f7c2dbca3f253e360951634ef0886a66684576b6edff94d7",
+      "display_text": "OPICE",
+      "spoken_text": "opice"
+    },
+    "learning.word.orel": {
+      "asset": "clips/1f/1f2fef960664.mp3",
+      "duration_ms": 653,
+      "sha256": "1f2fef960664e6d5c4f6b61be493b58f400142c17decf5ec95a79f794a8d11c1",
+      "display_text": "OREL",
+      "spoken_text": "orel"
+    },
+    "learning.word.ostrovek": {
+      "asset": "clips/85/85fd1384f8a5.mp3",
+      "duration_ms": 862,
+      "sha256": "85fd1384f8a51d171922e2ff3089bed7589d14f0a8745dc3fb80929520df11d3",
+      "display_text": "OSTROVEK",
+      "spoken_text": "ostrovek"
+    },
+    "learning.word.ostruziny": {
+      "asset": "clips/5a/5a1938347822.mp3",
+      "duration_ms": 888,
+      "sha256": "5a19383478227a11db12cca21e92a19b9972d2db79a0a53cf81819952399d262",
+      "display_text": "OSTRUŽINY",
+      "spoken_text": "ostružiny"
+    },
+    "learning.word.palacinky": {
+      "asset": "clips/3b/3b9e18480d75.mp3",
+      "duration_ms": 940,
+      "sha256": "3b9e18480d752530bc0144593149e40e4b4508395ade2d2376acf920ae400203",
+      "display_text": "PALAČINKY",
+      "spoken_text": "palačinky"
+    },
+    "learning.word.pampeliska": {
+      "asset": "clips/34/341a45dd3061.mp3",
+      "duration_ms": 940,
+      "sha256": "341a45dd3061029173fbdd31f0f90a846b0e75ec3a6fd9936b49d1120c91c78b",
+      "display_text": "PAMPELIŠKA",
+      "spoken_text": "pampeliška"
+    },
+    "learning.word.panda": {
+      "asset": "clips/43/43d0527c72c7.mp3",
+      "duration_ms": 653,
+      "sha256": "43d0527c72c73e8850ec9c785c9216e46d2e62a8f2aba3c35efc61b93dffed80",
+      "display_text": "PANDA",
+      "spoken_text": "panda"
+    },
+    "learning.word.papir": {
+      "asset": "clips/ec/eca10545fd5e.mp3",
+      "duration_ms": 758,
+      "sha256": "eca10545fd5ec6d8fd90279488a199d05a858d30af96c256859c16d5129fae3c",
+      "display_text": "PAPÍR",
+      "spoken_text": "papír"
+    },
+    "learning.word.pav": {
+      "asset": "clips/41/414a3dbe575f.mp3",
+      "duration_ms": 705,
+      "sha256": "414a3dbe575f006643b84bc2052906be57af565667016e948120aeaba81a6c31",
+      "display_text": "PÁV",
+      "spoken_text": "páv"
+    },
+    "learning.word.pavoucek": {
+      "asset": "clips/83/8335d9f0d238.mp3",
+      "duration_ms": 1071,
+      "sha256": "8335d9f0d23850e0151fceb612bdfe41cb9bfe41a889fc80392d63f43dbc2c3f",
+      "display_text": "PAVOUČEK",
+      "spoken_text": "pavouček"
+    },
+    "learning.word.pavouk": {
+      "asset": "clips/9e/9e55b9a67aeb.mp3",
+      "duration_ms": 836,
+      "sha256": "9e55b9a67aeb6ad01ea6c05047ef4abce9a8f7191e967cd80fd30340bb97eba6",
+      "display_text": "PAVOUK",
+      "spoken_text": "pavouk"
+    },
+    "learning.word.pecene_kure": {
+      "asset": "clips/b9/b91422525ac6.mp3",
+      "duration_ms": 1019,
+      "sha256": "b91422525ac6bff3afb0b6b708eac3eaedf58aaf04beb2f19edf63a0cac1e031",
+      "display_text": "PEČENÉ KUŘE",
+      "spoken_text": "pečené kuře"
+    },
+    "learning.word.pejsek": {
+      "asset": "clips/be/be5ef37dbf14.mp3",
+      "duration_ms": 836,
+      "sha256": "be5ef37dbf14148aa77af73b73b789621de63d51031be91249e733d8899547f9",
+      "display_text": "PEJSEK",
+      "spoken_text": "pejsek"
+    },
+    "learning.word.pejsek_a_kocicka": {
+      "asset": "clips/d6/d6fa6d42b7d2.mp3",
+      "duration_ms": 1254,
+      "sha256": "d6fa6d42b7d21812efc17a28b9d2d525d276415d826fc7adb1e3f4fb2cb5d8c9",
+      "display_text": "PEJSEK A KOČIČKA",
+      "spoken_text": "pejsek a kočička"
+    },
+    "learning.word.pero": {
+      "asset": "clips/34/342ebd3ab04b.mp3",
+      "duration_ms": 522,
+      "sha256": "342ebd3ab04b7742d00a0775fa4d51cddf365927be1681684c059c947a660e86",
+      "display_text": "PERO",
+      "spoken_text": "pero"
+    },
+    "learning.word.pes": {
+      "asset": "clips/b3/b3e39014d14e.mp3",
+      "duration_ms": 548,
+      "sha256": "b3e39014d14e52b501c609f28be529dbb59b6c37931c39ad8331dd8da29c35bf",
+      "display_text": "PES",
+      "spoken_text": "pes"
+    },
+    "learning.word.pes_jedl_kost": {
+      "asset": "clips/4e/4ed4fb747f54.mp3",
+      "duration_ms": 1123,
+      "sha256": "4ed4fb747f541e8beef708643739f5c5ca663242bc3c52730ef296f8ca894767",
+      "display_text": "PES JEDL KOST",
+      "spoken_text": "pes jedl kost"
+    },
+    "learning.word.pilna_vcelka": {
+      "asset": "clips/ca/ca35bc5d8cda.mp3",
+      "duration_ms": 1071,
+      "sha256": "ca35bc5d8cda3f44f447a30f6f8803590233a5e31f583ae54630d78f9b6d925a",
+      "display_text": "PILNÁ VČELKA",
+      "spoken_text": "pilná včelka"
+    },
+    "learning.word.pisek": {
+      "asset": "clips/10/109be29ac56f.mp3",
+      "duration_ms": 836,
+      "sha256": "109be29ac56fa7d89f9555cc0d182add9077907c1926c510a0f1b8f535bf4d36",
+      "display_text": "PÍSEK",
+      "spoken_text": "písek"
+    },
+    "learning.word.plachetnice": {
+      "asset": "clips/51/51fc272c5166.mp3",
+      "duration_ms": 914,
+      "sha256": "51fc272c516657bcdd59a8d9928bc73520f7aec2add1b0e444c7f6e274aecbc6",
+      "display_text": "PLACHETNICE",
+      "spoken_text": "plachetnice"
+    },
+    "learning.word.pocasi": {
+      "asset": "clips/98/9887b3546f41.mp3",
+      "duration_ms": 862,
+      "sha256": "9887b3546f41d6f60f0108348bc8fc299e33537aed95feaedd4cdc7a5e23a214",
+      "display_text": "POČASÍ",
+      "spoken_text": "počasí"
+    },
+    "learning.word.pocitac": {
+      "asset": "clips/16/16372f60e8dd.mp3",
+      "duration_ms": 862,
+      "sha256": "16372f60e8dd39784e5d0a705ebea5bc41809207cdf82cd44f8e60f2a0da7ed1",
+      "display_text": "POČÍTAČ",
+      "spoken_text": "počítač"
+    },
+    "learning.word.podzim": {
+      "asset": "clips/82/82fa7e957991.mp3",
+      "duration_ms": 758,
+      "sha256": "82fa7e95799166306cab0a012c191dd148a609be8a52b29b9d217ce6f7c86684",
+      "display_text": "PODZIM",
+      "spoken_text": "podzim"
+    },
+    "learning.word.pokladnice": {
+      "asset": "clips/af/af89fb94c5d8.mp3",
+      "duration_ms": 836,
+      "sha256": "af89fb94c5d8106eb19d745d71f289d6be37af872deecbf7fddbe6c728706959",
+      "display_text": "POKLADNICE",
+      "spoken_text": "pokladnice"
+    },
+    "learning.word.policie": {
+      "asset": "clips/eb/eb01f745d55d.mp3",
+      "duration_ms": 758,
+      "sha256": "eb01f745d55d30f088c1733196033822cc85c9912b5f373c04dd7707b11646e5",
+      "display_text": "POLICIE",
+      "spoken_text": "policie"
+    },
+    "learning.word.pomaham_mamince": {
+      "asset": "clips/cd/cde1ccc299dd.mp3",
+      "duration_ms": 1410,
+      "sha256": "cde1ccc299dd506ad88e68686826a09c00864ec6d3d8abd741197547a7968048",
+      "display_text": "POMÁHÁM MAMINCE",
+      "spoken_text": "pomáhám mamince"
+    },
+    "learning.word.pomaly_snek": {
+      "asset": "clips/7d/7dbcc864d92d.mp3",
+      "duration_ms": 1019,
+      "sha256": "7dbcc864d92d9a7e3fb9e8911b2b749dc4f5347ad1225b1ceb12d525a0e33a00",
+      "display_text": "POMALÝ ŠNEK",
+      "spoken_text": "pomalý šnek"
+    },
+    "learning.word.ponorka": {
+      "asset": "clips/5d/5d0687decc5a.mp3",
+      "duration_ms": 732,
+      "sha256": "5d0687decc5a8275af5ef4f53bcf01831f8c6d0ae81d3bab6c12b0d4e6ed779e",
+      "display_text": "PONORKA",
+      "spoken_text": "ponorka"
+    },
+    "learning.word.popelarske_auto": {
+      "asset": "clips/8f/8f33885a1e9b.mp3",
+      "duration_ms": 1280,
+      "sha256": "8f33885a1e9bda7c13e111d62e02ad3b69dffa0723beba07006037efd3c8dd4e",
+      "display_text": "POPELÁŘSKÉ AUTO",
+      "spoken_text": "popelářské auto"
+    },
+    "learning.word.postel": {
+      "asset": "clips/1e/1e8422933b88.mp3",
+      "duration_ms": 836,
+      "sha256": "1e8422933b88a2dc7aae1638df4a4a46ab64b355a704f2aa381758e5633fd058",
+      "display_text": "POSTEL",
+      "spoken_text": "postel"
+    },
+    "learning.word.prase": {
+      "asset": "clips/a4/a4c332203123.mp3",
+      "duration_ms": 627,
+      "sha256": "a4c33220312311d9399a3ce2b09a3c9d3a266181c557aa9b39585a1a65a19bc8",
+      "display_text": "PRASE",
+      "spoken_text": "prase"
+    },
+    "learning.word.princezna": {
+      "asset": "clips/12/126dacf34964.mp3",
+      "duration_ms": 836,
+      "sha256": "126dacf34964aad9d7cdf69a03e848cc3f9b4a0a342608eb21a7721d8e713890",
+      "display_text": "PRINCEZNA",
+      "spoken_text": "princezna"
+    },
+    "learning.word.prst": {
+      "asset": "clips/85/8578c6f33640.mp3",
+      "duration_ms": 627,
+      "sha256": "8578c6f33640cc3ce524ba9105c33f00b715a1e199aff4874df90f6e7dce28ab",
+      "display_text": "PRST",
+      "spoken_text": "prst"
+    },
+    "learning.word.ptaci_letaji_vysoko": {
+      "asset": "clips/8f/8f7ead19564b.mp3",
+      "duration_ms": 1646,
+      "sha256": "8f7ead19564b0fb27b26710ca2c559e864dc063148e274352e42ab27edafed52",
+      "display_text": "PTÁCI LÉTAJÍ VYSOKO",
+      "spoken_text": "ptáci létají vysoko"
+    },
+    "learning.word.ptak": {
+      "asset": "clips/66/66f710e8bc48.mp3",
+      "duration_ms": 705,
+      "sha256": "66f710e8bc488ebf243f18053ba85a16330f37c3bbb33e719841b3d9b41ded7c",
+      "display_text": "PTÁK",
+      "spoken_text": "pták"
+    },
+    "learning.word.pujc_sve_hezke_hracky": {
+      "asset": "clips/39/39cc16bad014.mp3",
+      "duration_ms": 1646,
+      "sha256": "39cc16bad014f6a059a1ad38d09742f98c8f2ff2c351049556d8ffd7f4d9afcb",
+      "display_text": "PŮJČ SVÉ HEZKÉ HRAČKY",
+      "spoken_text": "půjč své hezké hračky"
+    },
+    "learning.word.radio": {
+      "asset": "clips/23/234d672dae08.mp3",
+      "duration_ms": 810,
+      "sha256": "234d672dae081074a6837e8b9bdd1694e286761c231884ecc1e0256edbbcc000",
+      "display_text": "RÁDIO",
+      "spoken_text": "rádio"
+    },
+    "learning.word.raketa": {
+      "asset": "clips/4f/4fbf3787443e.mp3",
+      "duration_ms": 732,
+      "sha256": "4fbf3787443ec1c3af2ff2a2c97813fd2c7c3d7e8cd07e28f4906e73d6a4428f",
+      "display_text": "RAKETA",
+      "spoken_text": "raketa"
+    },
+    "learning.word.ranni_slunce": {
+      "asset": "clips/94/94077cf97d73.mp3",
+      "duration_ms": 1150,
+      "sha256": "94077cf97d7358a0be0386db14a5d19f7202b060ec4ca0df4b031547812a5f8f",
+      "display_text": "RANNÍ SLUNCE",
+      "spoken_text": "ranní slunce"
+    },
+    "learning.word.reka": {
+      "asset": "clips/0f/0f6514edeebb.mp3",
+      "duration_ms": 653,
+      "sha256": "0f6514edeebbbabcaf2e8d2e41c9845e9a60c51af898b7f6632fe7355912f97d",
+      "display_text": "ŘEKA",
+      "spoken_text": "řeka"
+    },
+    "learning.word.robotek": {
+      "asset": "clips/6a/6af739106b62.mp3",
+      "duration_ms": 862,
+      "sha256": "6af739106b62a756eb750c517f4dc0b8c0210163668e2f3535fdc8daffc14050",
+      "display_text": "ROBOTEK",
+      "spoken_text": "robotek"
+    },
+    "learning.word.ruka": {
+      "asset": "clips/3c/3c8759474da5.mp3",
+      "duration_ms": 653,
+      "sha256": "3c8759474da50ff40b9771a741423beae40a7205deacc3c7f8e2b64507ccb141",
+      "display_text": "RUKA",
+      "spoken_text": "ruka"
+    },
+    "learning.word.ruze": {
+      "asset": "clips/b6/b6d7dcd71bab.mp3",
+      "duration_ms": 784,
+      "sha256": "b6d7dcd71bab934c8c85467ba09fa6df5bece3af901093b3c3debf94027db7bf",
+      "display_text": "RŮŽE",
+      "spoken_text": "růže"
+    },
+    "learning.word.ryba": {
+      "asset": "clips/c4/c4138d35966d.mp3",
+      "duration_ms": 575,
+      "sha256": "c4138d35966d0e4263d5481f6aa6ea54308870b35e00cf901a092c10fe6af8e2",
+      "display_text": "RYBA",
+      "spoken_text": "ryba"
+    },
+    "learning.word.rybicka": {
+      "asset": "clips/da/da55bafaea84.mp3",
+      "duration_ms": 810,
+      "sha256": "da55bafaea84e15e6048636016b0c3dcde639ea74a89e73cdbb4763cb7884f2a",
+      "display_text": "RYBIČKA",
+      "spoken_text": "rybička"
+    },
+    "learning.word.rybka": {
+      "asset": "clips/eb/ebc51f5aba12.mp3",
+      "duration_ms": 627,
+      "sha256": "ebc51f5aba129f6d8a6c0191250f90e21a5e9af99e836db31c06caab2a201be8",
+      "display_text": "RYBKA",
+      "spoken_text": "rybka"
+    },
+    "learning.word.rychle_auto": {
+      "asset": "clips/bb/bbb6dfce6f35.mp3",
+      "duration_ms": 1150,
+      "sha256": "bbb6dfce6f35971a7dcc5c41532f689a2a681a8e74f8c4c75f40e543804238b7",
+      "display_text": "RYCHLÉ AUTO",
+      "spoken_text": "rychlé auto"
+    },
+    "learning.word.sane": {
+      "asset": "clips/ce/ce0bc46a2980.mp3",
+      "duration_ms": 836,
+      "sha256": "ce0bc46a2980832f5b346c2cd5a8887f210d52afc5001929b7acc219683727d8",
+      "display_text": "SÁNĚ",
+      "spoken_text": "sáně"
+    },
+    "learning.word.sanitka": {
+      "asset": "clips/cc/ccce6665aa48.mp3",
+      "duration_ms": 784,
+      "sha256": "ccce6665aa487e83fbf653e96554080819e12b95a2b9233b0e06e4fcc065ff1e",
+      "display_text": "SANITKA",
+      "spoken_text": "sanitka"
+    },
+    "learning.word.skolka": {
+      "asset": "clips/2a/2a0717cdc05a.mp3",
+      "duration_ms": 784,
+      "sha256": "2a0717cdc05a54e16184dd4610cf33762c9b7467d841bb584ddfb7bbd0e27bf1",
+      "display_text": "ŠKOLKA",
+      "spoken_text": "školka"
+    },
+    "learning.word.sladky_dort": {
+      "asset": "clips/10/1090b7cbf25f.mp3",
+      "duration_ms": 1123,
+      "sha256": "1090b7cbf25f5b2d783d96376f9e06196437f46764c2e8f75aede86bce3021b4",
+      "display_text": "SLADKÝ DORT",
+      "spoken_text": "sladký dort"
+    },
+    "learning.word.slepicka": {
+      "asset": "clips/76/76a64ebfd4e4.mp3",
+      "duration_ms": 888,
+      "sha256": "76a64ebfd4e47c7b80905f6a9441cfc403951c94c8529f59c7a37eb9dc8d41e9",
+      "display_text": "SLEPIČKA",
+      "spoken_text": "slepička"
+    },
+    "learning.word.slon": {
+      "asset": "clips/a0/a0d28dc54e1b.mp3",
+      "duration_ms": 705,
+      "sha256": "a0d28dc54e1b0bf8cd3ca8635a00b7e834f49e88db24decd75ce79cd07cb86ef",
+      "display_text": "SLON",
+      "spoken_text": "slon"
+    },
+    "learning.word.slonice": {
+      "asset": "clips/5e/5e1b935f18a3.mp3",
+      "duration_ms": 836,
+      "sha256": "5e1b935f18a3d64a5e496ce61f190905a255d6362bc963b0e49eeba3da852a85",
+      "display_text": "SLONICE",
+      "spoken_text": "slonice"
+    },
+    "learning.word.slonik": {
+      "asset": "clips/74/74acbf31a3e0.mp3",
+      "duration_ms": 888,
+      "sha256": "74acbf31a3e095777ed375ffd40aaaf5df5c903c9766ff24c4f1561efd6a4867",
+      "display_text": "SLONÍK",
+      "spoken_text": "sloník"
+    },
+    "learning.word.sluchatka": {
+      "asset": "clips/80/8049a81640ed.mp3",
+      "duration_ms": 993,
+      "sha256": "8049a81640ed8f7371bdcd54600cb11828161f009de944470144c3f3c3fe6ced",
+      "display_text": "SLUCHÁTKA",
+      "spoken_text": "sluchátka"
+    },
+    "learning.word.slunce": {
+      "asset": "clips/65/65e9742d528b.mp3",
+      "duration_ms": 810,
+      "sha256": "65e9742d528b76b10b2589ef721a8808ba13cca0e71b4fc7b0c6bc41a9113c20",
+      "display_text": "SLUNCE",
+      "spoken_text": "slunce"
+    },
+    "learning.word.slunecko": {
+      "asset": "clips/d2/d2fdc792f523.mp3",
+      "duration_ms": 940,
+      "sha256": "d2fdc792f5235acc5d6a3f1ca30c944284e1dae2b6b8b72b5b2ea72f0edb2142",
+      "display_text": "SLUNÉČKO",
+      "spoken_text": "slunéčko"
+    },
+    "learning.word.slunna_plaz": {
+      "asset": "clips/f9/f97b9929dcbf.mp3",
+      "duration_ms": 1254,
+      "sha256": "f97b9929dcbf165041ab8ca05163ed20d03721512d5f4214413d9bbced5c1f6a",
+      "display_text": "SLUNNÁ PLÁŽ",
+      "spoken_text": "slunná pláž"
+    },
+    "learning.word.snehova_koule": {
+      "asset": "clips/99/993fa1b83aeb.mp3",
+      "duration_ms": 1228,
+      "sha256": "993fa1b83aeb36edda5708a0f610b86dee1ec696f1c5fc57adc2ebbbcf3a40c8",
+      "display_text": "SNĚHOVÁ KOULE",
+      "spoken_text": "sněhová koule"
+    },
+    "learning.word.snehulak": {
+      "asset": "clips/da/da69b2fef7ee.mp3",
+      "duration_ms": 1019,
+      "sha256": "da69b2fef7eee3f004a77b7df174ad12d81f24b13306c1843ddae8fbf87dda2e",
+      "display_text": "SNĚHULÁK",
+      "spoken_text": "sněhulák"
+    },
+    "learning.word.snek": {
+      "asset": "clips/8c/8cdeae1aa45d.mp3",
+      "duration_ms": 758,
+      "sha256": "8cdeae1aa45db6838103761a49de65ea06e035f2ba715c3d9f1c822352f12930",
+      "display_text": "ŠNEK",
+      "spoken_text": "šnek"
+    },
+    "learning.word.snih": {
+      "asset": "clips/36/36e6dceef438.mp3",
+      "duration_ms": 914,
+      "sha256": "36e6dceef4386cdd13e2e811165ae08e3918c685fa655c28fc959a293db7e300",
+      "display_text": "SNÍH",
+      "spoken_text": "sníh"
+    },
+    "learning.word.sopicka": {
+      "asset": "clips/c3/c35aa3224272.mp3",
+      "duration_ms": 940,
+      "sha256": "c35aa3224272f368e972712dd86f6235f2cb9a5d8c25179f1a9624ad9a9e6e77",
+      "display_text": "SOPIČKA",
+      "spoken_text": "sopička"
+    },
+    "learning.word.sova": {
+      "asset": "clips/36/363a64a3a76c.mp3",
+      "duration_ms": 627,
+      "sha256": "363a64a3a76c9ea04d1a114cd7d192503dc76e9a1cfd24aad35850f7a810be2c",
+      "display_text": "SOVA",
+      "spoken_text": "sova"
+    },
+    "learning.word.srdce": {
+      "asset": "clips/1f/1f481ec895fc.mp3",
+      "duration_ms": 705,
+      "sha256": "1f481ec895fcdf98cc2e47a2282211150831ffffce44e0dda205b17f063d14d0",
+      "display_text": "SRDCE",
+      "spoken_text": "srdce"
+    },
+    "learning.word.stavime_snehulaka": {
+      "asset": "clips/b8/b8c1c1d5e3be.mp3",
+      "duration_ms": 1515,
+      "sha256": "b8c1c1d5e3be6d6bd4797e3e228906edf8443540bbe007bec2cd4ac651793bc7",
+      "display_text": "STAVÍME SNĚHULÁKA",
+      "spoken_text": "stavíme sněhuláka"
+    },
+    "learning.word.straznik": {
+      "asset": "clips/a6/a63ee4cc4a66.mp3",
+      "duration_ms": 1045,
+      "sha256": "a63ee4cc4a661170668a1bb83782f0ae212e05c17b39530fe7c55ebe2dd77ef1",
+      "display_text": "STRÁŽNÍK",
+      "spoken_text": "strážník"
+    },
+    "learning.word.strom": {
+      "asset": "clips/40/4073832b437d.mp3",
+      "duration_ms": 705,
+      "sha256": "4073832b437d446ead89058681f6690a2d85f948db761daeabf48c57db415ed9",
+      "display_text": "STROM",
+      "spoken_text": "strom"
+    },
+    "learning.word.stromy": {
+      "asset": "clips/5e/5ed1f2469243.mp3",
+      "duration_ms": 705,
+      "sha256": "5ed1f246924354748199a41aac828067511556f5b5cfeea8341dd9848f839181",
+      "display_text": "STROMY",
+      "spoken_text": "stromy"
+    },
+    "learning.word.studena_zmrzlina": {
+      "asset": "clips/bc/bc4102e3bd5b.mp3",
+      "duration_ms": 1332,
+      "sha256": "bc4102e3bd5b8baebdd2b0f301f3fe9ee96e67cea28bf91e2d9a9e8997522eaf",
+      "display_text": "STUDENÁ ZMRZLINA",
+      "spoken_text": "studená zmrzlina"
+    },
+    "learning.word.stul": {
+      "asset": "clips/62/62ef50bc2a43.mp3",
+      "duration_ms": 914,
+      "sha256": "62ef50bc2a43ba8c706e790fc18af85d0bb4799ffb89c41e9a6c27bf0a54e664",
+      "display_text": "STŮL",
+      "spoken_text": "stůl"
+    },
+    "learning.word.sul": {
+      "asset": "clips/86/86054e1f5881.mp3",
+      "duration_ms": 836,
+      "sha256": "86054e1f5881b1ac14f5a4d86fd7af4c0bee312250f0a1c882488ad5480663e0",
+      "display_text": "SŮL",
+      "spoken_text": "sůl"
+    },
+    "learning.word.svestky": {
+      "asset": "clips/e5/e5ecc92a9277.mp3",
+      "duration_ms": 810,
+      "sha256": "e5ecc92a9277369904b1f53cde6b3667a24f480fca5f20aa2496196f5a057f91",
+      "display_text": "ŠVESTKY",
+      "spoken_text": "švestky"
+    },
+    "learning.word.syr": {
+      "asset": "clips/72/724bc0ef2f64.mp3",
+      "duration_ms": 810,
+      "sha256": "724bc0ef2f640444fd594aea2b0a989d4217df48fafd9f6f47006c4eb33eb103",
+      "display_text": "SÝR",
+      "spoken_text": "sýr"
+    },
+    "learning.word.talir": {
+      "asset": "clips/64/6475814c6578.mp3",
+      "duration_ms": 758,
+      "sha256": "6475814c6578a13434b5e56c15bf741b3e1bd554d397c4b69f60642a3ba5274e",
+      "display_text": "TALÍŘ",
+      "spoken_text": "talíř"
+    },
+    "learning.word.tata": {
+      "asset": "clips/83/83dabaa2af68.mp3",
+      "duration_ms": 653,
+      "sha256": "83dabaa2af68b66ca882886cf5719a4ad2fec9fa388431c7aabcd6f053b3384b",
+      "display_text": "TÁTA",
+      "spoken_text": "táta"
+    },
+    "learning.word.televize": {
+      "asset": "clips/a5/a57930b46d97.mp3",
+      "duration_ms": 679,
+      "sha256": "a57930b46d972b09ca71d1ecf0e8979f6223f58b3561568afaed2d9457550448",
+      "display_text": "TELEVIZE",
+      "spoken_text": "televize"
+    },
+    "learning.word.teple_mleko": {
+      "asset": "clips/0f/0f2464ab27ac.mp3",
+      "duration_ms": 1019,
+      "sha256": "0f2464ab27aca4d88b665af47fd4ee8d5cd22322a3c1e4e5db12116b869d6053",
+      "display_text": "TEPLÉ MLÉKO",
+      "spoken_text": "teplé mléko"
+    },
+    "learning.word.tornado": {
+      "asset": "clips/30/303e08c31cc1.mp3",
+      "duration_ms": 836,
+      "sha256": "303e08c31cc1d3eea8ea7e6f6e8fe1db1a3f1fc96af75eba2e0bbedd1646b730",
+      "display_text": "TORNÁDO",
+      "spoken_text": "tornádo"
+    },
+    "learning.word.traktor": {
+      "asset": "clips/51/513214ba74c0.mp3",
+      "duration_ms": 758,
+      "sha256": "513214ba74c0bc516bab80a74393a9622fe8c98824aeea56569fdf40052d9d64",
+      "display_text": "TRAKTOR",
+      "spoken_text": "traktor"
+    },
+    "learning.word.trava": {
+      "asset": "clips/45/45b8c4a7b1b0.mp3",
+      "duration_ms": 653,
+      "sha256": "45b8c4a7b1b08ea65f36fc57b2212ddf3469247cecd63bf9a420373ae629684d",
+      "display_text": "TRÁVA",
+      "spoken_text": "tráva"
+    },
+    "learning.word.tresen": {
+      "asset": "clips/5a/5a95a0432d9f.mp3",
+      "duration_ms": 758,
+      "sha256": "5a95a0432d9fdf81ba69a0346c0e0ab50caf3636e9e81168274b7c245cea722c",
+      "display_text": "TŘEŠEŇ",
+      "spoken_text": "třešeň"
+    },
+    "learning.word.tresnicky": {
+      "asset": "clips/f7/f786fbfa0de3.mp3",
+      "duration_ms": 836,
+      "sha256": "f786fbfa0de3f3e9e12f4a1120ba17c1d40ca31853e7a857ab879223764481fe",
+      "display_text": "TŘEŠNIČKY",
+      "spoken_text": "třešničky"
+    },
+    "learning.word.trubka": {
+      "asset": "clips/16/160e9daf0f81.mp3",
+      "duration_ms": 679,
+      "sha256": "160e9daf0f812a12bf155d0da646fedacfab0549482ea36a71c8ecdd1ddfcf37",
+      "display_text": "TRUBKA",
+      "spoken_text": "trubka"
+    },
+    "learning.word.tucnak": {
+      "asset": "clips/7f/7f7f2578cdfd.mp3",
+      "duration_ms": 940,
+      "sha256": "7f7f2578cdfd97abcf1ba64745557fd6851802f6b4dcae1219e46ec363318129",
+      "display_text": "TUČŇÁK",
+      "spoken_text": "tučňák"
+    },
+    "learning.word.tuzka": {
+      "asset": "clips/64/64bba1618875.mp3",
+      "duration_ms": 679,
+      "sha256": "64bba1618875f5f5e01a0f9404a0713fb04aa2005e66a040fdd8d24de066d7bc",
+      "display_text": "TUŽKA",
+      "spoken_text": "tužka"
+    },
+    "learning.word.tygr": {
+      "asset": "clips/40/40e5836f45e4.mp3",
+      "duration_ms": 548,
+      "sha256": "40e5836f45e4677b9249280d0a427afd641bf338343446512d200b52370806d0",
+      "display_text": "TYGR",
+      "spoken_text": "tygr"
+    },
+    "learning.word.usi": {
+      "asset": "clips/01/01bd9f35e3f1.mp3",
+      "duration_ms": 601,
+      "sha256": "01bd9f35e3f1cc26762c267ccbc5e359923c5dbaa15ed12ba1dc35356694bf83",
+      "display_text": "UŠI",
+      "spoken_text": "uši"
+    },
+    "learning.word.vanoce": {
+      "asset": "clips/79/794eb630bc5f.mp3",
+      "duration_ms": 888,
+      "sha256": "794eb630bc5f1127db94e8f316172ddec53d2fbd0839e9da85e71e2eac7ef61b",
+      "display_text": "VÁNOCE",
+      "spoken_text": "vánoce"
+    },
+    "learning.word.vazka": {
+      "asset": "clips/b7/b71914444523.mp3",
+      "duration_ms": 758,
+      "sha256": "b71914444523dd57f2bd732cc4c9cf26a95b17b99e99123f474bbcab11a76036",
+      "display_text": "VÁŽKA",
+      "spoken_text": "vážka"
+    },
+    "learning.word.vcela": {
+      "asset": "clips/d0/d0f2e4a45824.mp3",
+      "duration_ms": 732,
+      "sha256": "d0f2e4a45824db16451131ad56f3d4e5682a25508d0d1a1e870f800ff07d72b4",
+      "display_text": "VČELA",
+      "spoken_text": "včela"
+    },
+    "learning.word.vcelicka": {
+      "asset": "clips/ab/aba316c0b965.mp3",
+      "duration_ms": 862,
+      "sha256": "aba316c0b965f53c4a10484acf53d56f97a0bb36199a9c910334356b9e363db1",
+      "display_text": "VČELIČKA",
+      "spoken_text": "včelička"
+    },
+    "learning.word.velikonoce": {
+      "asset": "clips/13/136a824db0ad.mp3",
+      "duration_ms": 862,
+      "sha256": "136a824db0ad8deeea488e8a850901a6cf436a4c4a72789399b67f0aa4e617f8",
+      "display_text": "VELIKONOCE",
+      "spoken_text": "velikonoce"
+    },
+    "learning.word.velky_balonek": {
+      "asset": "clips/ed/ed6287cc0e1d.mp3",
+      "duration_ms": 1254,
+      "sha256": "ed6287cc0e1d464d627b6412cb6de3d61b13e1c984771cec4e2baaf70ab815b4",
+      "display_text": "VELKÝ BALÓNEK",
+      "spoken_text": "velký balónek"
+    },
+    "learning.word.velky_medved": {
+      "asset": "clips/19/199ae8e53370.mp3",
+      "duration_ms": 1123,
+      "sha256": "199ae8e533707bed263f69a7aced2e135b37e85f1ebac4834438425c4a17b300",
+      "display_text": "VELKÝ MEDVĚD",
+      "spoken_text": "velký medvěd"
+    },
+    "learning.word.velky_slon": {
+      "asset": "clips/79/79938a7b5cdc.mp3",
+      "duration_ms": 966,
+      "sha256": "79938a7b5cdc2b16830601fec67be0fc54c14164a7b018d640c9979ec84e43fe",
+      "display_text": "VELKÝ SLON",
+      "spoken_text": "velký slon"
+    },
+    "learning.word.venku_prsi_ted": {
+      "asset": "clips/ea/ea3a96cca308.mp3",
+      "duration_ms": 1150,
+      "sha256": "ea3a96cca308f2dd3df1801c99b5245fcf31fbd59e332d4c2b94df10e5e68a0e",
+      "display_text": "VENKU PRŠÍ TEĎ",
+      "spoken_text": "venku prší teď"
+    },
+    "learning.word.vesele_vanoce": {
+      "asset": "clips/99/998e938db2c4.mp3",
+      "duration_ms": 1176,
+      "sha256": "998e938db2c4ae581db3fbc1ac7eee7e08358d1ff54b5793e66958033dd8bcc2",
+      "display_text": "VESELÉ VÁNOCE",
+      "spoken_text": "veselé vánoce"
+    },
+    "learning.word.veverka": {
+      "asset": "clips/73/73520ea23e23.mp3",
+      "duration_ms": 758,
+      "sha256": "73520ea23e23191fe0051517faffc394ac4a38fe48c595f5c84d5d41f5c45821",
+      "display_text": "VEVERKA",
+      "spoken_text": "veverka"
+    },
+    "learning.word.vidlicka": {
+      "asset": "clips/c2/c2495362d09e.mp3",
+      "duration_ms": 888,
+      "sha256": "c2495362d09e64a00bdc0dc077bbe3f93d109f046f2362a2a3678aad17b01b83",
+      "display_text": "VIDLIČKA",
+      "spoken_text": "vidlička"
+    },
+    "learning.word.vitr": {
+      "asset": "clips/3d/3ddb6ecccd12.mp3",
+      "duration_ms": 705,
+      "sha256": "3ddb6ecccd12602ef047383fa811f7389f1b23cbae016afc37e11e7394a25db7",
+      "display_text": "VÍTR",
+      "spoken_text": "vítr"
+    },
+    "learning.word.vlak": {
+      "asset": "clips/ea/ea582d28c665.mp3",
+      "duration_ms": 732,
+      "sha256": "ea582d28c6655b9a111958e9e73d1f66979d30f7fe04e2da0282d158b08e88b0",
+      "display_text": "VLAK",
+      "spoken_text": "vlak"
+    },
+    "learning.word.vlasy": {
+      "asset": "clips/fc/fc3ab789644b.mp3",
+      "duration_ms": 810,
+      "sha256": "fc3ab789644bae74fe4fed756ff1e50037672b2e49eaefd7561a49795002d2b8",
+      "display_text": "VLASY",
+      "spoken_text": "vlasy"
+    },
+    "learning.word.vlk": {
+      "asset": "clips/ef/efac0795319e.mp3",
+      "duration_ms": 679,
+      "sha256": "efac0795319ebd2dadf575a0cc9c9ab262ad796a6539f975e5f8886cb6e01b5f",
+      "display_text": "VLK",
+      "spoken_text": "vlk"
+    },
+    "learning.word.voda": {
+      "asset": "clips/ff/ff25beb09a4d.mp3",
+      "duration_ms": 705,
+      "sha256": "ff25beb09a4d7f09f44c293a53c200938b92ee8f6805f02a74afbf184c6f6a2a",
+      "display_text": "VODA",
+      "spoken_text": "voda"
+    },
+    "learning.word.voda_je_pro_tebe_dobra": {
+      "asset": "clips/8e/8ea0ef3f656a.mp3",
+      "duration_ms": 1410,
+      "sha256": "8ea0ef3f656a4663f7416198abf2bd9710f6722db05e78bd4dabd1669b082b3b",
+      "display_text": "VODA JE PRO TEBE DOBRÁ",
+      "spoken_text": "voda je pro tebe dobrá"
+    },
+    "learning.word.vrana": {
+      "asset": "clips/e1/e1e90b2236bf.mp3",
+      "duration_ms": 705,
+      "sha256": "e1e90b2236bf1e95d4c29a17b7793eb1a718859cd2775fd91a92b881dbc05fe3",
+      "display_text": "VRÁNA",
+      "spoken_text": "vrána"
+    },
+    "learning.word.vrtulnik": {
+      "asset": "clips/bc/bc8588b0e7df.mp3",
+      "duration_ms": 914,
+      "sha256": "bc8588b0e7df8b921c7da670e7a7421f3af19062412e2ed5c72a85a1bd64b2e2",
+      "display_text": "VRTULNÍK",
+      "spoken_text": "vrtulník"
+    },
+    "learning.word.zaba": {
+      "asset": "clips/bc/bc6afdabaee9.mp3",
+      "duration_ms": 758,
+      "sha256": "bc6afdabaee90591af2076c001cd45b80b462a158364585677e60e1287fc3425",
+      "display_text": "ŽÁBA",
+      "spoken_text": "žába"
+    },
+    "learning.word.zajic": {
+      "asset": "clips/e4/e497b100d209.mp3",
+      "duration_ms": 862,
+      "sha256": "e497b100d2099989d34010d33088172468f186eae4ae0ff47c37bb38ba4f5205",
+      "display_text": "ZAJÍC",
+      "spoken_text": "zajíc"
+    },
+    "learning.word.zamecek": {
+      "asset": "clips/44/44dc3416a810.mp3",
+      "duration_ms": 993,
+      "sha256": "44dc3416a8108fc01f2e909643cb53d1667e140902b92557959b19bd81da7269",
+      "display_text": "ZÁMEČEK",
+      "spoken_text": "zámeček"
+    },
+    "learning.word.zamek": {
+      "asset": "clips/cc/cc9d18dd555e.mp3",
+      "duration_ms": 862,
+      "sha256": "cc9d18dd555e9330bd757b67d07e3bbe50c4124decbc985c2e5a9fcbb121436f",
+      "display_text": "ZÁMEK",
+      "spoken_text": "zámek"
+    },
+    "learning.word.zarovka": {
+      "asset": "clips/2b/2bc8c1bd0d41.mp3",
+      "duration_ms": 836,
+      "sha256": "2bc8c1bd0d419081ee240cb39a981fd7bfe42e56e09d404b07d619f652d42011",
+      "display_text": "ŽÁROVKA",
+      "spoken_text": "žárovka"
+    },
+    "learning.word.zasuvka": {
+      "asset": "clips/62/6293eae918b1.mp3",
+      "duration_ms": 888,
+      "sha256": "6293eae918b161f2cda7bb225f5de634ab8908ac7328121c0e4bd9dfef4b5f7f",
+      "display_text": "ZÁSUVKA",
+      "spoken_text": "zásuvka"
+    },
+    "learning.word.zed": {
+      "asset": "clips/2e/2ed644a1e4e6.mp3",
+      "duration_ms": 705,
+      "sha256": "2ed644a1e4e695aa325e546cca3e71d075c77ad95c6fb566cebd7595460fb264",
+      "display_text": "ZEĎ",
+      "spoken_text": "zeď"
+    },
+    "learning.word.zelena_zelva": {
+      "asset": "clips/a9/a9f1792e7eab.mp3",
+      "duration_ms": 1724,
+      "sha256": "a9f1792e7eab4f4d009ff19d8d75134217f03af554aa447f15cd0d3683019bd4",
+      "display_text": "ZELENÁ ŽELVA",
+      "spoken_text": "zelená želva"
+    },
+    "learning.word.zelvicka": {
+      "asset": "clips/9d/9dc63a4bb8e8.mp3",
+      "duration_ms": 836,
+      "sha256": "9dc63a4bb8e81b23b0a44539686f14ac5905975c7efbd9102dd22dc25cf6421e",
+      "display_text": "ŽELVIČKA",
+      "spoken_text": "želvička"
+    },
+    "learning.word.zeme_je_kulata": {
+      "asset": "clips/5c/5c852b42aecf.mp3",
+      "duration_ms": 1306,
+      "sha256": "5c852b42aecf3817972d2a52efa31f1da13bff45b3094cc9692aa86c49dbd2b8",
+      "display_text": "ZEMĚ JE KULATÁ",
+      "spoken_text": "země je kulatá"
+    },
+    "learning.word.zidle": {
+      "asset": "clips/cb/cb6071b67565.mp3",
+      "duration_ms": 679,
+      "sha256": "cb6071b67565d00cf108e922d8953062635d61e7e4a30e6d11d995c223e4af0e",
+      "display_text": "ŽIDLE",
+      "spoken_text": "židle"
+    },
+    "learning.word.zima": {
+      "asset": "clips/00/0077deb493dd.mp3",
+      "duration_ms": 679,
+      "sha256": "0077deb493dd650b661b9af48e2c3d4d4e9b6aff360613fac6d7df83771f374d",
+      "display_text": "ZIMA",
+      "spoken_text": "zima"
+    },
+    "learning.word.zirafa": {
+      "asset": "clips/54/544b1970298f.mp3",
+      "duration_ms": 784,
+      "sha256": "544b1970298ffd45a92f8d3c1f2876fd5079e5c97271de7b775f21091647e91a",
+      "display_text": "ŽIRAFA",
+      "spoken_text": "žirafa"
+    },
+    "learning.word.zlata_rybka": {
+      "asset": "clips/6a/6aa062d90e4b.mp3",
+      "duration_ms": 1019,
+      "sha256": "6aa062d90e4b281545dd5d4c40170e707186602fbd37ea8774e4cc3255da6ff9",
+      "display_text": "ZLATÁ RYBKA",
+      "spoken_text": "zlatá rybka"
+    },
+    "learning.word.zlato": {
+      "asset": "clips/45/45978731eaea.mp3",
+      "duration_ms": 653,
+      "sha256": "45978731eaea1e4bbde5beb35fb976625c250f3d1a79290ef088bbb084f7272b",
+      "display_text": "ZLATO",
+      "spoken_text": "zlato"
+    },
+    "learning.word.zmrzlina": {
+      "asset": "clips/67/6719c9b1cd65.mp3",
+      "duration_ms": 862,
+      "sha256": "6719c9b1cd6564bfdc7928f145de595b6383a8cca90a032ce1399ffc84987fbb",
+      "display_text": "ZMRZLINA",
+      "spoken_text": "zmrzlina"
+    },
+    "learning.word.zmrzlinarna": {
+      "asset": "clips/e4/e43ec06a9dc2.mp3",
+      "duration_ms": 1097,
+      "sha256": "e43ec06a9dc22221d284d66756c0c98901282fd0204268064cc4694122f95369",
+      "display_text": "ZMRZLINÁRNA",
+      "spoken_text": "zmrzlinárna"
+    },
+    "learning.word.zralok": {
+      "asset": "clips/a7/a7ced1205389.mp3",
+      "duration_ms": 758,
+      "sha256": "a7ced1205389158d1754f39820447c5ce7d71ba5b9511a4d8da83afdef6a53f3",
+      "display_text": "ŽRALOK",
+      "spoken_text": "žralok"
+    },
+    "learning.word.zrcadlo": {
+      "asset": "clips/c2/c28e014643ef.mp3",
+      "duration_ms": 862,
+      "sha256": "c28e014643ef5d0956405bd122ad7677689284abb0e63bc8d47c7ece3a706185",
+      "display_text": "ZRCADLO",
+      "spoken_text": "zrcadlo"
+    },
+    "learning.word.zub": {
+      "asset": "clips/f6/f6d8241a5180.mp3",
+      "duration_ms": 548,
+      "sha256": "f6d8241a5180a22d2328651eb7a2c627a1ae76110fb53c9e5c1106d99b4d5e74",
+      "display_text": "ZUB",
+      "spoken_text": "zub"
     }
   }
 }
