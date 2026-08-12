@@ -84,8 +84,10 @@ into raw PCM, so nothing is decoded and nothing is re-encoded.
   "preamble": "",
   "guard_lead_ms": 30,
   "guard_tail_ms": 120,
-  "search_window_ms": 350,
-  "max_items_per_sheet": 16
+  "min_gap_ms": 180,
+  "min_sound_ms": 60,
+  "max_items_per_sheet": 16,
+  "cutter_version": 2
 }
 ```
 
@@ -119,7 +121,7 @@ is written.
 
 The sheet audio and its alignment are stored under `voice_masters/sheets/`,
 keyed by a hash of the *synthesis* inputs only — voice, model, settings, seed,
-text. The guards and the search window are deliberately **not** in that hash.
+text. The guards are deliberately **not** in that hash.
 
 That makes boundary tuning a local loop with no API call and no cost:
 

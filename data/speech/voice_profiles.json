@@ -76,7 +76,7 @@
     "speed": "Below 1.0 for a pre-reader. 0.9 is a starting point, not a decision.",
     "seed": "Best effort only; ElevenLabs does not guarantee reproducibility. Recorded so a regeneration starts from the same place.",
     "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix.",
-    "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the snapped boundary; search_window_ms is how far either side of the reported alignment the cutter may look, bounded by the midpoint to the neighbouring item so one letter cannot bleed into the next. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`.",
+    "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the detected boundary, clamped to half the real silence gap so a generous guard can never bleed into the neighbour; min_gap_ms and min_sound_ms are only starting points for the solver, which sweeps them against the known item count. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`.",
     "cutter_version": "Bump when the cutting algorithm changes. It sits in the spec hash, so a changed cutter restages the masters and drops their approvals — an approval is for a take somebody heard, and re-cutting produces a take nobody has. Re-cutting is still free; only the listening has to be redone."
   }
 }
