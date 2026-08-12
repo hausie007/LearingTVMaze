@@ -73,18 +73,18 @@ and an isolated vowel comes out emotive. The first Czech review rejected eleven
 of twelve clips this way — *chá* read as French, letters that sounded like
 different speakers, long vowels delivered short.
 
-**`sheet`** asks for the whole alphabet in one breath and cuts it up afterwards,
-using the character alignment the API returns. One performance, one register,
-one language decision. The cut is a byte offset into raw PCM at the timestamp
-the API reported, so nothing is re-encoded and no boundary is guessed.
+**`sheet`** asks for the whole alphabet in one breath and cuts it up afterwards.
+One performance, one register, one language decision. The cut is a byte offset
+into raw PCM, so nothing is decoded and nothing is re-encoded.
 
 ```json
 "synthesis_mode": "sheet",
 "sheet": {
   "separator": ". ",
   "preamble": "",
-  "guard_lead_ms": 40,
-  "guard_tail_ms": 90,
+  "guard_lead_ms": 30,
+  "guard_tail_ms": 120,
+  "search_window_ms": 350,
   "max_items_per_sheet": 16
 }
 ```
