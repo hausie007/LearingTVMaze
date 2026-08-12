@@ -243,11 +243,13 @@ func _cycle_voice(dir: int) -> void:
 
 ## Which modes the player can actually reach right now.
 func _voice_choices() -> Array[int]:
-	var choices: Array[int] = [Config.VoiceMode.OFF]
+	# int() rather than the enum values directly: a named enum is its own type
+	# to the static checker, and will not append to an Array[int].
+	var choices: Array[int] = [int(Config.VoiceMode.OFF)]
 	if not TTS.tts_ready or _device_voices_available():
-		choices.append(Config.VoiceMode.DEVICE_TTS)
+		choices.append(int(Config.VoiceMode.DEVICE_TTS))
 	if Speech.has_pack(_get_preview_language(true)):
-		choices.append(Config.VoiceMode.STUDIO_PREFERRED)
+		choices.append(int(Config.VoiceMode.STUDIO_PREFERRED))
 	return choices
 
 func _device_voices_available() -> bool:

@@ -217,7 +217,8 @@ func has_clip(key: String, lang: String = "") -> bool:
 
 ## Per-category coverage for a language: "complete", "partial" or "none".
 func coverage(lang: String = "") -> Dictionary:
-	return (_pack(_language_or_default(lang)).get("coverage", {}) as Dictionary).duplicate()
+	var cover: Dictionary = _pack(_language_or_default(lang)).get("coverage", {})
+	return cover.duplicate()
 
 
 ## True when every category this language declares is fully recorded.
@@ -332,13 +333,16 @@ func _advance(version: int) -> void:
 	_wait_elapsed = 0.0
 	_silence_elapsed = 0.0
 	set_process(true)
-	TTS.speak_segments([{
+	# Must be a typed array: TTS.speak_segments takes Array[Dictionary], and an
+	# untyped literal will not pass GDScript's static check.
+	var one: Array[Dictionary] = [{
 		"text": step["text"],
 		"lang": step["lang"],
 		"rate": step["rate"],
 		"volume": step["volume"],
 		"pause_ms": 0,
-	}])
+	}]
+	TTS.speak_segments(one)
 
 
 func _on_clip_finished() -> void:

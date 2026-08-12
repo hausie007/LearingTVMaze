@@ -450,7 +450,7 @@ func save_settings() -> void:
 func _clamp_voice_mode(value: int) -> VoiceMode:
 	if value < 0 or value > int(VoiceMode.STUDIO_PREFERRED):
 		return VoiceMode.DEVICE_TTS
-	return value as VoiceMode
+	return value
 
 
 func load_settings() -> void:
