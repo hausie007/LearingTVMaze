@@ -193,10 +193,26 @@ What to listen for specifically:
 | en | `G` — *jee* | "gee" with a hard G |
 | en | 13 / 30, 14 / 40 | the classic teen/ten confusion |
 
-If Multilingual v2 fails on Czech, switch that profile to `eleven_v3` and set
-`language_code` to `"cs"`, then regenerate. The pipeline treats a model change
-as a new take automatically — the old clips go stale rather than silently
-mixing with the new ones.
+### What the first Czech run taught us
+
+Worth reading before you blame a voice. The first attempt used
+`eleven_multilingual_v2`, one request per letter, `stability` 0.5 — and eleven
+of twelve clips were rejected. Three separate faults, none of them the voice:
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| *chá* read as French | Multilingual v2 cannot accept `language_code`, so every two-character request was language-detected on its own | `eleven_v3` with `language_code: "cs"` |
+| Every letter a different speaker | `stability` 0.5 on an isolated token — nothing to anchor to | `stability` 1.0, fixed `seed` |
+| Emotive, unusable isolated vowels | Two characters is no context at all | `synthesis_mode: "sheet"` |
+| Long vowels delivered short | Probably the language detection above; if it survives, IPA | `pronunciations/cs-CZ.json` |
+
+The profile now carries all four changes. If a letter is still wrong after that,
+*then* suspect the voice — and note that a library voice with a warm, intimate
+character will read an isolated vowel in ways you do not want in a children's
+game.
+
+A model or setting change is always safe to make: the pipeline treats it as a
+new take, so old clips go stale rather than silently mixing with new ones.
 
 Also A/B the shipped bitrate at this point, on the oldest television you
 support, before 168 clips are encoded at 32 kbps.

@@ -61,6 +61,51 @@ python3 tools/speech/speech_pipeline.py verify
 character count and the estimated cost. Get into the habit of running it that
 way first.
 
+## Single clips, or a recording sheet
+
+`synthesis_mode` in each profile decides how a locale is recorded.
+
+**`single`** sends one request per clip. Simple, and wrong for this content. A
+letter name is two or three characters, which is no context at all: the model
+re-invents the delivery every time, the language detector guesses per request,
+and an isolated vowel comes out emotive. The first Czech review rejected eleven
+of twelve clips this way — *chá* read as French, letters that sounded like
+different speakers, long vowels delivered short.
+
+**`sheet`** asks for the whole alphabet in one breath and cuts it up afterwards,
+using the character alignment the API returns. One performance, one register,
+one language decision. The cut is a byte offset into raw PCM at the timestamp
+the API reported, so nothing is re-encoded and no boundary is guessed.
+
+```json
+"synthesis_mode": "sheet",
+"sheet": {
+  "separator": ". ",
+  "preamble": "",
+  "guard_lead_ms": 40,
+  "guard_tail_ms": 90,
+  "max_items_per_sheet": 16
+}
+```
+
+Things worth knowing about sheet mode:
+
+- **A sheet is recorded whole.** You cannot cut one letter out of a reading that
+  never happened, so if any member of a group is missing the whole group is
+  re-read. At 42 letters for under two cents this is not a problem worth
+  optimising.
+- **Sheets are chunked to about 16 items**, in evenly sized pieces. Fifty
+  numbers in one breath invites the model to trail off, and an uneven split
+  would leave the last two letters of the alphabet as their own tiny, differently
+  performed sheet.
+- **`separator` is the first knob to try** if delivery sounds clipped or the
+  intonation is wrong. `". "` gives each item a falling statement contour;
+  `", "` gives a list contour, which is more even but rises.
+- **The cut is verified before anything is saved.** If the returned alignment
+  does not match the text that was sent, the pipeline refuses rather than
+  slicing in the wrong place — you are still billed for the request, but you do
+  not get 42 masters silently offset by one letter.
+
 ## Listening to what came back
 
 Shipped clips are named by content hash — `clips/c8/c81f3a9b2e40.mp3` — so that

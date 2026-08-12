@@ -335,6 +335,8 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
                     "pronunciation_dictionaries": profile.get("pronunciation_dictionaries", []),
                     "output_format": profile.get("output_format"),
                     "master_format": cat["master_format"],
+                    "synthesis_mode": profile.get("synthesis_mode", "single"),
+                    "sheet": profile.get("sheet") if profile.get("synthesis_mode") == "sheet" else None,
                 }
                 spec_hash = canonical_hash(spec)
                 render_hash = canonical_hash({
@@ -721,18 +723,52 @@ def cmd_generate(args) -> int:
     if unconfigured:
         raise Fail(f"no voice_id set for {', '.join(sorted(unconfigured))} — see tools/speech/SETUP.md")
 
-    todo = [r for r in records if r["status"] == "missing"]
+    # Sheet groups are all-or-nothing: you cannot cut one letter out of a sheet
+    # that was never recorded. If any member is missing, the whole group is
+    # re-read, which is also what keeps the group sounding like one take.
+    all_records = classify(load_desired())
+    sheet_groups = {}
+    for r in records:
+        if profiles[r["locale"]].get("synthesis_mode") != "sheet":
+            continue
+        ident = (r["locale"], r["category"])
+        if ident in sheet_groups:
+            continue
+        members = [x for x in all_records
+                   if x["locale"] == ident[0] and x["category"] == ident[1]]
+        if any(m["status"] == "missing" for m in members) or args.force:
+            sheet_groups[ident] = members
+
+    todo = [r for r in records if r["status"] == "missing"
+            and profiles[r["locale"]].get("synthesis_mode") != "sheet"]
     if args.limit:
         todo = todo[:args.limit]
-    if not todo:
+    if not todo and not sheet_groups:
         info("Nothing to generate.")
         return 0
+    if sheet_groups and (args.limit or args.key):
+        warn("--limit and --key do not apply to sheet mode; a sheet is recorded whole")
 
-    chars = sum(len(r["spoken_text"]) for r in todo)
+    sheet_chars = sum(len(sheet_text(profiles[loc], chunk)[0])
+                      for (loc, _c), grp in sheet_groups.items()
+                      for chunk in sheet_chunks(profiles[loc], grp))
+    chars = sum(len(r["spoken_text"]) for r in todo) + sheet_chars
     budget = args.max_characters if args.max_characters is not None else guards["max_characters_per_run"]
-    cost = estimate_cost(cat, todo)
+    prices = cat["pricing_usd_per_1k_chars"]
+    est = 0.0
+    for r in todo:
+        price = prices.get(profiles[r["locale"]]["model_id"])
+        est += len(r["spoken_text"]) / 1000.0 * (price or 0)
+    for (loc, _cat), grp in sheet_groups.items():
+        price = prices.get(profiles[loc]["model_id"])
+        for chunk in sheet_chunks(profiles[loc], grp):
+            est += len(sheet_text(profiles[loc], chunk)[0]) / 1000.0 * (price or 0)
 
-    info(f"{len(todo)} clips, {chars} characters, estimated ~USD {cost['usd']:.2f}")
+    clip_total = len(todo) + sum(len(g) for g in sheet_groups.values())
+    info(f"{clip_total} clips, {chars} characters, estimated ~USD {est:.2f}")
+    for (loc, cat_), grp in sorted(sheet_groups.items()):
+        n = len(sheet_chunks(profiles[loc], grp))
+        info(f"  sheet  {loc}/{cat_}  {len(grp)} items in {n} request(s)")
     for r in todo[:8]:
         info(f"  {r['key']:24s} {r['locale']}  {r['spoken_text']!r}")
     if len(todo) > 8:
@@ -751,6 +787,10 @@ def cmd_generate(args) -> int:
 
     key = api_key()
     ok = failed = 0
+
+    if sheet_groups:
+        ok, failed = generate_sheets(key, cat, profiles, sheet_groups, args)
+
     for i, r in enumerate(todo, 1):
         profile = profiles[r["locale"]]
         info(f"[{i}/{len(todo)}] {r['key']}  {r['spoken_text']!r}")
@@ -783,6 +823,198 @@ def cmd_generate(args) -> int:
     info("")
     info(f"generated {ok}, failed {failed}. Next: `process`, then listen.")
     return 1 if failed else 0
+
+
+# --------------------------------------------------------------------------
+# Recording sheets
+# --------------------------------------------------------------------------
+#
+# One request per letter gives the model two characters of context and nothing
+# else, so it re-invents the delivery every time: the same voice arrives as a
+# different person, an isolated vowel comes out emotive, and the language
+# detector guesses per request.
+#
+# A sheet asks for the whole alphabet in one breath, then cuts it up using the
+# character alignment the API returns. One performance, one register, one
+# language decision.
+
+def sheet_text(profile: dict, group: list):
+    """Build the sheet and record where each item sits inside it."""
+    sheet = profile.get("sheet") or {}
+    sep = sheet.get("separator", ". ")
+    preamble = sheet.get("preamble", "")
+
+    text = f"{preamble}{sep}" if preamble else ""
+    spans = []
+    for i, r in enumerate(group):
+        start = len(text)
+        text += r["spoken_text"]
+        spans.append((start, len(text)))
+        if i < len(group) - 1:
+            text += sep
+    trailer = sheet.get("trailer", "")
+    if trailer:
+        text += sep + trailer
+    return text, spans
+
+
+def tts_sheet_request(key: str, profile: dict, text: str):
+    """POST to the with-timestamps endpoint; return (pcm bytes, alignment, id)."""
+    import urllib.error
+    import urllib.request
+
+    payload = {
+        "text": text,
+        "model_id": profile["model_id"],
+        "voice_settings": profile.get("settings", {}),
+    }
+    if profile.get("language_code"):
+        payload["language_code"] = profile["language_code"]
+    if profile.get("seed") is not None:
+        payload["seed"] = profile["seed"]
+    if profile.get("pronunciation_dictionaries"):
+        payload["pronunciation_dictionary_locators"] = profile["pronunciation_dictionaries"]
+
+    url = (f"{API_BASE}/text-to-speech/{profile['voice_id']}/with-timestamps"
+           f"?output_format={profile.get('output_format', 'pcm_22050')}")
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"xi-api-key": key, "Content-Type": "application/json"},
+        method="POST",
+    )
+
+    delay = 2.0
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                doc = json.loads(resp.read().decode("utf-8"))
+                request_id = resp.headers.get("request-id", "")
+                break
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", "replace")[:300]
+            if exc.code in (429, 500, 502, 503, 504) and attempt < 4:
+                warn(f"HTTP {exc.code}, retrying in {delay:.1f}s")
+                time.sleep(delay)
+                delay *= 2
+                continue
+            raise Fail(f"HTTP {exc.code}: {body}")
+        except urllib.error.URLError as exc:
+            if attempt < 4:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            raise Fail(f"network error: {exc.reason}")
+    else:
+        raise Fail("exhausted retries")
+
+    import base64
+    audio = base64.b64decode(doc["audio_base64"])
+    alignment = doc.get("alignment") or doc.get("normalized_alignment")
+    if not alignment:
+        raise Fail("the API returned no alignment, so the sheet cannot be cut")
+    return audio, alignment, request_id
+
+
+def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, profile: dict):
+    """Slice the sheet into one master per item, by character alignment.
+
+    The audio is raw signed 16-bit PCM, so a cut is a byte offset — no decoding,
+    no re-encoding, and the boundary is exactly where the API said it was.
+    """
+    chars = alignment.get("characters") or []
+    starts = alignment.get("character_start_times_seconds") or []
+    ends = alignment.get("character_end_times_seconds") or []
+    if not (len(chars) == len(starts) == len(ends)):
+        raise Fail("alignment arrays disagree in length")
+    if "".join(chars) != text:
+        raise Fail(
+            "the alignment does not match the text that was sent, so cuts would "
+            "land in the wrong place. Nothing was saved; the master is still billed."
+        )
+
+    fmt = cat["master_format"]
+    frame = (fmt["bits"] // 8) * fmt["channels"]
+    rate = fmt["sample_rate"]
+    total = len(audio) // frame
+
+    sheet = profile.get("sheet") or {}
+    lead = sheet.get("guard_lead_ms", 40) / 1000.0
+    tail = sheet.get("guard_tail_ms", 90) / 1000.0
+
+    cuts = []
+    for start, end in spans:
+        t0 = max(starts[start] - lead, 0.0)
+        t1 = min(ends[end - 1] + tail, total / rate)
+        a = max(int(t0 * rate), 0) * frame
+        b = min(int(t1 * rate), total) * frame
+        if b <= a:
+            raise Fail("the alignment produced an empty segment")
+        cuts.append(audio[a:b])
+    return cuts
+
+
+def sheet_chunks(profile: dict, group: list):
+    """Split a group into sheets small enough to stay energetic.
+
+    Fifty numbers in one breath invites the model to drift or trail off toward
+    the end. A fixed seed and one voice make sheet-to-sheet variation far
+    smaller than the item-to-item variation this is replacing, so chunking
+    costs much less consistency than it buys.
+    """
+    size = (profile.get("sheet") or {}).get("max_items_per_sheet", 16)
+    if size <= 0 or len(group) <= size:
+        return [group]
+    # Evenly sized, not "as many full sheets as fit and a stub at the end".
+    # A two-item final sheet is a different performance from a sixteen-item one,
+    # and it would be the one holding the last two letters of the alphabet.
+    count = -(-len(group) // size)
+    base, extra = divmod(len(group), count)
+    chunks, at = [], 0
+    for i in range(count):
+        take = base + (1 if i < extra else 0)
+        chunks.append(group[at:at + take])
+        at += take
+    return chunks
+
+
+def generate_sheets(key: str, cat: dict, profiles: dict, groups: dict, args) -> tuple:
+    ok = failed = 0
+    expanded = []
+    for (locale, category), group in sorted(groups.items()):
+        for n, chunk in enumerate(sheet_chunks(profiles[locale], group), 1):
+            expanded.append(((locale, f"{category} {n}"), chunk))
+
+    for (locale, category), group in expanded:
+        profile = profiles[locale]
+        text, spans = sheet_text(profile, group)
+        info(f"sheet {locale}/{category}: {len(group)} items, {len(text)} characters")
+        info(f"  {text[:110]}{'…' if len(text) > 110 else ''}")
+        try:
+            audio, alignment, request_id = tts_sheet_request(key, profile, text)
+            cuts = cut_sheet(audio, alignment, text, spans, cat, profile)
+        except Fail as exc:
+            warn(str(exc))
+            failed += len(group)
+            continue
+
+        for r, chunk in zip(group, cuts):
+            write_atomic(master_path(r["spec_hash"]), chunk)
+            append_ledger({
+                "ts": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                "key": r["key"], "lang": r["lang"], "locale": r["locale"],
+                "category": r["category"], "spec_hash": r["spec_hash"],
+                "provider": profile["provider"], "model_id": profile["model_id"],
+                "voice_id": profile["voice_id"], "voice_profile_version": profile.get("version", 1),
+                "spoken_text": r["spoken_text"],
+                "billed_characters": len(text) if r is group[0] else 0,
+                "request_id": request_id, "master": rel(master_path(r["spec_hash"])),
+                "master_bytes": len(chunk), "status": "generated",
+                "synthesis_mode": "sheet", "sheet_group": f"{locale}/{category}",
+            })
+            ok += 1
+        info(f"  cut into {len(cuts)} masters")
+    return ok, failed
 
 
 def tts_request(key: str, profile: dict, text: str):
@@ -1661,6 +1893,8 @@ def main(argv=None) -> int:
     sp.add_argument("--limit", type=int, help="at most N clips this run")
     sp.add_argument("--max-characters", type=int, help="override the budget in catalog.json")
     sp.add_argument("--delay", type=float, default=0.4, help="seconds between requests (default 0.4)")
+    sp.add_argument("--force", action="store_true",
+                    help="re-record sheet groups even when nothing is missing")
     sp.set_defaults(func=cmd_generate)
 
     sp = sub.add_parser("process", help="trim, level, encode masters to shipping MP3")

@@ -1,0 +1,13 @@
+key,spec_hash,status,reviewer,date,notes
+learning.char.a,29d29c9b65365969b94b6fc13352c8b06044f87661058143fce95daa17149eda,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.a_acute,0ede0b17583e3db4d989ff2b9c4b9eca843ef7861cfea4208c3ffbf7302b8491,rejected,,2026-08-12,"sounds like dlouhe a - as if the a was short, but it should be long"
+learning.char.b,10108fd345169f57b097656c207e2e169ec521d1292467946288b1ad9a5175bb,rejected,,2026-08-12,"short, should be long"
+learning.char.c,e31111844149a1ed1e286030c092a7083957bbef02f6c687432b49822d8cbb9e,approved,,2026-08-12,
+learning.char.c_caron,726f070a0f461e69b3cc3af7646696bfc6fcfdc8318301fc3b027d26b13fad7c,rejected,,2026-08-12,should be longer
+learning.char.ch,77c58358943d34167c2c3727dffd734012789f7004296f49dab410209ba3e0da,rejected,,2026-08-12,"very wrong, uses french pronounciation"
+learning.char.d,dfea66c4ff4863bebfabc271edfa724f1b64dda4720bf9e4b56b2aa40fd74a66,rejected,,2026-08-12,almost as if it uses different voice 
+learning.char.d_caron,ee6ccb7f1031b33d8ab902b9d4406744d3ec8fa656954d7f4602bba2a8b351fb,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.e,a1763d57473031e762aa0753a8f78c927397f30a77fe4b4c0b7b88cdea0e132f,rejected,,2026-08-12,
+learning.char.e_acute,5e10f808a6202437cc25976a1064e3aa41a2d06bb32377545ffd1eee2590880b,rejected,,2026-08-12,"short, should be long"
+learning.char.e_caron,d7d7094bb32d3a6aed8c3098a161aa190c46f462480697457103d7f0e64cf8a7,rejected,,2026-08-12,"short, should be long"
+learning.char.f,6816bd254e318fb9d4bac1de257adc97402d7db0470662fe6c95dd35ce406cfc,rejected,,2026-08-12,very short

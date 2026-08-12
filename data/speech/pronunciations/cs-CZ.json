@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "locale": "cs-CZ",
+
+  "note": "Empty on purpose. Try the profile changes first — forcing language_code to cs and reading the alphabet as one sheet fixes most of what the first review rejected. Add an override only for a letter that is still wrong after that, so the file stays a short list of real exceptions rather than a pile of guesses.",
+
+  "overrides": {},
+
+  "_example": {
+    "learning.char.ch": {
+      "spoken": "/xaː/",
+      "reason": "IPA, eleven_v3 only. Czech ch is the voiceless velar fricative /x/, and the vowel is long. Use this if the letter still comes back with a French or English reading — 'sha' or 'tch' — after language_code is set to cs.",
+      "added_by": "",
+      "added_on": ""
+    }
+  },
+
+  "_length_note": "If long vowels keep coming back short — bé, cé, dé, á, é all carry a long vowel in Czech — that is worth one attempt with IPA before changing voice. Czech long vowels are written with the length mark in IPA: /aː/, /ɛː/, /iː/, /oː/, /uː/. Wrong IPA is worse than none, so have the native reviewer write it rather than deriving it from a chart."
+}

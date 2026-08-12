@@ -1,65 +1,68 @@
 {
   "schema_version": 1,
   "note": "Per-locale voice choice. NEVER put an API key in this file — the key is read from the environment variable named in catalog.json, and `speech_pipeline.py verify` fails the build if anything key-shaped appears in the repo. Committed so a re-record years from now is reproducible: voice, model and settings together are what decide how a clip sounds.",
-
   "profiles": {
     "cs-CZ": {
-      "version": 1,
+      "version": 2,
       "provider": "elevenlabs",
-
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
-
-      "model_id": "eleven_multilingual_v2",
-      "language_code": null,
-
+      "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+      "voice_name": "Jana",
+      "voice_source": "library",
+      "model_id": "eleven_v3",
+      "language_code": "cs",
       "settings": {
-        "stability": 0.5,
+        "stability": 1.0,
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
         "speed": 0.9
       },
-
-      "seed": null,
+      "seed": 20260812,
       "pronunciation_dictionaries": [],
       "output_format": "pcm_22050",
-
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 40,
+        "guard_tail_ms": 90,
+        "max_items_per_sheet": 16
+      },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "Phase 3 A/B: eleven_multilingual_v2 against eleven_v3. The stress tests are Ř and the letter name chá; if v2 fails either, switch this profile to eleven_v3 and set language_code to \"cs\"."
+      "notes": "v2 of this profile, after the first review rejected 11 of 12 clips. Three faults, three changes. (1) chá came back with a French reading: eleven_multilingual_v2 cannot take language_code, so every two-character request was language-detected on its own. eleven_v3 accepts it and it is now forced to cs. (2) Every letter sounded like a different speaker: stability 0.5 let the model reinvent an isolated token each time, so it is now 1.0 with a fixed seed. (3) The root cause of both, and of the emotive isolated vowels: two characters is no context at all. synthesis_mode is now sheet, so the whole alphabet is read in one breath and cut by the returned alignment. Separator is the knob to try first if delivery sounds clipped."
     },
-
     "en-US": {
-      "version": 1,
+      "version": 2,
       "provider": "elevenlabs",
-
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
-
-      "model_id": "eleven_multilingual_v2",
-      "language_code": null,
-
+      "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+      "voice_name": "Jana",
+      "voice_source": "library",
+      "model_id": "eleven_v3",
+      "language_code": "en",
       "settings": {
-        "stability": 0.5,
+        "stability": 1.0,
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
         "speed": 0.9
       },
-
-      "seed": null,
+      "seed": 20260812,
       "pronunciation_dictionaries": [],
       "output_format": "pcm_22050",
-
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 40,
+        "guard_tail_ms": 90,
+        "max_items_per_sheet": 16
+      },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J."
+      "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J. STILL TO DECIDE: this currently shares the Czech voice. A Czech-trained voice reading English letter names will carry an accent into exactly the content where clarity matters most, so pick a separate en-US voice before generating this locale."
     }
   },
-
   "field_notes": {
     "voice_id": "From the ElevenLabs dashboard, or `speech_pipeline.py voices`. Until it is set, `plan` reports the locale as unconfigured and `generate` refuses to run.",
     "voice_source": "One of: owned_design, owned_clone, default_perpetual, library. Prefer the first three — a Voice Library owner can withdraw a voice, and then later additions to the vocabulary will not match the clips already shipped.",
