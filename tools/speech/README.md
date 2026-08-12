@@ -92,15 +92,28 @@ into raw PCM, so nothing is decoded and nothing is re-encoded.
 ### The cut is decided by the waveform, not by the alignment
 
 The API returns a character alignment, which is enough to *locate* an item and
-not enough to *bound* it. The reported end time regularly lands before the sound
-has finished. Measured on a real Czech run: every clip the reviewer rejected as
-"cropped at the end" still had its last 30 ms at -13 to -17 dBFS, while approved
-clips ended around -40. It was cut mid-vowel.
+not enough to *bound* it. Two review rounds established this the hard way. The
+reported end time lands before the sound finishes — every clip rejected as
+"cropped at the end" still had its last 30 ms at -13 to -17 dBFS, against about
+-40 for approved ones. And because the reported end is early, using it to bound
+the *next* item's search window opened that window inside the previous word:
+hence "too long pause at the beginning", sometimes with a fragment of the letter
+before it.
 
-So the cutter uses alignment only to decide where to look, then finds the actual
-speech onset and offset by short-time RMS, and pads that. The search window is
-bounded by the midpoint of the gap to each neighbour, so widening it can never
-let one letter bleed into the next.
+So the sheet is segmented as a whole, at real silence, and the segments are
+matched to items in order. The one threshold that has to be right is how much
+silence separates two items rather than sitting inside one — and since the
+number of items on the sheet is known exactly, that is not guessed. The cutter
+sweeps both the silence threshold and the loudness floor, keeps every
+combination that yields exactly the expected count, and takes the middle of the
+widest working range.
+
+If no combination works, it falls back to cutting at the quietest point between
+each pair of items, using alignment only to say roughly where that gap is —
+locating a *gap* being far easier than locating a sound. That path cannot hand
+the same audio to two items, which the earlier nearest-segment matching could.
+Either way the segments are asserted to be ordered and disjoint before anything
+is written.
 
 ### Re-cutting is free
 

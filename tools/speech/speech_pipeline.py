@@ -950,33 +950,220 @@ def frame_levels(samples, rate: int, frame_ms: int = 10):
     return out, step
 
 
-def snap_to_speech(levels, lo_f: int, hi_f: int):
-    """Find where the sound actually starts and stops inside a frame window.
+def segment_for_gap(runs, levels, min_gap_frames: int, min_len_frames: int):
+    """Merge runs separated by less than min_gap, then reach into the soft edges."""
+    merged = []
+    for run in runs:
+        if merged and run[0] - merged[-1][1] <= min_gap_frames:
+            merged[-1][1] = run[1]
+        else:
+            merged.append(list(run))
 
-    The API's character alignment locates an item but does not bound it: the
-    reported end time regularly lands before the sound has finished, which is
-    audible as a clipped final vowel. So alignment is used to say *where to
-    look*, and the audio itself decides where to cut.
+    peak = max(levels) if levels else -99.0
+    soft = max(peak - 48.0, -65.0)
+
+    # Reaching out to a soft onset or decay must not reach into the neighbour.
+    # The floor is the previous segment's edge *after* it was extended, not
+    # before: clamping both sides against pre-extension bounds still lets two
+    # segments grow towards each other across a wide gap and overlap in it.
+    fixed = [(s[0], s[1]) for s in merged]
+    for i, seg in enumerate(merged):
+        floor = merged[i - 1][1] + 1 if i > 0 else 0
+        ceiling = fixed[i + 1][0] - 1 if i < len(merged) - 1 else len(levels) - 1
+        while seg[0] > floor and levels[seg[0] - 1] >= soft:
+            seg[0] -= 1
+        while seg[1] < ceiling and levels[seg[1] + 1] >= soft:
+            seg[1] += 1
+
+    return [s for s in merged if s[1] - s[0] + 1 >= min_len_frames]
+
+
+def runs_above(levels, threshold: float):
+    runs, i = [], 0
+    while i < len(levels):
+        if levels[i] >= threshold:
+            j = i
+            while j < len(levels) and levels[j] >= threshold:
+                j += 1
+            runs.append([i, j - 1])
+            i = j
+        else:
+            i += 1
+    return runs
+
+
+def split_by_quietest(levels, spans, starts, ends, step: int, rate: int, min_len_frames: int):
+    """Force exactly one segment per item by cutting at the quietest point between them.
+
+    The last-resort path, and it cannot fail the way nearest-segment matching
+    could: that could hand the same sound to two items, which is how a letter
+    ends up containing its neighbour. Here the boundaries are strictly ordered
+    by construction, so every item gets its own piece of the sheet.
+
+    Alignment is used only to say roughly where the gap between two items is.
+    Locating a *gap* is a much easier job than locating a sound, and it is the
+    one thing the alignment has been reliable at.
     """
-    window = levels[lo_f:hi_f]
-    if not window:
-        return None
-    peak = max(window)
-    if peak < -70.0:
-        return None
-    strong = peak - 30.0          # clearly speech
-    soft = peak - 45.0            # a decaying tail or a soft onset
+    total = len(levels)
+    edges = [0]
+    for i in range(1, len(spans)):
+        gap_start = ends[spans[i - 1][1] - 1]
+        gap_end = starts[spans[i][0]]
+        lo = max(int((min(gap_start, gap_end) - 0.20) * rate / step), edges[-1] + 1)
+        hi = min(int((max(gap_start, gap_end) + 0.20) * rate / step), total - 1)
+        if hi > lo:
+            window = levels[lo:hi + 1]
+            edge = lo + window.index(min(window))
+        else:
+            edge = lo
+        # Strictly increasing, always. Everything downstream depends on it.
+        edges.append(min(max(edge, edges[-1] + 1), total - 1))
+    edges.append(total)
 
-    first = next((i for i, v in enumerate(window) if v >= strong), None)
-    if first is None:
-        return None
-    last = len(window) - 1 - next(i for i, v in enumerate(reversed(window)) if v >= strong)
+    segments = []
+    for i in range(len(spans)):
+        lo, hi = edges[i], edges[i + 1] - 1
+        piece = levels[lo:hi + 1]
+        if not piece:
+            segments.append([lo, max(lo, hi)])
+            continue
+        peak = max(piece)
+        thr = max(peak - 35.0, -55.0)
+        inner = runs_above(piece, thr)
+        inner = [r for r in inner if r[1] - r[0] + 1 >= min_len_frames] or inner
+        if inner:
+            seg = [lo + inner[0][0], lo + inner[-1][1]]
+            soft = max(peak - 48.0, -65.0)
+            while seg[0] > lo and levels[seg[0] - 1] >= soft:
+                seg[0] -= 1
+            while seg[1] < hi and levels[seg[1] + 1] >= soft:
+                seg[1] += 1
+            segments.append(seg)
+        else:
+            segments.append([lo, hi])
+    return segments
 
-    while first > 0 and window[first - 1] >= soft:
-        first -= 1
-    while last < len(window) - 1 and window[last + 1] >= soft:
-        last += 1
-    return lo_f + first, lo_f + last
+
+def solve_segments(levels, want: int, frame_ms: int, min_len_frames: int):
+    """Choose the silence threshold that yields exactly the expected item count.
+
+    A fixed threshold cannot work for both jobs at once. It has to be long
+    enough that the pause inside 'dvacet jedna' or 'ú s čárkou' does not split
+    one item in two, and short enough that the pause between two items does
+    separate them — and those two gaps overlap across sheets and voices.
+
+    Since the number of items on the sheet is known exactly, the threshold is
+    not something to guess. Sweep it, keep the values that produce the right
+    count, and take the middle of that range: the setting furthest from either
+    failure.
+    """
+    peak = max(levels) if levels else -99.0
+
+    # Sweep the loudness threshold as well as the gap. One dimension is not
+    # enough: a quiet item disappears at a strict threshold, and two items run
+    # together at a lax one, and which happens depends on the sheet.
+    best = None
+    for drop in (25.0, 30.0, 35.0, 40.0, 45.0):
+        runs = runs_above(levels, max(peak - drop, -60.0))
+        if not runs:
+            continue
+        working = []
+        for gap_ms in range(40, 601, 10):
+            segs = segment_for_gap(runs, levels, max(int(gap_ms / frame_ms), 1), min_len_frames)
+            if len(segs) == want:
+                working.append(gap_ms)
+        if not working:
+            continue
+
+        # Widest contiguous run of thresholds that works — the setting furthest
+        # from either failure, rather than one that only just happens to fit.
+        best_run, run_now = [], [working[0]]
+        for prev, cur in zip(working, working[1:]):
+            if cur - prev <= 10:
+                run_now.append(cur)
+            else:
+                best_run = run_now if len(run_now) > len(best_run) else best_run
+                run_now = [cur]
+        best_run = run_now if len(run_now) > len(best_run) else best_run
+
+        if best is None or len(best_run) > best[0]:
+            best = (len(best_run), drop, best_run[len(best_run) // 2], runs)
+
+    if best is None:
+        return None, None
+    _, drop, gap_ms, runs = best
+    segs = segment_for_gap(runs, levels, max(int(gap_ms / frame_ms), 1), min_len_frames)
+    return segs, gap_ms
+
+
+def speech_segments(levels, min_gap_frames: int, min_len_frames: int):
+    """Every run of speech in the sheet, split at real silence.
+
+    Locating each item inside its own alignment window was the previous
+    approach and it failed in a way worth remembering: the reported end time of
+    the *previous* item lands early, so a window bounded by it began inside the
+    previous word, and the cutter locked onto that. Hence "too long pause at the
+    beginning", and sometimes a fragment of the letter before.
+
+    Segmenting the whole sheet at once avoids the problem entirely. The
+    separator leaves real silence between items, and silence is not a matter of
+    opinion.
+    """
+    peak = max(levels) if levels else -99.0
+    strong = max(peak - 35.0, -55.0)
+    soft = max(peak - 48.0, -65.0)
+
+    runs = []
+    i = 0
+    while i < len(levels):
+        if levels[i] >= strong:
+            j = i
+            while j < len(levels) and levels[j] >= strong:
+                j += 1
+            runs.append([i, j - 1])
+            i = j
+        else:
+            i += 1
+
+    # A stop consonant inside a word is silence too. Anything shorter than the
+    # gap the separator produces belongs to the item on either side of it.
+    merged = []
+    for run in runs:
+        if merged and run[0] - merged[-1][1] <= min_gap_frames:
+            merged[-1][1] = run[1]
+        else:
+            merged.append(run)
+
+    # Reach out to the soft onset and decay that sit below the speech threshold.
+    for seg in merged:
+        while seg[0] > 0 and levels[seg[0] - 1] >= soft:
+            seg[0] -= 1
+        while seg[1] < len(levels) - 1 and levels[seg[1] + 1] >= soft:
+            seg[1] += 1
+
+    return [s for s in merged if s[1] - s[0] + 1 >= min_len_frames]
+
+
+def assign_segments(segments, spans, starts, ends, step: int, rate: int):
+    """Match detected segments to catalog items, in order.
+
+    The common case is that the counts agree and the mapping is the obvious
+    one. When they do not, alignment decides which segment belongs to which
+    item — imperfect, but it only has to be better than guessing, and the
+    caller warns so a human listens.
+    """
+    if len(segments) == len(spans):
+        return segments, None
+
+    chosen = []
+    for start, end in spans:
+        middle = (starts[start] + ends[end - 1]) / 2.0
+        best = min(segments,
+                   key=lambda s: abs(((s[0] + s[1]) / 2.0) * step / rate - middle))
+        chosen.append(best)
+    return chosen, (f"the sheet split into {len(segments)} sounds but the catalog "
+                    f"expects {len(spans)} items — cuts were matched by alignment "
+                    f"instead, so listen to this group carefully")
 
 
 def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, profile: dict):
@@ -1013,29 +1200,41 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
     sheet = profile.get("sheet") or {}
     lead = sheet.get("guard_lead_ms", 30) / 1000.0
     tail = sheet.get("guard_tail_ms", 120) / 1000.0
-    search = sheet.get("search_window_ms", 350) / 1000.0
+    min_gap = sheet.get("min_gap_ms", 180) / 1000.0
+    min_len = sheet.get("min_sound_ms", 60) / 1000.0
 
-    cuts, notes = [], []
-    for i, (start, end) in enumerate(spans):
-        t0, t1 = starts[start], ends[end - 1]
+    min_len_frames = max(int(min_len * rate / step), 1)
+    segments, gap_ms = solve_segments(levels, len(spans), 1000 * step // rate, min_len_frames)
 
-        # Look either side of where the API said the item is, but never past the
-        # midpoint of the gap to a neighbour — that is what stops one letter
-        # bleeding into the next.
-        lo = max(t0 - search, 0.0)
-        hi = min(t1 + search, duration)
+    if segments is None:
+        warn("no silence threshold separates this sheet into exactly "
+             f"{len(spans)} items; cutting at the quietest point between each pair instead")
+        chosen = split_by_quietest(levels, spans, starts, ends, step, rate, min_len_frames)
+    else:
+        chosen = segments
+        if gap_ms is not None and abs(gap_ms - min_gap * 1000) > 200:
+            info(f"  (silence threshold solved to {gap_ms} ms for this sheet)")
+
+    # However they were produced, the segments must be ordered and disjoint. This is
+    # the invariant that stops one item containing a piece of its neighbour.
+    for prev, cur in zip(chosen, chosen[1:]):
+        if cur[0] <= prev[1]:
+            raise Fail("the cutter produced overlapping segments — refusing to save")
+
+    cuts = []
+    for i, seg in enumerate(chosen):
+        a = seg[0] * step / rate - lead
+        b = (seg[1] + 1) * step / rate + tail
+
+        # Padding may never cross into a neighbouring sound. Halving the real
+        # silence gap is the bound, so a generous guard can be set without any
+        # risk of bleed — it simply gets trimmed back where the gap is short.
         if i > 0:
-            lo = max(lo, (ends[spans[i - 1][1] - 1] + t0) / 2.0)
-        if i < len(spans) - 1:
-            hi = min(hi, (t1 + starts[spans[i + 1][0]]) / 2.0)
-
-        found = snap_to_speech(levels, int(lo * rate / step), max(int(hi * rate / step), 1))
-        if found is None:
-            notes.append(f"item {i + 1} had no measurable sound in its window")
-            a, b = t0 - lead, t1 + tail
-        else:
-            a = found[0] * step / rate - lead
-            b = (found[1] + 1) * step / rate + tail
+            prev_end = (chosen[i - 1][1] + 1) * step / rate
+            a = max(a, (prev_end + seg[0] * step / rate) / 2.0)
+        if i < len(chosen) - 1:
+            next_start = chosen[i + 1][0] * step / rate
+            b = min(b, ((seg[1] + 1) * step / rate + next_start) / 2.0)
 
         a = max(min(a, duration), 0.0)
         b = max(min(b, duration), 0.0)
@@ -1043,8 +1242,6 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
             raise Fail(f"item {i + 1} of the sheet came out empty — refusing to save a bad cut")
         cuts.append(audio[int(a * rate) * frame:int(b * rate) * frame])
 
-    for note in notes:
-        warn(note)
     return cuts
 
 

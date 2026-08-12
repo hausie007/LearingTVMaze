@@ -3,7 +3,7 @@
   "note": "Per-locale voice choice. NEVER put an API key in this file — the key is read from the environment variable named in catalog.json, and `speech_pipeline.py verify` fails the build if anything key-shaped appears in the repo. Committed so a re-record years from now is reproducible: voice, model and settings together are what decide how a clip sounds.",
   "profiles": {
     "cs-CZ": {
-      "version": 3,
+      "version": 4,
       "provider": "elevenlabs",
       "voice_id": "bF7C2fCv7Zf30iT84wZ1",
       "voice_name": "Jana",
@@ -26,15 +26,17 @@
         "preamble": "",
         "guard_lead_ms": 30,
         "guard_tail_ms": 120,
-        "search_window_ms": 350,
-        "max_items_per_sheet": 16
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "v3. v2 fixed the language and the consistency; this fixes the boundaries. The second review approved 80 of 92 but rejected 11 clips as cropped, and measuring the masters showed why: clips the reviewer rejected ended with their last 30ms still at -13 to -17 dBFS, i.e. cut while the sound was still loud, while approved clips ended around -40. The API's character alignment locates an item but does not bound it. Cutting now uses alignment only to decide where to look, and the waveform to decide where to cut. The sheet audio is also stored now, so guard changes are re-cut locally and never billed again."
+      "notes": "v4. The cutter changed, so the takes are re-cut rather than re-recorded. The third review approved 81 of 92 and rejected eleven for a long pause at the start, some carrying a fragment of the previous item. Cause: each item was located inside a window bounded by the *reported* end of the previous item, and that report lands early, so the window opened inside the previous word and the cutter locked onto it. The sheet is now segmented as a whole at real silence, with the threshold solved per sheet against the known item count. Measured over the stored Czech sheets: clips containing more than one sound fell from 10 to 2, and both remaining ones are genuinely two words. Worst leading silence 1.107s to 0.249s."
     },
     "en-US": {
-      "version": 3,
+      "version": 4,
       "provider": "elevenlabs",
       "voice_id": "bF7C2fCv7Zf30iT84wZ1",
       "voice_name": "Jana",
@@ -57,8 +59,10 @@
         "preamble": "",
         "guard_lead_ms": 30,
         "guard_tail_ms": 120,
-        "search_window_ms": 350,
-        "max_items_per_sheet": 16
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
       },
       "reviewed_by": null,
       "reviewed_on": null,
@@ -72,6 +76,7 @@
     "speed": "Below 1.0 for a pre-reader. 0.9 is a starting point, not a decision.",
     "seed": "Best effort only; ElevenLabs does not guarantee reproducibility. Recorded so a regeneration starts from the same place.",
     "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix.",
-    "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the snapped boundary; search_window_ms is how far either side of the reported alignment the cutter may look, bounded by the midpoint to the neighbouring item so one letter cannot bleed into the next. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`."
+    "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the snapped boundary; search_window_ms is how far either side of the reported alignment the cutter may look, bounded by the midpoint to the neighbouring item so one letter cannot bleed into the next. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`.",
+    "cutter_version": "Bump when the cutting algorithm changes. It sits in the spec hash, so a changed cutter restages the masters and drops their approvals — an approval is for a take somebody heard, and re-cutting produces a take nobody has. Re-cutting is still free; only the listening has to be redone."
   }
 }
