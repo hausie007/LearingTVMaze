@@ -1,0 +1,661 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "cs",
+  "locale": "cs-CZ",
+  "voice_profile": "cs-CZ@4",
+  "coverage": {
+    "number": "complete",
+    "char": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 42
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/27/27811d6665aa.mp3",
+      "duration_ms": 758,
+      "sha256": "27811d6665aaf666c899d05d5af7c35ad490cd95b0c5d30406f37fdf810e3e41",
+      "display_text": "A",
+      "spoken_text": "á"
+    },
+    "learning.char.a_acute": {
+      "asset": "clips/3c/3c3085236c18.mp3",
+      "duration_ms": 1646,
+      "sha256": "3c3085236c18f2d252b7b90a4d4ee4be24044492de6e6464ab8b52f541b3309f",
+      "display_text": "Á",
+      "spoken_text": "dlouhé á"
+    },
+    "learning.char.b": {
+      "asset": "clips/bc/bc15e75f99c4.mp3",
+      "duration_ms": 940,
+      "sha256": "bc15e75f99c456d2f87b1a554fe364d31dbd69d64bc74bedc6ffe0ffcdc8f9e9",
+      "display_text": "B",
+      "spoken_text": "bé"
+    },
+    "learning.char.c": {
+      "asset": "clips/c7/c769515b2f3b.mp3",
+      "duration_ms": 836,
+      "sha256": "c769515b2f3b086049df6986d3b4fbab54cdef80ff7b71169e185725ad7f20b1",
+      "display_text": "C",
+      "spoken_text": "cé"
+    },
+    "learning.char.c_caron": {
+      "asset": "clips/c0/c0b202a8ebad.mp3",
+      "duration_ms": 888,
+      "sha256": "c0b202a8ebad71a371cc40369bcbfa8a96498b94e62617e6a3cf716107d34b75",
+      "display_text": "Č",
+      "spoken_text": "čé"
+    },
+    "learning.char.ch": {
+      "asset": "clips/c6/c611e9491088.mp3",
+      "duration_ms": 1019,
+      "sha256": "c611e94910880c9bb8ef46790e7536425375f4907054d8f4e1af704c0fb5c9e8",
+      "display_text": "CH",
+      "spoken_text": "chá"
+    },
+    "learning.char.d": {
+      "asset": "clips/fb/fbd315aeb2e7.mp3",
+      "duration_ms": 966,
+      "sha256": "fbd315aeb2e7617664dd3fb31b896630ca95196e77ba1362080beb73cf769ac1",
+      "display_text": "D",
+      "spoken_text": "dé"
+    },
+    "learning.char.d_caron": {
+      "asset": "clips/2d/2d4c31e6287e.mp3",
+      "duration_ms": 888,
+      "sha256": "2d4c31e6287e094de42b5613ffd0600e1006fef44f103e8d4db647633fd470c0",
+      "display_text": "Ď",
+      "spoken_text": "ďé"
+    },
+    "learning.char.e": {
+      "asset": "clips/03/03791de6708c.mp3",
+      "duration_ms": 1045,
+      "sha256": "03791de6708c5759d0201055ca3f9a8604866e70faa0ceabb53705080b648700",
+      "display_text": "E",
+      "spoken_text": "é"
+    },
+    "learning.char.e_acute": {
+      "asset": "clips/80/80cc6c6c1ffd.mp3",
+      "duration_ms": 1202,
+      "sha256": "80cc6c6c1ffdd5818e5a66f6f007f5cd7fb93f26ca3f53b6785ac160b0d791bc",
+      "display_text": "É",
+      "spoken_text": "dlouhé é"
+    },
+    "learning.char.e_caron": {
+      "asset": "clips/03/0386b790ffbd.mp3",
+      "duration_ms": 1280,
+      "sha256": "0386b790ffbd3b10a62423de560b5e50cfbfca40697e7fdc6b106cb367c1e2eb",
+      "display_text": "Ě",
+      "spoken_text": "é s háčkem"
+    },
+    "learning.char.f": {
+      "asset": "clips/74/74cd2abfd38f.mp3",
+      "duration_ms": 732,
+      "sha256": "74cd2abfd38f274e43f4085e675ac0ff22287d7d34a87f1df86ca7d8cea8e459",
+      "display_text": "F",
+      "spoken_text": "ef"
+    },
+    "learning.char.g": {
+      "asset": "clips/61/61c1b111606d.mp3",
+      "duration_ms": 784,
+      "sha256": "61c1b111606d85bad627fe4213b5ef6e245e8a72718338bc7a866b26b9e90d75",
+      "display_text": "G",
+      "spoken_text": "gé"
+    },
+    "learning.char.h": {
+      "asset": "clips/e4/e4551888b7ca.mp3",
+      "duration_ms": 758,
+      "sha256": "e4551888b7cadd5ff8d12c709779a0b36c4b5e6b1b321e7aa0025ff0ad9c6eb0",
+      "display_text": "H",
+      "spoken_text": "há"
+    },
+    "learning.char.i": {
+      "asset": "clips/52/52491d48a6b4.mp3",
+      "duration_ms": 784,
+      "sha256": "52491d48a6b4b8247d9a45652e191034d28fe0efe7e581a84728f8b9860fb520",
+      "display_text": "I",
+      "spoken_text": "í"
+    },
+    "learning.char.i_acute": {
+      "asset": "clips/0f/0f82071b0527.mp3",
+      "duration_ms": 1123,
+      "sha256": "0f82071b0527a9f4902b811d911ab9cb3f0b9ab01f6f4c91545c51c197d39abd",
+      "display_text": "Í",
+      "spoken_text": "dlouhé í"
+    },
+    "learning.char.j": {
+      "asset": "clips/c9/c901ce11609d.mp3",
+      "duration_ms": 888,
+      "sha256": "c901ce11609de487527f6935969ba3fdb18cc8d473ea29025e73c78c9c7b7a7f",
+      "display_text": "J",
+      "spoken_text": "jé"
+    },
+    "learning.char.k": {
+      "asset": "clips/6c/6c1cd6c02466.mp3",
+      "duration_ms": 810,
+      "sha256": "6c1cd6c02466fd3e45e93589fe977d60473331e9d90ea225933188fd6ceac83e",
+      "display_text": "K",
+      "spoken_text": "ká"
+    },
+    "learning.char.l": {
+      "asset": "clips/c7/c7fc8933e342.mp3",
+      "duration_ms": 810,
+      "sha256": "c7fc8933e342969ad306727f9535a5bc855c087bc68eebba6e5f1f3691fbed4a",
+      "display_text": "L",
+      "spoken_text": "el"
+    },
+    "learning.char.m": {
+      "asset": "clips/ba/ba0b945d4736.mp3",
+      "duration_ms": 810,
+      "sha256": "ba0b945d4736078e03c18e44158720872d25f4bb24d2a699bb224873d9fafad3",
+      "display_text": "M",
+      "spoken_text": "em"
+    },
+    "learning.char.n": {
+      "asset": "clips/23/23992b53e89b.mp3",
+      "duration_ms": 914,
+      "sha256": "23992b53e89bb827b888e42099dd7362b04129b7fda1af2902e5e658977452ac",
+      "display_text": "N",
+      "spoken_text": "en"
+    },
+    "learning.char.n_caron": {
+      "asset": "clips/51/51b2bb3453d2.mp3",
+      "duration_ms": 940,
+      "sha256": "51b2bb3453d28c65a13203ad536c73017215553b9169ac2e1c7dd3e798db19eb",
+      "display_text": "Ň",
+      "spoken_text": "eň"
+    },
+    "learning.char.o": {
+      "asset": "clips/16/16de7b3a441d.mp3",
+      "duration_ms": 862,
+      "sha256": "16de7b3a441de44727bca49d0aae61719bc6b0707d96cfb32b36a50051a30cd8",
+      "display_text": "O",
+      "spoken_text": "ó"
+    },
+    "learning.char.o_acute": {
+      "asset": "clips/02/02beefd2115c.mp3",
+      "duration_ms": 1123,
+      "sha256": "02beefd2115cce3c1529cc34ec889fad4a574fc8c5ece89c1d0e957f23b7c251",
+      "display_text": "Ó",
+      "spoken_text": "dlouhé ó"
+    },
+    "learning.char.p": {
+      "asset": "clips/00/00a28038f7bb.mp3",
+      "duration_ms": 836,
+      "sha256": "00a28038f7bb5e3b34e5deca8f38d27c53ec112ffaa65f27a582e64f7bfea71c",
+      "display_text": "P",
+      "spoken_text": "pé"
+    },
+    "learning.char.q": {
+      "asset": "clips/9a/9a9a356abeda.mp3",
+      "duration_ms": 810,
+      "sha256": "9a9a356abedad12583667608070011af8b7ec4956e7a5985adf493640ab3ab86",
+      "display_text": "Q",
+      "spoken_text": "kvé"
+    },
+    "learning.char.r": {
+      "asset": "clips/fd/fd5ea5ac8f23.mp3",
+      "duration_ms": 758,
+      "sha256": "fd5ea5ac8f23adeade167f09c0150abf672bd63fc93231fa161815365fc36c0f",
+      "display_text": "R",
+      "spoken_text": "er"
+    },
+    "learning.char.r_caron": {
+      "asset": "clips/f6/f61c1a00a327.mp3",
+      "duration_ms": 705,
+      "sha256": "f61c1a00a3277f492c2fe1201452cc8ad31f34ae701240df0f9743e6a1dcc2d3",
+      "display_text": "Ř",
+      "spoken_text": "eř"
+    },
+    "learning.char.s": {
+      "asset": "clips/60/60160d50dd1c.mp3",
+      "duration_ms": 679,
+      "sha256": "60160d50dd1c6fe9f2b3309c557847183c0f74bad050d417be1c405ee3dbef16",
+      "display_text": "S",
+      "spoken_text": "es"
+    },
+    "learning.char.s_caron": {
+      "asset": "clips/7f/7fceb90c5a8a.mp3",
+      "duration_ms": 758,
+      "sha256": "7fceb90c5a8a5c14bfec26e218178f822a4dbc522c0df517bf625412c834ae80",
+      "display_text": "Š",
+      "spoken_text": "eš"
+    },
+    "learning.char.t": {
+      "asset": "clips/52/523c34e23877.mp3",
+      "duration_ms": 679,
+      "sha256": "523c34e238771a869029f35d9e05beb27b89f899705477d45b6f570345e04f3c",
+      "display_text": "T",
+      "spoken_text": "té"
+    },
+    "learning.char.t_caron": {
+      "asset": "clips/8c/8c592ef15fec.mp3",
+      "duration_ms": 758,
+      "sha256": "8c592ef15fec83c6213165c53a95e7b6137dc41bc5e80b9042c034fb7f0a6538",
+      "display_text": "Ť",
+      "spoken_text": "ťé"
+    },
+    "learning.char.u": {
+      "asset": "clips/54/54311cb6707f.mp3",
+      "duration_ms": 679,
+      "sha256": "54311cb6707fb6275bc0059d39dc1f22090e8e2d56a301264738da26d918b68e",
+      "display_text": "U",
+      "spoken_text": "ú"
+    },
+    "learning.char.u_acute": {
+      "asset": "clips/65/65f7dd8937de.mp3",
+      "duration_ms": 1332,
+      "sha256": "65f7dd8937de80842b0699de7db68971f46949e6aeac34e638635dc1efbb9d8a",
+      "display_text": "Ú",
+      "spoken_text": "ú s čárkou"
+    },
+    "learning.char.u_ring": {
+      "asset": "clips/dd/ddd5f9c8c6ae.mp3",
+      "duration_ms": 1594,
+      "sha256": "ddd5f9c8c6aedf648fc13c204f022123cebe4a2ce3d084ced1606f96f1da7e6b",
+      "display_text": "Ů",
+      "spoken_text": "ů s kroužkem"
+    },
+    "learning.char.v": {
+      "asset": "clips/6d/6d14381272e7.mp3",
+      "duration_ms": 705,
+      "sha256": "6d14381272e74dfb8f7852917b9a779d0116ee5e62fc9068740e3fc48cc8e1fc",
+      "display_text": "V",
+      "spoken_text": "vé"
+    },
+    "learning.char.w": {
+      "asset": "clips/3d/3d39219dae21.mp3",
+      "duration_ms": 1150,
+      "sha256": "3d39219dae215fdd232821e5ae089e58b9579d216fe06501abb061adb451069c",
+      "display_text": "W",
+      "spoken_text": "dvojité vé"
+    },
+    "learning.char.x": {
+      "asset": "clips/25/2590fc758aa1.mp3",
+      "duration_ms": 653,
+      "sha256": "2590fc758aa1f346a23d67e47c7babb91d565dc7632739cb0ddbdddd3185e6de",
+      "display_text": "X",
+      "spoken_text": "iks"
+    },
+    "learning.char.y": {
+      "asset": "clips/eb/eb0d1f39168e.mp3",
+      "duration_ms": 862,
+      "sha256": "eb0d1f39168ed61c7663ec54f27945dba17d30bcfbc07da64eae7f7df8d3fac3",
+      "display_text": "Y",
+      "spoken_text": "ypsilon"
+    },
+    "learning.char.y_acute": {
+      "asset": "clips/91/91a8532f9076.mp3",
+      "duration_ms": 1254,
+      "sha256": "91a8532f9076bf51036625d7b2ddec7281932f55ef0a2c51c11d431db7ac216d",
+      "display_text": "Ý",
+      "spoken_text": "dlouhé ypsilon"
+    },
+    "learning.char.z": {
+      "asset": "clips/98/98f6151fe591.mp3",
+      "duration_ms": 732,
+      "sha256": "98f6151fe59167046cff5855d810b9af7450514738957db1d7f1231dba83ba36",
+      "display_text": "Z",
+      "spoken_text": "zet"
+    },
+    "learning.char.z_caron": {
+      "asset": "clips/f7/f7f681f91fd5.mp3",
+      "duration_ms": 627,
+      "sha256": "f7f681f91fd5ebafbe1c3ea62bfd1a37888a2460e4cfdeb03c321e6f5f6950cb",
+      "display_text": "Ž",
+      "spoken_text": "žet"
+    },
+    "learning.number.001": {
+      "asset": "clips/ca/caf8e9cb3bcb.mp3",
+      "duration_ms": 679,
+      "sha256": "caf8e9cb3bcb7a4c00477f6ae9096d897ef32ff277e01e4bd4aab1cbf5b859cc",
+      "display_text": "1",
+      "spoken_text": "jedna"
+    },
+    "learning.number.002": {
+      "asset": "clips/a8/a80b52b19e2c.mp3",
+      "duration_ms": 548,
+      "sha256": "a80b52b19e2c3c2d050ee551046af221faacd53b6530d130a5f722146b4eb923",
+      "display_text": "2",
+      "spoken_text": "dva"
+    },
+    "learning.number.003": {
+      "asset": "clips/82/821e01d10053.mp3",
+      "duration_ms": 470,
+      "sha256": "821e01d1005341a4b614e853bf18cf597386608900aabc52d6ea933be6fe510b",
+      "display_text": "3",
+      "spoken_text": "tři"
+    },
+    "learning.number.004": {
+      "asset": "clips/ed/edc65108c498.mp3",
+      "duration_ms": 705,
+      "sha256": "edc65108c4982fd6599bd5ff9a0e4ce2e932f83eb321d0d466b466d4f8bd7267",
+      "display_text": "4",
+      "spoken_text": "čtyři"
+    },
+    "learning.number.005": {
+      "asset": "clips/20/20bf3957b2de.mp3",
+      "duration_ms": 627,
+      "sha256": "20bf3957b2deadeb443d6a89c6670546a041124e767a1d2b16480f947ac7fdd7",
+      "display_text": "5",
+      "spoken_text": "pět"
+    },
+    "learning.number.006": {
+      "asset": "clips/44/44e39313c2f1.mp3",
+      "duration_ms": 836,
+      "sha256": "44e39313c2f1e13d356cb544d2df880f2d29fcebd2709115e962d3af7db20d1d",
+      "display_text": "6",
+      "spoken_text": "šest"
+    },
+    "learning.number.007": {
+      "asset": "clips/77/771507c48250.mp3",
+      "duration_ms": 705,
+      "sha256": "771507c482507884123d25420f2cff983c3df4632ceaf08ba31e418c00768ac8",
+      "display_text": "7",
+      "spoken_text": "sedm"
+    },
+    "learning.number.008": {
+      "asset": "clips/c2/c24da8740af3.mp3",
+      "duration_ms": 810,
+      "sha256": "c24da8740af347fbe0a89eef7b72706b36b7e25543c8b1cb6113ef0c107f139a",
+      "display_text": "8",
+      "spoken_text": "osm"
+    },
+    "learning.number.009": {
+      "asset": "clips/6c/6ca951bbc39f.mp3",
+      "duration_ms": 836,
+      "sha256": "6ca951bbc39f8e58105d0eaf4115a58f9e9ef39d58a4ed21660fe2033f8c26c6",
+      "display_text": "9",
+      "spoken_text": "devět"
+    },
+    "learning.number.010": {
+      "asset": "clips/89/895ace6bb1f3.mp3",
+      "duration_ms": 836,
+      "sha256": "895ace6bb1f3c650fd5eda5074a55932a2b457015be492784042b0045b3be287",
+      "display_text": "10",
+      "spoken_text": "deset"
+    },
+    "learning.number.011": {
+      "asset": "clips/3d/3dabcbf33bd3.mp3",
+      "duration_ms": 1019,
+      "sha256": "3dabcbf33bd366dfb13660e6e9feb78d77befa595e0be0d35ac03266175ff58e",
+      "display_text": "11",
+      "spoken_text": "jedenáct"
+    },
+    "learning.number.012": {
+      "asset": "clips/7b/7b8c47dd97b7.mp3",
+      "duration_ms": 993,
+      "sha256": "7b8c47dd97b71ca65b10b2dbe08cd2bb5af769983e7b1a52bc323de2a2748d6e",
+      "display_text": "12",
+      "spoken_text": "dvanáct"
+    },
+    "learning.number.013": {
+      "asset": "clips/90/9036bfdc64dd.mp3",
+      "duration_ms": 966,
+      "sha256": "9036bfdc64ddb9fc3b36240a84aa60c93aa791237aba9a6a31a107645a809647",
+      "display_text": "13",
+      "spoken_text": "třináct"
+    },
+    "learning.number.014": {
+      "asset": "clips/be/be56cf6a75b0.mp3",
+      "duration_ms": 966,
+      "sha256": "be56cf6a75b017c245cf11ea3b19f10fd2e3189fea0770bfd0a65cc069ca30b9",
+      "display_text": "14",
+      "spoken_text": "čtrnáct"
+    },
+    "learning.number.015": {
+      "asset": "clips/b0/b0769f87fa21.mp3",
+      "duration_ms": 914,
+      "sha256": "b0769f87fa21de73dfff004cc2919cc0015ff098f3ddb2ec9d4f2879dd4ebc88",
+      "display_text": "15",
+      "spoken_text": "patnáct"
+    },
+    "learning.number.016": {
+      "asset": "clips/11/11da85a91fa6.mp3",
+      "duration_ms": 993,
+      "sha256": "11da85a91fa6a8cbb570e1c15a4923bcfa91d318f7c379cd342257b4b15f1787",
+      "display_text": "16",
+      "spoken_text": "šestnáct"
+    },
+    "learning.number.017": {
+      "asset": "clips/71/71c5cedca747.mp3",
+      "duration_ms": 993,
+      "sha256": "71c5cedca7473b516302a4ac36da7c6579d441edcddda80940047a120af92f28",
+      "display_text": "17",
+      "spoken_text": "sedmnáct"
+    },
+    "learning.number.018": {
+      "asset": "clips/43/432a3d8d723d.mp3",
+      "duration_ms": 993,
+      "sha256": "432a3d8d723dbc76ff891e02392b8fa3d6f17a104aa7523b2b6cdeb83890881a",
+      "display_text": "18",
+      "spoken_text": "osmnáct"
+    },
+    "learning.number.019": {
+      "asset": "clips/d1/d14c322b551d.mp3",
+      "duration_ms": 1071,
+      "sha256": "d14c322b551d87db61274c278920d7e8cb9685405a1f4df720ec7374808e6ce2",
+      "display_text": "19",
+      "spoken_text": "devatenáct"
+    },
+    "learning.number.020": {
+      "asset": "clips/0f/0fd7f20ec6d7.mp3",
+      "duration_ms": 810,
+      "sha256": "0fd7f20ec6d7999f43e068bacb93500d09be6f382b28852952ff5b8330172cea",
+      "display_text": "20",
+      "spoken_text": "dvacet"
+    },
+    "learning.number.021": {
+      "asset": "clips/12/12530d667dd4.mp3",
+      "duration_ms": 940,
+      "sha256": "12530d667dd4f7d6b3b29294fb6235731566eca8edf0049871fd82270ceb89c2",
+      "display_text": "21",
+      "spoken_text": "dvacet jedna"
+    },
+    "learning.number.022": {
+      "asset": "clips/06/0646c109c88f.mp3",
+      "duration_ms": 888,
+      "sha256": "0646c109c88f891ccfc13d5bd823110c79ae1a649755c14373cd814174c81e52",
+      "display_text": "22",
+      "spoken_text": "dvacet dva"
+    },
+    "learning.number.023": {
+      "asset": "clips/d8/d8092eda2dce.mp3",
+      "duration_ms": 1019,
+      "sha256": "d8092eda2dcefd1e16c314fbabe7146b8fdc30069fdbe9b660183449f7d847ba",
+      "display_text": "23",
+      "spoken_text": "dvacet tři"
+    },
+    "learning.number.024": {
+      "asset": "clips/9b/9b1fb14f768f.mp3",
+      "duration_ms": 1019,
+      "sha256": "9b1fb14f768f9f59519869253a744d9af6bc4ffb9fc7b58e771e54df9366c70c",
+      "display_text": "24",
+      "spoken_text": "dvacet čtyři"
+    },
+    "learning.number.025": {
+      "asset": "clips/cb/cb39d9fdecbc.mp3",
+      "duration_ms": 914,
+      "sha256": "cb39d9fdecbce8bd8a35d57404d0fab432c4e84dccd8b50f03ee28c2ee15fd91",
+      "display_text": "25",
+      "spoken_text": "dvacet pět"
+    },
+    "learning.number.026": {
+      "asset": "clips/b9/b985c94c70fb.mp3",
+      "duration_ms": 993,
+      "sha256": "b985c94c70fbd209a60b38dd79f6ba7e979190f9dec3f88ddbcb54e5a2a9dd8c",
+      "display_text": "26",
+      "spoken_text": "dvacet šest"
+    },
+    "learning.number.027": {
+      "asset": "clips/9c/9cd90d39ef36.mp3",
+      "duration_ms": 1202,
+      "sha256": "9cd90d39ef3683a24edc5911e2ba493a6c830fc1c79200bb1853e14e95e76a24",
+      "display_text": "27",
+      "spoken_text": "dvacet sedm"
+    },
+    "learning.number.028": {
+      "asset": "clips/45/4599788f227e.mp3",
+      "duration_ms": 1384,
+      "sha256": "4599788f227ed03ee7c87dd9d2845e49f300b0c45500a2aa257137acfe8e94f2",
+      "display_text": "28",
+      "spoken_text": "dvacet osm"
+    },
+    "learning.number.029": {
+      "asset": "clips/7e/7e816b2d4abd.mp3",
+      "duration_ms": 1097,
+      "sha256": "7e816b2d4abd70fc12270418ab61a78141c9840034f6a1cafedb7fdadc5e9e5d",
+      "display_text": "29",
+      "spoken_text": "dvacet devět"
+    },
+    "learning.number.030": {
+      "asset": "clips/87/87a9ea082756.mp3",
+      "duration_ms": 888,
+      "sha256": "87a9ea082756a2b66743b870354285e942010bcac68cb941cbd83f4c679fdb0f",
+      "display_text": "30",
+      "spoken_text": "třicet"
+    },
+    "learning.number.031": {
+      "asset": "clips/5a/5a8258a4809a.mp3",
+      "duration_ms": 1123,
+      "sha256": "5a8258a4809a037d66fc7fd62370422f3babc39fd6de35c1f18a03fd002ec3aa",
+      "display_text": "31",
+      "spoken_text": "třicet jedna"
+    },
+    "learning.number.032": {
+      "asset": "clips/f3/f3f69ed3c98f.mp3",
+      "duration_ms": 888,
+      "sha256": "f3f69ed3c98f57c227f282a5310bdf151ba38300ccbc153b4ac72f62e2e263c2",
+      "display_text": "32",
+      "spoken_text": "třicet dva"
+    },
+    "learning.number.033": {
+      "asset": "clips/13/13dd1ac6e38d.mp3",
+      "duration_ms": 993,
+      "sha256": "13dd1ac6e38dbfd936b15181cd1c1706d2e5adb3a7f8da9e8ae5739b388b64e8",
+      "display_text": "33",
+      "spoken_text": "třicet tři"
+    },
+    "learning.number.034": {
+      "asset": "clips/be/be0cdcf975d2.mp3",
+      "duration_ms": 1150,
+      "sha256": "be0cdcf975d2de533f9e4230f96a48484436d48594779e96244fe054b25aade2",
+      "display_text": "34",
+      "spoken_text": "třicet čtyři"
+    },
+    "learning.number.035": {
+      "asset": "clips/d1/d1b74d475fce.mp3",
+      "duration_ms": 1071,
+      "sha256": "d1b74d475fce7dd4042b299f4733cc1330647ffb9d9a2a76cbe3cf0a48cf1f16",
+      "display_text": "35",
+      "spoken_text": "třicet pět"
+    },
+    "learning.number.036": {
+      "asset": "clips/fa/fae02c28c1ca.mp3",
+      "duration_ms": 1254,
+      "sha256": "fae02c28c1ca8e631f15f3c8d847255c2e301bd0e9fec59a6d2170bc38cc6240",
+      "display_text": "36",
+      "spoken_text": "třicet šest"
+    },
+    "learning.number.037": {
+      "asset": "clips/8c/8c4a3451ae78.mp3",
+      "duration_ms": 1071,
+      "sha256": "8c4a3451ae78be1b3f93f8134164f1ea7ebd2462cb51115364f387294f54dbd5",
+      "display_text": "37",
+      "spoken_text": "třicet sedm"
+    },
+    "learning.number.038": {
+      "asset": "clips/59/595bdb3f1bc1.mp3",
+      "duration_ms": 1045,
+      "sha256": "595bdb3f1bc163ac3e4b287659f769c7a377eb76a70e1925e4f3c1fa5bb8fd7f",
+      "display_text": "38",
+      "spoken_text": "třicet osm"
+    },
+    "learning.number.039": {
+      "asset": "clips/85/855d03460bc3.mp3",
+      "duration_ms": 1019,
+      "sha256": "855d03460bc32df19ee0c9699db75a22c1d43be78051a8307b2803c75c073642",
+      "display_text": "39",
+      "spoken_text": "třicet devět"
+    },
+    "learning.number.040": {
+      "asset": "clips/54/543cdd8fc65d.mp3",
+      "duration_ms": 993,
+      "sha256": "543cdd8fc65d6382c7e65469be2791a9c4923345f9c15334972440df41823919",
+      "display_text": "40",
+      "spoken_text": "čtyřicet"
+    },
+    "learning.number.041": {
+      "asset": "clips/fd/fd4050fa18ff.mp3",
+      "duration_ms": 1150,
+      "sha256": "fd4050fa18ff780a03e8799bbf2328d48e0f296070a20bf2b0ac88ffaa0c79e0",
+      "display_text": "41",
+      "spoken_text": "čtyřicet jedna"
+    },
+    "learning.number.042": {
+      "asset": "clips/5f/5f1be05b3438.mp3",
+      "duration_ms": 1071,
+      "sha256": "5f1be05b3438a635298f06c957bcddd230f9fd4519fbb478f7bac04c1578ee30",
+      "display_text": "42",
+      "spoken_text": "čtyřicet dva"
+    },
+    "learning.number.043": {
+      "asset": "clips/35/35b1eb2c1b63.mp3",
+      "duration_ms": 1150,
+      "sha256": "35b1eb2c1b63499665e7fc8e2f30db259710d7dde4b7437ab71bd54ec2e3954b",
+      "display_text": "43",
+      "spoken_text": "čtyřicet tři"
+    },
+    "learning.number.044": {
+      "asset": "clips/f6/f6aa891f217c.mp3",
+      "duration_ms": 1306,
+      "sha256": "f6aa891f217cd498f8c47bf17887bd813741297c63deb7cb8a61fa14d2e0e3ed",
+      "display_text": "44",
+      "spoken_text": "čtyřicet čtyři"
+    },
+    "learning.number.045": {
+      "asset": "clips/73/73505e910f24.mp3",
+      "duration_ms": 1306,
+      "sha256": "73505e910f24845235ca234bae1fa254785733bd03b48db4e7dccb861180fef6",
+      "display_text": "45",
+      "spoken_text": "čtyřicet pět"
+    },
+    "learning.number.046": {
+      "asset": "clips/72/7221f9c0c3e7.mp3",
+      "duration_ms": 1332,
+      "sha256": "7221f9c0c3e7308b84701be198a2f149d37c003de52aa5de0333daa9cd6c8e65",
+      "display_text": "46",
+      "spoken_text": "čtyřicet šest"
+    },
+    "learning.number.047": {
+      "asset": "clips/89/89cb8fd6780c.mp3",
+      "duration_ms": 1202,
+      "sha256": "89cb8fd6780c2f4fcb42398d7e8368623ab4c635800421229f1872dd59031e75",
+      "display_text": "47",
+      "spoken_text": "čtyřicet sedm"
+    },
+    "learning.number.048": {
+      "asset": "clips/29/292b9d9a6862.mp3",
+      "duration_ms": 1228,
+      "sha256": "292b9d9a686211b6a52f455b95b75d2015aed0bb31094e329b8b66e72dd10bf2",
+      "display_text": "48",
+      "spoken_text": "čtyřicet osm"
+    },
+    "learning.number.049": {
+      "asset": "clips/5f/5febb3c28fd8.mp3",
+      "duration_ms": 1228,
+      "sha256": "5febb3c28fd8ec0cd136a2e68009829f71b82732d796acd8a5738cb057376fdb",
+      "display_text": "49",
+      "spoken_text": "čtyřicet devět"
+    },
+    "learning.number.050": {
+      "asset": "clips/01/01dcd074a3ef.mp3",
+      "duration_ms": 836,
+      "sha256": "01dcd074a3efa627b813e2ffa248fc172b3ceee20cfb165d712d7e640da5cc30",
+      "display_text": "50",
+      "spoken_text": "padesát"
+    }
+  }
+}
