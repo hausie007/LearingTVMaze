@@ -248,8 +248,10 @@ func _update_slide() -> void:
 	_update_animations()
 
 	# Keep small network caveats visual-only; TTS reads the child-facing slide text.
-	if Config.voice_hints:
-		TTS.speak(text, 0.8, Config.get_effective_ui_language())
+	if Config.voice_mode != Config.VoiceMode.OFF:
+		# Help narration is long, mixed and rarely heard twice; it stays on the
+		# device voice, so the key never resolves and always falls through.
+		Speech.speak_key("ui.help.slide", Config.get_effective_ui_language(), text, 0.8)
 
 
 func _slide_has_network_note(slide_type: String) -> bool:
@@ -797,7 +799,7 @@ func _on_right_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	TTS.stop()
+	Speech.stop()
 	get_tree().change_scene_to_file(Scenes.HOME)
 
 

@@ -262,8 +262,22 @@ var ui_language: String = "auto"
 ## Language code for learning content (word lists, alphabets). "auto" = detect from OS.
 var learning_language: String = "auto"
 
-## Whether to read collected items and words aloud using TTS.
-var voice_hints: bool = true
+## How collected items and words are read aloud.
+##   OFF               silent
+##   DEVICE_TTS        the operating system voice — what every install had
+##                     before pre-recorded audio existed
+##   STUDIO_PREFERRED  the pre-recorded pack for the learning language, falling
+##                     back to the device voice per item where a clip is absent
+enum VoiceMode { OFF, DEVICE_TTS, STUDIO_PREFERRED }
+
+var voice_mode: VoiceMode = VoiceMode.DEVICE_TTS
+
+## Deprecated: read-only bridge for one release so nothing silently breaks
+## while call sites migrate. `verify --strict` keeps it from coming back.
+var voice_hints: bool:
+	get:
+		return voice_mode != VoiceMode.OFF
+
 var _voice_hints_build_67_reset: bool = true
 
 ## Chaser speed tier. See ChaserLevel enum.
@@ -417,7 +431,7 @@ func save_settings() -> void:
 	config.set_value("Game", "difficulty", difficulty)
 	config.set_value("Game", "ui_language", ui_language)
 	config.set_value("Game", "learning_language", learning_language)
-	config.set_value("Game", "voice_hints", voice_hints)
+	config.set_value("Game", "voice_mode", int(voice_mode))
 	config.set_value("Game", "chaser_level", chaser_level)
 	config.set_value("Game", "performance_mode", performance_mode)
 	config.set_value("Game", "screensaver_timeout", screensaver_timeout)
@@ -431,6 +445,13 @@ func save_settings() -> void:
 	var err := config.save(SAVE_PATH)
 	if err != OK:
 		push_error("Failed to save settings to %s (Error: %s)" % [SAVE_PATH, err])
+
+## Guards against a settings file written by a newer build, or a hand-edited one.
+func _clamp_voice_mode(value: int) -> VoiceMode:
+	if value < 0 or value > int(VoiceMode.STUDIO_PREFERRED):
+		return VoiceMode.DEVICE_TTS
+	return value as VoiceMode
+
 
 func load_settings() -> void:
 	var config := ConfigFile.new()
@@ -451,9 +472,18 @@ func load_settings() -> void:
 		# Migration: if we have an old 'language' setting, migrate it to learning_language
 		if config.has_section_key("Game", "language"):
 			learning_language = config.get_value("Game", "language", learning_language)
-		voice_hints    = config.get_value("Game", "voice_hints", voice_hints)
+		# Voice setting migration. An existing install must not change behaviour
+		# on update: whoever had speech on keeps the device voice they already
+		# had, and Studio voice is something they opt into. Only a fresh install
+		# has no opinion, and it gets the same device voice.
+		if config.has_section_key("Game", "voice_mode"):
+			voice_mode = _clamp_voice_mode(int(config.get_value("Game", "voice_mode", int(voice_mode))))
+		elif config.has_section_key("Game", "voice_hints"):
+			voice_mode = VoiceMode.DEVICE_TTS if bool(config.get_value("Game", "voice_hints", true)) \
+				else VoiceMode.OFF
+			should_save_after_load = true
 		if not _voice_hints_build_67_reset:
-			voice_hints = true
+			voice_mode = VoiceMode.DEVICE_TTS
 			_voice_hints_build_67_reset = true
 			should_save_after_load = true
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)

@@ -117,6 +117,15 @@ func get_word_grapheme_count() -> int:
 	return _word_graphemes.size()
 
 
+## The grapheme the player is expected to collect next, or "" at the end.
+## Used to decode its clip before it is needed — the next pickup is always
+## known in advance, which is the whole of the latency story.
+func get_word_next_grapheme() -> String:
+	if _word_next_index < 0 or _word_next_index >= _word_graphemes.size():
+		return ""
+	return _word_graphemes[_word_next_index]
+
+
 ## True if a real word boundary (a space) lies in the given grapheme range.
 ##
 ## Needed because hyphens and apostrophes are also skipped when advancing, and

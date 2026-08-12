@@ -640,12 +640,12 @@ func _is_shared_collectible_phase_active() -> bool:
 	return _has_shared_collectibles() and not _collectible_spawner.is_complete()
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
-	if Config.voice_hints:
+	if Config.voice_mode != Config.VoiceMode.OFF:
 		if Config.game_mode == Config.GameMode.WORDS:
-			TTS.speak(value_str, 0.85, lang)
+			Speech.speak_grapheme(value_str, lang)
 			_speak_completed_word_if_needed(lang)
 		else:
-			TTS.speak(value_str, 0.85)
+			Speech.speak_item(value_str, "")
 	# For next-symbol mode, do NOT set _round_complete here.
 	# Coop: finish requires all players on end cell (handled by _check_shared_finish).
 	# Chaser variant: collector must still reach exit AND can still be caught.
@@ -953,7 +953,7 @@ func _speak_completed_word_if_needed(lang_override: String = "") -> void:
 			return
 		if _win_screen != null and _win_screen.is_active():
 			return
-		TTS.speak(phrase, 0.7, word_lang)
+		Speech.speak_word(phrase, word_lang)
 	)
 
 func _spawn_for_role(role: String, slot: int) -> Vector2i:
@@ -1821,7 +1821,7 @@ func _send_remote_result(title_text: String, character_ids: Array[String]) -> vo
 				NetworkManager.rpc_id(peer_id, "rpc_update_remote_result", title_text, character_ids)
 
 func _speak_race_completion_once() -> void:
-	if not Config.voice_hints:
+	if Config.voice_mode == Config.VoiceMode.OFF:
 		return
 	if Config.game_mode != Config.GameMode.WORDS:
 		return
@@ -1837,7 +1837,7 @@ func _speak_race_completion_once() -> void:
 			return
 		if _win_screen != null and _win_screen.is_active():
 			return
-		TTS.speak(phrase, 0.7, word_lang)
+		Speech.speak_word(phrase, word_lang)
 	)
 
 func _should_play_race_learning_recap() -> bool:

@@ -362,16 +362,16 @@ func _play_learning_recap_once() -> void:
 	if _recap_played:
 		return
 	_recap_played = true
-	if not _is_active or not Config.voice_hints:
+	if not _is_active or Config.voice_mode == Config.VoiceMode.OFF:
 		return
 	var segments := _learning_recap.get("tts_segments", []) as Array
 	if segments == null or segments.is_empty():
 		return
-	TTS.speak_segments(segments)
+	Speech.speak_segments(segments)
 
 
 func _stop_recap_tts() -> void:
-	TTS.stop()
+	Speech.stop()
 
 
 func _emit_next_round() -> void:

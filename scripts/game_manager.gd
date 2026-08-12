@@ -326,10 +326,10 @@ func _on_player_moved(new_pos: Vector2i) -> void:
 # ── Collectible Callbacks ────────────────────────────────────────────────────
 
 func _on_collectible_gathered(value_str: String, collect_index: int, lang: String) -> void:
-	if Config.voice_hints:
+	if Config.voice_mode != Config.VoiceMode.OFF:
 		if Config.game_mode == Config.GameMode.WORDS:
 			# Words mode: speak collected letter
-			TTS.speak(value_str, 0.85, lang)
+			Speech.speak_grapheme(value_str, lang)
 
 			# Speak the whole word once when it is complete.
 			var next_idx: int = collectible_spawner.get_word_next_index()
@@ -338,8 +338,12 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 				_speak_completed_word_once(lang)
 			elif collectible_spawner.has_word_boundary_between(collect_index + 1, next_idx):
 				_speak_completed_word_segment(next_idx, lang)
+			# Decode the next letter's clip now rather than when it is wanted.
+			Speech.prefetch_grapheme(collectible_spawner.get_word_next_grapheme(), lang)
 		else:
-			TTS.speak(value_str, 0.85)
+			Speech.speak_item(value_str, "")
+			if Config.game_mode == Config.GameMode.NUMBERS and value_str.is_valid_int():
+				Speech.prefetch_number(value_str.to_int() + 1, "")
 
 	_refresh_target_hud()
 	# If all collectibles are now done, rebuild the chip with the exit role.
@@ -921,7 +925,7 @@ func _get_solo_goal() -> String:
 		return tr("hud_desc_sp_path")
 
 func _speak_completed_word_once(lang_override: String = "") -> void:
-	if _completed_word_spoken or not Config.voice_hints:
+	if _completed_word_spoken or Config.voice_mode == Config.VoiceMode.OFF:
 		return
 	var phrase: String = String(Config.current_word.get("word", "")).strip_edges()
 	if phrase.is_empty():
@@ -937,12 +941,12 @@ func _speak_completed_word_once(lang_override: String = "") -> void:
 		func():
 			if win_screen != null and win_screen.is_active():
 				return
-			TTS.speak(phrase, 0.7, word_lang)
+			Speech.speak_word(phrase, word_lang)
 	)
 
 ## `segment_end` is a GRAPHEME index; the substring needs a character offset.
 func _speak_completed_word_segment(segment_end: int, lang_override: String = "") -> void:
-	if not Config.voice_hints or collectible_spawner == null:
+	if Config.voice_mode == Config.VoiceMode.OFF or collectible_spawner == null:
 		return
 	var word_full: String = String(Config.current_word.get("word", ""))
 	var clamped_end := clampi(segment_end, 0, collectible_spawner.get_word_grapheme_count())
@@ -960,7 +964,9 @@ func _speak_completed_word_segment(segment_end: int, lang_override: String = "")
 		func():
 			if win_screen != null and win_screen.is_active():
 				return
-			TTS.speak(phrase, 0.7, word_lang)
+			# A partial phrase is not a catalog entry, so this always falls
+			# through to the device voice. That is intended, not a gap.
+			Speech.speak_word(phrase, word_lang)
 	)
 
 func _spawn_race_robot() -> void:
@@ -1112,7 +1118,7 @@ func _race_robot_step_interval() -> float:
 	return maxf(0.34, base * difficulty_factor)
 
 func _speak_race_completion_once() -> void:
-	if not Config.voice_hints:
+	if Config.voice_mode == Config.VoiceMode.OFF:
 		return
 	if Config.game_mode == Config.GameMode.WORDS:
 		_speak_completed_word_once()

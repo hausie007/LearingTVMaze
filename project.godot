@@ -25,6 +25,7 @@ config/android_tv_banner="res://images/lm_paper_logo.png"
 
 TTS="*res://scripts/tts_manager.gd"
 Config="*res://scripts/game_config.gd"
+Speech="*res://scripts/speech_manager.gd"
 DPad="*res://scripts/virtual_dpad.gd"
 NetworkManager="*res://scripts/network/network_manager.gd"
 IdleManager="*res://scripts/idle_manager.gd"

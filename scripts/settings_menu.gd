@@ -3,7 +3,7 @@ extends Control
 
 var temp_ui_lang_idx: int
 var temp_learning_lang_idx: int
-var temp_voice: bool
+var temp_voice: int   ## Config.VoiceMode
 var temp_perf: bool
 var temp_controls: int
 var temp_controller_size: int
@@ -27,7 +27,7 @@ var _original_learning_language: String = ""
 var _original_controls: int = 0
 var _original_controller_size: int = 0
 
-var _original_voice_hints: bool = false
+var _original_voice_mode: int = 0
 var _original_performance_mode: bool = false
 
 func _ready() -> void:
@@ -43,7 +43,7 @@ func _ready() -> void:
 		temp_learning_lang_idx = Config.LANG_CODES.find(Config.learning_language)
 		if temp_learning_lang_idx < 0: temp_learning_lang_idx = 0
 			
-		temp_voice = Config.voice_hints
+		temp_voice = Config.voice_mode
 		temp_perf = Config.performance_mode
 		temp_screensaver = Config.screensaver_timeout
 		temp_controls = Config.on_screen_controls
@@ -52,7 +52,7 @@ func _ready() -> void:
 		_original_controller_size = Config.controller_size
 		_original_ui_language = Config.ui_language
 		_original_learning_language = Config.learning_language
-		_original_voice_hints = Config.voice_hints
+		_original_voice_mode = Config.voice_mode
 		_original_performance_mode = Config.performance_mode
 		# Listen for async TTS completion
 		if not TTS.status_changed.is_connected(_update_labels):
@@ -200,14 +200,14 @@ func _cycle_ui_lang(dir: int) -> void:
 	_configure_navigation()
 
 func _trigger_warmup_ui() -> void:
-	if temp_voice:
+	if temp_voice != Config.VoiceMode.OFF:
 		var lang_name = _get_lang_display_name(temp_ui_lang_idx, false)
-		TTS.warm_up(_get_preview_language(false), lang_name)
+		Speech.warm_up(_get_preview_language(false), lang_name)
 
 func _trigger_warmup_learning() -> void:
-	if temp_voice:
+	if temp_voice != Config.VoiceMode.OFF:
 		var lang_name = _get_lang_display_name(temp_learning_lang_idx, true)
-		TTS.warm_up(_get_preview_language(true), lang_name)
+		Speech.warm_up(_get_preview_language(true), lang_name)
 
 func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
 	return Config.get_lang_display_name(idx, is_learning, temp_ui_lang_idx)
@@ -220,14 +220,47 @@ func _cycle_learning_lang(dir: int) -> void:
 		Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
 		Config.save_settings()
 
-func _cycle_voice(_dir: int) -> void:
-	temp_voice = !temp_voice
+## Off / Device voice / Studio voice, skipping whichever is unavailable.
+## Studio voice only appears once the learning language has a complete pack;
+## the device voice only when the OS actually has the voices installed. Both
+## are checked separately, because a Czech pack works on a device with no
+## Czech voice at all — which is the case it exists for.
+func _cycle_voice(dir: int) -> void:
+	var choices := _voice_choices()
+	if choices.is_empty():
+		return
+	var at := choices.find(temp_voice)
+	if at == -1:
+		at = 0
+		dir = 0
+	temp_voice = choices[(at + dir + choices.size()) % choices.size()]
 	_update_labels()
-	if temp_voice:
+	if temp_voice == Config.VoiceMode.DEVICE_TTS:
 		_trigger_warmup_ui()
 	if Config:
-		Config.voice_hints = temp_voice
+		Config.voice_mode = temp_voice
 		Config.save_settings()
+
+## Which modes the player can actually reach right now.
+func _voice_choices() -> Array[int]:
+	var choices: Array[int] = [Config.VoiceMode.OFF]
+	if not TTS.tts_ready or _device_voices_available():
+		choices.append(Config.VoiceMode.DEVICE_TTS)
+	if Speech.has_pack(_get_preview_language(true)):
+		choices.append(Config.VoiceMode.STUDIO_PREFERRED)
+	return choices
+
+func _device_voices_available() -> bool:
+	return TTS.is_available(_get_preview_language(false)) \
+		and TTS.is_available(_get_preview_language(true))
+
+func _voice_mode_label(mode: int) -> String:
+	match mode:
+		Config.VoiceMode.OFF: return tr("voice_off")
+		Config.VoiceMode.STUDIO_PREFERRED:
+			return tr("voice_studio") if Speech.is_complete(_get_preview_language(true)) \
+				else tr("voice_studio_partial")
+		_: return tr("voice_device")
 
 func _cycle_perf(_dir: int) -> void:
 	temp_perf = !temp_perf
@@ -293,8 +326,10 @@ func _update_labels() -> void:
 	if has_node("%VoiceButton"):
 		if not _tts_warning_label: _create_tts_warning()
 		
-		if not TTS.tts_ready:
-			%VoiceButton.text = tr("on") if temp_voice else tr("off")
+		var has_studio := Speech.has_pack(_get_preview_language(true))
+
+		if not TTS.tts_ready and not has_studio:
+			%VoiceButton.text = _voice_mode_label(temp_voice)
 			%VoiceButton.disabled = true
 			%VoiceButton.modulate.a = 0.5
 			if _tts_warning_label:
@@ -302,20 +337,30 @@ func _update_labels() -> void:
 				_tts_warning_label.text = tr("checking_tts")
 				_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_PENDING)
 		else:
-			var ui_lang_code := _get_preview_language(false)
-			var learning_lang_code := _get_preview_language(true)
-			var ui_available = TTS.is_available(ui_lang_code)
-			var learning_available = TTS.is_available(learning_lang_code)
-			var is_available = ui_available and learning_available
-			var effective_voice_state = temp_voice and is_available
-			
-			%VoiceButton.text = tr("on") if effective_voice_state else tr("off")
-			%VoiceButton.disabled = not is_available
-			%VoiceButton.modulate.a = 1.0 if is_available else 0.4
-			
+			var ui_available := TTS.is_available(_get_preview_language(false))
+			var learning_available := TTS.is_available(_get_preview_language(true))
+			var device_ok := ui_available and learning_available
+
+			# The row is usable whenever there is more than one thing to choose,
+			# and a complete pack is enough on its own. The old rule disabled it
+			# unless the OS had both voices, which would have hidden Studio
+			# voice on exactly the devices that need it most.
+			var choices := _voice_choices()
+			if not choices.has(temp_voice):
+				temp_voice = Config.VoiceMode.OFF
+			%VoiceButton.text = _voice_mode_label(temp_voice)
+			%VoiceButton.disabled = choices.size() < 2
+			%VoiceButton.modulate.a = 1.0 if choices.size() > 1 else 0.4
+
 			if _tts_warning_label:
-				_tts_warning_label.visible = not is_available
-				if not is_available:
+				# Studio coverage and device availability are reported
+				# separately; only the device voice depends on the OS.
+				if has_studio and not device_ok:
+					_tts_warning_label.visible = true
+					_tts_warning_label.text = tr("voice_studio_only")
+					_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_OK)
+				elif not device_ok:
+					_tts_warning_label.visible = true
 					if not ui_available and not learning_available:
 						_tts_warning_label.text = tr("tts_missing")
 					elif not ui_available:
@@ -324,6 +369,7 @@ func _update_labels() -> void:
 						_tts_warning_label.text = tr("tts_missing") + " (Learn)"
 					_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_ERROR)
 				else:
+					_tts_warning_label.visible = false
 					_tts_warning_label.text = tr("tts_ready")
 					_tts_warning_label.add_theme_color_override("font_color", UIColors.TTS_OK)
 
@@ -507,7 +553,7 @@ func _on_save_pressed() -> void:
 	if Config:
 		if temp_ui_lang_idx < Config.LANG_CODES.size(): Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
 		if temp_learning_lang_idx < Config.LANG_CODES.size(): Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
-		Config.voice_hints = temp_voice
+		Config.voice_mode = temp_voice
 		Config.performance_mode = temp_perf
 		Config.screensaver_timeout = temp_screensaver
 		Config.on_screen_controls = temp_controls
@@ -522,7 +568,7 @@ func _on_cancel_pressed() -> void:
 	if Config:
 		if temp_ui_lang_idx < Config.LANG_CODES.size(): Config.ui_language = Config.LANG_CODES[temp_ui_lang_idx]
 		if temp_learning_lang_idx < Config.LANG_CODES.size(): Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
-		Config.voice_hints = temp_voice
+		Config.voice_mode = temp_voice
 		Config.performance_mode = temp_perf
 		Config.screensaver_timeout = temp_screensaver
 		Config.on_screen_controls = temp_controls
