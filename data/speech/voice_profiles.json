@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "note": "Per-locale voice choice. NEVER put an API key in this file — the key is read from the environment variable named in catalog.json, and `speech_pipeline.py verify` fails the build if anything key-shaped appears in the repo. Committed so a re-record years from now is reproducible: voice, model and settings together are what decide how a clip sounds.",
+
+  "profiles": {
+    "cs-CZ": {
+      "version": 1,
+      "provider": "elevenlabs",
+
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+
+      "model_id": "eleven_multilingual_v2",
+      "language_code": null,
+
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+
+      "seed": null,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "Phase 3 A/B: eleven_multilingual_v2 against eleven_v3. The stress tests are Ř and the letter name chá; if v2 fails either, switch this profile to eleven_v3 and set language_code to \"cs\"."
+    },
+
+    "en-US": {
+      "version": 1,
+      "provider": "elevenlabs",
+
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+
+      "model_id": "eleven_multilingual_v2",
+      "language_code": null,
+
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+
+      "seed": null,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J."
+    }
+  },
+
+  "field_notes": {
+    "voice_id": "From the ElevenLabs dashboard, or `speech_pipeline.py voices`. Until it is set, `plan` reports the locale as unconfigured and `generate` refuses to run.",
+    "voice_source": "One of: owned_design, owned_clone, default_perpetual, library. Prefer the first three — a Voice Library owner can withdraw a voice, and then later additions to the vocabulary will not match the clips already shipped.",
+    "language_code": "eleven_multilingual_v2 does not accept it; leave null. eleven_flash_v2_5 and eleven_v3 do — set the ISO 639-1 code. Norwegian is \"no\", not \"nb\".",
+    "speed": "Below 1.0 for a pre-reader. 0.9 is a starting point, not a decision.",
+    "seed": "Best effort only; ElevenLabs does not guarantee reproducibility. Recorded so a regeneration starts from the same place.",
+    "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix."
+  }
+}

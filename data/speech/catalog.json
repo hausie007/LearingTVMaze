@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "note": "Declares WHAT speech the game needs, not how it is made. The pipeline never discovers work by scanning code — if it is not declared here it is not generated. See tools/speech/README.md.",
+
+  "provider": "elevenlabs",
+  "api_key_env": "ELEVENLABS_API_KEY",
+
+  "categories": {
+    "number": {
+      "priority": 0,
+      "key_format": "learning.number.{value:03d}",
+      "source": "numbers_{lang}.json",
+      "range": [1, 50],
+      "duration_ms": { "min": 220, "max": 2200 }
+    },
+    "char": {
+      "priority": 0,
+      "key_format": "learning.char.{id}",
+      "source": "letters_{lang}.json",
+      "duration_ms": { "min": 180, "max": 2500 }
+    }
+  },
+
+  "reserved_key_prefixes": [
+    "learning.word.",
+    "ui.help."
+  ],
+
+  "languages": {
+    "cs": { "locale": "cs-CZ", "enabled": true,  "categories": ["number", "char"] },
+    "en": { "locale": "en-US", "enabled": true,  "categories": ["number", "char"] },
+
+    "sk": { "locale": "sk-SK", "enabled": false, "categories": ["number", "char"] },
+    "pl": { "locale": "pl-PL", "enabled": false, "categories": ["number", "char"] },
+    "de": { "locale": "de-DE", "enabled": false, "categories": ["number", "char"] },
+    "es": { "locale": "es-ES", "enabled": false, "categories": ["number", "char"] },
+    "fr": { "locale": "fr-FR", "enabled": false, "categories": ["number", "char"] },
+    "it": { "locale": "it-IT", "enabled": false, "categories": ["number", "char"] },
+    "pt": { "locale": "pt-PT", "enabled": false, "categories": ["number", "char"] },
+    "nl": { "locale": "nl-NL", "enabled": false, "categories": ["number", "char"] },
+    "sv": { "locale": "sv-SE", "enabled": false, "categories": ["number", "char"] },
+    "da": { "locale": "da-DK", "enabled": false, "categories": ["number", "char"] },
+    "nb": { "locale": "nb-NO", "enabled": false, "categories": ["number", "char"] },
+    "fi": { "locale": "fi-FI", "enabled": false, "categories": ["number", "char"] },
+    "hu": { "locale": "hu-HU", "enabled": false, "categories": ["number", "char"] },
+    "ro": { "locale": "ro-RO", "enabled": false, "categories": ["number", "char"] },
+    "tr": { "locale": "tr-TR", "enabled": false, "categories": ["number", "char"] },
+    "el": { "locale": "el-GR", "enabled": false, "categories": ["number", "char"] },
+    "uk": { "locale": "uk-UA", "enabled": false, "categories": ["number", "char"] },
+    "vi": { "locale": "vi-VN", "enabled": false, "categories": ["number", "char"] },
+    "he": { "locale": "he-IL", "enabled": false, "categories": ["number", "char"] }
+  },
+
+  "master_format": {
+    "note": "What the provider returns and what is archived. Lossless, so the shipped bitrate can change without paying to resynthesise.",
+    "container": "pcm",
+    "sample_rate": 22050,
+    "bits": 16,
+    "channels": 1
+  },
+
+  "ship_format": {
+    "note": "What goes in the AAB. Revisit only after the Phase 3 A/B listening test on a TV.",
+    "codec": "mp3",
+    "sample_rate": 22050,
+    "bitrate_kbps": 32,
+    "channels": 1
+  },
+
+  "processing": {
+    "version": 1,
+    "note": "Any change here restages every clip as stale, because it changes the audio. Bump the version deliberately.",
+    "trim_silence_db": -45.0,
+    "keep_lead_ms": 20,
+    "keep_tail_ms": 60,
+    "fade_ms": 8,
+    "target_lufs": -17.0,
+    "true_peak_dbtp": -1.5,
+    "loudness_tolerance_lu": 2.5
+  },
+
+  "pricing_usd_per_1k_chars": {
+    "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",
+    "checked_on": "2026-08-12",
+    "eleven_flash_v2_5": 0.05,
+    "eleven_turbo_v2_5": 0.05,
+    "eleven_multilingual_v2": 0.10,
+    "eleven_v3": 0.10
+  },
+
+  "generate_guards": {
+    "note": "Refuses to spend more than this in one run unless the numbers are raised deliberately.",
+    "max_characters_per_run": 5000,
+    "max_concurrency": 2,
+    "require_confirm_flag": true
+  }
+}
