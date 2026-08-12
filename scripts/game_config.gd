@@ -684,28 +684,51 @@ func get_auto_detected_language() -> String:
 	return "en"
 
 
-## Return the N-th character of the alphabet for the given language.
-## For 'el' (Greek), it returns Α, Β, Γ...
-## For others, it returns A, B, C...
+## Teaching alphabets, in the "[]"-marked grapheme syntax (see grapheme_text.gd).
+## A bracketed run is ONE letter: Czech CH is the 15th letter of its alphabet,
+## not a C followed by an H.
+##
+## Languages absent from this table fall back to plain Latin A–Z, which is the
+## behaviour every language had before this table existed.
+const ALPHABETS: Dictionary = {
+	"cs": "AÁBCČDĎEÉĚFGH[CH]IÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ",
+	"el": "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",
+	"he": "אבגדהוזחטיכלמנסעפצקרשת",
+	"uk": "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ",
+}
+
+const LATIN_BASIC := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+## Cache of split alphabets, keyed by language code.
+var _alphabet_cache: Dictionary = {}
+
+
+## Return the ordered letters of a language's teaching alphabet.
+func get_alphabet(lang: String) -> PackedStringArray:
+	if _alphabet_cache.has(lang):
+		var cached: PackedStringArray = _alphabet_cache[lang]
+		return cached
+	var marked: String = ALPHABETS.get(lang, LATIN_BASIC)
+	var letters := GraphemeText.split(marked)
+	_alphabet_cache[lang] = letters
+	return letters
+
+
+## How many letters the language's alphabet has. Callers must use this to size
+## Letters mode instead of assuming 26 — Greek has 24, Hebrew 22, Czech 42 and
+## Ukrainian 33.
+func get_alphabet_length(lang: String) -> int:
+	return get_alphabet(lang).size()
+
+
+## Return the N-th letter of the alphabet for the given language.
+## Returns "" past the end. It deliberately does NOT wrap or repeat the final
+## letter: callers should ask for get_alphabet_length() items and no more.
 func get_alphabet_char(index: int, lang: String) -> String:
-	if lang == "el":
-		var greek_alphabet = "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"
-		if index >= 0 and index < greek_alphabet.length():
-			return greek_alphabet[index]
-		return greek_alphabet[greek_alphabet.length() - 1]
-	if lang == "he":
-		var hebrew_alphabet = "אבגדהוזחטיכלמנסעפצקרשת"
-		if index >= 0 and index < hebrew_alphabet.length():
-			return hebrew_alphabet[index]
-		return hebrew_alphabet[hebrew_alphabet.length() - 1]
-	if lang == "uk":
-		var ukrainian_alphabet = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"
-		if index >= 0 and index < ukrainian_alphabet.length():
-			return ukrainian_alphabet[index]
-		return ukrainian_alphabet[ukrainian_alphabet.length() - 1]
-	
-	# Default to Latin A-Z
-	return String.chr(65 + (index % 26))
+	var letters := get_alphabet(lang)
+	if index < 0 or index >= letters.size():
+		return ""
+	return letters[index]
 
 
 ## Returns flag texture(s) and whether it is a split flag.

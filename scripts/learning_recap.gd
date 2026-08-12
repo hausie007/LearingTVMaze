@@ -245,7 +245,13 @@ static func _letter_boundary(values: Array[String]) -> Dictionary:
 	var learning_lang := Config.get_effective_learning_language()
 	var ui_family := _alphabet_family(ui_lang)
 	var learning_family := _alphabet_family(learning_lang)
-	var use_ui_letters := ui_family == learning_family
+	# Same script family is not enough: Czech has 42 letters and English 26, so
+	# naming the boundary in the UI language only works if that alphabet is long
+	# enough to reach it. Otherwise fall back to the letters actually collected.
+	var use_ui_letters := (
+		ui_family == learning_family
+		and Config.get_alphabet_length(ui_lang) >= values.size()
+	)
 	var first_index := 0
 	var last_index := values.size() - 1
 	var first_value := Config.get_alphabet_char(first_index, ui_lang) if use_ui_letters else values[0]

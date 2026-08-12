@@ -24,8 +24,15 @@ const CollectibleScene = preload("res://scenes/collectible.tscn")
 ## Active collectibles keyed by grid position.
 var _collectibles: Dictionary = {}  # Dictionary<Vector2i, Collectible>
 
-## Next expected letter index in Words mode.
+## Next expected letter index in Words mode. This is a GRAPHEME index into
+## _word_graphemes, not a character index — Czech CH is one grapheme, two chars.
 var _word_next_index: int = 0
+
+## Graphemes of the current word, including separators (spaces, hyphens).
+var _word_graphemes: PackedStringArray = PackedStringArray()
+
+## Start character offset of each grapheme within the clean word.
+var _word_char_starts: PackedInt32Array = PackedInt32Array()
 var _next_collect_index: int = 0
 var _total_collectibles: int = 0
 var _game_style: String = Config.STYLE_PATH
@@ -50,6 +57,8 @@ func clear() -> void:
 			c.queue_free()
 	_collectibles.clear()
 	_word_next_index = 0
+	_word_graphemes = PackedStringArray()
+	_word_char_starts = PackedInt32Array()
 	_next_collect_index = 0
 	_total_collectibles = 0
 	_sequence.clear()
@@ -98,9 +107,38 @@ func check_collection(pos: Vector2i) -> bool:
 	return true
 
 
-## Return the current word next index (for HUD syncing in Words mode).
+## Return the next expected grapheme index (for HUD syncing in Words mode).
 func get_word_next_index() -> int:
 	return _word_next_index
+
+
+## Total graphemes in the current word, separators included.
+func get_word_grapheme_count() -> int:
+	return _word_graphemes.size()
+
+
+## True if a real word boundary (a space) lies in the given grapheme range.
+##
+## Needed because hyphens and apostrophes are also skipped when advancing, and
+## crossing one of those is NOT the end of a word — "TISZA-TÓ" should not be
+## announced as "TISZA-" partway through.
+func has_word_boundary_between(from_index: int, to_index: int) -> bool:
+	var start := maxi(from_index, 0)
+	var end := mini(to_index, _word_graphemes.size())
+	for i in range(start, end):
+		if _word_graphemes[i] == " ":
+			return true
+	return false
+
+
+## Translate a grapheme index into a character offset in the clean word, so
+## callers can substring it for partial-word speech.
+func get_word_char_offset(grapheme_index: int) -> int:
+	if grapheme_index <= 0:
+		return 0
+	if grapheme_index >= _word_char_starts.size():
+		return String(Config.current_word.get("word", "")).length()
+	return _word_char_starts[grapheme_index]
 
 func get_next_collect_index() -> int:
 	return _next_collect_index
@@ -122,9 +160,8 @@ func get_current_target() -> String:
 	if is_complete():
 		return ""
 	if Config.game_mode == Config.GameMode.WORDS:
-		var word_full: String = Config.current_word.get("word", "")
-		if _word_next_index >= 0 and _word_next_index < word_full.length():
-			return word_full[_word_next_index]
+		if _word_next_index >= 0 and _word_next_index < _word_graphemes.size():
+			return _word_graphemes[_word_next_index]
 		return ""
 
 	for col in _collectibles.values():
@@ -138,9 +175,8 @@ func get_current_target() -> String:
 func get_sequence_strings() -> Array[String]:
 	var result: Array[String] = []
 	if Config.game_mode == Config.GameMode.WORDS:
-		var word: String = Config.current_word.get("word", "")
-		for i in range(word.length()):
-			result.append(word[i])
+		for g in _word_graphemes:
+			result.append(g)
 	else:
 		for entry in _sequence:
 			result.append(String(entry.get("value", "")))
@@ -172,7 +208,10 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 	if L == 0:
 		return
 
-	var max_items: int = 26 if Config.game_mode == Config.GameMode.LETTERS else 50
+	var learning_lang: String = Config.get_effective_learning_language()
+	var max_items: int = 50
+	if Config.game_mode == Config.GameMode.LETTERS:
+		max_items = Config.get_alphabet_length(learning_lang)
 	var num_items: int = maxi(1, mini(max_items, int(float(L) / 3.0)))
 	_total_collectibles = num_items
 	var step: float = float(L) / float(num_items)
@@ -186,7 +225,7 @@ func _spawn_mode_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 		if Config.game_mode == Config.GameMode.NUMBERS:
 			val_str = str(i + 1)
 		elif Config.game_mode == Config.GameMode.LETTERS:
-			val_str = Config.get_alphabet_char(i, Config.get_effective_learning_language())
+			val_str = Config.get_alphabet_char(i, learning_lang)
 
 		_sequence.append({"cell": cell, "value": val_str, "index": i})
 
@@ -210,6 +249,13 @@ func _spawn_word_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 	if word.is_empty():
 		return
 
+	# Graphemes are resolved once at load in WordList; fall back to a plain
+	# per-character split if an entry somehow arrives without them.
+	_word_graphemes = word_data.get("graphemes", PackedStringArray())
+	if _word_graphemes.is_empty():
+		_word_graphemes = GraphemeText.split(word)
+	_word_char_starts = GraphemeText.char_starts(_word_graphemes)
+
 	var path_coords: Array[Vector2i] = maze.main_path_coords
 	var temp_path: Array[MazeData.CellData] = []
 	for coord in path_coords:
@@ -221,24 +267,29 @@ func _spawn_word_collectibles(maze: MazeData, renderer: MazeRenderer) -> void:
 	if L == 0:
 		return
 
-	var collectible_chars: Array[int] = []
-	for i in range(word.length()):
-		if word[i] != " ":
-			collectible_chars.append(i)
+	# Separators (space, apostrophe, hyphen) stay visible in the tracker but are
+	# never spawned as items to collect.
+	var collectible_graphemes: Array[int] = []
+	for i in range(_word_graphemes.size()):
+		if not GraphemeText.is_separator(_word_graphemes[i]):
+			collectible_graphemes.append(i)
 
-	var num_collectibles: int = collectible_chars.size()
+	var num_collectibles: int = collectible_graphemes.size()
 	if num_collectibles == 0:
 		return
 	_total_collectibles = num_collectibles
 
+	# A word could in principle open with a separator; start on a real letter.
+	_word_next_index = collectible_graphemes[0]
+
 	var step: float = float(L) / float(num_collectibles)
 
 	for i in range(num_collectibles):
-		var char_idx: int = collectible_chars[i]
+		var g_idx: int = collectible_graphemes[i]
 		var path_idx: int = int(i * step + (step / 2.0))
 		path_idx = mini(path_idx, L - 1)
 		var cell: MazeData.CellData = temp_path[path_idx]
-		_sequence.append({"cell": cell, "value": word[char_idx], "index": char_idx})
+		_sequence.append({"cell": cell, "value": _word_graphemes[g_idx], "index": g_idx})
 
 	_spawn_sequence(renderer)
 
@@ -277,9 +328,11 @@ func _collect_word_letter(col: Collectible, pos: Vector2i) -> bool:
 	_word_next_index += 1
 	_next_collect_index += 1
 
-	# Auto-advance through spaces
-	var word_full: String = Config.current_word.get("word", "")
-	while _word_next_index < word_full.length() and word_full[_word_next_index] == " ":
+	# Auto-advance past separators to the next collectible grapheme.
+	while (
+		_word_next_index < _word_graphemes.size()
+		and GraphemeText.is_separator(_word_graphemes[_word_next_index])
+	):
 		_word_next_index += 1
 
 	_reveal_next_symbol()

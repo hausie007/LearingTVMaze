@@ -6,6 +6,11 @@
 ##   words_{lang}_{difficulty}.json
 ## Each entry: {"word": "CAT", "emoji": "🐱"}
 ##
+## The source `word` may carry grapheme markers for letters spelled with more
+## than one character — {"word": "MOU[CH]A"}. Those are resolved once, here at
+## load time: callers receive a clean `word` ("MOUCHA") plus a `graphemes`
+## array (["M","O","U","CH","A"]). See grapheme_text.gd.
+##
 ## Falls back to English if the requested language file is missing.
 ## ---------------------------------------------------------------------------
 class_name WordList
@@ -64,7 +69,7 @@ static func _load_word_list(lang: String, difficulty: int) -> Array:
 					if data is Array:
 						for item in data:
 							if item is Dictionary:
-								item["lang"] = lang
+								_resolve_entry(item, lang)
 						return data
 		
 		# Not found at this difficulty, try one step easier
@@ -78,3 +83,16 @@ static func _load_word_list(lang: String, difficulty: int) -> Array:
 	
 	push_warning("WordList: No word lists found at all for %s up to diff %d." % [lang, difficulty])
 	return []
+
+
+## Normalise one loaded entry, in place.
+##
+## This is the ONLY place grapheme markers are resolved. Downstream code —
+## the HUD, the win screen, both game managers, every speech call — keeps
+## reading a clean `word` and never sees a bracket. Only the collectible
+## spawner reads `graphemes`.
+static func _resolve_entry(item: Dictionary, lang: String) -> void:
+	item["lang"] = lang
+	var marked := String(item.get("word", ""))
+	item["graphemes"] = GraphemeText.split(marked)
+	item["word"] = GraphemeText.strip(marked)

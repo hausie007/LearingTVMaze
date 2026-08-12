@@ -333,11 +333,10 @@ func _on_collectible_gathered(value_str: String, collect_index: int, lang: Strin
 
 			# Speak the whole word once when it is complete.
 			var next_idx: int = collectible_spawner.get_word_next_index()
-			var word_full: String = Config.current_word.get("word", "")
-			var word_complete: bool = (next_idx >= word_full.length())
+			var word_complete: bool = (next_idx >= collectible_spawner.get_word_grapheme_count())
 			if word_complete:
 				_speak_completed_word_once(lang)
-			elif next_idx > collect_index + 1:
+			elif collectible_spawner.has_word_boundary_between(collect_index + 1, next_idx):
 				_speak_completed_word_segment(next_idx, lang)
 		else:
 			TTS.speak(value_str, 0.85)
@@ -928,7 +927,9 @@ func _speak_completed_word_once(lang_override: String = "") -> void:
 	if phrase.is_empty():
 		return
 	_completed_word_spoken = true
-	_last_spoken_word_segment_end = phrase.length()
+	# Grapheme count, not character count — see _speak_completed_word_segment.
+	if collectible_spawner != null:
+		_last_spoken_word_segment_end = collectible_spawner.get_word_grapheme_count()
 	var word_lang: String = lang_override
 	if word_lang.is_empty():
 		word_lang = String(Config.current_word.get("lang", ""))
@@ -939,14 +940,16 @@ func _speak_completed_word_once(lang_override: String = "") -> void:
 			TTS.speak(phrase, 0.7, word_lang)
 	)
 
+## `segment_end` is a GRAPHEME index; the substring needs a character offset.
 func _speak_completed_word_segment(segment_end: int, lang_override: String = "") -> void:
-	if not Config.voice_hints:
+	if not Config.voice_hints or collectible_spawner == null:
 		return
 	var word_full: String = String(Config.current_word.get("word", ""))
-	var clamped_end := clampi(segment_end, 0, word_full.length())
+	var clamped_end := clampi(segment_end, 0, collectible_spawner.get_word_grapheme_count())
 	if clamped_end <= _last_spoken_word_segment_end:
 		return
-	var phrase := word_full.substr(0, clamped_end).strip_edges()
+	var char_end := collectible_spawner.get_word_char_offset(clamped_end)
+	var phrase := word_full.substr(0, char_end).strip_edges()
 	if phrase.is_empty():
 		return
 	_last_spoken_word_segment_end = clamped_end

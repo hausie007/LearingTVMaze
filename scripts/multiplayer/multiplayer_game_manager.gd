@@ -733,6 +733,15 @@ func _refresh_shared_hud() -> void:
 	hud.update_tracker(seq, current_idx, collected, lt, emoji)
 	_update_hud_mission_description()
 
+## Graphemes of the active word. Resolved at load by WordList; the split() call
+## is only a guard for entries that somehow arrive without them.
+func _current_word_graphemes() -> PackedStringArray:
+	var graphemes: PackedStringArray = Config.current_word.get("graphemes", PackedStringArray())
+	if graphemes.is_empty():
+		graphemes = GraphemeText.split(String(Config.current_word.get("word", "")))
+	return graphemes
+
+
 func _refresh_race_hud() -> void:
 	if hud == null:
 		return
@@ -746,8 +755,7 @@ func _refresh_race_hud() -> void:
 			if progress < seq_len:
 				display_idx = _race_sequence[progress].get("word_index", progress)
 			else:
-				var word_full := String(Config.current_word.get("word", ""))
-				display_idx = word_full.length()
+				display_idx = _current_word_graphemes().size()
 		hud.update_race_tracker(peer_id, display_idx, display_idx)
 
 
@@ -757,9 +765,8 @@ func _setup_race_hud() -> void:
 	# Build the per-player race sequence for the tracker display.
 	var seq: Array[String] = []
 	if Config.game_mode == Config.GameMode.WORDS:
-		var word: String = Config.current_word.get("word", "")
-		for i in range(word.length()):
-			seq.append(word[i])
+		for g in _current_word_graphemes():
+			seq.append(g)
 	else:
 		for item in _race_sequence:
 			seq.append(String(item.get("value", "")))
@@ -1500,14 +1507,17 @@ func _eligible_main_path_cells() -> Array[MazeData.CellData]:
 	return result
 
 func _build_race_symbol_sequence(path_cells: Array[MazeData.CellData]) -> void:
-	var max_items: int = 26 if Config.game_mode == Config.GameMode.LETTERS else 50
+	var learning_lang := Config.get_effective_learning_language()
+	var max_items: int = 50
+	if Config.game_mode == Config.GameMode.LETTERS:
+		max_items = Config.get_alphabet_length(learning_lang)
 	var item_count: int = maxi(1, mini(max_items, path_cells.size() / 3))
 	var step := float(path_cells.size()) / float(item_count)
 	for i in range(item_count):
 		var path_idx := mini(int(i * step + (step / 2.0)), path_cells.size() - 1)
 		var value := str(i + 1)
 		if Config.game_mode == Config.GameMode.LETTERS:
-			value = Config.get_alphabet_char(i, Config.get_effective_learning_language())
+			value = Config.get_alphabet_char(i, learning_lang)
 		_race_sequence.append({
 			"cell": path_cells[path_idx],
 			"value": value,
@@ -1521,21 +1531,24 @@ func _build_race_word_sequence(path_cells: Array[MazeData.CellData]) -> void:
 		return
 	Config.current_word = word_data
 	var word := String(word_data.get("word", ""))
-	var chars: Array[int] = []
-	for i in range(word.length()):
-		if word[i] != " ":
-			chars.append(i)
-	if chars.is_empty():
+	var graphemes: PackedStringArray = word_data.get("graphemes", PackedStringArray())
+	if graphemes.is_empty():
+		graphemes = GraphemeText.split(word)
+	var picks: Array[int] = []
+	for i in range(graphemes.size()):
+		if not GraphemeText.is_separator(graphemes[i]):
+			picks.append(i)
+	if picks.is_empty():
 		return
-	var step := float(path_cells.size()) / float(chars.size())
-	for i in range(chars.size()):
-		var char_idx := chars[i]
+	var step := float(path_cells.size()) / float(picks.size())
+	for i in range(picks.size()):
+		var g_idx := picks[i]
 		var path_idx := mini(int(i * step + (step / 2.0)), path_cells.size() - 1)
 		_race_sequence.append({
 			"cell": path_cells[path_idx],
-			"value": word[char_idx],
+			"value": graphemes[g_idx],
 			"index": i,
-			"word_index": char_idx,
+			"word_index": g_idx,
 		})
 
 func _race_word_difficulty() -> int:
