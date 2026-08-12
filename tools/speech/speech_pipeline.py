@@ -999,6 +999,227 @@ def cmd_process(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# listen — a human-readable copy of the clips, plus a page to review them in
+# --------------------------------------------------------------------------
+#
+# Shipped clips are content-addressed (clips/c8/c81f3a….mp3) so that "a" and "A"
+# cannot collide on a case-insensitive filesystem and so that no Android path
+# ever contains a non-ASCII character. That is right for the pack and hopeless
+# for a person: nobody can review a folder of hex.
+#
+# `listen` makes a throwaway copy under build/, named for what it says, with a
+# page that plays them in order and records the verdicts.
+
+LISTEN_PAGE = """<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>__TITLE__</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         margin: 0 auto; padding: 24px; max-width: 860px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { opacity: .65; margin-bottom: 20px; font-size: 14px; }
+  .bar { position: sticky; top: 0; padding: 12px 0; margin-bottom: 8px;
+         background: Canvas; border-bottom: 1px solid rgba(128,128,128,.3);
+         display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  input[type=text] { font: inherit; padding: 6px 8px; border-radius: 6px;
+                     border: 1px solid rgba(128,128,128,.5); background: Canvas; color: inherit; }
+  button { font: inherit; padding: 6px 12px; border-radius: 6px; cursor: pointer;
+           border: 1px solid rgba(128,128,128,.5); background: Canvas; color: inherit; }
+  button.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+  .count { margin-left: auto; opacity: .7; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { padding: 8px 6px; border-bottom: 1px solid rgba(128,128,128,.2); text-align: left;
+           vertical-align: middle; }
+  th { font-size: 13px; opacity: .7; font-weight: 600; }
+  tr.cur { background: rgba(37,99,235,.10); }
+  tr.approved td.v { color: #16a34a; font-weight: 600; }
+  tr.rejected td.v { color: #dc2626; font-weight: 600; }
+  .glyph { font-size: 22px; font-weight: 700; }
+  .spoken { font-size: 17px; }
+  .meta { font-size: 12px; opacity: .6; }
+  .flag { color: #b45309; font-size: 12px; }
+  .play { width: 40px; text-align: center; }
+  .note { width: 150px; }
+  kbd { font: 12px ui-monospace, monospace; border: 1px solid rgba(128,128,128,.5);
+        border-radius: 4px; padding: 1px 5px; }
+</style>
+
+<h1>__TITLE__</h1>
+<div class="sub">
+  Click a row to hear it. <kbd>space</kbd> replay &nbsp; <kbd>A</kbd> approve &nbsp;
+  <kbd>R</kbd> reject &nbsp; <kbd>↑</kbd><kbd>↓</kbd> move.
+  Listen on the television if you can, not on a laptop.
+</div>
+
+<div class="bar">
+  <label>Reviewer <input type="text" id="reviewer" placeholder="your name" size="18"></label>
+  <button id="playall">Play all</button>
+  <button class="primary" id="export">Download verdicts CSV</button>
+  <span class="count" id="count"></span>
+</div>
+
+<table>
+  <thead><tr>
+    <th></th><th>Shows</th><th>Says</th><th>Sounds like</th><th></th><th>Note</th>
+  </tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<script>
+const CLIPS = __DATA__;
+const LOCALE = "__LOCALE__";
+let cur = 0;
+const verdicts = {};
+try { Object.assign(verdicts, JSON.parse(localStorage.getItem("lm_" + LOCALE) || "{}")); } catch (e) {}
+const notes = {};
+try { Object.assign(notes, JSON.parse(localStorage.getItem("lm_n_" + LOCALE) || "{}")); } catch (e) {}
+
+const audio = new Audio();
+const tbody = document.getElementById("rows");
+
+function save() {
+  try {
+    localStorage.setItem("lm_" + LOCALE, JSON.stringify(verdicts));
+    localStorage.setItem("lm_n_" + LOCALE, JSON.stringify(notes));
+  } catch (e) {}
+}
+
+function render() {
+  tbody.innerHTML = "";
+  CLIPS.forEach((c, i) => {
+    const tr = document.createElement("tr");
+    tr.className = (i === cur ? "cur " : "") + (verdicts[c.key] || "");
+    tr.onclick = (ev) => { if (ev.target.tagName !== "INPUT") { cur = i; play(); render(); } };
+    tr.innerHTML =
+      '<td class="play">▶</td>' +
+      '<td class="glyph">' + c.display + '</td>' +
+      '<td class="spoken">' + c.spoken + '</td>' +
+      '<td class="meta">' + c.duration_ms + ' ms' +
+        (c.flag ? '<br><span class="flag">' + c.flag + '</span>' : '') + '</td>' +
+      '<td class="v">' + (verdicts[c.key] === "approved" ? "approved"
+                        : verdicts[c.key] === "rejected" ? "rejected" : "") + '</td>' +
+      '<td><input type="text" class="note" data-k="' + c.key + '" value="' +
+          (notes[c.key] || "").replace(/"/g, "&quot;") + '" placeholder="what was wrong"></td>';
+    tbody.appendChild(tr);
+  });
+  tbody.querySelectorAll("input.note").forEach(inp => {
+    inp.oninput = () => { notes[inp.dataset.k] = inp.value; save(); };
+  });
+  const done = CLIPS.filter(c => verdicts[c.key]).length;
+  document.getElementById("count").textContent =
+    done + " of " + CLIPS.length + " decided" +
+    (done === CLIPS.length ? " — export the CSV" : "");
+  const row = tbody.children[cur];
+  if (row) row.scrollIntoView({ block: "nearest" });
+}
+
+function play() { audio.src = CLIPS[cur].file; audio.play().catch(() => {}); }
+
+function decide(status) {
+  verdicts[CLIPS[cur].key] = status;
+  save();
+  if (cur < CLIPS.length - 1) { cur++; play(); }
+  render();
+}
+
+document.onkeydown = (e) => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === " ") { e.preventDefault(); play(); }
+  else if (e.key.toLowerCase() === "a") decide("approved");
+  else if (e.key.toLowerCase() === "r") decide("rejected");
+  else if (e.key === "ArrowDown") { e.preventDefault(); cur = Math.min(cur + 1, CLIPS.length - 1); play(); render(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); cur = Math.max(cur - 1, 0); play(); render(); }
+};
+
+document.getElementById("playall").onclick = () => {
+  cur = 0; play(); render();
+  audio.onended = () => {
+    if (cur < CLIPS.length - 1) { cur++; play(); render(); } else { audio.onended = null; }
+  };
+};
+
+document.getElementById("export").onclick = () => {
+  const who = document.getElementById("reviewer").value.trim();
+  const today = new Date().toISOString().slice(0, 10);
+  const esc = (s) => '"' + String(s == null ? "" : s).replace(/"/g, '""') + '"';
+  let csv = "key,spec_hash,status,reviewer,date,notes\\n";
+  CLIPS.forEach(c => {
+    if (!verdicts[c.key]) return;
+    csv += [c.key, c.spec_hash, verdicts[c.key], who, today, notes[c.key] || ""].map(esc).join(",") + "\\n";
+  });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+  a.download = "review_" + LOCALE + ".csv";
+  a.click();
+};
+
+render();
+</script>
+</html>
+"""
+
+
+def cmd_listen(args) -> int:
+    cat = load_catalog()
+    records = load_desired()
+    if args.language:
+        records = [r for r in records if r["lang"] in args.language]
+    classify(records)
+
+    ready = [r for r in records if r["status"] in ("unreviewed", "rejected", "approved")]
+    if args.pending:
+        ready = [r for r in ready if r["status"] != "approved"]
+    if not ready:
+        raise Fail("no processed clips to listen to — run `generate` and `process` first")
+
+    for locale in sorted({r["locale"] for r in ready}):
+        rows = [r for r in ready if r["locale"] == locale]
+        rows.sort(key=lambda r: (r["category"], r["key"]))
+        folder = BUILD / f"listen_{locale}"
+        if folder.exists():
+            shutil.rmtree(folder)
+        folder.mkdir(parents=True)
+
+        clips = []
+        for i, r in enumerate(rows, 1):
+            src = processed_path(r["render_hash"])
+            if not src.exists():
+                continue
+            # Numbered so the order is the alphabet's, and so that "a" and "A"
+            # cannot collide on a case-insensitive filesystem.
+            slug = r["key"].rsplit(".", 1)[-1]
+            dest = folder / f"{i:03d}_{slug}.mp3"
+            shutil.copy2(src, dest)
+
+            duration = int(round(probe_duration(src) * 1000)) if shutil.which("ffprobe") else 0
+            bounds = cat["categories"][r["category"]]["duration_ms"]
+            flag = ""
+            if duration and not (bounds["min"] <= duration <= bounds["max"]):
+                flag = "unusual length"
+            clips.append({
+                "key": r["key"], "spec_hash": r["spec_hash"],
+                "display": r["display_text"], "spoken": r["spoken_text"],
+                "file": dest.name, "duration_ms": duration, "flag": flag,
+            })
+
+        page = (LISTEN_PAGE
+                .replace("__TITLE__", f"Studio Voice review — {locale}")
+                .replace("__LOCALE__", locale)
+                .replace("__DATA__", json.dumps(clips, ensure_ascii=False, indent=1)))
+        (folder / "index.html").write_text(page, encoding="utf-8")
+
+        info(f"{locale}: {len(clips)} clips -> {rel(folder)}")
+        info(f"  open {rel(folder / 'index.html')}")
+
+    info("")
+    info("Listen, decide, then download the CSV from the page and run:")
+    info("  speech_pipeline.py review --import ~/Downloads/review_<locale>.csv")
+    return 0
+
+
+# --------------------------------------------------------------------------
 # review
 # --------------------------------------------------------------------------
 
@@ -1446,6 +1667,11 @@ def main(argv=None) -> int:
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
     sp.add_argument("--force", action="store_true", help="re-encode clips that already exist")
     sp.set_defaults(func=cmd_process)
+
+    sp = sub.add_parser("listen", help="named copies of the clips + a page to review them in")
+    sp.add_argument("--language", "-l", action="append", metavar="LANG")
+    sp.add_argument("--pending", action="store_true", help="skip clips already approved")
+    sp.set_defaults(func=cmd_listen)
 
     sp = sub.add_parser("review", help="export a review sheet, or import the verdicts")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")

@@ -33,6 +33,7 @@ python3 tools/speech/speech_pipeline.py doctor
 | `voices` | Lists account and library voices with their IDs | yes, free |
 | `generate` | Synthesises missing clips | **yes, billed** |
 | `process` | Trims, levels, encodes to shipping MP3 | no |
+| `listen` | Named copies of the clips + a page to review them in | no |
 | `review` | Exports a review sheet, then imports the verdicts | no |
 | `pack` | Writes `res://voices/<lang>/` from approved clips only | no |
 | `verify` | The CI gate — run before every commit | no |
@@ -49,10 +50,9 @@ python3 tools/speech/speech_pipeline.py plan --language cs
 python3 tools/speech/speech_pipeline.py generate --language cs --limit 12   # dry run
 python3 tools/speech/speech_pipeline.py generate --language cs --limit 12 --confirm
 python3 tools/speech/speech_pipeline.py process --language cs
-# listen to voice_masters/processed/…
-python3 tools/speech/speech_pipeline.py review --language cs
-# fill in the status column, then:
-python3 tools/speech/speech_pipeline.py review --import build/speech/review_cs-CZ.csv
+python3 tools/speech/speech_pipeline.py listen --language cs
+open build/speech/listen_cs-CZ/index.html      # decide, then download the CSV
+python3 tools/speech/speech_pipeline.py review --import ~/Downloads/review_cs-CZ.csv
 python3 tools/speech/speech_pipeline.py pack --language cs
 python3 tools/speech/speech_pipeline.py verify
 ```
@@ -60,6 +60,34 @@ python3 tools/speech/speech_pipeline.py verify
 `generate` without `--confirm` is always a dry run that prints the clips, the
 character count and the estimated cost. Get into the habit of running it that
 way first.
+
+## Listening to what came back
+
+Shipped clips are named by content hash — `clips/c8/c81f3a9b2e40.mp3` — so that
+`a` and `A` cannot collide on a case-insensitive filesystem and no Android path
+carries a non-ASCII character. Correct for the pack, useless for a person.
+
+`listen` solves that. It writes a throwaway folder under `build/speech/` with
+the clips copied out in alphabet order under readable names, plus an
+`index.html` that plays them and records verdicts:
+
+```bash
+python3 tools/speech/speech_pipeline.py listen --language cs
+open build/speech/listen_cs-CZ/index.html
+```
+
+The page shows what each clip is *supposed* to say — the glyph the child sees,
+the generation text, the duration, and any flag `process` raised. Click a row to
+hear it; <kbd>A</kbd> approves, <kbd>R</kbd> rejects and advances, <kbd>space</kbd>
+replays. "Play all" runs the set back to back, which is how a level or accent
+inconsistency actually reveals itself.
+
+Decisions survive a page reload. When you are done, download the CSV and import
+it. The folder is disposable — regenerate it whenever, nothing depends on it.
+
+Listen on the television, not a laptop. A laptop speaker flatters these clips
+and hides exactly the failure that matters: final consonants disappearing at
+three metres.
 
 ## Files
 
