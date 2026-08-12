@@ -2419,8 +2419,10 @@ def cmd_verify(args) -> int:
                 errors.append(f"{rel(path)} looks like it contains an API key")
                 break
 
-    # 6. Build outputs must not be exportable into the AAB.
-    for folder in (MASTERS, BUILD.parent):
+    # 6. Build inputs and outputs must not be exportable into the AAB.
+    #    data/speech is pipeline input the game never reads — and Godot will
+    #    happily import a review CSV as a translation if left to itself.
+    for folder in (MASTERS, BUILD.parent, SPEECH_SRC):
         if folder.exists():
             check(errors, (folder / ".gdignore").exists(),
                   f"{rel(folder)} has no .gdignore — Godot would import and export it")

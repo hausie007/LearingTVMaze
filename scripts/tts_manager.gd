@@ -111,6 +111,17 @@ func _main_tts_stop() -> void:
 	DisplayServer.tts_stop()
 
 
+## True while the OS voice is speaking, about to start, or still has segments
+## queued. SpeechManager needs this to interleave recorded clips with spoken
+## framing in the finish recap — it has to know when a spoken part has ended
+## before playing the next recorded one.
+func is_busy() -> bool:
+	_mutex.lock()
+	var busy := _main_tts_speaking or _speech_started or not _pending_segments.is_empty()
+	_mutex.unlock()
+	return busy
+
+
 func _is_tts_speaking() -> bool:
 	_mutex.lock()
 	var speaking := _main_tts_speaking

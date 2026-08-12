@@ -354,7 +354,10 @@ func _process(delta: float) -> void:
 		return
 
 	_wait_elapsed += delta
-	var speaking := DisplayServer.tts_is_speaking()
+	# tts_manager knows more than the display server does: it also counts the
+	# moment between asking the OS to speak and the OS admitting that it has,
+	# and any segments still queued behind this one.
+	var speaking := TTS.is_busy() or DisplayServer.tts_is_speaking()
 
 	if not _tts_has_started:
 		if speaking:
@@ -367,9 +370,9 @@ func _process(delta: float) -> void:
 		return
 
 	# tts_manager splits a segment on punctuation and speaks the pieces as
-	# separate utterances, so "speaking" dips false between them. Requiring the
-	# silence to persist keeps the queue from stepping over the rest of a
-	# sentence at its first comma.
+	# separate utterances, so even is_busy() dips false in the gap between two
+	# of them. Requiring the silence to persist keeps the queue from stepping
+	# over the rest of a sentence at its first full stop.
 	if speaking:
 		_silence_elapsed = 0.0
 	else:
