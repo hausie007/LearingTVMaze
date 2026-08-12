@@ -733,6 +733,17 @@ const ALPHABETS: Dictionary = {
 	"uk": "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ",
 }
 
+## Letters that occur inside words but are not part of the alphabet lesson.
+## Spawned in WORDS mode, never in LETTERS mode, and recorded either way —
+## Czech Á turns up in 56 of the 277 Czech words.
+##
+## These two tables are the whole definition of a language's letters. The
+## speech pipeline reads them from here rather than keeping its own copy, so
+## there is one list to edit and nothing to keep in step.
+const WORD_ONLY_LETTERS: Dictionary = {
+	"cs": "ÁÉĚÍÓÚŮÝ",
+}
+
 const LATIN_BASIC := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 ## Cache of split alphabets, keyed by language code.

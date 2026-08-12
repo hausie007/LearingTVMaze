@@ -341,12 +341,43 @@ language, and the phrasings are formatted with values inside them. Recording
 "you counted to seven" as one clip does not scale; the framing has to be split
 so the number stays a separate segment, which it already is.
 
+## Where a language's letters are defined
+
+In `scripts/game_config.gd`, once:
+
+```gdscript
+const ALPHABETS := {           # what LETTERS mode spawns
+    "cs": "ABCČDĎEFGH[CH]IJKLMNŇOPQRŘSŠTŤUVWXYZŽ",
+}
+const WORD_ONLY_LETTERS := {   # only ever seen inside words
+    "cs": "ÁÉĚÍÓÚŮÝ",
+}
+```
+
+`letters_<lang>.json` does not repeat that list. It says how each letter is
+pronounced and nothing else — id, display glyph, spoken name — and the pipeline
+reads the letters themselves from `game_config.gd`. The game cannot read
+`data/speech`, so the definition has to live on the game's side; keeping a
+second copy here and asserting the two agreed was a copy that did not need to
+exist.
+
+`verify` therefore checks the two halves fit rather than that two lists match:
+every letter the game uses has a pronunciation, and no pronunciation names a
+letter the game does not use.
+
+Czech is the case that motivated the split. It records 42 letters and spawns
+34: the long vowels are wrong to ask a four-year-old to distinguish in an
+alphabet lesson, and unavoidable inside words, where Á alone appears in 56 of
+the 277 entries.
+
 ## Adding a language
 
-1. Write `letters_<lang>.json` and `numbers_<lang>.json` — a native speaker
-   decides the letter names, not a transliteration.
-2. If its alphabet is not plain A–Z, add it to `ALPHABETS` in `game_config.gd`
-   using the same `[…]` syntax. `verify` will tell you if the two disagree.
+1. Add it to `ALPHABETS` in `game_config.gd` using the `[…]` syntax, and to
+   `WORD_ONLY_LETTERS` if its words contain letters the alphabet lesson should
+   skip. A language absent from both spawns plain A–Z.
+2. Write `letters_<lang>.json` and `numbers_<lang>.json` — a native speaker
+   decides the letter names, not a transliteration. `verify` names any letter
+   you missed.
 3. Set `enabled: true` for it in `catalog.json` and add a profile for its locale
    in `voice_profiles.json`.
 4. `extract`, then `plan`. Nothing is spent until `generate --confirm`.

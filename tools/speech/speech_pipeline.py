@@ -467,8 +467,9 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
                 items = [(cspec["key_format"].format(value=v), by_value[v]["display"],
                           by_value[v]["spoken"]) for v in range(lo, hi + 1)]
             elif category == "char":
+                spawned, extra = language_letters(lang)
+                names = {}
                 seen = set()
-                items = []
                 for letter in doc["letters"]:
                     lid = letter["id"]
                     if not re.fullmatch(r"[a-z0-9_]+", lid):
@@ -476,8 +477,21 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
                     if lid in seen:
                         raise Fail(f"{rel(source)}: duplicate letter id '{lid}'")
                     seen.add(lid)
-                    items.append((cspec["key_format"].format(id=lid),
-                                  letter["display"], letter["spoken"]))
+                    if letter["display"] in names:
+                        raise Fail(f"{rel(source)}: two entries for {letter['display']!r}")
+                    names[letter["display"]] = letter
+                items = []
+                for display in spawned + extra:
+                    letter = names.get(display)
+                    if letter is None:
+                        raise Fail(f"{rel(source)} has no entry for {display!r}, which "
+                                   f"game_config.gd says {lang} uses")
+                    items.append((cspec["key_format"].format(id=letter["id"]),
+                                  display, letter["spoken"]))
+                unused = [d for d in names if d not in spawned + extra]
+                if unused:
+                    raise Fail(f"{rel(source)} names letters {lang} does not use: "
+                               f"{', '.join(unused)} — add them to game_config.gd or remove them")
             else:
                 raise Fail(f"unknown category '{category}' in catalog.json")
 
@@ -2270,18 +2284,36 @@ SECRET_SKIP_DIRS = {".git", ".godot", "build", "voice_masters", "android", "_unu
 SECRET_SUFFIXES = {".gd", ".py", ".json", ".cfg", ".md", ".csv", ".sh", ".txt", ".tres", ".godot", ".yml", ".yaml"}
 
 
-def parse_gd_alphabets() -> dict:
-    """Pull the ALPHABETS const out of game_config.gd without running Godot."""
+def parse_gd_table(name: str) -> dict:
+    """Read one of game_config.gd's letter tables without running Godot.
+
+    The game and the pipeline need the same answer to "which letters does this
+    language have", and the game cannot read data/speech. So game_config.gd is
+    the single definition and this reads it, rather than keeping a second copy
+    here and asserting the two agree.
+    """
     if not GAME_CONFIG.exists():
         return {}
     text = GAME_CONFIG.read_text(encoding="utf-8")
-    match = re.search(r"const\s+ALPHABETS\s*:\s*Dictionary\s*=\s*\{(.*?)\n\}", text, re.S)
+    match = re.search(r"const\s+%s\s*:\s*Dictionary\s*=\s*\{(.*?)\n\}" % name, text, re.S)
     if not match:
         return {}
-    out = {}
-    for lang, alphabet in re.findall(r'"([a-z]{2})"\s*:\s*"([^"]*)"', match.group(1)):
-        out[lang] = alphabet
-    return out
+    return dict(re.findall(r'"([a-z]{2})"\s*:\s*"([^"]*)"', match.group(1)))
+
+
+LATIN_BASIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+def language_letters(lang: str):
+    """Every letter this language records, in order: alphabet first, then the
+    letters that only ever turn up inside words."""
+    alphabets = parse_gd_table("ALPHABETS")
+    word_only = parse_gd_table("WORD_ONLY_LETTERS")
+    if not alphabets and not word_only:
+        raise Fail("could not read ALPHABETS from scripts/game_config.gd")
+    spawned = grapheme_split(alphabets.get(lang, LATIN_BASIC))
+    extra = grapheme_split(word_only.get(lang, ""))
+    return spawned, extra
 
 
 def check(errors: list, condition: bool, message: str) -> None:
@@ -2343,47 +2375,36 @@ def cmd_verify(args) -> int:
                 warnings.append(f"{path.name}: {word!r} duplicates {seen[bare]!r} once markers are stripped")
             seen[bare] = word
 
-    # 3. The speech alphabet and the game's alphabet must be the same letters,
-    #    in the same order. This is the check that keeps a clip mapped to the
-    #    right pickup.
-    gd_alphabets = parse_gd_alphabets()
+    # 3. Every letter game_config.gd says a language uses must have a name
+    #    here, and nothing may name a letter the language does not use. There is
+    #    no longer a second copy of the alphabet to compare against — this file
+    #    supplies pronunciations and game_config.gd supplies the letters.
     for lang, spec in cat["languages"].items():
-        if not spec.get("enabled"):
+        if not spec.get("enabled") or "char" not in spec.get("categories", []):
             continue
         letters_file = SPEECH_SRC / f"letters_{lang}.json"
         if not letters_file.exists():
             errors.append(f"{lang} is enabled but {letters_file.name} is missing")
             continue
         doc = read_json(letters_file)
-        declared = doc.get("alphabet_string", "")
-        problem = grapheme_validate(declared)
-        check(errors, not problem, f"{letters_file.name}: alphabet_string — {problem}")
-        # alphabet_string is the Letters-mode set; the letters array also holds
-        # characters that only ever appear inside words. Compare like with like.
-        split = grapheme_split(declared)
-        displays = [l["display"] for l in doc["letters"] if l.get("letters_mode", True)]
-        if split != displays:
-            where = next((i for i, (a, b) in enumerate(zip(split, displays)) if a != b),
-                         min(len(split), len(displays)))
-            errors.append(
-                f"{letters_file.name}: alphabet_string has {len(split)} letters, the letters "
-                f"array has {len(displays)}; they first differ at position {where} — "
-                f"alphabet_string says {split[where] if where < len(split) else '(end)'!r}, "
-                f"letters says {displays[where] if where < len(displays) else '(end)'!r}")
-        gd_alphabet = gd_alphabets.get(lang)
-        if gd_alphabet is None:
-            check(errors, declared == "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                  f"{lang}: game_config.gd has no ALPHABETS entry, so the game uses plain A-Z, "
-                  f"but {letters_file.name} declares something else")
-        else:
-            check(errors, gd_alphabet == declared,
-                  f"{lang}: game_config.gd alphabet and {letters_file.name} alphabet_string differ")
+        spawned, extra = language_letters(lang)
+        named = {l["display"]: l for l in doc["letters"]}
+
+        for display in spawned + extra:
+            if display not in named:
+                errors.append(f"{letters_file.name} has no entry for {display!r}, "
+                              f"which game_config.gd says {lang} uses")
+        for display in named:
+            if display not in spawned + extra:
+                errors.append(f"{letters_file.name} names {display!r}, which is in neither "
+                              f"ALPHABETS nor WORD_ONLY_LETTERS for {lang}")
+
         for letter in doc["letters"]:
             check(errors, bool(letter.get("spoken", "").strip()),
                   f"{letters_file.name}: {letter.get('id')} has no spoken text")
             if letter.get("spoken", "").strip() == letter.get("display", ""):
-                warnings.append(f"{letters_file.name}: {letter['id']} spoken text is just the glyph "
-                                f"{letter['display']!r} — the engine will guess")
+                warnings.append(f"{letters_file.name}: {letter['id']} spoken text is just the "
+                                f"glyph {letter['display']!r} — the engine will guess")
 
     # 4. Numbers.
     for lang, spec in cat["languages"].items():

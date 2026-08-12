@@ -2,8 +2,7 @@
   "schema_version": 1,
   "lang": "en",
   "locale": "en-US",
-  "note": "Ordered English alphabet, 26 letters. 'spoken' uses pronunciation respellings rather than bare glyphs, because a provider sent a lone 'A' may say the article or spell the case. Z is 'zee' (en-US reference variant).",
-  "alphabet_string": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "note": "Which letters en has, and in what order, is defined once in scripts/game_config.gd — ALPHABETS for the alphabet lesson, WORD_ONLY_LETTERS for the ones that only turn up inside words. This file only says how each is pronounced. 'display' is what the collectible shows; 'spoken' is the generation text sent to the speech provider. Never send 'display' to the provider.",
   "letters": [
     { "id": "a", "display": "A", "spoken": "ay" },
     { "id": "b", "display": "B", "spoken": "bee" },
