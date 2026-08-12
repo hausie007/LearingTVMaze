@@ -32,6 +32,7 @@ const ICON_EXIT := "res://images/icons/i_find_the_exit.png"
 const ICON_RACE := "res://images/icons/i_race_to_the_center.png"
 const ICON_JOIN := "res://images/icons/i_join_game.png"
 const ICON_MAZE := "res://images/icons/i_just_maze.png"
+const HOME_SYMBOL := "🏠"
 
 var _current_slide: int = 0
 var _theme: ThemeLoader = null
@@ -42,7 +43,9 @@ var _anim_time: float = 0.0
 @onready var _title_label: Label = %TitleLabel
 @onready var _text_label: Label = %TextLabel
 @onready var _fineprint_label: Label = %FineprintLabel
+@onready var _fineprint_margin: MarginContainer = %FineprintMargin
 @onready var _page_label: Label = %PageLabel
+@onready var _back_btn: Button = %BackButton
 @onready var _left_btn: Button = %LeftButton
 @onready var _right_btn: Button = %RightButton
 
@@ -50,21 +53,15 @@ var _anim_time: float = 0.0
 func _ready() -> void:
 	_theme = Config.theme
 
+	_back_btn.pressed.connect(_on_back_pressed)
 	_left_btn.pressed.connect(_on_left_pressed)
 	_right_btn.pressed.connect(_on_right_pressed)
 
+	_back_btn.focus_mode = Control.FOCUS_ALL
 	_left_btn.focus_mode = Control.FOCUS_ALL
 	_right_btn.focus_mode = Control.FOCUS_ALL
+	_style_navigation_buttons()
 	UIHelpers.apply_medium(_fineprint_label)
-
-	# Configure explicit focus neighbors to enable natural D-pad navigation
-	_left_btn.focus_neighbor_right = _right_btn.get_path()
-	_left_btn.focus_neighbor_left = _left_btn.get_path()
-	_right_btn.focus_neighbor_left = _left_btn.get_path()
-	_right_btn.focus_neighbor_right = _right_btn.get_path()
-
-	# Initially focus the right button so TV focus starts active
-	_right_btn.grab_focus.call_deferred()
 
 	if is_layout_rtl():
 		_left_btn.text = ">"
@@ -72,6 +69,7 @@ func _ready() -> void:
 
 	_update_slide()
 	_apply_layout_shift()
+	call_deferred("_focus_next_button")
 
 
 func _apply_layout_shift() -> void:
@@ -92,41 +90,86 @@ func _apply_layout_shift() -> void:
 	var text_label: Label = get_node_or_null("%TextLabel")
 	var fineprint_label: Label = get_node_or_null("%FineprintLabel")
 	var icon_rect: TextureRect = get_node_or_null("%IconRect")
-	var vbox: VBoxContainer = get_node_or_null("CenterContainer/Panel/MainHBox/ContentMargin/VBox")
+	var vbox: VBoxContainer = get_node_or_null("CenterContainer/Panel/MainVBox/ContentMargin/VBox")
+	var main_vbox: VBoxContainer = get_node_or_null("CenterContainer/Panel/MainVBox")
+	var content_margin: MarginContainer = get_node_or_null("CenterContainer/Panel/MainVBox/ContentMargin")
+	var fineprint_margin: MarginContainer = _fineprint_margin
+	var nav_margin: MarginContainer = get_node_or_null("CenterContainer/Panel/MainVBox/NavMargin")
+	var nav_bar: HBoxContainer = get_node_or_null("CenterContainer/Panel/MainVBox/NavMargin/NavBar")
 
 	if panel == null or text_label == null or title_label == null:
 		return
 
 	if controls_mode != Config.ControlsMode.OFF:
 		panel.custom_minimum_size = Vector2(1280, 820)
+		if main_vbox:
+			main_vbox.add_theme_constant_override("separation", 8)
+		if content_margin:
+			content_margin.add_theme_constant_override("margin_left", 42)
+			content_margin.add_theme_constant_override("margin_top", 24)
+			content_margin.add_theme_constant_override("margin_right", 42)
+			content_margin.add_theme_constant_override("margin_bottom", 0)
+		if fineprint_margin:
+			fineprint_margin.custom_minimum_size = Vector2(0, 48)
+			fineprint_margin.add_theme_constant_override("margin_left", 42)
+			fineprint_margin.add_theme_constant_override("margin_top", 0)
+			fineprint_margin.add_theme_constant_override("margin_right", 42)
+			fineprint_margin.add_theme_constant_override("margin_bottom", 6)
+		if nav_margin:
+			nav_margin.add_theme_constant_override("margin_left", 42)
+			nav_margin.add_theme_constant_override("margin_right", 42)
+			nav_margin.add_theme_constant_override("margin_bottom", 16)
+		if nav_bar:
+			nav_bar.add_theme_constant_override("separation", 18)
 		if visual_container:
-			visual_container.custom_minimum_size = Vector2(0, 230)
+			visual_container.custom_minimum_size = Vector2(0, 190)
 		title_label.custom_minimum_size = Vector2(900, 56)
 		title_label.add_theme_font_size_override("font_size", 40)
 		text_label.custom_minimum_size = Vector2(900, 290)
 		text_label.add_theme_font_size_override("font_size", 33)
 		if fineprint_label:
-			fineprint_label.custom_minimum_size = Vector2(900, 48)
-			fineprint_label.add_theme_font_size_override("font_size", 19)
+			fineprint_label.custom_minimum_size = Vector2(900, 40)
+			fineprint_label.add_theme_font_size_override("font_size", 17)
 		if icon_rect:
-			icon_rect.custom_minimum_size = Vector2(230, 230)
+			icon_rect.custom_minimum_size = Vector2(210, 210)
 		if vbox:
-			vbox.add_theme_constant_override("separation", 18)
+			vbox.add_theme_constant_override("separation", 14)
+		_resize_nav_buttons(Vector2(112, 76), Vector2(176, 76), 50, 28)
 	else:
 		panel.custom_minimum_size = Vector2(1500, 900)
+		if main_vbox:
+			main_vbox.add_theme_constant_override("separation", 8)
+		if content_margin:
+			content_margin.add_theme_constant_override("margin_left", 52)
+			content_margin.add_theme_constant_override("margin_top", 36)
+			content_margin.add_theme_constant_override("margin_right", 52)
+			content_margin.add_theme_constant_override("margin_bottom", 0)
+		if fineprint_margin:
+			fineprint_margin.custom_minimum_size = Vector2(0, 56)
+			fineprint_margin.add_theme_constant_override("margin_left", 52)
+			fineprint_margin.add_theme_constant_override("margin_top", 0)
+			fineprint_margin.add_theme_constant_override("margin_right", 52)
+			fineprint_margin.add_theme_constant_override("margin_bottom", 8)
+		if nav_margin:
+			nav_margin.add_theme_constant_override("margin_left", 52)
+			nav_margin.add_theme_constant_override("margin_right", 52)
+			nav_margin.add_theme_constant_override("margin_bottom", 20)
+		if nav_bar:
+			nav_bar.add_theme_constant_override("separation", 26)
 		if visual_container:
-			visual_container.custom_minimum_size = Vector2(0, 300)
+			visual_container.custom_minimum_size = Vector2(0, 280)
 		title_label.custom_minimum_size = Vector2(1000, 66)
 		title_label.add_theme_font_size_override("font_size", 46)
 		text_label.custom_minimum_size = Vector2(1000, 300)
 		text_label.add_theme_font_size_override("font_size", 39)
 		if fineprint_label:
-			fineprint_label.custom_minimum_size = Vector2(1000, 52)
-			fineprint_label.add_theme_font_size_override("font_size", 22)
+			fineprint_label.custom_minimum_size = Vector2(1000, 44)
+			fineprint_label.add_theme_font_size_override("font_size", 20)
 		if icon_rect:
 			icon_rect.custom_minimum_size = Vector2(300, 300)
 		if vbox:
-			vbox.add_theme_constant_override("separation", 22)
+			vbox.add_theme_constant_override("separation", 18)
+		_resize_nav_buttons(Vector2(130, 86), Vector2(190, 86), 58, 32)
 
 
 func _process(delta: float) -> void:
@@ -138,18 +181,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		_on_back_pressed()
-
-	if event.is_action_pressed("ui_left"):
-		get_viewport().set_input_as_handled()
-		if not _left_btn.disabled:
-			_left_btn.grab_focus()
-		_on_left_pressed()
-
-	if event.is_action_pressed("ui_right"):
-		get_viewport().set_input_as_handled()
-		if not _right_btn.disabled:
-			_right_btn.grab_focus()
-		_on_right_pressed()
 
 
 func _update_slide() -> void:
@@ -201,13 +232,18 @@ func _update_slide() -> void:
 			_show_icon(_theme_player_texture(), 260)
 
 	var is_first := (_current_slide == 0)
-	_left_btn.disabled = is_first
-	_left_btn.modulate.a = 0.0 if is_first else 1.0
-	_right_btn.disabled = false
-	_right_btn.modulate.a = 1.0
+	var is_last := (_current_slide == SLIDES.size() - 1)
+	var focus_owner: Control = get_viewport().gui_get_focus_owner() if get_viewport() != null else null
+	_set_nav_button_enabled(_left_btn, not is_first)
+	_set_nav_button_enabled(_right_btn, not is_last)
 
-	if is_first and _left_btn.has_focus():
+	_configure_navigation_focus()
+	if is_last:
+		call_deferred("_focus_home_button")
+	elif is_first and focus_owner == _left_btn:
 		_right_btn.grab_focus()
+	elif focus_owner == null:
+		_focus_default_nav()
 
 	_update_animations()
 
@@ -758,10 +794,95 @@ func _on_right_pressed() -> void:
 	if _current_slide < SLIDES.size() - 1:
 		_current_slide += 1
 		_update_slide()
-	else:
-		_on_back_pressed()
 
 
 func _on_back_pressed() -> void:
 	TTS.stop()
 	get_tree().change_scene_to_file(Scenes.HOME)
+
+
+func _style_navigation_buttons() -> void:
+	UIHelpers.apply_style_to_button(_back_btn, UIColors.YELLOW)
+	UIHelpers.apply_style_to_button(_left_btn, UIColors.BLUE)
+	UIHelpers.apply_style_to_button(_right_btn, UIColors.GREEN)
+
+	_back_btn.text = HOME_SYMBOL
+	_back_btn.tooltip_text = tr("main_menu")
+	_back_btn.add_theme_font_override("font", UIHelpers.get_emoji_font())
+	_back_btn.add_theme_font_size_override("font_size", 42)
+	_left_btn.add_theme_font_size_override("font_size", 58)
+	_right_btn.add_theme_font_size_override("font_size", 58)
+	_page_label.add_theme_color_override("font_color", UIColors.TEXT_SECONDARY)
+	UIHelpers.apply_medium(_page_label)
+
+
+func _resize_nav_buttons(button_size: Vector2, page_size: Vector2, arrow_font_size: int, page_font_size: int) -> void:
+	if _back_btn != null:
+		_back_btn.custom_minimum_size = button_size
+		_back_btn.add_theme_font_size_override("font_size", int(float(arrow_font_size) * 0.78))
+	if _left_btn != null:
+		_left_btn.custom_minimum_size = button_size
+		_left_btn.add_theme_font_size_override("font_size", arrow_font_size)
+	if _right_btn != null:
+		_right_btn.custom_minimum_size = button_size
+		_right_btn.add_theme_font_size_override("font_size", arrow_font_size)
+	if _page_label != null:
+		_page_label.custom_minimum_size = page_size
+		_page_label.add_theme_font_size_override("font_size", page_font_size)
+
+
+func _set_nav_button_enabled(button: Button, enabled: bool) -> void:
+	if button == null:
+		return
+	button.disabled = not enabled
+	button.focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
+	button.mouse_filter = _nav_mouse_filter(enabled)
+	button.modulate = Color.WHITE if enabled else Color(1.0, 1.0, 1.0, 0.34)
+
+
+func _configure_navigation_focus() -> void:
+	if _back_btn == null or _left_btn == null or _right_btn == null:
+		return
+
+	var focusable: Array[Button] = [_back_btn]
+	if not _left_btn.disabled:
+		focusable.append(_left_btn)
+	if not _right_btn.disabled:
+		focusable.append(_right_btn)
+
+	for i in range(focusable.size()):
+		var button := focusable[i]
+		var visual_left := focusable[mini(focusable.size() - 1, i + 1)] if is_layout_rtl() else focusable[maxi(0, i - 1)]
+		var visual_right := focusable[maxi(0, i - 1)] if is_layout_rtl() else focusable[mini(focusable.size() - 1, i + 1)]
+		button.focus_neighbor_left = button.get_path_to(visual_left)
+		button.focus_neighbor_right = button.get_path_to(visual_right)
+		button.focus_neighbor_top = button.get_path_to(button)
+		button.focus_neighbor_bottom = button.get_path_to(button)
+
+
+func _nav_mouse_filter(active: bool) -> int:
+	if not active or UIHelpers.is_likely_tv():
+		return Control.MOUSE_FILTER_IGNORE
+	return Control.MOUSE_FILTER_STOP
+
+
+func _focus_default_nav() -> void:
+	if _current_slide == SLIDES.size() - 1 and _back_btn != null:
+		_back_btn.grab_focus()
+		return
+	if _right_btn != null and not _right_btn.disabled:
+		_right_btn.grab_focus()
+	elif _left_btn != null and not _left_btn.disabled:
+		_left_btn.grab_focus()
+	elif _back_btn != null:
+		_back_btn.grab_focus()
+
+
+func _focus_next_button() -> void:
+	if _right_btn != null and not _right_btn.disabled:
+		_right_btn.grab_focus()
+
+
+func _focus_home_button() -> void:
+	if _back_btn != null:
+		_back_btn.grab_focus()

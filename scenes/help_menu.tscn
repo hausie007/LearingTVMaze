@@ -55,52 +55,44 @@ custom_minimum_size = Vector2(1280, 820)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_help")
 
-[node name="MainHBox" type="HBoxContainer" parent="CenterContainer/Panel"]
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constant_override/separation = 20
-
-[node name="LeftButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
-theme_override_font_sizes/font_size = 84
-text = "<"
-flat = true
-
-[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/Panel/MainHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 40
-
-[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin"]
-layout_mode = 2
-theme_override_constant_override/separation = 22
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="VisualContainer" type="CenterContainer" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+[node name="ContentMargin" type="MarginContainer" parent="CenterContainer/Panel/MainVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 52
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/MainVBox/ContentMargin"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="VisualContainer" type="CenterContainer" parent="CenterContainer/Panel/MainVBox/ContentMargin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox/VisualContainer"]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/Panel/MainVBox/ContentMargin/VBox/VisualContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/MainVBox/ContentMargin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 66)
 layout_mode = 2
@@ -111,7 +103,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+[node name="TextLabel" type="Label" parent="CenterContainer/Panel/MainVBox/ContentMargin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 300)
 layout_mode = 2
@@ -122,33 +114,75 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="FineprintLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+[node name="FineprintMargin" type="MarginContainer" parent="CenterContainer/Panel/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 52
+theme_override_constants/margin_bottom = 8
+
+[node name="FineprintLabel" type="Label" parent="CenterContainer/Panel/MainVBox/FineprintMargin"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(800, 52)
+custom_minimum_size = Vector2(800, 44)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.68, 0.70, 0.76, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="PageLabel" type="Label" parent="CenterContainer/Panel/MainHBox/ContentMargin/VBox"]
+[node name="NavMargin" type="MarginContainer" parent="CenterContainer/Panel/MainVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 52
+theme_override_constants/margin_bottom = 20
+
+[node name="NavBar" type="HBoxContainer" parent="CenterContainer/Panel/MainVBox/NavMargin"]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel/MainVBox/NavMargin/NavBar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(130, 86)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_font_sizes/font_size = 42
+text = "Home"
+
+[node name="LeftButton" type="Button" parent="CenterContainer/Panel/MainVBox/NavMargin/NavBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 86)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_font_sizes/font_size = 58
+text = "<"
+
+[node name="PageLabel" type="Label" parent="CenterContainer/Panel/MainVBox/NavMargin/NavBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 86)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.48, 0.55, 1)
 theme_override_font_sizes/font_size = 32
 text = "1 / 13"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RightButton" type="Button" parent="CenterContainer/Panel/MainHBox"]
+[node name="RightButton" type="Button" parent="CenterContainer/Panel/MainVBox/NavMargin/NavBar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(130, 86)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.949, 0.788, 0.298, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
-theme_override_font_sizes/font_size = 84
+theme_override_font_sizes/font_size = 58
 text = ">"
-flat = true

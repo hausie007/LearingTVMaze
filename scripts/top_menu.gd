@@ -47,6 +47,7 @@ var _quit_no_button: Button = null
 
 # ── State ────────────────────────────────────────────────────────────────────
 var _input_locked: bool = true
+var _tv_ui: bool = false
 var _hosts: Array = []
 var _preserve_client_presence_on_exit: bool = false
 
@@ -55,6 +56,9 @@ var _preserve_client_presence_on_exit: bool = false
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	_tv_ui = UIHelpers.is_likely_tv()
+	if _tv_ui:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Input.warp_mouse(Vector2(-1, -1))
 	_build_layout()
 	_apply_dpad_layout()
@@ -75,13 +79,16 @@ func _ready() -> void:
 	_update_nearby_players_label(NetworkManager.get_nearby_player_count())
 	_update_replay_card_state()
 
-	# Focus the Play Now card
-	var play_now_card: Button = _cards.get(CARD_PLAY_NOW, null) as Button
-	if play_now_card != null:
-		play_now_card.grab_focus()
+	# Focus the Play Now card after the generated layout settles.
+	_focus_play_now(true)
+	call_deferred("_focus_play_now", true)
 
 	z_index = 0
-	get_tree().create_timer(0.2).timeout.connect(func(): _input_locked = false)
+	get_tree().create_timer(0.2).timeout.connect(func():
+		if _tv_ui:
+			_focus_play_now(false)
+		_input_locked = false
+	)
 
 	# OLED: home screen is a menu — release the wake lock.
 	DisplayServer.screen_set_keep_on(false)
@@ -462,7 +469,7 @@ func _update_join_card_visibility() -> void:
 
 	join_card.visible = has_hosts
 	join_card.disabled = not has_hosts
-	join_card.mouse_filter = Control.MOUSE_FILTER_STOP if has_hosts else Control.MOUSE_FILTER_IGNORE
+	join_card.mouse_filter = _card_mouse_filter(has_hosts)
 	join_card.focus_mode = Control.FOCUS_ALL if has_hosts else Control.FOCUS_NONE
 
 	if not has_hosts and focus_owner == join_card:
@@ -483,7 +490,7 @@ func _update_replay_card_state() -> void:
 	var focus_owner: Control = get_viewport().gui_get_focus_owner() if get_viewport() != null else null
 	replay_card.disabled = not can_replay
 	replay_card.focus_mode = Control.FOCUS_ALL if can_replay else Control.FOCUS_NONE
-	replay_card.mouse_filter = Control.MOUSE_FILTER_STOP if can_replay else Control.MOUSE_FILTER_IGNORE
+	replay_card.mouse_filter = _card_mouse_filter(can_replay)
 	replay_card.modulate = Color.WHITE if can_replay else Color(1.0, 1.0, 1.0, 0.42)
 	if not can_replay and focus_owner == replay_card:
 		var play_now: Button = _cards.get(CARD_PLAY_NOW, null) as Button
@@ -498,7 +505,7 @@ func _setup_play_together_card() -> void:
 	play_together.visible = true
 	play_together.disabled = false
 	play_together.focus_mode = Control.FOCUS_ALL
-	play_together.mouse_filter = Control.MOUSE_FILTER_STOP
+	play_together.mouse_filter = _card_mouse_filter(true)
 	
 	if play_together.has_method("set_horizontal_layout"):
 		play_together.call("set_horizontal_layout")
@@ -739,6 +746,13 @@ func _spacing() -> int:
 
 # ── Input ─────────────────────────────────────────────────────────────────────
 
+func _input(event: InputEvent) -> void:
+	if not _input_locked:
+		return
+	if _is_startup_navigation_event(event):
+		get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked: return
 	if not event.is_action_pressed("ui_cancel"): return
@@ -816,3 +830,35 @@ func _create_quit_dialog() -> void:
 	for button in [yes_button, _quit_no_button]:
 		button.focus_neighbor_top = button.get_path_to(button)
 		button.focus_neighbor_bottom = button.get_path_to(button)
+
+
+func _card_mouse_filter(active: bool) -> int:
+	if not active or _tv_ui:
+		return Control.MOUSE_FILTER_IGNORE
+	return Control.MOUSE_FILTER_STOP
+
+
+func _focus_play_now(force: bool = false) -> void:
+	var play_now: Button = _cards.get(CARD_PLAY_NOW, null) as Button
+	if play_now == null or not play_now.visible or play_now.disabled or play_now.focus_mode == Control.FOCUS_NONE:
+		return
+
+	if force:
+		play_now.grab_focus()
+		return
+
+	var focus_owner: Control = get_viewport().gui_get_focus_owner() if get_viewport() != null else null
+	var play_together: Button = _cards.get(CARD_PLAY_TOGETHER, null) as Button
+	if focus_owner == null or focus_owner == play_together:
+		play_now.grab_focus()
+
+
+func _is_startup_navigation_event(event: InputEvent) -> bool:
+	return (
+		event.is_action_pressed("ui_up") or
+		event.is_action_pressed("ui_down") or
+		event.is_action_pressed("ui_left") or
+		event.is_action_pressed("ui_right") or
+		event.is_action_pressed("ui_accept") or
+		event.is_action_pressed("ui_cancel")
+	)

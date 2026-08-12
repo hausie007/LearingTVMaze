@@ -37,7 +37,10 @@ func _ready() -> void:
 	# Internal focus animation
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
-	mouse_entered.connect(grab_focus)
+	if UIHelpers.is_likely_tv():
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+	else:
+		mouse_entered.connect(grab_focus)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
