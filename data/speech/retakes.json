@@ -3,11 +3,14 @@
   "languages": {
     "cs": {
       "learning.word.budova": {
-        "n": 3,
-        "reason": "v3 rejects previous_text; use a carrier word instead",
+        "n": 4,
+        "reason": "take 3 still not right; budova was also the last item on its original sheet, so surround it",
         "asked_on": "2026-08-12",
         "carrier_before": [
           "auto"
+        ],
+        "carrier_after": [
+          "kolo"
         ]
       },
       "learning.word.letadlo": {

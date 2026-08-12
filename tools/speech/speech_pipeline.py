@@ -2176,15 +2176,21 @@ def cmd_retake(args) -> int:
         if args.carrier:
             entry["carrier_before"] = list(args.carrier)
             entry.pop("previous_text", None)
+        if args.carrier_after:
+            entry["carrier_after"] = list(args.carrier_after)
+            entry.pop("next_text", None)
         entry["asked_on"] = time.strftime("%Y-%m-%d")
         info(f"  {lang} {key}  -> take {entry['n']}" + (f"  ({reason})" if reason else ""))
 
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     info("")
     info(f"{len(wanted)} clip(s) staged in {rel(path)}, one request each.")
-    if args.carrier:
-        info(f"Each is recorded after {', '.join(args.carrier)!r}, which is then discarded —")
-        info("a two-item sheet, whose cutting has one long gap and nothing to be ambiguous about.")
+    if args.carrier or args.carrier_after:
+        around = " and ".join(filter(None, [
+            f"after {', '.join(args.carrier)}" if args.carrier else "",
+            f"before {', '.join(args.carrier_after)}" if args.carrier_after else ""]))
+        info(f"Each is recorded {around}; those words are then discarded.")
+        info("Being neither first nor last is the position a sheet item is read best in.")
     else:
         info("No sheet, and therefore no cutting. Next: extract, then generate.")
     return 0
@@ -2604,6 +2610,9 @@ def main(argv=None) -> int:
     sp.add_argument("--carrier", action="append", metavar="WORD",
                     help="throwaway word spoken before the clip and then discarded, so the "
                          "take has a run-up; repeatable")
+    sp.add_argument("--carrier-after", action="append", metavar="WORD",
+                    help="throwaway word spoken after the clip, so it is not the last thing "
+                         "read — a reading trails off at its end; repeatable")
     sp.set_defaults(func=cmd_retake)
 
     sp = sub.add_parser("pack", help="write res://voices/<lang>/ from approved clips")
