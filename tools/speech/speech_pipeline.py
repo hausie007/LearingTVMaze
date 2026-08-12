@@ -1954,6 +1954,20 @@ def cmd_listen(args) -> int:
     ready = [r for r in records if r["status"] in ("unreviewed", "rejected", "approved")]
     if args.pending:
         ready = [r for r in ready if r["status"] != "approved"]
+
+    # A clip asked for and quietly absent is worse than an error. Say which,
+    # and say what would produce it.
+    waiting = {}
+    for r in records:
+        if r["status"] in ("missing", "generated", "unconfigured"):
+            waiting.setdefault(r["status"], []).append(r)
+    for status, group in sorted(waiting.items()):
+        needs = {"missing": "`generate`", "generated": "`process`",
+                 "unconfigured": "a voice_id in voice_profiles.json"}[status]
+        names = ", ".join(sorted(x["display_text"] for x in group)[:6])
+        warn(f"{len(group)} clip(s) not on the page because they are {status} "
+             f"— run {needs}: {names}{' …' if len(group) > 6 else ''}")
+
     if not ready:
         raise Fail("no processed clips to listen to — run `generate` and `process` first")
 
