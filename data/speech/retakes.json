@@ -3,9 +3,10 @@
   "languages": {
     "cs": {
       "learning.word.budova": {
-        "n": 1,
-        "reason": "at the end some weird sound-clipping",
-        "asked_on": "2026-08-12"
+        "n": 2,
+        "reason": "isolated take opened mid-word, no attack on the b",
+        "asked_on": "2026-08-12",
+        "previous_text": "Podívej se na obrázek."
       },
       "learning.word.letadlo": {
         "n": 1,

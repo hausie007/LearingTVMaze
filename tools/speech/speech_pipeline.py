@@ -336,8 +336,22 @@ def load_retakes(lang: str) -> dict:
     return doc.get("languages", {}).get(lang, {})
 
 
+def retake_context(entry: dict):
+    """The conditioning text recorded against a retake, if any.
+
+    A clip recorded on its own arrives with no run-up: the first Czech retake of
+    BUDOVA opened at -8 dBFS in its first frame, the /b/ already under way, where
+    a sheet take opens at -89 and rises into the word. previous_text gives the
+    model something to have just said, so it enters the word the way it would
+    have mid-sheet. It is never synthesised — only the clip's own text is.
+    """
+    keys = ("previous_text", "next_text")
+    context = {k: entry[k] for k in keys if entry.get(k)}
+    return context or None
+
+
 def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
-                retake: int = 0) -> dict:
+                retake: int = 0, context: dict = None) -> dict:
     if not spoken:
         raise Fail(f"{key} ({locale}) has empty spoken text")
     spec = {
@@ -363,6 +377,10 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         spec["retake"] = retake
         spec["synthesis_mode"] = "single"
         spec["sheet"] = None
+        # Conditioning text is not spoken, but it changes how the clip is
+        # delivered, so it belongs in the hash like any other input.
+        if context:
+            spec["context"] = context
     spec_hash = canonical_hash(spec)
     return {
         "key": key,
@@ -380,6 +398,7 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         }),
         "source": source,
         "retake": retake,
+        "context": context or None,
         "voice_configured": bool(profile.get("voice_id")),
     }
 
@@ -416,7 +435,8 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
                     spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
                     records.append(make_record(cat, profile, lang, locale, category, cspec,
                                                key, display, spoken, origin,
-                                               int(retakes.get(key, {}).get("n", 0))))
+                                               int(retakes.get(key, {}).get("n", 0)),
+                                               retake_context(retakes.get(key, {}))))
                 continue
 
             source = SPEECH_SRC / cspec["source"].format(lang=lang)
@@ -457,7 +477,8 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
                 spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
                 records.append(make_record(cat, profile, lang, locale, category, cspec,
                                            key, display, spoken, rel(source),
-                                           int(retakes.get(key, {}).get("n", 0))))
+                                           int(retakes.get(key, {}).get("n", 0)),
+                                           retake_context(retakes.get(key, {}))))
 
     records.sort(key=lambda r: (r["lang"], r["category"], r["key"]))
 
@@ -915,7 +936,7 @@ def cmd_generate(args) -> int:
         profile = profiles[r["locale"]]
         info(f"[{i}/{len(todo)}] {r['key']}  {r['spoken_text']!r}")
         try:
-            audio, request_id = tts_request(key, profile, r["spoken_text"])
+            audio, request_id = tts_request(key, profile, r["spoken_text"], r.get("context"))
         except Fail as exc:
             failed += 1
             warn(str(exc))
@@ -1480,7 +1501,7 @@ def generate_sheets(key: str, cat: dict, profiles: dict, groups: dict, args) -> 
     return ok, failed
 
 
-def tts_request(key: str, profile: dict, text: str):
+def tts_request(key: str, profile: dict, text: str, context: dict = None):
     import urllib.error
     import urllib.request
 
@@ -1495,6 +1516,9 @@ def tts_request(key: str, profile: dict, text: str):
         payload["seed"] = profile["seed"]
     if profile.get("pronunciation_dictionaries"):
         payload["pronunciation_dictionary_locators"] = profile["pronunciation_dictionaries"]
+    for field in ("previous_text", "next_text"):
+        if (context or {}).get(field):
+            payload[field] = context[field]
 
     url = (f"{API_BASE}/text-to-speech/{profile['voice_id']}"
            f"?output_format={profile.get('output_format', 'pcm_22050')}")
@@ -2100,6 +2124,8 @@ def cmd_retake(args) -> int:
         entry = doc["languages"].setdefault(lang, {}).setdefault(key, {"n": 0})
         entry["n"] = int(entry.get("n", 0)) + 1
         entry["reason"] = reason or entry.get("reason", "")
+        if args.previous_text:
+            entry["previous_text"] = args.previous_text
         entry["asked_on"] = time.strftime("%Y-%m-%d")
         info(f"  {lang} {key}  -> take {entry['n']}" + (f"  ({reason})" if reason else ""))
 
@@ -2518,6 +2544,9 @@ def main(argv=None) -> int:
     sp.add_argument("--rejected", action="store_true",
                     help="every clip currently marked rejected")
     sp.add_argument("--reason", help="recorded alongside the counter")
+    sp.add_argument("--previous-text", metavar="TEXT",
+                    help="text the model should behave as though it just said; "
+                         "not synthesised, but it gives an isolated clip a natural onset")
     sp.set_defaults(func=cmd_retake)
 
     sp = sub.add_parser("pack", help="write res://voices/<lang>/ from approved clips")
