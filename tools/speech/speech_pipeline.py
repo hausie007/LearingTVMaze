@@ -1283,6 +1283,16 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
         chosen = segments
         if gap_ms is not None and abs(gap_ms - min_gap * 1000) > 200:
             info(f"  (silence threshold solved to {gap_ms} ms for this sheet)")
+        if gap_ms is not None and gap_ms >= 400:
+            # Matching the item count is only correct if the reading contains
+            # exactly that many sounds. When the model throws in an extra one —
+            # a repeat, a stray syllable — the solver can only reach the right
+            # count by merging it into a neighbour, and it does that by raising
+            # the threshold. An unusually high threshold is therefore the
+            # symptom of a bad take rather than of a bad cut.
+            warn(f"this sheet needed a {gap_ms} ms silence threshold, well above the usual "
+                 "300-ish; that usually means the reading contains an extra sound which has "
+                 "been merged into a neighbouring item. Listen to the long clips in this group.")
 
     # However they were produced, the segments must be ordered and disjoint. This is
     # the invariant that stops one item containing a piece of its neighbour.
@@ -1835,6 +1845,49 @@ render();
 """
 
 
+def flag_clips(clips, measured, rate: int) -> None:
+    """Point the reviewer at the clips most likely to be wrong.
+
+    Two signals, both cheap and both learned from earlier rounds. A clip
+    holding more separate sounds than its text has words is the signature of a
+    neighbour bleeding in. And a clip much longer than others with the same
+    amount of text is either padded with silence or carrying something it
+    should not — compared against its own length group, because a three-letter
+    word is not three-sevenths of a seven-letter one.
+    """
+    by_length = {}
+    for idx, record, duration in measured:
+        if duration:
+            by_length.setdefault(len(record["spoken_text"]), []).append(duration)
+    typical = {n: sorted(v)[len(v) // 2] for n, v in by_length.items() if len(v) >= 3}
+
+    for idx, record, duration in measured:
+        master = master_path(record["spec_hash"])
+        notes = []
+        if master.exists():
+            samples = array.array("h")
+            raw = master.read_bytes()
+            samples.frombytes(raw[:len(raw) - len(raw) % 2])
+            levels, step = frame_levels(samples, rate)
+            if levels:
+                segs = segment_for_gap(runs_above(levels, max(max(levels) - 35.0, -55.0)),
+                                       levels, max(int(0.18 * rate / step), 1),
+                                       max(int(0.05 * rate / step), 1))
+                words = len(record["spoken_text"].split())
+                if len(segs) > words:
+                    notes.append(f"{len(segs)} sounds for {words} word(s) — check for a neighbour")
+                if segs and segs[0][0] * step / rate > 0.20:
+                    notes.append(f"{segs[0][0] * step / rate:.2f}s of silence first")
+
+        expected = typical.get(len(record["spoken_text"]))
+        if expected and duration > expected * 1.6:
+            notes.append("much longer than others this size")
+
+        if notes:
+            existing = clips[idx].get("flag") or ""
+            clips[idx]["flag"] = "; ".join(([existing] if existing else []) + notes)
+
+
 def cmd_listen(args) -> int:
     cat = load_catalog()
     records = load_desired()
@@ -1859,7 +1912,7 @@ def cmd_listen(args) -> int:
             shutil.rmtree(folder)
         folder.mkdir(parents=True)
 
-        clips = []
+        clips, measured = [], []
         for i, r in enumerate(rows, 1):
             src = processed_path(r["render_hash"])
             if not src.exists():
@@ -1875,11 +1928,14 @@ def cmd_listen(args) -> int:
             flag = ""
             if duration and not (bounds["min"] <= duration <= bounds["max"]):
                 flag = "unusual length"
+            measured.append((len(clips), r, duration))
             clips.append({
                 "key": r["key"], "spec_hash": r["spec_hash"],
                 "display": r["display_text"], "spoken": r["spoken_text"],
                 "file": dest.name, "duration_ms": duration, "flag": flag,
             })
+
+        flag_clips(clips, measured, rate=cat["master_format"]["sample_rate"])
 
         page = (LISTEN_PAGE
                 .replace("__TITLE__", f"Studio Voice review — {locale}")
