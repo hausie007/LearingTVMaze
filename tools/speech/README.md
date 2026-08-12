@@ -1,0 +1,144 @@
+# Studio Voice pipeline
+
+Generates the pre-recorded speech the game plays instead of device TTS, offline,
+ahead of time. New to this? Read `SETUP.md` first — account, key and choosing a
+voice. The design and its rationale are in
+`_ideas_/studio_voice_iteration_1_design.md`.
+
+```
+extract → plan → generate → process → review → pack → verify
+```
+
+**Only `generate` spends money, and only with `--confirm`.** Everything else is
+offline, free and safe to run in CI as often as you like. The whole pipeline is
+idempotent: re-running it does the work that is missing and nothing else.
+
+## Requirements
+
+Python 3.8+ and, for `process` only, ffmpeg (`brew install ffmpeg`). No
+third-party Python packages — deliberately, so this still runs on a clean
+machine years from now.
+
+```bash
+python3 tools/speech/speech_pipeline.py doctor
+```
+
+## The commands
+
+| Command | Does | Network |
+|---|---|---|
+| `doctor` | Checks tools, sources, profiles and the export guards | no |
+| `extract` | Enumerates every clip the catalog wants → `build/speech/desired.jsonl` | no |
+| `plan` | Diffs wanted against what exists; reports cost | no |
+| `voices` | Lists account and library voices with their IDs | yes, free |
+| `generate` | Synthesises missing clips | **yes, billed** |
+| `process` | Trims, levels, encodes to shipping MP3 | no |
+| `review` | Exports a review sheet, then imports the verdicts | no |
+| `pack` | Writes `res://voices/<lang>/` from approved clips only | no |
+| `verify` | The CI gate — run before every commit | no |
+
+Filters on most commands: `--language cs`, `--category char`, `--key
+learning.char.ch`, `--limit`, all repeatable.
+
+## A first run
+
+```bash
+python3 tools/speech/speech_pipeline.py extract
+python3 tools/speech/speech_pipeline.py plan --language cs
+# fill in voice_id in data/speech/voice_profiles.json — see SETUP.md
+python3 tools/speech/speech_pipeline.py generate --language cs --limit 12   # dry run
+python3 tools/speech/speech_pipeline.py generate --language cs --limit 12 --confirm
+python3 tools/speech/speech_pipeline.py process --language cs
+# listen to voice_masters/processed/…
+python3 tools/speech/speech_pipeline.py review --language cs
+# fill in the status column, then:
+python3 tools/speech/speech_pipeline.py review --import build/speech/review_cs-CZ.csv
+python3 tools/speech/speech_pipeline.py pack --language cs
+python3 tools/speech/speech_pipeline.py verify
+```
+
+`generate` without `--confirm` is always a dry run that prints the clips, the
+character count and the estimated cost. Get into the habit of running it that
+way first.
+
+## Files
+
+Checked in — the inputs, and the record of what was approved:
+
+```
+data/speech/
+  catalog.json          what to generate: languages, categories, formats, budgets
+  letters_<lang>.json   ordered alphabet: id, display glyph, spoken name
+  numbers_<lang>.json   1–50, written out in the language
+  voice_profiles.json   voice, model and settings per locale — NEVER a key
+  pronunciations/       per-locale corrections to the spoken text
+  reviews/              who approved which take, and when
+```
+
+Not checked in — reproducible, large, or both:
+
+```
+build/speech/           desired.jsonl, plan.json, review sheets
+voice_masters/raw/      the lossless masters from the provider
+voice_masters/processed/  encoded clips awaiting review
+voice_masters/generation_ledger.jsonl   append-only: every request ever made
+```
+
+Shipped:
+
+```
+voices/<lang>/manifest.json
+voices/<lang>/clips/7f/7f47f13c9f2a.mp3
+```
+
+Both `build/` and `voice_masters/` carry a `.gdignore` so Godot never imports or
+exports them, and `verify` fails if either goes missing. Masters must not reach
+the AAB.
+
+## How it decides what to regenerate
+
+Every clip carries two hashes.
+
+**`spec_hash`** covers everything that decides how the synthesised master
+sounds: the spoken text, locale, model, voice, voice settings, seed,
+pronunciation dictionaries and master format. Change any of them and the clip is
+`missing` again and must be re-synthesised.
+
+**`render_hash`** is `spec_hash` plus the processing chain and the shipped
+codec. Change the bitrate or the loudness target and the clip is re-encoded from
+the archived master — no network, no cost.
+
+That split is the reason masters are kept: deciding in Phase 6 that 32 kbps is
+too low costs nothing but CPU.
+
+Review approval is bound to `spec_hash`, so it applies to the exact take that
+was heard. Edit a letter name and its approval does not carry over to the new
+recording. That is intentional and should not be worked around.
+
+## What `verify` checks
+
+- Language sets agree across `game_config.gd`, `project.godot`,
+  `translations.csv`, the word filenames and `catalog.json`, and every language
+  has all seven difficulty tiers.
+- Every word file parses, has an emoji, and has valid `[…]` markers; near
+  duplicates that differ only by markers are flagged.
+- `letters_<lang>.json`'s `alphabet_string` matches `game_config.gd`'s alphabet
+  exactly — same letters, same order. This is what keeps a clip attached to the
+  right pickup.
+- Numbers cover the declared range and are written out, not left as digits.
+- No file in the repo contains anything key-shaped.
+- `build/` and `voice_masters/` still have their `.gdignore`.
+- Every shipped manifest points at files that exist and hash as recorded.
+- With `--strict`: no gameplay code calls `TTS.speak()` directly. Leave this off
+  until Phase 5 introduces `SpeechManager`; today it correctly reports the seven
+  call sites still to migrate.
+
+## Adding a language
+
+1. Write `letters_<lang>.json` and `numbers_<lang>.json` — a native speaker
+   decides the letter names, not a transliteration.
+2. If its alphabet is not plain A–Z, add it to `ALPHABETS` in `game_config.gd`
+   using the same `[…]` syntax. `verify` will tell you if the two disagree.
+3. Set `enabled: true` for it in `catalog.json` and add a profile for its locale
+   in `voice_profiles.json`.
+4. `extract`, then `plan`. Nothing is spent until `generate --confirm`.

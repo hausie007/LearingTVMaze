@@ -9,3 +9,12 @@
 
 # macOS
 .DS_Store
+
+# Studio Voice — generated audio and build reports.
+# The masters are large, reproducible from the ledger, and must never reach the
+# AAB; the .gdignore files stop Godot importing or exporting either folder and
+# are the only thing kept from them.
+/voice_masters/*
+!/voice_masters/.gdignore
+/build/*
+!/build/.gdignore
