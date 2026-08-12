@@ -715,13 +715,19 @@ func get_auto_detected_language() -> String:
 
 
 ## Teaching alphabets, in the "[]"-marked grapheme syntax (see grapheme_text.gd).
-## A bracketed run is ONE letter: Czech CH is the 15th letter of its alphabet,
-## not a C followed by an H.
+## A bracketed run is ONE letter: Czech CH is one letter, not a C then an H.
+##
+## This is what LETTERS mode spawns, which is not the same thing as every
+## letter the language writes. Czech omits its long vowels here — asking a
+## four-year-old meeting the alphabet to tell Á from A as two collectibles
+## teaches the wrong lesson — but Á, Í and the rest still appear constantly
+## inside words, so Words mode spawns them and they stay recorded.
+## data/speech/letters_cs.json holds both sets and marks which is which.
 ##
 ## Languages absent from this table fall back to plain Latin A–Z, which is the
 ## behaviour every language had before this table existed.
 const ALPHABETS: Dictionary = {
-	"cs": "AÁBCČDĎEÉĚFGH[CH]IÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ",
+	"cs": "ABCČDĎEFGH[CH]IJKLMNŇOPQRŘSŠTŤUVWXYZŽ",
 	"el": "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",
 	"he": "אבגדהוזחטיכלמנסעפצקרשת",
 	"uk": "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ",

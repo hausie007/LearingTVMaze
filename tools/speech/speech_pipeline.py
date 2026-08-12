@@ -2358,8 +2358,10 @@ def cmd_verify(args) -> int:
         declared = doc.get("alphabet_string", "")
         problem = grapheme_validate(declared)
         check(errors, not problem, f"{letters_file.name}: alphabet_string — {problem}")
+        # alphabet_string is the Letters-mode set; the letters array also holds
+        # characters that only ever appear inside words. Compare like with like.
         split = grapheme_split(declared)
-        displays = [l["display"] for l in doc["letters"]]
+        displays = [l["display"] for l in doc["letters"] if l.get("letters_mode", True)]
         if split != displays:
             where = next((i for i, (a, b) in enumerate(zip(split, displays)) if a != b),
                          min(len(split), len(displays)))
