@@ -719,6 +719,12 @@ def cmd_plan(args) -> int:
     if orphans:
         info(f"  {'orphaned':12s} {len(orphans):5d}  (files no longer wanted; nothing is deleted automatically)")
 
+    drafts = sorted({r["lang"] for r in records if _source_is_draft(r["lang"])})
+    if drafts:
+        info("")
+        info(f"  DRAFT source data: {', '.join(drafts)} — letter and number names in these")
+        info("  languages have not been read by a native speaker yet.")
+
     if counts["unconfigured"]:
         info("")
         info("  No voice_id set yet for at least one locale. Fill it in data/speech/voice_profiles.json —")
@@ -862,6 +868,14 @@ def generate_with_carrier(key: str, profile: dict, record: dict, cat: dict):
     return cuts[len(before)], request_id, text
 
 
+def _source_is_draft(lang: str) -> bool:
+    for name in (f"letters_{lang}.json", f"numbers_{lang}.json"):
+        path = SPEECH_SRC / name
+        if path.exists() and "DRAFT" in str(read_json(path).get("source_review", "")).upper():
+            return True
+    return False
+
+
 def cmd_generate(args) -> int:
     ensure_guards()
     cat = load_catalog()
@@ -958,6 +972,16 @@ def cmd_generate(args) -> int:
             "Narrow with --language/--category/--limit, or raise it deliberately with --max-characters."
         )
     billable = chars > 0
+    # Draft source data is the expensive mistake: wrong letter names are only
+    # discovered after they have been generated, reviewed and rejected.
+    drafts = sorted({r["lang"] for r in todo + [x for g in sheet_groups.values() for x in g]
+                     if _source_is_draft(r["lang"])})
+    if drafts:
+        info("")
+        for lang in drafts:
+            warn(f"{lang} letter or number names are still marked DRAFT — a native speaker "
+                 "should read them before you pay to record them")
+
     if args.dry_run or (billable and not args.confirm):
         info("")
         if billable:

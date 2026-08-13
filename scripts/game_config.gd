@@ -728,6 +728,9 @@ func get_auto_detected_language() -> String:
 ## behaviour every language had before this table existed.
 const ALPHABETS: Dictionary = {
 	"cs": "ABCČDĎEFGH[CH]IJKLMNŇOPQRŘSŠTŤUVWXYZŽ",
+	"de": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+	"pl": "ABCĆDEFGHIJKLŁMNŃOPRSŚTUWYZŹŻ",
+	"sk": "ABCČD[DZ][DŽ]ĎEFGH[CH]IJKLĽMNŇOPQRSŠTŤUVWXYZŽ",
 	"el": "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",
 	"he": "אבגדהוזחטיכלמנסעפצקרשת",
 	"uk": "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ",
@@ -742,6 +745,9 @@ const ALPHABETS: Dictionary = {
 ## there is one list to edit and nothing to keep in step.
 const WORD_ONLY_LETTERS: Dictionary = {
 	"cs": "ÁÉĚÍÓÚŮÝ",
+	"de": "ÄÖÜß",
+	"pl": "ĄĘÓ",
+	"sk": "ÁÄÉÍĹŔÓÔÚÝ",
 }
 
 const LATIN_BASIC := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

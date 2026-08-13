@@ -74,6 +74,105 @@
       "reviewed_by": null,
       "reviewed_on": null,
       "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J. STILL TO DECIDE: this currently shares the Czech voice. A Czech-trained voice reading English letter names will carry an accent into exactly the content where clarity matters most, so pick a separate en-US voice before generating this locale."
+    },
+    "de-DE": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "de",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "Needs its own voice — native to de-DE, warm, calm, adult. `speech_pipeline.py voices --language de` lists candidates; see SETUP.md for what to listen for."
+    },
+    "sk-SK": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "sk",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "Needs its own voice — native to sk-SK, warm, calm, adult. `speech_pipeline.py voices --language sk` lists candidates; see SETUP.md for what to listen for."
+    },
+    "pl-PL": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "pl",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "Needs its own voice — native to pl-PL, warm, calm, adult. `speech_pipeline.py voices --language pl` lists candidates; see SETUP.md for what to listen for."
     }
   },
   "field_notes": {

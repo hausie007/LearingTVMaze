@@ -62,7 +62,7 @@
     },
     "sk": {
       "locale": "sk-SK",
-      "enabled": false,
+      "enabled": true,
       "categories": [
         "number",
         "char"
@@ -70,7 +70,7 @@
     },
     "pl": {
       "locale": "pl-PL",
-      "enabled": false,
+      "enabled": true,
       "categories": [
         "number",
         "char"
@@ -78,7 +78,7 @@
     },
     "de": {
       "locale": "de-DE",
-      "enabled": false,
+      "enabled": true,
       "categories": [
         "number",
         "char"
