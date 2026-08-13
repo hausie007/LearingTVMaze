@@ -36,7 +36,9 @@
         "min": 250,
         "max": 4000
       },
-      "note": "Every vocabulary word across all seven difficulty tiers. Only the 'word' field is read — the emoji is a picture hint on screen and never reaches a recording. Grapheme markers are stripped, so MOU[CH]A is recorded as moucha. Sent lowercase: an all-capitals word invites the model to spell it out."
+      "note": "Every vocabulary word across all seven difficulty tiers. Only the 'word' field is read — the emoji is a picture hint on screen and never reaches a recording. Grapheme markers are stripped, so MOU[CH]A is recorded as moucha. Sent lowercase: an all-capitals word invites the model to spell it out.",
+      "prefixes": true,
+      "prefixes_note": "Multi-word entries are announced as the child crosses each space — THIS, THIS IS, THIS IS GOOD — so the partial phrases are recorded as well. Cumulative rather than word by word: a phrase of n words has n-1 prefixes but n words, and prefixes share their openings across entries, so it is both fewer clips and exactly the strings the game already asks for. They cannot be cut from the full recording — fluent speech leaves no silence between words to cut at."
     },
     "ui": {
       "priority": 2,

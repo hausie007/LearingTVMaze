@@ -307,6 +307,28 @@ def word_items(cat: dict, lang: str, cspec: dict):
     for display in sorted(found):
         slugs.setdefault(word_slug(display), []).append(display)
 
+    # The mid-phrase narration speaks what has been spelled so far: THIS, then
+    # THIS IS, then THIS IS GOOD. Those partial phrases need recording too, or
+    # every multi-word entry drops to the device voice halfway through.
+    #
+    # They cannot be trimmed out of the full recording. Fluent speech puts no
+    # silence between words — "čokoládový dort" runs together — so there is no
+    # boundary to cut at, and a splitter forced to find one invents it.
+    #
+    # Cumulative prefixes rather than individual words: a phrase of n words has
+    # n-1 prefixes and n words, and prefixes also share their openings across
+    # entries. Fewer clips, and the game already speaks exactly these strings,
+    # so nothing in it has to change.
+    if cspec.get("prefixes"):
+        for display in sorted(list(found)):
+            parts = display.split()
+            for count in range(1, len(parts)):
+                prefix = " ".join(parts[:count])
+                if prefix in found:
+                    continue
+                found[prefix] = ("", "derived prefix")
+                slugs.setdefault(word_slug(prefix), []).append(prefix)
+
     items = []
     for slug, group in sorted(slugs.items()):
         for display in group:
@@ -1019,8 +1041,20 @@ def cmd_generate(args) -> int:
         members = [x for x in all_records
                    if x["locale"] == ident[0] and x["category"] == ident[1]
                    and x.get("synthesis_mode") == "sheet" and not x.get("retake")]
-        if any(m["status"] == "missing" for m in members) or args.force:
-            sheet_groups[ident] = members
+        # Only what is actually missing goes into the sheet.
+        #
+        # This used to re-read the whole category whenever one member was
+        # absent, on the reasoning that a sheet must be read whole. That
+        # confused two things: a sheet must be *cut* whole, but there is no
+        # need for it to contain everything the category has. Adding 65 phrase
+        # prefixes was about to re-record all 342 Czech words — 31 cents
+        # instead of 6, and 277 approvals to re-check for no reason.
+        #
+        # Sheets are already chunked into sixteens, so a new chunk is no less
+        # consistent than the chunk boundaries the pack already has.
+        wanted = members if args.force else [m for m in members if m["status"] == "missing"]
+        if wanted:
+            sheet_groups[ident] = wanted
 
     todo = [r for r in records if r["status"] == "missing"
             and (r.get("retake") or r.get("synthesis_mode") != "sheet")]
