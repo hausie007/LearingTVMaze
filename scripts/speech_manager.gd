@@ -230,10 +230,17 @@ func speak_segments(segments: Array) -> void:
 				key = _resolve_key(lang, text)
 			if not key.is_empty():
 				step["stream"] = _stream_for(lang, key)
-		# Nothing recorded and no voice installed for this language: skip it
-		# rather than stand in silence waiting for speech that cannot happen.
+		# Nothing recorded and no voice installed for this language. Skipping
+		# just this segment was wrong: a recap is one sentence, and dropping a
+		# word out of the middle leaves "we found letters from … to …" with
+		# nothing where the letters should be. A Czech menu with Greek content
+		# on a device with no Greek voice is the case that shows it.
+		#
+		# Better to say nothing than to say a sentence with holes in it.
 		if step["stream"] == null and TTS.tts_ready and not TTS.is_available(lang):
-			continue
+			_queue.clear()
+			print_verbose("Speech: recap skipped — no way to speak %s" % lang)
+			return
 		_queue.append(step)
 
 	if _queue.is_empty():
