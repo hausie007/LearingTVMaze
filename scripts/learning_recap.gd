@@ -14,6 +14,7 @@ const TYPE_WORDS := "words"
 const TARGET_MARKER := "__LEARNING_RECAP_TARGET__"
 const FIRST_MARKER := "__LEARNING_RECAP_FIRST__"
 const LAST_MARKER := "__LEARNING_RECAP_LAST__"
+const CONTEXT_MARKER := "__LEARNING_RECAP_CONTEXT__"
 
 
 static func build(game_mode: int, sequence: Array[String], word: String = "", word_lang: String = "") -> Dictionary:
@@ -99,10 +100,10 @@ static func _number_segments(values: Array[String], learning_context: String, sh
 	var learning_lang := Config.get_effective_learning_language()
 	var last_value := values[values.size() - 1]
 	var intro_key := "recap_tts_counted_to_lang" if show_language else "recap_tts_counted_to"
-	var intro_args: Array = [learning_context, last_value] if show_language else [last_value]
-	var segments: Array[Dictionary] = [
-		_segment(_fmt(intro_key, intro_args), ui_lang, 0.82, 180),
-	]
+	var intro_args: Array = [CONTEXT_MARKER, LAST_MARKER] if show_language else [LAST_MARKER]
+	var segments: Array[Dictionary] = []
+	_append_marked(segments, _fmt(intro_key, intro_args), _marks(
+		show_language, learning_context, ui_lang, [[LAST_MARKER, last_value, learning_lang]]))
 	for value in values:
 		segments.append(_segment(value, learning_lang, 0.78, 90))
 	return segments
@@ -116,26 +117,21 @@ static func _letter_segments(values: Array[String], boundary: Dictionary) -> Arr
 	var last_value := String(boundary.get("last", values[values.size() - 1]))
 	var learning_context := String(boundary.get("learning_context", ""))
 	var show_language := bool(boundary.get("show_language", false))
-	var boundary_is_ui := boundary_lang == ui_lang
 	var segments: Array[Dictionary] = []
+	# Marked whether or not the boundary letters are in the UI language. The
+	# result is identical when they are, and it keeps the framing as its own
+	# segments, which is the only form a recording can match.
 	if values.size() == 1:
-		if boundary_is_ui:
-			var key := "recap_tts_found_letter_lang" if show_language else "recap_tts_found_letter"
-			var args: Array = [learning_context, first_value] if show_language else [first_value]
-			segments.append(_segment(_fmt(key, args), ui_lang, 0.82, 180))
-		else:
-			var key := "recap_tts_found_letter_lang" if show_language else "recap_tts_found_letter"
-			var args: Array = [learning_context, FIRST_MARKER] if show_language else [FIRST_MARKER]
-			_append_one_marker_segments(segments, _fmt(key, args), FIRST_MARKER, first_value, boundary_lang)
+		var key := "recap_tts_found_letter_lang" if show_language else "recap_tts_found_letter"
+		var args: Array = [CONTEXT_MARKER, FIRST_MARKER] if show_language else [FIRST_MARKER]
+		_append_marked(segments, _fmt(key, args), _marks(
+			show_language, learning_context, ui_lang, [[FIRST_MARKER, first_value, boundary_lang]]))
 	else:
-		if boundary_is_ui:
-			var key := "recap_tts_found_letters_lang" if show_language else "recap_tts_found_letters"
-			var args: Array = [learning_context, first_value, last_value] if show_language else [first_value, last_value]
-			segments.append(_segment(_fmt(key, args), ui_lang, 0.82, 180))
-		else:
-			var key := "recap_tts_found_letters_lang" if show_language else "recap_tts_found_letters"
-			var args: Array = [learning_context, FIRST_MARKER, LAST_MARKER] if show_language else [FIRST_MARKER, LAST_MARKER]
-			_append_two_marker_segments(segments, _fmt(key, args), FIRST_MARKER, first_value, LAST_MARKER, last_value, boundary_lang)
+		var key := "recap_tts_found_letters_lang" if show_language else "recap_tts_found_letters"
+		var args: Array = [CONTEXT_MARKER, FIRST_MARKER, LAST_MARKER] if show_language else [FIRST_MARKER, LAST_MARKER]
+		_append_marked(segments, _fmt(key, args), _marks(
+			show_language, learning_context, ui_lang,
+			[[FIRST_MARKER, first_value, boundary_lang], [LAST_MARKER, last_value, boundary_lang]]))
 	for value in values:
 		segments.append(_segment(value, learning_lang, 0.78, 90))
 	return segments
@@ -154,12 +150,13 @@ static func _word_segments(
 	var recap_args: Array = []
 	if is_phrase:
 		recap_key = "recap_phrase_lang" if show_language else "recap_phrase"
-		recap_args = [learning_context, TARGET_MARKER] if show_language else [TARGET_MARKER]
+		recap_args = [CONTEXT_MARKER, TARGET_MARKER] if show_language else [TARGET_MARKER]
 	else:
 		recap_key = "recap_word_lang" if show_language else "recap_word"
-		recap_args = [learning_context, TARGET_MARKER] if show_language else [TARGET_MARKER]
+		recap_args = [CONTEXT_MARKER, TARGET_MARKER] if show_language else [TARGET_MARKER]
 	var segments: Array[Dictionary] = []
-	_append_one_marker_segments(segments, _fmt(recap_key, recap_args), TARGET_MARKER, display_word, learning_lang)
+	_append_marked(segments, _fmt(recap_key, recap_args), _marks(
+		show_language, learning_context, ui_lang, [[TARGET_MARKER, display_word, learning_lang]]))
 	for value in values:
 		segments.append(_segment(value, learning_lang, 0.78, 90))
 	segments.append(_segment(display_word, learning_lang, 0.76, 220))
@@ -184,35 +181,35 @@ static func _segment(text: String, lang: String, rate: float, pause_ms: int) -> 
 	}
 
 
-static func _append_one_marker_segments(
-	segments: Array[Dictionary],
-	text: String,
-	marker: String,
-	value: String,
-	value_lang: String
-) -> void:
-	var parts := _split_once(text, marker)
-	_append_ui_segment(segments, String(parts.get("before", "")), 90)
-	segments.append(_segment(value, value_lang, 0.78, 120))
-	_append_ui_segment(segments, String(parts.get("after", "")), 170)
+## Split a formatted template around every value substituted into it, so that
+## what remains between them is pure template text.
+##
+## This is what lets the framing be recorded. A sentence with the value still
+## inside it — "You counted to 7" — matches nothing in a pack, because a pack
+## holds "You counted to" and the number separately. It also lets the framing
+## and the values come from different languages, which is the normal case.
+##
+## `marks` is an ordered array of [marker, value, language], in the order the
+## markers appear in the text.
+static func _append_marked(segments: Array[Dictionary], text: String, marks: Array) -> void:
+	var rest := text
+	for mark in marks:
+		var parts := _split_once(rest, String(mark[0]))
+		_append_ui_segment(segments, String(parts.get("before", "")), 90)
+		segments.append(_segment(String(mark[1]), String(mark[2]), 0.78, 110))
+		rest = String(parts.get("after", ""))
+	_append_ui_segment(segments, rest, 170)
 
 
-static func _append_two_marker_segments(
-	segments: Array[Dictionary],
-	text: String,
-	first_marker: String,
-	first_value: String,
-	second_marker: String,
-	second_value: String,
-	value_lang: String
-) -> void:
-	var first_parts := _split_once(text, first_marker)
-	var second_parts := _split_once(String(first_parts.get("after", "")), second_marker)
-	_append_ui_segment(segments, String(first_parts.get("before", "")), 90)
-	segments.append(_segment(first_value, value_lang, 0.78, 90))
-	_append_ui_segment(segments, String(second_parts.get("before", "")), 90)
-	segments.append(_segment(second_value, value_lang, 0.78, 90))
-	_append_ui_segment(segments, String(second_parts.get("after", "")), 170)
+## The language name, when the recap names one, is itself a value rather than
+## part of the framing — "in Czech" is spoken in the language of the menu and
+## belongs in the pack as its own clip.
+static func _marks(show_language: bool, context: String, ui_lang: String, rest: Array) -> Array:
+	var marks: Array = []
+	if show_language:
+		marks.append([CONTEXT_MARKER, context, ui_lang])
+	marks.append_array(rest)
+	return marks
 
 
 static func _append_ui_segment(segments: Array[Dictionary], text: String, pause_ms: int) -> void:

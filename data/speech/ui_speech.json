@@ -1,13 +1,9 @@
 {
   "schema_version": 1,
-
   "note": "The UI text the game speaks aloud, as opposed to the letters, numbers and words a child collects. Help narration is deliberately absent — fourteen long slides per language, rarely heard twice, and the least worthwhile thing here to record.",
-
   "how_it_works": "Each translation template is split on its %s placeholders and every literal fragment becomes one clip. The finish recap already speaks these as separate segments — it substitutes the collected letter or number between them — so the fragments are exactly what the child hears, and no code has to change for them to be recorded. Fragments identical across templates are recorded once; SpeechManager resolves a segment by its text.",
-
   "keys": [
     "app_title",
-
     "recap_tts_counted_to",
     "recap_tts_counted_to_lang",
     "recap_tts_found_letter",
@@ -28,7 +24,27 @@
     "recap_phrase",
     "recap_phrase_lang",
     "recap_tts_in_language",
-
+    "lang_in_english",
+    "lang_in_spanish",
+    "lang_in_french",
+    "lang_in_german",
+    "lang_in_italian",
+    "lang_in_portuguese",
+    "lang_in_polish",
+    "lang_in_ukrainian",
+    "lang_in_dutch",
+    "lang_in_turkish",
+    "lang_in_romanian",
+    "lang_in_czech",
+    "lang_in_hungarian",
+    "lang_in_greek",
+    "lang_in_swedish",
+    "lang_in_danish",
+    "lang_in_finnish",
+    "lang_in_norwegian",
+    "lang_in_slovak",
+    "lang_in_hebrew",
+    "lang_in_vietnamese",
     "lang_auto",
     "lang_english",
     "lang_spanish",
@@ -52,13 +68,12 @@
     "lang_hebrew",
     "lang_vietnamese"
   ],
-
   "why_these": {
     "app_title": "Spoken once on first boot, to confirm the voice is working.",
     "recap_*": "The finish and gotcha screen. The framing is in the UI language while the letters and numbers inside it are in the learning language, and the two are frequently different — which is why the recap plays as a queue of separately resolved segments.",
-    "lang_*": "Spoken in the settings screen when the UI or learning language changes, so a parent who cannot read the menu can still hear which language they picked. Every language name is recorded in every pack, because the name of a language is said in the language of the menu, not in the language being named."
+    "lang_*": "Spoken in the settings screen when the UI or learning language changes, so a parent who cannot read the menu can still hear which language they picked. Every language name is recorded in every pack, because the name of a language is said in the language of the menu, not in the language being named.",
+    "lang_in_*": "The same languages in the form the recap uses — Czech 'v češtině' rather than 'Čeština'. The recap names the learning language inside a sentence, and an inflected language cannot reuse the menu form there."
   },
-
   "not_recorded": {
     "ui.help.*": "Fourteen slides per language. Long, rarely repeated, and the poorest return on review time. Stays on the device voice.",
     "win/gotcha titles": "Displayed, never spoken.",
