@@ -199,15 +199,22 @@ func _cycle_ui_lang(dir: int) -> void:
 		Config.save_settings()
 	_configure_navigation()
 
+## Say the language just chosen, so a parent who cannot read the menu still
+## hears which one they picked. The name is said in the language of the menu,
+## not in the language being named, so it resolves against the UI pack.
 func _trigger_warmup_ui() -> void:
-	if temp_voice != Config.VoiceMode.OFF:
-		var lang_name = _get_lang_display_name(temp_ui_lang_idx, false)
-		Speech.warm_up(_get_preview_language(false), lang_name)
+	if temp_voice == Config.VoiceMode.OFF:
+		return
+	var lang_name = _get_lang_display_name(temp_ui_lang_idx, false)
+	Speech.warm_up(_get_preview_language(false))
+	Speech.speak_ui(lang_name, _get_preview_language(false))
 
 func _trigger_warmup_learning() -> void:
-	if temp_voice != Config.VoiceMode.OFF:
-		var lang_name = _get_lang_display_name(temp_learning_lang_idx, true)
-		Speech.warm_up(_get_preview_language(true), lang_name)
+	if temp_voice == Config.VoiceMode.OFF:
+		return
+	var lang_name = _get_lang_display_name(temp_learning_lang_idx, true)
+	Speech.warm_up(_get_preview_language(true))
+	Speech.speak_ui(lang_name, _get_preview_language(true))
 
 func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
 	return Config.get_lang_display_name(idx, is_learning, temp_ui_lang_idx)

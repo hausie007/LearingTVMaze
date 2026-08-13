@@ -125,6 +125,14 @@ func speak_word(text: String, lang: String = "") -> void:
 	_speak(_word_key(language, text), language, text, RATE_WORD)
 
 
+## Speak a fixed piece of interface text — a language name in settings, the
+## app title. Resolved by its text, like everything else, so a caller passes
+## what it would have spoken and needs to know nothing about clip keys.
+func speak_ui(text: String, lang: String = "", rate: float = 0.95) -> void:
+	var language := lang if not lang.is_empty() else Config.get_effective_ui_language()
+	_speak(_ui_key(language, text), language, text, rate)
+
+
 ## Speak by semantic key, for callers that already know one.
 func speak_key(key: String, lang: String, fallback_text: String, rate: float = 1.0) -> void:
 	_speak(key, _language_or_default(lang), fallback_text, rate)
@@ -232,6 +240,12 @@ func is_complete(lang: String = "") -> bool:
 	return true
 
 
+## Coverage of the spoken interface text, separate from the learning content:
+## a pack can have every letter and no menu speech, or the reverse.
+func has_ui(lang: String = "") -> bool:
+	return String(coverage(lang).get("ui", "none")) == "complete"
+
+
 ## True when a language has enough of a pack to be worth offering at all.
 ## Numbers and letters are what every mode uses; words are a bonus.
 func has_pack(lang: String = "") -> bool:
@@ -294,7 +308,10 @@ func _resolve_key(lang: String, text: String) -> String:
 	var as_char := _char_key(lang, text)
 	if not as_char.is_empty():
 		return as_char
-	return _word_key(lang, text)
+	var as_word := _word_key(lang, text)
+	if not as_word.is_empty():
+		return as_word
+	return _ui_key(lang, text)
 
 
 func _char_key(lang: String, display: String) -> String:
@@ -303,6 +320,17 @@ func _char_key(lang: String, display: String) -> String:
 
 func _word_key(lang: String, text: String) -> String:
 	return String(_pack(lang).get("_words", {}).get(text.strip_edges().to_upper(), ""))
+
+
+func _ui_key(lang: String, text: String) -> String:
+	return String(_pack(lang).get("_ui", {}).get(_ui_lookup(text), ""))
+
+
+## Interface text is matched loosely — trailing commas and full stops come and
+## go between a translation template and the fragment the recap actually
+## speaks, and they should not decide whether a recording is found.
+func _ui_lookup(text: String) -> String:
+	return text.strip_edges().to_upper().trim_suffix(".").trim_suffix(",").strip_edges()
 
 
 # ── The recap queue ──────────────────────────────────────────────────────────
@@ -423,7 +451,7 @@ func _pack(lang: String) -> Dictionary:
 	if _packs.has(lang):
 		return _packs[lang]
 
-	var pack := {"items": {}, "coverage": {}, "_chars": {}, "_words": {}}
+	var pack := {"items": {}, "coverage": {}, "_chars": {}, "_words": {}, "_ui": {}}
 	_packs[lang] = pack
 
 	var path := "%s/%s/manifest.json" % [PACK_DIR, lang]
@@ -456,6 +484,8 @@ func _pack(lang: String) -> Dictionary:
 			pack["_chars"][display] = key
 		elif key.begins_with("learning.word."):
 			pack["_words"][display] = key
+		elif key.begins_with("ui."):
+			pack["_ui"][_ui_lookup(display)] = key
 	return pack
 
 

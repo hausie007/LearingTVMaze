@@ -358,6 +358,44 @@ def retake_context(entry: dict):
     return context or None
 
 
+def ui_items(cat: dict, lang: str, cspec: dict):
+    """Every fixed piece of UI the game speaks, in one language.
+
+    Templates are split on their %s placeholders, because that is what the
+    runtime does: the recap speaks "You counted to", then the number, then
+    whatever follows, as separate segments. Recording the fragments therefore
+    needs no change to how the recap is built.
+
+    Fragments that repeat across templates are recorded once — "You spelled the
+    word" is both its own key and the opening of another — since resolution is
+    by text.
+    """
+    doc = read_json(SPEECH_SRC / cspec["source"])
+    with TRANSLATIONS.open(encoding="utf-8", newline="") as fh:
+        rows = list(csv.reader(fh))
+    header = rows[0]
+    if lang not in header:
+        raise Fail(f"translations.csv has no column for {lang}")
+    column = header.index(lang)
+    text_for = {r[0]: r[column] for r in rows[1:] if r and len(r) > column}
+
+    items, seen = [], {}
+    for key in doc["keys"]:
+        template = text_for.get(key, "").strip()
+        if not template:
+            warn(f"translations.csv has no {lang} text for {key} — skipped")
+            continue
+        for index, fragment in enumerate(template.split("%s")):
+            fragment = nfc(fragment.strip(" \t\n,.:;"))
+            if len(fragment) < 2:
+                continue
+            if fragment in seen:
+                continue
+            seen[fragment] = True
+            items.append((f"ui.{key}.{index}", fragment, fragment))
+    return items
+
+
 def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
                 retake: int = 0, context: dict = None) -> dict:
     if not spoken:
@@ -437,6 +475,15 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
 
         for category in lspec["categories"]:
             cspec = cat["categories"][category]
+
+            if category == "ui":
+                for key, display, spoken in ui_items(cat, lang, cspec):
+                    spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
+                    records.append(make_record(cat, profile, lang, locale, category, cspec,
+                                               key, display, spoken, rel(TRANSLATIONS),
+                                               int(retakes.get(key, {}).get("n", 0)),
+                                               retake_context(retakes.get(key, {}))))
+                continue
 
             if category == "word":
                 for key, display, spoken, origin in word_items(cat, lang, cspec):

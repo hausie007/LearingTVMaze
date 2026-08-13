@@ -37,10 +37,20 @@
         "max": 4000
       },
       "note": "Every vocabulary word across all seven difficulty tiers. Only the 'word' field is read — the emoji is a picture hint on screen and never reaches a recording. Grapheme markers are stripped, so MOU[CH]A is recorded as moucha. Sent lowercase: an all-capitals word invites the model to spell it out."
+    },
+    "ui": {
+      "priority": 2,
+      "key_format": "ui.{id}",
+      "source": "ui_speech.json",
+      "duration_ms": {
+        "min": 200,
+        "max": 5000
+      },
+      "note": "Spoken UI text, split from its translation templates on the %s placeholders. Recorded in the UI language, which is often not the learning language — the recap is one sentence built from both."
     }
   },
   "reserved_key_prefixes": [
-    "ui."
+    "ui.help."
   ],
   "languages": {
     "cs": {
@@ -49,7 +59,8 @@
       "categories": [
         "number",
         "char",
-        "word"
+        "word",
+        "ui"
       ]
     },
     "en": {
@@ -58,7 +69,8 @@
       "categories": [
         "number",
         "char",
-        "word"
+        "word",
+        "ui"
       ]
     },
     "sk": {
@@ -257,10 +269,5 @@
     "max_characters_per_run": 5000,
     "max_concurrency": 2,
     "require_confirm_flag": true
-  },
-  "future_categories": {
-    "note": "Not generated yet, and reserved so the runtime can already resolve them. SpeechManager accepts an optional 'key' on any narration segment, so recording the menu and recap framing later is a data change rather than a code change — give the segment a key, add the category here, and it resolves.",
-    "ui.recap.*": "The finish-recap framing: 'you counted to', 'you collected the letters'. Spoken in the UI language, which is often not the learning language.",
-    "ui.help.*": "The 14 help slides. Long, rarely heard twice, and the least worthwhile to record."
   }
 }

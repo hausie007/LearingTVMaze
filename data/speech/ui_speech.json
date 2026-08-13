@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+
+  "note": "The UI text the game speaks aloud, as opposed to the letters, numbers and words a child collects. Help narration is deliberately absent — fourteen long slides per language, rarely heard twice, and the least worthwhile thing here to record.",
+
+  "how_it_works": "Each translation template is split on its %s placeholders and every literal fragment becomes one clip. The finish recap already speaks these as separate segments — it substitutes the collected letter or number between them — so the fragments are exactly what the child hears, and no code has to change for them to be recorded. Fragments identical across templates are recorded once; SpeechManager resolves a segment by its text.",
+
+  "keys": [
+    "app_title",
+
+    "recap_tts_counted_to",
+    "recap_tts_counted_to_lang",
+    "recap_tts_found_letter",
+    "recap_tts_found_letter_lang",
+    "recap_tts_found_letter_label",
+    "recap_tts_found_letter_label_lang",
+    "recap_tts_found_letters",
+    "recap_tts_found_letters_lang",
+    "recap_tts_found_letters_from",
+    "recap_tts_found_letters_from_lang",
+    "recap_tts_to",
+    "recap_tts_spelled_word",
+    "recap_tts_spelled_word_lang",
+    "recap_tts_spelled_phrase",
+    "recap_tts_spelled_phrase_lang",
+    "recap_word",
+    "recap_word_lang",
+    "recap_phrase",
+    "recap_phrase_lang",
+    "recap_tts_in_language",
+
+    "lang_auto",
+    "lang_english",
+    "lang_spanish",
+    "lang_french",
+    "lang_german",
+    "lang_italian",
+    "lang_portuguese",
+    "lang_polish",
+    "lang_ukrainian",
+    "lang_dutch",
+    "lang_turkish",
+    "lang_romanian",
+    "lang_czech",
+    "lang_hungarian",
+    "lang_greek",
+    "lang_swedish",
+    "lang_danish",
+    "lang_finnish",
+    "lang_norwegian",
+    "lang_slovak",
+    "lang_hebrew",
+    "lang_vietnamese"
+  ],
+
+  "why_these": {
+    "app_title": "Spoken once on first boot, to confirm the voice is working.",
+    "recap_*": "The finish and gotcha screen. The framing is in the UI language while the letters and numbers inside it are in the learning language, and the two are frequently different — which is why the recap plays as a queue of separately resolved segments.",
+    "lang_*": "Spoken in the settings screen when the UI or learning language changes, so a parent who cannot read the menu can still hear which language they picked. Every language name is recorded in every pack, because the name of a language is said in the language of the menu, not in the language being named."
+  },
+
+  "not_recorded": {
+    "ui.help.*": "Fourteen slides per language. Long, rarely repeated, and the poorest return on review time. Stays on the device voice.",
+    "win/gotcha titles": "Displayed, never spoken.",
+    "remote controller goals": "The specification describes narrating these; the code does not, and inventing it here would be a feature rather than a recording."
+  }
+}
