@@ -33,6 +33,19 @@
         "reason": "sounds liek mrtvicka not mrKvicka",
         "asked_on": "2026-08-12"
       }
+    },
+    "en": {
+      "learning.word.ocean_wave": {
+        "n": 1,
+        "reason": "read as two items; spoken text changed to ocean-wave",
+        "carrier_before": [
+          "island"
+        ],
+        "carrier_after": [
+          "river"
+        ],
+        "asked_on": "2026-08-13"
+      }
     }
   }
 }

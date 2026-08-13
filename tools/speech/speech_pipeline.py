@@ -1554,7 +1554,15 @@ def generate_sheets(key: str, cat: dict, profiles: dict, groups: dict, args) -> 
             continue
 
         for r, chunk in zip(group, cuts):
-            write_atomic(master_path(r["spec_hash"]), chunk)
+            # A sheet has to be read whole, but that does not mean everything
+            # in it should be written. A member whose master already exists was
+            # very likely approved from it, and overwriting that would leave the
+            # approval attached to audio nobody heard — the spec hash does not
+            # change, because nothing about the request changed.
+            existing = master_path(r["spec_hash"])
+            if existing.exists() and not args.force:
+                continue
+            write_atomic(existing, chunk)
             append_ledger({
                 "ts": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
                 "key": r["key"], "lang": r["lang"], "locale": r["locale"],

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "locale": "en-US",
+
+  "note": "Corrections to the generation text only. What the child sees on screen is unchanged — display and spoken have been separate all along, and this is the case that needs it.",
+
+  "overrides": {
+    "learning.word.ocean_wave": {
+      "spoken": "ocean-wave",
+      "reason": "Read as two items with a pause between them — 'ocean, wave' rather than a phrase. Shortening the silence afterwards fixed the length and not the delivery, because the prosody was already two separate utterances. A hyphen asks for one.",
+      "added_by": "Michal Hauzírek",
+      "added_on": "2026-08-12"
+    }
+  },
+
+  "_note_on_phrases": "Worth trying first for any multi-word entry that comes back as a list rather than a phrase. It is a change of generation text, so it costs one clip to re-record and nothing else — and the display text, which is what the tracker shows, never moves."
+}
