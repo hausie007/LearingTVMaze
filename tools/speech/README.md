@@ -366,6 +366,40 @@ language, and the phrasings are formatted with values inside them. Recording
 "you counted to seven" as one clip does not scale; the framing has to be split
 so the number stays a separate segment, which it already is.
 
+## What goes in a recorded fragment
+
+A recorded fragment has to be something a person would say as one unit, and a
+substituted value has to be complete on its own. Getting this wrong is not
+audible as a missing recording — it is audible as a stilted one.
+
+Three rounds of the Czech recap established the rule:
+
+- **A preposition cannot be a clip.** It leans on the following word. `v` +
+  `angličtině` sounds stitched; `v angličtině` does not. The preposition
+  belongs to the value, and the template goes without it.
+- **A value must carry its own grammar.** Czech `do` demands the genitive, so
+  splicing a citation-form number after it produces `do padesát`, which is
+  simply wrong. Record `do padesáti` as one phrase.
+- **In some languages there is nothing to separate.** Hungarian marks the same
+  idea with a suffix — `ötvenig` — and Turkish with a suffix plus a
+  postposition. No amount of care lets those be recorded as two clips.
+
+So `data/number_forms.json` holds the phrase that fills a slot, not "the number
+in some case", and a language either composes or does not:
+
+```
+cs   template "Napočítali jsme %s"     value "do padesáti"    50 clips
+en   template "you counted to %s"      value "50"              0 clips
+```
+
+The two halves are one decision. A language that composes must drop the
+preposition from its template; a language that does not must keep it. English
+records none of these, which is the point — it needs none.
+
+The same rule folded the preposition into `lang_in_*` for the 16 languages
+whose recap templates share one, and left the other five alone because they
+had nothing stranded to begin with.
+
 ## Where a language's letters are defined
 
 In `scripts/game_config.gd`, once:
