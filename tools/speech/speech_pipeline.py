@@ -396,10 +396,29 @@ def ui_items(cat: dict, lang: str, cspec: dict):
     return items
 
 
+def category_settings(profile: dict, category: str) -> dict:
+    """Per-category synthesis settings, where a category needs different ones.
+
+    Interface fragments are the case that forced this. They are short function
+    words — "do", "v", "písmeno" — and a sheet of them has gaps no larger than
+    the gaps inside them, which is the one situation sheet cutting cannot
+    survive. The first Czech UI sheet merged two and then shifted every cut
+    after it by one, ending in a silent clip.
+    """
+    return (profile.get("categories") or {}).get(category, {})
+
+
 def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
                 retake: int = 0, context: dict = None) -> dict:
     if not spoken:
         raise Fail(f"{key} ({locale}) has empty spoken text")
+    settings = category_settings(profile, category)
+    mode = settings.get("synthesis_mode", profile.get("synthesis_mode", "single"))
+    if not retake and settings.get("carrier_before") or settings.get("carrier_after"):
+        context = context or {}
+        for field in ("carrier_before", "carrier_after"):
+            if settings.get(field) and field not in context:
+                context[field] = list(settings[field])
     spec = {
         "provider": profile["provider"],
         "spoken_text": spoken,
@@ -413,9 +432,11 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         "pronunciation_dictionaries": profile.get("pronunciation_dictionaries", []),
         "output_format": profile.get("output_format"),
         "master_format": cat["master_format"],
-        "synthesis_mode": profile.get("synthesis_mode", "single"),
-        "sheet": profile.get("sheet") if profile.get("synthesis_mode") == "sheet" else None,
+        "synthesis_mode": mode,
+        "sheet": profile.get("sheet") if mode == "sheet" else None,
     }
+    if context and not retake:
+        spec["context"] = context
     if retake:
         # Only ever added when there is a retake, so that asking for one clip to
         # be redone cannot disturb the hash — and therefore the approval — of
@@ -444,6 +465,7 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         }),
         "source": source,
         "retake": retake,
+        "synthesis_mode": "single" if retake else mode,
         "context": context or None,
         "voice_configured": bool(profile.get("voice_id")),
     }
@@ -948,19 +970,19 @@ def cmd_generate(args) -> int:
     all_records = classify(load_desired())
     sheet_groups = {}
     for r in records:
-        if profiles[r["locale"]].get("synthesis_mode") != "sheet" or r.get("retake"):
+        if r.get("synthesis_mode") != "sheet" or r.get("retake"):
             continue
         ident = (r["locale"], r["category"])
         if ident in sheet_groups:
             continue
         members = [x for x in all_records
                    if x["locale"] == ident[0] and x["category"] == ident[1]
-                   and not x.get("retake")]
+                   and x.get("synthesis_mode") == "sheet" and not x.get("retake")]
         if any(m["status"] == "missing" for m in members) or args.force:
             sheet_groups[ident] = members
 
     todo = [r for r in records if r["status"] == "missing"
-            and (r.get("retake") or profiles[r["locale"]].get("synthesis_mode") != "sheet")]
+            and (r.get("retake") or r.get("synthesis_mode") != "sheet")]
     if args.limit:
         todo = todo[:args.limit]
     if not todo and not sheet_groups:

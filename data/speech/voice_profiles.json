@@ -40,6 +40,18 @@
         "status": "accepted for cs",
         "risk_accepted": "Jana is a Voice Library voice, not one we own. The contributor can withdraw it. Clips already generated stay usable indefinitely under the paid plan, but if the voice goes away, vocabulary added later cannot be recorded to match what shipped. Mitigation if that happens: re-record the whole locale from the catalog, which is a known quantity — about 40 cents for letters, numbers and the current 277 words.",
         "revisit_when": "before a second language shares this voice, or before any large vocabulary expansion"
+      },
+      "categories": {
+        "ui": {
+          "synthesis_mode": "single",
+          "carrier_before": [
+            "ahoj"
+          ],
+          "carrier_after": [
+            "dobře"
+          ],
+          "note": "Recorded one request at a time between carrier words, never cut from a sheet. The fragments are short function words and a sheet of them has gaps no bigger than the gaps inside them — the first Czech attempt merged two and shifted every cut after it by one. Carriers give each one a run-up and a follower without any cutting."
+        }
       }
     },
     "en-US": {
@@ -73,7 +85,19 @@
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J. STILL TO DECIDE: this currently shares the Czech voice. A Czech-trained voice reading English letter names will carry an accent into exactly the content where clarity matters most, so pick a separate en-US voice before generating this locale."
+      "notes": "en-US, so Z is zee. Confusable pairs to listen for: M/N, E/I, and G against J. STILL TO DECIDE: this currently shares the Czech voice. A Czech-trained voice reading English letter names will carry an accent into exactly the content where clarity matters most, so pick a separate en-US voice before generating this locale.",
+      "categories": {
+        "ui": {
+          "synthesis_mode": "single",
+          "carrier_before": [
+            "hello"
+          ],
+          "carrier_after": [
+            "thanks"
+          ],
+          "note": "Recorded one request at a time between carrier words, never cut from a sheet. The fragments are short function words and a sheet of them has gaps no bigger than the gaps inside them — the first Czech attempt merged two and shifted every cut after it by one. Carriers give each one a run-up and a follower without any cutting."
+        }
+      }
     },
     "de-DE": {
       "version": 1,
@@ -183,6 +207,7 @@
     "seed": "Best effort only; ElevenLabs does not guarantee reproducibility. Recorded so a regeneration starts from the same place.",
     "version": "Bump when any field above changes. It appears in the generation spec hash, so bumping restages that locale's clips as stale rather than letting old and new takes mix.",
     "sheet": "separator sets the intonation; guard_lead_ms/guard_tail_ms pad the detected boundary, clamped to half the real silence gap so a generous guard can never bleed into the neighbour; min_gap_ms and min_sound_ms are only starting points for the solver, which sweeps them against the known item count. None of these are in the sheet's synthesis hash, so changing them costs nothing: `recut`, `process`, `listen`.",
-    "cutter_version": "Bump when the cutting algorithm changes. It sits in the spec hash, so a changed cutter restages the masters and drops their approvals — an approval is for a take somebody heard, and re-cutting produces a take nobody has. Re-cutting is still free; only the listening has to be redone."
+    "cutter_version": "Bump when the cutting algorithm changes. It sits in the spec hash, so a changed cutter restages the masters and drops their approvals — an approval is for a take somebody heard, and re-cutting produces a take nobody has. Re-cutting is still free; only the listening has to be redone.",
+    "categories": "Per-category overrides of the profile's synthesis settings. A category whose items are short or unusually similar can be recorded singly, with carrier words, instead of being cut out of a sheet."
   }
 }
