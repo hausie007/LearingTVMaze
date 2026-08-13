@@ -47,6 +47,16 @@
         "max": 5000
       },
       "note": "Spoken UI text, split from its translation templates on the %s placeholders. Recorded in the UI language, which is often not the learning language — the recap is one sentence built from both."
+    },
+    "number_form": {
+      "priority": 2,
+      "key_format": "ui.number_{case}.{value:03d}",
+      "source": "data/number_forms.json",
+      "duration_ms": {
+        "min": 220,
+        "max": 2600
+      },
+      "note": "Numbers in the grammatical form the recap frame requires, spoken in the UI language. Recorded only where that differs from the citation form, so a language that does not inflect records none of them. A language with no entry in data/number_forms.json, or an empty one, records nothing here and keeps using the plain number — which is correct for English, German, Dutch, the Scandinavian languages and the Romance ones. Czech, Slovak, Polish, Ukrainian, Greek, Finnish, Hungarian and Turkish will all need it."
     }
   },
   "reserved_key_prefixes": [
@@ -60,7 +70,8 @@
         "number",
         "char",
         "word",
-        "ui"
+        "ui",
+        "number_form"
       ]
     },
     "en": {
@@ -70,7 +81,8 @@
         "number",
         "char",
         "word",
-        "ui"
+        "ui",
+        "number_form"
       ]
     },
     "sk": {

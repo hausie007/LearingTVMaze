@@ -358,6 +358,33 @@ def retake_context(entry: dict):
     return context or None
 
 
+def number_form_items(cat: dict, lang: str, cspec: dict):
+    """Numbers in the case a sentence puts them in, where that differs.
+
+    Only recorded where the inflected form is not the citation form already —
+    English 'to fifty' is the plain number, so English records nothing here and
+    Czech records most of fifty.
+    """
+    path = REPO / cspec["source"]
+    if not path.exists():
+        return []
+    doc = read_json(path)
+    entry = doc.get("languages", {}).get(lang, {})
+    plain = read_json(SPEECH_SRC / f"numbers_{lang}.json") if (SPEECH_SRC / f"numbers_{lang}.json").exists() else {"numbers": []}
+    citation = {str(n["value"]): nfc(n["spoken"]) for n in plain.get("numbers", [])}
+
+    items = []
+    for case, values in entry.items():
+        if case == "review" or not isinstance(values, dict):
+            continue
+        for value, text in sorted(values.items(), key=lambda kv: int(kv[0])):
+            text = nfc(text)
+            if not text or text == citation.get(value):
+                continue
+            items.append((cspec["key_format"].format(case=case, value=int(value)), text, text))
+    return items
+
+
 def ui_items(cat: dict, lang: str, cspec: dict):
     """Every fixed piece of UI the game speaks, in one language.
 
@@ -497,6 +524,15 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
 
         for category in lspec["categories"]:
             cspec = cat["categories"][category]
+
+            if category == "number_form":
+                for key, display, spoken in number_form_items(cat, lang, cspec):
+                    spoken = nfc(overrides.get(key, {}).get("spoken", spoken))
+                    records.append(make_record(cat, profile, lang, locale, category, cspec,
+                                               key, display, spoken, "data/number_forms.json",
+                                               int(retakes.get(key, {}).get("n", 0)),
+                                               retake_context(retakes.get(key, {}))))
+                continue
 
             if category == "ui":
                 for key, display, spoken in ui_items(cat, lang, cspec):
@@ -941,6 +977,11 @@ def _source_is_draft(lang: str) -> bool:
     for name in (f"letters_{lang}.json", f"numbers_{lang}.json"):
         path = SPEECH_SRC / name
         if path.exists() and "DRAFT" in str(read_json(path).get("source_review", "")).upper():
+            return True
+    forms = REPO / "data" / "number_forms.json"
+    if forms.exists():
+        entry = read_json(forms).get("languages", {}).get(lang, {})
+        if "DRAFT" in str(entry.get("review", "")).upper():
             return True
     return False
 

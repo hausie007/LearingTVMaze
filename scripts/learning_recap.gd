@@ -16,6 +16,34 @@ const FIRST_MARKER := "__LEARNING_RECAP_FIRST__"
 const LAST_MARKER := "__LEARNING_RECAP_LAST__"
 const CONTEXT_MARKER := "__LEARNING_RECAP_CONTEXT__"
 
+## Numbers in the grammatical form a sentence needs, keyed by language.
+## Czech "do padesáti", not "do padesát" — the ending belongs to the sentence
+## rather than to the number, so it cannot be spliced on afterwards.
+const NUMBER_FORMS_PATH := "res://data/number_forms.json"
+static var _number_forms: Dictionary = {}
+static var _number_forms_loaded: bool = false
+
+
+## The number as this language says it after "counted to". Falls back to the
+## digits, which is correct for every language that does not inflect here and
+## is what the reader did before this existed.
+static func number_in_frame(lang: String, value: String, case_name: String = "to") -> String:
+	if not _number_forms_loaded:
+		_number_forms_loaded = true
+		if FileAccess.file_exists(NUMBER_FORMS_PATH):
+			var file := FileAccess.open(NUMBER_FORMS_PATH, FileAccess.READ)
+			if file != null:
+				var json := JSON.new()
+				if json.parse(file.get_as_text()) == OK:
+					var data = json.get_data()
+					if data is Dictionary:
+						_number_forms = data.get("languages", {})
+				else:
+					push_warning("LearningRecap: %s is not valid JSON" % NUMBER_FORMS_PATH)
+	var forms: Dictionary = _number_forms.get(lang, {})
+	var cases: Dictionary = forms.get(case_name, {})
+	return String(cases.get(value, value))
+
 
 static func build(game_mode: int, sequence: Array[String], word: String = "", word_lang: String = "") -> Dictionary:
 	var values := _clean_sequence(sequence)
@@ -102,8 +130,12 @@ static func _number_segments(values: Array[String], learning_context: String, sh
 	var intro_key := "recap_tts_counted_to_lang" if show_language else "recap_tts_counted_to"
 	var intro_args: Array = [CONTEXT_MARKER, LAST_MARKER] if show_language else [LAST_MARKER]
 	var segments: Array[Dictionary] = []
+	# The number inside the frame belongs to the frame: it is spoken in the UI
+	# language and in whatever form that sentence governs. The learning-language
+	# numbers follow after it, as the sequence.
 	_append_marked(segments, _fmt(intro_key, intro_args), _marks(
-		show_language, learning_context, ui_lang, [[LAST_MARKER, last_value, learning_lang]]))
+		show_language, learning_context, ui_lang,
+		[[LAST_MARKER, number_in_frame(ui_lang, last_value), ui_lang]]))
 	for value in values:
 		segments.append(_segment(value, learning_lang, 0.78, 90))
 	return segments
