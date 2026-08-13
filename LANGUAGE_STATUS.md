@@ -10,7 +10,7 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 
 | Lang | Voice | Data | Alphabet | Digraphs | Words checked | Letters+numbers | Word audio | UI speech | In game |
 |---|---|---|---|---|---|---|---|---|---|
-| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | ✓ | ✓ 277 | ~ 55/57 | ✓ playing |
+| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | ✓ | ✓ 277 | ✓ 57 | ✓ playing |
 | **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | ✓ | ✓ 290 | ✓ 36 | ✓ playing |
 | **sk** | · | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | · | · 0/147 | · | · |
 | **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · 0/169 | · | · |

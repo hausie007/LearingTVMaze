@@ -585,6 +585,7 @@ ui.lang_in_czech.0,2ccee23030cd3a8a63791fc8e0e229b90ebd4e13dd5437959ecd1484a3451
 ui.lang_in_danish.0,fcdcb291314cad930601a27b39bfb28556361c69fd70b46d5d9d6050866f1e7a,approved,,2026-08-13,
 ui.lang_in_dutch.0,c26ad1ee3de5c73ef80bfca81422ddec41a91d67d2f464847ac4845e49537634,approved,,2026-08-13,
 ui.lang_in_english.0,f47365cd6f08b3ed3c1ad1f8d8389f441179ce93c298806d22a83f2559483da1,rejected,,2026-08-13,wrongly cut
+ui.lang_in_english.0,fb96addd69b21526fd182cda1d2200e7ed1134b7876f724419d244e99bf79d20,approved,Michal Hauzírek,2026-08-13,retake with jedna/konec carriers after a mid-word cut
 ui.lang_in_finnish.0,b2c4ff30b36c0f5eb92d0fcc3bcf193836f5628372e2f85e6438e3fe5c916c0c,approved,,2026-08-13,
 ui.lang_in_french.0,96ef86ccdeb5f8480f65cdae8802185578a818ae47de3d40dfba6c7ff34dc53e,approved,,2026-08-13,
 ui.lang_in_german.0,a45e5aa8bd55c760ff4e9a8f58a10976cf89c59ae6a0e7ed43276d0b9962d135,approved,,2026-08-13,
@@ -601,6 +602,7 @@ ui.lang_in_spanish.0,85c70a202cb83a84b12baa8c84ba6f43d25441462d0820537ea418053d7
 ui.lang_in_swedish.0,700b62e4cc9e44a26c1545ae473e2b3385b166b165a3b33887e884d360c5998f,approved,,2026-08-13,
 ui.lang_in_turkish.0,d34a28619bada55af297d05bb0101a66996d29c84640b0cad0d1840c76af40ff,approved,,2026-08-13,
 ui.lang_in_ukrainian.0,5061ad7540e1e968eca657429b735dc8e7bc696c977e5d734bd1dcd8adbf92e7,rejected,,2026-08-13,wrongly cut
+ui.lang_in_ukrainian.0,d6ddd3292299bc33be9a65afb7a9870b864d257a8295b8fe5f2184cad9e6f134,approved,Michal Hauzírek,2026-08-13,retake with jedna/konec carriers after a mid-word cut
 ui.lang_in_vietnamese.0,00e08c9efc7fa2bc01b7a888fbc09d439c6ba02b5cd512f95ebd67aa6d75c77d,approved,,2026-08-13,
 ui.lang_italian.0,0c2334b06641fba504c3027266366c6a5771ab70236fd8fdade894c9d15d20e6,approved,,2026-08-13,
 ui.lang_norwegian.0,ac15c35c0fe64ac145437f53337e4007720ed8e796e27a8eb782f4990cdc3edc,approved,,2026-08-13,
