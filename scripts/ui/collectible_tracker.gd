@@ -128,6 +128,26 @@ func setup(sequence: Array[String], learning_type: String, word_emoji: String = 
 func update_progress(current_index: int, collected_count: int) -> void:
 	if current_index == _current_index and collected_count == _collected_count:
 		return
+
+	# Progress never runs backwards inside a round, so this is a new maze.
+	#
+	# The HUD only calls setup() when the sequence itself changes, which is a
+	# fair optimisation and wrong here: counting to fifty produces the identical
+	# sequence every maze, so setup() is skipped and the page stays wherever the
+	# last maze left it. The player then collects 1, 2, 3 while the bar still
+	# shows 48, 49, 50. Letters mode has the same shape, and so does Words mode
+	# whenever the same word comes up twice.
+	#
+	# Detecting it here rather than in the HUD keeps it correct for every caller,
+	# including the per-player race trackers, which have their own setup path.
+	if collected_count < _collected_count or current_index < _current_index:
+		_current_index = current_index
+		_collected_count = collected_count
+		_window_start = 0
+		_cancel_pending_slide()
+		_rebuild_labels_instant()
+		return
+
 	var old_collected := _collected_count
 	_current_index = current_index
 	_collected_count = collected_count
