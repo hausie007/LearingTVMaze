@@ -32,6 +32,28 @@
         "n": 1,
         "reason": "sounds liek mrtvicka not mrKvicka",
         "asked_on": "2026-08-12"
+      },
+      "ui.lang_in_english.0": {
+        "n": 1,
+        "reason": "wrongly cut",
+        "carrier_before": [
+          "jedna"
+        ],
+        "carrier_after": [
+          "konec"
+        ],
+        "asked_on": "2026-08-13"
+      },
+      "ui.lang_in_ukrainian.0": {
+        "n": 1,
+        "reason": "wrongly cut",
+        "carrier_before": [
+          "jedna"
+        ],
+        "carrier_after": [
+          "konec"
+        ],
+        "asked_on": "2026-08-13"
       }
     },
     "en": {

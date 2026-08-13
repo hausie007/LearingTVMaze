@@ -569,39 +569,60 @@ learning.word.zmrzlinarna,8ab3e9fe4291488cea0be06f6a7fa9d9efd09b1dbee1d8d75603a3
 learning.word.zralok,48aff3f1c622bb94990317a38bda7c13d17bec2af1b1283af6ef58d2ec137c8c,approved,,2026-08-12,
 learning.word.zrcadlo,128c906afdea247dd19eccf17caca2ce0bd05476802dd4ecc98bfd90a3615eb7,approved,,2026-08-12,
 learning.word.zub,c657971b9a19e412e218d983a317c7299fbc0bc57af1ba21ef7627c769c72f96,approved,,2026-08-12,
-ui.app_title.0,ae8debe0f9c6368ad0b1a5d8393a9844c80b6a9527c51d41eac442a16e47d9ac,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_auto.0,8ca240f87e8b30dd0b1690334cb161a642343d55e1531c6bd85a9ca6cc24b59d,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_czech.0,036438b47bbd4d61e16dea335e1f71404ced5679ce974fb8d4decc1db9aa8b42,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_danish.0,fb359b713fab6b4025b392d6bf1ee2a326924c5095339db6e615f13421a9c8fa,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_dutch.0,4e2e8f14701d5fb0ddf48dfa71cdf980e7c47f33a4acad3a269296c29e12a3eb,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_english.0,9419d2572817161bacbfab021de85e30116794c1cb0eae833451139b3972e427,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_finnish.0,c6b616cb1b6d5a9cb55cea9dad908035261332a9bb33e925e52f03798e7add94,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_french.0,9576d4ba1ac42fb34616bcb2cc40a3bc2befee5bc96c47df7fc972d2a4f553d6,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_german.0,09acadb1e90b5eb6a832f17ae73e849e14b90cef8f38a90b6d5f074e27f17327,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_greek.0,aeaff79c0b30d10abc8d87e3441323888b4af67b1d5abc4bd458d8d776678b8b,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_hebrew.0,73088175261f9f2dd8cd3d8bd8e1cd05c760f482d30f24566376d0149f682517,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_hungarian.0,8ca61842dc1eb9ba4bfda7f80737c3c44db48b316b6d337cba1b4eeece5c3ab1,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_italian.0,0c2334b06641fba504c3027266366c6a5771ab70236fd8fdade894c9d15d20e6,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_norwegian.0,ac15c35c0fe64ac145437f53337e4007720ed8e796e27a8eb782f4990cdc3edc,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_polish.0,08426d730389c9630119c83411760159426ecf9c03cf9a40f9c522a3b69b288a,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_portuguese.0,b8341c7e1dde87981d0c7b148a7b8a35dded38c0216f7fcfd1d8e02d9267a621,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_romanian.0,04695d835479012f89b179b58fb267f9f68c4f87889577928e178fcd59e8a630,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_slovak.0,1f4d82823b843fd02654d9f7f38d2c5be2c7561925178450ce06af30d967cd39,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_spanish.0,27a58048e7f3af1c692d0703cc39258405903b223b4eea0623a60bfb34c27ef2,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_swedish.0,858dc9577784326acf72d14b4068276ec89b2e495132e16c9fcb0f9e16d43885,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_turkish.0,c29e97a92e4f50d4aa6d94a59f3e9eb4cc0edb4a0282a46b5fc6370ac1771b6b,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_ukrainian.0,996b5dffd257a2688b3ba0744b4e32d3f556512b0dfaf161dd71e218fca8dc7c,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.lang_vietnamese.0,4f49307a7d677503123d5b0b65aeea0db0bdab64280073744e4e4dbe0a43b850,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_counted_to.0,6165a6c34e74161f1ed3011ab831cc844e6e53c077e7a4bdec02b83d31bd4582,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_counted_to_lang.0,4fbb5e46b5d2cc1d22085d0827f46d86e68e9e736f91f62e5f13c70c49e80571,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_counted_to_lang.1,42f4de1e5b2102f5857874813a2106f606295b6c7ed9711c5771b9b3857af878,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_found_letter.0,4e02449e3a132553d0b45dda252bcff6a9e583204a8bd14475ee68365cb34de9,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_found_letter_lang.0,8fbb97e36ef6d93e93dc40367e1ae26844d2ade0c7c8b17d7f6eea7e63f43437,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_found_letter_lang.1,b6eea9b3b33324c1486ecf40e66da7c56cae4edab919a905662aa0abe53ea2a8,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_found_letters.0,c1073ccf9c7f37584a6f4368f90fe6c240932c57fbf17ddbb3efda384e3ea76f,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_found_letters_lang.1,f285651844a2093b832cba90d1e4f28b54b5bcae4e66c5676fcbf02ec9e8f48a,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_spelled_phrase.0,ea5a9dac689967e1994fabfb6c11aa28917937d0b6157da269579f064d720109,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_spelled_phrase_lang.1,340bdaa20d7712ade0c59694c3906ca1451bd7f9570d14f7c32dc937f3e4d596,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_spelled_word.0,53b2e825bd3997ae7a8f78d4b14f9965bf1b1eb761da43d47346af221d8bc71b,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_spelled_word_lang.0,569cdb03cce09e2704855e7b08078aeb665c35c0b34355361a4d0151820c20db,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
-ui.recap_tts_spelled_word_lang.1,e6a9cc9d15e2ba53fe19d8d5c14bd98513cd33a4a2ba52ce45076f664683b394,approved,Michal Hauzírek,2026-08-13,"recorded singly between carrier words, no sheet cutting"
+ui.app_title.0,ae8debe0f9c6368ad0b1a5d8393a9844c80b6a9527c51d41eac442a16e47d9ac,approved,,2026-08-13,
+ui.lang_auto.0,8ca240f87e8b30dd0b1690334cb161a642343d55e1531c6bd85a9ca6cc24b59d,approved,,2026-08-13,
+ui.lang_czech.0,036438b47bbd4d61e16dea335e1f71404ced5679ce974fb8d4decc1db9aa8b42,approved,,2026-08-13,
+ui.lang_danish.0,fb359b713fab6b4025b392d6bf1ee2a326924c5095339db6e615f13421a9c8fa,approved,,2026-08-13,
+ui.lang_dutch.0,4e2e8f14701d5fb0ddf48dfa71cdf980e7c47f33a4acad3a269296c29e12a3eb,approved,,2026-08-13,
+ui.lang_english.0,9419d2572817161bacbfab021de85e30116794c1cb0eae833451139b3972e427,approved,,2026-08-13,
+ui.lang_finnish.0,c6b616cb1b6d5a9cb55cea9dad908035261332a9bb33e925e52f03798e7add94,approved,,2026-08-13,
+ui.lang_french.0,9576d4ba1ac42fb34616bcb2cc40a3bc2befee5bc96c47df7fc972d2a4f553d6,approved,,2026-08-13,
+ui.lang_german.0,09acadb1e90b5eb6a832f17ae73e849e14b90cef8f38a90b6d5f074e27f17327,approved,,2026-08-13,
+ui.lang_greek.0,aeaff79c0b30d10abc8d87e3441323888b4af67b1d5abc4bd458d8d776678b8b,approved,,2026-08-13,
+ui.lang_hebrew.0,73088175261f9f2dd8cd3d8bd8e1cd05c760f482d30f24566376d0149f682517,approved,,2026-08-13,
+ui.lang_hungarian.0,8ca61842dc1eb9ba4bfda7f80737c3c44db48b316b6d337cba1b4eeece5c3ab1,approved,,2026-08-13,
+ui.lang_in_czech.0,2ccee23030cd3a8a63791fc8e0e229b90ebd4e13dd5437959ecd1484a34516e8,approved,,2026-08-13,
+ui.lang_in_danish.0,fcdcb291314cad930601a27b39bfb28556361c69fd70b46d5d9d6050866f1e7a,approved,,2026-08-13,
+ui.lang_in_dutch.0,c26ad1ee3de5c73ef80bfca81422ddec41a91d67d2f464847ac4845e49537634,approved,,2026-08-13,
+ui.lang_in_english.0,f47365cd6f08b3ed3c1ad1f8d8389f441179ce93c298806d22a83f2559483da1,rejected,,2026-08-13,wrongly cut
+ui.lang_in_finnish.0,b2c4ff30b36c0f5eb92d0fcc3bcf193836f5628372e2f85e6438e3fe5c916c0c,approved,,2026-08-13,
+ui.lang_in_french.0,96ef86ccdeb5f8480f65cdae8802185578a818ae47de3d40dfba6c7ff34dc53e,approved,,2026-08-13,
+ui.lang_in_german.0,a45e5aa8bd55c760ff4e9a8f58a10976cf89c59ae6a0e7ed43276d0b9962d135,approved,,2026-08-13,
+ui.lang_in_greek.0,7a327622b09dbc5b7076dfd93fb2cc4c4ea9fb7a19ce31275c8e0734a2586297,approved,,2026-08-13,
+ui.lang_in_hebrew.0,4f31441e39628abfda75a4604967d362037b9934242a04979f532367771af770,approved,,2026-08-13,
+ui.lang_in_hungarian.0,55c67f7326fb7ddd92702f22e4c15b4bf94278d4d718dc6a6e3a7788da62631c,approved,,2026-08-13,
+ui.lang_in_italian.0,d138397d891efdb6164a563f752f5f2ba2004b70155075c178662a79a5cc78d4,approved,,2026-08-13,
+ui.lang_in_norwegian.0,7055c9f31ffc74991b174f55aa7e5966256896acac0851e8638f7b9b14e65fe1,approved,,2026-08-13,
+ui.lang_in_polish.0,72339d9783714f4406df433fe220d81c4b75f1c2ab3378d3f7dada6d8c750e9b,approved,,2026-08-13,
+ui.lang_in_portuguese.0,86186d1c2fcabd654ea5bb373aa798363c3024430c7ceb11e74df16cfc03ff31,approved,,2026-08-13,
+ui.lang_in_romanian.0,223bf80d8199d1d1be1d1c27605f72b87812a5474f192e35a408ec1f2a416d7a,approved,,2026-08-13,
+ui.lang_in_slovak.0,f65629f8bee5a9706b098d65d0bab2ae0e36b0c8094071cd5e78884a4a957a48,approved,,2026-08-13,
+ui.lang_in_spanish.0,85c70a202cb83a84b12baa8c84ba6f43d25441462d0820537ea418053d790cca,approved,,2026-08-13,
+ui.lang_in_swedish.0,700b62e4cc9e44a26c1545ae473e2b3385b166b165a3b33887e884d360c5998f,approved,,2026-08-13,
+ui.lang_in_turkish.0,d34a28619bada55af297d05bb0101a66996d29c84640b0cad0d1840c76af40ff,approved,,2026-08-13,
+ui.lang_in_ukrainian.0,5061ad7540e1e968eca657429b735dc8e7bc696c977e5d734bd1dcd8adbf92e7,rejected,,2026-08-13,wrongly cut
+ui.lang_in_vietnamese.0,00e08c9efc7fa2bc01b7a888fbc09d439c6ba02b5cd512f95ebd67aa6d75c77d,approved,,2026-08-13,
+ui.lang_italian.0,0c2334b06641fba504c3027266366c6a5771ab70236fd8fdade894c9d15d20e6,approved,,2026-08-13,
+ui.lang_norwegian.0,ac15c35c0fe64ac145437f53337e4007720ed8e796e27a8eb782f4990cdc3edc,approved,,2026-08-13,
+ui.lang_polish.0,08426d730389c9630119c83411760159426ecf9c03cf9a40f9c522a3b69b288a,approved,,2026-08-13,
+ui.lang_portuguese.0,b8341c7e1dde87981d0c7b148a7b8a35dded38c0216f7fcfd1d8e02d9267a621,approved,,2026-08-13,
+ui.lang_romanian.0,04695d835479012f89b179b58fb267f9f68c4f87889577928e178fcd59e8a630,approved,,2026-08-13,
+ui.lang_slovak.0,1f4d82823b843fd02654d9f7f38d2c5be2c7561925178450ce06af30d967cd39,approved,,2026-08-13,
+ui.lang_spanish.0,27a58048e7f3af1c692d0703cc39258405903b223b4eea0623a60bfb34c27ef2,approved,,2026-08-13,
+ui.lang_swedish.0,858dc9577784326acf72d14b4068276ec89b2e495132e16c9fcb0f9e16d43885,approved,,2026-08-13,
+ui.lang_turkish.0,c29e97a92e4f50d4aa6d94a59f3e9eb4cc0edb4a0282a46b5fc6370ac1771b6b,approved,,2026-08-13,
+ui.lang_ukrainian.0,996b5dffd257a2688b3ba0744b4e32d3f556512b0dfaf161dd71e218fca8dc7c,approved,,2026-08-13,
+ui.lang_vietnamese.0,4f49307a7d677503123d5b0b65aeea0db0bdab64280073744e4e4dbe0a43b850,approved,,2026-08-13,
+ui.recap_tts_counted_to.0,6165a6c34e74161f1ed3011ab831cc844e6e53c077e7a4bdec02b83d31bd4582,approved,,2026-08-13,
+ui.recap_tts_counted_to_lang.0,4fbb5e46b5d2cc1d22085d0827f46d86e68e9e736f91f62e5f13c70c49e80571,approved,,2026-08-13,
+ui.recap_tts_counted_to_lang.1,42f4de1e5b2102f5857874813a2106f606295b6c7ed9711c5771b9b3857af878,approved,,2026-08-13,
+ui.recap_tts_found_letter.0,4e02449e3a132553d0b45dda252bcff6a9e583204a8bd14475ee68365cb34de9,approved,,2026-08-13,
+ui.recap_tts_found_letter_lang.0,8fbb97e36ef6d93e93dc40367e1ae26844d2ade0c7c8b17d7f6eea7e63f43437,approved,,2026-08-13,
+ui.recap_tts_found_letter_lang.1,b6eea9b3b33324c1486ecf40e66da7c56cae4edab919a905662aa0abe53ea2a8,approved,,2026-08-13,
+ui.recap_tts_found_letters.0,c1073ccf9c7f37584a6f4368f90fe6c240932c57fbf17ddbb3efda384e3ea76f,approved,,2026-08-13,
+ui.recap_tts_found_letters_lang.1,f285651844a2093b832cba90d1e4f28b54b5bcae4e66c5676fcbf02ec9e8f48a,approved,,2026-08-13,
+ui.recap_tts_spelled_phrase.0,ea5a9dac689967e1994fabfb6c11aa28917937d0b6157da269579f064d720109,approved,,2026-08-13,
+ui.recap_tts_spelled_phrase_lang.1,340bdaa20d7712ade0c59694c3906ca1451bd7f9570d14f7c32dc937f3e4d596,approved,,2026-08-13,
+ui.recap_tts_spelled_word.0,53b2e825bd3997ae7a8f78d4b14f9965bf1b1eb761da43d47346af221d8bc71b,approved,,2026-08-13,
+ui.recap_tts_spelled_word_lang.0,569cdb03cce09e2704855e7b08078aeb665c35c0b34355361a4d0151820c20db,approved,,2026-08-13,
+ui.recap_tts_spelled_word_lang.1,e6a9cc9d15e2ba53fe19d8d5c14bd98513cd33a4a2ba52ce45076f664683b394,approved,,2026-08-13,
