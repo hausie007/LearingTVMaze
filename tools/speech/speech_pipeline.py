@@ -2117,10 +2117,26 @@ def cmd_review(args) -> int:
                     raise Fail(f"{row['key']}: status must be approved, rejected or pending")
                 if status in ("", "pending"):
                     continue
-                locale = next((r["locale"] for r in records if r["key"] == row["key"]), None)
-                if locale is None:
+                # By spec_hash, not by key. learning.char.a exists in every
+                # language, so matching on the key alone files an English
+                # review under whichever language happens to come first — which
+                # is exactly what happened, and it silently emptied the English
+                # record while polluting the Czech one.
+                match = next((r for r in records if r["spec_hash"] == row.get("spec_hash")), None)
+                if match is None:
+                    match = next((r for r in records if r["key"] == row["key"]
+                                  and (not args.language or r["lang"] in args.language)), None)
+                    if match is not None and not args.language:
+                        candidates = {r["locale"] for r in records if r["key"] == row["key"]}
+                        if len(candidates) > 1:
+                            raise Fail(
+                                f"{row['key']} exists in {', '.join(sorted(candidates))} and the "
+                                "row carries no spec_hash — re-export the sheet, or say which "
+                                "with --language")
+                if match is None:
                     warn(f"{row['key']} is not in the current catalog — skipped")
                     continue
+                locale = match["locale"]
                 merged.setdefault(locale, []).append({
                     "key": row["key"], "spec_hash": row.get("spec_hash", ""),
                     "status": status, "reviewer": row.get("reviewer", ""),
@@ -2447,7 +2463,25 @@ def cmd_verify(args) -> int:
             check(errors, not n["spoken"].strip().isdigit(),
                   f"{path.name}: {n['value']} spoken text is digits — write the word out")
 
-    # 5. Profiles carry no secret, and the repo carries no key.
+    # 5. A review file must only contain verdicts for its own locale.
+    known = {}
+    try:
+        for r in load_desired():
+            known[r["spec_hash"]] = r["locale"]
+    except Fail:
+        known = {}
+    if known:
+        for path in sorted(REVIEWS.glob("*.csv")):
+            locale = path.stem
+            with path.open(encoding="utf-8", newline="") as fh:
+                for row in csv.DictReader(fh):
+                    owner = known.get(row.get("spec_hash", ""))
+                    if owner and owner != locale:
+                        errors.append(f"{rel(path)} contains a verdict for {owner} "
+                                      f"({row.get('key')}) — reviews must not cross locales")
+                        break
+
+    # 6. Profiles carry no secret, and the repo carries no key.
     for locale, profile in profiles.items():
         for field in ("api_key", "xi_api_key", "key", "token"):
             check(errors, field not in profile,
@@ -2466,7 +2500,7 @@ def cmd_verify(args) -> int:
                 errors.append(f"{rel(path)} looks like it contains an API key")
                 break
 
-    # 6. Build inputs and outputs must not be exportable into the AAB.
+    # 7. Build inputs and outputs must not be exportable into the AAB.
     #    data/speech is pipeline input the game never reads — and Godot will
     #    happily import a review CSV as a translation if left to itself.
     for folder in (MASTERS, BUILD.parent, SPEECH_SRC):
@@ -2474,7 +2508,7 @@ def cmd_verify(args) -> int:
             check(errors, (folder / ".gdignore").exists(),
                   f"{rel(folder)} has no .gdignore — Godot would import and export it")
 
-    # 7. Shipped manifests must be internally consistent.
+    # 8. Shipped manifests must be internally consistent.
     for manifest_path in sorted(PACKS.glob("*/manifest.json")):
         manifest = read_json(manifest_path)
         pack_dir = manifest_path.parent
@@ -2486,7 +2520,7 @@ def cmd_verify(args) -> int:
             check(errors, sha256_file(asset) == item["sha256"],
                   f"{rel(manifest_path)}: {key} hash mismatch — the file changed after packing")
 
-    # 8. Phase 5 gate: gameplay must go through SpeechManager, not TTS directly.
+    # 9. Phase 5 gate: gameplay must go through SpeechManager, not TTS directly.
     if args.strict:
         allowed = {"scripts/tts_manager.gd", "scripts/speech_manager.gd"}
         for path in sorted((REPO / "scripts").rglob("*.gd")):

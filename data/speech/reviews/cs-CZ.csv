@@ -1,138 +1,138 @@
 key,spec_hash,status,reviewer,date,notes
-learning.char.a,29d29c9b65365969b94b6fc13352c8b06044f87661058143fce95daa17149eda,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
 learning.char.a,043cc2ca79947573f3b005cdbd430fe326f89f950fbe53584c5af438eef8d0b2,approved,,2026-08-12,
-learning.char.a,653e619d539af74fc5cca7258281fd212b6218357e2ed9277ba5b81a144e206d,approved,,2026-08-12,
 learning.char.a,0d90a5f1f5ddffc230469deba1a7488954c2ac346520e480d3121d89804cdbc7,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.a_acute,0ede0b17583e3db4d989ff2b9c4b9eca843ef7861cfea4208c3ffbf7302b8491,rejected,,2026-08-12,"sounds like dlouhe a - as if the a was short, but it should be long"
+learning.char.a,29d29c9b65365969b94b6fc13352c8b06044f87661058143fce95daa17149eda,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.a,653e619d539af74fc5cca7258281fd212b6218357e2ed9277ba5b81a144e206d,approved,,2026-08-12,
 learning.char.a_acute,07156e1063aba951f7bcdae592f9455113507d6a4d343e04e5c90e483abf1573,approved,,2026-08-12,
-learning.char.a_acute,eaccb1bd73e5fbfab17d69167676f1b4cc826537814cf534ec495df06740ef45,approved,,2026-08-12,
+learning.char.a_acute,0ede0b17583e3db4d989ff2b9c4b9eca843ef7861cfea4208c3ffbf7302b8491,rejected,,2026-08-12,"sounds like dlouhe a - as if the a was short, but it should be long"
 learning.char.a_acute,97df3119ce4b46e534b2b77a554c541266e83ad780eb8a2115a9c1ca935686a9,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.b,10108fd345169f57b097656c207e2e169ec521d1292467946288b1ad9a5175bb,rejected,,2026-08-12,"short, should be long"
+learning.char.a_acute,eaccb1bd73e5fbfab17d69167676f1b4cc826537814cf534ec495df06740ef45,approved,,2026-08-12,
 learning.char.b,02ff15cadab43e1b5e2fae2a3266d9844106564dff1caa92dfd73e2acb2b3678,approved,,2026-08-12,
+learning.char.b,10108fd345169f57b097656c207e2e169ec521d1292467946288b1ad9a5175bb,rejected,,2026-08-12,"short, should be long"
 learning.char.b,2d204bd105ed8fc0cca5960df888edd1690ae2dd8a1cd0d45d29fb690f86d0a5,approved,,2026-08-12,
 learning.char.b,c56ce92d7ae6ab8e01bfdaf248177a9bbd4e13bc5d07a115dbe0ae5ec067d38b,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.c,e31111844149a1ed1e286030c092a7083957bbef02f6c687432b49822d8cbb9e,approved,,2026-08-12,
-learning.char.c,a5cd321f59a462a51014c8a9fc918087b15194c177c960dccb3e4990f7db4039,rejected,,2026-08-12,too short
-learning.char.c,e339f9e093de83e7f11f2dee77896636d88ea5da612973d305f7736e7fd1d1a7,rejected,,2026-08-12,too long pause at the beginning
 learning.char.c,1204d19b93ea219e0dcc20031557a22511060d192cef129a912fc9b256bc5e56,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.c_caron,726f070a0f461e69b3cc3af7646696bfc6fcfdc8318301fc3b027d26b13fad7c,rejected,,2026-08-12,should be longer
+learning.char.c,a5cd321f59a462a51014c8a9fc918087b15194c177c960dccb3e4990f7db4039,rejected,,2026-08-12,too short
+learning.char.c,e31111844149a1ed1e286030c092a7083957bbef02f6c687432b49822d8cbb9e,approved,,2026-08-12,
+learning.char.c,e339f9e093de83e7f11f2dee77896636d88ea5da612973d305f7736e7fd1d1a7,rejected,,2026-08-12,too long pause at the beginning
 learning.char.c_caron,4eff25c740841d6997ae7e760b44240c57bb0fe397321bdd30d7b859cec3209b,approved,,2026-08-12,
-learning.char.c_caron,ad1fb9abeab8d59f3d9a5a01be2fdfcff8672d89c9cab7ae503f639253e9e814,approved,,2026-08-12,
 learning.char.c_caron,57c3b075900846f5edaa7f941e879d2396f29f0485277d5d11708a613b2c59bf,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.ch,77c58358943d34167c2c3727dffd734012789f7004296f49dab410209ba3e0da,rejected,,2026-08-12,"very wrong, uses french pronounciation"
+learning.char.c_caron,726f070a0f461e69b3cc3af7646696bfc6fcfdc8318301fc3b027d26b13fad7c,rejected,,2026-08-12,should be longer
+learning.char.c_caron,ad1fb9abeab8d59f3d9a5a01be2fdfcff8672d89c9cab7ae503f639253e9e814,approved,,2026-08-12,
 learning.char.ch,60be902745a3f090bcbe38681dd7c7a272342c0e97076df68557f1864c04ebad,approved,,2026-08-12,
+learning.char.ch,77c58358943d34167c2c3727dffd734012789f7004296f49dab410209ba3e0da,rejected,,2026-08-12,"very wrong, uses french pronounciation"
 learning.char.ch,9ca89559bb813d9f0f02364e09fa7e598bafd042b6d376bbb199d8a5fd2454d7,approved,,2026-08-12,
 learning.char.ch,d51f9f8f57826e276575bf8a32bff7c3d1bbac479178e779fbcc7c07457c3188,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.d,dfea66c4ff4863bebfabc271edfa724f1b64dda4720bf9e4b56b2aa40fd74a66,rejected,,2026-08-12,almost as if it uses different voice 
-learning.char.d,6a1875ad0dea8ef135831c1d8c1c115790376874f73658c77f731137c77bf214,approved,,2026-08-12,
-learning.char.d,31e04e614327801cfed6754f43a566b2c76e9d9dbd3b7b84edfcfa0d0f78b9e9,approved,,2026-08-12,
 learning.char.d,13746776cf896a93307c791261b8d9d6323d4b36a14de0d477fc3d7bfabea53a,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.d_caron,ee6ccb7f1031b33d8ab902b9d4406744d3ec8fa656954d7f4602bba2a8b351fb,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
+learning.char.d,31e04e614327801cfed6754f43a566b2c76e9d9dbd3b7b84edfcfa0d0f78b9e9,approved,,2026-08-12,
+learning.char.d,6a1875ad0dea8ef135831c1d8c1c115790376874f73658c77f731137c77bf214,approved,,2026-08-12,
+learning.char.d,dfea66c4ff4863bebfabc271edfa724f1b64dda4720bf9e4b56b2aa40fd74a66,rejected,,2026-08-12,almost as if it uses different voice 
 learning.char.d_caron,764d4b074d57ffcd024b07a702ee991f939aa8747629ffce89f5a7c9428a8d2f,rejected,,2026-08-12,clipping
 learning.char.d_caron,e4d2e5ae3a2b00d2d79e264024d979133933d3030a660f2c1a0097d344e7b939,approved,,2026-08-12,clipping
+learning.char.d_caron,ee6ccb7f1031b33d8ab902b9d4406744d3ec8fa656954d7f4602bba2a8b351fb,rejected,,2026-08-12,"not a letter name, more like a sexual sound, unacceptable for a kids game!!!"
 learning.char.d_caron,ef8e79a112373a01ccea1eb833986154f285a21b310eb4f0a84bd2dc3369eea3,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.e,a1763d57473031e762aa0753a8f78c927397f30a77fe4b4c0b7b88cdea0e132f,rejected,,2026-08-12,
 learning.char.e,52168d8c7991ed1395bb9a64deaf611bffae61249d4f228bb3eb947b0e66e43a,rejected,,2026-08-12,might be a bit longer
 learning.char.e,6542b7eed4528f74de6b2315df42c074ec77905d169ffda7e26ceac54575a5b4,approved,,2026-08-12,
 learning.char.e,91bee14bee98e1ab09bbbebbf23fb60aaea57d7c764e813366eee0f2238160ab,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.e,a1763d57473031e762aa0753a8f78c927397f30a77fe4b4c0b7b88cdea0e132f,rejected,,2026-08-12,
 learning.char.e_acute,5e10f808a6202437cc25976a1064e3aa41a2d06bb32377545ffd1eee2590880b,rejected,,2026-08-12,"short, should be long"
+learning.char.e_acute,7a04bd9de4ef779e0af2441e0c8ddb46657a8af2b2053d3986f04504f1dc52dc,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.e_acute,bc3e73d780738bfcbf627d19fb5a3c3af55292f8b8f753bdffabc73bb7955012,approved,,2026-08-12,
 learning.char.e_acute,c2aeaefe07af9fa251914129522ffcd9325f9b8316296743c9bd22d0afd6e6c3,rejected,,2026-08-12,has some clip and longer pause at the beginning 9probably from previous letter)
-learning.char.e_acute,7a04bd9de4ef779e0af2441e0c8ddb46657a8af2b2053d3986f04504f1dc52dc,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.e_caron,d7d7094bb32d3a6aed8c3098a161aa190c46f462480697457103d7f0e64cf8a7,rejected,,2026-08-12,"short, should be long"
 learning.char.e_caron,1cfda7ea70f97d2fa675f4f456ebf51c63cd7a950a2675e4ef0e432c4a45270c,rejected,,2026-08-12,"the ""e"" is too short. should be rather é a háčkem then e s háčkem"
-learning.char.e_caron,fb91dc31761c0fd8086e8291dd578c90137f25f682b1125c0d4308f3a0ea659e,approved,,2026-08-12,
 learning.char.e_caron,c32309cf63651d64e2f65f3f98946dfe4af98e40eec10b9961285dfe3811eeac,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.e_caron,d7d7094bb32d3a6aed8c3098a161aa190c46f462480697457103d7f0e64cf8a7,rejected,,2026-08-12,"short, should be long"
+learning.char.e_caron,fb91dc31761c0fd8086e8291dd578c90137f25f682b1125c0d4308f3a0ea659e,approved,,2026-08-12,
 learning.char.f,6816bd254e318fb9d4bac1de257adc97402d7db0470662fe6c95dd35ce406cfc,rejected,,2026-08-12,very short
-learning.char.f,e847794db582183279dc4c90d1e2f90f0ec97035c529baeac2bbf96bbcaa7120,approved,,2026-08-12,
 learning.char.f,dd89eaa98bbc2c27150a208a749c89eb32cdb91ddd22bc54afddd15d65d524fd,approved,,2026-08-12,
+learning.char.f,e847794db582183279dc4c90d1e2f90f0ec97035c529baeac2bbf96bbcaa7120,approved,,2026-08-12,
 learning.char.f,f218d3b0dbf913770942dc3329e14ff160cf68e0dcc809e9042f440f7e4c9106,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.g,d291bf1b45e255958582e25570b8344f6423415ae99659475eb80c2ce09894cb,approved,,2026-08-12,
-learning.char.g,23827faf777034376fe28f6eb5d24871cca5ef030cf4d487e01758dd9d4867c9,approved,,2026-08-12,
 learning.char.g,0302e88b0efdf5c6a00c3f5b19ebeb2d7e99c03fbe2ecdf6b13a9d38a4308904,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.h,e4f94606542d4510019332efdcb5ba877ff82060ad007a11c289066e34e99c1c,approved,,2026-08-12,
+learning.char.g,23827faf777034376fe28f6eb5d24871cca5ef030cf4d487e01758dd9d4867c9,approved,,2026-08-12,
+learning.char.g,d291bf1b45e255958582e25570b8344f6423415ae99659475eb80c2ce09894cb,approved,,2026-08-12,
 learning.char.h,11e7badde100310600f1937177f0784113e50f1731b693d6b3b6364e38d3ba93,approved,,2026-08-12,
 learning.char.h,188579692ea90f22b63a5593ddd9a36d009039c6fda085df67cc7ce639a483f9,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.h,e4f94606542d4510019332efdcb5ba877ff82060ad007a11c289066e34e99c1c,approved,,2026-08-12,
 learning.char.i,32309c7c44251726025419f9b4359064a4b23556c6aa5e25845ab12bcbd01c0e,rejected,,2026-08-12,almost different speaker
-learning.char.i,f099387f70bafd075f62d86dc32b5090522536b0bf1ca4ed54e03262949849fb,approved,,2026-08-12,
 learning.char.i,55ed9fb8804268659f7f404582b9a526e3cc7cb039ebbfa79353dfa7e160d3b5,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.i,f099387f70bafd075f62d86dc32b5090522536b0bf1ca4ed54e03262949849fb,approved,,2026-08-12,
 learning.char.i_acute,5df041e5e4f2900f3deb9150fcddc9639536484d52af27e4d17d6b5987655e06,approved,,2026-08-12,
-learning.char.i_acute,c5e7c9e0a8bc5f6e337a27c1e813699ab89fa4a847f03263149ffc835f6cd663,approved,,2026-08-12,
 learning.char.i_acute,a78b600ab34b663d82d70759f5265ab2a2437a2eaecd58688131ac80c5ea823e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.i_acute,c5e7c9e0a8bc5f6e337a27c1e813699ab89fa4a847f03263149ffc835f6cd663,approved,,2026-08-12,
+learning.char.j,0c608476686fe661150abeb9dae846e03ccd4aba42ea9b8d31dd8c359bb70dff,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.j,af56336acf0aaa3b4b67fc6af0ce2ea88f806b1f7e5d1d4ae8381142952c7427,approved,,2026-08-12,
 learning.char.j,ddfcf72a1e49e8b3302207fff6627f079d65e723928db83640ce23c0f04c3923,approved,,2026-08-12,
-learning.char.j,0c608476686fe661150abeb9dae846e03ccd4aba42ea9b8d31dd8c359bb70dff,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.k,4f10acfb213315d0d8f5001f799d422a2a6aa726cf983ebc7e3f43499b4e6c3c,approved,,2026-08-12,
 learning.char.k,8fe9d96955b46ffd320e4fbc4af950fe3f70f0f98ed4e05b22b67ee990f32072,approved,,2026-08-12,
 learning.char.k,e945051c6237e51969cf6e6f607a4540d5b81e85ed615246cc16b8a407c5c1a8,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.l,a1b9832ecb821231d70a22e0fba8a37132fd31f550ea25a8c30eadc9d59db128,approved,,2026-08-12,
 learning.char.l,16b1c80ae0f50f7b6fecc7a99ef9bd5952174c730bdd176c445a4122f5a5d435,approved,,2026-08-12,
 learning.char.l,8cbfce10c49ce18c9e60f480377e1ba5f85f430199ac414b3b5ec8f288d4793e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.l,a1b9832ecb821231d70a22e0fba8a37132fd31f550ea25a8c30eadc9d59db128,approved,,2026-08-12,
 learning.char.m,0a333eecea44e3b683a50b4819e2f0117b464084de50ef5417072ff5706686c2,approved,,2026-08-12,
-learning.char.m,df60d3fef558c7012422e73a16d0989744228117daa79e06761a1c765fc8dc05,approved,,2026-08-12,
 learning.char.m,2f0b3d6e0ba451b75e5eeb06dd3085c7d97d1455fa1b390adf2cc44c0941f47e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.n,bcf8eaa97e40011e7e7754f2229c2fddfdc4299d43eb2bb8c9dc3f6ba23046e5,approved,,2026-08-12,
+learning.char.m,df60d3fef558c7012422e73a16d0989744228117daa79e06761a1c765fc8dc05,approved,,2026-08-12,
 learning.char.n,b7b8aef81c0a065e3d86a3c62423c3d8b5c3ce4abcc9481cd1e6dc155131f347,approved,,2026-08-12,
+learning.char.n,bcf8eaa97e40011e7e7754f2229c2fddfdc4299d43eb2bb8c9dc3f6ba23046e5,approved,,2026-08-12,
 learning.char.n,be1beda3ab5b2dbca3df2d5b51970fc2943ffa92c83b6d65c98852e79bdd272e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.n_caron,cb4c9b0990de77e83fac3ac3aa3873cb3a25193d1e90ad9205cb49e726fa1203,approved,,2026-08-12,
-learning.char.n_caron,f35bb54585425112cc1fd20788bbe7aaae1852f5543d82ea950fd36b89d91591,approved,,2026-08-12,
 learning.char.n_caron,d52f8ca1f18cacea0ca4a8c54009cc1b42f3a74d7f65ddfb8b7e5626f1703e3c,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.o,299376e54fb0dc98457b4a90d551009fb366883cd75da65c794f47b657d0d999,approved,,2026-08-12,
+learning.char.n_caron,f35bb54585425112cc1fd20788bbe7aaae1852f5543d82ea950fd36b89d91591,approved,,2026-08-12,
 learning.char.o,009566810bff0ebb68cfd9668076386021210fe6fc7b68023c0142416d8eb810,approved,,2026-08-12,
+learning.char.o,299376e54fb0dc98457b4a90d551009fb366883cd75da65c794f47b657d0d999,approved,,2026-08-12,
 learning.char.o,3084f4d04036481b332134c32bb7c3984a529f9a56c0dc81deb53b4e83527fe6,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.o_acute,5c8374487d383043644ec530fd3bfcd601c9b09c0c939c4d3d897499eea67c5c,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.o_acute,cbe453e57c4b8b2bd0d3800e85871163fdf48fb1b4fbeb00b3c3945e91aa404c,approved,,2026-08-12,
 learning.char.o_acute,e413b9bd72c8133b275fae2adf8c20af109d25613ca324a52fb9bfe33667bd7c,approved,,2026-08-12,
-learning.char.o_acute,5c8374487d383043644ec530fd3bfcd601c9b09c0c939c4d3d897499eea67c5c,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.p,1387a6b89db342fe2e3d59eec336936c26783b2df3a7b6e906231a3205ffd0e8,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.p,62ab08e73d3f18ded199be8cd5e522fb0bedac176d999f234643aee602df9cba,approved,,2026-08-12,
 learning.char.p,f44c594f4d0922f7b9fc329a71f4342b45aae5bc1ecf19a3c49ba9d0ecddfc0a,approved,,2026-08-12,
-learning.char.p,1387a6b89db342fe2e3d59eec336936c26783b2df3a7b6e906231a3205ffd0e8,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.q,5726ad4cda305b9fe0a799ff7141fb4eaa337eedfb3fe6be226fedf67a6961c3,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.q,6c864896f2d9ae37f55ab545e311a0637d6c66728db058e984a86a18fff9b67e,approved,,2026-08-12,
 learning.char.q,aeeb8b71627ca9262032ff7aa966b249d43ba6baaf1d9a135784de43deab0c3e,approved,,2026-08-12,
-learning.char.q,5726ad4cda305b9fe0a799ff7141fb4eaa337eedfb3fe6be226fedf67a6961c3,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.r,26a6e8c695a29038456073b05d9b78c8b5fefef1f821ec854f1de557735b4203,approved,,2026-08-12,
-learning.char.r,f73f0fdba17ee316226f70bcc243870dc2a1a26ea972d5f34ccc9d999425f41a,approved,,2026-08-12,
 learning.char.r,ead99b8ce77c213c34191ca7e033ccca8a8d209c8f380f05be4191a2a3b8cca9,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.r,f73f0fdba17ee316226f70bcc243870dc2a1a26ea972d5f34ccc9d999425f41a,approved,,2026-08-12,
 learning.char.r_caron,3c5f401adb427cfa660fbd00ec3fecd449ec9d9208aee4fc32662158fdd1d532,approved,,2026-08-12,
-learning.char.r_caron,eba3df6210a46141b1a6761319ed9a749a178b89f2f3a1bea1083a4422fbdeb7,approved,,2026-08-12,
 learning.char.r_caron,7deefa84073c534f6a504639575a11c9af99e39c2a15216a3e991665e4447c38,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.r_caron,eba3df6210a46141b1a6761319ed9a749a178b89f2f3a1bea1083a4422fbdeb7,approved,,2026-08-12,
+learning.char.s,76d99f742f36a5e4e83ea2971d0677fd73ab9365e70a8dc8531d282a579ab6dc,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.s,8550f7d0ccc383d1fcd2f3d1084b65ba185ed8de4af5b6459440220ccb15779d,approved,,2026-08-12,
 learning.char.s,a202abc6f44acc46cbe7ccffe19f5f132c5e344eeae9c1f3536fe4fff1cd46b4,approved,,2026-08-12,
-learning.char.s,76d99f742f36a5e4e83ea2971d0677fd73ab9365e70a8dc8531d282a579ab6dc,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.s_caron,17637bb2c21a53c2737f2256e60345f441c60490a1af84c50bc06a63105c38ca,approved,,2026-08-12,
 learning.char.s_caron,8e1a81deed55855e19e3784b7b6a6fedddc3edb224dc8dd448dec834e018778f,approved,,2026-08-12,
 learning.char.s_caron,acd7c466793b7ebcf66fe35dc8751055bb9953dba3fef4642121fee4f3a0355e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.t,5a8ff8acfa3c585db19f68cc57fba031158975e3cb1aaa4f009952dc2c720abe,approved,,2026-08-12,
 learning.char.t,69f0ddf9f8547cb6547bd734f53a8c1933db2953fecbb25658daa3ac7e9f7b53,approved,,2026-08-12,
 learning.char.t,7a00d396fbd32c83d7dcd00b27d92e503137666c96545aef6912c523680c8628,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.t_caron,09a250e4a672cd9ae976b53928f666187facf05ebfe42f6f3b50e739f70cef3f,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.t_caron,21d7bb2094d893f7fa2e5cffe56666a71a666497390271d4c679bbc0138e73dd,rejected,,2026-08-12,not very distinct
 learning.char.t_caron,5bddc55c32b5ec90fb50e71f17c6a2984fb57ff620937c4d46317802b85fcd7b,approved,,2026-08-12,
-learning.char.t_caron,09a250e4a672cd9ae976b53928f666187facf05ebfe42f6f3b50e739f70cef3f,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.u,ad45155eb2fd05da89528bea062568556aea8e3c3a022931bc6d0f2fdba9448d,approved,,2026-08-12,
 learning.char.u,41ddbfa46990badc8ec7caca0e1aab8150b626c06f95c03331edb264a10a5089,approved,,2026-08-12,
 learning.char.u,9892661e96a7d9580e10d57237653cdd616e4af4fbd66200908ce665ccf84251,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.u_acute,ba623086961a25cab01c5afedda38aae02d3a08786587cac5b1c9130a02c11d3,approved,,2026-08-12,
+learning.char.u,ad45155eb2fd05da89528bea062568556aea8e3c3a022931bc6d0f2fdba9448d,approved,,2026-08-12,
 learning.char.u_acute,83d38fd2d08e657d895b729c079edd02ce001a4028d782698b1c69498ef96919,approved,,2026-08-12,
 learning.char.u_acute,a82051c84b8cef0ed320c10fbd99f00c2392f334edd99c5e87a106bf4f54adab,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.u_ring,f39d02f64837906803ef9be9293ae97ffe4e39476cdcd2459d4721df3788e791,rejected,,2026-08-12,beginning is weirdly cropped
-learning.char.u_ring,a2f2cafc12b057c1b6ba7d20627fd85aa181519ef1fe59fa96d691b2e18e8211,approved,,2026-08-12,
+learning.char.u_acute,ba623086961a25cab01c5afedda38aae02d3a08786587cac5b1c9130a02c11d3,approved,,2026-08-12,
 learning.char.u_ring,054e2e19e3616519be950f7838d77e9a38525663ad0564e5ec61858a23b2a204,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.char.u_ring,a2f2cafc12b057c1b6ba7d20627fd85aa181519ef1fe59fa96d691b2e18e8211,approved,,2026-08-12,
+learning.char.u_ring,f39d02f64837906803ef9be9293ae97ffe4e39476cdcd2459d4721df3788e791,rejected,,2026-08-12,beginning is weirdly cropped
+learning.char.v,73875dfb7d67fcec95f61aac559cc94dfec1ca04dff24a0702baa7293f76af13,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.v,d7b2d01268cc2ad0eaf26c3f3060f3368e7954b6beccc0a06f899df8b0b0f06c,approved,,2026-08-12,
 learning.char.v,e506f0e8a874673c3969d3265631212595b4373abcbea0b6a3205f7142c25b11,approved,,2026-08-12,
-learning.char.v,73875dfb7d67fcec95f61aac559cc94dfec1ca04dff24a0702baa7293f76af13,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.w,8e3115bc4696d411792ddf78b0ae976876191f4593de303241683d5cbeb8f375,approved,,2026-08-12,
 learning.char.w,402cee21b4130d08226b9729ec900fa520661d5bb733fec8aa007dce22406f1a,approved,,2026-08-12,
 learning.char.w,85b60564c18f1efb6048cb394394d6fd5953595afc96eb227557b04648616371,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.x,6543f0278236649f80cceac4e0a558a4f921431fb453470f87ff5479fc0973cc,approved,,2026-08-12,
+learning.char.w,8e3115bc4696d411792ddf78b0ae976876191f4593de303241683d5cbeb8f375,approved,,2026-08-12,
 learning.char.x,4ec7589267b40eb1cbb75ecc09b71b22b8c266e36c74b83a19c16e1201111087,approved,,2026-08-12,
+learning.char.x,6543f0278236649f80cceac4e0a558a4f921431fb453470f87ff5479fc0973cc,approved,,2026-08-12,
 learning.char.x,a69de0d88febc2012616672dd5bec0263535053064cc650b57ad60c0b91cf229,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.y,449231643b3ba0063e6b97bd4d8d1d21f03596991de7251c96a32d1a1e45d33a,approved,,2026-08-12,
-learning.char.y,e6e3e9e389ee1c3c1acabe8f3dcba3825ca873b6b164ed9ce36a164bd9543223,approved,,2026-08-12,
 learning.char.y,da83af0cbad1d8d73d87ec316fbe8d05d9fc98cd76981663eac5703220c421a1,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.y_acute,6cdc9f4bdac0cf2676fdf3ad928a81e22daa2717774e4137ba3273ba38f754ce,approved,,2026-08-12,
+learning.char.y,e6e3e9e389ee1c3c1acabe8f3dcba3825ca873b6b164ed9ce36a164bd9543223,approved,,2026-08-12,
 learning.char.y_acute,5ff9c4595eb19093164f875cf5748a4ebbc501133cd093d4604bc4d5212fd8f5,approved,,2026-08-12,
+learning.char.y_acute,6cdc9f4bdac0cf2676fdf3ad928a81e22daa2717774e4137ba3273ba38f754ce,approved,,2026-08-12,
 learning.char.y_acute,7df8252aa0cb06ffa9e8d424be730fc3dc72a148f84b33b2bf9715758bb7ae02,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.char.z,82c7c437b982a15616e2034758d149b60827a3141f5882270c3f4b489d8dfbf3,approved,,2026-08-12,
 learning.char.z,55682fd5ed135d806b0498de47d3f6b916483bf01749d1d0c15bf8a4ecf1813f,approved,,2026-08-12,
+learning.char.z,82c7c437b982a15616e2034758d149b60827a3141f5882270c3f4b489d8dfbf3,approved,,2026-08-12,
 learning.char.z,bc9b5805ff6cfea6ac002e54939829449c2c31f8f03c95ac81b213efbf25144b,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.char.z_caron,87d50567537d7e05a057f112d161ed73beb88ead45d67844615d7f727a816513,approved,,2026-08-12,
 learning.char.z_caron,a282ef5b85de5316ac4e2c0c1651026111eb2b0c331e3a5ed0471da404793d5a,approved,,2026-08-12,
@@ -141,19 +141,19 @@ learning.number.001,046d9d007671eb1571c102a4a3f8918ed75aef8c41055a42f00b5cc120f7
 learning.number.001,84f316ee86929745bc1ba555ccc2ab9e29b4a683657be7e9d15f0b635dc2975a,approved,,2026-08-12,
 learning.number.001,b3a299279682a2e4c3b1068d974cc488469b874564062f856c3e14e191bcc3b9,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.002,0245304b4ed1c4faeb3d2ce23be23d6d4fc14ce566785f0f91f26eb604c42a0e,approved,,2026-08-12,
-learning.number.002,f21b72d88b8b71dc317c2655b1cb713f989fa64d6f2dac056ef6577319dbf620,approved,,2026-08-12,
 learning.number.002,3d1649eb29a55a87447a6a2085a47e750cd71d1829dceda1fcdb4a2a04704760,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.002,f21b72d88b8b71dc317c2655b1cb713f989fa64d6f2dac056ef6577319dbf620,approved,,2026-08-12,
 learning.number.003,43890711358cf097743ab907fc9b990f50c89b12223b150505961464909e9764,approved,,2026-08-12,
-learning.number.003,7c7a9be2fbf734fca574a3dac82c9e3f9175cd781d228788535f902b5bc251f6,approved,,2026-08-12,
 learning.number.003,4a272757cfef75163c7ddbac69fe1ef279e1e7068f252408bc9548789b9620f1,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.003,7c7a9be2fbf734fca574a3dac82c9e3f9175cd781d228788535f902b5bc251f6,approved,,2026-08-12,
+learning.number.004,17718544640ae1f4cf6abc3eaefd59788e22f0b15ffc339ecbe63a68e342fab6,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.004,3f77040d3f377e31f5bbd23d5eabee8a0ae2086d470f3feccbdffc211e2ed654,approved,,2026-08-12,
 learning.number.004,889ed307148b58da1fd5e5ac23097320c50128546ed3027f0db68ee51db664f4,approved,,2026-08-12,
-learning.number.004,17718544640ae1f4cf6abc3eaefd59788e22f0b15ffc339ecbe63a68e342fab6,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.005,97ac00e21dfa2cf93186e9f7ce78bfe1acafbc59a3b588808f5bd5d103a3b2c7,approved,,2026-08-12,
 learning.number.005,49da9d686e3be926b4c8101f9b3dc32dcd45ad5534fe26d7b17d2af6011915cb,approved,,2026-08-12,
 learning.number.005,63b3fec8767bc43ea81cf85f2feb06f91fbc2e519032be68d2314c46870d5522,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.006,60b19e1917f7ddde6289397c828b3d5a967339449b06d19b015e432d49d6f6f3,approved,,2026-08-12,
+learning.number.005,97ac00e21dfa2cf93186e9f7ce78bfe1acafbc59a3b588808f5bd5d103a3b2c7,approved,,2026-08-12,
 learning.number.006,0de5b94439da4313cb4acc6d6196970c7ca92e95e076bf6dbfaa25c0d8b47f10,approved,,2026-08-12,
+learning.number.006,60b19e1917f7ddde6289397c828b3d5a967339449b06d19b015e432d49d6f6f3,approved,,2026-08-12,
 learning.number.006,fdf93dceb45eaac37efaf5d06b2d3631045510d9f86ff1fb98d38edfca89be23,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.007,11256460d319dbfa9676a87f197045e3bc92a9432e94e28bcccdf5026208916b,approved,,2026-08-12,
 learning.number.007,1ca5cab0aa4fa3603ef163f81f72aebee349aec776e55f5549dd7bec81d4c117,approved,,2026-08-12,
@@ -161,132 +161,132 @@ learning.number.007,96e8e2b3274216b6b8f61a632b0503c890f147b95a512d1e6cf9a6e57c8e
 learning.number.008,3ccd36971f53d2754cc739b39a5d87098c454e73949e47ed3e7020e279325052,rejected,,2026-08-12,clipped
 learning.number.008,6030f3a3e0ecce99cfa541b0f658df796ff2a501bcc6378052191d11c64f2ca6,approved,,2026-08-12,
 learning.number.008,96301e9c8bdab9928ea901d3e22e3683d38925d3c412695b790c25bbc894e84c,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.009,fed304c0e6ef77361fa1ed41c3896dbcdeebf0798c38d2dd7723b206618b9a36,approved,,2026-08-12,
-learning.number.009,f778209fff823e0b0966b2dc869d8edb4b27cae23553340e8122770cb2080afc,rejected,,2026-08-12,has part of previous number at the beginning
 learning.number.009,06abf08b4650babda1b621201b8fd808796a2cc358a9c53423abd66bc7c42524,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.010,f797b0ad12e72306cb70c35e2808513abf2876ffd257ef05d1d13a60a83ba978,approved,,2026-08-12,
+learning.number.009,f778209fff823e0b0966b2dc869d8edb4b27cae23553340e8122770cb2080afc,rejected,,2026-08-12,has part of previous number at the beginning
+learning.number.009,fed304c0e6ef77361fa1ed41c3896dbcdeebf0798c38d2dd7723b206618b9a36,approved,,2026-08-12,
 learning.number.010,119f45dcb01f2091d0b322fb1decdb6e253fff04a1479ae543a1807616d63b03,rejected,,2026-08-12,too long pause at the beginning
 learning.number.010,11ca667f2100d7824b34625ad989c3432d930d95b1df606117513abe0f308de2,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.010,f797b0ad12e72306cb70c35e2808513abf2876ffd257ef05d1d13a60a83ba978,approved,,2026-08-12,
 learning.number.011,37db638990013f071fce4a882d825c4fb339d6640d6ed4d790f47fd8c9c289da,approved,,2026-08-12,
-learning.number.011,d9c69e398ca222eb6ba52a04c722ae3b36f1c289ddbebbe3e6a9bb43edcdb611,rejected,,2026-08-12,too long pause at the beginning
 learning.number.011,656f7b4314aa5ff369490cbf33540bef52428e676036cd16120adffcea8ddbda,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.012,6ab38f8c8242178f4a6216ee50bf1497a72d92e94806b4044184f2fa5af86fb2,approved,,2026-08-12,
+learning.number.011,d9c69e398ca222eb6ba52a04c722ae3b36f1c289ddbebbe3e6a9bb43edcdb611,rejected,,2026-08-12,too long pause at the beginning
 learning.number.012,1c31b0983be20a8887cf208b48d66b9858f6c2f63de03dc9e8b5ca09b6812d09,approved,,2026-08-12,
+learning.number.012,6ab38f8c8242178f4a6216ee50bf1497a72d92e94806b4044184f2fa5af86fb2,approved,,2026-08-12,
 learning.number.012,f1e1f76925623d0e1232033466061f796fe6bc56d835ea1f75dbdad653d4331d,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.013,3d97199023dc6e4b1f803446f7006e7a119d302e22faeea0f719f9293782b544,approved,,2026-08-12,
 learning.number.013,7e22c4174a8f33bdf4b0eaed4684653396e951cc8c4b4bf746fb9d1230853c85,approved,,2026-08-12,
 learning.number.013,bdcb5204f24128c3403c4195c31ca91cdd273661a84642deffb740cc4961ccfe,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.014,3d34d823b8d021b1c0b0393c06283c0aed1048028ace667dd626ebe4cccb5d25,approved,,2026-08-12,
-learning.number.014,bbf1f6347816f97010fb5f5d47684697bede50d7fa54d9137e40fa2f8692b2e7,approved,,2026-08-12,
 learning.number.014,906171871a5650c85670ff4ef1195ec488d788875d6d16160a01df16d70b45d9,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.015,e2a1729ba3b3f830612a48c9ba98fe3b570316f119f94698e6a308f8cd7da964,approved,,2026-08-12,
+learning.number.014,bbf1f6347816f97010fb5f5d47684697bede50d7fa54d9137e40fa2f8692b2e7,approved,,2026-08-12,
 learning.number.015,54a6b214201576311865116dd08477428856b53370059e13f141857bd5110d88,approved,,2026-08-12,
 learning.number.015,6a1fb39478f088e1ef033cce2b7727d3deb12242499e4616633dfa8623e018ab,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.016,bb057c6d01ca65d25f1c90bbff70d54aa0b514cfe15c05a23e70016ddec4f446,approved,,2026-08-12,
+learning.number.015,e2a1729ba3b3f830612a48c9ba98fe3b570316f119f94698e6a308f8cd7da964,approved,,2026-08-12,
 learning.number.016,17c2a4bcf6a08dd0915cd576038d5030363aaf042b0114da61e1955404e6adcd,approved,,2026-08-12,
 learning.number.016,7c7e908c41758a7b94b812cc2718e9d24f17523b93182dc0d0eeff9c289d37bb,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.016,bb057c6d01ca65d25f1c90bbff70d54aa0b514cfe15c05a23e70016ddec4f446,approved,,2026-08-12,
+learning.number.017,304cbad740a8b58d1f29c7efcd434319af530d316117bb3e2054f7afbe8200ea,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.017,40b72ed82da36e0d66a4b22af02830c1af940152672c5d0f16a7de391baef3ab,approved,,2026-08-12,
 learning.number.017,ba700da0728126d58e9d96ca0b76d60e07a41adaa32dbee9bbc0a5c5ebaed80a,approved,,2026-08-12,
-learning.number.017,304cbad740a8b58d1f29c7efcd434319af530d316117bb3e2054f7afbe8200ea,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.018,f0a9d42553adb7f0817d084e84e9b4be5dfd28686950dfaa05131fd78b8e41a0,approved,,2026-08-12,
 learning.number.018,3dcc8723ee473a4c12299b3167c72ef6bcb7f2c85b9467dee3cf0a9c0cd4bbb6,approved,,2026-08-12,
+learning.number.018,f0a9d42553adb7f0817d084e84e9b4be5dfd28686950dfaa05131fd78b8e41a0,approved,,2026-08-12,
 learning.number.018,fdcc041023b59277f64538b13c4f47c61d5d9c4776c0df8f7e295ac69b901e1d,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.019,a6016870dc2d2fa64d08754778a340f8c8bdd1be57408c84f79dd2cdfc1f01ef,approved,,2026-08-12,
 learning.number.019,8ee6ab4c54b1e3bebc2022f37633d17a9ab88aca61fc72542fda805db83a5e33,approved,,2026-08-12,
+learning.number.019,a6016870dc2d2fa64d08754778a340f8c8bdd1be57408c84f79dd2cdfc1f01ef,approved,,2026-08-12,
 learning.number.019,d36abb3c73b4f5f4e42e11ca495b587c23c7900feede9814d9e97d8b06220ce6,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.020,a00e4b9f8a5bcc6ca12ace9eb6371b9c156b7a3a2e69fca93aaf24503997387b,approved,,2026-08-12,
-learning.number.020,4d40f7d24df9819bf85bf022e6169e7efa7ea3978516c2f6decb208e7a6274ca,approved,,2026-08-12,
 learning.number.020,1518ac145bd370c24d96bf460a6a847d42858e7fed9c341a29a9347c15125cb6,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.021,9170c88900e5f31ee9fbabf7917c217109973cb38af3d708ca5a9f6658e65932,approved,,2026-08-12,
+learning.number.020,4d40f7d24df9819bf85bf022e6169e7efa7ea3978516c2f6decb208e7a6274ca,approved,,2026-08-12,
+learning.number.020,a00e4b9f8a5bcc6ca12ace9eb6371b9c156b7a3a2e69fca93aaf24503997387b,approved,,2026-08-12,
 learning.number.021,40ddd596f9180b542abdcd55074350191ab95ff4748466491be7d1546ed5e493,approved,,2026-08-12,
+learning.number.021,9170c88900e5f31ee9fbabf7917c217109973cb38af3d708ca5a9f6658e65932,approved,,2026-08-12,
 learning.number.021,ccff23f06328f1d4ddfa10759c30435a224c98132828532d8db0b56e39ed33e0,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.022,1ec111128dc2e9bcba8e0885a539c7942b69be453d8a7d1f049f7463dc769fd7,approved,,2026-08-12,
 learning.number.022,10e43c4e0995fa1749e12210b62faa1241b21a65fd1c14e8ce8875117fbf584c,approved,,2026-08-12,
+learning.number.022,1ec111128dc2e9bcba8e0885a539c7942b69be453d8a7d1f049f7463dc769fd7,approved,,2026-08-12,
 learning.number.022,2e1519d5c0b7cc46eb43ff7671b22dcff02b9cdcf83f6bc228941692523d38e5,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.023,1401c5f6a73a5e3c7d34c2f3b6b7a22bfcf13bb8829c24575fff8a71605e8d7d,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.023,cbc35cdcaea6d9d43dfbe65a3d6e355f86fc475784ec18addc818207791002a9,rejected,,2026-08-12,cropped at the end
 learning.number.023,fec9b8ae8d87da7cb1c391b668dc73b8356deddde7454338c85309771617841b,approved,,2026-08-12,
-learning.number.023,1401c5f6a73a5e3c7d34c2f3b6b7a22bfcf13bb8829c24575fff8a71605e8d7d,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.024,2eee2f210c3dd10a6b7f4eda91633982561b8553c12ed13165a9d1beb5003e40,rejected,,2026-08-12,cropped at the end
-learning.number.024,eebff8e0df6db11d4c0b530abbbbc14ec049dd1c61dbdc1ccff4b1e4822abaa1,approved,,2026-08-12,
 learning.number.024,a6691fb9c4f21138fe92804583dc52337122050c6c6795b0e2b2094b5f180108,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.025,97b1c6e75f10cefdcfb73037f3aa1832309060359f46eaa0d5960c98469b69ad,approved,,2026-08-12,
+learning.number.024,eebff8e0df6db11d4c0b530abbbbc14ec049dd1c61dbdc1ccff4b1e4822abaa1,approved,,2026-08-12,
 learning.number.025,2d7df9c6d61c9bf7d30141f0d7847d3ec12963b0cc6e67d4349ed6e4302e93b1,approved,,2026-08-12,
+learning.number.025,97b1c6e75f10cefdcfb73037f3aa1832309060359f46eaa0d5960c98469b69ad,approved,,2026-08-12,
 learning.number.025,c5da36e163f1a9d0384c30b0edf156569736a86b015070b37a996101a5a75b76,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.026,b93599ae9eab52dce24b1d4d41ff7350e0bb3424a308da53c3a8e08fde462043,approved,,2026-08-12,
-learning.number.026,9e211e4c5211d17b78fee9cc517922b80460701ba6968b17433dc99bf9ca7e41,approved,,2026-08-12,
 learning.number.026,25942c790dd519ac4e13a41806543813b75783f0d97d6e7edded0fd386498865,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.027,4e61def338795f10ccf8cc94a03bc890e81bc8ca8d7d9328d3f64bc39d550d9f,approved,,2026-08-12,
+learning.number.026,9e211e4c5211d17b78fee9cc517922b80460701ba6968b17433dc99bf9ca7e41,approved,,2026-08-12,
+learning.number.026,b93599ae9eab52dce24b1d4d41ff7350e0bb3424a308da53c3a8e08fde462043,approved,,2026-08-12,
 learning.number.027,35eb5162e911a255f47d9d8161b5910d1e7c2d971fc6a43e09d1a4eadcde66f1,approved,,2026-08-12,
+learning.number.027,4e61def338795f10ccf8cc94a03bc890e81bc8ca8d7d9328d3f64bc39d550d9f,approved,,2026-08-12,
 learning.number.027,d81751c58f25121f5d75f9bacbce9d2e15dfdc2654cc3cd13b4dfbf5bbbe2656,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.028,1adde2d06b4aaa1c8ed23542d75444218ddd6b9f644f13bd768fcc5bb3022744,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.028,4705fff317f081c053067df3fae24c59a28ce60e6f7a2e287553d6447df74d6c,approved,,2026-08-12,
 learning.number.028,6ccbc805c58247162ccbbfce899211bec09736a0c60ab726fb5abafa9b0d6574,approved,,2026-08-12,
-learning.number.028,1adde2d06b4aaa1c8ed23542d75444218ddd6b9f644f13bd768fcc5bb3022744,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.029,526fd9abc5f020bf22916cf31211ad553156b39ba601a11b8b3a14a193b4f61f,approved,,2026-08-12,
 learning.number.029,6eebd50d11c56e88003aea8ef265e7471329ee8f5defa9242a10527782fdf827,rejected,,2026-08-12,too long pause at the beginning
 learning.number.029,aedd66ad8878ad3a6e0134d9ab5e8bc988cc0dd4e41460e21ce9d252a66c3421,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.030,1d9244e6a7731dcba7cec3da81adeffb626268807e9c24c3d0ec3e72e9be3a16,approved,,2026-08-12,
-learning.number.030,e84cb02b8999f74063c68c1a8b3413bf7376c276b0fce463dd69305c7d457328,approved,,2026-08-12,
 learning.number.030,6429cdb54d5f2f7d2d9501f3d23a52b0ae776b38d36ae6a3479f2b93faa12cb4,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.030,e84cb02b8999f74063c68c1a8b3413bf7376c276b0fce463dd69305c7d457328,approved,,2026-08-12,
 learning.number.031,57432b71dd29833dbdc4231eca7bc80167de6aacce374ac22a73717bee330f6d,approved,,2026-08-12,
-learning.number.031,d5c2130610f5d27ef97f02644e9c57e2a8ff8cf11067aa74a09f1de722cb50f1,rejected,,2026-08-12,too long pause at the beginning
 learning.number.031,c4bd8f69ee212f67e6336c7d6be827b71b0ea7bb1199bae6ab6f499fe7dc1be8,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.031,d5c2130610f5d27ef97f02644e9c57e2a8ff8cf11067aa74a09f1de722cb50f1,rejected,,2026-08-12,too long pause at the beginning
 learning.number.032,6b9008d93baec74749d0724c01a769738b39c8951aeb14f94f3e1aacf50f4d0d,rejected,,2026-08-12,cropped at the end
-learning.number.032,e7f502bbbb4c83c183712fe3f837545c7e19532e62bf0e1ec523711ca97895c1,approved,,2026-08-12,
 learning.number.032,6e9423a8265e7a0af63a761b78921f8f7d47d0ee4a36829374584401b451f9c4,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.033,c769deff5a98efa42707fd3e78abe9fe9e3f3d01f9f441e0f670b33afc4b3f88,approved,,2026-08-12,
+learning.number.032,e7f502bbbb4c83c183712fe3f837545c7e19532e62bf0e1ec523711ca97895c1,approved,,2026-08-12,
 learning.number.033,8b47dd15bec1b3eef4b995504cb97bf71cb116fef8f552788a1f6d5617ba48dd,approved,,2026-08-12,
+learning.number.033,c769deff5a98efa42707fd3e78abe9fe9e3f3d01f9f441e0f670b33afc4b3f88,approved,,2026-08-12,
 learning.number.033,e5ed4c406b767f8d84a83e4b9b404ecd3e43a74f9623afab563194e1e0cec768,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.034,a74fd4d4a48e1d8cd4d47b537b609891a0770e6444cee76c0be98e1b2b743043,approved,,2026-08-12,
-learning.number.034,7202c9863c8f19293c773be4e27b0cd9bdfd246bcde1196f92246acddba62c96,approved,,2026-08-12,
 learning.number.034,360f4a3433a14c122a428277aed3326e472dbdd635323ac12262ac33ec64a6aa,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.035,96a252af6e2ddeaa394313e152a2a2e8cceb9b9f92b8d6d933e0546dd87116c5,approved,,2026-08-12,
+learning.number.034,7202c9863c8f19293c773be4e27b0cd9bdfd246bcde1196f92246acddba62c96,approved,,2026-08-12,
+learning.number.034,a74fd4d4a48e1d8cd4d47b537b609891a0770e6444cee76c0be98e1b2b743043,approved,,2026-08-12,
 learning.number.035,0144c7f2c581e43d4e601fb6d258a232f4825e407908831f9b1aafb41a687517,rejected,,2026-08-12,too long pause at the beginning
 learning.number.035,1b01a1dfd82184a6e961cacb0473d04cfd8cb7753132e68009dc206340b23b07,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.036,9dd9bbbce3e8f0445d9287a6803ec9809c1b32112d852f3f7ee445e87e7a5320,approved,,2026-08-12,
+learning.number.035,96a252af6e2ddeaa394313e152a2a2e8cceb9b9f92b8d6d933e0546dd87116c5,approved,,2026-08-12,
 learning.number.036,271f8b90799261ba3e84383d4291b2656a6f0f9c4e73fc46c132d9c2a70eab72,approved,,2026-08-12,
 learning.number.036,775781de71977190ddc0668f1e48e81d24c5cd1937f6935a723574d28c67ef02,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.037,41f96c5c86f03b933a9ae5b41fedf8e3a033913b11d1dc2bf4c5c8a69ad1d48d,approved,,2026-08-12,
-learning.number.037,28f90d00663c7ef7ee54c292d482ee31935de1dab232fac3d234e240c562c047,approved,,2026-08-12,
+learning.number.036,9dd9bbbce3e8f0445d9287a6803ec9809c1b32112d852f3f7ee445e87e7a5320,approved,,2026-08-12,
 learning.number.037,214b22fccd97c2fbc6447e4f4e81bb08b48c893dda4bbb115f9a3a1e89b23cf3,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.038,3f7a35bd7d38f921dfe06749114e6be55846d44dc369d3a45c0a2059e3108a7e,approved,,2026-08-12,
-learning.number.038,34ae9350a006249733637e46a4e61ad6fb27d3d0b22061c077f67c257277b985,approved,,2026-08-12,
+learning.number.037,28f90d00663c7ef7ee54c292d482ee31935de1dab232fac3d234e240c562c047,approved,,2026-08-12,
+learning.number.037,41f96c5c86f03b933a9ae5b41fedf8e3a033913b11d1dc2bf4c5c8a69ad1d48d,approved,,2026-08-12,
 learning.number.038,0313e12d03e9f4fb48012aeed63ea2592e9a19500bb77870411d1e6a8692239c,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.039,f74202fcff46782f6d099dd55c6e6c36468a28e97d61902d9475855d3910bc2d,approved,,2026-08-12,
-learning.number.039,f2f41e5f6633c7477d852fed7559580685862c704e73131a8f3eab440d5b1cf6,approved,,2026-08-12,
+learning.number.038,34ae9350a006249733637e46a4e61ad6fb27d3d0b22061c077f67c257277b985,approved,,2026-08-12,
+learning.number.038,3f7a35bd7d38f921dfe06749114e6be55846d44dc369d3a45c0a2059e3108a7e,approved,,2026-08-12,
 learning.number.039,66ff1925e47862a7a596178ac9a49305880693a4354dbbc4f978f4862b89428a,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.039,f2f41e5f6633c7477d852fed7559580685862c704e73131a8f3eab440d5b1cf6,approved,,2026-08-12,
+learning.number.039,f74202fcff46782f6d099dd55c6e6c36468a28e97d61902d9475855d3910bc2d,approved,,2026-08-12,
+learning.number.040,8a6653b98defd626dd9174e375c23791406a5fe8cefb026ee9388b578a023163,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.040,d574dd7749f64348a2172607a4eff32959a1da4306c73ca48872962441f631ec,approved,,2026-08-12,
 learning.number.040,e743afd27344f5ffd2fe1ad0099596eb72279ef357d8b428d9eb15dd5eae753a,approved,,2026-08-12,
-learning.number.040,8a6653b98defd626dd9174e375c23791406a5fe8cefb026ee9388b578a023163,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.041,05e558ce63b8c34315e402bc3b2a77131a833f406da50fea746c313ab8dd5a04,approved,,2026-08-12,
-learning.number.041,aae9cc424a8eaf36ac9eb5d69e3d5ca029b5bcdc6961ea6352f7652e14e09e03,approved,,2026-08-12,
 learning.number.041,68796033ff57d8fbf4727779db4cce4304577a130038b79d899e441bed02bdc5,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.042,a3d74690632acb1710344b65d15ec025122dd86964f24f027b581bc960a22a16,approved,,2026-08-12,
-learning.number.042,80b489c34493bf7c1f0b95d29043aa66f5e909f65fd2696ae700dfe981f9fc82,approved,,2026-08-12,
+learning.number.041,aae9cc424a8eaf36ac9eb5d69e3d5ca029b5bcdc6961ea6352f7652e14e09e03,approved,,2026-08-12,
 learning.number.042,79f5e59e8d6584dd86dd967c55026e195d3bb8f2f27b19bf62582903e9c7eaef,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.042,80b489c34493bf7c1f0b95d29043aa66f5e909f65fd2696ae700dfe981f9fc82,approved,,2026-08-12,
+learning.number.042,a3d74690632acb1710344b65d15ec025122dd86964f24f027b581bc960a22a16,approved,,2026-08-12,
 learning.number.043,65297190b02e5f219f0ec572053351498f50b2aa83e5376cb48d38c215f4bc64,rejected,,2026-08-12,cropped at the end
-learning.number.043,f8e89dbfdeea6e9898052f5cf11a12172b7d04c6ee47cecb82159c8cd4b08ffd,approved,,2026-08-12,
 learning.number.043,cba6f36688c95624f02044ed1c4267bf3188e14de5fe21442d84182c12b4a177,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.043,f8e89dbfdeea6e9898052f5cf11a12172b7d04c6ee47cecb82159c8cd4b08ffd,approved,,2026-08-12,
 learning.number.044,5d223223deb3686f691f6e60b377ebad0da6fa24307121c6ae58d4973cd46687,rejected,,2026-08-12,cropped at the end
 learning.number.044,b79fbd1d2e6d77987df8f018e25e64acb7f91a9f2def102f873b8f53e1f2c50e,rejected,,2026-08-12,too long pause at the beginning
 learning.number.044,e87a09ccbf718edb6080d0223359343420b88e56175043ced4b768d6e17c6c6e,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.045,0e01f9958369bd32a2ce214f778af27faa5b8fb395cc557e995ec8bdef655102,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
 learning.number.045,839229581b818ac4515ec50d655c9e09826d0d62aa4026e852de6639c0ae7a95,approved,,2026-08-12,
 learning.number.045,99f8ca28b3700ae4a16dbd6dbcdf2e3d42d742192eac4a93da1396abc89a8305,rejected,,2026-08-12,too long pause at the beginning
-learning.number.045,0e01f9958369bd32a2ce214f778af27faa5b8fb395cc557e995ec8bdef655102,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.046,def2142e8509ac623cc5883315eef283389b003a6e731b8e4019d0a7ca56be01,approved,,2026-08-12,
 learning.number.046,424ba036515e39794c8184ab1dcd358a91f43ac9f65fdb202fd7caace206a43e,approved,,2026-08-12,
 learning.number.046,52309ff58c93dc00e739104bb4b8417b44265879d429f1e11681798d8a8ca8db,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.046,def2142e8509ac623cc5883315eef283389b003a6e731b8e4019d0a7ca56be01,approved,,2026-08-12,
 learning.number.047,2f7b5b7bb079718afe79b22acc0b65b6ce7888481b5d01dd1b0af96c840c7931,approved,,2026-08-12,
-learning.number.047,fdfa0cd28fc3fa7f9ed724cc9aa66ed4c87fa26ab9c7dd822aa673b4a84f01e3,approved,,2026-08-12,
 learning.number.047,d4b1c15f4b048c89cb06d53560ebd91c62c565b7ca186d49975be3bd8fd04fbd,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.047,fdfa0cd28fc3fa7f9ed724cc9aa66ed4c87fa26ab9c7dd822aa673b4a84f01e3,approved,,2026-08-12,
 learning.number.048,1ed280e9977048a8bafc46e4c15ab2571d7f56bcd92a12a2273577e9325f941f,approved,,2026-08-12,
-learning.number.048,c84004f7e0d8c563e6cd6999991a6bae94b53d1f916602981c06220b675c00fb,rejected,,2026-08-12,too long pause at the beginning
 learning.number.048,9949dda410b3d25b2e4f7500d515eae90af02134c8585271d97d7ce8d7604cad,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.048,c84004f7e0d8c563e6cd6999991a6bae94b53d1f916602981c06220b675c00fb,rejected,,2026-08-12,too long pause at the beginning
 learning.number.049,0cc3ece8a3bc8c4bcf0bf9c48ff19520d3bef9abda9991d15ae9d8780e15be8b,approved,,2026-08-12,
-learning.number.049,c77952ec7437057d21e5c9a878e2a0d3f0604e3fabb9ecf4ec56da90508092d6,approved,,2026-08-12,
 learning.number.049,216bf792bf51aa02bad452c8832c899468fac00a69863c0f65a61812f8f50dc3,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
-learning.number.050,f0112c5f492265c70194efa6f16c6e8071a88eb27f3f422626792cc3564fef4d,approved,,2026-08-12,
+learning.number.049,c77952ec7437057d21e5c9a878e2a0d3f0604e3fabb9ecf4ec56da90508092d6,approved,,2026-08-12,
 learning.number.050,00e616013756dfa5a2ec817c479ea7aaa83df2ec551cfa18b0e94f3d9e52d97a,approved,,2026-08-12,
 learning.number.050,3142e5cdeb888935dcde421083f6e294a8ed26514f3ad92237351ddc63e8d789,approved,Michal Hauzírek,2026-08-12,fourth review round; approved as a set after the segmenting cutter
+learning.number.050,f0112c5f492265c70194efa6f16c6e8071a88eb27f3f422626792cc3564fef4d,approved,,2026-08-12,
 learning.word.auto,620ed801eac696f120eb6c5264777dbe67a8675c0e8d1310d0ca7d19682dd02e,approved,,2026-08-12,
 learning.word.banan,22cde201298358b9fb8a66da69f17a3b04db99fb83980f90138c94129459e054,approved,,2026-08-12,
 learning.word.barevna_duha,827c5352538d3cada47757cbbe2237e323ebf2d9fd25c869bd5b48aee8fdb212,approved,,2026-08-12,
@@ -302,8 +302,8 @@ learning.word.brambory,fc39624059ffd28a3da29bf92dd58211b5c79f69f09c76cf4c0dc5c64
 learning.word.brouk,fc31a52aedaabb19cfa66b96183a289861e65af9513d83e9bc8d2505d453e04e,approved,,2026-08-12,
 learning.word.bubinek,21d61d63045595da5daf05bb5194068ad3c70e38db852d6c3cf43991581921a2,approved,,2026-08-12,
 learning.word.bud_odvazny_a_silny,839f444be737b0e52e22163e5a9034641617f0ab5e925f6171770bac476ddbdd,approved,,2026-08-12,
-learning.word.budova,8b64769142acb6577ed103c5474cb9d3386912cf8298889bfaec2d6c4528afed,rejected,,2026-08-12,at the end some weird sound-clipping
 learning.word.budova,7bdc9dd2dc0100506b338bec2bcbb36b3f98af0740f0119944262d4a7b61a935,approved,Michal Hauzírek,2026-08-12,"take 4, recorded between carrier words"
+learning.word.budova,8b64769142acb6577ed103c5474cb9d3386912cf8298889bfaec2d6c4528afed,rejected,,2026-08-12,at the end some weird sound-clipping
 learning.word.byk,564524d205bda93615393124da9bdcff5a4e0c9a16fcb7ab90dafd735c434d72,approved,,2026-08-12,
 learning.word.caj,d3a2792bc386280180b2cb7f1800c3c657eb5d7478c110d3e1aa494926200126,approved,,2026-08-12,
 learning.word.carodejnice,408fef8250c57617c815543b7909c306145cdb3e198ae4d9a6dee7ab31488140,approved,,2026-08-12,
@@ -386,12 +386,12 @@ learning.word.led,35e8c31de8718134f5dc666e1a27ce103078924bff43b4c296f49d50824c2f
 learning.word.ledy,fccf91b4b1d0f1ec5c7b24a7d1ebff0065d0b576c635fc004db10d737c01bd45,approved,,2026-08-12,
 learning.word.les,51608418ece28d6dfb9f7fa12d173193dae07ceb81f30562a50207b7e5df93ce,approved,,2026-08-12,
 learning.word.lesni_jahoda,a9359628f944dbb9c092b0247b4ed6878a7290bd078900df8257d28a88c1b3b6,approved,,2026-08-12,
-learning.word.letadlo,86971b22170e6cae2d166bef0116c81e7a33190fe400db221cbb8bd21fd45211,rejected,,2026-08-12,says letadlo letadylko instead of just letadlo
 learning.word.letadlo,13d3177e222a55589d3957449cff647657d00da5945796d261209265723ed73e,approved,Michal Hauzírek,2026-08-12,retake approved; recorded alone rather than in a sheet
+learning.word.letadlo,86971b22170e6cae2d166bef0116c81e7a33190fe400db221cbb8bd21fd45211,rejected,,2026-08-12,says letadlo letadylko instead of just letadlo
 learning.word.letadylko,0109634b7c5f79cdf4b1ec6d535357413f4361581533efa30f5ac3555ad8501d,rejected,,2026-08-12,"wrongly cut says ""leti"" instead of letadylko"
 learning.word.letadylko,7c36acddd45dbf44ff4780ab0ea16535d2d152c650fd8c91f53ee4d096df3ca2,approved,Michal Hauzírek,2026-08-12,retake approved; recorded alone rather than in a sheet
-learning.word.leti_leti_ptacek,e7ebc8dcb64a9f40a4cc636731f4cea3a1d4d0c136f9abdef00fb4960f420bb5,rejected,,2026-08-12,says leti ptacek instead of leti leti ptacek
 learning.word.leti_leti_ptacek,17c132b43e18003421eb0c23a5dba528a6f9f2fff8a99b2082a816ee464cfae9,approved,Michal Hauzírek,2026-08-12,retake approved; recorded alone rather than in a sheet
+learning.word.leti_leti_ptacek,e7ebc8dcb64a9f40a4cc636731f4cea3a1d4d0c136f9abdef00fb4960f420bb5,rejected,,2026-08-12,says leti ptacek instead of leti leti ptacek
 learning.word.leto,937889f81dad58869a79208cfc56ff356f58cfc64c805c2daf01c1275e400cf9,approved,,2026-08-12,
 learning.word.lev,cd3ef01a6d3b8c30cec90d49886977b4119cef0d130585a51988f94d438b0a60,approved,,2026-08-12,
 learning.word.liska,e72c7d2592121a4305f1f38dd21d4aab03d981b822b75c7756edcf398222cb47,approved,,2026-08-12,

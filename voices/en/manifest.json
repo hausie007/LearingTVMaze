@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "en",
+  "locale": "en-US",
+  "voice_profile": "en-US@4",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "none"
+  },
+  "counts": {
+    "number": 50,
+    "char": 26,
+    "word": 0
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/9a/9aa6c082aa58.mp3",
+      "duration_ms": 548,
+      "sha256": "9aa6c082aa58754768fe8f91a3ad7f9caea05b37dbe8d4ead7a3ef8ba2513f23",
+      "display_text": "A",
+      "spoken_text": "ay"
+    },
+    "learning.char.b": {
+      "asset": "clips/76/760705da0d9d.mp3",
+      "duration_ms": 496,
+      "sha256": "760705da0d9dabf0356198f92b25b643bf667e04c7dc8cba771b9a3d6ed8dbb0",
+      "display_text": "B",
+      "spoken_text": "bee"
+    },
+    "learning.char.c": {
+      "asset": "clips/98/98d27457f2c6.mp3",
+      "duration_ms": 653,
+      "sha256": "98d27457f2c6360817fdf009be72e57350ccd905e97e241e91d1ed2a1ef53328",
+      "display_text": "C",
+      "spoken_text": "see"
+    },
+    "learning.char.d": {
+      "asset": "clips/9e/9e60bbc883bd.mp3",
+      "duration_ms": 496,
+      "sha256": "9e60bbc883bd16f53e7cb1bc603180fb0d38888ee34ab0e22622407080be99fa",
+      "display_text": "D",
+      "spoken_text": "dee"
+    },
+    "learning.char.e": {
+      "asset": "clips/cc/ccafcb993748.mp3",
+      "duration_ms": 548,
+      "sha256": "ccafcb993748827807c37c19a5b55cac48ac126df467e6e41108d3ce16f679fa",
+      "display_text": "E",
+      "spoken_text": "ee"
+    },
+    "learning.char.f": {
+      "asset": "clips/cb/cbe9b84f088f.mp3",
+      "duration_ms": 575,
+      "sha256": "cbe9b84f088f005c1a3d0e4d6c190c6b8c4066b1e8a9a024ffc54a89527123fa",
+      "display_text": "F",
+      "spoken_text": "eff"
+    },
+    "learning.char.g": {
+      "asset": "clips/ed/edcee1d44675.mp3",
+      "duration_ms": 575,
+      "sha256": "edcee1d446759a32160ea1c0e7eee72905f8ee17fcdb84695de81d0c6bccbb13",
+      "display_text": "G",
+      "spoken_text": "jee"
+    },
+    "learning.char.h": {
+      "asset": "clips/85/8531c0d5cbe1.mp3",
+      "duration_ms": 653,
+      "sha256": "8531c0d5cbe17e3060b897a7e6189d14682e5663ab94356d5ba718ee2bb9a0c4",
+      "display_text": "H",
+      "spoken_text": "aitch"
+    },
+    "learning.char.i": {
+      "asset": "clips/7b/7b7fb42b5cd1.mp3",
+      "duration_ms": 575,
+      "sha256": "7b7fb42b5cd1132489ce99916bcdc1eeb8b8f973296c1864f4f3029e35373aa5",
+      "display_text": "I",
+      "spoken_text": "eye"
+    },
+    "learning.char.j": {
+      "asset": "clips/ad/ad544cf2889d.mp3",
+      "duration_ms": 601,
+      "sha256": "ad544cf2889d1b3b521aa33091e85dbfb7e0b766a89ea464ea7587ccbc963ea9",
+      "display_text": "J",
+      "spoken_text": "jay"
+    },
+    "learning.char.k": {
+      "asset": "clips/82/826cb90d1b0c.mp3",
+      "duration_ms": 627,
+      "sha256": "826cb90d1b0c78e3c56f9e1ff0b97000ea3c80725d9ef5ec58c1ece66d0f6682",
+      "display_text": "K",
+      "spoken_text": "kay"
+    },
+    "learning.char.l": {
+      "asset": "clips/8e/8ed8290d202a.mp3",
+      "duration_ms": 601,
+      "sha256": "8ed8290d202a7e6b4069f4bf1c70e0342cc507577c70f700471baa2c18abfd6d",
+      "display_text": "L",
+      "spoken_text": "ell"
+    },
+    "learning.char.m": {
+      "asset": "clips/13/1372c8e23260.mp3",
+      "duration_ms": 627,
+      "sha256": "1372c8e23260f45602ceee4a4496d35dd5aa9ec80ca01c5fc430c063cf1c88da",
+      "display_text": "M",
+      "spoken_text": "em"
+    },
+    "learning.char.n": {
+      "asset": "clips/48/4874a9e707ae.mp3",
+      "duration_ms": 575,
+      "sha256": "4874a9e707ae7485c7829d6563d82ff4a8458089e07db581675c8cdb6d717c5a",
+      "display_text": "N",
+      "spoken_text": "en"
+    },
+    "learning.char.o": {
+      "asset": "clips/ca/caa98fab917c.mp3",
+      "duration_ms": 601,
+      "sha256": "caa98fab917cde9758dcd3bcbac3ff98cc3d79fe8b1a72221c78bc0f8671f6a0",
+      "display_text": "O",
+      "spoken_text": "oh"
+    },
+    "learning.char.p": {
+      "asset": "clips/a4/a48d70ceaef4.mp3",
+      "duration_ms": 653,
+      "sha256": "a48d70ceaef49669bae452cac15ae10a15e696785007c37235b64951a0810232",
+      "display_text": "P",
+      "spoken_text": "pee"
+    },
+    "learning.char.q": {
+      "asset": "clips/ad/ada391e06669.mp3",
+      "duration_ms": 705,
+      "sha256": "ada391e06669da30fcb3f5166f18ada821efe5288c93a16775e1d56bc801b886",
+      "display_text": "Q",
+      "spoken_text": "cue"
+    },
+    "learning.char.r": {
+      "asset": "clips/c1/c103b27c785c.mp3",
+      "duration_ms": 653,
+      "sha256": "c103b27c785c1510115539614ac2441493e6e9bca719e3411e88c6c47a0a717c",
+      "display_text": "R",
+      "spoken_text": "ar"
+    },
+    "learning.char.s": {
+      "asset": "clips/b4/b46a29ec26d8.mp3",
+      "duration_ms": 679,
+      "sha256": "b46a29ec26d827232d3c6bc57e9c70d3ddb30989d55f5dfedd06b73a705fac57",
+      "display_text": "S",
+      "spoken_text": "ess"
+    },
+    "learning.char.t": {
+      "asset": "clips/ed/ed99c72c8296.mp3",
+      "duration_ms": 601,
+      "sha256": "ed99c72c82968df09d3cdbb374a896f6a71e4070b1981b4fa956d1170c4f9c1b",
+      "display_text": "T",
+      "spoken_text": "tee"
+    },
+    "learning.char.u": {
+      "asset": "clips/c2/c2f63e8a7c45.mp3",
+      "duration_ms": 679,
+      "sha256": "c2f63e8a7c457d6d455b1eb94982b4531388675750ddbbfb6a4fb293004bc205",
+      "display_text": "U",
+      "spoken_text": "you"
+    },
+    "learning.char.v": {
+      "asset": "clips/30/30ca7751e199.mp3",
+      "duration_ms": 601,
+      "sha256": "30ca7751e199e76dd785bb05fcc8beb5f21cf89182836493dd47f7f497199613",
+      "display_text": "V",
+      "spoken_text": "vee"
+    },
+    "learning.char.w": {
+      "asset": "clips/07/07e14ac8abdf.mp3",
+      "duration_ms": 862,
+      "sha256": "07e14ac8abdfcd76b6a33fd0a43a457f68b4fc05df259825c0211ac496ef571a",
+      "display_text": "W",
+      "spoken_text": "double you"
+    },
+    "learning.char.x": {
+      "asset": "clips/bf/bfa6591a05f4.mp3",
+      "duration_ms": 679,
+      "sha256": "bfa6591a05f4b41c633f0437f97216ced09395758f961a433d1fcfedd3d5459b",
+      "display_text": "X",
+      "spoken_text": "ex"
+    },
+    "learning.char.y": {
+      "asset": "clips/3d/3ddeacc101ab.mp3",
+      "duration_ms": 732,
+      "sha256": "3ddeacc101abad142c8c02d557f23e934356afea2b2e9e123690802d6b3ff565",
+      "display_text": "Y",
+      "spoken_text": "why"
+    },
+    "learning.char.z": {
+      "asset": "clips/f0/f03ee89a1994.mp3",
+      "duration_ms": 653,
+      "sha256": "f03ee89a1994cc91e4f3f1778bd69f2bf4698a5bc6199515c856e41b9ae07713",
+      "display_text": "Z",
+      "spoken_text": "zee"
+    },
+    "learning.number.001": {
+      "asset": "clips/f5/f53562732164.mp3",
+      "duration_ms": 575,
+      "sha256": "f53562732164570b3b215fc2497f9fb43383ba93d5a675bcbc24a626d59236be",
+      "display_text": "1",
+      "spoken_text": "one"
+    },
+    "learning.number.002": {
+      "asset": "clips/8f/8f17cb779d38.mp3",
+      "duration_ms": 522,
+      "sha256": "8f17cb779d389ada5f160fe7cdd6cb2d487cf398c60180c17706b6724a83e45d",
+      "display_text": "2",
+      "spoken_text": "two"
+    },
+    "learning.number.003": {
+      "asset": "clips/91/9116f661ecc1.mp3",
+      "duration_ms": 601,
+      "sha256": "9116f661ecc1f6f63adcfb5e878a70291b3a1689a5eeeadf324df70a70451b19",
+      "display_text": "3",
+      "spoken_text": "three"
+    },
+    "learning.number.004": {
+      "asset": "clips/e2/e2b7c578d3c6.mp3",
+      "duration_ms": 653,
+      "sha256": "e2b7c578d3c6e7d292f7c69af2e4b04f488462edbeacfd297cb872acaec27930",
+      "display_text": "4",
+      "spoken_text": "four"
+    },
+    "learning.number.005": {
+      "asset": "clips/08/08779c878662.mp3",
+      "duration_ms": 732,
+      "sha256": "08779c878662445d213e299ef093a4136206c98107cde1fcd4b0cd43d57dc270",
+      "display_text": "5",
+      "spoken_text": "five"
+    },
+    "learning.number.006": {
+      "asset": "clips/9e/9e7e9b6e66b4.mp3",
+      "duration_ms": 732,
+      "sha256": "9e7e9b6e66b40355feb9efc6328c39c83d489952384e1b76e6284a6857311500",
+      "display_text": "6",
+      "spoken_text": "six"
+    },
+    "learning.number.007": {
+      "asset": "clips/eb/ebd5c2d2034c.mp3",
+      "duration_ms": 705,
+      "sha256": "ebd5c2d2034c3cc99d93e3f5c3d80930541658245f9945bdce15ed184ebcfd0d",
+      "display_text": "7",
+      "spoken_text": "seven"
+    },
+    "learning.number.008": {
+      "asset": "clips/0d/0de3932e79a3.mp3",
+      "duration_ms": 548,
+      "sha256": "0de3932e79a3c0a917fd30e59f460a23de6bbf3c050905df216cee7420ae7894",
+      "display_text": "8",
+      "spoken_text": "eight"
+    },
+    "learning.number.009": {
+      "asset": "clips/b5/b55f8e012d54.mp3",
+      "duration_ms": 732,
+      "sha256": "b55f8e012d54b9708c236b203e81946fc5f6701addea603acfc96c0ee8b8a57c",
+      "display_text": "9",
+      "spoken_text": "nine"
+    },
+    "learning.number.010": {
+      "asset": "clips/71/71e72ede4043.mp3",
+      "duration_ms": 653,
+      "sha256": "71e72ede40434c3a6f883a97ebd3e5e9069666e5a2a33830943b6c40565e6fd4",
+      "display_text": "10",
+      "spoken_text": "ten"
+    },
+    "learning.number.011": {
+      "asset": "clips/fd/fd2170bd9af6.mp3",
+      "duration_ms": 784,
+      "sha256": "fd2170bd9af64a2663f6863a2059fe009fd4474e7571ffc327cc8a589262ebd5",
+      "display_text": "11",
+      "spoken_text": "eleven"
+    },
+    "learning.number.012": {
+      "asset": "clips/83/830963e30049.mp3",
+      "duration_ms": 758,
+      "sha256": "830963e30049a8d4f8466fe89a1f3ba76b607a10c98b081b1eece85d2240f260",
+      "display_text": "12",
+      "spoken_text": "twelve"
+    },
+    "learning.number.013": {
+      "asset": "clips/d7/d761f64be53e.mp3",
+      "duration_ms": 1097,
+      "sha256": "d761f64be53ebf6d7253d4b6afb24e5945a4842fd09fafc6e25f66fdd612139b",
+      "display_text": "13",
+      "spoken_text": "thirteen"
+    },
+    "learning.number.014": {
+      "asset": "clips/01/013d72e2487b.mp3",
+      "duration_ms": 914,
+      "sha256": "013d72e2487b92bae4ebeec1c0ed1e2d97ffab9366a97cc5e9ada2f7ec6d2c85",
+      "display_text": "14",
+      "spoken_text": "fourteen"
+    },
+    "learning.number.015": {
+      "asset": "clips/1d/1d2c7a46f41d.mp3",
+      "duration_ms": 914,
+      "sha256": "1d2c7a46f41dbbf0b6629156e914a93ca5da2861855592a014ead2c427084a5c",
+      "display_text": "15",
+      "spoken_text": "fifteen"
+    },
+    "learning.number.016": {
+      "asset": "clips/47/476b996498e3.mp3",
+      "duration_ms": 966,
+      "sha256": "476b996498e3e9fd0c537fcd610933076daa8044056e48dfee3ffc8089ea1bdb",
+      "display_text": "16",
+      "spoken_text": "sixteen"
+    },
+    "learning.number.017": {
+      "asset": "clips/c5/c5c32acf5a4e.mp3",
+      "duration_ms": 1019,
+      "sha256": "c5c32acf5a4e17c9c55f59531bdda2161b824a5be9e638e4ab3642e70d9c9330",
+      "display_text": "17",
+      "spoken_text": "seventeen"
+    },
+    "learning.number.018": {
+      "asset": "clips/30/30cca3dfecd9.mp3",
+      "duration_ms": 862,
+      "sha256": "30cca3dfecd98e557de69428c0f1e15bbd9b864de42132ffadb25c022e53a4b8",
+      "display_text": "18",
+      "spoken_text": "eighteen"
+    },
+    "learning.number.019": {
+      "asset": "clips/33/336b67a67f1f.mp3",
+      "duration_ms": 914,
+      "sha256": "336b67a67f1fd07e9a8da25db3de0408c97d4ed87862678f68703b185cd06d08",
+      "display_text": "19",
+      "spoken_text": "nineteen"
+    },
+    "learning.number.020": {
+      "asset": "clips/72/720876ea3df0.mp3",
+      "duration_ms": 705,
+      "sha256": "720876ea3df0dae7e01eb211a46d430e714157e95bd65a7702a54f43efe96311",
+      "display_text": "20",
+      "spoken_text": "twenty"
+    },
+    "learning.number.021": {
+      "asset": "clips/66/66679dd1c29e.mp3",
+      "duration_ms": 888,
+      "sha256": "66679dd1c29e0d492a935608782a5830a1c0d75efef1817b4cb2cbda5fef2235",
+      "display_text": "21",
+      "spoken_text": "twenty-one"
+    },
+    "learning.number.022": {
+      "asset": "clips/6d/6d3b427330bd.mp3",
+      "duration_ms": 940,
+      "sha256": "6d3b427330bd5cdaefa45039183a5a9f1f38d141ad164a90fe081ee6004e3754",
+      "display_text": "22",
+      "spoken_text": "twenty-two"
+    },
+    "learning.number.023": {
+      "asset": "clips/4d/4d9fad538c0f.mp3",
+      "duration_ms": 914,
+      "sha256": "4d9fad538c0fdb85cd50d650d755707509d92fb94ab1eded26ae80b81db2006c",
+      "display_text": "23",
+      "spoken_text": "twenty-three"
+    },
+    "learning.number.024": {
+      "asset": "clips/8c/8c51b97829fb.mp3",
+      "duration_ms": 940,
+      "sha256": "8c51b97829fb01b1241154a692303458b18cab28daecf861105fe9d74f5f8795",
+      "display_text": "24",
+      "spoken_text": "twenty-four"
+    },
+    "learning.number.025": {
+      "asset": "clips/e8/e851b90e36f6.mp3",
+      "duration_ms": 1045,
+      "sha256": "e851b90e36f6f9e737f96ed4171f1d600e1bca02af76286e178635e648b65e3d",
+      "display_text": "25",
+      "spoken_text": "twenty-five"
+    },
+    "learning.number.026": {
+      "asset": "clips/76/76a82611329c.mp3",
+      "duration_ms": 1045,
+      "sha256": "76a82611329c3a95b62528dcfebb270a4654f9564eac588d8f34caffe21c8183",
+      "display_text": "26",
+      "spoken_text": "twenty-six"
+    },
+    "learning.number.027": {
+      "asset": "clips/c3/c3ad2c67a155.mp3",
+      "duration_ms": 940,
+      "sha256": "c3ad2c67a15585464bdf6e7a3f80d3ac8d0d82f3c5c30a493adac99aa598699c",
+      "display_text": "27",
+      "spoken_text": "twenty-seven"
+    },
+    "learning.number.028": {
+      "asset": "clips/26/26d4999df4d1.mp3",
+      "duration_ms": 862,
+      "sha256": "26d4999df4d1799320d729412df0000fef41571331690574f01d0ab5795cb082",
+      "display_text": "28",
+      "spoken_text": "twenty-eight"
+    },
+    "learning.number.029": {
+      "asset": "clips/24/2448b21209e3.mp3",
+      "duration_ms": 940,
+      "sha256": "2448b21209e317dac2e2791a2ca62c0066da37a6a2aaaabf9602d33013f80ca5",
+      "display_text": "29",
+      "spoken_text": "twenty-nine"
+    },
+    "learning.number.030": {
+      "asset": "clips/d3/d3589ddf0086.mp3",
+      "duration_ms": 601,
+      "sha256": "d3589ddf008613bd45400e9049bfbc9324fdf14fa99388d643a2d4b15fe748f0",
+      "display_text": "30",
+      "spoken_text": "thirty"
+    },
+    "learning.number.031": {
+      "asset": "clips/f2/f224a6a892fe.mp3",
+      "duration_ms": 940,
+      "sha256": "f224a6a892fec38e8fd1140b65b57e96fc2a9c7558b812c219a2fc877a84bfbc",
+      "display_text": "31",
+      "spoken_text": "thirty-one"
+    },
+    "learning.number.032": {
+      "asset": "clips/f6/f657e9b1bc54.mp3",
+      "duration_ms": 940,
+      "sha256": "f657e9b1bc547d1ac8752a01f5ce403f067ca024befd9a1373c9b0094942abd3",
+      "display_text": "32",
+      "spoken_text": "thirty-two"
+    },
+    "learning.number.033": {
+      "asset": "clips/0a/0a0c17727da4.mp3",
+      "duration_ms": 914,
+      "sha256": "0a0c17727da40dfb4cdf03fb3ad65bdeb927ca67ec8d6a95279efbfaeeed4264",
+      "display_text": "33",
+      "spoken_text": "thirty-three"
+    },
+    "learning.number.034": {
+      "asset": "clips/fc/fc2af2c68bc1.mp3",
+      "duration_ms": 966,
+      "sha256": "fc2af2c68bc1406ef6509b369085d16d97c6e603e6505bf6a46d3f4d345a2550",
+      "display_text": "34",
+      "spoken_text": "thirty-four"
+    },
+    "learning.number.035": {
+      "asset": "clips/89/89a3b7600bf3.mp3",
+      "duration_ms": 1071,
+      "sha256": "89a3b7600bf3145b9eb611dce790f33ad8de29f3373c1be849afb2c90ba5911d",
+      "display_text": "35",
+      "spoken_text": "thirty-five"
+    },
+    "learning.number.036": {
+      "asset": "clips/54/54a56002724e.mp3",
+      "duration_ms": 1045,
+      "sha256": "54a56002724eaa10ca3ed884c21e7dc9d712e0e301653f6274a618490afd2739",
+      "display_text": "36",
+      "spoken_text": "thirty-six"
+    },
+    "learning.number.037": {
+      "asset": "clips/2a/2a193be093bc.mp3",
+      "duration_ms": 993,
+      "sha256": "2a193be093bc58914faa111b3938edc2e200995542dbaefe22381192f5216269",
+      "display_text": "37",
+      "spoken_text": "thirty-seven"
+    },
+    "learning.number.038": {
+      "asset": "clips/f4/f4f4c691c0b3.mp3",
+      "duration_ms": 966,
+      "sha256": "f4f4c691c0b32fd3b0a5a6aa87f45532f3c64a430ff25861334a7ccb777fbf49",
+      "display_text": "38",
+      "spoken_text": "thirty-eight"
+    },
+    "learning.number.039": {
+      "asset": "clips/7c/7c75d6803de7.mp3",
+      "duration_ms": 966,
+      "sha256": "7c75d6803de75ab77a02e5f3da5129f4ab5f9982e6e8dcf1d11fdab73a8db158",
+      "display_text": "39",
+      "spoken_text": "thirty-nine"
+    },
+    "learning.number.040": {
+      "asset": "clips/64/64724a84482d.mp3",
+      "duration_ms": 679,
+      "sha256": "64724a84482d9adea30b1b5f1a8d3ac26d108a180a5c9f2cfe935826db68b415",
+      "display_text": "40",
+      "spoken_text": "forty"
+    },
+    "learning.number.041": {
+      "asset": "clips/b7/b794358bd995.mp3",
+      "duration_ms": 914,
+      "sha256": "b794358bd99501b410e74692f2ab572e4f0967b04aa9d694c0f7540ea59f6d56",
+      "display_text": "41",
+      "spoken_text": "forty-one"
+    },
+    "learning.number.042": {
+      "asset": "clips/0f/0f4b6846e20e.mp3",
+      "duration_ms": 888,
+      "sha256": "0f4b6846e20e7fda50e414726734a1f3fb139259c2e963c5ea888f12f68ceca0",
+      "display_text": "42",
+      "spoken_text": "forty-two"
+    },
+    "learning.number.043": {
+      "asset": "clips/1c/1cfa14557607.mp3",
+      "duration_ms": 888,
+      "sha256": "1cfa14557607e2ea933ce047caa8d2920ee736259572c65746adddea2b083d61",
+      "display_text": "43",
+      "spoken_text": "forty-three"
+    },
+    "learning.number.044": {
+      "asset": "clips/84/8451847b8106.mp3",
+      "duration_ms": 993,
+      "sha256": "8451847b81063f7271d9ff7e726834b7ac9b8a15821088617ce898f9228e8867",
+      "display_text": "44",
+      "spoken_text": "forty-four"
+    },
+    "learning.number.045": {
+      "asset": "clips/62/629c7776f528.mp3",
+      "duration_ms": 1019,
+      "sha256": "629c7776f528427af64c7f551d521940e02fd8677f5f0ad804dda46a36258964",
+      "display_text": "45",
+      "spoken_text": "forty-five"
+    },
+    "learning.number.046": {
+      "asset": "clips/ec/ec9974e8d5b5.mp3",
+      "duration_ms": 1019,
+      "sha256": "ec9974e8d5b54302dd6ee4a6199054db2e8c96f918c704a50aad5faf648ddea8",
+      "display_text": "46",
+      "spoken_text": "forty-six"
+    },
+    "learning.number.047": {
+      "asset": "clips/bb/bb240f74d7de.mp3",
+      "duration_ms": 966,
+      "sha256": "bb240f74d7dea7b6c87cf04ddcc2671ac5f549ab4636a8a3be904e7594958ede",
+      "display_text": "47",
+      "spoken_text": "forty-seven"
+    },
+    "learning.number.048": {
+      "asset": "clips/fd/fd841799c98a.mp3",
+      "duration_ms": 888,
+      "sha256": "fd841799c98a9351d106d9c694cae80e9569f28b98950388f4bf03c41ae0c823",
+      "display_text": "48",
+      "spoken_text": "forty-eight"
+    },
+    "learning.number.049": {
+      "asset": "clips/54/540f68699827.mp3",
+      "duration_ms": 940,
+      "sha256": "540f68699827d58589cc0b34ab7e295a57c617e74507a5161a0b581f309d2e61",
+      "display_text": "49",
+      "spoken_text": "forty-nine"
+    },
+    "learning.number.050": {
+      "asset": "clips/22/22ff8e143a03.mp3",
+      "duration_ms": 679,
+      "sha256": "22ff8e143a033128be26e44dea358301670eb8b8cf236be83f78ad9062a6ae56",
+      "display_text": "50",
+      "spoken_text": "fifty"
+    }
+  }
+}

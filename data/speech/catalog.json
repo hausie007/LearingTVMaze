@@ -57,7 +57,8 @@
       "enabled": true,
       "categories": [
         "number",
-        "char"
+        "char",
+        "word"
       ]
     },
     "sk": {
@@ -65,7 +66,8 @@
       "enabled": true,
       "categories": [
         "number",
-        "char"
+        "char",
+        "word"
       ]
     },
     "pl": {
@@ -73,7 +75,8 @@
       "enabled": true,
       "categories": [
         "number",
-        "char"
+        "char",
+        "word"
       ]
     },
     "de": {
@@ -81,7 +84,8 @@
       "enabled": true,
       "categories": [
         "number",
-        "char"
+        "char",
+        "word"
       ]
     },
     "es": {
