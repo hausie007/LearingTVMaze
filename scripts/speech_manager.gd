@@ -362,11 +362,19 @@ func _ui_key(lang: String, text: String) -> String:
 	return String(_pack(lang).get("_ui", {}).get(_ui_lookup(text), ""))
 
 
-## Interface text is matched loosely — trailing commas and full stops come and
-## go between a translation template and the fragment the recap actually
-## speaks, and they should not decide whether a recording is found.
+## Punctuation that must not decide whether a recording is found. It differs
+## between the template and the fragment actually spoken: English writes
+## "%s, you counted to %s", so the runtime hands over ", you counted to" with a
+## leading comma while the catalog recorded "you counted to" without one. Czech
+## has no comma there, which is why only English menus were affected.
+##
+## The pipeline strips exactly this set at both ends. The two must agree, and
+## `verify` now checks that they do.
+const UI_TRIM := " \t\n,.:;"
+
+
 func _ui_lookup(text: String) -> String:
-	return text.strip_edges().to_upper().trim_suffix(".").trim_suffix(",").strip_edges()
+	return text.strip_edges().lstrip(UI_TRIM).rstrip(UI_TRIM).strip_edges().to_upper()
 
 
 # ── The recap queue ──────────────────────────────────────────────────────────

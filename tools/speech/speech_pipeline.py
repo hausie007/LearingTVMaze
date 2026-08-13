@@ -2493,6 +2493,9 @@ def cmd_pack(args) -> int:
 # verify  (CI gate; no network)
 # --------------------------------------------------------------------------
 
+## Must match UI_TRIM in speech_manager.gd exactly.
+UI_TRIM_RE = re.compile(r"^[\s,.:;]+|[\s,.:;]+$")
+
 SECRET_PATTERNS = [
     re.compile(r"\bsk_[0-9a-f]{32,}\b"),
     re.compile(r"xi-api-key\s*[:=]\s*[\"'][^\"'{$]{8,}"),
@@ -2642,7 +2645,59 @@ def cmd_verify(args) -> int:
             check(errors, not n["spoken"].strip().isdigit(),
                   f"{path.name}: {n['value']} spoken text is digits — write the word out")
 
-    # 5. A review file must only contain verdicts for its own locale.
+    # 5. Every fragment the recap will actually speak must match something the
+    #    catalog recorded. The two derive from the same templates but strip
+    #    differently — the runtime only trims whitespace, the catalog trims
+    #    punctuation too — and a mismatch is silent: the clip exists, is packed,
+    #    and is never played.
+    # The runtime trims in GDScript and the catalog trims in Python. Nothing
+    # here can execute the former, so at least assert the two name the same
+    # characters — that divergence is what let ", you counted to" miss a clip
+    # recorded as "you counted to", silently, in English menus only.
+    manager = REPO / "scripts" / "speech_manager.gd"
+    expected_trim = set(" \t\n,.:;")
+    if manager.exists():
+        found = re.search(r'const\s+UI_TRIM\s*:?=\s*"([^"]*)"', manager.read_text(encoding="utf-8"))
+        if not found:
+            errors.append("speech_manager.gd has no UI_TRIM — the runtime and the catalog "
+                          "must agree on what punctuation is ignored")
+        else:
+            literal = found.group(1).replace("\\t", "\t").replace("\\n", "\n")
+            if set(literal) != expected_trim:
+                errors.append(
+                    "speech_manager.gd UI_TRIM is %r but the catalog trims %r — they must match"
+                    % (sorted(set(literal)), sorted(expected_trim)))
+
+    ui_doc = SPEECH_SRC / "ui_speech.json"
+    if ui_doc.exists() and TRANSLATIONS.exists():
+        with TRANSLATIONS.open(encoding="utf-8", newline="") as fh:
+            trows = list(csv.reader(fh))
+        theader = trows[0]
+        wanted = read_json(ui_doc)["keys"]
+        for lang, spec in cat["languages"].items():
+            if not spec.get("enabled") or "ui" not in spec.get("categories", []):
+                continue
+            if lang not in theader:
+                continue
+            col = theader.index(lang)
+            text_for = {r[0]: r[col] for r in trows[1:] if r and len(r) > col}
+            recorded = {UI_TRIM_RE.sub("", f).upper()
+                        for key in wanted
+                        for f in text_for.get(key, "").split("%s")
+                        if len(UI_TRIM_RE.sub("", f)) >= 2}
+            for key in wanted:
+                if not key.startswith("recap"):
+                    continue
+                for fragment in text_for.get(key, "").split("%s"):
+                    spoken = fragment.strip()          # what learning_recap emits
+                    if len(spoken) < 2:
+                        continue
+                    if UI_TRIM_RE.sub("", spoken).upper() not in recorded:
+                        errors.append(
+                            f"{lang}: the recap will speak {spoken!r} (from {key}) and no clip "
+                            "matches it — the runtime and the catalog disagree about trimming")
+
+    # 6. A review file must only contain verdicts for its own locale.
     known = {}
     try:
         for r in load_desired():
@@ -2660,7 +2715,7 @@ def cmd_verify(args) -> int:
                                       f"({row.get('key')}) — reviews must not cross locales")
                         break
 
-    # 6. Profiles carry no secret, and the repo carries no key.
+    # 7. Profiles carry no secret, and the repo carries no key.
     for locale, profile in profiles.items():
         for field in ("api_key", "xi_api_key", "key", "token"):
             check(errors, field not in profile,
@@ -2679,7 +2734,7 @@ def cmd_verify(args) -> int:
                 errors.append(f"{rel(path)} looks like it contains an API key")
                 break
 
-    # 7. Build inputs and outputs must not be exportable into the AAB.
+    # 8. Build inputs and outputs must not be exportable into the AAB.
     #    data/speech is pipeline input the game never reads — and Godot will
     #    happily import a review CSV as a translation if left to itself.
     for folder in (MASTERS, BUILD.parent, SPEECH_SRC):
@@ -2687,7 +2742,7 @@ def cmd_verify(args) -> int:
             check(errors, (folder / ".gdignore").exists(),
                   f"{rel(folder)} has no .gdignore — Godot would import and export it")
 
-    # 8. Shipped manifests must be internally consistent.
+    # 9. Shipped manifests must be internally consistent.
     for manifest_path in sorted(PACKS.glob("*/manifest.json")):
         manifest = read_json(manifest_path)
         pack_dir = manifest_path.parent
@@ -2699,7 +2754,7 @@ def cmd_verify(args) -> int:
             check(errors, sha256_file(asset) == item["sha256"],
                   f"{rel(manifest_path)}: {key} hash mismatch — the file changed after packing")
 
-    # 9. Phase 5 gate: gameplay must go through SpeechManager, not TTS directly.
+    # 10. Phase 5 gate: gameplay must go through SpeechManager, not TTS directly.
     if args.strict:
         allowed = {"scripts/tts_manager.gd", "scripts/speech_manager.gd"}
         for path in sorted((REPO / "scripts").rglob("*.gd")):
