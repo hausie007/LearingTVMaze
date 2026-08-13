@@ -8,13 +8,15 @@
     "number": "complete",
     "char": "complete",
     "word": "complete",
-    "ui": "complete"
+    "ui": "complete",
+    "number_form": "not_needed"
   },
   "counts": {
     "number": 50,
     "char": 26,
     "word": 290,
-    "ui": 36
+    "ui": 56,
+    "number_form": 0
   },
   "items": {
     "learning.char.a": {
@@ -2663,6 +2665,153 @@
       "display_text": "Hungarian",
       "spoken_text": "Hungarian"
     },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/8f/8facc64c874a.mp3",
+      "duration_ms": 653,
+      "sha256": "8facc64c874ad9219a86ffd86eb5d9ba4a5d0bef151810ccc5c5bd338a5cb9db",
+      "display_text": "In Czech",
+      "spoken_text": "In Czech"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/bf/bfb4573d1033.mp3",
+      "duration_ms": 784,
+      "sha256": "bfb4573d10330eeddaec55bac4542c6fa094ca8b0b494ab284d45de291266c4d",
+      "display_text": "In Danish",
+      "spoken_text": "In Danish"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/4e/4e9767bcb92d.mp3",
+      "duration_ms": 679,
+      "sha256": "4e9767bcb92d18a2e14f778fb065ec11521e3b5e6a749f5144ffb08730de768a",
+      "display_text": "In Dutch",
+      "spoken_text": "In Dutch"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/6b/6b628e1576f5.mp3",
+      "duration_ms": 810,
+      "sha256": "6b628e1576f5e60cb021767ab95c5cabca46633caa8b929a91f61cf0132ca3ba",
+      "display_text": "In English",
+      "spoken_text": "In English"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/09/098316dd8e3a.mp3",
+      "duration_ms": 784,
+      "sha256": "098316dd8e3a5974662ed794c3a2200cadbecbca77dfc45321f269e1eb28be0e",
+      "display_text": "In Finnish",
+      "spoken_text": "In Finnish"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/d8/d83ea20fbb3f.mp3",
+      "duration_ms": 810,
+      "sha256": "d83ea20fbb3f8986e67bc92f14482ffc57a7861dfc1ffb6ee0cba73920f5fc33",
+      "display_text": "In French",
+      "spoken_text": "In French"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/87/87e3cb05aa5b.mp3",
+      "duration_ms": 732,
+      "sha256": "87e3cb05aa5b8889f4b91ea14e8faa78f1d662a66f4aad5491f0ec31189b2afa",
+      "display_text": "In German",
+      "spoken_text": "In German"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/e8/e87594e10c3f.mp3",
+      "duration_ms": 732,
+      "sha256": "e87594e10c3f59f12e34b8e21c9f495bbad07c60639e296261cab85f8c9deae4",
+      "display_text": "In Greek",
+      "spoken_text": "In Greek"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/f5/f5154f69001a.mp3",
+      "duration_ms": 758,
+      "sha256": "f5154f69001a6f6f255e21b8230c85fdd361965955de0d843db7b4b8b64ef4ca",
+      "display_text": "In Hebrew",
+      "spoken_text": "In Hebrew"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/2f/2f5ab8eaa240.mp3",
+      "duration_ms": 914,
+      "sha256": "2f5ab8eaa2406102973e48b3c30c13d0e530e58482336f17896809a8190e76b3",
+      "display_text": "In Hungarian",
+      "spoken_text": "In Hungarian"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/d8/d861cdc1acbc.mp3",
+      "duration_ms": 810,
+      "sha256": "d861cdc1acbcbd3ed90e25a115959e109fb93cb47a75ad835f2879e9f992af99",
+      "display_text": "In Italian",
+      "spoken_text": "In Italian"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/15/1510d8f90e96.mp3",
+      "duration_ms": 888,
+      "sha256": "1510d8f90e96275da433482dfb28316ed178fcf4438a2cc1a9284233c59ef10e",
+      "display_text": "In Norwegian",
+      "spoken_text": "In Norwegian"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/e1/e11cf4b24be4.mp3",
+      "duration_ms": 810,
+      "sha256": "e11cf4b24be4a8125a2653b811988ed27baeb4a9018e87d2e71cfe08f00aed40",
+      "display_text": "In Polish",
+      "spoken_text": "In Polish"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/7e/7e18cf78837f.mp3",
+      "duration_ms": 993,
+      "sha256": "7e18cf78837f4b45c758abfdfea2d4d05a85e1b415171be34acc4173d6311fd9",
+      "display_text": "In Portuguese",
+      "spoken_text": "In Portuguese"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/c6/c62fde472594.mp3",
+      "duration_ms": 940,
+      "sha256": "c62fde4725940055e69eebab6f4aff6b076f18bc1e0f1e0d3137011755422ad7",
+      "display_text": "In Romanian",
+      "spoken_text": "In Romanian"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/0f/0fe16e7b8a7e.mp3",
+      "duration_ms": 836,
+      "sha256": "0fe16e7b8a7e458271aa91d2e854183c4d3c85d23b146df647dc9861b1c28bbf",
+      "display_text": "In Slovak",
+      "spoken_text": "In Slovak"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/64/64bbd1ff0702.mp3",
+      "duration_ms": 914,
+      "sha256": "64bbd1ff07026c87f424d6a3eddbb73847b6836304c57978279c654064cae80f",
+      "display_text": "In Spanish",
+      "spoken_text": "In Spanish"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/3c/3c2628afdcf3.mp3",
+      "duration_ms": 784,
+      "sha256": "3c2628afdcf341560badf71d48b7e72f699db7f26d1e366cf5539808aa618cbd",
+      "display_text": "In Swedish",
+      "spoken_text": "In Swedish"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/35/35378b1bd5f2.mp3",
+      "duration_ms": 888,
+      "sha256": "35378b1bd5f228ae2179eb4611ea81345331fdff24bbfdcc54ce39aa58862a18",
+      "display_text": "In Turkish",
+      "spoken_text": "In Turkish"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/40/40dc754a6a61.mp3",
+      "duration_ms": 888,
+      "sha256": "40dc754a6a617c5088bd7c42476ecf3c8f81ef3f632dc8fd3537fd72645d3a7d",
+      "display_text": "In Ukrainian",
+      "spoken_text": "In Ukrainian"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/03/03f3255d0e80.mp3",
+      "duration_ms": 1045,
+      "sha256": "03f3255d0e805310663cdffc404b27b4fb11b1fd2b8780a7aa5251f0e8519d8a",
+      "display_text": "In Vietnamese",
+      "spoken_text": "In Vietnamese"
+    },
     "ui.lang_italian.0": {
       "asset": "clips/47/47fbe0a493d0.mp3",
       "duration_ms": 705,
@@ -2746,13 +2895,6 @@
       "sha256": "4de3fa2093257928c4cd54d70938d4d513225e812735ee24b9645a05caaceae4",
       "display_text": "You counted to",
       "spoken_text": "You counted to"
-    },
-    "ui.recap_tts_counted_to_lang.0": {
-      "asset": "clips/5f/5f9dccd3434f.mp3",
-      "duration_ms": 522,
-      "sha256": "5f9dccd3434f4c2b3cb70ccad86451388cca0c47bb98e50ca92839bcea3493c0",
-      "display_text": "In",
-      "spoken_text": "In"
     },
     "ui.recap_tts_counted_to_lang.1": {
       "asset": "clips/71/71cd284c4068.mp3",

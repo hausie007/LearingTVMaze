@@ -582,28 +582,49 @@ ui.lang_greek.0,aeaff79c0b30d10abc8d87e3441323888b4af67b1d5abc4bd458d8d776678b8b
 ui.lang_hebrew.0,73088175261f9f2dd8cd3d8bd8e1cd05c760f482d30f24566376d0149f682517,approved,,2026-08-13,
 ui.lang_hungarian.0,8ca61842dc1eb9ba4bfda7f80737c3c44db48b316b6d337cba1b4eeece5c3ab1,approved,,2026-08-13,
 ui.lang_in_czech.0,2ccee23030cd3a8a63791fc8e0e229b90ebd4e13dd5437959ecd1484a34516e8,approved,,2026-08-13,
+ui.lang_in_czech.0,ceca4e96a2abb8f987f1dbba2c35bbd5576e3e8959d352b927fc034b9cfed70c,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_danish.0,fcdcb291314cad930601a27b39bfb28556361c69fd70b46d5d9d6050866f1e7a,approved,,2026-08-13,
+ui.lang_in_danish.0,2712d35a2259323620aca139bfede31e54fa027bb0530bbbe9fca8b09f38ebaf,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_dutch.0,c26ad1ee3de5c73ef80bfca81422ddec41a91d67d2f464847ac4845e49537634,approved,,2026-08-13,
+ui.lang_in_dutch.0,1e9062dbb7ca4aa5e19c945ae0f3ad8a08bb80199b793f45cf4d7eaa0236dfd8,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_english.0,f47365cd6f08b3ed3c1ad1f8d8389f441179ce93c298806d22a83f2559483da1,rejected,,2026-08-13,wrongly cut
 ui.lang_in_english.0,fb96addd69b21526fd182cda1d2200e7ed1134b7876f724419d244e99bf79d20,approved,Michal Hauzírek,2026-08-13,retake with jedna/konec carriers after a mid-word cut
+ui.lang_in_english.0,6a497d78a96a1c6b126e20c3fd285dd1cb13ba60a2f22472171ce858eb9fd9f7,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_finnish.0,b2c4ff30b36c0f5eb92d0fcc3bcf193836f5628372e2f85e6438e3fe5c916c0c,approved,,2026-08-13,
+ui.lang_in_finnish.0,e4875110026ea1467a66fbae8dda1ce1009049c100667f2e04fa34ef8a154033,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_french.0,96ef86ccdeb5f8480f65cdae8802185578a818ae47de3d40dfba6c7ff34dc53e,approved,,2026-08-13,
+ui.lang_in_french.0,2ef790eb58e376f38b27643320bd1fc2f4932278fc0cb9d9294017a7b45944b5,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_german.0,a45e5aa8bd55c760ff4e9a8f58a10976cf89c59ae6a0e7ed43276d0b9962d135,approved,,2026-08-13,
+ui.lang_in_german.0,3a2a8464da2f48995054a796da1c959b5f1d75d8c6acb6beea258d2f32e2883f,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_greek.0,7a327622b09dbc5b7076dfd93fb2cc4c4ea9fb7a19ce31275c8e0734a2586297,approved,,2026-08-13,
+ui.lang_in_greek.0,4becf15ba5006142a3eabd7e3c6dcf2dc830a664ce943dbffd4e3fd22980449c,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_hebrew.0,4f31441e39628abfda75a4604967d362037b9934242a04979f532367771af770,approved,,2026-08-13,
+ui.lang_in_hebrew.0,ee34754908ca66c3d4a0e1c3fd21e20af8b8385537f0041bfd38f29adbdb02a0,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_hungarian.0,55c67f7326fb7ddd92702f22e4c15b4bf94278d4d718dc6a6e3a7788da62631c,approved,,2026-08-13,
+ui.lang_in_hungarian.0,92a03b33a2d535a2a60e1eb4d096661e84d4ee7144c32e34f46db53429e4781a,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_italian.0,d138397d891efdb6164a563f752f5f2ba2004b70155075c178662a79a5cc78d4,approved,,2026-08-13,
+ui.lang_in_italian.0,204246def4107673c67a99544f08336e4ff98fb3c2f8a22cc546f78e95b02cff,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_norwegian.0,7055c9f31ffc74991b174f55aa7e5966256896acac0851e8638f7b9b14e65fe1,approved,,2026-08-13,
+ui.lang_in_norwegian.0,88143c9a74eadc9db6d6ae69bccfdd7978214fb77e8f11a333362de7f960786e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_polish.0,72339d9783714f4406df433fe220d81c4b75f1c2ab3378d3f7dada6d8c750e9b,approved,,2026-08-13,
+ui.lang_in_polish.0,8f05315d6714d6cb50d51a0ce1af04ed45d4f41a72df20e6031b911e72719588,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_portuguese.0,86186d1c2fcabd654ea5bb373aa798363c3024430c7ceb11e74df16cfc03ff31,approved,,2026-08-13,
+ui.lang_in_portuguese.0,f3be15e603a4143a8ad6150ff32cef51f837d39e223fbdd4f439ca04020483fc,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_romanian.0,223bf80d8199d1d1be1d1c27605f72b87812a5474f192e35a408ec1f2a416d7a,approved,,2026-08-13,
+ui.lang_in_romanian.0,8a25e93476d494f4fef1d8d4f3ba3df8c24fe0d7f02817a2f73f2596644ad4ed,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_slovak.0,f65629f8bee5a9706b098d65d0bab2ae0e36b0c8094071cd5e78884a4a957a48,approved,,2026-08-13,
+ui.lang_in_slovak.0,2b42d1337dc79167c047a7c036adcb91e0dd2f0ad0c8ae1363af55eb1ab233c8,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_spanish.0,85c70a202cb83a84b12baa8c84ba6f43d25441462d0820537ea418053d790cca,approved,,2026-08-13,
+ui.lang_in_spanish.0,b94b896f711ebd02e9042d08899d52a4c7d1ee1e67c97f7b95ba5b9e04ed3d67,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_swedish.0,700b62e4cc9e44a26c1545ae473e2b3385b166b165a3b33887e884d360c5998f,approved,,2026-08-13,
+ui.lang_in_swedish.0,fc4294b96178b721304561f50a9f737f67b5457d606b13b172b90d439d7ed056,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_turkish.0,d34a28619bada55af297d05bb0101a66996d29c84640b0cad0d1840c76af40ff,approved,,2026-08-13,
+ui.lang_in_turkish.0,20e24c2c641cb6cc896083a759071a4c3fed69c10feb9d3e1b69155f8ff1d24c,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_ukrainian.0,5061ad7540e1e968eca657429b735dc8e7bc696c977e5d734bd1dcd8adbf92e7,rejected,,2026-08-13,wrongly cut
 ui.lang_in_ukrainian.0,d6ddd3292299bc33be9a65afb7a9870b864d257a8295b8fe5f2184cad9e6f134,approved,Michal Hauzírek,2026-08-13,retake with jedna/konec carriers after a mid-word cut
+ui.lang_in_ukrainian.0,e677e1d228a4eb3a0be2a4ff80dbe749aeeacfb90f5c726657cdfc22ece2981d,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_in_vietnamese.0,00e08c9efc7fa2bc01b7a888fbc09d439c6ba02b5cd512f95ebd67aa6d75c77d,approved,,2026-08-13,
+ui.lang_in_vietnamese.0,a37a63d41e27f49600a2e055e1913017e0f5093ba40bc0aae65cfb1a2e558e52,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.lang_italian.0,0c2334b06641fba504c3027266366c6a5771ab70236fd8fdade894c9d15d20e6,approved,,2026-08-13,
 ui.lang_norwegian.0,ac15c35c0fe64ac145437f53337e4007720ed8e796e27a8eb782f4990cdc3edc,approved,,2026-08-13,
 ui.lang_polish.0,08426d730389c9630119c83411760159426ecf9c03cf9a40f9c522a3b69b288a,approved,,2026-08-13,
@@ -615,16 +636,70 @@ ui.lang_swedish.0,858dc9577784326acf72d14b4068276ec89b2e495132e16c9fcb0f9e16d438
 ui.lang_turkish.0,c29e97a92e4f50d4aa6d94a59f3e9eb4cc0edb4a0282a46b5fc6370ac1771b6b,approved,,2026-08-13,
 ui.lang_ukrainian.0,996b5dffd257a2688b3ba0744b4e32d3f556512b0dfaf161dd71e218fca8dc7c,approved,,2026-08-13,
 ui.lang_vietnamese.0,4f49307a7d677503123d5b0b65aeea0db0bdab64280073744e4e4dbe0a43b850,approved,,2026-08-13,
+ui.number_to.001,17e2278a2a6e283dc3d5d0ade1f62872309baa1e179c8a0ca8ef213294a34aa9,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.002,19644f5d27367b2bc89027d54eeb494aa604f25942c9a856bcb0fe8c14309cbd,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.003,5cb8c9fb4632f17835f763832df4670c1c220de9afaaaa6004b398c3b9150659,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.004,9845682754aa338e6f6d0b816a01e387527bb0abb8b8f7b208883875137f9867,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.005,02c804b64e8ee626d715fb2f4af093efdc83f9a12306838665e98729904f0efc,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.006,7ca0cdf31ae1869875f09a8245bf724d1707380694bfa69e2f3b139a5e27c7a2,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.007,e05dfbbb6e09e3551eff126b5bfbac593453ede54e3ef19d2dee99b257c3e0b9,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.008,368fa0edf224b9838e4b76798d22edee1a23bdf46d68bdaff8dc8505e0d173de,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.009,fd3fba48fe918e1ea508cab351be37cf086da38fb378cae4125f9e0b9c60d5dd,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.010,268715934be52e2a7f17bee8c1b19d5259887ad48dd49e38d02a24946d975686,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.011,44d914d653c87e4ec2b3d205c3e5826f5eae5f6b558f669487f8d97087696dbf,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.012,64e667fcd0623c4a40ba83b7c03db28e9a02e337dfa4c786345a198171890ac4,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.013,1418c1ae50e7fa2811d99b4ae35cb1b77ba3e9f3034fd1c39e6805199f7285f8,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.014,b7b6abbf53aeef663705e4669a4195a0d8f22221dbd0d13c72084d18af35fefa,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.015,a1dd2e3ff519649ae0370079dbb09929177bc03ed72491279cfab716f3c8399a,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.016,033ec938a986ff1fde01962a22a220f35fe5af2a95383ad4fa578fe32a9123d9,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.017,6fa4dba9c1c5fea268d948ae43fb35f5ba8b22d3786174731b22179891da0c9b,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.018,3ed4ddd607efbee9adf0b496b95d70b51dabbb1404e45420f9b7cdc672ad74c1,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.019,c892af78a5a71beffcf8ec8f8843c193bfcdc49c5463eed7d49f2cac4a221ac0,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.020,8ad3718e5e6c5b73fe21f3ca27e470021246666ef99bfaec6e75d3a16c2a9d67,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.021,df892cb7079d5d6f997a7ab5756e2ba0b9582ed074654be52512f07471bfad36,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.022,3f02455f1b7f53e3907d67174236b638ea522393b8baa5b5bb0f8cedb5007403,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.023,721e6481bdd5e47390838a1a7d8dcb350b7c64d6a24373e9c22639f20c181322,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.024,7cde056e7db7939b7e6b2bff54e9f1addacd89358b22012e964da13308413c09,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.025,c72d4fc27c9ede8dcf2cd3a5bb53e1bc5aae88687b8e20b7386d271cd33b432d,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.026,e48025ccd548e32c57d4b0fed0ece5ee90b5458d640966d45d857d43813a99c2,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.027,11cd91a479259b4fa31c9da871fe275e36cd64debe5b074b7198c762811915c6,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.028,b05d3233141c0f57d3f68de5fc8d3bb101781fb98e9f164fbd94c8a8c5f7195b,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.029,decc50065c8a303716769b56096294dd5ac9ca9c767f6e9792177213561e4c00,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.030,6fcec3655c3bf874b7cb5d434048971c78e1389b2c50eb871b2b3f8ac9d1d641,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.031,184d59b9af0a6b6d61e0eedbb6d5f8c26cd89cd7d5a4c52ca252373a90ce1903,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.032,21181ff88a743917f056f90156eb811f19c0d570e49f2a2b34bdbc934b3363ba,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.033,935627e40ee2a12cfc324b74820c897e288d3e7282754ba0d3516aac143e22a6,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.034,6c41bbc041fb06bc6cf6005d202905f7df36f77af579bca7cd66b684a26c781e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.035,3a949a603de9ed4650e6bd02d9bfd0cba6de2910d7bd7b46c3b1431f0da1e87e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.036,d8d71ee1fd0f0505265765ec4e10bcd34f33862a9bdf1337a97775f3fefe117e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.037,2c898149a4ee3ab84f12712c67732e8c0491dcc3c1cf69ff5b4dcec8c9cb1088,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.038,16ea52400a3c924a98dfa894f7a92a9e76ca70566b5d9cdc44dd38457ad4ff38,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.039,bb276454632afa16944d416b9040d038df0e6dd8ca3baa8b5cf3b5a93281f8f3,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.040,72b9fab4f08bcfa52757776dc43e53811f2b9397bd00a980d82ebe80390c89e8,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.041,173743285e2450f675456a66d022076368449e1ea904f2e5fd676e02595b4e74,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.042,c49180fb57f89366ef9a790873cfed153a30529f619b2b6669b1e22fed21b8bb,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.043,212b85f04930ae5c6bdc3246d52ede721eab90f178a5eec5cba7cd48119a53aa,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.044,806590401094415d25ff12767ecaa23eb9ddc8547c4509f8c54c3737a80f6f4c,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.045,06a42ac28c43d8c0a5c6cacb1a47ea76c3fa4fbe20221a51cabc1f27c7cfa133,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.046,100b402c0bc0ecfa2267e336803109838e741d9ba846056997d89c239232763e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.047,035c6b73841cc238af5bf8e74fce624dd7b864dc07f562c1f1bc3a9639c90d08,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.048,5368c27debff10e8d2baf0887b2fe66c45390d5982b2c7b0eeb81aabc19404d7,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.049,555646270f276a42aee4425f63f226b11c53b0c4767a36665e3ad48e26646a86,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
+ui.number_to.050,8d90de21b06a623eb29bfcfbffa4007c2b1dc36ee6c4a649be2a7e54297844f5,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.recap_tts_counted_to.0,6165a6c34e74161f1ed3011ab831cc844e6e53c077e7a4bdec02b83d31bd4582,approved,,2026-08-13,
+ui.recap_tts_counted_to.0,9b092adf0b340e2eef8ec3cf96a983920c1d21a25a6bab37e2492dacaed08b79,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.recap_tts_counted_to_lang.0,4fbb5e46b5d2cc1d22085d0827f46d86e68e9e736f91f62e5f13c70c49e80571,approved,,2026-08-13,
 ui.recap_tts_counted_to_lang.1,42f4de1e5b2102f5857874813a2106f606295b6c7ed9711c5771b9b3857af878,approved,,2026-08-13,
 ui.recap_tts_found_letter.0,4e02449e3a132553d0b45dda252bcff6a9e583204a8bd14475ee68365cb34de9,approved,,2026-08-13,
 ui.recap_tts_found_letter_lang.0,8fbb97e36ef6d93e93dc40367e1ae26844d2ade0c7c8b17d7f6eea7e63f43437,approved,,2026-08-13,
+ui.recap_tts_found_letter_lang.0,ab701fd6ca8f0cd6d2189ef44f50cc55686b460c86da83e8fdcc995e7fc513f1,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.recap_tts_found_letter_lang.1,b6eea9b3b33324c1486ecf40e66da7c56cae4edab919a905662aa0abe53ea2a8,approved,,2026-08-13,
 ui.recap_tts_found_letters.0,c1073ccf9c7f37584a6f4368f90fe6c240932c57fbf17ddbb3efda384e3ea76f,approved,,2026-08-13,
+ui.recap_tts_found_letters.1,42f4de1e5b2102f5857874813a2106f606295b6c7ed9711c5771b9b3857af878,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.recap_tts_found_letters_lang.1,f285651844a2093b832cba90d1e4f28b54b5bcae4e66c5676fcbf02ec9e8f48a,approved,,2026-08-13,
 ui.recap_tts_spelled_phrase.0,ea5a9dac689967e1994fabfb6c11aa28917937d0b6157da269579f064d720109,approved,,2026-08-13,
 ui.recap_tts_spelled_phrase_lang.1,340bdaa20d7712ade0c59694c3906ca1451bd7f9570d14f7c32dc937f3e4d596,approved,,2026-08-13,
 ui.recap_tts_spelled_word.0,53b2e825bd3997ae7a8f78d4b14f9965bf1b1eb761da43d47346af221d8bc71b,approved,,2026-08-13,
 ui.recap_tts_spelled_word_lang.0,569cdb03cce09e2704855e7b08078aeb665c35c0b34355361a4d0151820c20db,approved,,2026-08-13,
+ui.recap_tts_spelled_word_lang.0,ec09b72364febc8bd5f68ff6cda3eaf18a6be397101d4d6b03962d9bba8ec34e,approved,Michal Hauzírek,2026-08-13,composed phrase: preposition recorded with its value
 ui.recap_tts_spelled_word_lang.1,e6a9cc9d15e2ba53fe19d8d5c14bd98513cd33a4a2ba52ce45076f664683b394,approved,,2026-08-13,

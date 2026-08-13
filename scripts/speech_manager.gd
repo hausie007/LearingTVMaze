@@ -262,7 +262,9 @@ func is_complete(lang: String = "") -> bool:
 	if cover.is_empty():
 		return false
 	for state in cover.values():
-		if String(state) != "complete":
+		# "not_needed" means this language has nothing to record in that
+		# category, which is completeness rather than a hole in it.
+		if String(state) != "complete" and String(state) != "not_needed":
 			return false
 	return true
 

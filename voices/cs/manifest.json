@@ -8,13 +8,15 @@
     "number": "complete",
     "char": "complete",
     "word": "complete",
-    "ui": "complete"
+    "ui": "complete",
+    "number_form": "complete"
   },
   "counts": {
     "number": 50,
     "char": 42,
     "word": 277,
-    "ui": 57
+    "ui": 56,
+    "number_form": 50
   },
   "items": {
     "learning.char.a": {
@@ -2685,151 +2687,151 @@
       "spoken_text": "Maďarština"
     },
     "ui.lang_in_czech.0": {
-      "asset": "clips/f9/f943b7ff9c40.mp3",
-      "duration_ms": 758,
-      "sha256": "f943b7ff9c40808bf96c3446db8a31ad2b24bdeca52e9c45adfb001957fdf59f",
-      "display_text": "češtině",
-      "spoken_text": "češtině"
+      "asset": "clips/85/856c12722a1f.mp3",
+      "duration_ms": 679,
+      "sha256": "856c12722a1f7988f2674b93e01cd9eb74de56150040dee0e6f8b5b58c7b9a6e",
+      "display_text": "v češtině",
+      "spoken_text": "v češtině"
     },
     "ui.lang_in_danish.0": {
-      "asset": "clips/1f/1f2be1c98cbc.mp3",
-      "duration_ms": 914,
-      "sha256": "1f2be1c98cbc2cc38163b045bb75ff19bc02f4eb24c0d530926a8053d8bd5fe9",
-      "display_text": "dánštině",
-      "spoken_text": "dánštině"
+      "asset": "clips/ed/ed08dec418d6.mp3",
+      "duration_ms": 836,
+      "sha256": "ed08dec418d6d9fed77cced4c6cf6152b7d8ed83d1c4909a7afd36c13882a94e",
+      "display_text": "v dánštině",
+      "spoken_text": "v dánštině"
     },
     "ui.lang_in_dutch.0": {
-      "asset": "clips/ed/ed78a2f820c8.mp3",
-      "duration_ms": 1045,
-      "sha256": "ed78a2f820c8a3acfdf27cd773d45e0d4e9c259d729d37923c1f791e7eee9b3b",
-      "display_text": "nizozemštině",
-      "spoken_text": "nizozemštině"
+      "asset": "clips/7f/7f34d36c4005.mp3",
+      "duration_ms": 1097,
+      "sha256": "7f34d36c4005cdff1df1de7e2c28d8c17dd6183967d9838e97cac66b1d8cddfa",
+      "display_text": "v nizozemštině",
+      "spoken_text": "v nizozemštině"
     },
     "ui.lang_in_english.0": {
-      "asset": "clips/e2/e2929c2cd51b.mp3",
+      "asset": "clips/6d/6d7de2bde3d8.mp3",
       "duration_ms": 888,
-      "sha256": "e2929c2cd51b6579e56050eb7ad2ddeaad505626d73f4a2135447fd331e576f0",
-      "display_text": "angličtině",
-      "spoken_text": "angličtině"
+      "sha256": "6d7de2bde3d8761ff4670760d34615ec01daf6c96748069a5ee7bca639a6f93e",
+      "display_text": "v angličtině",
+      "spoken_text": "v angličtině"
     },
     "ui.lang_in_finnish.0": {
-      "asset": "clips/c5/c57d9eeb3742.mp3",
-      "duration_ms": 732,
-      "sha256": "c57d9eeb374293ed5dc8d7ba72d612cb197f73a7de0ad98ecbf8b9bb1bdfb6ac",
-      "display_text": "finštině",
-      "spoken_text": "finštině"
+      "asset": "clips/79/79a5b32c1919.mp3",
+      "duration_ms": 758,
+      "sha256": "79a5b32c1919427df6f113c87c91534b9c570124b20dbb4a1c91d4578170c230",
+      "display_text": "v finštině",
+      "spoken_text": "v finštině"
     },
     "ui.lang_in_french.0": {
-      "asset": "clips/9f/9f959be3b5e0.mp3",
-      "duration_ms": 966,
-      "sha256": "9f959be3b5e02523b9ae7f27ae6095deb769b438f62dfcad235bd6b4876dcbc8",
-      "display_text": "francouzštině",
-      "spoken_text": "francouzštině"
+      "asset": "clips/80/80323fc05d26.mp3",
+      "duration_ms": 914,
+      "sha256": "80323fc05d26e852ef42fdcc81c7240b4ff1bf52f8e706ba3f43e93afc14bb0c",
+      "display_text": "v francouzštině",
+      "spoken_text": "v francouzštině"
     },
     "ui.lang_in_german.0": {
-      "asset": "clips/c0/c053fae38c6b.mp3",
-      "duration_ms": 784,
-      "sha256": "c053fae38c6bbe7fb550a7b78501b82fdddf7f1c7efd6aaf281cab998753119d",
-      "display_text": "němčině",
-      "spoken_text": "němčině"
+      "asset": "clips/07/07169818995b.mp3",
+      "duration_ms": 758,
+      "sha256": "07169818995bb3e421cf94bb837940cfb91ac6e98076224b6c842087e9b43d89",
+      "display_text": "v němčině",
+      "spoken_text": "v němčině"
     },
     "ui.lang_in_greek.0": {
-      "asset": "clips/f8/f851d083b8ff.mp3",
-      "duration_ms": 784,
-      "sha256": "f851d083b8ff73ff524d65b88b9e344246f675154b25e508edf4b36e87ec0a61",
-      "display_text": "řečtině",
-      "spoken_text": "řečtině"
+      "asset": "clips/d6/d6958686d5c6.mp3",
+      "duration_ms": 888,
+      "sha256": "d6958686d5c67d49990ac04af131b31b20cd9b3f781323c11b9fcc2297e1d2d9",
+      "display_text": "v řečtině",
+      "spoken_text": "v řečtině"
     },
     "ui.lang_in_hebrew.0": {
-      "asset": "clips/25/2538e8e350ed.mp3",
-      "duration_ms": 836,
-      "sha256": "2538e8e350ed86810ba4cde3bf468183050a6f95ec77216b04f0e24e5397f427",
-      "display_text": "hebrejštině",
-      "spoken_text": "hebrejštině"
+      "asset": "clips/82/8289e63b688b.mp3",
+      "duration_ms": 1019,
+      "sha256": "8289e63b688ba27d5fcf119f3a781578c1de9cd7455c2eee8e744b68212b363e",
+      "display_text": "v hebrejštině",
+      "spoken_text": "v hebrejštině"
     },
     "ui.lang_in_hungarian.0": {
-      "asset": "clips/44/44ab9c996342.mp3",
-      "duration_ms": 914,
-      "sha256": "44ab9c9963422e6d51827064adbb28e968121fb29bfe2e2c87fd81754da82525",
-      "display_text": "maďarštině",
-      "spoken_text": "maďarštině"
+      "asset": "clips/1f/1fe37333cc14.mp3",
+      "duration_ms": 940,
+      "sha256": "1fe37333cc140dea29fef506cbd933c6bc60921dd09ab3b63a91b95af9a0d43f",
+      "display_text": "v maďarštině",
+      "spoken_text": "v maďarštině"
     },
     "ui.lang_in_italian.0": {
-      "asset": "clips/17/17382b857142.mp3",
-      "duration_ms": 888,
-      "sha256": "17382b857142ffd61ea109c9eff1cd95a3602a4e88fed07b2e7c2959c7660ca9",
-      "display_text": "italštině",
-      "spoken_text": "italštině"
+      "asset": "clips/a5/a5fb7628344b.mp3",
+      "duration_ms": 810,
+      "sha256": "a5fb7628344b26069a4b4beba7decfe2ff35f38a14153b39fb61f33afcfa7c01",
+      "display_text": "v italštině",
+      "spoken_text": "v italštině"
     },
     "ui.lang_in_norwegian.0": {
-      "asset": "clips/72/72878b9e2c3a.mp3",
-      "duration_ms": 862,
-      "sha256": "72878b9e2c3abe50646f2856c9cd17678e366a00910a440ddf54f8e3a9ed98e2",
-      "display_text": "norštině",
-      "spoken_text": "norštině"
+      "asset": "clips/62/6247695da856.mp3",
+      "duration_ms": 914,
+      "sha256": "6247695da856317f3436f78f0bb5338a3cb06baf4820ecd52f24ad801cea67d7",
+      "display_text": "v norštině",
+      "spoken_text": "v norštině"
     },
     "ui.lang_in_polish.0": {
-      "asset": "clips/e1/e1f5cb754dd4.mp3",
-      "duration_ms": 705,
-      "sha256": "e1f5cb754dd44b63941297f0fd1364d0566ae372d5ac2ff73a059e04897f3b04",
-      "display_text": "polštině",
-      "spoken_text": "polštině"
+      "asset": "clips/22/2232a3028db2.mp3",
+      "duration_ms": 732,
+      "sha256": "2232a3028db2f4f30bb88776bdcb1922b76250f5bb770440643e588ddcc90da0",
+      "display_text": "v polštině",
+      "spoken_text": "v polštině"
     },
     "ui.lang_in_portuguese.0": {
-      "asset": "clips/01/0184f4ff9fda.mp3",
-      "duration_ms": 1019,
-      "sha256": "0184f4ff9fda64438647c351cbc63dfe06f49214b49244608e636f868349bd3d",
-      "display_text": "portugalštině",
-      "spoken_text": "portugalštině"
+      "asset": "clips/44/44c079fa6172.mp3",
+      "duration_ms": 940,
+      "sha256": "44c079fa617265ef1b6cdfe11444dfd3c67a8498944ac604123918cdf803fd0a",
+      "display_text": "v portugalštině",
+      "spoken_text": "v portugalštině"
     },
     "ui.lang_in_romanian.0": {
-      "asset": "clips/7d/7dd48212f0b6.mp3",
-      "duration_ms": 914,
-      "sha256": "7dd48212f0b66e2a884e223238d0817e88033e4cacf30826c67f9c485fb2cc39",
-      "display_text": "rumunštině",
-      "spoken_text": "rumunštině"
+      "asset": "clips/a2/a2ebb8082322.mp3",
+      "duration_ms": 966,
+      "sha256": "a2ebb8082322f2b312bfdfce7db6ccb3f3c39b2f421ca9d624eb10900573d57f",
+      "display_text": "v rumunštině",
+      "spoken_text": "v rumunštině"
     },
     "ui.lang_in_slovak.0": {
-      "asset": "clips/cc/ccb64f2fecba.mp3",
-      "duration_ms": 966,
-      "sha256": "ccb64f2fecba0f819040dfbde1c5f7460e08e2e2019efdb8ab409aef219582b9",
-      "display_text": "slovenštině",
-      "spoken_text": "slovenštině"
+      "asset": "clips/ff/ffce99f2f89e.mp3",
+      "duration_ms": 914,
+      "sha256": "ffce99f2f89e23fd29194fbe52dc22c80a038187725889ff6db19d64ed63848c",
+      "display_text": "v slovenštině",
+      "spoken_text": "v slovenštině"
     },
     "ui.lang_in_spanish.0": {
-      "asset": "clips/84/84918607eebc.mp3",
-      "duration_ms": 1019,
-      "sha256": "84918607eebc620bef85c467adbcb5d91b9971c9b3556b7141138f60245f0c1a",
-      "display_text": "španělštině",
-      "spoken_text": "španělštině"
+      "asset": "clips/07/07554a75b5fd.mp3",
+      "duration_ms": 940,
+      "sha256": "07554a75b5fde1bc952bd741586ad994896aff72c91c42362ab3ede0be3e820e",
+      "display_text": "v španělštině",
+      "spoken_text": "v španělštině"
     },
     "ui.lang_in_swedish.0": {
-      "asset": "clips/ea/eaed5c05ed20.mp3",
-      "duration_ms": 940,
-      "sha256": "eaed5c05ed2038dd13d2bfb7c5c4870e9f30507b73831ef770e009c3b902c98c",
-      "display_text": "švédštině",
-      "spoken_text": "švédštině"
+      "asset": "clips/0b/0bce42484065.mp3",
+      "duration_ms": 836,
+      "sha256": "0bce4248406575150e9f6c0ba8bb6c5fd029e681b6c57fb20f7c02bf8598a60d",
+      "display_text": "v švédštině",
+      "spoken_text": "v švédštině"
     },
     "ui.lang_in_turkish.0": {
-      "asset": "clips/83/8395b7b817f1.mp3",
-      "duration_ms": 862,
-      "sha256": "8395b7b817f16c48ba44053aa78e9304325e3258f36f222c548cb9609ef729b8",
-      "display_text": "turečtině",
-      "spoken_text": "turečtině"
+      "asset": "clips/e5/e5b09f111a79.mp3",
+      "duration_ms": 888,
+      "sha256": "e5b09f111a791e71ecca499c4ec302794566131e9dcd22816bb994c1512f765d",
+      "display_text": "v turečtině",
+      "spoken_text": "v turečtině"
     },
     "ui.lang_in_ukrainian.0": {
-      "asset": "clips/7a/7ac3dff5b153.mp3",
+      "asset": "clips/12/1214ba95250b.mp3",
       "duration_ms": 914,
-      "sha256": "7ac3dff5b153aa53207544e03553acc323baa20ffd83823de2197bb7630d6bea",
-      "display_text": "ukrajinštině",
-      "spoken_text": "ukrajinštině"
+      "sha256": "1214ba95250b6e7ffa46653fdd3ce4dbbe3e5d371f7549a1f107fae3938318db",
+      "display_text": "v ukrajinštině",
+      "spoken_text": "v ukrajinštině"
     },
     "ui.lang_in_vietnamese.0": {
-      "asset": "clips/92/920cc7e18a2f.mp3",
-      "duration_ms": 1045,
-      "sha256": "920cc7e18a2f1ab746e781d57efca01e03044176b09bba055982c68b3f512da9",
-      "display_text": "vietnamštině",
-      "spoken_text": "vietnamštině"
+      "asset": "clips/da/dafdd57d0db2.mp3",
+      "duration_ms": 1123,
+      "sha256": "dafdd57d0db2291f172719ecb3d3b928e32d4fecced48d0f7c89c3b885500e1d",
+      "display_text": "v vietnamštině",
+      "spoken_text": "v vietnamštině"
     },
     "ui.lang_italian.0": {
       "asset": "clips/a7/a7b4d235cb36.mp3",
@@ -2908,26 +2910,362 @@
       "display_text": "Vietnamština",
       "spoken_text": "Vietnamština"
     },
-    "ui.recap_tts_counted_to.0": {
-      "asset": "clips/cd/cd1f182883d2.mp3",
+    "ui.number_to.001": {
+      "asset": "clips/66/6695b85c8563.mp3",
+      "duration_ms": 940,
+      "sha256": "6695b85c856392bfc0d2da8a8d24c7f0337d3e96d405581f1c9a2ecc0be85168",
+      "display_text": "do jedné",
+      "spoken_text": "do jedné"
+    },
+    "ui.number_to.002": {
+      "asset": "clips/15/15b268f74ec3.mp3",
+      "duration_ms": 993,
+      "sha256": "15b268f74ec3cc5f2b368dc55e82aa842f39dcf017f9da21bd298e2fb6882cb7",
+      "display_text": "do dvou",
+      "spoken_text": "do dvou"
+    },
+    "ui.number_to.003": {
+      "asset": "clips/f7/f70eda316988.mp3",
+      "duration_ms": 993,
+      "sha256": "f70eda3169880e2dbbde39d6d87395bbb6e0cacf8e569cd1eade4a726cb3d7f2",
+      "display_text": "do tří",
+      "spoken_text": "do tří"
+    },
+    "ui.number_to.004": {
+      "asset": "clips/2f/2f69d7ddba79.mp3",
+      "duration_ms": 1019,
+      "sha256": "2f69d7ddba796c20e73a7f73dea5c67526ffcea987cb11afe35dd576d6592109",
+      "display_text": "do čtyř",
+      "spoken_text": "do čtyř"
+    },
+    "ui.number_to.005": {
+      "asset": "clips/94/9491cf378698.mp3",
+      "duration_ms": 966,
+      "sha256": "9491cf3786984319848dd3dfc401db62e8606219e4417c4c886931323be8096d",
+      "display_text": "do pěti",
+      "spoken_text": "do pěti"
+    },
+    "ui.number_to.006": {
+      "asset": "clips/f3/f3a75d865e47.mp3",
+      "duration_ms": 1071,
+      "sha256": "f3a75d865e4759b0eece837af9d1978d9e91e166b1c7cd96ad853c07ddc8f003",
+      "display_text": "do šesti",
+      "spoken_text": "do šesti"
+    },
+    "ui.number_to.007": {
+      "asset": "clips/13/13780cbe3886.mp3",
+      "duration_ms": 966,
+      "sha256": "13780cbe3886739cae466e29c304295d0809f81c10175b8a658c834f10149344",
+      "display_text": "do sedmi",
+      "spoken_text": "do sedmi"
+    },
+    "ui.number_to.008": {
+      "asset": "clips/b2/b26dbf5b5b43.mp3",
+      "duration_ms": 1019,
+      "sha256": "b26dbf5b5b43ed89c9814d8f0978102e88e23f7816dd76f8e5f9a5b63732dce4",
+      "display_text": "do osmi",
+      "spoken_text": "do osmi"
+    },
+    "ui.number_to.009": {
+      "asset": "clips/d7/d7c684d3bb48.mp3",
+      "duration_ms": 1071,
+      "sha256": "d7c684d3bb489afbd66fe08531357b2692c5d65d71db5884b860d3d86b247797",
+      "display_text": "do devíti",
+      "spoken_text": "do devíti"
+    },
+    "ui.number_to.010": {
+      "asset": "clips/6a/6a6f4920d3dd.mp3",
+      "duration_ms": 1045,
+      "sha256": "6a6f4920d3dd3c8aad1be968968e117b0212ff14cbebef7d7b4a1ecb9ada96f9",
+      "display_text": "do deseti",
+      "spoken_text": "do deseti"
+    },
+    "ui.number_to.011": {
+      "asset": "clips/7f/7fe7b114a757.mp3",
+      "duration_ms": 1254,
+      "sha256": "7fe7b114a7578b44691526e81eb349c9cfa34393b61a5180132c301df2b648bd",
+      "display_text": "do jedenácti",
+      "spoken_text": "do jedenácti"
+    },
+    "ui.number_to.012": {
+      "asset": "clips/7a/7a3c09d71204.mp3",
+      "duration_ms": 1228,
+      "sha256": "7a3c09d71204cda45eecdf848938a8d1e1660fa2a57257e096c13b114ecf54e2",
+      "display_text": "do dvanácti",
+      "spoken_text": "do dvanácti"
+    },
+    "ui.number_to.013": {
+      "asset": "clips/30/30b5dc55bbbe.mp3",
+      "duration_ms": 1071,
+      "sha256": "30b5dc55bbbe514afbbdb61c517917c1b42a8f95d67558c4f7a1a795b69ab40f",
+      "display_text": "do třinácti",
+      "spoken_text": "do třinácti"
+    },
+    "ui.number_to.014": {
+      "asset": "clips/35/3546912c4df0.mp3",
+      "duration_ms": 1123,
+      "sha256": "3546912c4df0678f4faaa0c76e04902e45eb8bc46010a14082cf4f20b799687c",
+      "display_text": "do čtrnácti",
+      "spoken_text": "do čtrnácti"
+    },
+    "ui.number_to.015": {
+      "asset": "clips/4f/4fb313aae782.mp3",
+      "duration_ms": 1071,
+      "sha256": "4fb313aae7825a43953ed61da7d3f67c8d173e41d80d031bf91d139e4477adde",
+      "display_text": "do patnácti",
+      "spoken_text": "do patnácti"
+    },
+    "ui.number_to.016": {
+      "asset": "clips/55/55c6b459e8da.mp3",
+      "duration_ms": 1123,
+      "sha256": "55c6b459e8dad15da8e7f59c5c72cfb6a9a9087340999191820ee50c7903a9b2",
+      "display_text": "do šestnácti",
+      "spoken_text": "do šestnácti"
+    },
+    "ui.number_to.017": {
+      "asset": "clips/80/80066cca7600.mp3",
+      "duration_ms": 1176,
+      "sha256": "80066cca7600261458d6fe4152d912b13abd84a5bf4fe474cd79a622b546275e",
+      "display_text": "do sedmnácti",
+      "spoken_text": "do sedmnácti"
+    },
+    "ui.number_to.018": {
+      "asset": "clips/90/90df289d4765.mp3",
+      "duration_ms": 1176,
+      "sha256": "90df289d4765db1ed310b1655e5a53b80ea226a157ec9cf6fa3ef5525db83cf2",
+      "display_text": "do osmnácti",
+      "spoken_text": "do osmnácti"
+    },
+    "ui.number_to.019": {
+      "asset": "clips/35/35a6e1344536.mp3",
+      "duration_ms": 1202,
+      "sha256": "35a6e1344536edb4eed71713501f66fab0d24f5c6cce2a92b8ea75c42135c7b4",
+      "display_text": "do devatenácti",
+      "spoken_text": "do devatenácti"
+    },
+    "ui.number_to.020": {
+      "asset": "clips/0f/0f2ad68154e7.mp3",
+      "duration_ms": 966,
+      "sha256": "0f2ad68154e7073e84fddb0464cb5e6eca2fdd0460dc48044f147e8e5fbba2a1",
+      "display_text": "do dvaceti",
+      "spoken_text": "do dvaceti"
+    },
+    "ui.number_to.021": {
+      "asset": "clips/a3/a3c162ec0738.mp3",
+      "duration_ms": 1306,
+      "sha256": "a3c162ec0738d8c2dd32be696a01d9b0fcf28c54976c2c906a853ee640bf23cf",
+      "display_text": "do dvaceti jedné",
+      "spoken_text": "do dvaceti jedné"
+    },
+    "ui.number_to.022": {
+      "asset": "clips/9b/9b9665175199.mp3",
+      "duration_ms": 1202,
+      "sha256": "9b966517519948aa304487cd5190f5732fcb440f0a2b7212e981002fc7fa1d14",
+      "display_text": "do dvaceti dvou",
+      "spoken_text": "do dvaceti dvou"
+    },
+    "ui.number_to.023": {
+      "asset": "clips/7d/7dc9f54b5fcc.mp3",
+      "duration_ms": 1228,
+      "sha256": "7dc9f54b5fcc1b604c75bd3034ca2f41ac6a0729a171223250dc8a66c85dfb75",
+      "display_text": "do dvaceti tří",
+      "spoken_text": "do dvaceti tří"
+    },
+    "ui.number_to.024": {
+      "asset": "clips/e0/e032bfeb59a9.mp3",
+      "duration_ms": 1228,
+      "sha256": "e032bfeb59a97bf4f27c72d115d46afe5c53db573c940a7309fab72668ad873a",
+      "display_text": "do dvaceti čtyř",
+      "spoken_text": "do dvaceti čtyř"
+    },
+    "ui.number_to.025": {
+      "asset": "clips/92/921b85cae106.mp3",
       "duration_ms": 1280,
-      "sha256": "cd1f182883d216fb39d17260d95e5a437d63e1868120ff0abeddb33fe5002de0",
-      "display_text": "Napočítali jsme do",
-      "spoken_text": "Napočítali jsme do"
+      "sha256": "921b85cae1067ebc88bea4d3b05ad38e06f8deb38559ff72c81a3e240ecf85b5",
+      "display_text": "do dvaceti pěti",
+      "spoken_text": "do dvaceti pěti"
     },
-    "ui.recap_tts_counted_to_lang.0": {
-      "asset": "clips/50/506746c81667.mp3",
-      "duration_ms": 1750,
-      "sha256": "506746c816677fb2212c67a241c6e6be12965259166fcec3d02120e5c8abf627",
-      "display_text": "Napočítali jsme v",
-      "spoken_text": "Napočítali jsme v"
+    "ui.number_to.026": {
+      "asset": "clips/e7/e7c700c3b4ba.mp3",
+      "duration_ms": 1280,
+      "sha256": "e7c700c3b4bad0e51cf857f2bda9b196ce0f96af194b2a68a0b0d2168ef1d212",
+      "display_text": "do dvaceti šesti",
+      "spoken_text": "do dvaceti šesti"
     },
-    "ui.recap_tts_counted_to_lang.1": {
-      "asset": "clips/16/169016f4c314.mp3",
-      "duration_ms": 522,
-      "sha256": "169016f4c314477f14fd29436dc2752e169594157c266a1986ed644b7d4dc880",
-      "display_text": "do",
-      "spoken_text": "do"
+    "ui.number_to.027": {
+      "asset": "clips/eb/eb99832e4153.mp3",
+      "duration_ms": 1306,
+      "sha256": "eb99832e41536f61dfe049f7fea79122118a43d8f755b7c76f093a4c093407df",
+      "display_text": "do dvaceti sedmi",
+      "spoken_text": "do dvaceti sedmi"
+    },
+    "ui.number_to.028": {
+      "asset": "clips/a3/a3dd3429a093.mp3",
+      "duration_ms": 1306,
+      "sha256": "a3dd3429a0933841da62e14e29fff0ffd7916703f6f149d65104f6af7a1c3c61",
+      "display_text": "do dvaceti osmi",
+      "spoken_text": "do dvaceti osmi"
+    },
+    "ui.number_to.029": {
+      "asset": "clips/b4/b43720bf7905.mp3",
+      "duration_ms": 1437,
+      "sha256": "b43720bf79052bee21b0aa7d699f472f0e6e4adfb65ad05476877cd32ba7064c",
+      "display_text": "do dvaceti devíti",
+      "spoken_text": "do dvaceti devíti"
+    },
+    "ui.number_to.030": {
+      "asset": "clips/5d/5d126f420a92.mp3",
+      "duration_ms": 1045,
+      "sha256": "5d126f420a922dc69eba9659ecc6cc3e619f3fb47d8509e22b022b1f80ea2989",
+      "display_text": "do třiceti",
+      "spoken_text": "do třiceti"
+    },
+    "ui.number_to.031": {
+      "asset": "clips/b6/b61c879f2a2d.mp3",
+      "duration_ms": 1384,
+      "sha256": "b61c879f2a2dfc058d81fa0733cc69958fbde1f61af0f1c44a8e379c10a67ca7",
+      "display_text": "do třiceti jedné",
+      "spoken_text": "do třiceti jedné"
+    },
+    "ui.number_to.032": {
+      "asset": "clips/06/0691ed7fd3dd.mp3",
+      "duration_ms": 1280,
+      "sha256": "0691ed7fd3dd11c70624d97d2dd0e7a93773067cd374e263e385f3f70da8a889",
+      "display_text": "do třiceti dvou",
+      "spoken_text": "do třiceti dvou"
+    },
+    "ui.number_to.033": {
+      "asset": "clips/5e/5e9369e14e88.mp3",
+      "duration_ms": 1280,
+      "sha256": "5e9369e14e88d0f6ed58274fb65843274498f9899836a6d40b6bcdce35df649f",
+      "display_text": "do třiceti tří",
+      "spoken_text": "do třiceti tří"
+    },
+    "ui.number_to.034": {
+      "asset": "clips/dc/dc30c755e503.mp3",
+      "duration_ms": 1358,
+      "sha256": "dc30c755e503bf3c1f344a33e2bb00a92757ecc5ed8506f8d3d726f0ad28349e",
+      "display_text": "do třiceti čtyř",
+      "spoken_text": "do třiceti čtyř"
+    },
+    "ui.number_to.035": {
+      "asset": "clips/43/438eb0d93ce5.mp3",
+      "duration_ms": 1332,
+      "sha256": "438eb0d93ce50ba9ad7b270c3c5c0bee6ba434482cb0abdc9dffb686e597f892",
+      "display_text": "do třiceti pěti",
+      "spoken_text": "do třiceti pěti"
+    },
+    "ui.number_to.036": {
+      "asset": "clips/0a/0a60c18e2227.mp3",
+      "duration_ms": 1384,
+      "sha256": "0a60c18e22270292ad7439ab18ac4493e9506137e6e911c76bf504a636187c31",
+      "display_text": "do třiceti šesti",
+      "spoken_text": "do třiceti šesti"
+    },
+    "ui.number_to.037": {
+      "asset": "clips/4e/4e53dfa402fd.mp3",
+      "duration_ms": 1358,
+      "sha256": "4e53dfa402fd92c6e4f451652aa06cf68389ae61f5327c44f4ddb6d7aa56d905",
+      "display_text": "do třiceti sedmi",
+      "spoken_text": "do třiceti sedmi"
+    },
+    "ui.number_to.038": {
+      "asset": "clips/3d/3d8002f29452.mp3",
+      "duration_ms": 1358,
+      "sha256": "3d8002f29452ae4200bc9d2852100f636080d0ad4f6c885146cc51b315af16ce",
+      "display_text": "do třiceti osmi",
+      "spoken_text": "do třiceti osmi"
+    },
+    "ui.number_to.039": {
+      "asset": "clips/cb/cb51e7599335.mp3",
+      "duration_ms": 1410,
+      "sha256": "cb51e7599335c8e2fb6e8a01fac4dce921beb554a7d329829971d80c8a7c5eb7",
+      "display_text": "do třiceti devíti",
+      "spoken_text": "do třiceti devíti"
+    },
+    "ui.number_to.040": {
+      "asset": "clips/22/22eb2548d583.mp3",
+      "duration_ms": 1176,
+      "sha256": "22eb2548d583c2749f695e0f34b0a51969575408eefa945b0b31f015b15bb956",
+      "display_text": "do čtyřiceti",
+      "spoken_text": "do čtyřiceti"
+    },
+    "ui.number_to.041": {
+      "asset": "clips/38/38e5f779cc7d.mp3",
+      "duration_ms": 1437,
+      "sha256": "38e5f779cc7dcec82f0249252e4b523ecaaff402a0590326958b87cd6766e40c",
+      "display_text": "do čtyřiceti jedné",
+      "spoken_text": "do čtyřiceti jedné"
+    },
+    "ui.number_to.042": {
+      "asset": "clips/b6/b6916bb58217.mp3",
+      "duration_ms": 1489,
+      "sha256": "b6916bb582173950b043124538ee4072b79186d76648b39eba50cb4cecd6cba7",
+      "display_text": "do čtyřiceti dvou",
+      "spoken_text": "do čtyřiceti dvou"
+    },
+    "ui.number_to.043": {
+      "asset": "clips/25/2524686f4425.mp3",
+      "duration_ms": 1515,
+      "sha256": "2524686f4425781ebb3f1fca9667437b43742c5dcb713216cc4f609485318cb1",
+      "display_text": "do čtyřiceti tří",
+      "spoken_text": "do čtyřiceti tří"
+    },
+    "ui.number_to.044": {
+      "asset": "clips/48/488828a7b6db.mp3",
+      "duration_ms": 1437,
+      "sha256": "488828a7b6dbf190cdd69de47c2d9f0827965f83dbbdd01403ea4045a9082b95",
+      "display_text": "do čtyřiceti čtyř",
+      "spoken_text": "do čtyřiceti čtyř"
+    },
+    "ui.number_to.045": {
+      "asset": "clips/fd/fde826d9d065.mp3",
+      "duration_ms": 1541,
+      "sha256": "fde826d9d065cc0c8bcc74b35a3be5a636121302457fba2847d20947af98f8aa",
+      "display_text": "do čtyřiceti pěti",
+      "spoken_text": "do čtyřiceti pěti"
+    },
+    "ui.number_to.046": {
+      "asset": "clips/af/af59312e032b.mp3",
+      "duration_ms": 1620,
+      "sha256": "af59312e032bd1f733b74e37df1523daf801d8ac3b236ebd8aae244f7cb3869f",
+      "display_text": "do čtyřiceti šesti",
+      "spoken_text": "do čtyřiceti šesti"
+    },
+    "ui.number_to.047": {
+      "asset": "clips/b9/b975cc299750.mp3",
+      "duration_ms": 1410,
+      "sha256": "b975cc299750f01d11e1fce825a336c226bb292956813c13d92627a06fd62f7a",
+      "display_text": "do čtyřiceti sedmi",
+      "spoken_text": "do čtyřiceti sedmi"
+    },
+    "ui.number_to.048": {
+      "asset": "clips/59/59b54b2f4ddf.mp3",
+      "duration_ms": 1541,
+      "sha256": "59b54b2f4ddf054935ef4917d8e7e1324d5acddf6ab0e82579d08cf961bbb656",
+      "display_text": "do čtyřiceti osmi",
+      "spoken_text": "do čtyřiceti osmi"
+    },
+    "ui.number_to.049": {
+      "asset": "clips/54/543ddaa1e91b.mp3",
+      "duration_ms": 1567,
+      "sha256": "543ddaa1e91becfc679a180e92671268242fc9c9b98ba143effc89c1fac21d10",
+      "display_text": "do čtyřiceti devíti",
+      "spoken_text": "do čtyřiceti devíti"
+    },
+    "ui.number_to.050": {
+      "asset": "clips/7b/7bfbf3946d20.mp3",
+      "duration_ms": 1071,
+      "sha256": "7bfbf3946d20ab607c4be5f40af8bb82a4f2b3c77eb357590858a7fef37b2dcd",
+      "display_text": "do padesáti",
+      "spoken_text": "do padesáti"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/d7/d714c085025a.mp3",
+      "duration_ms": 1123,
+      "sha256": "d714c085025abf34ced6b5b872933013b4385ccc1bd70adf2df0b5a761c4dd58",
+      "display_text": "Napočítali jsme",
+      "spoken_text": "Napočítali jsme"
     },
     "ui.recap_tts_found_letter.0": {
       "asset": "clips/47/47ff2809e411.mp3",
@@ -2937,11 +3275,11 @@
       "spoken_text": "Našli jsme písmeno"
     },
     "ui.recap_tts_found_letter_lang.0": {
-      "asset": "clips/6d/6da670f0bf3a.mp3",
-      "duration_ms": 1698,
-      "sha256": "6da670f0bf3ace2c8c478300723e9e8e4affe59d447e8184ad2cfeb2381ff663",
-      "display_text": "Našli jsme v",
-      "spoken_text": "Našli jsme v"
+      "asset": "clips/6a/6a444d244661.mp3",
+      "duration_ms": 758,
+      "sha256": "6a444d24466199a678f53dfce1c2795de8c71a6fafd3c37fa75062e968bf491a",
+      "display_text": "Našli jsme",
+      "spoken_text": "Našli jsme"
     },
     "ui.recap_tts_found_letter_lang.1": {
       "asset": "clips/95/95b272913613.mp3",
@@ -2956,6 +3294,13 @@
       "sha256": "dbc53bc6ab867182111528d24b66d2be34422d36b57b09abf9e90d7caa88b1a0",
       "display_text": "Našli jsme písmena od",
       "spoken_text": "Našli jsme písmena od"
+    },
+    "ui.recap_tts_found_letters.1": {
+      "asset": "clips/16/169016f4c314.mp3",
+      "duration_ms": 522,
+      "sha256": "169016f4c314477f14fd29436dc2752e169594157c266a1986ed644b7d4dc880",
+      "display_text": "do",
+      "spoken_text": "do"
     },
     "ui.recap_tts_found_letters_lang.1": {
       "asset": "clips/3c/3c4f0e67d011.mp3",
@@ -2986,11 +3331,11 @@
       "spoken_text": "Složili jsme slovo"
     },
     "ui.recap_tts_spelled_word_lang.0": {
-      "asset": "clips/fb/fbb5aeffb416.mp3",
-      "duration_ms": 1228,
-      "sha256": "fbb5aeffb4169b952b96b62e6144b9d4d6d76e6c79c2e196ce4f8140390013f7",
-      "display_text": "Složili jsme v",
-      "spoken_text": "Složili jsme v"
+      "asset": "clips/e9/e97184054803.mp3",
+      "duration_ms": 1019,
+      "sha256": "e971840548030285738be219d951609a30e31c44386d866738da245f2cda959e",
+      "display_text": "Složili jsme",
+      "spoken_text": "Složili jsme"
     },
     "ui.recap_tts_spelled_word_lang.1": {
       "asset": "clips/97/971edfdb0f7a.mp3",

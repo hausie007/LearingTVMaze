@@ -2462,8 +2462,15 @@ def cmd_pack(args) -> int:
             wanted = [r for r in per if r["category"] == category]
             got = [r for r in approved if r["category"] == category]
             counts[category] = len(got)
-            coverage[category] = ("complete" if len(got) == len(wanted) and wanted
-                                  else "partial" if got else "none")
+            if not wanted:
+                # The language declares the category and needs nothing in it —
+                # English inflects no numbers, so it has no number_form clips to
+                # be missing. That is not the same as a gap, and a pack should
+                # not read as incomplete because of it.
+                coverage[category] = "not_needed"
+            else:
+                coverage[category] = ("complete" if len(got) == len(wanted)
+                                      else "partial" if got else "none")
 
         manifest = {
             "schema_version": 1,
@@ -2821,11 +2828,17 @@ def language_status(cat: dict) -> list:
         ui = phase("ui")
         if "ui" not in spec.get("categories", []):
             ui = ("·", "")
+        forms = phase("number_form")
+        if "number_form" in spec.get("categories", []) and forms == ("·", ""):
+            # Declared and empty: this language inflects nothing here.
+            ui = ("✓", f"{ui[1]} +0 forms".strip()) if ui[0] == "✓" else ui
+        elif forms[0] == "✓":
+            ui = ("✓", f"{ui[1]} +{forms[1]} forms".strip()) if ui[0] == "✓" else ui
 
         pack = PACKS / lang / "manifest.json"
         if pack.exists():
             cover = read_json(pack).get("coverage", {})
-            complete = all(str(v) == "complete" for v in cover.values())
+            complete = all(str(v) in ("complete", "not_needed") for v in cover.values())
             game = ("✓", "playing") if complete else ("~", "partial")
         else:
             game = ("·", "")
