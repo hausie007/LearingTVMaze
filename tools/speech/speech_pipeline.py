@@ -1661,15 +1661,69 @@ def measure_levels(path: Path):
     return float(mean.group(1)), float(peak.group(1))
 
 
+def cap_internal_silence(pcm: bytes, cat: dict) -> bytes:
+    """Shorten pauses *inside* a clip, without touching its ends.
+
+    A model asked for "ocean wave" may leave a second and a half between the
+    two words. That is not a cutting error — the pause is genuinely in the
+    recording — but a child waiting on it hears a clip that has finished.
+
+    Only silence with sound on both sides is shortened, so a leading or
+    trailing pause is left for the trimmer, and a clip with nothing to shorten
+    comes back byte-identical.
+    """
+    cap_ms = cat["processing"].get("max_internal_silence_ms")
+    if not cap_ms:
+        return pcm
+
+    fmt = cat["master_format"]
+    rate = fmt["sample_rate"]
+    frame = (fmt["bits"] // 8) * fmt["channels"]
+    samples = array.array("h")
+    samples.frombytes(pcm[:len(pcm) - len(pcm) % frame])
+    levels, step = frame_levels(samples, rate)
+    if not levels:
+        return pcm
+
+    peak = max(levels)
+    sound = runs_above(levels, max(peak - 40.0, -55.0))
+    if len(sound) < 2:
+        return pcm
+
+    cap_frames = max(int(cap_ms / (1000 * step / rate)), 1)
+    keep, at = [], 0
+    for before, after in zip(sound, sound[1:]):
+        gap = after[0] - before[1] - 1
+        if gap <= cap_frames:
+            continue
+        # Keep half the cap either side of the cut, so the join stays in
+        # silence and no consonant is clipped by it.
+        cut_from = before[1] + 1 + cap_frames // 2
+        cut_to = after[0] - cap_frames // 2
+        keep.append((at, cut_from))
+        at = cut_to
+    if not keep:
+        return pcm
+    keep.append((at, len(levels) + 1))
+
+    out = bytearray()
+    for lo, hi in keep:
+        out += pcm[lo * step * frame:min(hi * step * frame, len(pcm))]
+    return bytes(out)
+
+
 def process_one(master: Path, out: Path, cat: dict) -> dict:
     """Trim, level, fade and encode. Deterministic: same input, same output."""
     p = cat["processing"]
     fmt = cat["master_format"]
     ship = cat["ship_format"]
 
-    src = ["-f", "s16le", "-ar", str(fmt["sample_rate"]), "-ac", str(fmt["channels"]), "-i", str(master)]
-
     with tempfile.TemporaryDirectory() as tmpdir:
+        raw = cap_internal_silence(master.read_bytes(), cat)
+        staged = Path(tmpdir) / "master.pcm"
+        staged.write_bytes(raw)
+        src = ["-f", "s16le", "-ar", str(fmt["sample_rate"]),
+               "-ac", str(fmt["channels"]), "-i", str(staged)]
         trimmed = Path(tmpdir) / "trimmed.wav"
         thr = f"{p['trim_silence_db']}dB"
         trim = (f"silenceremove=start_periods=1:start_silence=0:start_threshold={thr},"

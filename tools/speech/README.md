@@ -190,6 +190,30 @@ surrounding context, so its delivery can drift from the rest. For a whole word
 that is a small risk. For a two-character letter name it is the original
 problem, so prefer re-recording the sheet in that case.
 
+### Pauses inside a clip
+
+`max_internal_silence_ms` shortens silence that has sound on both sides. The
+model asked for "ocean wave" left 1.35 s between the two words, which is a clip
+that sounds finished while it is still playing. Only interior silence is
+touched; the ends are the trimmer's job, and a clip with nothing to shorten
+re-encodes byte-identically.
+
+That last property is what makes the setting safe to change: re-encode
+everything, then compare, and only the clips that actually moved need another
+listen. Changing it on the Czech and English packs altered exactly two clips out
+of 735.
+
+### Encoded bytes are not the same as changed audio
+
+MP3 files encoded on different machines differ in a handful of header bytes
+while the audio is identical — a macOS LAME build and a Linux one disagree about
+what to write there, not about the samples. Comparing file hashes after
+re-processing elsewhere therefore reports every clip as changed.
+
+Compare durations, or run the master through the processing chain and see
+whether its length moves. `pack` records the hash of whatever it copies, so the
+shipped manifest is always self-consistent regardless.
+
 ## Listening to what came back
 
 Shipped clips are named by content hash — `clips/c8/c81f3a9b2e40.mp3` — so that

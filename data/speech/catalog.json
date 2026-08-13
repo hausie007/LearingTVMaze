@@ -232,7 +232,7 @@
     "channels": 1
   },
   "processing": {
-    "version": 2,
+    "version": 3,
     "note": "Any change here restages every clip for re-encoding, because it changes the audio — but only re-encoding, from the archived masters. It never costs a synthesis credit. Bump the version deliberately.",
     "trim_silence_db": -45.0,
     "keep_lead_ms": 20,
@@ -240,7 +240,9 @@
     "fade_ms": 8,
     "target_rms_dbfs": -20.0,
     "peak_ceiling_dbfs": -1.5,
-    "levelling_note": "Mean RMS with a peak ceiling, not EBU R128. Integrated loudness needs a window a letter name does not have — 'bé' is under 400ms and loudnorm measures it as -inf. One target for the whole voice family also keeps the batch consistent, which matters more here than any single clip hitting a number."
+    "levelling_note": "Mean RMS with a peak ceiling, not EBU R128. Integrated loudness needs a window a letter name does not have — 'bé' is under 400ms and loudnorm measures it as -inf. One target for the whole voice family also keeps the batch consistent, which matters more here than any single clip hitting a number.",
+    "max_internal_silence_ms": 320,
+    "internal_silence_note": "A pause inside a clip is not a cutting error — the model really did pause — but 1.35 seconds between 'ocean' and 'wave' is a clip that sounds finished while it is still playing. Only silence with sound on both sides is shortened; the ends are the trimmer's job. Clips with nothing to shorten re-encode byte-identically, which is how the re-listen can be limited to what actually changed."
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",
