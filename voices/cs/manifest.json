@@ -7,12 +7,14 @@
   "coverage": {
     "number": "complete",
     "char": "complete",
-    "word": "complete"
+    "word": "complete",
+    "ui": "complete"
   },
   "counts": {
     "number": 50,
     "char": 42,
-    "word": 277
+    "word": 277,
+    "ui": 36
   },
   "items": {
     "learning.char.a": {
@@ -765,9 +767,9 @@
       "spoken_text": "buď odvážný a silný"
     },
     "learning.word.budova": {
-      "asset": "clips/e9/e903afa6be8c.mp3",
+      "asset": "clips/48/48d9788dbe40.mp3",
       "duration_ms": 940,
-      "sha256": "e903afa6be8cbafd76976a14f4689602ce1800f7505fc47010ffc1924379f19b",
+      "sha256": "48d9788dbe40a777a2ed0cddb138f80191c8d0c89b4af20245eccb1fc406d32b",
       "display_text": "BUDOVA",
       "spoken_text": "budova"
     },
@@ -1346,23 +1348,23 @@
       "spoken_text": "lesní jahoda"
     },
     "learning.word.letadlo": {
-      "asset": "clips/bb/bb3704104eba.mp3",
+      "asset": "clips/6e/6ed4ecd12c40.mp3",
       "duration_ms": 836,
-      "sha256": "bb3704104eba9949ce7bce85246aa88dc2b182babca86385f0730453cc9ab529",
+      "sha256": "6ed4ecd12c4065fc2a48acb95ce3e5ef4adfd9a34dcd9ab5c4145337da3d05fb",
       "display_text": "LETADLO",
       "spoken_text": "letadlo"
     },
     "learning.word.letadylko": {
-      "asset": "clips/06/0633412732d8.mp3",
+      "asset": "clips/56/56353b208905.mp3",
       "duration_ms": 1019,
-      "sha256": "0633412732d8016efbbc2d8a68fa3e2c2ba2c1e30a0f65f50a3aa48be1b6403f",
+      "sha256": "56353b208905309a2ba827c2faa6a084f45c1f7fa3b5683610eaac290597725e",
       "display_text": "LETADÝLKO",
       "spoken_text": "letadýlko"
     },
     "learning.word.leti_leti_ptacek": {
-      "asset": "clips/6e/6ed6657548e2.mp3",
-      "duration_ms": 1698,
-      "sha256": "6ed6657548e2160c89e84b1a0f7fd9a8a02bf36851720597242ba8ed33ebbfbb",
+      "asset": "clips/78/78767a259bd1.mp3",
+      "duration_ms": 1672,
+      "sha256": "78767a259bd1769eb42d9fd70bb12a1a9855a638da95e853176fed1329ca4de8",
       "display_text": "LETÍ LETÍ PTÁČEK",
       "spoken_text": "letí letí ptáček"
     },
@@ -1612,9 +1614,9 @@
       "spoken_text": "mrkev"
     },
     "learning.word.mrkvicka": {
-      "asset": "clips/4d/4d2719229f3f.mp3",
+      "asset": "clips/7f/7febb2a60106.mp3",
       "duration_ms": 940,
-      "sha256": "4d2719229f3f0281b41d758513f6b9d79b18b3a65c0293442d60595ca471e100",
+      "sha256": "7febb2a60106d937276508fba650b6ebd61c0a92be9671030849dde14f811ed3",
       "display_text": "MRKVIČKA",
       "spoken_text": "mrkvička"
     },
@@ -2597,6 +2599,258 @@
       "sha256": "f6d8241a5180a22d2328651eb7a2c627a1ae76110fb53c9e5c1106d99b4d5e74",
       "display_text": "ZUB",
       "spoken_text": "zub"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/73/73adc76e84fe.mp3",
+      "duration_ms": 1463,
+      "sha256": "73adc76e84fe17c7f8a96cb6d797e2c4f143f2e8549a709398efb3d510286e72",
+      "display_text": "Vzdělávací bludiště",
+      "spoken_text": "Vzdělávací bludiště"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/80/80cd7f0dd35c.mp3",
+      "duration_ms": 940,
+      "sha256": "80cd7f0dd35c092b8f27956de378ee07840c33ac64ccf0ae4f3d16bf8effc6e1",
+      "display_text": "Automaticky",
+      "spoken_text": "Automaticky"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/4d/4d9eca2cef42.mp3",
+      "duration_ms": 653,
+      "sha256": "4d9eca2cef421f5282e9faaa820d1e570ae9dd83458edc7ac6f4923cbc51c94a",
+      "display_text": "Čeština",
+      "spoken_text": "Čeština"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/1a/1a76a92804ba.mp3",
+      "duration_ms": 940,
+      "sha256": "1a76a92804babcdd7f970ad41374218660f9a9b8512c97a1d6ebca65a658674c",
+      "display_text": "Dánština",
+      "spoken_text": "Dánština"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/4c/4c288086dc73.mp3",
+      "duration_ms": 940,
+      "sha256": "4c288086dc73e9352c93c7ddcbd554713d63fe82f363fa549351ca625a8121a5",
+      "display_text": "Nizozemština",
+      "spoken_text": "Nizozemština"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/49/498355171f7a.mp3",
+      "duration_ms": 888,
+      "sha256": "498355171f7a3d977098952f2879d83ff47e5a2a3fbcc02e8736f5501b2b4793",
+      "display_text": "Angličtina",
+      "spoken_text": "Angličtina"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/13/131aff9a2021.mp3",
+      "duration_ms": 732,
+      "sha256": "131aff9a202113d4c7c06062a6e26e0da53c8cc57a0258ab46195cc47270fe94",
+      "display_text": "Finština",
+      "spoken_text": "Finština"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/ac/ac28a480b609.mp3",
+      "duration_ms": 993,
+      "sha256": "ac28a480b609954a3c8e6b15c92ef294590d9c0a89caa754177235e7b67a4e6f",
+      "display_text": "Francouzština",
+      "spoken_text": "Francouzština"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/86/86005f3c8804.mp3",
+      "duration_ms": 810,
+      "sha256": "86005f3c8804d437b22b90d20ba07e46323e0e597c01322c76044cbd69f328b2",
+      "display_text": "Němčina",
+      "spoken_text": "Němčina"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/c2/c27d78ee30a4.mp3",
+      "duration_ms": 758,
+      "sha256": "c27d78ee30a459f14dc4d7a5444db44a5a8d0de31925453bd03d2b43f210274c",
+      "display_text": "Řečtina",
+      "spoken_text": "Řečtina"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/6f/6fbd2c900b21.mp3",
+      "duration_ms": 888,
+      "sha256": "6fbd2c900b21fb0dd86add0784d9f32508f267d36afbaef2009e21cdbc659795",
+      "display_text": "Hebrejština",
+      "spoken_text": "Hebrejština"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/ae/aed3ba782588.mp3",
+      "duration_ms": 993,
+      "sha256": "aed3ba78258849f7c53e8a6f22798277d46488b5fb69bc4e99fc0fdedb2ed46f",
+      "display_text": "Maďarština",
+      "spoken_text": "Maďarština"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/a7/a7b4d235cb36.mp3",
+      "duration_ms": 862,
+      "sha256": "a7b4d235cb36e71e532a7bab5ebe43b0290c9b625c538ff2fab26a9d79ec7e8b",
+      "display_text": "Italština",
+      "spoken_text": "Italština"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/a4/a4a32b5526f6.mp3",
+      "duration_ms": 862,
+      "sha256": "a4a32b5526f686ddf19a8f8e42d793d93a39f2e7f8c7c7f4b2694efe65ee302b",
+      "display_text": "Norština",
+      "spoken_text": "Norština"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/a1/a185b3f4b63e.mp3",
+      "duration_ms": 732,
+      "sha256": "a185b3f4b63ebf9d6785eac328fcef881fd7c3e7112668befc54c34d0b3d6b33",
+      "display_text": "Polština",
+      "spoken_text": "Polština"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/f6/f61f58748ee9.mp3",
+      "duration_ms": 1045,
+      "sha256": "f61f58748ee9a1d803d094e26cd0af1243f1a570e9d6cc7ba6db76b3436c4d2b",
+      "display_text": "Portugalština",
+      "spoken_text": "Portugalština"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/94/94f484db8591.mp3",
+      "duration_ms": 993,
+      "sha256": "94f484db85914f083a1d58b13affee296aef5d56cfdc4be61234b9571fa33125",
+      "display_text": "Rumunština",
+      "spoken_text": "Rumunština"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/2d/2d0b733f7d52.mp3",
+      "duration_ms": 966,
+      "sha256": "2d0b733f7d520f36314e104ae2523c3e8ce155814c1e93c1b2f9d3b895891cbf",
+      "display_text": "Slovenština",
+      "spoken_text": "Slovenština"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/7c/7c707b1af13c.mp3",
+      "duration_ms": 1071,
+      "sha256": "7c707b1af13c7bac52d5052a45a8ed55952d1b0e8fa477adaf07585beb80e1d4",
+      "display_text": "Španělština",
+      "spoken_text": "Španělština"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/51/51b6125e34cb.mp3",
+      "duration_ms": 914,
+      "sha256": "51b6125e34cb56c89e16e45048cbaa7e2c06bc41770a52800b8a98575529b45e",
+      "display_text": "Švédština",
+      "spoken_text": "Švédština"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/e5/e58c6ecd9d5f.mp3",
+      "duration_ms": 914,
+      "sha256": "e58c6ecd9d5f0547b37df81123cc12da8dec03671fec9f50e64acebdcbabce3c",
+      "display_text": "Turečtina",
+      "spoken_text": "Turečtina"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/5d/5d94f11515ba.mp3",
+      "duration_ms": 1045,
+      "sha256": "5d94f11515ba36ae42871aa71e0f00d56059b4bc2226c1b526d2b195ca9a4ef6",
+      "display_text": "Ukrajinština",
+      "spoken_text": "Ukrajinština"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/c6/c6e4d74148ea.mp3",
+      "duration_ms": 993,
+      "sha256": "c6e4d74148ea2a866f53d961b34d146617b04a29b3fc116b5f38f2a52f5e87f6",
+      "display_text": "Vietnamština",
+      "spoken_text": "Vietnamština"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/cd/cd1f182883d2.mp3",
+      "duration_ms": 1280,
+      "sha256": "cd1f182883d216fb39d17260d95e5a437d63e1868120ff0abeddb33fe5002de0",
+      "display_text": "Napočítali jsme do",
+      "spoken_text": "Napočítali jsme do"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/50/506746c81667.mp3",
+      "duration_ms": 1750,
+      "sha256": "506746c816677fb2212c67a241c6e6be12965259166fcec3d02120e5c8abf627",
+      "display_text": "Napočítali jsme v",
+      "spoken_text": "Napočítali jsme v"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/16/169016f4c314.mp3",
+      "duration_ms": 522,
+      "sha256": "169016f4c314477f14fd29436dc2752e169594157c266a1986ed644b7d4dc880",
+      "display_text": "do",
+      "spoken_text": "do"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/47/47ff2809e411.mp3",
+      "duration_ms": 1306,
+      "sha256": "47ff2809e411cd021bdd92a126913d3cb02e7a26b5ad4ce164748208e28cd3ce",
+      "display_text": "Našli jsme písmeno",
+      "spoken_text": "Našli jsme písmeno"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/6d/6da670f0bf3a.mp3",
+      "duration_ms": 1698,
+      "sha256": "6da670f0bf3ace2c8c478300723e9e8e4affe59d447e8184ad2cfeb2381ff663",
+      "display_text": "Našli jsme v",
+      "spoken_text": "Našli jsme v"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/95/95b272913613.mp3",
+      "duration_ms": 679,
+      "sha256": "95b2729136135e1cddc75d5b1be2a01894330202b18705d771fbc361a03a4bd2",
+      "display_text": "písmeno",
+      "spoken_text": "písmeno"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/db/dbc53bc6ab86.mp3",
+      "duration_ms": 1541,
+      "sha256": "dbc53bc6ab867182111528d24b66d2be34422d36b57b09abf9e90d7caa88b1a0",
+      "display_text": "Našli jsme písmena od",
+      "spoken_text": "Našli jsme písmena od"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/3c/3c4f0e67d011.mp3",
+      "duration_ms": 1019,
+      "sha256": "3c4f0e67d01153996b7902c53b34c8209c5c269dd75f3e267eba1b551a969fe6",
+      "display_text": "písmena od",
+      "spoken_text": "písmena od"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/82/823ba2b904d3.mp3",
+      "duration_ms": 1306,
+      "sha256": "823ba2b904d36d8643fd2ecbf7c9df9b7a08aa1a1dd70a1f52084b37e2890b2f",
+      "display_text": "Složili jsme frázi",
+      "spoken_text": "Složili jsme frázi"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/83/8306e9d718bd.mp3",
+      "duration_ms": 575,
+      "sha256": "8306e9d718bd98ef77444bb8a5a857243e4404b36f64bfb2404e6442cc51a557",
+      "display_text": "frázi",
+      "spoken_text": "frázi"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/e9/e9b3422ba97b.mp3",
+      "duration_ms": 1280,
+      "sha256": "e9b3422ba97bbec2e304e779e6687f315fa51d4c4084462b800a1a8409142f53",
+      "display_text": "Složili jsme slovo",
+      "spoken_text": "Složili jsme slovo"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/fb/fbb5aeffb416.mp3",
+      "duration_ms": 1228,
+      "sha256": "fbb5aeffb4169b952b96b62e6144b9d4d6d76e6c79c2e196ce4f8140390013f7",
+      "display_text": "Složili jsme v",
+      "spoken_text": "Složili jsme v"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/97/971edfdb0f7a.mp3",
+      "duration_ms": 784,
+      "sha256": "971edfdb0f7ad18b1fbf452cf5e97f8222516c490cdba79e820c4d7133d3b658",
+      "display_text": "slovo",
+      "spoken_text": "slovo"
     }
   }
 }

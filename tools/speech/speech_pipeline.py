@@ -2777,6 +2777,10 @@ def language_status(cat: dict) -> list:
         if "word" not in spec.get("categories", []):
             words = ("·", "")
 
+        ui = phase("ui")
+        if "ui" not in spec.get("categories", []):
+            ui = ("·", "")
+
         pack = PACKS / lang / "manifest.json"
         if pack.exists():
             cover = read_json(pack).get("coverage", {})
@@ -2793,7 +2797,7 @@ def language_status(cat: dict) -> list:
             "voice": voice,
             "data": data, "alphabet": alphabet, "digraphs": digraph_state,
             "corpus": corpus, "core": core, "words": words,
-            "ui": ("·", ""), "game": game,
+            "ui": ui, "game": game,
         })
     return rows
 
@@ -2841,7 +2845,7 @@ def cmd_status(args) -> int:
     lines.append("| Words checked | The whole word list has been read for those digraphs and marked, e.g. `MOU[CH]A` |")
     lines.append("| Letters+numbers | Every letter and every number 1–50 recorded and approved by a named reviewer |")
     lines.append("| Word audio | Every vocabulary word recorded and approved |")
-    lines.append("| UI speech | Menu and finish-recap framing recorded. Nothing yet in any language; the runtime already resolves `ui.*` keys and falls back to the device voice |")
+    lines.append("| UI speech | The app title, the language names spoken in settings, and the finish-recap framing — recorded in the UI language, which is often not the learning language. Help narration is deliberately excluded |")
     lines.append("| In game | `voices/<lang>/` exists and the game plays it |")
     lines.append("")
     lines.append("## Order of work for a new language")

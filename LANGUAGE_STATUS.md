@@ -10,8 +10,8 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 
 | Lang | Voice | Data | Alphabet | Digraphs | Words checked | Letters+numbers | Word audio | UI speech | In game |
 |---|---|---|---|---|---|---|---|---|---|
-| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | ✓ | ✓ 277 | · | ✓ playing |
-| **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | ✓ | ✓ 290 | · | ✓ playing |
+| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | ✓ | ✓ 277 | ✓ 36 | ✓ playing |
+| **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | ✓ | ✓ 290 | · 0/36 | ✓ playing |
 | **sk** | · | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | · | · 0/147 | · | · |
 | **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · 0/169 | · | · |
 | **de** | · | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | · | · 0/178 | · | · |
@@ -45,7 +45,7 @@ declared but not being generated.
 | Words checked | The whole word list has been read for those digraphs and marked, e.g. `MOU[CH]A` |
 | Letters+numbers | Every letter and every number 1–50 recorded and approved by a named reviewer |
 | Word audio | Every vocabulary word recorded and approved |
-| UI speech | Menu and finish-recap framing recorded. Nothing yet in any language; the runtime already resolves `ui.*` keys and falls back to the device voice |
+| UI speech | The app title, the language names spoken in settings, and the finish-recap framing — recorded in the UI language, which is often not the learning language. Help narration is deliberately excluded |
 | In game | `voices/<lang>/` exists and the game plays it |
 
 ## Order of work for a new language
