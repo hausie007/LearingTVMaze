@@ -34,7 +34,6 @@ var _installed_tts_langs: Array[String] = []
 ## Map of language codes to their first available voice ID.
 var _tts_voice_cache: Dictionary = {}
 
-var _is_first_boot: bool = true
 
 ## Whether a cache refresh scan is currently in progress (guards against re-entrancy).
 var _is_scanning: bool = false
@@ -200,12 +199,10 @@ func refresh_cache() -> void:
 	_mutex.unlock()
 	status_changed.emit()
 	
-	# Announce app title ONLY on first boot to confirm readiness
-	if _is_first_boot:
-		_is_first_boot = false
-		warm_up(Config.get_effective_ui_language(), TranslationServer.translate("app_title"))
-	else:
-		warm_up(Config.get_effective_ui_language())  # Silent whisper for subsequent refreshes
+	# Always a silent whisper here. The audible first-boot announcement belongs
+	# to SpeechManager, which owns the decision between a recording and this
+	# engine — it listens for status_changed and says the title itself.
+	warm_up(Config.get_effective_ui_language())
 
 
 ## Quick retrieval of cached voice ID for a given language code.

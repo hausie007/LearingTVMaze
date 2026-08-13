@@ -76,6 +76,9 @@ var _wait_elapsed: float = 0.0
 var _silence_elapsed: float = 0.0
 var _tts_has_started: bool = false
 
+## The first-boot announcement happens once per launch, not once per voice scan.
+var _announced: bool = false
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -88,6 +91,30 @@ func _ready() -> void:
 	_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	_player.finished.connect(_on_clip_finished)
 	add_child(_player)
+
+	# The app title on first boot is the one piece of speech the game says
+	# without being asked, and it is how a parent knows the voice works at all.
+	# It waits for the voice scan because the fallback path needs it, and it
+	# lives here rather than in tts_manager so that it can be a recording.
+	TTS.status_changed.connect(_on_tts_status_changed)
+	if TTS.tts_ready:
+		_announce_ready.call_deferred()
+
+
+func _on_tts_status_changed() -> void:
+	if TTS.tts_ready:
+		_announce_ready()
+
+
+## Say the app title once per launch, in the UI language.
+func _announce_ready() -> void:
+	if _announced or Config.voice_mode == Config.VoiceMode.OFF:
+		return
+	_announced = true
+	var title := TranslationServer.translate("app_title")
+	if title.is_empty() or title == "app_title":
+		return
+	speak_ui(title, Config.get_effective_ui_language())
 
 
 # ── Public API: single utterances ────────────────────────────────────────────
