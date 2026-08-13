@@ -269,41 +269,29 @@ static func _tr(key: String) -> String:
 	return TranslationServer.translate(key)
 
 
+## The first and last letter the child actually collected.
+##
+## These used to be looked up in the UI language's alphabet by index, so that
+## the sentence could be monolingual. That is not a translation, it is a
+## renaming: a Czech menu with English content collected A B C D and reported
+## "A to Č", because Č is the fourth letter of the Czech alphabet. There is no
+## sense in which the child collected Č.
+##
+## A collected letter is a fact about the game, not a slot in the reader's
+## alphabet. It is reported as it was collected, in the language it was
+## collected in, and the framing around it stays in the UI language.
 static func _letter_boundary(values: Array[String]) -> Dictionary:
 	var ui_lang := Config.get_effective_ui_language()
 	var learning_lang := Config.get_effective_learning_language()
-	var ui_family := _alphabet_family(ui_lang)
-	var learning_family := _alphabet_family(learning_lang)
-	# Same script family is not enough: Czech has 42 letters and English 26, so
-	# naming the boundary in the UI language only works if that alphabet is long
-	# enough to reach it. Otherwise fall back to the letters actually collected.
-	var use_ui_letters := (
-		ui_family == learning_family
-		and Config.get_alphabet_length(ui_lang) >= values.size()
-	)
-	var first_index := 0
-	var last_index := values.size() - 1
-	var first_value := Config.get_alphabet_char(first_index, ui_lang) if use_ui_letters else values[0]
-	var last_value := Config.get_alphabet_char(last_index, ui_lang) if use_ui_letters else values[values.size() - 1]
 	return {
-		"first": first_value,
-		"last": last_value,
-		"tts_lang": ui_lang if use_ui_letters else learning_lang,
+		"first": values[0],
+		"last": values[values.size() - 1],
+		"tts_lang": learning_lang,
 		"learning_context": _language_context_in_ui(learning_lang),
 		"show_language": learning_lang != ui_lang,
 	}
 
 
-static func _alphabet_family(lang: String) -> String:
-	match lang:
-		"el":
-			return "greek"
-		"he":
-			return "hebrew"
-		"uk":
-			return "ukrainian"
-		_:
-			return "latin"
 
 
 static func _language_name_in_ui(lang: String) -> String:
