@@ -38,6 +38,7 @@ python3 tools/speech/speech_pipeline.py doctor
 | `review` | Exports a review sheet, then imports the verdicts | no |
 | `retake` | Stages named clips to be recorded again, alone | no |
 | `pack` | Writes `res://voices/<lang>/` from approved clips only | no |
+| `status` | Regenerates `LANGUAGE_STATUS.md` from the repository | no |
 | `verify` | The CI gate — run before every commit | no |
 
 Filters on most commands: `--language cs`, `--category char`, `--key

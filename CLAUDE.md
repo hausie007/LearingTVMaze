@@ -45,6 +45,16 @@ Expected: `OK 147 files, 3652 entries`.
 
 `[CH]` marks one letter spelled with two characters — see `data/words/README.md`. Strip markers before any length, duplicate or emoji comparison, or `MOU[CH]A` and `MOUCHA` will look like different words.
 
+## Speech
+
+[`LANGUAGE_STATUS.md`](LANGUAGE_STATUS.md) is the per-language checklist — alphabet, digraphs, recordings, what is playing in the game. It is **generated**, so read it rather than trusting memory, and regenerate it rather than editing it:
+
+```bash
+python3 tools/speech/speech_pipeline.py status
+```
+
+The pipeline that produces the recordings is [`tools/speech/README.md`](tools/speech/README.md). Only `generate` costs money, and only with `--confirm`.
+
 ## Compliance
 
 `COMPLIANCE_CHECKLIST.md` is the current Google Play compliance record, written for an external reader. Update it whenever content changes.

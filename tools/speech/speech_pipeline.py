@@ -2514,6 +2514,201 @@ def cmd_verify(args) -> int:
 # doctor
 # --------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------
+# status
+# --------------------------------------------------------------------------
+
+STATUS_FILE = REPO / "LANGUAGE_STATUS.md"
+
+STATUS_STEPS = [
+    ("data", "Data"),
+    ("alphabet", "Alphabet"),
+    ("digraphs", "Digraphs"),
+    ("corpus", "Words checked"),
+    ("core", "Letters+numbers"),
+    ("words", "Word audio"),
+    ("ui", "UI speech"),
+    ("game", "In game"),
+]
+
+
+def language_status(cat: dict) -> list:
+    """Work out where every language actually stands, from the repo itself.
+
+    Generated rather than maintained: a checklist that has to be ticked by hand
+    is a checklist that lies within a month.
+    """
+    profiles = load_profiles()
+    alphabets = parse_gd_table("ALPHABETS")
+    word_only = parse_gd_table("WORD_ONLY_LETTERS")
+    digraphs = read_json(SPEECH_SRC / "digraphs.json") if (SPEECH_SRC / "digraphs.json").exists() else {}
+    dg_langs = digraphs.get("languages", {})
+    dg_none = set(digraphs.get("not_applicable", {}).get("languages", []))
+
+    try:
+        desired = load_desired()
+    except Fail:
+        desired = []
+    classify(desired)
+
+    rows = []
+    for lang, spec in cat["languages"].items():
+        locale = spec["locale"]
+        mine = [r for r in desired if r["lang"] == lang]
+        by_cat = {}
+        for r in mine:
+            acc = by_cat.setdefault(r["category"], {"n": 0, "ok": 0})
+            acc["n"] += 1
+            acc["ok"] += 1 if r["status"] == "approved" else 0
+
+        def phase(name):
+            acc = by_cat.get(name)
+            if not acc or not acc["n"]:
+                return "·", ""
+            if acc["ok"] == acc["n"]:
+                return "✓", f"{acc['ok']}"
+            if acc["ok"]:
+                return "~", f"{acc['ok']}/{acc['n']}"
+            return "·", f"0/{acc['n']}"
+
+        letters = SPEECH_SRC / f"letters_{lang}.json"
+        numbers = SPEECH_SRC / f"numbers_{lang}.json"
+        draft = _source_is_draft(lang)
+        if letters.exists() and numbers.exists():
+            data = ("~", "draft") if draft else ("✓", "")
+        else:
+            data = ("·", "")
+
+        alphabet = ("✓", "") if lang in alphabets else (
+            ("✓", "A–Z") if letters.exists() else ("·", ""))
+        if lang in word_only:
+            alphabet = ("✓", f"+{len(grapheme_split(word_only[lang]))} word-only")
+
+        entry = dg_langs.get(lang, {})
+        if lang in dg_none:
+            digraph_state = ("—", "none")
+            corpus = ("—", "")
+        elif entry.get("decided"):
+            marks = entry.get("letters", [])
+            digraph_state = ("✓", ", ".join(marks) if marks else "none")
+            corpus = ("✓", f"{entry.get('marked_words', 0)} marked") \
+                if entry.get("corpus_reviewed") else ("·", "")
+        elif entry:
+            # Candidates found and nobody has ruled yet — not the same as none.
+            digraph_state = ("·", "candidates")
+            corpus = ("·", "")
+        else:
+            digraph_state = ("·", "")
+            corpus = ("·", "")
+
+        core_char, core_char_n = phase("char")
+        core_num, _ = phase("number")
+        core = ("✓", "") if core_char == "✓" and core_num == "✓" else (
+            ("~", core_char_n) if (core_char != "·" or core_num != "·") and mine else ("·", ""))
+        if not spec.get("enabled"):
+            core = ("·", "")
+
+        words = phase("word")
+        if "word" not in spec.get("categories", []):
+            words = ("·", "")
+
+        pack = PACKS / lang / "manifest.json"
+        if pack.exists():
+            cover = read_json(pack).get("coverage", {})
+            complete = all(str(v) == "complete" for v in cover.values())
+            game = ("✓", "playing") if complete else ("~", "partial")
+        else:
+            game = ("·", "")
+
+        voice = profiles.get(locale, {}).get("voice_name") or (
+            "chosen" if profiles.get(locale, {}).get("voice_id") else "")
+
+        rows.append({
+            "lang": lang, "locale": locale, "enabled": bool(spec.get("enabled")),
+            "voice": voice,
+            "data": data, "alphabet": alphabet, "digraphs": digraph_state,
+            "corpus": corpus, "core": core, "words": words,
+            "ui": ("·", ""), "game": game,
+        })
+    return rows
+
+
+def cmd_status(args) -> int:
+    cat = load_catalog()
+    rows = language_status(cat)
+    active = [r for r in rows if r["enabled"]]
+    resting = [r for r in rows if not r["enabled"]]
+
+    def cell(pair):
+        mark, note = pair
+        return f"{mark} {note}".strip() if note else mark
+
+    lines = []
+    lines.append("# Language status")
+    lines.append("")
+    lines.append("Where every language stands, from the alphabet to audio playing in the game.")
+    lines.append("")
+    lines.append("**Generated — do not edit by hand.** `python3 tools/speech/speech_pipeline.py status`")
+    lines.append("reads the repository and rewrites this file, so it cannot drift from what is")
+    lines.append("actually there. A checklist ticked by hand is a checklist that lies within a month.")
+    lines.append("")
+    lines.append("`✓` done  `~` partly  `·` not started  `—` nothing to do")
+    lines.append("")
+
+    header = "| Lang | Voice | " + " | ".join(label for _, label in STATUS_STEPS) + " |"
+    lines.append(header)
+    lines.append("|" + "---|" * (len(STATUS_STEPS) + 2))
+    for r in active + resting:
+        cells = [cell(r[key]) for key, _ in STATUS_STEPS]
+        name = f"**{r['lang']}**" if r["enabled"] else r["lang"]
+        lines.append(f"| {name} | {r['voice'] or '·'} | " + " | ".join(cells) + " |")
+    lines.append("")
+    lines.append("Bold means the language is enabled in `data/speech/catalog.json`; the rest are")
+    lines.append("declared but not being generated.")
+    lines.append("")
+    lines.append("## What each column means")
+    lines.append("")
+    lines.append("| Column | Done when |")
+    lines.append("|---|---|")
+    lines.append("| Data | `letters_<lang>.json` and `numbers_<lang>.json` exist and are no longer marked DRAFT — a native speaker has read the letter names and the number words |")
+    lines.append("| Alphabet | The language has an entry in `ALPHABETS` in `game_config.gd`, and in `WORD_ONLY_LETTERS` if its words use letters the alphabet lesson should skip |")
+    lines.append("| Digraphs | Someone has decided which multi-character sequences are *letters* of this alphabet, recorded in `data/speech/digraphs.json` |")
+    lines.append("| Words checked | The whole word list has been read for those digraphs and marked, e.g. `MOU[CH]A` |")
+    lines.append("| Letters+numbers | Every letter and every number 1–50 recorded and approved by a named reviewer |")
+    lines.append("| Word audio | Every vocabulary word recorded and approved |")
+    lines.append("| UI speech | Menu and finish-recap framing recorded. Nothing yet in any language; the runtime already resolves `ui.*` keys and falls back to the device voice |")
+    lines.append("| In game | `voices/<lang>/` exists and the game plays it |")
+    lines.append("")
+    lines.append("## Order of work for a new language")
+    lines.append("")
+    lines.append("1. **Alphabet** into `game_config.gd` — what Letters mode spawns, plus word-only letters.")
+    lines.append("2. **Digraphs** — is any two-character sequence a letter here? Record the decision either way.")
+    lines.append("3. **Word list** — mark them, if there were any.")
+    lines.append("4. **Letter names and number words** — a native speaker, before anything is recorded.")
+    lines.append("5. **A voice** — native to the language. `voices --language <lang>` lists candidates.")
+    lines.append("6. **Generate, review, pack.** Letters and numbers first; words are a separate, larger pass.")
+    lines.append("")
+    lines.append("Steps 1–4 cost nothing and are where the mistakes are cheap. Step 6 is where they")
+    lines.append("stop being cheap: the Czech pilot spent about 40 cents on synthesis across eight")
+    lines.append("rounds of review, and the reviewing was the expensive part.")
+    lines.append("")
+
+    text = "\n".join(lines)
+    if args.check:
+        current = STATUS_FILE.read_text(encoding="utf-8") if STATUS_FILE.exists() else ""
+        if current.strip() != text.strip():
+            raise Fail(f"{rel(STATUS_FILE)} is out of date — run `speech_pipeline.py status`")
+        info(f"{rel(STATUS_FILE)} is up to date")
+        return 0
+
+    STATUS_FILE.write_text(text, encoding="utf-8")
+    info(f"-> {rel(STATUS_FILE)}")
+    for r in active:
+        marks = " ".join(r[key][0] for key, _ in STATUS_STEPS)
+        info(f"  {r['lang']}  {marks}")
+    return 0
+
+
 def cmd_doctor(args) -> int:
     def line(ok, label, detail=""):
         info(f"  {'ok  ' if ok else 'MISS'}  {label:34s} {detail}")
@@ -2668,6 +2863,11 @@ def main(argv=None) -> int:
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
     sp.add_argument("--pack-version", type=int, default=1)
     sp.set_defaults(func=cmd_pack)
+
+    sp = sub.add_parser("status", help="regenerate LANGUAGE_STATUS.md from the repository")
+    sp.add_argument("--check", action="store_true",
+                    help="fail if the file is out of date instead of rewriting it")
+    sp.set_defaults(func=cmd_status)
 
     sp = sub.add_parser("verify", help="CI gate — sources, hashes, manifests, secrets")
     sp.add_argument("--strict", action="store_true",

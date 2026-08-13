@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "note": "Which multi-character letters each language has, and whether its word list has been checked for them. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters — otherwise German SCH and English TH would qualify and the alphabet lesson would be nonsense. Marked letters go in ALPHABETS in game_config.gd and in the word list as MOU[CH]A; see data/words/README.md. 'decided' is whether anyone has actually ruled on this language: an empty 'letters' list with decided=false means candidates exist and nobody has chosen yet, which is not the same as having none.",
+  "languages": {
+    "cs": {
+      "letters": [
+        "CH"
+      ],
+      "corpus_reviewed": true,
+      "marked_words": 8,
+      "note": "CH is the 15th letter of the Czech alphabet. 8 of 277 words carry it.",
+      "decided": true
+    },
+    "sk": {
+      "letters": [
+        "CH",
+        "DZ",
+        "DŽ"
+      ],
+      "corpus_reviewed": true,
+      "marked_words": 6,
+      "note": "All three are letters of the 46-letter Slovak alphabet. CH in CHLIEB, UCHO, CHROBÁK; DZ in the imperatives JEDZ and POVEDZ, where it is one sound. DŽ does not occur in the current corpus.",
+      "decided": true
+    },
+    "pl": {
+      "letters": [],
+      "corpus_reviewed": true,
+      "marked_words": 0,
+      "note": "CZ, SZ, RZ, DZ, DŹ, DŻ and CH are dwuznaki — digraphs, and each one sound — but the Polish alphabet has 32 letters and none of them is a digraph. Not marked, on the same test that rejects Spanish CH and German SCH. This is a reversible decision: Polish reading instruction does teach dwuznaki as units, so if the game should follow the classroom rather than the alphabet, mark them and add them to ALPHABETS together. It would affect 46 of 169 words.",
+      "revisit_if": "a Polish teacher says the alphabet lesson should teach dwuznaki as single collectibles",
+      "decided": true
+    },
+    "de": {
+      "letters": [],
+      "corpus_reviewed": true,
+      "marked_words": 0,
+      "note": "SCH, CH, EI, IE, EU, PF, ST and SP are all sounds rather than letters; the German alphabet is A–Z plus Ä Ö Ü ß. CH alone appears in 42 of 178 words and would be wrong in every one.",
+      "decided": true
+    },
+    "en": {
+      "letters": [],
+      "corpus_reviewed": true,
+      "marked_words": 0,
+      "note": "CH, SH, TH, PH, CK and NG are sounds, not letters. SCHOOL is the reminder of why: its CH is not even the CH sound.",
+      "decided": true
+    },
+    "vi": {
+      "letters": [],
+      "corpus_reviewed": false,
+      "marked_words": 0,
+      "note": "The largest outstanding case: 105 of 170 words contain a candidate. NG, NGH, NH, CH, TR, TH, PH, KH, GI and QU are letters of the Vietnamese alphabet, so most of these will need marking.",
+      "decided": false
+    },
+    "hu": {
+      "letters": [],
+      "corpus_reviewed": false,
+      "marked_words": 0,
+      "note": "57 of 140 words contain a candidate. CS, GY, LY, NY, SZ, TY, ZS and DZS are letters of the Hungarian alphabet. Beware KÖZSÉGHÁZA — község-háza, not …ö-zs-é…",
+      "decided": false
+    },
+    "nl": {
+      "letters": [],
+      "corpus_reviewed": false,
+      "marked_words": 0,
+      "note": "IJ in 14 of 165 words. Genuinely contested: taught as one letter, capitalised as one (IJsland), but usually listed as a digraph. Needs a Dutch decision.",
+      "decided": false
+    }
+  },
+  "not_applicable": {
+    "note": "Languages whose corpus was scanned and produced no candidates at all: da, el, fi, he, nb, ro, sv, tr, uk. Nothing to decide.",
+    "languages": [
+      "da",
+      "el",
+      "fi",
+      "he",
+      "nb",
+      "ro",
+      "sv",
+      "tr",
+      "uk"
+    ]
+  },
+  "unscanned": {
+    "note": "Scanned in the iteration 1 analysis and found to contain candidates that are sounds rather than letters — es (LL, RR, CH), fr, it, pt, de. Recorded as reviewed above only where a decision was actually taken.",
+    "languages": [
+      "es",
+      "fr",
+      "it",
+      "pt"
+    ]
+  }
+}
