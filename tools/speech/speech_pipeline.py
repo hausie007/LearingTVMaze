@@ -3305,7 +3305,7 @@ def cmd_doctor(args) -> int:
     cat = load_catalog()
     var = cat.get("api_key_env", "ELEVENLABS_API_KEY")
     key = os.environ.get(var, "")
-    line(bool(key), f"${var}", f"set, {len(key)} chars" if key else "not set — only `generate`/`voices` need it")
+    line(bool(key), f"${var}", f"set, {len(key)} chars" if key else "not set — `generate`, `voices` and `align` need it")
 
     info("")
     info("Sources")
@@ -3315,7 +3315,12 @@ def cmd_doctor(args) -> int:
         if not spec.get("enabled"):
             continue
         for category in spec["categories"]:
-            source = SPEECH_SRC / cat["categories"][category]["source"].format(lang=lang)
+            cspec = cat["categories"][category]
+            if "source" not in cspec:
+                # A category can name a directory of files instead of one file
+                # — the vocabulary is 147 of them. Nothing to check here.
+                continue
+            source = SPEECH_SRC / cspec["source"].format(lang=lang)
             line(source.exists(), rel(source))
 
     info("")
