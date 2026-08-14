@@ -144,12 +144,25 @@ func speak_item(display: String, lang: String = "") -> void:
 		speak_grapheme(display, lang)
 
 
-## Speak a complete vocabulary word or phrase.
-## A partial word — the prefix narration mid-phrase — has no recording and
-## falls through to TTS, which is the intended behaviour, not an oversight.
+## Speak a vocabulary word or phrase, whole or as far as it has been collected.
+##
+## A partial phrase is not a recording of its own. It is the full phrase played
+## and stopped at a word boundary, so THIS, THIS IS and THIS IS GOOD are three
+## lengths of one reading rather than three readings.
 func speak_word(text: String, lang: String = "") -> void:
 	var language := _language_or_default(lang)
-	_speak(_word_key(language, text), language, text, RATE_WORD)
+	var key := _word_key(language, text)
+	if not key.is_empty():
+		_speak(key, language, text, RATE_WORD)
+		return
+	var partial: Dictionary = _pack(language).get("_prefixes", {}).get(
+		text.strip_edges().to_upper(), {})
+	if partial.is_empty() or Config.voice_mode != Config.VoiceMode.STUDIO_PREFERRED:
+		_speak("", language, text, RATE_WORD)
+		return
+	if not _play(language, String(partial["key"]), int(partial["stop_ms"])):
+		_note_missing(String(partial["key"]), language)
+		_speak_with_tts(text, RATE_WORD, language)
 
 
 ## Speak a fixed piece of interface text — a language name in settings, the
@@ -327,14 +340,40 @@ func _speak_with_tts(text: String, rate: float, lang: String) -> void:
 	TTS.speak(text, rate, lang)
 
 
-func _play(lang: String, key: String) -> bool:
+func _play(lang: String, key: String, stop_ms: int = 0) -> bool:
 	var stream := _stream_for(lang, key)
 	if stream == null:
 		return false
 	stop()
 	_player.stream = stream
 	_player.play()
+	if stop_ms > 0:
+		_stop_at(stop_ms)
 	return true
+
+
+## End a clip early, at a word boundary, without a click.
+##
+## The tail is faded rather than cut: stopping a player mid-waveform pops, and
+## a pop is exactly the kind of harsh sound this game keeps out. The version
+## guard means anything that started since — including a plain stop() — is left
+## alone when the timer comes back.
+const PREFIX_FADE_MS := 45
+
+func _stop_at(stop_ms: int) -> void:
+	var version := _queue_version
+	var lead := maxf(float(stop_ms - PREFIX_FADE_MS) / 1000.0, 0.0)
+	await get_tree().create_timer(lead).timeout
+	if version != _queue_version or _player == null or not _player.playing:
+		return
+	var level := _player.volume_db
+	var tween := create_tween()
+	tween.tween_property(_player, "volume_db", -40.0, float(PREFIX_FADE_MS) / 1000.0)
+	await tween.finished
+	if version == _queue_version and _player != null:
+		_player.stop()
+	if _player != null:
+		_player.volume_db = level
 
 
 ## What a piece of text is, as far as the pack is concerned.
@@ -495,7 +534,8 @@ func _pack(lang: String) -> Dictionary:
 	if _packs.has(lang):
 		return _packs[lang]
 
-	var pack := {"items": {}, "coverage": {}, "_chars": {}, "_words": {}, "_ui": {}}
+	var pack := {"items": {}, "coverage": {}, "_chars": {}, "_words": {}, "_ui": {},
+		"_prefixes": {}}
 	_packs[lang] = pack
 
 	var path := "%s/%s/manifest.json" % [PACK_DIR, lang]
@@ -528,9 +568,33 @@ func _pack(lang: String) -> Dictionary:
 			pack["_chars"][display] = key
 		elif key.begins_with("learning.word."):
 			pack["_words"][display] = key
+			_register_prefixes(pack, key, display)
 		elif key.begins_with("ui."):
 			pack["_ui"][_ui_lookup(display)] = key
 	return pack
+
+
+## Map each partly-collected phrase onto the full recording and the moment to
+## stop it. "THIS IS GOOD" gives THIS and THIS IS, both pointing at the one
+## clip. The child hears the same reading grow a word at a time rather than a
+## fresh performance at every step, which is the whole point — a phrase that
+## changes character as it is collected is what made this grating before.
+##
+## A phrase with no boundaries is simply absent here, and speak_word falls
+## through to the device voice for its partials as it always did.
+func _register_prefixes(pack: Dictionary, key: String, display: String) -> void:
+	var ends: Array = pack["items"][key].get("word_ends_ms", [])
+	if ends.is_empty():
+		return
+	var words := display.split(" ", false)
+	if words.size() != ends.size() + 1:
+		return
+	for i in range(ends.size()):
+		var prefix := " ".join(words.slice(0, i + 1))
+		if pack["_words"].has(prefix) or pack["_prefixes"].has(prefix):
+			continue        # a real recording of its own always wins
+		pack["_prefixes"][prefix] = {"key": key, "stop_ms": int(ends[i])}
+	return
 
 
 func _stream_for(lang: String, key: String) -> AudioStream:

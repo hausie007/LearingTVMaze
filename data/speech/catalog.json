@@ -37,8 +37,7 @@
         "max": 4000
       },
       "note": "Every vocabulary word across all seven difficulty tiers. Only the 'word' field is read — the emoji is a picture hint on screen and never reaches a recording. Grapheme markers are stripped, so MOU[CH]A is recorded as moucha. Sent lowercase: an all-capitals word invites the model to spell it out.",
-      "prefixes": true,
-      "prefixes_note": "Multi-word entries are announced as the child crosses each space — THIS, THIS IS, THIS IS GOOD — so the partial phrases are recorded as well. Cumulative rather than word by word: a phrase of n words has n-1 prefixes but n words, and prefixes share their openings across entries, so it is both fewer clips and exactly the strings the game already asks for. They cannot be cut from the full recording — fluent speech leaves no silence between words to cut at."
+      "phrase_note": "Multi-word entries are announced as the child crosses each space — THIS, THIS IS, THIS IS GOOD. Those partials are not recorded separately: the full phrase is played and stopped at a word boundary, so every stage sounds like the same reading rather than a fresh one. Boundaries come from `align`."
     },
     "ui": {
       "priority": 2,
@@ -268,7 +267,9 @@
     "peak_ceiling_dbfs": -1.5,
     "levelling_note": "Mean RMS with a peak ceiling, not EBU R128. Integrated loudness needs a window a letter name does not have — 'bé' is under 400ms and loudnorm measures it as -inf. One target for the whole voice family also keeps the batch consistent, which matters more here than any single clip hitting a number.",
     "max_internal_silence_ms": 320,
-    "internal_silence_note": "A pause inside a clip is not a cutting error — the model really did pause — but 1.35 seconds between 'ocean' and 'wave' is a clip that sounds finished while it is still playing. Only silence with sound on both sides is shortened; the ends are the trimmer's job. Clips with nothing to shorten re-encode byte-identically, which is how the re-listen can be limited to what actually changed."
+    "internal_silence_note": "A pause inside a clip is not a cutting error — the model really did pause — but 1.35 seconds between 'ocean' and 'wave' is a clip that sounds finished while it is still playing. Only silence with sound on both sides is shortened; the ends are the trimmer's job. Clips with nothing to shorten re-encode byte-identically, which is how the re-listen can be limited to what actually changed.",
+    "alignment_max_loss": 0.5,
+    "alignment_note": "Forced alignment supplies the word boundaries inside a phrase. The sheet's own alignment cannot: it is right at the ends of a sheet and drifts by over a second in the middle. A clip whose alignment loss exceeds this is left without boundaries, and the game simply does not narrate that phrase mid-word."
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",

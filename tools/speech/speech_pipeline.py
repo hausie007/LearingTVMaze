@@ -308,27 +308,14 @@ def word_items(cat: dict, lang: str, cspec: dict):
         slugs.setdefault(word_slug(display), []).append(display)
 
     # The mid-phrase narration speaks what has been spelled so far: THIS, then
-    # THIS IS, then THIS IS GOOD. Those partial phrases need recording too, or
-    # every multi-word entry drops to the device voice halfway through.
+    # THIS IS, then THIS IS GOOD. Those partials are not recorded.
     #
-    # They cannot be trimmed out of the full recording. Fluent speech puts no
-    # silence between words — "čokoládový dort" runs together — so there is no
-    # boundary to cut at, and a splitter forced to find one invents it.
-    #
-    # Cumulative prefixes rather than individual words: a phrase of n words has
-    # n-1 prefixes and n words, and prefixes also share their openings across
-    # entries. Fewer clips, and the game already speaks exactly these strings,
-    # so nothing in it has to change.
-    if cspec.get("prefixes"):
-        for display in sorted(list(found)):
-            parts = display.split()
-            for count in range(1, len(parts)):
-                prefix = " ".join(parts[:count])
-                if prefix in found:
-                    continue
-                found[prefix] = ("", "derived prefix")
-                slugs.setdefault(word_slug(prefix), []).append(prefix)
-
+    # They were, once — as separate clips — and it was the wrong shape. Each
+    # partial was its own reading, so the phrase changed character as the child
+    # collected it, which is exactly the sort of inconsistency a four-year-old
+    # notices. The full recording is played and stopped at a word boundary
+    # instead: one performance, revealed a word at a time. `align` supplies the
+    # boundaries; nothing extra is synthesised.
     items = []
     for slug, group in sorted(slugs.items()):
         for display in group:
@@ -991,7 +978,7 @@ def generate_with_carrier(key: str, profile: dict, record: dict, cat: dict):
 
     text, spans = sheet_text(profile, group)
     audio, alignment, request_id = tts_sheet_request(key, profile, text)
-    cuts = cut_sheet(audio, alignment, text, spans, cat, profile)
+    cuts, _offsets = cut_sheet(audio, alignment, text, spans, cat, profile)
     return cuts[len(before)], request_id, text
 
 
@@ -1566,7 +1553,7 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
         if cur[0] <= prev[1]:
             raise Fail("the cutter produced overlapping segments — refusing to save")
 
-    cuts = []
+    cuts, offsets = [], []
     for i, seg in enumerate(chosen):
         a = seg[0] * step / rate - lead
         b = (seg[1] + 1) * step / rate + tail
@@ -1586,8 +1573,9 @@ def cut_sheet(audio: bytes, alignment: dict, text: str, spans: list, cat: dict, 
         if b - a < 0.05:
             raise Fail(f"item {i + 1} of the sheet came out empty — refusing to save a bad cut")
         cuts.append(audio[int(a * rate) * frame:int(b * rate) * frame])
+        offsets.append(a)
 
-    return cuts
+    return cuts, offsets
 
 
 def sheet_synth_hash(profile: dict, text: str) -> str:
@@ -1691,7 +1679,7 @@ def generate_sheets(key: str, cat: dict, profiles: dict, groups: dict, args) -> 
             else:
                 audio, alignment, request_id = tts_sheet_request(key, profile, text)
                 save_sheet(profile, text, audio, alignment, request_id)
-            cuts = cut_sheet(audio, alignment, text, spans, cat, profile)
+            cuts, _offsets = cut_sheet(audio, alignment, text, spans, cat, profile)
         except Fail as exc:
             warn(str(exc))
             failed += len(group)
@@ -1873,6 +1861,20 @@ def cap_internal_silence(pcm: bytes, cat: dict):
     return bytes(out), removed
 
 
+def lead_silence(pcm: bytes, cat: dict) -> float:
+    """How much quiet the trim will take off the front, in seconds."""
+    fmt = cat["master_format"]
+    samples = array.array("h")
+    samples.frombytes(pcm[:len(pcm) - len(pcm) % 2])
+    if sys.byteorder == "big":
+        samples.byteswap()
+    floor = 32768.0 * (10 ** (cat["processing"]["trim_silence_db"] / 20.0))
+    for i, v in enumerate(samples):
+        if abs(v) >= floor:
+            return i / float(fmt["sample_rate"] * fmt["channels"])
+    return 0.0
+
+
 def process_one(master: Path, out: Path, cat: dict, boundaries=None, trim: bool = True) -> dict:
     """Trim, level, fade and encode. Deterministic: same input, same output."""
     p = cat["processing"]
@@ -1884,28 +1886,34 @@ def process_one(master: Path, out: Path, cat: dict, boundaries=None, trim: bool 
         staged = Path(tmpdir) / "master.pcm"
         staged.write_bytes(raw)
 
-        # Map each boundary through the spans capping removed. Trimming is
-        # skipped for clips that carry boundaries, so nothing else moves them:
-        # levelling, fades and resampling all preserve the timeline.
-        mapped = []
-        for at in (boundaries or []):
-            shift = sum(min(at, hi) - lo for lo, hi in removed if lo < at)
-            mapped.append(max(at - shift, 0.0))
         src = ["-f", "s16le", "-ar", str(fmt["sample_rate"]),
                "-ac", str(fmt["channels"]), "-i", str(staged)]
         trimmed = Path(tmpdir) / "trimmed.wav"
         thr = f"{p['trim_silence_db']}dB"
-        trim_filter = (f"silenceremove=start_periods=1:start_silence=0:start_threshold={thr},"
+        trim_chain = (f"silenceremove=start_periods=1:start_silence=0:start_threshold={thr},"
                 f"areverse,"
                 f"silenceremove=start_periods=1:start_silence=0:start_threshold={thr},"
                 f"areverse,"
                 f"adelay={p['keep_lead_ms']}:all=1,"
                 f"apad=pad_dur={p['keep_tail_ms'] / 1000.0}")
         if not trim:
-            # A clip whose boundaries are published must keep its timeline.
             trim_chain = "anull"
-        else:
-            trim_chain = trim_filter
+
+        # Move each boundary onto the shipped clip's timeline.
+        #
+        # Two edits shift it, and both are measurable rather than guessed:
+        # the silence capping reports the spans it removed, and the trim drops
+        # the lead silence then puts keep_lead_ms back. Levelling, fades and
+        # resampling all leave the timeline alone. The predicted duration is
+        # checked against the encoded file below, which is what would catch
+        # this model being wrong.
+        mapped = []
+        if boundaries:
+            lead = lead_silence(raw, cat) if trim else 0.0
+            offset = lead - (p["keep_lead_ms"] / 1000.0 if trim else 0.0)
+            for at in boundaries:
+                shift = sum(min(at, hi) - lo for lo, hi in removed if lo < at)
+                mapped.append(max(at - shift - offset, 0.0))
         res = run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error"] + src +
                   ["-af", trim_chain, str(trimmed)])
         if res.returncode != 0:
@@ -1981,10 +1989,153 @@ def cmd_recut(args) -> int:
     return cmd_generate(args)
 
 
+def alignment_path(spec_hash: str) -> Path:
+    folder = MASTERS / "alignments" / spec_hash[:2]
+    return folder / f"{spec_hash}.json"
+
+
+def force_align(key: str, pcm: bytes, text: str, cat: dict) -> dict:
+    """Ask the provider where each word sits in audio it did not just make.
+
+    The sheet's own alignment cannot answer this. It is accurate at the ends of
+    a sheet and drifts in the middle — measured at over a second on a
+    twenty-second sheet, which is not a rounding error but a different answer.
+    Forced alignment is given one short clip and its text, so there is nothing
+    for it to drift against, and it returns a loss to say how sure it is.
+    """
+    import urllib.error
+    import urllib.request
+
+    fmt = cat["master_format"]
+    wav = wav_header(len(pcm), fmt) + pcm
+    boundary = "----speechpipeline" + hashlib.sha256(pcm[:64]).hexdigest()[:16]
+    parts = []
+    parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="file"; '
+                 f'filename="clip.wav"\r\nContent-Type: audio/wav\r\n\r\n'.encode("utf-8"))
+    parts.append(wav)
+    parts.append(f'\r\n--{boundary}\r\nContent-Disposition: form-data; name="text"'
+                 f'\r\n\r\n{text}\r\n--{boundary}--\r\n'.encode("utf-8"))
+    body = b"".join(parts)
+
+    req = urllib.request.Request(
+        f"{API_BASE}/forced-alignment", data=body,
+        headers={"xi-api-key": key,
+                 "Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method="POST")
+    delay = 2.0
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", "replace")[:300]
+            if exc.code in (429, 500, 502, 503, 504) and attempt < 4:
+                warn(f"HTTP {exc.code}, retrying in {delay:.1f}s")
+                time.sleep(delay); delay *= 2; continue
+            raise Fail(f"HTTP {exc.code}: {detail}")
+        except urllib.error.URLError as exc:
+            if attempt < 4:
+                time.sleep(delay); delay *= 2; continue
+            raise Fail(f"network error: {exc.reason}")
+    raise Fail("exhausted retries")
+
+
+def wav_header(data_len: int, fmt: dict) -> bytes:
+    import struct
+    rate, ch, bits = fmt["sample_rate"], fmt["channels"], fmt["bits"]
+    byte_rate = rate * ch * bits // 8
+    return (b"RIFF" + struct.pack("<I", 36 + data_len) + b"WAVEfmt " +
+            struct.pack("<IHHIIHH", 16, 1, ch, rate, byte_rate, ch * bits // 8, bits) +
+            b"data" + struct.pack("<I", data_len))
+
+
+def phrase_boundaries(record: dict, profiles: dict, cat: dict):
+    """When each word of a multi-word entry finishes, in its own clip's time.
+
+    Read from the cached forced alignment, which `align` fetches once per
+    phrase. No alignment cached means no boundaries, which the game reads as
+    "do not narrate this one mid-phrase" rather than as an error.
+    """
+    words = record["spoken_text"].split()
+    if len(words) < 2:
+        return []
+    path = alignment_path(record["spec_hash"])
+    if not path.exists():
+        return []
+    doc = read_json(path)
+    got = [w for w in doc.get("words", []) if w.get("text", "").strip()]
+    if len(got) != len(words):
+        return []
+    limit = cat["processing"].get("alignment_max_loss", 1.0)
+    if doc.get("loss", 0.0) > limit:
+        return []
+    return [float(w["end"]) for w in got[:-1]]
+
+
+def cmd_align(args) -> int:
+    """Fetch word boundaries for the phrases already recorded.
+
+    Reads the archived masters and sends each with its own text. Nothing is
+    synthesised, so no clip changes and no approval is disturbed — the result
+    is only a set of timestamps, cached next to the audio.
+    """
+    ensure_guards()
+    cat = load_catalog()
+    profiles = load_profiles()
+    records = load_desired()
+    if args.language:
+        records = [r for r in records if r["lang"] in args.language]
+    classify(records)
+
+    todo = [r for r in records
+            if r["category"] == "word" and len(r["spoken_text"].split()) > 1
+            and r["status"] in ("generated", "unreviewed", "approved")
+            and master_path(r["spec_hash"]).exists()
+            and (args.force or not alignment_path(r["spec_hash"]).exists())]
+    if not todo:
+        info("Every phrase already has its word boundaries.")
+        return 0
+
+    info(f"{len(todo)} phrases to align. This sends existing audio for timing only; "
+         f"it synthesises nothing.")
+    if not args.confirm:
+        info("Re-run with --confirm to do it.")
+        return 0
+
+    key = api_key()
+    done = skipped = failed = 0
+    limit = cat["processing"].get("alignment_max_loss", 1.0)
+    for i, r in enumerate(todo, 1):
+        try:
+            doc = force_align(key, master_path(r["spec_hash"]).read_bytes(),
+                              r["spoken_text"], cat)
+        except Fail as exc:
+            warn(f"{r['key']}: {exc}")
+            failed += 1
+            continue
+        path = alignment_path(r["spec_hash"])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"text": r["spoken_text"],
+                                    "words": doc.get("words", []),
+                                    "loss": doc.get("loss", 0.0)},
+                                   ensure_ascii=False, indent=1), encoding="utf-8")
+        loss = doc.get("loss", 0.0)
+        mark = ""
+        if loss > limit:
+            mark = f"  loss {loss:.2f} above {limit} — will not be used"
+            skipped += 1
+        info(f"[{i}/{len(todo)}] {r['display_text']:28s} {loss:.3f}{mark}")
+        done += 1
+    info(f"Aligned {done}, unusable {skipped}, failed {failed}. "
+         f"Run `process --force --category word` to fold the timings into the clips.")
+    return 1 if failed else 0
+
+
 def cmd_process(args) -> int:
     ensure_guards()
     require_ffmpeg()
     cat = load_catalog()
+    profiles = load_profiles()
     records = load_desired()
     if args.language:
         records = [r for r in records if r["lang"] in args.language]
@@ -2005,8 +2156,9 @@ def cmd_process(args) -> int:
             warn(f"{r['key']}: master missing, run `generate` first")
             failed += 1
             continue
+        word_ends = phrase_boundaries(r, profiles, cat) if r["category"] == "word" else []
         try:
-            meta = process_one(master, out, cat)
+            meta = process_one(master, out, cat, word_ends)
         except Fail as exc:
             warn(str(exc))
             failed += 1
@@ -2025,8 +2177,12 @@ def cmd_process(args) -> int:
             # with it, so a take this quiet is worth hearing before it is kept.
             flags.append(f"quiet take, boosted {meta['gain_db']:+.1f}dB — listen for hiss")
         flag = ("  <-- " + "; ".join(flags)) if flags else ""
+        if meta["word_ends_ms"]:
+            side = processed_path(r["render_hash"]).with_suffix(".json")
+            side.write_text(json.dumps({"word_ends_ms": meta["word_ends_ms"]}), encoding="utf-8")
         info(f"[{i}/{len(todo)}] {r['key']:24s} {meta['duration_ms']:5d}ms  "
-             f"{meta['bytes']:6d}B  {meta['gain_db']:+5.1f}dB{flag}")
+             f"{meta['bytes']:6d}B  {meta['gain_db']:+5.1f}dB{flag}"
+             + (f"  words end at {meta['word_ends_ms']}" if meta["word_ends_ms"] else ""))
         done += 1
 
     info("")
@@ -2506,8 +2662,11 @@ def cmd_pack(args) -> int:
             digest = hashlib.sha256(data).hexdigest()
             asset = f"clips/{digest[:2]}/{digest[:12]}.mp3"
             write_atomic(pack_dir / asset, data)
+            side = processed_path(r["render_hash"]).with_suffix(".json")
+            ends = read_json(side).get("word_ends_ms", []) if side.exists() else []
             items[r["key"]] = {
                 "asset": asset,
+                "word_ends_ms": ends,
                 "duration_ms": int(round(probe_duration(src) * 1000)) if shutil.which("ffprobe") else 0,
                 "sha256": digest,
                 "display_text": r["display_text"],
@@ -3155,6 +3314,12 @@ def main(argv=None) -> int:
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
     sp.add_argument("--category", "-c", action="append", metavar="CAT")
     sp.set_defaults(func=cmd_recut)
+
+    sp = sub.add_parser("align", help="fetch word boundaries for recorded phrases (no synthesis)")
+    sp.add_argument("--language", action="append")
+    sp.add_argument("--force", action="store_true", help="re-align phrases that already have timings")
+    sp.add_argument("--confirm", action="store_true", help="actually call the API")
+    sp.set_defaults(func=cmd_align)
 
     sp = sub.add_parser("process", help="trim, level, encode masters to shipping MP3")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")

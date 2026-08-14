@@ -964,8 +964,9 @@ func _speak_completed_word_segment(segment_end: int, lang_override: String = "")
 		func():
 			if win_screen != null and win_screen.is_active():
 				return
-			# A partial phrase is not a catalog entry, so this always falls
-			# through to the device voice. That is intended, not a gap.
+			# A partial phrase has no recording of its own. Speech plays the
+			# full phrase and stops it at the word boundary, so each stage is
+			# the same reading heard a little further.
 			Speech.speak_word(phrase, word_lang)
 	)
 
