@@ -1,5 +1,11 @@
 # Themes — content to change
 
+> ⚠️ **BOTH MUST ITEMS ARE DONE — historical record.** Verified by inspecting the sprites on 2026-08-14:
+> `themes/castle/c_player.png` now carries a **torch**, not a sword ·
+> `themes/karkulka/k_chaser.png` is a **friendly grey wolf** with a closed mouth and round eyes.
+> Open theme work, if any, is tracked in [`PROJECT_STATE.md`](PROJECT_STATE.md).
+> The resolution notes below (the two-slot `theme_loader.gd` behaviour) are still accurate and useful.
+
 Assets below are the ones the game **actually loads**, resolved by mirroring `theme_loader.gd`:
 `assets.<slot>` from `manifest.json`, else the naming-convention default; then the top-level
 `player` / `chaser` / `background` / `collectible` block, whose `frames` list overrides.

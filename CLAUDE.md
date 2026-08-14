@@ -5,8 +5,17 @@ Package `com.hauzirek.learningmaze`.
 
 ## Read these first
 
+- **[`PROJECT_STATE.md`](PROJECT_STATE.md)** — **the ledger. Read it before anything else.** What is open, what is deferred and why, what is already done, and which documents are stale. If it disagrees with another document, the ledger wins. Update it before finishing any session that changed something.
 - **[`coding_rules.md`](coding_rules.md)** — GDScript conventions, D-pad navigation, UI utilities, file organisation. Read before writing any code.
 - **[`DEVELOPMENT.md`](DEVELOPMENT.md)** — who the game is for, game mechanics, the theme and vocabulary systems, content and policy rules, release process.
+
+## How to work on this project
+
+- **One goal per session.** At the start, state the goal and its exit condition in one line. Hold to it.
+- **Do not end turns with an offer.** End with the result. If you notice adjacent work worth doing, append it to §7 "Noticed" in `PROJECT_STATE.md` — do not propose it, do not ask whether to do it. The owner decides what to pick up, from the ledger, at the start of a session.
+- **Say when something is finished.** If the session's goal is met, say so plainly instead of extending scope.
+- **Push back on drift.** If asked mid-session for something outside the stated goal, log it to the ledger and say it is logged. Do it only if told to do it anyway.
+- **Verify before reporting.** Several documents here describe work already completed. Check the tree, the git log or the sprite itself before repeating a claim from a document.
 
 ## The short version
 

@@ -1,5 +1,15 @@
 # Learning Maze — implementation spec for compliance changes
 
+> ⚠️ **MOSTLY EXECUTED — historical record. Do not work from this file.**
+> Checked against the tree on 2026-08-14 at version 1.2.0 build 79:
+> **Phase 1 done** (baton → whistle, Thieves → *Treasure Chase*, unreferenced asset deleted) ·
+> **Phase 2 done** (vocabulary fixes committed) ·
+> **Phase 3 built then deliberately reverted** in `c365847` — only the retitle to *Autumn Forest* was kept, to protect the promo video ·
+> **§2 "uncommitted work at handover" is obsolete** — the tree is clean.
+> Only **Phase 4** (store listing) and part of **Phase 5** remain, and both are tracked in
+> [`PROJECT_STATE.md`](PROJECT_STATE.md). **Read the ledger, not this file.**
+> §1 hard constraints are still valid and worth reading.
+
 Written 6 August 2026. Intended to be executed in a **separate session**, standalone.
 App: `com.hauzirek.learningmaze` · Godot 4.6 · repo root `/Documents/Bludiste`
 
