@@ -1907,13 +1907,22 @@ def process_one(master: Path, out: Path, cat: dict, boundaries=None, trim: bool 
         # resampling all leave the timeline alone. The predicted duration is
         # checked against the encoded file below, which is what would catch
         # this model being wrong.
-        mapped = []
+        holds, fades = [], []
         if boundaries:
             lead = lead_silence(raw, cat) if trim else 0.0
             offset = lead - (p["keep_lead_ms"] / 1000.0 if trim else 0.0)
-            for at in boundaries:
+
+            def onto_clip(at: float) -> float:
                 shift = sum(min(at, hi) - lo for lo, hi in removed if lo < at)
-                mapped.append(max(at - shift - offset, 0.0))
+                return max(at - shift - offset, 0.0)
+
+            for hold, until in boundaries:
+                # Both ends go through the same mapping, so a fade that spanned
+                # a shortened pause comes out shortened too rather than running
+                # on into the next word.
+                a, b = onto_clip(hold), onto_clip(until)
+                holds.append(a)
+                fades.append(max(b - a, 0.0))
         res = run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error"] + src +
                   ["-af", trim_chain, str(trimmed)])
         if res.returncode != 0:
@@ -1962,7 +1971,8 @@ def process_one(master: Path, out: Path, cat: dict, boundaries=None, trim: bool 
 
     write_atomic(out, data)
     return {
-        "word_ends_ms": [int(round(t * 1000)) for t in mapped],
+        "word_ends_ms": [int(round(t * 1000)) for t in holds],
+        "word_fade_ms": [int(round(t * 1000)) for t in fades],
         "duration_ms": int(round(final_duration * 1000)),
         "bytes": len(data),
         "sha256": hashlib.sha256(data).hexdigest(),
@@ -2056,11 +2066,16 @@ def wav_header(data_len: int, fmt: dict) -> bytes:
 
 
 def phrase_boundaries(record: dict, profiles: dict, cat: dict):
-    """When each word of a multi-word entry finishes, in its own clip's time.
+    """Where to hold each word until, and how long to fade after it.
 
-    Read from the cached forced alignment, which `align` fetches once per
-    phrase. No alignment cached means no boundaries, which the game reads as
-    "do not narrate this one mid-phrase" rather than as an error.
+    Two numbers per boundary, not one. The word is played whole at full volume
+    up to the hold point, and only then does the clip fade — fading *into* the
+    boundary is what made every word sound cut a syllable short.
+
+    The hold point runs a little past the aligner's end of the word. Aligners
+    mark the vowel, not the release that follows it, and the gap the aligner
+    reports before the next word is real speech time: a median 40 ms here. The
+    hold takes that gap, capped, so a long pause is not sat through.
     """
     words = record["spoken_text"].split()
     if len(words) < 2:
@@ -2075,7 +2090,16 @@ def phrase_boundaries(record: dict, profiles: dict, cat: dict):
     limit = cat["processing"].get("alignment_max_loss", 1.0)
     if doc.get("loss", 0.0) > limit:
         return []
-    return [float(w["end"]) for w in got[:-1]]
+
+    p = cat["processing"]
+    reach = p.get("boundary_reach_ms", 120) / 1000.0
+    fade = p.get("boundary_fade_ms", 40) / 1000.0
+    pairs = []
+    for cur, nxt in zip(got, got[1:]):
+        end = float(cur["end"])
+        hold = end + min(max(float(nxt["start"]) - end, 0.0), reach)
+        pairs.append((hold, hold + fade))
+    return pairs
 
 
 def cmd_align(args) -> int:
@@ -2196,7 +2220,8 @@ def cmd_process(args) -> int:
         flag = ("  <-- " + "; ".join(flags)) if flags else ""
         if meta["word_ends_ms"]:
             side = processed_path(r["render_hash"]).with_suffix(".json")
-            side.write_text(json.dumps({"word_ends_ms": meta["word_ends_ms"]}), encoding="utf-8")
+            side.write_text(json.dumps({"word_ends_ms": meta["word_ends_ms"],
+                                        "word_fade_ms": meta["word_fade_ms"]}), encoding="utf-8")
         info(f"[{i}/{len(todo)}] {r['key']:24s} {meta['duration_ms']:5d}ms  "
              f"{meta['bytes']:6d}B  {meta['gain_db']:+5.1f}dB{flag}"
              + (f"  words end at {meta['word_ends_ms']}" if meta["word_ends_ms"] else ""))
@@ -2454,13 +2479,19 @@ def cmd_phrases(args) -> int:
         src = processed_path(r["render_hash"])
         meta = read_json(src.with_suffix(".json")) if src.with_suffix(".json").exists() else {}
         stops = meta.get("word_ends_ms", [])
+        fades = meta.get("word_fade_ms", [])
         words = r["display_text"].split()
         stages = []
         for n, stop_ms in enumerate(stops, 1):
             name = f"{i:03d}_{word_slug(r['display_text'])}_{n}.mp3"
+            fade_s = (fades[n - 1] if n <= len(fades) else 40) / 1000.0
+            hold_s = stop_ms / 1000.0
+            # The fade starts where the word ends. Starting it earlier — which
+            # is what this did at first — quietens the last syllable and makes
+            # every stage sound clipped.
             res = run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(src),
-                       "-t", f"{stop_ms / 1000.0:.3f}", "-af",
-                       f"afade=t=out:st={max(stop_ms / 1000.0 - 0.045, 0):.3f}:d=0.045",
+                       "-t", f"{hold_s + fade_s:.3f}", "-af",
+                       f"afade=t=out:st={hold_s:.3f}:d={max(fade_s, 0.01):.3f}",
                        str(folder / name)])
             if res.returncode == 0:
                 stages.append((" ".join(words[:n]), name, stop_ms))
@@ -2760,10 +2791,11 @@ def cmd_pack(args) -> int:
             asset = f"clips/{digest[:2]}/{digest[:12]}.mp3"
             write_atomic(pack_dir / asset, data)
             side = processed_path(r["render_hash"]).with_suffix(".json")
-            ends = read_json(side).get("word_ends_ms", []) if side.exists() else []
+            side_doc = read_json(side) if side.exists() else {}
             items[r["key"]] = {
                 "asset": asset,
-                "word_ends_ms": ends,
+                "word_ends_ms": side_doc.get("word_ends_ms", []),
+                "word_fade_ms": side_doc.get("word_fade_ms", []),
                 "duration_ms": int(round(probe_duration(src) * 1000)) if shutil.which("ffprobe") else 0,
                 "sha256": digest,
                 "display_text": r["display_text"],

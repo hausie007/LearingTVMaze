@@ -160,7 +160,8 @@ func speak_word(text: String, lang: String = "") -> void:
 	if partial.is_empty() or Config.voice_mode != Config.VoiceMode.STUDIO_PREFERRED:
 		_speak("", language, text, RATE_WORD)
 		return
-	if not _play(language, String(partial["key"]), int(partial["stop_ms"])):
+	if not _play(language, String(partial["key"]), int(partial["stop_ms"]),
+			int(partial.get("fade_ms", DEFAULT_FADE_MS))):
 		_note_missing(String(partial["key"]), language)
 		_speak_with_tts(text, RATE_WORD, language)
 
@@ -340,7 +341,7 @@ func _speak_with_tts(text: String, rate: float, lang: String) -> void:
 	TTS.speak(text, rate, lang)
 
 
-func _play(lang: String, key: String, stop_ms: int = 0) -> bool:
+func _play(lang: String, key: String, stop_ms: int = 0, fade_ms: int = DEFAULT_FADE_MS) -> bool:
 	var stream := _stream_for(lang, key)
 	if stream == null:
 		return false
@@ -348,27 +349,31 @@ func _play(lang: String, key: String, stop_ms: int = 0) -> bool:
 	_player.stream = stream
 	_player.play()
 	if stop_ms > 0:
-		_stop_at(stop_ms)
+		_stop_at(stop_ms, fade_ms)
 	return true
 
 
 ## End a clip early, at a word boundary, without a click.
 ##
-## The tail is faded rather than cut: stopping a player mid-waveform pops, and
-## a pop is exactly the kind of harsh sound this game keeps out. The version
-## guard means anything that started since — including a plain stop() — is left
-## alone when the timer comes back.
-const PREFIX_FADE_MS := 45
+## The word plays whole and the fade begins where it ends — it must not begin
+## before, or the last syllable is quietened and every stage sounds cut short.
+## The fade runs through the pause the speaker left after that word, so it is
+## silent by the time the next word would have started.
+##
+## Faded rather than cut because stopping a player mid-waveform pops, and a pop
+## is exactly the sort of harsh sound this game keeps out. The version guard
+## means anything that started since — including a plain stop() — is left alone
+## when the timer comes back.
+const DEFAULT_FADE_MS := 40
 
-func _stop_at(stop_ms: int) -> void:
+func _stop_at(stop_ms: int, fade_ms: int) -> void:
 	var version := _queue_version
-	var lead := maxf(float(stop_ms - PREFIX_FADE_MS) / 1000.0, 0.0)
-	await get_tree().create_timer(lead).timeout
+	await get_tree().create_timer(float(stop_ms) / 1000.0).timeout
 	if version != _queue_version or _player == null or not _player.playing:
 		return
 	var level := _player.volume_db
 	var tween := create_tween()
-	tween.tween_property(_player, "volume_db", -40.0, float(PREFIX_FADE_MS) / 1000.0)
+	tween.tween_property(_player, "volume_db", -40.0, float(maxi(fade_ms, 10)) / 1000.0)
 	await tween.finished
 	if version == _queue_version and _player != null:
 		_player.stop()
@@ -589,11 +594,16 @@ func _register_prefixes(pack: Dictionary, key: String, display: String) -> void:
 	var words := display.split(" ", false)
 	if words.size() != ends.size() + 1:
 		return
+	var fades: Array = pack["items"][key].get("word_fade_ms", [])
 	for i in range(ends.size()):
 		var prefix := " ".join(words.slice(0, i + 1))
 		if pack["_words"].has(prefix) or pack["_prefixes"].has(prefix):
 			continue        # a real recording of its own always wins
-		pack["_prefixes"][prefix] = {"key": key, "stop_ms": int(ends[i])}
+		pack["_prefixes"][prefix] = {
+			"key": key,
+			"stop_ms": int(ends[i]),
+			"fade_ms": int(fades[i]) if i < fades.size() else DEFAULT_FADE_MS,
+		}
 	return
 
 
