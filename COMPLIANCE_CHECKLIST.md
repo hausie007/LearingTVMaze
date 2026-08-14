@@ -84,12 +84,12 @@ No affiliate destination, no third-party destination, no advertising destination
 | Ads — "Doesn't contain ads" | ✅ | No advertising code of any kind present |
 | Advertising ID — "Doesn't use advertising ID" | ✅ | No `AD_ID` permission, no AAID reference |
 | Target audience — Ages 5 & under, 6–8 | ✅ | Consistent with the design; see Part 3 |
-| IARC — crude humour | ⚠️ | Answered affirmatively at the mildest tier. The application depicts a static cartoon character; it contains no belching, flatulence or vomiting. Referred to IARC for determination |
-| IARC — fear / horror | ❓ | Requires confirmation against the characters described in Part 3 |
-| IARC — crime / violence | ❓ | Requires confirmation against the themes described in Part 3 |
-| IARC — user interaction | ❓ | Requires confirmation against the multiplayer behaviour described in requirement 7 |
+| IARC — crude humour | ✅ | Answered **Yes** at the mildest applicable tier — IARC's own sub-question names "whimsical depictions of feces", which the application contains. Questionnaire resubmitted 6 August 2026 with this answer unchanged; no external determination was sought and none was required |
+| IARC — fear / horror | ✅ | Answered **No**. Confirmed against the resubmitted questionnaire |
+| IARC — crime / violence | ✅ | Answered **No**. Confirmed against the resubmitted questionnaire |
+| IARC — user interaction | ✅ | Answered **No**. Confirmed against the resubmitted questionnaire |
 
-The three ❓ answers cannot be read from the binary. They are listed as open rather than assumed correct.
+**Resolved 6 August 2026.** The questionnaire was resubmitted with every answer left as it stood, and all eight ratings came back unchanged — ACB PG · ESRB Everyone · PEGI 3 · USK 0 · ClassInd L · GRAC All ages · IARC 3+ · Russia 3+. ESRB "Everyone" is the value the rejection's third bullet requires. Play Console subsequently showed no outstanding errors or claims.
 
 ### Requirement 4 · Data practices ✅
 
@@ -251,7 +251,7 @@ The application is free, complete, and contains no commercial content whatsoever
 |---|---|---|
 | Privacy policy linked in Play Console | ✅ | Declared |
 | **Privacy policy link or text within the app itself** | ✅ | Settings screen contains a Privacy Policy button opening the published policy. This satisfies the requirement that all apps post "a privacy policy link in the designated field within Play Console, **and** a privacy policy link or text within the app itself" |
-| Privacy policy publicly accessible, non-geofenced, not a PDF, non-editable | ❓ | Hosted at `sites.google.com/view/learning-maze-privacy-policy/`; requires confirmation against the live page |
+| Privacy policy publicly accessible, non-geofenced, not a PDF, non-editable | ✅ | Live at `sites.google.com/view/learning-maze-privacy-policy/` serving the current text, and linked from both Play Console and the in-app Settings screen. Confirmed by the owner, August 2026 |
 | Data safety section complete and accurate | ✅ | "Doesn't collect or share data", consistent with Part 2 requirement 4 |
 | Prominent disclosure and consent for sensitive data | ➖ | No personal or sensitive data is accessed |
 | Account deletion mechanism | ➖ | The application does not allow account creation |

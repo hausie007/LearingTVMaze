@@ -6,24 +6,35 @@ of the older documents describe a state that no longer exists (see §5).
 
 Last verified against the working tree: **2026-08-14** · version **1.2.0 build 79** · tree clean.
 
+## 0. Release state
+
+| Track | Build | Status |
+|---|---|---|
+| **Production** | **78** | **Live and accepted.** Theme changes and help-screen navigation. *What's new* submitted with it |
+| Closed testing | 78 | |
+| Internal testing | **79** | Pre-generated TTS work in progress |
+
+**The compliance chapter is closed.** Build 76 was rejected on 25 July 2026; build 78 was accepted
+and is live. Play Console shows **no outstanding errors and no open claims**. The privacy policy is
+live on Google Sites in its current version and linked from both Console and the game.
+
+The IARC questionnaire was resubmitted with **every answer left exactly as it stood** — including
+crude humour Yes — and passed. No external determination was sought and none was needed. Do not
+reopen it.
+
 Verification method: git log, `export_presets.cfg`, `data/translations.csv`, direct inspection of
 the sprite files, and `speech_pipeline.py status`. Anything not verifiable from the repo is marked
 **needs Console** or **needs your eye** rather than assumed.
 
 ---
 
-## 1. Blocking — this is the ship path
+## 1. Blocking
 
-Nothing in the codebase blocks a release. Every remaining blocker is outside the repo.
+**Nothing.** The app is live on production, Console is clean, and no compliance item is outstanding.
 
-| # | Item | Where | Notes |
-|---|---|---|---|
-| 1 | Confirm the privacy policy page is live, titled *"Learning Maze Privacy Policy"*, and serves the current `PRIVACY_POLICY.md` text | Google Sites | Page title was still *Domovská stránka*. This is the only ❓ in Part 5 of the compliance record |
-| 2 | Paste the *What's new* release notes | Play Console | 31-locale block was produced; confirm it went in for build 79 |
-| 3 | Enumerate which version code is active on production / open / closed / internal | Play Console | Never captured. Needed before any submission |
-| 4 | Export the AAB and run the verification script | local | Expect permissions `INTERNET`/`VIBRATE`/`DUMP`, libs `libc++_shared.so`/`libgodot_android.so`, SDKs `NONE`. Script is in `GAME_MODIFICATION_SPEC.md` §8 |
-
-**Estimated total: under an hour.** Three of the four are read-only Console checks.
+The current workstream is **pre-generated TTS**, riding on internal testing at build 79. With
+shipping unblocked, this is the main line of work rather than a detour — the open questions are
+in §2.
 
 ---
 
@@ -31,8 +42,7 @@ Nothing in the codebase blocks a release. Every remaining blocker is outside the
 
 | Item | Status | Notes |
 |---|---|---|
-| **Compliance record has 4 stale ❓** | Record is out of date, not the app | The three IARC answers (fear/horror, crime/violence, user interaction) were resolved when the questionnaire was submitted and completed **2026-08-06** — all declared No, crude humour Yes at tier 2, all eight ratings unchanged. `COMPLIANCE_CHECKLIST.md` lines 88–90 still read ❓. Flip them to ✅ with the submission date as evidence |
-| **Screenshot 3 breadcrumb** | Needs your eye | It read *"Follow the Trail • Scary • Very Large"*. The theme is now titled **Autumn Forest**, so a re-shoot fixes it. Cosmetic, not a policy gap |
+| **Screenshot 3 breadcrumb** | Needs your eye | It read *"Follow the Trail • Scary • Very Large"*. The theme is now titled **Autumn Forest**, so a re-shoot fixes it. Cosmetic — the listing passed review as it stands |
 | **`exclude_filter` is empty** | Confirmed open | Godot rewrote `export_presets.cfg` and dropped `exclude_filter="_unused_assets/*"`. Still `""` on lines 10 and 236. `.gdignore` is the primary guard and is intact, so nothing leaks — this is belt-and-braces only |
 | **Speech coverage: 5 of 21 languages** | In progress | `cs` and `en` essentially complete; `sk`, `pl`, `de` have alphabet/digraphs only. Run `python3 tools/speech/speech_pipeline.py status` — never trust memory here, `LANGUAGE_STATUS.md` is generated |
 | **Mid-phrase word prefixes** | Decision pending | Cumulative prefixes cost 65 (cs) + 80 (en) clips ≈ 14 cents, and cutting them from existing masters is free because the alignment timings are already stored in all 70 sheets. Open question is a **product** one, not a cost one: the accumulated readout ends on dangling conjunctions ("buď odvážný a…") and repeats the opening word up to four times. Leaning toward dropping the mid-phrase feature entirely |
@@ -59,8 +69,10 @@ Nothing in the codebase blocks a release. Every remaining blocker is outside the
 - **Theme retitles, all 21 locales**: `thiefs` → *Treasure Chase* · `scary` → *Autumn Forest* · `castle` → *Stone Castle* · `karkulka` → *Little Red*.
 - **`themes/scary/pumpkin.png`** deleted (only `pumpkin3.png` remains).
 - **Vocabulary**: 3,652 entries across 147 files, 21 languages. 28 fixes removed alcohol and weapon imagery.
-- **IARC questionnaire** submitted and completed 2026-08-06, all ratings held.
-- **Privacy policy** committed to `PRIVACY_POLICY.md`.
+- **IARC questionnaire** resubmitted 2026-08-06 with every answer unchanged, including crude humour Yes. All eight ratings held. No external determination sought or needed.
+- **Privacy policy** committed to `PRIVACY_POLICY.md`, **published live** on Google Sites, and linked from Play Console and the in-app Settings screen.
+- **Build 78 accepted and live on production**, after build 76 was rejected on 25 July 2026. *What's new* submitted with it. Play Console clear of errors and claims.
+- **`COMPLIANCE_CHECKLIST.md` ❓ items** — all four resolved to ✅ on 2026-08-14.
 - **All previously uncommitted work** (`export_presets.cfg`, `top_menu.gd`, `mode_card.gd`, 21 vocabulary files) is committed. Tree is clean.
 - **Tracker reset bug** — HUD skipped `setup()` when the sequence hash matched, so the paging window stayed where the last maze left it. Fixed.
 - **English menu TTS fallback** — leading-comma trim asymmetry between the catalog and `speech_manager.gd`. Fixed, plus two guards added.
@@ -76,7 +88,7 @@ That is the main reason a fresh session (or you, in three weeks) cannot tell wha
 |---|---|
 | `GAME_MODIFICATION_SPEC.md` | **Largely executed.** Phase 1 done, Phase 2 done, Phase 3 deliberately reverted. Only Phase 4 (store listing) and part of Phase 5 remain. §2 "uncommitted work at handover" is obsolete — tree is clean |
 | `themes_todo.md` | **Both MUST items are done** (castle sword, karkulka teeth). The resolution notes about `theme_loader.gd` slots are still valuable and now live in `DEVELOPMENT.md` |
-| `COMPLIANCE_CHECKLIST.md` | Accurate except the 4 stale ❓ in §2 above |
+| `COMPLIANCE_CHECKLIST.md` | **Current.** All four ❓ resolved to ✅ on 2026-08-14 |
 | `game_specification.md`, `_v2`, `_v3` | Three versions side by side. Consider keeping v3 and archiving the rest |
 | `LANGUAGE_STATUS.md` | **Generated** — regenerate, never edit |
 
