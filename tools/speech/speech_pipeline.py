@@ -2093,11 +2093,19 @@ def phrase_boundaries(record: dict, profiles: dict, cat: dict):
 
     p = cat["processing"]
     reach = p.get("boundary_reach_ms", 120) / 1000.0
-    fade = p.get("boundary_fade_ms", 40) / 1000.0
+    share = p.get("boundary_hold_share", 0.5)
+    fade_min = p.get("boundary_fade_min_ms", 12) / 1000.0
+    fade_max = p.get("boundary_fade_ms", 40) / 1000.0
     pairs = []
     for cur, nxt in zip(got, got[1:]):
         end = float(cur["end"])
-        hold = end + min(max(float(nxt["start"]) - end, 0.0), reach)
+        # The hold and the fade together stay inside the pause before the next
+        # word. Spending the whole pause on the hold and then fading on top of
+        # it put the fade over the next word, which was audible as a hint of
+        # the letter to come. Half the pause is held, the rest is the fade.
+        budget = min(max(float(nxt["start"]) - end, 0.0), reach)
+        hold = end + budget * share
+        fade = min(max(budget * (1.0 - share), fade_min), fade_max)
         pairs.append((hold, hold + fade))
     return pairs
 
@@ -2182,6 +2190,10 @@ def cmd_process(args) -> int:
         records = [r for r in records if r["lang"] in args.language]
     if args.category:
         records = [r for r in records if r["category"] in args.category]
+    if getattr(args, "key", None):
+        needle = args.key.lower()
+        records = [r for r in records
+                   if needle in r["key"].lower() or needle in r["display_text"].lower()]
     classify(records)
 
     todo = [r for r in records if r["status"] == "generated" or (args.force and r["status"] in ("unreviewed", "approved"))]
@@ -2220,8 +2232,10 @@ def cmd_process(args) -> int:
         flag = ("  <-- " + "; ".join(flags)) if flags else ""
         if meta["word_ends_ms"]:
             side = processed_path(r["render_hash"]).with_suffix(".json")
-            side.write_text(json.dumps({"word_ends_ms": meta["word_ends_ms"],
-                                        "word_fade_ms": meta["word_fade_ms"]}), encoding="utf-8")
+            # Atomically, like the clip beside it. A run killed mid-write left
+            # a zero-byte sidecar that then failed to parse on every later read.
+            write_atomic(side, json.dumps({"word_ends_ms": meta["word_ends_ms"],
+                                           "word_fade_ms": meta["word_fade_ms"]}).encode("utf-8"))
         info(f"[{i}/{len(todo)}] {r['key']:24s} {meta['duration_ms']:5d}ms  "
              f"{meta['bytes']:6d}B  {meta['gain_db']:+5.1f}dB{flag}"
              + (f"  words end at {meta['word_ends_ms']}" if meta["word_ends_ms"] else ""))
@@ -2438,6 +2452,81 @@ def flag_clips(clips, measured, rate: int) -> None:
         if notes:
             existing = clips[idx].get("flag") or ""
             clips[idx]["flag"] = "; ".join(([existing] if existing else []) + notes)
+
+
+def cmd_prune(args) -> int:
+    """Delete archived audio nothing asks for any more.
+
+    Two very different piles, so they are treated differently. A processed clip
+    is an encoding of a master and costs nothing but seconds to remake, so it
+    goes. A master was paid for, and once deleted the only way back is to buy
+    it again — those are listed with the words they say and removed only when
+    asked for by name.
+    """
+    cat = load_catalog()
+    records = load_desired()
+    live_specs = {r["spec_hash"] for r in records}
+    live_renders = {r["render_hash"] for r in records}
+
+    ledger = {}
+    if LEDGER.exists():
+        for row in LEDGER.read_text(encoding="utf-8").splitlines():
+            if row.strip():
+                entry = json.loads(row)
+                ledger[entry["spec_hash"]] = entry
+
+    def orphans(folder: Path, keep: set, suffix: str) -> list:
+        return [p for p in sorted(folder.rglob(f"*{suffix}"))
+                if p.stem not in keep]
+
+    stale_clips = orphans(MASTERS_PROCESSED, live_renders, ".mp3")
+    stale_side = [p.with_suffix(".json") for p in stale_clips if p.with_suffix(".json").exists()]
+    stale_masters = orphans(MASTERS_RAW, live_specs, ".pcm")
+
+    def size(paths):
+        return sum(p.stat().st_size for p in paths) / 1024.0
+
+    info(f"{len(stale_clips)} processed clips no longer referenced ({size(stale_clips):.0f} KB). "
+         f"These re-encode from the masters for free.")
+    info(f"{len(stale_masters)} masters no longer referenced ({size(stale_masters):.0f} KB). "
+         f"These cost money to replace.")
+    if stale_masters:
+        info("")
+        shown = 0
+        for p in stale_masters:
+            entry = ledger.get(p.stem)
+            what = f"{entry['lang']} {entry['spoken_text']!r}" if entry else "not in the ledger"
+            info(f"  {what}")
+            shown += 1
+            if shown >= 20 and len(stale_masters) > 20:
+                info(f"  … and {len(stale_masters) - shown} more")
+                break
+
+    if not args.confirm:
+        info("")
+        info("Nothing deleted. Re-run with --confirm for the processed clips, "
+             "and --confirm --masters to include the masters.")
+        return 0
+
+    gone = 0
+    for p in stale_clips + stale_side:
+        p.unlink()
+        gone += 1
+    if args.masters:
+        for p in stale_masters:
+            alignment = alignment_path(p.stem)
+            if alignment.exists():
+                alignment.unlink()
+            p.unlink()
+            gone += 1
+    for folder in (MASTERS_PROCESSED, MASTERS_RAW):
+        for sub in sorted(folder.glob("*")):
+            if sub.is_dir() and not any(sub.iterdir()):
+                sub.rmdir()
+    info(f"Deleted {gone} file(s).")
+    if not args.masters and stale_masters:
+        info(f"Kept {len(stale_masters)} masters. Add --masters to remove those too.")
+    return 0
 
 
 def cmd_phrases(args) -> int:
@@ -3461,7 +3550,13 @@ def main(argv=None) -> int:
     sp.add_argument("--category", "-c", action="append", metavar="CAT",
                     help="number | char | word; repeatable")
     sp.add_argument("--force", action="store_true", help="re-encode clips that already exist")
+    sp.add_argument("--key", help="only clips whose key or text contains this")
     sp.set_defaults(func=cmd_process)
+
+    sp = sub.add_parser("prune", help="delete archived audio nothing asks for any more")
+    sp.add_argument("--masters", action="store_true", help="also delete orphaned masters (paid for)")
+    sp.add_argument("--confirm", action="store_true")
+    sp.set_defaults(func=cmd_prune)
 
     sp = sub.add_parser("phrases", help="hear each stage of a phrase, to check the boundaries")
     sp.add_argument("--language", action="append")

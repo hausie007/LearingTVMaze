@@ -151,14 +151,21 @@ func speak_item(display: String, lang: String = "") -> void:
 ## lengths of one reading rather than three readings.
 func speak_word(text: String, lang: String = "") -> void:
 	var language := _language_or_default(lang)
-	var key := _word_key(language, text)
-	if not key.is_empty():
-		_speak(key, language, text, RATE_WORD)
-		return
+	# The phrase's own reading comes first, ahead of any standalone recording
+	# of the same word. KOČKA is both its own vocabulary word and the opening
+	# of KOČKA LEZE DÍROU; playing the standalone clip and then the phrase
+	# would put two different readings back to back, which is the thing this
+	# whole approach exists to avoid.
 	var partial: Dictionary = _pack(language).get("_prefixes", {}).get(
 		text.strip_edges().to_upper(), {})
+	var key := _word_key(language, text)
+	if partial.is_empty() and not key.is_empty():
+		_speak(key, language, text, RATE_WORD)
+		return
 	if partial.is_empty() or Config.voice_mode != Config.VoiceMode.STUDIO_PREFERRED:
-		_speak("", language, text, RATE_WORD)
+		# `key` is empty for a partial phrase, which sends this to the device
+		# voice — the same behaviour as before boundaries existed.
+		_speak(key, language, text, RATE_WORD)
 		return
 	if not _play(language, String(partial["key"]), int(partial["stop_ms"]),
 			int(partial.get("fade_ms", DEFAULT_FADE_MS))):
@@ -597,8 +604,8 @@ func _register_prefixes(pack: Dictionary, key: String, display: String) -> void:
 	var fades: Array = pack["items"][key].get("word_fade_ms", [])
 	for i in range(ends.size()):
 		var prefix := " ".join(words.slice(0, i + 1))
-		if pack["_words"].has(prefix) or pack["_prefixes"].has(prefix):
-			continue        # a real recording of its own always wins
+		if pack["_prefixes"].has(prefix):
+			continue
 		pack["_prefixes"][prefix] = {
 			"key": key,
 			"stop_ms": int(ends[i]),

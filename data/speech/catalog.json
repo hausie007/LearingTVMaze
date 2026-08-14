@@ -272,7 +272,9 @@
     "alignment_note": "Forced alignment supplies the word boundaries inside a phrase. The sheet's own alignment cannot: it is right at the ends of a sheet and drifts by over a second in the middle. A clip whose alignment loss exceeds this is left without boundaries, and the game simply does not narrate that phrase mid-word.",
     "boundary_reach_ms": 120,
     "boundary_fade_ms": 40,
-    "boundary_note": "How a phrase is stopped at a word boundary. The word plays whole at full volume to the hold point, then fades — fading into the boundary instead cost the last syllable. reach is how far past the aligner's end of the word the hold may run, taken from the pause the aligner reports before the next word and capped so a long pause is not sat through; aligners mark the vowel and not the release after it."
+    "boundary_note": "How a phrase is stopped at a word boundary. The word plays whole at full volume to the hold point and only then fades — fading into the boundary instead cost the last syllable. Hold and fade together stay inside the pause the aligner reports before the next word: half of it is held, the rest is the fade, so nothing reaches over the next word, which was audible as a hint of the letter to come. reach caps the pause that may be spent, so a long one is not sat through. The hold running past the aligner's end at all is deliberate — aligners mark the vowel, not the release after it.",
+    "boundary_hold_share": 0.5,
+    "boundary_fade_min_ms": 12
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",
