@@ -284,5 +284,10 @@
     "max_characters_per_run": 5000,
     "max_concurrency": 2,
     "require_confirm_flag": true
+  },
+  "pricing_usd_per_hour_audio": {
+    "note": "Forced alignment is billed by audio duration at the speech-to-text rate, not by characters. RECHECK at https://elevenlabs.io/pricing/api — these change.",
+    "checked_on": "2026-08-14",
+    "forced_alignment": 0.4
   }
 }

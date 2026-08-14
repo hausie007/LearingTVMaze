@@ -2096,10 +2096,19 @@ def cmd_align(args) -> int:
         info("Every phrase already has its word boundaries.")
         return 0
 
-    info(f"{len(todo)} phrases to align. This sends existing audio for timing only; "
-         f"it synthesises nothing.")
+    todo.sort(key=lambda r: r["key"])
+    if args.limit:
+        todo = todo[:args.limit]
+
+    rate = cat["master_format"]["sample_rate"]
+    seconds = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate for r in todo)
+    price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
+    info(f"{len(todo)} phrases, {seconds / 60:.1f} min of audio, about "
+         f"${seconds / 3600 * price:.3f}. Forced alignment is billed by audio "
+         f"duration at the speech-to-text rate; nothing is synthesised, so no "
+         f"clip changes and no approval is disturbed.")
     if not args.confirm:
-        info("Re-run with --confirm to do it.")
+        info("Re-run with --confirm to do it. Add --limit N to try a few first.")
         return 0
 
     key = api_key()
@@ -2396,6 +2405,86 @@ def flag_clips(clips, measured, rate: int) -> None:
         if notes:
             existing = clips[idx].get("flag") or ""
             clips[idx]["flag"] = "; ".join(([existing] if existing else []) + notes)
+
+
+def cmd_phrases(args) -> int:
+    """Write out each stage of a phrase, so the boundaries can be judged by ear.
+
+    This is the only check that counts. A boundary table looks right whether or
+    not it lands between the words; the way to know is to hear THIS, then THIS
+    IS, then THIS IS GOOD, and notice whether any of them clips a syllable.
+    """
+    require_ffmpeg()
+    cat = load_catalog()
+    profiles = load_profiles()
+    records = load_desired()
+    if args.language:
+        records = [r for r in records if r["lang"] in args.language]
+    classify(records)
+
+    rows = []
+    for r in records:
+        if r["category"] != "word" or len(r["spoken_text"].split()) < 2:
+            continue
+        ends = phrase_boundaries(r, profiles, cat)
+        if ends and processed_path(r["render_hash"]).exists():
+            rows.append((r, ends))
+    if not rows:
+        raise Fail("no phrase has usable word boundaries yet — run `align --confirm` "
+                   "and then `process --force --category word`")
+    rows.sort(key=lambda x: x[0]["key"])
+    if args.limit:
+        rows = rows[:args.limit]
+
+    folder = BUILD / "phrases"
+    if folder.exists():
+        shutil.rmtree(folder)
+    folder.mkdir(parents=True)
+
+    listed = []
+    for i, (r, ends) in enumerate(rows, 1):
+        src = processed_path(r["render_hash"])
+        meta = read_json(src.with_suffix(".json")) if src.with_suffix(".json").exists() else {}
+        stops = meta.get("word_ends_ms", [])
+        words = r["display_text"].split()
+        stages = []
+        for n, stop_ms in enumerate(stops, 1):
+            name = f"{i:03d}_{word_slug(r['display_text'])}_{n}.mp3"
+            res = run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(src),
+                       "-t", f"{stop_ms / 1000.0:.3f}", "-af",
+                       f"afade=t=out:st={max(stop_ms / 1000.0 - 0.045, 0):.3f}:d=0.045",
+                       str(folder / name)])
+            if res.returncode == 0:
+                stages.append((" ".join(words[:n]), name, stop_ms))
+        full = f"{i:03d}_{word_slug(r['display_text'])}_full.mp3"
+        shutil.copyfile(src, folder / full)
+        stages.append((r["display_text"], full, 0))
+        listed.append((r, stages))
+
+    write_phrase_page(folder / "index.html", listed)
+    info(f"-> {rel(folder / 'index.html')}  ({len(listed)} phrases)")
+    info("Listen to each stage in turn. A stage that clips a syllable or runs "
+         "into the next word means that phrase's alignment is wrong; note the "
+         "phrase and it can be dropped or re-aligned individually.")
+    return 0
+
+
+def write_phrase_page(path: Path, listed: list) -> None:
+    parts = ["<!doctype html><meta charset='utf-8'><title>Phrase boundaries</title>",
+             "<style>body{font:15px/1.5 system-ui;margin:2rem;max-width:52rem}"
+             "h2{margin:1.6rem 0 .3rem;font-size:1rem}"
+             "div{display:flex;align-items:center;gap:.6rem;margin:.15rem 0}"
+             "span{min-width:16rem}audio{height:2rem}em{color:#777;font-style:normal}"
+             "</style>",
+             "<h1>Phrase boundaries</h1><p>Each row is what the child hears after "
+             "collecting that many words. It should end cleanly on a word.</p>"]
+    for r, stages in listed:
+        parts.append(f"<h2>{r['display_text']} <em>{r['lang']}</em></h2>")
+        for text, name, stop_ms in stages:
+            at = f"<em>{stop_ms} ms</em>" if stop_ms else "<em>full</em>"
+            parts.append(f"<div><span>{text}</span>"
+                         f"<audio controls preload=none src='{name}'></audio>{at}</div>")
+    path.write_text("\n".join(parts), encoding="utf-8")
 
 
 def cmd_listen(args) -> int:
@@ -3318,6 +3407,7 @@ def main(argv=None) -> int:
     sp = sub.add_parser("align", help="fetch word boundaries for recorded phrases (no synthesis)")
     sp.add_argument("--language", action="append")
     sp.add_argument("--force", action="store_true", help="re-align phrases that already have timings")
+    sp.add_argument("--limit", type=int, help="only the first N, for a trial run")
     sp.add_argument("--confirm", action="store_true", help="actually call the API")
     sp.set_defaults(func=cmd_align)
 
@@ -3327,6 +3417,11 @@ def main(argv=None) -> int:
                     help="number | char | word; repeatable")
     sp.add_argument("--force", action="store_true", help="re-encode clips that already exist")
     sp.set_defaults(func=cmd_process)
+
+    sp = sub.add_parser("phrases", help="hear each stage of a phrase, to check the boundaries")
+    sp.add_argument("--language", action="append")
+    sp.add_argument("--limit", type=int)
+    sp.set_defaults(func=cmd_phrases)
 
     sp = sub.add_parser("listen", help="named copies of the clips + a page to review them in")
     sp.add_argument("--language", "-l", action="append", metavar="LANG")
