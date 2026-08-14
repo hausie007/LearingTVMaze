@@ -65,9 +65,23 @@ Two things to be aware of before you commit:
 2. Subscribe to Starter.
 3. Go to <https://elevenlabs.io/app/settings/api-keys> and create a key.
    - Name it something like `learning-maze-tts`.
-   - **Restrict it to Text to Speech** if the scope selector offers it. The key
-     never needs to do anything else, and a narrow key limits the damage if it
-     leaks.
+   - **Grant these four permissions.** A key is shown once and cannot be
+     re-scoped afterwards, so granting all four now avoids making a third key:
+
+     | Permission | Used by | Endpoint |
+     |---|---|---|
+     | Text to Speech | `generate` | `POST /text-to-speech/{id}/with-timestamps` |
+     | Voices (read) | `voices` | `GET /voices` |
+     | Voice Library (read) | `voices` | `GET /shared-voices` |
+     | Forced Alignment | `align` | `POST /forced-alignment` |
+
+     Nothing else is ever called — no dubbing, no Studio, no history, no
+     account or workspace endpoints. If the scope list uses different labels,
+     match them to the endpoints in the right-hand column.
+   - You would also need **Pronunciation Dictionaries** if a locale ever gets
+     `pronunciation_dictionaries` filled in inside `voice_profiles.json`. They
+     are all empty today: the pronunciation files in `data/speech/pronunciations/`
+     are applied to the text locally, before it is sent.
    - Copy it now; it is shown once.
 
 Then put it in your shell environment — **never in a file inside this repo**:

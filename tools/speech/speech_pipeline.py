@@ -2032,6 +2032,12 @@ def force_align(key: str, pcm: bytes, text: str, cat: dict) -> dict:
             if exc.code in (429, 500, 502, 503, 504) and attempt < 4:
                 warn(f"HTTP {exc.code}, retrying in {delay:.1f}s")
                 time.sleep(delay); delay *= 2; continue
+            if exc.code == 401 and "forced_alignment" in detail:
+                raise Fail(
+                    "this API key lacks the 'Forced Alignment' permission. A key's "
+                    "permissions cannot be changed after it is created, so make a new "
+                    "one granting Text to Speech, Voices, Voice Library and Forced "
+                    "Alignment together — see tools/speech/SETUP.md.")
             raise Fail(f"HTTP {exc.code}: {detail}")
         except urllib.error.URLError as exc:
             if attempt < 4:
@@ -2119,6 +2125,8 @@ def cmd_align(args) -> int:
             doc = force_align(key, master_path(r["spec_hash"]).read_bytes(),
                               r["spoken_text"], cat)
         except Fail as exc:
+            if "permission" in str(exc):
+                raise
             warn(f"{r['key']}: {exc}")
             failed += 1
             continue
