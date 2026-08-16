@@ -1,5 +1,36 @@
 # Studio Voice pipeline
 
+## Start here
+
+One command, one language. It works out the order, does everything that is
+free and reversible, and stops at the two things that are not — spending money
+and listening:
+
+```bash
+python3 tools/speech/speech_pipeline.py next en
+```
+
+Run it, do what it says, run it again. Repeat until it says the language is
+done. You never need to know the other verbs; they are what `next` calls, and
+they are documented below for when something goes wrong.
+
+The two stops:
+
+- **money** — `generate` records new clips, `align` finds word boundaries in
+  ones already recorded. Both print the cost and both need `--confirm`.
+- **ears** — nothing is packed until you have listened. `next` builds the pages
+  and tells you which file to mark up.
+
+Listening pages, both rebuilt each run:
+
+| Page | What it is for |
+|---|---|
+| `build/speech/listen_<locale>/index.html` | every clip, to approve or reject |
+| `build/speech/phrases/index.html` | each stage of a multi-word phrase, to check the boundaries fall between words |
+
+`phrases` covers one language at a time and overwrites the folder, so look at
+one language, then the next.
+
 Generates the pre-recorded speech the game plays instead of device TTS, offline,
 ahead of time. New to this? Read `SETUP.md` first — account, key and choosing a
 voice. The design and its rationale are in

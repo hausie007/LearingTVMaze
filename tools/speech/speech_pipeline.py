@@ -3345,6 +3345,85 @@ def language_status(cat: dict) -> list:
     return rows
 
 
+def cmd_next(args) -> int:
+    """One command for one language: where it stands and what to do now.
+
+    The rest of this tool is thirteen verbs in an order that only makes sense
+    once you already know it. This works out the order for you, does every step
+    that is free and reversible, and stops at the two that are not: spending
+    money, and listening. Those stay yours.
+    """
+    lang = args.language
+    cat = load_catalog()
+    if lang not in cat["languages"]:
+        raise Fail(f"unknown language {lang!r}. Known: {', '.join(sorted(cat['languages']))}")
+
+    def run_step(name: str, argv: list) -> int:
+        info(f"\n--- {name} ---")
+        parser = build_parser()
+        return parser.parse_args(argv).func(parser.parse_args(argv))
+
+    # Always re-derive what the language wants. It is free, and a stale
+    # desired.jsonl once had every later command working from a word list that
+    # no longer existed.
+    run_step("reading the word lists", ["extract"])
+
+    records = [r for r in load_desired() if r["lang"] == lang]
+    if not records:
+        raise Fail(f"{lang} is not enabled in data/speech/catalog.json")
+    classify(records)
+    profiles = load_profiles()
+
+    counts = {}
+    for r in records:
+        counts[r["status"]] = counts.get(r["status"], 0) + 1
+    info(f"\n{lang}: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
+
+    if counts.get("unconfigured"):
+        info(f"\nNEXT: pick a voice. No voice_id for this language yet.")
+        info(f"  python3 {rel(Path(__file__))} voices --language {lang}")
+        return 0
+
+    if counts.get("missing"):
+        chars = sum(len(r["spoken_text"]) for r in records if r["status"] == "missing")
+        cost = chars / 1000.0 * cat["pricing_usd_per_1k_chars"].get("eleven_v3", 0.1)
+        info(f"\nNEXT: record the {counts['missing']} missing clips — about ${cost:.2f}.")
+        info(f"  python3 {rel(Path(__file__))} generate --language {lang} --confirm")
+        return 0
+
+    # Free and reversible: encode anything recorded but not yet encoded.
+    if counts.get("generated"):
+        run_step(f"encoding {counts['generated']} new clips", ["process", "--language", lang])
+
+    phrases = [r for r in records
+               if r["category"] == "word" and len(r["spoken_text"].split()) > 1]
+    unaligned = [r for r in phrases if not alignment_path(r["spec_hash"]).exists()]
+    if unaligned:
+        rate = cat["master_format"]["sample_rate"]
+        secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
+                   for r in unaligned if master_path(r["spec_hash"]).exists())
+        price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
+        info(f"\nNEXT: {len(unaligned)} phrases have no word timings, so the game "
+             f"cannot narrate them as they are collected — about "
+             f"${secs / 3600 * price:.3f}.")
+        info(f"  python3 {rel(Path(__file__))} align --language {lang} --confirm")
+        info(f"Then run this command again.")
+        return 0
+
+    if phrases:
+        run_step("checking the phrase boundaries", ["phrases", "--language", lang])
+
+    if counts.get("unreviewed") or counts.get("rejected"):
+        run_step("building the listening page", ["listen", "--language", lang, "--pending"])
+        info(f"\nNEXT: listen, mark each row, then import your verdicts.")
+        info(f"  python3 {rel(Path(__file__))} review --import <the CSV you edited>")
+        return 0
+
+    run_step("packing", ["pack", "--language", lang])
+    info(f"\n{lang} is done: every clip recorded, encoded, approved and packed.")
+    return 0
+
+
 def cmd_status(args) -> int:
     cat = load_catalog()
     rows = language_status(cat)
@@ -3476,13 +3555,16 @@ def cmd_doctor(args) -> int:
 # CLI
 # --------------------------------------------------------------------------
 
-def main(argv=None) -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="speech_pipeline.py",
         description="Studio Voice build pipeline. Only `generate` spends money.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__.split("Requires")[0].strip().splitlines()[-4:] and
-        "typical run:\n"
+        "start here:\n"
+        "  next <lang>     one language: do the free steps, say what is next\n"
+        "\n"
+        "the individual steps, in the order `next` runs them:\n"
         "  doctor          check the machine and the config\n"
         "  extract         enumerate every clip the catalog wants\n"
         "  plan            what is missing, and what it would cost\n"
@@ -3599,6 +3681,10 @@ def main(argv=None) -> int:
     sp.add_argument("--pack-version", type=int, default=1)
     sp.set_defaults(func=cmd_pack)
 
+    sp = sub.add_parser("next", help="START HERE: one language, what to do next")
+    sp.add_argument("language", help="cs, en, de, sk, pl …")
+    sp.set_defaults(func=cmd_next)
+
     sp = sub.add_parser("status", help="regenerate LANGUAGE_STATUS.md from the repository")
     sp.add_argument("--check", action="store_true",
                     help="fail if the file is out of date instead of rewriting it")
@@ -3609,7 +3695,11 @@ def main(argv=None) -> int:
                     help="also fail on direct TTS.speak() calls (turn on in Phase 5)")
     sp.set_defaults(func=cmd_verify)
 
-    args = parser.parse_args(argv)
+    return parser
+
+
+def main(argv=None) -> int:
+    args = build_parser().parse_args(argv)
     try:
         return args.func(args)
     except Fail as exc:
