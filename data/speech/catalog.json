@@ -68,181 +68,87 @@
   "languages": {
     "cs": {
       "locale": "cs-CZ",
-      "enabled": true,
-      "categories": [
-        "number",
-        "char",
-        "word",
-        "ui",
-        "number_form"
-      ]
+      "enabled": true
     },
     "en": {
       "locale": "en-US",
-      "enabled": true,
-      "categories": [
-        "number",
-        "char",
-        "word",
-        "ui",
-        "number_form"
-      ]
+      "enabled": true
     },
     "sk": {
       "locale": "sk-SK",
-      "enabled": true,
-      "categories": [
-        "number",
-        "char",
-        "word"
-      ]
+      "enabled": true
     },
     "pl": {
       "locale": "pl-PL",
-      "enabled": true,
-      "categories": [
-        "number",
-        "char",
-        "word"
-      ]
+      "enabled": true
     },
     "de": {
       "locale": "de-DE",
-      "enabled": true,
-      "categories": [
-        "number",
-        "char",
-        "word",
-        "ui"
-      ]
+      "enabled": true
     },
     "es": {
       "locale": "es-ES",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "fr": {
       "locale": "fr-FR",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "it": {
       "locale": "it-IT",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "pt": {
       "locale": "pt-PT",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "nl": {
       "locale": "nl-NL",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "sv": {
       "locale": "sv-SE",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "da": {
       "locale": "da-DK",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "nb": {
       "locale": "nb-NO",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "fi": {
       "locale": "fi-FI",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "hu": {
       "locale": "hu-HU",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "ro": {
       "locale": "ro-RO",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "tr": {
       "locale": "tr-TR",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "el": {
       "locale": "el-GR",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "uk": {
       "locale": "uk-UA",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "vi": {
       "locale": "vi-VN",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     },
     "he": {
       "locale": "he-IL",
-      "enabled": false,
-      "categories": [
-        "number",
-        "char"
-      ]
+      "enabled": false
     }
   },
   "master_format": {
@@ -299,5 +205,6 @@
     "note": "Forced alignment is billed by audio duration at the speech-to-text rate, not by characters. RECHECK at https://elevenlabs.io/pricing/api — these change.",
     "checked_on": "2026-08-14",
     "forced_alignment": 0.4
-  }
+  },
+  "languages_note": "A language records every category it has the data for. There is no per-language list to keep in step any more: German once shipped without 'ui' in its list and its title and menu names silently fell back to the device voice. Add a 'categories' key to a language only to deliberately restrict it."
 }

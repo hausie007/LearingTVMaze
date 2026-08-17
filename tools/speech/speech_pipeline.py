@@ -460,6 +460,30 @@ def category_mode(cat: dict, profile: dict, category: str) -> str:
                             profile.get("synthesis_mode", "single")))
 
 
+def categories_for(cat: dict, lang: str, lspec: dict) -> list:
+    """What a language records. Everything it can, unless it says otherwise.
+
+    This used to be an explicit list per language, and German shipped without
+    "ui" in it — so its title, its menu language names and its recap framing
+    quietly fell back to the device voice, and nobody could see why. A list
+    that must be remembered is a list that will be forgotten. The default is
+    now everything the language has the data for; naming categories explicitly
+    still works, for a language deliberately kept to letters and numbers.
+    """
+    if lspec.get("categories"):
+        return lspec["categories"]
+    out = []
+    for name, cspec in cat["categories"].items():
+        if name == "number_form":
+            # Only where the language actually inflects. English "to fifty" is
+            # the plain number already, so there is nothing to record.
+            forms = read_json(REPO / "data" / "number_forms.json")
+            if not (forms.get("languages", {}).get(lang, {}).get("to")):
+                continue
+        out.append(name)
+    return out
+
+
 def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
                 retake: int = 0, context: dict = None) -> dict:
     if not spoken:
@@ -547,7 +571,7 @@ def build_records(cat: dict, profiles: dict, langs) -> list:
         overrides = load_overrides(locale)
         retakes = load_retakes(lang)
 
-        for category in lspec["categories"]:
+        for category in categories_for(cat, lang, lspec):
             cspec = cat["categories"][category]
 
             if category == "number_form":
@@ -2931,7 +2955,7 @@ def cmd_pack(args) -> int:
             }
 
         coverage, counts = {}, {}
-        for category in cat["languages"][lang]["categories"]:
+        for category in categories_for(cat, lang, cat["languages"][lang]):
             wanted = [r for r in per if r["category"] == category]
             got = [r for r in approved if r["category"] == category]
             counts[category] = len(got)
@@ -3465,110 +3489,131 @@ def audit_verdict(doc: dict, record: dict, cat: dict) -> dict:
 
 
 def cmd_next(args) -> int:
-    """One command for one language: where it stands and what to do now.
+    """One language, start to finish. Look, or do.
 
-    The rest of this tool is thirteen verbs in an order that only makes sense
-    once you already know it. This works out the order for you, does every step
-    that is free and reversible, and stops at the two that are not: spending
-    money, and listening. Those stay yours.
+    Without --go it reports and stops. With --go it runs the whole chain up to
+    the point where a human has to listen, spending at most --budget. Every
+    step that costs money says what it cost and counts against that budget, so
+    there is one decision to make instead of five prompts to answer.
     """
     lang = args.language
     cat = load_catalog()
     if lang not in cat["languages"]:
         raise Fail(f"unknown language {lang!r}. Known: {', '.join(sorted(cat['languages']))}")
+    budget = args.budget if args.go else 0.0
+    spent = [0.0]
 
-    def run_step(name: str, argv: list) -> int:
+    def step(name: str, argv: list):
         info(f"\n--- {name} ---")
-        parser = build_parser()
-        return parser.parse_args(argv).func(parser.parse_args(argv))
+        parsed = build_parser().parse_args(argv)
+        return parsed.func(parsed)
 
-    # Always re-derive what the language wants. It is free, and a stale
-    # desired.jsonl once had every later command working from a word list that
-    # no longer existed.
-    run_step("reading the word lists", ["extract"])
+    def afford(what: str, cost: float, argv: list) -> bool:
+        """Spend, if --go was given and the budget covers it. Otherwise say so."""
+        if not args.go:
+            info(f"\nNEXT: {what} — about ${cost:.2f}")
+            info(f"  python3 {rel(Path(__file__))} next {lang} --go --budget {max(cost * 1.5, 0.50):.2f}")
+            return False
+        if spent[0] + cost > budget:
+            info(f"\nSTOPPED: {what} would cost about ${cost:.2f} and only "
+                 f"${budget - spent[0]:.2f} of the ${budget:.2f} budget is left.")
+            info(f"  python3 {rel(Path(__file__))} next {lang} --go --budget {spent[0] + cost * 1.5:.2f}")
+            return False
+        spent[0] += cost
+        step(what, argv + ["--confirm"])
+        return True
 
-    records = [r for r in load_desired() if r["lang"] == lang]
-    if not records:
-        raise Fail(f"{lang} is not enabled in data/speech/catalog.json")
-    classify(records)
+    def state():
+        records = [r for r in load_desired() if r["lang"] == lang]
+        if not records:
+            raise Fail(f"{lang} is not enabled in data/speech/catalog.json")
+        return classify(records)
+
+    step("reading the word lists", ["extract"])
     profiles = load_profiles()
+    rate = cat["master_format"]["sample_rate"]
+    align_price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
 
-    counts = {}
-    for r in records:
-        counts[r["status"]] = counts.get(r["status"], 0) + 1
-    info(f"\n{lang}: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
+    for _ in range(8):        # each pass completes one stage; 8 is more than enough
+        records = state()
+        counts = {}
+        for r in records:
+            counts[r["status"]] = counts.get(r["status"], 0) + 1
+        info(f"\n{lang}: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
 
-    if counts.get("unconfigured"):
-        info(f"\nNEXT: pick a voice. No voice_id for this language yet.")
-        info(f"  python3 {rel(Path(__file__))} voices --language {lang}")
-        return 0
+        if counts.get("unconfigured"):
+            info(f"\nNEXT: this language has no voice yet. Listen to candidates, put the "
+                 f"voice_id in data/speech/voice_profiles.json, then run this again.")
+            info(f"  python3 {rel(Path(__file__))} voices --language {lang}")
+            return 0
 
-    if counts.get("missing"):
-        chars = sum(len(r["spoken_text"]) for r in records if r["status"] == "missing")
-        cost = chars / 1000.0 * cat["pricing_usd_per_1k_chars"].get("eleven_v3", 0.1)
-        info(f"\nNEXT: record the {counts['missing']} missing clips — about ${cost:.2f}.")
-        info(f"  python3 {rel(Path(__file__))} generate --language {lang} --confirm")
-        return 0
-
-    # Free and reversible: encode anything recorded but not yet encoded.
-    if counts.get("generated"):
-        run_step(f"encoding {counts['generated']} new clips", ["process", "--language", lang])
-
-    phrases = [r for r in records
-               if r["category"] == "word" and len(r["spoken_text"].split()) > 1]
-    unaligned = [r for r in phrases if not alignment_path(r["spec_hash"]).exists()]
-    if unaligned:
-        rate = cat["master_format"]["sample_rate"]
-        secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
-                   for r in unaligned if master_path(r["spec_hash"]).exists())
-        price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
-        info(f"\nNEXT: {len(unaligned)} phrases have no word timings, so the game "
-             f"cannot narrate them as they are collected — about "
-             f"${secs / 3600 * price:.3f}.")
-        info(f"  python3 {rel(Path(__file__))} align --language {lang} --confirm")
-        info(f"Then run this command again.")
-        return 0
-
-    # An alignment only reaches the game once the clip beside it has been
-    # re-encoded. Aligning and then packing — which is the obvious order —
-    # silently produced clips with no boundaries at all, so this closes the
-    # gap rather than trusting anyone to remember the extra step.
-    stale = []
-    for r in phrases:
-        if not phrase_boundaries(r, profiles, cat):
+        if counts.get("missing"):
+            chars = sum(len(r["spoken_text"]) for r in records if r["status"] == "missing")
+            cost = chars / 1000.0 * cat["pricing_usd_per_1k_chars"].get("eleven_v3", 0.1)
+            if not afford(f"record {counts['missing']} clips", cost,
+                          ["generate", "--language", lang]):
+                return 0
             continue
-        side = processed_path(r["render_hash"]).with_suffix(".json")
-        if not side.exists() or not read_json(side).get("word_ends_ms"):
-            stale.append(r)
-    if stale:
-        run_step(f"folding the word timings into {len(stale)} clips",
+
+        if counts.get("generated"):
+            step(f"encoding {counts['generated']} clips", ["process", "--language", lang])
+            continue
+
+        phrases = [r for r in records
+                   if r["category"] == "word" and len(r["spoken_text"].split()) > 1]
+        unaligned = [r for r in phrases if not alignment_path(r["spec_hash"]).exists()]
+        if unaligned:
+            secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
+                       for r in unaligned if master_path(r["spec_hash"]).exists())
+            if not afford(f"find word boundaries in {len(unaligned)} phrases",
+                          secs / 3600 * align_price, ["align", "--language", lang]):
+                return 0
+            continue
+
+        # A boundary only reaches the game once its clip is re-encoded.
+        stale = [r for r in phrases if phrase_boundaries(r, profiles, cat)
+                 and not read_json(processed_path(r["render_hash"]).with_suffix(".json")
+                                   ).get("word_ends_ms")]
+        if stale:
+            step(f"folding word timings into {len(stale)} clips",
                  ["process", "--force", "--language", lang, "--category", "word"])
+            continue
 
-    if phrases:
-        run_step("checking the phrase boundaries", ["phrases", "--language", lang])
-
-    if counts.get("unreviewed") or counts.get("rejected"):
-        unchecked = [r for r in records if r["status"] in ("unreviewed", "rejected")
-                     and not audit_path(r["render_hash"]).exists()]
+        waiting = [r for r in records if r["status"] in ("unreviewed", "rejected")]
+        unchecked = [r for r in waiting if not audit_path(r["render_hash"]).exists()]
         if unchecked:
-            rate = cat["master_format"]["sample_rate"]
             secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
                        for r in unchecked if master_path(r["spec_hash"]).exists())
-            price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
-            info(f"\nNEXT: check the {len(unchecked)} new clips actually say what they "
-                 f"should — about ${secs / 3600 * price:.3f}. This is what catches a "
-                 f"mis-cut before you have to hear it.")
-            info(f"  python3 {rel(Path(__file__))} audit --language {lang} --confirm")
-            info(f"Then run this command again.")
+            if not afford(f"check {len(unchecked)} clips say the right words",
+                          secs / 3600 * align_price, ["audit", "--language", lang]):
+                return 0
+            continue
+
+        if waiting:
+            if phrases:
+                step("phrase boundaries", ["phrases", "--language", lang])
+            step("building the review page", ["listen", "--language", lang, "--pending"])
+            step("building the review sheet", ["review", "--language", lang])
+            suspect = sum(1 for r in waiting
+                          if (read_json(audit_path(r["render_hash"])) or {}).get("suspect"))
+            info(f"\nYOUR TURN: {len(waiting)} clips to sign off. {suspect} are already "
+                 f"marked rejected because they do not say what they should; the rest "
+                 f"need your ears.")
+            info(f"  open build/speech/listen/{records[0]['locale']}/index.html")
+            info(f"  then: python3 {rel(Path(__file__))} review "
+                 f"--import build/speech/review_{records[0]['locale']}.csv")
+            if spent[0]:
+                info(f"\nSpent about ${spent[0]:.2f}.")
             return 0
-        run_step("building the listening page", ["listen", "--language", lang, "--pending"])
-        info(f"\nNEXT: listen, mark each row, then import your verdicts.")
-        info(f"  python3 {rel(Path(__file__))} review --import <the CSV you edited>")
+
+        step("packing", ["pack", "--language", lang])
+        if spent[0]:
+            info(f"\nSpent about ${spent[0]:.2f}.")
+        info(f"\n{lang} is done: recorded, checked, approved and playing in the game.")
         return 0
 
-    run_step("packing", ["pack", "--language", lang])
-    info(f"\n{lang} is done: every clip recorded, encoded, approved and packed.")
-    return 0
+    warn("stopped after 8 stages without finishing — something is looping")
+    return 1
 
 
 def cmd_status(args) -> int:
@@ -3685,7 +3730,7 @@ def cmd_doctor(args) -> int:
     for lang, spec in cat["languages"].items():
         if not spec.get("enabled"):
             continue
-        for category in spec["categories"]:
+        for category in categories_for(cat, lang, spec):
             cspec = cat["categories"][category]
             if "source" not in cspec:
                 # A category can name a directory of files instead of one file
@@ -3852,6 +3897,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = sub.add_parser("next", help="START HERE: one language, what to do next")
     sp.add_argument("language", help="cs, en, de, sk, pl …")
+    sp.add_argument("--go", action="store_true",
+                    help="actually do it, instead of reporting what is next")
+    sp.add_argument("--budget", type=float, default=1.00, metavar="USD",
+                    help="most this run may spend, in dollars (default 1.00)")
     sp.set_defaults(func=cmd_next)
 
     sp = sub.add_parser("status", help="regenerate LANGUAGE_STATUS.md from the repository")
