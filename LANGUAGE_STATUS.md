@@ -10,11 +10,11 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 
 | Lang | Voice | Data | Alphabet | Digraphs | Words checked | Letters+numbers | Word audio | UI speech | In game |
 |---|---|---|---|---|---|---|---|---|---|
-| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | · | · | · | ✓ playing |
-| **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | · | · | · | ✓ playing |
-| **sk** | Luky Zajo | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | ✓ | · | · | ✓ playing |
-| **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · | · | · |
-| **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | · | · | ✓ playing |
+| **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | · | · 0/277 | · 0/56 | ✓ playing |
+| **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | ✓ | ✓ 290 | ✓ 56 | ✓ playing |
+| **sk** | Luky Zajo | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | ✓ | ✓ 147 | ✓ 57 | ✓ playing |
+| **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · 0/169 | · 0/58 | · |
+| **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | ✓ 62 | ✓ playing |
 | es | · | · | · | · | · | · | · | · | · |
 | fr | · | · | · | · | · | · | · | · | · |
 | it | · | · | · | · | · | · | · | · | · |

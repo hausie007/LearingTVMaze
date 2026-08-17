@@ -3366,6 +3366,8 @@ def language_status(cat: dict) -> list:
             acc["n"] += 1
             acc["ok"] += 1 if r["status"] == "approved" else 0
 
+        declared = categories_for(cat, lang, spec)
+
         def phase(name):
             acc = by_cat.get(name)
             if not acc or not acc["n"]:
@@ -3414,14 +3416,14 @@ def language_status(cat: dict) -> list:
             core = ("·", "")
 
         words = phase("word")
-        if "word" not in spec.get("categories", []):
+        if "word" not in declared:
             words = ("·", "")
 
         ui = phase("ui")
-        if "ui" not in spec.get("categories", []):
+        if "ui" not in declared:
             ui = ("·", "")
         forms = phase("number_form")
-        if "number_form" in spec.get("categories", []) and forms == ("·", ""):
+        if "number_form" in declared and forms == ("·", ""):
             # Declared and empty: this language inflects nothing here.
             ui = ("✓", f"{ui[1]} +0 forms".strip()) if ui[0] == "✓" else ui
         elif forms[0] == "✓":
@@ -3590,6 +3592,13 @@ def cmd_next(args) -> int:
         # A clip you rejected is a clip to record again. That needed a separate
         # verb nobody could be expected to know about, so a rejection sat there
         # looking like unfinished review instead of pending work.
+        # Encoding comes before spending. Czech sat unprocessed because four
+        # clips needed re-recording, and the paid step was checked first — so
+        # a few cents of work blocked several hundred clips of free work.
+        if counts.get("generated"):
+            step(f"encoding {counts['generated']} clips", ["process", "--language", lang])
+            continue
+
         if counts.get("rejected"):
             step(f"queueing {counts['rejected']} rejected clips for a fresh take",
                  ["retake", "--language", lang, "--rejected"])
@@ -3604,10 +3613,6 @@ def cmd_next(args) -> int:
             if not afford(f"record {counts['missing']} clips", cost,
                           ["generate", "--language", lang]):
                 return 0
-            continue
-
-        if counts.get("generated"):
-            step(f"encoding {counts['generated']} clips", ["process", "--language", lang])
             continue
 
         phrases = [r for r in records

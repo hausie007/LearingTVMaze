@@ -8,15 +8,13 @@
     "number": "complete",
     "char": "complete",
     "word": "complete",
-    "ui": "complete",
-    "number_form": "not_needed"
+    "ui": "complete"
   },
   "counts": {
     "number": 50,
     "char": 26,
     "word": 290,
-    "ui": 56,
-    "number_form": 0
+    "ui": 56
   },
   "items": {
     "learning.char.a": {
