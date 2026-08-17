@@ -102,9 +102,9 @@
     "de-DE": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "kkJxCnlRCckmfFvzDW5Q",
+      "voice_name": "Alexander - Deep TV Narrator",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "de",
       "settings": {

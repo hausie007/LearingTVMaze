@@ -3410,6 +3410,21 @@ def cmd_next(args) -> int:
         info(f"Then run this command again.")
         return 0
 
+    # An alignment only reaches the game once the clip beside it has been
+    # re-encoded. Aligning and then packing — which is the obvious order —
+    # silently produced clips with no boundaries at all, so this closes the
+    # gap rather than trusting anyone to remember the extra step.
+    stale = []
+    for r in phrases:
+        if not phrase_boundaries(r, profiles, cat):
+            continue
+        side = processed_path(r["render_hash"]).with_suffix(".json")
+        if not side.exists() or not read_json(side).get("word_ends_ms"):
+            stale.append(r)
+    if stale:
+        run_step(f"folding the word timings into {len(stale)} clips",
+                 ["process", "--force", "--language", lang, "--category", "word"])
+
     if phrases:
         run_step("checking the phrase boundaries", ["phrases", "--language", lang])
 
