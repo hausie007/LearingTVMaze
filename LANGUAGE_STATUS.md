@@ -12,7 +12,7 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 |---|---|---|---|---|---|---|---|---|---|
 | **cs** | Jana | ✓ | ✓ +8 word-only | ✓ CH | ✓ 8 marked | · | · | · | ✓ playing |
 | **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | · | · | · | ✓ playing |
-| **sk** | · | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | · | · | · | · |
+| **sk** | Luky Zajo | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | ✓ | · | · | ✓ playing |
 | **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · | · | · |
 | **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | · | · | ✓ playing |
 | es | · | · | · | · | · | · | · | · | · |

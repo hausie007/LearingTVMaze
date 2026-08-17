@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "locale": "sk-SK",
+  "note": "Empty on purpose. IPA was tried for H and made it worse — /ɦaːː/ came out as a breath rather than a letter name. The fix was context, not spelling: the letter is retaken between its neighbours in the alphabet, so the model reads it as one name in a recital. See retakes.json.",
+  "overrides": {},
+  "_length_note": "If IPA does not hold the vowel either, the voice is the problem, not the request — try another Slovak voice before a tenth take.",
+  "_stop_rule": "Twelve takes is the limit for one letter. Past that the answer is a different Slovak voice, not another spelling — `voices --language sk` lists candidates and costs nothing to browse."
+}
