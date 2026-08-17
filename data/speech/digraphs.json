@@ -67,17 +67,17 @@
     },
     "es": {
       "digraphs": [],
-      "checked": false,
+      "checked": true,
       "note": "CH and LL were letters of the Spanish alphabet until 2010 and are not any more. Two letters each. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     },
     "pt": {
       "digraphs": [],
-      "checked": false,
+      "checked": true,
       "note": "None. LH, NH and CH are one sound written with two letters, which is not the same as being a letter. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     },
     "fr": {
       "digraphs": [],
-      "checked": false,
+      "checked": true,
       "note": "None. CH, OU and the rest are spellings, not letters of the alphabet. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     }
   },

@@ -15,10 +15,10 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 | **sk** | Luky Zajo | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | ✓ | ✓ 147 | ✓ 57 | ✓ playing |
 | **pl** | Pawel | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 169 | ✓ 58 | ✓ playing |
 | **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | ✓ 62 | ✓ playing |
-| es | · | · | · | · | · | · | · | · | · |
-| fr | · | · | · | · | · | · | · | · | · |
+| es | · | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
+| fr | · | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
 | it | · | · | · | · | · | · | · | · | · |
-| pt | · | · | · | · | · | · | · | · | · |
+| pt | · | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
 | nl | · | · | · | · candidates | · | · | · | · | · |
 | sv | · | · | · | — none | — | · | · | · | · |
 | da | · | · | · | — none | — | · | · | · | · |

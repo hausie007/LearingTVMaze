@@ -3,7 +3,7 @@
   "lang": "pt",
   "locale": "pt-PT",
   "note": "European Portuguese, not Brazilian: 'dezasseis' and 'catorze' here, 'dezesseis' and 'quatorze' in Brazil. 26 letters — K, W and Y were formally added in 2009. Ç is not a letter of the alphabet, it is C with a cedilla.",
-  "source_review": "DRAFT — needs a native speaker, especially 21-49 where the joining word and hyphens vary.",
+  "source_review": "Reviewed 2026-08-18 by an LLM answering as a native speaker, against tools/speech/REVIEW_PROMPT.md, and accepted with no changes. Provenance recorded honestly: this is not a human native speaker, which is what the project asks for elsewhere. Worth a human ear before this language ships, particularly the letter names — a wrong one is learned silently and permanently.",
   "numbers": [
     {
       "value": 1,

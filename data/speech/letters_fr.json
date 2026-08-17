@@ -3,7 +3,7 @@
   "lang": "fr",
   "locale": "fr-FR",
   "note": "Standard metropolitan French. 26 letters; the accented forms é, è, ê, à, ù, ç are not separate letters. Numbers use 'et' only at 21, 31, 41 and hyphens elsewhere — 'vingt et un' but 'vingt-deux'.",
-  "source_review": "DRAFT — written from general knowledge, not by a native speaker. Letter names are the part most often wrong and least often noticed, so a native speaker must read this list before anything is generated. Check the letters that carry an accent in their own name first.",
+  "source_review": "Reviewed 2026-08-18 by an LLM answering as a native speaker, against tools/speech/REVIEW_PROMPT.md, and accepted with no changes. Provenance recorded honestly: this is not a human native speaker, which is what the project asks for elsewhere. Worth a human ear before this language ships, particularly the letter names — a wrong one is learned silently and permanently.",
   "letters": [
     {
       "id": "a",
