@@ -163,10 +163,12 @@ func speak_word(text: String, lang: String = "") -> void:
 		_speak(key, language, text, RATE_WORD)
 		return
 	if partial.is_empty() or Config.voice_mode != Config.VoiceMode.STUDIO_PREFERRED:
-		# `key` is empty for a partial phrase, which sends this to the device
-		# voice — the same behaviour as before boundaries existed.
+		# `key` is empty for a partial phrase of a language with no pack, which
+		# sends it to the device voice — the behaviour before boundaries existed.
 		_speak(key, language, text, RATE_WORD)
 		return
+	if int(partial["stop_ms"]) <= 0:
+		return      # recorded phrase, unusable boundaries: stay quiet until the end
 	if not _play(language, String(partial["key"]), int(partial["stop_ms"]),
 			int(partial.get("fade_ms", DEFAULT_FADE_MS))):
 		_note_missing(String(partial["key"]), language)
@@ -592,14 +594,27 @@ func _pack(lang: String) -> Dictionary:
 ## fresh performance at every step, which is the whole point — a phrase that
 ## changes character as it is collected is what made this grating before.
 ##
-## A phrase with no boundaries is simply absent here, and speak_word falls
-## through to the device voice for its partials as it always did.
+## A phrase whose boundaries could not be established is registered with
+## nothing to play, so its partials stay silent rather than reaching for the
+## device voice. Slovak has 28 such phrases out of 68 and Czech 12 of 50: the
+## aligner was not confident enough to say where the words end.
 func _register_prefixes(pack: Dictionary, key: String, display: String) -> void:
-	var ends: Array = pack["items"][key].get("word_ends_ms", [])
-	if ends.is_empty():
-		return
 	var words := display.split(" ", false)
-	if words.size() != ends.size() + 1:
+	if words.size() < 2:
+		return
+	var ends: Array = pack["items"][key].get("word_ends_ms", [])
+
+	# A phrase whose boundaries could not be established is registered anyway,
+	# with nothing to play. Its partials then say nothing at all rather than
+	# dropping to the device voice, which would put a second speaker inside a
+	# phrase the recorded voice finishes — a worse version of the very
+	# inconsistency boundaries exist to remove. The child still gets the tile,
+	# the collect sound, and the whole phrase read properly at the end.
+	if ends.size() != words.size() - 1:
+		for i in range(words.size() - 1):
+			var quiet := " ".join(words.slice(0, i + 1))
+			if not pack["_prefixes"].has(quiet):
+				pack["_prefixes"][quiet] = {"key": key, "stop_ms": 0, "fade_ms": 0}
 		return
 	var fades: Array = pack["items"][key].get("word_fade_ms", [])
 	for i in range(ends.size()):
