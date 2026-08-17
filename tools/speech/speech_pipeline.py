@@ -2408,7 +2408,13 @@ function render() {
 function play() { audio.src = CLIPS[cur].file; audio.play().catch(() => {}); }
 
 function decide(status) {
-  verdicts[CLIPS[cur].key] = status;
+  const key = CLIPS[cur].key;
+  verdicts[key] = status;
+  // Approving clears the note. The note is why the clip was doubted, and the
+  // audit writes one in before you ever hear it — so approving means you
+  // disagree with it, and leaving it behind would export a reason next to a
+  // verdict that contradicts it.
+  if (status === "approved") delete notes[key];
   save();
   if (cur < CLIPS.length - 1) { cur++; play(); }
   render();
@@ -2437,7 +2443,8 @@ document.getElementById("export").onclick = () => {
   let csv = "key,spec_hash,status,reviewer,date,notes\\n";
   CLIPS.forEach(c => {
     if (!verdicts[c.key]) return;
-    csv += [c.key, c.spec_hash, verdicts[c.key], who, today, notes[c.key] || ""].map(esc).join(",") + "\\n";
+    const note = verdicts[c.key] === "approved" ? "" : (notes[c.key] || "");
+    csv += [c.key, c.spec_hash, verdicts[c.key], who, today, note].map(esc).join(",") + "\\n";
   });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
