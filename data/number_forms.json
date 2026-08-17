@@ -8,7 +8,7 @@
   "how_to_add": "A language with no entry, or an empty one, uses the plain number and nothing is recorded twice — English 'to fifty' is the citation form already. Languages that will need this: cs, sk, pl, uk, el, fi, hu, tr. Languages that will not: en, de, nl, sv, da, nb, it, es, pt, fr, ro, vi.",
   "languages": {
     "cs": {
-      "review": "DRAFT — needs a native speaker. The whole phrase after 'counted', genitive after 'do'. CONFIRM 1: 'do jedné' is feminine; a counting frame may prefer 'do jednoho'.",
+      "review": "Confirmed by Michal Hauzirek (native speaker), 2026-08-17. The whole phrase after 'counted', genitive after 'do'. 'do jedné' and 'do dvaceti jedné' are the feminine forms and are correct here — the number is being counted, not read as a time.",
       "to": {
         "1": "do jedné",
         "2": "do dvou",
