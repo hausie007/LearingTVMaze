@@ -25,8 +25,8 @@ Listening pages, both rebuilt each run:
 
 | Page | What it is for |
 |---|---|
-| `build/speech/listen_<locale>/index.html` | every clip, to approve or reject |
-| `build/speech/phrases_<locale>/index.html` | each stage of a multi-word phrase, to check the boundaries fall between words |
+| `build/speech/listen/<locale>/index.html` | every clip, to approve or reject |
+| `build/speech/phrases/<locale>/index.html` | each stage of a multi-word phrase, to check the boundaries fall between words |
 
 Both are per locale, so looking at German does not wipe Czech.
 
@@ -84,7 +84,7 @@ python3 tools/speech/speech_pipeline.py generate --language cs --limit 12   # dr
 python3 tools/speech/speech_pipeline.py generate --language cs --limit 12 --confirm
 python3 tools/speech/speech_pipeline.py process --language cs
 python3 tools/speech/speech_pipeline.py listen --language cs
-open build/speech/listen_cs-CZ/index.html      # decide, then download the CSV
+open build/speech/listen/cs-CZ/index.html      # decide, then download the CSV
 python3 tools/speech/speech_pipeline.py review --import ~/Downloads/review_cs-CZ.csv
 python3 tools/speech/speech_pipeline.py pack --language cs
 python3 tools/speech/speech_pipeline.py verify
@@ -256,7 +256,7 @@ the clips copied out in alphabet order under readable names, plus an
 
 ```bash
 python3 tools/speech/speech_pipeline.py listen --language cs
-open build/speech/listen_cs-CZ/index.html
+open build/speech/listen/cs-CZ/index.html
 ```
 
 The page shows what each clip is *supposed* to say — the glyph the child sees,

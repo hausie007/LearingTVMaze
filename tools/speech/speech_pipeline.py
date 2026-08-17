@@ -2562,7 +2562,7 @@ def cmd_phrases(args) -> int:
     # German overwrote Czech, and the page gave no clue which language it was
     # showing — you had to remember what you last ran.
     locales = sorted({r["locale"] for r, _ in rows})
-    folder = BUILD / f"phrases_{locales[0] if len(locales) == 1 else 'all'}"
+    folder = BUILD / "phrases" / (locales[0] if len(locales) == 1 else "all")
     if folder.exists():
         shutil.rmtree(folder)
     folder.mkdir(parents=True)
@@ -2655,7 +2655,7 @@ def cmd_listen(args) -> int:
         rows = [r for r in ready if r["locale"] == locale]
         rows.sort(key=lambda r: (r["category"], r["key"]))
         suffix = ("_" + "_".join(sorted(args.category))) if args.category else ""
-        folder = BUILD / f"listen_{locale}{suffix}"
+        folder = BUILD / "listen" / f"{locale}{suffix}"
         if folder.exists():
             shutil.rmtree(folder)
         folder.mkdir(parents=True)

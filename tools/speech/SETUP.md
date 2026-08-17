@@ -187,7 +187,7 @@ python3 tools/speech/speech_pipeline.py plan --language cs
 python3 tools/speech/speech_pipeline.py generate --language cs --limit 12 --confirm
 python3 tools/speech/speech_pipeline.py process --language cs
 python3 tools/speech/speech_pipeline.py listen --language cs
-open build/speech/listen_cs-CZ/index.html
+open build/speech/listen/cs-CZ/index.html
 ```
 
 That last page is where the judgement happens: it plays each clip next to the
