@@ -100,6 +100,22 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def maybe_json(path: Path) -> dict:
+    """Read a JSON file, or nothing if it is not there or is unreadable.
+
+    For the files that are absent as a matter of course: a boundary sidecar
+    before its clip has been re-encoded, an audit verdict before the check has
+    run. Their absence is a state, not a failure, and treating it as one
+    stopped a whole language mid-run.
+    """
+    if not path.exists():
+        return {}
+    try:
+        return read_json(path) or {}
+    except (Fail, ValueError, OSError):
+        return {}
+
+
 def read_json(path: Path):
     if not path.exists():
         raise Fail(f"missing file: {path.relative_to(REPO)}")
@@ -2617,7 +2633,7 @@ def cmd_phrases(args) -> int:
     listed = []
     for i, (r, ends) in enumerate(rows, 1):
         src = processed_path(r["render_hash"])
-        meta = read_json(src.with_suffix(".json")) if src.with_suffix(".json").exists() else {}
+        meta = maybe_json(src.with_suffix(".json"))
         stops = meta.get("word_ends_ms", [])
         fades = meta.get("word_fade_ms", [])
         words = r["display_text"].split()
@@ -2950,7 +2966,7 @@ def cmd_pack(args) -> int:
             asset = f"clips/{digest[:2]}/{digest[:12]}.mp3"
             write_atomic(pack_dir / asset, data)
             side = processed_path(r["render_hash"]).with_suffix(".json")
-            side_doc = read_json(side) if side.exists() else {}
+            side_doc = maybe_json(side)
             items[r["key"]] = {
                 "asset": asset,
                 "word_ends_ms": side_doc.get("word_ends_ms", []),
@@ -3578,9 +3594,11 @@ def cmd_next(args) -> int:
             continue
 
         # A boundary only reaches the game once its clip is re-encoded.
+        # A clip whose timings have not been folded in yet has no sidecar at
+        # all, which is the normal state right after `align` — not an error.
         stale = [r for r in phrases if phrase_boundaries(r, profiles, cat)
-                 and not read_json(processed_path(r["render_hash"]).with_suffix(".json")
-                                   ).get("word_ends_ms")]
+                 and not maybe_json(processed_path(r["render_hash"]).with_suffix(".json")
+                                    ).get("word_ends_ms")]
         if stale:
             step(f"folding word timings into {len(stale)} clips",
                  ["process", "--force", "--language", lang, "--category", "word"])
@@ -3602,7 +3620,7 @@ def cmd_next(args) -> int:
             step("building the review page", ["listen", "--language", lang, "--pending"])
             step("building the review sheet", ["review", "--language", lang])
             suspect = sum(1 for r in waiting
-                          if (read_json(audit_path(r["render_hash"])) or {}).get("suspect"))
+                          if maybe_json(audit_path(r["render_hash"])).get("suspect"))
             info(f"\nYOUR TURN: {len(waiting)} clips to sign off. {suspect} are already "
                  f"marked rejected because they do not say what they should; the rest "
                  f"need your ears.")

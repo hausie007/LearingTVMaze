@@ -146,9 +146,9 @@
     "sk-SK": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "Zai7B4Aol2bJtneyq0L1",
+      "voice_name": "Luky Zajo",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "sk",
       "settings": {
