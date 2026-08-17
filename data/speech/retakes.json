@@ -88,6 +88,13 @@
         "reason": "too short",
         "asked_on": "2026-08-17"
       }
+    },
+    "pl": {
+      "learning.char.a_ogonek": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-17"
+      }
     }
   }
 }

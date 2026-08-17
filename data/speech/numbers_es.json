@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "es",
+  "locale": "es-ES",
+  "note": "Castilian Spanish. 27 letters: Ñ is a letter of the alphabet, CH and LL are not — the Academies removed them in 2010, so they are two letters each. Y is 'ye' in current usage; older speakers say 'i griega' and both are understood. 31-49 are written as three words, 'treinta y uno'.",
+  "source_review": "DRAFT — needs a native speaker, especially 21-49 where the joining word and hyphens vary.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "uno"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "dos"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "tres"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "cuatro"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "cinco"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "seis"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "siete"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "ocho"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "nueve"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "diez"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "once"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "doce"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "trece"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "catorce"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "quince"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "dieciséis"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "diecisiete"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "dieciocho"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "diecinueve"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "veinte"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "veintiuno"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "veintidós"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "veintitrés"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "veinticuatro"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "veinticinco"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "veintiséis"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "veintisiete"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "veintiocho"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "veintinueve"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "treinta"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "treinta y uno"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "treinta y dos"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "treinta y tres"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "treinta y cuatro"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "treinta y cinco"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "treinta y seis"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "treinta y siete"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "treinta y ocho"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "treinta y nueve"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "cuarenta"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "cuarenta y uno"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "cuarenta y dos"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "cuarenta y tres"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "cuarenta y cuatro"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "cuarenta y cinco"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "cuarenta y seis"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "cuarenta y siete"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "cuarenta y ocho"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "cuarenta y nueve"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "cincuenta"
+    }
+  ]
+}

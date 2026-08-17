@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "lang": "pt",
+  "locale": "pt-PT",
+  "note": "European Portuguese, not Brazilian: 'dezasseis' and 'catorze' here, 'dezesseis' and 'quatorze' in Brazil. 26 letters — K, W and Y were formally added in 2009. Ç is not a letter of the alphabet, it is C with a cedilla.",
+  "source_review": "DRAFT — written from general knowledge, not by a native speaker. Letter names are the part most often wrong and least often noticed, so a native speaker must read this list before anything is generated. Check the letters that carry an accent in their own name first.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "á"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "bê"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "cê"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "dê"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "é"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "efe"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "gê"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "agá"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "i"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "jota"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "capa"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "ele"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "eme"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "ene"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "ó"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pê"
+    },
+    {
+      "id": "q",
+      "display": "Q",
+      "spoken": "quê"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "erre"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "esse"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "tê"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "u"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "vê"
+    },
+    {
+      "id": "w",
+      "display": "W",
+      "spoken": "dâblio"
+    },
+    {
+      "id": "x",
+      "display": "X",
+      "spoken": "xis"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "ípsilon"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "zê"
+    }
+  ]
+}

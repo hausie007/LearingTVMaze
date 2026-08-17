@@ -64,6 +64,21 @@
       "marked_words": 0,
       "note": "IJ in 14 of 165 words. Genuinely contested: taught as one letter, capitalised as one (IJsland), but usually listed as a digraph. Needs a Dutch decision.",
       "decided": false
+    },
+    "es": {
+      "digraphs": [],
+      "checked": false,
+      "note": "CH and LL were letters of the Spanish alphabet until 2010 and are not any more. Two letters each. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "pt": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. LH, NH and CH are one sound written with two letters, which is not the same as being a letter. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "fr": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. CH, OU and the rest are spellings, not letters of the alphabet. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     }
   },
   "not_applicable": {
