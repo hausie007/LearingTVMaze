@@ -2787,13 +2787,29 @@ def cmd_review(args) -> int:
         by_locale.setdefault(r["locale"], []).append(r)
     for locale, rows in by_locale.items():
         out = BUILD / f"review_{locale}.csv"
+        # Anything `audit` doubted comes first and arrives already marked
+        # rejected with the reason in the notes, so the tedious part — hunting
+        # for the broken one among a hundred good ones — is done. A blank
+        # status still means nobody has judged it.
+        def suspicion(r):
+            path = audit_path(r["render_hash"])
+            return read_json(path) if path.exists() else None
+
+        marked = 0
         with out.open("w", encoding="utf-8", newline="") as fh:
             writer = csv.writer(fh)
             writer.writerow(REVIEW_FIELDS + ["display_text", "spoken_text", "clip"])
-            for r in sorted(rows, key=lambda x: x["key"]):
-                writer.writerow([r["key"], r["spec_hash"], "", "", "", "",
+            ordered = sorted(rows, key=lambda x: (not (suspicion(x) or {}).get("suspect"),
+                                                  x["key"]))
+            for r in ordered:
+                doubt = suspicion(r) or {}
+                status = "rejected" if doubt.get("suspect") else ""
+                marked += 1 if status else 0
+                writer.writerow([r["key"], r["spec_hash"], status, "", "",
+                                 doubt.get("why", ""),
                                  r["display_text"], r["spoken_text"], r["clip"]])
-        info(f"{locale}: {len(rows)} clips -> {rel(out)}")
+        info(f"{locale}: {len(rows)} clips -> {rel(out)}"
+             + (f"  ({marked} pre-marked rejected by audit)" if marked else ""))
     info("")
     info("Fill in the status column (approved / rejected), then:")
     info("  speech_pipeline.py review --import build/speech/review_<locale>.csv")
@@ -3368,6 +3384,86 @@ def language_status(cat: dict) -> list:
     return rows
 
 
+def cmd_audit(args) -> int:
+    """Check every clip against the words it was supposed to say.
+
+    Forced alignment does not just place words in time; it reports how badly
+    the audio fits the text it was given. A clip holding the wrong words fits
+    badly, so this catches the failures that have actually reached review here:
+    a sheet cut that slipped and left every clip holding the next one's words,
+    a cropped ending, a fragment merged into its neighbour. Those were all
+    found by a human listening to a hundred files, which is the tedious part.
+
+    It is not a substitute for listening. It cannot hear a French 'chá' in a
+    Czech alphabet — the words are right there, only the accent is wrong. It
+    narrows what has to be listened to sceptically, and it never approves
+    anything on its own.
+    """
+    cat = load_catalog()
+    records = load_desired()
+    if args.language:
+        records = [r for r in records if r["lang"] in args.language]
+    classify(records)
+    todo = [r for r in records if r["status"] in ("unreviewed", "rejected", "approved")
+            and processed_path(r["render_hash"]).exists()
+            and (args.force or not audit_path(r["render_hash"]).exists())]
+
+    rate = cat["master_format"]["sample_rate"]
+    secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
+               for r in todo if master_path(r["spec_hash"]).exists())
+    price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
+    info(f"{len(todo)} clips to check, {secs / 60:.1f} min of audio, about "
+         f"${secs / 3600 * price:.3f}. Nothing is synthesised.")
+    if not todo:
+        return 0
+    if not args.confirm:
+        info("Re-run with --confirm.")
+        return 0
+
+    key = api_key()
+    checked = flagged = 0
+    for i, r in enumerate(todo, 1):
+        try:
+            doc = force_align(key, master_path(r["spec_hash"]).read_bytes(),
+                              r["spoken_text"], cat)
+        except Fail as exc:
+            if "permission" in str(exc):
+                raise
+            warn(f"{r['key']}: {exc}")
+            continue
+        verdict = audit_verdict(doc, r, cat)
+        path = audit_path(r["render_hash"])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        write_atomic(path, json.dumps(verdict, ensure_ascii=False).encode("utf-8"))
+        checked += 1
+        if verdict["suspect"]:
+            flagged += 1
+            info(f"  ? {r['display_text']:28s} {verdict['why']}")
+    info(f"\nChecked {checked}, flagged {flagged}. The flagged ones are listed "
+         f"first on the review page and start marked rejected; the rest start "
+         f"blank and still need your ears.")
+    return 0
+
+
+def audit_path(render_hash: str) -> Path:
+    return MASTERS / "audits" / render_hash[:2] / f"{render_hash}.json"
+
+
+def audit_verdict(doc: dict, record: dict, cat: dict) -> dict:
+    """Turn an alignment into a suspicion, with a reason a human can check."""
+    limit = cat["processing"].get("audit_max_loss", 0.5)
+    words = [w for w in doc.get("words", []) if w.get("text", "").strip()]
+    expected = record["spoken_text"].split()
+    loss = float(doc.get("loss", 0.0))
+    why = ""
+    if len(words) != len(expected):
+        why = f"aligner heard {len(words)} words, the text has {len(expected)}"
+    elif loss > limit:
+        why = f"fits the text poorly (loss {loss:.2f} over {limit})"
+    return {"loss": loss, "words": len(words), "expected": len(expected),
+            "suspect": bool(why), "why": why}
+
+
 def cmd_next(args) -> int:
     """One command for one language: where it stands and what to do now.
 
@@ -3452,6 +3548,19 @@ def cmd_next(args) -> int:
         run_step("checking the phrase boundaries", ["phrases", "--language", lang])
 
     if counts.get("unreviewed") or counts.get("rejected"):
+        unchecked = [r for r in records if r["status"] in ("unreviewed", "rejected")
+                     and not audit_path(r["render_hash"]).exists()]
+        if unchecked:
+            rate = cat["master_format"]["sample_rate"]
+            secs = sum(master_path(r["spec_hash"]).stat().st_size / 2.0 / rate
+                       for r in unchecked if master_path(r["spec_hash"]).exists())
+            price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
+            info(f"\nNEXT: check the {len(unchecked)} new clips actually say what they "
+                 f"should — about ${secs / 3600 * price:.3f}. This is what catches a "
+                 f"mis-cut before you have to hear it.")
+            info(f"  python3 {rel(Path(__file__))} audit --language {lang} --confirm")
+            info(f"Then run this command again.")
+            return 0
         run_step("building the listening page", ["listen", "--language", lang, "--pending"])
         info(f"\nNEXT: listen, mark each row, then import your verdicts.")
         info(f"  python3 {rel(Path(__file__))} review --import <the CSV you edited>")
@@ -3693,6 +3802,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--masters", action="store_true", help="also delete orphaned masters (paid for)")
     sp.add_argument("--confirm", action="store_true")
     sp.set_defaults(func=cmd_prune)
+
+    sp = sub.add_parser("audit", help="check clips against the words they should say")
+    sp.add_argument("--language", action="append")
+    sp.add_argument("--force", action="store_true")
+    sp.add_argument("--confirm", action="store_true")
+    sp.set_defaults(func=cmd_audit)
 
     sp = sub.add_parser("phrases", help="hear each stage of a phrase, to check the boundaries")
     sp.add_argument("--language", action="append")

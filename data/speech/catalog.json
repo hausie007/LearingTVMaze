@@ -277,7 +277,9 @@
     "boundary_fade_ms": 40,
     "boundary_note": "How a phrase is stopped at a word boundary. The word plays whole at full volume to the hold point and only then fades — fading into the boundary instead cost the last syllable. Hold and fade together stay inside the pause the aligner reports before the next word: half of it is held, the rest is the fade, so nothing reaches over the next word, which was audible as a hint of the letter to come. reach caps the pause that may be spent, so a long one is not sat through. The hold running past the aligner's end at all is deliberate — aligners mark the vowel, not the release after it.",
     "boundary_hold_share": 0.5,
-    "boundary_fade_min_ms": 12
+    "boundary_fade_min_ms": 12,
+    "audit_max_loss": 0.5,
+    "audit_note": "How badly a clip may fit the text it was meant to say before `audit` doubts it. Forced alignment reports the fit, so a clip holding the wrong words scores badly — which is how the German UI shift and the early Czech cropped endings would have been caught without anyone listening to a hundred files. It cannot hear a wrong accent, only wrong words, so it flags rather than approves."
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",
