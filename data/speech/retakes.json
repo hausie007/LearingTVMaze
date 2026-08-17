@@ -71,8 +71,8 @@
     },
     "sk": {
       "learning.char.h": {
-        "n": 9,
-        "reason": "says \"cha\" instead of \"ha\"",
+        "n": 11,
+        "reason": "short ha; trying IPA /ɦaː/",
         "asked_on": "2026-08-17"
       },
       "ui.lang_spanish.0": {
