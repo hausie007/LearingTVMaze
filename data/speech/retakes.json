@@ -71,9 +71,17 @@
     },
     "sk": {
       "learning.char.h": {
-        "n": 12,
-        "reason": "still short at /ɦaː/; trying doubled length",
-        "asked_on": "2026-08-17"
+        "n": 13,
+        "reason": "IPA read as a breath; retaking between its alphabet neighbours ef gé _ í jé",
+        "asked_on": "2026-08-17",
+        "carrier_before": [
+          "ef",
+          "gé"
+        ],
+        "carrier_after": [
+          "í",
+          "jé"
+        ]
       },
       "ui.lang_spanish.0": {
         "n": 9,
