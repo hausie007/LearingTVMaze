@@ -506,11 +506,28 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         raise Fail(f"{key} ({locale}) has empty spoken text")
     settings = category_settings(profile, category)
     mode = category_mode(cat, profile, category)
+    # Carriers on a normal take come from the category, and only where the
+    # category is recorded one request at a time — inside a sheet the
+    # neighbouring items already give each reading a run-up.
     if not retake and (settings.get("carrier_before") or settings.get("carrier_after")):
         context = context or {}
         for field in ("carrier_before", "carrier_after"):
             if settings.get(field) and field not in context:
                 context[field] = list(settings[field])
+
+    # A retake is always a single request with nothing either side of it, so it
+    # is the take that most needs the run-up — whatever category it belongs to.
+    # Slovak 'há' came back as a clipped 'ha' eight times, and 'španielčina'
+    # cut off at the end, both for want of a word to lean on. An explicit
+    # --carrier still wins: it is already in the context by the time this runs.
+    if retake:
+        fallback = profile.get("retake_carriers") or {}
+        context = context or {}
+        for field in ("carrier_before", "carrier_after"):
+            value = settings.get(field) or fallback.get(field)
+            if value and field not in context:
+                context[field] = list(value)
+
     spec = {
         "provider": profile["provider"],
         "spoken_text": spoken,

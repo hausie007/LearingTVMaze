@@ -52,6 +52,15 @@
           ],
           "note": "Recorded one request at a time between carrier words, never cut from a sheet. The fragments are short function words and a sheet of them has gaps no bigger than the gaps inside them — the first Czech attempt merged two and shifted every cut after it by one. Carriers give each one a run-up and a follower without any cutting."
         }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "ahoj"
+        ],
+        "carrier_after": [
+          "dobře"
+        ],
+        "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
       }
     },
     "en-US": {
@@ -97,6 +106,15 @@
           ],
           "note": "Recorded one request at a time between carrier words, never cut from a sheet. The fragments are short function words and a sheet of them has gaps no bigger than the gaps inside them — the first Czech attempt merged two and shifted every cut after it by one. Carriers give each one a run-up and a follower without any cutting."
         }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hello"
+        ],
+        "carrier_after": [
+          "thanks"
+        ],
+        "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
       }
     },
     "de-DE": {
@@ -141,6 +159,15 @@
           ],
           "note": "Carrier words only. The single-request rule itself lives in catalog.json so a new language cannot be added without it."
         }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hallo"
+        ],
+        "carrier_after": [
+          "danke"
+        ],
+        "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
       }
     },
     "sk-SK": {
@@ -174,7 +201,27 @@
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "Needs its own voice — native to sk-SK, warm, calm, adult. `speech_pipeline.py voices --language sk` lists candidates; see SETUP.md for what to listen for."
+      "notes": "Needs its own voice — native to sk-SK, warm, calm, adult. `speech_pipeline.py voices --language sk` lists candidates; see SETUP.md for what to listen for.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "ahoj"
+          ],
+          "carrier_after": [
+            "dobre"
+          ],
+          "note": "Carrier words only; the single-request rule lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "ahoj"
+        ],
+        "carrier_after": [
+          "dobre"
+        ],
+        "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
+      }
     },
     "pl-PL": {
       "version": 1,
@@ -207,7 +254,27 @@
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "Needs its own voice — native to pl-PL, warm, calm, adult. `speech_pipeline.py voices --language pl` lists candidates; see SETUP.md for what to listen for."
+      "notes": "Needs its own voice — native to pl-PL, warm, calm, adult. `speech_pipeline.py voices --language pl` lists candidates; see SETUP.md for what to listen for.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "cześć"
+          ],
+          "carrier_after": [
+            "dobrze"
+          ],
+          "note": "Carrier words only; the single-request rule lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "cześć"
+        ],
+        "carrier_after": [
+          "dobrze"
+        ],
+        "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
+      }
     }
   },
   "field_notes": {
