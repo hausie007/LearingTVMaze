@@ -110,7 +110,8 @@
       "categories": [
         "number",
         "char",
-        "word"
+        "word",
+        "ui"
       ]
     },
     "es": {

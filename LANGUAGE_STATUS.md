@@ -14,7 +14,7 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 | **en** | Nichalia Schwartz | ✓ | ✓ A–Z | ✓ none | ✓ 0 marked | ✓ | ✓ 290 | ✓ 56 +0 forms | ✓ playing |
 | **sk** | · | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | · | · 0/147 | · | · |
 | **pl** | · | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | · | · 0/169 | · | · |
-| **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | · | ✓ playing |
+| **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | · 0/62 | ~ partial |
 | es | · | · | · | · | · | · | · | · | · |
 | fr | · | · | · | · | · | · | · | · | · |
 | it | · | · | · | · | · | · | · | · | · |
