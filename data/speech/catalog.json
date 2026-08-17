@@ -206,5 +206,10 @@
     "checked_on": "2026-08-14",
     "forced_alignment": 0.4
   },
-  "languages_note": "A language records every category it has the data for. There is no per-language list to keep in step any more: German once shipped without 'ui' in its list and its title and menu names silently fell back to the device voice. Add a 'categories' key to a language only to deliberately restrict it."
+  "languages_note": "A language records every category it has the data for. There is no per-language list to keep in step any more: German once shipped without 'ui' in its list and its title and menu names silently fell back to the device voice. Add a 'categories' key to a language only to deliberately restrict it.",
+  "retake_carrier_categories": [
+    "char",
+    "ui"
+  ],
+  "retake_carrier_note": "Which categories get carrier words on a retake. Short items only: a letter name or a UI fragment read alone trails off at its end, and a retake has no neighbours to lean on. A whole word is long enough to stand by itself, and wrapping one in carriers means cutting it back out of a three-item reading — which took 'letadýlko' and 'mrkvička' down to their last syllable."
 }

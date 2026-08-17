@@ -520,7 +520,13 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
     # Slovak 'há' came back as a clipped 'ha' eight times, and 'španielčina'
     # cut off at the end, both for want of a word to lean on. An explicit
     # --carrier still wins: it is already in the context by the time this runs.
-    if retake:
+    # …but only for the categories whose items are too short to stand alone.
+    # A letter name or a UI fragment trails off with nothing after it; a whole
+    # word does not, and wrapping one in carriers means cutting it back out of
+    # a three-item reading — which clipped 'letadýlko' and 'mrkvička' down to
+    # their last syllable. The carrier is a remedy for shortness, and applying
+    # it where there is no shortness introduced the fault it was meant to cure.
+    if retake and category in (cat.get("retake_carrier_categories") or ["char", "ui"]):
         fallback = profile.get("retake_carriers") or {}
         context = context or {}
         for field in ("carrier_before", "carrier_after"):

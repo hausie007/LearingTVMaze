@@ -226,9 +226,9 @@
     "pl-PL": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "zzBTsLBFM6AOJtkr1e9b",
+      "voice_name": "Pawel",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "pl",
       "settings": {
