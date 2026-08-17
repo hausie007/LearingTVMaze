@@ -130,7 +130,18 @@
       },
       "reviewed_by": null,
       "reviewed_on": null,
-      "notes": "Needs its own voice — native to de-DE, warm, calm, adult. `speech_pipeline.py voices --language de` lists candidates; see SETUP.md for what to listen for."
+      "notes": "Needs its own voice — native to de-DE, warm, calm, adult. `speech_pipeline.py voices --language de` lists candidates; see SETUP.md for what to listen for.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hallo"
+          ],
+          "carrier_after": [
+            "danke"
+          ],
+          "note": "Carrier words only. The single-request rule itself lives in catalog.json so a new language cannot be added without it."
+        }
+      }
     },
     "sk-SK": {
       "version": 1,

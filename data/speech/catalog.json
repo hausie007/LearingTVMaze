@@ -47,7 +47,9 @@
         "min": 200,
         "max": 5000
       },
-      "note": "Spoken UI text, split from its translation templates on the %s placeholders. Recorded in the UI language, which is often not the learning language — the recap is one sentence built from both."
+      "note": "Spoken UI text, split from its translation templates on the %s placeholders. Recorded in the UI language, which is often not the learning language — the recap is one sentence built from both.",
+      "synthesis_mode": "single",
+      "synthesis_note": "Recorded one request at a time, never cut from a sheet. These fragments are short function words and a sheet of them has gaps between items no bigger than the gaps inside them, which is the one case sheet cutting cannot survive: the first Czech attempt merged two and shifted every later cut by one, and German repeated it exactly when its profile was added without the override. The rule lives here so a new language inherits it. Carrier words come from the voice profile, since they must be words of that language."
     },
     "number_form": {
       "priority": 2,

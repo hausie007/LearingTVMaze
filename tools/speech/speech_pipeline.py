@@ -444,13 +444,29 @@ def category_settings(profile: dict, category: str) -> dict:
     return (profile.get("categories") or {}).get(category, {})
 
 
+def category_mode(cat: dict, profile: dict, category: str) -> str:
+    """How a category is recorded, with the catalog getting the final say.
+
+    The rule belongs to the category, not to the voice. It was a per-profile
+    override at first, and German then arrived without it: its UI fragments
+    were sheet-cut, one cut slipped, and every clip after it held the next
+    one's words. The catalog now carries the default so a new language cannot
+    be added without it, and a profile may still override for a voice that
+    genuinely needs something else.
+    """
+    settings = category_settings(profile, category)
+    return settings.get("synthesis_mode",
+                        cat["categories"].get(category, {}).get("synthesis_mode",
+                            profile.get("synthesis_mode", "single")))
+
+
 def make_record(cat, profile, lang, locale, category, cspec, key, display, spoken, source,
                 retake: int = 0, context: dict = None) -> dict:
     if not spoken:
         raise Fail(f"{key} ({locale}) has empty spoken text")
     settings = category_settings(profile, category)
-    mode = settings.get("synthesis_mode", profile.get("synthesis_mode", "single"))
-    if not retake and settings.get("carrier_before") or settings.get("carrier_after"):
+    mode = category_mode(cat, profile, category)
+    if not retake and (settings.get("carrier_before") or settings.get("carrier_after")):
         context = context or {}
         for field in ("carrier_before", "carrier_after"):
             if settings.get(field) and field not in context:
