@@ -275,6 +275,165 @@
         ],
         "note": "Used for any retake, whatever the category. A retake is one request read alone, and a reading trails off at its end."
       }
+    },
+    "es-ES": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "es",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and the pipeline picks this language up — nothing else needs changing. Wanted: native to es-ES, warm, calm, adult, even pace, clear final consonants, and boring on the thousandth listen. `speech_pipeline.py voices --language es` lists candidates and costs nothing; tools/speech/SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one: a library contributor can withdraw their voice, and then next year's words will not match this year's letters.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hola"
+          ],
+          "carrier_after": [
+            "gracias"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hola"
+        ],
+        "carrier_after": [
+          "gracias"
+        ],
+        "note": "Used for any char or ui retake. A retake is one request read alone, and a short item trails off at its end."
+      }
+    },
+    "pt-PT": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "pt",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and the pipeline picks this language up — nothing else needs changing. Wanted: native to pt-PT, warm, calm, adult, even pace, clear final consonants, and boring on the thousandth listen. `speech_pipeline.py voices --language pt` lists candidates and costs nothing; tools/speech/SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one: a library contributor can withdraw their voice, and then next year's words will not match this year's letters.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "olá"
+          ],
+          "carrier_after": [
+            "obrigado"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "olá"
+        ],
+        "carrier_after": [
+          "obrigado"
+        ],
+        "note": "Used for any char or ui retake. A retake is one request read alone, and a short item trails off at its end."
+      }
+    },
+    "fr-FR": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "fr",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and the pipeline picks this language up — nothing else needs changing. Wanted: native to fr-FR, warm, calm, adult, even pace, clear final consonants, and boring on the thousandth listen. `speech_pipeline.py voices --language fr` lists candidates and costs nothing; tools/speech/SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one: a library contributor can withdraw their voice, and then next year's words will not match this year's letters.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "bonjour"
+          ],
+          "carrier_after": [
+            "merci"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "bonjour"
+        ],
+        "carrier_after": [
+          "merci"
+        ],
+        "note": "Used for any char or ui retake. A retake is one request read alone, and a short item trails off at its end."
+      }
     }
   },
   "field_notes": {
