@@ -729,6 +729,7 @@ func get_auto_detected_language() -> String:
 const ALPHABETS: Dictionary = {
 	"cs": "ABCČDĎEFGH[CH]IJKLMNŇOPQRŘSŠTŤUVWXYZŽ",
 	"de": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+	"es": "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
 	"pl": "ABCĆDEFGHIJKLŁMNŃOPRSŚTUWYZŹŻ",
 	"sk": "ABCČD[DZ][DŽ]ĎEFGH[CH]IJKLĽMNŇOPQRSŠTŤUVWXYZŽ",
 	"el": "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",
@@ -746,6 +747,7 @@ const ALPHABETS: Dictionary = {
 const WORD_ONLY_LETTERS: Dictionary = {
 	"cs": "ÁÉĚÍÓÚŮÝ",
 	"de": "ÄÖÜß",
+	"es": "ÁÉÍÓÚÜ",
 	"pl": "ĄĘÓ",
 	"sk": "ÁÄÉÍĹŔÓÔÚÝ",
 }
