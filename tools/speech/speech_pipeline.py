@@ -3570,6 +3570,17 @@ def cmd_next(args) -> int:
             info(f"  python3 {rel(Path(__file__))} voices --language {lang}")
             return 0
 
+        # A clip you rejected is a clip to record again. That needed a separate
+        # verb nobody could be expected to know about, so a rejection sat there
+        # looking like unfinished review instead of pending work.
+        if counts.get("rejected"):
+            step(f"queueing {counts['rejected']} rejected clips for a fresh take",
+                 ["retake", "--language", lang, "--rejected"])
+            # A retake changes what the clip is, so the list has to be rebuilt
+            # before the next pass can see it as missing.
+            step("re-reading the word lists", ["extract"])
+            continue
+
         if counts.get("missing"):
             chars = sum(len(r["spoken_text"]) for r in records if r["status"] == "missing")
             cost = chars / 1000.0 * cat["pricing_usd_per_1k_chars"].get("eleven_v3", 0.1)

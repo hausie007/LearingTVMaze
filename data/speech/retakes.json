@@ -68,6 +68,18 @@
         ],
         "asked_on": "2026-08-13"
       }
+    },
+    "sk": {
+      "learning.char.h": {
+        "n": 8,
+        "reason": "says \"cha\" instead of \"ha\"",
+        "asked_on": "2026-08-17"
+      },
+      "ui.lang_spanish.0": {
+        "n": 8,
+        "reason": "too short",
+        "asked_on": "2026-08-17"
+      }
     }
   }
 }
