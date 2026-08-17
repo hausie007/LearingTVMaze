@@ -3516,9 +3516,25 @@ def cmd_status(args) -> int:
 
     STATUS_FILE.write_text(text, encoding="utf-8")
     info(f"-> {rel(STATUS_FILE)}")
+    info("")
+
+    # A grid of bare marks with no headings is a puzzle, not a report. The
+    # columns are named down the side, once, and each language is a column
+    # under its own name — eight steps read better vertically than as eight
+    # unlabelled glyphs in a row.
+    width = max(len(label) for _, label in STATUS_STEPS) + 2
+    info(" " * width + "  ".join(f"{r['lang']:>3s}" for r in active))
+    for key, label in STATUS_STEPS:
+        cells = "  ".join(f"{r[key][0]:>3s}" for r in active)
+        info(f"{label:<{width}}{cells}")
+    info("")
+    info("  ✓ done    ~ partly    · not started")
+    info("")
     for r in active:
-        marks = " ".join(r[key][0] for key, _ in STATUS_STEPS)
-        info(f"  {r['lang']}  {marks}")
+        notes = [f"{label} ({r[key][1]})" for key, label in STATUS_STEPS if r[key][1]]
+        if notes:
+            info(f"  {r['lang']}: " + "; ".join(notes))
+    info(f"\n  What each row means: {rel(STATUS_FILE)}")
     return 0
 
 
