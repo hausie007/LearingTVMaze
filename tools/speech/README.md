@@ -26,10 +26,9 @@ Listening pages, both rebuilt each run:
 | Page | What it is for |
 |---|---|
 | `build/speech/listen_<locale>/index.html` | every clip, to approve or reject |
-| `build/speech/phrases/index.html` | each stage of a multi-word phrase, to check the boundaries fall between words |
+| `build/speech/phrases_<locale>/index.html` | each stage of a multi-word phrase, to check the boundaries fall between words |
 
-`phrases` covers one language at a time and overwrites the folder, so look at
-one language, then the next.
+Both are per locale, so looking at German does not wipe Czech.
 
 Generates the pre-recorded speech the game plays instead of device TTS, offline,
 ahead of time. New to this? Read `SETUP.md` first — account, key and choosing a

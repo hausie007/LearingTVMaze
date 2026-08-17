@@ -2558,7 +2558,11 @@ def cmd_phrases(args) -> int:
     if args.limit:
         rows = rows[:args.limit]
 
-    folder = BUILD / "phrases"
+    # Per locale, like the listening pages. One shared folder meant looking at
+    # German overwrote Czech, and the page gave no clue which language it was
+    # showing — you had to remember what you last ran.
+    locales = sorted({r["locale"] for r, _ in rows})
+    folder = BUILD / f"phrases_{locales[0] if len(locales) == 1 else 'all'}"
     if folder.exists():
         shutil.rmtree(folder)
     folder.mkdir(parents=True)
@@ -2598,13 +2602,16 @@ def cmd_phrases(args) -> int:
 
 
 def write_phrase_page(path: Path, listed: list) -> None:
-    parts = ["<!doctype html><meta charset='utf-8'><title>Phrase boundaries</title>",
+    """The page says which language it is showing, because a page that does not
+    is a page you have to remember the provenance of."""
+    langs = ", ".join(sorted({r["locale"] for r, _ in listed}))
+    parts = [f"<!doctype html><meta charset='utf-8'><title>Phrase boundaries — {langs}</title>",
              "<style>body{font:15px/1.5 system-ui;margin:2rem;max-width:52rem}"
              "h2{margin:1.6rem 0 .3rem;font-size:1rem}"
              "div{display:flex;align-items:center;gap:.6rem;margin:.15rem 0}"
              "span{min-width:16rem}audio{height:2rem}em{color:#777;font-style:normal}"
              "</style>",
-             "<h1>Phrase boundaries</h1><p>Each row is what the child hears after "
+             f"<h1>Phrase boundaries — {langs}</h1><p>Each row is what the child hears after "
              "collecting that many words. It should end cleanly on a word.</p>"]
     for r, stages in listed:
         parts.append(f"<h2>{r['display_text']} <em>{r['lang']}</em></h2>")
