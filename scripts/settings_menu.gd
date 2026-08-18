@@ -203,18 +203,10 @@ func _cycle_ui_lang(dir: int) -> void:
 ## hears which one they picked. The name is said in the language of the menu,
 ## not in the language being named, so it resolves against the UI pack.
 func _trigger_warmup_ui() -> void:
-	if temp_voice == Config.VoiceMode.OFF:
-		return
-	var lang_name = _get_lang_display_name(temp_ui_lang_idx, false)
-	Speech.warm_up(_get_preview_language(false))
-	Speech.speak_ui(lang_name, _get_preview_language(false))
+	Config.speak_language_name(temp_ui_lang_idx, false, temp_ui_lang_idx)
 
 func _trigger_warmup_learning() -> void:
-	if temp_voice == Config.VoiceMode.OFF:
-		return
-	var lang_name = _get_lang_display_name(temp_learning_lang_idx, true)
-	Speech.warm_up(_get_preview_language(true))
-	Speech.speak_ui(lang_name, _get_preview_language(true))
+	Config.speak_language_name(temp_learning_lang_idx, true, temp_ui_lang_idx)
 
 func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
 	return Config.get_lang_display_name(idx, is_learning, temp_ui_lang_idx)
@@ -224,7 +216,7 @@ func _cycle_learning_lang(dir: int) -> void:
 	temp_learning_lang_idx = (temp_learning_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
 	if Config and temp_learning_lang_idx < Config.LANG_CODES.size():
 		var lang: String = Config.LANG_CODES[temp_learning_lang_idx]
-		Config.adopt_learning_language(lang, _get_lang_display_name(temp_learning_lang_idx, true))
+		Config.adopt_learning_language(lang, temp_learning_lang_idx, temp_ui_lang_idx)
 		Config.save_settings()
 	_update_labels()
 
@@ -243,11 +235,12 @@ func _cycle_voice(dir: int) -> void:
 		dir = 0
 	temp_voice = choices[(at + dir + choices.size()) % choices.size()]
 	_update_labels()
-	if temp_voice == Config.VoiceMode.DEVICE_TTS:
-		_trigger_warmup_ui()
 	if Config:
+		# Set it before speaking: the point of the sample is to hear the mode
+		# just chosen, so the mode has to be in force before anything is said.
 		Config.voice_mode = temp_voice
 		Config.save_settings()
+		Config.speak_language_name(temp_ui_lang_idx, false, temp_ui_lang_idx)
 
 ## Which modes the player can actually reach right now.
 func _voice_choices() -> Array[int]:

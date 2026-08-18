@@ -273,25 +273,47 @@ enum VoiceMode { OFF, DEVICE_TTS, STUDIO_PREFERRED }
 var voice_mode: VoiceMode = VoiceMode.DEVICE_TTS
 
 
-## Say the language just chosen, in the language of the menu.
+## The spoken form of a language name, as one or two recorded pieces.
 ##
-## Not in the language being named: with a Czech menu, saying "vietnamština"
-## with a Vietnamese voice is a Vietnamese speaker reading a Czech word, which
-## is neither language and helps nobody. The parent reads the menu in their own
-## language and should hear it in their own language.
-##
-## The voice mode is left alone. It is a preference between two backends, not
-## a claim that either can speak the language chosen — STUDIO_PREFERRED already
-## falls back per item, so a language with no pack still speaks. Switching the
-## mode while the parent scrolled made the setting flicker under them and, once
-## flipped to device, stopped the studio UI clips being used at all.
-func adopt_learning_language(lang: String, speak_name: String = "") -> void:
-	learning_language = lang
-	if voice_mode == VoiceMode.OFF or speak_name.is_empty():
+## On screen Auto reads "Automatic (English)", and that whole string matches no
+## recording — brackets and all, it went to the robot voice every time, which
+## is what a player left on the default heard. It is two clips: the word for
+## automatic, then the name of the language actually detected. Both are in
+## every UI pack already.
+func language_name_segments(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> Array[Dictionary]:
+	var menu_lang := get_effective_ui_language()
+	var out: Array[Dictionary] = []
+	if idx != 0:
+		out.append({"text": TranslationServer.translate(LANG_KEYS[idx]), "lang": menu_lang})
+		return out
+
+	out.append({"text": TranslationServer.translate("lang_auto"), "lang": menu_lang})
+	var resolved := ui_lang_idx
+	if is_learning and resolved == 0:
+		resolved = LANG_CODES.find(get_auto_detected_language())
+	elif not is_learning:
+		resolved = LANG_CODES.find(get_auto_detected_language())
+	if resolved > 0:
+		out.append({"text": TranslationServer.translate(LANG_KEYS[resolved]), "lang": menu_lang})
+	return out
+
+
+## Say a language name aloud, whichever voice the player has chosen. Silent
+## when the voice is off, because off means off.
+func speak_language_name(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> void:
+	if voice_mode == VoiceMode.OFF:
 		return
-	var menu_lang := get_effective_ui_language()   # never the "auto" sentinel
-	Speech.warm_up(menu_lang, speak_name)
-	Speech.speak_ui(speak_name, menu_lang)
+	var segments := language_name_segments(idx, is_learning, ui_lang_idx)
+	if segments.is_empty():
+		return
+	Speech.warm_up(get_effective_ui_language(), String(segments[0]["text"]))
+	Speech.speak_segments(segments)
+
+
+func adopt_learning_language(lang: String, idx: int = -1, ui_lang_idx: int = 0) -> void:
+	learning_language = lang
+	if idx >= 0:
+		speak_language_name(idx, true, ui_lang_idx)
 
 ## Deprecated: read-only bridge for one release so nothing silently breaks
 ## while call sites migrate. `verify --strict` keeps it from coming back.
@@ -766,7 +788,6 @@ const ALPHABETS: Dictionary = {
 	"fi": "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ",
 	"vi": "AĂÂBCDĐEÊGHIKLMNOÔƠPQRSTUƯVXY",
 	"he": "אבגדהוזחטיכלמנסעפצקרשת",
-	"uk": "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ",
 }
 
 ## Letters that occur inside words but are not part of the alphabet lesson.

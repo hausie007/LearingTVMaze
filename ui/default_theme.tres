@@ -1,13 +1,15 @@
-[gd_resource type="Theme" load_steps=5 format=3]
+[gd_resource type="Theme" format=3 uid="uid://bofp8j54cdso5"]
 
-[ext_resource type="FontFile" path="res://assets/fonts/Quicksand-VariableFont_wght.ttf" id="1_quicksand"]
-[ext_resource type="FontFile" path="res://assets/fonts/NotoColorEmoji-Regular.ttf" id="2_emoji"]
-[ext_resource type="FontFile" path="res://assets/fonts/NotoSansHebrew.ttf" id="3_hebrew"]
+[ext_resource type="FontFile" uid="uid://c025kdcf8o8s4" path="res://assets/fonts/Quicksand-VariableFont_wght.ttf" id="1_quicksand"]
+[ext_resource type="FontFile" uid="uid://ckwfx1jslpdu4" path="res://assets/fonts/NotoColorEmoji-Regular.ttf" id="2_emoji"]
+[ext_resource type="FontFile" uid="uid://b5w8g2muy5dft" path="res://assets/fonts/NotoSansHebrew.ttf" id="3_hebrew"]
 
 [sub_resource type="FontVariation" id="FontVariation_default"]
-base_font = ExtResource("1_quicksand")
-variation_opentype = {2003265652: 500}
 fallbacks = Array[Font]([ExtResource("2_emoji"), ExtResource("3_hebrew")])
+base_font = ExtResource("1_quicksand")
+variation_opentype = {
+2003265652: 500
+}
 
 [resource]
 default_font = SubResource("FontVariation_default")
