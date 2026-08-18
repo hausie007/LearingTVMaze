@@ -342,7 +342,7 @@
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.7
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -386,7 +386,8 @@
           "obrigado"
         ],
         "note": "Used for any char or ui retake. A retake is one request read alone, and a short item trails off at its end."
-      }
+      },
+      "settings_note": "speed lowered from 0.9 to 0.7 — about 22% slower. This voice raced short items: thirteen letter names in 5.68s with 1.2s of silence across the whole reading, where Czech takes 22s over fourteen. Slowing the voice is the honest lever; a separator only asks for a pause between items, not for the items themselves to be said at a speed a four-year-old can follow."
     },
     "fr-FR": {
       "version": 1,
