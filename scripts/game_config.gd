@@ -354,6 +354,14 @@ var voice_hints: bool:
 
 var _voice_hints_build_67_reset: bool = true
 
+## Whether this install has been offered the recorded voice once. Recorded
+## voices arrived after people were already playing, and someone happily using
+## the robot voice has no reason to visit a settings screen to discover that
+## something better exists — so it is switched on for them once, and never
+## again. Turning it back to the robot voice afterwards sticks, because a
+## choice made deliberately outranks a default applied on their behalf.
+var _studio_offered: bool = false
+
 ## Chaser speed tier. See ChaserLevel enum.
 var chaser_level: ChaserLevel = ChaserLevel.MEDIUM
 
@@ -512,6 +520,7 @@ func save_settings() -> void:
 	config.set_value("Game", "on_screen_controls", on_screen_controls)
 	config.set_value("Game", "controller_size", controller_size)
 	config.set_value("Migrations", "voice_hints_build_67_reset", _voice_hints_build_67_reset)
+	config.set_value("Migrations", "studio_offered", _studio_offered)
 	config.set_value("Theme", "dir_name", theme_dir_name)
 	config.set_value("LastGame", "has_last_played_game", has_last_played_game)
 	config.set_value("LastGame", "session", last_played_game)
@@ -532,6 +541,7 @@ func load_settings() -> void:
 	var should_save_after_load := false
 	if config.load(SAVE_PATH) == OK:
 		_voice_hints_build_67_reset = bool(config.get_value("Migrations", "voice_hints_build_67_reset", false))
+		_studio_offered = bool(config.get_value("Migrations", "studio_offered", false))
 		game_mode      = config.get_value("Game", "game_mode", game_mode)
 		game_style     = config.get_value("Game", "game_style", game_style)
 		mission_id     = config.get_value("Game", "mission_id", mission_id)
@@ -560,6 +570,26 @@ func load_settings() -> void:
 			voice_mode = VoiceMode.DEVICE_TTS
 			_voice_hints_build_67_reset = true
 			should_save_after_load = true
+
+		# One-time upgrade to the recorded voice.
+		#
+		# Someone who has been playing with the robot voice will not go looking
+		# in settings for a feature they do not know shipped, so the better
+		# voice is turned on for them once. Once, and recorded as done: if they
+		# switch back to the robot voice it stays switched back, because that is
+		# a decision and this is only a default.
+		#
+		# Off is not touched. Nor is anyone whose language has no recordings —
+		# there would be nothing to upgrade to, and marking it done would spend
+		# their one upgrade on a language that could not use it.
+		if not _studio_offered:
+			if voice_mode == VoiceMode.DEVICE_TTS and Speech.has_pack(get_effective_learning_language()):
+				voice_mode = VoiceMode.STUDIO_PREFERRED
+				_studio_offered = true
+				should_save_after_load = true
+			elif voice_mode == VoiceMode.OFF:
+				_studio_offered = true      # they turned speech off; leave them alone
+				should_save_after_load = true
 		chaser_level   = config.get_value("Game", "chaser_level", ChaserLevel.SLOW)
 		performance_mode = config.get_value("Game", "performance_mode", true)
 		screensaver_timeout = config.get_value("Game", "screensaver_timeout", 300)
