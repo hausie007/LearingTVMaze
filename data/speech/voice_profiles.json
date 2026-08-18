@@ -1028,9 +1028,9 @@
     "vi-VN": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "qByVAGjXwGlkcRDJoiHg",
+      "voice_name": "Kiều Linh",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "vi",
       "settings": {

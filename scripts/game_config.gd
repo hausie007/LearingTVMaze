@@ -280,13 +280,19 @@ var voice_mode: VoiceMode = VoiceMode.DEVICE_TTS
 ## is what a player left on the default heard. It is two clips: the word for
 ## automatic, then the name of the language actually detected. Both are in
 ## every UI pack already.
-func language_name_segments(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> Array[Dictionary]:
+func language_name_segments(idx: int, is_learning: bool, ui_lang_idx: int = -1) -> Array[Dictionary]:
 	# The language being previewed, not the one already saved. Settings holds a
 	# temporary choice while the parent scrolls, and reading the saved value
 	# here meant every preview was spoken by the previous language's pack —
 	# usually falling through to the robot voice, because that pack has no clip
 	# for the name of a language it does not know about.
-	var menu_lang := resolve_language_code(ui_lang_idx)
+	# -1 means "whatever the UI language is now". Settings passes the index it
+	# is previewing, which may not be saved yet; everywhere else has no opinion
+	# and must not be given one — defaulting to index 0 meant the setup wizard
+	# announced in the language the operating system reports rather than the
+	# one the parent chose.
+	var menu_lang := get_effective_ui_language() if ui_lang_idx < 0 \
+		else resolve_language_code(ui_lang_idx)
 	var out: Array[Dictionary] = []
 
 	if idx != 0:
@@ -299,10 +305,12 @@ func language_name_segments(idx: int, is_learning: bool, ui_lang_idx: int = 0) -
 
 	# Auto is two clips: the word for automatic, then the language detected.
 	# "Automatic (English)" as one string matches no recording, brackets and all.
-	var detected := resolve_language_code(0)
-	var voice := menu_lang if is_learning else detected
+	# Auto as a learning language means "the same as the menu"; as a UI language
+	# it means "whatever the device reports".
+	var resolved := menu_lang if is_learning else resolve_language_code(0)
+	var voice := menu_lang
 	out.append({"text": translate_in("lang_auto", voice), "lang": voice})
-	var det_idx := LANG_CODES.find(detected)
+	var det_idx := LANG_CODES.find(resolved)
 	if det_idx > 0:
 		out.append({"text": translate_in(LANG_KEYS[det_idx], voice), "lang": voice})
 	return out
@@ -329,7 +337,7 @@ func translate_in(key: String, locale: String) -> String:
 
 ## Say a language name aloud, in whichever voice the player has chosen.
 ## Silent when the voice is off, because off means off.
-func speak_language_name(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> void:
+func speak_language_name(idx: int, is_learning: bool, ui_lang_idx: int = -1) -> void:
 	if voice_mode == VoiceMode.OFF:
 		return
 	var segments := language_name_segments(idx, is_learning, ui_lang_idx)
@@ -340,7 +348,7 @@ func speak_language_name(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> v
 
 
 ## Adopt a learning language and announce it.
-func adopt_learning_language(lang: String, idx: int = -1, ui_lang_idx: int = 0) -> void:
+func adopt_learning_language(lang: String, idx: int = -1, ui_lang_idx: int = -1) -> void:
 	learning_language = lang
 	if idx >= 0:
 		speak_language_name(idx, true, ui_lang_idx)
