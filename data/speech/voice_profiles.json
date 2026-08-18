@@ -372,14 +372,11 @@
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
         },
         "char": {
-          "synthesis_mode": "single",
-          "carrier_before": [
-            "olá"
-          ],
-          "carrier_after": [
-            "obrigado"
-          ],
-          "note": "Recorded one letter at a time between carrier words, never cut from a sheet. Portuguese letter names are unusually short and several are a bare vowel — A is 'á', E is 'é', O is 'ó', U is 'u' — so a sheet of them has gaps between items no larger than the gaps inside them, and the cutter kept returning empty items. A preamble fixed the first one and then item five failed for the same reason. This is the same remedy the UI fragments needed, for the same cause."
+          "sheet": {
+            "preamble": "olá",
+            "separator": ". ... "
+          },
+          "note": "Sheet mode, like every other language — but with a separator that forces a pause. This voice reads a list of short letter names at wildly different speeds: the same voice took 16.96s over thirteen letters in one sheet and 5.68s in another, leaving 1.2s of total silence across the whole reading. Nothing can be cut out of that, and it is the reading that is wrong, not the alphabet — Spanish has the same bare vowels and cuts cleanly. An ellipsis is read as a pause rather than spoken."
         }
       },
       "retake_carriers": {
