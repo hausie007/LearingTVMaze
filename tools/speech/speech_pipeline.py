@@ -3579,8 +3579,11 @@ def cmd_next(args) -> int:
     budget = args.budget if args.go else 0.0
     spent = [0.0]
 
+    ran = []
+
     def step(name: str, argv: list):
         info(f"\n--- {name} ---")
+        ran.append(tuple(argv))
         parsed = build_parser().parse_args(argv)
         return parsed.func(parsed)
 
@@ -3618,13 +3621,15 @@ def cmd_next(args) -> int:
             counts[r["status"]] = counts.get(r["status"], 0) + 1
         info(f"\n{lang}: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
 
-        # A stage that changes nothing has failed, and running it again will
-        # fail the same way. Portuguese sat here six times over, re-cutting two
-        # sheets that cannot be cut and reporting it each time.
-        signature = tuple(sorted(counts.items()))
-        if signature == seen:
-            warn(f"that stage changed nothing, so it will not be retried. "
-                 f"The messages above say why it could not finish.")
+        # A stage that runs twice and changes nothing has failed, and running it
+        # again will fail the same way. Judged on the stage as well as the
+        # counts: encoding a hundred clips moves none of them out of
+        # "unreviewed", so counts alone called honest work a loop and stopped
+        # one step short of the review page.
+        signature = (tuple(sorted(counts.items())), ran[-1] if ran else None)
+        if signature == seen and ran:
+            warn("that stage changed nothing, so it will not be retried. "
+                 "The messages above say why it could not finish.")
             return 1
         seen = signature
 
