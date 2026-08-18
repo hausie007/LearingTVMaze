@@ -1272,8 +1272,12 @@ def sheet_text(profile: dict, group: list):
     recorded for the sake of one letter.
     """
     sheet = dict(profile.get("sheet") or {})
-    if group:
-        sheet.update((category_settings(profile, group[0]["category"]).get("sheet") or {}))
+    # Carrier readings are assembled as bare {spoken_text} entries rather than
+    # records, so there is not always a category to look up — and a carrier
+    # group must not inherit a preamble anyway, it is already its own run-up.
+    category = next((r.get("category") for r in group if r.get("category")), "")
+    if category:
+        sheet.update((category_settings(profile, category).get("sheet") or {}))
     sep = sheet.get("separator", ". ")
     preamble = sheet.get("preamble", "")
 
