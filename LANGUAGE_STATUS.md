@@ -16,21 +16,21 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 | **pl** | Pawel | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 169 | ✓ 58 | ✓ playing |
 | **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | ✓ 62 | ✓ playing |
 | **es** | Dan | ✓ | ✓ +6 word-only | · candidates | · | ✓ | ✓ 207 | ✓ 58 | ✓ playing |
-| fr | · | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
-| it | · | · | · | · | · | · | · | · | · |
-| pt | · | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
-| nl | · | · | · | · candidates | · | · | · | · | · |
-| sv | · | · | · | — none | — | · | · | · | · |
-| da | · | · | · | — none | — | · | · | · | · |
-| nb | · | · | · | — none | — | · | · | · | · |
-| fi | · | · | · | — none | — | · | · | · | · |
-| hu | · | · | · | · candidates | · | · | · | · | · |
-| ro | · | · | · | — none | — | · | · | · | · |
-| tr | · | · | · | — none | — | · | · | · | · |
-| el | · | · | ✓ | — none | — | · | · | · | · |
-| uk | · | · | ✓ | — none | — | · | · | · | · |
-| vi | · | · | · | · candidates | · | · | · | · | · |
-| he | · | · | ✓ | — none | — | · | · | · | · |
+| **pt** | Paulo | ✓ | ✓ A–Z | · candidates | · | ✓ | ✓ 173 | ✓ 58 | ✓ playing |
+| fr | Martin Dupont | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
+| it | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
+| nl | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
+| sv | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| da | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| nb | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| fi | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| hu | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
+| ro | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| tr | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| el | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| uk | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| vi | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
+| he | · | ~ draft | ✓ | — none | — | · | · | · | · |
 
 Bold means the language is enabled in `data/speech/catalog.json`; the rest are
 declared but not being generated.

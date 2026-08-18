@@ -132,7 +132,7 @@
     },
     "tr": {
       "locale": "tr-TR",
-      "enabled": false
+      "enabled": true
     },
     "el": {
       "locale": "el-GR",
@@ -144,7 +144,7 @@
     },
     "vi": {
       "locale": "vi-VN",
-      "enabled": false
+      "enabled": true
     },
     "he": {
       "locale": "he-IL",
