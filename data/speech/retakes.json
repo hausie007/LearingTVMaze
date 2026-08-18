@@ -161,6 +161,26 @@
           "muito obrigado"
         ]
       }
+    },
+    "tr": {
+      "learning.char.c03": {
+        "n": 1,
+        "reason": "sounds exactly as simple C",
+        "asked_on": "2026-08-18"
+      },
+      "learning.char.r": {
+        "n": 1,
+        "reason": "sounds like zhe",
+        "asked_on": "2026-08-18"
+      },
+      "ui.recap_tts_found_letters.1": {
+        "n": 3,
+        "reason": "Came out as the carrier that follows it. 'ile' opens on a vowel and runs into 'merhaba' in front of it, so the two read as one sound and the cut lands a segment late — the same fault Portuguese 'oito' had. No leader: first in the reading it has nothing to merge with, and the follower still stops it trailing off.",
+        "asked_on": "2026-08-18",
+        "carrier_after": [
+          "teşekkürler"
+        ]
+      }
     }
   }
 }

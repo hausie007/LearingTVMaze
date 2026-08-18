@@ -527,12 +527,18 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
     # their last syllable. The carrier is a remedy for shortness, and applying
     # it where there is no shortness introduced the fault it was meant to cure.
     if retake and category in (cat.get("retake_carrier_categories") or ["char", "ui"]):
-        fallback = profile.get("retake_carriers") or {}
         context = context or {}
-        for field in ("carrier_before", "carrier_after"):
-            value = settings.get(field) or fallback.get(field)
-            if value and field not in context:
-                context[field] = list(value)
+        # A retake that names any carrier has named all of them. Asking for a
+        # follower and no leader used to leave the category's own leader in
+        # place, so the retake tested the opposite of what it said — Turkish
+        # "ile" came back as the word after it, twice.
+        explicit = any(f in context for f in ("carrier_before", "carrier_after"))
+        if not explicit:
+            fallback = profile.get("retake_carriers") or {}
+            for field in ("carrier_before", "carrier_after"):
+                value = settings.get(field) or fallback.get(field)
+                if value:
+                    context[field] = list(value)
 
     spec = {
         "provider": profile["provider"],
