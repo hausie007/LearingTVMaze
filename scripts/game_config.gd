@@ -560,6 +560,14 @@ func load_settings() -> void:
 		# on update: whoever had speech on keeps the device voice they already
 		# had, and Studio voice is something they opt into. Only a fresh install
 		# has no opinion, and it gets the same device voice.
+		# Whether this install ever said it wanted no speech, read before the
+		# build-67 reset below overwrites the answer. An install old enough to
+		# predate voice_mode stored a single voice_hints bool, and false there
+		# means the same thing OFF means now.
+		var asked_for_silence := (not config.has_section_key("Game", "voice_mode")
+			and config.has_section_key("Game", "voice_hints")
+			and not bool(config.get_value("Game", "voice_hints", true)))
+
 		if config.has_section_key("Game", "voice_mode"):
 			voice_mode = _clamp_voice_mode(int(config.get_value("Game", "voice_mode", int(voice_mode))))
 		elif config.has_section_key("Game", "voice_hints"):
@@ -583,7 +591,13 @@ func load_settings() -> void:
 		# there would be nothing to upgrade to, and marking it done would spend
 		# their one upgrade on a language that could not use it.
 		if not _studio_offered:
-			if voice_mode == VoiceMode.DEVICE_TTS and Speech.has_pack(get_effective_learning_language()):
+			if asked_for_silence:
+				# The build-67 reset above turned their OFF into the device
+				# voice. Upgrading that to a recorded voice would take someone
+				# who asked for quiet and give them a better sounding no.
+				_studio_offered = true
+				should_save_after_load = true
+			elif voice_mode == VoiceMode.DEVICE_TTS and Speech.has_pack(get_effective_learning_language()):
 				voice_mode = VoiceMode.STUDIO_PREFERRED
 				_studio_offered = true
 				should_save_after_load = true
