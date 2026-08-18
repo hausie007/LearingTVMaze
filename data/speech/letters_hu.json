@@ -146,6 +146,11 @@
       "spoken": "pé"
     },
     {
+      "id": "q",
+      "display": "Q",
+      "spoken": "kú"
+    },
+    {
       "id": "r",
       "display": "R",
       "spoken": "er"
@@ -194,6 +199,21 @@
       "id": "v",
       "display": "V",
       "spoken": "vé"
+    },
+    {
+      "id": "w",
+      "display": "W",
+      "spoken": "dupla vé"
+    },
+    {
+      "id": "x",
+      "display": "X",
+      "spoken": "iksz"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "ipszilon"
     },
     {
       "id": "z",

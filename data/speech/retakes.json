@@ -95,6 +95,75 @@
         "reason": "",
         "asked_on": "2026-08-17"
       }
+    },
+    "pt": {
+      "learning.number.004": {
+        "n": 2,
+        "reason": "harsh clipping at the end",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.005": {
+        "n": 2,
+        "reason": "harsh clipping at the end",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.006": {
+        "n": 1,
+        "reason": "says sete",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.007": {
+        "n": 3,
+        "reason": "harsh clipping at the end",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.008": {
+        "n": 4,
+        "reason": "additional breath at the end",
+        "asked_on": "2026-08-18",
+        "carrier_before": [
+          "bom dia"
+        ],
+        "carrier_after": [
+          "muito obrigado"
+        ]
+      },
+      "learning.number.009": {
+        "n": 1,
+        "reason": "says dez",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.010": {
+        "n": 1,
+        "reason": "says onze",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.011": {
+        "n": 1,
+        "reason": "says doze",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.012": {
+        "n": 1,
+        "reason": "says treze",
+        "asked_on": "2026-08-18"
+      },
+      "learning.number.013": {
+        "n": 1,
+        "reason": "weirdly cut, short",
+        "asked_on": "2026-08-18"
+      },
+      "ui.recap_tts_counted_to.0": {
+        "n": 4,
+        "reason": "just a very short \"te\", not the whole phrase",
+        "asked_on": "2026-08-18",
+        "carrier_before": [
+          "bom dia"
+        ],
+        "carrier_after": [
+          "muito obrigado"
+        ]
+      }
     }
   }
 }
