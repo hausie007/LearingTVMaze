@@ -787,6 +787,12 @@ func _cycle_maze_size(dir: int) -> void:
 
 func _cycle_lang(dir: int) -> void:
 	_lang_idx = (_lang_idx + dir + Config.LANG_CODES.size()) % Config.LANG_CODES.size()
+	# Say it, and make sure there is a voice able to say it. A parent choosing
+	# the language here is the one moment they can check they picked the right
+	# one without reading anything.
+	Config.adopt_learning_language(Config.LANG_CODES[_lang_idx],
+		Config.get_lang_display_name(_lang_idx, true))
+	Config.save_settings()
 	_update_all_labels()
 
 func _cycle_chaser_speed(dir: int) -> void:

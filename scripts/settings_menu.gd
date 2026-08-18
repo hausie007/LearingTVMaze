@@ -222,10 +222,12 @@ func _get_lang_display_name(idx: int, is_learning: bool = false) -> String:
 func _cycle_learning_lang(dir: int) -> void:
 	if Config.LANG_KEYS.size() == 0: return
 	temp_learning_lang_idx = (temp_learning_lang_idx + dir + Config.LANG_KEYS.size()) % Config.LANG_KEYS.size()
-	_update_labels()
 	if Config and temp_learning_lang_idx < Config.LANG_CODES.size():
-		Config.learning_language = Config.LANG_CODES[temp_learning_lang_idx]
+		var lang: String = Config.LANG_CODES[temp_learning_lang_idx]
+		Config.adopt_learning_language(lang, _get_lang_display_name(temp_learning_lang_idx, true))
+		temp_voice = Config.voice_mode      # the row shows what is now in force
 		Config.save_settings()
+	_update_labels()
 
 ## Off / Device voice / Studio voice, skipping whichever is unavailable.
 ## Studio voice only appears once the learning language has a complete pack;
