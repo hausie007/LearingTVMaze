@@ -100,7 +100,7 @@
     },
     "pt": {
       "locale": "pt-PT",
-      "enabled": false
+      "enabled": true
     },
     "nl": {
       "locale": "nl-NL",

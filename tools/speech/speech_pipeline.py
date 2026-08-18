@@ -3548,6 +3548,19 @@ def cmd_next(args) -> int:
     cat = load_catalog()
     if lang not in cat["languages"]:
         raise Fail(f"unknown language {lang!r}. Known: {', '.join(sorted(cat['languages']))}")
+
+    # A language declared but not enabled is a config flag, not a decision the
+    # person running this needs to be stopped by. Enabling costs nothing, is
+    # one line to undo, and this command refuses to spend anything without
+    # --go anyway — so it enables and says so, rather than failing with an
+    # instruction to go and edit JSON.
+    if not cat["languages"][lang].get("enabled"):
+        doc = read_json(CATALOG)
+        doc["languages"][lang]["enabled"] = True
+        write_atomic(CATALOG, (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+        cat = load_catalog()
+        info(f"Enabled {lang} in {rel(CATALOG)} — it was declared but switched off. "
+             f"Set \"enabled\": false there to undo.")
     budget = args.budget if args.go else 0.0
     spent = [0.0]
 
