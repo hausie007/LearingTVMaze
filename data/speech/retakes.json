@@ -118,15 +118,9 @@
         "asked_on": "2026-08-18"
       },
       "learning.number.008": {
-        "n": 5,
-        "reason": "lost its start twice: 'oito' begins with a vowel and merges into whatever precedes it, so the cut lands inside the word. No carrier before it this time — first in the reading it has nothing to merge with, and the follower still stops it trailing off.",
-        "asked_on": "2026-08-18",
-        "carrier_before": [
-          "bom dia"
-        ],
-        "carrier_after": [
-          "muito obrigado"
-        ]
+        "n": 6,
+        "reason": "Recorded alone, with nothing either side. Three attempts with carriers all cut the word down to its last sound — the master was 0.13s — while 'sete' and 'nove' were retaken with no carriers at all and came out at 0.80s and 2.16s. Carriers exist so a short item is not read first or last; the price is a cut, and for a vowel-initial word this voice gives the cutter nowhere safe to land. No carriers means no cut.",
+        "asked_on": "2026-08-18"
       },
       "learning.number.009": {
         "n": 1,

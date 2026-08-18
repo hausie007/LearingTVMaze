@@ -2962,6 +2962,12 @@ def cmd_retake(args) -> int:
         entry = doc["languages"].setdefault(lang, {}).setdefault(key, {"n": 0})
         entry["n"] = int(entry.get("n", 0)) + 1
         entry["reason"] = reason or entry.get("reason", "")
+        # Each retake states its own conditions. Carriers used to survive from
+        # the attempt before, so asking for a follower and no leader silently
+        # kept the leader — and the retake that was meant to test 'nothing in
+        # front of it' tested nothing of the kind.
+        for field in ("carrier_before", "carrier_after", "previous_text", "next_text"):
+            entry.pop(field, None)
         if args.previous_text:
             entry["previous_text"] = args.previous_text
         if args.carrier:
