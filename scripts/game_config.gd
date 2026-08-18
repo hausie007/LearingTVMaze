@@ -327,10 +327,24 @@ func translate_in(key: String, locale: String) -> String:
 	return TranslationServer.translate(key)
 
 
+## Say a language name aloud, in whichever voice the player has chosen.
+## Silent when the voice is off, because off means off.
+func speak_language_name(idx: int, is_learning: bool, ui_lang_idx: int = 0) -> void:
+	if voice_mode == VoiceMode.OFF:
+		return
+	var segments := language_name_segments(idx, is_learning, ui_lang_idx)
+	if segments.is_empty():
+		return
+	Speech.warm_up(String(segments[0]["lang"]), String(segments[0]["text"]))
+	Speech.speak_segments(segments)
+
+
+## Adopt a learning language and announce it.
 func adopt_learning_language(lang: String, idx: int = -1, ui_lang_idx: int = 0) -> void:
 	learning_language = lang
 	if idx >= 0:
 		speak_language_name(idx, true, ui_lang_idx)
+
 
 ## Deprecated: read-only bridge for one release so nothing silently breaks
 ## while call sites migrate. `verify --strict` keeps it from coming back.
