@@ -289,7 +289,7 @@ func adopt_learning_language(lang: String, speak_name: String = "") -> void:
 	learning_language = lang
 	if voice_mode == VoiceMode.OFF or speak_name.is_empty():
 		return
-	var menu_lang := get_effective_ui_language()
+	var menu_lang := get_effective_ui_language()   # never the "auto" sentinel
 	Speech.warm_up(menu_lang, speak_name)
 	Speech.speak_ui(speak_name, menu_lang)
 

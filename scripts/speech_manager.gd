@@ -179,7 +179,7 @@ func speak_word(text: String, lang: String = "") -> void:
 ## app title. Resolved by its text, like everything else, so a caller passes
 ## what it would have spoken and needs to know nothing about clip keys.
 func speak_ui(text: String, lang: String = "", rate: float = 0.95) -> void:
-	var language := lang if not lang.is_empty() else Config.get_effective_ui_language()
+	var language := _ui_language_or_default(lang)
 	_speak(_ui_key(language, text), language, text, rate)
 
 
@@ -203,6 +203,7 @@ func stop() -> void:
 ## Prime the OS voice. Skipped when the pack covers this language, since the
 ## fallback would not be reached — but not skipped when coverage is partial.
 func warm_up(lang: String, text: String = "") -> void:
+	lang = _language_or_default(lang)
 	if Config.voice_mode == Config.VoiceMode.OFF:
 		return
 	if Config.voice_mode == Config.VoiceMode.STUDIO_PREFERRED and is_complete(lang):
@@ -537,8 +538,22 @@ func _after_pause() -> void:
 
 # ── Pack loading ─────────────────────────────────────────────────────────────
 
+## "auto" is a menu choice, not a language. It has to become a real code before
+## anything is looked up, or every call asks for a pack named "auto", finds
+## none, and quietly drops to the robot voice — which is what happened to every
+## player who never changed the language away from its default.
+const AUTO := "auto"
+
 func _language_or_default(lang: String) -> String:
-	return lang if not lang.is_empty() else Config.get_effective_learning_language()
+	if lang.is_empty() or lang == AUTO:
+		return Config.get_effective_learning_language()
+	return lang
+
+
+func _ui_language_or_default(lang: String) -> String:
+	if lang.is_empty() or lang == AUTO:
+		return Config.get_effective_ui_language()
+	return lang
 
 
 ## Load a language's manifest once, on first use, and keep it.
