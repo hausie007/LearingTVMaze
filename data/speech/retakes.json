@@ -118,9 +118,12 @@
         "asked_on": "2026-08-18"
       },
       "learning.number.008": {
-        "n": 6,
-        "reason": "Recorded alone, with nothing either side. Three attempts with carriers all cut the word down to its last sound — the master was 0.13s — while 'sete' and 'nove' were retaken with no carriers at all and came out at 0.80s and 2.16s. Carriers exist so a short item is not read first or last; the price is a cut, and for a vowel-initial word this voice gives the cutter nowhere safe to land. No carriers means no cut.",
-        "asked_on": "2026-08-18"
+        "n": 7,
+        "reason": "The word is right, it just ends on an intake of breath — which a reading alone always does, and which the trim cannot remove because a breath is well above the silence threshold. A follower gives the breath somewhere to go: it lands in the discarded carrier instead of the clip. No leader, since a carrier in front is what cut the word to 't' three times.",
+        "asked_on": "2026-08-18",
+        "carrier_after": [
+          "muito obrigado"
+        ]
       },
       "learning.number.009": {
         "n": 1,
