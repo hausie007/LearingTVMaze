@@ -118,8 +118,8 @@
         "asked_on": "2026-08-18"
       },
       "learning.number.008": {
-        "n": 4,
-        "reason": "additional breath at the end",
+        "n": 5,
+        "reason": "lost its start twice: 'oito' begins with a vowel and merges into whatever precedes it, so the cut lands inside the word. No carrier before it this time — first in the reading it has nothing to merge with, and the follower still stops it trailing off.",
         "asked_on": "2026-08-18",
         "carrier_before": [
           "bom dia"
