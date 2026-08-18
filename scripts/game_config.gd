@@ -273,33 +273,25 @@ enum VoiceMode { OFF, DEVICE_TTS, STUDIO_PREFERRED }
 var voice_mode: VoiceMode = VoiceMode.DEVICE_TTS
 
 
-## Keep the voice usable when the learning language changes.
+## Say the language just chosen, in the language of the menu.
 ##
-## Studio and device are not a preference between two equal things: studio is
-## better where it exists, and it exists for a handful of languages. Scrolling
-## from Czech to Greek used to leave the mode on Studio with no Greek pack
-## behind it, so the game went quiet — the child got silence for the crime of
-## the parent browsing.
+## Not in the language being named: with a Czech menu, saying "vietnamština"
+## with a Vietnamese voice is a Vietnamese speaker reading a Czech word, which
+## is neither language and helps nobody. The parent reads the menu in their own
+## language and should hear it in their own language.
 ##
-## OFF is never touched. It is the one setting that means what it says, and a
-## parent who turned the voice off did so on purpose.
-func voice_mode_for_language(lang: String) -> VoiceMode:
-	if voice_mode == VoiceMode.OFF:
-		return VoiceMode.OFF
-	return VoiceMode.STUDIO_PREFERRED if Speech.has_pack(lang) else VoiceMode.DEVICE_TTS
-
-
-## Apply that, and say the language just chosen in its own voice.
-## Called by both places a learning language can be picked, so the two cannot
-## drift apart — they already had two copies of the language list and one of
-## them was wrong for a year.
+## The voice mode is left alone. It is a preference between two backends, not
+## a claim that either can speak the language chosen — STUDIO_PREFERRED already
+## falls back per item, so a language with no pack still speaks. Switching the
+## mode while the parent scrolled made the setting flicker under them and, once
+## flipped to device, stopped the studio UI clips being used at all.
 func adopt_learning_language(lang: String, speak_name: String = "") -> void:
 	learning_language = lang
-	voice_mode = voice_mode_for_language(lang)
 	if voice_mode == VoiceMode.OFF or speak_name.is_empty():
 		return
-	Speech.warm_up(lang, speak_name)
-	Speech.speak_ui(speak_name, lang)
+	var menu_lang := get_effective_ui_language()
+	Speech.warm_up(menu_lang, speak_name)
+	Speech.speak_ui(speak_name, menu_lang)
 
 ## Deprecated: read-only bridge for one release so nothing silently breaks
 ## while call sites migrate. `verify --strict` keeps it from coming back.

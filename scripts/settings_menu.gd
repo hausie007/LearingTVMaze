@@ -225,7 +225,6 @@ func _cycle_learning_lang(dir: int) -> void:
 	if Config and temp_learning_lang_idx < Config.LANG_CODES.size():
 		var lang: String = Config.LANG_CODES[temp_learning_lang_idx]
 		Config.adopt_learning_language(lang, _get_lang_display_name(temp_learning_lang_idx, true))
-		temp_voice = Config.voice_mode      # the row shows what is now in force
 		Config.save_settings()
 	_update_labels()
 
@@ -254,12 +253,12 @@ func _cycle_voice(dir: int) -> void:
 func _voice_choices() -> Array[int]:
 	# int() rather than the enum values directly: a named enum is its own type
 	# to the static checker, and will not append to an Array[int].
-	var choices: Array[int] = [int(Config.VoiceMode.OFF)]
-	if not TTS.tts_ready or _device_voices_available():
-		choices.append(int(Config.VoiceMode.DEVICE_TTS))
-	if Speech.has_pack(_get_preview_language(true)):
-		choices.append(int(Config.VoiceMode.STUDIO_PREFERRED))
-	return choices
+	# All three, always. Hiding a mode because this language has no pack meant
+	# the row changed length as the parent scrolled through languages, and the
+	# setting is a preference anyway: studio falls back to the device voice per
+	# item, and the device voice falls back to silence, both without asking.
+	return [int(Config.VoiceMode.OFF), int(Config.VoiceMode.DEVICE_TTS),
+			int(Config.VoiceMode.STUDIO_PREFERRED)]
 
 func _device_voices_available() -> bool:
 	return TTS.is_available(_get_preview_language(false)) \
@@ -268,9 +267,7 @@ func _device_voices_available() -> bool:
 func _voice_mode_label(mode: int) -> String:
 	match mode:
 		Config.VoiceMode.OFF: return tr("voice_off")
-		Config.VoiceMode.STUDIO_PREFERRED:
-			return tr("voice_studio") if Speech.is_complete(_get_preview_language(true)) \
-				else tr("voice_studio_partial")
+		Config.VoiceMode.STUDIO_PREFERRED: return tr("voice_studio")
 		_: return tr("voice_device")
 
 func _cycle_perf(_dir: int) -> void:
