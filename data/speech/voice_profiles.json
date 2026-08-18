@@ -372,10 +372,14 @@
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
         },
         "char": {
-          "sheet": {
-            "preamble": "olá"
-          },
-          "note": "A throwaway word read before the first item, then discarded with the cut. Portuguese A is named 'á' — one short vowel, first in the sheet, with nothing in front of it — and the cutter kept returning an empty first item because there was no silence before it to cut at. A preamble gives item one the same run-up every other item gets from its neighbour."
+          "synthesis_mode": "single",
+          "carrier_before": [
+            "olá"
+          ],
+          "carrier_after": [
+            "obrigado"
+          ],
+          "note": "Recorded one letter at a time between carrier words, never cut from a sheet. Portuguese letter names are unusually short and several are a bare vowel — A is 'á', E is 'é', O is 'ó', U is 'u' — so a sheet of them has gaps between items no larger than the gaps inside them, and the cutter kept returning empty items. A preamble fixed the first one and then item five failed for the same reason. This is the same remedy the UI fragments needed, for the same cause."
         }
       },
       "retake_carriers": {
