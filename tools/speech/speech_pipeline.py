@@ -1280,8 +1280,19 @@ def sheet_text(profile: dict, group: list):
         sheet.update((category_settings(profile, category).get("sheet") or {}))
     sep = sheet.get("separator", ". ")
     preamble = sheet.get("preamble", "")
+    if preamble:
+        # The cutter solves the sheet for exactly len(spans) sounds. A preamble
+        # is a sound it is never told about, so every cut lands one item late:
+        # Portuguese A came back saying "olá", B said "á", C said "bê". The
+        # field looked supported and was not. Refuse it rather than let it
+        # shift a whole alphabet silently.
+        raise Fail(
+            "sheet.preamble is not supported: the cutter is not told about it "
+            "and every cut lands one item late. Use a longer separator to force "
+            "a pause, or record the category one item at a time with carriers."
+        )
 
-    text = f"{preamble}{sep}" if preamble else ""
+    text = ""
     spans = []
     for i, r in enumerate(group):
         start = len(text)

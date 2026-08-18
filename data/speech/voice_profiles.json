@@ -373,10 +373,9 @@
         },
         "char": {
           "sheet": {
-            "preamble": "olá",
             "separator": ". ... "
           },
-          "note": "Sheet mode, like every other language — but with a separator that forces a pause. This voice reads a list of short letter names at wildly different speeds: the same voice took 16.96s over thirteen letters in one sheet and 5.68s in another, leaving 1.2s of total silence across the whole reading. Nothing can be cut out of that, and it is the reading that is wrong, not the alphabet — Spanish has the same bare vowels and cuts cleanly. An ellipsis is read as a pause rather than spoken."
+          "note": "Sheet mode with a separator that forces a pause. This voice paces a list of short letter names erratically — thirteen letters in 5.68s with 1.2s of silence in one sheet, 16.96s with 10.6s in another — and nothing can be cut out of the fast reading. An ellipsis is read as a pause rather than spoken. Not a preamble: the cutter is never told about one and every cut lands an item late."
         }
       },
       "retake_carriers": {
