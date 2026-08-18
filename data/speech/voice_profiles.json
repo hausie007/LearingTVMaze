@@ -370,6 +370,12 @@
             "obrigado"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "char": {
+          "sheet": {
+            "preamble": "olá"
+          },
+          "note": "A throwaway word read before the first item, then discarded with the cut. Portuguese A is named 'á' — one short vowel, first in the sheet, with nothing in front of it — and the cutter kept returning an empty first item because there was no silence before it to cut at. A preamble gives item one the same run-up every other item gets from its neighbour."
         }
       },
       "retake_carriers": {
@@ -385,9 +391,9 @@
     "fr-FR": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "a5n9pJUnAhX4fn7lx3uo",
+      "voice_name": "Martin Dupont",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "fr",
       "settings": {

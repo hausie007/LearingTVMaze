@@ -1261,8 +1261,19 @@ def cmd_generate(args) -> int:
 # language decision.
 
 def sheet_text(profile: dict, group: list):
-    """Build the sheet and record where each item sits inside it."""
-    sheet = profile.get("sheet") or {}
+    """Build the sheet and record where each item sits inside it.
+
+    A category may override the sheet settings. Only one thing has needed it so
+    far and it needed it badly: Portuguese names its A "á", one short vowel
+    sitting first in the sheet with nothing in front of it, and the cutter kept
+    returning an empty first item because there was no silence to cut at. A
+    preamble fixes that — but the profile's sheet settings are shared with the
+    word sheets, and changing them there would throw away every word already
+    recorded for the sake of one letter.
+    """
+    sheet = dict(profile.get("sheet") or {})
+    if group:
+        sheet.update((category_settings(profile, group[0]["category"]).get("sheet") or {}))
     sep = sheet.get("separator", ". ")
     preamble = sheet.get("preamble", "")
 
@@ -3595,12 +3606,23 @@ def cmd_next(args) -> int:
     rate = cat["master_format"]["sample_rate"]
     align_price = cat.get("pricing_usd_per_hour_audio", {}).get("forced_alignment", 0.40)
 
+    seen = None
     for _ in range(8):        # each pass completes one stage; 8 is more than enough
         records = state()
         counts = {}
         for r in records:
             counts[r["status"]] = counts.get(r["status"], 0) + 1
         info(f"\n{lang}: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
+
+        # A stage that changes nothing has failed, and running it again will
+        # fail the same way. Portuguese sat here six times over, re-cutting two
+        # sheets that cannot be cut and reporting it each time.
+        signature = tuple(sorted(counts.items()))
+        if signature == seen:
+            warn(f"that stage changed nothing, so it will not be retried. "
+                 f"The messages above say why it could not finish.")
+            return 1
+        seen = signature
 
         if counts.get("unconfigured"):
             info(f"\nNEXT: this language has no voice yet. Listen to candidates, put the "
