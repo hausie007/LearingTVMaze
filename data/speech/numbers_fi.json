@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "fi",
+  "locale": "fi-FI",
+  "note": "29 letters. Å is in the alphabet for Swedish names only and is named 'ruotsalainen oo' — the Swedish o. Ä and Ö are letters, not accented vowels, and sort after Z. Finnish inflects heavily and will need number_forms before the recap can speak.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "yksi"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "kaksi"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "kolme"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "neljä"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "viisi"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "kuusi"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "seitsemän"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "kahdeksan"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "yhdeksän"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "kymmenen"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "yksitoista"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "kaksitoista"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "kolmetoista"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "neljätoista"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "viisitoista"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "kuusitoista"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "seitsemäntoista"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "kahdeksantoista"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "yhdeksäntoista"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "kaksikymmentä"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "kaksikymmentäyksi"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "kaksikymmentäkaksi"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "kaksikymmentäkolme"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "kaksikymmentäneljä"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "kaksikymmentäviisi"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "kaksikymmentäkuusi"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "kaksikymmentäseitsemän"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "kaksikymmentäkahdeksan"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "kaksikymmentäyhdeksän"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "kolmekymmentä"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "kolmekymmentäyksi"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "kolmekymmentäkaksi"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "kolmekymmentäkolme"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "kolmekymmentäneljä"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "kolmekymmentäviisi"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "kolmekymmentäkuusi"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "kolmekymmentäseitsemän"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "kolmekymmentäkahdeksan"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "kolmekymmentäyhdeksän"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "neljäkymmentä"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "neljäkymmentäyksi"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "neljäkymmentäkaksi"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "neljäkymmentäkolme"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "neljäkymmentäneljä"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "neljäkymmentäviisi"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "neljäkymmentäkuusi"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "neljäkymmentäseitsemän"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "neljäkymmentäkahdeksan"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "neljäkymmentäyhdeksän"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "viisikymmentä"
+    }
+  ]
+}

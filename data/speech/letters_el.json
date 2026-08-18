@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "lang": "el",
+  "locale": "el-GR",
+  "note": "24 letters. Σ has a final form ς at the end of a word, which is the same letter. ΑΙ, ΕΙ, ΟΙ, ΟΥ, ΜΠ, ΝΤ, ΓΚ are δίψηφα — two letters making one sound, taught as such but not letters of the alphabet. Greek inflects after 'ως/μέχρι' and will need number_forms.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "c00",
+      "display": "Α",
+      "spoken": "άλφα"
+    },
+    {
+      "id": "c01",
+      "display": "Β",
+      "spoken": "βήτα"
+    },
+    {
+      "id": "c02",
+      "display": "Γ",
+      "spoken": "γάμμα"
+    },
+    {
+      "id": "c03",
+      "display": "Δ",
+      "spoken": "δέλτα"
+    },
+    {
+      "id": "c04",
+      "display": "Ε",
+      "spoken": "έψιλον"
+    },
+    {
+      "id": "c05",
+      "display": "Ζ",
+      "spoken": "ζήτα"
+    },
+    {
+      "id": "c06",
+      "display": "Η",
+      "spoken": "ήτα"
+    },
+    {
+      "id": "c07",
+      "display": "Θ",
+      "spoken": "θήτα"
+    },
+    {
+      "id": "c08",
+      "display": "Ι",
+      "spoken": "γιώτα"
+    },
+    {
+      "id": "c09",
+      "display": "Κ",
+      "spoken": "κάππα"
+    },
+    {
+      "id": "c10",
+      "display": "Λ",
+      "spoken": "λάμδα"
+    },
+    {
+      "id": "c11",
+      "display": "Μ",
+      "spoken": "μι"
+    },
+    {
+      "id": "c12",
+      "display": "Ν",
+      "spoken": "νι"
+    },
+    {
+      "id": "c13",
+      "display": "Ξ",
+      "spoken": "ξι"
+    },
+    {
+      "id": "c14",
+      "display": "Ο",
+      "spoken": "όμικρον"
+    },
+    {
+      "id": "c15",
+      "display": "Π",
+      "spoken": "πι"
+    },
+    {
+      "id": "c16",
+      "display": "Ρ",
+      "spoken": "ρο"
+    },
+    {
+      "id": "c17",
+      "display": "Σ",
+      "spoken": "σίγμα"
+    },
+    {
+      "id": "c18",
+      "display": "Τ",
+      "spoken": "ταυ"
+    },
+    {
+      "id": "c19",
+      "display": "Υ",
+      "spoken": "ύψιλον"
+    },
+    {
+      "id": "c20",
+      "display": "Φ",
+      "spoken": "φι"
+    },
+    {
+      "id": "c21",
+      "display": "Χ",
+      "spoken": "χι"
+    },
+    {
+      "id": "c22",
+      "display": "Ψ",
+      "spoken": "ψι"
+    },
+    {
+      "id": "c23",
+      "display": "Ω",
+      "spoken": "ωμέγα"
+    }
+  ]
+}

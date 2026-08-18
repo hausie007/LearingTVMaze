@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "it",
+  "locale": "it-IT",
+  "note": "21 native letters, then J K W X Y which schools teach as 'lettere straniere' — they appear in borrowed words a child will meet. CH, GH, GL, GN and SC are sounds written with two letters, not letters of the alphabet.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "uno"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "due"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "tre"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "quattro"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "cinque"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "sei"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "sette"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "otto"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "nove"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "dieci"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "undici"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "dodici"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "tredici"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "quattordici"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "quindici"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "sedici"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "diciassette"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "diciotto"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "diciannove"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "venti"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "ventuno"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "ventidue"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "ventitre"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "ventiquattro"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "venticinque"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "ventisei"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "ventisette"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "ventotto"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "ventinove"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "trenta"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "trentuno"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "trentadue"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "trentatre"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "trentaquattro"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "trentacinque"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "trentasei"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "trentasette"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "trentotto"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "trentanove"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "quaranta"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "quarantuno"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "quarantadue"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "quarantatre"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "quarantaquattro"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "quarantacinque"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "quarantasei"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "quarantasette"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "quarantotto"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "quarantanove"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "cinquanta"
+    }
+  ]
+}

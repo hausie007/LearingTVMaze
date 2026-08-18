@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "el",
+  "locale": "el-GR",
+  "note": "24 letters. Σ has a final form ς at the end of a word, which is the same letter. ΑΙ, ΕΙ, ΟΙ, ΟΥ, ΜΠ, ΝΤ, ΓΚ are δίψηφα — two letters making one sound, taught as such but not letters of the alphabet. Greek inflects after 'ως/μέχρι' and will need number_forms.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "ένα"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "δύο"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "τρία"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "τέσσερα"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "πέντε"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "έξι"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "επτά"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "οκτώ"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "εννέα"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "δέκα"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "έντεκα"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "δώδεκα"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "δεκατρία"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "δεκατέσσερα"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "δεκαπέντε"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "δεκαέξι"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "δεκαεπτά"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "δεκαοκτώ"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "δεκαεννέα"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "είκοσι"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "είκοσι ένα"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "είκοσι δύο"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "είκοσι τρία"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "είκοσι τέσσερα"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "είκοσι πέντε"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "είκοσι έξι"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "είκοσι επτά"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "είκοσι οκτώ"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "είκοσι εννέα"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "τριάντα"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "τριάντα ένα"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "τριάντα δύο"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "τριάντα τρία"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "τριάντα τέσσερα"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "τριάντα πέντε"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "τριάντα έξι"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "τριάντα επτά"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "τριάντα οκτώ"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "τριάντα εννέα"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "σαράντα"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "σαράντα ένα"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "σαράντα δύο"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "σαράντα τρία"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "σαράντα τέσσερα"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "σαράντα πέντε"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "σαράντα έξι"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "σαράντα επτά"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "σαράντα οκτώ"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "σαράντα εννέα"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "πενήντα"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "hu",
+  "locale": "hu-HU",
+  "note": "44 letters, and this is the one alphabet here where digraphs really are letters: CS, DZ, DZS, GY, LY, NY, SZ, TY and ZS each have their own place, their own name and their own drawer in a dictionary. DZS is three characters and one letter. Q, W, X and Y appear only in names and borrowings.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "egy"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "kettő"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "három"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "négy"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "öt"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "hat"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "hét"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "nyolc"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "kilenc"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "tíz"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "tizenegy"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "tizenkettő"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "tizenhárom"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "tizennégy"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "tizenöt"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "tizenhat"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "tizenhét"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "tizennyolc"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "tizenkilenc"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "húsz"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "huszonegy"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "huszonkettő"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "huszonhárom"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "huszonnégy"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "huszonöt"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "huszonhat"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "huszonhét"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "huszonnyolc"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "huszonkilenc"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "harminc"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "harmincegy"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "harminckettő"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "harminchárom"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "harmincnégy"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "harmincöt"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "harminchat"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "harminchét"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "harmincnyolc"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "harminckilenc"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "negyven"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "negyvenegy"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "negyvenkettő"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "negyvenhárom"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "negyvennégy"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "negyvenöt"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "negyvenhat"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "negyvenhét"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "negyvennyolc"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "negyvenkilenc"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "ötven"
+    }
+  ]
+}

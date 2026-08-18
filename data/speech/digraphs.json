@@ -45,25 +45,29 @@
       "decided": true
     },
     "vi": {
-      "letters": [],
-      "corpus_reviewed": false,
-      "marked_words": 0,
-      "note": "The largest outstanding case: 105 of 170 words contain a candidate. NG, NGH, NH, CH, TR, TH, PH, KH, GI and QU are letters of the Vietnamese alphabet, so most of these will need marking.",
-      "decided": false
+      "digraphs": [],
+      "checked": false,
+      "note": "Undecided, and it matters more here than anywhere else. CH, GH, GI, KH, NG, NGH, NH, PH, QU, TH, TR are taught in Vietnamese schools as units a child learns whole. Whether they belong in the alphabet for this game is a question for a Vietnamese teacher, not for a dictionary. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     },
     "hu": {
-      "letters": [],
-      "corpus_reviewed": false,
-      "marked_words": 0,
-      "note": "57 of 140 words contain a candidate. CS, GY, LY, NY, SZ, TY, ZS and DZS are letters of the Hungarian alphabet. Beware KÖZSÉGHÁZA — község-háza, not …ö-zs-é…",
-      "decided": false
+      "digraphs": [
+        "CS",
+        "DZ",
+        "DZS",
+        "GY",
+        "LY",
+        "NY",
+        "SZ",
+        "TY",
+        "ZS"
+      ],
+      "checked": false,
+      "note": "These really are letters: each has its own name, its own place in the alphabet and its own section in a dictionary. DZS is three characters and one letter. The word list must be marked accordingly. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     },
     "nl": {
-      "letters": [],
-      "corpus_reviewed": false,
-      "marked_words": 0,
-      "note": "IJ in 14 of 165 words. Genuinely contested: taught as one letter, capitalised as one (IJsland), but usually listed as a digraph. Needs a Dutch decision.",
-      "decided": false
+      "digraphs": [],
+      "checked": false,
+      "note": "IJ is the real question and is left out for now: it capitalises as a pair and many schools call it a letter, but it is not in the official alphabet. A native speaker should settle it — if IJ becomes a letter here it must also be marked in the word list. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     },
     "es": {
       "digraphs": [],
@@ -79,6 +83,56 @@
       "digraphs": [],
       "checked": true,
       "note": "None. CH, OU and the rest are spellings, not letters of the alphabet. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "tr": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. Turkish spelling is one letter per sound. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "it": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. CH, GH, GL, GN, SC are one sound written with two letters, which is not the same as being a letter. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "ro": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. CE, CI, GE, GI, CHE, CHI, GHE, GHI are letter groups taught for reading, not letters. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "uk": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. ДЖ and ДЗ are two letters each. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "el": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. The δίψηφα — ΑΙ, ΕΙ, ΟΙ, ΟΥ, ΜΠ, ΝΤ, ΓΚ — are pairs making one sound, taught as such but not letters. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "sv": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. Å, Ä and Ö are single letters, not digraphs. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "da": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. AA is an old spelling of Å and appears in names, but is not a letter. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "nb": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "fi": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
+    },
+    "he": {
+      "digraphs": [],
+      "checked": false,
+      "note": "None. The five final forms — ך ם ן ף ץ — are shapes of existing letters, not separate ones. The test is whether the sequence is a LETTER OF THE ALPHABET, not merely one sound spelled with two characters."
     }
   },
   "not_applicable": {

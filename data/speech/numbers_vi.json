@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "vi",
+  "locale": "vi-VN",
+  "note": "29 letters. F, J, W and Z are not in the alphabet. The vowels with marks — Ă, Â, Ê, Ô, Ơ, Ư — are separate letters, not accents; the tone marks written above them are a different thing again and are not letters. CH, GH, GI, KH, NG, NGH, NH, PH, QU, TH, TR are taught in school as units, which is why they are recorded in digraphs.json for a decision.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "một"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "hai"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "ba"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "bốn"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "năm"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "sáu"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "bảy"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "tám"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "chín"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "mười"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "mười một"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "mười hai"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "mười ba"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "mười bốn"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "mười lăm"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "mười sáu"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "mười bảy"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "mười tám"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "mười chín"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "hai mươi"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "hai mươi mốt"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "hai mươi hai"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "hai mươi ba"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "hai mươi tư"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "hai mươi lăm"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "hai mươi sáu"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "hai mươi bảy"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "hai mươi tám"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "hai mươi chín"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "ba mươi"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "ba mươi mốt"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "ba mươi hai"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "ba mươi ba"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "ba mươi tư"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "ba mươi lăm"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "ba mươi sáu"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "ba mươi bảy"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "ba mươi tám"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "ba mươi chín"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "bốn mươi"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "bốn mươi mốt"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "bốn mươi hai"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "bốn mươi ba"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "bốn mươi tư"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "bốn mươi lăm"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "bốn mươi sáu"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "bốn mươi bảy"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "bốn mươi tám"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "bốn mươi chín"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "năm mươi"
+    }
+  ]
+}

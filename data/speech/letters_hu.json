@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "lang": "hu",
+  "locale": "hu-HU",
+  "note": "44 letters, and this is the one alphabet here where digraphs really are letters: CS, DZ, DZS, GY, LY, NY, SZ, TY and ZS each have their own place, their own name and their own drawer in a dictionary. DZS is three characters and one letter. Q, W, X and Y appear only in names and borrowings.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "a"
+    },
+    {
+      "id": "c01",
+      "display": "Á",
+      "spoken": "á"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "bé"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "cé"
+    },
+    {
+      "id": "cs",
+      "display": "[CS]",
+      "spoken": "csé"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "dé"
+    },
+    {
+      "id": "dz",
+      "display": "[DZ]",
+      "spoken": "dzé"
+    },
+    {
+      "id": "dzs",
+      "display": "[DZS]",
+      "spoken": "dzsé"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "e"
+    },
+    {
+      "id": "c09",
+      "display": "É",
+      "spoken": "é"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "ef"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "gé"
+    },
+    {
+      "id": "gy",
+      "display": "[GY]",
+      "spoken": "gyé"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "há"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "i"
+    },
+    {
+      "id": "c15",
+      "display": "Í",
+      "spoken": "í"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "jé"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "ká"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "el"
+    },
+    {
+      "id": "ly",
+      "display": "[LY]",
+      "spoken": "ej"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "em"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "en"
+    },
+    {
+      "id": "ny",
+      "display": "[NY]",
+      "spoken": "eny"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "o"
+    },
+    {
+      "id": "c24",
+      "display": "Ó",
+      "spoken": "ó"
+    },
+    {
+      "id": "c25",
+      "display": "Ö",
+      "spoken": "ö"
+    },
+    {
+      "id": "c26",
+      "display": "Ő",
+      "spoken": "ő"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pé"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "er"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "es"
+    },
+    {
+      "id": "sz",
+      "display": "[SZ]",
+      "spoken": "esz"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "té"
+    },
+    {
+      "id": "ty",
+      "display": "[TY]",
+      "spoken": "tyé"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "u"
+    },
+    {
+      "id": "c34",
+      "display": "Ú",
+      "spoken": "ú"
+    },
+    {
+      "id": "c35",
+      "display": "Ü",
+      "spoken": "ü"
+    },
+    {
+      "id": "c36",
+      "display": "Ű",
+      "spoken": "ű"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "vé"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "zé"
+    },
+    {
+      "id": "zs",
+      "display": "[ZS]",
+      "spoken": "zsé"
+    }
+  ]
+}

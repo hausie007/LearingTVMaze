@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "nb",
+  "locale": "nb-NO",
+  "note": "Bokmål. 29 letters: A-Z then Æ, Ø, Å. Numbers use the modern order, 'tjueen' rather than the older 'enogtyve', which is what schools teach now.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "en"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "to"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "tre"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "fire"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "fem"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "seks"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "sju"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "åtte"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "ni"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "ti"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "elleve"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "tolv"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "tretten"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "fjorten"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "femten"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "seksten"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "sytten"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "atten"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "nitten"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "tjue"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "tjueen"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "tjueto"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "tjuetre"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "tjuefire"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "tjuefem"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "tjueseks"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "tjuesju"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "tjueåtte"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "tjueni"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "tretti"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "trettien"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "trettito"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "trettitre"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "trettifire"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "trettifem"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "trettiseks"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "trettisju"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "trettiåtte"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "trettini"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "førti"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "førtien"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "førtito"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "førtitre"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "førtifire"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "førtifem"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "førtiseks"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "førtisju"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "førtiåtte"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "førtini"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "femti"
+    }
+  ]
+}

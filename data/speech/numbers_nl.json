@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "nl",
+  "locale": "nl-NL",
+  "note": "26 letters. IJ is the open question: many schools treat it as a letter and it capitalises as a pair (IJsselmeer), but it is not in the official alphabet. Left out here — see digraphs.json. Y is named 'ei' or 'i-grec' depending on region.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "een"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "twee"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "drie"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "vier"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "vijf"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "zes"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "zeven"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "acht"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "negen"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "tien"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "elf"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "twaalf"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "dertien"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "veertien"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "vijftien"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "zestien"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "zeventien"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "achttien"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "negentien"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "twintig"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "eenentwintig"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "tweeëntwintig"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "drieëntwintig"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "vierentwintig"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "vijfentwintig"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "zesentwintig"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "zevenentwintig"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "achtentwintig"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "negenentwintig"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "dertig"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "eenendertig"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "tweeëndertig"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "drieëndertig"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "vierendertig"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "vijfendertig"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "zesendertig"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "zevenendertig"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "achtendertig"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "negenendertig"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "veertig"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "eenenveertig"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "tweeënveertig"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "drieënveertig"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "vierenveertig"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "vijfenveertig"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "zesenveertig"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "zevenenveertig"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "achtenveertig"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "negenenveertig"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "vijftig"
+    }
+  ]
+}

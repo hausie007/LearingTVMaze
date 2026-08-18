@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "lang": "uk",
+  "locale": "uk-UA",
+  "note": "33 letters. Г and Ґ are different letters and different sounds. Ь has no sound of its own and is named 'м'який знак'. ДЖ and ДЗ are two letters each, not one. Ukrainian inflects after 'до', so it will need an entry in data/number_forms.json before the recap can speak.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "c00",
+      "display": "А",
+      "spoken": "а"
+    },
+    {
+      "id": "c01",
+      "display": "Б",
+      "spoken": "бе"
+    },
+    {
+      "id": "c02",
+      "display": "В",
+      "spoken": "ве"
+    },
+    {
+      "id": "c03",
+      "display": "Г",
+      "spoken": "ге"
+    },
+    {
+      "id": "c04",
+      "display": "Ґ",
+      "spoken": "ґе"
+    },
+    {
+      "id": "c05",
+      "display": "Д",
+      "spoken": "де"
+    },
+    {
+      "id": "c06",
+      "display": "Е",
+      "spoken": "е"
+    },
+    {
+      "id": "c07",
+      "display": "Є",
+      "spoken": "є"
+    },
+    {
+      "id": "c08",
+      "display": "Ж",
+      "spoken": "же"
+    },
+    {
+      "id": "c09",
+      "display": "З",
+      "spoken": "зе"
+    },
+    {
+      "id": "c10",
+      "display": "И",
+      "spoken": "и"
+    },
+    {
+      "id": "c11",
+      "display": "І",
+      "spoken": "і"
+    },
+    {
+      "id": "c12",
+      "display": "Ї",
+      "spoken": "ї"
+    },
+    {
+      "id": "c13",
+      "display": "Й",
+      "spoken": "йот"
+    },
+    {
+      "id": "c14",
+      "display": "К",
+      "spoken": "ка"
+    },
+    {
+      "id": "c15",
+      "display": "Л",
+      "spoken": "ел"
+    },
+    {
+      "id": "c16",
+      "display": "М",
+      "spoken": "ем"
+    },
+    {
+      "id": "c17",
+      "display": "Н",
+      "spoken": "ен"
+    },
+    {
+      "id": "c18",
+      "display": "О",
+      "spoken": "о"
+    },
+    {
+      "id": "c19",
+      "display": "П",
+      "spoken": "пе"
+    },
+    {
+      "id": "c20",
+      "display": "Р",
+      "spoken": "ер"
+    },
+    {
+      "id": "c21",
+      "display": "С",
+      "spoken": "ес"
+    },
+    {
+      "id": "c22",
+      "display": "Т",
+      "spoken": "те"
+    },
+    {
+      "id": "c23",
+      "display": "У",
+      "spoken": "у"
+    },
+    {
+      "id": "c24",
+      "display": "Ф",
+      "spoken": "еф"
+    },
+    {
+      "id": "c25",
+      "display": "Х",
+      "spoken": "ха"
+    },
+    {
+      "id": "c26",
+      "display": "Ц",
+      "spoken": "це"
+    },
+    {
+      "id": "c27",
+      "display": "Ч",
+      "spoken": "че"
+    },
+    {
+      "id": "c28",
+      "display": "Ш",
+      "spoken": "ша"
+    },
+    {
+      "id": "c29",
+      "display": "Щ",
+      "spoken": "ща"
+    },
+    {
+      "id": "c30",
+      "display": "Ь",
+      "spoken": "м'який знак"
+    },
+    {
+      "id": "c31",
+      "display": "Ю",
+      "spoken": "ю"
+    },
+    {
+      "id": "c32",
+      "display": "Я",
+      "spoken": "я"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "lang": "ro",
+  "locale": "ro-RO",
+  "note": "31 letters, including Ă, Â, Î, Ș and Ț. Â and Î are the same sound and are told apart by name: 'â din a' and 'î din i'. K, Q, W and Y are taught but appear only in borrowings. CE, CI, GE, GI, CHE, CHI, GHE, GHI are letter groups, not letters.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "a"
+    },
+    {
+      "id": "c01",
+      "display": "Ă",
+      "spoken": "ă"
+    },
+    {
+      "id": "c02",
+      "display": "Â",
+      "spoken": "â din a"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "be"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "ce"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "de"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "e"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "ef"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "ge"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "ha"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "i"
+    },
+    {
+      "id": "c11",
+      "display": "Î",
+      "spoken": "î din i"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "je"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "ka"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "el"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "em"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "en"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "o"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pe"
+    },
+    {
+      "id": "q",
+      "display": "Q",
+      "spoken": "chiu"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "er"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "es"
+    },
+    {
+      "id": "c22",
+      "display": "Ș",
+      "spoken": "șe"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "te"
+    },
+    {
+      "id": "c24",
+      "display": "Ț",
+      "spoken": "țe"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "u"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "ve"
+    },
+    {
+      "id": "w",
+      "display": "W",
+      "spoken": "dublu ve"
+    },
+    {
+      "id": "x",
+      "display": "X",
+      "spoken": "ics"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "igrec"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "ze"
+    }
+  ]
+}

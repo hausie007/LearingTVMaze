@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "ro",
+  "locale": "ro-RO",
+  "note": "31 letters, including Ă, Â, Î, Ș and Ț. Â and Î are the same sound and are told apart by name: 'â din a' and 'î din i'. K, Q, W and Y are taught but appear only in borrowings. CE, CI, GE, GI, CHE, CHI, GHE, GHI are letter groups, not letters.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "unu"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "doi"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "trei"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "patru"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "cinci"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "șase"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "șapte"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "opt"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "nouă"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "zece"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "unsprezece"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "doisprezece"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "treisprezece"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "paisprezece"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "cincisprezece"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "șaisprezece"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "șaptesprezece"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "optsprezece"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "nouăsprezece"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "douăzeci"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "douăzeci și unu"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "douăzeci și doi"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "douăzeci și trei"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "douăzeci și patru"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "douăzeci și cinci"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "douăzeci și șase"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "douăzeci și șapte"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "douăzeci și opt"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "douăzeci și nouă"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "treizeci"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "treizeci și unu"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "treizeci și doi"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "treizeci și trei"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "treizeci și patru"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "treizeci și cinci"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "treizeci și șase"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "treizeci și șapte"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "treizeci și opt"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "treizeci și nouă"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "patruzeci"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "patruzeci și unu"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "patruzeci și doi"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "patruzeci și trei"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "patruzeci și patru"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "patruzeci și cinci"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "patruzeci și șase"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "patruzeci și șapte"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "patruzeci și opt"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "patruzeci și nouă"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "cincizeci"
+    }
+  ]
+}

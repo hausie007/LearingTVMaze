@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "he",
+  "locale": "he-IL",
+  "note": "22 letters, written right to left. Five have a different shape at the end of a word — ך ם ן ף ץ — which are the same letters and are not listed separately. Hebrew numbers change with the gender of what is counted; the feminine forms are used here because that is how a child counts aloud.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "אחת"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "שתיים"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "שלוש"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "ארבע"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "חמש"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "שש"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "שבע"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "שמונה"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "תשע"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "עשר"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "אחת עשרה"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "שתים עשרה"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "שלוש עשרה"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "ארבע עשרה"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "חמש עשרה"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "שש עשרה"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "שבע עשרה"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "שמונה עשרה"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "תשע עשרה"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "עשרים"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "עשרים ואחת"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "עשרים ושתיים"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "עשרים ושלוש"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "עשרים וארבע"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "עשרים וחמש"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "עשרים ושש"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "עשרים ושבע"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "עשרים ושמונה"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "עשרים ותשע"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "שלושים"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "שלושים ואחת"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "שלושים ושתיים"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "שלושים ושלוש"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "שלושים וארבע"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "שלושים וחמש"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "שלושים ושש"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "שלושים ושבע"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "שלושים ושמונה"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "שלושים ותשע"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "ארבעים"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "ארבעים ואחת"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "ארבעים ושתיים"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "ארבעים ושלוש"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "ארבעים וארבע"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "ארבעים וחמש"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "ארבעים ושש"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "ארבעים ושבע"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "ארבעים ושמונה"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "ארבעים ותשע"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "חמישים"
+    }
+  ]
+}

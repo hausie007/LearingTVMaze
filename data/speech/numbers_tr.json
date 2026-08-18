@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "tr",
+  "locale": "tr-TR",
+  "note": "29 letters. Q, W and X are not in the alphabet. The dotted and dotless i are different letters: I is 'ı' and İ is 'i', and a child must not hear them as the same. Ğ is never word-initial and is named 'yumuşak ge'. No digraphs.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "bir"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "iki"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "üç"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "dört"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "beş"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "altı"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "yedi"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "sekiz"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "dokuz"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "on"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "on bir"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "on iki"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "on üç"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "on dört"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "on beş"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "on altı"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "on yedi"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "on sekiz"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "on dokuz"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "yirmi"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "yirmi bir"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "yirmi iki"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "yirmi üç"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "yirmi dört"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "yirmi beş"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "yirmi altı"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "yirmi yedi"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "yirmi sekiz"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "yirmi dokuz"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "otuz"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "otuz bir"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "otuz iki"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "otuz üç"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "otuz dört"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "otuz beş"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "otuz altı"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "otuz yedi"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "otuz sekiz"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "otuz dokuz"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "kırk"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "kırk bir"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "kırk iki"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "kırk üç"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "kırk dört"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "kırk beş"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "kırk altı"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "kırk yedi"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "kırk sekiz"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "kırk dokuz"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "elli"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "lang": "sv",
+  "locale": "sv-SE",
+  "note": "29 letters: A-Z then Å, Ä, Ö, which come after Z and are letters in their own right, not accented vowels. W was merged with V in dictionaries only in 2006 and is still its own letter.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "a"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "be"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "se"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "de"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "e"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "eff"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "ge"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "hå"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "i"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "ji"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "kå"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "ell"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "emm"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "enn"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "o"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pe"
+    },
+    {
+      "id": "q",
+      "display": "Q",
+      "spoken": "ku"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "ärr"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "ess"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "te"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "u"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "ve"
+    },
+    {
+      "id": "w",
+      "display": "W",
+      "spoken": "dubbel-ve"
+    },
+    {
+      "id": "x",
+      "display": "X",
+      "spoken": "eks"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "y"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "säta"
+    },
+    {
+      "id": "c26",
+      "display": "Å",
+      "spoken": "å"
+    },
+    {
+      "id": "c27",
+      "display": "Ä",
+      "spoken": "ä"
+    },
+    {
+      "id": "c28",
+      "display": "Ö",
+      "spoken": "ö"
+    }
+  ]
+}

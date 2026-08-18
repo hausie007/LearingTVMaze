@@ -434,6 +434,695 @@
         ],
         "note": "Used for any char or ui retake. A retake is one request read alone, and a short item trails off at its end."
       }
+    },
+    "tr-TR": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "tr",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to tr-TR, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language tr` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "merhaba"
+          ],
+          "carrier_after": [
+            "teşekkürler"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "merhaba"
+        ],
+        "carrier_after": [
+          "teşekkürler"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "it-IT": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "it",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to it-IT, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language it` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "ciao"
+          ],
+          "carrier_after": [
+            "grazie"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "ciao"
+        ],
+        "carrier_after": [
+          "grazie"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "nl-NL": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "nl",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to nl-NL, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language nl` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hallo"
+          ],
+          "carrier_after": [
+            "dank je"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hallo"
+        ],
+        "carrier_after": [
+          "dank je"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "ro-RO": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "ro",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to ro-RO, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language ro` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "salut"
+          ],
+          "carrier_after": [
+            "mulțumesc"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "salut"
+        ],
+        "carrier_after": [
+          "mulțumesc"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "uk-UA": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "uk",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to uk-UA, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language uk` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "привіт"
+          ],
+          "carrier_after": [
+            "дякую"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "привіт"
+        ],
+        "carrier_after": [
+          "дякую"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "el-GR": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "el",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to el-GR, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language el` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "γεια"
+          ],
+          "carrier_after": [
+            "ευχαριστώ"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "γεια"
+        ],
+        "carrier_after": [
+          "ευχαριστώ"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "hu-HU": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "hu",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to hu-HU, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language hu` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "szia"
+          ],
+          "carrier_after": [
+            "köszönöm"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "szia"
+        ],
+        "carrier_after": [
+          "köszönöm"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "sv-SE": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "sv",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to sv-SE, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language sv` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hej"
+          ],
+          "carrier_after": [
+            "tack"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hej"
+        ],
+        "carrier_after": [
+          "tack"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "da-DK": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "da",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to da-DK, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language da` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hej"
+          ],
+          "carrier_after": [
+            "tak"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hej"
+        ],
+        "carrier_after": [
+          "tak"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "nb-NO": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "nb",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to nb-NO, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language nb` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hei"
+          ],
+          "carrier_after": [
+            "takk"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hei"
+        ],
+        "carrier_after": [
+          "takk"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "fi-FI": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "fi",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to fi-FI, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language fi` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "hei"
+          ],
+          "carrier_after": [
+            "kiitos"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "hei"
+        ],
+        "carrier_after": [
+          "kiitos"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "vi-VN": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "vi",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to vi-VN, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language vi` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "xin chào"
+          ],
+          "carrier_after": [
+            "cảm ơn"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "xin chào"
+        ],
+        "carrier_after": [
+          "cảm ơn"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
+    },
+    "he-IL": {
+      "version": 1,
+      "provider": "elevenlabs",
+      "voice_id": null,
+      "voice_name": null,
+      "voice_source": null,
+      "model_id": "eleven_v3",
+      "language_code": "he",
+      "settings": {
+        "stability": 1.0,
+        "similarity_boost": 0.75,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 0.9
+      },
+      "seed": 20260812,
+      "pronunciation_dictionaries": [],
+      "output_format": "pcm_22050",
+      "synthesis_mode": "sheet",
+      "sheet": {
+        "separator": ". ",
+        "preamble": "",
+        "guard_lead_ms": 30,
+        "guard_tail_ms": 120,
+        "min_gap_ms": 180,
+        "min_sound_ms": 60,
+        "max_items_per_sheet": 16,
+        "cutter_version": 2
+      },
+      "reviewed_by": null,
+      "reviewed_on": null,
+      "notes": "No voice chosen yet. Put the ElevenLabs voice_id here and nothing else needs changing. Wanted: native to he-IL, warm, calm, adult, even pace, clear final consonants, boring on the thousandth listen. `speech_pipeline.py voices --language he` lists candidates for free; SETUP.md section 4 says what to listen for. Prefer an owned or designed voice over a library one, so it cannot be withdrawn after you ship.",
+      "categories": {
+        "ui": {
+          "carrier_before": [
+            "שלום"
+          ],
+          "carrier_after": [
+            "תודה"
+          ],
+          "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        }
+      },
+      "retake_carriers": {
+        "carrier_before": [
+          "שלום"
+        ],
+        "carrier_after": [
+          "תודה"
+        ],
+        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+      }
     }
   },
   "field_notes": {

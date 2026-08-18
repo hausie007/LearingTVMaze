@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "uk",
+  "locale": "uk-UA",
+  "note": "33 letters. Г and Ґ are different letters and different sounds. Ь has no sound of its own and is named 'м'який знак'. ДЖ and ДЗ are two letters each, not one. Ukrainian inflects after 'до', so it will need an entry in data/number_forms.json before the recap can speak.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "один"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "два"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "три"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "чотири"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "п'ять"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "шість"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "сім"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "вісім"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "дев'ять"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "десять"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "одинадцять"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "дванадцять"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "тринадцять"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "чотирнадцять"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "п'ятнадцять"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "шістнадцять"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "сімнадцять"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "вісімнадцять"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "дев'ятнадцять"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "двадцять"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "двадцять один"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "двадцять два"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "двадцять три"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "двадцять чотири"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "двадцять п'ять"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "двадцять шість"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "двадцять сім"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "двадцять вісім"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "двадцять дев'ять"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "тридцять"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "тридцять один"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "тридцять два"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "тридцять три"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "тридцять чотири"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "тридцять п'ять"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "тридцять шість"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "тридцять сім"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "тридцять вісім"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "тридцять дев'ять"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "сорок"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "сорок один"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "сорок два"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "сорок три"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "сорок чотири"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "сорок п'ять"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "сорок шість"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "сорок сім"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "сорок вісім"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "сорок дев'ять"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "п'ятдесят"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "lang": "sv",
+  "locale": "sv-SE",
+  "note": "29 letters: A-Z then Å, Ä, Ö, which come after Z and are letters in their own right, not accented vowels. W was merged with V in dictionaries only in 2006 and is still its own letter.",
+  "source_review": "DRAFT — needs a native speaker, especially 11-19 and the joining of 21-49.",
+  "numbers": [
+    {
+      "value": 1,
+      "display": "1",
+      "spoken": "ett"
+    },
+    {
+      "value": 2,
+      "display": "2",
+      "spoken": "två"
+    },
+    {
+      "value": 3,
+      "display": "3",
+      "spoken": "tre"
+    },
+    {
+      "value": 4,
+      "display": "4",
+      "spoken": "fyra"
+    },
+    {
+      "value": 5,
+      "display": "5",
+      "spoken": "fem"
+    },
+    {
+      "value": 6,
+      "display": "6",
+      "spoken": "sex"
+    },
+    {
+      "value": 7,
+      "display": "7",
+      "spoken": "sju"
+    },
+    {
+      "value": 8,
+      "display": "8",
+      "spoken": "åtta"
+    },
+    {
+      "value": 9,
+      "display": "9",
+      "spoken": "nio"
+    },
+    {
+      "value": 10,
+      "display": "10",
+      "spoken": "tio"
+    },
+    {
+      "value": 11,
+      "display": "11",
+      "spoken": "elva"
+    },
+    {
+      "value": 12,
+      "display": "12",
+      "spoken": "tolv"
+    },
+    {
+      "value": 13,
+      "display": "13",
+      "spoken": "tretton"
+    },
+    {
+      "value": 14,
+      "display": "14",
+      "spoken": "fjorton"
+    },
+    {
+      "value": 15,
+      "display": "15",
+      "spoken": "femton"
+    },
+    {
+      "value": 16,
+      "display": "16",
+      "spoken": "sexton"
+    },
+    {
+      "value": 17,
+      "display": "17",
+      "spoken": "sjutton"
+    },
+    {
+      "value": 18,
+      "display": "18",
+      "spoken": "arton"
+    },
+    {
+      "value": 19,
+      "display": "19",
+      "spoken": "nitton"
+    },
+    {
+      "value": 20,
+      "display": "20",
+      "spoken": "tjugo"
+    },
+    {
+      "value": 21,
+      "display": "21",
+      "spoken": "tjugoett"
+    },
+    {
+      "value": 22,
+      "display": "22",
+      "spoken": "tjugotvå"
+    },
+    {
+      "value": 23,
+      "display": "23",
+      "spoken": "tjugotre"
+    },
+    {
+      "value": 24,
+      "display": "24",
+      "spoken": "tjugofyra"
+    },
+    {
+      "value": 25,
+      "display": "25",
+      "spoken": "tjugofem"
+    },
+    {
+      "value": 26,
+      "display": "26",
+      "spoken": "tjugosex"
+    },
+    {
+      "value": 27,
+      "display": "27",
+      "spoken": "tjugosju"
+    },
+    {
+      "value": 28,
+      "display": "28",
+      "spoken": "tjugoåtta"
+    },
+    {
+      "value": 29,
+      "display": "29",
+      "spoken": "tjugonio"
+    },
+    {
+      "value": 30,
+      "display": "30",
+      "spoken": "trettio"
+    },
+    {
+      "value": 31,
+      "display": "31",
+      "spoken": "trettioett"
+    },
+    {
+      "value": 32,
+      "display": "32",
+      "spoken": "trettiotvå"
+    },
+    {
+      "value": 33,
+      "display": "33",
+      "spoken": "trettiotre"
+    },
+    {
+      "value": 34,
+      "display": "34",
+      "spoken": "trettiofyra"
+    },
+    {
+      "value": 35,
+      "display": "35",
+      "spoken": "trettiofem"
+    },
+    {
+      "value": 36,
+      "display": "36",
+      "spoken": "trettiosex"
+    },
+    {
+      "value": 37,
+      "display": "37",
+      "spoken": "trettiosju"
+    },
+    {
+      "value": 38,
+      "display": "38",
+      "spoken": "trettioåtta"
+    },
+    {
+      "value": 39,
+      "display": "39",
+      "spoken": "trettionio"
+    },
+    {
+      "value": 40,
+      "display": "40",
+      "spoken": "fyrtio"
+    },
+    {
+      "value": 41,
+      "display": "41",
+      "spoken": "fyrtioett"
+    },
+    {
+      "value": 42,
+      "display": "42",
+      "spoken": "fyrtiotvå"
+    },
+    {
+      "value": 43,
+      "display": "43",
+      "spoken": "fyrtiotre"
+    },
+    {
+      "value": 44,
+      "display": "44",
+      "spoken": "fyrtiofyra"
+    },
+    {
+      "value": 45,
+      "display": "45",
+      "spoken": "fyrtiofem"
+    },
+    {
+      "value": 46,
+      "display": "46",
+      "spoken": "fyrtiosex"
+    },
+    {
+      "value": 47,
+      "display": "47",
+      "spoken": "fyrtiosju"
+    },
+    {
+      "value": 48,
+      "display": "48",
+      "spoken": "fyrtioåtta"
+    },
+    {
+      "value": 49,
+      "display": "49",
+      "spoken": "fyrtionio"
+    },
+    {
+      "value": 50,
+      "display": "50",
+      "spoken": "femtio"
+    }
+  ]
+}

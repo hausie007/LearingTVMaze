@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "lang": "he",
+  "locale": "he-IL",
+  "note": "22 letters, written right to left. Five have a different shape at the end of a word — ך ם ן ף ץ — which are the same letters and are not listed separately. Hebrew numbers change with the gender of what is counted; the feminine forms are used here because that is how a child counts aloud.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "c00",
+      "display": "א",
+      "spoken": "אלף"
+    },
+    {
+      "id": "c01",
+      "display": "ב",
+      "spoken": "בית"
+    },
+    {
+      "id": "c02",
+      "display": "ג",
+      "spoken": "גימל"
+    },
+    {
+      "id": "c03",
+      "display": "ד",
+      "spoken": "דלת"
+    },
+    {
+      "id": "c04",
+      "display": "ה",
+      "spoken": "הא"
+    },
+    {
+      "id": "c05",
+      "display": "ו",
+      "spoken": "וו"
+    },
+    {
+      "id": "c06",
+      "display": "ז",
+      "spoken": "זין"
+    },
+    {
+      "id": "c07",
+      "display": "ח",
+      "spoken": "חית"
+    },
+    {
+      "id": "c08",
+      "display": "ט",
+      "spoken": "טית"
+    },
+    {
+      "id": "c09",
+      "display": "י",
+      "spoken": "יוד"
+    },
+    {
+      "id": "c10",
+      "display": "כ",
+      "spoken": "כף"
+    },
+    {
+      "id": "c11",
+      "display": "ל",
+      "spoken": "למד"
+    },
+    {
+      "id": "c12",
+      "display": "מ",
+      "spoken": "מם"
+    },
+    {
+      "id": "c13",
+      "display": "נ",
+      "spoken": "נון"
+    },
+    {
+      "id": "c14",
+      "display": "ס",
+      "spoken": "סמך"
+    },
+    {
+      "id": "c15",
+      "display": "ע",
+      "spoken": "עין"
+    },
+    {
+      "id": "c16",
+      "display": "פ",
+      "spoken": "פא"
+    },
+    {
+      "id": "c17",
+      "display": "צ",
+      "spoken": "צדי"
+    },
+    {
+      "id": "c18",
+      "display": "ק",
+      "spoken": "קוף"
+    },
+    {
+      "id": "c19",
+      "display": "ר",
+      "spoken": "ריש"
+    },
+    {
+      "id": "c20",
+      "display": "ש",
+      "spoken": "שין"
+    },
+    {
+      "id": "c21",
+      "display": "ת",
+      "spoken": "תו"
+    }
+  ]
+}

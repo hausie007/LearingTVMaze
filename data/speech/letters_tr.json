@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "lang": "tr",
+  "locale": "tr-TR",
+  "note": "29 letters. Q, W and X are not in the alphabet. The dotted and dotless i are different letters: I is 'ı' and İ is 'i', and a child must not hear them as the same. Ğ is never word-initial and is named 'yumuşak ge'. No digraphs.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "a"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "be"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "ce"
+    },
+    {
+      "id": "c03",
+      "display": "Ç",
+      "spoken": "çe"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "de"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "e"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "fe"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "ge"
+    },
+    {
+      "id": "c08",
+      "display": "Ğ",
+      "spoken": "yumuşak ge"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "he"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "ı"
+    },
+    {
+      "id": "c11",
+      "display": "İ",
+      "spoken": "i"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "je"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "ke"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "le"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "me"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "ne"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "o"
+    },
+    {
+      "id": "c18",
+      "display": "Ö",
+      "spoken": "ö"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pe"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "re"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "se"
+    },
+    {
+      "id": "c22",
+      "display": "Ş",
+      "spoken": "şe"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "te"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "u"
+    },
+    {
+      "id": "c25",
+      "display": "Ü",
+      "spoken": "ü"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "ve"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "ye"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "ze"
+    }
+  ]
+}

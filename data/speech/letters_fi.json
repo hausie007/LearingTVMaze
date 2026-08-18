@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "lang": "fi",
+  "locale": "fi-FI",
+  "note": "29 letters. Å is in the alphabet for Swedish names only and is named 'ruotsalainen oo' — the Swedish o. Ä and Ö are letters, not accented vowels, and sort after Z. Finnish inflects heavily and will need number_forms before the recap can speak.",
+  "source_review": "DRAFT — written from general knowledge, NOT by a native speaker, and not yet checked against how the alphabet is taught in school. Letter names are the part most often wrong and least often noticed. Nothing here should be recorded until a native speaker has read it.",
+  "letters": [
+    {
+      "id": "a",
+      "display": "A",
+      "spoken": "aa"
+    },
+    {
+      "id": "b",
+      "display": "B",
+      "spoken": "bee"
+    },
+    {
+      "id": "c",
+      "display": "C",
+      "spoken": "see"
+    },
+    {
+      "id": "d",
+      "display": "D",
+      "spoken": "dee"
+    },
+    {
+      "id": "e",
+      "display": "E",
+      "spoken": "ee"
+    },
+    {
+      "id": "f",
+      "display": "F",
+      "spoken": "äf"
+    },
+    {
+      "id": "g",
+      "display": "G",
+      "spoken": "gee"
+    },
+    {
+      "id": "h",
+      "display": "H",
+      "spoken": "hoo"
+    },
+    {
+      "id": "i",
+      "display": "I",
+      "spoken": "ii"
+    },
+    {
+      "id": "j",
+      "display": "J",
+      "spoken": "jii"
+    },
+    {
+      "id": "k",
+      "display": "K",
+      "spoken": "koo"
+    },
+    {
+      "id": "l",
+      "display": "L",
+      "spoken": "äl"
+    },
+    {
+      "id": "m",
+      "display": "M",
+      "spoken": "äm"
+    },
+    {
+      "id": "n",
+      "display": "N",
+      "spoken": "än"
+    },
+    {
+      "id": "o",
+      "display": "O",
+      "spoken": "oo"
+    },
+    {
+      "id": "p",
+      "display": "P",
+      "spoken": "pee"
+    },
+    {
+      "id": "q",
+      "display": "Q",
+      "spoken": "kuu"
+    },
+    {
+      "id": "r",
+      "display": "R",
+      "spoken": "är"
+    },
+    {
+      "id": "s",
+      "display": "S",
+      "spoken": "äs"
+    },
+    {
+      "id": "t",
+      "display": "T",
+      "spoken": "tee"
+    },
+    {
+      "id": "u",
+      "display": "U",
+      "spoken": "uu"
+    },
+    {
+      "id": "v",
+      "display": "V",
+      "spoken": "vee"
+    },
+    {
+      "id": "w",
+      "display": "W",
+      "spoken": "kaksois-vee"
+    },
+    {
+      "id": "x",
+      "display": "X",
+      "spoken": "äks"
+    },
+    {
+      "id": "y",
+      "display": "Y",
+      "spoken": "yy"
+    },
+    {
+      "id": "z",
+      "display": "Z",
+      "spoken": "tset"
+    },
+    {
+      "id": "c26",
+      "display": "Å",
+      "spoken": "ruotsalainen oo"
+    },
+    {
+      "id": "c27",
+      "display": "Ä",
+      "spoken": "ää"
+    },
+    {
+      "id": "c28",
+      "display": "Ö",
+      "spoken": "öö"
+    }
+  ]
+}
