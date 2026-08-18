@@ -332,9 +332,9 @@
     "pt-PT": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "aLFUti4k8YKvtQGXv0UO",
+      "voice_name": "Paulo",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "pt",
       "settings": {
