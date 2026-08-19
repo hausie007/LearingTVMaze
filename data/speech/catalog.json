@@ -96,7 +96,7 @@
     },
     "it": {
       "locale": "it-IT",
-      "enabled": false
+      "enabled": true
     },
     "pt": {
       "locale": "pt-PT",

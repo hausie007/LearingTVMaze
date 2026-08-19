@@ -504,9 +504,9 @@
     "it-IT": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "Nh2zY9kknu6z4pZy6FhD",
+      "voice_name": "David Martin",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "it",
       "settings": {
@@ -557,9 +557,9 @@
     "nl-NL": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "yO6w2xlECAQRFP6pX7Hw",
+      "voice_name": "Ruth",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "nl",
       "settings": {
@@ -610,9 +610,9 @@
     "ro-RO": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "am5XuPVtut7uKJQKMja2",
+      "voice_name": "Mike L",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "ro",
       "settings": {
@@ -716,9 +716,9 @@
     "el-GR": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "20zUtLxCwVzsFDWub4sB",
+      "voice_name": "Stefanos",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "el",
       "settings": {
@@ -769,9 +769,9 @@
     "hu-HU": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "Dme3o25EiC1DfrBQd73f",
+      "voice_name": "Aggie",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "hu",
       "settings": {
@@ -822,9 +822,9 @@
     "sv-SE": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "x0u3EW21dbrORJzOq1m9",
+      "voice_name": "Adam Composer",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "sv",
       "settings": {
