@@ -270,6 +270,28 @@
         "reason": "cut abruptly",
         "asked_on": "2026-08-19"
       }
+    },
+    "it": {
+      "learning.char.z": {
+        "n": 2,
+        "reason": "Take 1 was the last item on its sheet and the returned audio ends mid-vowel: the final 'a' is still at -22 dBFS on the last frame, 0.44s against ~0.60s for esse/erre/effe/enne, and the [dz] onset is 100ms of low-level frication that the normaliser then boosts — hence 'feta'. Take 2 inherited the profile's ciao/grazie carriers; 'ciao' runs straight into the [dz] with no gap, while zeta has a 60ms [t] closure inside it, so the only way the cutter could find exactly three sounds was to glue 'ciao'+'ze' together and hand back the 'ta' — 0.354s, peak -22 dBFS, no vowel in it at all. Take 3: follower and no leader.",
+        "asked_on": "2026-08-19",
+        "carrier_after": [
+          "grazie"
+        ]
+      }
+    },
+    "uk": {
+      "learning.char.c03": {
+        "n": 1,
+        "reason": "should be more like \"He\"?",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word._5e75": {
+        "n": 2,
+        "reason": "cut abruptly",
+        "asked_on": "2026-08-19"
+      }
     }
   }
 }

@@ -1,0 +1,3032 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "it",
+  "locale": "it-IT",
+  "voice_profile": "it-IT@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 26,
+    "word": 171,
+    "ui": 58
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/ab/ab1217470eac.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 287,
+      "sha256": "ab1217470eac5b5a3e60492e61638bac016bc478bbc2e56ae2b0d00ed52e9d1b",
+      "display_text": "A",
+      "spoken_text": "a"
+    },
+    "learning.char.b": {
+      "asset": "clips/0a/0adfe6b26fa1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "0adfe6b26fa1c5d90092ce359e15f40ec4b9e5be247b927e2040e2acc37a9e0e",
+      "display_text": "B",
+      "spoken_text": "bi"
+    },
+    "learning.char.c": {
+      "asset": "clips/12/12f9f1aa0169.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "12f9f1aa0169fe93f4ad30a195d938ffec66ca9c5a8132e1055c289487227b45",
+      "display_text": "C",
+      "spoken_text": "ci"
+    },
+    "learning.char.d": {
+      "asset": "clips/bf/bfc645e7d6af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "bfc645e7d6af8144cd22ec7decdfd9db84e521563b88a712e96973ce7b000474",
+      "display_text": "D",
+      "spoken_text": "di"
+    },
+    "learning.char.e": {
+      "asset": "clips/18/18c0c186e962.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 314,
+      "sha256": "18c0c186e96267f703efbb4e3c3c6872d4690b08ecc914aa59aca51658a604e1",
+      "display_text": "E",
+      "spoken_text": "e"
+    },
+    "learning.char.f": {
+      "asset": "clips/2f/2f0fcc504cbf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "2f0fcc504cbf0db5244a9c1071be88149607ad745c7574240b5ab7885b01dcd4",
+      "display_text": "F",
+      "spoken_text": "effe"
+    },
+    "learning.char.g": {
+      "asset": "clips/c3/c3143ded4ffb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "c3143ded4ffb984b6aca132ed45c9b813db3b218ea4c5cf8a48f1aad519ea31b",
+      "display_text": "G",
+      "spoken_text": "gi"
+    },
+    "learning.char.h": {
+      "asset": "clips/88/88df59dc91fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "88df59dc91fef7099c2d4757078f765eeebfc0f6a8cab0dc4f0f4520885370df",
+      "display_text": "H",
+      "spoken_text": "acca"
+    },
+    "learning.char.i": {
+      "asset": "clips/62/62b615fecb16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 287,
+      "sha256": "62b615fecb16310e7a50c82b16a7d30d02b604256ad9f93c0d608dd44bc418f4",
+      "display_text": "I",
+      "spoken_text": "i"
+    },
+    "learning.char.j": {
+      "asset": "clips/48/48d7fb65853a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "48d7fb65853ae548c9ad90ecca82a5d660db7e655a39dcec9fd120934f9867dd",
+      "display_text": "J",
+      "spoken_text": "i lunga"
+    },
+    "learning.char.k": {
+      "asset": "clips/f4/f43efc4b4dce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "f43efc4b4dce49d98674f361fffb4afc5431248325d054b4b234b424b167278d",
+      "display_text": "K",
+      "spoken_text": "cappa"
+    },
+    "learning.char.l": {
+      "asset": "clips/fb/fb3b466b3e1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "fb3b466b3e1aab5c26ede550c083a877eba101429a7dca1f66a35b3bfa6fa6fc",
+      "display_text": "L",
+      "spoken_text": "elle"
+    },
+    "learning.char.m": {
+      "asset": "clips/8c/8ceeba4ef2e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "8ceeba4ef2e0f44bc5234fb627d6b5ed64970a660a4e7acbae83666ef477098c",
+      "display_text": "M",
+      "spoken_text": "emme"
+    },
+    "learning.char.n": {
+      "asset": "clips/18/18dfad4412fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "18dfad4412feee913f83b04aa4aeba73a3cdf97c19c012c6236fa9547c78e761",
+      "display_text": "N",
+      "spoken_text": "enne"
+    },
+    "learning.char.o": {
+      "asset": "clips/f9/f94894787cc2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "f94894787cc2dabb4968e2d5345778ac5dda6ecfb45f74394da806bf8d0f3b79",
+      "display_text": "O",
+      "spoken_text": "o"
+    },
+    "learning.char.p": {
+      "asset": "clips/9d/9dcd9f3921e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 314,
+      "sha256": "9dcd9f3921e5efea6dcc5e0960f5188568869364d9ab05ddd3d4fe9d54fe61d1",
+      "display_text": "P",
+      "spoken_text": "pi"
+    },
+    "learning.char.q": {
+      "asset": "clips/8a/8ad31f520177.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "8ad31f52017709b125eaf11e916d5b67f1f2d9c94dec52d79fe001e9e19c887e",
+      "display_text": "Q",
+      "spoken_text": "cu"
+    },
+    "learning.char.r": {
+      "asset": "clips/37/37f70b095f89.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "37f70b095f899cc67bf62d58e1b039f0d9f40f7fe62980395e35d799f0e812cc",
+      "display_text": "R",
+      "spoken_text": "erre"
+    },
+    "learning.char.s": {
+      "asset": "clips/44/440164a1f930.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "440164a1f930c0d1b6590e456c4a46ab0e8952a69961f8f432a00c76bd88dbd3",
+      "display_text": "S",
+      "spoken_text": "esse"
+    },
+    "learning.char.t": {
+      "asset": "clips/15/15a13cae6fdf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 340,
+      "sha256": "15a13cae6fdf6ff7052443d2ef8ef333dd1daaff8d57eb244f5154ad281ef202",
+      "display_text": "T",
+      "spoken_text": "ti"
+    },
+    "learning.char.u": {
+      "asset": "clips/e9/e9833c4dfa9a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "e9833c4dfa9acf15ee4a82d57b33b9b6b52bcb0427bd2f017c559c03f2e269e1",
+      "display_text": "U",
+      "spoken_text": "u"
+    },
+    "learning.char.v": {
+      "asset": "clips/57/57f5a0d138da.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "57f5a0d138da4af7a9f38856397b6941c057ddf44031460379302d3ac8e482eb",
+      "display_text": "V",
+      "spoken_text": "vu"
+    },
+    "learning.char.w": {
+      "asset": "clips/d5/d54b070e374a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "d54b070e374a8b680c43b11e23a65c8b611e4f4248a1992373fba9f6ca176611",
+      "display_text": "W",
+      "spoken_text": "doppia vu"
+    },
+    "learning.char.x": {
+      "asset": "clips/60/60dec2a356b5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "60dec2a356b5057a1b3218a8388effcb74b4b60961dd50ca9daf41a1c058dbc7",
+      "display_text": "X",
+      "spoken_text": "ics"
+    },
+    "learning.char.y": {
+      "asset": "clips/d2/d2fb7aec09de.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "d2fb7aec09dee82328b24e6713a13bcd106222703a643b3fcc2a352ad1865f80",
+      "display_text": "Y",
+      "spoken_text": "ipsilon"
+    },
+    "learning.char.z": {
+      "asset": "clips/1a/1a94297f2c77.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1a94297f2c7733a107c0502dda48451c5806721b14258a194b9e364c3d39f751",
+      "display_text": "Z",
+      "spoken_text": "zeta"
+    },
+    "learning.number.001": {
+      "asset": "clips/52/52889a142d3b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "52889a142d3ba9b22f70d817023ac611e0b16e742eadf285de9931abeaba7dfc",
+      "display_text": "1",
+      "spoken_text": "uno"
+    },
+    "learning.number.002": {
+      "asset": "clips/08/0845d8a50c43.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "0845d8a50c43ff0702ddcdfede27f6321dca393e533b5dbc23a00886468f148b",
+      "display_text": "2",
+      "spoken_text": "due"
+    },
+    "learning.number.003": {
+      "asset": "clips/0d/0d8aa82cca93.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 340,
+      "sha256": "0d8aa82cca931c4bc550fcbd3e8032c3c24b76b481666873c89c080b0bf1df5c",
+      "display_text": "3",
+      "spoken_text": "tre"
+    },
+    "learning.number.004": {
+      "asset": "clips/da/da5fc55c2140.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "da5fc55c2140bf246c071f64b58d27424b405a7cd96973045ed3613b97373671",
+      "display_text": "4",
+      "spoken_text": "quattro"
+    },
+    "learning.number.005": {
+      "asset": "clips/ad/addf1a40dd4c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "addf1a40dd4c680b25cc92ddf83c5be2d91709bc0b0969626222316bc0e1d155",
+      "display_text": "5",
+      "spoken_text": "cinque"
+    },
+    "learning.number.006": {
+      "asset": "clips/6a/6a8db353050d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "6a8db353050de24eca04cb16c5b5e20e913aaf5ab5fb94f99a182faaac4ea32a",
+      "display_text": "6",
+      "spoken_text": "sei"
+    },
+    "learning.number.007": {
+      "asset": "clips/57/575bb1a0b1f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "575bb1a0b1f60e26abd627c13d7c31ef3ce917a0eb42e583af297c4f79b36081",
+      "display_text": "7",
+      "spoken_text": "sette"
+    },
+    "learning.number.008": {
+      "asset": "clips/4a/4afc85d92cc8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "4afc85d92cc8f09510be2c9541402e7f99a01dc00570b5c7079a3e00badbede5",
+      "display_text": "8",
+      "spoken_text": "otto"
+    },
+    "learning.number.009": {
+      "asset": "clips/ea/ea9b77f57d8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "ea9b77f57d8f86d3944628daccba2b48d02d2b678ecc91ac646cb4678fd493b2",
+      "display_text": "9",
+      "spoken_text": "nove"
+    },
+    "learning.number.010": {
+      "asset": "clips/92/928754f0261d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "928754f0261d466cffa351f6107ea207e1608348fb3dddc8abf73f5a1039fde9",
+      "display_text": "10",
+      "spoken_text": "dieci"
+    },
+    "learning.number.011": {
+      "asset": "clips/7b/7b4ca578b9ba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "7b4ca578b9baac35f081da614f820832d38e3bb85ac4c2e1f4bac40048188735",
+      "display_text": "11",
+      "spoken_text": "undici"
+    },
+    "learning.number.012": {
+      "asset": "clips/18/18bc2ee352bd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "18bc2ee352bdf35ac4aa35f1ef78fcf26a77a5c3ab80072c3e4a6f0b4ec77142",
+      "display_text": "12",
+      "spoken_text": "dodici"
+    },
+    "learning.number.013": {
+      "asset": "clips/af/af47573b05f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "af47573b05f089866d25921ee218bfdd190b0a4bc7cc0411e5f1de0397a77229",
+      "display_text": "13",
+      "spoken_text": "tredici"
+    },
+    "learning.number.014": {
+      "asset": "clips/2b/2bc63d5cdd39.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "2bc63d5cdd3902661726d0a14c4e3d4431ea56abe81e03a6faabd4838c837b55",
+      "display_text": "14",
+      "spoken_text": "quattordici"
+    },
+    "learning.number.015": {
+      "asset": "clips/26/2621e0d67d98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "2621e0d67d988e169a6568fd9c62fa6bde5d72090a6e76f0ed14e17b00532f1c",
+      "display_text": "15",
+      "spoken_text": "quindici"
+    },
+    "learning.number.016": {
+      "asset": "clips/e1/e17b8d6c0b70.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "e17b8d6c0b70dc2e535d3dbd4bf6b6cd378d37c89d4ca5de88057a88ef36c609",
+      "display_text": "16",
+      "spoken_text": "sedici"
+    },
+    "learning.number.017": {
+      "asset": "clips/38/380fb2b5e590.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "380fb2b5e590e7ba499eb33c95def48c8fbb34ea5f48788c600bdc67a2e3b37e",
+      "display_text": "17",
+      "spoken_text": "diciassette"
+    },
+    "learning.number.018": {
+      "asset": "clips/64/64a4758d12c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "64a4758d12c1f668405258142f1ca4020dbc307aab9f60889dbd15cc3f660a4e",
+      "display_text": "18",
+      "spoken_text": "diciotto"
+    },
+    "learning.number.019": {
+      "asset": "clips/9b/9bedae583949.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "9bedae583949fa1679ccced04ef597448061afbd3d7708dcc9668a145c31d158",
+      "display_text": "19",
+      "spoken_text": "diciannove"
+    },
+    "learning.number.020": {
+      "asset": "clips/84/84c58bc929ad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "84c58bc929adb11e122aea0ebae2a0628ea7c991bf72ffda6f12ae614e456660",
+      "display_text": "20",
+      "spoken_text": "venti"
+    },
+    "learning.number.021": {
+      "asset": "clips/f5/f5135a5b3bab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f5135a5b3bab37889d8f8f0f5e666dff83fae769a64aa0980de391b4113cb347",
+      "display_text": "21",
+      "spoken_text": "ventuno"
+    },
+    "learning.number.022": {
+      "asset": "clips/36/3634ff00b38f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "3634ff00b38f0748e1378f91936af6b1d6bdb937f65ff422aeb7a7aa5aad938c",
+      "display_text": "22",
+      "spoken_text": "ventidue"
+    },
+    "learning.number.023": {
+      "asset": "clips/04/0434de1a4354.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "0434de1a4354990cc18eb2be8024f94ac715ab48e8d529ad1450d60d3daddbaf",
+      "display_text": "23",
+      "spoken_text": "ventitré"
+    },
+    "learning.number.024": {
+      "asset": "clips/6f/6fb537db5066.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "6fb537db5066900a13165dfec23574103a86dec5ba5ccebfcb0d075c20d00e29",
+      "display_text": "24",
+      "spoken_text": "ventiquattro"
+    },
+    "learning.number.025": {
+      "asset": "clips/a3/a3aabb9592aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "a3aabb9592aa64e013489a8e0dccfac6d38b0d33c775d4bfc8a2668e9b61c319",
+      "display_text": "25",
+      "spoken_text": "venticinque"
+    },
+    "learning.number.026": {
+      "asset": "clips/b4/b4d42025c7ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "b4d42025c7ffb7bd073179be45893db22bc133def32ffe1abac99377ad0ec61a",
+      "display_text": "26",
+      "spoken_text": "ventisei"
+    },
+    "learning.number.027": {
+      "asset": "clips/87/874370b74b69.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "874370b74b6935c6f7bba2cda87bab191a41003164be29dbe769dd5de1c368c6",
+      "display_text": "27",
+      "spoken_text": "ventisette"
+    },
+    "learning.number.028": {
+      "asset": "clips/3f/3f280bdc2e9f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "3f280bdc2e9fc7443f736ee511c88f4749b56aa22ad2d59c9252ed7c4a5f9590",
+      "display_text": "28",
+      "spoken_text": "ventotto"
+    },
+    "learning.number.029": {
+      "asset": "clips/70/705de34a8a21.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "705de34a8a217437816b381a338b9795df8a9994946d9ebc287105ccaeadc552",
+      "display_text": "29",
+      "spoken_text": "ventinove"
+    },
+    "learning.number.030": {
+      "asset": "clips/67/6797fdfa2b56.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "6797fdfa2b5660c504b5eb9ac94c8f8d58fe2c637549d54ee3c741249a82f1e4",
+      "display_text": "30",
+      "spoken_text": "trenta"
+    },
+    "learning.number.031": {
+      "asset": "clips/93/93866639c9f1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "93866639c9f1586d580f1795f275a4bbc8b05ff3cce7398acf7d60e161f251e6",
+      "display_text": "31",
+      "spoken_text": "trentuno"
+    },
+    "learning.number.032": {
+      "asset": "clips/1f/1f0fe48cb40a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "1f0fe48cb40af3f0c95e7b47132b16c14f87be3388c2009c2607ec4aed73b083",
+      "display_text": "32",
+      "spoken_text": "trentadue"
+    },
+    "learning.number.033": {
+      "asset": "clips/c8/c8e54da25301.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "c8e54da253012c424c3ab72f934b2e22a077b2e1e7baa8d3e2f27f3b7e164a8b",
+      "display_text": "33",
+      "spoken_text": "trentatré"
+    },
+    "learning.number.034": {
+      "asset": "clips/42/4280455e4488.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "4280455e4488098675554087ab3d9886496692402e31af0f8bd751c46b075e92",
+      "display_text": "34",
+      "spoken_text": "trentaquattro"
+    },
+    "learning.number.035": {
+      "asset": "clips/8b/8bd7b1b381b2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "8bd7b1b381b2dd249358887e3decf86a5ff94df26a5405aeb90cc53dd267725e",
+      "display_text": "35",
+      "spoken_text": "trentacinque"
+    },
+    "learning.number.036": {
+      "asset": "clips/50/50949de1d8ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "50949de1d8eeb578c223d7ab21dd8eb239e79b5d5d45a761e94f880c401784a5",
+      "display_text": "36",
+      "spoken_text": "trentasei"
+    },
+    "learning.number.037": {
+      "asset": "clips/a1/a1fcdb2df7fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "a1fcdb2df7fbbad96091b8d89b9c746d73ad79fa06c1510f4803b83a39313df3",
+      "display_text": "37",
+      "spoken_text": "trentasette"
+    },
+    "learning.number.038": {
+      "asset": "clips/a5/a5b11f61ece3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a5b11f61ece3e45debe26626b1061f9fb58d7b349fb2552d11cb2b3ad8b5a542",
+      "display_text": "38",
+      "spoken_text": "trentotto"
+    },
+    "learning.number.039": {
+      "asset": "clips/dc/dc986b00072a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "dc986b00072a442375dc0195f9fd64f1828f48504b030b389f184743fa06dc7a",
+      "display_text": "39",
+      "spoken_text": "trentanove"
+    },
+    "learning.number.040": {
+      "asset": "clips/4f/4f4b4d930486.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4f4b4d9304863aa292f820ee82272614b2f0f6c35566f0e4c10e350e290ed13b",
+      "display_text": "40",
+      "spoken_text": "quaranta"
+    },
+    "learning.number.041": {
+      "asset": "clips/ca/ca71f5c6a37a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "ca71f5c6a37afdea84328c55b006fd383edabefd45c6fd03fb3b8178663963b8",
+      "display_text": "41",
+      "spoken_text": "quarantuno"
+    },
+    "learning.number.042": {
+      "asset": "clips/57/570c0d0eeb2b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "570c0d0eeb2b266c9a219e467782cc958c2fb1fd5f8fc41a3ebca7b66976aaef",
+      "display_text": "42",
+      "spoken_text": "quarantadue"
+    },
+    "learning.number.043": {
+      "asset": "clips/bb/bba03722020c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "bba03722020c97ddb1bc84074295575c5f2960ab7e0ad11b5db85664061d7c12",
+      "display_text": "43",
+      "spoken_text": "quarantatré"
+    },
+    "learning.number.044": {
+      "asset": "clips/63/635869a9ba03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "635869a9ba03a8a4e58600e2f1772d2551e4d765e042df94e9c756cce719cb10",
+      "display_text": "44",
+      "spoken_text": "quarantaquattro"
+    },
+    "learning.number.045": {
+      "asset": "clips/6b/6ba73413d856.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "6ba73413d85622a6fbdff38dbc6c5cc8a64b497594f0a48732cd9c17f108cbde",
+      "display_text": "45",
+      "spoken_text": "quarantacinque"
+    },
+    "learning.number.046": {
+      "asset": "clips/84/8470afb93c79.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "8470afb93c79e0672df1888e515c0856f92e0d2a80fcdeb21fa041cea3216b32",
+      "display_text": "46",
+      "spoken_text": "quarantasei"
+    },
+    "learning.number.047": {
+      "asset": "clips/a2/a21f01d1a6e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "a21f01d1a6e58fe1764021497a4d179abe6fc18375b9facb42f5786f5c0eab3b",
+      "display_text": "47",
+      "spoken_text": "quarantasette"
+    },
+    "learning.number.048": {
+      "asset": "clips/b7/b790e1f2be5d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "b790e1f2be5db14068f670bb7a7234988a73c619bd62c0a0438bbce14017df1b",
+      "display_text": "48",
+      "spoken_text": "quarantotto"
+    },
+    "learning.number.049": {
+      "asset": "clips/0a/0a6a6f29be8b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "0a6a6f29be8bf728934eafbcfc9e4b1a57829566cefeb4ecebdfd2f0fbbea9b6",
+      "display_text": "49",
+      "spoken_text": "quarantanove"
+    },
+    "learning.number.050": {
+      "asset": "clips/42/4284773109d5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "4284773109d59033924365eca5a56f76f446f762210710c50c5cfd26509184be",
+      "display_text": "50",
+      "spoken_text": "cinquanta"
+    },
+    "learning.word.acqua_fredda": {
+      "asset": "clips/e9/e9d8c35bfb0e.mp3",
+      "word_ends_ms": [
+        372
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 940,
+      "sha256": "e9d8c35bfb0e1e049af5598bd0349757443cd496fa6b8a3868b6f47a291c8d12",
+      "display_text": "ACQUA FREDDA",
+      "spoken_text": "acqua fredda"
+    },
+    "learning.word.aiuta_tutti_gli_altri": {
+      "asset": "clips/ce/cea338e3fad4.mp3",
+      "word_ends_ms": [
+        490,
+        780,
+        980
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        12
+      ],
+      "duration_ms": 1437,
+      "sha256": "cea338e3fad4b9669b29841564837d07833e64769c917d22b968d68081f5b54c",
+      "display_text": "AIUTA TUTTI GLI ALTRI",
+      "spoken_text": "aiuta tutti gli altri"
+    },
+    "learning.word.alba": {
+      "asset": "clips/69/694f44afd9fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "694f44afd9fe9643fe44aeece12b98995d6a5ab6d28a4bff77b452e1d17eb265",
+      "display_text": "ALBA",
+      "spoken_text": "alba"
+    },
+    "learning.word.albero": {
+      "asset": "clips/55/55529cba1761.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "55529cba176119ff134c6e53fdfed4730423bf7e53ecd93ed96542fbf067ee06",
+      "display_text": "ALBERO",
+      "spoken_text": "albero"
+    },
+    "learning.word.ama_il_tuo_pianeta": {
+      "asset": "clips/26/2603f68dbb7d.mp3",
+      "word_ends_ms": [
+        301,
+        471,
+        691
+      ],
+      "word_fade_ms": [
+        21,
+        12,
+        30
+      ],
+      "duration_ms": 1332,
+      "sha256": "2603f68dbb7df7cb44ff8c891bbd218262e3ea55bbfcd6ff0f06866383c0bc66",
+      "display_text": "AMA IL TUO PIANETA",
+      "spoken_text": "ama il tuo pianeta"
+    },
+    "learning.word.amico": {
+      "asset": "clips/d2/d2fcdba17a10.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "d2fcdba17a10a7fc3ebb349a7c426761ceb3518a53b34e5d90dbbaa50f2c4877",
+      "display_text": "AMICO",
+      "spoken_text": "amico"
+    },
+    "learning.word.ananas": {
+      "asset": "clips/4c/4c224a2d81c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "4c224a2d81c856ca4084d8f09451008255b6b609e4757a7469520e61721c5831",
+      "display_text": "ANANAS",
+      "spoken_text": "ananas"
+    },
+    "learning.word.anguria": {
+      "asset": "clips/59/592582aafe05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "592582aafe05662a2a50c54bb875657d5614d37b83eaf5b9f6c178f8ed215e50",
+      "display_text": "ANGURIA",
+      "spoken_text": "anguria"
+    },
+    "learning.word.ape": {
+      "asset": "clips/a7/a7b82c20c419.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "a7b82c20c4196a71b419adcf49f8873d40e21a6c4d77b5f57e9047f5fbb01bd4",
+      "display_text": "APE",
+      "spoken_text": "ape"
+    },
+    "learning.word.aquilone": {
+      "asset": "clips/a9/a9c6d74d4466.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a9c6d74d446663701ad76dfb4b48573cf33e0843db0195c8bc2d299693d21e30",
+      "display_text": "AQUILONE",
+      "spoken_text": "aquilone"
+    },
+    "learning.word.arcobaleno": {
+      "asset": "clips/e6/e6662f044e3b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "e6662f044e3ba744f8b886d5726eee23e2dfac937b0adaeb1675fcb616e7ec4a",
+      "display_text": "ARCOBALENO",
+      "spoken_text": "arcobaleno"
+    },
+    "learning.word.astronave": {
+      "asset": "clips/5e/5eb16335cbbf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5eb16335cbbf1de512c6f005f543fec588440ef0f913a8a23764aae0cd44396e",
+      "display_text": "ASTRONAVE",
+      "spoken_text": "astronave"
+    },
+    "learning.word.autopompa": {
+      "asset": "clips/45/451fb4ca6da0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "451fb4ca6da06f970867c98c44cac84ec11ec6f4a0eead67b41300def5116137",
+      "display_text": "AUTOPOMPA",
+      "spoken_text": "autopompa"
+    },
+    "learning.word.avventura": {
+      "asset": "clips/80/8098142d5b6d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "8098142d5b6d25c1eeff316dab25601d9893e5e1e5a138f28a823431acab3854",
+      "display_text": "AVVENTURA",
+      "spoken_text": "avventura"
+    },
+    "learning.word.bacchetta_magica": {
+      "asset": "clips/95/95dff41709e9.mp3",
+      "word_ends_ms": [
+        686
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "95dff41709e90cce164ac3044046b2d088d34ff37a1f955f81c28485e86a96df",
+      "display_text": "BACCHETTA MAGICA",
+      "spoken_text": "bacchetta magica"
+    },
+    "learning.word.bambina_gioiosa": {
+      "asset": "clips/66/666b308de29f.mp3",
+      "word_ends_ms": [
+        625
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1306,
+      "sha256": "666b308de29f19307f9c1c8f0bbd2a4dfd6406e91dd387ce0f28c87b9dacd17d",
+      "display_text": "BAMBINA GIOIOSA",
+      "spoken_text": "bambina gioiosa"
+    },
+    "learning.word.bambino_felice": {
+      "asset": "clips/d9/d90ee71eccca.mp3",
+      "word_ends_ms": [
+        664
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1280,
+      "sha256": "d90ee71ecccadac8e2e70af9b2784b2ef96af57a4d0547dec51fe5316586820f",
+      "display_text": "BAMBINO FELICE",
+      "spoken_text": "bambino felice"
+    },
+    "learning.word.barca": {
+      "asset": "clips/96/96c0723d39db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "96c0723d39db68a287c32f1b65b4cdb820ec28d1ff04cc9fd6ea1be427e4427d",
+      "display_text": "BARCA",
+      "spoken_text": "barca"
+    },
+    "learning.word.bel_fiore": {
+      "asset": "clips/8e/8e73b43e9285.mp3",
+      "word_ends_ms": [
+        317
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "8e73b43e92859a9cb083cac92853d230cd33234c4568a2cc0504f87cf4dec8ab",
+      "display_text": "BEL FIORE",
+      "spoken_text": "bel fiore"
+    },
+    "learning.word.bevi_acqua": {
+      "asset": "clips/48/48eee9038a6b.mp3",
+      "word_ends_ms": [
+        423
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 940,
+      "sha256": "48eee9038a6b4401b7e813dbc2f0a97c7cf0828bda91a6343aadc6cca8b03af6",
+      "display_text": "BEVI ACQUA",
+      "spoken_text": "bevi acqua"
+    },
+    "learning.word.bevi_acqua_per_crescere": {
+      "asset": "clips/ce/ce60c5ba5a6e.mp3",
+      "word_ends_ms": [
+        372,
+        712,
+        892
+      ],
+      "word_fade_ms": [
+        30,
+        12,
+        12
+      ],
+      "duration_ms": 1541,
+      "sha256": "ce60c5ba5a6ea3e7fe054f4c20d51a024e06e6868b7fbd6c9e62587cc81bbfee",
+      "display_text": "BEVI ACQUA PER CRESCERE",
+      "spoken_text": "bevi acqua per crescere"
+    },
+    "learning.word.bicicletta": {
+      "asset": "clips/72/728b8a045c61.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "728b8a045c6120519b4f0803e6756985a2ffff355536d686fb685f6d79c0f258",
+      "display_text": "BICICLETTA",
+      "spoken_text": "bicicletta"
+    },
+    "learning.word.bimbo": {
+      "asset": "clips/63/6366fdc5cf80.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6366fdc5cf80312796533f407bf3ace04a2ee83692af20c8416b554fe2df59c5",
+      "display_text": "BIMBO",
+      "spoken_text": "bimbo"
+    },
+    "learning.word.bosco_verde": {
+      "asset": "clips/39/39da6c5af01f.mp3",
+      "word_ends_ms": [
+        463
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1019,
+      "sha256": "39da6c5af01f45e2d395ddada916c2b6cace7a87e032a85596581e6132fbc84f",
+      "display_text": "BOSCO VERDE",
+      "spoken_text": "bosco verde"
+    },
+    "learning.word.burro": {
+      "asset": "clips/67/675a0b658a76.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "675a0b658a76bcdf0c5175058cf3add1a6381c897002758866077cd66cd23e05",
+      "display_text": "BURRO",
+      "spoken_text": "burro"
+    },
+    "learning.word.cammello": {
+      "asset": "clips/a3/a35e23acf41e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a35e23acf41ef0681fa7a2297146ce8cb7543d9a2b444a92f48ea0d3908d9f4d",
+      "display_text": "CAMMELLO",
+      "spoken_text": "cammello"
+    },
+    "learning.word.cammina_con_gioia": {
+      "asset": "clips/85/851e6e7c05e3.mp3",
+      "word_ends_ms": [
+        491,
+        721
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1228,
+      "sha256": "851e6e7c05e3ae8d1fffb2642dc337f5f0aab754aa66cd59ad5ff8153f08e723",
+      "display_text": "CAMMINA CON GIOIA",
+      "spoken_text": "cammina con gioia"
+    },
+    "learning.word.cane": {
+      "asset": "clips/6e/6ec61f05580b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "6ec61f05580be0da7b9e48b7fe68173afd40558b397da0627cda604da56eb09f",
+      "display_text": "CANE",
+      "spoken_text": "cane"
+    },
+    "learning.word.cane_giocherellone": {
+      "asset": "clips/e9/e962e05b110f.mp3",
+      "word_ends_ms": [
+        378
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "e962e05b110fe70c5b274f74d4188a120f2522ee0e0ecc3d2e4f68dca5a96180",
+      "display_text": "CANE GIOCHERELLONE",
+      "spoken_text": "cane giocherellone"
+    },
+    "learning.word.canguro": {
+      "asset": "clips/30/3082eccbeab4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "3082eccbeab417c7cb2988fe0e95ab85e55793febc870009fe3c26f45a675882",
+      "display_text": "CANGURO",
+      "spoken_text": "canguro"
+    },
+    "learning.word.canta_una_canzone": {
+      "asset": "clips/94/946a968a2af6.mp3",
+      "word_ends_ms": [
+        356,
+        546
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1202,
+      "sha256": "946a968a2af69b569f2e2363179a98a787e7440996c1caa193698ef4a2966a39",
+      "display_text": "CANTA UNA CANZONE",
+      "spoken_text": "canta una canzone"
+    },
+    "learning.word.caramella": {
+      "asset": "clips/d4/d46528b6b55c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d46528b6b55cbc2ece7c88054a10198a8f270ad0966850df5d1fe82446db0bd6",
+      "display_text": "CARAMELLA",
+      "spoken_text": "caramella"
+    },
+    "learning.word.carta": {
+      "asset": "clips/7c/7c4749c9e536.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7c4749c9e536d7a311548f0a5a6705bf470795f7ebc568522e9f9081a05e02ec",
+      "display_text": "CARTA",
+      "spoken_text": "carta"
+    },
+    "learning.word.casa": {
+      "asset": "clips/c6/c68216adbd27.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "c68216adbd270fdab4fdde052571bdb25f40fc9f7128a686fff40acf23714fbc",
+      "display_text": "CASA",
+      "spoken_text": "casa"
+    },
+    "learning.word.cavallo": {
+      "asset": "clips/15/154f6a881f98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "154f6a881f98ffcaa6ca23b813b0a2310fd7a3e7b3557047ae5b33f52027bdac",
+      "display_text": "CAVALLO",
+      "spoken_text": "cavallo"
+    },
+    "learning.word.ciao_amici": {
+      "asset": "clips/f0/f05f1e722751.mp3",
+      "word_ends_ms": [
+        242
+      ],
+      "word_fade_ms": [
+        21
+      ],
+      "duration_ms": 784,
+      "sha256": "f05f1e7227511e529f236dd824d3cc6ac87fe32b30e8d29529db088ac7e52251",
+      "display_text": "CIAO AMICI",
+      "spoken_text": "ciao amici"
+    },
+    "learning.word.cielo": {
+      "asset": "clips/f7/f7d7296fdf4a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "f7d7296fdf4aa13fae796df6b055d15cf6666d8c43669c9fa54b524dff6ffd77",
+      "display_text": "CIELO",
+      "spoken_text": "cielo"
+    },
+    "learning.word.cioccolato": {
+      "asset": "clips/72/7253679439e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "7253679439e0bd538fa4118b795943ce2b1ce23669e3d5c04318487cbf76b7a6",
+      "display_text": "CIOCCOLATO",
+      "spoken_text": "cioccolato"
+    },
+    "learning.word.coccinella": {
+      "asset": "clips/37/37216292ca01.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "37216292ca0103e435006492b51f0336143ac7101dfb5e001900ef9c7d993bb4",
+      "display_text": "COCCINELLA",
+      "spoken_text": "coccinella"
+    },
+    "learning.word.coccodrillo": {
+      "asset": "clips/d1/d11f525ecc4f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d11f525ecc4f216c40df0d07e0aa6fcd5c0054e18ffabcef54de97b9ad754a53",
+      "display_text": "COCCODRILLO",
+      "spoken_text": "coccodrillo"
+    },
+    "learning.word.coniglio": {
+      "asset": "clips/af/af1c516bb4ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "af1c516bb4ffd65c008b0550a18426e64d515d277b15c637df34bfd98ad79580",
+      "display_text": "CONIGLIO",
+      "spoken_text": "coniglio"
+    },
+    "learning.word.coscia": {
+      "asset": "clips/cf/cf4ccbe09f90.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "cf4ccbe09f90f24182a9c9498fcf6fc437f4d09b17ec6317a792076ec112ddf6",
+      "display_text": "COSCIA",
+      "spoken_text": "coscia"
+    },
+    "learning.word.criceto": {
+      "asset": "clips/c4/c429c3b395df.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "c429c3b395df5a1b2774855d40734b72d288286486eb3285e0f3b5605d574569",
+      "display_text": "CRICETO",
+      "spoken_text": "criceto"
+    },
+    "learning.word.delfino": {
+      "asset": "clips/87/87d93549b596.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "87d93549b59612b92fef29353ecf8a9adc63043f96037b8ac2b90166e48a0e43",
+      "display_text": "DELFINO",
+      "spoken_text": "delfino"
+    },
+    "learning.word.di_grazie_e_per_favore": {
+      "asset": "clips/50/50850d0f708e.mp3",
+      "word_ends_ms": [
+        259,
+        959,
+        1101,
+        1280
+      ],
+      "word_fade_ms": [
+        40,
+        40,
+        12,
+        12
+      ],
+      "duration_ms": 1802,
+      "sha256": "50850d0f708eafb50f04dbf26e0cefe65d6d5be13692e9026f3e09d89edbf227",
+      "display_text": "DI GRAZIE E PER FAVORE",
+      "spoken_text": "di grazie e per favore"
+    },
+    "learning.word.dinosauro": {
+      "asset": "clips/e3/e3bb6f19179d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "e3bb6f19179d836625abbe4e4788063b2ab3a80f675624fe0e3c0e55b1c06eaa",
+      "display_text": "DINOSAURO",
+      "spoken_text": "dinosauro"
+    },
+    "learning.word.dito": {
+      "asset": "clips/d3/d30a6e7c1e1d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "d30a6e7c1e1dcab742d1b8e3a4d91e9d5dd59d43c316c0f3f511356854103360",
+      "display_text": "DITO",
+      "spoken_text": "dito"
+    },
+    "learning.word.dolce_caramella": {
+      "asset": "clips/cd/cd23e2eaa1a1.mp3",
+      "word_ends_ms": [
+        499
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1254,
+      "sha256": "cd23e2eaa1a1e93bcdf9f84719260679a295ee7974f005dcaed562fac4bd4ca0",
+      "display_text": "DOLCE CARAMELLA",
+      "spoken_text": "dolce caramella"
+    },
+    "learning.word.dormi_bene_stanotte": {
+      "asset": "clips/3d/3d07d330fa74.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "3d07d330fa7480bfa1b22614545ac233dec2aaab2914bbc98c918f919296717f",
+      "display_text": "DORMI BENE STANOTTE",
+      "spoken_text": "dormi bene stanotte"
+    },
+    "learning.word.drago": {
+      "asset": "clips/b8/b8265429dd82.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b8265429dd82479193e96574ac1f05d8707991ffa535c902c75bf44b85601e38",
+      "display_text": "DRAGO",
+      "spoken_text": "drago"
+    },
+    "learning.word.elefante": {
+      "asset": "clips/06/06c83eebc9d0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "06c83eebc9d01e8e188ace6c51ae21c53fedacaca7851d33e640f5b8d9d8e01c",
+      "display_text": "ELEFANTE",
+      "spoken_text": "elefante"
+    },
+    "learning.word.elicottero": {
+      "asset": "clips/65/655790c29df4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "655790c29df4030c993acfd494f98e1f814e17a70dda939072ba233b1b415e90",
+      "display_text": "ELICOTTERO",
+      "spoken_text": "elicottero"
+    },
+    "learning.word.erba": {
+      "asset": "clips/bf/bf61f5ccaeaa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "bf61f5ccaeaaf6c3e24db10ba73add0e45d671da53d9052a2c05d9cd7c580072",
+      "display_text": "ERBA",
+      "spoken_text": "erba"
+    },
+    "learning.word.erba_verde": {
+      "asset": "clips/65/65961fb384da.mp3",
+      "word_ends_ms": [
+        339
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 784,
+      "sha256": "65961fb384daf4e5cbf9e0bd580662da9957bbdc28b4899f5d0872cf52422e4c",
+      "display_text": "ERBA VERDE",
+      "spoken_text": "erba verde"
+    },
+    "learning.word.faccia_felice": {
+      "asset": "clips/ee/ee745596caf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "ee745596caf62d31ab498f1cbcd8b0b994adc9c37766571bb321f359435b7713",
+      "display_text": "FACCIA FELICE",
+      "spoken_text": "faccia felice"
+    },
+    "learning.word.famiglia": {
+      "asset": "clips/42/4296d2e16248.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "4296d2e16248ebc60a7d0a3f641ca1c5169ef3c87eb5be90e693aa9867fbd148",
+      "display_text": "FAMIGLIA",
+      "spoken_text": "famiglia"
+    },
+    "learning.word.farfalla": {
+      "asset": "clips/0a/0a360692655f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "0a360692655f5bf4884b6bb136a2b755a10aa34c48f937b2696fe782ea812c4c",
+      "display_text": "FARFALLA",
+      "spoken_text": "farfalla"
+    },
+    "learning.word.fenicottero": {
+      "asset": "clips/1d/1d8e4494003d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "1d8e4494003d0c11f307069d46c6b9f7a9bf43029d9c15c8cbbf18add6becec2",
+      "display_text": "FENICOTTERO",
+      "spoken_text": "fenicottero"
+    },
+    "learning.word.fiore": {
+      "asset": "clips/07/07d9082afd12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "07d9082afd123c6c4b3e257e1ec7b23dd39a7fe70e8a63b2f2627421bfc6d191",
+      "display_text": "FIORE",
+      "spoken_text": "fiore"
+    },
+    "learning.word.formica": {
+      "asset": "clips/f8/f8b083de9a44.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "f8b083de9a44e28f71ee0f58e158a7370202f178390713b1493a9216a656ee4e",
+      "display_text": "FORMICA",
+      "spoken_text": "formica"
+    },
+    "learning.word.fragola": {
+      "asset": "clips/68/687e8dacd1ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "687e8dacd1ff1ca47fad05682f35543f270c806bc25c49b08c40ccf4137ca5a9",
+      "display_text": "FRAGOLA",
+      "spoken_text": "fragola"
+    },
+    "learning.word.frutta_fresca": {
+      "asset": "clips/f5/f5e02cbaec02.mp3",
+      "word_ends_ms": [
+        441
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 966,
+      "sha256": "f5e02cbaec02d9316ffe31ed73a11b84bfe16a4d932bf82361b431a8b90e828b",
+      "display_text": "FRUTTA FRESCA",
+      "spoken_text": "frutta fresca"
+    },
+    "learning.word.fulmine": {
+      "asset": "clips/9f/9fec550da4fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "9fec550da4fb9b7784e1ce0811183a280eb5c760436e631aae5d29ffeb301253",
+      "display_text": "FULMINE",
+      "spoken_text": "fulmine"
+    },
+    "learning.word.fuochi_d_artificio": {
+      "asset": "clips/51/51112697880b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "51112697880b4d5f5be9b872f665e28ce5608d416889b7a2793f515033896bc5",
+      "display_text": "FUOCHI D'ARTIFICIO",
+      "spoken_text": "fuochi d'artificio"
+    },
+    "learning.word.gallina": {
+      "asset": "clips/80/802b636d4070.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "802b636d40705eccee1182821cd5fc590903bd745ff9a19ab17192ea13de0c37",
+      "display_text": "GALLINA",
+      "spoken_text": "gallina"
+    },
+    "learning.word.gatto": {
+      "asset": "clips/43/431556a792c5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "431556a792c51c2ec7a2d61ce8a7cd831c12395a408285328b61b2919c530533",
+      "display_text": "GATTO",
+      "spoken_text": "gatto"
+    },
+    "learning.word.gatto_dormiente": {
+      "asset": "clips/8a/8ac5cca1e98f.mp3",
+      "word_ends_ms": [
+        455
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "8ac5cca1e98f65957f27dd3e4babdfe2b96cd13d88046577c8c3469fb2a1990b",
+      "display_text": "GATTO DORMIENTE",
+      "spoken_text": "gatto dormiente"
+    },
+    "learning.word.gioca_con_i_tuoi_giocattoli": {
+      "asset": "clips/eb/eb21ca5ae026.mp3",
+      "word_ends_ms": [
+        418,
+        598,
+        678,
+        868
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        12,
+        40
+      ],
+      "duration_ms": 1489,
+      "sha256": "eb21ca5ae026b433fd0606e4091cf9d0db958b5be74d5a6fd171953c85d7a4fa",
+      "display_text": "GIOCA CON I TUOI GIOCATTOLI",
+      "spoken_text": "gioca con i tuoi giocattoli"
+    },
+    "learning.word.gioca_insieme": {
+      "asset": "clips/ab/ab8d8051c1e8.mp3",
+      "word_ends_ms": [
+        372
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 966,
+      "sha256": "ab8d8051c1e817698f868dbff2dcaaf9ca0b88f56478bd5e183f8302cda47c0b",
+      "display_text": "GIOCA INSIEME",
+      "spoken_text": "gioca insieme"
+    },
+    "learning.word.giocattolo": {
+      "asset": "clips/c0/c044038a8d8c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "c044038a8d8c82badb2fbf92eef3e74ddc7441f735f91545bb1f09f8f5f63650",
+      "display_text": "GIOCATTOLO",
+      "spoken_text": "giocattolo"
+    },
+    "learning.word.gioco": {
+      "asset": "clips/8c/8c331640ca55.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "8c331640ca554cd45ab720de988bc74bcb89abcac070997b4ac59976abfb1aea",
+      "display_text": "GIOCO",
+      "spoken_text": "gioco"
+    },
+    "learning.word.giraffa": {
+      "asset": "clips/72/723b04d16d41.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "723b04d16d414251bd28c8b57e7a7da2ebbc8c68864513f358ddf4282e08d9aa",
+      "display_text": "GIRAFFA",
+      "spoken_text": "giraffa"
+    },
+    "learning.word.girasole": {
+      "asset": "clips/53/5329b95004ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "5329b95004ae300b1555f757de7645a23b9dad5de0a5d3aebff06fdba3aa67d8",
+      "display_text": "GIRASOLE",
+      "spoken_text": "girasole"
+    },
+    "learning.word.gli_amici_condividono": {
+      "asset": "clips/2c/2c0f24cd9f63.mp3",
+      "word_ends_ms": [
+        225,
+        555
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "2c0f24cd9f630b6f723c37519a8cc07d01ff3ed4c0d1f2cccb67457118225eb6",
+      "display_text": "GLI AMICI CONDIVIDONO",
+      "spoken_text": "gli amici condividono"
+    },
+    "learning.word.gli_uccelli_volano_in_alto": {
+      "asset": "clips/0b/0bb31d6382d1.mp3",
+      "word_ends_ms": [
+        252,
+        672,
+        1012,
+        1153
+      ],
+      "word_fade_ms": [
+        40,
+        12,
+        12,
+        40
+      ],
+      "duration_ms": 1620,
+      "sha256": "0bb31d6382d1ed514027d4f61256b68d28cd23a1188b8ee9432200ddfcf4750b",
+      "display_text": "GLI UCCELLI VOLANO IN ALTO",
+      "spoken_text": "gli uccelli volano in alto"
+    },
+    "learning.word.grande_castello": {
+      "asset": "clips/14/14a7bcd21143.mp3",
+      "word_ends_ms": [
+        464
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1123,
+      "sha256": "14a7bcd21143a9c1720e90f3f505bd7fe6fe15a22f5152d4ecbb90dfc22ec5b5",
+      "display_text": "GRANDE CASTELLO",
+      "spoken_text": "grande castello"
+    },
+    "learning.word.gufo": {
+      "asset": "clips/b4/b493da405661.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b493da405661f8f1ac30674fcb0f562da97e3e88d647fd6ea02837ae230e4c5d",
+      "display_text": "GUFO",
+      "spoken_text": "gufo"
+    },
+    "learning.word.il_bosco_e_pieno_di_vita": {
+      "asset": "clips/42/42d50ac87616.mp3",
+      "word_ends_ms": [
+        194,
+        604,
+        684,
+        974,
+        1074
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1515,
+      "sha256": "42d50ac8761639ab2965592df26bdfedde2603ded3daf2ce03afe19a03b2afc3",
+      "display_text": "IL BOSCO È PIENO DI VITA",
+      "spoken_text": "il bosco è pieno di vita"
+    },
+    "learning.word.il_nostro_mare_e_blu": {
+      "asset": "clips/1d/1da4c20bb63a.mp3",
+      "word_ends_ms": [
+        189,
+        549,
+        758,
+        878
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1228,
+      "sha256": "1da4c20bb63aacadad338a9cb718ffb68a53c9ec7c5d05e2c93ecfffe616eca1",
+      "display_text": "IL NOSTRO MARE È BLU",
+      "spoken_text": "il nostro mare è blu"
+    },
+    "learning.word.il_sole_splende": {
+      "asset": "clips/fb/fb2a16f26ef9.mp3",
+      "word_ends_ms": [
+        236,
+        427
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1071,
+      "sha256": "fb2a16f26ef92034085733accbd973e3f26c1cb4f87ef1d833be996bc321d06e",
+      "display_text": "IL SOLE SPLENDE",
+      "spoken_text": "il sole splende"
+    },
+    "learning.word.impara_ogni_giorno": {
+      "asset": "clips/64/64cf0b71c2af.mp3",
+      "word_ends_ms": [
+        576,
+        906
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1437,
+      "sha256": "64cf0b71c2afe874378660be3db77569c3f310293f8467e9e788c52099ed5237",
+      "display_text": "IMPARA OGNI GIORNO",
+      "spoken_text": "impara ogni giorno"
+    },
+    "learning.word.isola": {
+      "asset": "clips/f2/f2832a5e4081.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "f2832a5e4081b4da7c84de1aefd178195b82f7b34850dd549b36cd6a3c6df4e8",
+      "display_text": "ISOLA",
+      "spoken_text": "isola"
+    },
+    "learning.word.koala": {
+      "asset": "clips/ec/ecb04fe0da32.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "ecb04fe0da325b0ef05c8b9cda419e8a4a23a804c1f5de4efbd657ad7f6982f0",
+      "display_text": "KOALA",
+      "spoken_text": "koala"
+    },
+    "learning.word.l_arcobaleno_ha_tanti_colori": {
+      "asset": "clips/4e/4ea064353e48.mp3",
+      "word_ends_ms": [
+        714,
+        883,
+        1163
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        20
+      ],
+      "duration_ms": 1672,
+      "sha256": "4ea064353e48f82d019776b8cb2f9f65b330afea4ab45a1506cce68146148a90",
+      "display_text": "L'ARCOBALENO HA TANTI COLORI",
+      "spoken_text": "l'arcobaleno ha tanti colori"
+    },
+    "learning.word.la_luna_ci_illumina": {
+      "asset": "clips/50/50e829b157e0.mp3",
+      "word_ends_ms": [
+        244,
+        514,
+        684
+      ],
+      "word_fade_ms": [
+        40,
+        12,
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "50e829b157e0075e95e1a5b4cb47def7aecfd486cf05b5d23638150e383cdd42",
+      "display_text": "LA LUNA CI ILLUMINA",
+      "spoken_text": "la luna ci illumina"
+    },
+    "learning.word.la_mia_famiglia_e_amore": {
+      "asset": "clips/94/942debb3cd13.mp3",
+      "word_ends_ms": [
+        205,
+        365,
+        845,
+        975
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        20,
+        40
+      ],
+      "duration_ms": 1489,
+      "sha256": "942debb3cd13e7fa0fd8701cb23ab6f3e511adb5c43811c790862b82299adaaa",
+      "display_text": "LA MIA FAMIGLIA È AMORE",
+      "spoken_text": "la mia famiglia è amore"
+    },
+    "learning.word.lago": {
+      "asset": "clips/f8/f86757e5a611.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "f86757e5a611ea75da36ea7ca89921fde43f6917dceb0d9c18e7957b9e8648f5",
+      "display_text": "LAGO",
+      "spoken_text": "lago"
+    },
+    "learning.word.latte": {
+      "asset": "clips/47/479c28658c6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "479c28658c6e98620097d609db9a9422ed602e627dc97e6bd0bff1256bbddeb9",
+      "display_text": "LATTE",
+      "spoken_text": "latte"
+    },
+    "learning.word.le_stelle_brillano": {
+      "asset": "clips/ee/eeb789848d8f.mp3",
+      "word_ends_ms": [
+        177,
+        597
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "eeb789848d8f9faf4421b2de3b5f9a9a6d4c0c11458a450fe3f2687125ead8fd",
+      "display_text": "LE STELLE BRILLANO",
+      "spoken_text": "le stelle brillano"
+    },
+    "learning.word.leggi_una_bella_storia": {
+      "asset": "clips/31/318a861fad62.mp3",
+      "word_ends_ms": [
+        382,
+        532,
+        792
+      ],
+      "word_fade_ms": [
+        40,
+        12,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "318a861fad62e9b9054d0c42b4d4b660308b104f6d1704f7fa486c5a860709c1",
+      "display_text": "LEGGI UNA BELLA STORIA",
+      "spoken_text": "leggi una bella storia"
+    },
+    "learning.word.libellula": {
+      "asset": "clips/db/dbacfe1bb40a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "dbacfe1bb40a3723bdbb5b0462896bdaa2e43d0bf8733e38b4f9f49645680109",
+      "display_text": "LIBELLULA",
+      "spoken_text": "libellula"
+    },
+    "learning.word.libro": {
+      "asset": "clips/e4/e4d2e9651dc8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e4d2e9651dc81a9b95c4674d14e5fce002ff87f5f05c38356bc3b84dc1559c0a",
+      "display_text": "LIBRO",
+      "spoken_text": "libro"
+    },
+    "learning.word.lucertola": {
+      "asset": "clips/f3/f3973c083768.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "f3973c083768421ff876876e6c28244993e0ca7bf82198a97c82203106b5d355",
+      "display_text": "LUCERTOLA",
+      "spoken_text": "lucertola"
+    },
+    "learning.word.luna": {
+      "asset": "clips/8b/8bf6a672feae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "8bf6a672feae0635177b6b4899d85800c46b59956dd27265382b84f28f8049ac",
+      "display_text": "LUNA",
+      "spoken_text": "luna"
+    },
+    "learning.word.magia": {
+      "asset": "clips/d7/d78f8ce60cbb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "d78f8ce60cbb3f3ab9016c0db8852c920e8b4c4e13eb5a48c8dc7a1121afbc68",
+      "display_text": "MAGIA",
+      "spoken_text": "magia"
+    },
+    "learning.word.maiale": {
+      "asset": "clips/80/80c179aa4557.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "80c179aa45570bf2f504d52710eb8ac180f5d2416fed02d5a9db20dabb41c867",
+      "display_text": "MAIALE",
+      "spoken_text": "maiale"
+    },
+    "learning.word.mamma": {
+      "asset": "clips/9b/9bf6f19a7cac.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "9bf6f19a7cac692a7a54a377afe34b0755919d2a1fd221e97ae068baac2a3600",
+      "display_text": "MAMMA",
+      "spoken_text": "mamma"
+    },
+    "learning.word.mammut": {
+      "asset": "clips/83/83fcd141db02.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "83fcd141db02ef6eb04253123d11cc54e1ac78040c6c6a42ec895c301e3bb63d",
+      "display_text": "MAMMUT",
+      "spoken_text": "mammut"
+    },
+    "learning.word.mangia_molta_frutta": {
+      "asset": "clips/fd/fd922f365746.mp3",
+      "word_ends_ms": [
+        454,
+        764
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1280,
+      "sha256": "fd922f36574637c1ede90f167ce609233475e19e0cba376888de25cf6d3ec811",
+      "display_text": "MANGIA MOLTA FRUTTA",
+      "spoken_text": "mangia molta frutta"
+    },
+    "learning.word.mangia_sano": {
+      "asset": "clips/34/34fc540b5b47.mp3",
+      "word_ends_ms": [
+        454
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 888,
+      "sha256": "34fc540b5b47fd52df22e8b146f157578b4741feeb9dcdee42bd47688d042a45",
+      "display_text": "MANGIA SANO",
+      "spoken_text": "mangia sano"
+    },
+    "learning.word.mare": {
+      "asset": "clips/05/0532a0d19a10.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "0532a0d19a107a6bbd89317d7734966af5cff3eb911d1cebd91df9c62783db56",
+      "display_text": "MARE",
+      "spoken_text": "mare"
+    },
+    "learning.word.mare_blu": {
+      "asset": "clips/c4/c48582dbb3fa.mp3",
+      "word_ends_ms": [
+        339
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 705,
+      "sha256": "c48582dbb3faa1489063223956f8c00be87114e0dd334610e8e247301d76c157",
+      "display_text": "MARE BLU",
+      "spoken_text": "mare blu"
+    },
+    "learning.word.mela": {
+      "asset": "clips/45/45bbc70ef6b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "45bbc70ef6b3f8a38921ca0e0a500bb4cba08cab7899f1b5dcb9750ecb0a52b8",
+      "display_text": "MELA",
+      "spoken_text": "mela"
+    },
+    "learning.word.mela_rossa": {
+      "asset": "clips/eb/ebe59879e081.mp3",
+      "word_ends_ms": [
+        356
+      ],
+      "word_fade_ms": [
+        29
+      ],
+      "duration_ms": 888,
+      "sha256": "ebe59879e0819e00a15ca2cd524a03c22c21a4d4c65e6403ad5ae035b96b5233",
+      "display_text": "MELA ROSSA",
+      "spoken_text": "mela rossa"
+    },
+    "learning.word.microscopio": {
+      "asset": "clips/a9/a9b0218523a3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "a9b0218523a3f3ebefd1ae3ab641950d8e225b999fa4c3721b4d84caf5bb2826",
+      "display_text": "MICROSCOPIO",
+      "spoken_text": "microscopio"
+    },
+    "learning.word.muro": {
+      "asset": "clips/21/21dd90f7fd25.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "21dd90f7fd2593fb0ec162f91e1275ab328da2f00145abae1cfd08ce14dd83e2",
+      "display_text": "MURO",
+      "spoken_text": "muro"
+    },
+    "learning.word.nave": {
+      "asset": "clips/64/648a3a33a841.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "648a3a33a841b0568a294ac027109ad88b17224618b86e3124a051277b18127b",
+      "display_text": "NAVE",
+      "spoken_text": "nave"
+    },
+    "learning.word.nero": {
+      "asset": "clips/2b/2b896e58fba8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "2b896e58fba81f2a8dcb9ddd288892b7649292c2d1368ac76e7d06eac7d5d788",
+      "display_text": "NERO",
+      "spoken_text": "nero"
+    },
+    "learning.word.neve": {
+      "asset": "clips/fd/fdc00e0a7e7a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fdc00e0a7e7a025c9a66aa15e93791fa8a08d3496430971c1d02644a2c7a2fb8",
+      "display_text": "NEVE",
+      "spoken_text": "neve"
+    },
+    "learning.word.nido": {
+      "asset": "clips/89/894a7ee2e798.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "894a7ee2e798cbe913166a122d9e630ea76559ad3a66f4aa4612ec8599b71f38",
+      "display_text": "NIDO",
+      "spoken_text": "nido"
+    },
+    "learning.word.nuvola": {
+      "asset": "clips/0a/0af153bd702c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "0af153bd702ca7fa6dff7547c250b1f2a121259700a4cb5784b46ed941f69866",
+      "display_text": "NUVOLA",
+      "spoken_text": "nuvola"
+    },
+    "learning.word.oceano_blu": {
+      "asset": "clips/66/668b0df27b12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "668b0df27b1273690ebb2a6317d873748b9833f5bbba3b4af975788426df5bc3",
+      "display_text": "OCEANO BLU",
+      "spoken_text": "oceano blu"
+    },
+    "learning.word.ombrello": {
+      "asset": "clips/c4/c4c514cbb95f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "c4c514cbb95fdf98abac35a2a75eda0c1df354143507f8eb13e14a2fa7d2171f",
+      "display_text": "OMBRELLO",
+      "spoken_text": "ombrello"
+    },
+    "learning.word.orso": {
+      "asset": "clips/d2/d2ca600cf17b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "d2ca600cf17b9f1c32993152c56bfc57cb6256a218647c88ba07935dcc4aff68",
+      "display_text": "ORSO",
+      "spoken_text": "orso"
+    },
+    "learning.word.ospedale": {
+      "asset": "clips/33/338e7596286f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "338e7596286ff6fb77bd1b01aa35443f3d6eca71c1f0aae6dfe095ed754d7a5c",
+      "display_text": "OSPEDALE",
+      "spoken_text": "ospedale"
+    },
+    "learning.word.panda": {
+      "asset": "clips/00/00cad8317c2d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "00cad8317c2d380067844fda2d7f1251867b996c7281e108f16f3170c3607c55",
+      "display_text": "PANDA",
+      "spoken_text": "panda"
+    },
+    "learning.word.pane": {
+      "asset": "clips/e8/e87c0651bf17.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "e87c0651bf1746a187af976885773ec21baf589b762bcd5986ee25c391f52951",
+      "display_text": "PANE",
+      "spoken_text": "pane"
+    },
+    "learning.word.panino": {
+      "asset": "clips/84/84ab871fc3ad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "84ab871fc3ad29113853bd14c2a9533848d598f8ab9ecba06a39e1b81a9ec6b5",
+      "display_text": "PANINO",
+      "spoken_text": "panino"
+    },
+    "learning.word.pantera": {
+      "asset": "clips/ae/aea43eb09c3a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "aea43eb09c3a58c4979e27ab861e9490bd46d559e6ac0bd272a31b31feb52523",
+      "display_text": "PANTERA",
+      "spoken_text": "pantera"
+    },
+    "learning.word.papa": {
+      "asset": "clips/fd/fd09de50c8c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "fd09de50c8c329adeffdec65fb9f883d50012c5c4667eab8f6b6a633c7aa6b87",
+      "display_text": "PAPA",
+      "spoken_text": "papa"
+    },
+    "learning.word.pappagallo": {
+      "asset": "clips/92/9215d7365cd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "9215d7365cd2e758a9b7d902d3ef4cf26c68c193c1efa23c8d176c7f0a8c52e0",
+      "display_text": "PAPPAGALLO",
+      "spoken_text": "pappagallo"
+    },
+    "learning.word.pavone": {
+      "asset": "clips/1b/1b9ab2d39321.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1b9ab2d39321084c9be187894707b030db0460cdf24521219f321aecd925c8db",
+      "display_text": "PAVONE",
+      "spoken_text": "pavone"
+    },
+    "learning.word.pecora": {
+      "asset": "clips/7e/7edffc991a9f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "7edffc991a9fd1c8be07ce834b6cc5421e5a310cdef9d0fa63ca89ef583bb760",
+      "display_text": "PECORA",
+      "spoken_text": "pecora"
+    },
+    "learning.word.pera": {
+      "asset": "clips/a1/a12891be5ce9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "a12891be5ce910e69eee629838bd60b26aba9145f33b8b48637c64b4cffe2449",
+      "display_text": "PERA",
+      "spoken_text": "pera"
+    },
+    "learning.word.pesca": {
+      "asset": "clips/86/8675b158e4af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "8675b158e4af883547f69de1277446a603ff0762408dbf7449a4ab99ca22fd6e",
+      "display_text": "PESCA",
+      "spoken_text": "pesca"
+    },
+    "learning.word.pesce": {
+      "asset": "clips/99/999bac555169.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "999bac555169be3fa5d843249e71dbb125b29d0c0e3319d809298fcca79759b3",
+      "display_text": "PESCE",
+      "spoken_text": "pesce"
+    },
+    "learning.word.pesce_che_nuota": {
+      "asset": "clips/40/401236f6c454.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "401236f6c454b8c7c9fbbf40ae59c8ac618c99f7650ff445a6ad42a5860aa091",
+      "display_text": "PESCE CHE NUOTA",
+      "spoken_text": "pesce che nuota"
+    },
+    "learning.word.piccola_casa": {
+      "asset": "clips/91/911d3dc3047f.mp3",
+      "word_ends_ms": [
+        408
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 888,
+      "sha256": "911d3dc3047f3b09bc4dff2c90e1d0c4e8a8fb72fd924f46fb23118aecf1aaa2",
+      "display_text": "PICCOLA CASA",
+      "spoken_text": "piccola casa"
+    },
+    "learning.word.pinguino": {
+      "asset": "clips/ae/aeae790aaae4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "aeae790aaae4aff58c16639fae8740b0649882f4e7f9c0dbb7dbc3b04670fb8d",
+      "display_text": "PINGUINO",
+      "spoken_text": "pinguino"
+    },
+    "learning.word.pino": {
+      "asset": "clips/89/897503f6fa7a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "897503f6fa7ab91ab976c1ba861a603adb6d5beeba7e6efa3994b76eb56d9671",
+      "display_text": "PINO",
+      "spoken_text": "pino"
+    },
+    "learning.word.pizza": {
+      "asset": "clips/e4/e45be39014a0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "e45be39014a084f684886e8e86d3eadb6ed2b7ccf6065bf144cb4a9e1b82cf28",
+      "display_text": "PIZZA",
+      "spoken_text": "pizza"
+    },
+    "learning.word.polpo": {
+      "asset": "clips/c5/c5a3178ad06b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "c5a3178ad06beacab6743b327a620a39dcb4505695241ccb881d93756a2b659f",
+      "display_text": "POLPO",
+      "spoken_text": "polpo"
+    },
+    "learning.word.ponte": {
+      "asset": "clips/8e/8e6822b49be0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "8e6822b49be0b87243a322b62be9a53e41a778e928fd277fa283e71b00059a82",
+      "display_text": "PONTE",
+      "spoken_text": "ponte"
+    },
+    "learning.word.porco": {
+      "asset": "clips/6a/6a117635d5a7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "6a117635d5a7ad5f11e63476abb23ca376c13eeed681bcc0e9e830d356af7857",
+      "display_text": "PORCO",
+      "spoken_text": "porco"
+    },
+    "learning.word.prato": {
+      "asset": "clips/b8/b88e27f31f04.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "b88e27f31f045bde56ef2b709dc60562ff47ae6b5453994b98da4cfeb492e6e1",
+      "display_text": "PRATO",
+      "spoken_text": "prato"
+    },
+    "learning.word.puma": {
+      "asset": "clips/56/56fa252530c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "56fa252530c047d60979ba3e9468d12abc4f8c064245cd28658fd4d8326f4689",
+      "display_text": "PUMA",
+      "spoken_text": "puma"
+    },
+    "learning.word.pupazzo_di_neve": {
+      "asset": "clips/8b/8be8166bbaa6.mp3",
+      "word_ends_ms": [
+        481,
+        600
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "8be8166bbaa64df57ce59dc3a151f886db1a2b8393dad06364958b8d2d6ca8bc",
+      "display_text": "PUPAZZO DI NEVE",
+      "spoken_text": "pupazzo di neve"
+    },
+    "learning.word.ragno": {
+      "asset": "clips/65/65d9aa00d9b1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "65d9aa00d9b1fb8cffa58e6c19c5a75905ddd672fcec6cf30d74505e79d95f90",
+      "display_text": "RAGNO",
+      "spoken_text": "ragno"
+    },
+    "learning.word.rana": {
+      "asset": "clips/d5/d5b5d44f5ee3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "d5b5d44f5ee3b259a30fdfbbe22378db3fa5c819cc9aaeb836ba18b9e78f9d43",
+      "display_text": "RANA",
+      "spoken_text": "rana"
+    },
+    "learning.word.riccio": {
+      "asset": "clips/76/7650009f85fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7650009f85fce6841c004a3aa7032e8ae780953b3aa8423f2ae4922722f4af8e",
+      "display_text": "RICCIO",
+      "spoken_text": "riccio"
+    },
+    "learning.word.rosa": {
+      "asset": "clips/bb/bbe9f3c9441d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "bbe9f3c9441dbb2c0deab02900f918c640b4bed2385e078757d3b9eb3da36349",
+      "display_text": "ROSA",
+      "spoken_text": "rosa"
+    },
+    "learning.word.scimmia": {
+      "asset": "clips/e3/e3e197200519.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e3e1972005195d0c4447bf2ca390f1a9a3f3181878a9fde160c5cdcef71238b7",
+      "display_text": "SCIMMIA",
+      "spoken_text": "scimmia"
+    },
+    "learning.word.scoiattolo": {
+      "asset": "clips/75/75ba927ca5c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "75ba927ca5c06b9cd81e0e0890934bfbb63db5c721514adfc48fb2dc9070bef8",
+      "display_text": "SCOIATTOLO",
+      "spoken_text": "scoiattolo"
+    },
+    "learning.word.scuola": {
+      "asset": "clips/69/69924bbe1962.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "69924bbe196280daec9026968c30e525580dd95a5e784984caf8dba4dfe1d23b",
+      "display_text": "SCUOLA",
+      "spoken_text": "scuola"
+    },
+    "learning.word.sedia": {
+      "asset": "clips/c2/c2a3e68a9ee3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "c2a3e68a9ee36127925ec8fd16bb4ee003b557fce7a3b08a204f15ed425cd6e9",
+      "display_text": "SEDIA",
+      "spoken_text": "sedia"
+    },
+    "learning.word.serpente": {
+      "asset": "clips/84/8474bc92a073.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "8474bc92a073949c96040d012294c9ef118331159d2597b7571eb3a0d4c70e3a",
+      "display_text": "SERPENTE",
+      "spoken_text": "serpente"
+    },
+    "learning.word.sole": {
+      "asset": "clips/5a/5acc2734032a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "5acc2734032aadc0a470b5880d861dc09ddfa1dc834151e5f9d2e999ef8759b1",
+      "display_text": "SOLE",
+      "spoken_text": "sole"
+    },
+    "learning.word.sole_giallo": {
+      "asset": "clips/e6/e602a578a13d.mp3",
+      "word_ends_ms": [
+        399
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "e602a578a13d80a268d15d874ce4e872d6bebe4b7064a4f78e28bfdc3a62cb1f",
+      "display_text": "SOLE GIALLO",
+      "spoken_text": "sole giallo"
+    },
+    "learning.word.sole_splendente": {
+      "asset": "clips/91/917a386d1f4a.mp3",
+      "word_ends_ms": [
+        329
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1280,
+      "sha256": "917a386d1f4a40881a5b215cca0be648b5b276f47f0d00ce9d89b2b79a91effc",
+      "display_text": "SOLE SPLENDENTE",
+      "spoken_text": "sole splendente"
+    },
+    "learning.word.sorridi_e_sii_felice": {
+      "asset": "clips/31/31d061549888.mp3",
+      "word_ends_ms": [
+        648,
+        838,
+        1088
+      ],
+      "word_fade_ms": [
+        20,
+        30,
+        21
+      ],
+      "duration_ms": 1750,
+      "sha256": "31d0615498885d7b2a72d121618fb646894f0c44ed168a033fc76a2a337a6acb",
+      "display_text": "SORRIDI E SII FELICE",
+      "spoken_text": "sorridi e sii felice"
+    },
+    "learning.word.spaventapasseri": {
+      "asset": "clips/7b/7bb4d3ddcfeb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "7bb4d3ddcfeb4f5e21696d4784366c363b1329834be0200c66ef9aa87940acf5",
+      "display_text": "SPAVENTAPASSERI",
+      "spoken_text": "spaventapasseri"
+    },
+    "learning.word.stella": {
+      "asset": "clips/ca/ca720b03d384.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "ca720b03d38413d154dcf698f4ea3e87dc521cdb8759b64587f6a529f1fdf5c2",
+      "display_text": "STELLA",
+      "spoken_text": "stella"
+    },
+    "learning.word.stella_marina": {
+      "asset": "clips/5d/5d8148ff68d3.mp3",
+      "word_ends_ms": [
+        438
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "5d8148ff68d32860da21515376456f5d3969c0ae590b240615e9f30439fbaec8",
+      "display_text": "STELLA MARINA",
+      "spoken_text": "stella marina"
+    },
+    "learning.word.succo": {
+      "asset": "clips/84/841331411db2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "841331411db234932fe3f821d582a81adf9340b0ead9a0a792817f483c67e480",
+      "display_text": "SUCCO",
+      "spoken_text": "succo"
+    },
+    "learning.word.succo_di_frutta": {
+      "asset": "clips/cd/cd3c1d93af56.mp3",
+      "word_ends_ms": [
+        420,
+        551
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "cd3c1d93af560b50ad1347a07ece7f57fdd83a1ae1dd346d31430c5893d2185b",
+      "display_text": "SUCCO DI FRUTTA",
+      "spoken_text": "succo di frutta"
+    },
+    "learning.word.suono": {
+      "asset": "clips/a4/a4cd71a88301.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "a4cd71a88301768efc991a69077048702d0993ecf8e6db1cee84fe4f5e07877f",
+      "display_text": "SUONO",
+      "spoken_text": "suono"
+    },
+    "learning.word.tartaruga": {
+      "asset": "clips/65/659a13b74065.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "659a13b740650dcbee82c0e9afede980a8fbcd4d8cda7557e8a3808347e0a63c",
+      "display_text": "TARTARUGA",
+      "spoken_text": "tartaruga"
+    },
+    "learning.word.telescopio": {
+      "asset": "clips/8f/8f2d0e9721d3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "8f2d0e9721d37bfb8ef8949359a2ae3b22de2fda5497c1a82b3f23b031614c51",
+      "display_text": "TELESCOPIO",
+      "spoken_text": "telescopio"
+    },
+    "learning.word.tenda": {
+      "asset": "clips/df/dfc59b0909d9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "dfc59b0909d98fe821974b4ca78553c69eaabeb58e6fd8d518e798d826d674cf",
+      "display_text": "TENDA",
+      "spoken_text": "tenda"
+    },
+    "learning.word.tesoro": {
+      "asset": "clips/67/67768162878d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "67768162878dd698340e7c65c4a41f885970741c9f763a7912cadb4db791011e",
+      "display_text": "TESORO",
+      "spoken_text": "tesoro"
+    },
+    "learning.word.topo": {
+      "asset": "clips/80/80082a155fd6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "80082a155fd6184d2f9bbcdc9f5540d482290041ec9e36b81943ac0068d22262",
+      "display_text": "TOPO",
+      "spoken_text": "topo"
+    },
+    "learning.word.trenino": {
+      "asset": "clips/81/8114e4e1c130.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "8114e4e1c130da424aa49a9b45d3dd86c577b616d27e87c2750c387863e5c514",
+      "display_text": "TRENINO",
+      "spoken_text": "trenino"
+    },
+    "learning.word.treno": {
+      "asset": "clips/db/db35861324c5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "db35861324c5793b4b25622c0c7e43578501f1e1633496002170ec8227c54cf3",
+      "display_text": "TRENO",
+      "spoken_text": "treno"
+    },
+    "learning.word.uccellino": {
+      "asset": "clips/78/784e4171f59e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "784e4171f59eeaf2bae0d93c6d293e339d44e87d8cc886fb581e5d2e19afba35",
+      "display_text": "UCCELLINO",
+      "spoken_text": "uccellino"
+    },
+    "learning.word.uccello": {
+      "asset": "clips/f7/f7d8b2b8fab9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "f7d8b2b8fab9b6d3324195b8de47ed87996e1e79f2c8fb1a9e8a2311be3a379d",
+      "display_text": "UCCELLO",
+      "spoken_text": "uccello"
+    },
+    "learning.word.uccello_che_vola": {
+      "asset": "clips/eb/eb7d6c6d04eb.mp3",
+      "word_ends_ms": [
+        491,
+        641
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1019,
+      "sha256": "eb7d6c6d04eb3760ca0b7b9ab0ef5edd2710e5891f72af0ce0c9356f1bf18deb",
+      "display_text": "UCCELLO CHE VOLA",
+      "spoken_text": "uccello che vola"
+    },
+    "learning.word.unicorno": {
+      "asset": "clips/45/4571448b83f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "4571448b83f771a5c796c6849e1419e45ad12fd0b71e8c579e25c7d3f270a610",
+      "display_text": "UNICORNO",
+      "spoken_text": "unicorno"
+    },
+    "learning.word.ventaglio": {
+      "asset": "clips/d4/d4d318d15b49.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "d4d318d15b49329b88d728c08ed5c39eca09865bd03b935b7339d403418a88c4",
+      "display_text": "VENTAGLIO",
+      "spoken_text": "ventaglio"
+    },
+    "learning.word.vento": {
+      "asset": "clips/9f/9f89ad3d778e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9f89ad3d778e5525b405fd1354d65aba881238b321652238d4f957442f8c0e02",
+      "display_text": "VENTO",
+      "spoken_text": "vento"
+    },
+    "learning.word.volpe": {
+      "asset": "clips/c8/c8e55b6f55f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c8e55b6f55f7bb72f25dee53cb5912cfaa7ac737bcf7d32a6fa959c0898ae7b6",
+      "display_text": "VOLPE",
+      "spoken_text": "volpe"
+    },
+    "learning.word.zebra": {
+      "asset": "clips/26/26c889e0dae0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "26c889e0dae015f1b4dc8b746be6070e0f7426d44f82a96210ae9d720f6faaec",
+      "display_text": "ZEBRA",
+      "spoken_text": "zebra"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/4e/4e4bbe02a064.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "4e4bbe02a064208c6fb55f7f444d22be0304c17b104198a0f42edd86720243f9",
+      "display_text": "Labirinto Didattico",
+      "spoken_text": "Labirinto Didattico"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/58/580862ad26aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "580862ad26aaa4afb9451fb7a1613ef5334f384085163349429c07ca3ee5fdbe",
+      "display_text": "Automatico",
+      "spoken_text": "Automatico"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/62/629115c1d461.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "629115c1d461cfe4a897198df4371840c48a35ff2f6538f89a20be2130e44a07",
+      "display_text": "Ceco",
+      "spoken_text": "Ceco"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/c7/c7f48e57da8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c7f48e57da8f7b60a9fc97d28cdaf23a806fea0a6171793fe9e64eeb70bec181",
+      "display_text": "Danese",
+      "spoken_text": "Danese"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/6f/6f13188a0c91.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "6f13188a0c91191177f6670829562bab90b0bad0dcce8f5bec99b32a830ddd00",
+      "display_text": "Olandese",
+      "spoken_text": "Olandese"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/1c/1c5683b61322.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "1c5683b6132284984f73eefe6bcb3aeb6b2e7642378072725407c7bbcaefa4d0",
+      "display_text": "Inglese",
+      "spoken_text": "Inglese"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/2d/2d29aab23597.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "2d29aab23597d6da467e02ef4664d4ded566763c5d803653319af7d0f415db10",
+      "display_text": "Finlandese",
+      "spoken_text": "Finlandese"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/4b/4b07eea10db9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "4b07eea10db9875c2001065fb9ec7d28028649127c6d8656eb75de71f8975e14",
+      "display_text": "Francese",
+      "spoken_text": "Francese"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/66/6652ccb98808.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "6652ccb98808caee5045a7ad12f186a0715c208a6a729f228d25f7297c08c043",
+      "display_text": "Tedesco",
+      "spoken_text": "Tedesco"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/fc/fc1fd4a5a093.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fc1fd4a5a0933707b5d1589f34b79acfcacf6237404e8e9480d5aed263dcc309",
+      "display_text": "Greco",
+      "spoken_text": "Greco"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/74/7475b77c1c14.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "7475b77c1c1441deacb46e6b634917a74421470f3856b90bc11c89c6b9d17523",
+      "display_text": "Ebraico",
+      "spoken_text": "Ebraico"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/06/067a88a330ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "067a88a330ff785fb1319ce6cf60a1ac74f70458efa894032209a10d6f055953",
+      "display_text": "Ungherese",
+      "spoken_text": "Ungherese"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/f0/f0176680b9d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "f0176680b9d6046467b9805b52fd049ae25bb49bd6bad30343fef1b4ee22f417",
+      "display_text": "in ceco",
+      "spoken_text": "in ceco"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/47/471368669d0a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "471368669d0ab2b369d4d9595c5099dcb809d722babe180d7c2418325e1fb2aa",
+      "display_text": "in danese",
+      "spoken_text": "in danese"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/12/12811411e60d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "12811411e60dfd9759499a15628984578428f8ddcc85296c80e6e32972d217e6",
+      "display_text": "in olandese",
+      "spoken_text": "in olandese"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/1b/1b5e498f00dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "1b5e498f00dda7a739f39fa5fb754602303d3a9dc40828319dea6a29bfce2625",
+      "display_text": "in inglese",
+      "spoken_text": "in inglese"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/4c/4cc0db0e72ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "4cc0db0e72ce631504e6c6cf7b1d1d98fb04060e37584930b22851b5bb017cff",
+      "display_text": "in finlandese",
+      "spoken_text": "in finlandese"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/f7/f79f9d3691c2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "f79f9d3691c282db913aedc37f16d7359ab6be3c7e321ff176e47769527209a1",
+      "display_text": "in francese",
+      "spoken_text": "in francese"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/fd/fda682f7e1a1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "fda682f7e1a14d42e5a9f86a2c03323c164b28eaf424df4c75e7f401675328ac",
+      "display_text": "in tedesco",
+      "spoken_text": "in tedesco"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/4d/4df435c9a67b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4df435c9a67b707b694062a731f1617842ad1bd7fbedb70abb67d8b656e31b66",
+      "display_text": "in greco",
+      "spoken_text": "in greco"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/e0/e0d8a828a8f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "e0d8a828a8f69700e03964588dcfcee8f9ed6e3c2377112a9afa220f24fe9c8e",
+      "display_text": "in ebraico",
+      "spoken_text": "in ebraico"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/38/38400889a34a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "38400889a34ab4c15d0feec003605a68383a49c11c78825b00227ee0fff30369",
+      "display_text": "in ungherese",
+      "spoken_text": "in ungherese"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/73/73dbb99b78bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "73dbb99b78bf9aede858d7b9da740788c9f327340e8d83ff933ade8ea458397d",
+      "display_text": "in italiano",
+      "spoken_text": "in italiano"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/8b/8b8fa406a010.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "8b8fa406a0109494d908e1f05b90173bac7de7e4afea5c7859ce49675af40b15",
+      "display_text": "in norvegese",
+      "spoken_text": "in norvegese"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/74/7406ddabc38d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "7406ddabc38ddee81de3045dc9043df86f62a3763676efcea6e3a03d033c51e4",
+      "display_text": "in polacco",
+      "spoken_text": "in polacco"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/4d/4da2df9d3c31.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "4da2df9d3c3164f8165895e9826ee3605f5051fddbdf1763c9f6eb6cafe0f5c8",
+      "display_text": "in portoghese",
+      "spoken_text": "in portoghese"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/ad/add4404b09cc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "add4404b09cce9f32d1768194e83cbb4771fed68105c49e367cac232524838e0",
+      "display_text": "in rumeno",
+      "spoken_text": "in rumeno"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/9b/9b83b42d4911.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "9b83b42d49111df5aa46cc31c9f6fdf18334d93d85cbae80f644eb2064bdc45f",
+      "display_text": "in slovacco",
+      "spoken_text": "in slovacco"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/d7/d7ccdbed8092.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d7ccdbed809239d4fbd6ea5bfd8964b933223e583c1a09b8ab6754a2a8379d78",
+      "display_text": "in spagnolo",
+      "spoken_text": "in spagnolo"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/68/68d97da2e062.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "68d97da2e062c809fa58b0cb8519c4f22284da3789a415f5cd452b867d6d9721",
+      "display_text": "in svedese",
+      "spoken_text": "in svedese"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/3a/3a7eb6623d36.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "3a7eb6623d36ec43158d3aa340bd98902663310823f7e401f85648d67aaad286",
+      "display_text": "in turco",
+      "spoken_text": "in turco"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/c4/c470f0dfaba8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "c470f0dfaba83a15d676e35bd6ba3b98e578897902c3a149fd8972df7c8da42a",
+      "display_text": "in ucraino",
+      "spoken_text": "in ucraino"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/57/57143a3a94ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "57143a3a94aef61d1dade4352d9acb980ae51bf93e51f66fc6a4281a5f0faa96",
+      "display_text": "in vietnamita",
+      "spoken_text": "in vietnamita"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/40/407dd6fa85e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "407dd6fa85e5bcc39635a6cdcca17e1f068b35e6c7771c911f5caaa1d32d3c85",
+      "display_text": "Italiano",
+      "spoken_text": "Italiano"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/0b/0b8700f86a55.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "0b8700f86a55c101541cb0c7d5012c4d821ee16027ee15243d77d96ab38db250",
+      "display_text": "Norvegese",
+      "spoken_text": "Norvegese"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/b8/b86196bda3f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "b86196bda3f0722bea7c4f07de467242b860188e2567cd56f77fff597a835c73",
+      "display_text": "Polacco",
+      "spoken_text": "Polacco"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/37/37f68de39241.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "37f68de392413f00fca7dee7593160a51f0422a58891b59e82c62bfcd64737dc",
+      "display_text": "Portoghese",
+      "spoken_text": "Portoghese"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/53/53e7ac71a330.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "53e7ac71a3303fd79f4df18dca486be2dcf2cb0f8fe74586d86a312ca346d18e",
+      "display_text": "Rumeno",
+      "spoken_text": "Rumeno"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/99/99fc8b492e5d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "99fc8b492e5d2ee62d94737ecb426b3b96bf18b67105799de603d753257a7a7b",
+      "display_text": "Slovacco",
+      "spoken_text": "Slovacco"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/88/88db52ad35f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "88db52ad35f6365fd522f548a8b6c8cc6bb6dfaf9f41a165f2a573bcd8b57a6b",
+      "display_text": "Spagnolo",
+      "spoken_text": "Spagnolo"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/a9/a9318a0e31c5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a9318a0e31c58364ff2f8aba280c820ecf2dbb0a50ac62aa8fb72842ac045472",
+      "display_text": "Svedese",
+      "spoken_text": "Svedese"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/10/1067471e9997.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "1067471e999748e554a92f9a769253f372140046ef0f7b97aa875b5f1e32ecc6",
+      "display_text": "Turco",
+      "spoken_text": "Turco"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/0b/0b08a1141b9b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "0b08a1141b9b543b9a8b73f578794825ea1ec06031465b6bab0e1448e0375cdc",
+      "display_text": "Ucraino",
+      "spoken_text": "Ucraino"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/60/6050d703e7f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "6050d703e7f70ceff01b8e61877494345b5c98fda0ed5d3a3b15e8a0da5874f3",
+      "display_text": "Vietnamita",
+      "spoken_text": "Vietnamita"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/b4/b41b3cac6c12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "b41b3cac6c1278ca1af20787e97efc87946c9ce46c2c10612c46511c2690cc25",
+      "display_text": "Hai contato fino a",
+      "spoken_text": "Hai contato fino a"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/b8/b85717574a98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "b85717574a98f7996e417296ab29744927ed2c7e4781683d63273abbdef4b70b",
+      "display_text": "Hai contato",
+      "spoken_text": "Hai contato"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/72/720bca97efef.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "720bca97efefad79f0c380bb66b8f09a33f2463e57c4ab71d1f6ffea3492498b",
+      "display_text": "fino a",
+      "spoken_text": "fino a"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/69/698ffc64cb75.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "698ffc64cb750deb7d669dd121cb922f952abde11cf242c353363416e142e700",
+      "display_text": "Hai trovato la lettera",
+      "spoken_text": "Hai trovato la lettera"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/3c/3cc4abb511c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "3cc4abb511c02e9369fef926b8d2619e6ce446e624998c050ce1144afc069b02",
+      "display_text": "Hai trovato",
+      "spoken_text": "Hai trovato"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/85/85deb60c2ed2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "85deb60c2ed25f601b20f3eeb4c10ab61a9d809beb4333aa886a4b5f5ef1049a",
+      "display_text": "la lettera",
+      "spoken_text": "la lettera"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/a5/a5d2205f2b49.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "a5d2205f2b49f7b862ceae282c32c487d270d9f2910f78ac656d80fea207e85d",
+      "display_text": "Hai trovato le lettere da",
+      "spoken_text": "Hai trovato le lettere da"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/b0/b069b750c51e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "b069b750c51e4947b06b3a7ac1b11a976a3918e77cd377a114ac16191e5bd82a",
+      "display_text": "le lettere da",
+      "spoken_text": "le lettere da"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/59/5929ed2a6e03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "5929ed2a6e03908b09a748e65aa6d17c2e46c8fafa19014c727c04e916d3eef0",
+      "display_text": "in",
+      "spoken_text": "in"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/8a/8aae8185420a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1776,
+      "sha256": "8aae8185420a75a86ff573a9b2ece250d5573247a3e3a1386bb074dab9172068",
+      "display_text": "Hai fatto lo spelling della frase",
+      "spoken_text": "Hai fatto lo spelling della frase"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/9d/9d695c5e44e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "9d695c5e44e5a7ef79e02087910288d5143113e76b3d0d2a80cbc3d555361528",
+      "display_text": "lo spelling della frase",
+      "spoken_text": "lo spelling della frase"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/51/51d10dbcbad0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1881,
+      "sha256": "51d10dbcbad058ffe1bc3c4cf2a77189e3ecfb9668bb8013ee27fc8ee4640d24",
+      "display_text": "Hai fatto lo spelling della parola",
+      "spoken_text": "Hai fatto lo spelling della parola"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/3a/3a70270ff968.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "3a70270ff968156cd4f0da867c078a621d7571fbdd3a9a8059861dbf50430af1",
+      "display_text": "Hai fatto",
+      "spoken_text": "Hai fatto"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/9a/9a60af40366f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "9a60af40366f5da96af5e329305226a9ae89782ec0cacfe34461c32316918252",
+      "display_text": "lo spelling della parola",
+      "spoken_text": "lo spelling della parola"
+    }
+  }
+}

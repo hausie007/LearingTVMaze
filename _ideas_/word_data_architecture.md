@@ -193,3 +193,124 @@ picture. That is still worth having; it just is not a store.
 Steps 1 and 2 are worth doing even if the translation feature is never built:
 they make every future language cheaper to add and every existing one easier to
 review.
+
+---
+
+# Addendum: core-first, and letting the language pair choose the words
+
+A second reading of the same problem, and a better one. Two variants were
+proposed: complete a core set everywhere and mark what is translated; or keep a
+core and record per word which languages have it, then let the selected
+languages decide which words the child meets.
+
+**Both are feasible. The second is the right shape. Neither should store the
+list of languages.**
+
+## It already works, before a single word is added
+
+The question that decides feasibility is whether filtering to shared concepts
+leaves enough words to play with. Measured today, on the corpus as it stands —
+words available in the learning language when only concepts the UI language
+also has are used:
+
+| Pair | 2–6 letters | 3–7 | 6–12 | 11–20 |
+|---|---|---|---|---|
+| es → en | 69 / 101 | 78 / 115 | 64 / 78 | 40 / 49 |
+| vi → en | 57 / 81 | 77 / 97 | 76 / 94 | 27 / 34 |
+| pt → es | 45 / 67 | 57 / 81 | 72 / 91 | 47 / 47 |
+| uk → pl | 50 / 78 | 56 / 85 | 50 / 59 | 33 / 36 |
+| el → cs | 37 / 52 | 49 / 69 | 51 / 70 | 29 / 42 |
+| pl → de | 34 / 72 | 45 / 90 | 43 / 90 | 27 / 38 |
+| tr → de | 37 / 72 | 44 / 95 | 45 / 96 | 22 / 28 |
+
+Even the worst pair leaves 22–45 words per band. A session shows perhaps ten to
+twenty. **The pool is already large enough to select on.** Completing a core
+raises the floor; it is not required to start.
+
+## The core is cheap if it is chosen by evidence
+
+Rather than inventing a list of universal concepts, take the ones the languages
+already agree on. Concepts present in *n* languages, and the entries needed to
+complete them everywhere:
+
+| Present in | Concepts | Entries to complete |
+|---|---|---|
+| all 21 | 13 | 0 |
+| ≥ 18 | 43 | 58 |
+| ≥ 15 | 67 | 176 |
+| ≥ 12 | 107 | 507 |
+| **≥ 10** | **127** | **715** |
+| ≥ 8 | 142 | 902 |
+
+A **127-concept core costs 715 new entries** — about 34 per language — against
+7,369 for full coverage. That is the whole argument for core-first in one line:
+**a tenth of the work for most of the benefit**, and the core selects itself
+from what twenty-one independent lists already converged on.
+
+## Do not store which languages have a word
+
+This is where the two variants differ, and it matters.
+
+Writing `"translated_into": ["cs", "de", "es", …]` on each entry means the same
+fact is recorded in 21 files, and every time a word is added or removed, 21
+files are wrong until someone updates them all. This repository has been bitten
+by exactly that shape four times in one week — a pipeline and a runtime
+disagreeing about a string, a cached `desired.jsonl`, a stale manifest, a
+boundary sidecar. Derived data that is stored will drift.
+
+Store the minimum that cannot be derived:
+
+```
+data/words/concepts.json     the registry: id, emoji, gloss, tags, core
+data/words/words_<lang>.json id -> word, and nothing else duplicated
+```
+
+Coverage is then a query, not a field. Which languages have `dog` is answered by
+looking, and it cannot be out of date.
+
+Moving the emoji into the registry is worth doing on its own. `DEVELOPMENT.md`
+already requires that "the emoji must match the word in every language" and
+that a new entry is cross-checked against the same emoji elsewhere — that rule
+is enforced by hand today and would be enforced structurally by the schema. It
+also deletes 3,652 duplicated emoji strings, and it makes the picture what it
+actually is: a property of the concept, not of the translation.
+
+If a runtime query feels heavy, materialise it as a generated index and have
+`verify` fail when it disagrees with the sources. That is the pattern
+`LANGUAGE_STATUS.md` already uses, and the rule that comes with it — regenerate
+rather than edit — is already established here.
+
+## Selection: prefer, do not restrict
+
+"Depending on which languages are selected, select the words" is the right
+instinct, with one adjustment: bias the deck, do not filter it.
+
+Deal from the shared pool first; when it is exhausted, continue into the rest of
+the list rather than reshuffling. So:
+
+- Nearly every word the child meets can be translated.
+- The language-specific words still appear sometimes, with no translation
+  spoken — which is the existing per-item fallback behaviour, not a new rule.
+- The deck never shrinks, so a small language plus a narrow band plus a chosen
+  category cannot collapse to four words on a loop.
+
+Hard filtering would also quietly remove exactly the words worth keeping. The
+143 concepts unique to one language are the culturally specific ones — the
+reindeer, the words chosen to carry Ř. A Finnish child learning Finnish should
+still meet them; only the cross-language session should prefer otherwise.
+
+And it applies only when the languages differ. When they are the same, which is
+most installs, nothing about selection changes at all.
+
+## What this costs, in order
+
+1. **`id` on every entry**, and the concepts registry — the schema migration
+   from the section above, done once. Data work, no new words.
+2. **Derive coverage**, no stored language lists.
+3. **Complete the 127-concept core**: ~715 entries, ~34 per language, each
+   needing a word, a length that fits some band, and a recording to review.
+4. **Bias the deck** when the languages differ: a small change in
+   `word_list.gd`, which has two callers.
+
+Steps 1, 2 and 4 are small and independent of how many words exist. Step 3 is
+the only real content work, and it is a tenth of what full coverage would be.

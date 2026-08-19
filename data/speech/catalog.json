@@ -128,7 +128,7 @@
     },
     "ro": {
       "locale": "ro-RO",
-      "enabled": false
+      "enabled": true
     },
     "tr": {
       "locale": "tr-TR",
@@ -140,7 +140,7 @@
     },
     "uk": {
       "locale": "uk-UA",
-      "enabled": false
+      "enabled": true
     },
     "vi": {
       "locale": "vi-VN",
