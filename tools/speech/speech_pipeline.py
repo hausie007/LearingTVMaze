@@ -337,7 +337,16 @@ def word_items(cat: dict, lang: str, cspec: dict):
         for display in group:
             ident = slug if len(group) == 1 else (
                 f"{slug}_{hashlib.sha256(display.encode('utf-8')).hexdigest()[:4]}")
-            spoken = display.lower() if cspec.get("case") == "lower" else display
+            # Lowercasing is a remedy for one failure — an all-capitals word
+            # invites the model to spell it out — and it is the wrong remedy for
+            # a script where the two cases do not carry the same information.
+            # Greek writes no stress accent in capitals, so a word list stored
+            # in capitals has none to lose, and lowercasing it produces text no
+            # Greek reader would write: 'μελι' for 'μέλι'. Whether that or the
+            # capitals read better is a question for the ear, per language, so
+            # the language may say. Default stays lower for everyone else.
+            case = cat["languages"].get(lang, {}).get("case", cspec.get("case"))
+            spoken = display.lower() if case == "lower" else display
             items.append((cspec["key_format"].format(id=ident), display, spoken,
                           rel(REPO / cspec["source_dir"] / found[display][1])))
     items.sort(key=lambda x: x[0])
@@ -380,6 +389,22 @@ def retake_context(entry: dict):
     for k in ("carrier_before", "carrier_after"):
         if entry.get(k):
             context[k] = list(entry[k])
+        elif entry.get(k) is not None and int(entry.get("n", 0)) > 0:
+            # An empty list is an answer, not an absence: it says "record this
+            # one with nothing either side of it". It has to reach make_record,
+            # because that is where a category's own carriers are put back when
+            # the retake named none — and then the retake tests the opposite of
+            # what it asked for. Romanian is the case that needed it: that voice
+            # runs a list of short letter names together with no gap — 15 items
+            # in 7.4s yielding three detectable sounds — so wrapping a retake in
+            # carriers cut it against a reading that cannot be cut, which is the
+            # fault the retake was undoing. Set it only where that is true: a
+            # token read with no context at all invites the model to interpret
+            # it rather than say it, and Romanian 'ics' duly came back as four
+            # syllables with the letter spelled out.
+            # Guarded on n so an entry that is not actually asking for a retake
+            # cannot put a context key into a normal record's spec hash.
+            context[k] = []
     return context or None
 
 
@@ -2670,8 +2695,34 @@ def cmd_phrases(args) -> int:
         if ends and processed_path(r["render_hash"]).exists():
             rows.append((r, ends))
     if not rows:
-        raise Fail("no phrase has usable word boundaries yet — run `align --confirm` "
-                   "and then `process --force --category word`")
+        # Three different situations reached this one error, and only two of
+        # them are actually a missing step.
+        wanted = [r for r in records
+                  if r["category"] == "word" and len(r["spoken_text"].split()) > 1]
+        aligned = [r for r in wanted if alignment_path(r["spec_hash"]).exists()]
+        usable = [r for r in aligned if phrase_boundaries(r, profiles, cat)]
+        if not aligned:
+            raise Fail("no phrase has word boundaries yet — run `align --confirm` "
+                       "and then `process --force --category word`")
+        if usable:
+            raise Fail(f"{len(usable)} phrase(s) have usable boundaries but no encoded clip "
+                       "to apply them to — run `process --force --category word`")
+        # Aligned, but nothing meets the loss bar. That is a quality result, not
+        # an unfinished step, and the game already copes: a phrase without
+        # boundaries is played whole and simply not narrated word by word — see
+        # processing.alignment_note in catalog.json. Failing here stopped `next`
+        # one step before it built the review page, so a language whose phrases
+        # align badly could not be listened to at all. Listening is the only
+        # thing that can say whether the clips are any good, and it is exactly
+        # what a language in this state needs most. Greek is how this was found.
+        limit = cat["processing"].get("alignment_max_loss", 1.0)
+        worst = sorted(maybe_json(alignment_path(r["spec_hash"])).get("loss", 0.0)
+                       for r in aligned)
+        warn(f"{len(aligned)} phrase(s) are aligned but none fit well enough to cut "
+             f"(best loss {worst[0]:.2f}, alignment_max_loss is {limit}). Those phrases "
+             f"will be played whole instead of word by word; the clips themselves are "
+             f"unaffected. Carry on and listen to them.")
+        return 0
     rows.sort(key=lambda x: x[0]["key"])
     if args.limit:
         rows = rows[:args.limit]

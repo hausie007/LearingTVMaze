@@ -651,13 +651,9 @@
         }
       },
       "retake_carriers": {
-        "carrier_before": [
-          "salut"
-        ],
-        "carrier_after": [
-          "mulțumesc"
-        ],
-        "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
+        "carrier_before": [],
+        "carrier_after": [],
+        "note": "Deliberately empty. Measured 2026-08-19: ro-RO char sheet 2 — 'el. em. en. o. pe. chiu. er. es. te. u. ve. dublu ve. ics. igrec. ze' — is 15 items in 7.4s and yields only 3 detectable sounds at any threshold the solver sweeps. This voice runs a list of short letter names together with no gap at all, which is the French fault, not a separator being spoken aloud. Sheet 1, whose items are longer ('â din a', 'î din i'), is 19.3s and splits into 20 sounds for 16 items, which is correct. So a retake wrapped in carriers was being cut against a reading that cannot be cut, and the clips came back holding their neighbours. Empty lists make retake_context() return no context, so a char or ui retake here is one plain request with nothing to cut. The cost is real and has already been paid once: with no context at all this voice interprets a bare short token instead of reading it — 'ics' came back as four syllables, the letter spelled out. Where that happens, name carriers explicitly on the retake (the Slovak 'há' remedy — the letter between its own alphabet neighbours); a small group of longer items does cut here, as sheet 1 shows."
       }
     },
     "uk-UA": {
@@ -1087,9 +1083,9 @@
     "he-IL": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "dwGJAuZAfQ5CMZQCmdGb",
+      "voice_name": "Hebrew Man",
+      "voice_source": "my own created with prompt",
       "model_id": "eleven_v3",
       "language_code": "he",
       "settings": {

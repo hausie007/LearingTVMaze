@@ -292,6 +292,156 @@
         "reason": "cut abruptly",
         "asked_on": "2026-08-19"
       }
+    },
+    "ro": {
+      "learning.char.c02": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.c11": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.l": {
+        "n": 2,
+        "reason": "additional sound at the end",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.m": {
+        "n": 2,
+        "reason": "additional sound at the end",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.o": {
+        "n": 2,
+        "reason": "wroing cutting",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.p": {
+        "n": 2,
+        "reason": "wrong cutting",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.t": {
+        "n": 2,
+        "reason": "says T-U-V",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.u": {
+        "n": 2,
+        "reason": "says duble w",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.v": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.w": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.x": {
+        "n": 4,
+        "reason": "Take 3 was still spelled out — 0.883s with three vocalic peaks at 0.04-0.17, 0.21-0.36 and 0.44-0.74, the cut itself clean. So the recital did not stop it. Take 4 sends the glyph 'x' instead of 'ics' via data/speech/pronunciations/ro-RO.json: nothing left to spell, and a letter read between dublu ve and igrec is read by its name. If this one comes back as English 'eks' or as a bare hiss, the token is not the lever and the next step is a different Romanian voice.",
+        "asked_on": "2026-08-19",
+        "carrier_before": [
+          "dublu ve"
+        ],
+        "carrier_after": [
+          "igrec"
+        ]
+      },
+      "learning.char.y": {
+        "n": 2,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.char.z": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "ui.recap_tts_found_letter.0": {
+        "n": 2,
+        "reason": "wrong cutting; recorded with no carriers because this voice runs short items together — ro char sheet 2 gives 3 detectable sounds for 15 items — so any mini-sheet is cut against a reading that cannot be cut",
+        "asked_on": "2026-08-19",
+        "carrier_before": [],
+        "carrier_after": []
+      },
+      "learning.word.cantec": {
+        "n": 1,
+        "reason": "says capsuna",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.capsuna": {
+        "n": 1,
+        "reason": "says carpac",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.carpati": {
+        "n": 1,
+        "reason": "says carte",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.carte": {
+        "n": 1,
+        "reason": "says cartof",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.cartof": {
+        "n": 1,
+        "reason": "says casa",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.casa": {
+        "n": 1,
+        "reason": "says casa mica",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.casa_mica": {
+        "n": 1,
+        "reason": "says castel",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.castel": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.castravete": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.catel": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.cerul": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.citeste_o_poveste": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.cometa": {
+        "n": 1,
+        "reason": "says copac",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.copac": {
+        "n": 1,
+        "reason": "super short",
+        "asked_on": "2026-08-19"
+      }
     }
   }
 }

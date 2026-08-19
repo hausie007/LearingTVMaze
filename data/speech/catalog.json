@@ -104,27 +104,27 @@
     },
     "nl": {
       "locale": "nl-NL",
-      "enabled": false
+      "enabled": true
     },
     "sv": {
       "locale": "sv-SE",
-      "enabled": false
+      "enabled": true
     },
     "da": {
       "locale": "da-DK",
-      "enabled": false
+      "enabled": true
     },
     "nb": {
       "locale": "nb-NO",
-      "enabled": false
+      "enabled": true
     },
     "fi": {
       "locale": "fi-FI",
-      "enabled": false
+      "enabled": true
     },
     "hu": {
       "locale": "hu-HU",
-      "enabled": false
+      "enabled": true
     },
     "ro": {
       "locale": "ro-RO",
@@ -136,7 +136,9 @@
     },
     "el": {
       "locale": "el-GR",
-      "enabled": false
+      "enabled": true,
+      "case": "keep",
+      "case_note": "Send the vocabulary as it is written in the source, in capitals, instead of lowercasing it. Greek drops the stress accent in capitals, so 'ΜΕΛΙ' carries none to begin with and lowercasing yields 'μελι' — text no Greek reader would write, and with nothing to say which syllable is stressed. Under test as of 2026-08-19: the audit's median alignment loss for Greek words is 1.75 against 0.20 for Spanish and 0.92 for the next worst, and every one of the 41 Greek phrases misses alignment_max_loss (best 0.53). If the capitals read correctly this is the fix; if the voice spells them out instead — which is the failure lowercasing exists to prevent — delete this key and supply accented forms in pronunciations/el-GR.json instead. Listen before approving anything."
     },
     "uk": {
       "locale": "uk-UA",
@@ -148,7 +150,7 @@
     },
     "he": {
       "locale": "he-IL",
-      "enabled": false
+      "enabled": true
     }
   },
   "master_format": {

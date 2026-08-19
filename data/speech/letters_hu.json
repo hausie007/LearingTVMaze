@@ -27,7 +27,7 @@
     },
     {
       "id": "cs",
-      "display": "[CS]",
+      "display": "CS",
       "spoken": "csé"
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "id": "dz",
-      "display": "[DZ]",
+      "display": "DZ",
       "spoken": "dzé"
     },
     {
       "id": "dzs",
-      "display": "[DZS]",
+      "display": "DZS",
       "spoken": "dzsé"
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "gy",
-      "display": "[GY]",
+      "display": "GY",
       "spoken": "gyé"
     },
     {
@@ -102,7 +102,7 @@
     },
     {
       "id": "ly",
-      "display": "[LY]",
+      "display": "LY",
       "spoken": "ej"
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id": "ny",
-      "display": "[NY]",
+      "display": "NY",
       "spoken": "eny"
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "id": "sz",
-      "display": "[SZ]",
+      "display": "SZ",
       "spoken": "esz"
     },
     {
@@ -172,7 +172,7 @@
     },
     {
       "id": "ty",
-      "display": "[TY]",
+      "display": "TY",
       "spoken": "tyé"
     },
     {
@@ -222,7 +222,7 @@
     },
     {
       "id": "zs",
-      "display": "[ZS]",
+      "display": "ZS",
       "spoken": "zsé"
     }
   ]

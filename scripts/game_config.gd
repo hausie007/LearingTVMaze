@@ -884,6 +884,7 @@ const WORD_ONLY_LETTERS: Dictionary = {
 	"cs": "ÁÉĚÍÓÚŮÝ",
 	"de": "ÄÖÜß",
 	"es": "ÁÉÍÓÚÜ",
+	"hu": "QWXY",
 	"pl": "ĄĘÓ",
 	"sk": "ÁÄÉÍĹŔÓÔÚÝ",
 }
