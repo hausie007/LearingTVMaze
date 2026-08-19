@@ -258,6 +258,18 @@
         "reason": "says hamster",
         "asked_on": "2026-08-19"
       }
+    },
+    "fr": {
+      "learning.char.n": {
+        "n": 2,
+        "reason": "try again",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.dauphin": {
+        "n": 1,
+        "reason": "cut abruptly",
+        "asked_on": "2026-08-19"
+      }
     }
   }
 }
