@@ -179,7 +179,6 @@
     "levelling_note": "Mean RMS with a peak ceiling, not EBU R128. Integrated loudness needs a window a letter name does not have — 'bé' is under 400ms and loudnorm measures it as -inf. One target for the whole voice family also keeps the batch consistent, which matters more here than any single clip hitting a number.",
     "max_internal_silence_ms": 320,
     "internal_silence_note": "A pause inside a clip is not a cutting error — the model really did pause — but 1.35 seconds between 'ocean' and 'wave' is a clip that sounds finished while it is still playing. Only silence with sound on both sides is shortened; the ends are the trimmer's job. Clips with nothing to shorten re-encode byte-identically, which is how the re-listen can be limited to what actually changed.",
-    "alignment_max_loss": 0.5,
     "alignment_note": "Forced alignment supplies the word boundaries inside a phrase. The sheet's own alignment cannot: it is right at the ends of a sheet and drifts by over a second in the middle. A clip whose alignment loss exceeds this is left without boundaries, and the game simply does not narrate that phrase mid-word.",
     "boundary_reach_ms": 120,
     "boundary_fade_ms": 40,
@@ -187,7 +186,10 @@
     "boundary_hold_share": 0.5,
     "boundary_fade_min_ms": 12,
     "audit_max_loss": 0.5,
-    "audit_note": "How badly a clip may fit the text it was meant to say before `audit` doubts it. Forced alignment reports the fit, so a clip holding the wrong words scores badly — which is how the German UI shift and the early Czech cropped endings would have been caught without anyone listening to a hundred files. It cannot hear a wrong accent, only wrong words, so it flags rather than approves."
+    "audit_note": "How badly a clip may fit the text it was meant to say before `audit` doubts it. Forced alignment reports the fit, so a clip holding the wrong words scores badly — which is how the German UI shift and the early Czech cropped endings would have been caught without anyone listening to a hundred files. It cannot hear a wrong accent, only wrong words, so it flags rather than approves.",
+    "loss_floor": 0.8,
+    "loss_factor": 3.0,
+    "loss_note": "How badly a clip may fit its own text before its word boundaries are discarded. Relative, not absolute: the provider's loss is not comparable between languages. Greek's best alignment scores worse than every other language's median — 2.50 against 0.09 to 0.78 — while getting the word count right every time, in every language measured. A fixed threshold rejected all 41 Greek phrases, which was a unit mismatch rather than a quality judgement. The gate is loss_factor times this locale's own median, never below loss_floor."
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",

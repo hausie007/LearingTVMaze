@@ -2135,6 +2135,45 @@ def cmd_recut(args) -> int:
     return cmd_generate(args)
 
 
+_LOSS_BASELINE: dict = {}
+
+def loss_gate(records: list, locale: str, cat: dict, folder) -> float:
+    """How badly a clip may fit its text before it is doubted, for this locale.
+
+    Relative, because the number is not comparable between languages. Greek's
+    best alignment scores worse than every other language's median — 2.50
+    against 0.09 to 0.78 — while getting the word count right every time, in
+    every language measured. A fixed threshold therefore rejected all 41 Greek
+    phrases and kept none, which is not a quality judgement, it is a unit
+    mismatch.
+
+    So the gate is a multiple of what this locale normally achieves, with a
+    floor so that a locale which aligns almost perfectly does not start
+    rejecting clips for being slightly less perfect.
+    """
+    if locale in _LOSS_BASELINE:
+        return _LOSS_BASELINE[locale]
+    p = cat["processing"]
+    losses = []
+    for r in records:
+        if r["locale"] != locale:
+            continue
+        path = folder(r)
+        if path.exists():
+            value = maybe_json(path).get("loss")
+            if value is not None:
+                losses.append(float(value))
+    floor = p.get("loss_floor", 0.8)
+    factor = p.get("loss_factor", 3.0)
+    if not losses:
+        _LOSS_BASELINE[locale] = floor
+        return floor
+    losses.sort()
+    median = losses[len(losses) // 2]
+    _LOSS_BASELINE[locale] = max(floor, median * factor)
+    return _LOSS_BASELINE[locale]
+
+
 def alignment_path(spec_hash: str) -> Path:
     folder = MASTERS / "alignments" / spec_hash[:2]
     return folder / f"{spec_hash}.json"
@@ -2223,7 +2262,8 @@ def phrase_boundaries(record: dict, profiles: dict, cat: dict):
     got = [w for w in doc.get("words", []) if w.get("text", "").strip()]
     if len(got) != len(words):
         return []
-    limit = cat["processing"].get("alignment_max_loss", 1.0)
+    limit = loss_gate(load_desired(), record["locale"], cat,
+                      lambda r: alignment_path(r["spec_hash"]))
     if doc.get("loss", 0.0) > limit:
         return []
 
@@ -3070,6 +3110,18 @@ def cmd_pack(args) -> int:
         if clips_dir.exists():
             shutil.rmtree(clips_dir)
 
+        # Every clip has to be there before anything is written. Removing the
+        # clips directory and then failing partway leaves the previous
+        # manifest pointing at files that no longer exist — which is what
+        # Romanian shipped with, 72 of its 280 entries pointing at nothing.
+        absent = [r for r in approved if not processed_path(r["render_hash"]).exists()]
+        if absent:
+            raise Fail(
+                f"{lang}: {len(absent)} approved clip(s) have not been encoded, so the "
+                f"pack would reference files that do not exist. Run "
+                f"`process --language {lang}` first. First few: "
+                + ", ".join(r["key"] for r in absent[:5]))
+
         items = {}
         for r in approved:
             src = processed_path(r["render_hash"])
@@ -3088,6 +3140,11 @@ def cmd_pack(args) -> int:
                 "display_text": r["display_text"],
                 "spoken_text": r["spoken_text"],
             }
+
+        broken = [k for k, v in items.items() if not (pack_dir / v["asset"]).exists()]
+        if broken:
+            raise Fail(f"{lang}: {len(broken)} clip(s) did not reach {rel(pack_dir)} — "
+                       f"refusing to write a manifest that lies about what shipped")
 
         coverage, counts = {}, {}
         for category in categories_for(cat, lang, cat["languages"][lang]):
@@ -3610,9 +3667,9 @@ def audit_path(render_hash: str) -> Path:
     return MASTERS / "audits" / render_hash[:2] / f"{render_hash}.json"
 
 
-def audit_verdict(doc: dict, record: dict, cat: dict) -> dict:
+def audit_verdict(doc: dict, record: dict, cat: dict, limit: float = 0.0) -> dict:
     """Turn an alignment into a suspicion, with a reason a human can check."""
-    limit = cat["processing"].get("audit_max_loss", 0.5)
+    limit = limit or cat["processing"].get("audit_max_loss", 0.5)
     words = [w for w in doc.get("words", []) if w.get("text", "").strip()]
     expected = record["spoken_text"].split()
     loss = float(doc.get("loss", 0.0))
