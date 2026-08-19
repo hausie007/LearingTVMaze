@@ -1,0 +1,3250 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "vi",
+  "locale": "vi-VN",
+  "voice_profile": "vi-VN@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 29,
+    "word": 170,
+    "ui": 58
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/c2/c2f1a4cf1947.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "c2f1a4cf194717c22ce078a056764c1a0704b6c269d0d90acd8ed47bb6dcde6b",
+      "display_text": "A",
+      "spoken_text": "a"
+    },
+    "learning.char.b": {
+      "asset": "clips/50/50120d636b1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "50120d636b1a71817878343eeb5a3ada392c9a0f22c8081f2dc8c6afb228885a",
+      "display_text": "B",
+      "spoken_text": "bê"
+    },
+    "learning.char.c": {
+      "asset": "clips/43/437111c63c34.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "437111c63c349d18079065adb06f4bd2a6fd8ebb051c4ec8e672fb014f889a61",
+      "display_text": "C",
+      "spoken_text": "xê"
+    },
+    "learning.char.c01": {
+      "asset": "clips/e2/e263b74fae24.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "e263b74fae2469098eccd3059f013f72ea9228f059f51d361b3be3d453fcdfbd",
+      "display_text": "Ă",
+      "spoken_text": "á"
+    },
+    "learning.char.c02": {
+      "asset": "clips/12/129b6e41a440.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "129b6e41a440fa86592fecd42c980f366b81a191feec3d4db2361cd2ff194bbd",
+      "display_text": "Â",
+      "spoken_text": "ớ"
+    },
+    "learning.char.c06": {
+      "asset": "clips/3f/3ff3ce560d56.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "3ff3ce560d56ff5d2967029803790aa096e5191ef018afbc923510397c4d6990",
+      "display_text": "Đ",
+      "spoken_text": "đê"
+    },
+    "learning.char.c08": {
+      "asset": "clips/54/54a9f7e1667b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "54a9f7e1667bfe4486d89ef74b8974f59681db4155fb82df3eed274c9b642351",
+      "display_text": "Ê",
+      "spoken_text": "ê"
+    },
+    "learning.char.c17": {
+      "asset": "clips/39/3944d9a50ddb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "3944d9a50ddb924c2a5f90af089c969fe88dc64b676a80f6b767f393dbe793f7",
+      "display_text": "Ô",
+      "spoken_text": "ô"
+    },
+    "learning.char.c18": {
+      "asset": "clips/ec/ece4cfed9e40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "ece4cfed9e4049e00985e94287d92fcbab2b3ec283b25cd9d9b4ce015884faf7",
+      "display_text": "Ơ",
+      "spoken_text": "ơ"
+    },
+    "learning.char.c25": {
+      "asset": "clips/ef/efe434a976b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "efe434a976b9a6b0da3e3c1a6697402f80183cb1f6854255812909a7346b67a0",
+      "display_text": "Ư",
+      "spoken_text": "ư"
+    },
+    "learning.char.d": {
+      "asset": "clips/88/88f1b5a8a266.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "88f1b5a8a26693f99b777cd4d381f96b79c4ae412921469743d438407238c0ba",
+      "display_text": "D",
+      "spoken_text": "dê"
+    },
+    "learning.char.e": {
+      "asset": "clips/39/390e89585359.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "390e895853596dd46d49ffa2b680578136d4c58f4d157f465b24432334fa296e",
+      "display_text": "E",
+      "spoken_text": "e"
+    },
+    "learning.char.g": {
+      "asset": "clips/6b/6b5d4b5885f3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "6b5d4b5885f37c9c02fb7375d205fc10ade881f3a71ac2aa9444d13dcdfe6dd6",
+      "display_text": "G",
+      "spoken_text": "giê"
+    },
+    "learning.char.h": {
+      "asset": "clips/b3/b37f2b6918b6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "b37f2b6918b6f69fcedd26059d5d8c51edb077313ded78d6fa56b7c183bc81ed",
+      "display_text": "H",
+      "spoken_text": "hát"
+    },
+    "learning.char.i": {
+      "asset": "clips/fe/fe807f475af3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "fe807f475af3426fea23649a5f6745602754cc8049f5578c3f5c32cf58e96e2b",
+      "display_text": "I",
+      "spoken_text": "i ngắn"
+    },
+    "learning.char.k": {
+      "asset": "clips/0f/0f4e3ca48495.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "0f4e3ca48495227703722fedf71d25035eafc994f052a7780dba684969c549cd",
+      "display_text": "K",
+      "spoken_text": "ca"
+    },
+    "learning.char.l": {
+      "asset": "clips/41/41ec782c47e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "41ec782c47e3be75285a18023563f43a89679b4669a6b22e5bd41bd609f0f344",
+      "display_text": "L",
+      "spoken_text": "e-lờ"
+    },
+    "learning.char.m": {
+      "asset": "clips/a2/a28b29206f16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "a28b29206f1610884ce5ccdfbac9e51d9b6372920d1e9e83902e7665d7741afe",
+      "display_text": "M",
+      "spoken_text": "em-mờ"
+    },
+    "learning.char.n": {
+      "asset": "clips/4e/4e1359f73220.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "4e1359f73220da51b552cc6630193ebd536bd08f5bd2e099365dac1cefca31a9",
+      "display_text": "N",
+      "spoken_text": "en-nờ"
+    },
+    "learning.char.o": {
+      "asset": "clips/2f/2fd6db8d8c13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "2fd6db8d8c13d5e4624f89176cbed80c8c4dde8a75ed089dd41cc5e19546bc07",
+      "display_text": "O",
+      "spoken_text": "o"
+    },
+    "learning.char.p": {
+      "asset": "clips/97/978157502e93.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "978157502e930bee0820bc742c8e9028fa5ad6dd59a32f28479474a2983ea9b9",
+      "display_text": "P",
+      "spoken_text": "pê"
+    },
+    "learning.char.q": {
+      "asset": "clips/7b/7b8c203ffee4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "7b8c203ffee42ba1105ce1d25c780756d46ff77a8bf92786c84fe76c3aacd6e0",
+      "display_text": "Q",
+      "spoken_text": "cu"
+    },
+    "learning.char.r": {
+      "asset": "clips/18/1839d0cd9239.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1776,
+      "sha256": "1839d0cd923914b5d3ef0e245e377a1f31730968fa2bbd1be9a0572f4ed6510e",
+      "display_text": "R",
+      "spoken_text": "e-rờ"
+    },
+    "learning.char.s": {
+      "asset": "clips/38/38bf8f4880e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "38bf8f4880e32124526b05387541937220d1bb2108a8645105a2a2868e668703",
+      "display_text": "S",
+      "spoken_text": "ét-sì"
+    },
+    "learning.char.t": {
+      "asset": "clips/5c/5c4c28bee8f1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5c4c28bee8f1782c7998e686b3ebf8e622c0326d09cb382c17ecee0c1b006bec",
+      "display_text": "T",
+      "spoken_text": "tê"
+    },
+    "learning.char.u": {
+      "asset": "clips/f9/f9966d5ce359.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f9966d5ce3591cf6d5859b5212dd98ae8f866281812062ed2a5c19794942b7cb",
+      "display_text": "U",
+      "spoken_text": "u"
+    },
+    "learning.char.v": {
+      "asset": "clips/4f/4f5c382b7226.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "4f5c382b7226b9dc7a1f6f443a399ada818f919cc4e4392f05b7bd5666e2897d",
+      "display_text": "V",
+      "spoken_text": "vê"
+    },
+    "learning.char.x": {
+      "asset": "clips/2c/2c1eaa1f7210.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "2c1eaa1f7210bd7a23a4a1e5217f3c29c1f1d862b46b05e9a017884470e9b1c2",
+      "display_text": "X",
+      "spoken_text": "ích-xì"
+    },
+    "learning.char.y": {
+      "asset": "clips/d4/d4048114daf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "d4048114daf6a9b1353e1b8111a2875cb9d9223298e7037563746a7110198a7e",
+      "display_text": "Y",
+      "spoken_text": "i dài"
+    },
+    "learning.number.001": {
+      "asset": "clips/c7/c7914dfb891a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "c7914dfb891a37cf8ad9077a205d7cf8298c523447b6a872ab44138e23a122ea",
+      "display_text": "1",
+      "spoken_text": "một"
+    },
+    "learning.number.002": {
+      "asset": "clips/23/235a98a5c5c2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "235a98a5c5c2d91ddfac8774a7a1e656f623dedfef7c04278a6162a7e99a1634",
+      "display_text": "2",
+      "spoken_text": "hai"
+    },
+    "learning.number.003": {
+      "asset": "clips/d9/d942ab6189b2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "d942ab6189b2b3675cfbf68edc34e8ac542c84fc39851606d080cd99fffd45c0",
+      "display_text": "3",
+      "spoken_text": "ba"
+    },
+    "learning.number.004": {
+      "asset": "clips/a8/a83756e43382.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "a83756e43382ac28856d788a82cd7c99ed84b36bd4e845b46239ff33d06d314b",
+      "display_text": "4",
+      "spoken_text": "bốn"
+    },
+    "learning.number.005": {
+      "asset": "clips/ac/ac02ee7cb9e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "ac02ee7cb9e363c91e337a706c20a5ae71f5ed77627d8b69f73a036f78551bc7",
+      "display_text": "5",
+      "spoken_text": "năm"
+    },
+    "learning.number.006": {
+      "asset": "clips/0d/0db5d09eb548.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "0db5d09eb5489e31272f3b46e9638bc6e9646640579b6b5a48a3b6db9ef9fcff",
+      "display_text": "6",
+      "spoken_text": "sáu"
+    },
+    "learning.number.007": {
+      "asset": "clips/7e/7e979a29cc35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "7e979a29cc35789028ea62904feef51adbe87eae75766635952897ea04797f10",
+      "display_text": "7",
+      "spoken_text": "bảy"
+    },
+    "learning.number.008": {
+      "asset": "clips/54/549f96ad9cd3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "549f96ad9cd36a1fdec0bb1bb1c2142093e9dd3978323e2b15c85ccc581ce1db",
+      "display_text": "8",
+      "spoken_text": "tám"
+    },
+    "learning.number.009": {
+      "asset": "clips/4a/4abc6700c046.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "4abc6700c046356a39e3b5788a07c3f68a360c2d5d87bb3d02b52d751bb93d35",
+      "display_text": "9",
+      "spoken_text": "chín"
+    },
+    "learning.number.010": {
+      "asset": "clips/b0/b0d698aba435.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "b0d698aba435b17af3a792d809d9e0e0655283ac509520d17f0c7d142f587d6c",
+      "display_text": "10",
+      "spoken_text": "mười"
+    },
+    "learning.number.011": {
+      "asset": "clips/1d/1d96f5e406bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "1d96f5e406bfb6b3d1f9487342cdce351df781707049122f6d3f4bdd5fac552b",
+      "display_text": "11",
+      "spoken_text": "mười một"
+    },
+    "learning.number.012": {
+      "asset": "clips/6f/6f348393be67.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "6f348393be670a32ae0ca5805be17ccbec43960be4c3caa23e38d879bc9da432",
+      "display_text": "12",
+      "spoken_text": "mười hai"
+    },
+    "learning.number.013": {
+      "asset": "clips/55/554a0ae29420.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "554a0ae29420b67ea6ccfc28440d62087ab3bf2900d313399f110e5ae875b9c3",
+      "display_text": "13",
+      "spoken_text": "mười ba"
+    },
+    "learning.number.014": {
+      "asset": "clips/10/10e533be00b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "10e533be00b4b20b2c86ddafeb3ae8d2868ba28a935c6b62f17344bd4cb52c13",
+      "display_text": "14",
+      "spoken_text": "mười bốn"
+    },
+    "learning.number.015": {
+      "asset": "clips/ca/caa22fda5ce7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "caa22fda5ce75a64a9513d2c7199cc90174152da2c7a9a7ab7b78ba3e7348122",
+      "display_text": "15",
+      "spoken_text": "mười lăm"
+    },
+    "learning.number.016": {
+      "asset": "clips/d7/d7e587f10b37.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "d7e587f10b37309c1192c2cae838a5423fa9740702babc9efcd2f135662d59bd",
+      "display_text": "16",
+      "spoken_text": "mười sáu"
+    },
+    "learning.number.017": {
+      "asset": "clips/cb/cbab126610c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "cbab126610c820ff655c56522032b3b7ad1244c1c97617a65e80c5bea29ae0bd",
+      "display_text": "17",
+      "spoken_text": "mười bảy"
+    },
+    "learning.number.018": {
+      "asset": "clips/a4/a46d5baf4326.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "a46d5baf4326a345d8a5cef56a6e2f4a0f8787a075890589b5fee7c6aecd15e6",
+      "display_text": "18",
+      "spoken_text": "mười tám"
+    },
+    "learning.number.019": {
+      "asset": "clips/ef/ef813c7ca5b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "ef813c7ca5b9878cae655581c846276c0e221dc827b055d2eec6441cad0c76c3",
+      "display_text": "19",
+      "spoken_text": "mười chín"
+    },
+    "learning.number.020": {
+      "asset": "clips/7f/7fa686386d9b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "7fa686386d9b84af2688b46d7237083bfedbdda51f9d6d00774e37f44ccc12c7",
+      "display_text": "20",
+      "spoken_text": "hai mươi"
+    },
+    "learning.number.021": {
+      "asset": "clips/65/6508be7d44be.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "6508be7d44beaabec5d94831c93015810ef99e27d80c857838713ecc1a2a856e",
+      "display_text": "21",
+      "spoken_text": "hai mươi mốt"
+    },
+    "learning.number.022": {
+      "asset": "clips/d1/d134956ad3c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "d134956ad3c13093a9e9624f8b7b9256260349777d5977a73d886695e2f9804b",
+      "display_text": "22",
+      "spoken_text": "hai mươi hai"
+    },
+    "learning.number.023": {
+      "asset": "clips/aa/aa385215d066.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "aa385215d066970c157d4264e2e603e5eba3c2ff991114b48f8e8f3458a3b07f",
+      "display_text": "23",
+      "spoken_text": "hai mươi ba"
+    },
+    "learning.number.024": {
+      "asset": "clips/06/061c02f8e763.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "061c02f8e7636595e639d6d8c63b3bad449f1ebef5b42c924c0dd9d356287d9e",
+      "display_text": "24",
+      "spoken_text": "hai mươi tư"
+    },
+    "learning.number.025": {
+      "asset": "clips/dd/ddf68f690182.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "ddf68f69018235ae5e92ecc2bd502564607e1367adc011571d4b7dd28fc11c1e",
+      "display_text": "25",
+      "spoken_text": "hai mươi lăm"
+    },
+    "learning.number.026": {
+      "asset": "clips/ab/abd0794234bb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "abd0794234bb9d916c8fde5bb72d31bbe10b213d1b9b16b4ddee70fd0fd5b461",
+      "display_text": "26",
+      "spoken_text": "hai mươi sáu"
+    },
+    "learning.number.027": {
+      "asset": "clips/c6/c66259c05a58.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "c66259c05a586c930159afd840287187f98f8b499bb9b1779ac5e46c314b5b5d",
+      "display_text": "27",
+      "spoken_text": "hai mươi bảy"
+    },
+    "learning.number.028": {
+      "asset": "clips/bf/bf11d041d867.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "bf11d041d867ad115b0c0105d6da5944f51466651e789dd1a9fb798504d4c847",
+      "display_text": "28",
+      "spoken_text": "hai mươi tám"
+    },
+    "learning.number.029": {
+      "asset": "clips/7a/7ae8c7494d81.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "7ae8c7494d8105c7a0e9dcf60bb0400ce9717fcfde8b8e3ba29062d92e4938cc",
+      "display_text": "29",
+      "spoken_text": "hai mươi chín"
+    },
+    "learning.number.030": {
+      "asset": "clips/4d/4dd34bfbb304.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "4dd34bfbb304d96703700f8ca70541b899f5f3d4717ab40ec745222d2b64cfe6",
+      "display_text": "30",
+      "spoken_text": "ba mươi"
+    },
+    "learning.number.031": {
+      "asset": "clips/a5/a5ecaaea2360.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "a5ecaaea2360be6c5738b51c13aa338cfb10bb6bc7f90262db49ec143bc81e08",
+      "display_text": "31",
+      "spoken_text": "ba mươi mốt"
+    },
+    "learning.number.032": {
+      "asset": "clips/11/112c83a2bbb2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "112c83a2bbb2224ed941dffa0d97c10975e9cdcf19de785651568f9b4ac9cfaa",
+      "display_text": "32",
+      "spoken_text": "ba mươi hai"
+    },
+    "learning.number.033": {
+      "asset": "clips/4a/4a622b92b1ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "4a622b92b1aeed60a36800646eab91fbb825fd23feb039d530ddb4cb496cfbb0",
+      "display_text": "33",
+      "spoken_text": "ba mươi ba"
+    },
+    "learning.number.034": {
+      "asset": "clips/16/165dff3dab3f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "165dff3dab3fd936d82693b24c180b6f8f00d4c0a60bcfcff082924fb8a4969e",
+      "display_text": "34",
+      "spoken_text": "ba mươi tư"
+    },
+    "learning.number.035": {
+      "asset": "clips/1a/1ac48648631d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "1ac48648631d1d488bd739955a39a517d69cd92f70e7fb0c0e53d734cee97b33",
+      "display_text": "35",
+      "spoken_text": "ba mươi lăm"
+    },
+    "learning.number.036": {
+      "asset": "clips/0f/0f2398234f25.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "0f2398234f25b8bc914a286b1d0f8ca8b5e60c5ae68e61a3b85a9d85ba5f50e3",
+      "display_text": "36",
+      "spoken_text": "ba mươi sáu"
+    },
+    "learning.number.037": {
+      "asset": "clips/c3/c3f0fcd1d468.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "c3f0fcd1d468943664e80f6e9a38739444d9542bd95a5079d73ca62eb3b20e6a",
+      "display_text": "37",
+      "spoken_text": "ba mươi bảy"
+    },
+    "learning.number.038": {
+      "asset": "clips/15/15c327ec45f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "15c327ec45f0e91302844e5c9e19acd137fe73c848563894234f2d6d60520ccb",
+      "display_text": "38",
+      "spoken_text": "ba mươi tám"
+    },
+    "learning.number.039": {
+      "asset": "clips/b7/b7b120998ca6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "b7b120998ca6af5efc70033e7b0bc7a928f0e2f30d8b1b9644684f771ff4d2e5",
+      "display_text": "39",
+      "spoken_text": "ba mươi chín"
+    },
+    "learning.number.040": {
+      "asset": "clips/ab/ab720577c5e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "ab720577c5e14e8f45f158bd0de55dd94dffc1327e09cdfdaf45904c320b173c",
+      "display_text": "40",
+      "spoken_text": "bốn mươi"
+    },
+    "learning.number.041": {
+      "asset": "clips/3d/3d123209ad3b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "3d123209ad3b6533a854385bdef1e4d8fa5124adf141737d39c9d80208b7e010",
+      "display_text": "41",
+      "spoken_text": "bốn mươi mốt"
+    },
+    "learning.number.042": {
+      "asset": "clips/27/27bc2a05155a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "27bc2a05155a68197b59efc790a9359b04ceda53ac97bf2d9114db9dc38557e7",
+      "display_text": "42",
+      "spoken_text": "bốn mươi hai"
+    },
+    "learning.number.043": {
+      "asset": "clips/9d/9d9bc97e599f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "9d9bc97e599f7f8f9aaadec18c4070372be7a4cbd422f62dd3079b2b8c3e4ee5",
+      "display_text": "43",
+      "spoken_text": "bốn mươi ba"
+    },
+    "learning.number.044": {
+      "asset": "clips/7c/7c063819c0d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "7c063819c0d64cfe7f0f84b62e52e8fb62484f4632ec7fd89e06b1e01a89ca8b",
+      "display_text": "44",
+      "spoken_text": "bốn mươi tư"
+    },
+    "learning.number.045": {
+      "asset": "clips/8b/8b3e042852c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "8b3e042852c03571cf59a40e2cffb501c5590e614c3fb1f81768c790e932ad29",
+      "display_text": "45",
+      "spoken_text": "bốn mươi lăm"
+    },
+    "learning.number.046": {
+      "asset": "clips/c8/c8ef1cc0e2f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "c8ef1cc0e2f4f7fea93a76f7270d4bae21bb36c15f9f2c38bc2b7a52d114835d",
+      "display_text": "46",
+      "spoken_text": "bốn mươi sáu"
+    },
+    "learning.number.047": {
+      "asset": "clips/8c/8ce9ccc07ea1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "8ce9ccc07ea15b3b5cd891f3b4016129a2a55e966af7282f70ad8edb3c468463",
+      "display_text": "47",
+      "spoken_text": "bốn mươi bảy"
+    },
+    "learning.number.048": {
+      "asset": "clips/88/88ce8a3a0511.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "88ce8a3a0511ce5270045865f6b140b657b13dabfcfb9206de66e6ec713691b7",
+      "display_text": "48",
+      "spoken_text": "bốn mươi tám"
+    },
+    "learning.number.049": {
+      "asset": "clips/5a/5a141e0742e9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "5a141e0742e9ce4d69ef0b0eead74c3ebbf899e717b7eb7ea30d29f0237bcd9f",
+      "display_text": "49",
+      "spoken_text": "bốn mươi chín"
+    },
+    "learning.number.050": {
+      "asset": "clips/60/605ecb895c40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "605ecb895c4079d96b9b895a2236099273dfb1f797933cc73bad452a9246b16b",
+      "display_text": "50",
+      "spoken_text": "năm mươi"
+    },
+    "learning.word.ai_duong_xanh": {
+      "asset": "clips/f6/f62348a28cc5.mp3",
+      "word_ends_ms": [
+        370,
+        629
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1802,
+      "sha256": "f62348a28cc57a738985343afc218026e21346301ef5eea9fa4207cfa16ee185",
+      "display_text": "ĐẠI DƯƠNG XANH",
+      "spoken_text": "đại dương xanh"
+    },
+    "learning.word.an_nhieu_trai_cay": {
+      "asset": "clips/74/740de1d7eed4.mp3",
+      "word_ends_ms": [
+        256,
+        507,
+        717
+      ],
+      "word_fade_ms": [
+        20,
+        12,
+        19
+      ],
+      "duration_ms": 1907,
+      "sha256": "740de1d7eed4a12194cebeaef4bd6f0490cc151a183b3dda45126d7481dc7922",
+      "display_text": "ĂN NHIỀU TRÁI CÂY",
+      "spoken_text": "ăn nhiều trái cây"
+    },
+    "learning.word.an_uong_lanh_manh": {
+      "asset": "clips/52/52fc43027f83.mp3",
+      "word_ends_ms": [
+        270,
+        540,
+        819
+      ],
+      "word_fade_ms": [
+        31,
+        40,
+        20
+      ],
+      "duration_ms": 1802,
+      "sha256": "52fc43027f8332c2039b039280ce87a66649cde26870be6932e8717ba251b310",
+      "display_text": "ĂN UỐNG LÀNH MẠNH",
+      "spoken_text": "ăn uống lành mạnh"
+    },
+    "learning.word.bach_tuoc": {
+      "asset": "clips/f5/f549d0b6eb72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "f549d0b6eb7215fc116ab72d85aa9acdb72f239b74dc0262397eff12ac5b8f56",
+      "display_text": "BẠCH TUỘC",
+      "spoken_text": "bạch tuộc"
+    },
+    "learning.word.ban": {
+      "asset": "clips/43/437c2735cbe0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "437c2735cbe05817806a6f1b7f6e941c584c31ce6befed045ea45e127e5dd2bb",
+      "display_text": "BẠN",
+      "spoken_text": "bạn"
+    },
+    "learning.word.ban_be_chia_se": {
+      "asset": "clips/b9/b947106f0707.mp3",
+      "word_ends_ms": [
+        239,
+        489,
+        769
+      ],
+      "word_fade_ms": [
+        40,
+        40,
+        30
+      ],
+      "duration_ms": 1828,
+      "sha256": "b947106f070768207b33334bb1bd80c5ef2a66ecefdaf8059e87ccfecf1f2d06",
+      "display_text": "BẠN BÈ CHIA SẺ",
+      "spoken_text": "bạn bè chia sẻ"
+    },
+    "learning.word.banh": {
+      "asset": "clips/a7/a71271ac3b3b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "a71271ac3b3b8e559b2bfbd6316a372201f9634412f9ef40e4d7e76e8f370218",
+      "display_text": "BÁNH",
+      "spoken_text": "bánh"
+    },
+    "learning.word.banh_mi_kep": {
+      "asset": "clips/77/7711c63aecf2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "7711c63aecf245b0781f39c68c2cb9fe25552f5c10f6b56b8a3e9e6e7a6ec37a",
+      "display_text": "BÁNH MÌ KẸP",
+      "spoken_text": "bánh mì kẹp"
+    },
+    "learning.word.banh_quy": {
+      "asset": "clips/17/1744d496d472.mp3",
+      "word_ends_ms": [
+        319
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1410,
+      "sha256": "1744d496d472be367a4d677fd619f3cdb0dcd5bff14cc84d907f1a4a080481f4",
+      "display_text": "BÁNH QUY",
+      "spoken_text": "bánh quy"
+    },
+    "learning.word.be": {
+      "asset": "clips/33/33bcaa0be2e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "33bcaa0be2e58c6105a78933aa4a3ee323611ba5412a7c1589f244245317f995",
+      "display_text": "BÉ",
+      "spoken_text": "bé"
+    },
+    "learning.word.be_gai_ngoan": {
+      "asset": "clips/3c/3c78a14cdcf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "3c78a14cdcf60936e35b91d675bfec10bc75dd2cf82b152d7edcd4f41f378e4b",
+      "display_text": "BÉ GÁI NGOAN",
+      "spoken_text": "bé gái ngoan"
+    },
+    "learning.word.benh_vien": {
+      "asset": "clips/51/51971e33553e.mp3",
+      "word_ends_ms": [
+        673
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1698,
+      "sha256": "51971e33553e95d9a570a7dbad0e62d671d29f8b37869596eaa66e9a85871051",
+      "display_text": "BỆNH VIỆN",
+      "spoken_text": "bệnh viện"
+    },
+    "learning.word.bien": {
+      "asset": "clips/d5/d547c7e7aa8a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "d547c7e7aa8aa1b62695ce5bb1bd8dbee5f718479ab21ec826cb01ed04bbbf5b",
+      "display_text": "BIỂN",
+      "spoken_text": "biển"
+    },
+    "learning.word.bien_xanh": {
+      "asset": "clips/df/df5bdc1fa9f3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "df5bdc1fa9f32d1e01b89e0d3f82f6f41fdda35c52c6696041b505f8c0aab432",
+      "display_text": "BIỂN XANH",
+      "spoken_text": "biển xanh"
+    },
+    "learning.word.bien_xanh_cua_ta": {
+      "asset": "clips/23/237c1a170e99.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1855,
+      "sha256": "237c1a170e99de7f19b6a6c17bdf5aa4b5431eb432702d4689a84bca6a6053a7",
+      "display_text": "BIỂN XANH CỦA TA",
+      "spoken_text": "biển xanh của ta"
+    },
+    "learning.word.bo": {
+      "asset": "clips/1a/1ae5ca2734d5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "1ae5ca2734d58285b0ea72cc92fc81942cdb06ee930cc17b377fd225bd8eeac5",
+      "display_text": "BỐ",
+      "spoken_text": "bố"
+    },
+    "learning.word.bo_rua": {
+      "asset": "clips/33/339bda5acdcf.mp3",
+      "word_ends_ms": [
+        298
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1280,
+      "sha256": "339bda5acdcf4582bcc8b167b1b93069e831c54b58e084da1f2f1f004203ddef",
+      "display_text": "BỌ RÙA",
+      "spoken_text": "bọ rùa"
+    },
+    "learning.word.bong_bay": {
+      "asset": "clips/38/386ece50c7a6.mp3",
+      "word_ends_ms": [
+        329
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1019,
+      "sha256": "386ece50c7a6d8ebd3982fcfe650a2ff677f8469419e73440e6ccdbbc41ac76c",
+      "display_text": "BÓNG BAY",
+      "spoken_text": "bóng bay"
+    },
+    "learning.word.bong_hoa_ep": {
+      "asset": "clips/3b/3bbcf0447806.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "3bbcf0447806d9bc66c8844583f31e393b5eff0ec7bfe97f15e5273bad30861a",
+      "display_text": "BÔNG HOA ĐẸP",
+      "spoken_text": "bông hoa đẹp"
+    },
+    "learning.word.bu_nhin": {
+      "asset": "clips/43/43ac1b9ec0f1.mp3",
+      "word_ends_ms": [
+        310
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "43ac1b9ec0f1ea09fb6a74e0260839470f49e33c6502510a52e121ec2983bbbe",
+      "display_text": "BÙ NHÌN",
+      "spoken_text": "bù nhìn"
+    },
+    "learning.word.buom": {
+      "asset": "clips/b0/b01e8014e60d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "b01e8014e60d0b42d42de0cd9081cf9452a658218c4c6775c500ba618fb727cb",
+      "display_text": "BƯỚM",
+      "spoken_text": "bướm"
+    },
+    "learning.word.buom_xinh": {
+      "asset": "clips/45/455763efef85.mp3",
+      "word_ends_ms": [
+        340
+      ],
+      "word_fade_ms": [
+        21
+      ],
+      "duration_ms": 1228,
+      "sha256": "455763efef85d6f0636a4eac25b5980bbd630886ad23cec3add892721e907609",
+      "display_text": "BƯỚM XINH",
+      "spoken_text": "bướm xinh"
+    },
+    "learning.word.ca_ang_boi": {
+      "asset": "clips/20/20ee0b824ab4.mp3",
+      "word_ends_ms": [
+        267,
+        537
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1437,
+      "sha256": "20ee0b824ab455f48f5407b0401b88ac4c9d0e1ee43d2e490071a8492ddecf7f",
+      "display_text": "CÁ ĐANG BƠI",
+      "spoken_text": "cá đang bơi"
+    },
+    "learning.word.ca_chua": {
+      "asset": "clips/f7/f7cfd977496c.mp3",
+      "word_ends_ms": [
+        272
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1358,
+      "sha256": "f7cfd977496c2379e10f58cf2f0ca3f3f1f05c9eb5f3e96c31527a37ac48995e",
+      "display_text": "CÀ CHUA",
+      "spoken_text": "cà chua"
+    },
+    "learning.word.ca_heo": {
+      "asset": "clips/5d/5d6192776873.mp3",
+      "word_ends_ms": [
+        319
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1254,
+      "sha256": "5d6192776873143e5305264b62533205577eb7a087f913c2a721c5aefd80f100",
+      "display_text": "CÁ HEO",
+      "spoken_text": "cá heo"
+    },
+    "learning.word.ca_no": {
+      "asset": "clips/93/93fdbfdc80ec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "93fdbfdc80ec3e08eef854b05679774f6da89086208e2cb5c38aee8d58ef5660",
+      "display_text": "CA NÔ",
+      "spoken_text": "ca nô"
+    },
+    "learning.word.ca_rot": {
+      "asset": "clips/a6/a609a44ad3b1.mp3",
+      "word_ends_ms": [
+        209
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 888,
+      "sha256": "a609a44ad3b1b9446f7046ebd3731bec47f4927fb9b56666e87d1dd59b1eb55d",
+      "display_text": "CÀ RỐT",
+      "spoken_text": "cà rốt"
+    },
+    "learning.word.ca_sau": {
+      "asset": "clips/63/635091695c8b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "635091695c8b333e27a1b4ab47ae32a5a508f409fa0be247201a94c9d34c15ab",
+      "display_text": "CÁ SẤU",
+      "spoken_text": "cá sấu"
+    },
+    "learning.word.cam": {
+      "asset": "clips/23/2311fa7512ea.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "2311fa7512eaa4fdee8da9f3847ae1d81677a9578fd8824c09d595cf44091491",
+      "display_text": "CAM",
+      "spoken_text": "cam"
+    },
+    "learning.word.cau_vong": {
+      "asset": "clips/61/61b79d1f2c1a.mp3",
+      "word_ends_ms": [
+        632
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "61b79d1f2c1a4adf32ad01f66722905198c7d5c642ec8fc027aa9d5214743a99",
+      "display_text": "CẦU VỒNG",
+      "spoken_text": "cầu vồng"
+    },
+    "learning.word.cau_vong_nhieu_mau": {
+      "asset": "clips/f4/f4c599ee9e51.mp3",
+      "word_ends_ms": [
+        273,
+        553,
+        813
+      ],
+      "word_fade_ms": [
+        21,
+        20,
+        20
+      ],
+      "duration_ms": 1907,
+      "sha256": "f4c599ee9e516d3d9dbd4e619f24d9084422cef28f561791ec9dcb90c1037ca4",
+      "display_text": "CẦU VỒNG NHIỀU MÀU",
+      "spoken_text": "cầu vồng nhiều màu"
+    },
+    "learning.word.cay": {
+      "asset": "clips/42/422b960fbd43.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "422b960fbd43e022cba1a56ee3a457802dba1742c8dc1222ac02e54ac9b5e478",
+      "display_text": "CÂY",
+      "spoken_text": "cây"
+    },
+    "learning.word.chao": {
+      "asset": "clips/fb/fbdea04cc02f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "fbdea04cc02fd9a3daa7521c62ab71f1033e9104c461e3478afc19ca54fe30e9",
+      "display_text": "CHÁO",
+      "spoken_text": "cháo"
+    },
+    "learning.word.chao_cac_ban": {
+      "asset": "clips/e3/e37f9168377e.mp3",
+      "word_ends_ms": [
+        174,
+        354
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1097,
+      "sha256": "e37f9168377eadad96b5e4153aae89b27e5628f48045d5df317dad2034390e40",
+      "display_text": "CHÀO CÁC BẠN",
+      "spoken_text": "chào các bạn"
+    },
+    "learning.word.chim": {
+      "asset": "clips/f2/f217dae02cae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "f217dae02caead98344d1d091ff539531c0cef005654bbb97b47b5eb78585699",
+      "display_text": "CHIM",
+      "spoken_text": "chim"
+    },
+    "learning.word.chim_ang_bay": {
+      "asset": "clips/7d/7d923b1aa98b.mp3",
+      "word_ends_ms": [
+        417,
+        637
+      ],
+      "word_fade_ms": [
+        20,
+        20
+      ],
+      "duration_ms": 1515,
+      "sha256": "7d923b1aa98b2dc049676189f951ff4cecbbb6fcc2be0e36dc986297d44a9430",
+      "display_text": "CHIM ĐANG BAY",
+      "spoken_text": "chim đang bay"
+    },
+    "learning.word.chim_bay_that_cao": {
+      "asset": "clips/a2/a22cf7562728.mp3",
+      "word_ends_ms": [
+        408,
+        679,
+        928
+      ],
+      "word_fade_ms": [
+        20,
+        12,
+        20
+      ],
+      "duration_ms": 1776,
+      "sha256": "a22cf75627289dfac62b7da11fadc9722ab19f70269dc484a0ebaaa1055a0f29",
+      "display_text": "CHIM BAY THẬT CAO",
+      "spoken_text": "chim bay thật cao"
+    },
+    "learning.word.chim_canh_cut": {
+      "asset": "clips/00/009a28e26614.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "009a28e26614e90e9fb536103fdfa6cc1f4cda2f561269e1c64427a5696fef3e",
+      "display_text": "CHIM CÁNH CỤT",
+      "spoken_text": "chim cánh cụt"
+    },
+    "learning.word.chim_cong": {
+      "asset": "clips/ee/eea5b085d0fa.mp3",
+      "word_ends_ms": [
+        310
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "eea5b085d0fa23dde29205dd92ce7e22b24fb62b60e391e29aba258e98618e7b",
+      "display_text": "CHIM CÔNG",
+      "spoken_text": "chim công"
+    },
+    "learning.word.chim_nho": {
+      "asset": "clips/4b/4b81613669ef.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "4b81613669ef66cf8015a7f2d0ef2c9e3b60abb770ce5f7c5cd91bb74ce302c8",
+      "display_text": "CHIM NHỎ",
+      "spoken_text": "chim nhỏ"
+    },
+    "learning.word.cho": {
+      "asset": "clips/38/380c0ed72020.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "380c0ed720206d51f3765f0be4235fd854355f039561f93072ff7942a65ebc60",
+      "display_text": "CHÓ",
+      "spoken_text": "chó"
+    },
+    "learning.word.choi_cung_nhau": {
+      "asset": "clips/8e/8e7b892172a5.mp3",
+      "word_ends_ms": [
+        379,
+        609
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1097,
+      "sha256": "8e7b892172a59e1eea7d89d4437b9ee148d69e17f5a150414522ef9c10284bb8",
+      "display_text": "CHƠI CÙNG NHAU",
+      "spoken_text": "chơi cùng nhau"
+    },
+    "learning.word.choi_voi_o_choi": {
+      "asset": "clips/df/df692c1eb183.mp3",
+      "word_ends_ms": [
+        409,
+        570,
+        739
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        40
+      ],
+      "duration_ms": 2142,
+      "sha256": "df692c1eb183aae1044b62fb4a4e7e76443c9afa8db2f3d0bbc364dbc673ec1d",
+      "display_text": "CHƠI VỚI ĐỒ CHƠI",
+      "spoken_text": "chơi với đồ chơi"
+    },
+    "learning.word.chu_cho_con": {
+      "asset": "clips/bb/bbfd378d84a9.mp3",
+      "word_ends_ms": [
+        239,
+        500
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "bbfd378d84a9c2a5415d9726235690086a214df768d7635f45cf845294b5a86f",
+      "display_text": "CHÚ CHÓ CON",
+      "spoken_text": "chú chó con"
+    },
+    "learning.word.chuoi": {
+      "asset": "clips/7d/7d9908d94b4b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "7d9908d94b4b74d706476cdb398593bea9269f1f939072a6c0478b6db358196b",
+      "display_text": "CHUỐI",
+      "spoken_text": "chuối"
+    },
+    "learning.word.chuot_hamster": {
+      "asset": "clips/ab/ab0d6b15c2bc.mp3",
+      "word_ends_ms": [
+        327
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1724,
+      "sha256": "ab0d6b15c2bcc80e3903a028dbac8b5729a18576bfe59720f27c6547a3de1b56",
+      "display_text": "CHUỘT HAMSTER",
+      "spoken_text": "chuột hamster"
+    },
+    "learning.word.chuot_tui": {
+      "asset": "clips/f4/f488a43e9ca1.mp3",
+      "word_ends_ms": [
+        278
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1437,
+      "sha256": "f488a43e9ca1d2ea2eed8b63b2ecb512593b760e88f6e9d7c3991e2775b74045",
+      "display_text": "CHUỘT TÚI",
+      "spoken_text": "chuột túi"
+    },
+    "learning.word.co_xanh": {
+      "asset": "clips/30/30c68ddc4ded.mp3",
+      "word_ends_ms": [
+        256
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 810,
+      "sha256": "30c68ddc4dedb63e25867d923fb5922e3b480ad504ca8e6f96ed68fa6ada718e",
+      "display_text": "CỎ XANH",
+      "spoken_text": "cỏ xanh"
+    },
+    "learning.word.com": {
+      "asset": "clips/0e/0e8f56c09c86.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "0e8f56c09c86527dc0469e28e7c409b5a463db4211fc4fa7a994158ae83e4a1d",
+      "display_text": "CƠM",
+      "spoken_text": "cơm"
+    },
+    "learning.word.cuoi_va_hanh_phuc": {
+      "asset": "clips/5e/5e2181ecf252.mp3",
+      "word_ends_ms": [
+        600,
+        780,
+        1030
+      ],
+      "word_fade_ms": [
+        40,
+        20,
+        12
+      ],
+      "duration_ms": 2220,
+      "sha256": "5e2181ecf2527ea4cfc7a893ed466863bdec4880fbabb2566c57ea8ddf846753",
+      "display_text": "CƯỜI VÀ HẠNH PHÚC",
+      "spoken_text": "cười và hạnh phúc"
+    },
+    "learning.word.cuu": {
+      "asset": "clips/38/3879e290b787.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "3879e290b7875fa25b5a92d90caf2d1a3aaa1dc7f51f446ca763f9e9f7da76dd",
+      "display_text": "CỪU",
+      "spoken_text": "cừu"
+    },
+    "learning.word.dau_tay": {
+      "asset": "clips/12/1294be7a22ff.mp3",
+      "word_ends_ms": [
+        299
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1384,
+      "sha256": "1294be7a22ffa4604b69013047c935be415dd4f51895679636ca235d97ffc32f",
+      "display_text": "DÂU TÂY",
+      "spoken_text": "dâu tây"
+    },
+    "learning.word.de": {
+      "asset": "clips/88/88f1b5a8a266.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "88f1b5a8a26693f99b777cd4d381f96b79c4ae412921469743d438407238c0ba",
+      "display_text": "DÊ",
+      "spoken_text": "dê"
+    },
+    "learning.word.dua_chuot": {
+      "asset": "clips/2f/2f1624bdced7.mp3",
+      "word_ends_ms": [
+        239
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1202,
+      "sha256": "2f1624bdced76e5474761cb48fb2bae4622bb4343f593e67056bf70e3a35c155",
+      "display_text": "DƯA CHUỘT",
+      "spoken_text": "dưa chuột"
+    },
+    "learning.word.dua_hau": {
+      "asset": "clips/a6/a6f109d3b3ed.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "a6f109d3b3ed57f8b5a31d1741a7c86e7d296e37dd361dcb0e2690d7c5b66ae8",
+      "display_text": "DƯA HẤU",
+      "spoken_text": "dưa hấu"
+    },
+    "learning.word.dua_le": {
+      "asset": "clips/f0/f0a19d9f2675.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "f0a19d9f26752873569a7601f058c40cac472580e83ea3927c14ccc7a6300428",
+      "display_text": "DƯA LÊ",
+      "spoken_text": "dưa lê"
+    },
+    "learning.word.dua_thom": {
+      "asset": "clips/03/03393bd66e5d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "03393bd66e5da266a67a17ad1b30475ee6213985b15e22a498230942663726f2",
+      "display_text": "DỨA THƠM",
+      "spoken_text": "dứa thơm"
+    },
+    "learning.word.ech": {
+      "asset": "clips/79/79b39a016ca2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "79b39a016ca2546a6f626f2a6791978b70acf7e696fda7966e28e609e5d6e24a",
+      "display_text": "ẾCH",
+      "spoken_text": "ếch"
+    },
+    "learning.word.em_be_vui": {
+      "asset": "clips/11/11b3c6f2c9ea.mp3",
+      "word_ends_ms": [
+        259,
+        490
+      ],
+      "word_fade_ms": [
+        20,
+        30
+      ],
+      "duration_ms": 1594,
+      "sha256": "11b3c6f2c9ea2aeb4af5d6386442805dc0422ddb4ef8987d750bcc512e7c9ed2",
+      "display_text": "EM BÉ VUI",
+      "spoken_text": "em bé vui"
+    },
+    "learning.word.ga": {
+      "asset": "clips/8a/8a4f69cb017e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "8a4f69cb017e4cd33e9435711e215305e31ca3ac23f4f163a395bfa15a125ce7",
+      "display_text": "GÀ",
+      "spoken_text": "gà"
+    },
+    "learning.word.gau": {
+      "asset": "clips/b4/b4a2f2a36657.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "b4a2f2a366576776517a8d294d669145ec860b7f72bf1e2a584f85f8399f6bac",
+      "display_text": "GẤU",
+      "spoken_text": "gấu"
+    },
+    "learning.word.gau_bong": {
+      "asset": "clips/10/10c1154513bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "10c1154513bf00f8514d2b156e7f426accb259f9ba431b836a0686fdaef8cff5",
+      "display_text": "GẤU BÔNG",
+      "spoken_text": "gấu bông"
+    },
+    "learning.word.gia_inh": {
+      "asset": "clips/0a/0a0f5fab4a35.mp3",
+      "word_ends_ms": [
+        298
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1150,
+      "sha256": "0a0f5fab4a35a01f5d336f262a580ec7c17e330d8b549329cc4b011c5dba955c",
+      "display_text": "GIA ĐÌNH",
+      "spoken_text": "gia đình"
+    },
+    "learning.word.gia_inh_la_tinh_yeu": {
+      "asset": "clips/26/26953128fd23.mp3",
+      "word_ends_ms": [
+        239,
+        600,
+        750,
+        1019
+      ],
+      "word_fade_ms": [
+        40,
+        19,
+        40,
+        40
+      ],
+      "duration_ms": 1515,
+      "sha256": "26953128fd2399a7194e7b07df0de375f02033dc994479a84d9b8dba413b575d",
+      "display_text": "GIA ĐÌNH LÀ TÌNH YÊU",
+      "spoken_text": "gia đình là tình yêu"
+    },
+    "learning.word.giup_o_moi_nguoi": {
+      "asset": "clips/d1/d16ace77a483.mp3",
+      "word_ends_ms": [
+        359,
+        679,
+        939
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        40
+      ],
+      "duration_ms": 2038,
+      "sha256": "d16ace77a483367598b032dd30f286de360a69804cdb5af798a0f3a12b68f2ea",
+      "display_text": "GIÚP ĐỠ MỌI NGƯỜI",
+      "spoken_text": "giúp đỡ mọi người"
+    },
+    "learning.word.hat_mot_bai": {
+      "asset": "clips/b2/b289a9683707.mp3",
+      "word_ends_ms": [
+        339,
+        499
+      ],
+      "word_fade_ms": [
+        21,
+        40
+      ],
+      "duration_ms": 1620,
+      "sha256": "b289a96837077aa196f2f1d6b5d2c747a0f10263dbbf9020acd7b05d274f921d",
+      "display_text": "HÁT MỘT BÀI",
+      "spoken_text": "hát một bài"
+    },
+    "learning.word.ho": {
+      "asset": "clips/2c/2c3ae83679b0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "2c3ae83679b0e57166909190fb63d4867c7b3c8ccf15e9a979923f39ca2eeb22",
+      "display_text": "HỔ",
+      "spoken_text": "hổ"
+    },
+    "learning.word.hoa": {
+      "asset": "clips/a5/a5d7884739e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "a5d7884739e3fcfea8a364b2e19d39769d8b906ff097d1c2eadd21ab4e523286",
+      "display_text": "HOA",
+      "spoken_text": "hoa"
+    },
+    "learning.word.hoa_huong_duong": {
+      "asset": "clips/25/255fa28a475b.mp3",
+      "word_ends_ms": [
+        239,
+        489
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "255fa28a475b3b694c18b8b285bd9da8e1b683246986df2200af3b04f6a59f1c",
+      "display_text": "HOA HƯỚNG DƯƠNG",
+      "spoken_text": "hoa hướng dương"
+    },
+    "learning.word.hoc_moi_ngay": {
+      "asset": "clips/d6/d671e3e640d8.mp3",
+      "word_ends_ms": [
+        468,
+        698
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1724,
+      "sha256": "d671e3e640d82c95346ad12cdb023f9a63f2001611d8acc6001be9e433898df1",
+      "display_text": "HỌC MỖI NGÀY",
+      "spoken_text": "học mỗi ngày"
+    },
+    "learning.word.hong_hac": {
+      "asset": "clips/ea/ea452846087d.mp3",
+      "word_ends_ms": [
+        350
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "ea452846087d9e496c571a0f2c8bfe26a86e05ee23dd50a4e4d72698312ad39a",
+      "display_text": "HỒNG HẠC",
+      "spoken_text": "hồng hạc"
+    },
+    "learning.word.huou_cao_co": {
+      "asset": "clips/ed/edacdb453087.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "edacdb45308762a78d53e975f231b2751e672412b1317944421bfae347d696fc",
+      "display_text": "HƯƠU CAO CỔ",
+      "spoken_text": "hươu cao cổ"
+    },
+    "learning.word.huou_con": {
+      "asset": "clips/fe/feebba38ac38.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "feebba38ac38a22fe3c6a541dff33a69fcf3b68c05ae1e9aec9220bbfdc7b63d",
+      "display_text": "HƯƠU CON",
+      "spoken_text": "hươu con"
+    },
+    "learning.word.i_bo_vui_ve": {
+      "asset": "clips/0c/0cd071f655d3.mp3",
+      "word_ends_ms": [
+        259,
+        540,
+        799
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        20
+      ],
+      "duration_ms": 1802,
+      "sha256": "0cd071f655d3518b35b4595b4943a0e725870d553389e8015674d70c1c537f7f",
+      "display_text": "ĐI BỘ VUI VẺ",
+      "spoken_text": "đi bộ vui vẻ"
+    },
+    "learning.word.kem": {
+      "asset": "clips/bc/bcbe1121c45d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "bcbe1121c45d650ea0ae51529f9e57322ccbd689b9a9fa99409128651cbb22f3",
+      "display_text": "KEM",
+      "spoken_text": "kem"
+    },
+    "learning.word.keo": {
+      "asset": "clips/bf/bf268487d5a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "bf268487d5a282d6b88771dcb763b6fcb629094980a19cb58048fd384fe9e4ae",
+      "display_text": "KẸO",
+      "spoken_text": "kẹo"
+    },
+    "learning.word.keo_ngot": {
+      "asset": "clips/12/12962a63d416.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "12962a63d41625255cacbb885401f172870d9a30107e1a2880f93ecc7a1245b4",
+      "display_text": "KẸO NGỌT",
+      "spoken_text": "kẹo ngọt"
+    },
+    "learning.word.khi": {
+      "asset": "clips/fc/fc1664a44d8b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "fc1664a44d8b66f7ebd0701639ffb9ab68d5b246e001eab270ebb1a07096f735",
+      "display_text": "KHỈ",
+      "spoken_text": "khỉ"
+    },
+    "learning.word.kho_bau": {
+      "asset": "clips/b1/b1c62e998076.mp3",
+      "word_ends_ms": [
+        239
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1176,
+      "sha256": "b1c62e998076c5b4f873533231413aa851d2d30f0bcf39191a13da1984b58169",
+      "display_text": "KHO BÁU",
+      "spoken_text": "kho báu"
+    },
+    "learning.word.khoai_tay": {
+      "asset": "clips/1f/1f20d8ee9e22.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "1f20d8ee9e22d34367aaf308ebb2cda69b919cbcdfddacc5961968403c8035cd",
+      "display_text": "KHOAI TÂY",
+      "spoken_text": "khoai tây"
+    },
+    "learning.word.khung_long": {
+      "asset": "clips/4f/4f8619770735.mp3",
+      "word_ends_ms": [
+        374
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1228,
+      "sha256": "4f86197707350650f718f3b632c8a4f8521817dee49ff138d1b40087066fe0f0",
+      "display_text": "KHỦNG LONG",
+      "spoken_text": "khủng long"
+    },
+    "learning.word.kien": {
+      "asset": "clips/c9/c9712924cecf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "c9712924cecf24f64c785e68b8063cd4ee887c1c13ad1b5175f7bb2928823e06",
+      "display_text": "KIẾN",
+      "spoken_text": "kiến"
+    },
+    "learning.word.kinh_hien_vi": {
+      "asset": "clips/62/62e30cb828b7.mp3",
+      "word_ends_ms": [
+        336,
+        595
+      ],
+      "word_fade_ms": [
+        21,
+        40
+      ],
+      "duration_ms": 1515,
+      "sha256": "62e30cb828b71f8b0e2058d24e06e907520475d191395414c8a658b77d7cebbd",
+      "display_text": "KÍNH HIỂN VI",
+      "spoken_text": "kính hiển vi"
+    },
+    "learning.word.kinh_thien_van": {
+      "asset": "clips/eb/ebfcd63f542e.mp3",
+      "word_ends_ms": [
+        343,
+        613
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1463,
+      "sha256": "ebfcd63f542edfff6d7f449ecd71cb8b3f7dfe56df2a2897eed6743d9a67379d",
+      "display_text": "KÍNH THIÊN VĂN",
+      "spoken_text": "kính thiên văn"
+    },
+    "learning.word.lau_ai_to": {
+      "asset": "clips/91/913a796d0f67.mp3",
+      "word_ends_ms": [
+        260,
+        540
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1280,
+      "sha256": "913a796d0f674699af10e515322ea2a15a91c771ebe7a70acd386db8618bd77c",
+      "display_text": "LÂU ĐÀI TO",
+      "spoken_text": "lâu đài to"
+    },
+    "learning.word.mam_xoi": {
+      "asset": "clips/d4/d47659e87387.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "d47659e87387957d1acdfea2b1faa7bf1591651392dd85d46a33e91cf817969f",
+      "display_text": "MÂM XÔI",
+      "spoken_text": "mâm xôi"
+    },
+    "learning.word.mat_cuoi": {
+      "asset": "clips/72/726262f9a110.mp3",
+      "word_ends_ms": [
+        340
+      ],
+      "word_fade_ms": [
+        21
+      ],
+      "duration_ms": 1202,
+      "sha256": "726262f9a110c774382c9bc7057b590e5851d092c4fba67b5018ec08dd4001cd",
+      "display_text": "MẶT CƯỜI",
+      "spoken_text": "mặt cười"
+    },
+    "learning.word.mat_trang_chieu_sang": {
+      "asset": "clips/6b/6bcd23873b66.mp3",
+      "word_ends_ms": [
+        310,
+        640,
+        929
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1828,
+      "sha256": "6bcd23873b66fa846272cabca6689d985216b93a4909ee17f0149140bf813dc8",
+      "display_text": "MẶT TRĂNG CHIẾU SÁNG",
+      "spoken_text": "mặt trăng chiếu sáng"
+    },
+    "learning.word.mat_troi_sang": {
+      "asset": "clips/a1/a101d9c6854e.mp3",
+      "word_ends_ms": [
+        249,
+        549
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1410,
+      "sha256": "a101d9c6854efc8106a006f802a8c5b596e66c4331b7c17ba2902fa6312dcc32",
+      "display_text": "MẶT TRỜI SÁNG",
+      "spoken_text": "mặt trời sáng"
+    },
+    "learning.word.mat_troi_toa_sang": {
+      "asset": "clips/24/24d7a9ad2129.mp3",
+      "word_ends_ms": [
+        269,
+        659,
+        899
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        40
+      ],
+      "duration_ms": 1541,
+      "sha256": "24d7a9ad2129056ad39538685c2965d2589dfe3afe0d90db4a53cdab18679b28",
+      "display_text": "MẶT TRỜI TỎA SÁNG",
+      "spoken_text": "mặt trời tỏa sáng"
+    },
+    "learning.word.mat_troi_vang": {
+      "asset": "clips/38/3825876b45ac.mp3",
+      "word_ends_ms": [
+        472,
+        752
+      ],
+      "word_fade_ms": [
+        20,
+        20
+      ],
+      "duration_ms": 1855,
+      "sha256": "3825876b45ac9785de980213c2861b85bbdc3e8d3371d7dc0aed1ecb40ca5bb6",
+      "display_text": "MẶT TRỜI VÀNG",
+      "spoken_text": "mặt trời vàng"
+    },
+    "learning.word.may": {
+      "asset": "clips/c1/c17c2cf1e788.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "c17c2cf1e788dd82f083a24393db4cf31e33c86009e8cf80b518756f426f81a5",
+      "display_text": "MÂY",
+      "spoken_text": "mây"
+    },
+    "learning.word.may_bay": {
+      "asset": "clips/22/225ee0b7acd5.mp3",
+      "word_ends_ms": [
+        340
+      ],
+      "word_fade_ms": [
+        21
+      ],
+      "duration_ms": 1071,
+      "sha256": "225ee0b7acd5513ef0a41279b4ed6cd8b0a6370e34f32fbc79d61a63034d70a0",
+      "display_text": "MÁY BAY",
+      "spoken_text": "máy bay"
+    },
+    "learning.word.may_bay_nho": {
+      "asset": "clips/3b/3b647f0f54b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "3b647f0f54b9c1a56bb01fe91cb070067e4f778bfd028b18af76213d3ac7b5e6",
+      "display_text": "MÁY BAY NHỎ",
+      "spoken_text": "máy bay nhỏ"
+    },
+    "learning.word.may_cay": {
+      "asset": "clips/a3/a36318247179.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "a3631824717992c629f781aab4130350ee81e8a469c610de561716b2918962bc",
+      "display_text": "MÁY CÀY",
+      "spoken_text": "máy cày"
+    },
+    "learning.word.me": {
+      "asset": "clips/e8/e82ec43a36be.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "e82ec43a36be6ff88dd2800fe32b52d0671c2993281e31c711ccfc071bacf461",
+      "display_text": "MẸ",
+      "spoken_text": "mẹ"
+    },
+    "learning.word.meo": {
+      "asset": "clips/46/46c51eae9acb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "46c51eae9acb932e7144b40ecc40aea42f8596c5b25ecf18bc8766375f759382",
+      "display_text": "MÈO",
+      "spoken_text": "mèo"
+    },
+    "learning.word.meo_luoi_bieng": {
+      "asset": "clips/ba/baee598fec9d.mp3",
+      "word_ends_ms": [
+        339,
+        619
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1776,
+      "sha256": "baee598fec9d87bcbf33a98e014a48745c20d75f3fe5dc69bcaee3484e87ef05",
+      "display_text": "MÈO LƯỜI BIẾNG",
+      "spoken_text": "mèo lười biếng"
+    },
+    "learning.word.mi": {
+      "asset": "clips/df/dfbe8c167409.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "dfbe8c167409cd1ab3b4a68fe56d51c858b1095a951d3983ae340ba48638a86e",
+      "display_text": "MÌ",
+      "spoken_text": "mì"
+    },
+    "learning.word.ngoi_nha_nho": {
+      "asset": "clips/a7/a7fbe01853b8.mp3",
+      "word_ends_ms": [
+        359,
+        580
+      ],
+      "word_fade_ms": [
+        20,
+        40
+      ],
+      "duration_ms": 1698,
+      "sha256": "a7fbe01853b858c18f0933ada8dda3f7e232ba5d9ce8b5ac271e00fe8d4809ea",
+      "display_text": "NGÔI NHÀ NHỎ",
+      "spoken_text": "ngôi nhà nhỏ"
+    },
+    "learning.word.ngoi_sao_lap_lanh": {
+      "asset": "clips/08/080b1b6a381a.mp3",
+      "word_ends_ms": [
+        320,
+        579,
+        789
+      ],
+      "word_fade_ms": [
+        19,
+        20,
+        12
+      ],
+      "duration_ms": 1802,
+      "sha256": "080b1b6a381af7a0cffe44da4ead012dd32ee29c0af7fac1cf37f68624571a21",
+      "display_text": "NGÔI SAO LẤP LÁNH",
+      "spoken_text": "ngôi sao lấp lánh"
+    },
+    "learning.word.ngu_ngon_em_nay": {
+      "asset": "clips/d0/d087948cb792.mp3",
+      "word_ends_ms": [
+        340,
+        630,
+        869
+      ],
+      "word_fade_ms": [
+        21,
+        40,
+        12
+      ],
+      "duration_ms": 2064,
+      "sha256": "d087948cb79260405821c2b82c037c69c920dc50ae378dc9a09553507e7eb6cb",
+      "display_text": "NGỦ NGON ĐÊM NAY",
+      "spoken_text": "ngủ ngon đêm nay"
+    },
+    "learning.word.ngua": {
+      "asset": "clips/45/4558f1f7226d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "4558f1f7226ddb90743b79bcb7275745c77f008116139a8c3b854be61c444424",
+      "display_text": "NGỰA",
+      "spoken_text": "ngựa"
+    },
+    "learning.word.nguoi_tuyet": {
+      "asset": "clips/db/db75a5210757.mp3",
+      "word_ends_ms": [
+        359
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1437,
+      "sha256": "db75a52107576e53b05582f318fa8a255f4623c3338f1cd1456a0fcb4a4bec6d",
+      "display_text": "NGƯỜI TUYẾT",
+      "spoken_text": "người tuyết"
+    },
+    "learning.word.nha": {
+      "asset": "clips/ae/aeb09c649c4f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "aeb09c649c4f5515684df8342fb68c74f2ba2405b8fbb341bfb68262c355877a",
+      "display_text": "NHÀ",
+      "spoken_text": "nhà"
+    },
+    "learning.word.nhen": {
+      "asset": "clips/ac/acb0d598d4ba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "acb0d598d4ba174533a14ff1fb2f423bc6cc82493d786847385c135eeab97f44",
+      "display_text": "NHỆN",
+      "spoken_text": "nhện"
+    },
+    "learning.word.nhim_con": {
+      "asset": "clips/d0/d01612ea42ed.mp3",
+      "word_ends_ms": [
+        379
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1410,
+      "sha256": "d01612ea42ed80bb1b68231eebb999446697a4dca0be237314627c2b19a8b2ba",
+      "display_text": "NHÍM CON",
+      "spoken_text": "nhím con"
+    },
+    "learning.word.noi_loi_cam_on": {
+      "asset": "clips/de/de8bf8770135.mp3",
+      "word_ends_ms": [
+        338,
+        568,
+        817
+      ],
+      "word_fade_ms": [
+        21,
+        40,
+        20
+      ],
+      "duration_ms": 1855,
+      "sha256": "de8bf8770135190f0dcbe4429f4a92d7522dd300ae68e93c989e1b206c0915e4",
+      "display_text": "NÓI LỜI CẢM ƠN",
+      "spoken_text": "nói lời cảm ơn"
+    },
+    "learning.word.nuoc_ep": {
+      "asset": "clips/e7/e7d424371bf5.mp3",
+      "word_ends_ms": [
+        350
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1123,
+      "sha256": "e7d424371bf573ebfbc7934f6e237ff6152618138c9d5d11ddf8eccc280e571b",
+      "display_text": "NƯỚC ÉP",
+      "spoken_text": "nước ép"
+    },
+    "learning.word.nuoc_trai_cay": {
+      "asset": "clips/2e/2eb0b1020f04.mp3",
+      "word_ends_ms": [
+        421,
+        622
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1176,
+      "sha256": "2eb0b1020f0413bc60e669c2d54c2f44a65fe808adcaedd471af53a8c6e98e56",
+      "display_text": "NƯỚC TRÁI CÂY",
+      "spoken_text": "nước trái cây"
+    },
+    "learning.word.o_che_mua": {
+      "asset": "clips/ab/ab13b1197de8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "ab13b1197de8344329e374c7384549bd41d66f2c7a7657b21e68e3ba084fc1fe",
+      "display_text": "Ô CHE MƯA",
+      "spoken_text": "ô che mưa"
+    },
+    "learning.word.o_choi": {
+      "asset": "clips/f7/f7b03181080a.mp3",
+      "word_ends_ms": [
+        259
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "f7b03181080a7b21c219bc009e5e84e750cc7805bcfe1a3c8589bef547868100",
+      "display_text": "ĐỒ CHƠI",
+      "spoken_text": "đồ chơi"
+    },
+    "learning.word.o_to": {
+      "asset": "clips/f3/f3eb6a611432.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "f3eb6a611432a055d538e1a291ea177b4c8b616d075ee6a3cfeefa867a84dc1b",
+      "display_text": "Ô TÔ",
+      "spoken_text": "ô tô"
+    },
+    "learning.word.oc_truyen_hay": {
+      "asset": "clips/8e/8e5c4ae5db24.mp3",
+      "word_ends_ms": [
+        259,
+        560
+      ],
+      "word_fade_ms": [
+        20,
+        20
+      ],
+      "duration_ms": 1541,
+      "sha256": "8e5c4ae5db24ddc8b7c05811ae592d96c3b8f8b26e3b1a5fafbd1977bb11227b",
+      "display_text": "ĐỌC TRUYỆN HAY",
+      "spoken_text": "đọc truyện hay"
+    },
+    "learning.word.ong": {
+      "asset": "clips/3b/3b2cd36e2245.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "3b2cd36e2245aeb3085a1f03d5fb78415ec3c21aa005dfa6e1ed26f30454bf43",
+      "display_text": "ONG",
+      "spoken_text": "ong"
+    },
+    "learning.word.ot": {
+      "asset": "clips/dd/dd4053fd1e1d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "dd4053fd1e1d1b828e5528eeb515cdd14fd724cccb61f27bf82b8f829ed46e81",
+      "display_text": "ỚT",
+      "spoken_text": "ớt"
+    },
+    "learning.word.pha": {
+      "asset": "clips/1a/1a54e1e2e8d4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "1a54e1e2e8d49d104821ebb2c72a82e6a5c47113f632bb8e89cc26c1666087aa",
+      "display_text": "PHÀ",
+      "spoken_text": "phà"
+    },
+    "learning.word.phao_hoa": {
+      "asset": "clips/f7/f7e4365c9927.mp3",
+      "word_ends_ms": [
+        229
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1280,
+      "sha256": "f7e4365c99272cb97313f157057ada72588352db849f2c95bc1517ea3a23673a",
+      "display_text": "PHÁO HOA",
+      "spoken_text": "pháo hoa"
+    },
+    "learning.word.phi_co": {
+      "asset": "clips/68/68dc77ce17bd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "68dc77ce17bda191dabbc2b7b52506812f1aa382ea44ab3a6d75370ba0b6fe23",
+      "display_text": "PHI CƠ",
+      "spoken_text": "phi cơ"
+    },
+    "learning.word.phieu_luu": {
+      "asset": "clips/ce/cec7bcd496ca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "cec7bcd496ca370dd36e88b1745e2ec4f728994f8f8c32e5ff33165c1f78c7e1",
+      "display_text": "PHIÊU LƯU",
+      "spoken_text": "phiêu lưu"
+    },
+    "learning.word.pho_mai": {
+      "asset": "clips/0f/0fe7f954a0dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "0fe7f954a0dda1be65c5e3f34639c3bc20e6f7945b3fdbb31336e208df7b8319",
+      "display_text": "PHÔ MAI",
+      "spoken_text": "phô mai"
+    },
+    "learning.word.qua_tao_o": {
+      "asset": "clips/c7/c7222fc8ece7.mp3",
+      "word_ends_ms": [
+        199,
+        459
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "c7222fc8ece79801172284436d3df4dd7c269bd26252730cde01e0c0fb2647d6",
+      "display_text": "QUẢ TÁO ĐỎ",
+      "spoken_text": "quả táo đỏ"
+    },
+    "learning.word.ran": {
+      "asset": "clips/13/13999f625d37.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "13999f625d374f9f591dc2436233117180638ee37c6e536d79519defd254087f",
+      "display_text": "RẮN",
+      "spoken_text": "rắn"
+    },
+    "learning.word.rau": {
+      "asset": "clips/e5/e5089fc15d69.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "e5089fc15d6955b3654fbf2dd6900385dd0c8b2fb963b951e69a19d23c9d6292",
+      "display_text": "RAU",
+      "spoken_text": "rau"
+    },
+    "learning.word.rua": {
+      "asset": "clips/3f/3fc38ed0afc3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3fc38ed0afc3ee36025362a162df1e14826586d525eea3415bb656a85baf9074",
+      "display_text": "RÙA",
+      "spoken_text": "rùa"
+    },
+    "learning.word.rung_ay_suc_song": {
+      "asset": "clips/70/70756b0226d1.mp3",
+      "word_ends_ms": [
+        336,
+        556,
+        776
+      ],
+      "word_fade_ms": [
+        20,
+        12,
+        20
+      ],
+      "duration_ms": 1855,
+      "sha256": "70756b0226d10af05bcf9e20a702412d55270839b9795b7b07ce8891010f5ab9",
+      "display_text": "RỪNG ĐẦY SỨC SỐNG",
+      "spoken_text": "rừng đầy sức sống"
+    },
+    "learning.word.rung_xanh_mat": {
+      "asset": "clips/19/19f6c8f72058.mp3",
+      "word_ends_ms": [
+        359,
+        639
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1724,
+      "sha256": "19f6c8f720580d881d3f0dcc0e44c60cb63c4b1457802e2cb90f49f13c4c318a",
+      "display_text": "RỪNG XANH MÁT",
+      "spoken_text": "rừng xanh mát"
+    },
+    "learning.word.sach": {
+      "asset": "clips/30/30df1809f7af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "30df1809f7afe17383c1cf6265470fd278887fd30bb2e955a67e80debd5f5761",
+      "display_text": "SÁCH",
+      "spoken_text": "sách"
+    },
+    "learning.word.sao": {
+      "asset": "clips/68/68bb2a3e0d8c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "68bb2a3e0d8cdfc7c2e19893d94dd804e57fb2a6ef36b41e66e3a58dccc368c4",
+      "display_text": "SAO",
+      "spoken_text": "sao"
+    },
+    "learning.word.sao_bien": {
+      "asset": "clips/66/66ddf2f6ffd0.mp3",
+      "word_ends_ms": [
+        389
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1410,
+      "sha256": "66ddf2f6ffd0f5bc9cc1193bbbb4dbef80aebd898791590ffc7bad0a37e7abc0",
+      "display_text": "SAO BIỂN",
+      "spoken_text": "sao biển"
+    },
+    "learning.word.so_co_la": {
+      "asset": "clips/37/3776452e12b0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "3776452e12b0ef3ef9abf24d0c82d1daf4f06a4c7c97be828ab37274a0ec92ca",
+      "display_text": "SÔ CÔ LA",
+      "spoken_text": "sô cô la"
+    },
+    "learning.word.soc_nho": {
+      "asset": "clips/44/4431f53128aa.mp3",
+      "word_ends_ms": [
+        329
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1384,
+      "sha256": "4431f53128aa5e69b312c2f438d303f1154d22b9b4bb2974d619577e5c7f8ee0",
+      "display_text": "SÓC NHỎ",
+      "spoken_text": "sóc nhỏ"
+    },
+    "learning.word.su_tu": {
+      "asset": "clips/c2/c20987ccf0c3.mp3",
+      "word_ends_ms": [
+        299
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1437,
+      "sha256": "c20987ccf0c3d1eb29ca2b518f2ea0cf5821698608fc315dd43ac68a0a2a254f",
+      "display_text": "SƯ TỬ",
+      "spoken_text": "sư tử"
+    },
+    "learning.word.sua": {
+      "asset": "clips/12/1215fb37aac5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "1215fb37aac5131e79d13ce54173a8d8ab8ee35e3d27488549ab460bb2292462",
+      "display_text": "SỮA",
+      "spoken_text": "sữa"
+    },
+    "learning.word.sua_chua": {
+      "asset": "clips/ed/edadcb1e1acf.mp3",
+      "word_ends_ms": [
+        369
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1594,
+      "sha256": "edadcb1e1acf9d2d4d0e59b3db521c626dcb1bb7273fb089e1b6bb241c8f8d51",
+      "display_text": "SỮA CHUA",
+      "spoken_text": "sữa chua"
+    },
+    "learning.word.tao": {
+      "asset": "clips/90/90eea9fa675b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "90eea9fa675b60f2a26fe3ce08aa352625db6374e92f24ab305b6695f985b595",
+      "display_text": "TÁO",
+      "spoken_text": "táo"
+    },
+    "learning.word.tau_hoa": {
+      "asset": "clips/e1/e1d54c3cb3db.mp3",
+      "word_ends_ms": [
+        239
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1358,
+      "sha256": "e1d54c3cb3dbc1674d97caf9077f79789f5d96bf82e1e6c8193d9f45c1e2e44b",
+      "display_text": "TÀU HỎA",
+      "spoken_text": "tàu hỏa"
+    },
+    "learning.word.tau_ien": {
+      "asset": "clips/ca/caa536f28717.mp3",
+      "word_ends_ms": [
+        239
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1254,
+      "sha256": "caa536f2871787a259cf7f00f72152d02ea797b8062d3257702bde6dd922983f",
+      "display_text": "TÀU ĐIỆN",
+      "spoken_text": "tàu điện"
+    },
+    "learning.word.tau_lon": {
+      "asset": "clips/f5/f502703e66a0.mp3",
+      "word_ends_ms": [
+        298
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "f502703e66a088f94698f9faa665083d0a2838b2b13abdb68e83a7a5efc00c05",
+      "display_text": "TÀU LỚN",
+      "spoken_text": "tàu lớn"
+    },
+    "learning.word.tau_o_choi": {
+      "asset": "clips/cb/cb9500d08e8e.mp3",
+      "word_ends_ms": [
+        260,
+        449
+      ],
+      "word_fade_ms": [
+        40,
+        40
+      ],
+      "duration_ms": 1123,
+      "sha256": "cb9500d08e8ec3b80b9bd0a6f1b822fdc5f450f769bd40a2988e3464d16394dc",
+      "display_text": "TÀU ĐỒ CHƠI",
+      "spoken_text": "tàu đồ chơi"
+    },
+    "learning.word.tau_thuy": {
+      "asset": "clips/c3/c39ad9bd3a10.mp3",
+      "word_ends_ms": [
+        295
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "c39ad9bd3a107d1cbc67c12deaaaf350693d18c0a123416e2004e86806b31979",
+      "display_text": "TÀU THỦY",
+      "spoken_text": "tàu thủy"
+    },
+    "learning.word.tau_vu_tru": {
+      "asset": "clips/cc/cc6cafcdcec4.mp3",
+      "word_ends_ms": [
+        258,
+        419
+      ],
+      "word_fade_ms": [
+        20,
+        40
+      ],
+      "duration_ms": 1280,
+      "sha256": "cc6cafcdcec474dd3c4e0cd2984c677f1fd3c4be55fc00890cb3bd4327f6e6f6",
+      "display_text": "TÀU VŨ TRỤ",
+      "spoken_text": "tàu vũ trụ"
+    },
+    "learning.word.ten_lua": {
+      "asset": "clips/3d/3d1c5eedaf6b.mp3",
+      "word_ends_ms": [
+        320
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1332,
+      "sha256": "3d1c5eedaf6b18efbb8a2684c09adae288c387d82fb7747fe3d9512a8ccdf27a",
+      "display_text": "TÊN LỬA",
+      "spoken_text": "tên lửa"
+    },
+    "learning.word.tho": {
+      "asset": "clips/15/15e97ad010c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "15e97ad010c7ac946aff66f6f3c2a190ec91b70ec1d9a9d69d2577cc57fd2469",
+      "display_text": "THỎ",
+      "spoken_text": "thỏ"
+    },
+    "learning.word.thuyen": {
+      "asset": "clips/36/363a824ba441.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "363a824ba4415f6afd7ef816043f5f0a2025bf030066727d5f9463d599b7d269",
+      "display_text": "THUYỀN",
+      "spoken_text": "thuyền"
+    },
+    "learning.word.tia_chop": {
+      "asset": "clips/02/022f0a5f3b93.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "022f0a5f3b937468df31c1bdc67743b93250d5ac48ca36b30655336dc8c005c5",
+      "display_text": "TIA CHỚP",
+      "spoken_text": "tia chớp"
+    },
+    "learning.word.tinh_ban": {
+      "asset": "clips/ad/ad2f0b820b06.mp3",
+      "word_ends_ms": [
+        269
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "ad2f0b820b06672d9f433ac1b966ef1442ca227cfb42bd4fc0db3d31484a4df3",
+      "display_text": "TÌNH BẠN",
+      "spoken_text": "tình bạn"
+    },
+    "learning.word.trai_cay_tuoi": {
+      "asset": "clips/d8/d88fccc610d2.mp3",
+      "word_ends_ms": [
+        197,
+        417
+      ],
+      "word_fade_ms": [
+        39,
+        40
+      ],
+      "duration_ms": 1254,
+      "sha256": "d88fccc610d2e33e7f07ba66ca0557f7c0010317f282b6bc34d8aad447b2261c",
+      "display_text": "TRÁI CÂY TƯƠI",
+      "spoken_text": "trái cây tươi"
+    },
+    "learning.word.trang": {
+      "asset": "clips/81/813bc2ff9c9a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "813bc2ff9c9ad5ab674ccb7d192ad9977bdb3203f7d83340a63de0ddeb4e0c08",
+      "display_text": "TRĂNG",
+      "spoken_text": "trăng"
+    },
+    "learning.word.troi": {
+      "asset": "clips/92/922c97af6bb9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "922c97af6bb9fbebc62c509046c1bdd2fed747683147ec1e4c79385f233a44d8",
+      "display_text": "TRỜI",
+      "spoken_text": "trời"
+    },
+    "learning.word.truc_thang": {
+      "asset": "clips/f3/f30e5632f48e.mp3",
+      "word_ends_ms": [
+        254
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "f30e5632f48e2187e0d3bb0800b33f9339216dad870837a0326468d523d21170",
+      "display_text": "TRỰC THĂNG",
+      "spoken_text": "trực thăng"
+    },
+    "learning.word.trung": {
+      "asset": "clips/71/71409a2f6a5b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "71409a2f6a5be16a198079c3090f0cc0f51900dbe1e7fb0d80d9c23929ffce3a",
+      "display_text": "TRỨNG",
+      "spoken_text": "trứng"
+    },
+    "learning.word.truong": {
+      "asset": "clips/ec/ecb8f7322853.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "ecb8f7322853a6b6fefa38c498e1dd18dd5443d1544da409f0b2633380246b4b",
+      "display_text": "TRƯỜNG",
+      "spoken_text": "trường"
+    },
+    "learning.word.ua_than": {
+      "asset": "clips/e3/e34bb5cf4737.mp3",
+      "word_ends_ms": [
+        299
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "e34bb5cf473756d5b9fa8677e9786510a4dff6c0adb480e03b1daa6a0a914805",
+      "display_text": "ĐŨA THẦN",
+      "spoken_text": "đũa thần"
+    },
+    "learning.word.uong_nuoc_loc": {
+      "asset": "clips/f3/f39518177cf1.mp3",
+      "word_ends_ms": [
+        207,
+        417
+      ],
+      "word_fade_ms": [
+        30,
+        20
+      ],
+      "duration_ms": 862,
+      "sha256": "f39518177cf1b96a6fb19ac83ee0c408aa61297ba219d225a705646923edf2bc",
+      "display_text": "UỐNG NƯỚC LỌC",
+      "spoken_text": "uống nước lọc"
+    },
+    "learning.word.uong_nuoc_moi_ngay": {
+      "asset": "clips/ae/aeac01229ca6.mp3",
+      "word_ends_ms": [
+        309,
+        639,
+        909
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1750,
+      "sha256": "aeac01229ca6cbcc19af6ab0dcc5947a1995f5f65eb2500e216219c9d75922d4",
+      "display_text": "UỐNG NƯỚC MỖI NGÀY",
+      "spoken_text": "uống nước mỗi ngày"
+    },
+    "learning.word.vet_xanh": {
+      "asset": "clips/f1/f19ffae31539.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "f19ffae31539dcfb26dd4281e99937b134f38fc7b6fc1f7a851ce5ed55562551",
+      "display_text": "VẸT XANH",
+      "spoken_text": "vẹt xanh"
+    },
+    "learning.word.vien_keo_ngot": {
+      "asset": "clips/74/742992ed2c17.mp3",
+      "word_ends_ms": [
+        319,
+        539
+      ],
+      "word_fade_ms": [
+        19,
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "742992ed2c1751755570ca3e9d6cf07e51e47daed6435ec48160ace56c4fccc2",
+      "display_text": "VIÊN KẸO NGỌT",
+      "spoken_text": "viên kẹo ngọt"
+    },
+    "learning.word.voi": {
+      "asset": "clips/28/2890bf1b8c5f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "2890bf1b8c5f595798cfa9a2cc147de7c7f4ca565b29b6a9cd9f1d2ddfae2e4b",
+      "display_text": "VOI",
+      "spoken_text": "voi"
+    },
+    "learning.word.voi_lon": {
+      "asset": "clips/0d/0ddd2c67d57c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "0ddd2c67d57cb066ae818f71f5cd7cb3b9fd3acd6bff14cfff9978b170a04854",
+      "display_text": "VOI LỚN",
+      "spoken_text": "voi lớn"
+    },
+    "learning.word.xe_ap": {
+      "asset": "clips/c7/c7d56125df46.mp3",
+      "word_ends_ms": [
+        299
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1045,
+      "sha256": "c7d56125df46662ac0fd0b4f90db950e4eea00de1bceb94bc98c749479859fb7",
+      "display_text": "XE ĐẠP",
+      "spoken_text": "xe đạp"
+    },
+    "learning.word.xe_ba_banh": {
+      "asset": "clips/30/3039d2d40df8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "3039d2d40df84aa1501955a981328c93f27a81a28e4d9bcfc0c3bc54d4dbb4ca",
+      "display_text": "XE BA BÁNH",
+      "spoken_text": "xe ba bánh"
+    },
+    "learning.word.xe_buyt": {
+      "asset": "clips/91/915666f36f63.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "915666f36f634e895f4ac27d15063e5270be1f9a069574fc16479966555bad5a",
+      "display_text": "XE BUÝT",
+      "spoken_text": "xe buýt"
+    },
+    "learning.word.xe_cuu_hoa": {
+      "asset": "clips/73/7338b4d6ac35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "7338b4d6ac3539ebce541d1022f12c0495940b6233a9761d4e372a9c43e154c8",
+      "display_text": "XE CỨU HỎA",
+      "spoken_text": "xe cứu hỏa"
+    },
+    "learning.word.xe_ien": {
+      "asset": "clips/9d/9def80b2d206.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "9def80b2d206b9777d09dfcf5ccb7b17683c3225b54bc645228b2670caf5522e",
+      "display_text": "XE ĐIỆN",
+      "spoken_text": "xe điện"
+    },
+    "learning.word.xe_kem": {
+      "asset": "clips/2c/2c59aa029828.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "2c59aa02982843540f19f71e14a6c13495e528a347712296ce13e503dd72d6c7",
+      "display_text": "XE KEM",
+      "spoken_text": "xe kem"
+    },
+    "learning.word.xe_may": {
+      "asset": "clips/72/7239bdf5fc82.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "7239bdf5fc82e56784a29c12e9abf986ededa12a5047c342ca86b936ce102098",
+      "display_text": "XE MÁY",
+      "spoken_text": "xe máy"
+    },
+    "learning.word.xe_tai": {
+      "asset": "clips/af/afa0458d30b2.mp3",
+      "word_ends_ms": [
+        239
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1176,
+      "sha256": "afa0458d30b24539d6085de0f3b98c1a006acc287fdeaf92d213a1e0c9ba1a77",
+      "display_text": "XE TẢI",
+      "spoken_text": "xe tải"
+    },
+    "learning.word.xe_truot": {
+      "asset": "clips/e4/e4705dca414d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "e4705dca414d62ffd64a906933008ee52301459f50f12ae3b71f53ca5c5f9c80",
+      "display_text": "XE TRƯỢT",
+      "spoken_text": "xe trượt"
+    },
+    "learning.word.yeu_trai_at_nay": {
+      "asset": "clips/1f/1fdb52ac6283.mp3",
+      "word_ends_ms": [
+        270,
+        459,
+        699
+      ],
+      "word_fade_ms": [
+        31,
+        20,
+        20
+      ],
+      "duration_ms": 1202,
+      "sha256": "1fdb52ac628383438558820e6bc287124d313fdc34dc003a145fd61a45f85789",
+      "display_text": "YÊU TRÁI ĐẤT NÀY",
+      "spoken_text": "yêu trái đất này"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/7d/7df78f51adcc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "7df78f51adcc70c91ae8439436d6fd7bbd21dcf904ea613cc4c0ae888acbd348",
+      "display_text": "Mê Cung Học Tập",
+      "spoken_text": "Mê Cung Học Tập"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/49/49f6c0a6e57f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "49f6c0a6e57f282b12d1de83236b0ae5d59d8e4bbcfcbf0e5d41d4047e7050d8",
+      "display_text": "Tự động",
+      "spoken_text": "Tự động"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/47/47c262e1500b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "47c262e1500b596c0d7c3914d256432fb5fbff9447e85d4960a0208893fc3497",
+      "display_text": "Tiếng Séc",
+      "spoken_text": "Tiếng Séc"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/cf/cf4b53aeefe5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "cf4b53aeefe5605515d649c6a467b23b88ced150f2d00011a4d07880d52ce14b",
+      "display_text": "Tiếng Đan Mạch",
+      "spoken_text": "Tiếng Đan Mạch"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/0d/0d8cc9eb7381.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "0d8cc9eb73815389870600dfa7137ddc24c0ec5cfa3c15730f5a7b5adf204505",
+      "display_text": "Tiếng Hà Lan",
+      "spoken_text": "Tiếng Hà Lan"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/c3/c3716aa3d5e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "c3716aa3d5e50717b648de940d036f3373b0b58f75899b754de25388f791e2cd",
+      "display_text": "Tiếng Anh",
+      "spoken_text": "Tiếng Anh"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/93/9335a0c479cb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "9335a0c479cb573c6c9c1520c2dfb05af50b32e8215a16c87697614c4d0eaf86",
+      "display_text": "Tiếng Phần Lan",
+      "spoken_text": "Tiếng Phần Lan"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/bb/bb83963cbf9e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "bb83963cbf9e642f6a119c3cbbda8fb5b012fe5bc9645cec574f074041388188",
+      "display_text": "Tiếng Pháp",
+      "spoken_text": "Tiếng Pháp"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/f5/f56fc538f1eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "f56fc538f1eb9b5ab55bec538ff7ffd75b82160e736f64febe03a470bd48f93f",
+      "display_text": "Tiếng Đức",
+      "spoken_text": "Tiếng Đức"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/03/0305150500b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "0305150500b8cee0f9647dfe78c4eff702422211bba7be59735b42a5b87cfbc0",
+      "display_text": "Tiếng Hy Lạp",
+      "spoken_text": "Tiếng Hy Lạp"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/39/39c4491c1c7b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "39c4491c1c7b6bf2d9a970b734e319a573ceaab7009af745d180c523a92e845a",
+      "display_text": "Tiếng Do Thái",
+      "spoken_text": "Tiếng Do Thái"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/33/331641cae3b7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "331641cae3b78b09fff4f23e27ad71127d737df6990eddb2254f656b5d4a2b24",
+      "display_text": "Tiếng Hungary",
+      "spoken_text": "Tiếng Hungary"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/b7/b7d73df80d20.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "b7d73df80d20f925c20365cd3a185e52119657207fb1ca4fb12954c0e9c5b4bd",
+      "display_text": "bằng tiếng Séc",
+      "spoken_text": "bằng tiếng Séc"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/1d/1d743fffa9c4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1828,
+      "sha256": "1d743fffa9c46f0ec73d09b239f83417f0fe9b4a880d1f525c8500fc6792f216",
+      "display_text": "bằng tiếng Đan Mạch",
+      "spoken_text": "bằng tiếng Đan Mạch"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/c4/c4948d09db1f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1698,
+      "sha256": "c4948d09db1fba395ea36ac4a6b4019e0b7ac66dc24c672cde1bf142a45910b8",
+      "display_text": "bằng tiếng Hà Lan",
+      "spoken_text": "bằng tiếng Hà Lan"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/79/79e044affa96.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "79e044affa9666561039fc78363ee78083c33217c1f67f8e81eace605f11f192",
+      "display_text": "bằng tiếng Anh",
+      "spoken_text": "bằng tiếng Anh"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/c6/c625e794000d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1881,
+      "sha256": "c625e794000d400b6d9cf070cdb82fe36afdf2a6993aed8e5378a35cc794d9d3",
+      "display_text": "bằng tiếng Phần Lan",
+      "spoken_text": "bằng tiếng Phần Lan"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/6b/6b8707970dab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "6b8707970dabd4d65c379689388cd87f3dbb55ff15161a8b3ed3a667e6a10ee8",
+      "display_text": "bằng tiếng Pháp",
+      "spoken_text": "bằng tiếng Pháp"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/74/74107b01abf7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "74107b01abf7cd99622eb1809f87635b8197360dc5f734d189a8cfcdb9484ae5",
+      "display_text": "bằng tiếng Đức",
+      "spoken_text": "bằng tiếng Đức"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/e5/e542f9371772.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "e542f9371772e7db9ae4242b9d58345a9e885e9f65b578da12706c9ee74cfb4c",
+      "display_text": "bằng tiếng Hy Lạp",
+      "spoken_text": "bằng tiếng Hy Lạp"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/77/770462bafc7b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1750,
+      "sha256": "770462bafc7b6242b9d09a696fb68ee351105e5f4150800ead6ac2ce8619121b",
+      "display_text": "bằng tiếng Do Thái",
+      "spoken_text": "bằng tiếng Do Thái"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/45/45f8c9cca564.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1881,
+      "sha256": "45f8c9cca564f6ac9aa67b455b7d156c6240e207a7ea9b6adbec2d41672d4cb4",
+      "display_text": "bằng tiếng Hungary",
+      "spoken_text": "bằng tiếng Hungary"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/35/354a07818209.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "354a078182092b715323a91021283f1684783596af080fc98724ccc26100ebe6",
+      "display_text": "bằng tiếng Ý",
+      "spoken_text": "bằng tiếng Ý"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/6d/6d650abccee7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1828,
+      "sha256": "6d650abccee7d3b8a99739f5c5f59ce3b9ee10289c61035b566ce2763b4be8e7",
+      "display_text": "bằng tiếng Na Uy",
+      "spoken_text": "bằng tiếng Na Uy"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/13/1352dd028f50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "1352dd028f508c3d3463335ac81eb983d1d7816ce3297762a3d2213f81220bb8",
+      "display_text": "bằng tiếng Ba Lan",
+      "spoken_text": "bằng tiếng Ba Lan"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/b3/b3f591e19187.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "b3f591e19187f7012669306579964b24a4ee9510451fdf65853b14e29158d8dd",
+      "display_text": "bằng tiếng Bồ Đào Nha",
+      "spoken_text": "bằng tiếng Bồ Đào Nha"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/45/45c2a2e6558c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1802,
+      "sha256": "45c2a2e6558c2c947548da114ace004908b4c3d2c84830be10c979bb344ac237",
+      "display_text": "bằng tiếng Rumani",
+      "spoken_text": "bằng tiếng Rumani"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/be/be1a8b11071a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1724,
+      "sha256": "be1a8b11071a6c0e70f229c31229a864f793f95d15f79db9125d1c7e84f693e8",
+      "display_text": "bằng tiếng Slovak",
+      "spoken_text": "bằng tiếng Slovak"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/87/8733ac8bfc35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "8733ac8bfc35ce1f08e0399fb7fa9de67488b66bf3a42d8fdaeb926c266ae2b7",
+      "display_text": "bằng tiếng Tây Ban Nha",
+      "spoken_text": "bằng tiếng Tây Ban Nha"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/90/9004564a22c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "9004564a22c015c78d18795939dc67fceeb467fa03ba1061959c77c38b0758bf",
+      "display_text": "bằng tiếng Thụy Điển",
+      "spoken_text": "bằng tiếng Thụy Điển"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/cd/cd6bc5c7b1e7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "cd6bc5c7b1e78c485c0ce4a1994543402f046deef75c9d482917304e8e15f78f",
+      "display_text": "bằng tiếng Thổ Nhĩ Kỳ",
+      "spoken_text": "bằng tiếng Thổ Nhĩ Kỳ"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/37/37912fafb7b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 2142,
+      "sha256": "37912fafb7b88d8bb0fe4d8070a2260f0864ad6f2295748d8bcd55d82408efcf",
+      "display_text": "bằng tiếng Ukraina",
+      "spoken_text": "bằng tiếng Ukraina"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/a6/a663b190298d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "a663b190298d5175d246c9ababa406a317dbafd351858303d15b0d8382cdd46a",
+      "display_text": "bằng tiếng Việt",
+      "spoken_text": "bằng tiếng Việt"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/77/77d6cd9f803b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "77d6cd9f803b1bc79be61c80ff19c47e1ac64624a5797655ce347199ced4ba37",
+      "display_text": "Tiếng Ý",
+      "spoken_text": "Tiếng Ý"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/6c/6cbfe4239bf9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "6cbfe4239bf9e997b9b9b55b332a90cfa8586abaa83dd6d7c94deb7038984dd4",
+      "display_text": "Tiếng Na Uy",
+      "spoken_text": "Tiếng Na Uy"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/12/12579511dddd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "12579511dddd22f1f81e872a79d341c166a9f516a8129213f6b2bd5b1b09611e",
+      "display_text": "Tiếng Ba Lan",
+      "spoken_text": "Tiếng Ba Lan"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/a6/a6ef911cd4ea.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "a6ef911cd4ea7572ecb05e175c8bba2707cef152d6f7d855f653212eb332bbfd",
+      "display_text": "Tiếng Bồ Đào Nha",
+      "spoken_text": "Tiếng Bồ Đào Nha"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/d4/d41feb5f8f21.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "d41feb5f8f215e4a9c492ac2e7bb6fe4b76da19389702584095fea4c3af1607a",
+      "display_text": "Tiếng Rumani",
+      "spoken_text": "Tiếng Rumani"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/0b/0b17c52c6868.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "0b17c52c6868e298582d59eb072aa539f0f621b4684272411ee9ab5d72429677",
+      "display_text": "Tiếng Slovak",
+      "spoken_text": "Tiếng Slovak"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/2d/2d2b159c795f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "2d2b159c795f68e13061a96e81e8098ad38e0edc78d21559a520b3fe1f1a59a6",
+      "display_text": "Tiếng Tây Ban Nha",
+      "spoken_text": "Tiếng Tây Ban Nha"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/50/509649c7ddfa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "509649c7ddfade8d3087dd06864e6103550d81bf3849ee2148b8ca8aec3bdd58",
+      "display_text": "Tiếng Thụy Điển",
+      "spoken_text": "Tiếng Thụy Điển"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/34/34ab8067fe73.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "34ab8067fe73294d6021e5b77bd8119f75bdcb5b9c4de3689a50f75a3696c717",
+      "display_text": "Tiếng Thổ Nhĩ Kỳ",
+      "spoken_text": "Tiếng Thổ Nhĩ Kỳ"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/7e/7e646ccaa6bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "7e646ccaa6bf3581239448f37cc4a41923ea0627fc4ac42771a82abe4f291353",
+      "display_text": "Tiếng Ukraina",
+      "spoken_text": "Tiếng Ukraina"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/ff/ff3ad38d32d9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "ff3ad38d32d989660f010b8f966f7ed0539d79380dd0be98661d7ad3ebe5027a",
+      "display_text": "Tiếng Việt",
+      "spoken_text": "Tiếng Việt"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/5e/5e5f99665257.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "5e5f9966525726aa88f9d6b5b1de82842908c8148c370216e57f8f3ba8ce8192",
+      "display_text": "Bạn đã đếm đến",
+      "spoken_text": "Bạn đã đếm đến"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/45/45acd9df465c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "45acd9df465c5b073bd6edc78a1c9d7dd9d4feeea026814bfa3c97b33fa8d5bf",
+      "display_text": "Bạn đã đếm",
+      "spoken_text": "Bạn đã đếm"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/5b/5bd3450073a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "5bd3450073a4b33260a644af438ae1fa8233bdfb199e6d4f99b0ae0befc52d56",
+      "display_text": "đến",
+      "spoken_text": "đến"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/c4/c4265ca6e677.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 2011,
+      "sha256": "c4265ca6e67707eb95eff4e4e3e244ffbc4750e215a9d88631cce31aac92ca2b",
+      "display_text": "Bạn đã tìm thấy chữ cái",
+      "spoken_text": "Bạn đã tìm thấy chữ cái"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/76/7669a305d1f2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "7669a305d1f21a898db6c3ab855f4e6116067081d05d37dc030eb6241f681518",
+      "display_text": "Bạn đã tìm thấy",
+      "spoken_text": "Bạn đã tìm thấy"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/87/87f3df1b5cc6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "87f3df1b5cc641157d8c909937d8ed6bb9aa0052d6b327a006fb3c4d5d5b8f26",
+      "display_text": "chữ cái",
+      "spoken_text": "chữ cái"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/ff/ff2c2e934947.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 2534,
+      "sha256": "ff2c2e9349477aaddfc6a5ee7813aae48ea088a45498eac38e2b4137ca5562f9",
+      "display_text": "Bạn đã tìm thấy các chữ cái từ",
+      "spoken_text": "Bạn đã tìm thấy các chữ cái từ"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/79/792240d67bbd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "792240d67bbdc2a4b057a94a88c445c506cce6903ba9f2feecf044b8128f89bb",
+      "display_text": "các chữ cái từ",
+      "spoken_text": "các chữ cái từ"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/70/7045bc6a2943.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "7045bc6a2943d50efc3712ed39edd2096e0a23f8ef37c139b407441acda00aea",
+      "display_text": "bằng",
+      "spoken_text": "bằng"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/6c/6c00e1680ed7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 2116,
+      "sha256": "6c00e1680ed7dd3ec17f4f2fbf2af9339c4d87d9a1007c629d1f5fcbbc3be023",
+      "display_text": "Bạn đã đánh vần cụm từ",
+      "spoken_text": "Bạn đã đánh vần cụm từ"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/64/6498e2a169d1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "6498e2a169d1c451af0f2fbab7bf4e82108a375a718379d76d5ea6dd970b4901",
+      "display_text": "cụm từ",
+      "spoken_text": "cụm từ"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/5f/5fd5467db4c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1776,
+      "sha256": "5fd5467db4c884b486bd314e42fe7bfeaed0de7f3ec6bc6480c38800a47454e9",
+      "display_text": "Bạn đã đánh vần từ",
+      "spoken_text": "Bạn đã đánh vần từ"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/03/0300d17a2325.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "0300d17a23257603fa594f0d966ab4e79181dfc785b55b1f30e8602c9012af97",
+      "display_text": "Bạn đã đánh vần",
+      "spoken_text": "Bạn đã đánh vần"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/09/09014e677954.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "09014e6779544a51e3a78bd4b63fd954e8bab3f00343cd309787bd10beebd9fd",
+      "display_text": "từ",
+      "spoken_text": "từ"
+    }
+  }
+}

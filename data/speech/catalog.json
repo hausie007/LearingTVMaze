@@ -92,7 +92,7 @@
     },
     "fr": {
       "locale": "fr-FR",
-      "enabled": false
+      "enabled": true
     },
     "it": {
       "locale": "it-IT",

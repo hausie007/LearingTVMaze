@@ -181,6 +181,83 @@
           "teşekkürler"
         ]
       }
+    },
+    "vi": {
+      "learning.char.c06": {
+        "n": 1,
+        "reason": "sounds like D",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chao": {
+        "n": 1,
+        "reason": "says chào chào các bạn",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chao_cac_ban": {
+        "n": 1,
+        "reason": "says chim",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim": {
+        "n": 1,
+        "reason": "says chim đang bay",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim_ang_bay": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim_bay_that_cao": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim_canh_cut": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim_cong": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chim_nho": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.cho": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.choi_cung_nhau": {
+        "n": 1,
+        "reason": "says chơi với đồ chơi",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.choi_voi_o_choi": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chu_cho_con": {
+        "n": 1,
+        "reason": "says chuối",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chuoi": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-19"
+      },
+      "learning.word.chuot_hamster": {
+        "n": 1,
+        "reason": "says hamster",
+        "asked_on": "2026-08-19"
+      }
     }
   }
 }

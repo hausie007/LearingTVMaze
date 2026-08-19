@@ -1,0 +1,2686 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "tr",
+  "locale": "tr-TR",
+  "voice_profile": "tr-TR@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 29,
+    "word": 170,
+    "ui": 36
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/f4/f469096b9995.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "f469096b999513f5a7332e026468b182be1475d550a13bdb8070eca79fd0dd3f",
+      "display_text": "A",
+      "spoken_text": "a"
+    },
+    "learning.char.b": {
+      "asset": "clips/eb/eb26dd6029cf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "eb26dd6029cfc4c58dc704b0d3543f1620019cb00eb22cd46d101e17c21e347b",
+      "display_text": "B",
+      "spoken_text": "be"
+    },
+    "learning.char.c": {
+      "asset": "clips/08/082ae49c483e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "082ae49c483ea9bc3b5ce4f9f4acd0e262380a305b88e230128da69d22a348b2",
+      "display_text": "C",
+      "spoken_text": "ce"
+    },
+    "learning.char.c03": {
+      "asset": "clips/7a/7a288071f819.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "7a288071f819b654c274525c25ee3ef27257b43a0de372ac7a84eb4c5e38e357",
+      "display_text": "Ç",
+      "spoken_text": "çe"
+    },
+    "learning.char.c08": {
+      "asset": "clips/b6/b64d35290533.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "b64d352905332b582b310c14ca85198e2f7227a0b0c843ca1e10724aed5eb4c5",
+      "display_text": "Ğ",
+      "spoken_text": "yumuşak ge"
+    },
+    "learning.char.c11": {
+      "asset": "clips/8e/8e3f0427ba98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "8e3f0427ba989e9ebba194f481117d37d905c15adfa9bd30f59de8ab7f9dd836",
+      "display_text": "İ",
+      "spoken_text": "i"
+    },
+    "learning.char.c18": {
+      "asset": "clips/dc/dcae1834bbdf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "dcae1834bbdf4bd3cc116e5314300c29fee1e7fd1cf1fc0403440d8dbaeb7b8e",
+      "display_text": "Ö",
+      "spoken_text": "ö"
+    },
+    "learning.char.c22": {
+      "asset": "clips/df/df78c4ebc849.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "df78c4ebc849d0880e1737db3402277a999569bd4332ebd606bd3165ed905a7a",
+      "display_text": "Ş",
+      "spoken_text": "şe"
+    },
+    "learning.char.c25": {
+      "asset": "clips/2c/2caf2f61a280.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "2caf2f61a28043c4db08e56c94f69ff8707694edc1b7b08e453d48e727441ea2",
+      "display_text": "Ü",
+      "spoken_text": "ü"
+    },
+    "learning.char.d": {
+      "asset": "clips/e3/e3d70043f86b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "e3d70043f86b5fd7aed876cd33a2ba67bbd01a89cb98b48abacceaacb0a21f1d",
+      "display_text": "D",
+      "spoken_text": "de"
+    },
+    "learning.char.e": {
+      "asset": "clips/e9/e9aff6b083fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "e9aff6b083fdcf1eb93f1a58e65e86215327e6729f3c53125b3ded85e57d1ede",
+      "display_text": "E",
+      "spoken_text": "e"
+    },
+    "learning.char.f": {
+      "asset": "clips/60/6092b5ca0a1d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "6092b5ca0a1d0c01258bc214f706bc1a5701054d711c1e26825e9ec817ea2562",
+      "display_text": "F",
+      "spoken_text": "fe"
+    },
+    "learning.char.g": {
+      "asset": "clips/4f/4f8a1f794149.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "4f8a1f79414947dbd8b27e583ac62f23f6cb6f52dc0571bcb9938d3564fd2ac9",
+      "display_text": "G",
+      "spoken_text": "ge"
+    },
+    "learning.char.h": {
+      "asset": "clips/28/28a6710b84d7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "28a6710b84d724eca2e7440901eed44077190adcd7192367d4621e70f2c71aa0",
+      "display_text": "H",
+      "spoken_text": "he"
+    },
+    "learning.char.i": {
+      "asset": "clips/1e/1ecd34ce3073.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "1ecd34ce3073f626b720d71d39cc60376b0b1d5d1da9a5e701a87b27e9dde51a",
+      "display_text": "I",
+      "spoken_text": "ı"
+    },
+    "learning.char.j": {
+      "asset": "clips/07/0741f1099ee2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "0741f1099ee2e99a5f994b7c016e7cca415be06b84f8449af4551078ea2a127c",
+      "display_text": "J",
+      "spoken_text": "je"
+    },
+    "learning.char.k": {
+      "asset": "clips/01/015827756bd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "015827756bd2f5a3c16f18715144763fa73507352dbdd652f1c24439059e58a1",
+      "display_text": "K",
+      "spoken_text": "ke"
+    },
+    "learning.char.l": {
+      "asset": "clips/20/20901a5d9f26.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "20901a5d9f2677f2b9647c1becad26273a87dff1c452b5302fa9561f27aad078",
+      "display_text": "L",
+      "spoken_text": "le"
+    },
+    "learning.char.m": {
+      "asset": "clips/9c/9c2c84535061.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "9c2c84535061b8f3cdcac8563f16e9e757a11aa90953a884b69d3519b1852a6c",
+      "display_text": "M",
+      "spoken_text": "me"
+    },
+    "learning.char.n": {
+      "asset": "clips/fa/fad34b00799c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "fad34b00799ce950c0cce760a1f13b816b3949d00fe047d98d11d55788092270",
+      "display_text": "N",
+      "spoken_text": "ne"
+    },
+    "learning.char.o": {
+      "asset": "clips/76/768993b12280.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "768993b1228030d90aa41a0aac2bec83ea319099e7e8c49fac8295e48718bff2",
+      "display_text": "O",
+      "spoken_text": "o"
+    },
+    "learning.char.p": {
+      "asset": "clips/d0/d0eb0e964df2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "d0eb0e964df2e696aca7b32d3b4df1ba8ccb1d66056bc20e11b6489c995b3a82",
+      "display_text": "P",
+      "spoken_text": "pe"
+    },
+    "learning.char.r": {
+      "asset": "clips/f7/f78b06f89168.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "f78b06f891687be288ae3c61b83773da62ce505b6f49d20bda7ae226ee03138d",
+      "display_text": "R",
+      "spoken_text": "re"
+    },
+    "learning.char.s": {
+      "asset": "clips/98/9870c9c7df2c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "9870c9c7df2c6f61c5ad9b685475c978af9096efb200e4cd4c2f3eaf0a65682e",
+      "display_text": "S",
+      "spoken_text": "se"
+    },
+    "learning.char.t": {
+      "asset": "clips/a6/a6d8a539ae89.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "a6d8a539ae891c0ecd5cf771b7f69127ec8fd6f1e9f866d9d4a334e18b3afd7b",
+      "display_text": "T",
+      "spoken_text": "te"
+    },
+    "learning.char.u": {
+      "asset": "clips/df/df25f63d42aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "df25f63d42aa4da4248f7060b849e9d5ac51500989f466826faacdf5385dffe8",
+      "display_text": "U",
+      "spoken_text": "u"
+    },
+    "learning.char.v": {
+      "asset": "clips/a0/a0b7349fb2b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "a0b7349fb2b401b4790ebafabaed52d6c6f76fd59dd4f20c71d76b20c00e175d",
+      "display_text": "V",
+      "spoken_text": "ve"
+    },
+    "learning.char.y": {
+      "asset": "clips/28/28ba8484329c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "28ba8484329c8d50a9863b4496753e0f8e1500fd923dd30dbff181a7dce1a9b9",
+      "display_text": "Y",
+      "spoken_text": "ye"
+    },
+    "learning.char.z": {
+      "asset": "clips/49/4951e9cae368.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "4951e9cae36883610996a8e39cdb739ff133e24900960ecf9d65be7549ca351e",
+      "display_text": "Z",
+      "spoken_text": "ze"
+    },
+    "learning.number.001": {
+      "asset": "clips/2d/2df4e1113fad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "2df4e1113faddc663cf9a127a7980b4566e9a6aca22e377497d990c4aa9fd089",
+      "display_text": "1",
+      "spoken_text": "bir"
+    },
+    "learning.number.002": {
+      "asset": "clips/d4/d4e2d3c6c081.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "d4e2d3c6c0815dc8cc74eca98432b4370c9d44ff6bd0cd26b0665a95e6bbd822",
+      "display_text": "2",
+      "spoken_text": "iki"
+    },
+    "learning.number.003": {
+      "asset": "clips/1b/1b9ee491e636.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "1b9ee491e63628a5fa90b163d14994f867089e015fa67b7d5f72f356419e31f9",
+      "display_text": "3",
+      "spoken_text": "üç"
+    },
+    "learning.number.004": {
+      "asset": "clips/fd/fde7541b2770.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "fde7541b277031ea15fde951827d5cc4a3711a6a9469b77d8201fa6ec5f7f669",
+      "display_text": "4",
+      "spoken_text": "dört"
+    },
+    "learning.number.005": {
+      "asset": "clips/b3/b3663743a9a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "b3663743a9a21cf247458c888f29112dbbaa2c470def6f54c3ddd90e12626330",
+      "display_text": "5",
+      "spoken_text": "beş"
+    },
+    "learning.number.006": {
+      "asset": "clips/bd/bdb495c87ed4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "bdb495c87ed4f7a76f5a291662b7ee84c6501faa50aee9e527ab129510cbc3d3",
+      "display_text": "6",
+      "spoken_text": "altı"
+    },
+    "learning.number.007": {
+      "asset": "clips/e9/e921e793df48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "e921e793df48395ca1d7759b060b4874a272dbcc32580e7990c4d0b6b1759fa8",
+      "display_text": "7",
+      "spoken_text": "yedi"
+    },
+    "learning.number.008": {
+      "asset": "clips/dd/dd8ab3c73bd0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "dd8ab3c73bd08ca901082f9b7352d13ee5c5a27649ab544e075a1d8cd77027bb",
+      "display_text": "8",
+      "spoken_text": "sekiz"
+    },
+    "learning.number.009": {
+      "asset": "clips/5b/5b99d3bec2be.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "5b99d3bec2be9ecc5b70ce653907ce3b2e62b9c212c8e1586a6adf2c722e7322",
+      "display_text": "9",
+      "spoken_text": "dokuz"
+    },
+    "learning.number.010": {
+      "asset": "clips/3f/3f906e12f823.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "3f906e12f82332e0da1dc6957b92c949cc476cfbb3229f8118b317978e27e34b",
+      "display_text": "10",
+      "spoken_text": "on"
+    },
+    "learning.number.011": {
+      "asset": "clips/a9/a9018462d7a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "a9018462d7a681ff2fb5de5e82adc09ea98298a3b1f678bf7cebb080f753af6e",
+      "display_text": "11",
+      "spoken_text": "on bir"
+    },
+    "learning.number.012": {
+      "asset": "clips/34/347b07f99e07.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "347b07f99e0776e60e0143acb45501183246c5de16b473564f2bc52e8b14523c",
+      "display_text": "12",
+      "spoken_text": "on iki"
+    },
+    "learning.number.013": {
+      "asset": "clips/c2/c21412ab95a7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c21412ab95a767709f2c123ae33d3720435e3a808295e270bb147d1d42d73022",
+      "display_text": "13",
+      "spoken_text": "on üç"
+    },
+    "learning.number.014": {
+      "asset": "clips/d5/d5219fcc93b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "d5219fcc93b327e4076b4a96c85b6195813e66541b1cc59071c5cefed7e935b4",
+      "display_text": "14",
+      "spoken_text": "on dört"
+    },
+    "learning.number.015": {
+      "asset": "clips/f5/f56e1f5876e9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "f56e1f5876e95c3d481da353300139f6384be3ea1162d12befa97748e7dd5b2b",
+      "display_text": "15",
+      "spoken_text": "on beş"
+    },
+    "learning.number.016": {
+      "asset": "clips/ce/ce7d8fbe971c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "ce7d8fbe971c88762549d15ba64b60c9d78371ee59ed04218087806dcfaaec16",
+      "display_text": "16",
+      "spoken_text": "on altı"
+    },
+    "learning.number.017": {
+      "asset": "clips/a2/a2f0ef87081a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "a2f0ef87081a5d1b61ca76940775c97af85c085beae581b1e90e4d62ff9df5a5",
+      "display_text": "17",
+      "spoken_text": "on yedi"
+    },
+    "learning.number.018": {
+      "asset": "clips/34/34a08012c797.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "34a08012c797ee318002e1424780db12f903ab9f0aec82a177207258fe9b3f64",
+      "display_text": "18",
+      "spoken_text": "on sekiz"
+    },
+    "learning.number.019": {
+      "asset": "clips/71/71567e72b938.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "71567e72b938f92f8ac5c179614f009899bac315b7350e777fc54f5a91f0d749",
+      "display_text": "19",
+      "spoken_text": "on dokuz"
+    },
+    "learning.number.020": {
+      "asset": "clips/20/2021b29da681.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "2021b29da681a494c2722e452459bad3e0e4c11831cb30109829ec97e2429be6",
+      "display_text": "20",
+      "spoken_text": "yirmi"
+    },
+    "learning.number.021": {
+      "asset": "clips/41/41bc99227248.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "41bc99227248b8d3410d5bf127b7f7b502ed7f62430ea5a4e6cfb4c002ab06ff",
+      "display_text": "21",
+      "spoken_text": "yirmi bir"
+    },
+    "learning.number.022": {
+      "asset": "clips/6a/6a088dc0fb05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "6a088dc0fb053b89f2413b34e1a56d7ad526d0cf07c7e536b5a30a1c08d89c1b",
+      "display_text": "22",
+      "spoken_text": "yirmi iki"
+    },
+    "learning.number.023": {
+      "asset": "clips/89/89290d8588cc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "89290d8588cc1bec99f834bd2a7228087590d0ce122304899174c1fbd978f522",
+      "display_text": "23",
+      "spoken_text": "yirmi üç"
+    },
+    "learning.number.024": {
+      "asset": "clips/bb/bb43f3e6ea76.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "bb43f3e6ea767e3bff92c149cb92d07903a8aae946c920a4c19215c17fc0a01d",
+      "display_text": "24",
+      "spoken_text": "yirmi dört"
+    },
+    "learning.number.025": {
+      "asset": "clips/f6/f68beae5b464.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "f68beae5b46413b9763e28f2e24e9e8c3a3c6d056b2c7dbe3621608823cbf8c7",
+      "display_text": "25",
+      "spoken_text": "yirmi beş"
+    },
+    "learning.number.026": {
+      "asset": "clips/04/044e42b0a8e8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "044e42b0a8e837de6c9be4c57476d5f3e3268df8053dc0daac73bf2eefc914db",
+      "display_text": "26",
+      "spoken_text": "yirmi altı"
+    },
+    "learning.number.027": {
+      "asset": "clips/7a/7afe5255ddca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "7afe5255ddca38c1b13343eaf8b558ffe5eb9021dfb26125f777a677fbe86144",
+      "display_text": "27",
+      "spoken_text": "yirmi yedi"
+    },
+    "learning.number.028": {
+      "asset": "clips/06/060d8649e0a3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "060d8649e0a3855b979aa7e4358e1a4ad8b066c6e5a81141b31dac3054af30fb",
+      "display_text": "28",
+      "spoken_text": "yirmi sekiz"
+    },
+    "learning.number.029": {
+      "asset": "clips/97/97864adad96d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "97864adad96ddcb317807c33ddbd155dd95525b9a0f3ac3f905e93fd67365f8d",
+      "display_text": "29",
+      "spoken_text": "yirmi dokuz"
+    },
+    "learning.number.030": {
+      "asset": "clips/f9/f909fc17fbb4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "f909fc17fbb4380ac1bf38923e2aff720ed6c2f401b3020e5a3c5ff6025e820f",
+      "display_text": "30",
+      "spoken_text": "otuz"
+    },
+    "learning.number.031": {
+      "asset": "clips/f3/f378c5aacd95.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "f378c5aacd95e1f80e09cf7e2cc535a8588ce1113d9699861bde29de9863e50a",
+      "display_text": "31",
+      "spoken_text": "otuz bir"
+    },
+    "learning.number.032": {
+      "asset": "clips/65/6523a9ceb58c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "6523a9ceb58cf5e47a77b31a61a822b63389f725591721ecd02d3b1cae6315d3",
+      "display_text": "32",
+      "spoken_text": "otuz iki"
+    },
+    "learning.number.033": {
+      "asset": "clips/39/39cb8958fe29.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "39cb8958fe29cce6993b1da2a1aaf0fdd96b061329599c9ce95b70bf993cc586",
+      "display_text": "33",
+      "spoken_text": "otuz üç"
+    },
+    "learning.number.034": {
+      "asset": "clips/d4/d406ef58f866.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "d406ef58f8663201508d7fb89a35abaaefb8e4f5ad6489329dd152cecfc8ced0",
+      "display_text": "34",
+      "spoken_text": "otuz dört"
+    },
+    "learning.number.035": {
+      "asset": "clips/bc/bc841dfbeab0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "bc841dfbeab022b41de91e582dfd67f52e87f293da57c54d06bc4eaa6e919e00",
+      "display_text": "35",
+      "spoken_text": "otuz beş"
+    },
+    "learning.number.036": {
+      "asset": "clips/a8/a80e13940254.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "a80e139402548f69979bc80615597c3fbbd2f0e7acaf6c22af93aef82592942b",
+      "display_text": "36",
+      "spoken_text": "otuz altı"
+    },
+    "learning.number.037": {
+      "asset": "clips/5f/5f0d3a29ce60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5f0d3a29ce60e91df09f78e292932bcf4522547f0ea4d649c2db3068620a6876",
+      "display_text": "37",
+      "spoken_text": "otuz yedi"
+    },
+    "learning.number.038": {
+      "asset": "clips/cb/cb4e1bfdfe23.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "cb4e1bfdfe23190716ac1ba6a5a1623249f93d98ff68c662980724f277abb423",
+      "display_text": "38",
+      "spoken_text": "otuz sekiz"
+    },
+    "learning.number.039": {
+      "asset": "clips/71/719b65e84b8b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "719b65e84b8bc41aa6db8d0c44bdc9d7913a448d9b46c1b2aa19abd2fa8a3411",
+      "display_text": "39",
+      "spoken_text": "otuz dokuz"
+    },
+    "learning.number.040": {
+      "asset": "clips/69/694a45e4fb5f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "694a45e4fb5f2353ae6818e5bdcf8b4298c9e860c507b01d1477d43cb6bd519e",
+      "display_text": "40",
+      "spoken_text": "kırk"
+    },
+    "learning.number.041": {
+      "asset": "clips/b1/b1a9e5c6cb27.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "b1a9e5c6cb270b4a2ff3ce9bc0ee456795bbfa6918ffaff4a1f2030a0ae5ed26",
+      "display_text": "41",
+      "spoken_text": "kırk bir"
+    },
+    "learning.number.042": {
+      "asset": "clips/7d/7dcb72a00dc9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "7dcb72a00dc98e522997b51d58dbd547ea0c1cbf09a5b56a3a9d567c52e8f26c",
+      "display_text": "42",
+      "spoken_text": "kırk iki"
+    },
+    "learning.number.043": {
+      "asset": "clips/2f/2f1a843bb901.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "2f1a843bb901a9a9fc6d91751bb59adef805143cc1696e27da7aa7aa053e1b4f",
+      "display_text": "43",
+      "spoken_text": "kırk üç"
+    },
+    "learning.number.044": {
+      "asset": "clips/2b/2b9cd8e155d7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "2b9cd8e155d7495366743ca3719eb0aceb8355864edcc1e0ae26ac184bf89970",
+      "display_text": "44",
+      "spoken_text": "kırk dört"
+    },
+    "learning.number.045": {
+      "asset": "clips/c0/c063644862f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "c063644862f6a4450ddeefbe73e4d346c3174e8ccfdf4235b4054f98f6712519",
+      "display_text": "45",
+      "spoken_text": "kırk beş"
+    },
+    "learning.number.046": {
+      "asset": "clips/f5/f555cd64b85c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "f555cd64b85c1d4683368a1f519d5a4ba1da4864d81c918974593df09ee055db",
+      "display_text": "46",
+      "spoken_text": "kırk altı"
+    },
+    "learning.number.047": {
+      "asset": "clips/e0/e077bc4f504d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e077bc4f504dde65038efc4ef9b7ec4419830cb6d7aa6be620ab496b4a3b1f48",
+      "display_text": "47",
+      "spoken_text": "kırk yedi"
+    },
+    "learning.number.048": {
+      "asset": "clips/fb/fb4d2a582f65.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "fb4d2a582f6543987ad24780e6e7fb826aaa614baa8b6c8fc683241e92a6bacd",
+      "display_text": "48",
+      "spoken_text": "kırk sekiz"
+    },
+    "learning.number.049": {
+      "asset": "clips/99/9903ff23f870.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "9903ff23f870e63c1e271f7aaa15e6cf1e3c09e4c2ce4432e2c0c228e387df4e",
+      "display_text": "49",
+      "spoken_text": "kırk dokuz"
+    },
+    "learning.number.050": {
+      "asset": "clips/59/59e3036fe487.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "59e3036fe4873a853f2f6cc535e3d60a688a06c4166a0124ef84bee91e51a112",
+      "display_text": "50",
+      "spoken_text": "elli"
+    },
+    "learning.word.agac": {
+      "asset": "clips/6c/6c1e5f4a18f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "6c1e5f4a18f6cb9cf3866c01d2e00c8ecf0a781806d4548588f8b8c16512e3dd",
+      "display_text": "AĞAÇ",
+      "spoken_text": "ağaç"
+    },
+    "learning.word.ahtapot": {
+      "asset": "clips/f0/f03eabfafb50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "f03eabfafb5000a1be9596471163dda32e858edb3fa0e33ec0c2d3c40f6c2607",
+      "display_text": "AHTAPOT",
+      "spoken_text": "ahtapot"
+    },
+    "learning.word.ahududu": {
+      "asset": "clips/ba/ba09ca7bb6af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "ba09ca7bb6af6b50609753c3ca31f4841b016932d94c55f7cee2ad94b5f77e81",
+      "display_text": "AHUDUDU",
+      "spoken_text": "ahududu"
+    },
+    "learning.word.aile": {
+      "asset": "clips/2d/2d32c9e159d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "2d32c9e159d65db46aa8f98f0c20922bb51d94be6ee5912211b1980b09e4bb41",
+      "display_text": "AİLE",
+      "spoken_text": "ai̇le"
+    },
+    "learning.word.ailem_sevgidir": {
+      "asset": "clips/eb/ebff3bd539af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "ebff3bd539af8adce32fa43ce0195bcd7e6471f55fc247d302b994ad18ef6cf1",
+      "display_text": "AİLEM SEVGİDİR",
+      "spoken_text": "ai̇lem sevgi̇di̇r"
+    },
+    "learning.word.ananas": {
+      "asset": "clips/76/76972ff8948c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "76972ff8948cbfd3d2b6b0841c3b4d4cbd0aae0cdbb31d300303a3336a453c4c",
+      "display_text": "ANANAS",
+      "spoken_text": "ananas"
+    },
+    "learning.word.anne": {
+      "asset": "clips/41/4116f8a04a2f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "4116f8a04a2f76e9da46fcc2966aefdc07d840b1ad26d63866f4b7a2fc507de9",
+      "display_text": "ANNE",
+      "spoken_text": "anne"
+    },
+    "learning.word.araba": {
+      "asset": "clips/4c/4c0ec3227877.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "4c0ec322787741d9f7a3a18caa51a8fd09b8d1fa96fe39ddb2d8b07bf1b623c9",
+      "display_text": "ARABA",
+      "spoken_text": "araba"
+    },
+    "learning.word.ari": {
+      "asset": "clips/e4/e462d053c836.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "e462d053c8365fbb03322b7648b094d20a71b1085028776b70dfbf236900143d",
+      "display_text": "ARI",
+      "spoken_text": "ari"
+    },
+    "learning.word.arkadaslar_paylasir": {
+      "asset": "clips/90/90a8ecf169b2.mp3",
+      "word_ends_ms": [
+        696
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 1358,
+      "sha256": "90a8ecf169b2e40b052169b00691d72394be0fb5c34f2a6a09cd2945fd09dd76",
+      "display_text": "ARKADAŞLAR PAYLAŞIR",
+      "spoken_text": "arkadaşlar paylaşir"
+    },
+    "learning.word.arkadaslik": {
+      "asset": "clips/6f/6f54e03e9473.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "6f54e03e9473b07f9fb68e2c0b858f7e60c0e8f25f79154151375d4b8b50fc73",
+      "display_text": "ARKADAŞLIK",
+      "spoken_text": "arkadaşlik"
+    },
+    "learning.word.aslan": {
+      "asset": "clips/ee/ee9687950a98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "ee9687950a98e6c190cbe078683568e8bcb9348dbaebcb25e7b5fe2489c73c77",
+      "display_text": "ASLAN",
+      "spoken_text": "aslan"
+    },
+    "learning.word.at": {
+      "asset": "clips/21/21923aa8ac15.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "21923aa8ac159bcea2cf981696043b2351c955152eb04edd214965a0cf4c4c3c",
+      "display_text": "AT",
+      "spoken_text": "at"
+    },
+    "learning.word.ay": {
+      "asset": "clips/14/143320d9e593.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "143320d9e593d0508cfc238eb89fb7ac9f4048490445b6e49a840706ec2030f8",
+      "display_text": "AY",
+      "spoken_text": "ay"
+    },
+    "learning.word.ay_bizi_aydinlatir": {
+      "asset": "clips/62/624c6acc4e9e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "624c6acc4e9e6c21a1b269189279ed58c9757431f7f8b9db5aff0fed66609a2e",
+      "display_text": "AY BİZİ AYDINLATIR",
+      "spoken_text": "ay bi̇zi̇ aydinlatir"
+    },
+    "learning.word.aycicegi": {
+      "asset": "clips/e9/e95ee2f13a6a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e95ee2f13a6a0458a34e018778c220200a67e8b31426fe423ce53ac948cfab0b",
+      "display_text": "AYÇİÇEĞİ",
+      "spoken_text": "ayçi̇çeği̇"
+    },
+    "learning.word.ayi": {
+      "asset": "clips/8d/8d77ee5c99e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "8d77ee5c99e51a4c5bc4f6476d31559b8dffd9a9268fcb82c901b12d962eb11f",
+      "display_text": "AYI",
+      "spoken_text": "ayi"
+    },
+    "learning.word.ayran": {
+      "asset": "clips/e8/e85b6217fb19.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e85b6217fb19cde8d514b34121d312c5f9106a5ba3ea24e0d86f37c9c85806b8",
+      "display_text": "AYRAN",
+      "spoken_text": "ayran"
+    },
+    "learning.word.baba": {
+      "asset": "clips/b2/b2611b87eef9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b2611b87eef9eeba6cc0e8763a5e306f480685fb2614fa545236f3b99c938bc0",
+      "display_text": "BABA",
+      "spoken_text": "baba"
+    },
+    "learning.word.balon": {
+      "asset": "clips/6b/6b1437af5060.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6b1437af5060ba747b44d8d938b2db5fa0daad4069e74baf4d9f477639cb07af",
+      "display_text": "BALON",
+      "spoken_text": "balon"
+    },
+    "learning.word.baskalarina_yardim_et": {
+      "asset": "clips/8b/8ba35d475123.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "8ba35d475123df88eb9048fd3fcc4be49332a743195ca2abbc65bc721b996eb7",
+      "display_text": "BAŞKALARINA YARDIM ET",
+      "spoken_text": "başkalarina yardim et"
+    },
+    "learning.word.biber": {
+      "asset": "clips/2b/2bda3621f216.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "2bda3621f2163f88dfb2308b12a530cabc319e09f3ab888c1b5e333eabfd1144",
+      "display_text": "BİBER",
+      "spoken_text": "bi̇ber"
+    },
+    "learning.word.birlikte_oyna": {
+      "asset": "clips/82/82678d9301dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "82678d9301dd73c05da0944e6676ec9e24ee898185564a321e95d7719b5474e8",
+      "display_text": "BİRLİKTE OYNA",
+      "spoken_text": "bi̇rli̇kte oyna"
+    },
+    "learning.word.bisiklet": {
+      "asset": "clips/96/96b14f56975b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "96b14f56975b87db8289853de3b5f44249333bd99d341c96d6494a3fefd9a91d",
+      "display_text": "BİSİKLET",
+      "spoken_text": "bi̇si̇klet"
+    },
+    "learning.word.bol_meyve_ye": {
+      "asset": "clips/b9/b9fc6d561c3e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "b9fc6d561c3e8a279da6413d23671b606705e1a2d25a2e18b2fbd476c0cce033",
+      "display_text": "BOL MEYVE YE",
+      "spoken_text": "bol meyve ye"
+    },
+    "learning.word.borek": {
+      "asset": "clips/e9/e93225d77f0c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e93225d77f0c7403501f100305256a7a20f907bcc6bfb04a929257b39c25d509",
+      "display_text": "BÖREK",
+      "spoken_text": "börek"
+    },
+    "learning.word.bu_gece_iyi_uyu": {
+      "asset": "clips/d7/d7e6b97ce843.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "d7e6b97ce8438efd349a2e2519f6f4da717aad058e96fc3fe3edca428156dfff",
+      "display_text": "BU GECE İYİ UYU",
+      "spoken_text": "bu gece i̇yi̇ uyu"
+    },
+    "learning.word.buyuk_sato": {
+      "asset": "clips/74/7460353ce6e2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "7460353ce6e25244d8edf139ed9176012f80846d74973e80045e84df0467677d",
+      "display_text": "BÜYÜK ŞATO",
+      "spoken_text": "büyük şato"
+    },
+    "learning.word.cicek": {
+      "asset": "clips/a7/a7886b1405b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "a7886b1405b8e037de1a419a41d60e5d16b50585e73b0e1300f1cbdb8c0692d6",
+      "display_text": "ÇİÇEK",
+      "spoken_text": "çi̇çek"
+    },
+    "learning.word.cikolata": {
+      "asset": "clips/57/5757a202503f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "5757a202503fae0326e88766f4deb84f006f6a89ecdfa51b49e6a350b283be6c",
+      "display_text": "ÇİKOLATA",
+      "spoken_text": "çi̇kolata"
+    },
+    "learning.word.cilek": {
+      "asset": "clips/7f/7f0e10ed9bf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "7f0e10ed9bf68b8c184e3ea1750633f89798689b7db3be1ab9b6edc381795077",
+      "display_text": "ÇİLEK",
+      "spoken_text": "çi̇lek"
+    },
+    "learning.word.cocuk": {
+      "asset": "clips/dd/ddcdf9182ed4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "ddcdf9182ed4158d76040566c5c88310291ee918b5026c8d37aa3c992241c27e",
+      "display_text": "ÇOCUK",
+      "spoken_text": "çocuk"
+    },
+    "learning.word.deniz": {
+      "asset": "clips/27/27e282b6c31a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "27e282b6c31ad51ba270eb9161d91cd64a0f16f053575fdc8cea3cd34473725f",
+      "display_text": "DENİZ",
+      "spoken_text": "deni̇z"
+    },
+    "learning.word.denizimiz_mavidir": {
+      "asset": "clips/a1/a1e4f8dec178.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1750,
+      "sha256": "a1e4f8dec178a4375348ccb5b7c97ad544b41a266db5c4ea5c19fb9908fe668b",
+      "display_text": "DENİZİMİZ MAVİDİR",
+      "spoken_text": "deni̇zi̇mi̇z mavi̇di̇r"
+    },
+    "learning.word.denizyildizi": {
+      "asset": "clips/9e/9eecccfcee16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "9eecccfcee168a1b58f999867fe31d2023f1231b3c58e0099a9e61aaca66d769",
+      "display_text": "DENİZYILDIZI",
+      "spoken_text": "deni̇zyildizi"
+    },
+    "learning.word.dinozor": {
+      "asset": "clips/e8/e89fc8b76697.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e89fc8b76697b7a9b4fd1f5108ff3dae3f6f110962818019853507a799b6b5d3",
+      "display_text": "DİNOZOR",
+      "spoken_text": "di̇nozor"
+    },
+    "learning.word.domates": {
+      "asset": "clips/96/96d0c1a3c35f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "96d0c1a3c35fbc93bd60c5c8ba61edbe0008dc115a6e5abaedccb171293b3bb3",
+      "display_text": "DOMATES",
+      "spoken_text": "domates"
+    },
+    "learning.word.dondurma": {
+      "asset": "clips/4e/4e8552de0650.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4e8552de0650572a0d278e0825c04e9141960c13fc2a6b703fe200a71f068e9a",
+      "display_text": "DONDURMA",
+      "spoken_text": "dondurma"
+    },
+    "learning.word.dondurmaci": {
+      "asset": "clips/1b/1bfc58dd146b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "1bfc58dd146b7eff954502929dfde1fabab9b8ef04d5182399116e2ac3501d4c",
+      "display_text": "DONDURMACI",
+      "spoken_text": "dondurmaci"
+    },
+    "learning.word.dost": {
+      "asset": "clips/8d/8d0c0ed71ad0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "8d0c0ed71ad0c3c7596d788ca2a7699c687ffdbf964cf93af65a12e6b297d9a1",
+      "display_text": "DOST",
+      "spoken_text": "dost"
+    },
+    "learning.word.dunyani_cok_sev": {
+      "asset": "clips/2b/2b0466cf72e6.mp3",
+      "word_ends_ms": [
+        555,
+        814
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "2b0466cf72e6c1afb0acf965a549a126c5d7885e385bca10097b781c48cb9783",
+      "display_text": "DÜNYANI ÇOK SEV",
+      "spoken_text": "dünyani çok sev"
+    },
+    "learning.word.ekmek": {
+      "asset": "clips/af/af17f2a597c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "af17f2a597c0823ce33718da0f5854c7c4b78a2b97553d2b80d508295b398068",
+      "display_text": "EKMEK",
+      "spoken_text": "ekmek"
+    },
+    "learning.word.elma": {
+      "asset": "clips/09/09612b472d05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "09612b472d05f45eaa9017ec1deaa3b0b6fe38e0a015d500762e3d436a797d8f",
+      "display_text": "ELMA",
+      "spoken_text": "elma"
+    },
+    "learning.word.ev": {
+      "asset": "clips/dd/ddc7346e3c6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "ddc7346e3c6e3b45951dd3aac9c43f2d338eeaf11607f3c09261a755df776c96",
+      "display_text": "EV",
+      "spoken_text": "ev"
+    },
+    "learning.word.feribot": {
+      "asset": "clips/70/70ca3895d47f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "70ca3895d47f3cff74791dc6e5575df09bcce2724d74c432a3c166eece26c68e",
+      "display_text": "FERİBOT",
+      "spoken_text": "feri̇bot"
+    },
+    "learning.word.fil": {
+      "asset": "clips/c5/c5726aeffa46.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "c5726aeffa469db0ab9bc02553f75b5b98799e060c55bd59783f043381da43c3",
+      "display_text": "FİL",
+      "spoken_text": "fi̇l"
+    },
+    "learning.word.flamingo": {
+      "asset": "clips/92/9231fca7f1b5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "9231fca7f1b59fa56eb971df0ab6a30f70694d5c6d47b26990c96f3870a1d4d9",
+      "display_text": "FLAMİNGO",
+      "spoken_text": "flami̇ngo"
+    },
+    "learning.word.gemi": {
+      "asset": "clips/1e/1e2f10d8afa7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "1e2f10d8afa73833a0e360267b2409a622163a8e94c0f7a76acd4877b162d4c1",
+      "display_text": "GEMİ",
+      "spoken_text": "gemi̇"
+    },
+    "learning.word.gok": {
+      "asset": "clips/4a/4a9ed859bc72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "4a9ed859bc72849486cab51d04470a78c91354bf93695c2c8c43dfc7fc944804",
+      "display_text": "GÖK",
+      "spoken_text": "gök"
+    },
+    "learning.word.gokkusagi": {
+      "asset": "clips/78/7836f2373825.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "7836f237382501f22895e86193bfac70c0332f2f54fc5a73eda6e365199beb7d",
+      "display_text": "GÖKKUŞAĞI",
+      "spoken_text": "gökkuşaği"
+    },
+    "learning.word.gokkusaginin_renkleri_var": {
+      "asset": "clips/61/6194be2db58d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 2194,
+      "sha256": "6194be2db58d1f92dc088749e28e89b8b552a5265e0472b5dde40e03926973a9",
+      "display_text": "GÖKKUŞAĞININ RENKLERİ VAR",
+      "spoken_text": "gökkuşağinin renkleri̇ var"
+    },
+    "learning.word.gulumse_ve_mutlu_ol": {
+      "asset": "clips/7c/7cdc9acc54c4.mp3",
+      "word_ends_ms": [
+        535,
+        745,
+        1135
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        30
+      ],
+      "duration_ms": 1410,
+      "sha256": "7cdc9acc54c467524c9209524dfe14471e97bec05563aae04217737c42b73791",
+      "display_text": "GÜLÜMSE VE MUTLU OL",
+      "spoken_text": "gülümse ve mutlu ol"
+    },
+    "learning.word.gunes": {
+      "asset": "clips/f3/f355ec5e367d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "f355ec5e367dbe8f86430b7a8ffd19e298a497a2fbd2e7cdd0e7e9c889bf8b87",
+      "display_text": "GÜNEŞ",
+      "spoken_text": "güneş"
+    },
+    "learning.word.gunes_parliyor": {
+      "asset": "clips/e1/e1ff3ebb6819.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "e1ff3ebb68198432948b5cb0f956d5675bcc6e04937cf67242881645628e22bb",
+      "display_text": "GÜNEŞ PARLIYOR",
+      "spoken_text": "güneş parliyor"
+    },
+    "learning.word.guve": {
+      "asset": "clips/0e/0edbaf28fd4f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "0edbaf28fd4f596008d17c369776574ccfa0f74c2aaded73ad9c183396fd1e6b",
+      "display_text": "GÜVE",
+      "spoken_text": "güve"
+    },
+    "learning.word.guzel_bir_masal_oku": {
+      "asset": "clips/bf/bf7522a53b2f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "bf7522a53b2f9ad15213a3ce0001380d470a056f7e448735b88cc8912cd8c84c",
+      "display_text": "GÜZEL BİR MASAL OKU",
+      "spoken_text": "güzel bi̇r masal oku"
+    },
+    "learning.word.guzel_cicek": {
+      "asset": "clips/8d/8d961d4d6fc5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "8d961d4d6fc5f49b6536032f6deb6339772a36c79d71de8ad3a91cdcce64e6ee",
+      "display_text": "GÜZEL ÇİÇEK",
+      "spoken_text": "güzel çi̇çek"
+    },
+    "learning.word.hamster": {
+      "asset": "clips/66/66925d3c37d5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "66925d3c37d5d3af167c2bef40518d46a4a9c42fd1d41cf43a437d52fe3adce6",
+      "display_text": "HAMSTER",
+      "spoken_text": "hamster"
+    },
+    "learning.word.hastane": {
+      "asset": "clips/cb/cb1d02cf63e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "cb1d02cf63e55087906a3e87ccdc77e4c743084258e3925330a69c8e6769a660",
+      "display_text": "HASTANE",
+      "spoken_text": "hastane"
+    },
+    "learning.word.hava_taksi": {
+      "asset": "clips/48/48fe257ff96e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "48fe257ff96ece884f5338e40563e1266ab42168d8e8880ccea7a7574d12feb3",
+      "display_text": "HAVA TAKSİ",
+      "spoken_text": "hava taksi̇"
+    },
+    "learning.word.havai_fisek": {
+      "asset": "clips/c7/c7af1ea25238.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "c7af1ea25238ea823bc522654d32b6fb8b2ff21d6329f34c17c511c9024d26f5",
+      "display_text": "HAVAİ FİŞEK",
+      "spoken_text": "havai̇ fi̇şek"
+    },
+    "learning.word.havuc": {
+      "asset": "clips/76/76d1e99502b5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "76d1e99502b5394d0cc2b3c08c915da0a9aabd77e417666aea950b0291ec9df5",
+      "display_text": "HAVUÇ",
+      "spoken_text": "havuç"
+    },
+    "learning.word.hazine": {
+      "asset": "clips/2b/2bc5ebad4442.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "2bc5ebad4442aafe54e94f81492ca4831183156cf716a662c101f8923bb8ef95",
+      "display_text": "HAZİNE",
+      "spoken_text": "hazi̇ne"
+    },
+    "learning.word.helikopter": {
+      "asset": "clips/80/809b03057729.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "809b030577298abfe8a8c0a49543bb11645fd2331bd21f3f19a6edfee99d5751",
+      "display_text": "HELİKOPTER",
+      "spoken_text": "heli̇kopter"
+    },
+    "learning.word.hep_tesekkur_et": {
+      "asset": "clips/7c/7c5202267d6b.mp3",
+      "word_ends_ms": [
+        275,
+        734
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1019,
+      "sha256": "7c5202267d6b8bb1873dd97e47371754e197a31d5c5979eb22803ac11cf9a31f",
+      "display_text": "HEP TEŞEKKÜR ET",
+      "spoken_text": "hep teşekkür et"
+    },
+    "learning.word.her_gun_bir_sey_ogren": {
+      "asset": "clips/49/49b2c6e95379.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "49b2c6e9537948f24916a0fd52d53d22852b2289891f151a90a928df782e7dbb",
+      "display_text": "HER GÜN BİR ŞEY ÖĞREN",
+      "spoken_text": "her gün bi̇r şey öğren"
+    },
+    "learning.word.her_gun_su_ic": {
+      "asset": "clips/a3/a33ccfc401dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "a33ccfc401dda0bf9068a3f53eae0aef6e8c3b3f1027ba3c6da6adad5f78bac3",
+      "display_text": "HER GÜN SU İÇ",
+      "spoken_text": "her gün su i̇ç"
+    },
+    "learning.word.itfaiye_araci": {
+      "asset": "clips/e7/e74c1767feb5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "e74c1767feb5ecc278325fd0b9bd35abd265e09c7f3e79c212c97c20dd20a54e",
+      "display_text": "İTFAİYE ARACI",
+      "spoken_text": "i̇tfai̇ye araci"
+    },
+    "learning.word.jet_ucagi": {
+      "asset": "clips/46/4629353b4f9d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "4629353b4f9d402575c8ace8d1c430f1b3b3ba41ea6da3c94d38a690821664f4",
+      "display_text": "JET UÇAĞI",
+      "spoken_text": "jet uçaği"
+    },
+    "learning.word.kamyon": {
+      "asset": "clips/da/da0727e57de0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "da0727e57de05368c524cdf6e245850c2c27ddd0ba44cf7b7959c0e895fa90cf",
+      "display_text": "KAMYON",
+      "spoken_text": "kamyon"
+    },
+    "learning.word.kanguru": {
+      "asset": "clips/63/631268d8eeca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "631268d8eeca85b65424b7f6d334364d41a97f205c3db0dbc056e09300830bb5",
+      "display_text": "KANGURU",
+      "spoken_text": "kanguru"
+    },
+    "learning.word.kaplan": {
+      "asset": "clips/08/08fa6e21f7a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "08fa6e21f7a2ad96ed1381a7a50158cd82e3847d8f6935273ae1cf8e9828162c",
+      "display_text": "KAPLAN",
+      "spoken_text": "kaplan"
+    },
+    "learning.word.kaplumbaga": {
+      "asset": "clips/90/9001359f275a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "9001359f275a9feebefc3185ae1c215821daebac901f4647a691939416bf5f97",
+      "display_text": "KAPLUMBAĞA",
+      "spoken_text": "kaplumbağa"
+    },
+    "learning.word.kardan_adam": {
+      "asset": "clips/4d/4dddf4b429b2.mp3",
+      "word_ends_ms": [
+        425
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 758,
+      "sha256": "4dddf4b429b21375ed28528ad668725b5b440ef941c46301055cd0031cb32433",
+      "display_text": "KARDAN ADAM",
+      "spoken_text": "kardan adam"
+    },
+    "learning.word.karinca": {
+      "asset": "clips/e5/e584524aa56c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e584524aa56c356d26e90f1d57e0c4823721540f5c66ba2155bac7f5d427a485",
+      "display_text": "KARINCA",
+      "spoken_text": "karinca"
+    },
+    "learning.word.karpuz": {
+      "asset": "clips/ea/eac134625ae8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "eac134625ae8f5da0565980323ac58d27d059bf2a7be161d452a8312166317be",
+      "display_text": "KARPUZ",
+      "spoken_text": "karpuz"
+    },
+    "learning.word.kavun": {
+      "asset": "clips/ac/ac4825147787.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "ac48251477879bc4aebe74ed22c70d2ad59e7c382b5fdd0845d5f292144bba78",
+      "display_text": "KAVUN",
+      "spoken_text": "kavun"
+    },
+    "learning.word.kayik": {
+      "asset": "clips/15/1546d55716c9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1546d55716c960710ea3bbc48dc3dacd633913603f50cd76e068f08b88d79581",
+      "display_text": "KAYIK",
+      "spoken_text": "kayik"
+    },
+    "learning.word.keci": {
+      "asset": "clips/54/54aaac5468dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "54aaac5468dcc71fbca9a0bd6d9aa5b594b940dd11e21d0cfb666f9a1914155a",
+      "display_text": "KEÇİ",
+      "spoken_text": "keçi̇"
+    },
+    "learning.word.kedi": {
+      "asset": "clips/8f/8f437d860b7f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "8f437d860b7f47957d247974eaaa7165c329c605ebcd3abd62769e0f674f1555",
+      "display_text": "KEDİ",
+      "spoken_text": "kedi̇"
+    },
+    "learning.word.kelebek": {
+      "asset": "clips/fe/fe2a3be72f4f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "fe2a3be72f4fa92f6d4401b0c70b3736cd6f819a76bdb8906973df1b87c42dcf",
+      "display_text": "KELEBEK",
+      "spoken_text": "kelebek"
+    },
+    "learning.word.kirmizi_elma": {
+      "asset": "clips/29/29f4c68c78a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "29f4c68c78a64284e7aceecce258a03362de7333b4db39fe26a4f404b3670553",
+      "display_text": "KIRMIZI ELMA",
+      "spoken_text": "kirmizi elma"
+    },
+    "learning.word.kirpi": {
+      "asset": "clips/02/024de621b7b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "024de621b7b8a5951b3a1ec4643f8a946f655a4fcf294960034643bc0d228131",
+      "display_text": "KİRPİ",
+      "spoken_text": "ki̇rpi̇"
+    },
+    "learning.word.kitap": {
+      "asset": "clips/04/044fd14189d4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "044fd14189d4575ee903cafa323c90df45681b3c8a5a01fba5db9cd007eb80cc",
+      "display_text": "KİTAP",
+      "spoken_text": "ki̇tap"
+    },
+    "learning.word.kopek": {
+      "asset": "clips/d1/d16e268fa5a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "d16e268fa5a6f82f9b5c6e43bd91fa2d38573c25ffc45ed5ecc7ee38b56fa115",
+      "display_text": "KÖPEK",
+      "spoken_text": "köpek"
+    },
+    "learning.word.korkuluk": {
+      "asset": "clips/2e/2e2292b5ce6a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "2e2292b5ce6a5d67470dfc6ae97403d5465787ffa326c8e4bade20d8e847b1f4",
+      "display_text": "KORKULUK",
+      "spoken_text": "korkuluk"
+    },
+    "learning.word.koyun": {
+      "asset": "clips/af/af9d9ff86590.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "af9d9ff86590a15e6c046cb34e44901de74626cf67034b1348cd8e3bc916dce6",
+      "display_text": "KOYUN",
+      "spoken_text": "koyun"
+    },
+    "learning.word.kucuk_ev": {
+      "asset": "clips/d7/d7e76faf45e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "d7e76faf45e0f1a18217f1d7942c6971f99ac27b86b4c2ff4fe817866b72f7f9",
+      "display_text": "KÜÇÜK EV",
+      "spoken_text": "küçük ev"
+    },
+    "learning.word.kucuk_kus": {
+      "asset": "clips/be/be8a5a680f7a.mp3",
+      "word_ends_ms": [
+        376
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "be8a5a680f7a5dc5c1a2428e5db00efca07a4c2540c4bc9c8499041e8b8c2adf",
+      "display_text": "KÜÇÜK KUŞ",
+      "spoken_text": "küçük kuş"
+    },
+    "learning.word.kurbaga": {
+      "asset": "clips/95/95c5baf57c35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "95c5baf57c3509cdb53d2c97962328487a25f21d21e03c4c1fa4b61eaa30003c",
+      "display_text": "KURBAĞA",
+      "spoken_text": "kurbağa"
+    },
+    "learning.word.kus": {
+      "asset": "clips/ff/ff44fbda2b7c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "ff44fbda2b7c168baf3f64bb6921d0abb23375498f377cce6952d903e131cd54",
+      "display_text": "KUŞ",
+      "spoken_text": "kuş"
+    },
+    "learning.word.kuslar_yuksek_ucar": {
+      "asset": "clips/3f/3fa6a78057be.mp3",
+      "word_ends_ms": [
+        632,
+        1032
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1515,
+      "sha256": "3fa6a78057beef74872e52da86d01b795190f62edb89e851932ce00e58d09764",
+      "display_text": "KUŞLAR YÜKSEK UÇAR",
+      "spoken_text": "kuşlar yüksek uçar"
+    },
+    "learning.word.macera": {
+      "asset": "clips/f8/f8b03632ee16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "f8b03632ee1666a878d23f4e0b10a6e7600f335122aae1629d7f7821af72afe8",
+      "display_text": "MACERA",
+      "spoken_text": "macera"
+    },
+    "learning.word.makarna": {
+      "asset": "clips/01/015463b7cfff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "015463b7cfff0810fd3941425c1424ac933473bc27d5c90fb642aa45673930e8",
+      "display_text": "MAKARNA",
+      "spoken_text": "makarna"
+    },
+    "learning.word.mamut": {
+      "asset": "clips/48/4804d9c0ac5a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "4804d9c0ac5a52b7c4ae6d70b4738f922e4a2960fc44310c8bcfaa358323ebd0",
+      "display_text": "MAMUT",
+      "spoken_text": "mamut"
+    },
+    "learning.word.mavi_deniz": {
+      "asset": "clips/21/21e37ac9add3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "21e37ac9add3075113810ee539ce01a323a1ed2758510b1fb554a4a47d346749",
+      "display_text": "MAVİ DENİZ",
+      "spoken_text": "mavi̇ deni̇z"
+    },
+    "learning.word.mavi_okyanus": {
+      "asset": "clips/1a/1a180e9ed45f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "1a180e9ed45f324bfe035c03a394dfc5a240c23e26e496203cc1a77d810dbc35",
+      "display_text": "MAVİ OKYANUS",
+      "spoken_text": "mavi̇ okyanus"
+    },
+    "learning.word.maymun": {
+      "asset": "clips/07/07bb00ea5d20.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "07bb00ea5d2089472d4370d9850371374e2b35a0f4a7fe7f666fb13fe741835a",
+      "display_text": "MAYMUN",
+      "spoken_text": "maymun"
+    },
+    "learning.word.metro": {
+      "asset": "clips/01/010f35475474.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "010f3547547498868d43802a48cbf5a5d61630ca034f451c8ee556daa2262f2c",
+      "display_text": "METRO",
+      "spoken_text": "metro"
+    },
+    "learning.word.meyve_suyu": {
+      "asset": "clips/6f/6fac885c3fcd.mp3",
+      "word_ends_ms": [
+        417
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "6fac885c3fcd1a7783bd7fd35e060c2048ac32e03a1290858d7cd267cb9cf1a8",
+      "display_text": "MEYVE SUYU",
+      "spoken_text": "meyve suyu"
+    },
+    "learning.word.mikroskop": {
+      "asset": "clips/65/658dc93ac56b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "658dc93ac56b1dc746c3966ae49f72e2c55d1ae9a26a2ec153f5471d8ed179bc",
+      "display_text": "MİKROSKOP",
+      "spoken_text": "mi̇kroskop"
+    },
+    "learning.word.motosiklet": {
+      "asset": "clips/91/9176ad7d78c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "9176ad7d78c3352dab58958eb6c2d4fd6f9eb485e84a03a0f988c48b88810758",
+      "display_text": "MOTOSİKLET",
+      "spoken_text": "motosi̇klet"
+    },
+    "learning.word.mutlu_cocuk": {
+      "asset": "clips/18/18a35c11aa85.mp3",
+      "word_ends_ms": [
+        344
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "18a35c11aa857c47c1db9ef52298bab213f1597e2baf3a0ed6aae6ff0562e228",
+      "display_text": "MUTLU ÇOCUK",
+      "spoken_text": "mutlu çocuk"
+    },
+    "learning.word.mutlu_yuz": {
+      "asset": "clips/0c/0c261e7a4ec4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "0c261e7a4ec444f238deef671b642674d3cc60b6b3d379b374b631a71ebaeca1",
+      "display_text": "MUTLU YÜZ",
+      "spoken_text": "mutlu yüz"
+    },
+    "learning.word.muz": {
+      "asset": "clips/42/4294c07b0554.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "4294c07b05545d0c0121e38b69fb87c29cf27b2fea859d1f49c2a4e5cd848c58",
+      "display_text": "MUZ",
+      "spoken_text": "muz"
+    },
+    "learning.word.neseli_kiz": {
+      "asset": "clips/8e/8e4e8d1ac39e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "8e4e8d1ac39ecb7aac0addc3475f5c33d5acfe077f5781d41a45c009d27b5afe",
+      "display_text": "NEŞELİ KIZ",
+      "spoken_text": "neşeli̇ kiz"
+    },
+    "learning.word.neseyle_yuru": {
+      "asset": "clips/e3/e3fe401abbdd.mp3",
+      "word_ends_ms": [
+        512
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 888,
+      "sha256": "e3fe401abbddbd6bbd209e5b260841cb5f795a0967dbdd10adced7322c6af95b",
+      "display_text": "NEŞEYLE YÜRÜ",
+      "spoken_text": "neşeyle yürü"
+    },
+    "learning.word.okul": {
+      "asset": "clips/30/306a98380a77.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "306a98380a778e08b070b58b140f4b25455b5075673e10bfec20f2653a4a021e",
+      "display_text": "OKUL",
+      "spoken_text": "okul"
+    },
+    "learning.word.orman_hayat_doludur": {
+      "asset": "clips/46/46f498abb072.mp3",
+      "word_ends_ms": [
+        459,
+        859
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1437,
+      "sha256": "46f498abb0729fc95d089a42d04bf6ed1c9a5682ce2f05f9f7306e64081a4645",
+      "display_text": "ORMAN HAYAT DOLUDUR",
+      "spoken_text": "orman hayat doludur"
+    },
+    "learning.word.orumcek": {
+      "asset": "clips/a7/a72777c715f5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a72777c715f55c0c0b6e0114cbca19a15c50e0da31787a1e27ab8119dbac3dc1",
+      "display_text": "ÖRÜMCEK",
+      "spoken_text": "örümcek"
+    },
+    "learning.word.otobus": {
+      "asset": "clips/6f/6f3f570a882d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6f3f570a882d106790ce1f6ad4c4a0fe9a4797b00b0f71867a363ba2da320c88",
+      "display_text": "OTOBÜS",
+      "spoken_text": "otobüs"
+    },
+    "learning.word.oyun": {
+      "asset": "clips/20/202a120e96a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "202a120e96a29e0fc92fa2b4b88697bdf297442680492c21bb2088ca9a2e5079",
+      "display_text": "OYUN",
+      "spoken_text": "oyun"
+    },
+    "learning.word.oyuncak": {
+      "asset": "clips/cf/cfc06aa99ffc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "cfc06aa99ffce4716bf71e9cf00fd5e2db9f3ca36e4ff5180f8bc329f5a2c07e",
+      "display_text": "OYUNCAK",
+      "spoken_text": "oyuncak"
+    },
+    "learning.word.oyuncak_tren": {
+      "asset": "clips/01/01ea6c93032b.mp3",
+      "word_ends_ms": [
+        580
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "01ea6c93032baecd3467b97e632efbdad40b06b97372cad7d7acc0ae7882c8d7",
+      "display_text": "OYUNCAK TREN",
+      "spoken_text": "oyuncak tren"
+    },
+    "learning.word.oyuncaklarla_oyna": {
+      "asset": "clips/5a/5a2b9835bf3b.mp3",
+      "word_ends_ms": [
+        819
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1332,
+      "sha256": "5a2b9835bf3bd7a53dfff6dbeed081915b4b0844ce086542a25bad3d32c0129a",
+      "display_text": "OYUNCAKLARLA OYNA",
+      "spoken_text": "oyuncaklarla oyna"
+    },
+    "learning.word.oyuncu_kopek": {
+      "asset": "clips/bf/bf412abc5e40.mp3",
+      "word_ends_ms": [
+        442
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 993,
+      "sha256": "bf412abc5e401c590a950db380aa512568dce8d5af0893a8790ccec5087c85c5",
+      "display_text": "OYUNCU KÖPEK",
+      "spoken_text": "oyuncu köpek"
+    },
+    "learning.word.papagan": {
+      "asset": "clips/b3/b3f95437bf26.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "b3f95437bf26ca338dca800ed6ee6c6167d5aeb3c045960a7ae61549f2cba7b4",
+      "display_text": "PAPAĞAN",
+      "spoken_text": "papağan"
+    },
+    "learning.word.parlak_gunes": {
+      "asset": "clips/c2/c212514f3c58.mp3",
+      "word_ends_ms": [
+        442
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1019,
+      "sha256": "c212514f3c58aeca333e9b05188377483ea6226eb463cba1e2f1fc348439b231",
+      "display_text": "PARLAK GÜNEŞ",
+      "spoken_text": "parlak güneş"
+    },
+    "learning.word.patates": {
+      "asset": "clips/8e/8e64399b1966.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "8e64399b19669435835d720ec0c30dccc2a0effeb89ffd094da7aa471ea02506",
+      "display_text": "PATATES",
+      "spoken_text": "patates"
+    },
+    "learning.word.penguen": {
+      "asset": "clips/ab/ab3e625fa95a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "ab3e625fa95af553a693a4f7cdaa1d3c62ba92b688cc97f1beb432f99e83e23f",
+      "display_text": "PENGUEN",
+      "spoken_text": "penguen"
+    },
+    "learning.word.peynir": {
+      "asset": "clips/a3/a33e112bbeb4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "a33e112bbeb4cb92d010ef7cd94944efd809cc819cc371f96d33f1970c017c08",
+      "display_text": "PEYNİR",
+      "spoken_text": "peyni̇r"
+    },
+    "learning.word.pide": {
+      "asset": "clips/fb/fb34dc8be5ba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "fb34dc8be5bacddcdc7fc290e3841256f289e8bb43c6f36d73280590b0f33382",
+      "display_text": "PİDE",
+      "spoken_text": "pi̇de"
+    },
+    "learning.word.pilav": {
+      "asset": "clips/d5/d5abadf9377f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "d5abadf9377f63b9d93c1cde6755bd428170d589fdfc1ac555deb801dc704277",
+      "display_text": "PİLAV",
+      "spoken_text": "pi̇lav"
+    },
+    "learning.word.portakal": {
+      "asset": "clips/48/488e82e305d1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "488e82e305d1e90bf0e3019c1ffc3af08c217198f04847b922ce7e4f1f7f0f60",
+      "display_text": "PORTAKAL",
+      "spoken_text": "portakal"
+    },
+    "learning.word.roket": {
+      "asset": "clips/3c/3c4dd96a9423.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "3c4dd96a9423625f737699a5deba5502e226b8e82293418d07d204d55d507586",
+      "display_text": "ROKET",
+      "spoken_text": "roket"
+    },
+    "learning.word.saglikli_beslen": {
+      "asset": "clips/6c/6cceae851c64.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "6cceae851c64d94413ae8fb68fe47c1dc5e005e9732241c6ce30018c9bfd1606",
+      "display_text": "SAĞLIKLI BESLEN",
+      "spoken_text": "sağlikli beslen"
+    },
+    "learning.word.salata": {
+      "asset": "clips/24/24f13086625c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "24f13086625ca68e3fc1076e0b6313db3772a8daacee99ec486c04a0a4b18b44",
+      "display_text": "SALATA",
+      "spoken_text": "salata"
+    },
+    "learning.word.salatalik": {
+      "asset": "clips/73/739af3a8df3c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "739af3a8df3cce81ac72cd49d4dd559b7a3b60592bf918d65d8279d28ac0e03f",
+      "display_text": "SALATALIK",
+      "spoken_text": "salatalik"
+    },
+    "learning.word.sandvic": {
+      "asset": "clips/e7/e7be74d3b89c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "e7be74d3b89c0c3b87489b71b2c391504eb0ba7d8b2fdf3934b7e890136218e5",
+      "display_text": "SANDVİÇ",
+      "spoken_text": "sandvi̇ç"
+    },
+    "learning.word.sari_gunes": {
+      "asset": "clips/02/02fed8139d62.mp3",
+      "word_ends_ms": [
+        464
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1123,
+      "sha256": "02fed8139d62ecb5b1d477f614073be88a095afe7dc71d154a1f63208201793c",
+      "display_text": "SARI GÜNEŞ",
+      "spoken_text": "sari güneş"
+    },
+    "learning.word.sarki_soyle": {
+      "asset": "clips/f5/f5137aa60660.mp3",
+      "word_ends_ms": [
+        474
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 966,
+      "sha256": "f5137aa6066042315b0c5b4902092ed065384a8744b1551c11829bc54f0f0352",
+      "display_text": "ŞARKI SÖYLE",
+      "spoken_text": "şarki söyle"
+    },
+    "learning.word.scooter": {
+      "asset": "clips/e0/e0b9cf626e0e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e0b9cf626e0e3fd82885a45418694292cfdc572502c3a34183ca56146d501b75",
+      "display_text": "SCOOTER",
+      "spoken_text": "scooter"
+    },
+    "learning.word.seker": {
+      "asset": "clips/c6/c6b921769457.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c6b9217694570d7008a6e77500a212b3cac4834622111d78d1c4216be1dce822",
+      "display_text": "ŞEKER",
+      "spoken_text": "şeker"
+    },
+    "learning.word.sekerleme": {
+      "asset": "clips/b5/b5defc0a048f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "b5defc0a048f0b6c4719dde68acb4417a24fe394ed3278c0841a744392dd8206",
+      "display_text": "ŞEKERLEME",
+      "spoken_text": "şekerleme"
+    },
+    "learning.word.selam_arkadaslar": {
+      "asset": "clips/18/186e69febc59.mp3",
+      "word_ends_ms": [
+        332
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1097,
+      "sha256": "186e69febc59d7689ee9312167c8cf49b9c7aa21bb969fdb5a463984df741317",
+      "display_text": "SELAM ARKADAŞLAR",
+      "spoken_text": "selam arkadaşlar"
+    },
+    "learning.word.semsiye": {
+      "asset": "clips/59/59ad2a32f582.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "59ad2a32f582fcf904da934f4da23e514c21c5f67ff795772dc67d80825e4b42",
+      "display_text": "ŞEMSİYE",
+      "spoken_text": "şemsi̇ye"
+    },
+    "learning.word.sihirli_degnek": {
+      "asset": "clips/ae/ae5871f4ff77.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "ae5871f4ff77474017c459a95eb5cf1214a3ae0f967ee95780a7e8fe2420a8dc",
+      "display_text": "SİHİRLİ DEĞNEK",
+      "spoken_text": "si̇hi̇rli̇ değnek"
+    },
+    "learning.word.simsek": {
+      "asset": "clips/69/690f21b63484.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "690f21b63484aac8768e558a5aa4d71eba2b575f5e17486cb77b0cf936d6cb43",
+      "display_text": "ŞİMŞEK",
+      "spoken_text": "şi̇mşek"
+    },
+    "learning.word.sincap": {
+      "asset": "clips/37/3723447c3634.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "3723447c3634fc8e24800742126b366146f7dcf373623097da0673587550ad4b",
+      "display_text": "SİNCAP",
+      "spoken_text": "si̇ncap"
+    },
+    "learning.word.su_ic": {
+      "asset": "clips/33/33a22c4657a9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "33a22c4657a9a4df4b57408224fc47db2ff726d508ad78c69f291c893ac873a7",
+      "display_text": "SU İÇ",
+      "spoken_text": "su i̇ç"
+    },
+    "learning.word.sut": {
+      "asset": "clips/6b/6b5814f1cd2e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "6b5814f1cd2e119aabb78d2dd64b79784629856867650fc7b650032d7075ef76",
+      "display_text": "SÜT",
+      "spoken_text": "süt"
+    },
+    "learning.word.tatli_seker": {
+      "asset": "clips/ad/ad846129672b.mp3",
+      "word_ends_ms": [
+        404
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 966,
+      "sha256": "ad846129672bfdd03128580158368aa20be997e4eed84f8464ed456ba34cf4ac",
+      "display_text": "TATLI ŞEKER",
+      "spoken_text": "tatli şeker"
+    },
+    "learning.word.tavsan": {
+      "asset": "clips/a9/a9b74a4d0449.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "a9b74a4d0449a8dcbfb38fb631b782590578c4e3daf117a4ab34c2cecf44770c",
+      "display_text": "TAVŞAN",
+      "spoken_text": "tavşan"
+    },
+    "learning.word.tavuk": {
+      "asset": "clips/86/86c0f7e554b2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "86c0f7e554b283256018a6677ea2d9c6048950c959a0fdd92592a52cbb5fb74a",
+      "display_text": "TAVUK",
+      "spoken_text": "tavuk"
+    },
+    "learning.word.tavus_kusu": {
+      "asset": "clips/f1/f1220325bd4a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f1220325bd4a8e0a48f45bea1970b0a833c97c09c1f492f000c8b01ab8ccd578",
+      "display_text": "TAVUS KUŞU",
+      "spoken_text": "tavus kuşu"
+    },
+    "learning.word.taze_meyve": {
+      "asset": "clips/b4/b459af75d4f0.mp3",
+      "word_ends_ms": [
+        417
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 888,
+      "sha256": "b459af75d4f099ac23aa12bc8fd969de4f68e224d4bdff70dbad3313c4d36465",
+      "display_text": "TAZE MEYVE",
+      "spoken_text": "taze meyve"
+    },
+    "learning.word.tekboynuz": {
+      "asset": "clips/b1/b1eea5c42225.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "b1eea5c422257370738bb2d5fe868a4b714040f3002c6143e0064dcd7a950f1c",
+      "display_text": "TEKBOYNUZ",
+      "spoken_text": "tekboynuz"
+    },
+    "learning.word.tekne": {
+      "asset": "clips/ba/bad3a3ee4195.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "bad3a3ee419514d5ca540836f65707c87eed90580652c2f31965d57c902d42f2",
+      "display_text": "TEKNE",
+      "spoken_text": "tekne"
+    },
+    "learning.word.teleskop": {
+      "asset": "clips/89/8985c3ac6148.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "8985c3ac614867ddd80dfa6e19c1dc8f4b80d0fa1de668002907487df031013f",
+      "display_text": "TELESKOP",
+      "spoken_text": "teleskop"
+    },
+    "learning.word.timsah": {
+      "asset": "clips/08/087cd1a1e92d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "087cd1a1e92d001884290e750f295d5000b61c00f1b9d49766b6a1ee3157a8c2",
+      "display_text": "TİMSAH",
+      "spoken_text": "ti̇msah"
+    },
+    "learning.word.traktor": {
+      "asset": "clips/8f/8fad8c23eef4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "8fad8c23eef4167ecdc3418d70a8913f2c87381194ed708ec5fff44b16a5e972",
+      "display_text": "TRAKTÖR",
+      "spoken_text": "traktör"
+    },
+    "learning.word.tramvay": {
+      "asset": "clips/8e/8ee090867ee4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "8ee090867ee404a9e341e856cc26751e44366381cd0983916b1fe027b1c79775",
+      "display_text": "TRAMVAY",
+      "spoken_text": "tramvay"
+    },
+    "learning.word.tren": {
+      "asset": "clips/c3/c3a5bac976d3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "c3a5bac976d362ddd1f0c433f39d11bf49e3605e1b60d0b267e480ffecb0c078",
+      "display_text": "TREN",
+      "spoken_text": "tren"
+    },
+    "learning.word.uc_teker": {
+      "asset": "clips/4d/4d28ea65d372.mp3",
+      "word_ends_ms": [
+        285
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "4d28ea65d37252b075d714f98b849eab35e1796cb59ea42a81728b4966cf1abd",
+      "display_text": "ÜÇ TEKER",
+      "spoken_text": "üç teker"
+    },
+    "learning.word.ucak": {
+      "asset": "clips/75/75795353f5ca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "75795353f5ca85f9e7e9955728691469a44cdd917bc7dc8e964aa2752aa4804e",
+      "display_text": "UÇAK",
+      "spoken_text": "uçak"
+    },
+    "learning.word.ucan_kus": {
+      "asset": "clips/d9/d98aa7abb44a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d98aa7abb44a4d4ebe074bbea775b0e94fa49c0cbe4d03ea4906f1d560501231",
+      "display_text": "UÇAN KUŞ",
+      "spoken_text": "uçan kuş"
+    },
+    "learning.word.ugur_bocegi": {
+      "asset": "clips/8a/8ad432f4c4fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "8ad432f4c4fb99c5f37df273f71e634ffc59c7a3846dd5c50932a83ba0e29da5",
+      "display_text": "UĞUR BÖCEĞİ",
+      "spoken_text": "uğur böceği̇"
+    },
+    "learning.word.uykucu_kedi": {
+      "asset": "clips/93/93db98dd5f27.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "93db98dd5f271a454336588d30abaee67e45f3ba806f37c46d7311092f44d0ec",
+      "display_text": "UYKUCU KEDİ",
+      "spoken_text": "uykucu kedi̇"
+    },
+    "learning.word.uzay_gemisi": {
+      "asset": "clips/7a/7a701ea6a4be.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "7a701ea6a4be5da03447e7656708517791b7900bfd0c9644fd1efcc14498a8df",
+      "display_text": "UZAY GEMİSİ",
+      "spoken_text": "uzay gemi̇si̇"
+    },
+    "learning.word.vapur": {
+      "asset": "clips/c0/c0b19daa287f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "c0b19daa287fc48d53e60aba3a2598e7c44b266faadec2e43b42bedd52eb8a65",
+      "display_text": "VAPUR",
+      "spoken_text": "vapur"
+    },
+    "learning.word.yesil_cim": {
+      "asset": "clips/ab/abcd88453aa3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "abcd88453aa35200de2d84ec9cd6fa36ae9e1f9b3d29547f65fa4fabd28ca4ec",
+      "display_text": "YEŞİL ÇİM",
+      "spoken_text": "yeşi̇l çi̇m"
+    },
+    "learning.word.yesil_orman": {
+      "asset": "clips/43/43eae616fbef.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "43eae616fbefeae6b01318b25700e05a365c7ab399f0909ef3b8921a4025a5e2",
+      "display_text": "YEŞİL ORMAN",
+      "spoken_text": "yeşi̇l orman"
+    },
+    "learning.word.yilan": {
+      "asset": "clips/29/292b3fdf4dd8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "292b3fdf4dd8f86e82b09fe3dbb0934c2b810ab9a4698275cebfcb0b0fc2c1df",
+      "display_text": "YILAN",
+      "spoken_text": "yilan"
+    },
+    "learning.word.yildiz": {
+      "asset": "clips/83/8363edb7df05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "8363edb7df055e6c7c3c10ea4b5af8a3b9d3153ecc631142c06591f93270de43",
+      "display_text": "YILDIZ",
+      "spoken_text": "yildiz"
+    },
+    "learning.word.yildizlar_parliyor": {
+      "asset": "clips/be/bedc087bf867.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "bedc087bf86730bc88da31164084ef2f12006d16c6114991fd55e9c49026bea1",
+      "display_text": "YILDIZLAR PARLIYOR",
+      "spoken_text": "yildizlar parliyor"
+    },
+    "learning.word.yogurt": {
+      "asset": "clips/78/7849421a0a72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "7849421a0a7299d05ca04488e786b8ec11b755ede094f77be19a7ccc45e6f956",
+      "display_text": "YOĞURT",
+      "spoken_text": "yoğurt"
+    },
+    "learning.word.yumurta": {
+      "asset": "clips/57/57cfdb302589.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "57cfdb3025893a40d23e4f6e4d091d20fa4625ddaa3cae0866af3e96fc86da1f",
+      "display_text": "YUMURTA",
+      "spoken_text": "yumurta"
+    },
+    "learning.word.yunus": {
+      "asset": "clips/03/03937a42bba5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "03937a42bba513bba9eb9d2d0b343884d8b983b7e2e9146f03518a04244d1d66",
+      "display_text": "YUNUS",
+      "spoken_text": "yunus"
+    },
+    "learning.word.yuzen_balik": {
+      "asset": "clips/69/69d6045bc69a.mp3",
+      "word_ends_ms": [
+        385
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 914,
+      "sha256": "69d6045bc69a2008500d103a19158b15ed064a19b22c466e0ad1fbf6de56d0e2",
+      "display_text": "YÜZEN BALIK",
+      "spoken_text": "yüzen balik"
+    },
+    "learning.word.zurafa": {
+      "asset": "clips/00/00bce66da0c9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "00bce66da0c9cd28ff045d85135c92cfe9377e72546d474eca68eaa9f6891eff",
+      "display_text": "ZÜRAFA",
+      "spoken_text": "zürafa"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/cf/cf15edb4f0d5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "cf15edb4f0d587dbbc7f85a14a3d6c00365e2829166b0426b333c4ef6817e789",
+      "display_text": "Öğrenme Labirenti",
+      "spoken_text": "Öğrenme Labirenti"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/28/2851d234048e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "2851d234048ecd0496c920472d0d1d2fbef55895f34041f0b70072f8197525b1",
+      "display_text": "Otomatik",
+      "spoken_text": "Otomatik"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/a1/a1d04706929e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "a1d04706929e9765ec9933cb4218695fac0f76395b33059423a22aadd0e0a8d4",
+      "display_text": "Çekçe",
+      "spoken_text": "Çekçe"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/ca/ca1e0b5a7027.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "ca1e0b5a7027791c2c804bce6dd99145ab7e0a6d5dc11097b870ade6ecd2a3dd",
+      "display_text": "Danimarkaca",
+      "spoken_text": "Danimarkaca"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/3c/3c1c7548c0a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "3c1c7548c0a49ddc9ff5f5aef9e5f9ac0c0dd27825b90d741354f4c12154efee",
+      "display_text": "Hollandaca",
+      "spoken_text": "Hollandaca"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/79/791dbe297bda.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "791dbe297bda504494f69bc7802e52f9fe613e2609f6f7cead08cb78ea536b6c",
+      "display_text": "İngilizce",
+      "spoken_text": "İngilizce"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/a0/a01c071c6aba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a01c071c6abab1bb90f4215e7113a4d218d85cee3fe7ccd4c606d1a9c36a00ed",
+      "display_text": "Fince",
+      "spoken_text": "Fince"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/f5/f50b820d7fc3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "f50b820d7fc3bed918fbacdcc4e57336e21b0346533511c94af4b7a36d3fbc68",
+      "display_text": "Fransızca",
+      "spoken_text": "Fransızca"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/b8/b8ad8b452e8a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "b8ad8b452e8a711d9f5cf8e728da8ea242941725a31a9273b416c416980011b0",
+      "display_text": "Almanca",
+      "spoken_text": "Almanca"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/c6/c689a8155d8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "c689a8155d8fcf908fc8b8bd2811eea7afe8b2440830e238e97f040e263455d7",
+      "display_text": "Yunanca",
+      "spoken_text": "Yunanca"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/ab/ab7457e2499d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "ab7457e2499d732db1a065e7b69e09c5e0bbba6f91fbab548fab1fe7de0dc8fd",
+      "display_text": "İbranice",
+      "spoken_text": "İbranice"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/70/70675440c710.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "70675440c710b33ac8b3a6384221be1e9f17ba1def5cf69d5f48bf570ff6b529",
+      "display_text": "Macarca",
+      "spoken_text": "Macarca"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/8b/8b7b3e0c79de.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "8b7b3e0c79defbf86553dbe233af3b581f0509d64e9ca7445ae5c6080621d26e",
+      "display_text": "İtalyanca",
+      "spoken_text": "İtalyanca"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/6d/6dc66894f316.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "6dc66894f3166433e903fc74c2546ccf0a712030d2a85e4a52641b44d9d710ca",
+      "display_text": "Norveççe",
+      "spoken_text": "Norveççe"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/7e/7e50f2a73917.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "7e50f2a73917d1d72f45e04f8d5de3e752e68a8592a7381ad1a17207a139eb65",
+      "display_text": "Lehçe",
+      "spoken_text": "Lehçe"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/f1/f1181019faab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f1181019faabe42b8b0b3a6f32b28a15db15482d21ae1eb0813ca430ac6a7ee7",
+      "display_text": "Portekizce",
+      "spoken_text": "Portekizce"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/00/009bdca10e6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "009bdca10e6e8359129b7ca01ec24663b4819e1acdbcdae6d07c8ef6a18eeb1c",
+      "display_text": "Rumence",
+      "spoken_text": "Rumence"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/ae/ae7d5ce47310.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "ae7d5ce47310c466426480b8f269c7130f238a124a21c18a492f39d9eca3f396",
+      "display_text": "Slovakça",
+      "spoken_text": "Slovakça"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/ef/eff20f8f4e5c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "eff20f8f4e5c70865e64f0de3e96563eb73aff41e73984be49aaa91989281860",
+      "display_text": "İspanyolca",
+      "spoken_text": "İspanyolca"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/70/702eab9e4e71.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "702eab9e4e71733035a6b9e9e48a5c5feceead930d2673c7b2d524e096825790",
+      "display_text": "İsveççe",
+      "spoken_text": "İsveççe"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/93/93e6fe806191.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "93e6fe806191c222a6d863c8c7aab932a43acc2047d9b8238cc814a85ac1f4c3",
+      "display_text": "Türkçe",
+      "spoken_text": "Türkçe"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/e5/e518166f981d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "e518166f981dc376c8efb6a1ed82e6aa8e57e93df5037727b23d225d7947bc23",
+      "display_text": "Ukraynaca",
+      "spoken_text": "Ukraynaca"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/0c/0cede61ab922.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "0cede61ab9221a1cdcbe13eb08e04f956173b161d2bda046109e0ec27d2c2653",
+      "display_text": "Vietnamca",
+      "spoken_text": "Vietnamca"
+    },
+    "ui.recap_tts_counted_to.1": {
+      "asset": "clips/ac/accca72e0291.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "accca72e0291a5b210666c8459412ffe36182e5abdc7fe8fefe7fe745a486172",
+      "display_text": "'e kadar saydın",
+      "spoken_text": "'e kadar saydın"
+    },
+    "ui.recap_tts_found_letter.1": {
+      "asset": "clips/49/49c0213cd7da.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "49c0213cd7daa38d0ce137b77f90fb4dddd7a88a1f5702f0063a394893994ba3",
+      "display_text": "harfini buldun",
+      "spoken_text": "harfini buldun"
+    },
+    "ui.recap_tts_found_letter_label.0": {
+      "asset": "clips/0e/0e7c13e326f2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "0e7c13e326f2df84e0b5846ee091fe5058888b85234768b1d4720e0057f61f76",
+      "display_text": "Harfini buldun",
+      "spoken_text": "Harfini buldun"
+    },
+    "ui.recap_tts_found_letter_label_lang.1": {
+      "asset": "clips/ee/ee7fc759928e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "ee7fc759928e9b3bebb5b1f8327de7b7d0f3e9d5bc8c4187d68791a652f86c38",
+      "display_text": "şu harfi buldun",
+      "spoken_text": "şu harfi buldun"
+    },
+    "ui.recap_tts_found_letters.1": {
+      "asset": "clips/c6/c6fb72b0487f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "c6fb72b0487f55835c333b9058fe2b14c58125c4accfe0abc426ee7694172563",
+      "display_text": "ile",
+      "spoken_text": "ile"
+    },
+    "ui.recap_tts_found_letters.2": {
+      "asset": "clips/6d/6dab9d7ca945.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1620,
+      "sha256": "6dab9d7ca945d1badef9fbaae9571c0c5d1c4542319c062a2c3550e80c0be4cc",
+      "display_text": "arasındaki harfleri buldun",
+      "spoken_text": "arasındaki harfleri buldun"
+    },
+    "ui.recap_tts_found_letters_from.0": {
+      "asset": "clips/41/41855f3222d2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "41855f3222d26976d579fd32eafffbe2642458925b3cbd4b1132df506aedcb4e",
+      "display_text": "Şu harfler arasını buldun",
+      "spoken_text": "Şu harfler arasını buldun"
+    },
+    "ui.recap_tts_found_letters_from_lang.1": {
+      "asset": "clips/c5/c5222ff8734d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "c5222ff8734ddc96dddc9bf061ac3e0c33bc401e41015c55ce8d8b9eaf66e6ab",
+      "display_text": "şu harfleri buldun",
+      "spoken_text": "şu harfleri buldun"
+    },
+    "ui.recap_tts_in_language.1": {
+      "asset": "clips/e8/e887ee5a1ba6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e887ee5a1ba6459e2c46e26e3743d6b19a42f9ef1c7288294f2673ada66e4764",
+      "display_text": "dilinde",
+      "spoken_text": "dilinde"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/b3/b3e0c713d080.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "b3e0c713d0800e62102ffe44251af53eaa244a435e5b2f036285a21b08e5cee1",
+      "display_text": "ifadesini heceledin",
+      "spoken_text": "ifadesini heceledin"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/b4/b4520205daff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "b4520205daff904ba43b768a1b808fe5263479f5b7f5378df9bd6eea46e28280",
+      "display_text": "ifadeyi heceledin",
+      "spoken_text": "ifadeyi heceledin"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/9c/9c2303a65d01.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "9c2303a65d0121f9cbeff7d3a4e59b9dafe5d891934c848bfe6e1c7e0f637110",
+      "display_text": "kelimesini heceledin",
+      "spoken_text": "kelimesini heceledin"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/6c/6c26778b3ccf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "6c26778b3ccf197584860d78fd01671f584d3bd610c372f3d48072279d43969d",
+      "display_text": "kelimeyi heceledin",
+      "spoken_text": "kelimeyi heceledin"
+    }
+  }
+}

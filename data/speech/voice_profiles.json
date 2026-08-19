@@ -657,9 +657,9 @@
     "uk-UA": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "h9NSQvWZaC4NFusYsxT9",
+      "voice_name": "Artem Klopotenko",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "uk",
       "settings": {
