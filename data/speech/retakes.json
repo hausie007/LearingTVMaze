@@ -442,6 +442,93 @@
         "reason": "super short",
         "asked_on": "2026-08-19"
       }
+    },
+    "hu": {
+      "learning.number.003": {
+        "n": 1,
+        "reason": "contains harom negy",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.004": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.005": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.006": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.007": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.008": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.009": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.010": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.011": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "learning.number.012": {
+        "n": 1,
+        "reason": "shift by 1",
+        "asked_on": "2026-08-20"
+      },
+      "ui.lang_in_spanish.0": {
+        "n": 1,
+        "reason": "just brief sound",
+        "asked_on": "2026-08-20"
+      },
+      "ui.lang_in_swedish.0": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-20"
+      },
+      "ui.lang_romanian.0": {
+        "n": 1,
+        "reason": "just brief sound",
+        "asked_on": "2026-08-20"
+      },
+      "ui.lang_vietnamese.0": {
+        "n": 1,
+        "reason": "just brief sound",
+        "asked_on": "2026-08-20"
+      },
+      "ui.recap_tts_counted_to_lang.0": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word.jatssz_a_jatekaiddal": {
+        "n": 1,
+        "reason": "too long",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word.jatszunk_egyutt": {
+        "n": 1,
+        "reason": "too short",
+        "asked_on": "2026-08-20"
+      }
     }
   }
 }

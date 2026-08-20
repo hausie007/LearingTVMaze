@@ -753,8 +753,14 @@
     },
     "learning.word.aire_de_jeux": {
       "asset": "clips/5a/5a58bb190207.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        227,
+        426
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
       "duration_ms": 758,
       "sha256": "5a58bb190207a3373f44fb50d59fc9555d0f2f06b2cc2b56ea6a2bdbd72a34c5",
       "display_text": "AIRE DE JEUX",
@@ -1284,8 +1290,12 @@
     },
     "learning.word.eau_fraiche": {
       "asset": "clips/44/449b5a4496a7.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        207
+      ],
+      "word_fade_ms": [
+        20
+      ],
       "duration_ms": 758,
       "sha256": "449b5a4496a7dbe8078a293b2da7870945c1e9ff119f28f1d5d36d7d6c4379a9",
       "display_text": "EAU FRAÎCHE",
@@ -2238,8 +2248,12 @@
     },
     "learning.word.poisson_nageant": {
       "asset": "clips/9b/9bc5a3cf41b6.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        379
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 888,
       "sha256": "9bc5a3cf41b6920b537070ef4b04148670f010989841077d6f742a2615e4333a",
       "display_text": "POISSON NAGEANT",
@@ -2581,8 +2595,12 @@
     },
     "learning.word.vaisseau_spatial": {
       "asset": "clips/39/39daf7d3a4cb.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        351
+      ],
+      "word_fade_ms": [
+        29
+      ],
       "duration_ms": 1123,
       "sha256": "39daf7d3a4cba9b9a2c36c8c8bd72723adfb3486b3590892dcf33e4573782d73",
       "display_text": "VAISSEAU SPATIAL",

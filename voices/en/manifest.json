@@ -1824,8 +1824,16 @@
     },
     "learning.word.i_love_my_family": {
       "asset": "clips/fb/fbec6b278277.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        249,
+        489,
+        689
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        19
+      ],
       "duration_ms": 1280,
       "sha256": "fbec6b2782778b98db4fff148a1fcb99ef0d27afa552a3d06a5961b9f5a4c059",
       "display_text": "I LOVE MY FAMILY",

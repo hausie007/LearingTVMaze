@@ -1364,8 +1364,12 @@
     },
     "learning.word.fuochi_d_artificio": {
       "asset": "clips/51/51112697880b.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        419
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1150,
       "sha256": "51112697880b4d5f5be9b872f665e28ce5608d416889b7a2793f515033896bc5",
       "display_text": "FUOCHI D'ARTIFICIO",
@@ -1926,8 +1930,12 @@
     },
     "learning.word.oceano_blu": {
       "asset": "clips/66/668b0df27b12.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        508
+      ],
+      "word_fade_ms": [
+        20
+      ],
       "duration_ms": 862,
       "sha256": "668b0df27b1273690ebb2a6317d873748b9833f5bbba3b4af975788426df5bc3",
       "display_text": "OCEANO BLU",

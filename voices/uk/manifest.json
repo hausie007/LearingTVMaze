@@ -775,8 +775,12 @@
     },
     "learning.word._033d": {
       "asset": "clips/67/67ad674be10e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        354
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 705,
       "sha256": "67ad674be10ea062b544959f367a6ea94cdceb064fc1a8709c888bf058250707",
       "display_text": "ДОБРИЙ ДЕНЬ",
@@ -830,8 +834,12 @@
     },
     "learning.word._0699": {
       "asset": "clips/91/913eae7ce5e0.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        339
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 914,
       "sha256": "913eae7ce5e089ba74e8636e16caecfd3c9950c73e2b9316a8603830b082b3e5",
       "display_text": "ЛЮБИ ПЛАНЕТУ",
@@ -848,8 +856,12 @@
     },
     "learning.word._09b4": {
       "asset": "clips/d1/d1a871f94159.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        394
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 784,
       "sha256": "d1a871f94159473adfe2292664ae87a9e34a91686615d86bdce92d9084a23481",
       "display_text": "СИНЄ НЕБО",
@@ -954,8 +966,12 @@
     },
     "learning.word._1b6e": {
       "asset": "clips/dd/ddf63dd26a4e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        311
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 732,
       "sha256": "ddf63dd26a4e2d191c8760a541c4b21bbafe5c97446134860f521d62d5724e4b",
       "display_text": "ПРИВІТ ДРУЗІ",
@@ -1039,8 +1055,12 @@
     },
     "learning.word._28c0": {
       "asset": "clips/95/951ef7cd9e01.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        415
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 862,
       "sha256": "951ef7cd9e01f804adc50702d356256633c578143fc4551e4820970ea33570bf",
       "display_text": "ПЛАВАЄ РИБКА",
@@ -1167,8 +1187,12 @@
     },
     "learning.word._3604": {
       "asset": "clips/1b/1b064e2b49b6.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        555
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1176,
       "sha256": "1b064e2b49b6f682a738712fc7d3bdb1d8b4f866c05dd39af22f2228f75ecebc",
       "display_text": "РАДІСНА ДІВЧИНКА",
@@ -1365,8 +1389,14 @@
     },
     "learning.word._52eb": {
       "asset": "clips/14/14251d63040f.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        367,
+        686
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
       "duration_ms": 993,
       "sha256": "14251d63040f3ab005049d33e8911630c6467b1f5337f3c774fa9981ce9ef868",
       "display_text": "ВЧИСЬ КОЖЕН ДЕНЬ",
@@ -1591,8 +1621,14 @@
     },
     "learning.word._7c43": {
       "asset": "clips/82/82fd7e3eafbe.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        239,
+        539
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
       "duration_ms": 1019,
       "sha256": "82fd7e3eafbe0c9ebf8ec84e7774f2ad0dec4192a473537fb39f267d3426a867",
       "display_text": "ПИЙ ВОДУ ЩОДНЯ",
@@ -1907,8 +1943,14 @@
     },
     "learning.word._b7c2": {
       "asset": "clips/a5/a594a2f9b448.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        372,
+        452
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
       "duration_ms": 993,
       "sha256": "a594a2f9b448f49e6bb91bf24cc79516c5342fada142c7f0a5baf339f81b6c8b",
       "display_text": "ЙДИ З РАДІСТЮ",
@@ -2014,8 +2056,12 @@
     },
     "learning.word._d5a8": {
       "asset": "clips/0a/0a219afa20a3.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        243
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 679,
       "sha256": "0a219afa20a3db981996bc995e2215c243f1a3a038417641eb58731164dbd8e2",
       "display_text": "Я МАЛЮЮ",
@@ -2072,8 +2118,12 @@
     },
     "learning.word._dedd": {
       "asset": "clips/0d/0d7732e4044d.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        374
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 836,
       "sha256": "0d7732e4044dcc187a2d836bc92003cb2c15322fdb717c55c385fa2f3266c640",
       "display_text": "ЇЖ ЗДОРОВО",
@@ -2147,8 +2197,14 @@
     },
     "learning.word._e9fe": {
       "asset": "clips/ed/ed7f0fe3b38b.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        337,
+        697
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
       "duration_ms": 1228,
       "sha256": "ed7f0fe3b38beb48562254f0870c91cc7d22116ee05ae680bfb16091e063688a",
       "display_text": "ПТАХИ ЛЕТЯТЬ ВИСОКО",

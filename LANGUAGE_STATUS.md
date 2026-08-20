@@ -15,22 +15,22 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 | **sk** | Luky Zajo | ~ draft | ✓ +10 word-only | ✓ CH, DZ, DŽ | ✓ 6 marked | ✓ | ✓ 147 | ✓ 57 | ✓ playing |
 | **pl** | Pawel | ~ draft | ✓ +3 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 169 | ✓ 58 | ✓ playing |
 | **de** | Alexander - Deep TV Narrator | ~ draft | ✓ +4 word-only | ✓ none | ✓ 0 marked | ✓ | ✓ 178 | ✓ 62 | ✓ playing |
-| **es** | Dan | ✓ | ✓ +6 word-only | · candidates | · | ✓ | ✓ 207 | ✓ 58 | ✓ playing |
+| **es** | Dan | ✓ | ✓ +6 word-only | · candidates | · | · | · 0/207 | · 0/58 | ✓ playing |
+| **fr** | Martin Dupont | ✓ | ✓ A–Z | · candidates | · | ✓ | ✓ 182 | ✓ 58 | ✓ playing |
+| **it** | David Martin | ~ draft | ✓ | · candidates | · | ✓ | ✓ 171 | ✓ 58 | ✓ playing |
 | **pt** | Paulo | ✓ | ✓ A–Z | · candidates | · | ✓ | ✓ 173 | ✓ 58 | ✓ playing |
-| fr | Martin Dupont | ✓ | ✓ A–Z | · candidates | · | · | · | · | · |
-| it | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
-| nl | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
-| sv | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| da | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| nb | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| fi | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| hu | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
-| ro | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| tr | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| el | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| uk | · | ~ draft | ✓ | — none | — | · | · | · | · |
-| vi | · | ~ draft | ✓ | · candidates | · | · | · | · | · |
-| he | · | ~ draft | ✓ | — none | — | · | · | · | · |
+| **nl** | Ruth | ~ draft | ✓ | · candidates | · | ✓ | ✓ 165 | ✓ 58 | ✓ playing |
+| **sv** | Adam Composer | ~ draft | ✓ | — none | — | · | · 0/179 | · 0/59 | · |
+| **da** | · | ~ draft | ✓ | — none | — | · | · 0/159 | · 0/59 | · |
+| **nb** | · | ~ draft | ✓ | — none | — | · | · 0/168 | · 0/59 | · |
+| **fi** | · | ~ draft | ✓ | — none | — | · | · 0/140 | · 0/57 | · |
+| **hu** | Aggie | ~ draft | ✓ +4 word-only | · candidates | · | ~ 44 | ~ 138/140 | ~ 60/65 | · |
+| **ro** | Mike L | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 59 | ✓ playing |
+| **tr** | Fatih Yıldırım | ~ draft | ✓ | — none | — | ✓ | ✓ 170 | ✓ 36 | ✓ playing |
+| **el** | Stefanos | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 59 | ✓ playing |
+| **uk** | Artem Klopotenko | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 57 | ✓ playing |
+| **vi** | Kiều Linh | ~ draft | ✓ | · candidates | · | ✓ | ✓ 170 | ✓ 58 | ✓ playing |
+| **he** | Hebrew Man | ~ draft | ✓ | — none | — | · | · 0/147 | · 0/38 | · |
 
 Bold means the language is enabled in `data/speech/catalog.json`; the rest are
 declared but not being generated.

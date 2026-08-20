@@ -775,7 +775,7 @@
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.7
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -803,6 +803,18 @@
             "köszönöm"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "number": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, which the model reads as a pause rather than speaking. Hungarian number words are short enough that the gaps between items in a sheet were no larger than the gaps inside them, and one merged pair shifts every cut after it."
+        },
+        "char": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, which the model reads as a pause rather than speaking. Hungarian letter names are short enough that the gaps between items in a sheet were no larger than the gaps inside them, and one merged pair shifts every cut after it."
         }
       },
       "retake_carriers": {
@@ -813,7 +825,8 @@
           "köszönöm"
         ],
         "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
-      }
+      },
+      "settings_note": "speed lowered from 0.9 to 0.7. Hungarian number words are very short — egy, öt, hat, hét — and at 0.9 this voice ran them together: 'három' came back containing 'három négy' and every number after it was shifted by one. The same setting caused the same trouble in Portuguese."
     },
     "sv-SE": {
       "version": 1,

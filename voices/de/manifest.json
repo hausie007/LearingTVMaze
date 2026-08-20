@@ -927,8 +927,12 @@
     },
     "learning.word.bunter_drache": {
       "asset": "clips/47/47c3761aa3ea.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        454
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1019,
       "sha256": "47c3761aa3ea0b0d8a67adb6d085b5c795ce5704cc6861df6496ba4fb3717d09",
       "display_text": "BUNTER DRACHE",
@@ -1169,8 +1173,12 @@
     },
     "learning.word.fleissige_biene": {
       "asset": "clips/e4/e4df4dd3668e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        756
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1280,
       "sha256": "e4df4dd3668e3c2509d374090165bf2331966e28980d62ce899289a4a7eabc85",
       "display_text": "FLEISSIGE BIENE",
@@ -1251,8 +1259,12 @@
     },
     "learning.word.grosse_katze": {
       "asset": "clips/15/15e44d749a15.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        558
+      ],
+      "word_fade_ms": [
+        30
+      ],
       "duration_ms": 1123,
       "sha256": "15e44d749a15977e723f7475710963a42f5f579d1105b77b803102145a97f4da",
       "display_text": "GROSSE KATZE",
@@ -1260,8 +1272,12 @@
     },
     "learning.word.grosser_ballon": {
       "asset": "clips/75/75034fd53356.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        552
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1150,
       "sha256": "75034fd53356c1d8b4f4c68825ac974f0b3b574c10594d90e9b43e05605ee5d4",
       "display_text": "GROSSER BALLON",
@@ -1269,8 +1285,14 @@
     },
     "learning.word.grosser_bar_schlaft": {
       "asset": "clips/03/03e1853e30d7.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        603,
+        1032
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
       "duration_ms": 1724,
       "sha256": "03e1853e30d716007e8506df67692791120e988cdc849e765244019ef7ca2944",
       "display_text": "GROSSER BÄR SCHLÄFT",
@@ -1278,8 +1300,12 @@
     },
     "learning.word.grosser_wal": {
       "asset": "clips/97/97e386b37aa7.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        541
+      ],
+      "word_fade_ms": [
+        20
+      ],
       "duration_ms": 1019,
       "sha256": "97e386b37aa7642b9e296c48741b67180e445b6984efbb640f67ca04125525bc",
       "display_text": "GROSSER WAL",
@@ -1322,8 +1348,14 @@
     },
     "learning.word.gute_ist_magie": {
       "asset": "clips/37/370c8ffd390b.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        544,
+        893
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
       "duration_ms": 1515,
       "sha256": "370c8ffd390b3899495d7b02870fe5d0c051593a4d0b9f5c4acc353adbaa6c45",
       "display_text": "GÜTE IST MAGIE",
@@ -1344,8 +1376,12 @@
     },
     "learning.word.guter_freund": {
       "asset": "clips/dd/ddd2bb6e9403.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        440
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1071,
       "sha256": "ddd2bb6e940316b60ffdb663d6c85aa0159163ecdbf804581d997034f20f160a",
       "display_text": "GUTER FREUND",
@@ -1371,8 +1407,12 @@
     },
     "learning.word.heisser_tee": {
       "asset": "clips/10/1055da10df0d.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        490
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 940,
       "sha256": "1055da10df0de7f2d58bb7a97ca65792794bcdf30ddb3c817cf00e26dae6f322",
       "display_text": "HEISSER TEE",
@@ -1449,8 +1489,12 @@
     },
     "learning.word.kalter_schnee": {
       "asset": "clips/43/43c3faef7a5a.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        515
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1045,
       "sha256": "43c3faef7a5a4051a3e6334be7495be1720a338398ef32c2bf239eb449664e5c",
       "display_text": "KALTER SCHNEE",
@@ -1458,8 +1502,12 @@
     },
     "learning.word.kaltes_eis": {
       "asset": "clips/48/4899b8fe0566.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        505
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1097,
       "sha256": "4899b8fe0566a6a7f8748e159574137660def58fcca136cb462855d7ef28c228",
       "display_text": "KALTES EIS",
@@ -1556,8 +1604,12 @@
     },
     "learning.word.kleines_kaninchen": {
       "asset": "clips/6e/6e1d119b32ea.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        482
+      ],
+      "word_fade_ms": [
+        20
+      ],
       "duration_ms": 1228,
       "sha256": "6e1d119b32eaca972049ef68f136b41a6f3f192499d5709ce1b9d079f5866e2f",
       "display_text": "KLEINES KANINCHEN",
@@ -1776,8 +1828,12 @@
     },
     "learning.word.meine_familie": {
       "asset": "clips/de/de6cc9419d04.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        367
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1097,
       "sha256": "de6cc9419d04ffd5f01c8a1297d03d86c4db0b98243dbe53733a8b28f9dcc034",
       "display_text": "MEINE FAMILIE",
@@ -2027,8 +2083,12 @@
     },
     "learning.word.roter_apfel": {
       "asset": "clips/6b/6bf684c85b38.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        551
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1097,
       "sha256": "6bf684c85b38298d25e68aeb4a71f3e23d80c052c561d37d64298931c8693b25",
       "display_text": "ROTER APFEL",
@@ -2036,8 +2096,12 @@
     },
     "learning.word.rotes_auto": {
       "asset": "clips/ce/cebcdab15351.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        598
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1176,
       "sha256": "cebcdab1535132aa0d76f035b30fa69d7904b403949695ad18bf5488d3fba5c9",
       "display_text": "ROTES AUTO",
@@ -2201,8 +2265,12 @@
     },
     "learning.word.susse_milch": {
       "asset": "clips/89/8904eca009b6.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        637
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1202,
       "sha256": "8904eca009b6f4b5cef7a7261a6d1d7eb92ec7b1640db54af9da70c9b3c16cf2",
       "display_text": "SÜSSE MILCH",
@@ -2210,8 +2278,12 @@
     },
     "learning.word.susser_kuchen": {
       "asset": "clips/96/960cad9c50ea.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        543
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1228,
       "sha256": "960cad9c50ea5a14b7915a7498871860cfe2402ca9b49a847e55c49035c698d0",
       "display_text": "SÜSSER KUCHEN",

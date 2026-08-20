@@ -2114,8 +2114,12 @@
     },
     "learning.word.sok_owocowy": {
       "asset": "clips/58/58c0c08f6f4f.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        404
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1150,
       "sha256": "58c0c08f6f4f61e3b286e5e86b3a0d8f7e7e17c568ff4ffdc1938485e4763572",
       "display_text": "SOK OWOCOWY",
