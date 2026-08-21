@@ -884,9 +884,9 @@
     "da-DK": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "xj6X4BCUsv9oxohm1E8o",
+      "voice_name": "Søren",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "da",
       "settings": {
@@ -894,7 +894,7 @@
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.72
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -922,6 +922,18 @@
             "tak"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "number": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Danish number words are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it. Cheap insurance, set before the first recording rather than after a review found it."
+        },
+        "char": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Danish letter names are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it. Cheap insurance, set before the first recording rather than after a review found it."
         }
       },
       "retake_carriers": {
@@ -932,14 +944,15 @@
           "tak"
         ],
         "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
-      }
+      },
+      "settings_note": "speed lowered from 0.9 to 0.72, 20% slower. Judged by ear on the first pass. Danish number words above twenty put the unit first — 'enogtyve' — and 50 is 'halvtreds', so the sheet is full of long compounds read quickly; short letter names in the same voice are what suffer."
     },
     "nb-NO": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "BGEU6wFi2uNm6Kje1Yhk",
+      "voice_name": "Maja",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "nb",
       "settings": {
@@ -990,9 +1003,9 @@
     "fi-FI": {
       "version": 1,
       "provider": "elevenlabs",
-      "voice_id": null,
-      "voice_name": null,
-      "voice_source": null,
+      "voice_id": "Gp43kq9FsSlavD7esRtx",
+      "voice_name": "Vaino",
+      "voice_source": "library",
       "model_id": "eleven_v3",
       "language_code": "fi",
       "settings": {
