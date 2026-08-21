@@ -3065,6 +3065,13 @@ def cmd_retake(args) -> int:
         # front of it' tested nothing of the kind.
         for field in ("carrier_before", "carrier_after", "previous_text", "next_text"):
             entry.pop(field, None)
+        if args.no_carrier:
+            # An empty list is the existing way to say "nothing either side" —
+            # see retake_context. The carrier is a remedy for a short item read
+            # first or last, and its price is a cut; when the cut is what keeps
+            # failing, removing it is the condition left to try.
+            entry["carrier_before"] = []
+            entry["carrier_after"] = []
         if args.previous_text:
             entry["previous_text"] = args.previous_text
         if args.carrier:
@@ -4124,6 +4131,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--carrier", action="append", metavar="WORD",
                     help="throwaway word spoken before the clip and then discarded, so the "
                          "take has a run-up; repeatable")
+    sp.add_argument("--no-carrier", action="store_true",
+                    help="record it alone, with nothing either side and nothing to cut")
     sp.add_argument("--carrier-after", action="append", metavar="WORD",
                     help="throwaway word spoken after the clip, so it is not the last thing "
                          "read — a reading trails off at its end; repeatable")

@@ -505,19 +505,25 @@
         "asked_on": "2026-08-20"
       },
       "ui.lang_romanian.0": {
-        "n": 1,
-        "reason": "just brief sound",
-        "asked_on": "2026-08-20"
+        "n": 4,
+        "reason": "Cut to 0.09-0.38s on three takes with carriers, while the untouched clips beside it are 0.8-1.2s. These are proper words, long enough to stand alone, so the carrier is buying nothing and costing a cut.",
+        "asked_on": "2026-08-21",
+        "carrier_before": [],
+        "carrier_after": []
       },
       "ui.lang_vietnamese.0": {
-        "n": 1,
-        "reason": "just brief sound",
-        "asked_on": "2026-08-20"
+        "n": 4,
+        "reason": "Cut to 0.09-0.38s on three takes with carriers, while the untouched clips beside it are 0.8-1.2s. These are proper words, long enough to stand alone, so the carrier is buying nothing and costing a cut.",
+        "asked_on": "2026-08-21",
+        "carrier_before": [],
+        "carrier_after": []
       },
       "ui.recap_tts_counted_to_lang.0": {
-        "n": 1,
-        "reason": "",
-        "asked_on": "2026-08-20"
+        "n": 4,
+        "reason": "Cut to 0.09-0.38s on three takes with carriers, while the untouched clips beside it are 0.8-1.2s. These are proper words, long enough to stand alone, so the carrier is buying nothing and costing a cut.",
+        "asked_on": "2026-08-21",
+        "carrier_before": [],
+        "carrier_after": []
       },
       "learning.word.jatssz_a_jatekaiddal": {
         "n": 1,
@@ -527,6 +533,78 @@
       "learning.word.jatszunk_egyutt": {
         "n": 1,
         "reason": "too short",
+        "asked_on": "2026-08-20"
+      },
+      "learning.char.a": {
+        "n": 1,
+        "reason": "says A-B",
+        "asked_on": "2026-08-21"
+      }
+    },
+    "he": {
+      "learning.word._be13": {
+        "n": 1,
+        "reason": "two words",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._c099": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._c139": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._c45e": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._c5dc": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._c698": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._d0b9": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._d72d": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._d916": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._d9a1": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._db2c": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._e037": {
+        "n": 1,
+        "reason": "off by one",
+        "asked_on": "2026-08-20"
+      },
+      "learning.word._e53c": {
+        "n": 1,
+        "reason": "only short sound",
         "asked_on": "2026-08-20"
       }
     }
