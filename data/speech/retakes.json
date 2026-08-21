@@ -607,6 +607,23 @@
         "reason": "only short sound",
         "asked_on": "2026-08-20"
       }
+    },
+    "da": {
+      "learning.word.syng_sang": {
+        "n": 1,
+        "reason": "syng",
+        "asked_on": "2026-08-21"
+      },
+      "learning.word.teleskopet": {
+        "n": 1,
+        "reason": "sang",
+        "asked_on": "2026-08-21"
+      },
+      "learning.word.tog": {
+        "n": 1,
+        "reason": "teleskopet tog",
+        "asked_on": "2026-08-21"
+      }
     }
   }
 }

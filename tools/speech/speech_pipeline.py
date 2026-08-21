@@ -1372,6 +1372,16 @@ def tts_sheet_request(key: str, profile: dict, text: str):
                 break
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", "replace")[:300]
+            if "unsupported_language" in body:
+                # Not worth retrying, and not worth burying in a wall of JSON:
+                # the provider wants the ISO 639-1 macrolanguage, so Norwegian
+                # is 'no' and never 'nb'.
+                raise Fail(
+                    "the model rejected this language_code. Set the right one in "
+                    "data/speech/voice_profiles.json — the provider wants the ISO 639-1 "
+                    "macrolanguage, so Norwegian is 'no' rather than 'nb'. Removing "
+                    "language_code altogether also works; the model infers it from the "
+                    "text. Provider said: " + body[:200])
             if exc.code in (429, 500, 502, 503, 504) and attempt < 4:
                 warn(f"HTTP {exc.code}, retrying in {delay:.1f}s")
                 time.sleep(delay)
@@ -1883,6 +1893,16 @@ def tts_request(key: str, profile: dict, text: str, context: dict = None):
                 return resp.read(), resp.headers.get("request-id", "")
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", "replace")[:300]
+            if "unsupported_language" in body:
+                # Not worth retrying, and not worth burying in a wall of JSON:
+                # the provider wants the ISO 639-1 macrolanguage, so Norwegian
+                # is 'no' and never 'nb'.
+                raise Fail(
+                    "the model rejected this language_code. Set the right one in "
+                    "data/speech/voice_profiles.json — the provider wants the ISO 639-1 "
+                    "macrolanguage, so Norwegian is 'no' rather than 'nb'. Removing "
+                    "language_code altogether also works; the model infers it from the "
+                    "text. Provider said: " + body[:200])
             if exc.code in (429, 500, 502, 503, 504) and attempt < 4:
                 sleep_for = delay + (os.getpid() % 7) / 10.0   # a little jitter
                 warn(f"HTTP {exc.code}, retrying in {sleep_for:.1f}s")

@@ -841,7 +841,7 @@
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.72
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -869,6 +869,18 @@
             "tack"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "number": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Swedish number words are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
+        },
+        "char": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Swedish letter names are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
         }
       },
       "retake_carriers": {
@@ -879,7 +891,8 @@
           "tack"
         ],
         "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
-      }
+      },
+      "settings_note": "0.72, set before the first recording. Portuguese, Hungarian and Danish each cost a full re-record for starting at 0.9."
     },
     "da-DK": {
       "version": 1,
@@ -954,13 +967,13 @@
       "voice_name": "Maja",
       "voice_source": "library",
       "model_id": "eleven_v3",
-      "language_code": "nb",
+      "language_code": "no",
       "settings": {
         "stability": 1.0,
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.72
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -988,6 +1001,18 @@
             "takk"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "number": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Norwegian number words are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
+        },
+        "char": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Norwegian letter names are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
         }
       },
       "retake_carriers": {
@@ -998,7 +1023,9 @@
           "takk"
         ],
         "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
-      }
+      },
+      "language_code_note": "'no', not 'nb'. The provider takes the ISO 639-1 macrolanguage for Norwegian and rejects the Bokmål subtag outright. The locale stays nb-NO because that is what the game and the letter files call it, and because the recordings really are Bokmål — only the code sent to the API differs.",
+      "settings_note": "0.72, set before the first recording. Portuguese, Hungarian and Danish each cost a full re-record for starting at 0.9."
     },
     "fi-FI": {
       "version": 1,
@@ -1013,7 +1040,7 @@
         "similarity_boost": 0.75,
         "style": 0.0,
         "use_speaker_boost": true,
-        "speed": 0.9
+        "speed": 0.72
       },
       "seed": 20260812,
       "pronunciation_dictionaries": [],
@@ -1041,6 +1068,18 @@
             "kiitos"
           ],
           "note": "Carrier words only; the single-request rule for UI lives in catalog.json."
+        },
+        "number": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Finnish number words are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
+        },
+        "char": {
+          "sheet": {
+            "separator": ". ... "
+          },
+          "note": "An ellipsis in the separator, read as a pause rather than spoken. Finnish letter names are short enough that a sheet of them can leave gaps no larger than the gaps inside them, and one merged pair shifts every cut after it."
         }
       },
       "retake_carriers": {
@@ -1051,7 +1090,8 @@
           "kiitos"
         ],
         "note": "Used for any char or ui retake, which is read alone and would otherwise trail off."
-      }
+      },
+      "settings_note": "0.72, set before the first recording. Portuguese, Hungarian and Danish each cost a full re-record for starting at 0.9."
     },
     "vi-VN": {
       "version": 1,
