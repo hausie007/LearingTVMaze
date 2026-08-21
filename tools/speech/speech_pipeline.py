@@ -2153,7 +2153,7 @@ def loss_gate(records: list, locale: str, cat: dict, folder) -> float:
     """
     if locale in _LOSS_BASELINE:
         return _LOSS_BASELINE[locale]
-    p = cat["processing"]
+    p = cat.get("review", {})
     losses = []
     for r in records:
         if r["locale"] != locale:
@@ -3676,7 +3676,7 @@ def audit_path(render_hash: str) -> Path:
 
 def audit_verdict(doc: dict, record: dict, cat: dict, limit: float = 0.0) -> dict:
     """Turn an alignment into a suspicion, with a reason a human can check."""
-    limit = limit or cat["processing"].get("audit_max_loss", 0.5)
+    limit = limit or cat.get("review", {}).get("audit_max_loss", 0.5)
     words = [w for w in doc.get("words", []) if w.get("text", "").strip()]
     expected = record["spoken_text"].split()
     loss = float(doc.get("loss", 0.0))

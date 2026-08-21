@@ -169,7 +169,7 @@
   },
   "processing": {
     "version": 3,
-    "note": "Any change here restages every clip for re-encoding, because it changes the audio — but only re-encoding, from the archived masters. It never costs a synthesis credit. Bump the version deliberately.",
+    "note": "Any change here restages every clip for re-encoding, because it changes the audio — but only re-encoding, from the archived masters. It never costs a synthesis credit. Bump the version deliberately. Only settings that change the audio belong here; judging thresholds live in 'review', so a change to them cannot restage every clip.",
     "trim_silence_db": -45.0,
     "keep_lead_ms": 20,
     "keep_tail_ms": 60,
@@ -184,12 +184,7 @@
     "boundary_fade_ms": 40,
     "boundary_note": "How a phrase is stopped at a word boundary. The word plays whole at full volume to the hold point and only then fades — fading into the boundary instead cost the last syllable. Hold and fade together stay inside the pause the aligner reports before the next word: half of it is held, the rest is the fade, so nothing reaches over the next word, which was audible as a hint of the letter to come. reach caps the pause that may be spent, so a long one is not sat through. The hold running past the aligner's end at all is deliberate — aligners mark the vowel, not the release after it.",
     "boundary_hold_share": 0.5,
-    "boundary_fade_min_ms": 12,
-    "audit_max_loss": 0.5,
-    "audit_note": "How badly a clip may fit the text it was meant to say before `audit` doubts it. Forced alignment reports the fit, so a clip holding the wrong words scores badly — which is how the German UI shift and the early Czech cropped endings would have been caught without anyone listening to a hundred files. It cannot hear a wrong accent, only wrong words, so it flags rather than approves.",
-    "loss_floor": 0.8,
-    "loss_factor": 3.0,
-    "loss_note": "How badly a clip may fit its own text before its word boundaries are discarded. Relative, not absolute: the provider's loss is not comparable between languages. Greek's best alignment scores worse than every other language's median — 2.50 against 0.09 to 0.78 — while getting the word count right every time, in every language measured. A fixed threshold rejected all 41 Greek phrases, which was a unit mismatch rather than a quality judgement. The gate is loss_factor times this locale's own median, never below loss_floor."
+    "boundary_fade_min_ms": 12
   },
   "pricing_usd_per_1k_chars": {
     "note": "Estimation only, for the plan report. RECHECK at https://elevenlabs.io/pricing/api before any production run — these change.",
@@ -215,5 +210,13 @@
     "char",
     "ui"
   ],
-  "retake_carrier_note": "Which categories get carrier words on a retake. Short items only: a letter name or a UI fragment read alone trails off at its end, and a retake has no neighbours to lean on. A whole word is long enough to stand by itself, and wrapping one in carriers means cutting it back out of a three-item reading — which took 'letadýlko' and 'mrkvička' down to their last syllable."
+  "retake_carrier_note": "Which categories get carrier words on a retake. Short items only: a letter name or a UI fragment read alone trails off at its end, and a retake has no neighbours to lean on. A whole word is long enough to stand by itself, and wrapping one in carriers means cutting it back out of a three-item reading — which took 'letadýlko' and 'mrkvička' down to their last syllable.",
+  "review": {
+    "loss_floor": 0.8,
+    "loss_factor": 3.0,
+    "loss_note": "How badly a clip may fit its own text before its word boundaries are discarded. Relative, not absolute: the provider's loss is not comparable between languages. Greek's best alignment scores worse than every other language's median — 2.50 against 0.09 to 0.78 — while getting the word count right every time, in every language measured. A fixed threshold rejected all 41 Greek phrases, which was a unit mismatch rather than a quality judgement. The gate is loss_factor times this locale's own median, never below loss_floor.",
+    "audit_max_loss": 0.5,
+    "audit_note": "How badly a clip may fit the text it was meant to say before `audit` doubts it. Forced alignment reports the fit, so a clip holding the wrong words scores badly — which is how the German UI shift and the early Czech cropped endings would have been caught without anyone listening to a hundred files. It cannot hear a wrong accent, only wrong words, so it flags rather than approves.",
+    "note": "Thresholds for judging clips, kept out of 'processing' on purpose. Anything inside 'processing' is part of the encoding hash, so adding a threshold there silently restages every clip in every language for re-encoding — which is how Spanish ended up with 348 masters and no clips. Only put something in 'processing' if it changes the audio."
+  }
 }

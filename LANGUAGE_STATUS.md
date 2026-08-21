@@ -24,13 +24,13 @@ actually there. A checklist ticked by hand is a checklist that lies within a mon
 | **da** | · | ~ draft | ✓ | — none | — | · | · 0/159 | · 0/59 | · |
 | **nb** | · | ~ draft | ✓ | — none | — | · | · 0/168 | · 0/59 | · |
 | **fi** | · | ~ draft | ✓ | — none | — | · | · 0/140 | · 0/57 | · |
-| **hu** | Aggie | ~ draft | ✓ +4 word-only | · candidates | · | ~ 44 | ~ 138/140 | ~ 60/65 | · |
+| **hu** | Aggie | ~ draft | ✓ +4 word-only | · candidates | · | ✓ | ✓ 140 | ✓ 65 | ✓ playing |
 | **ro** | Mike L | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 59 | ✓ playing |
 | **tr** | Fatih Yıldırım | ~ draft | ✓ | — none | — | ✓ | ✓ 170 | ✓ 36 | ✓ playing |
 | **el** | Stefanos | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 59 | ✓ playing |
 | **uk** | Artem Klopotenko | ~ draft | ✓ | — none | — | ✓ | ✓ 140 | ✓ 57 | ✓ playing |
 | **vi** | Kiều Linh | ~ draft | ✓ | · candidates | · | ✓ | ✓ 170 | ✓ 58 | ✓ playing |
-| **he** | Hebrew Man | ~ draft | ✓ | — none | — | · | · 0/147 | · 0/38 | · |
+| **he** | Hebrew Man | ~ draft | ✓ | — none | — | ✓ | ✓ 147 | ✓ 38 | ✓ playing |
 
 Bold means the language is enabled in `data/speech/catalog.json`; the rest are
 declared but not being generated.
