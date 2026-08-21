@@ -624,6 +624,13 @@
         "reason": "teleskopet tog",
         "asked_on": "2026-08-21"
       }
+    },
+    "nb": {
+      "learning.word.rev": {
+        "n": 1,
+        "reason": "",
+        "asked_on": "2026-08-21"
+      }
     }
   }
 }

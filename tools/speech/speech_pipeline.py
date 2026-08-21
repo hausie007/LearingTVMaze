@@ -87,6 +87,18 @@ def nfc(text: str) -> str:
     return unicodedata.normalize("NFC", text).strip()
 
 
+def audio_settings(section: dict) -> dict:
+    """The part of a config section that actually changes the audio.
+
+    Prose is dropped. A note is documentation, and editing one used to restage
+    every clip in every language for re-encoding — five thousand of them, for a
+    sentence. Nothing about how a clip sounds depends on the comment beside the
+    number.
+    """
+    return {k: v for k, v in section.items()
+            if not (k == "note" or k.endswith("_note"))}
+
+
 def canonical_hash(obj) -> str:
     blob = json.dumps(obj, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
@@ -606,8 +618,8 @@ def make_record(cat, profile, lang, locale, category, cspec, key, display, spoke
         "spec_hash": spec_hash,
         "render_hash": canonical_hash({
             "spec": spec_hash,
-            "processing": cat["processing"],
-            "ship_format": cat["ship_format"],
+            "processing": audio_settings(cat["processing"]),
+            "ship_format": audio_settings(cat["ship_format"]),
         }),
         "source": source,
         "retake": retake,
