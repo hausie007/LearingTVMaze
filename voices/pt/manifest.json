@@ -12,7 +12,7 @@
   },
   "counts": {
     "number": 50,
-    "char": 26,
+    "char": 34,
     "word": 173,
     "ui": 58
   },
@@ -25,6 +25,33 @@
       "sha256": "ad412f7fcb8ef80881d342fa994e10706f3c2e63df6d6a4fff0778eba4c046a7",
       "display_text": "A",
       "spoken_text": "á"
+    },
+    "learning.char.a_acute": {
+      "asset": "clips/dd/ddc5d3f6cd2e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "ddc5d3f6cd2e784ac950e8127be63853626b741d20f2a36f8d34ffd30171e681",
+      "display_text": "Á",
+      "spoken_text": "a com acento agudo"
+    },
+    "learning.char.a_circumflex": {
+      "asset": "clips/68/687892593374.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "6878925933743fd7829e4acaf2cc886a9654f080b0b4eb6c8a12cc7accaba3f3",
+      "display_text": "Â",
+      "spoken_text": "a com acento circunflexo"
+    },
+    "learning.char.a_tilde": {
+      "asset": "clips/bd/bd6bd7163f3f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "bd6bd7163f3fb50b4e3e54673711f02dd6cc17b185131fed4d115a5a9d0b5975",
+      "display_text": "Ã",
+      "spoken_text": "a com til"
     },
     "learning.char.b": {
       "asset": "clips/a3/a3d5b94e8083.mp3",
@@ -44,6 +71,15 @@
       "display_text": "C",
       "spoken_text": "cê"
     },
+    "learning.char.c_cedilla": {
+      "asset": "clips/e6/e601034fb7a1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "e601034fb7a17bec696fa3aef4985b38da34cb6a2abcc6aec2773fb3d1fc2304",
+      "display_text": "Ç",
+      "spoken_text": "cê cedilha"
+    },
     "learning.char.d": {
       "asset": "clips/40/4030af8fda3e.mp3",
       "word_ends_ms": [],
@@ -61,6 +97,24 @@
       "sha256": "ac71c97b43295991fa744825b5e7fd4e9d1d35dc0d39b40784d8ae2a69f9e75c",
       "display_text": "E",
       "spoken_text": "é"
+    },
+    "learning.char.e_acute": {
+      "asset": "clips/78/785dc3360786.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "785dc3360786925fce15fc32f6977125c89da2451f4d830a26be91355865eee3",
+      "display_text": "É",
+      "spoken_text": "e com acento agudo"
+    },
+    "learning.char.e_circumflex": {
+      "asset": "clips/aa/aa40d1d2edd6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "aa40d1d2edd6d06ff2081519931e61816ab5e7db1701967f9370ac01fc50abbc",
+      "display_text": "Ê",
+      "spoken_text": "e com acento circunflexo"
     },
     "learning.char.f": {
       "asset": "clips/bc/bc5f6289d8e5.mp3",
@@ -97,6 +151,15 @@
       "sha256": "6cf93863714096cf7ef9e712c48d86ce1ba4548402f54696681505b909eaf344",
       "display_text": "I",
       "spoken_text": "i"
+    },
+    "learning.char.i_acute": {
+      "asset": "clips/0d/0de9fdba62c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "0de9fdba62c7242f1291354f56534d5c7df6ebde4d750ec8f87cb0db8fc187a3",
+      "display_text": "Í",
+      "spoken_text": "i com acento agudo"
     },
     "learning.char.j": {
       "asset": "clips/57/57d776333eb2.mp3",
@@ -151,6 +214,15 @@
       "sha256": "101f086253fa27c1df94f2279f6adb2d8a4a144e78ae3182f2f2a42873441512",
       "display_text": "O",
       "spoken_text": "ó"
+    },
+    "learning.char.o_acute": {
+      "asset": "clips/7f/7facf70092c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "7facf70092c7541e64f487484ffc2762bbe49e651c0dbd3042c556da14ace3d8",
+      "display_text": "Ó",
+      "spoken_text": "o com acento agudo"
     },
     "learning.char.p": {
       "asset": "clips/49/49e015cfd327.mp3",
@@ -1007,8 +1079,14 @@
     },
     "learning.word.boneco_de_neve": {
       "asset": "clips/16/163a3e5ad64f.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        435,
+        516
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
       "duration_ms": 940,
       "sha256": "163a3e5ad64fa76b5823b0398d4dac987697eebf5180f617387b01dd96846ac5",
       "display_text": "BONECO DE NEVE",
@@ -1332,8 +1410,12 @@
     },
     "learning.word.doce_gostoso": {
       "asset": "clips/da/da457bf302d9.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        372
+      ],
+      "word_fade_ms": [
+        30
+      ],
       "duration_ms": 1045,
       "sha256": "da457bf302d9f1a81eeb56cf8656bded9c004f4a917af06915fcdba90d18b108",
       "display_text": "DOCE GOSTOSO",
@@ -1894,8 +1976,12 @@
     },
     "learning.word.menino_feliz": {
       "asset": "clips/11/112245c1f7fb.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        366
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 966,
       "sha256": "112245c1f7fbb9ad9080e0fccb2412236a91ac0da7621a1e36a456f885fc041e",
       "display_text": "MENINO FELIZ",
@@ -1970,8 +2056,16 @@
     },
     "learning.word.o_arco_iris_tem_cores": {
       "asset": "clips/ec/ec8c4769ab64.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        111,
+        571,
+        712
+      ],
+      "word_fade_ms": [
+        20,
+        12,
+        39
+      ],
       "duration_ms": 1254,
       "sha256": "ec8c4769ab64257f4c4556d1c09e3eb9d822f6b27d954fddb4507277c6a086f3",
       "display_text": "O ARCO-ÍRIS TEM CORES",
@@ -2028,8 +2122,12 @@
     },
     "learning.word.ola_amigos": {
       "asset": "clips/3d/3d2b9198513e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        284
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 810,
       "sha256": "3d2b9198513e04d8896e1a8c17eecef4a240dd3720b9e05bcfe5bdc711424b27",
       "display_text": "OLÁ AMIGOS",
@@ -2235,8 +2333,12 @@
     },
     "learning.word.rebucado_doce": {
       "asset": "clips/af/af9e4fbb4b09.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        698
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1071,
       "sha256": "af9e4fbb4b09b0ea22c91be8c5be551f5612b206755956352856b4bb7b2834fb",
       "display_text": "REBUÇADO DOCE",

@@ -1,0 +1,2717 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "el",
+  "locale": "el-GR",
+  "voice_profile": "el-GR@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 25,
+    "word": 140,
+    "ui": 59
+  },
+  "items": {
+    "learning.char.c00": {
+      "asset": "clips/e6/e6e824ca55fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "e6e824ca55fc742ac8a6f67fa426798d6e164494715047cf916bfc4da228c53f",
+      "display_text": "Α",
+      "spoken_text": "άλφα"
+    },
+    "learning.char.c01": {
+      "asset": "clips/d1/d198bd607f89.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "d198bd607f898dbf8258e8a7ccb04b5d18c0a1adaee03006fb9094b536370803",
+      "display_text": "Β",
+      "spoken_text": "βήτα"
+    },
+    "learning.char.c02": {
+      "asset": "clips/c8/c8c1c433ab4a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "c8c1c433ab4ab0d8493a785343873abbcccfbb44faecd95f2a61b3045a9e3517",
+      "display_text": "Γ",
+      "spoken_text": "γάμμα"
+    },
+    "learning.char.c03": {
+      "asset": "clips/39/39acbf33b6d0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "39acbf33b6d0cf65be21b0d4fc6afbe4509c7712780e97497007f1a30634e8e0",
+      "display_text": "Δ",
+      "spoken_text": "δέλτα"
+    },
+    "learning.char.c04": {
+      "asset": "clips/e9/e918bd62d071.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "e918bd62d071cbc313e2787391c56957585c1c4ef8fd01c76a909e7b59dc0cbc",
+      "display_text": "Ε",
+      "spoken_text": "έψιλον"
+    },
+    "learning.char.c05": {
+      "asset": "clips/cd/cd9cdf0832c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "cd9cdf0832c75bdfc82f8bd575d86c4b27443a3daf65b240d4efe18d199c2ec4",
+      "display_text": "Ζ",
+      "spoken_text": "ζήτα"
+    },
+    "learning.char.c06": {
+      "asset": "clips/02/0262f24f707f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "0262f24f707fa28202003c3bcafd60d5be7cce759d549e30259135ff592497fc",
+      "display_text": "Η",
+      "spoken_text": "ήτα"
+    },
+    "learning.char.c07": {
+      "asset": "clips/5c/5c0e41a89ba0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "5c0e41a89ba06c6829256651537cdfe2ef33f9d4c3f47c5b8f1669e60a9a4765",
+      "display_text": "Θ",
+      "spoken_text": "θήτα"
+    },
+    "learning.char.c08": {
+      "asset": "clips/9b/9b401570dd1e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "9b401570dd1e3f4043138f849c1d73204f0eb798f6a698b1b38cec83a967d633",
+      "display_text": "Ι",
+      "spoken_text": "γιώτα"
+    },
+    "learning.char.c09": {
+      "asset": "clips/a0/a088193d979e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "a088193d979efa9b9160f60c512b81bb3c399ad7f9876e4119f45da0e9530d15",
+      "display_text": "Κ",
+      "spoken_text": "κάππα"
+    },
+    "learning.char.c10": {
+      "asset": "clips/fc/fc9bf72f6fba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "fc9bf72f6fba3dcabb319befd6dd7f83ad123810ed66af6c55738046e6485b08",
+      "display_text": "Λ",
+      "spoken_text": "λάμδα"
+    },
+    "learning.char.c11": {
+      "asset": "clips/be/beb6e6106f4e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "beb6e6106f4e15e0e7511e18682f7704de5eb788ce4e9d970a2377bcd000e83f",
+      "display_text": "Μ",
+      "spoken_text": "μι"
+    },
+    "learning.char.c12": {
+      "asset": "clips/3a/3a69d4d68cd8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "3a69d4d68cd8b525eb52a4218be14eebdd077d05099e286a785dbfbb9b4f3a71",
+      "display_text": "Ν",
+      "spoken_text": "νι"
+    },
+    "learning.char.c13": {
+      "asset": "clips/2f/2f734bb42d03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "2f734bb42d0314d2fe5bf74217cea31ad0d1ee6d9599763fa22e2581f0a6bfff",
+      "display_text": "Ξ",
+      "spoken_text": "ξι"
+    },
+    "learning.char.c14": {
+      "asset": "clips/ad/adad68f128c5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "adad68f128c55cda3252710658ef40461613e99e03624da58aa7e7a4bf07f95a",
+      "display_text": "Ο",
+      "spoken_text": "όμικρον"
+    },
+    "learning.char.c15": {
+      "asset": "clips/3c/3c4ed226cfbe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "3c4ed226cfbe7447df427fa869fe27a2fd27eb945c155045dbe10943c3cac88d",
+      "display_text": "Π",
+      "spoken_text": "πι"
+    },
+    "learning.char.c16": {
+      "asset": "clips/d7/d7fee9b92f92.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "d7fee9b92f92294fd4fcff3b66a84ff2fc2ff63e7eb68fa8ad046524a1910658",
+      "display_text": "Ρ",
+      "spoken_text": "ρο"
+    },
+    "learning.char.c17": {
+      "asset": "clips/8e/8eb38ded4f60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "8eb38ded4f60f81d0755ff3c89aea4b5e66ac555063e821690de485553d89b6a",
+      "display_text": "Σ",
+      "spoken_text": "σίγμα"
+    },
+    "learning.char.c18": {
+      "asset": "clips/52/5268031a7201.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "5268031a720106f8fbd85724dd57640ce83431a84c1f3f67d8ee32229b0d6d4a",
+      "display_text": "Τ",
+      "spoken_text": "ταυ"
+    },
+    "learning.char.c19": {
+      "asset": "clips/80/80eb814f7b46.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "80eb814f7b46d7a8eb30ce5d8d6a6187b94fbeb753c9f5ac8587d8a61a6710b2",
+      "display_text": "Υ",
+      "spoken_text": "ύψιλον"
+    },
+    "learning.char.c20": {
+      "asset": "clips/b1/b12d249ebd48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "b12d249ebd488e597ce2cf30b7a56f251895bc8293e1f12deb4d28a83d7d6a8a",
+      "display_text": "Φ",
+      "spoken_text": "φι"
+    },
+    "learning.char.c21": {
+      "asset": "clips/56/564f755a5fac.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "564f755a5fac32d563265eb54b810709b6dcbbeb7b00a243e3f9d6719f217fbe",
+      "display_text": "Χ",
+      "spoken_text": "χι"
+    },
+    "learning.char.c22": {
+      "asset": "clips/e6/e63a8b47b182.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "e63a8b47b18284550067805ac7539d2e4b49508aa449e15b5d1856ca1352108a",
+      "display_text": "Ψ",
+      "spoken_text": "ψι"
+    },
+    "learning.char.c23": {
+      "asset": "clips/79/79c0ad03232f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "79c0ad03232fa5abc1e03478d23fb71e00b838182fa49f4ed87d21e70522c8d5",
+      "display_text": "Ω",
+      "spoken_text": "ωμέγα"
+    },
+    "learning.char.iota_dialytika": {
+      "asset": "clips/64/648db6c6f266.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "648db6c6f266f0b6f962141d39404af495dcaca70a71cc8760d56126049ad1d6",
+      "display_text": "Ϊ",
+      "spoken_text": "γιώτα με διαλυτικά"
+    },
+    "learning.number.001": {
+      "asset": "clips/ab/ab37cf236c66.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "ab37cf236c668050359d8b694e8efe576cac2dce7192a369ab18a2785bde6cc1",
+      "display_text": "1",
+      "spoken_text": "ένα"
+    },
+    "learning.number.002": {
+      "asset": "clips/05/05d449f07ec3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "05d449f07ec37db17e206052ed7f94bd733ccac426ebf294421b71ac502515b0",
+      "display_text": "2",
+      "spoken_text": "δύο"
+    },
+    "learning.number.003": {
+      "asset": "clips/7a/7aeff31e6ffa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "7aeff31e6ffa885be1bdc27ce9fab0d4393d75e78ce455aa6b86e1a8e53e63f3",
+      "display_text": "3",
+      "spoken_text": "τρία"
+    },
+    "learning.number.004": {
+      "asset": "clips/15/150cd3654771.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "150cd3654771475d87b6d766bbaf2c6891a13a2b771bb0cab1caf36ef85ef228",
+      "display_text": "4",
+      "spoken_text": "τέσσερα"
+    },
+    "learning.number.005": {
+      "asset": "clips/dd/dd218b111d87.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "dd218b111d87ce0534329ad3455af3ee50799670649a6eeffa46a319a578e9c9",
+      "display_text": "5",
+      "spoken_text": "πέντε"
+    },
+    "learning.number.006": {
+      "asset": "clips/b8/b8d3701363a9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "b8d3701363a92601a5c7cfa8f31b492dfd7bb6db3a0b6e617cad9adce6f561b2",
+      "display_text": "6",
+      "spoken_text": "έξι"
+    },
+    "learning.number.007": {
+      "asset": "clips/9a/9a90e050c2da.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9a90e050c2da8105709658b34e101f7a2bad78d16e7be1a2bdcf2bce5e2d2643",
+      "display_text": "7",
+      "spoken_text": "επτά"
+    },
+    "learning.number.008": {
+      "asset": "clips/ab/ab8980623ad1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "ab8980623ad1082158a78363d1fdf3e6a1ec71896c82abec3cb56d89f13fa70a",
+      "display_text": "8",
+      "spoken_text": "οκτώ"
+    },
+    "learning.number.009": {
+      "asset": "clips/29/295d1d7721ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "295d1d7721ce45bd4032fea761098ea5fd0962a8871f90cd28259d057415dfe3",
+      "display_text": "9",
+      "spoken_text": "εννέα"
+    },
+    "learning.number.010": {
+      "asset": "clips/59/5985264cf1b5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "5985264cf1b518af37dbaf39bd108ba01230011d6571646b12cac3318d6f9132",
+      "display_text": "10",
+      "spoken_text": "δέκα"
+    },
+    "learning.number.011": {
+      "asset": "clips/6d/6d7a15dfa66d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "6d7a15dfa66d30c9eb6cebee34352d76633ceda3733b4997808a5328f15606c1",
+      "display_text": "11",
+      "spoken_text": "έντεκα"
+    },
+    "learning.number.012": {
+      "asset": "clips/7d/7dbee0046b51.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "7dbee0046b51a149837f8634c171ea11cc3cd6d65f680bf53cd1af69115abbe3",
+      "display_text": "12",
+      "spoken_text": "δώδεκα"
+    },
+    "learning.number.013": {
+      "asset": "clips/2d/2d7b2d39244a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "2d7b2d39244a3eb1cafb98174bf6aa35cbfd9d224d1c2d3a18f8f874c9ddb4c7",
+      "display_text": "13",
+      "spoken_text": "δεκατρία"
+    },
+    "learning.number.014": {
+      "asset": "clips/cf/cf1bf6295fdf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "cf1bf6295fdf567b4e8f1ae7712ed351acc36293453f0141284abc454460e9c8",
+      "display_text": "14",
+      "spoken_text": "δεκατέσσερα"
+    },
+    "learning.number.015": {
+      "asset": "clips/66/66578697b92e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "66578697b92eba406aebc9564cd54f3fcd4f94bba1006b9d5c3b61941686ee89",
+      "display_text": "15",
+      "spoken_text": "δεκαπέντε"
+    },
+    "learning.number.016": {
+      "asset": "clips/f0/f06c4ed17d73.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "f06c4ed17d7356e1817dd0ea3aa226fd567e2cd2595260e90713663934cdceb4",
+      "display_text": "16",
+      "spoken_text": "δεκαέξι"
+    },
+    "learning.number.017": {
+      "asset": "clips/00/00678771e6ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "00678771e6ae89cf934118ae12dae05a435684313a78b23bcadc7b38aca607a5",
+      "display_text": "17",
+      "spoken_text": "δεκαεπτά"
+    },
+    "learning.number.018": {
+      "asset": "clips/77/774ef96abcf0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "774ef96abcf04080fee6c62c9dc059563c02228a939208e50eb59b2c01b6ef58",
+      "display_text": "18",
+      "spoken_text": "δεκαοκτώ"
+    },
+    "learning.number.019": {
+      "asset": "clips/e7/e7c769d1625a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "e7c769d1625a8282533e78d2b78573efde07960519b081e215d57864bbbaf529",
+      "display_text": "19",
+      "spoken_text": "δεκαεννέα"
+    },
+    "learning.number.020": {
+      "asset": "clips/e4/e4971159f422.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "e4971159f422a7f09fe03949e15d3adf73068a04b2bed4198331f6aa4d21685a",
+      "display_text": "20",
+      "spoken_text": "είκοσι"
+    },
+    "learning.number.021": {
+      "asset": "clips/d8/d8f1dac43b2c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "d8f1dac43b2cd7c5b66dd1855cf01caf23512874ac67be5d41289ccb828e0feb",
+      "display_text": "21",
+      "spoken_text": "είκοσι ένα"
+    },
+    "learning.number.022": {
+      "asset": "clips/6e/6e20444a577d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "6e20444a577d3b6e8d112e9cf1fa8eb4c27bfc7dda421a2f50ece5d324470d13",
+      "display_text": "22",
+      "spoken_text": "είκοσι δύο"
+    },
+    "learning.number.023": {
+      "asset": "clips/ca/cafb473dd978.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "cafb473dd9787cf814b279b70def6b4fe8ffd27e82707f43d1f3e65df4197233",
+      "display_text": "23",
+      "spoken_text": "είκοσι τρία"
+    },
+    "learning.number.024": {
+      "asset": "clips/66/66acf6fb8bcd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "66acf6fb8bcdd77ca65b2d62bece042f2ed84599ef6b357881cf5252ad8fcf7d",
+      "display_text": "24",
+      "spoken_text": "είκοσι τέσσερα"
+    },
+    "learning.number.025": {
+      "asset": "clips/5d/5d921091a3c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "5d921091a3c3290babc8313db76ba78c670cee06df7cccba376a43ac6ffe5e20",
+      "display_text": "25",
+      "spoken_text": "είκοσι πέντε"
+    },
+    "learning.number.026": {
+      "asset": "clips/cc/cc7654431545.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "cc76544315457bdec9930030140f97b9ea3bd2213a16684f585e09b6f745816d",
+      "display_text": "26",
+      "spoken_text": "είκοσι έξι"
+    },
+    "learning.number.027": {
+      "asset": "clips/60/608cd8a80298.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "608cd8a8029808fa61fee58cc4f454dc07689bbe9fe0e8be2362a0e48a11a864",
+      "display_text": "27",
+      "spoken_text": "είκοσι επτά"
+    },
+    "learning.number.028": {
+      "asset": "clips/9e/9e80826c811e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "9e80826c811e138611e9449a7ff666c8786be8b148dc6779f0bf068bb5a629c5",
+      "display_text": "28",
+      "spoken_text": "είκοσι οκτώ"
+    },
+    "learning.number.029": {
+      "asset": "clips/29/2978c28592d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "2978c28592d6c8d1b7f4c407e6e46136552c546a76a1c2d3b430d796124c2f40",
+      "display_text": "29",
+      "spoken_text": "είκοσι εννέα"
+    },
+    "learning.number.030": {
+      "asset": "clips/c5/c53eaa332b72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c53eaa332b72e667f0267c7ad040613e163282dd1d1ee21da143949e162d4a6d",
+      "display_text": "30",
+      "spoken_text": "τριάντα"
+    },
+    "learning.number.031": {
+      "asset": "clips/5c/5c06cb5e2219.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5c06cb5e221908ed1edd47c56e3de4139f49fa124fddef241f23533a1ba5dee6",
+      "display_text": "31",
+      "spoken_text": "τριάντα ένα"
+    },
+    "learning.number.032": {
+      "asset": "clips/67/67f1674e63a0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "67f1674e63a05d064060f23d1cc17f6a71c83540b8326010e42188171e8311ce",
+      "display_text": "32",
+      "spoken_text": "τριάντα δύο"
+    },
+    "learning.number.033": {
+      "asset": "clips/2b/2bbab958ecc2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "2bbab958ecc2d14df7cdc26fb6639a23ecc10f317660b761b0a1da8ab4a75031",
+      "display_text": "33",
+      "spoken_text": "τριάντα τρία"
+    },
+    "learning.number.034": {
+      "asset": "clips/fd/fdddaa1686f5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "fdddaa1686f5676b51921cc36d8980c53467985f91a1019de6278bc0b7b3ef0f",
+      "display_text": "34",
+      "spoken_text": "τριάντα τέσσερα"
+    },
+    "learning.number.035": {
+      "asset": "clips/f1/f1e88ffe1fd8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "f1e88ffe1fd81d2050eb5fa34ff0f1e541a1d37d78f95aea83fe28f9bdbe142c",
+      "display_text": "35",
+      "spoken_text": "τριάντα πέντε"
+    },
+    "learning.number.036": {
+      "asset": "clips/4c/4c66df52704f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "4c66df52704f30d6c4c6c518b39eda9fb86f4f59fe92c42af951cf29c2781b72",
+      "display_text": "36",
+      "spoken_text": "τριάντα έξι"
+    },
+    "learning.number.037": {
+      "asset": "clips/04/04a3992ca20e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "04a3992ca20ebbb56207be410a097a1a18ed0ba06323dd7771e51ae5ed1d75ed",
+      "display_text": "37",
+      "spoken_text": "τριάντα επτά"
+    },
+    "learning.number.038": {
+      "asset": "clips/ca/ca05a4d52af8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "ca05a4d52af86ff944ddfa70827ebb59fe2920ba32ac816c616f2a38e1fc35fe",
+      "display_text": "38",
+      "spoken_text": "τριάντα οκτώ"
+    },
+    "learning.number.039": {
+      "asset": "clips/c6/c6ee5dad1896.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "c6ee5dad1896fec9a308f423d4c6f9bea3cc7d0af1494e04358dc0c5f2cd7be1",
+      "display_text": "39",
+      "spoken_text": "τριάντα εννέα"
+    },
+    "learning.number.040": {
+      "asset": "clips/bb/bbddcf737fb6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "bbddcf737fb63861bd5308a2ff36f423c1d1e9c572efd157ed1c66e44f3648d7",
+      "display_text": "40",
+      "spoken_text": "σαράντα"
+    },
+    "learning.number.041": {
+      "asset": "clips/aa/aaaaa5a94ab8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "aaaaa5a94ab899590cc55fdbd48f261fd550b9cb8e10d986e6d208b43a410817",
+      "display_text": "41",
+      "spoken_text": "σαράντα ένα"
+    },
+    "learning.number.042": {
+      "asset": "clips/e2/e271a7f01480.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "e271a7f01480a74c5a5c1c500aa322b23dd90189c1d087f3dbf2da38ac8483d7",
+      "display_text": "42",
+      "spoken_text": "σαράντα δύο"
+    },
+    "learning.number.043": {
+      "asset": "clips/cf/cf550310e8ba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "cf550310e8ba1fb68eaaf014dae66dc24de1608ef3e2368199ed2f2187487ba8",
+      "display_text": "43",
+      "spoken_text": "σαράντα τρία"
+    },
+    "learning.number.044": {
+      "asset": "clips/ff/ffa61414c88f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "ffa61414c88f484f446211623241eb0c53c9cfb5f64d2e0626336437b97b25bf",
+      "display_text": "44",
+      "spoken_text": "σαράντα τέσσερα"
+    },
+    "learning.number.045": {
+      "asset": "clips/ea/ead487a59436.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "ead487a59436d33fd2be39dee4eb3c53bdcf1a1597901161c351664c1bb7a0b6",
+      "display_text": "45",
+      "spoken_text": "σαράντα πέντε"
+    },
+    "learning.number.046": {
+      "asset": "clips/77/77e26e7ba3dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "77e26e7ba3dd85e43c104757262ade3f0ffe425b5562afff88c08e24565f059a",
+      "display_text": "46",
+      "spoken_text": "σαράντα έξι"
+    },
+    "learning.number.047": {
+      "asset": "clips/76/761ea84da6fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "761ea84da6fc6fb15701782d9631533c88c2676582f0a4fefda3cba27eda5785",
+      "display_text": "47",
+      "spoken_text": "σαράντα επτά"
+    },
+    "learning.number.048": {
+      "asset": "clips/ab/ab7c401f531f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "ab7c401f531f6aeac7109ab710b30dd4ff98e3e760762ef2b99d9324ecbb95c7",
+      "display_text": "48",
+      "spoken_text": "σαράντα οκτώ"
+    },
+    "learning.number.049": {
+      "asset": "clips/fb/fbc8fdc34caa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "fbc8fdc34caacb92bc5cd5a73c1771fa161228c1867006a65e4a683824cc83e2",
+      "display_text": "49",
+      "spoken_text": "σαράντα εννέα"
+    },
+    "learning.number.050": {
+      "asset": "clips/f9/f97ed00e47b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "f97ed00e47b8dda067be6034fdf7aa27229ff0a7db4b53d68438ec41d7681c3e",
+      "display_text": "50",
+      "spoken_text": "πενήντα"
+    },
+    "learning.word._014b": {
+      "asset": "clips/f3/f3f2fcadda63.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "f3f2fcadda632892c96f8b22c977d27b9243d0097ce43e1da3eb477b2b4a9de7",
+      "display_text": "ΚΑΜΗΛΟΠΑΡΔΑΛΗ",
+      "spoken_text": "ΚΑΜΗΛΟΠΑΡΔΑΛΗ"
+    },
+    "learning.word._0265": {
+      "asset": "clips/fa/fab3155a6a56.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "fab3155a6a5603d3457292c8d7c8a9d3bf311d923c6072ada67cbc37c7de0934",
+      "display_text": "ΨΩΜΙ",
+      "spoken_text": "ΨΩΜΙ"
+    },
+    "learning.word._06ca": {
+      "asset": "clips/18/1865dab2bdb5.mp3",
+      "word_ends_ms": [
+        868
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1594,
+      "sha256": "1865dab2bdb504e02be1bf3f849e02812f1b26bfd9144f07e09d72c7e0f6c9b7",
+      "display_text": "ΠΑΙΧΝΙΔΙΑΡΙΚΟΣ ΣΚΥΛΟΣ",
+      "spoken_text": "ΠΑΙΧΝΙΔΙΑΡΙΚΟΣ ΣΚΥΛΟΣ"
+    },
+    "learning.word._075b": {
+      "asset": "clips/87/87d35ff7e59b.mp3",
+      "word_ends_ms": [
+        560
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1228,
+      "sha256": "87d35ff7e59bfda326450aabbcb748c1083cba1ba8a99e2e2da897defecbcaa0",
+      "display_text": "ΚΙΤΡΙΝΟΣ ΗΛΙΟΣ",
+      "spoken_text": "ΚΙΤΡΙΝΟΣ ΗΛΙΟΣ"
+    },
+    "learning.word._0822": {
+      "asset": "clips/3e/3e8073b0ad51.mp3",
+      "word_ends_ms": [
+        382,
+        531
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1176,
+      "sha256": "3e8073b0ad5171c0d64b70bb09853d23a23fa5057a8b74bd7c347f2e26c8ede2",
+      "display_text": "ΑΓΑΠΑ ΤΟΝ ΠΛΑΝΗΤΗ",
+      "spoken_text": "ΑΓΑΠΑ ΤΟΝ ΠΛΑΝΗΤΗ"
+    },
+    "learning.word._0b75": {
+      "asset": "clips/fd/fd27889f7f72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "fd27889f7f72ab4cf520e223add1552a1f510ba1f7b11cc6d2727760fb073146",
+      "display_text": "ΝΟΣΟΚΟΜΕΙΟ",
+      "spoken_text": "ΝΟΣΟΚΟΜΕΙΟ"
+    },
+    "learning.word._0b87": {
+      "asset": "clips/ea/ea36fbbdb07b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "ea36fbbdb07b8f45c87bc18973b1d2db078534cc62aa873c00d4d7a3514f7ef6",
+      "display_text": "ΠΟΔΙ",
+      "spoken_text": "ΠΟΔΙ"
+    },
+    "learning.word._0bf3": {
+      "asset": "clips/27/2704044b2a3e.mp3",
+      "word_ends_ms": [
+        457,
+        617,
+        1517
+      ],
+      "word_fade_ms": [
+        40,
+        20,
+        12
+      ],
+      "duration_ms": 1541,
+      "sha256": "2704044b2a3e99d0ba48879be4d5e24a240ed18cc4a76dffde2027095cf0f248",
+      "display_text": "ΑΓΑΠΩ ΤΗΝ ΟΙΚΟΓΕΝΕΙΑ ΜΟΥ",
+      "spoken_text": "ΑΓΑΠΩ ΤΗΝ ΟΙΚΟΓΕΝΕΙΑ ΜΟΥ"
+    },
+    "learning.word._0c7d": {
+      "asset": "clips/62/62c13086d4b7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "62c13086d4b77d57cc4656a793611cbd0b17654d3489ed5f24e6f06d16266777",
+      "display_text": "ΜΕΛΙΣΣΑ",
+      "spoken_text": "ΜΕΛΙΣΣΑ"
+    },
+    "learning.word._0e4a": {
+      "asset": "clips/04/04a8b530fa24.mp3",
+      "word_ends_ms": [
+        599
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "04a8b530fa24584c03041af7f37221bb7fbdc37a1a4d4f1971373c76346dc509",
+      "display_text": "ΛΑΜΠΕΡΟΣ ΗΛΙΟΣ",
+      "spoken_text": "ΛΑΜΠΕΡΟΣ ΗΛΙΟΣ"
+    },
+    "learning.word._1399": {
+      "asset": "clips/c3/c33012cf6177.mp3",
+      "word_ends_ms": [
+        658
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "c33012cf6177fb22fb0842352e6435afa883734df41f7c1c23113d731232aaee",
+      "display_text": "ΧΑΡΟΥΜΕΝΟ ΚΟΡΙΤΣΙ",
+      "spoken_text": "ΧΑΡΟΥΜΕΝΟ ΚΟΡΙΤΣΙ"
+    },
+    "learning.word._145b": {
+      "asset": "clips/1c/1c6e333c1ce8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1c6e333c1ce8e51ff91225e039af2b3bbdb483183e2fd4cee507f4adae695326",
+      "display_text": "ΤΡΕΝΟ",
+      "spoken_text": "ΤΡΕΝΟ"
+    },
+    "learning.word._1966": {
+      "asset": "clips/72/726460711ed0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "726460711ed05591a51e4e93a061026a17dedab0926356f1519b8edaa45a03fc",
+      "display_text": "ΚΟΥΝΕΛΙ",
+      "spoken_text": "ΚΟΥΝΕΛΙ"
+    },
+    "learning.word._19d6": {
+      "asset": "clips/a7/a731b6a0ff58.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "a731b6a0ff585d0e0cae09b5f35a017b4ce4b51ccbc896c2657b979a93d99a67",
+      "display_text": "ΠΑΓΩΤΟ",
+      "spoken_text": "ΠΑΓΩΤΟ"
+    },
+    "learning.word._1f46": {
+      "asset": "clips/6c/6c03841a6f05.mp3",
+      "word_ends_ms": [
+        500
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1202,
+      "sha256": "6c03841a6f05c98c64a8f8a954a7110a1e0d8859e997c3257ae4771be9902654",
+      "display_text": "ΤΡΑΓΟΥΔΩ ΤΡΑΓΟΥΔΙ",
+      "spoken_text": "ΤΡΑΓΟΥΔΩ ΤΡΑΓΟΥΔΙ"
+    },
+    "learning.word._208f": {
+      "asset": "clips/30/3015c252cf65.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "3015c252cf6540372d53607cd9fd7e97cd4cfd7c89f759cebbf8e6cc62cce885",
+      "display_text": "ΓΛΥΚΟ",
+      "spoken_text": "ΓΛΥΚΟ"
+    },
+    "learning.word._228d": {
+      "asset": "clips/aa/aa6de0d00c31.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "aa6de0d00c3170f930f8940a0336621aa0a09e15fa787e1b03bc26b8c52baf9b",
+      "display_text": "ΦΩΛΙΑ",
+      "spoken_text": "ΦΩΛΙΑ"
+    },
+    "learning.word._241b": {
+      "asset": "clips/a8/a83a27454a38.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a83a27454a38e1633c248dc50a2a9631c139b923b83a3e484c4cfb7dcefde1ab",
+      "display_text": "ΤΙΓΡΗΣ",
+      "spoken_text": "ΤΙΓΡΗΣ"
+    },
+    "learning.word._2492": {
+      "asset": "clips/d3/d39cf4045851.mp3",
+      "word_ends_ms": [
+        558
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1097,
+      "sha256": "d39cf40458513bf4a02e629b90ff659b2e0e9477132efdab6e1129bf6ab6bd75",
+      "display_text": "ΧΑΡΟΥΜΕΝΟ ΠΑΙΔΙ",
+      "spoken_text": "ΧΑΡΟΥΜΕΝΟ ΠΑΙΔΙ"
+    },
+    "learning.word._25dc": {
+      "asset": "clips/a5/a53c669835dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "a53c669835dccb1acd73efe6b72f2d0064b0d3683a9ed5e852ffc7387adffd76",
+      "display_text": "ΣΟΚΟΛΑΤΑ",
+      "spoken_text": "ΣΟΚΟΛΑΤΑ"
+    },
+    "learning.word._2728": {
+      "asset": "clips/e2/e22d03a43110.mp3",
+      "word_ends_ms": [
+        560
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "e22d03a431102dbdbe11e2a760fa538e4aaab6c1d25b2b35344ad385dfa3d698",
+      "display_text": "ΤΡΩΩ ΥΓΙΕΙΝΑ",
+      "spoken_text": "ΤΡΩΩ ΥΓΙΕΙΝΑ"
+    },
+    "learning.word._2bcc": {
+      "asset": "clips/54/5451f9bba8eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "5451f9bba8eb8d9037f4ed216209cc3e22a680da23bd230edca113b54dd68181",
+      "display_text": "ΒΡΟΧΗ",
+      "spoken_text": "ΒΡΟΧΗ"
+    },
+    "learning.word._2eb7": {
+      "asset": "clips/48/48bf63591d86.mp3",
+      "word_ends_ms": [
+        570
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "48bf63591d86f99c69cc223a81813893d36b5253197158a8e8a2a2f862e06e70",
+      "display_text": "ΠΡΑΣΙΝΟ ΔΑΣΟΣ",
+      "spoken_text": "ΠΡΑΣΙΝΟ ΔΑΣΟΣ"
+    },
+    "learning.word._2fd9": {
+      "asset": "clips/ca/ca53ea1cddfc.mp3",
+      "word_ends_ms": [
+        506
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1045,
+      "sha256": "ca53ea1cddfc9da3dec61e4507bb3d28a34fc1a0cd13a189f78dffdcb97abbae",
+      "display_text": "ΦΡΕΣΚΟ ΦΡΟΥΤΟ",
+      "spoken_text": "ΦΡΕΣΚΟ ΦΡΟΥΤΟ"
+    },
+    "learning.word._2fed": {
+      "asset": "clips/3c/3cca3627ee49.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "3cca3627ee49c6dad58eb973f73240c9a6709fc6a1218b501fa4306ff1dd3792",
+      "display_text": "ΠΑΙΔΙ",
+      "spoken_text": "ΠΑΙΔΙ"
+    },
+    "learning.word._2ff0": {
+      "asset": "clips/4f/4fe7195e49a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "4fe7195e49a81a05b2871f01f46f07d0ab927139df9e3a40c724b4dde72d7514",
+      "display_text": "ΜΕΛΙ",
+      "spoken_text": "ΜΕΛΙ"
+    },
+    "learning.word._30a6": {
+      "asset": "clips/5e/5e3f9d8cb734.mp3",
+      "word_ends_ms": [
+        549
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1306,
+      "sha256": "5e3f9d8cb7347fc7a098a67057c2b1514db98f975b9a91c45146d7f2dc4595c9",
+      "display_text": "ΓΛΥΚΙΑ ΚΑΡΑΜΕΛΑ",
+      "spoken_text": "ΓΛΥΚΙΑ ΚΑΡΑΜΕΛΑ"
+    },
+    "learning.word._331c": {
+      "asset": "clips/66/66f0ee28966c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "66f0ee28966c2d42a1c1bf03e5b42c62e116b05b923e00d44aede5d579afdca6",
+      "display_text": "ΛΟΥΛΟΥΔΙ",
+      "spoken_text": "ΛΟΥΛΟΥΔΙ"
+    },
+    "learning.word._3374": {
+      "asset": "clips/8b/8baf866f450c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "8baf866f450c668d020262c99710af699e29dbc3e3aa53b2a0e6197ce67913a3",
+      "display_text": "ΒΙΒΛΙΟ",
+      "spoken_text": "ΒΙΒΛΙΟ"
+    },
+    "learning.word._33da": {
+      "asset": "clips/90/909eea83bcfc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "909eea83bcfce9f45f81733e925c4accb9278f8a53f79f0470fe1197493d9765",
+      "display_text": "ΑΛΟΓΟ",
+      "spoken_text": "ΑΛΟΓΟ"
+    },
+    "learning.word._342f": {
+      "asset": "clips/70/704a07af81e8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "704a07af81e8fe3ac1989657797d49796b91b19833fe6b3aa7a03b9e0d36b0d7",
+      "display_text": "ΜΑΤΙ",
+      "spoken_text": "ΜΑΤΙ"
+    },
+    "learning.word._3843": {
+      "asset": "clips/97/9740a274938c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "9740a274938c7ef9cf6dc86ab9106fe4e1dc3c59c13d4789c9359de9ce2ea725",
+      "display_text": "ΑΥΓΟ",
+      "spoken_text": "ΑΥΓΟ"
+    },
+    "learning.word._3bb4": {
+      "asset": "clips/0f/0f9e403a888d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "0f9e403a888dca2f79bc182e0e759db4b623fdc0fbcd59a0861ee640a58a3213",
+      "display_text": "ΔΕΛΦΙΝΙ",
+      "spoken_text": "ΔΕΛΦΙΝΙ"
+    },
+    "learning.word._3c2a": {
+      "asset": "clips/c9/c90e8af66415.mp3",
+      "word_ends_ms": [
+        755,
+        894,
+        1005,
+        1254
+      ],
+      "word_fade_ms": [
+        30,
+        30,
+        19,
+        12
+      ],
+      "duration_ms": 1698,
+      "sha256": "c90e8af66415dd5b7e8f1119bbdd24378d30fcaca9449a5112dfffe21b34c706",
+      "display_text": "ΧΑΜΟΓΕΛΑ ΚΑΙ ΝΑ ΕΙΣΑΙ ΚΑΛΑ",
+      "spoken_text": "ΧΑΜΟΓΕΛΑ ΚΑΙ ΝΑ ΕΙΣΑΙ ΚΑΛΑ"
+    },
+    "learning.word._3e33": {
+      "asset": "clips/cd/cd11a2a54e56.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "cd11a2a54e5608f63e0051c9b95d1d85ca5d8da0ee2362552bd5aa7f4a4b0d6d",
+      "display_text": "ΛΙΟΝΤΑΡΙ",
+      "spoken_text": "ΛΙΟΝΤΑΡΙ"
+    },
+    "learning.word._3e88": {
+      "asset": "clips/be/be7cbccb42c9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "be7cbccb42c989fbc57e085b33da5107e03ff27e3843d612d7b7554c2898ff00",
+      "display_text": "ΑΓΓΟΥΡΙ",
+      "spoken_text": "ΑΓΓΟΥΡΙ"
+    },
+    "learning.word._40d3": {
+      "asset": "clips/99/9917d251a91f.mp3",
+      "word_ends_ms": [
+        496,
+        616
+      ],
+      "word_fade_ms": [
+        30,
+        30
+      ],
+      "duration_ms": 1150,
+      "sha256": "9917d251a91fdc9bf0a4aea23fdcc219d9756b44d26029e5c4d995b551ae1309",
+      "display_text": "ΠΕΡΠΑΤΑ ΜΕ ΧΑΡΑ",
+      "spoken_text": "ΠΕΡΠΑΤΑ ΜΕ ΧΑΡΑ"
+    },
+    "learning.word._44cc": {
+      "asset": "clips/e9/e9554c26b2ad.mp3",
+      "word_ends_ms": [
+        416,
+        816
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "e9554c26b2ad924731f301099d24c99cf91667ee73cf14f243107cabdba30475",
+      "display_text": "ΚΟΙΜΗΣΟΥ ΚΑΛΑ ΑΠΟΨΕ",
+      "spoken_text": "ΚΟΙΜΗΣΟΥ ΚΑΛΑ ΑΠΟΨΕ"
+    },
+    "learning.word._4772": {
+      "asset": "clips/88/88abc7bb69a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "88abc7bb69a83e4513a2a29d820ad331d430d77c5ca26f424f52b0a6c2d77ab3",
+      "display_text": "ΠΑΠΙΑ",
+      "spoken_text": "ΠΑΠΙΑ"
+    },
+    "learning.word._49b0": {
+      "asset": "clips/db/db3b1554be1a.mp3",
+      "word_ends_ms": [
+        300
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 784,
+      "sha256": "db3b1554be1ae9e6683e07bb385359bc1cd3c8aea21d32eb101563ba4ab5c143",
+      "display_text": "ΠΙΝΩ ΝΕΡΟ",
+      "spoken_text": "ΠΙΝΩ ΝΕΡΟ"
+    },
+    "learning.word._4bb3": {
+      "asset": "clips/e7/e7e9aade0aa7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e7e9aade0aa7647f56083c4a44c51604aca5a91503f594c275368747d79de2fc",
+      "display_text": "ΠΑΙΧΝΙΔΙ",
+      "spoken_text": "ΠΑΙΧΝΙΔΙ"
+    },
+    "learning.word._4d74": {
+      "asset": "clips/bf/bf6c2c001aff.mp3",
+      "word_ends_ms": [
+        144,
+        744,
+        1174
+      ],
+      "word_fade_ms": [
+        19,
+        40,
+        12
+      ],
+      "duration_ms": 1594,
+      "sha256": "bf6c2c001aff4352fadc115d19c4df04579507954f73bd7567f7534aa96dbf0a",
+      "display_text": "Ο ΗΛΙΟΣ ΛΑΜΠΕΙ ΤΩΡΑ",
+      "spoken_text": "Ο ΗΛΙΟΣ ΛΑΜΠΕΙ ΤΩΡΑ"
+    },
+    "learning.word._4e7c": {
+      "asset": "clips/45/45768277ed28.mp3",
+      "word_ends_ms": [
+        328
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 966,
+      "sha256": "45768277ed28ceb11592d8a142e9bae985e09e0ad67b933bee1a7961930ca2bb",
+      "display_text": "ΜΠΛΕ ΘΑΛΑΣΣΑ",
+      "spoken_text": "ΜΠΛΕ ΘΑΛΑΣΣΑ"
+    },
+    "learning.word._4f82": {
+      "asset": "clips/1d/1d38ab68c104.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "1d38ab68c1047566ea069d86a9c45e35ed556613b8192adecd7bf289e19c2686",
+      "display_text": "ΜΠΑΜΠΑΣ",
+      "spoken_text": "ΜΠΑΜΠΑΣ"
+    },
+    "learning.word._4f92": {
+      "asset": "clips/c9/c906a95c006c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "c906a95c006c08f0ed36ce175829ba101d9816a9b6f28be4bd0c539602246554",
+      "display_text": "ΠΑΣΧΑΛΙΤΣΑ",
+      "spoken_text": "ΠΑΣΧΑΛΙΤΣΑ"
+    },
+    "learning.word._5086": {
+      "asset": "clips/73/73d109904557.mp3",
+      "word_ends_ms": [
+        270,
+        479
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 966,
+      "sha256": "73d10990455705504c18b2a6f3bd0d01751b353f20f5ebe0b2d6789d98cf7bfc",
+      "display_text": "ΓΕΙΑ ΣΑΣ ΦΙΛΟΙ",
+      "spoken_text": "ΓΕΙΑ ΣΑΣ ΦΙΛΟΙ"
+    },
+    "learning.word._5145": {
+      "asset": "clips/d8/d8dc8aff09c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "d8dc8aff09c1b16c6d6b85b7eca35e1d4d98e582ac919fe97b26e9cc78d384c7",
+      "display_text": "ΑΥΤΙ",
+      "spoken_text": "ΑΥΤΙ"
+    },
+    "learning.word._527d": {
+      "asset": "clips/9d/9dc94a3c72da.mp3",
+      "word_ends_ms": [
+        204,
+        754
+      ],
+      "word_fade_ms": [
+        20,
+        40
+      ],
+      "duration_ms": 1332,
+      "sha256": "9dc94a3c72daa4042f0506409b8943cbbe2eb086fa7d304b5b90bace10b8c127",
+      "display_text": "ΠΕΣ ΕΥΧΑΡΙΣΤΩ ΠΑΝΤΑ",
+      "spoken_text": "ΠΕΣ ΕΥΧΑΡΙΣΤΩ ΠΑΝΤΑ"
+    },
+    "learning.word._555e": {
+      "asset": "clips/ba/ba8236ac1895.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "ba8236ac189560e8ee2c246fa0f209d1e9c69634a7d2967a86017a35a756dd65",
+      "display_text": "ΝΤΟΜΑΤΑ",
+      "spoken_text": "ΝΤΟΜΑΤΑ"
+    },
+    "learning.word._5629": {
+      "asset": "clips/a3/a38216a26c21.mp3",
+      "word_ends_ms": [
+        576,
+        776
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1489,
+      "sha256": "a38216a26c21469baec567a2dc423185bebf5e10d114601aa165575a96fe84ee",
+      "display_text": "ΔΙΑΒΑΣΕ ΕΝΑ ΠΑΡΑΜΥΘΙ",
+      "spoken_text": "ΔΙΑΒΑΣΕ ΕΝΑ ΠΑΡΑΜΥΘΙ"
+    },
+    "learning.word._573d": {
+      "asset": "clips/0b/0bfdd12b6b8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "0bfdd12b6b8fc48f3d7d325715ba3de791ccaea79d0f0814db1c378d7be08d37",
+      "display_text": "ΓΑΛΑ",
+      "spoken_text": "ΓΑΛΑ"
+    },
+    "learning.word._6244": {
+      "asset": "clips/76/761917e59b34.mp3",
+      "word_ends_ms": [
+        139,
+        519,
+        679
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "761917e59b343a8ec777413b824e8323affe08468caaffdde25e9181cc61d981",
+      "display_text": "Η ΣΕΛΗΝΗ ΜΑΣ ΦΩΤΙΖΕΙ",
+      "spoken_text": "Η ΣΕΛΗΝΗ ΜΑΣ ΦΩΤΙΖΕΙ"
+    },
+    "learning.word._624a": {
+      "asset": "clips/53/533cf70cad87.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "533cf70cad8711665f4564d65be5d462d0336454ed55c7a703d15b0e43749a33",
+      "display_text": "ΜΙΚΡΟΣΚΟΠΙΟ",
+      "spoken_text": "ΜΙΚΡΟΣΚΟΠΙΟ"
+    },
+    "learning.word._6277": {
+      "asset": "clips/a5/a595da5b96db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "a595da5b96db2284bc519cfe7f51ea4ccbb912e7f23ecae7183833dbe7eb043e",
+      "display_text": "ΓΟΥΡΟΥΝΙ",
+      "spoken_text": "ΓΟΥΡΟΥΝΙ"
+    },
+    "learning.word._6390": {
+      "asset": "clips/d7/d798a6221c5b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "d798a6221c5b16baca56e0cac7526c73c8a07ab055de9d6ccfe5ee6d8d41184b",
+      "display_text": "ΠΥΡΟΣΒΕΣΤΙΚΟ",
+      "spoken_text": "ΠΥΡΟΣΒΕΣΤΙΚΟ"
+    },
+    "learning.word._63ba": {
+      "asset": "clips/f2/f2d197bab6b4.mp3",
+      "word_ends_ms": [
+        435,
+        675
+      ],
+      "word_fade_ms": [
+        30,
+        40
+      ],
+      "duration_ms": 1228,
+      "sha256": "f2d197bab6b4037bca571fe519b47c09ed672f9904f30b2ebf5350e61b115f9c",
+      "display_text": "ΒΟΗΘΑ ΤΟΥΣ ΑΛΛΟΥΣ",
+      "spoken_text": "ΒΟΗΘΑ ΤΟΥΣ ΑΛΛΟΥΣ"
+    },
+    "learning.word._6502": {
+      "asset": "clips/0c/0ce99df6fbb7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "0ce99df6fbb7f1fafb1aae975f977ae8b1953e48005147609b3c052cb6950f7f",
+      "display_text": "ΜΑΜΑ",
+      "spoken_text": "ΜΑΜΑ"
+    },
+    "learning.word._65a8": {
+      "asset": "clips/96/968242d0091d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "968242d0091d2b710e8de4b2ed213c71e5049ac753c5fab1782de419480f42e7",
+      "display_text": "ΠΙΘΗΚΟΣ",
+      "spoken_text": "ΠΙΘΗΚΟΣ"
+    },
+    "learning.word._65fb": {
+      "asset": "clips/bc/bca414936c3c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bca414936c3cbed2ba3caccd39ef990c68ae0d3f4eeb703821c4fa206aac2a71",
+      "display_text": "ΦΕΓΓΑΡΙ",
+      "spoken_text": "ΦΕΓΓΑΡΙ"
+    },
+    "learning.word._6657": {
+      "asset": "clips/7e/7e02d28919c6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "7e02d28919c6bf49a5406539bdaa156270cda79f515f602a97dabc62449ddf89",
+      "display_text": "ΣΚΥΛΟΣ",
+      "spoken_text": "ΣΚΥΛΟΣ"
+    },
+    "learning.word._66ac": {
+      "asset": "clips/ce/ce7654dce2dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "ce7654dce2dc6646152efbdb01e33ee0f4445f266eae19c6fa7b00cf24791a64",
+      "display_text": "ΗΛΙΟΣ",
+      "spoken_text": "ΗΛΙΟΣ"
+    },
+    "learning.word._67d6": {
+      "asset": "clips/94/941c816f15a0.mp3",
+      "word_ends_ms": [
+        453
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 940,
+      "sha256": "941c816f15a0b33270f698595da31af5e33963bded432226865ab902b7591985",
+      "display_text": "ΚΟΚΚΙΝΟ ΜΗΛΟ",
+      "spoken_text": "ΚΟΚΚΙΝΟ ΜΗΛΟ"
+    },
+    "learning.word._6bfd": {
+      "asset": "clips/46/462c5fc8d50e.mp3",
+      "word_ends_ms": [
+        365
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1045,
+      "sha256": "462c5fc8d50e4f652d64dbca9903058b42304869b0e62b13552269f816b6110c",
+      "display_text": "ΜΙΚΡΟ ΣΠΙΤΑΚΙ",
+      "spoken_text": "ΜΙΚΡΟ ΣΠΙΤΑΚΙ"
+    },
+    "learning.word._6c83": {
+      "asset": "clips/57/574768408213.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "5747684082139aa22fb2fc94468060835fe6f301128a4739dca51f9c79c5dc6f",
+      "display_text": "ΦΩΣ",
+      "spoken_text": "ΦΩΣ"
+    },
+    "learning.word._6d76": {
+      "asset": "clips/95/956d08e24de7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "956d08e24de79247f26d4ef529c8535068e08f501cd807c5de565d44f4ab5daf",
+      "display_text": "ΦΙΔΙ",
+      "spoken_text": "ΦΙΔΙ"
+    },
+    "learning.word._6e1c": {
+      "asset": "clips/59/59d5b93c344b.mp3",
+      "word_ends_ms": [
+        157,
+        478
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1097,
+      "sha256": "59d5b93c344b374b7f1394f77097f93478455823e947026221cae755fb5e4179",
+      "display_text": "ΤΑ ΠΟΥΛΙΑ ΠΕΤΟΥΝ",
+      "spoken_text": "ΤΑ ΠΟΥΛΙΑ ΠΕΤΟΥΝ"
+    },
+    "learning.word._7073": {
+      "asset": "clips/96/960dc8d5098a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "960dc8d5098a2008568c2b589ffb0c0f73910252db5f661e8d99acc396b056c3",
+      "display_text": "ΟΜΠΡΕΛΑ",
+      "spoken_text": "ΟΜΠΡΕΛΑ"
+    },
+    "learning.word._71a5": {
+      "asset": "clips/19/198ba65912c2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "198ba65912c2b98eed5163f56a15ef163f8a1423f3570fa4d66a66cf1f8486a9",
+      "display_text": "ΠΟΡΤΟΚΑΛΙ",
+      "spoken_text": "ΠΟΡΤΟΚΑΛΙ"
+    },
+    "learning.word._73b9": {
+      "asset": "clips/12/1271c69da5b1.mp3",
+      "word_ends_ms": [
+        699
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1202,
+      "sha256": "1271c69da5b176b1f7566c649468e4b2435efbf31f7122f98646da11db1de6c9",
+      "display_text": "ΝΥΣΤΑΓΜΕΝΗ ΓΑΤΑ",
+      "spoken_text": "ΝΥΣΤΑΓΜΕΝΗ ΓΑΤΑ"
+    },
+    "learning.word._7795": {
+      "asset": "clips/b6/b6597fabd792.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "b6597fabd7924742137e3727c1ad93e9b032a43a422ac6b7d69c179af2e9837e",
+      "display_text": "ΘΗΣΑΥΡΟΣ",
+      "spoken_text": "ΘΗΣΑΥΡΟΣ"
+    },
+    "learning.word._7854": {
+      "asset": "clips/da/da5a1a70bd3b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "da5a1a70bd3be1c1b000021cfb18258d0b3d7b3a257228959dcd3da9af13079b",
+      "display_text": "ΜΠΑΛΑ",
+      "spoken_text": "ΜΠΑΛΑ"
+    },
+    "learning.word._78df": {
+      "asset": "clips/ba/baba75469a1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "baba75469a1a5fb5f6dd71612fcc401399dcd85c6124479f05f30872bbba8049",
+      "display_text": "ΤΥΡΙ",
+      "spoken_text": "ΤΥΡΙ"
+    },
+    "learning.word._79d8": {
+      "asset": "clips/74/74ccb0357ee6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "74ccb0357ee6da85c0e7808cfbf34578fa7e22b0b32f677743a510b2f188e7fe",
+      "display_text": "ΠΑΤΑΤΑ",
+      "spoken_text": "ΠΑΤΑΤΑ"
+    },
+    "learning.word._7abb": {
+      "asset": "clips/68/68215cb4602f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "68215cb4602fb7db5816ccc3a6b4441eb253a7ca21aa8744f8d7a7cf6e5869a9",
+      "display_text": "ΑΣΤΕΡΙ",
+      "spoken_text": "ΑΣΤΕΡΙ"
+    },
+    "learning.word._7c79": {
+      "asset": "clips/6d/6dd5d9a283dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6dd5d9a283dc0dda3b97b05cd05e69a67e5ffbbaf5975e2be8bdb1afa7ad8919",
+      "display_text": "ΜΥΤΗ",
+      "spoken_text": "ΜΥΤΗ"
+    },
+    "learning.word._7d58": {
+      "asset": "clips/d4/d400271297bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "d400271297bfa54006aedde37826450922faba5686f8885d4ccc73f6fa0d4302",
+      "display_text": "ΠΙΠΕΡΙΑ",
+      "spoken_text": "ΠΙΠΕΡΙΑ"
+    },
+    "learning.word._7de2": {
+      "asset": "clips/cb/cb401b09cf7a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "cb401b09cf7a7f0b2d1f724d271b9e517fc60998cbfefd7c366581cf7cf8b015",
+      "display_text": "ΧΕΡΙ",
+      "spoken_text": "ΧΕΡΙ"
+    },
+    "learning.word._7e60": {
+      "asset": "clips/d2/d2f4cf2c2489.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d2f4cf2c24897df68ac06cfe09a97be8012f89e6ad06f493fb680c05d7f3544e",
+      "display_text": "ΠΕΤΑΛΟΥΔΑ",
+      "spoken_text": "ΠΕΤΑΛΟΥΔΑ"
+    },
+    "learning.word._8112": {
+      "asset": "clips/81/81777990fa4c.mp3",
+      "word_ends_ms": [
+        549,
+        1040
+      ],
+      "word_fade_ms": [
+        20,
+        40
+      ],
+      "duration_ms": 1594,
+      "sha256": "81777990fa4c2174d0c5c4608fb4255f3d328da2e589798bc18b670f106745b9",
+      "display_text": "ΔΑΣΟΣ ΓΕΜΑΤΟ ΖΩΗ",
+      "spoken_text": "ΔΑΣΟΣ ΓΕΜΑΤΟ ΖΩΗ"
+    },
+    "learning.word._8320": {
+      "asset": "clips/1e/1e86e50757fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "1e86e50757feee68344e48066eea2740226029362e9b77482496934fb83fecb0",
+      "display_text": "ΜΗΛΟ",
+      "spoken_text": "ΜΗΛΟ"
+    },
+    "learning.word._850e": {
+      "asset": "clips/09/0977c745470f.mp3",
+      "word_ends_ms": [
+        396,
+        696
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1176,
+      "sha256": "0977c745470fe798235b0e17e84c91607b0edffbbe5d77e739f8f5b0ffb6200d",
+      "display_text": "ΠΙΝΩ ΝΕΡΟ ΤΩΡΑ",
+      "spoken_text": "ΠΙΝΩ ΝΕΡΟ ΤΩΡΑ"
+    },
+    "learning.word._85b9": {
+      "asset": "clips/8d/8d2195ab928e.mp3",
+      "word_ends_ms": [
+        413
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 914,
+      "sha256": "8d2195ab928e6b5d9e13a000f6c4032f178235a8ad74e17849d144468743ec46",
+      "display_text": "ΠΑΙΖΟΥΜΕ ΜΑΖΙ",
+      "spoken_text": "ΠΑΙΖΟΥΜΕ ΜΑΖΙ"
+    },
+    "learning.word._8790": {
+      "asset": "clips/e9/e91f010df178.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e91f010df178703e6eace83b01fb04921f184d520da6ab758b36ec93c52bd91c",
+      "display_text": "ΠΟΥΛΙ",
+      "spoken_text": "ΠΟΥΛΙ"
+    },
+    "learning.word._879a": {
+      "asset": "clips/b9/b91013ac43c2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "b91013ac43c25b2e50ebb9f84798d3c7cb9fb8608494976895e5ead87bf73def",
+      "display_text": "ΧΥΜΟΣ",
+      "spoken_text": "ΧΥΜΟΣ"
+    },
+    "learning.word._8e12": {
+      "asset": "clips/55/55550deb4874.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "55550deb4874732200effc29593011099def59257421205ecf223011c23edb80",
+      "display_text": "ΑΡΚΟΥΔΑ",
+      "spoken_text": "ΑΡΚΟΥΔΑ"
+    },
+    "learning.word._8f68": {
+      "asset": "clips/f5/f5006fdc2e43.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "f5006fdc2e433a284fb92614bfc7fae96ae3701442b5aeb7e1dce28ea0fbbabc",
+      "display_text": "ΜΥΡΜΗΓΚΙ",
+      "spoken_text": "ΜΥΡΜΗΓΚΙ"
+    },
+    "learning.word._90cb": {
+      "asset": "clips/8e/8e545477a649.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "8e545477a649e9d688739c434a8f7c29592d9cbcfdb7eb5b0f7d845755d4b463",
+      "display_text": "ΚΕΪΚ",
+      "spoken_text": "ΚΕΪΚ"
+    },
+    "learning.word._9105": {
+      "asset": "clips/9f/9fa4c40d309d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9fa4c40d309d2495b9bf15772e843aa6c818ad921adbdc3fa959cef35920b131",
+      "display_text": "ΔΕΝΤΡΟ",
+      "spoken_text": "ΔΕΝΤΡΟ"
+    },
+    "learning.word._9170": {
+      "asset": "clips/f5/f51d4e19cde9.mp3",
+      "word_ends_ms": [
+        144,
+        633
+      ],
+      "word_fade_ms": [
+        19,
+        40
+      ],
+      "duration_ms": 1306,
+      "sha256": "f51d4e19cde999fb737f788f94da8177bc26632f571399a05649f5bbb4ba77c6",
+      "display_text": "ΤΑ ΑΣΤΕΡΙΑ ΛΑΜΠΟΥΝ",
+      "spoken_text": "ΤΑ ΑΣΤΕΡΙΑ ΛΑΜΠΟΥΝ"
+    },
+    "learning.word._92ae": {
+      "asset": "clips/ce/ce3a55850f03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "ce3a55850f0378f8a580e7bdb42f3ad10c763948ac4f9a3f5148c1a6bae4481e",
+      "display_text": "ΚΑΡΠΟΥΖΙ",
+      "spoken_text": "ΚΑΡΠΟΥΖΙ"
+    },
+    "learning.word._9606": {
+      "asset": "clips/af/af761ac32c51.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "af761ac32c51ab61a21653f6eb718544aaf1647d1855d977b16167ed1f0988e9",
+      "display_text": "ΓΗ",
+      "spoken_text": "ΓΗ"
+    },
+    "learning.word._981f": {
+      "asset": "clips/e2/e230e939daab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e230e939daabef48a32cd85cee29faf4236164ee2c4f2b091960de349e7df38b",
+      "display_text": "ΣΠΙΤΙ",
+      "spoken_text": "ΣΠΙΤΙ"
+    },
+    "learning.word._9910": {
+      "asset": "clips/1b/1b7f04910e44.mp3",
+      "word_ends_ms": [
+        615,
+        954
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1358,
+      "sha256": "1b7f04910e4493c98eb277beb267c8304637cda43d9fae1bd6cc04a854e31030",
+      "display_text": "ΜΑΘΑΙΝΕ ΚΑΘΕ ΜΕΡΑ",
+      "spoken_text": "ΜΑΘΑΙΝΕ ΚΑΘΕ ΜΕΡΑ"
+    },
+    "learning.word._9a96": {
+      "asset": "clips/07/073d2e9403db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "073d2e9403db3c794cf366dcfe22069d98f9fe6fa7ac9a2f6513fcef164d3e34",
+      "display_text": "ΤΗΛΕΣΚΟΠΙΟ",
+      "spoken_text": "ΤΗΛΕΣΚΟΠΙΟ"
+    },
+    "learning.word._a1f3": {
+      "asset": "clips/23/232b5e01ca42.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "232b5e01ca42c6c4236f5f065489b31524e5f79c1a36a62dda5f918d4b79df56",
+      "display_text": "ΟΥΡΑΝΟΣ",
+      "spoken_text": "ΟΥΡΑΝΟΣ"
+    },
+    "learning.word._a271": {
+      "asset": "clips/24/24539cabe788.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "24539cabe788455ba7ad19606a2686e70821dbc363ca7e6c52188765eb9a8222",
+      "display_text": "ΣΑΛΑΤΑ",
+      "spoken_text": "ΣΑΛΑΤΑ"
+    },
+    "learning.word._a374": {
+      "asset": "clips/8a/8aa3457bd447.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "8aa3457bd447134f5d5c93fb4ea204e8713091d9923c9aed7e43908265dd95fd",
+      "display_text": "ΚΟΥΚΛΑ",
+      "spoken_text": "ΚΟΥΚΛΑ"
+    },
+    "learning.word._a79d": {
+      "asset": "clips/2c/2c4154935e7a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "2c4154935e7a175b2ec7923a1e5f9b27b11dba165d5555884f7e3d5130f50cf6",
+      "display_text": "ΚΟΥΠΑ",
+      "spoken_text": "ΚΟΥΠΑ"
+    },
+    "learning.word._a995": {
+      "asset": "clips/6e/6ec5b59c83c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "6ec5b59c83c8015c331cd033b0d0ba0e08762660c52ba8bf57376b7aa1a1fe30",
+      "display_text": "ΖΥΜΑΡΙΚΑ",
+      "spoken_text": "ΖΥΜΑΡΙΚΑ"
+    },
+    "learning.word._ad14": {
+      "asset": "clips/57/57da55cedf62.mp3",
+      "word_ends_ms": [
+        578
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1228,
+      "sha256": "57da55cedf62a9232b4a9a33464699f9d0d8db896f0bbd4fc61ea1cedae3540c",
+      "display_text": "ΟΜΟΡΦΟ ΛΟΥΛΟΥΔΙ",
+      "spoken_text": "ΟΜΟΡΦΟ ΛΟΥΛΟΥΔΙ"
+    },
+    "learning.word._ad7b": {
+      "asset": "clips/0b/0b68c9c28ccc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "0b68c9c28ccc66841e7613f67f2b48229397efa8d80990780b17f90fc7612c68",
+      "display_text": "ΜΠΑΛΟΝΙ",
+      "spoken_text": "ΜΠΑΛΟΝΙ"
+    },
+    "learning.word._afa6": {
+      "asset": "clips/bd/bd0962c724f5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "bd0962c724f5eff504917324374c1dc40f78081f286e63b5a43a3bb0d22f5606",
+      "display_text": "ΡΥΖΙ",
+      "spoken_text": "ΡΥΖΙ"
+    },
+    "learning.word._afc4": {
+      "asset": "clips/f0/f0aa291632a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "f0aa291632a2c1f42d151ecd19602b6c7c2da0be89b81f8273bb26fd55df6eff",
+      "display_text": "ΔΙΑΣΤΗΜΟΠΛΟΙΟ",
+      "spoken_text": "ΔΙΑΣΤΗΜΟΠΛΟΙΟ"
+    },
+    "learning.word._b30a": {
+      "asset": "clips/41/419ee01982ec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "419ee01982eca985551487a6d14996b05e30c40c5110a70feb164b9ee2de49e4",
+      "display_text": "ΠΡΟΒΑΤΟ",
+      "spoken_text": "ΠΡΟΒΑΤΟ"
+    },
+    "learning.word._b65b": {
+      "asset": "clips/57/5755fc70fb37.mp3",
+      "word_ends_ms": [
+        174,
+        395,
+        954
+      ],
+      "word_fade_ms": [
+        12,
+        29,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "5755fc70fb3795a11d3b0379d5fe88ab4b0e6fd8303095e2a277501518fa60e2",
+      "display_text": "Η ΜΠΛΕ ΘΑΛΑΣΣΑ ΜΑΣ",
+      "spoken_text": "Η ΜΠΛΕ ΘΑΛΑΣΣΑ ΜΑΣ"
+    },
+    "learning.word._bb72": {
+      "asset": "clips/10/10e396222e65.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "10e396222e656f0b37996d9a71b3c1740db954959eba3aa9dcd1e609d0617979",
+      "display_text": "ΒΑΤΡΑΧΟΣ",
+      "spoken_text": "ΒΑΤΡΑΧΟΣ"
+    },
+    "learning.word._bbe3": {
+      "asset": "clips/89/89b6d3a23eda.mp3",
+      "word_ends_ms": [
+        389,
+        569
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "89b6d3a23eda7dee164fcb2ce9281854debe17b0353154241ba4afadfab8bf95",
+      "display_text": "ΠΟΥΛΙ ΠΟΥ ΠΕΤΑΕΙ",
+      "spoken_text": "ΠΟΥΛΙ ΠΟΥ ΠΕΤΑΕΙ"
+    },
+    "learning.word._c52d": {
+      "asset": "clips/34/3430a68a4041.mp3",
+      "word_ends_ms": [
+        355,
+        694
+      ],
+      "word_fade_ms": [
+        29,
+        40
+      ],
+      "duration_ms": 1280,
+      "sha256": "3430a68a40419ed9bec223d8ea3161c2158dd1a5c66331493448c32069132b4a",
+      "display_text": "ΤΡΩΓΕ ΠΟΛΛΑ ΦΡΟΥΤΑ",
+      "spoken_text": "ΤΡΩΓΕ ΠΟΛΛΑ ΦΡΟΥΤΑ"
+    },
+    "learning.word._c6a3": {
+      "asset": "clips/f7/f75122e127dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "f75122e127dc7062d7ec6d8e6e0546fbd5203eb9e1b4d82c5b762acf982229be",
+      "display_text": "ΧΙΟΝΑΝΘΡΩΠΟΣ",
+      "spoken_text": "ΧΙΟΝΑΝΘΡΩΠΟΣ"
+    },
+    "learning.word._c76b": {
+      "asset": "clips/ad/ad776e056d87.mp3",
+      "word_ends_ms": [
+        414,
+        574
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "ad776e056d87d8f82008ab87b6813736b83ae314ce85c30aee99fc3a7a6d98f1",
+      "display_text": "ΨΑΡΙ ΠΟΥ ΚΟΛΥΜΠΑΕΙ",
+      "spoken_text": "ΨΑΡΙ ΠΟΥ ΚΟΛΥΜΠΑΕΙ"
+    },
+    "learning.word._c81f": {
+      "asset": "clips/58/581269a03291.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "581269a032916343d0d7931b23693035432c6a565e5ab30bbe80abe86656411c",
+      "display_text": "ΗΛΙΟΤΡΟΠΙΟ",
+      "spoken_text": "ΗΛΙΟΤΡΟΠΙΟ"
+    },
+    "learning.word._ca66": {
+      "asset": "clips/b9/b94cdc451c76.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "b94cdc451c7678b23941996c351bca7f99779e9fa67ba939a44d773aa2fb2975",
+      "display_text": "ΠΟΔΗΛΑΤΟ",
+      "spoken_text": "ΠΟΔΗΛΑΤΟ"
+    },
+    "learning.word._cdf7": {
+      "asset": "clips/00/00aaf66bcba0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "00aaf66bcba040817e6b1d51da1109f49063b835c236e437b8f7ef6f13555f4c",
+      "display_text": "ΘΑΛΑΣΣΑ",
+      "spoken_text": "ΘΑΛΑΣΣΑ"
+    },
+    "learning.word._ce72": {
+      "asset": "clips/07/076959e936b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "076959e936b3fee17b53746b629a7ba4332d5839e77ef2d868fbe1d02d8d12f0",
+      "display_text": "ΕΛΕΦΑΝΤΑΣ",
+      "spoken_text": "ΕΛΕΦΑΝΤΑΣ"
+    },
+    "learning.word._d205": {
+      "asset": "clips/64/6447ec32b9f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "6447ec32b9f7209cbb1d9df9087f37ad06a87953de4c8c3ba83185fdce31e6cb",
+      "display_text": "ΠΑΙΔΟΤΟΠΟΣ",
+      "spoken_text": "ΠΑΙΔΟΤΟΠΟΣ"
+    },
+    "learning.word._d55d": {
+      "asset": "clips/84/84d03d252548.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "84d03d252548fba6479385e2bec5fce18436a0b33ac2e8a188344071fc9117ce",
+      "display_text": "ΚΟΤΑ",
+      "spoken_text": "ΚΟΤΑ"
+    },
+    "learning.word._d59b": {
+      "asset": "clips/04/040d0aa55b2f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "040d0aa55b2f958c9cd59d95dc0f5260d8272f3d3054cb483683672bee638833",
+      "display_text": "ΧΕΛΩΝΑ",
+      "spoken_text": "ΧΕΛΩΝΑ"
+    },
+    "learning.word._d7f1": {
+      "asset": "clips/15/155c1a4a2e6a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "155c1a4a2e6ab23f59fe0ccc67facb77398cbdff09be289abea01fbe7f400469",
+      "display_text": "ΨΑΡΙ",
+      "spoken_text": "ΨΑΡΙ"
+    },
+    "learning.word._d7f2": {
+      "asset": "clips/04/048bcae95305.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "048bcae95305e6eb58960b097459cb918390295d5b3008bbdab6856b485f9e45",
+      "display_text": "ΝΕΡΟ",
+      "spoken_text": "ΝΕΡΟ"
+    },
+    "learning.word._dbf8": {
+      "asset": "clips/23/23fa946031c6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "23fa946031c6e33ab06a61f1dde61ed3074226613b21cbc89d6bcaa6ab1a935c",
+      "display_text": "ΚΕΡΙ",
+      "spoken_text": "ΚΕΡΙ"
+    },
+    "learning.word._dd81": {
+      "asset": "clips/f7/f78ae3ed3304.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "f78ae3ed33047a598c5162fb69ad9643a0123e1fbdf7c87c0796f57b2c13e1eb",
+      "display_text": "ΣΧΟΛΕΙΟ",
+      "spoken_text": "ΣΧΟΛΕΙΟ"
+    },
+    "learning.word._deed": {
+      "asset": "clips/5f/5fc8f017c7fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "5fc8f017c7fbac8640ddad3564aa7b262b433af072633901c0fc4d675e6bf426",
+      "display_text": "ΚΑΡΟΤΟ",
+      "spoken_text": "ΚΑΡΟΤΟ"
+    },
+    "learning.word._e2d2": {
+      "asset": "clips/94/94f7379fb2f8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "94f7379fb2f8ad72ae7e450cb81df526bd572d815eac9349464bf0e7d9c699b5",
+      "display_text": "ΦΙΛΟΣ",
+      "spoken_text": "ΦΙΛΟΣ"
+    },
+    "learning.word._e319": {
+      "asset": "clips/32/3252ff012c80.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "3252ff012c80e8ed2b2a04819d1a2b7609f262521bdfd43028c8165840903091",
+      "display_text": "ΑΝΑΝΑΣ",
+      "spoken_text": "ΑΝΑΝΑΣ"
+    },
+    "learning.word._e423": {
+      "asset": "clips/42/42c77287b203.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "42c77287b2033636f1925bb65377822c07ba28e32aaa7b1d0139efa3e17e5eb2",
+      "display_text": "ΕΛΙΚΟΠΤΕΡΟ",
+      "spoken_text": "ΕΛΙΚΟΠΤΕΡΟ"
+    },
+    "learning.word._e452": {
+      "asset": "clips/77/77c34843f042.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "77c34843f0424685d366bbaa9174f2ac84e19bb7ff4e42cc50c6d7b2b722ffd7",
+      "display_text": "ΧΑΡΑ",
+      "spoken_text": "ΧΑΡΑ"
+    },
+    "learning.word._e75a": {
+      "asset": "clips/35/35d19775155c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "35d19775155cfd031c3cb7e54a6e8d17388784305eacaff8751a5ad309929cd3",
+      "display_text": "ΚΑΡΑΒΑΚΙ",
+      "spoken_text": "ΚΑΡΑΒΑΚΙ"
+    },
+    "learning.word._e8c6": {
+      "asset": "clips/ec/ec63ec5af41b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "ec63ec5af41bfe635808ce314e8b288bca290fe31baae8eff223b9ec970283b1",
+      "display_text": "ΔΕΝΤΡΟΣΠΙΤΟ",
+      "spoken_text": "ΔΕΝΤΡΟΣΠΙΤΟ"
+    },
+    "learning.word._e9a3": {
+      "asset": "clips/3a/3af66e63edbc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "3af66e63edbcdf4c9da18c06e25259c86929557635aa50a067580da0d22880c4",
+      "display_text": "ΜΠΑΝΑΝΑ",
+      "spoken_text": "ΜΠΑΝΑΝΑ"
+    },
+    "learning.word._ed1e": {
+      "asset": "clips/f8/f8d006cd0080.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "f8d006cd008037ad6e4c45740997b5b19ac0bb749bb64a6f26cb8e30c4641aff",
+      "display_text": "ΑΣΤΡΟ",
+      "spoken_text": "ΑΣΤΡΟ"
+    },
+    "learning.word._ed25": {
+      "asset": "clips/18/1826da4dc5e6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "1826da4dc5e65d8e160ac3c05db15d7200f5a2ca6f28e808d963da9c2ae14a71",
+      "display_text": "ΦΡΑΟΥΛΑ",
+      "spoken_text": "ΦΡΑΟΥΛΑ"
+    },
+    "learning.word._edfc": {
+      "asset": "clips/69/69145e46db9e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "69145e46db9e612dd071cee728e04fd779488574d8f195e9fa89f96f29b48371",
+      "display_text": "ΑΡΑΧΝΗ",
+      "spoken_text": "ΑΡΑΧΝΗ"
+    },
+    "learning.word._f2f0": {
+      "asset": "clips/47/47a4b7cc1f71.mp3",
+      "word_ends_ms": [
+        236,
+        667,
+        1406
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        12
+      ],
+      "duration_ms": 1907,
+      "sha256": "47a4b7cc1f71b59696a572f4123e13cdfe2ce1893ea2a2fdb35aa268799973d7",
+      "display_text": "ΟΙ ΦΙΛΟΙ ΜΟΙΡΑΖΟΝΤΑΙ ΠΑΝΤΑ",
+      "spoken_text": "ΟΙ ΦΙΛΟΙ ΜΟΙΡΑΖΟΝΤΑΙ ΠΑΝΤΑ"
+    },
+    "learning.word._f30e": {
+      "asset": "clips/a4/a48266156074.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "a482661560746e325953aed182a342d6f145b7a42b83a7d9177fc27a9cdeceb1",
+      "display_text": "ΑΣΘΕΝΟΦΟΡΟ",
+      "spoken_text": "ΑΣΘΕΝΟΦΟΡΟ"
+    },
+    "learning.word._f5b0": {
+      "asset": "clips/b4/b468f5ea5386.mp3",
+      "word_ends_ms": [
+        771
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "b468f5ea5386c4be6ffea859ba6ef9fef22b167a07359762c4958f3289369835",
+      "display_text": "ΟΥΡΑΝΙΟ ΤΟΞΟ",
+      "spoken_text": "ΟΥΡΑΝΙΟ ΤΟΞΟ"
+    },
+    "learning.word._f927": {
+      "asset": "clips/da/daf0f07d550b.mp3",
+      "word_ends_ms": [
+        134,
+        703,
+        1324,
+        1644
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        21,
+        39
+      ],
+      "duration_ms": 2403,
+      "sha256": "daf0f07d550b66a2b5f503d59d3a6aed6b228fcc88b5a734b4df0c7c3bbaff72",
+      "display_text": "ΤΟ ΟΥΡΑΝΙΟ ΤΟΞΟ ΕΧΕΙ ΧΡΩΜΑΤΑ",
+      "spoken_text": "ΤΟ ΟΥΡΑΝΙΟ ΤΟΞΟ ΕΧΕΙ ΧΡΩΜΑΤΑ"
+    },
+    "learning.word._f9dc": {
+      "asset": "clips/85/8506e5e4b797.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "8506e5e4b7973ae5c9fad19e8a9477b48303052f0be20f6cc41e801d12f87778",
+      "display_text": "ΚΑΠΕΛΟ",
+      "spoken_text": "ΚΑΠΕΛΟ"
+    },
+    "learning.word._fccd": {
+      "asset": "clips/c5/c5ed97c273ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "c5ed97c273cec1ae7e9df75356d74fce21e058bd4c58a978c539e62c64b0b652",
+      "display_text": "ΚΟΤΟΠΟΥΛΟ",
+      "spoken_text": "ΚΟΤΟΠΟΥΛΟ"
+    },
+    "learning.word._fe51": {
+      "asset": "clips/c8/c837e9140b6d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c837e9140b6de35a4adcfb30312f79b7d04e64cdd2b3aa118cf97eaf60aa8d79",
+      "display_text": "ΓΑΤΑ",
+      "spoken_text": "ΓΑΤΑ"
+    },
+    "learning.word._fe97": {
+      "asset": "clips/ce/ce9ff22f8392.mp3",
+      "word_ends_ms": [
+        324,
+        424,
+        534
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        30
+      ],
+      "duration_ms": 1280,
+      "sha256": "ce9ff22f839211c69bc590f96a597e22c1a91dd775c4d0ee69c842747f6fa835",
+      "display_text": "ΠΑΙΞΕ ΜΕ ΤΑ ΠΑΙΧΝΙΔΙΑ",
+      "spoken_text": "ΠΑΙΞΕ ΜΕ ΤΑ ΠΑΙΧΝΙΔΙΑ"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/dc/dc8876a3218b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "dc8876a3218bf2ee938f61ecba11bcc7c15d5278e453bb62383f03bbba7ccbe5",
+      "display_text": "Εκπαιδευτικός Λαβύρινθος",
+      "spoken_text": "Εκπαιδευτικός Λαβύρινθος"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/45/45672476167e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "45672476167ec44a9594dea469ac7b680581609ae98d9ae1d6d1c51aa48b5389",
+      "display_text": "Αυτόματα",
+      "spoken_text": "Αυτόματα"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/15/152b318ab598.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "152b318ab5986165e3a15f0c4fd331b8018485491948e7080140b4e95ee5ea66",
+      "display_text": "Τσεχικά",
+      "spoken_text": "Τσεχικά"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/32/32c89a48cc2e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "32c89a48cc2e452b0c52d7cb272e69da5fcb40b9aecbd37cac03baeec12e5711",
+      "display_text": "Δανικά",
+      "spoken_text": "Δανικά"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/bf/bff3023218d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "bff3023218d612dc48f407c8647cda2d36539b75215d4ed4e3c985c8569cb5bf",
+      "display_text": "Ολλανδικά",
+      "spoken_text": "Ολλανδικά"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/1f/1ffdeccd87bc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "1ffdeccd87bcd2c359e1f998b59ca0da6824b92f875ed03a7efec4a999e7bf39",
+      "display_text": "Αγγλικά",
+      "spoken_text": "Αγγλικά"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/6a/6a46457ca303.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "6a46457ca303fdf929304ea5170e013a04f8e50f1b2ff86d4d9303d06062b7a8",
+      "display_text": "Φινλανδικά",
+      "spoken_text": "Φινλανδικά"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/43/43f60635f296.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "43f60635f296230251c1257ff5a6040193ae8f6bd6072bb549d76054b26281fa",
+      "display_text": "Γαλλικά",
+      "spoken_text": "Γαλλικά"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/61/61597deb8515.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "61597deb8515b37ae53f66fd83209ada1fabca686570a07809473dcb6e53ed19",
+      "display_text": "Γερμανικά",
+      "spoken_text": "Γερμανικά"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/fe/fe427cd658d1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "fe427cd658d1d006c8025b912eeb2528147d630b6fe1f12820e2f287312908ee",
+      "display_text": "Ελληνικά",
+      "spoken_text": "Ελληνικά"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/a4/a46884245659.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a468842456593861cb2b379d4adb9d0c99d05a9051c14fe436325463d93cfd4e",
+      "display_text": "Εβραϊκά",
+      "spoken_text": "Εβραϊκά"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/31/315d60034a1f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "315d60034a1fcf04bee1398b9946850fba9adf0ac02a7b4cd4df5165c0539018",
+      "display_text": "Ουγγρικά",
+      "spoken_text": "Ουγγρικά"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/50/50d1bfc6dc5e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "50d1bfc6dc5e596af3fbaff55287b1315e5c2fbad3fe901385512810a62e8b60",
+      "display_text": "στα τσεχικά",
+      "spoken_text": "στα τσεχικά"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/fb/fb722ea21a94.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "fb722ea21a945931a3856c71c4a07ae6906715336cf0866cc15624efdbe4e08d",
+      "display_text": "στα δανικά",
+      "spoken_text": "στα δανικά"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/5c/5c17de79b230.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5c17de79b230c671c7006040d7072500050e6f036b1fcec1de8d8a76997e1d1b",
+      "display_text": "στα ολλανδικά",
+      "spoken_text": "στα ολλανδικά"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/e5/e54438fbc91a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "e54438fbc91a18818b7cbc22c76fa979308918e40d0f0ec00f906f821d1f9c82",
+      "display_text": "στα αγγλικά",
+      "spoken_text": "στα αγγλικά"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/5a/5ac56e8c8e2d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "5ac56e8c8e2d0296e170b8a13761c4d4549750006aa6f8dc579de66b904a3241",
+      "display_text": "στα φινλανδικά",
+      "spoken_text": "στα φινλανδικά"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/94/940bff293786.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "940bff2937869fbd221edf5e48e96e656ade7a1e696cc7d499c8784b3ef7d50e",
+      "display_text": "στα γαλλικά",
+      "spoken_text": "στα γαλλικά"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/1a/1a749ffd5e8a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "1a749ffd5e8a167b7020d1d3a6c5a421fff8a41f3389354c6d16d77ae3bd4697",
+      "display_text": "στα γερμανικά",
+      "spoken_text": "στα γερμανικά"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/74/74b1d7a8b331.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "74b1d7a8b331a88c10a1a0ea8c3cb2b7b72f42193612462e148a5a235106d566",
+      "display_text": "στα ελληνικά",
+      "spoken_text": "στα ελληνικά"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/b0/b0c60d7ea09d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "b0c60d7ea09d9301d82c63d331a6da5cb6780f5f89ccef3a8973ebb44d98d749",
+      "display_text": "στα εβραϊκά",
+      "spoken_text": "στα εβραϊκά"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/75/75bca5534fbc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "75bca5534fbc72a4d161cb901cdda07a5a7230382f50f98bea202f4f10c65db7",
+      "display_text": "στα ουγγρικά",
+      "spoken_text": "στα ουγγρικά"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/4c/4c94a2b136a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "4c94a2b136a266fcbafdcaa185aa56f4106401fd8f0b6a1b129f21b1c12d193b",
+      "display_text": "στα ιταλικά",
+      "spoken_text": "στα ιταλικά"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/77/776901cbd3d5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "776901cbd3d511b9517da732a288959ab8420e5b3e082e32563945562fc87877",
+      "display_text": "στα νορβηγικά",
+      "spoken_text": "στα νορβηγικά"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/82/82218d7ede15.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "82218d7ede15a2708b710581846738f17e9f420eba1a762d4e6c8aa7a4ce1eff",
+      "display_text": "στα πολωνικά",
+      "spoken_text": "στα πολωνικά"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/39/39911f6abe6c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "39911f6abe6c4e0413362e96372e53257eabbeaec4492e1171a7f83be7093c5e",
+      "display_text": "στα πορτογαλικά",
+      "spoken_text": "στα πορτογαλικά"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/13/13108a34c915.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "13108a34c915364a446487bcb35a596e8872f76bc1400838185a3107cfe16f5b",
+      "display_text": "στα ρουμανικά",
+      "spoken_text": "στα ρουμανικά"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/b3/b3780ec0cc13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "b3780ec0cc13a950cac64818e63fe492ab0da9c8aacf7b18cd26e4fa51549c55",
+      "display_text": "στα σλοβακικά",
+      "spoken_text": "στα σλοβακικά"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/dc/dcbce19d3c9a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "dcbce19d3c9a33798e3ea2280dcc04b574c6a2a702f764a483bb799be14f1374",
+      "display_text": "στα ισπανικά",
+      "spoken_text": "στα ισπανικά"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/8d/8d8425885017.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "8d8425885017a1ba449249e8d077d7a7cc8efbaf333589b05f558bfb2867ff96",
+      "display_text": "στα σουηδικά",
+      "spoken_text": "στα σουηδικά"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/79/796364d9b72b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "796364d9b72bac3138b04b9b2d3367f619fee3559860bf977fdd794894d149e4",
+      "display_text": "στα τουρκικά",
+      "spoken_text": "στα τουρκικά"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/3d/3d5b0835ca35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "3d5b0835ca35376d132a9d619740a3f68731daebdb6f2f7e7e51531b55510392",
+      "display_text": "στα ουκρανικά",
+      "spoken_text": "στα ουκρανικά"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/aa/aa820a1ef29f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "aa820a1ef29f8d558b8c1018ae29716e5852c75805fd174da81c3839fc124b6c",
+      "display_text": "στα βιετναμέζικα",
+      "spoken_text": "στα βιετναμέζικα"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/be/becdeaa48ffe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "becdeaa48ffe32d0bf7c5add5f69310cb7758008d435675b192c6770b4b22732",
+      "display_text": "Ιταλικά",
+      "spoken_text": "Ιταλικά"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/26/26316552bb0c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "26316552bb0c603bfd2816ac8118ce876a3fdd5aefea5f50934c25d352aab3dd",
+      "display_text": "Νορβηγικά",
+      "spoken_text": "Νορβηγικά"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/fd/fd5e03c43823.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "fd5e03c438234fedefd3ca4a123b5be31cd443f9c8e9af5902121d8c03e79697",
+      "display_text": "Πολωνικά",
+      "spoken_text": "Πολωνικά"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/c7/c72b1bfd2569.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "c72b1bfd2569b733f6f08df31561f1787d355771bbe0c8ee1b609e331fbd43f8",
+      "display_text": "Πορτογαλικά",
+      "spoken_text": "Πορτογαλικά"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/8f/8f0388161882.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "8f0388161882297af77004e606373b26d9b121b920d9ae348fd3c90305853045",
+      "display_text": "Ρουμανικά",
+      "spoken_text": "Ρουμανικά"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/85/85eae5b51abb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "85eae5b51abbdd0aa183c90c3fdc05dd0bfd9865693ed6f2b62fb9cdcee16f1b",
+      "display_text": "Σλοβακικά",
+      "spoken_text": "Σλοβακικά"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/94/949ca98599fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "949ca98599fc935b6d9208421d18cdfb0360f59824b494249089d1547cc0311d",
+      "display_text": "Ισπανικά",
+      "spoken_text": "Ισπανικά"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/8a/8a34b1567eff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "8a34b1567eff824343ceca1e61daccbfdb218e3200df96738b6d8a12b1036a4b",
+      "display_text": "Σουηδικά",
+      "spoken_text": "Σουηδικά"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/e6/e6be64ad58a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e6be64ad58a66e4a5c411b0c7f4ebdc2ae1d4579f5053cc4af68ec5f8529b67d",
+      "display_text": "Τουρκικά",
+      "spoken_text": "Τουρκικά"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/52/5222627d1e09.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5222627d1e09b7a8fd13f90b693b977c29f10a7569dcc53f9463d33a11769c9e",
+      "display_text": "Ουκρανικά",
+      "spoken_text": "Ουκρανικά"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/15/154c5122af13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "154c5122af13732669f76f1fbacb603d450bdbd285f5fafdb4384af9dcc1301c",
+      "display_text": "Βιετναμέζικα",
+      "spoken_text": "Βιετναμέζικα"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/af/afb95ee50c5a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "afb95ee50c5aac82ccdd13720682c357a337cb9a61aabba32e76f0463903bb2b",
+      "display_text": "Μέτρησες μέχρι το",
+      "spoken_text": "Μέτρησες μέχρι το"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/14/1403383aa3f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "1403383aa3f4d721f9daa79b82f5af31c66036d49143791561805e15d1e48abc",
+      "display_text": "Μέτρησες",
+      "spoken_text": "Μέτρησες"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/d6/d66a6d3e9a3e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d66a6d3e9a3e8e3a10c6bc7bd5a9cffe97b1e593e6768ca6484a82fadcbe1f42",
+      "display_text": "μέχρι το",
+      "spoken_text": "μέχρι το"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/96/96137eae5c4b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "96137eae5c4ba175d3a204860751997d746068011662ce422b0193770b0ec05d",
+      "display_text": "Βρήκες το γράμμα",
+      "spoken_text": "Βρήκες το γράμμα"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/a8/a89481fc72c4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a89481fc72c4ea0b7c5959eb8da00465e75cb72224aa96762a07940baaf31994",
+      "display_text": "Βρήκες",
+      "spoken_text": "Βρήκες"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/77/77627a7550ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "77627a7550ee8a31bbb509470318fc428a633a4059b8bc031fedaadd032afa7c",
+      "display_text": "το γράμμα",
+      "spoken_text": "το γράμμα"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/80/80f05041b008.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "80f05041b008376fc3c9d2600135ec97550f5a0769fb8a3a26529fdc9417fd19",
+      "display_text": "Βρήκες τα γράμματα από",
+      "spoken_text": "Βρήκες τα γράμματα από"
+    },
+    "ui.recap_tts_found_letters.1": {
+      "asset": "clips/e1/e17a81d0a975.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e17a81d0a975cfa6960c12568673e6fd03cc7f5491eb5541b2cd0fb2a3b1bdfc",
+      "display_text": "έως",
+      "spoken_text": "έως"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/78/78c2b93313e7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "78c2b93313e76e1b922c1eb16aa39019bd43b29cf95feed4931953b38f530825",
+      "display_text": "τα γράμματα από",
+      "spoken_text": "τα γράμματα από"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/e2/e2f91724883d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e2f91724883dc4d837fe557e630c1b5abc74d8654c818df15c8d97756e47ee97",
+      "display_text": "στα",
+      "spoken_text": "στα"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/22/226a8b3023a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "226a8b3023a66fa0dd8e7c676c1db0a39c9bd5cbfdaa8938f11fcb01fd7a014a",
+      "display_text": "Συλλάβισες τη φράση",
+      "spoken_text": "Συλλάβισες τη φράση"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/6b/6b374c78bb18.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "6b374c78bb18aa1816ac3fefebc92cbc26edb9025b091de954fcbeb6ff81ebd9",
+      "display_text": "τη φράση",
+      "spoken_text": "τη φράση"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/6a/6afe423b0b60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "6afe423b0b609fb09ba280ca04aca0883ff7404f307b9e494da72381f266daa1",
+      "display_text": "Συλλάβισες τη λέξη",
+      "spoken_text": "Συλλάβισες τη λέξη"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/b3/b31354154d75.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "b31354154d751f6cf715119850b62b7322f35a4d638039ddddde15ee839b7193",
+      "display_text": "Συλλάβισες",
+      "spoken_text": "Συλλάβισες"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/40/40f423eb204d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "40f423eb204d727ce77aaaf67677a873fe04baf33e7a5dd59e44cd76c2513a81",
+      "display_text": "τη λέξη",
+      "spoken_text": "τη λέξη"
+    }
+  }
+}

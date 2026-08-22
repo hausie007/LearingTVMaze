@@ -1,0 +1,2735 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "ro",
+  "locale": "ro-RO",
+  "voice_profile": "ro-RO@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 31,
+    "word": 140,
+    "ui": 59
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/e0/e090d182f0a5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "e090d182f0a5955a9fedbff5a4cba099704918981f920ab118a5540a9db8d426",
+      "display_text": "A",
+      "spoken_text": "a"
+    },
+    "learning.char.b": {
+      "asset": "clips/fb/fbd45515507f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fbd45515507fcb90dd8d3212abe27d504497d55d8cf313b0cb8897b157c9edb0",
+      "display_text": "B",
+      "spoken_text": "be"
+    },
+    "learning.char.c": {
+      "asset": "clips/ef/eff1670501f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "eff1670501f7832dbed71f2eee0ba784158b02eea120f60fce7a6316c3a19ee9",
+      "display_text": "C",
+      "spoken_text": "ce"
+    },
+    "learning.char.c01": {
+      "asset": "clips/4e/4e9655ca5e82.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "4e9655ca5e825356d9ff7f6c3628aea0ded422eca36f12e614cc7ff833051c2f",
+      "display_text": "Ă",
+      "spoken_text": "ă"
+    },
+    "learning.char.c02": {
+      "asset": "clips/e4/e42a31700d8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1620,
+      "sha256": "e42a31700d8f277c32c023b6833e2f77ad2366f197e3d2a4a64989c10e2f9ff9",
+      "display_text": "Â",
+      "spoken_text": "â din a"
+    },
+    "learning.char.c11": {
+      "asset": "clips/14/144f8f67e95d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "144f8f67e95dd403d979049921a6591c2adb3751b413087c4683371a22532e10",
+      "display_text": "Î",
+      "spoken_text": "î din i"
+    },
+    "learning.char.c22": {
+      "asset": "clips/ef/efbc09e82a1b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "efbc09e82a1bd5803e6c688b705f3bef23c6d122805c19afc85f44361452272b",
+      "display_text": "Ș",
+      "spoken_text": "șe"
+    },
+    "learning.char.c24": {
+      "asset": "clips/a9/a9a974ab43e6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "a9a974ab43e61b958d28aca9cd68ab40ed1db82afe20c62a6edc0c4b0fb46b7e",
+      "display_text": "Ț",
+      "spoken_text": "țe"
+    },
+    "learning.char.d": {
+      "asset": "clips/d3/d36b5dab6ae5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "d36b5dab6ae529d72049c0a95e5f043910a2b240b835202a05bdea940ee74ed4",
+      "display_text": "D",
+      "spoken_text": "de"
+    },
+    "learning.char.e": {
+      "asset": "clips/03/0322a70a34f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "0322a70a34f794e0c8869c89b22726dc58bc0de893261d41102f85952ae863f4",
+      "display_text": "E",
+      "spoken_text": "e"
+    },
+    "learning.char.f": {
+      "asset": "clips/24/248844275f99.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "248844275f99054b56fe4ecdfcf91114bc6c64d0a0643d3a2f70a7ffccd4f02b",
+      "display_text": "F",
+      "spoken_text": "ef"
+    },
+    "learning.char.g": {
+      "asset": "clips/56/56cdfd5adcbb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "56cdfd5adcbb578f006ecc05ed40caa00bc705eef728674fc2cb72ea7fabcd4e",
+      "display_text": "G",
+      "spoken_text": "ge"
+    },
+    "learning.char.h": {
+      "asset": "clips/63/6345026b26ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "6345026b26eecd6cfc860cd0a589bde7129caec12b24e2c264fb1fc88d8f8294",
+      "display_text": "H",
+      "spoken_text": "ha"
+    },
+    "learning.char.i": {
+      "asset": "clips/3b/3b2a9f7d4374.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "3b2a9f7d4374c278bb3347e2371ee6b761c61cc26f1975d1e795ff9364ac3af4",
+      "display_text": "I",
+      "spoken_text": "i"
+    },
+    "learning.char.j": {
+      "asset": "clips/ae/aefbf00b256b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "aefbf00b256b29fb4f0772915db9d61d10623ca583529c57ed145725c6e5f669",
+      "display_text": "J",
+      "spoken_text": "je"
+    },
+    "learning.char.k": {
+      "asset": "clips/cb/cb57e0b6c0f1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "cb57e0b6c0f10ef28f97771b712433beafb17885ed25ce0c126475d8c472cfa5",
+      "display_text": "K",
+      "spoken_text": "ka"
+    },
+    "learning.char.l": {
+      "asset": "clips/df/df38db1b57a3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "df38db1b57a320ca8a174cb84aad363c702c833d5a7f5a0b0cfe97b65ad0b2d0",
+      "display_text": "L",
+      "spoken_text": "el"
+    },
+    "learning.char.m": {
+      "asset": "clips/4f/4fbad7390065.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "4fbad7390065c5d42a4c665b5521597b1028b50bd5546d541069dee384634104",
+      "display_text": "M",
+      "spoken_text": "em"
+    },
+    "learning.char.n": {
+      "asset": "clips/00/007a535c6a32.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "007a535c6a322be3d698f4c3fb547b0cb4bc9c10996c46a16c1676182404997a",
+      "display_text": "N",
+      "spoken_text": "en"
+    },
+    "learning.char.o": {
+      "asset": "clips/82/82a743b536cc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "82a743b536cc754fff36b73c7322395a1abc9206a01a7c8b4cae3dd358fba77d",
+      "display_text": "O",
+      "spoken_text": "o"
+    },
+    "learning.char.p": {
+      "asset": "clips/5e/5ee793646900.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 340,
+      "sha256": "5ee79364690076a9c53cb101aa241f41d48ee3e02237171ae7daa77ce705b787",
+      "display_text": "P",
+      "spoken_text": "pe"
+    },
+    "learning.char.q": {
+      "asset": "clips/58/58e8297d4be6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "58e8297d4be63901a57a1e333e9a088cbc80f179f378df2b4bce846f6755dcb0",
+      "display_text": "Q",
+      "spoken_text": "chiu"
+    },
+    "learning.char.r": {
+      "asset": "clips/c4/c4f1c0cc49a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "c4f1c0cc49a2fb5ae59f0bfc2ca71a04dec31a810b713dc37b279c2ef4b3e518",
+      "display_text": "R",
+      "spoken_text": "er"
+    },
+    "learning.char.s": {
+      "asset": "clips/99/9992f5386984.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "9992f5386984c430dec87ad2e257f495f478a1d2a5ea2a00174044a86bfe0d9c",
+      "display_text": "S",
+      "spoken_text": "es"
+    },
+    "learning.char.t": {
+      "asset": "clips/0a/0afcadb7604b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "0afcadb7604b64992df511e8be55ad4268e0354891f9cb31427a0e3079358294",
+      "display_text": "T",
+      "spoken_text": "te"
+    },
+    "learning.char.u": {
+      "asset": "clips/c2/c2f8d0ee4a12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "c2f8d0ee4a122d9f4704e48cd9478b0ed666b02fbb5a2dffa8050ddbe205073e",
+      "display_text": "U",
+      "spoken_text": "u"
+    },
+    "learning.char.v": {
+      "asset": "clips/fb/fbac7eebe64e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "fbac7eebe64e170d87e2acdf519f845a059be2ef1ec05d3644aec63198596dba",
+      "display_text": "V",
+      "spoken_text": "ve"
+    },
+    "learning.char.w": {
+      "asset": "clips/fb/fb2f49f54b53.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "fb2f49f54b53a8b0816ac2790ab2b5d0b1fe31548911919e50e7a47dde0e77b4",
+      "display_text": "W",
+      "spoken_text": "dublu ve"
+    },
+    "learning.char.x": {
+      "asset": "clips/17/17e87912f293.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "17e87912f293392eb857265f8ab26da9648fc5a60add6916069c6a6eccb8d7bd",
+      "display_text": "X",
+      "spoken_text": "x"
+    },
+    "learning.char.y": {
+      "asset": "clips/97/97f29a2f4a01.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "97f29a2f4a012b53fde0886393216dc87fd61eac66b5fa275d8e4f1600212174",
+      "display_text": "Y",
+      "spoken_text": "igrec"
+    },
+    "learning.char.z": {
+      "asset": "clips/49/49b563423d52.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "49b563423d52a36e5eb954a7e4935144d31f1c2dafda0dfcaf042298f73c85fd",
+      "display_text": "Z",
+      "spoken_text": "ze"
+    },
+    "learning.number.001": {
+      "asset": "clips/b6/b6a40ba1875a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b6a40ba1875a86e04ac6196ac3576d00577a46e624aed69aebeefc46467e1e82",
+      "display_text": "1",
+      "spoken_text": "unu"
+    },
+    "learning.number.002": {
+      "asset": "clips/14/1427f3d11a00.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1427f3d11a009a9741d0388309d8d13ce2303b3b120669309d7e38416124075d",
+      "display_text": "2",
+      "spoken_text": "doi"
+    },
+    "learning.number.003": {
+      "asset": "clips/85/855065f9874c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "855065f9874ce9825338dccc9593fee9bae9ee96797b0fc897d75e8beaa5f0ef",
+      "display_text": "3",
+      "spoken_text": "trei"
+    },
+    "learning.number.004": {
+      "asset": "clips/c3/c3a3a288165d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "c3a3a288165df276b883915ee6b2e1ff51d064bc4bb6a4b9569bc565aed7f1e2",
+      "display_text": "4",
+      "spoken_text": "patru"
+    },
+    "learning.number.005": {
+      "asset": "clips/24/24ae6529f731.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "24ae6529f7317718d4834b8530787dc17c42c7fafadfed00c409c548cb4cd3c0",
+      "display_text": "5",
+      "spoken_text": "cinci"
+    },
+    "learning.number.006": {
+      "asset": "clips/bb/bbbbd7fbc354.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "bbbbd7fbc3546e0a8ae5dd227d2d2be12394d67d1aa769db4b979c989e783dde",
+      "display_text": "6",
+      "spoken_text": "șase"
+    },
+    "learning.number.007": {
+      "asset": "clips/77/770136d42ddd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "770136d42ddda517e0fa257cb953ec4c38b78828f174bc78db221f622a5d8b0a",
+      "display_text": "7",
+      "spoken_text": "șapte"
+    },
+    "learning.number.008": {
+      "asset": "clips/7c/7c9fdd1db020.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7c9fdd1db020883a700cc96906dbb560f61f4a7b04527c78f981508ad38164d5",
+      "display_text": "8",
+      "spoken_text": "opt"
+    },
+    "learning.number.009": {
+      "asset": "clips/cb/cb1587ad2a08.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "cb1587ad2a08ccef017ab258b6c539894cd2258bb287917131d622a9dae7236b",
+      "display_text": "9",
+      "spoken_text": "nouă"
+    },
+    "learning.number.010": {
+      "asset": "clips/c7/c7578788f1f2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "c7578788f1f2bae94ca9c4dd77a172c18215e7cf1814380064f1ab93a8282933",
+      "display_text": "10",
+      "spoken_text": "zece"
+    },
+    "learning.number.011": {
+      "asset": "clips/d1/d1a2429fc6db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "d1a2429fc6dbeeb76db3593d1e00cdd8226cdf2e37547a711636e7e65817dfec",
+      "display_text": "11",
+      "spoken_text": "unsprezece"
+    },
+    "learning.number.012": {
+      "asset": "clips/44/4400240d033d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "4400240d033d957e7810f4f1dc9980ff9820804fbb6b63363303371281acc277",
+      "display_text": "12",
+      "spoken_text": "doisprezece"
+    },
+    "learning.number.013": {
+      "asset": "clips/25/25b626daae0c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "25b626daae0c991c14c06e2e3f9d6a078a063b770a2ea87b1b56a420b77536db",
+      "display_text": "13",
+      "spoken_text": "treisprezece"
+    },
+    "learning.number.014": {
+      "asset": "clips/e5/e55d3d979030.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "e55d3d9790300d058a2639273ec33c53b49f8d06fe508b7fa0d23e315efad640",
+      "display_text": "14",
+      "spoken_text": "paisprezece"
+    },
+    "learning.number.015": {
+      "asset": "clips/e8/e8ca95104f01.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "e8ca95104f0156d6e9b29f7b756317a94460a451e6222d99f4ccd6860925f47d",
+      "display_text": "15",
+      "spoken_text": "cincisprezece"
+    },
+    "learning.number.016": {
+      "asset": "clips/11/113ba821ac2b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "113ba821ac2b9717c093bec9fe92a3135df6bee745ec19d9df1a0b542fa1d0d6",
+      "display_text": "16",
+      "spoken_text": "șaisprezece"
+    },
+    "learning.number.017": {
+      "asset": "clips/4c/4c7e33f7e512.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "4c7e33f7e512355eb002ad174902d1c51d39c82292e957df1768d0cbcf342f61",
+      "display_text": "17",
+      "spoken_text": "șaptesprezece"
+    },
+    "learning.number.018": {
+      "asset": "clips/24/241f42f57546.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "241f42f575464bd84d07f7140532d6e450d00958af95f7e3fea4ad28b9db7fab",
+      "display_text": "18",
+      "spoken_text": "optsprezece"
+    },
+    "learning.number.019": {
+      "asset": "clips/39/39af55c0e352.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "39af55c0e35267b004e039dad0ac1bf7321243b3ebc6cffef682c3f95808250c",
+      "display_text": "19",
+      "spoken_text": "nouăsprezece"
+    },
+    "learning.number.020": {
+      "asset": "clips/71/71e28357f868.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "71e28357f8686bf39f731a2176060a1a7ce38ca64cde3dff042c521f3a7f6321",
+      "display_text": "20",
+      "spoken_text": "douăzeci"
+    },
+    "learning.number.021": {
+      "asset": "clips/19/191385ecb85c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "191385ecb85c030aca2134347928b065033ba80ca0dfbf71a7c3abab4bf79ece",
+      "display_text": "21",
+      "spoken_text": "douăzeci și unu"
+    },
+    "learning.number.022": {
+      "asset": "clips/d7/d7ecfe8edc23.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "d7ecfe8edc2332d4c6a8d1e316c81441613d716d1d17eb88368b247b3a8b5a71",
+      "display_text": "22",
+      "spoken_text": "douăzeci și doi"
+    },
+    "learning.number.023": {
+      "asset": "clips/46/4686f4793ebb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "4686f4793ebb838cee4534260cabf9e2c1039e293f0be7be5dd6461ca7a33eb3",
+      "display_text": "23",
+      "spoken_text": "douăzeci și trei"
+    },
+    "learning.number.024": {
+      "asset": "clips/82/824a84de94e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "824a84de94e0cd635d85247229ba4e95c74498983e3abb38288b81c6cbd0d1f6",
+      "display_text": "24",
+      "spoken_text": "douăzeci și patru"
+    },
+    "learning.number.025": {
+      "asset": "clips/08/08bc254a47a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "08bc254a47a8b2ba4ad5e6997f12d90a5d30b52ae61680be22060476431fb52c",
+      "display_text": "25",
+      "spoken_text": "douăzeci și cinci"
+    },
+    "learning.number.026": {
+      "asset": "clips/47/47fbaeb886e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "47fbaeb886e1a12dcfb6ab94a1a64ab89cd9c7a37f7cf42205156cdf9fedfb83",
+      "display_text": "26",
+      "spoken_text": "douăzeci și șase"
+    },
+    "learning.number.027": {
+      "asset": "clips/01/01b0d7491f39.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "01b0d7491f398ec833b2b26042263c5adb57779f096cae9f2450dfce87408036",
+      "display_text": "27",
+      "spoken_text": "douăzeci și șapte"
+    },
+    "learning.number.028": {
+      "asset": "clips/19/19bbd3c80b3e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "19bbd3c80b3eb3758a53d80e00f649241eb579b3b9dc90143a54755f6f7ae9c1",
+      "display_text": "28",
+      "spoken_text": "douăzeci și opt"
+    },
+    "learning.number.029": {
+      "asset": "clips/53/53902e88bfdb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "53902e88bfdb76b0631605a00bc8b6a63fca4e8476bc854c5cab954f3d78a5f7",
+      "display_text": "29",
+      "spoken_text": "douăzeci și nouă"
+    },
+    "learning.number.030": {
+      "asset": "clips/f2/f25e32f4e7dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "f25e32f4e7dce5d656c178005c209bfed4ebbf8b7c4b6d2e273973c496a98f45",
+      "display_text": "30",
+      "spoken_text": "treizeci"
+    },
+    "learning.number.031": {
+      "asset": "clips/c9/c9d385053862.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "c9d3850538628f25de21808eccb68f9ed3fdf0dbb1d93bc651d7e46b85937422",
+      "display_text": "31",
+      "spoken_text": "treizeci și unu"
+    },
+    "learning.number.032": {
+      "asset": "clips/3e/3e384c18fe80.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "3e384c18fe80602443c3724a7c0d6494902fb75ca4b9059b32ae3b14de14eb90",
+      "display_text": "32",
+      "spoken_text": "treizeci și doi"
+    },
+    "learning.number.033": {
+      "asset": "clips/6c/6c3b09c53123.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "6c3b09c53123fb84c64b6d74af25c8296d51b3426369e46058b4a7464e0a9a4b",
+      "display_text": "33",
+      "spoken_text": "treizeci și trei"
+    },
+    "learning.number.034": {
+      "asset": "clips/7d/7d360fa832f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "7d360fa832f75cdb1a33a5daf1f8aa7f1ca8042c9e128e046a7fd074abada092",
+      "display_text": "34",
+      "spoken_text": "treizeci și patru"
+    },
+    "learning.number.035": {
+      "asset": "clips/c7/c76317f2753a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "c76317f2753a849ad465d9633717863318a8bcdb1e2a2ea07f5f34b52773bf76",
+      "display_text": "35",
+      "spoken_text": "treizeci și cinci"
+    },
+    "learning.number.036": {
+      "asset": "clips/a1/a1a210ece827.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "a1a210ece827189f621acb3d415c6293bdedcc6f6d70370ba7d6b7492371aa3c",
+      "display_text": "36",
+      "spoken_text": "treizeci și șase"
+    },
+    "learning.number.037": {
+      "asset": "clips/44/44196f5e5204.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "44196f5e5204fabdd67edf04a95321e8a14245ef78226b6aa8ef18ffee040c40",
+      "display_text": "37",
+      "spoken_text": "treizeci și șapte"
+    },
+    "learning.number.038": {
+      "asset": "clips/46/46367fedd8fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "46367fedd8fc2986ef91d83a24fb03d66bdf417cb39217d210ae5fe9112baa64",
+      "display_text": "38",
+      "spoken_text": "treizeci și opt"
+    },
+    "learning.number.039": {
+      "asset": "clips/d5/d53e37642938.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "d53e37642938a3bf0a7c7af6374fe3c34ff04c0172f57cff2713bb872c2723d2",
+      "display_text": "39",
+      "spoken_text": "treizeci și nouă"
+    },
+    "learning.number.040": {
+      "asset": "clips/d5/d51a892ed0fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "d51a892ed0fd868cbe255f237419315054207a08672b949021b32dcaa84b01b4",
+      "display_text": "40",
+      "spoken_text": "patruzeci"
+    },
+    "learning.number.041": {
+      "asset": "clips/7f/7fe07fb90161.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "7fe07fb901619b30a7f293b1a7ccc9ced77f4be7efbd8e34b785f8047f06faf6",
+      "display_text": "41",
+      "spoken_text": "patruzeci și unu"
+    },
+    "learning.number.042": {
+      "asset": "clips/75/756ed5e5c5c9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "756ed5e5c5c9b02ed4f624240ed2e9921ad2009582d7035f6aa613efcdda8c17",
+      "display_text": "42",
+      "spoken_text": "patruzeci și doi"
+    },
+    "learning.number.043": {
+      "asset": "clips/cc/cc8f9730e212.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "cc8f9730e2129e55a75062c343b1fcb040da6300073673901c5ca574a96a8fa6",
+      "display_text": "43",
+      "spoken_text": "patruzeci și trei"
+    },
+    "learning.number.044": {
+      "asset": "clips/ff/ff477fd94124.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "ff477fd9412430e50769ba635f7c3b02cbbcb7c7a1b408364b18a7bc279fe755",
+      "display_text": "44",
+      "spoken_text": "patruzeci și patru"
+    },
+    "learning.number.045": {
+      "asset": "clips/a8/a875a93a8603.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "a875a93a8603ccbc21f3a61560e0071f0a2b703fdc86efe9f9efe055130133a4",
+      "display_text": "45",
+      "spoken_text": "patruzeci și cinci"
+    },
+    "learning.number.046": {
+      "asset": "clips/cb/cb701d999f0b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "cb701d999f0b36b56d581ec45c7b39d705ec4434c8205ea9a36dcac0351c4d6f",
+      "display_text": "46",
+      "spoken_text": "patruzeci și șase"
+    },
+    "learning.number.047": {
+      "asset": "clips/77/7734118df680.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "7734118df680fd0ad46a027de5ad758acdc68b9d2a641d8823e3855e5145b690",
+      "display_text": "47",
+      "spoken_text": "patruzeci și șapte"
+    },
+    "learning.number.048": {
+      "asset": "clips/aa/aaf6b5a8e157.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "aaf6b5a8e15747f982da1e3ce72f286d9e1c89971ac8a9adca647f79b79e7e14",
+      "display_text": "48",
+      "spoken_text": "patruzeci și opt"
+    },
+    "learning.number.049": {
+      "asset": "clips/18/18347b3f7d0f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "18347b3f7d0f8a50e17cb6e62034ffac1cab9b0cf7f459470d7a381cadc02325",
+      "display_text": "49",
+      "spoken_text": "patruzeci și nouă"
+    },
+    "learning.number.050": {
+      "asset": "clips/82/82bc2f931923.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "82bc2f9319231fd481e482da750f3aa5ce188bb3156dab60c290f5ef39d5da77",
+      "display_text": "50",
+      "spoken_text": "cincizeci"
+    },
+    "learning.word.ajuta_pe_toata_lumea": {
+      "asset": "clips/98/981714c34414.mp3",
+      "word_ends_ms": [
+        530,
+        690,
+        980
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        20
+      ],
+      "duration_ms": 1358,
+      "sha256": "981714c3441443aae4915b27ba818f8d24eb30381978fe7d6c1e8cd550def99f",
+      "display_text": "AJUTĂ PE TOATĂ LUMEA",
+      "spoken_text": "ajută pe toată lumea"
+    },
+    "learning.word.albina": {
+      "asset": "clips/69/6939b55f7045.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "6939b55f70459b861ab4ad54732bb6effad516638de929d410666a70d67adf09",
+      "display_text": "ALBINĂ",
+      "spoken_text": "albină"
+    },
+    "learning.word.apa": {
+      "asset": "clips/41/4112eba9d837.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "4112eba9d837584a840c4407918487bbe5f17a7c9a29f81d56e993f2152a0dc4",
+      "display_text": "APĂ",
+      "spoken_text": "apă"
+    },
+    "learning.word.ardei": {
+      "asset": "clips/89/89116b55472d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "89116b55472d2f640a77b572c3bea5fa829bf18c30f0f1bf9444979fc38756d9",
+      "display_text": "ARDEI",
+      "spoken_text": "ardei"
+    },
+    "learning.word.banana": {
+      "asset": "clips/8d/8d6e2e0976eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "8d6e2e0976eb8122b180dbca2583459b9ee6c42aa58246070f8b53b496aa409d",
+      "display_text": "BANANĂ",
+      "spoken_text": "banană"
+    },
+    "learning.word.bea_apa": {
+      "asset": "clips/9a/9a3cfb2a8ea8.mp3",
+      "word_ends_ms": [
+        325
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 940,
+      "sha256": "9a3cfb2a8ea8badb019dc7c757bdbf2429a78c55b6880e8d13423b9c0e64b4eb",
+      "display_text": "BEA APĂ",
+      "spoken_text": "bea apă"
+    },
+    "learning.word.bea_apa_ca_sa_cresti": {
+      "asset": "clips/0b/0be0f24f9f36.mp3",
+      "word_ends_ms": [
+        375,
+        705,
+        865,
+        1025
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        20,
+        20
+      ],
+      "duration_ms": 1594,
+      "sha256": "0be0f24f9f36ae3e947fa25b4f2ab33ff223588d8890340437b85b8258ab687e",
+      "display_text": "BEA APĂ CA SĂ CREȘTI",
+      "spoken_text": "bea apă ca să crești"
+    },
+    "learning.word.bomboana": {
+      "asset": "clips/b9/b94bac5314dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "b94bac5314dd2e7f189f5f0ee4e2ae90b5b125cb7039665672542bce973bc1f9",
+      "display_text": "BOMBOANĂ",
+      "spoken_text": "bomboană"
+    },
+    "learning.word.bomboana_dulce": {
+      "asset": "clips/1d/1d459ed8a684.mp3",
+      "word_ends_ms": [
+        616
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "1d459ed8a684b8f8064e4ae15299824bf1eb90532e7e194eb7485e0365c15f55",
+      "display_text": "BOMBOANĂ DULCE",
+      "spoken_text": "bomboană dulce"
+    },
+    "learning.word.branza": {
+      "asset": "clips/f4/f470daee5b0c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f470daee5b0c7b4414b542f209c441eccb42bbd9627f3ce16733b8ab59f90a75",
+      "display_text": "BRÂNZĂ",
+      "spoken_text": "brânză"
+    },
+    "learning.word.broasca": {
+      "asset": "clips/67/67bda36abd0e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "67bda36abd0e6656d22a1e98bbcfe570488660c04ee2de69d4d3884ef1a67cb6",
+      "display_text": "BROASCĂ",
+      "spoken_text": "broască"
+    },
+    "learning.word.bucurie": {
+      "asset": "clips/89/892058ca5d94.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "892058ca5d945af327b81b8c5ea288e2fd7ab11368f9376b087acdb992cd3e0a",
+      "display_text": "BUCURIE",
+      "spoken_text": "bucurie"
+    },
+    "learning.word.buna_amici": {
+      "asset": "clips/fb/fb723ae710d8.mp3",
+      "word_ends_ms": [
+        371
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "fb723ae710d85b76b983ae4759caa863f233e35e5b899dfc7b99a072f69577b5",
+      "display_text": "BUNĂ AMICI",
+      "spoken_text": "bună amici"
+    },
+    "learning.word.caine_jucaus": {
+      "asset": "clips/f0/f0b299b850cf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "f0b299b850cfc9e3d088914d64ca68423ad409f5d9fbe2ef577f4728556b10a3",
+      "display_text": "CÂINE JUCĂUȘ",
+      "spoken_text": "câine jucăuș"
+    },
+    "learning.word.cal": {
+      "asset": "clips/db/dbfff7d53bb8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "dbfff7d53bb8d3d038a0eb77125c552cd69473adf3ed414d5e3e902b035010d6",
+      "display_text": "CAL",
+      "spoken_text": "cal"
+    },
+    "learning.word.camila": {
+      "asset": "clips/58/588dc75d231f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "588dc75d231ff18ed76b1a681e48ee5abdb753823382c59c4eea758025c4d064",
+      "display_text": "CĂMILĂ",
+      "spoken_text": "cămilă"
+    },
+    "learning.word.canta_un_cantec": {
+      "asset": "clips/11/11d6c221d820.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "11d6c221d8206335780b241d6ff6570553a1279325e227f7cd7b791f9eea7805",
+      "display_text": "CÂNTĂ UN CÂNTEC",
+      "spoken_text": "cântă un cântec"
+    },
+    "learning.word.cantec": {
+      "asset": "clips/53/53bf74e105dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "53bf74e105dd4516c683035325cb1757c077cfc55edde15bbe343113b4e49f3f",
+      "display_text": "CÂNTEC",
+      "spoken_text": "cântec"
+    },
+    "learning.word.capsuna": {
+      "asset": "clips/cb/cb922804b5f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "cb922804b5f4fdae19eda0630d280ff51fe1aabe73cae2d167ea43c29470921d",
+      "display_text": "CĂPȘUNĂ",
+      "spoken_text": "căpșună"
+    },
+    "learning.word.carpati": {
+      "asset": "clips/6f/6f07e5016e25.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "6f07e5016e25b83e3c731742aa7c4d3a6d59efd34daed791faf46fca625da09e",
+      "display_text": "CARPAȚI",
+      "spoken_text": "carpați"
+    },
+    "learning.word.carte": {
+      "asset": "clips/3b/3b09467d2094.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "3b09467d2094023bdc025d5decf1913cd5947412f137f278341fa8d6d58fa50f",
+      "display_text": "CARTE",
+      "spoken_text": "carte"
+    },
+    "learning.word.cartof": {
+      "asset": "clips/6a/6a8ce9c8a79d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "6a8ce9c8a79d68b338b2748677db081fb7327b55fc93554f3e1396ae5f15ff47",
+      "display_text": "CARTOF",
+      "spoken_text": "cartof"
+    },
+    "learning.word.casa": {
+      "asset": "clips/f6/f60e3f5c3d13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1828,
+      "sha256": "f60e3f5c3d13e6865861ee00116f54b16edad627b90cbd0f085c02b2192c9783",
+      "display_text": "CASĂ",
+      "spoken_text": "casă"
+    },
+    "learning.word.casa_mica": {
+      "asset": "clips/87/87bdc16e32af.mp3",
+      "word_ends_ms": [
+        376
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "87bdc16e32affa044e5410bf870b295c039b2d4c66eb3405fc8c83a5e760573c",
+      "display_text": "CASĂ MICĂ",
+      "spoken_text": "casă mică"
+    },
+    "learning.word.castel": {
+      "asset": "clips/b4/b46b72f20480.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "b46b72f20480bd32cbad8850ba26e6857f3bd8e5a8528569d32e832163f2a771",
+      "display_text": "CASTEL",
+      "spoken_text": "castel"
+    },
+    "learning.word.castravete": {
+      "asset": "clips/0e/0e4d9657b48b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "0e4d9657b48be14dd4ba5896f979b4e41e7f5d093ad482606cd846c0f1239adf",
+      "display_text": "CASTRAVETE",
+      "spoken_text": "castravete"
+    },
+    "learning.word.catel": {
+      "asset": "clips/24/246759d11817.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "246759d118174db1af9eacc1c522a6acfa094c8ed250d7cc3de5129a23bca3ba",
+      "display_text": "CĂȚEL",
+      "spoken_text": "cățel"
+    },
+    "learning.word.cerul": {
+      "asset": "clips/01/01c4dc62425e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "01c4dc62425e847687476837da2b4a0a11eaa7eaca1b920e1d04b08fc2aaa8f7",
+      "display_text": "CERUL",
+      "spoken_text": "cerul"
+    },
+    "learning.word.citeste_o_poveste": {
+      "asset": "clips/5c/5cee8c63edd7.mp3",
+      "word_ends_ms": [
+        562,
+        712
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1358,
+      "sha256": "5cee8c63edd745525a09585906247ffcca550d172bf51049e11b4d3fe97c4bce",
+      "display_text": "CITEȘTE O POVESTE",
+      "spoken_text": "citește o poveste"
+    },
+    "learning.word.cometa": {
+      "asset": "clips/d9/d9dbf0697abf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "d9dbf0697abfd4a28012ecee6d9d245965bb3dbb13729571a970f4510ca1326a",
+      "display_text": "COMETĂ",
+      "spoken_text": "cometă"
+    },
+    "learning.word.copac": {
+      "asset": "clips/24/24e232170dfb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "24e232170dfb86a7c2081b9b7016ae7aef4d3b6d9f1f3027efeaf459b16fbc52",
+      "display_text": "COPAC",
+      "spoken_text": "copac"
+    },
+    "learning.word.copil": {
+      "asset": "clips/7a/7a6d1eb4da1f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "7a6d1eb4da1ff070825b896495d2d3487be8f5fd1ceec732dfe8686fd680f080",
+      "display_text": "COPIL",
+      "spoken_text": "copil"
+    },
+    "learning.word.copil_fericit": {
+      "asset": "clips/8c/8c8ca38789ec.mp3",
+      "word_ends_ms": [
+        470
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "8c8ca38789ec98bdb9597f6d6a8a422fe2faf4cf392b675faf5b8d8e20ef725d",
+      "display_text": "COPIL FERICIT",
+      "spoken_text": "copil fericit"
+    },
+    "learning.word.culoare": {
+      "asset": "clips/0e/0e5f0913e49e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "0e5f0913e49e13afdded7a0d9f5ed2c9d47f61717b5d6d40619902b55e10599b",
+      "display_text": "CULOARE",
+      "spoken_text": "culoare"
+    },
+    "learning.word.curcubeu": {
+      "asset": "clips/fa/fa9d8d28d385.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "fa9d8d28d38578809c4ed565a06a7bf4c574e13d293b16fc6476f63f40372500",
+      "display_text": "CURCUBEU",
+      "spoken_text": "curcubeu"
+    },
+    "learning.word.curcubeul_are_culori": {
+      "asset": "clips/dd/dd7d42356027.mp3",
+      "word_ends_ms": [
+        592,
+        812
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "dd7d42356027a17fed5e60ead946e4946d7b068c2dcf661c714f17194f5b4a65",
+      "display_text": "CURCUBEUL ARE CULORI",
+      "spoken_text": "curcubeul are culori"
+    },
+    "learning.word.dans": {
+      "asset": "clips/b5/b56132b924ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "b56132b924ce859949adc19356b29d37e9d0f0efca12b49c28049f03ec1ea6be",
+      "display_text": "DANS",
+      "spoken_text": "dans"
+    },
+    "learning.word.delfin": {
+      "asset": "clips/32/32bc986fb176.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "32bc986fb176b95654b45d09eccb33299f4ed12d01c218eafa4c1fdce6455942",
+      "display_text": "DELFIN",
+      "spoken_text": "delfin"
+    },
+    "learning.word.doi": {
+      "asset": "clips/14/1427f3d11a00.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1427f3d11a009a9741d0388309d8d13ce2303b3b120669309d7e38416124075d",
+      "display_text": "DOI",
+      "spoken_text": "doi"
+    },
+    "learning.word.dormi_bine_la_noapte": {
+      "asset": "clips/40/4006ac7c78d6.mp3",
+      "word_ends_ms": [
+        506,
+        816,
+        976
+      ],
+      "word_fade_ms": [
+        40,
+        30,
+        12
+      ],
+      "duration_ms": 1541,
+      "sha256": "4006ac7c78d6add0c0026dabb540965b82f68ac06ae07ef6d4cbcfa67dffa804",
+      "display_text": "DORMI BINE LA NOAPTE",
+      "spoken_text": "dormi bine la noapte"
+    },
+    "learning.word.drum": {
+      "asset": "clips/7f/7f56611f3a73.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7f56611f3a73ec5cbcf32c319a44ec21a46dd62767d324facbef5ea2a270df4b",
+      "display_text": "DRUM",
+      "spoken_text": "drum"
+    },
+    "learning.word.dunare": {
+      "asset": "clips/1d/1dc59fe7e742.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "1dc59fe7e742aba4c8f84c7f9148e7b11402f126ba1e078e88e786ba02470cc7",
+      "display_text": "DUNĂRE",
+      "spoken_text": "dunăre"
+    },
+    "learning.word.elefant": {
+      "asset": "clips/f5/f5636204ec6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "f5636204ec6e537ddf030061cd33c79ec41262c23b352c1eb6c696c190afc43b",
+      "display_text": "ELEFANT",
+      "spoken_text": "elefant"
+    },
+    "learning.word.familia_mea_este_iubire": {
+      "asset": "clips/00/00ad65141330.mp3",
+      "word_ends_ms": [
+        658,
+        878,
+        1178
+      ],
+      "word_fade_ms": [
+        40,
+        30,
+        30
+      ],
+      "duration_ms": 1855,
+      "sha256": "00ad65141330c34e659310997c8331233a59f8dc7efa0324028ad85a24ba3ff9",
+      "display_text": "FAMILIA MEA ESTE IUBIRE",
+      "spoken_text": "familia mea este iubire"
+    },
+    "learning.word.fata_vesela": {
+      "asset": "clips/18/1824006ab9b0.mp3",
+      "word_ends_ms": [
+        474
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1123,
+      "sha256": "1824006ab9b02d53b0da5998d2157b8ca69ae315f4539b1cbebf557abaad4bf0",
+      "display_text": "FATĂ VESELĂ",
+      "spoken_text": "fată veselă"
+    },
+    "learning.word.floare": {
+      "asset": "clips/a2/a223c2e3ce6f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a223c2e3ce6f1f64d9652b239ea9c47d1acd4ef82d48fe7dba7b007b26250412",
+      "display_text": "FLOARE",
+      "spoken_text": "floare"
+    },
+    "learning.word.floare_frumoasa": {
+      "asset": "clips/e7/e7c0c50339ca.mp3",
+      "word_ends_ms": [
+        467
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1202,
+      "sha256": "e7c0c50339cad684280f3a59af9529541d8598a319a7301323d68c23e2bac8f3",
+      "display_text": "FLOARE FRUMOASĂ",
+      "spoken_text": "floare frumoasă"
+    },
+    "learning.word.fluture": {
+      "asset": "clips/bc/bc89ebcd6c57.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bc89ebcd6c575a2617f601a876caa553c131d030f719a93423328554cff56d4e",
+      "display_text": "FLUTURE",
+      "spoken_text": "fluture"
+    },
+    "learning.word.friptura": {
+      "asset": "clips/5e/5ee5666a8256.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "5ee5666a8256e26022e151781eaaec525a37d4c77f44cb88979a1f191271305a",
+      "display_text": "FRIPTURĂ",
+      "spoken_text": "friptură"
+    },
+    "learning.word.fruct_proaspat": {
+      "asset": "clips/3e/3e9b046bfffb.mp3",
+      "word_ends_ms": [
+        426
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 1202,
+      "sha256": "3e9b046bfffbf50c572d3d3e4b791242d8ae86ff651e4cdf599e5b892b53d6fc",
+      "display_text": "FRUCT PROASPĂT",
+      "spoken_text": "fruct proaspăt"
+    },
+    "learning.word.furnica": {
+      "asset": "clips/5a/5acf6a60e491.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5acf6a60e4916d922fca967e8e13920f61c6f0519a804277b6fe754e183a6e9d",
+      "display_text": "FURNICĂ",
+      "spoken_text": "furnică"
+    },
+    "learning.word.gaina": {
+      "asset": "clips/ab/abda9af294d0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "abda9af294d0385f0e5e94ba899ba9f003b396b2d1f028b4d746eea39f5a18ea",
+      "display_text": "GĂINĂ",
+      "spoken_text": "găină"
+    },
+    "learning.word.girafa": {
+      "asset": "clips/12/1286b2539e54.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "1286b2539e5430fdf22719ad492ecf3b2b40b0a19be929eeb15a0f599ecc1b0f",
+      "display_text": "GIRAFĂ",
+      "spoken_text": "girafă"
+    },
+    "learning.word.gradina": {
+      "asset": "clips/aa/aa24ec84dbfe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "aa24ec84dbfe25b5d9135d44381b88d2c88b1600cbea6186b40612ce2fec3484",
+      "display_text": "GRĂDINĂ",
+      "spoken_text": "grădină"
+    },
+    "learning.word.iepure": {
+      "asset": "clips/e2/e26df202bbee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e26df202bbee67777dd8de2694927ca09d2d29ee0449dda76ad32173d0493237",
+      "display_text": "IEPURE",
+      "spoken_text": "iepure"
+    },
+    "learning.word.inghetata": {
+      "asset": "clips/a8/a888bdcb76ec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "a888bdcb76ec834307336aeb2929628f1a7b8110a014e0545a9b461b8b07d578",
+      "display_text": "ÎNGHEȚATĂ",
+      "spoken_text": "înghețată"
+    },
+    "learning.word.invata_in_fiecare_zi": {
+      "asset": "clips/8e/8e59554d19c6.mp3",
+      "word_ends_ms": [
+        590,
+        770,
+        1220
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        40
+      ],
+      "duration_ms": 1567,
+      "sha256": "8e59554d19c6af80dc9e8f4ef2f30d735ccb0a25d17be7379470b09446196909",
+      "display_text": "ÎNVAȚĂ ÎN FIECARE ZI",
+      "spoken_text": "învață în fiecare zi"
+    },
+    "learning.word.iubeste_planeta": {
+      "asset": "clips/47/4762e8ec3b56.mp3",
+      "word_ends_ms": [
+        637
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "4762e8ec3b56584510c837c5d1426ceca6e4e7e95a274f73236de8809247f222",
+      "display_text": "IUBEȘTE PLANETA",
+      "spoken_text": "iubește planeta"
+    },
+    "learning.word.iubire": {
+      "asset": "clips/12/127ec12b0ae8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "127ec12b0ae84139a33d3de3f63ca9b9aa67fda11e21c3781838f93a4e42ee53",
+      "display_text": "IUBIRE",
+      "spoken_text": "iubire"
+    },
+    "learning.word.joaca_impreuna": {
+      "asset": "clips/a1/a16f2da24737.mp3",
+      "word_ends_ms": [
+        494
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "a16f2da247373162f640beac6d63759899e6fb1fb6a71303a997061b50a1975a",
+      "display_text": "JOACĂ ÎMPREUNĂ",
+      "spoken_text": "joacă împreună"
+    },
+    "learning.word.joaca_te_cu_jucariile": {
+      "asset": "clips/90/9036938b50b1.mp3",
+      "word_ends_ms": [
+        559,
+        659
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1515,
+      "sha256": "9036938b50b14b2756b1160aadd83509834a4fe13cd63a218a05c8b0046a0268",
+      "display_text": "JOACĂ-TE CU JUCĂRIILE",
+      "spoken_text": "joacă-te cu jucăriile"
+    },
+    "learning.word.joc": {
+      "asset": "clips/2c/2c6c3d91aa9d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "2c6c3d91aa9d6f4e90f04095cda147dc0b7f9fcf2ca3fec3cdba02cdf2222f27",
+      "display_text": "JOC",
+      "spoken_text": "joc"
+    },
+    "learning.word.jucarie": {
+      "asset": "clips/97/97d410d2e830.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "97d410d2e830a6d0d247d646d138801f13ce9837c3fd37ba6d4987b4cb8230d5",
+      "display_text": "JUCĂRIE",
+      "spoken_text": "jucărie"
+    },
+    "learning.word.lac": {
+      "asset": "clips/fa/fa4c8036315a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "fa4c8036315a717fa752cfe26a0b13ba7bf6ebb10b72b61f63a60971a203879e",
+      "display_text": "LAC",
+      "spoken_text": "lac"
+    },
+    "learning.word.lapte": {
+      "asset": "clips/6f/6f8be31dc823.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "6f8be31dc82393d1bd5a1d7b09ed63f8969f8ce46caf58a26e577b2d8a32d269",
+      "display_text": "LAPTE",
+      "spoken_text": "lapte"
+    },
+    "learning.word.leu": {
+      "asset": "clips/b1/b18e69fedbbf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b18e69fedbbf8bf2476fb73ea7e6953d22765350b6120a92087798d624a61311",
+      "display_text": "LEU",
+      "spoken_text": "leu"
+    },
+    "learning.word.lume": {
+      "asset": "clips/94/94dd2d9d1726.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "94dd2d9d1726a9695a28d6d10bfaba548f3dc4f9914f85dcda48711b36dabc78",
+      "display_text": "LUME",
+      "spoken_text": "lume"
+    },
+    "learning.word.luna": {
+      "asset": "clips/3c/3cd1a0b8352d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "3cd1a0b8352d146bdaeea83c9286b2eb23511cae0441a2e762a1386f429b1381",
+      "display_text": "LUNĂ",
+      "spoken_text": "lună"
+    },
+    "learning.word.luna_ne_lumineaza": {
+      "asset": "clips/5b/5b02d652f450.mp3",
+      "word_ends_ms": [
+        469,
+        619
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1437,
+      "sha256": "5b02d652f4501e12a7fee59ef1d830d608b173926ceb2ee002dd79e01e42cd54",
+      "display_text": "LUNA NE LUMINEAZĂ",
+      "spoken_text": "luna ne luminează"
+    },
+    "learning.word.maimuta": {
+      "asset": "clips/79/7998b90b0703.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "7998b90b07033b165267eddfd41c21adf7c20870209767098a84a87b53cf0190",
+      "display_text": "MAIMUȚĂ",
+      "spoken_text": "maimuță"
+    },
+    "learning.word.mal": {
+      "asset": "clips/e1/e16167d784ec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e16167d784ecaa215d0129c8d9e4bae451e552a620e72a789d8457841233fe1f",
+      "display_text": "MAL",
+      "spoken_text": "mal"
+    },
+    "learning.word.mama": {
+      "asset": "clips/f8/f8b3fc4823c6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "f8b3fc4823c6099fe50d61bac5ffd78692bd3b3b20f2499d9a3abf92fd41be6e",
+      "display_text": "MAMA",
+      "spoken_text": "mama"
+    },
+    "learning.word.mananca_multe_fructe": {
+      "asset": "clips/de/de5f80b69e2a.mp3",
+      "word_ends_ms": [
+        572,
+        942
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1541,
+      "sha256": "de5f80b69e2ae8b490083ed3c3562abef8cc99a53eb7dfe061aee406c97b3c46",
+      "display_text": "MĂNÂNCĂ MULTE FRUCTE",
+      "spoken_text": "mănâncă multe fructe"
+    },
+    "learning.word.mananca_sanatos": {
+      "asset": "clips/f6/f64067300529.mp3",
+      "word_ends_ms": [
+        502
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1254,
+      "sha256": "f6406730052963ec2760550d20696d2566102091ff2d7912b5e3a6ab668ee77c",
+      "display_text": "MĂNÂNCĂ SĂNĂTOS",
+      "spoken_text": "mănâncă sănătos"
+    },
+    "learning.word.mar_rosu": {
+      "asset": "clips/c5/c5bb937b7ffd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "c5bb937b7ffd9e9ab5025b18ae79637c2d67ac2d695b4803e81bf5fdc86d04f3",
+      "display_text": "MĂR ROȘU",
+      "spoken_text": "măr roșu"
+    },
+    "learning.word.mare": {
+      "asset": "clips/65/65b5fa811983.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "65b5fa811983779e781d0907a9ae5804e51ed18001c505d54d36f69a0cc46bc0",
+      "display_text": "MARE",
+      "spoken_text": "mare"
+    },
+    "learning.word.mare_albastra": {
+      "asset": "clips/f8/f86f91fbb240.mp3",
+      "word_ends_ms": [
+        458
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "f86f91fbb24010e6978d4eed3ff865cfdb5020634f5e80964c184863157a670c",
+      "display_text": "MARE ALBASTRĂ",
+      "spoken_text": "mare albastră"
+    },
+    "learning.word.marea_noastra_este_albastra": {
+      "asset": "clips/83/83052746fb00.mp3",
+      "word_ends_ms": [
+        415,
+        845,
+        1106
+      ],
+      "word_fade_ms": [
+        30,
+        20,
+        19
+      ],
+      "duration_ms": 1907,
+      "sha256": "83052746fb001c917cdf7df71d6526aeacf7ffdd722f43b0a5a7af8cda68798f",
+      "display_text": "MAREA NOASTRĂ ESTE ALBASTRĂ",
+      "spoken_text": "marea noastră este albastră"
+    },
+    "learning.word.mergi_cu_bucurie": {
+      "asset": "clips/27/2700baa6e136.mp3",
+      "word_ends_ms": [
+        521,
+        661
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1358,
+      "sha256": "2700baa6e136b07f4f48e3f670cb16d1401b25fc903a45309889fe0c90f0a628",
+      "display_text": "MERGI CU BUCURIE",
+      "spoken_text": "mergi cu bucurie"
+    },
+    "learning.word.mic": {
+      "asset": "clips/f6/f65d63f8dee1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "f65d63f8dee1a8615a64a2cbd7331632f88ccb62c4c1a4cd01a6959c0e5ce30c",
+      "display_text": "MIC",
+      "spoken_text": "mic"
+    },
+    "learning.word.minge": {
+      "asset": "clips/75/755832f7d5a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "755832f7d5a48a86a62642b1ecf9b7b0d45587ee3d30d202f3a81710e35be3b1",
+      "display_text": "MINGE",
+      "spoken_text": "minge"
+    },
+    "learning.word.morcov": {
+      "asset": "clips/05/05c40002dd39.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "05c40002dd39c47b7d755c5c878df0bd10e19e5da2374d336f24719894bcef15",
+      "display_text": "MORCOV",
+      "spoken_text": "morcov"
+    },
+    "learning.word.muzica": {
+      "asset": "clips/74/74fd54ec8b23.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "74fd54ec8b23571742b28f8a68bde6939aee2adf659bc0bfcdae70c3936e35ad",
+      "display_text": "MUZICĂ",
+      "spoken_text": "muzică"
+    },
+    "learning.word.nas": {
+      "asset": "clips/86/86eb0633a683.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "86eb0633a6832cc595e336ba2c051b2a26a1fa26b3cb2612f931d5e197abdf09",
+      "display_text": "NAS",
+      "spoken_text": "nas"
+    },
+    "learning.word.nor": {
+      "asset": "clips/04/04e2c6a65f14.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "04e2c6a65f1418d51e7750a5801a8e9d141be19cfb1ed724d8411a32c07020e0",
+      "display_text": "NOR",
+      "spoken_text": "nor"
+    },
+    "learning.word.nou": {
+      "asset": "clips/7e/7efe6c365f50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7efe6c365f50b6a579ce0c20844afd60360c9e84276313512792c785adc49c9e",
+      "display_text": "NOU",
+      "spoken_text": "nou"
+    },
+    "learning.word.oaie": {
+      "asset": "clips/ad/ad822782fd63.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "ad822782fd63cb47a505d28346d1d5ceff8728d36400342b7d1d181fe4ce95ef",
+      "display_text": "OAIE",
+      "spoken_text": "oaie"
+    },
+    "learning.word.oameni": {
+      "asset": "clips/06/06a50f7da89f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "06a50f7da89ff2de37fcdd99b3f6140c59fc01d3aa23220fa52515a34eaf5a2d",
+      "display_text": "OAMENI",
+      "spoken_text": "oameni"
+    },
+    "learning.word.opt": {
+      "asset": "clips/7c/7c9fdd1db020.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7c9fdd1db020883a700cc96906dbb560f61f4a7b04527c78f981508ad38164d5",
+      "display_text": "OPT",
+      "spoken_text": "opt"
+    },
+    "learning.word.orez": {
+      "asset": "clips/c7/c720bbefe5f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "c720bbefe5f7e1e4bd14f10d808e7071f71251cc9b207d25814fd3553d0699a8",
+      "display_text": "OREZ",
+      "spoken_text": "orez"
+    },
+    "learning.word.ou": {
+      "asset": "clips/0d/0d9c2cfc72e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "0d9c2cfc72e347df36a8a57838063d1d426c1232b26e5fb254cf28478b97dee0",
+      "display_text": "OU",
+      "spoken_text": "ou"
+    },
+    "learning.word.padure_verde": {
+      "asset": "clips/5f/5f13b4ecd952.mp3",
+      "word_ends_ms": [
+        449
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 966,
+      "sha256": "5f13b4ecd952def64e3102179c51053996c664fa428621b1ea48508a8482ea3c",
+      "display_text": "PĂDURE VERDE",
+      "spoken_text": "pădure verde"
+    },
+    "learning.word.padurea_e_plina_de_viata": {
+      "asset": "clips/3c/3cd5f328f4a8.mp3",
+      "word_ends_ms": [
+        393,
+        533,
+        853,
+        994
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "duration_ms": 1541,
+      "sha256": "3cd5f328f4a864324f6d2ea0d038b22cfa4cfa275e809acca82796b53837a33e",
+      "display_text": "PĂDUREA E PLINĂ DE VIAȚĂ",
+      "spoken_text": "pădurea e plină de viață"
+    },
+    "learning.word.paianjen": {
+      "asset": "clips/9d/9d27423b4b59.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "9d27423b4b597246eb454b23b7061bf4460964e0820075d3b0d25a900b238287",
+      "display_text": "PAIANJEN",
+      "spoken_text": "paianjen"
+    },
+    "learning.word.paine": {
+      "asset": "clips/7d/7d18cc3d294d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7d18cc3d294d306cdfb77a153f9756b5be4f70c3d71e8abb38a5ce137d229678",
+      "display_text": "PÂINE",
+      "spoken_text": "pâine"
+    },
+    "learning.word.palarie": {
+      "asset": "clips/56/56a8d5e4f9e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "56a8d5e4f9e54d1a0cd51a1c114ae3a277b7e25fca800ed1d54428f7173539ea",
+      "display_text": "PĂLĂRIE",
+      "spoken_text": "pălărie"
+    },
+    "learning.word.pasare": {
+      "asset": "clips/ba/ba5213885ef3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "ba5213885ef3729ee8012e285556d14b5da262fb4ff8cb94e818daa42d031724",
+      "display_text": "PASĂRE",
+      "spoken_text": "pasăre"
+    },
+    "learning.word.pasare_zburatoare": {
+      "asset": "clips/5d/5de750148e31.mp3",
+      "word_ends_ms": [
+        428
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1280,
+      "sha256": "5de750148e3118bb81b1759f8816167b9ce0e19868e3a6a049edc5224d7cedb1",
+      "display_text": "PASĂRE ZBURĂTOARE",
+      "spoken_text": "pasăre zburătoare"
+    },
+    "learning.word.pasarile_zboara_sus": {
+      "asset": "clips/b3/b396135f2b22.mp3",
+      "word_ends_ms": [
+        544,
+        1014
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1463,
+      "sha256": "b396135f2b223c6d44e14d6419d25be2e79b20902023c3d5a97d0cca0479c880",
+      "display_text": "PĂSĂRILE ZBOARĂ SUS",
+      "spoken_text": "păsările zboară sus"
+    },
+    "learning.word.paste": {
+      "asset": "clips/01/0140cda4f48b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "0140cda4f48b47528e14577cfdac1af283965faac2f218cb72ca8610541d0f93",
+      "display_text": "PASTE",
+      "spoken_text": "paste"
+    },
+    "learning.word.pat": {
+      "asset": "clips/fc/fcb545bd0b5a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "fcb545bd0b5abc26d6c53ebc8a60f790b22755c965bd9c22fafe92742d01bbc0",
+      "display_text": "PAT",
+      "spoken_text": "pat"
+    },
+    "learning.word.pepene": {
+      "asset": "clips/78/78eb4bf70b60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "78eb4bf70b607cf4680697cd083f91f3c08f268ba6912ab42a521331dbbbf8c1",
+      "display_text": "PEPENE",
+      "spoken_text": "pepene"
+    },
+    "learning.word.peste": {
+      "asset": "clips/fd/fdb87615ca40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "fdb87615ca4052b307fbabc2db9d3c31e156d4f41c24f9654a845e7f8ae7f7df",
+      "display_text": "PEȘTE",
+      "spoken_text": "pește"
+    },
+    "learning.word.peste_inotator": {
+      "asset": "clips/a9/a98244cba251.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "a98244cba2517e67413cf132b9e4618a8861612ebbfad684a7ffc567ba9f360c",
+      "display_text": "PEȘTE ÎNOTĂTOR",
+      "spoken_text": "pește înotător"
+    },
+    "learning.word.pisica": {
+      "asset": "clips/83/836a2adb2eff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "836a2adb2effe1a2a8cd75e47cb4aef8b269c498a6f38c1a2dcf2b4737bbf436",
+      "display_text": "PISICĂ",
+      "spoken_text": "pisică"
+    },
+    "learning.word.pisica_somnoroasa": {
+      "asset": "clips/75/75e394cfb655.mp3",
+      "word_ends_ms": [
+        454
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "75e394cfb6555f278890b1ce3f6e63059b693ea36a2fd2d7f50c030d117d962d",
+      "display_text": "PISICĂ SOMNOROASĂ",
+      "spoken_text": "pisică somnoroasă"
+    },
+    "learning.word.plaja": {
+      "asset": "clips/be/beb92f3af33f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "beb92f3af33ffac002b9be308a73d2612d4ccabdbac7dbc2976fa197aede409b",
+      "display_text": "PLAJĂ",
+      "spoken_text": "plajă"
+    },
+    "learning.word.planeta": {
+      "asset": "clips/f9/f9b7b8aef505.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "f9b7b8aef505bf43b2aa4fe6fde384b4488db0d3e24abb494e49d325f0ff5495",
+      "display_text": "PLANETĂ",
+      "spoken_text": "planetă"
+    },
+    "learning.word.porc": {
+      "asset": "clips/d5/d543a34cd929.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "d543a34cd9298b4aec3719af82c8f1cdcd277ee8fafd0f38a7be480a0f521f34",
+      "display_text": "PORC",
+      "spoken_text": "porc"
+    },
+    "learning.word.portocala": {
+      "asset": "clips/42/42c4889a37d4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "42c4889a37d44398e362e0cf65995474a3a53bb1cbc476eafe62dbc132e0b07e",
+      "display_text": "PORTOCALĂ",
+      "spoken_text": "portocală"
+    },
+    "learning.word.poveste": {
+      "asset": "clips/44/444d2b9376ca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "444d2b9376cace1eb62be6eaebfa281fdeeb01996bfd00051db8c4662162b8a7",
+      "display_text": "POVESTE",
+      "spoken_text": "poveste"
+    },
+    "learning.word.prieten": {
+      "asset": "clips/76/76a4a51d0df0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "76a4a51d0df0e4ca0a2ebfe184b77d5fbab56e2091885ca284f36297b1099433",
+      "display_text": "PRIETEN",
+      "spoken_text": "prieten"
+    },
+    "learning.word.prietenie": {
+      "asset": "clips/af/af4bdb128110.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "af4bdb128110a129c7a562617f521a9c6df05809e11ab3829218acf835eb2f3f",
+      "display_text": "PRIETENIE",
+      "spoken_text": "prietenie"
+    },
+    "learning.word.prietenii_impart": {
+      "asset": "clips/32/325186dda5e3.mp3",
+      "word_ends_ms": [
+        605
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1332,
+      "sha256": "325186dda5e3f191996f3f0744f24b194f5fd202e218b89a442ab5923c834f16",
+      "display_text": "PRIETENII ÎMPART",
+      "spoken_text": "prietenii împart"
+    },
+    "learning.word.pui": {
+      "asset": "clips/79/7965bbe84e66.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "7965bbe84e669fc1ec4a98f6cc1cb257cad34755e61fb7597e518ac67c072760",
+      "display_text": "PUI",
+      "spoken_text": "pui"
+    },
+    "learning.word.rosie": {
+      "asset": "clips/fe/fe89d2facb83.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "fe89d2facb837850a62396056977101cfea11503a33e4dd9ac36e1a35b56bec3",
+      "display_text": "ROȘIE",
+      "spoken_text": "roșie"
+    },
+    "learning.word.sac": {
+      "asset": "clips/89/894a084f63f5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "894a084f63f5189ce4e82436b91eaa2db834f5b90ad427834581c894bc5c69c2",
+      "display_text": "SAC",
+      "spoken_text": "sac"
+    },
+    "learning.word.salata": {
+      "asset": "clips/e8/e86de5b7bf67.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "e86de5b7bf67918e4b037e50cf0cb2f64734d7b0298aeb02aa73f46aa5248aeb",
+      "display_text": "SALATĂ",
+      "spoken_text": "salată"
+    },
+    "learning.word.sarpe": {
+      "asset": "clips/41/412e7f9f9b16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "412e7f9f9b16d1114a26ac06110fa1adef1adb0b5a4213641db468fa7df53f67",
+      "display_text": "ȘARPE",
+      "spoken_text": "șarpe"
+    },
+    "learning.word.sat": {
+      "asset": "clips/2e/2e7e6b9e9701.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "2e7e6b9e9701344ed2662f63fa4256f573a99731560df00922ee0cf76a2726c6",
+      "display_text": "SAT",
+      "spoken_text": "sat"
+    },
+    "learning.word.scoala": {
+      "asset": "clips/49/494cf5b932a5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "494cf5b932a53eefbfb2371f3091016c264279a842203b41f68e83cfb27f77ab",
+      "display_text": "ȘCOALĂ",
+      "spoken_text": "școală"
+    },
+    "learning.word.soare": {
+      "asset": "clips/7f/7fe6fd925bf4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "7fe6fd925bf40ad2bbb3cd1e00f3cffc01b40ff4f3de5b80f7c4d5faaeeae5bb",
+      "display_text": "SOARE",
+      "spoken_text": "soare"
+    },
+    "learning.word.soare_galben": {
+      "asset": "clips/ea/eac17b1169b7.mp3",
+      "word_ends_ms": [
+        490
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "eac17b1169b75624832eb3c6d0003a4decb09ee69db18ef3fe9c21ad391889df",
+      "display_text": "SOARE GALBEN",
+      "spoken_text": "soare galben"
+    },
+    "learning.word.soare_stralucitor": {
+      "asset": "clips/62/62105909e927.mp3",
+      "word_ends_ms": [
+        422
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1410,
+      "sha256": "62105909e927e687d56548e65e0645a074aebbe5561f41fcb3256551671edb92",
+      "display_text": "SOARE STRĂLUCITOR",
+      "spoken_text": "soare strălucitor"
+    },
+    "learning.word.soarele_straluceste": {
+      "asset": "clips/98/987c51845db5.mp3",
+      "word_ends_ms": [
+        647
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 1698,
+      "sha256": "987c51845db57216b0eb0306d451ed73fbbe4e905a8a5bf038bdfa84f01ba3a1",
+      "display_text": "SOARELE STRĂLUCEȘTE",
+      "spoken_text": "soarele strălucește"
+    },
+    "learning.word.spune_multumesc": {
+      "asset": "clips/9a/9a0d65125f77.mp3",
+      "word_ends_ms": [
+        613
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1750,
+      "sha256": "9a0d65125f77743da92120081d0cb7881647b75ff613af46af96bc201c661f5a",
+      "display_text": "SPUNE MULȚUMESC",
+      "spoken_text": "spune mulțumesc"
+    },
+    "learning.word.stelele_stralucesc": {
+      "asset": "clips/99/995e3168625a.mp3",
+      "word_ends_ms": [
+        607
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1515,
+      "sha256": "995e3168625ada2573a0ac67f36730f063e2e9fccd4613171a2f2d3e857b7815",
+      "display_text": "STELELE STRĂLUCESC",
+      "spoken_text": "stelele strălucesc"
+    },
+    "learning.word.tata": {
+      "asset": "clips/9d/9de98dbb0174.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "9de98dbb01747bcf024a7ed55df2be2d6035290dae9a4885a62809c910f18934",
+      "display_text": "TATA",
+      "spoken_text": "tata"
+    },
+    "learning.word.testoasa": {
+      "asset": "clips/07/075c7a5b145a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "075c7a5b145abdffd7a33c3f867eb3c05ff838e575a8162930861460d97b56dd",
+      "display_text": "ȚESTOASĂ",
+      "spoken_text": "țestoasă"
+    },
+    "learning.word.tigru": {
+      "asset": "clips/5f/5f998ab71156.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "5f998ab7115681e8e74581f183df5dde46f940b421100be82e9f921a55faf1c9",
+      "display_text": "TIGRU",
+      "spoken_text": "tigru"
+    },
+    "learning.word.univers": {
+      "asset": "clips/66/66d5b0ace30e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "66d5b0ace30ec6cc17f7d478359641e018c22ee27a64f32d7a03b6f7073fbabe",
+      "display_text": "UNIVERS",
+      "spoken_text": "univers"
+    },
+    "learning.word.unu": {
+      "asset": "clips/b6/b6a40ba1875a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b6a40ba1875a86e04ac6196ac3576d00577a46e624aed69aebeefc46467e1e82",
+      "display_text": "UNU",
+      "spoken_text": "unu"
+    },
+    "learning.word.urs": {
+      "asset": "clips/1c/1c794cfee72b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "1c794cfee72b70e99e52e03f81e208f1c63ab649abd31723f8e388834faa0d8a",
+      "display_text": "URS",
+      "spoken_text": "urs"
+    },
+    "learning.word.usa": {
+      "asset": "clips/2a/2afa83334665.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "2afa83334665bdcd8178977b6f7d4589ba68d87a8b0cb443cc9c933be23273f2",
+      "display_text": "UȘĂ",
+      "spoken_text": "ușă"
+    },
+    "learning.word.vis": {
+      "asset": "clips/c5/c54f702b2af6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c54f702b2af662bace801e9aa0e59a88306ba132f9fe16e349219f669b86727c",
+      "display_text": "VIS",
+      "spoken_text": "vis"
+    },
+    "learning.word.voiosie": {
+      "asset": "clips/e7/e76eebfd1416.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "e76eebfd1416794e14054b9c34a08bac70cb60bd2caa930acff61aca72c9daea",
+      "display_text": "VOIOȘIE",
+      "spoken_text": "voioșie"
+    },
+    "learning.word.zambeste_si_fii_fericit": {
+      "asset": "clips/67/679a4c84ec75.mp3",
+      "word_ends_ms": [
+        795,
+        955,
+        1145
+      ],
+      "word_fade_ms": [
+        12,
+        40,
+        39
+      ],
+      "duration_ms": 1881,
+      "sha256": "679a4c84ec7522b87d2e2b291e1269895d0c827ce7f0e98eab3f4c9860c03e7a",
+      "display_text": "ZÂMBEȘTE ȘI FII FERICIT",
+      "spoken_text": "zâmbește și fii fericit"
+    },
+    "learning.word.zambet": {
+      "asset": "clips/5c/5c6f05846c97.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5c6f05846c9777cae7b9bbf977ddc99c9e549e6a2c4a518759b0d3842822f23d",
+      "display_text": "ZÂMBET",
+      "spoken_text": "zâmbet"
+    },
+    "learning.word.zebra": {
+      "asset": "clips/21/21fb7061e720.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "21fb7061e72019837ce17596caea7b4e59759d2f5eac82c9a728b82f03a0bbd1",
+      "display_text": "ZEBRĂ",
+      "spoken_text": "zebră"
+    },
+    "learning.word.zid": {
+      "asset": "clips/e7/e7dab7f0c1fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "e7dab7f0c1fd30d4e507840184eccd9b93a02b0455f1960fff12653c5eb9eabd",
+      "display_text": "ZID",
+      "spoken_text": "zid"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/b0/b00bef014e4f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "b00bef014e4f1cf9fc8132dd3bdece1104bd2699f7319d7dc57a674aaf297845",
+      "display_text": "Labirintul de Învățare",
+      "spoken_text": "Labirintul de Învățare"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/4e/4e2f2334d84d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "4e2f2334d84d875286fad9c9e2dfc055debc8c73c2bb64b5ab2e805c1d65706f",
+      "display_text": "Automat",
+      "spoken_text": "Automat"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/6c/6c11b772ec7f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "6c11b772ec7f6224feb012816a90012e17e32770dff4a5b4e2e55c6c168756b3",
+      "display_text": "Cehă",
+      "spoken_text": "Cehă"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/fc/fc02436bf654.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "fc02436bf654c85d6434135f822f9d7f5fcf313fc47ce12ab076208869a51b11",
+      "display_text": "Daneză",
+      "spoken_text": "Daneză"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/5f/5fe8c3287057.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5fe8c32870571cc576fc8646fbf1801b48894e9e89b4fe201165b40fb3c8045d",
+      "display_text": "Holandeză",
+      "spoken_text": "Holandeză"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/2a/2a1ef8da1715.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "2a1ef8da171511319872462f297cc4d261cdf99eee6963efd1a49552853f269b",
+      "display_text": "Engleză",
+      "spoken_text": "Engleză"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/24/24e0d80b0199.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "24e0d80b019933fcc26e103c0c92b0c2f85f1eefb34d0d5bbad42b0bb5c3c88e",
+      "display_text": "Finlandeză",
+      "spoken_text": "Finlandeză"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/91/91ed75312da5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "91ed75312da5ea14da7dfafb2b4b6ad54c977a9b15202799ffd38e0b9fdc435d",
+      "display_text": "Franceză",
+      "spoken_text": "Franceză"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/e0/e0dad9144e58.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e0dad9144e58b3b025bf35f8951b248de5a55f9a216157b80d8257a293bbbff5",
+      "display_text": "Germană",
+      "spoken_text": "Germană"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/de/de4803b8a4e2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "de4803b8a4e29d4f722fe32bc912c7d85871db7b0c0ac8d71c5c436bf4e44735",
+      "display_text": "Greacă",
+      "spoken_text": "Greacă"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/07/07cd533cea11.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "07cd533cea1172c7748f3b6bc5ead07f0d4114db602e5059ac0ff3bbe2206303",
+      "display_text": "Ebraică",
+      "spoken_text": "Ebraică"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/ea/ea42fcc2b4eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "ea42fcc2b4eb004f1e90bba3ed78c0534c1089c31d2c9444a0a20b51542b6798",
+      "display_text": "Maghiară",
+      "spoken_text": "Maghiară"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/bb/bb783d693da2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "bb783d693da2e1324ac045b404e153125c2712cb75d8007674a87c8765ec1303",
+      "display_text": "în cehă",
+      "spoken_text": "în cehă"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/9f/9f4bf7471033.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "9f4bf7471033d782705f13302bf09f64540a56e3c2070ab37cffc3654b5c900c",
+      "display_text": "în daneză",
+      "spoken_text": "în daneză"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/77/7728ed118a6c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "7728ed118a6cf07300a26b428edf69dd2785379fbb6854643f478bd965fe8c95",
+      "display_text": "în olandeză",
+      "spoken_text": "în olandeză"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/a6/a64cfad0eda1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a64cfad0eda14d2e950cad0c00315d947fd5ca58801a331300e0eb4115854c16",
+      "display_text": "în engleză",
+      "spoken_text": "în engleză"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/2b/2b96a5b494c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "2b96a5b494c0e103059f7bffd646a625f8448ee272797dabcbd663ce3122485f",
+      "display_text": "în finlandeză",
+      "spoken_text": "în finlandeză"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/75/75d6a3fcbd22.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "75d6a3fcbd22c2a02387c7c5b40e19a545b8bd71ddf808fd80f700b02c770922",
+      "display_text": "în franceză",
+      "spoken_text": "în franceză"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/7d/7d3d13b4fd91.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "7d3d13b4fd91e71d2d6b06a4de798531a328ee419365d05d76e503829efc115a",
+      "display_text": "în germană",
+      "spoken_text": "în germană"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/4d/4d0b723ff166.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4d0b723ff16665e6a7da44e544886f09d8a9b9026e4c1f991e1037ee07c8e87e",
+      "display_text": "în greacă",
+      "spoken_text": "în greacă"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/55/558ec67b932f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "558ec67b932ffa48a0788a744814274481f266810193536765d5fd0178fec6de",
+      "display_text": "în ebraică",
+      "spoken_text": "în ebraică"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/be/bec3730a7dee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "bec3730a7deeecfde035d2f98548f1720543ca932979e3b7cbba64f2090d1501",
+      "display_text": "în maghiară",
+      "spoken_text": "în maghiară"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/79/793874906109.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "7938749061092eeb808eb2a714cf6d3aebcdf4558a314a7287d6c33709bfdaf3",
+      "display_text": "în italiană",
+      "spoken_text": "în italiană"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/e8/e890f6b3ac20.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "e890f6b3ac2041fea7b126abb706fc3c1a9ab87320e783f03f1b057d6f055b86",
+      "display_text": "în norvegiană",
+      "spoken_text": "în norvegiană"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/d1/d14bccd3fb60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "d14bccd3fb6026bd1f80153a5633c9ab769fbb942067d362222c58fbb6f23ef0",
+      "display_text": "în poloneză",
+      "spoken_text": "în poloneză"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/dc/dc8c2f3d2c47.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "dc8c2f3d2c47b0cad13341623a94af125d143ca65bde25a961e5da9c65064da4",
+      "display_text": "în portugheză",
+      "spoken_text": "în portugheză"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/cf/cf165be9932a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "cf165be9932a6ed00bfdc2b07ba01a06fe8f94753d0d53268a35b6de5aa19ee0",
+      "display_text": "în română",
+      "spoken_text": "în română"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/f2/f2943f3f016c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "f2943f3f016c425489485c1399f11e0fd7633554da3f1c6d9ba6d60abad7223d",
+      "display_text": "în slovacă",
+      "spoken_text": "în slovacă"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/6e/6e39bb06b039.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "6e39bb06b039dd41c07dbb97dd47d04f578725aced4b13d6b63162c6c2189919",
+      "display_text": "în spaniolă",
+      "spoken_text": "în spaniolă"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/e3/e3dd52e6b3a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "e3dd52e6b3a6d3a5715a461b4e66f4b1dfd03d92ad737f85d3879c34bd8e0c02",
+      "display_text": "în suedeză",
+      "spoken_text": "în suedeză"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/bf/bf5e5c5a29a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bf5e5c5a29a83b76b79fc027f8ecc1e59d13c527820db48936a91668432696ba",
+      "display_text": "în turcă",
+      "spoken_text": "în turcă"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/5a/5ac66b9395d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "5ac66b9395d65922e0636d7baf1afaff3c943593ec5fd7dfee47bd401fc805e2",
+      "display_text": "în ucraineană",
+      "spoken_text": "în ucraineană"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/06/06ca33d896e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "06ca33d896e0c898eb27145d6ac213999af584e1c17687f4b1d49ff5bdd9f6d6",
+      "display_text": "în vietnameză",
+      "spoken_text": "în vietnameză"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/6a/6a93ec37fb28.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "6a93ec37fb28f01745cbef183ba0311c2b5a8f5d700c536aa28218491669b2f7",
+      "display_text": "Italiană",
+      "spoken_text": "Italiană"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/05/0553d0ade9d8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "0553d0ade9d8590b9abf5aa03a4dbb8814a18ae4a28f26fd9f829d2045b8d31a",
+      "display_text": "Norvegiană",
+      "spoken_text": "Norvegiană"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/88/8853ac822468.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "8853ac822468f98b253de70820d5069513ee369464d1e9310bcf6836a92d480b",
+      "display_text": "Poloneză",
+      "spoken_text": "Poloneză"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/bf/bf277b2f484d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "bf277b2f484dd761b4bf5f4be844ff953c737355b2b1ae7cb4154a7a4fe8834d",
+      "display_text": "Portugheză",
+      "spoken_text": "Portugheză"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/8e/8e56960cbfd9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "8e56960cbfd9251a2998b02a67a9534f5ca5d19240c68135c40a13a267a831a2",
+      "display_text": "Română",
+      "spoken_text": "Română"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/49/49a5febd51c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "49a5febd51c0a5e317f0818ef318a77c1778888d9c73ff62f5cc7bab275c2d14",
+      "display_text": "Slovacă",
+      "spoken_text": "Slovacă"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/06/06562de3b3c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "06562de3b3c756068ade284b3304f4cace079a04a048d1d8503384a39abc09dd",
+      "display_text": "Spaniolă",
+      "spoken_text": "Spaniolă"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/df/df10d890c807.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "df10d890c8074db2c2a46d9b10137ed9b4bf2dd2cafd936e4e0e7c5783755846",
+      "display_text": "Suedeză",
+      "spoken_text": "Suedeză"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/ac/ac0407fa62e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "ac0407fa62e3536aaa777c966c0c3de5ba7bd1fb9540831e56c790c101e2fd80",
+      "display_text": "Turcă",
+      "spoken_text": "Turcă"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/20/2023f407296e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "2023f407296ece8acded4725a527897f2b8a917b7ae38cfe50e83ce30f8b7992",
+      "display_text": "Ucraineană",
+      "spoken_text": "Ucraineană"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/26/26061fb4a087.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "26061fb4a08771c22196b488bd345d449683c1e00b2345509cc6e81b6c15d5b6",
+      "display_text": "Vietnameză",
+      "spoken_text": "Vietnameză"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/8e/8eecefec83f7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "8eecefec83f7d3b499babb7ffe524cd1d6afeb9ff889d42769c5a73abd07abfe",
+      "display_text": "Ai numărat până la",
+      "spoken_text": "Ai numărat până la"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/c3/c35ff94d8033.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "c35ff94d8033c810784ca0d8890935f3dada36c4f9a12faa934e1cbe78c9e2ba",
+      "display_text": "Ai numărat",
+      "spoken_text": "Ai numărat"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/50/5045d454b9a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "5045d454b9a4adab2a634554b09143a9756b23f92264cb8177aaaf4980c08af7",
+      "display_text": "până la",
+      "spoken_text": "până la"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/bd/bd67691af713.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "bd67691af7136865b7601b2f76676236d64405e4165b91cb74fca32df19986bb",
+      "display_text": "Ai găsit litera",
+      "spoken_text": "Ai găsit litera"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/bc/bc35520a02df.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bc35520a02df8d3eb2ce2f94f08744d2ab131c4b914d4e373383c39b754ccfc0",
+      "display_text": "Ai găsit",
+      "spoken_text": "Ai găsit"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/5b/5b858aa85cbc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "5b858aa85cbcdad997585e0b171d87d08bf6a4800992c4e77e3a69902856d7a8",
+      "display_text": "litera",
+      "spoken_text": "litera"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/b3/b369d9ba5603.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1698,
+      "sha256": "b369d9ba56038f23c38e8e560a616f3c64b56ab22fdb39ded712a9fbeee1640a",
+      "display_text": "Ai găsit literele de la",
+      "spoken_text": "Ai găsit literele de la"
+    },
+    "ui.recap_tts_found_letters.1": {
+      "asset": "clips/88/88dcfcc4feb7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "88dcfcc4feb7e87f90da7f2f7fd10914b33e34d81a3f9234caa416578ff80796",
+      "display_text": "la",
+      "spoken_text": "la"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/f7/f76cca5364d8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "f76cca5364d8673f7a92ef0ba7e49070daeb8d108c87f769e01b6bc96e8cd56c",
+      "display_text": "literele de la",
+      "spoken_text": "literele de la"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/0e/0e08104323e7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "0e08104323e73d67c0d3b838aa9e371ad9856deef5a8f14ad392f66a1ed0f55a",
+      "display_text": "în",
+      "spoken_text": "în"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/ec/ec6588dc723f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "ec6588dc723f0d4717334e394bcfd0f4fc15fa45d3e0d5f95dff9631817ec711",
+      "display_text": "Ai literat expresia",
+      "spoken_text": "Ai literat expresia"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/b0/b07737262a24.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "b07737262a24d1a89eee2d42d87ab81b11378b9a3b1e69b328bafca851364428",
+      "display_text": "expresia",
+      "spoken_text": "expresia"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/bb/bb03a2db62b7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "bb03a2db62b71f4e5abb1d54d4c9f8dac6be118ebeaefd5f2a54a6282515bbcd",
+      "display_text": "Ai literat cuvântul",
+      "spoken_text": "Ai literat cuvântul"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/0d/0d46fb042652.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "0d46fb042652317f5bf86cda9c4d27d58502edc9cd346f050d82f510d9b6330d",
+      "display_text": "Ai literat",
+      "spoken_text": "Ai literat"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/32/32821aa5108c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "32821aa5108ccee16c8e60c5fc87328b8c502df80490b550e0d2e57accba6522",
+      "display_text": "cuvântul",
+      "spoken_text": "cuvântul"
+    }
+  }
+}

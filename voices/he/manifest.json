@@ -1,0 +1,2579 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "he",
+  "locale": "he-IL",
+  "voice_profile": "he-IL@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 27,
+    "word": 147,
+    "ui": 38
+  },
+  "items": {
+    "learning.char.c00": {
+      "asset": "clips/ca/cae5b7156f37.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "cae5b7156f37ffd1c9447b2bfdfd4fda542f5c48e71915bbdcd09ca63f1b0197",
+      "display_text": "א",
+      "spoken_text": "אלף"
+    },
+    "learning.char.c01": {
+      "asset": "clips/b6/b685a45bc097.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b685a45bc0973712f238054bb3eb3d94a68fd0c71ad7d5f417d9f276e95bba90",
+      "display_text": "ב",
+      "spoken_text": "בית"
+    },
+    "learning.char.c02": {
+      "asset": "clips/c0/c0e7373485c9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "c0e7373485c9ba0155b147b5e265fc5185ec5b6e30455e4c35770c385a7e3f88",
+      "display_text": "ג",
+      "spoken_text": "גימל"
+    },
+    "learning.char.c03": {
+      "asset": "clips/74/74bea8526c71.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "74bea8526c711001e35c47f1b4e85c8074c49746efd4abfdc8f7e70aee8c931e",
+      "display_text": "ד",
+      "spoken_text": "דלת"
+    },
+    "learning.char.c04": {
+      "asset": "clips/08/0879ba052294.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 366,
+      "sha256": "0879ba0522940c890f877a5682273525c07ab862cd7254a5c9bb60a41fd2d193",
+      "display_text": "ה",
+      "spoken_text": "הא"
+    },
+    "learning.char.c05": {
+      "asset": "clips/86/8639dca24b51.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "8639dca24b51dbbe6ae05c95f0b4d6ec59ef7dc93b04a9f2e6a0d1c741c47879",
+      "display_text": "ו",
+      "spoken_text": "וו"
+    },
+    "learning.char.c06": {
+      "asset": "clips/c0/c0f275ab6214.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c0f275ab6214f264fdd07098196f20e25aeaa3b53df9b2631480ae7e13af2520",
+      "display_text": "ז",
+      "spoken_text": "זין"
+    },
+    "learning.char.c07": {
+      "asset": "clips/09/094fc363cdb9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "094fc363cdb951d6163619e11de1e8f615bf8d958d9f7c06c2b6dd0ad2056df8",
+      "display_text": "ח",
+      "spoken_text": "חית"
+    },
+    "learning.char.c08": {
+      "asset": "clips/4e/4ec803f317a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "4ec803f317a2531f1f7d4a9c6b23719e601474a8744aff77bdc18bfc663c2368",
+      "display_text": "ט",
+      "spoken_text": "טית"
+    },
+    "learning.char.c09": {
+      "asset": "clips/14/14bd5f00c7c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "14bd5f00c7c1b1e7e176bec7198d7ad053558721241c40c8f5b7b342be160dd6",
+      "display_text": "י",
+      "spoken_text": "יוד"
+    },
+    "learning.char.c10": {
+      "asset": "clips/25/25b7e55aa973.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "25b7e55aa973e00f90466eab1e4d60a63cba33d741f92fec3f5d4945659b0a27",
+      "display_text": "כ",
+      "spoken_text": "כף"
+    },
+    "learning.char.c11": {
+      "asset": "clips/f8/f854289286bc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "f854289286bc651d312e32e0ee2ce4f6afccc68e68bd0a04e5fa0022c9e2c5e3",
+      "display_text": "ל",
+      "spoken_text": "למד"
+    },
+    "learning.char.c12": {
+      "asset": "clips/9c/9ce675ee66ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "9ce675ee66ee3b79baf6d7ee1f42ad80501b25e6fabed750365f9551493fb337",
+      "display_text": "מ",
+      "spoken_text": "מם"
+    },
+    "learning.char.c13": {
+      "asset": "clips/54/54816e446af8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "54816e446af8eecab9585beffc7f0348d4ce79310d256668c2a411be56357bbe",
+      "display_text": "נ",
+      "spoken_text": "נון"
+    },
+    "learning.char.c14": {
+      "asset": "clips/c4/c45f514c8d9b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "c45f514c8d9b9482bd7aab1dd75cfc539655d10606615bb47d9dcd33c2758687",
+      "display_text": "ס",
+      "spoken_text": "סמך"
+    },
+    "learning.char.c15": {
+      "asset": "clips/09/091c87f480d7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "091c87f480d7d10aaf13905df73334a8259b6b070b284a8aecb2789922c0d155",
+      "display_text": "ע",
+      "spoken_text": "עין"
+    },
+    "learning.char.c16": {
+      "asset": "clips/b5/b56b00ff190d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 392,
+      "sha256": "b56b00ff190dbf3ba1d4297c520a4d96d2b11035898ffd72afc3b66db6f10788",
+      "display_text": "פ",
+      "spoken_text": "פא"
+    },
+    "learning.char.c17": {
+      "asset": "clips/05/054803833dd4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "054803833dd4ef771982338a1148d0389a2cb4f2ffb997c707f5562990ca66d9",
+      "display_text": "צ",
+      "spoken_text": "צדי"
+    },
+    "learning.char.c18": {
+      "asset": "clips/89/89a8e4416d83.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "89a8e4416d83b9ea6a1ffd3ec90fed655f0f605b514c9f193cc2e48fa9ce1453",
+      "display_text": "ק",
+      "spoken_text": "קוף"
+    },
+    "learning.char.c19": {
+      "asset": "clips/9a/9ac5ea8705b6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "9ac5ea8705b6837d58d4a4b9d88713a67849bb8ae04f6032e1bb86cfa838a958",
+      "display_text": "ר",
+      "spoken_text": "ריש"
+    },
+    "learning.char.c20": {
+      "asset": "clips/04/04f0a6fa6404.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "04f0a6fa6404b8f24563f772b988a9a1d6a5abc97d37e3a684977169f494ab8d",
+      "display_text": "ש",
+      "spoken_text": "שין"
+    },
+    "learning.char.c21": {
+      "asset": "clips/ce/cee226352917.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "cee2263529178e1f5c52b813dc330d53edd1acb10a19c3cb71c319f2834dc9c1",
+      "display_text": "ת",
+      "spoken_text": "תו"
+    },
+    "learning.char.kaf_final": {
+      "asset": "clips/dc/dc4b82ef4eae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "dc4b82ef4eaecdc15ec77e4728137c2d33ed15264a3f10b775271c8d81e1bd71",
+      "display_text": "ך",
+      "spoken_text": "כף סופית"
+    },
+    "learning.char.mem_final": {
+      "asset": "clips/39/393cf499d0be.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "393cf499d0bea2c09cc7ad413f2a8272dc3e9dc1b3d08bad8221657ee0f4ad10",
+      "display_text": "ם",
+      "spoken_text": "מם סופית"
+    },
+    "learning.char.nun_final": {
+      "asset": "clips/ba/bac0574e0216.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "bac0574e0216372df9e100b48ec102505189692148173f9497f426a37eb1d870",
+      "display_text": "ן",
+      "spoken_text": "נון סופית"
+    },
+    "learning.char.pe_final": {
+      "asset": "clips/34/34cb99308b48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "34cb99308b489425d3b9c815c87d017c0a70409039ccc5051c5bc8bf8a155ba1",
+      "display_text": "ף",
+      "spoken_text": "פא סופית"
+    },
+    "learning.char.tsadi_final": {
+      "asset": "clips/7d/7d03b04b3150.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "7d03b04b3150af98058621a7061ebae0c6b00e2bd5331fb11e89bdbdb2230d38",
+      "display_text": "ץ",
+      "spoken_text": "צדי סופית"
+    },
+    "learning.number.001": {
+      "asset": "clips/3b/3b3ccdd8f230.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "3b3ccdd8f230a62e14aa210456961d8dfee1f66c3cc388cffea91dea47e23e42",
+      "display_text": "1",
+      "spoken_text": "אחת"
+    },
+    "learning.number.002": {
+      "asset": "clips/fb/fbb731a5db10.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fbb731a5db10e6f6383fe89acf51539f0f4412ef83560f9d01c2e15c0f6d19b7",
+      "display_text": "2",
+      "spoken_text": "שתיים"
+    },
+    "learning.number.003": {
+      "asset": "clips/20/20d7dedfb719.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "20d7dedfb7198426b0a4f6a1ea44c04503d8df43207656d758d902bcdfd510c1",
+      "display_text": "3",
+      "spoken_text": "שלוש"
+    },
+    "learning.number.004": {
+      "asset": "clips/30/30b7ff0505d3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "30b7ff0505d3039e5b55fd0acfc27aad3b047786da4b1ae82e923a3e6578d4ca",
+      "display_text": "4",
+      "spoken_text": "ארבע"
+    },
+    "learning.number.005": {
+      "asset": "clips/00/00b5d12fb6aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "00b5d12fb6aa11bf70193849f6b43adb925acb12104b028bb07f1f801e6db8ed",
+      "display_text": "5",
+      "spoken_text": "חמש"
+    },
+    "learning.number.006": {
+      "asset": "clips/3b/3b1c506dc216.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "3b1c506dc2164b511bb0e4b08cf800cf5fb56286b9159657a1b0b400aa801087",
+      "display_text": "6",
+      "spoken_text": "שש"
+    },
+    "learning.number.007": {
+      "asset": "clips/eb/eb85047d58f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "eb85047d58f0e56b801bce62b741bb8db3028afc7eae957a798f44706ef6484a",
+      "display_text": "7",
+      "spoken_text": "שבע"
+    },
+    "learning.number.008": {
+      "asset": "clips/69/698c089141e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "698c089141e156f967aa9b81d7092e3876458e18ab20a7f04fd96caaa8a244fb",
+      "display_text": "8",
+      "spoken_text": "שמונה"
+    },
+    "learning.number.009": {
+      "asset": "clips/ba/bab1918e4ede.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "bab1918e4ede90e68574b63cc8ab905aac99a72f64ea1ad61eed264aada0b5df",
+      "display_text": "9",
+      "spoken_text": "תשע"
+    },
+    "learning.number.010": {
+      "asset": "clips/2e/2ea567fa4c8e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "2ea567fa4c8ea46858e9428598c4973ad8c1e46d180840df1f2c86ea5c1730b0",
+      "display_text": "10",
+      "spoken_text": "עשר"
+    },
+    "learning.number.011": {
+      "asset": "clips/eb/ebade9b9e4b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "ebade9b9e4b91032d187b01450a048a15e253bf47aa54564967f26e028c183e0",
+      "display_text": "11",
+      "spoken_text": "אחת עשרה"
+    },
+    "learning.number.012": {
+      "asset": "clips/cd/cdd7c2c60636.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "cdd7c2c6063698f0dcc0274e5bdaeb844dfc9be4011c43bf53272dfa2b5a38cc",
+      "display_text": "12",
+      "spoken_text": "שתים עשרה"
+    },
+    "learning.number.013": {
+      "asset": "clips/27/27e82fd9bbba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "27e82fd9bbbafacbb46835cbe0f7563d22628cfc538c5244c0b836f8ffaa377b",
+      "display_text": "13",
+      "spoken_text": "שלוש עשרה"
+    },
+    "learning.number.014": {
+      "asset": "clips/51/5171e91b4c82.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "5171e91b4c8272d1c8a974970310d28d7dcc0ca7231da10138acd7997d5e2e6e",
+      "display_text": "14",
+      "spoken_text": "ארבע עשרה"
+    },
+    "learning.number.015": {
+      "asset": "clips/58/58a5c83152b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "58a5c83152b97acb4b613dbd022fa0c3973fd774efde227f007b6c4d74407ab1",
+      "display_text": "15",
+      "spoken_text": "חמש עשרה"
+    },
+    "learning.number.016": {
+      "asset": "clips/d7/d7b5aad362d0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "d7b5aad362d05fe8dc1262e52e96a5c2ac56ec1b4c2f5349ab09803fbe165eb9",
+      "display_text": "16",
+      "spoken_text": "שש עשרה"
+    },
+    "learning.number.017": {
+      "asset": "clips/5d/5dbb7b4a762e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "5dbb7b4a762ef24f098183c5cc8cbfef7008b022cd5b631806d530c096668fb4",
+      "display_text": "17",
+      "spoken_text": "שבע עשרה"
+    },
+    "learning.number.018": {
+      "asset": "clips/ae/aec1aab6f163.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "aec1aab6f1632a9d037b424c4b3590aec3d9751a716764d795e0966f035963d7",
+      "display_text": "18",
+      "spoken_text": "שמונה עשרה"
+    },
+    "learning.number.019": {
+      "asset": "clips/c7/c7503e6bba48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "c7503e6bba4875ff0546919806d21d0c6e90b3986bb9b25016c23dab3ecc66df",
+      "display_text": "19",
+      "spoken_text": "תשע עשרה"
+    },
+    "learning.number.020": {
+      "asset": "clips/87/8745bb560ce0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "8745bb560ce0df8d3b179a7c16cb070cb63be8f0c38bfe1e7162ec18b0c12a2c",
+      "display_text": "20",
+      "spoken_text": "עשרים"
+    },
+    "learning.number.021": {
+      "asset": "clips/4d/4d457e256a84.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "4d457e256a84a13181985d158a391268a8ab4f7c278b2cd3ab3c8aa224e5b6d9",
+      "display_text": "21",
+      "spoken_text": "עשרים ואחת"
+    },
+    "learning.number.022": {
+      "asset": "clips/48/48f59823f261.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "48f59823f261b7e055844a6a7e8df22955a588a95fd691dc35c71f54cc4ad431",
+      "display_text": "22",
+      "spoken_text": "עשרים ושתיים"
+    },
+    "learning.number.023": {
+      "asset": "clips/6d/6d1d934c8780.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "6d1d934c8780554f93dfbb2c40b95fdc0ef8c9d172aa053bc5a19f4647586a69",
+      "display_text": "23",
+      "spoken_text": "עשרים ושלוש"
+    },
+    "learning.number.024": {
+      "asset": "clips/22/2234d494c7ea.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "2234d494c7ea8358f81502b24badb57d98b6faeca059da257276d84b6da5d4a6",
+      "display_text": "24",
+      "spoken_text": "עשרים וארבע"
+    },
+    "learning.number.025": {
+      "asset": "clips/06/06d3e4b95feb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "06d3e4b95feb5cbad33fb3f529d219ff853eaf41bde79842fff6caccc02fb5c5",
+      "display_text": "25",
+      "spoken_text": "עשרים וחמש"
+    },
+    "learning.number.026": {
+      "asset": "clips/e4/e4b9e9baf781.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "e4b9e9baf7812f33b1a3c3cd79c3f16562edcc5e6fb47e74638618083f03ab17",
+      "display_text": "26",
+      "spoken_text": "עשרים ושש"
+    },
+    "learning.number.027": {
+      "asset": "clips/ac/ac0bb3a1ec41.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "ac0bb3a1ec415c659467da55c0fad544d7ca0ddc71024b833a8a7ca630dc4e41",
+      "display_text": "27",
+      "spoken_text": "עשרים ושבע"
+    },
+    "learning.number.028": {
+      "asset": "clips/2e/2ee1cc2342ad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "2ee1cc2342ad339340d6b4fb4aec386f8165b05d176f2bb19ff523ccd6df0e05",
+      "display_text": "28",
+      "spoken_text": "עשרים ושמונה"
+    },
+    "learning.number.029": {
+      "asset": "clips/a0/a0609a17dab2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "a0609a17dab2432584828d7da3d4b0152cf07f11dfaf5c2d162a6a83063fb4a0",
+      "display_text": "29",
+      "spoken_text": "עשרים ותשע"
+    },
+    "learning.number.030": {
+      "asset": "clips/8d/8dccad65ccff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "8dccad65ccffb7ab83fcb42e41c1f5d4c59581fb9452a08a55dfb3279c90f2e3",
+      "display_text": "30",
+      "spoken_text": "שלושים"
+    },
+    "learning.number.031": {
+      "asset": "clips/85/8534e56ed414.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "8534e56ed4147695e61f8e6be7edaa905e02c13eec7a595f70f2f3e989a2b73e",
+      "display_text": "31",
+      "spoken_text": "שלושים ואחת"
+    },
+    "learning.number.032": {
+      "asset": "clips/a7/a79f5f1bea24.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "a79f5f1bea24cee220cc3196f04c1625b9f461d2416189bcdb6ac9e639e975bd",
+      "display_text": "32",
+      "spoken_text": "שלושים ושתיים"
+    },
+    "learning.number.033": {
+      "asset": "clips/8d/8d58fe0b2787.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "8d58fe0b2787fdf68e3a85fcf169bd20f2f21d80fc02f114a24bf8f65d5879b8",
+      "display_text": "33",
+      "spoken_text": "שלושים ושלוש"
+    },
+    "learning.number.034": {
+      "asset": "clips/a0/a08c953881fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "a08c953881fca15e6c8a0137388e3d20dfc3725c0328113828d5fd7499ecceec",
+      "display_text": "34",
+      "spoken_text": "שלושים וארבע"
+    },
+    "learning.number.035": {
+      "asset": "clips/12/1291b90355dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "1291b90355dd16728a01d6c48cc4112c06026aed6b3b3e956ae9d2b58cca2f52",
+      "display_text": "35",
+      "spoken_text": "שלושים וחמש"
+    },
+    "learning.number.036": {
+      "asset": "clips/9f/9fb8010e3e50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "9fb8010e3e50f41dcc164a3f546afa0c0ddf2c84946d14b6b98dfffdee7d7177",
+      "display_text": "36",
+      "spoken_text": "שלושים ושש"
+    },
+    "learning.number.037": {
+      "asset": "clips/c7/c73606953902.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "c73606953902b55a84814ad64526f50cd7dd120625ad2ae2fb864cce77aaf022",
+      "display_text": "37",
+      "spoken_text": "שלושים ושבע"
+    },
+    "learning.number.038": {
+      "asset": "clips/30/30e970321567.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "30e970321567ce8734e325778e74fea11d3658d6a20ca60fdcfab6aa63b00966",
+      "display_text": "38",
+      "spoken_text": "שלושים ושמונה"
+    },
+    "learning.number.039": {
+      "asset": "clips/dc/dcf85e7cc955.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "dcf85e7cc955b96b84553086dc2ac6f5e5b84c4b13e16e79bd2acd0b2bab072c",
+      "display_text": "39",
+      "spoken_text": "שלושים ותשע"
+    },
+    "learning.number.040": {
+      "asset": "clips/fd/fd9ff3380337.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "fd9ff33803372c36cbe82a52abe942e9d95252e91d96f1f24f9c589c0ea5c24e",
+      "display_text": "40",
+      "spoken_text": "ארבעים"
+    },
+    "learning.number.041": {
+      "asset": "clips/3e/3e89ac8d96e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "3e89ac8d96e177acc3ac4033c35005cf1d22ee0f0c93ad8cba027750f68cc4c2",
+      "display_text": "41",
+      "spoken_text": "ארבעים ואחת"
+    },
+    "learning.number.042": {
+      "asset": "clips/0b/0b95ea198744.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "0b95ea198744edb2b73ad9a845a9f63854a0fc088e3c081f2f7248a48ee414f5",
+      "display_text": "42",
+      "spoken_text": "ארבעים ושתיים"
+    },
+    "learning.number.043": {
+      "asset": "clips/bf/bffe24228074.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "bffe2422807498c7a860c1ca19e3621d6142b1736017f84f537622902fcafc38",
+      "display_text": "43",
+      "spoken_text": "ארבעים ושלוש"
+    },
+    "learning.number.044": {
+      "asset": "clips/d8/d8906daf910a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "d8906daf910a6a15a2cdbd72aaaac6bbd67e71d17aa58f6c1a00872ff417e3aa",
+      "display_text": "44",
+      "spoken_text": "ארבעים וארבע"
+    },
+    "learning.number.045": {
+      "asset": "clips/5e/5ef4a08d53ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "5ef4a08d53eef125ebac102532a1c3a867a1da0a3c81ad263c3a0d50cd35f68c",
+      "display_text": "45",
+      "spoken_text": "ארבעים וחמש"
+    },
+    "learning.number.046": {
+      "asset": "clips/24/24349400b687.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "24349400b687f9ddce9a5b63651a4bfc3a47e593c18c4db8b2f2b5f32f185d68",
+      "display_text": "46",
+      "spoken_text": "ארבעים ושש"
+    },
+    "learning.number.047": {
+      "asset": "clips/ec/eca7d23db59d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "eca7d23db59d2e24119d7ccbc1fb57475b66416f91a5f818cc4fef671df46f65",
+      "display_text": "47",
+      "spoken_text": "ארבעים ושבע"
+    },
+    "learning.number.048": {
+      "asset": "clips/31/310ea46dbf65.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "310ea46dbf6534ce0c56c2593836eb05ff0a1b70b281257f9b45420b6cdbb579",
+      "display_text": "48",
+      "spoken_text": "ארבעים ושמונה"
+    },
+    "learning.number.049": {
+      "asset": "clips/61/61fbcb83c6c5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "61fbcb83c6c5074d7a4b6631dbf246fb6d7f7deb171e922cdb9ffab926e78a16",
+      "display_text": "49",
+      "spoken_text": "ארבעים ותשע"
+    },
+    "learning.number.050": {
+      "asset": "clips/42/42c258faeb81.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "42c258faeb81e841f3dc0f33915916948c3c591b7f8b896fa416d35f968d23c5",
+      "display_text": "50",
+      "spoken_text": "חמישים"
+    },
+    "learning.word._003e": {
+      "asset": "clips/94/94e32f9fceb9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "94e32f9fceb9d01e5576df60312a7c85d07b16cd78ad76c45f6353cb536ddefe",
+      "display_text": "חייזר",
+      "spoken_text": "חייזר"
+    },
+    "learning.word._0232": {
+      "asset": "clips/d1/d1d74654df47.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "d1d74654df4747a55b066d4ac6e4b343f8f5fd778543b7efda72fbe6148657b8",
+      "display_text": "ירח",
+      "spoken_text": "ירח"
+    },
+    "learning.word._0753": {
+      "asset": "clips/8b/8b8bac9badec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "8b8bac9badec9a9884a3e6b80821f34c93e55927ce41d5c58efc43f9f81117ca",
+      "display_text": "מים",
+      "spoken_text": "מים"
+    },
+    "learning.word._09b3": {
+      "asset": "clips/5e/5e78561482f5.mp3",
+      "word_ends_ms": [
+        446,
+        676
+      ],
+      "word_fade_ms": [
+        40,
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "5e78561482f5f35a4c727bb9921336edeba5c5561a5bbe18ee4321c96a400307",
+      "display_text": "הסבון עושה קצף",
+      "spoken_text": "הסבון עושה קצף"
+    },
+    "learning.word._09d3": {
+      "asset": "clips/fd/fd459a8b79da.mp3",
+      "word_ends_ms": [
+        493,
+        933
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1463,
+      "sha256": "fd459a8b79daee43bec08ce874faa3ffbf3548a7fd28075596a021a59415805a",
+      "display_text": "המנורה דולקת עכשיו",
+      "spoken_text": "המנורה דולקת עכשיו"
+    },
+    "learning.word._0ade": {
+      "asset": "clips/ce/ce2c5a1ed339.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "ce2c5a1ed33910b1a6c8236d3af2f36f5febf83e0ef8f2c15c94cec7c0336a84",
+      "display_text": "תינוק",
+      "spoken_text": "תינוק"
+    },
+    "learning.word._0b79": {
+      "asset": "clips/e0/e0e5b2e5915e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "e0e5b2e5915e7bae93aafecf7f1fd127cc89d214b3012f7ad69df3915eb4245e",
+      "display_text": "מכונית",
+      "spoken_text": "מכונית"
+    },
+    "learning.word._0bb5": {
+      "asset": "clips/a9/a9c839975057.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "a9c839975057a035fee9ee3fe54c59ac277c391fd98bffe12293620b33c6a468",
+      "display_text": "סבתא",
+      "spoken_text": "סבתא"
+    },
+    "learning.word._0bb6": {
+      "asset": "clips/cc/cc6d2181812b.mp3",
+      "word_ends_ms": [
+        554,
+        904
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1541,
+      "sha256": "cc6d2181812be3459140441ea65c725dbce265c38edc6f388900544df2329d9a",
+      "display_text": "מצחצחים שיניים בבוקר",
+      "spoken_text": "מצחצחים שיניים בבוקר"
+    },
+    "learning.word._104f": {
+      "asset": "clips/92/9234cb680383.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "9234cb68038382bb2ddd567aefeba2ef37c571d8b267780d526b002719d3b5c0",
+      "display_text": "הר",
+      "spoken_text": "הר"
+    },
+    "learning.word._114c": {
+      "asset": "clips/43/43a337a521b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "43a337a521b39a04208c475a2363e656a8015a770a709d505d1b4f6e554e6bbc",
+      "display_text": "צבעים",
+      "spoken_text": "צבעים"
+    },
+    "learning.word._121e": {
+      "asset": "clips/7c/7cb661716a41.mp3",
+      "word_ends_ms": [
+        245
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 732,
+      "sha256": "7cb661716a4179ca50eb95842eb93b081b384e4a8fbd23b520bbee75d628f435",
+      "display_text": "אור רך",
+      "spoken_text": "אור רך"
+    },
+    "learning.word._12db": {
+      "asset": "clips/60/60949f19bb60.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "60949f19bb6073f33e604cd231d52686c4af6b4fe36a58fbec66f9897bcf7cc0",
+      "display_text": "מיטה",
+      "spoken_text": "מיטה"
+    },
+    "learning.word._14f7": {
+      "asset": "clips/da/dac0d8c7f6ba.mp3",
+      "word_ends_ms": [
+        314
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1019,
+      "sha256": "dac0d8c7f6ba682443b09c4ece4dee6451bf482c47957b0c734626b442895f30",
+      "display_text": "שביל ירוק",
+      "spoken_text": "שביל ירוק"
+    },
+    "learning.word._16f8": {
+      "asset": "clips/d6/d6aeb397fed1.mp3",
+      "word_ends_ms": [
+        427,
+        867
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1410,
+      "sha256": "d6aeb397fed1d2ca5a815c7aaf10d8838f4963143dbbfc2e5353ce110d595ca0",
+      "display_text": "העגלה נוסעת לאט",
+      "spoken_text": "העגלה נוסעת לאט"
+    },
+    "learning.word._1847": {
+      "asset": "clips/d7/d773c7ba5d0a.mp3",
+      "word_ends_ms": [
+        674,
+        914
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1463,
+      "sha256": "d773c7ba5d0ae862db9bebe01f351553b9c70b14226ca4d5e207eb6ca23d350a",
+      "display_text": "התרנגול קורא בקול",
+      "spoken_text": "התרנגול קורא בקול"
+    },
+    "learning.word._1866": {
+      "asset": "clips/8f/8f574e8e9862.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "8f574e8e98620eeec209308fca56714fe00fdfca5be569fcc62ae8032f02b34b",
+      "display_text": "מטוס",
+      "spoken_text": "מטוס"
+    },
+    "learning.word._1993": {
+      "asset": "clips/15/1571b91d1231.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "1571b91d1231aaa677afd694f81082c18a8d7471cbd95d2641941b6ca77acd77",
+      "display_text": "פירמידה",
+      "spoken_text": "פירמידה"
+    },
+    "learning.word._19b1": {
+      "asset": "clips/b8/b8bcd0557c03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b8bcd0557c033171af1ac6f6b23b5c11bca955d6f0c0b23ddb7fd2a66d079eab",
+      "display_text": "שוטר",
+      "spoken_text": "שוטר"
+    },
+    "learning.word._1a13": {
+      "asset": "clips/e9/e9ee7b356779.mp3",
+      "word_ends_ms": [
+        228,
+        498
+      ],
+      "word_fade_ms": [
+        20,
+        30
+      ],
+      "duration_ms": 1150,
+      "sha256": "e9ee7b356779e5bdd094ea72df59f5a151887ffb93b34be861b5c8959b4689a1",
+      "display_text": "בואו נשיר ביחד",
+      "spoken_text": "בואו נשיר ביחד"
+    },
+    "learning.word._1b81": {
+      "asset": "clips/17/173ae1c2445a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "173ae1c2445ab5fc38ad18b0c7e67d3cc3158aad2b830b8a16d82c180eb2b4bf",
+      "display_text": "פיל",
+      "spoken_text": "פיל"
+    },
+    "learning.word._1bb9": {
+      "asset": "clips/c1/c1c27b80c328.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "c1c27b80c3286cbed994dc3518903f447ef21ff519244dc45fcca4c8d876c273",
+      "display_text": "ים",
+      "spoken_text": "ים"
+    },
+    "learning.word._1bdb": {
+      "asset": "clips/d9/d943a05660dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "d943a05660dc7d00e3ba1cb603a69e277dca8b7c839209346bea149c77597961",
+      "display_text": "בלון",
+      "spoken_text": "בלון"
+    },
+    "learning.word._2055": {
+      "asset": "clips/8e/8ee419fa36b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "8ee419fa36b4029c70bfa821d215c544d95c02903f49fa46a8d24c7ab5847875",
+      "display_text": "סוכריה",
+      "spoken_text": "סוכריה"
+    },
+    "learning.word._20f1": {
+      "asset": "clips/4f/4f751bad4c35.mp3",
+      "word_ends_ms": [
+        340
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "4f751bad4c3546d460be66eba88666737731dffd5c56fa7bff49a55e22ccf5e7",
+      "display_text": "חיוך רחב",
+      "spoken_text": "חיוך רחב"
+    },
+    "learning.word._2223": {
+      "asset": "clips/50/507051338a9b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "507051338a9b5e6ee2561691627ec60fb60949a7d533947560a4ca0c230ec2a0",
+      "display_text": "אוהל",
+      "spoken_text": "אוהל"
+    },
+    "learning.word._2293": {
+      "asset": "clips/10/10865d8c6fba.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "10865d8c6fbae1106438af7d0c6f634344f495dc03aba7e982b2e55a6c78048f",
+      "display_text": "אמא",
+      "spoken_text": "אמא"
+    },
+    "learning.word._23e2": {
+      "asset": "clips/75/75b6040ced8a.mp3",
+      "word_ends_ms": [
+        438,
+        798
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1410,
+      "sha256": "75b6040ced8a452ce3926191eaeabc399449ee7486624ca168f0ad2a4e42fe90",
+      "display_text": "רוחצים ידיים היטב",
+      "spoken_text": "רוחצים ידיים היטב"
+    },
+    "learning.word._245d": {
+      "asset": "clips/04/04a4fca488f8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "04a4fca488f861c149c11f98b82fc9db875885fe9c8aa6e9f64cb4caef25ee04",
+      "display_text": "ענן",
+      "spoken_text": "ענן"
+    },
+    "learning.word._27a7": {
+      "asset": "clips/fc/fc693bf40ed5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "fc693bf40ed5bbe659cb2c1878287564cb232537cdf3f20ddf31c503861e0acf",
+      "display_text": "מיץ",
+      "spoken_text": "מיץ"
+    },
+    "learning.word._3119": {
+      "asset": "clips/9a/9a6c5a8a298d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "9a6c5a8a298d54ce647ca4f28fcf0283cf098682881ddf64edcf7230a3368eca",
+      "display_text": "גמל",
+      "spoken_text": "גמל"
+    },
+    "learning.word._3174": {
+      "asset": "clips/6d/6d1e328c9832.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "6d1e328c98329f2b724cf1bd19da0aab7ebf5cc3feb45c4928ec8b7905b7dcab",
+      "display_text": "משאית",
+      "spoken_text": "משאית"
+    },
+    "learning.word._31df": {
+      "asset": "clips/3b/3bf99c51f578.mp3",
+      "word_ends_ms": [
+        456,
+        736
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1280,
+      "sha256": "3bf99c51f578675ef8b8420e1278a2ddd47c817ff4aaa43409e90ebe7498442c",
+      "display_text": "הכפית בתוך הקערה",
+      "spoken_text": "הכפית בתוך הקערה"
+    },
+    "learning.word._34fe": {
+      "asset": "clips/e4/e4b6149013c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e4b6149013c002b5fe33533a6af609e103de0d8428bf4ef74e90bc784ef8a955",
+      "display_text": "מחשב",
+      "spoken_text": "מחשב"
+    },
+    "learning.word._3630": {
+      "asset": "clips/78/7879851ee6a1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "7879851ee6a19bf0adb00b90b11274caeafe77e181aa610aa67f7415a15ad9fe",
+      "display_text": "דג",
+      "spoken_text": "דג"
+    },
+    "learning.word._363c": {
+      "asset": "clips/38/38677a58b638.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "38677a58b6387870beea40dee772c4789a4cc0dc3f6eee83675e611f9f0cfd37",
+      "display_text": "קורקינט",
+      "spoken_text": "קורקינט"
+    },
+    "learning.word._376c": {
+      "asset": "clips/9b/9b066727ddfa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "9b066727ddfab30966c950baa1dc86a363138b1ed3e4e3ec54fb37d59d364239",
+      "display_text": "חתול",
+      "spoken_text": "חתול"
+    },
+    "learning.word._37ce": {
+      "asset": "clips/ec/ec335475744a.mp3",
+      "word_ends_ms": [
+        370
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 914,
+      "sha256": "ec335475744af669d3f2132a334fcc777305794c76b9e2a92895415e05873a73",
+      "display_text": "עוגייה טעימה",
+      "spoken_text": "עוגייה טעימה"
+    },
+    "learning.word._38e6": {
+      "asset": "clips/29/2934c9c85b40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "2934c9c85b403ea03c456173ab7cd1a90dadf3ca10fb87dcce56242a30c30dc3",
+      "display_text": "אש",
+      "spoken_text": "אש"
+    },
+    "learning.word._3b8f": {
+      "asset": "clips/dd/dd3cc413bcfb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "dd3cc413bcfb7be859fa39a07a5b1195459c4bbe051b5bd4b7388d8eee538ddc",
+      "display_text": "תפוח",
+      "spoken_text": "תפוח"
+    },
+    "learning.word._3d60": {
+      "asset": "clips/a6/a6e29236e804.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "a6e29236e8040a24b119cc499d99cdd8cbccc286f499b43c271d6bfe53e36ba9",
+      "display_text": "דרקון",
+      "spoken_text": "דרקון"
+    },
+    "learning.word._3ec5": {
+      "asset": "clips/b3/b31b528742a9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "b31b528742a952dfe9893ae8a2e753aefa1ca07a7a073b3009d0f68baf6ccc0b",
+      "display_text": "דוב",
+      "spoken_text": "דוב"
+    },
+    "learning.word._400b": {
+      "asset": "clips/d2/d26e08aac2e4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "d26e08aac2e46f74d2863f9d20b0ee20eb5b2f65d10d3df6488480f65cbedcad",
+      "display_text": "שלג",
+      "spoken_text": "שלג"
+    },
+    "learning.word._422c": {
+      "asset": "clips/52/5215714d3852.mp3",
+      "word_ends_ms": [
+        348
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 810,
+      "sha256": "5215714d3852eb35eb969730a0fafcab93fe411cf9b0fb6ced3bd834e11025b2",
+      "display_text": "מתנה יפה",
+      "spoken_text": "מתנה יפה"
+    },
+    "learning.word._432b": {
+      "asset": "clips/95/95a201382f3f.mp3",
+      "word_ends_ms": [
+        307
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 888,
+      "sha256": "95a201382f3fff9976b0367b8aaa817257b7251b2a8eb8eb0deed797e26fbf52",
+      "display_text": "פרח ורוד",
+      "spoken_text": "פרח ורוד"
+    },
+    "learning.word._47df": {
+      "asset": "clips/3c/3cf20937184c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "3cf20937184c5f8060f3fb150718e659d35ae73a11a001577dfb926eb488e8da",
+      "display_text": "אבא",
+      "spoken_text": "אבא"
+    },
+    "learning.word._48cb": {
+      "asset": "clips/12/12f414093572.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "12f414093572cb29ce3da8477482f0582d20f973970a4e6f0c09d57ee637c5e2",
+      "display_text": "אופניים",
+      "spoken_text": "אופניים"
+    },
+    "learning.word._4d47": {
+      "asset": "clips/c6/c658c55b7163.mp3",
+      "word_ends_ms": [
+        279
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 836,
+      "sha256": "c658c55b71639c16f0441a033f2fb544c57cd00f358377446fe5503bb784fb9d",
+      "display_text": "עלה זהוב",
+      "spoken_text": "עלה זהוב"
+    },
+    "learning.word._4e44": {
+      "asset": "clips/0b/0bc1ac1a39f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "0bc1ac1a39f010d9f5bd3718ed38dd6e7eabd31aba43070649b9277735699963",
+      "display_text": "טלפון",
+      "spoken_text": "טלפון"
+    },
+    "learning.word._51a3": {
+      "asset": "clips/12/1279927a9b47.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "1279927a9b47219c14ee8650959f714f19143d07fd36c94259c47e4cb77f25cf",
+      "display_text": "פנדה",
+      "spoken_text": "פנדה"
+    },
+    "learning.word._532a": {
+      "asset": "clips/db/db839b53b045.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "db839b53b04580ae6a764b434195c020e88649c0786d744533bed7f58b2f1307",
+      "display_text": "מלכה",
+      "spoken_text": "מלכה"
+    },
+    "learning.word._54ff": {
+      "asset": "clips/ff/ffbcc95e0686.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "ffbcc95e06869b44363b0911da7a1f5645a0ff990457bb13c5c7e3f72abda29e",
+      "display_text": "כובע",
+      "spoken_text": "כובע"
+    },
+    "learning.word._55bb": {
+      "asset": "clips/27/2715904fd085.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "2715904fd0857e19956d2f7aeb0b86d364e334335f815f183b1a60b76dffb598",
+      "display_text": "אוטו",
+      "spoken_text": "אוטו"
+    },
+    "learning.word._5743": {
+      "asset": "clips/d1/d1176032b9af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d1176032b9afcb6ce79cb4c0ae468e5bda0c641b1eb1d10d20a25a2ae3d6279b",
+      "display_text": "זאב",
+      "spoken_text": "זאב"
+    },
+    "learning.word._5813": {
+      "asset": "clips/88/88bae1a6ad7d.mp3",
+      "word_ends_ms": [
+        554,
+        844
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1280,
+      "sha256": "88bae1a6ad7d5e98efcb3c0e24dc47e5a6fc13a41d288e23686492395b7c6344",
+      "display_text": "מערבבים מרק חם",
+      "spoken_text": "מערבבים מרק חם"
+    },
+    "learning.word._5a13": {
+      "asset": "clips/7c/7cca54f82f94.mp3",
+      "word_ends_ms": [
+        327
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 940,
+      "sha256": "7cca54f82f9403b07ba861801c303728775a31a7ed7801f79fbbb42f79451017",
+      "display_text": "דגל צבעוני",
+      "spoken_text": "דגל צבעוני"
+    },
+    "learning.word._5bec": {
+      "asset": "clips/08/0884d23fa72b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "0884d23fa72b53891b9ae1fc7d0403e45e8dc296a8ef775d70adee351b4b9d1b",
+      "display_text": "גן",
+      "spoken_text": "גן"
+    },
+    "learning.word._5c02": {
+      "asset": "clips/9c/9c443449a788.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9c443449a788019990ac4848a6b1cb0eca90ce6dc51cf52d426afde3aa7c551b",
+      "display_text": "דבש",
+      "spoken_text": "דבש"
+    },
+    "learning.word._5c1c": {
+      "asset": "clips/fc/fcf6c64634aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "fcf6c64634aa8640be4886997d06eee2248cb2831172a7d3967952437108bd3d",
+      "display_text": "מפתח",
+      "spoken_text": "מפתח"
+    },
+    "learning.word._5cbb": {
+      "asset": "clips/70/70eea571f644.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "70eea571f64474335448cd6e6b2f6d38194ca3a9af8e337878caea73280c5d71",
+      "display_text": "בננה",
+      "spoken_text": "בננה"
+    },
+    "learning.word._5dd6": {
+      "asset": "clips/ad/ad1ec2815466.mp3",
+      "word_ends_ms": [
+        355
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 940,
+      "sha256": "ad1ec2815466c10c1f5f9c2f3f1cebd7a6a4280f0f56531a2f3d57acd23f2bf6",
+      "display_text": "שלום חברים",
+      "spoken_text": "שלום חברים"
+    },
+    "learning.word._5ffd": {
+      "asset": "clips/3a/3ab1d1f55f57.mp3",
+      "word_ends_ms": [
+        783,
+        1214
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1672,
+      "sha256": "3ab1d1f55f57f09ae6e04b5f0028ffdd7171b964343e4af0c22f736ae7092f7a",
+      "display_text": "העוגייה מתוקה מאוד",
+      "spoken_text": "העוגייה מתוקה מאוד"
+    },
+    "learning.word._62a0": {
+      "asset": "clips/c1/c15ffee6c58d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "c15ffee6c58de484b5fe2eb802486323427005cae56a1a3fdc42561b933edba8",
+      "display_text": "טירה",
+      "spoken_text": "טירה"
+    },
+    "learning.word._65a0": {
+      "asset": "clips/d2/d2f7ac8b9039.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "d2f7ac8b9039780088cb8023d8e3c77b48c404cb3f9e88c4ca83a05dba2a5a84",
+      "display_text": "צב",
+      "spoken_text": "צב"
+    },
+    "learning.word._65fe": {
+      "asset": "clips/c2/c241ccebef17.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "c241ccebef17d1a3fb923a344f62ef2669427c2cba1e71552fa9cc80d92c6a42",
+      "display_text": "מצלמה",
+      "spoken_text": "מצלמה"
+    },
+    "learning.word._6c20": {
+      "asset": "clips/60/60aa94400513.mp3",
+      "word_ends_ms": [
+        283
+      ],
+      "word_fade_ms": [
+        19
+      ],
+      "duration_ms": 862,
+      "sha256": "60aa94400513247fe800868f982db7656e4c5aa493d1f12bd6f86c2f45a7a229",
+      "display_text": "דג זהב",
+      "spoken_text": "דג זהב"
+    },
+    "learning.word._6c2f": {
+      "asset": "clips/bb/bb7892a162c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bb7892a162c320debb0254b785987add1e9888e1e10d4e002436e0334298db6d",
+      "display_text": "מחברת",
+      "spoken_text": "מחברת"
+    },
+    "learning.word._6c90": {
+      "asset": "clips/0a/0aa0e4724ada.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "0aa0e4724ada59175dde9b82426e21c9a634c7805087b44b6ba39996c1007815",
+      "display_text": "קשת",
+      "spoken_text": "קשת"
+    },
+    "learning.word._6de3": {
+      "asset": "clips/a9/a9bbbcab4173.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a9bbbcab4173f60a480425c4f5294b9ef42403c5c9ef7192afcad83a0d832ca0",
+      "display_text": "צפרדע",
+      "spoken_text": "צפרדע"
+    },
+    "learning.word._6e17": {
+      "asset": "clips/c7/c78dd96f4aa9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "c78dd96f4aa98219bd2cb325b6b86c2732e1116ccbd7e5072c33fa740c812798",
+      "display_text": "עוגה",
+      "spoken_text": "עוגה"
+    },
+    "learning.word._6e1f": {
+      "asset": "clips/7b/7ba1b142373b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "7ba1b142373b73571b6726a58d6aa16ba558f20c1ca6324fbcf84cb7101abd3e",
+      "display_text": "רופא",
+      "spoken_text": "רופא"
+    },
+    "learning.word._6fb3": {
+      "asset": "clips/b3/b365edb7aa3e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "b365edb7aa3e9299e6ae663d9628fefdacc06517ee875faa5cedda775bd9dba4",
+      "display_text": "סוס",
+      "spoken_text": "סוס"
+    },
+    "learning.word._710b": {
+      "asset": "clips/12/122d1ad94bb2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "122d1ad94bb2d436404f12c80aaf386d5ac8c3b70f52ce219cc7a17ff07f5c30",
+      "display_text": "תנין",
+      "spoken_text": "תנין"
+    },
+    "learning.word._713f": {
+      "asset": "clips/3f/3ffb94ec043d.mp3",
+      "word_ends_ms": [
+        638,
+        948
+      ],
+      "word_fade_ms": [
+        20,
+        30
+      ],
+      "duration_ms": 1202,
+      "sha256": "3ffb94ec043d4733087cbcdee59137740a5e2786e929e67f9bca28dd1c9953f5",
+      "display_text": "הירקות טובים לי",
+      "spoken_text": "הירקות טובים לי"
+    },
+    "learning.word._7482": {
+      "asset": "clips/53/53487fae9d24.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "53487fae9d24088e05d60078b774d0676d4b51c82b56d778be1959b490248d09",
+      "display_text": "עיפרון",
+      "spoken_text": "עיפרון"
+    },
+    "learning.word._74f5": {
+      "asset": "clips/b6/b685a45bc097.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b685a45bc0973712f238054bb3eb3d94a68fd0c71ad7d5f417d9f276e95bba90",
+      "display_text": "בית",
+      "spoken_text": "בית"
+    },
+    "learning.word._7947": {
+      "asset": "clips/9e/9ed64ff7fd45.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "9ed64ff7fd45a24adb1c014d1d08c1cb859f8e58c67d9c3e62ccaf224c68c4ca",
+      "display_text": "ילד",
+      "spoken_text": "ילד"
+    },
+    "learning.word._7aa9": {
+      "asset": "clips/61/61e54f83779a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "61e54f83779a6d84ac526767c5320e4fb8d7a736710b1326a79d8df6d3d28953",
+      "display_text": "תוף",
+      "spoken_text": "תוף"
+    },
+    "learning.word._7e11": {
+      "asset": "clips/3a/3a46f249bd4f.mp3",
+      "word_ends_ms": [
+        235
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 784,
+      "sha256": "3a46f249bd4f493117792c9841092062fce3c75eee6a157f5af0ae2a47b5b0e8",
+      "display_text": "כוס חלב",
+      "spoken_text": "כוס חלב"
+    },
+    "learning.word._8372": {
+      "asset": "clips/3c/3ce6f895323f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3ce6f895323fbb434e05fd224decce53b4fbe603de5a388116048df870eb5fe4",
+      "display_text": "פרפר",
+      "spoken_text": "פרפר"
+    },
+    "learning.word._838c": {
+      "asset": "clips/be/bea7c5ae91f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "bea7c5ae91f464bd9ff15f232d1145ddb7df7ac98f9f08f01d098aeb2c67d4e1",
+      "display_text": "גיטרה",
+      "spoken_text": "גיטרה"
+    },
+    "learning.word._849d": {
+      "asset": "clips/81/8174172f2e1c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "8174172f2e1c83179da7e2e93d38473fbb226abab410002852a0cdbdbfe198a0",
+      "display_text": "מלך",
+      "spoken_text": "מלך"
+    },
+    "learning.word._8570": {
+      "asset": "clips/a2/a29b6274e882.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a29b6274e88285fcb2a9653c104a5a1ad0ffcb1e343d1915fb4dedad5ea447f3",
+      "display_text": "שוקולד",
+      "spoken_text": "שוקולד"
+    },
+    "learning.word._857e": {
+      "asset": "clips/a7/a741f86879f5.mp3",
+      "word_ends_ms": [
+        461,
+        731
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "a741f86879f56eca408053e247da21350495471231150383acf7e2713f5f4dfa",
+      "display_text": "הילדים בונים מגדל",
+      "spoken_text": "הילדים בונים מגדל"
+    },
+    "learning.word._8585": {
+      "asset": "clips/36/364735a4cd15.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "364735a4cd154f00679cc7d05af0935262d8a754c575ad28ac3d132294cf4167",
+      "display_text": "נמר",
+      "spoken_text": "נמר"
+    },
+    "learning.word._8747": {
+      "asset": "clips/d3/d32dc4623e9c.mp3",
+      "word_ends_ms": [
+        619,
+        1040
+      ],
+      "word_fade_ms": [
+        40,
+        40
+      ],
+      "duration_ms": 1541,
+      "sha256": "d32dc4623e9c829dbea35adcd2c631a87ea4424d6f62c92e01f6ec066adb5cdb",
+      "display_text": "הציפור בונה קן",
+      "spoken_text": "הציפור בונה קן"
+    },
+    "learning.word._8ba3": {
+      "asset": "clips/92/92b1719eeac8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "92b1719eeac8c0c0a09b35ee842abd5320fe82b0cdbfe24ee4bdd73cc4114294",
+      "display_text": "מטריה",
+      "spoken_text": "מטריה"
+    },
+    "learning.word._9014": {
+      "asset": "clips/61/6129dac2990d.mp3",
+      "word_ends_ms": [
+        342,
+        582
+      ],
+      "word_fade_ms": [
+        19,
+        39
+      ],
+      "duration_ms": 1150,
+      "sha256": "6129dac2990de8dcf0f25da379d2ee39cbe28e95f45d9b970b77554e33408b0b",
+      "display_text": "היום נצא לטייל",
+      "spoken_text": "היום נצא לטייל"
+    },
+    "learning.word._912a": {
+      "asset": "clips/04/04e183954ff4.mp3",
+      "word_ends_ms": [
+        606,
+        1165
+      ],
+      "word_fade_ms": [
+        40,
+        20
+      ],
+      "duration_ms": 1646,
+      "sha256": "04e183954ff47f69359e2dda22c283ed56c4a3f7933a55a0aa34d456af4eabc4",
+      "display_text": "הדבורה אוספת צוף",
+      "spoken_text": "הדבורה אוספת צוף"
+    },
+    "learning.word._9209": {
+      "asset": "clips/f0/f0a0ccdb3ca0.mp3",
+      "word_ends_ms": [
+        366
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 836,
+      "sha256": "f0a0ccdb3ca07fbbb3ddef41997c14c950d385f76bf8f0e981b67dd30fd2a7e3",
+      "display_text": "דובי רך",
+      "spoken_text": "דובי רך"
+    },
+    "learning.word._9301": {
+      "asset": "clips/ec/ec04be6d48ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "ec04be6d48ff71e5b140a9e9f504019df8670f21e92cf326d3bc4834a6583b99",
+      "display_text": "רכבת",
+      "spoken_text": "רכבת"
+    },
+    "learning.word._954d": {
+      "asset": "clips/73/7392e9a8fb61.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "7392e9a8fb61c9661489ed83b882bcd468ba346561213e8519bc8737647d4575",
+      "display_text": "גשם",
+      "spoken_text": "גשם"
+    },
+    "learning.word._96c2": {
+      "asset": "clips/21/21620d783e78.mp3",
+      "word_ends_ms": [
+        343,
+        693
+      ],
+      "word_fade_ms": [
+        19,
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "21620d783e7889c85abf825abcd019573d0b2f56a5f2f9115819201f5274e34c",
+      "display_text": "אנחנו לומדים יחד",
+      "spoken_text": "אנחנו לומדים יחד"
+    },
+    "learning.word._96ec": {
+      "asset": "clips/af/af0dfe12596e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "af0dfe12596e209adeee695378c67ee1c488377fb96b0bd94748cd1f6d04a032",
+      "display_text": "אריה",
+      "spoken_text": "אריה"
+    },
+    "learning.word._9815": {
+      "asset": "clips/8b/8b73b8a74132.mp3",
+      "word_ends_ms": [
+        375
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 993,
+      "sha256": "8b73b8a7413202bcb2b8f571686cdb50c3ad49f8d3c49712dd9fedd16f7d84c1",
+      "display_text": "חלום מתוק",
+      "spoken_text": "חלום מתוק"
+    },
+    "learning.word._98fc": {
+      "asset": "clips/cb/cb05bbb16f5c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "cb05bbb16f5c419c1bd09148e9c697053606d4b33317e76b6e8bfffce5b69c9a",
+      "display_text": "סבא",
+      "spoken_text": "סבא"
+    },
+    "learning.word._9b2e": {
+      "asset": "clips/ac/ac8b7d44775d.mp3",
+      "word_ends_ms": [
+        494,
+        884
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1306,
+      "sha256": "ac8b7d44775db6d618e9e67c0daabffa23c4199a85b4b06fa6ffd99dad2dfb3d",
+      "display_text": "הארנב מתחבא שם",
+      "spoken_text": "הארנב מתחבא שם"
+    },
+    "learning.word._9b65": {
+      "asset": "clips/a8/a8a8769edfd3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "a8a8769edfd3774984c552f5f016c7aee39af58007ecbbdd1417dab04e8870a3",
+      "display_text": "בובה",
+      "spoken_text": "בובה"
+    },
+    "learning.word._9d62": {
+      "asset": "clips/46/46e7c57dd889.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "46e7c57dd889b1c45e990b2d5ee556fdccbd0f48b95ffa6046e161134b2bcde4",
+      "display_text": "מורה",
+      "spoken_text": "מורה"
+    },
+    "learning.word._9f04": {
+      "asset": "clips/df/df9b07ef5ebd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "df9b07ef5ebd0ed6afaf3b89c6b81dba2772eb724563707e83165b324d534f4a",
+      "display_text": "פארק",
+      "spoken_text": "פארק"
+    },
+    "learning.word._a012": {
+      "asset": "clips/e2/e2b7e826e1dd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "e2b7e826e1ddc18035ab0de401ca4575c84bbc816fa62f89b3e8e369f28d130f",
+      "display_text": "עץ",
+      "spoken_text": "עץ"
+    },
+    "learning.word._a28d": {
+      "asset": "clips/be/be2ce989cba6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "be2ce989cba6fae905a87b8fac813a84a2a4633a1226e467c94d12637c0f6bd1",
+      "display_text": "כיסא",
+      "spoken_text": "כיסא"
+    },
+    "learning.word._a2b3": {
+      "asset": "clips/59/595e7f51b9ff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "595e7f51b9ff41b3e54e44d59cf46e21d64a42e47c2c62448f791df38d4e0041",
+      "display_text": "פרה",
+      "spoken_text": "פרה"
+    },
+    "learning.word._a325": {
+      "asset": "clips/ae/aeafa85e04f2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "aeafa85e04f2ece0426a788af5d1f4733f0993ee0cb4eb1dbf8299cbf456f925",
+      "display_text": "כדור",
+      "spoken_text": "כדור"
+    },
+    "learning.word._a4b1": {
+      "asset": "clips/35/3595640d4fed.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "3595640d4fed05e444bd8bb351bf5e19c3d76d792caaf4071d331672b5ea37c9",
+      "display_text": "חללית",
+      "spoken_text": "חללית"
+    },
+    "learning.word._a5b9": {
+      "asset": "clips/66/66130c20f0cf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "66130c20f0cfac1a2e71fbdf13baf4c817ebbc1aa74fe4a29673784cf7540b7b",
+      "display_text": "כוכב",
+      "spoken_text": "כוכב"
+    },
+    "learning.word._a66a": {
+      "asset": "clips/fd/fd0854ea6f5e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "fd0854ea6f5e10ca24c66c2da09eea08fdb32093f04a67dfdd295a497a6420ef",
+      "display_text": "סירה",
+      "spoken_text": "סירה"
+    },
+    "learning.word._aae4": {
+      "asset": "clips/30/30016a3a35d4.mp3",
+      "word_ends_ms": [
+        441
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 862,
+      "sha256": "30016a3a35d49f5c0a82d0f8bd3f5b3512849afe46ec07e12f82a1d6eeec98d6",
+      "display_text": "חיבוק גדול",
+      "spoken_text": "חיבוק גדול"
+    },
+    "learning.word._adfd": {
+      "asset": "clips/6f/6f8b2a541b1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "6f8b2a541b1a8860fe3efce80c0c8331828bf16d2cc14ab1f45b5c255e40f159",
+      "display_text": "זברה",
+      "spoken_text": "זברה"
+    },
+    "learning.word._aec8": {
+      "asset": "clips/4a/4a4129189220.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "4a41291892200b3788d8964ac8fbf2525097e39ccf16ae59edbfbcaaf5d04aad",
+      "display_text": "ספר",
+      "spoken_text": "ספר"
+    },
+    "learning.word._af0c": {
+      "asset": "clips/36/3628fe394035.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "3628fe394035c01c10fd96f8f4be4e732c2b75fee0cbcac3b42ef0d647d033cf",
+      "display_text": "ענבים",
+      "spoken_text": "ענבים"
+    },
+    "learning.word._b1fd": {
+      "asset": "clips/89/89a8e4416d83.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "89a8e4416d83b9ea6a1ffd3ec90fed655f0f605b514c9f193cc2e48fa9ce1453",
+      "display_text": "קוף",
+      "spoken_text": "קוף"
+    },
+    "learning.word._b2e1": {
+      "asset": "clips/a9/a96b04fb2c6c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "a96b04fb2c6c6fb387aa7df7924decc1d7f6120e2b28844dc7588d5811b6a315",
+      "display_text": "טרקטור",
+      "spoken_text": "טרקטור"
+    },
+    "learning.word._b4c0": {
+      "asset": "clips/62/62088ca43534.mp3",
+      "word_ends_ms": [
+        415
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 810,
+      "sha256": "62088ca43534cf0741719c96eca6a002358126bd13992469d0c6c4fb6929f4b1",
+      "display_text": "בוקר טוב",
+      "spoken_text": "בוקר טוב"
+    },
+    "learning.word._b579": {
+      "asset": "clips/76/7695ffca5b99.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "7695ffca5b99abbc4d0e3f68bad306c03ac3dcd692ecc8af2275302628fbdc6d",
+      "display_text": "נעליים",
+      "spoken_text": "נעליים"
+    },
+    "learning.word._b74c": {
+      "asset": "clips/3b/3b59027fa5ab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3b59027fa5ab2d08bf13fc7dbe0890619037049f0303c8f9c4e2f3538d43c6f5",
+      "display_text": "אגס",
+      "spoken_text": "אגס"
+    },
+    "learning.word._bc50": {
+      "asset": "clips/77/7708fdcd58c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "7708fdcd58c33f7a6d02c1deb0f85ebcf110da2760045425d6f0dc5d5634ed09",
+      "display_text": "חבר",
+      "spoken_text": "חבר"
+    },
+    "learning.word._bc8f": {
+      "asset": "clips/bd/bd64ecd457a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "bd64ecd457a2d5ef7a30e34548eb47226d3f43bed26b8f01a19c1e4cc8956200",
+      "display_text": "מסעדה",
+      "spoken_text": "מסעדה"
+    },
+    "learning.word._bd9d": {
+      "asset": "clips/7f/7fc49a7e0639.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "7fc49a7e0639c989030f231bcafd23602c61257e3e63ba23603e615f81022a13",
+      "display_text": "משפחה",
+      "spoken_text": "משפחה"
+    },
+    "learning.word._bd9f": {
+      "asset": "clips/1c/1c055daec172.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "1c055daec172b2a117981f45b4ce100187e2546855fc49e3ddaabe1cf6330c85",
+      "display_text": "שמש",
+      "spoken_text": "שמש"
+    },
+    "learning.word._be13": {
+      "asset": "clips/d6/d61070892ed8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "d61070892ed8cf973e67c969cadbe63aec28f8caf84c624b5cc50f807738c62a",
+      "display_text": "אמבולנס",
+      "spoken_text": "אמבולנס"
+    },
+    "learning.word._c099": {
+      "asset": "clips/00/004ff72b9c9e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "004ff72b9c9e00448ac655222466a022d9809a95477bef7c47eca09c5d5c8452",
+      "display_text": "ילדה",
+      "spoken_text": "ילדה"
+    },
+    "learning.word._c139": {
+      "asset": "clips/45/45b9d0a30e30.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "45b9d0a30e304467736f39c8d28a2a8d4f3b368109c548d55a67bdfa232985aa",
+      "display_text": "פסנתר",
+      "spoken_text": "פסנתר"
+    },
+    "learning.word._c45e": {
+      "asset": "clips/81/8170ce794235.mp3",
+      "word_ends_ms": [
+        299
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1097,
+      "sha256": "8170ce79423511e389281acf30a5728298806e053bf0d4e96d9f636456e045f2",
+      "display_text": "פרי טרי",
+      "spoken_text": "פרי טרי"
+    },
+    "learning.word._c5dc": {
+      "asset": "clips/fe/fecbe9036938.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "fecbe90369388e9b140fa113220a4a15b5de5d74d17e6bd2dabde4f3e3133ef7",
+      "display_text": "חיפושית",
+      "spoken_text": "חיפושית"
+    },
+    "learning.word._c698": {
+      "asset": "clips/a1/a1f1eba40aaa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a1f1eba40aaab7996c778c1ac7f1ac8d7ba7ca4d36f1951c836600cf8b67941b",
+      "display_text": "חלון",
+      "spoken_text": "חלון"
+    },
+    "learning.word._d0b9": {
+      "asset": "clips/c4/c425e5acba50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "c425e5acba50d3607e7c2f87a67bf9ce8137cb7defcf8033c9be2bb620301987",
+      "display_text": "שעון",
+      "spoken_text": "שעון"
+    },
+    "learning.word._d72d": {
+      "asset": "clips/0f/0f5b7af1f549.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "0f5b7af1f5498951367c61a58abead31a1db8bef35833f5149b2d78647b82338",
+      "display_text": "מספריים",
+      "spoken_text": "מספריים"
+    },
+    "learning.word._d916": {
+      "asset": "clips/a8/a82e836e3598.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "a82e836e359838e56038a845eb5629608b46d30fc8a6e6773706f1c9820a0b0b",
+      "display_text": "אביר",
+      "spoken_text": "אביר"
+    },
+    "learning.word._d9a1": {
+      "asset": "clips/23/2316e72d6561.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "2316e72d65617a46960f03dfb73df9a286efebf9b939c819cdd4b2ae7b5be8f9",
+      "display_text": "פרח",
+      "spoken_text": "פרח"
+    },
+    "learning.word._db2c": {
+      "asset": "clips/21/21b6ea5d2550.mp3",
+      "word_ends_ms": [
+        383
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 993,
+      "sha256": "21b6ea5d2550ce2dc4a915d7f085bcd39dab79a5a32afb3f9495b703f61c1d60",
+      "display_text": "יער קסום",
+      "spoken_text": "יער קסום"
+    },
+    "learning.word._e037": {
+      "asset": "clips/22/223612fd7399.mp3",
+      "word_ends_ms": [
+        405
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 705,
+      "sha256": "223612fd7399807309462363f1d286569af50f4fb415caccb22b3edc0109cc49",
+      "display_text": "כפפה חמה",
+      "spoken_text": "כפפה חמה"
+    },
+    "learning.word._e53c": {
+      "asset": "clips/fd/fd6ac8b9b555.mp3",
+      "word_ends_ms": [
+        417,
+        866
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1410,
+      "sha256": "fd6ac8b9b5552bbf7aac6a7a4681ce4a049dcd8e65554ed9cffb852a745090bd",
+      "display_text": "הדלת נפתחת לאט",
+      "spoken_text": "הדלת נפתחת לאט"
+    },
+    "learning.word._e5e3": {
+      "asset": "clips/46/466f157c1e06.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "466f157c1e06e91baf4dfd792fbb0ac2fb58d2bbf59790ec29a8558f1ad4f911",
+      "display_text": "חולצה",
+      "spoken_text": "חולצה"
+    },
+    "learning.word._e717": {
+      "asset": "clips/59/5902971a5ea4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "5902971a5ea47d597e7a9aded19df6bbdf8c6ee5e73fc6feae1cf81e11738b5a",
+      "display_text": "משקפיים",
+      "spoken_text": "משקפיים"
+    },
+    "learning.word._e737": {
+      "asset": "clips/bd/bd0249632529.mp3",
+      "word_ends_ms": [
+        236,
+        536
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1097,
+      "sha256": "bd0249632529b6bb13933413a11afeb96c224535762b8843095156858d5d2102",
+      "display_text": "כיף לקרוא יחד",
+      "spoken_text": "כיף לקרוא יחד"
+    },
+    "learning.word._e77d": {
+      "asset": "clips/9d/9d349ee1bc17.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "9d349ee1bc17ea02deb3727884dfab8f9ff07a3b1686c346cecfa8c68464820c",
+      "display_text": "לוויתן",
+      "spoken_text": "לוויתן"
+    },
+    "learning.word._e91f": {
+      "asset": "clips/69/69da76104c02.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "69da76104c0226ac59e69422916762ea77fc6291f2c79c31a018385bfd2a06c8",
+      "display_text": "לחם",
+      "spoken_text": "לחם"
+    },
+    "learning.word._e9d0": {
+      "asset": "clips/bb/bbbe9cbe145d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "bbbe9cbe145da94ce8898cb6c0696c1a64a7038cbba771daa4a65f3c004ca99f",
+      "display_text": "כלב",
+      "spoken_text": "כלב"
+    },
+    "learning.word._eb4d": {
+      "asset": "clips/ec/ec20fe30c379.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "ec20fe30c379c828ffaa6ec85959c51513ec974e0fa4d377d9f6603f60078a7e",
+      "display_text": "גלידה",
+      "spoken_text": "גלידה"
+    },
+    "learning.word._f51a": {
+      "asset": "clips/44/44d20cdd0b9a.mp3",
+      "word_ends_ms": [
+        280
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 836,
+      "sha256": "44d20cdd0b9ac1a8ef4d0ae1410ffa0e01d7c5067c70cba95798a73c99349416",
+      "display_text": "שיר נעים",
+      "spoken_text": "שיר נעים"
+    },
+    "learning.word._f972": {
+      "asset": "clips/46/46027aaa4b0d.mp3",
+      "word_ends_ms": [
+        272
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 784,
+      "sha256": "46027aaa4b0d79765c380bf6a1f78ddcb53dc6eddeb344dc6ea2ba3962835e23",
+      "display_text": "לב אדום",
+      "spoken_text": "לב אדום"
+    },
+    "learning.word._fade": {
+      "asset": "clips/7b/7be67dbebfdd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "7be67dbebfdd20f64d39d5df64a40ac045f755089770b2d357f06cef2b3b95cc",
+      "display_text": "ג'ירף",
+      "spoken_text": "ג'ירף"
+    },
+    "learning.word._fb35": {
+      "asset": "clips/bc/bceeb893566c.mp3",
+      "word_ends_ms": [
+        397,
+        777
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1384,
+      "sha256": "bceeb893566cadf647a47a99ea1ab184d78bc9f0bb984e00b59cd5edfcd4ffe0",
+      "display_text": "העלים נושרים ברוח",
+      "spoken_text": "העלים נושרים ברוח"
+    },
+    "learning.word._fbff": {
+      "asset": "clips/e9/e9fa151218d0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e9fa151218d07aa8edad3729305db2363ad018ea0428658a16301127be30ebac",
+      "display_text": "רובוט",
+      "spoken_text": "רובוט"
+    },
+    "learning.word._fe69": {
+      "asset": "clips/51/51c6ba0aba4a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "51c6ba0aba4a73d95f53c852e36e03acdef5146ae33f4c4259c6010acee92f1e",
+      "display_text": "נחש",
+      "spoken_text": "נחש"
+    },
+    "learning.word._fec4": {
+      "asset": "clips/10/1037f243809a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "1037f243809a89cfbf5b0a6ecb2018b3858348e5b8995c277ad4ab8cfc70efa8",
+      "display_text": "עכביש",
+      "spoken_text": "עכביש"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/0f/0f5153be26f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "0f5153be26f4996aae02feb24a8525231665cd0807f1e5cf923c5afa29a07fa5",
+      "display_text": "מבוך הלמידה",
+      "spoken_text": "מבוך הלמידה"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/e2/e22d87267ed6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "e22d87267ed629778cbbf0921af81be38e59118e5aedbcbf0791425a97b89463",
+      "display_text": "אוטומטי",
+      "spoken_text": "אוטומטי"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/83/83dd7a04d667.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "83dd7a04d66756a95c2545ff39abb44882eb10d778275589a9a5ce89347beefa",
+      "display_text": "צ'כית",
+      "spoken_text": "צ'כית"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/71/719b517f6a69.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "719b517f6a691b3e7f9647797c70898d0a64d95aeda61a84a4d2a6ce8a0824a8",
+      "display_text": "דנית",
+      "spoken_text": "דנית"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/dd/dda588329bf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "dda588329bf6e38a85250eebf625b5ea57f1639a1bf091ea730aee5cd282e497",
+      "display_text": "הולנדית",
+      "spoken_text": "הולנדית"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/fa/fa751169107c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "fa751169107c7e5267bced0a7e9dcd8779ff80a20da8727454c0a74169a0cbcb",
+      "display_text": "אנגלית",
+      "spoken_text": "אנגלית"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/68/68c14675558a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "68c14675558a9d7ab6a5f18459230ee42a1989bd0f83a1b2353380900a886368",
+      "display_text": "פינית",
+      "spoken_text": "פינית"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/c4/c4e575cc391c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "c4e575cc391cfbf141f2bc2bd80c38bf8f853aa9434fa8c61628c4931892b042",
+      "display_text": "צרפתית",
+      "spoken_text": "צרפתית"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/de/de8243a3cd87.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "de8243a3cd87a07d9d26d4bd86486f107e93a3c41f5844f776b2eac5c5ca37db",
+      "display_text": "גרמנית",
+      "spoken_text": "גרמנית"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/2e/2e756224d0bc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "2e756224d0bc1d823c1dc197935179e671c4c68ad9a94f764213a73ed99ab8f3",
+      "display_text": "יוונית",
+      "spoken_text": "יוונית"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/47/475eebaa964b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "475eebaa964b165d1c01f77ef4d1bf10998616d20086a58291db739782386d5e",
+      "display_text": "עברית",
+      "spoken_text": "עברית"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/dc/dc24129ec998.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "dc24129ec998e365a5d2fcf45c4304d131f51542c01d7f8c47f73bb528c6acd5",
+      "display_text": "הונגרית",
+      "spoken_text": "הונגרית"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/ee/ee84d6f20c11.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "ee84d6f20c11dc81e0fed7ff3dd8d3242c43d7886c53d9ee683e97483c1011ba",
+      "display_text": "איטלקית",
+      "spoken_text": "איטלקית"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/ee/eeb35a4f3ef0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "eeb35a4f3ef0c9d0a7a288ddc839d26d8f98b76e32a1d10e18e0914957cad3ac",
+      "display_text": "נורווגית",
+      "spoken_text": "נורווגית"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/94/94dbfa4157b9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "94dbfa4157b93fb770f17e1b343d38b430943a3aa56cc0379360dfa4c81b3b61",
+      "display_text": "פולנית",
+      "spoken_text": "פולנית"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/48/4864946e352f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "4864946e352f8c7dbe44cc1d3c021bcdc7fd814c7cfa92515b6edcbe377cb573",
+      "display_text": "פורטוגזית",
+      "spoken_text": "פורטוגזית"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/40/400461aef2f2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "400461aef2f2649b72aae0ccacdc074cdbc3f9dd163e3a4e5bb453d67b6e31f8",
+      "display_text": "רומנית",
+      "spoken_text": "רומנית"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/70/7097da0aded2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "7097da0aded206c4d08ee1bbf6f0c4857bc0678a7f0243af1d1b687fbcd558be",
+      "display_text": "סלובקית",
+      "spoken_text": "סלובקית"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/0b/0b64e193bf08.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "0b64e193bf085c34038210e8a1541619f9f553b25b338b2daaa5d412e29fb908",
+      "display_text": "ספרדית",
+      "spoken_text": "ספרדית"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/58/58bc2898b030.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "58bc2898b030590eff4fb1509f114690f9b527d34c158a89f554554d8278b674",
+      "display_text": "שוודית",
+      "spoken_text": "שוודית"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/f4/f46f6214c431.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "f46f6214c431f78713d06757d6ac07975aadf183ce5f40a44565631cc8188e58",
+      "display_text": "טורקית",
+      "spoken_text": "טורקית"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/30/3058ec35c8a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "3058ec35c8a44d017e22b7a12db9e63528cc1e896e7aa895d122f89307b75132",
+      "display_text": "אוקראינית",
+      "spoken_text": "אוקראינית"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/9a/9a85d76e1cd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "9a85d76e1cd2e4e7a7fd8920cbc2555151c31d08f6a0fa7a8b921830284cf24c",
+      "display_text": "וייטנאמית",
+      "spoken_text": "וייטנאמית"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/3d/3d7eaccd59d9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "3d7eaccd59d9c985770c252ed00ef346b14d653bce4cb24fdc433de62ed76717",
+      "display_text": "ספרנו עד",
+      "spoken_text": "ספרנו עד"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/60/60fd9640e7ab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "60fd9640e7abaf631c0916eb2a3b274a546b9eb80775188592668d9354f506e9",
+      "display_text": "ספרנו ב",
+      "spoken_text": "ספרנו ב"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/ab/ab7f2be54df7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "ab7f2be54df7049832e7fe166dec3a8f10368678ba8ab995ac5c846783f4fb2a",
+      "display_text": "עד",
+      "spoken_text": "עד"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/0d/0dcaadf9f90a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "0dcaadf9f90ad703eb615131062a7f88b832758e3d9969c8f920d12397e5436b",
+      "display_text": "מצאנו את האות",
+      "spoken_text": "מצאנו את האות"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/86/8673dc8e4c0a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "8673dc8e4c0ac2cf7a8a68e39863e40e8f5a4c95dc4e19354c2c939ed8920f26",
+      "display_text": "מצאנו ב",
+      "spoken_text": "מצאנו ב"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/20/20d5ec6d58b8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "20d5ec6d58b8f0730d1c7e042c078e56213b8c0e7af44144871c18c7b7cb7917",
+      "display_text": "את האות",
+      "spoken_text": "את האות"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/64/6408e806144f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "6408e806144f12d09d6ddd13b9f13d02ad26a5b0cb49401fa449baeb44b36816",
+      "display_text": "מצאנו אותיות מ-",
+      "spoken_text": "מצאנו אותיות מ-"
+    },
+    "ui.recap_tts_found_letters_from.0": {
+      "asset": "clips/eb/ebd8e63151ac.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "ebd8e63151ac68c7fcf4b58b4fe7f5fd5cd4a7be731db508c6d459a05e307d70",
+      "display_text": "מצאנו אותיות מ",
+      "spoken_text": "מצאנו אותיות מ"
+    },
+    "ui.recap_tts_found_letters_from_lang.1": {
+      "asset": "clips/66/66fcc7960e8d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "66fcc7960e8d900ea9c00de5f09cc805c077482617f85489f879d5b2d63a320e",
+      "display_text": "אותיות מ",
+      "spoken_text": "אותיות מ"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/8f/8f1cf6e4087b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "8f1cf6e4087b670630c5a5e0d8a2a31dc00bbb8f45daaca0f70ac34a28615db8",
+      "display_text": "אותיות מ-",
+      "spoken_text": "אותיות מ-"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/34/34e8cad5e80b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "34e8cad5e80b4fb35e82e0141c61a08d2461cd1853b5b3be8e3344395631d835",
+      "display_text": "אייתנו את הביטוי",
+      "spoken_text": "אייתנו את הביטוי"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/40/40bc77bb9639.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "40bc77bb9639340ab1564e325a31762487dc159a2608925d2582f1f57b85b1fe",
+      "display_text": "את הביטוי",
+      "spoken_text": "את הביטוי"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/d0/d0a96c27f6fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d0a96c27f6fe8404b5275d8660c679671845beef190ccec86319ac4174ec0c5c",
+      "display_text": "אייתנו את המילה",
+      "spoken_text": "אייתנו את המילה"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/ab/ab30bdbd24b1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "ab30bdbd24b186823c62b0d9f4294aa8a5f32b7d2056cd26d38e1fa31e681da6",
+      "display_text": "אייתנו ב",
+      "spoken_text": "אייתנו ב"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/ce/ce3d13677c9d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "ce3d13677c9d29720a4488548ea6b8419ae815793b931d671531a20d7e18d308",
+      "display_text": "את המילה",
+      "spoken_text": "את המילה"
+    }
+  }
+}

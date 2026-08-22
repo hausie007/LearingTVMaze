@@ -12,7 +12,7 @@
   },
   "counts": {
     "number": 50,
-    "char": 26,
+    "char": 32,
     "word": 182,
     "ui": 58
   },
@@ -25,6 +25,15 @@
       "sha256": "a3892d272662de63a0cdd5945b5a8d12a2ac01c1a3bd1453734142167aa965e9",
       "display_text": "A",
       "spoken_text": "a"
+    },
+    "learning.char.a_circumflex": {
+      "asset": "clips/95/9559800b95b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "9559800b95b46342635b754a27b9ef846922b6dae3c12bd0d6a8f0cb594fe605",
+      "display_text": "Â",
+      "spoken_text": "a accent circonflexe"
     },
     "learning.char.b": {
       "asset": "clips/5f/5fa73a4e66f6.mp3",
@@ -62,6 +71,33 @@
       "display_text": "E",
       "spoken_text": "e"
     },
+    "learning.char.e_acute": {
+      "asset": "clips/50/506ee1e3a206.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "506ee1e3a206b5bd03b87fd298f06cdb6d294224e5e69a34758ddff39dc29ba8",
+      "display_text": "É",
+      "spoken_text": "e accent aigu"
+    },
+    "learning.char.e_circumflex": {
+      "asset": "clips/c4/c463aee6d9ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "c463aee6d9ee2daa151308ab85ab86b4e795bcd9452d44025de26176243b951f",
+      "display_text": "Ê",
+      "spoken_text": "e accent circonflexe"
+    },
+    "learning.char.e_grave": {
+      "asset": "clips/46/4609737f1e40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "4609737f1e406cd1bc95bb8d03bb1d5db6c5d16cb040401bdc66e8e9e5208938",
+      "display_text": "È",
+      "spoken_text": "e accent grave"
+    },
     "learning.char.f": {
       "asset": "clips/d1/d1ae13c410a4.mp3",
       "word_ends_ms": [],
@@ -97,6 +133,15 @@
       "sha256": "7a1877afdfc5d883702b2062621b75421b1886d665b2e2aa271e51b5fc57ed26",
       "display_text": "I",
       "spoken_text": "i"
+    },
+    "learning.char.i_circumflex": {
+      "asset": "clips/5b/5b6ea9986c97.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "5b6ea9986c978d06c2d0d6efee1682dd9ae3fb5c1e09726524540084f25afe0f",
+      "display_text": "Î",
+      "spoken_text": "i accent circonflexe"
     },
     "learning.char.j": {
       "asset": "clips/2a/2a47ccb7a73b.mp3",
@@ -151,6 +196,15 @@
       "sha256": "1506ad834baf8c48f9fb479a8409127671d6d8365527cd7a82c5bbd3271c9813",
       "display_text": "O",
       "spoken_text": "o"
+    },
+    "learning.char.oe_ligature": {
+      "asset": "clips/ad/ada473f08bb5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "ada473f08bb59e14e361fd2786f42fed0bdecff6b2ca8fe2363e507861a5782c",
+      "display_text": "Œ",
+      "spoken_text": "e dans l'o"
     },
     "learning.char.p": {
       "asset": "clips/33/3397ada5778a.mp3",

@@ -14,386 +14,386 @@
   "counts": {
     "number": 50,
     "char": 42,
-    "word": 277,
+    "word": 276,
     "ui": 56,
     "number_form": 50
   },
   "items": {
     "learning.char.a": {
-      "asset": "clips/8a/8a1231098835.mp3",
+      "asset": "clips/27/27811d6665aa.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 758,
-      "sha256": "8a123109883560ce7d65a948688bc5c82fdd0702acfed7475e9a662f123da809",
+      "sha256": "27811d6665aaf666c899d05d5af7c35ad490cd95b0c5d30406f37fdf810e3e41",
       "display_text": "A",
       "spoken_text": "á"
     },
     "learning.char.a_acute": {
-      "asset": "clips/95/9581f7541d27.mp3",
+      "asset": "clips/3c/3c3085236c18.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1646,
-      "sha256": "9581f7541d2720f0f07439340c24da287de6f312f60123f33cfe6007700e92ea",
+      "sha256": "3c3085236c18f2d252b7b90a4d4ee4be24044492de6e6464ab8b52f541b3309f",
       "display_text": "Á",
       "spoken_text": "dlouhé á"
     },
     "learning.char.b": {
-      "asset": "clips/98/987b61d6d19d.mp3",
+      "asset": "clips/bc/bc15e75f99c4.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 940,
-      "sha256": "987b61d6d19d5e0225765d808b9500f25eac947de7d5de6efde512a624215e4b",
+      "sha256": "bc15e75f99c456d2f87b1a554fe364d31dbd69d64bc74bedc6ffe0ffcdc8f9e9",
       "display_text": "B",
       "spoken_text": "bé"
     },
     "learning.char.c": {
-      "asset": "clips/34/3476ce5b6ba1.mp3",
+      "asset": "clips/c7/c769515b2f3b.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 836,
-      "sha256": "3476ce5b6ba169d33e0e1c9074d3ec84c6ab766f6a1b640fe6aa463cb69cc589",
+      "sha256": "c769515b2f3b086049df6986d3b4fbab54cdef80ff7b71169e185725ad7f20b1",
       "display_text": "C",
       "spoken_text": "cé"
     },
     "learning.char.c_caron": {
-      "asset": "clips/51/513e67e5b204.mp3",
+      "asset": "clips/c0/c0b202a8ebad.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 888,
-      "sha256": "513e67e5b2043225c3b5f514bcd8bd0fb3aeda6065524aabe25e3d336c2c9aec",
+      "sha256": "c0b202a8ebad71a371cc40369bcbfa8a96498b94e62617e6a3cf716107d34b75",
       "display_text": "Č",
       "spoken_text": "čé"
     },
     "learning.char.ch": {
-      "asset": "clips/1b/1b3a00041d07.mp3",
+      "asset": "clips/c6/c611e9491088.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1019,
-      "sha256": "1b3a00041d078821844a1330caa692d8fbf68ee5254b15580263f779216d1087",
+      "sha256": "c611e94910880c9bb8ef46790e7536425375f4907054d8f4e1af704c0fb5c9e8",
       "display_text": "CH",
       "spoken_text": "chá"
     },
     "learning.char.d": {
-      "asset": "clips/6b/6b5093b92d7e.mp3",
+      "asset": "clips/fb/fbd315aeb2e7.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 966,
-      "sha256": "6b5093b92d7edc6576447d750dad759fd7135a12c12a04cb8f61b09fc2d6adec",
+      "sha256": "fbd315aeb2e7617664dd3fb31b896630ca95196e77ba1362080beb73cf769ac1",
       "display_text": "D",
       "spoken_text": "dé"
     },
     "learning.char.d_caron": {
-      "asset": "clips/c5/c57fbc66e431.mp3",
+      "asset": "clips/2d/2d4c31e6287e.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 888,
-      "sha256": "c57fbc66e43180f47688c990d86cc07d79a7a42f3175beb063f54d3a19af8101",
+      "sha256": "2d4c31e6287e094de42b5613ffd0600e1006fef44f103e8d4db647633fd470c0",
       "display_text": "Ď",
       "spoken_text": "ďé"
     },
     "learning.char.e": {
-      "asset": "clips/ca/ca71aeb197fb.mp3",
+      "asset": "clips/03/03791de6708c.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
-      "duration_ms": 1071,
-      "sha256": "ca71aeb197fb9d5bd36756495a9764885839eac1c61f2aabe7b2d09cf119fab1",
+      "duration_ms": 1045,
+      "sha256": "03791de6708c5759d0201055ca3f9a8604866e70faa0ceabb53705080b648700",
       "display_text": "E",
       "spoken_text": "é"
     },
     "learning.char.e_acute": {
-      "asset": "clips/ae/ae6168fb8418.mp3",
+      "asset": "clips/80/80cc6c6c1ffd.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1202,
-      "sha256": "ae6168fb841816aaebc079d8e73a20630ac81445c3cfbb0dbba18f460038551b",
+      "sha256": "80cc6c6c1ffdd5818e5a66f6f007f5cd7fb93f26ca3f53b6785ac160b0d791bc",
       "display_text": "É",
       "spoken_text": "dlouhé é"
     },
     "learning.char.e_caron": {
-      "asset": "clips/31/31bc8a59dfa3.mp3",
+      "asset": "clips/03/0386b790ffbd.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1280,
-      "sha256": "31bc8a59dfa3479a0221938fe9db44de5e741f1f1048ee75a04bee73c37b3520",
+      "sha256": "0386b790ffbd3b10a62423de560b5e50cfbfca40697e7fdc6b106cb367c1e2eb",
       "display_text": "Ě",
       "spoken_text": "é s háčkem"
     },
     "learning.char.f": {
-      "asset": "clips/9b/9b1c95f80bbb.mp3",
+      "asset": "clips/74/74cd2abfd38f.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 732,
-      "sha256": "9b1c95f80bbb6e214eae035c6c758c5b17be0cabf5577ce4e211563848125784",
+      "sha256": "74cd2abfd38f274e43f4085e675ac0ff22287d7d34a87f1df86ca7d8cea8e459",
       "display_text": "F",
       "spoken_text": "ef"
     },
     "learning.char.g": {
-      "asset": "clips/56/56f81f1baee5.mp3",
+      "asset": "clips/61/61c1b111606d.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 784,
-      "sha256": "56f81f1baee56fcc97ff957969750a163b88025f48c3e7261165221c71fa4e69",
+      "sha256": "61c1b111606d85bad627fe4213b5ef6e245e8a72718338bc7a866b26b9e90d75",
       "display_text": "G",
       "spoken_text": "gé"
     },
     "learning.char.h": {
-      "asset": "clips/bb/bbfa44aa2cc0.mp3",
+      "asset": "clips/e4/e4551888b7ca.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 758,
-      "sha256": "bbfa44aa2cc00cb447e8c05f05c61aff0b2441509fc3f8a9261eab06b3324b44",
+      "sha256": "e4551888b7cadd5ff8d12c709779a0b36c4b5e6b1b321e7aa0025ff0ad9c6eb0",
       "display_text": "H",
       "spoken_text": "há"
     },
     "learning.char.i": {
-      "asset": "clips/61/61597f701688.mp3",
+      "asset": "clips/52/52491d48a6b4.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 784,
-      "sha256": "61597f701688e415f35dbebecdc90b367148310ee8488db9a8c57795bb230509",
+      "sha256": "52491d48a6b4b8247d9a45652e191034d28fe0efe7e581a84728f8b9860fb520",
       "display_text": "I",
       "spoken_text": "í"
     },
     "learning.char.i_acute": {
-      "asset": "clips/27/274dc252ae63.mp3",
+      "asset": "clips/0f/0f82071b0527.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1123,
-      "sha256": "274dc252ae63b345acbc4833e7140a3484c30f5d5ac8a0357a19a2d149fe4217",
+      "sha256": "0f82071b0527a9f4902b811d911ab9cb3f0b9ab01f6f4c91545c51c197d39abd",
       "display_text": "Í",
       "spoken_text": "dlouhé í"
     },
     "learning.char.j": {
-      "asset": "clips/ae/ae9f0c660ae7.mp3",
+      "asset": "clips/c9/c901ce11609d.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 888,
-      "sha256": "ae9f0c660ae74b167a0a9b81eafabb9b9779c2077f10557220235409a896f9d1",
+      "sha256": "c901ce11609de487527f6935969ba3fdb18cc8d473ea29025e73c78c9c7b7a7f",
       "display_text": "J",
       "spoken_text": "jé"
     },
     "learning.char.k": {
-      "asset": "clips/45/4529d0ca96a9.mp3",
+      "asset": "clips/6c/6c1cd6c02466.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 810,
-      "sha256": "4529d0ca96a9d38260186f890c5766baef6054b8455f2e701c7984ab1169e0fa",
+      "sha256": "6c1cd6c02466fd3e45e93589fe977d60473331e9d90ea225933188fd6ceac83e",
       "display_text": "K",
       "spoken_text": "ká"
     },
     "learning.char.l": {
-      "asset": "clips/c6/c6558f95a8e6.mp3",
+      "asset": "clips/c7/c7fc8933e342.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 810,
-      "sha256": "c6558f95a8e68106e94912b88f185b98a7b62a1cbe7453509bd2422f78dd9c58",
+      "sha256": "c7fc8933e342969ad306727f9535a5bc855c087bc68eebba6e5f1f3691fbed4a",
       "display_text": "L",
       "spoken_text": "el"
     },
     "learning.char.m": {
-      "asset": "clips/a4/a4e69f98d63e.mp3",
+      "asset": "clips/ba/ba0b945d4736.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
-      "duration_ms": 836,
-      "sha256": "a4e69f98d63e43bbdfaaa9feea6c7e8e07c1cd88fe9a7c509a923eb5beed00ac",
+      "duration_ms": 810,
+      "sha256": "ba0b945d4736078e03c18e44158720872d25f4bb24d2a699bb224873d9fafad3",
       "display_text": "M",
       "spoken_text": "em"
     },
     "learning.char.n": {
-      "asset": "clips/e2/e24bb3b2080b.mp3",
+      "asset": "clips/23/23992b53e89b.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 914,
-      "sha256": "e24bb3b2080b3246bc7e2e6c69b23aabb2791fbc46e6ac23ac66e5a3761b7844",
+      "sha256": "23992b53e89bb827b888e42099dd7362b04129b7fda1af2902e5e658977452ac",
       "display_text": "N",
       "spoken_text": "en"
     },
     "learning.char.n_caron": {
-      "asset": "clips/99/9932b4172258.mp3",
+      "asset": "clips/51/51b2bb3453d2.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 940,
-      "sha256": "9932b4172258ec9e8c284abcf6c0555336f22aea4523e2467463e2cef0f81ce6",
+      "sha256": "51b2bb3453d28c65a13203ad536c73017215553b9169ac2e1c7dd3e798db19eb",
       "display_text": "Ň",
       "spoken_text": "eň"
     },
     "learning.char.o": {
-      "asset": "clips/a7/a7f7a7e9140e.mp3",
+      "asset": "clips/16/16de7b3a441d.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 862,
-      "sha256": "a7f7a7e9140e49f10c20c94fef9435012d49271b02cc81fea5db60b0c75ab715",
+      "sha256": "16de7b3a441de44727bca49d0aae61719bc6b0707d96cfb32b36a50051a30cd8",
       "display_text": "O",
       "spoken_text": "ó"
     },
     "learning.char.o_acute": {
-      "asset": "clips/ae/aed196fb2224.mp3",
+      "asset": "clips/02/02beefd2115c.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1123,
-      "sha256": "aed196fb22240d8504fa8c50b349e5040dc3af794f0783fb18370a95280766ad",
+      "sha256": "02beefd2115cce3c1529cc34ec889fad4a574fc8c5ece89c1d0e957f23b7c251",
       "display_text": "Ó",
       "spoken_text": "dlouhé ó"
     },
     "learning.char.p": {
-      "asset": "clips/0a/0a0241fb8e62.mp3",
+      "asset": "clips/00/00a28038f7bb.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 836,
-      "sha256": "0a0241fb8e62340337772e6a9b10f654ae23954a9b7c26b3f863fae90a884d30",
+      "sha256": "00a28038f7bb5e3b34e5deca8f38d27c53ec112ffaa65f27a582e64f7bfea71c",
       "display_text": "P",
       "spoken_text": "pé"
     },
     "learning.char.q": {
-      "asset": "clips/1f/1f28c7b4f94d.mp3",
+      "asset": "clips/9a/9a9a356abeda.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 810,
-      "sha256": "1f28c7b4f94ddcf901c3b521c1405eb7ee881cbc1484075d1472a618aa4e83c6",
+      "sha256": "9a9a356abedad12583667608070011af8b7ec4956e7a5985adf493640ab3ab86",
       "display_text": "Q",
       "spoken_text": "kvé"
     },
     "learning.char.r": {
-      "asset": "clips/65/65173ee9cc22.mp3",
+      "asset": "clips/fd/fd5ea5ac8f23.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
-      "duration_ms": 810,
-      "sha256": "65173ee9cc2207732043216c997c40d97384003c953b217065bdf470e0d07340",
+      "duration_ms": 758,
+      "sha256": "fd5ea5ac8f23adeade167f09c0150abf672bd63fc93231fa161815365fc36c0f",
       "display_text": "R",
       "spoken_text": "er"
     },
     "learning.char.r_caron": {
-      "asset": "clips/41/41027803c14e.mp3",
+      "asset": "clips/f6/f61c1a00a327.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 705,
-      "sha256": "41027803c14ed8ec8a81cb52d6b1e91b588d8977464c4dc4512ed748438baeaa",
+      "sha256": "f61c1a00a3277f492c2fe1201452cc8ad31f34ae701240df0f9743e6a1dcc2d3",
       "display_text": "Ř",
       "spoken_text": "eř"
     },
     "learning.char.s": {
-      "asset": "clips/41/4166639f9575.mp3",
+      "asset": "clips/60/60160d50dd1c.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 679,
-      "sha256": "4166639f9575a84f6fa8d814474bb5ba413f630a82554619cb49af14591100a2",
+      "sha256": "60160d50dd1c6fe9f2b3309c557847183c0f74bad050d417be1c405ee3dbef16",
       "display_text": "S",
       "spoken_text": "es"
     },
     "learning.char.s_caron": {
-      "asset": "clips/b0/b0516acaa1b9.mp3",
+      "asset": "clips/7f/7fceb90c5a8a.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 758,
-      "sha256": "b0516acaa1b9ccafdcc5c875f9f8551cb2cefb736ecd6fba51e27a4f76e3b739",
+      "sha256": "7fceb90c5a8a5c14bfec26e218178f822a4dbc522c0df517bf625412c834ae80",
       "display_text": "Š",
       "spoken_text": "eš"
     },
     "learning.char.t": {
-      "asset": "clips/a4/a4e5704c9dfa.mp3",
+      "asset": "clips/52/523c34e23877.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 679,
-      "sha256": "a4e5704c9dfa529adcf04c7baf9ac7d54c89a5cdd45cf0c876060d8940c7399e",
+      "sha256": "523c34e238771a869029f35d9e05beb27b89f899705477d45b6f570345e04f3c",
       "display_text": "T",
       "spoken_text": "té"
     },
     "learning.char.t_caron": {
-      "asset": "clips/e8/e885d4f28f4e.mp3",
+      "asset": "clips/8c/8c592ef15fec.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 758,
-      "sha256": "e885d4f28f4e2c5e416c988590d4c5cdfbf2f850cfb5a0539239d98414c20458",
+      "sha256": "8c592ef15fec83c6213165c53a95e7b6137dc41bc5e80b9042c034fb7f0a6538",
       "display_text": "Ť",
       "spoken_text": "ťé"
     },
     "learning.char.u": {
-      "asset": "clips/e3/e3b8099bbc82.mp3",
+      "asset": "clips/54/54311cb6707f.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 679,
-      "sha256": "e3b8099bbc82e9e590eff33272740e86e51d0b9d815ca4845c22d89f09a1a036",
+      "sha256": "54311cb6707fb6275bc0059d39dc1f22090e8e2d56a301264738da26d918b68e",
       "display_text": "U",
       "spoken_text": "ú"
     },
     "learning.char.u_acute": {
-      "asset": "clips/64/64b9fbc1b8af.mp3",
+      "asset": "clips/65/65f7dd8937de.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1332,
-      "sha256": "64b9fbc1b8af8a8f4186d5e013fc46b690646ede09e008da3dfb46f3a8df8d42",
+      "sha256": "65f7dd8937de80842b0699de7db68971f46949e6aeac34e638635dc1efbb9d8a",
       "display_text": "Ú",
       "spoken_text": "ú s čárkou"
     },
     "learning.char.u_ring": {
-      "asset": "clips/da/da5e1120dfb0.mp3",
+      "asset": "clips/dd/ddd5f9c8c6ae.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1594,
-      "sha256": "da5e1120dfb06bdcea4cf3f815dd3d0f8777ead3dac98216f80e01f6a7bd30e7",
+      "sha256": "ddd5f9c8c6aedf648fc13c204f022123cebe4a2ce3d084ced1606f96f1da7e6b",
       "display_text": "Ů",
       "spoken_text": "ů s kroužkem"
     },
     "learning.char.v": {
-      "asset": "clips/f6/f66bc1fe23df.mp3",
+      "asset": "clips/6d/6d14381272e7.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 705,
-      "sha256": "f66bc1fe23df05ef5a66f758d77c286e531864906953dfc316cffc6036147488",
+      "sha256": "6d14381272e74dfb8f7852917b9a779d0116ee5e62fc9068740e3fc48cc8e1fc",
       "display_text": "V",
       "spoken_text": "vé"
     },
     "learning.char.w": {
-      "asset": "clips/0a/0ae87c478e49.mp3",
+      "asset": "clips/3d/3d39219dae21.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1150,
-      "sha256": "0ae87c478e49139d30eab66fb5e1f23b479d0a10445c478ad8cf48e7e7faf448",
+      "sha256": "3d39219dae215fdd232821e5ae089e58b9579d216fe06501abb061adb451069c",
       "display_text": "W",
       "spoken_text": "dvojité vé"
     },
     "learning.char.x": {
-      "asset": "clips/7c/7ca359030f3f.mp3",
+      "asset": "clips/25/2590fc758aa1.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 653,
-      "sha256": "7ca359030f3fac5d66827fcbb004aecd3a63af6913f5eed73679525a8afbd0d4",
+      "sha256": "2590fc758aa1f346a23d67e47c7babb91d565dc7632739cb0ddbdddd3185e6de",
       "display_text": "X",
       "spoken_text": "iks"
     },
     "learning.char.y": {
-      "asset": "clips/ec/ec109b5acd3e.mp3",
+      "asset": "clips/eb/eb0d1f39168e.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 862,
-      "sha256": "ec109b5acd3e540d9c57a8ba18738de25155132686809d01b9ed148640c0c2d9",
+      "sha256": "eb0d1f39168ed61c7663ec54f27945dba17d30bcfbc07da64eae7f7df8d3fac3",
       "display_text": "Y",
       "spoken_text": "ypsilon"
     },
     "learning.char.y_acute": {
-      "asset": "clips/5b/5b8adc5ae25e.mp3",
+      "asset": "clips/91/91a8532f9076.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 1254,
-      "sha256": "5b8adc5ae25e57f9de5c3b30be426769a8518681ad4478a2efe3c541c0543a14",
+      "sha256": "91a8532f9076bf51036625d7b2ddec7281932f55ef0a2c51c11d431db7ac216d",
       "display_text": "Ý",
       "spoken_text": "dlouhé ypsilon"
     },
     "learning.char.z": {
-      "asset": "clips/f9/f9b444fed152.mp3",
+      "asset": "clips/98/98f6151fe591.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 732,
-      "sha256": "f9b444fed1528c6a9a1e622aeb38556a4eb01ae835b0eada056675b0882dd405",
+      "sha256": "98f6151fe59167046cff5855d810b9af7450514738957db1d7f1231dba83ba36",
       "display_text": "Z",
       "spoken_text": "zet"
     },
     "learning.char.z_caron": {
-      "asset": "clips/55/55b4a75390ec.mp3",
+      "asset": "clips/f7/f7f681f91fd5.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
       "duration_ms": 627,
-      "sha256": "55b4a75390ec91a60c5288134fa100eb5e8dc0458678f04464275d087620b976",
+      "sha256": "f7f681f91fd5ebafbe1c3ea62bfd1a37888a2460e4cfdeb03c321e6f5f6950cb",
       "display_text": "Ž",
       "spoken_text": "žet"
     },
@@ -959,6 +959,15 @@
       "display_text": "BRAMBORY",
       "spoken_text": "brambory"
     },
+    "learning.word.broskev": {
+      "asset": "clips/f4/f48c87f2559a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "f48c87f2559aca6c9c0ad2b2adfeb6d12067af1d96ce4a6328f16340913db510",
+      "display_text": "BROSKEV",
+      "spoken_text": "broskev"
+    },
     "learning.word.brouk": {
       "asset": "clips/85/851fc0a5128d.mp3",
       "word_ends_ms": [],
@@ -1079,14 +1088,14 @@
       "display_text": "CITRON",
       "spoken_text": "citron"
     },
-    "learning.word.coko": {
-      "asset": "clips/7d/7d0a2954f3bc.mp3",
+    "learning.word.cokolada": {
+      "asset": "clips/69/699fba7e029d.mp3",
       "word_ends_ms": [],
       "word_fade_ms": [],
-      "duration_ms": 601,
-      "sha256": "7d0a2954f3bcbcd25ab879cc3ad54e9747df7bb62fcfc1fcd3abd2d04adb9980",
-      "display_text": "ČOKO",
-      "spoken_text": "čoko"
+      "duration_ms": 836,
+      "sha256": "699fba7e029d6db61d0251a17d31e5f65c3401bef59b1ca3200dd5d403463398",
+      "display_text": "ČOKOLÁDA",
+      "spoken_text": "čokoláda"
     },
     "learning.word.cokoladovy_dort": {
       "asset": "clips/9e/9e75b1a3c095.mp3",
@@ -1116,15 +1125,6 @@
       "display_text": "ČTI DOBROU KNIHU",
       "spoken_text": "čti dobrou knihu"
     },
-    "learning.word.cuketa": {
-      "asset": "clips/90/9052f5952246.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 679,
-      "sha256": "9052f5952246c2f8d9edb16d2d89c2c6946f89eb3ab829a6073b89b031aeaee7",
-      "display_text": "CUKETA",
-      "spoken_text": "cuketa"
-    },
     "learning.word.delfin": {
       "asset": "clips/73/73f79ef09f37.mp3",
       "word_ends_ms": [],
@@ -1152,15 +1152,6 @@
       "display_text": "DINOSAUR",
       "spoken_text": "dinosaur"
     },
-    "learning.word.dinozaur": {
-      "asset": "clips/60/6061a4a58e4e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 888,
-      "sha256": "6061a4a58e4e583fe3ac53ad52157353cb947c800ce815a4b7a37224e01e6a24",
-      "display_text": "DINOZAUR",
-      "spoken_text": "dinozaur"
-    },
     "learning.word.dira": {
       "asset": "clips/ec/ec8e0aa40614.mp3",
       "word_ends_ms": [],
@@ -1178,21 +1169,6 @@
       "sha256": "19dfe5e6ce5efe929dd94619a655a06dddbc029b4ba94246586670ee70c1a2a2",
       "display_text": "DOBRODRUŽSTVÍ",
       "spoken_text": "dobrodružství"
-    },
-    "learning.word.dobrota_je_magie": {
-      "asset": "clips/79/793f41c48e26.mp3",
-      "word_ends_ms": [
-        533,
-        653
-      ],
-      "word_fade_ms": [
-        12,
-        12
-      ],
-      "duration_ms": 1202,
-      "sha256": "793f41c48e2629ffd65ef641bba148d29a33fe4a8655132dbac5ce2c3fa49489",
-      "display_text": "DOBROTA JE MAGIE",
-      "spoken_text": "dobrota je magie"
     },
     "learning.word.dobrou_noc_a_spi": {
       "asset": "clips/a1/a1e0993000c8.mp3",
@@ -1255,6 +1231,15 @@
       "sha256": "51bbc3b3568b000f2c8bb27b9298d4a53c3c6eb7e29f28b2f64529650016760b",
       "display_text": "DŮM",
       "spoken_text": "dům"
+    },
+    "learning.word.dvere": {
+      "asset": "clips/af/af752d5bad79.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "af752d5bad7928318b2140f9f334967d74ccfc499e170dbbe91e2c85db5c8bbd",
+      "display_text": "DVEŘE",
+      "spoken_text": "dveře"
     },
     "learning.word.dyne": {
       "asset": "clips/70/70800980becb.mp3",
@@ -1368,6 +1353,19 @@
       "display_text": "HRNEK",
       "spoken_text": "hrnek"
     },
+    "learning.word.hroznove_vino": {
+      "asset": "clips/5f/5f81cb9d5b90.mp3",
+      "word_ends_ms": [
+        637
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1123,
+      "sha256": "5f81cb9d5b908ff44b92c43704d94a9ec8b073d736e8bbcc1c337a877ac9ec5a",
+      "display_text": "HROZNOVÉ VÍNO",
+      "spoken_text": "hroznové víno"
+    },
     "learning.word.hruska": {
       "asset": "clips/80/80fd623435c1.mp3",
       "word_ends_ms": [],
@@ -1455,6 +1453,19 @@
       "display_text": "JÍME ZDRAVÉ JÍDLO",
       "spoken_text": "jíme zdravé jídlo"
     },
+    "learning.word.jizdni_kolo": {
+      "asset": "clips/02/023470823c60.mp3",
+      "word_ends_ms": [
+        566
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1019,
+      "sha256": "023470823c60d178f5c7f144f57850f89afbee36e632e8ba1d6c1d2d71a97820",
+      "display_text": "JÍZDNÍ KOLO",
+      "spoken_text": "jízdní kolo"
+    },
     "learning.word.kachnicka": {
       "asset": "clips/88/88a48f22b57f.mp3",
       "word_ends_ms": [],
@@ -1466,8 +1477,14 @@
     },
     "learning.word.kamaradi_si_hraji": {
       "asset": "clips/07/0706ea895f00.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        571,
+        747
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
       "duration_ms": 1280,
       "sha256": "0706ea895f00b93b06fc2b16801ed46107b8d728257a4a49f379139caf467e79",
       "display_text": "KAMARÁDI SI HRAJÍ",
@@ -1538,8 +1555,14 @@
     },
     "learning.word.kocka_leze_dirou": {
       "asset": "clips/ea/ea1c2bf4fa41.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        412,
+        661
+      ],
+      "word_fade_ms": [
+        12,
+        21
+      ],
       "duration_ms": 1306,
       "sha256": "ea1c2bf4fa416b531b024a883e819a24a1bf5fa55af11a8525fb91b6a068d760",
       "display_text": "KOČKA LEZE DÍROU",
@@ -1752,6 +1775,21 @@
       "sha256": "acc1364badd9ff95e0130ecf4a4f1db755f4351395c69cd52fded6f2fbb61e4f",
       "display_text": "KYTARA",
       "spoken_text": "kytara"
+    },
+    "learning.word.laskavost_je_kouzlo": {
+      "asset": "clips/91/91f38f082432.mp3",
+      "word_ends_ms": [
+        771,
+        911
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1515,
+      "sha256": "91f38f082432753335f82c9e7c23ff8d5260b3615e0a79eb7fd2e0a5d53872ac",
+      "display_text": "LASKAVOST JE KOUZLO",
+      "spoken_text": "laskavost je kouzlo"
     },
     "learning.word.led": {
       "asset": "clips/71/71e124ca1b0a.mp3",
@@ -1979,8 +2017,12 @@
     },
     "learning.word.mekky_polstar": {
       "asset": "clips/ac/ac60e3800fc2.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        370
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1228,
       "sha256": "ac60e3800fc257c4090774eb94084a14759014339dca936a61b0115731134940",
       "display_text": "MĚKKÝ POLŠTÁŘ",
@@ -2004,20 +2046,20 @@
       "display_text": "MĚSÍC",
       "spoken_text": "měsíc"
     },
-    "learning.word.mesic_jasno_sviti": {
-      "asset": "clips/36/36278d492a5b.mp3",
+    "learning.word.mesic_jasne_sviti": {
+      "asset": "clips/89/89a075d63060.mp3",
       "word_ends_ms": [
-        587,
-        937
+        586,
+        956
       ],
       "word_fade_ms": [
-        20,
-        12
+        30,
+        40
       ],
-      "duration_ms": 1567,
-      "sha256": "36278d492a5bbafae47b1a0c5ae4afbd2e2fff73cf0fcd62bf23d58e3b9372e8",
-      "display_text": "MĚSÍC JASNO SVÍTÍ",
-      "spoken_text": "měsíc jasno svítí"
+      "duration_ms": 1646,
+      "sha256": "89a075d630606b8a9d09a40e0139188332f75a6511b15ae6691b11cd622e7b0b",
+      "display_text": "MĚSÍC JASNĚ SVÍTÍ",
+      "spoken_text": "měsíc jasně svítí"
     },
     "learning.word.mic": {
       "asset": "clips/92/9226b4674fd4.mp3",
@@ -2253,15 +2295,6 @@
       "display_text": "OČI",
       "spoken_text": "oči"
     },
-    "learning.word.odrazedlo": {
-      "asset": "clips/8c/8cb93361657a.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 940,
-      "sha256": "8cb93361657a099980f3585b68d42b422b200292be5c02ebf3d61f0f0b619d10",
-      "display_text": "ODRÁŽEDLO",
-      "spoken_text": "odrážedlo"
-    },
     "learning.word.ohen": {
       "asset": "clips/b0/b0ab4d11c749.mp3",
       "word_ends_ms": [],
@@ -2289,6 +2322,15 @@
       "display_text": "OKO",
       "spoken_text": "oko"
     },
+    "learning.word.okurka": {
+      "asset": "clips/96/9666723ba918.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "9666723ba9184d8ce0b08e4398b7b046ceecc4fe48ef58591471f688900ff3ba",
+      "display_text": "OKURKA",
+      "spoken_text": "okurka"
+    },
     "learning.word.opice": {
       "asset": "clips/44/44c7c9edcda8.mp3",
       "word_ends_ms": [],
@@ -2315,15 +2357,6 @@
       "sha256": "e6885eafe45fd1a52f8cbae24949cea7630117603b35311eca2a64dd83e755b5",
       "display_text": "OSTROVEK",
       "spoken_text": "ostrovek"
-    },
-    "learning.word.ostruziny": {
-      "asset": "clips/3b/3bc396813f37.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 888,
-      "sha256": "3bc396813f37416e18b2f36c8d073633aa91950a886ce46a269a39824426a4b3",
-      "display_text": "OSTRUŽINY",
-      "spoken_text": "ostružiny"
     },
     "learning.word.palacinky": {
       "asset": "clips/3c/3cb2015e7022.mp3",
@@ -2361,6 +2394,15 @@
       "display_text": "PAPÍR",
       "spoken_text": "papír"
     },
+    "learning.word.parnik": {
+      "asset": "clips/3e/3e64eb58df85.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3e64eb58df8509645bd8e3483c603a046561350a1d1fdad16728390e53ad30a6",
+      "display_text": "PARNÍK",
+      "spoken_text": "parník"
+    },
     "learning.word.pav": {
       "asset": "clips/c5/c507b46a0867.mp3",
       "word_ends_ms": [],
@@ -2390,8 +2432,12 @@
     },
     "learning.word.pecene_kure": {
       "asset": "clips/d5/d5423135889b.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        424
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1019,
       "sha256": "d5423135889bae24c07bbce3d7411ef5833c3a978c88d63a3ee528e83ffb8937",
       "display_text": "PEČENÉ KUŘE",
@@ -2532,8 +2578,12 @@
     },
     "learning.word.pomaham_mamince": {
       "asset": "clips/69/6979b777ab79.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        582
+      ],
+      "word_fade_ms": [
+        30
+      ],
       "duration_ms": 1410,
       "sha256": "6979b777ab79df733ab66c2d23210019bca6d7e58230f7c93c7e9bf340c1fec9",
       "display_text": "POMÁHÁM MAMINCE",
@@ -2551,15 +2601,6 @@
       "sha256": "13108f9bf4c8b95bb9639b0f368a5fb27ef56af2de964f72267e884008773cd0",
       "display_text": "POMALÝ ŠNEK",
       "spoken_text": "pomalý šnek"
-    },
-    "learning.word.ponorka": {
-      "asset": "clips/d9/d9ff98edd9a6.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 732,
-      "sha256": "d9ff98edd9a65a2a5cd1b822906c110dfe50b81d44bf0a553de740fb5f681e41",
-      "display_text": "PONORKA",
-      "spoken_text": "ponorka"
     },
     "learning.word.popelarske_auto": {
       "asset": "clips/5a/5a13ef2bbb9b.mp3",
@@ -2671,8 +2712,12 @@
     },
     "learning.word.ranni_slunce": {
       "asset": "clips/1a/1ab724f8c755.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        379
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1150,
       "sha256": "1ab724f8c755bdcb485e5bdae16a0801c1669dd8c6e1c78b94f00850c1c9b67c",
       "display_text": "RANNÍ SLUNCE",
@@ -2859,8 +2904,12 @@
     },
     "learning.word.slunna_plaz": {
       "asset": "clips/c4/c4a1e4676710.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        533
+      ],
+      "word_fade_ms": [
+        12
+      ],
       "duration_ms": 1254,
       "sha256": "c4a1e46767104434f311cd7b94b0f36d94fee81beeae3dde80648684e434f59c",
       "display_text": "SLUNNÁ PLÁŽ",
@@ -2986,15 +3035,6 @@
       "display_text": "STUDENÁ ZMRZLINA",
       "spoken_text": "studená zmrzlina"
     },
-    "learning.word.stul": {
-      "asset": "clips/b6/b6ca2901a80e.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 914,
-      "sha256": "b6ca2901a80e3620ad43727bc1494ee2d81e15f30ae4891cfd8d1af5e19f0ddc",
-      "display_text": "STŮL",
-      "spoken_text": "stůl"
-    },
     "learning.word.sul": {
       "asset": "clips/57/574190b14bd7.mp3",
       "word_ends_ms": [],
@@ -3003,15 +3043,6 @@
       "sha256": "574190b14bd74ad36468b8a15f72a6072f429a52e0d00d6ad75b3487ef728b5a",
       "display_text": "SŮL",
       "spoken_text": "sůl"
-    },
-    "learning.word.svestky": {
-      "asset": "clips/77/778c92842985.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 810,
-      "sha256": "778c92842985ae1c05cb43daddfd212909661ea9525c1d6a0381a6773a68cee3",
-      "display_text": "ŠVESTKY",
-      "spoken_text": "švestky"
     },
     "learning.word.syr": {
       "asset": "clips/c9/c9793a8c7ecf.mp3",
@@ -3040,6 +3071,21 @@
       "display_text": "TÁTA",
       "spoken_text": "táta"
     },
+    "learning.word.ted_venku_prsi": {
+      "asset": "clips/77/77cc97f13c14.mp3",
+      "word_ends_ms": [
+        217,
+        558
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "77cc97f13c14a4d4e1c60c6f12e116ae435a44a2469eb34e6017294853ca7207",
+      "display_text": "TEĎ VENKU PRŠÍ",
+      "spoken_text": "teď venku prší"
+    },
     "learning.word.televize": {
       "asset": "clips/f1/f110e035a5a1.mp3",
       "word_ends_ms": [],
@@ -3051,8 +3097,12 @@
     },
     "learning.word.teple_mleko": {
       "asset": "clips/5a/5ae243297f4f.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
+      "word_ends_ms": [
+        364
+      ],
+      "word_fade_ms": [
+        40
+      ],
       "duration_ms": 1019,
       "sha256": "5ae243297f4f64f0fc8ed48f1475bd2906cec7f6734eaeb68a9e990a7cafc1cc",
       "display_text": "TEPLÉ MLÉKO",
@@ -3139,6 +3189,15 @@
       "display_text": "TYGR",
       "spoken_text": "tygr"
     },
+    "learning.word.tyranosaurus": {
+      "asset": "clips/59/59f5a2177f6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "59f5a2177f6e4c6111a49731edc4c062c32eb4c39d8e336c02b57676598c08ca",
+      "display_text": "TYRANOSAURUS",
+      "spoken_text": "tyranosaurus"
+    },
     "learning.word.usi": {
       "asset": "clips/42/425a3c10dd72.mp3",
       "word_ends_ms": [],
@@ -3156,15 +3215,6 @@
       "sha256": "4526a6d40ef54ada93f1c0885bbd83f5ca02c70ef62dc30e5d4c56e443420875",
       "display_text": "VÁNOCE",
       "spoken_text": "vánoce"
-    },
-    "learning.word.vazka": {
-      "asset": "clips/f9/f951fd3c37bd.mp3",
-      "word_ends_ms": [],
-      "word_fade_ms": [],
-      "duration_ms": 758,
-      "sha256": "f951fd3c37bd61500f0ba131e8ad52813255ed447f1572d50ee6f71057975822",
-      "display_text": "VÁŽKA",
-      "spoken_text": "vážka"
     },
     "learning.word.vcela": {
       "asset": "clips/54/545f755e4050.mp3",
@@ -3231,21 +3281,6 @@
       "sha256": "6363dad10c61b16ec6c4c12d5976eaea190b0aa20a35baf59ec037c0b63ea61d",
       "display_text": "VELKÝ SLON",
       "spoken_text": "velký slon"
-    },
-    "learning.word.venku_prsi_ted": {
-      "asset": "clips/97/974814f3f5c9.mp3",
-      "word_ends_ms": [
-        358,
-        688
-      ],
-      "word_fade_ms": [
-        12,
-        40
-      ],
-      "duration_ms": 1150,
-      "sha256": "974814f3f5c9a0fdeb504bd4cde77a9a38ec6b0c4cded0453bf90654aa5fbfd8",
-      "display_text": "VENKU PRŠÍ TEĎ",
-      "spoken_text": "venku prší teď"
     },
     "learning.word.vesele_vanoce": {
       "asset": "clips/5b/5b63099788c4.mp3",

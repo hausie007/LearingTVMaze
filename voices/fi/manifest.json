@@ -1,0 +1,3155 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "fi",
+  "locale": "fi-FI",
+  "voice_profile": "fi-FI@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete",
+    "number_form": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 29,
+    "word": 140,
+    "ui": 57,
+    "number_form": 50
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/fe/fee28b25342c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fee28b25342cbcb5f5d5614082a464906a57d9916d519b062e0c466a676f25fd",
+      "display_text": "A",
+      "spoken_text": "aa"
+    },
+    "learning.char.b": {
+      "asset": "clips/89/89bf441997e4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "89bf441997e4313ac2cd9bb1257ce003369bb89529eacb755ad852eddf903bf6",
+      "display_text": "B",
+      "spoken_text": "bee"
+    },
+    "learning.char.c": {
+      "asset": "clips/55/552093157de6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "552093157de67632a10354b3d8eb26f158e72790aabb367e53e67fcf19c0e011",
+      "display_text": "C",
+      "spoken_text": "see"
+    },
+    "learning.char.c26": {
+      "asset": "clips/76/768894721c35.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "768894721c35017c03e705af318faf0a371e3ea2e8026d6a5fae0b7f25779411",
+      "display_text": "Å",
+      "spoken_text": "ruotsalainen oo"
+    },
+    "learning.char.c27": {
+      "asset": "clips/12/12e5cd0a21a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "12e5cd0a21a221609f9fa0de10ca9122cfdd2cfbf29861c9dacabc7c999d7414",
+      "display_text": "Ä",
+      "spoken_text": "ää"
+    },
+    "learning.char.c28": {
+      "asset": "clips/34/34d45e4ca627.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "34d45e4ca627463cef42d23807e75024612303fdf83479ce008d3f79115ddd5b",
+      "display_text": "Ö",
+      "spoken_text": "öö"
+    },
+    "learning.char.d": {
+      "asset": "clips/a8/a8f38737f2fa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "a8f38737f2fa5fa2d06a7739cb8ac0ff7b5a664cb26ea5a4094e1232e241dd9b",
+      "display_text": "D",
+      "spoken_text": "dee"
+    },
+    "learning.char.e": {
+      "asset": "clips/b7/b7ed2960c8e2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "b7ed2960c8e2f9a916cb1b2989fe8a2e3b4833d1b60199ec862b56d0672b9899",
+      "display_text": "E",
+      "spoken_text": "ee"
+    },
+    "learning.char.f": {
+      "asset": "clips/99/99f67f5c0e98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "99f67f5c0e989f0327456a3ccdbbe2fe499ed58590ec8244558f5f10d64be103",
+      "display_text": "F",
+      "spoken_text": "äf"
+    },
+    "learning.char.g": {
+      "asset": "clips/ec/eca41543a24d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "eca41543a24d62373bd3febae8d67a2ad3da1daaeb5946899bca6a68b4bdbfe8",
+      "display_text": "G",
+      "spoken_text": "gee"
+    },
+    "learning.char.h": {
+      "asset": "clips/72/7211ed917102.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "7211ed9171023258bf40be51017aab476f93d9660fcb716a226cb908d9241102",
+      "display_text": "H",
+      "spoken_text": "hoo"
+    },
+    "learning.char.i": {
+      "asset": "clips/1d/1dbbcb8f7404.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "1dbbcb8f74049db6caf79c8267d3867a7c477a4d211a5c9f5a21d37634ddc902",
+      "display_text": "I",
+      "spoken_text": "ii"
+    },
+    "learning.char.j": {
+      "asset": "clips/84/84ac0fa9be83.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "84ac0fa9be836f777c3fea2576fdb760a0de18f55943aa0ba9dcbba63f8ae1b0",
+      "display_text": "J",
+      "spoken_text": "jii"
+    },
+    "learning.char.k": {
+      "asset": "clips/99/99af68da53c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "99af68da53c7e288312a8ac33a4fb5621cb107f7ef9dec83cb6227f30e1286f7",
+      "display_text": "K",
+      "spoken_text": "koo"
+    },
+    "learning.char.l": {
+      "asset": "clips/80/80a2e77a27fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "80a2e77a27fce03d60fbf732806b58463fbbb302dc1619bfd51019806fb6d771",
+      "display_text": "L",
+      "spoken_text": "äl"
+    },
+    "learning.char.m": {
+      "asset": "clips/ef/ef079928e0a6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "ef079928e0a67adfed7d25e22585e4ab421b361bb6c22af5eddb175b3aac30f7",
+      "display_text": "M",
+      "spoken_text": "äm"
+    },
+    "learning.char.n": {
+      "asset": "clips/c4/c4c6bd62e88f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "c4c6bd62e88f3768902b5b7994de01fc089447f9285f31a876da2410ae694955",
+      "display_text": "N",
+      "spoken_text": "än"
+    },
+    "learning.char.o": {
+      "asset": "clips/cc/cc1cf3883439.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "cc1cf3883439f570ac4f7d04f0d8ac987839f29152cd16f69b0199a4e3127b8a",
+      "display_text": "O",
+      "spoken_text": "oo"
+    },
+    "learning.char.p": {
+      "asset": "clips/6c/6caf1bcfdf9d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "6caf1bcfdf9d2d71d17dec4a404f0f279710b36fb178c7346522562d28e65c45",
+      "display_text": "P",
+      "spoken_text": "pee"
+    },
+    "learning.char.q": {
+      "asset": "clips/b8/b86e726aac3f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "b86e726aac3f89e0262a90769cb04f6390888ce7c6d9c9d36792b61973ad1915",
+      "display_text": "Q",
+      "spoken_text": "kuu"
+    },
+    "learning.char.r": {
+      "asset": "clips/4f/4f00b7f6fbe2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4f00b7f6fbe22f078db22d977091c9f41bc8a25e3257b84aa16040e877ccf904",
+      "display_text": "R",
+      "spoken_text": "är"
+    },
+    "learning.char.s": {
+      "asset": "clips/16/16c47ceb2214.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "16c47ceb22149805d801eba01d972418d408c99836e609a3f47bb79b1d2593a8",
+      "display_text": "S",
+      "spoken_text": "äs"
+    },
+    "learning.char.t": {
+      "asset": "clips/12/12b752f60932.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "12b752f60932516df309e3da787cba75fc36c31fe42eb8bb42547cd604ddd96d",
+      "display_text": "T",
+      "spoken_text": "tee"
+    },
+    "learning.char.u": {
+      "asset": "clips/8b/8bcec17b25df.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "8bcec17b25dfb09078ab87faf03f32c2ca583fd3fa2a5b16acf7ea841c4083a3",
+      "display_text": "U",
+      "spoken_text": "uu"
+    },
+    "learning.char.v": {
+      "asset": "clips/92/926dd03848fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "926dd03848fd2342b81bb5fe2197ff3f59c0fb91741575c221a08c356e779c44",
+      "display_text": "V",
+      "spoken_text": "vee"
+    },
+    "learning.char.w": {
+      "asset": "clips/64/647ea8b5b8d9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "647ea8b5b8d983f87b4a9a457e8227c50fb68f8de11c496069c4ce47fa63f381",
+      "display_text": "W",
+      "spoken_text": "kaksois-vee"
+    },
+    "learning.char.x": {
+      "asset": "clips/28/28d5b3194a07.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "28d5b3194a0766d85acc156e1dbf804a48fe7340bdf55f569d8ad3bfa84b798a",
+      "display_text": "X",
+      "spoken_text": "äks"
+    },
+    "learning.char.y": {
+      "asset": "clips/4e/4e57962d8b9f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "4e57962d8b9f914c705f9c3af74c96688961daa65c1cdefb64b67204e6a6a2f8",
+      "display_text": "Y",
+      "spoken_text": "yy"
+    },
+    "learning.char.z": {
+      "asset": "clips/d8/d8e13a87fd1f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "d8e13a87fd1fcbead078b36a584d8d8179552268b7879a272e82a8279d8c738d",
+      "display_text": "Z",
+      "spoken_text": "tset"
+    },
+    "learning.number.001": {
+      "asset": "clips/06/0636e53e810e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "0636e53e810e95ff427d3cf4d441b0e754bd8d0e848e5cdcb7dd4eba0a60d11b",
+      "display_text": "1",
+      "spoken_text": "yksi"
+    },
+    "learning.number.002": {
+      "asset": "clips/70/7097bce64bf2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "7097bce64bf26d01bc1132584b912fa6dfd671112a38718ffce20f159c29e6ff",
+      "display_text": "2",
+      "spoken_text": "kaksi"
+    },
+    "learning.number.003": {
+      "asset": "clips/84/845fff439995.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "845fff439995a64cfe41f7d77d99a6365a0eeccc2c72186910db7db1e0267b49",
+      "display_text": "3",
+      "spoken_text": "kolme"
+    },
+    "learning.number.004": {
+      "asset": "clips/5e/5e4cf540f5ee.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "5e4cf540f5ee285f60662e22b65a11d1552200884a972e02d9485f9863c64981",
+      "display_text": "4",
+      "spoken_text": "neljä"
+    },
+    "learning.number.005": {
+      "asset": "clips/0a/0a534dc90a8b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "0a534dc90a8b7566f858a213196a2801d4b39d1a183891cc89b47a2c77e79b05",
+      "display_text": "5",
+      "spoken_text": "viisi"
+    },
+    "learning.number.006": {
+      "asset": "clips/ce/ceb2b241fdef.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "ceb2b241fdef3d5d374fd9bd6976a07d1ee1003c9fd2791eeebd38446784ce9e",
+      "display_text": "6",
+      "spoken_text": "kuusi"
+    },
+    "learning.number.007": {
+      "asset": "clips/dc/dce6347e9850.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "dce6347e98509ee91961d9254a333d99c1233a0ceefce3aedabecff97bd7d45e",
+      "display_text": "7",
+      "spoken_text": "seitsemän"
+    },
+    "learning.number.008": {
+      "asset": "clips/43/438f328b9bdb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "438f328b9bdba012def540380895171ffe2effdcc26e9422896d9b3b26189598",
+      "display_text": "8",
+      "spoken_text": "kahdeksan"
+    },
+    "learning.number.009": {
+      "asset": "clips/89/8942b488d1af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "8942b488d1afee7505f395e04106ddf130a464a303d3554dae2ad35c76f839d5",
+      "display_text": "9",
+      "spoken_text": "yhdeksän"
+    },
+    "learning.number.010": {
+      "asset": "clips/49/495fca9fc02e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "495fca9fc02ef91f08380eba8f3933e51148a6c9bd5966ad4c68614d0325e19f",
+      "display_text": "10",
+      "spoken_text": "kymmenen"
+    },
+    "learning.number.011": {
+      "asset": "clips/40/4063e39e71b6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "4063e39e71b63ce9e042d72cf55448a59cfdbecf6efbeeea4d2320dc585b41d7",
+      "display_text": "11",
+      "spoken_text": "yksitoista"
+    },
+    "learning.number.012": {
+      "asset": "clips/43/43779e510065.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "43779e51006590fa785339fe9d0fd967bf031b8eb419ae01cad7b68eaeb9bc30",
+      "display_text": "12",
+      "spoken_text": "kaksitoista"
+    },
+    "learning.number.013": {
+      "asset": "clips/c6/c6ce759521c0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "c6ce759521c07f7fa87657fe83b400d6826346810aba85c530b7001e3bc1fc32",
+      "display_text": "13",
+      "spoken_text": "kolmetoista"
+    },
+    "learning.number.014": {
+      "asset": "clips/6a/6a4a9c58f1af.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "6a4a9c58f1af20c98cae4aa6fc335fde49805c01efd9f259ee23d9a9a353022e",
+      "display_text": "14",
+      "spoken_text": "neljätoista"
+    },
+    "learning.number.015": {
+      "asset": "clips/4a/4ae29ec3827f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "4ae29ec3827fae3c937573dcc39c360874dd6cf10bc9f04e8a2e4ea2b4f0f979",
+      "display_text": "15",
+      "spoken_text": "viisitoista"
+    },
+    "learning.number.016": {
+      "asset": "clips/af/af4d88f28eb3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "af4d88f28eb3bc70c6957b25212b519cc6d699e540819c7600c19c8c473fa797",
+      "display_text": "16",
+      "spoken_text": "kuusitoista"
+    },
+    "learning.number.017": {
+      "asset": "clips/5f/5f07f7be43a3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "5f07f7be43a3ef67eea7eda55722c45a365b32dd026b989a364869d4929f7d65",
+      "display_text": "17",
+      "spoken_text": "seitsemäntoista"
+    },
+    "learning.number.018": {
+      "asset": "clips/6e/6e395ea60e95.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "6e395ea60e95dec17881eb5cb43460589b3152fb784ec46eb5969e5dd83f462e",
+      "display_text": "18",
+      "spoken_text": "kahdeksantoista"
+    },
+    "learning.number.019": {
+      "asset": "clips/c3/c3c7f41023ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "c3c7f41023cee41c05ead112a3f114d3c35c46c40a6d607ad3d0263768e14536",
+      "display_text": "19",
+      "spoken_text": "yhdeksäntoista"
+    },
+    "learning.number.020": {
+      "asset": "clips/c1/c138beec9604.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "c138beec96042213099e1098368eda5d2b0c8d30729a46e83e8c732381789869",
+      "display_text": "20",
+      "spoken_text": "kaksikymmentä"
+    },
+    "learning.number.021": {
+      "asset": "clips/31/31fb47eef828.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "31fb47eef82872803845afbf1e0da2fc5905201ec94452c40706e2cdf222a6e5",
+      "display_text": "21",
+      "spoken_text": "kaksikymmentäyksi"
+    },
+    "learning.number.022": {
+      "asset": "clips/8a/8a8d09d98b52.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "8a8d09d98b52ddbdeb69db6951a8916eef39b562bc9e94d02d1caed82030ea00",
+      "display_text": "22",
+      "spoken_text": "kaksikymmentäkaksi"
+    },
+    "learning.number.023": {
+      "asset": "clips/a2/a2b602e0931c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "a2b602e0931cada96d2733f53c4e7c0199023d2b798f8c5bd0661f0b5b1c9533",
+      "display_text": "23",
+      "spoken_text": "kaksikymmentäkolme"
+    },
+    "learning.number.024": {
+      "asset": "clips/cf/cfc6ce9397ab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "cfc6ce9397ab2273ce82f4e5cd5a16174839731c42bf6680ecc9b5caa81f20c5",
+      "display_text": "24",
+      "spoken_text": "kaksikymmentäneljä"
+    },
+    "learning.number.025": {
+      "asset": "clips/57/573bebcf20fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "573bebcf20fd83a671e29123d6a409a0122ef022877985ee6dc513e150a12cd6",
+      "display_text": "25",
+      "spoken_text": "kaksikymmentäviisi"
+    },
+    "learning.number.026": {
+      "asset": "clips/93/930b4d479907.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "930b4d479907e8a45580e142d76e54a60f7a1af1aa803d799b2face714d0e7c0",
+      "display_text": "26",
+      "spoken_text": "kaksikymmentäkuusi"
+    },
+    "learning.number.027": {
+      "asset": "clips/8b/8b376114d5ef.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "8b376114d5efef908ed52476aff352770df11486e0c2092609042f3d55848052",
+      "display_text": "27",
+      "spoken_text": "kaksikymmentäseitsemän"
+    },
+    "learning.number.028": {
+      "asset": "clips/63/630acdb0da20.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "630acdb0da20872606be67b906cffcde2e0a46798b89618fe9367f98ede6f16c",
+      "display_text": "28",
+      "spoken_text": "kaksikymmentäkahdeksan"
+    },
+    "learning.number.029": {
+      "asset": "clips/a7/a7ba03e2692c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1437,
+      "sha256": "a7ba03e2692c7f23e8cc93e9a7e8d34785a8cd41964278357513db165950976c",
+      "display_text": "29",
+      "spoken_text": "kaksikymmentäyhdeksän"
+    },
+    "learning.number.030": {
+      "asset": "clips/cc/cc0a21c7e1ed.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "cc0a21c7e1edbf6097de06da40048d87eb4d90786d9f43f88af6ab30f6dfcbe7",
+      "display_text": "30",
+      "spoken_text": "kolmekymmentä"
+    },
+    "learning.number.031": {
+      "asset": "clips/08/086df20865ed.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "086df20865edfe56fb5b98df83223bd7c593e6c6484f43457386c40b3489a796",
+      "display_text": "31",
+      "spoken_text": "kolmekymmentäyksi"
+    },
+    "learning.number.032": {
+      "asset": "clips/bb/bbe5d7980d36.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "bbe5d7980d3637fd9ba53bface04cee8c42f95ad0de252f313ae752c0c8456bd",
+      "display_text": "32",
+      "spoken_text": "kolmekymmentäkaksi"
+    },
+    "learning.number.033": {
+      "asset": "clips/11/11a2a0337b8c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "11a2a0337b8c04b7c0aae7a270c0450bc328563e431a5e56b1661ea99f5c2373",
+      "display_text": "33",
+      "spoken_text": "kolmekymmentäkolme"
+    },
+    "learning.number.034": {
+      "asset": "clips/85/85fa6396a118.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "85fa6396a118e07198bc34aa7a1b354780176c97f3de0921134ebd1e355d10b5",
+      "display_text": "34",
+      "spoken_text": "kolmekymmentäneljä"
+    },
+    "learning.number.035": {
+      "asset": "clips/8e/8ef6c2ba3cf1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "8ef6c2ba3cf101cbc76bce23fd521a4aa67862aa6052ce10527be4d1ad03492e",
+      "display_text": "35",
+      "spoken_text": "kolmekymmentäviisi"
+    },
+    "learning.number.036": {
+      "asset": "clips/67/67a13f34414e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "67a13f34414eb9836219891ceed34f6710de2e089f9bf73bb3a650d74d1706fb",
+      "display_text": "36",
+      "spoken_text": "kolmekymmentäkuusi"
+    },
+    "learning.number.037": {
+      "asset": "clips/9a/9a9461390157.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "9a9461390157556d7214c61c892d1ad4b7341da1247f4a860f905aac9bfe68b9",
+      "display_text": "37",
+      "spoken_text": "kolmekymmentäseitsemän"
+    },
+    "learning.number.038": {
+      "asset": "clips/75/75feeb0313bd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "75feeb0313bda01f0b1b552d7134388064016b2dd33adef966ba1349d8f85333",
+      "display_text": "38",
+      "spoken_text": "kolmekymmentäkahdeksan"
+    },
+    "learning.number.039": {
+      "asset": "clips/b4/b48ab6a19803.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "b48ab6a19803880732771fbc4adfe137de9443ca139602c1f847cf143f1b1461",
+      "display_text": "39",
+      "spoken_text": "kolmekymmentäyhdeksän"
+    },
+    "learning.number.040": {
+      "asset": "clips/95/95cc6c6bc1b2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "95cc6c6bc1b25c425960b0bc918e38ccaa75411cc9d3bbf1955aa61d8591ed58",
+      "display_text": "40",
+      "spoken_text": "neljäkymmentä"
+    },
+    "learning.number.041": {
+      "asset": "clips/14/14b677195496.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "14b677195496a21912cefef5212ede5c7ae5bd0ce14500ab2e8c9f189f8543d0",
+      "display_text": "41",
+      "spoken_text": "neljäkymmentäyksi"
+    },
+    "learning.number.042": {
+      "asset": "clips/97/97154630a2da.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "97154630a2da9560b5af746a44730497dc3b3192179994f9c758303153557c76",
+      "display_text": "42",
+      "spoken_text": "neljäkymmentäkaksi"
+    },
+    "learning.number.043": {
+      "asset": "clips/07/075b4c937844.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "075b4c937844334f37b321c8a5c16c0428f339e9dae60d4ecf6849a03b506c15",
+      "display_text": "43",
+      "spoken_text": "neljäkymmentäkolme"
+    },
+    "learning.number.044": {
+      "asset": "clips/a6/a662b9f52166.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "a662b9f521669c06eb109dd5051be4ff7345a2ccb94fcea996a651a7020910a7",
+      "display_text": "44",
+      "spoken_text": "neljäkymmentäneljä"
+    },
+    "learning.number.045": {
+      "asset": "clips/06/06c12f0babce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "06c12f0babceee7f09b403ddfd840d0da24790fc911ca0141750e6ded590f785",
+      "display_text": "45",
+      "spoken_text": "neljäkymmentäviisi"
+    },
+    "learning.number.046": {
+      "asset": "clips/9b/9b9e8d067af5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1332,
+      "sha256": "9b9e8d067af5b13d86ec417f6cd5c11b578c6cd6dffd286c99d3a42a34f56574",
+      "display_text": "46",
+      "spoken_text": "neljäkymmentäkuusi"
+    },
+    "learning.number.047": {
+      "asset": "clips/18/18fb83a4e343.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1489,
+      "sha256": "18fb83a4e3438c0cb302f9254b1b8ad216fb0e8ef07d86e9946e97030a5948c1",
+      "display_text": "47",
+      "spoken_text": "neljäkymmentäseitsemän"
+    },
+    "learning.number.048": {
+      "asset": "clips/c2/c23c96e2cbd6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "c23c96e2cbd6f180633246652f044724e7ec3d1866da5b154ed134d008b24cf4",
+      "display_text": "48",
+      "spoken_text": "neljäkymmentäkahdeksan"
+    },
+    "learning.number.049": {
+      "asset": "clips/14/145e63512075.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "145e63512075607d27c18aa41d117491289497e1212a593b15e35eadaae74540",
+      "display_text": "49",
+      "spoken_text": "neljäkymmentäyhdeksän"
+    },
+    "learning.number.050": {
+      "asset": "clips/df/df589c2552e6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "df589c2552e6afb48615544eb386a125babf637aabf4e209044d03b60494c992",
+      "display_text": "50",
+      "spoken_text": "viisikymmentä"
+    },
+    "learning.word.aamukaste": {
+      "asset": "clips/85/85121ae073e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "85121ae073e01b2cf03b3d9f6cd4cdf02b1e190d7bcedc777c6c579789e390cf",
+      "display_text": "AAMUKASTE",
+      "spoken_text": "aamukaste"
+    },
+    "learning.word.aarrearkku": {
+      "asset": "clips/64/64f1d3547783.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "64f1d35477835101109a0ab3e8bfa173da5027682721c49e696a171309b701b2",
+      "display_text": "AARREARKKU",
+      "spoken_text": "aarrearkku"
+    },
+    "learning.word.aiti": {
+      "asset": "clips/fb/fbba945dc362.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "fbba945dc362ed5725950cfc89e01a331ca1687a8da3378dde6461d6b1906712",
+      "display_text": "ÄITI",
+      "spoken_text": "äiti"
+    },
+    "learning.word.ananas": {
+      "asset": "clips/e4/e46a45b1c515.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e46a45b1c5156f02467892c9a781b63157b201381474ca4b2920b862f60eaaac",
+      "display_text": "ANANAS",
+      "spoken_text": "ananas"
+    },
+    "learning.word.appelsiini": {
+      "asset": "clips/b7/b72683881740.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "b7268388174009b1e6058c4f7b1a24971b4c1b9137bf0b7fc1cd8224e4d81c71",
+      "display_text": "APPELSIINI",
+      "spoken_text": "appelsiini"
+    },
+    "learning.word.auringonpaiste": {
+      "asset": "clips/74/74f150f40248.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "74f150f40248a272e765141e0ca4c1de4aca42110e3088d3838c4669d6416f2b",
+      "display_text": "AURINGONPAISTE",
+      "spoken_text": "auringonpaiste"
+    },
+    "learning.word.aurinko_paistaa_nyt": {
+      "asset": "clips/96/96a4adf32c87.mp3",
+      "word_ends_ms": [
+        480,
+        1039
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1463,
+      "sha256": "96a4adf32c87c8346593a06b1a988b611c3211ad2c614b0fd79b148879c97e83",
+      "display_text": "AURINKO PAISTAA NYT",
+      "spoken_text": "aurinko paistaa nyt"
+    },
+    "learning.word.auta_muita_ihmisia": {
+      "asset": "clips/5c/5cafa20c71a2.mp3",
+      "word_ends_ms": [
+        434,
+        803
+      ],
+      "word_fade_ms": [
+        12,
+        20
+      ],
+      "duration_ms": 1489,
+      "sha256": "5cafa20c71a239ff2ee8c6ddc5f651c5532b49896a9a33775e2b58a07fb25bf4",
+      "display_text": "AUTA MUITA IHMISIÄ",
+      "spoken_text": "auta muita ihmisiä"
+    },
+    "learning.word.auto": {
+      "asset": "clips/4f/4f161389c98a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "4f161389c98a809f867ff5eab7d0fb79dcaa2aabd259a3dd350b89deaf489569",
+      "display_text": "AUTO",
+      "spoken_text": "auto"
+    },
+    "learning.word.banaani": {
+      "asset": "clips/e6/e6c2fdf68caf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "e6c2fdf68caf87cfe22e930a3ddc7aad3472589914f943fef3c5d2e8658fdf3c",
+      "display_text": "BANAANI",
+      "spoken_text": "banaani"
+    },
+    "learning.word.dinosaurus": {
+      "asset": "clips/1a/1aa1ac405436.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "1aa1ac405436f38ede4e0a8f071c7fabe4ce24f8015f30ce2346809dfaa9cab1",
+      "display_text": "DINOSAURUS",
+      "spoken_text": "dinosaurus"
+    },
+    "learning.word.haarukka": {
+      "asset": "clips/3d/3dd9374cb302.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "3dd9374cb3023674799eb9c10967c2ffb0e2a086591974e8e1b13fb2813323a1",
+      "display_text": "HAARUKKA",
+      "spoken_text": "haarukka"
+    },
+    "learning.word.hattu": {
+      "asset": "clips/e6/e62ae1ab70b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "e62ae1ab70b3a46e2d1862c513bc76ca7749b52e6d1123ac7142c3e0cfc4c518",
+      "display_text": "HATTU",
+      "spoken_text": "hattu"
+    },
+    "learning.word.hei_ystavat": {
+      "asset": "clips/bd/bd22718e908c.mp3",
+      "word_ends_ms": [
+        290
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 966,
+      "sha256": "bd22718e908cf531111246736145b577b971b3c775c2dabaadf80e689cd5d09f",
+      "display_text": "HEI YSTÄVÄT",
+      "spoken_text": "hei ystävät"
+    },
+    "learning.word.hymyile_ja_ole_iloinen": {
+      "asset": "clips/92/92b5eca78676.mp3",
+      "word_ends_ms": [
+        549,
+        729,
+        1009
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        40
+      ],
+      "duration_ms": 1672,
+      "sha256": "92b5eca786760b899c68d2ff2d71357d8c44749ff3adcbac7e71508769cc788c",
+      "display_text": "HYMYILE JA OLE ILOINEN",
+      "spoken_text": "hymyile ja ole iloinen"
+    },
+    "learning.word.iloinen_lapsi": {
+      "asset": "clips/4d/4d9a2872ebc9.mp3",
+      "word_ends_ms": [
+        556
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1123,
+      "sha256": "4d9a2872ebc9458d87e93a170ef5bc5beb6ab68c2feb2ffbb9e5e823af2e571e",
+      "display_text": "ILOINEN LAPSI",
+      "spoken_text": "iloinen lapsi"
+    },
+    "learning.word.iloinen_tytto": {
+      "asset": "clips/bd/bdca0248a858.mp3",
+      "word_ends_ms": [
+        531
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1123,
+      "sha256": "bdca0248a85806c4b4e082d9e20a24832d34556a95c04562a4c69d25b02882b9",
+      "display_text": "ILOINEN TYTTÖ",
+      "spoken_text": "iloinen tyttö"
+    },
+    "learning.word.ilotulitus": {
+      "asset": "clips/4b/4b9c0717cb15.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "4b9c0717cb1583b4ffc988ae5f48e9c14d4b97120c9427e41efb0a9ce091adcd",
+      "display_text": "ILOTULITUS",
+      "spoken_text": "ilotulitus"
+    },
+    "learning.word.isa": {
+      "asset": "clips/35/35ee2315984a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "35ee2315984ae66820c3d9fb8fb378ee1435c21c454628d4c9f2ae24e195681e",
+      "display_text": "ISÄ",
+      "spoken_text": "isä"
+    },
+    "learning.word.jaatelo": {
+      "asset": "clips/f4/f4feeef85af1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "f4feeef85af1ae0f680287d4e6bbf91ea6e1aa5d81ef9e574db02473bd7b7669",
+      "display_text": "JÄÄTELÖ",
+      "spoken_text": "jäätelö"
+    },
+    "learning.word.jaatelokioski": {
+      "asset": "clips/72/7236e49f4182.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "7236e49f4182a0420af3c24a3a846adeaeec394220b9539e773831e7603df897",
+      "display_text": "JÄÄTELÖKIOSKI",
+      "spoken_text": "jäätelökioski"
+    },
+    "learning.word.jarvi": {
+      "asset": "clips/d5/d5e923a9bdf9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "d5e923a9bdf9b999beec158b40f280cdc5a379acbaf54c00e9a6ea6577701f48",
+      "display_text": "JÄRVI",
+      "spoken_text": "järvi"
+    },
+    "learning.word.jokiranta": {
+      "asset": "clips/14/143430336637.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "14343033663719784d36f9412a65d09f4bc6d69c62c10db797c59d477cf469b3",
+      "display_text": "JOKIRANTA",
+      "spoken_text": "jokiranta"
+    },
+    "learning.word.juo_vetta": {
+      "asset": "clips/9e/9e82af0c628c.mp3",
+      "word_ends_ms": [
+        291
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 940,
+      "sha256": "9e82af0c628ce3f8929daad7ad1521fad60a4eca225a318eaf0aa6d5a6f42d37",
+      "display_text": "JUO VETTÄ",
+      "spoken_text": "juo vettä"
+    },
+    "learning.word.juo_vetta_juuri_nyt": {
+      "asset": "clips/73/73425dde137a.mp3",
+      "word_ends_ms": [
+        296,
+        657,
+        986
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        40
+      ],
+      "duration_ms": 1463,
+      "sha256": "73425dde137a8adfd357e6283afd6c0dd28991e1d877a46f8610b577a97ff741",
+      "display_text": "JUO VETTÄ JUURI NYT",
+      "spoken_text": "juo vettä juuri nyt"
+    },
+    "learning.word.kaakao": {
+      "asset": "clips/62/6294986f3498.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "6294986f3498fcd0694b77b10ee73f7d2ab63d833ac18c155afe10e8ca430daa",
+      "display_text": "KAAKAO",
+      "spoken_text": "kaakao"
+    },
+    "learning.word.kakku": {
+      "asset": "clips/0f/0f56c635f066.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "0f56c635f0660b3854c3ce8b237e5e0897e7da085cab344ce8d4f0f960d3c3b3",
+      "display_text": "KAKKU",
+      "spoken_text": "kakku"
+    },
+    "learning.word.kala": {
+      "asset": "clips/92/92d34faac874.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "92d34faac8749cbc0b3f0094e378f117501cbfda3eeb321591d4f9f6885e91d7",
+      "display_text": "KALA",
+      "spoken_text": "kala"
+    },
+    "learning.word.karhu": {
+      "asset": "clips/99/995528f766aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "995528f766aa54188918d45e233af258e2f4a3466dc0001c99151e510ce6f84b",
+      "display_text": "KARHU",
+      "spoken_text": "karhu"
+    },
+    "learning.word.kaunis_kukka": {
+      "asset": "clips/fb/fbec5235f27c.mp3",
+      "word_ends_ms": [
+        441
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1071,
+      "sha256": "fbec5235f27c2de5589664eee313e98e4f363da55219e59ec63ab55c69e82614",
+      "display_text": "KAUNIS KUKKA",
+      "spoken_text": "kaunis kukka"
+    },
+    "learning.word.kavele_ilossa": {
+      "asset": "clips/87/8721afa82f50.mp3",
+      "word_ends_ms": [
+        475
+      ],
+      "word_fade_ms": [
+        30
+      ],
+      "duration_ms": 1202,
+      "sha256": "8721afa82f509a4e55038cdd0180ce2b68cef800269f076160dc20c36adf7cd4",
+      "display_text": "KÄVELE ILOSSA",
+      "spoken_text": "kävele ilossa"
+    },
+    "learning.word.keittio": {
+      "asset": "clips/6a/6ac558a51fdb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "6ac558a51fdbd4768f4c893adbf7676455818f582278c2d9bd2d4db6ba44a7dd",
+      "display_text": "KEITTIÖ",
+      "spoken_text": "keittiö"
+    },
+    "learning.word.keltainen_aurinko": {
+      "asset": "clips/44/449b8908dd01.mp3",
+      "word_ends_ms": [
+        643
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 1384,
+      "sha256": "449b8908dd01ecef899f5db7aee91ff879e2037e39e1185639b49880e430d3fc",
+      "display_text": "KELTAINEN AURINKO",
+      "spoken_text": "keltainen aurinko"
+    },
+    "learning.word.kenka": {
+      "asset": "clips/5b/5bdb1213923b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "5bdb1213923b8f046aea9596a6e16b9f10fa2f226ffdcc592f650b18c2e863e0",
+      "display_text": "KENKÄ",
+      "spoken_text": "kenkä"
+    },
+    "learning.word.kesaloma": {
+      "asset": "clips/2e/2e0b6c8b728f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "2e0b6c8b728fd67092de5881b781d38b69ee1be4741267ea2f39d155ce093176",
+      "display_text": "KESÄLOMA",
+      "spoken_text": "kesäloma"
+    },
+    "learning.word.kettu": {
+      "asset": "clips/aa/aa710f7b562d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "aa710f7b562d67fcc766505c05d6e7c45a315868987836ad74063d14ad2a38d8",
+      "display_text": "KETTU",
+      "spoken_text": "kettu"
+    },
+    "learning.word.kevatpaiva": {
+      "asset": "clips/f7/f70c2cfbf390.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "f70c2cfbf390065de1c8eccbefc22633729585934493ec5a62b56c53b7adcd83",
+      "display_text": "KEVÄTPÄIVÄ",
+      "spoken_text": "kevätpäivä"
+    },
+    "learning.word.kirja": {
+      "asset": "clips/e3/e390ebf42674.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e390ebf42674fe19239d6a7fe3d085c0617662fdabf639b97dcd03568ee5f599",
+      "display_text": "KIRJA",
+      "spoken_text": "kirja"
+    },
+    "learning.word.kirkas_aurinko": {
+      "asset": "clips/88/880d2730793f.mp3",
+      "word_ends_ms": [
+        557
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1306,
+      "sha256": "880d2730793f8e18294b80e0ef2f42c2d6f41b356317e01c82dffde1360fc8ee",
+      "display_text": "KIRKAS AURINKO",
+      "spoken_text": "kirkas aurinko"
+    },
+    "learning.word.kissa": {
+      "asset": "clips/60/6060b20e8a46.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6060b20e8a46720453f49b45dc671300476c8b59e02e6a0d2d2ff8a9e1d44010",
+      "display_text": "KISSA",
+      "spoken_text": "kissa"
+    },
+    "learning.word.koira": {
+      "asset": "clips/38/38a1597ab421.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "38a1597ab42149aa55f9aef594f15fe01d0ec5da10ac9999c9000532b10cbf3b",
+      "display_text": "KOIRA",
+      "spoken_text": "koira"
+    },
+    "learning.word.koti": {
+      "asset": "clips/c9/c976f796fb0e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "c976f796fb0ed21f6a223c7b05e9d414abef6e0ac72cc425139fc8fc15bd5cf4",
+      "display_text": "KOTI",
+      "spoken_text": "koti"
+    },
+    "learning.word.koulu": {
+      "asset": "clips/2f/2fd6167d4ddd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "2fd6167d4dddbe9d793bb6658efa16fcf7aafbc756b51a31bd137478f93a8c70",
+      "display_text": "KOULU",
+      "spoken_text": "koulu"
+    },
+    "learning.word.kukka": {
+      "asset": "clips/ae/aec1af971d63.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "aec1af971d6375d07f1ee08af1f735d7532d2d7d364fca924ed58f44c810a6a2",
+      "display_text": "KUKKA",
+      "spoken_text": "kukka"
+    },
+    "learning.word.kulho": {
+      "asset": "clips/f0/f0801b70c1e7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "f0801b70c1e76abb545f6413c3108b3a1dba083c4814a1b414165e0adab026b8",
+      "display_text": "KULHO",
+      "spoken_text": "kulho"
+    },
+    "learning.word.kuppi": {
+      "asset": "clips/16/16abdbcbc1df.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "16abdbcbc1df8422ef6698e6eb9d3752df863be2b82be588abb7d3b1d2d6cd18",
+      "display_text": "KUPPI",
+      "spoken_text": "kuppi"
+    },
+    "learning.word.kuu": {
+      "asset": "clips/b8/b86e726aac3f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "b86e726aac3f89e0262a90769cb04f6390888ce7c6d9c9d36792b61973ad1915",
+      "display_text": "KUU",
+      "spoken_text": "kuu"
+    },
+    "learning.word.kuu_valaisee_meita": {
+      "asset": "clips/1e/1eae57e823ab.mp3",
+      "word_ends_ms": [
+        388,
+        1009
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1384,
+      "sha256": "1eae57e823ab183bf0795c934f2aeb643e078f16b32287b3744cb1aff51dbfb8",
+      "display_text": "KUU VALAISEE MEITÄ",
+      "spoken_text": "kuu valaisee meitä"
+    },
+    "learning.word.laakso": {
+      "asset": "clips/92/920487c73a99.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "920487c73a9987857c04259d36dce5b3f9a536876552d8581a65acf77800755b",
+      "display_text": "LAAKSO",
+      "spoken_text": "laakso"
+    },
+    "learning.word.lapsi": {
+      "asset": "clips/90/9051477d9e03.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9051477d9e03ad362b3b8f627c0d1006a159492a9de7fd662112601aa14dbd25",
+      "display_text": "LAPSI",
+      "spoken_text": "lapsi"
+    },
+    "learning.word.laula_laulu": {
+      "asset": "clips/e9/e97884cc8364.mp3",
+      "word_ends_ms": [
+        389
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 966,
+      "sha256": "e97884cc83641d4fff392d392dee6097265536af92b28e703c54def743320d0a",
+      "display_text": "LAULA LAULU",
+      "spoken_text": "laula laulu"
+    },
+    "learning.word.lautanen": {
+      "asset": "clips/04/04b24544de5e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "04b24544de5e1b274088b5dc60955a996bfd8cbc508467e97efcd4b6a7615edb",
+      "display_text": "LAUTANEN",
+      "spoken_text": "lautanen"
+    },
+    "learning.word.leiki_kanssani": {
+      "asset": "clips/26/26997d6801de.mp3",
+      "word_ends_ms": [
+        369
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1097,
+      "sha256": "26997d6801debe9f8af8cde4cd5233e27368a0421dc5a7f8c9e6f8f8cebb1854",
+      "display_text": "LEIKI KANSSANI",
+      "spoken_text": "leiki kanssani"
+    },
+    "learning.word.leiki_leluillasi": {
+      "asset": "clips/b1/b1d505b0a5fa.mp3",
+      "word_ends_ms": [
+        350
+      ],
+      "word_fade_ms": [
+        29
+      ],
+      "duration_ms": 1176,
+      "sha256": "b1d505b0a5fa0ba9b3f1e970c8c45bdbeccb1d07f345f21af4d484862d02f1a1",
+      "display_text": "LEIKI LELUILLASI",
+      "spoken_text": "leiki leluillasi"
+    },
+    "learning.word.leikki": {
+      "asset": "clips/47/474c789b999f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "474c789b999f1c4cd6b9f61488d9bc2a7e756648fe1099cc2ed73eb1d741f520",
+      "display_text": "LEIKKI",
+      "spoken_text": "leikki"
+    },
+    "learning.word.leikkipiha": {
+      "asset": "clips/1b/1bb77c602db6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "1bb77c602db6ff32b0f30127f85aa5ac151474f727db8ba617225ae3c832b337",
+      "display_text": "LEIKKIPIHA",
+      "spoken_text": "leikkipiha"
+    },
+    "learning.word.leikkipuisto": {
+      "asset": "clips/96/96a2c531361f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "96a2c531361f592775ed741c736d947e0b1c0f36ccc6c88aaa00c395c60aee6e",
+      "display_text": "LEIKKIPUISTO",
+      "spoken_text": "leikkipuisto"
+    },
+    "learning.word.leikkisa_koira": {
+      "asset": "clips/77/77e6c1498f0f.mp3",
+      "word_ends_ms": [
+        617
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "77e6c1498f0f1f6998baf7552ef87fe8281dfa1819c554f42a549f116fc477a6",
+      "display_text": "LEIKKISÄ KOIRA",
+      "spoken_text": "leikkisä koira"
+    },
+    "learning.word.leipa": {
+      "asset": "clips/30/308d1c755648.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "308d1c755648e88cf79ff8ffe096ae1079cbb084ba88e7289454a460d238d04b",
+      "display_text": "LEIPÄ",
+      "spoken_text": "leipä"
+    },
+    "learning.word.lentava_lintu": {
+      "asset": "clips/b4/b47c4b81451e.mp3",
+      "word_ends_ms": [
+        482
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1097,
+      "sha256": "b47c4b81451e999b85f6875e892fb217b199d140612ea585f9ff69d2654df06c",
+      "display_text": "LENTÄVÄ LINTU",
+      "spoken_text": "lentävä lintu"
+    },
+    "learning.word.lentokone": {
+      "asset": "clips/d7/d7c6798eea32.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "d7c6798eea32d42d74e7a2ee019120ea2034c7945b75745b9b83818080dc6f08",
+      "display_text": "LENTOKONE",
+      "spoken_text": "lentokone"
+    },
+    "learning.word.leppakerttu": {
+      "asset": "clips/ef/ef46456955d1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "ef46456955d17df7158cba17105dcb756c58658141c454f2c5d4f21d4787ce4e",
+      "display_text": "LEPPÄKERTTU",
+      "spoken_text": "leppäkerttu"
+    },
+    "learning.word.linnut_lentavat_korkealle": {
+      "asset": "clips/5c/5c731f0b4c79.mp3",
+      "word_ends_ms": [
+        463,
+        963
+      ],
+      "word_fade_ms": [
+        20,
+        20
+      ],
+      "duration_ms": 1802,
+      "sha256": "5c731f0b4c79efb9a1e61d6f64f0b75a69262da801637f984411f65ffc43a3bf",
+      "display_text": "LINNUT LENTÄVÄT KORKEALLE",
+      "spoken_text": "linnut lentävät korkealle"
+    },
+    "learning.word.lintu": {
+      "asset": "clips/9e/9e862acd7480.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "9e862acd7480935aad73a124032c314d816d1ff1676f8ae55c62b7a05acf7f32",
+      "display_text": "LINTU",
+      "spoken_text": "lintu"
+    },
+    "learning.word.lue_kaunis_tarina": {
+      "asset": "clips/a3/a3e1044b40ac.mp3",
+      "word_ends_ms": [
+        459,
+        939
+      ],
+      "word_fade_ms": [
+        20,
+        40
+      ],
+      "duration_ms": 1567,
+      "sha256": "a3e1044b40ac1bce1572faeea21525a44496dd01f43365bab6e94efb242932a5",
+      "display_text": "LUE KAUNIS TARINA",
+      "spoken_text": "lue kaunis tarina"
+    },
+    "learning.word.lumilyhty": {
+      "asset": "clips/87/874ab723b812.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "874ab723b8121ee7e1e4a93ecabef680c120957dc4a602d319caaaf8e23fb859",
+      "display_text": "LUMILYHTY",
+      "spoken_text": "lumilyhty"
+    },
+    "learning.word.lumisade": {
+      "asset": "clips/7f/7fff7671d290.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "7fff7671d2908bba864a9c09bf20ae295d6cb610683d4a2cbd5a278c7f79e805",
+      "display_text": "LUMISADE",
+      "spoken_text": "lumisade"
+    },
+    "learning.word.lumiukko": {
+      "asset": "clips/c2/c2350cff8d42.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "c2350cff8d421d1cbcb6511e3aeed95d628f4bb3a4c964b98ecba032331cd1f5",
+      "display_text": "LUMIUKKO",
+      "spoken_text": "lumiukko"
+    },
+    "learning.word.lusikka": {
+      "asset": "clips/34/3432f1507891.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "3432f150789139dc440062b7f6a80f320b712c7481600cf1bee4c2bbb7fabfb8",
+      "display_text": "LUSIKKA",
+      "spoken_text": "lusikka"
+    },
+    "learning.word.maito": {
+      "asset": "clips/bc/bcf71eff563c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "bcf71eff563c32d25a18b1520ca6df35249cbe8ebdbc08066d575515da1b00e8",
+      "display_text": "MAITO",
+      "spoken_text": "maito"
+    },
+    "learning.word.makea_karkki": {
+      "asset": "clips/b2/b24decb169b6.mp3",
+      "word_ends_ms": [
+        542
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1228,
+      "sha256": "b24decb169b636e9752d7dff87e135c8e9f170181b46b44ad0689bd3fb8945ca",
+      "display_text": "MAKEA KARKKI",
+      "spoken_text": "makea karkki"
+    },
+    "learning.word.mansikka": {
+      "asset": "clips/69/69bfedcc717f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "69bfedcc717fe8e6728474994d71747c9aeb12559bc088aebc13e8573feccd2a",
+      "display_text": "MANSIKKA",
+      "spoken_text": "mansikka"
+    },
+    "learning.word.mehu": {
+      "asset": "clips/e1/e189252bf3e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "e189252bf3e3c4cde11d26d8957934d2ab563f733f687ab2944a36360ce7986f",
+      "display_text": "MEHU",
+      "spoken_text": "mehu"
+    },
+    "learning.word.meidan_sininen_meri": {
+      "asset": "clips/48/48ef336ef4d1.mp3",
+      "word_ends_ms": [
+        472,
+        972
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1437,
+      "sha256": "48ef336ef4d15ffa0120f73b969436fc4a90891aaf556f8ce1ee07021cd7ae0b",
+      "display_text": "MEIDÄN SININEN MERI",
+      "spoken_text": "meidän sininen meri"
+    },
+    "learning.word.meren_sininen": {
+      "asset": "clips/45/45aea2cfd5c8.mp3",
+      "word_ends_ms": [
+        485
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1123,
+      "sha256": "45aea2cfd5c80b3ab1d94104f2279aa98303816205ebd2361132b5d06515253c",
+      "display_text": "MEREN SININEN",
+      "spoken_text": "meren sininen"
+    },
+    "learning.word.meri": {
+      "asset": "clips/48/48e91d74b780.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "48e91d74b7804a99f5247d88e399b07f1964baf783d0ace667590381558de3f4",
+      "display_text": "MERI",
+      "spoken_text": "meri"
+    },
+    "learning.word.meriranta": {
+      "asset": "clips/63/63b473b6960e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "63b473b6960e91af7b5251701f11bf64f5dd5dcf007e7d37cab3a5734be96f99",
+      "display_text": "MERIRANTA",
+      "spoken_text": "meriranta"
+    },
+    "learning.word.meritahti": {
+      "asset": "clips/68/683c8f62b7c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "683c8f62b7c35c64434cea411f017c6db64e8944500a8df353872b140f2f8e9a",
+      "display_text": "MERITÄHTI",
+      "spoken_text": "meritähti"
+    },
+    "learning.word.metsa": {
+      "asset": "clips/af/afc59172382a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "afc59172382adc107f06794030d79fbaa250dd386e2879517f12b08e44e28548",
+      "display_text": "METSÄ",
+      "spoken_text": "metsä"
+    },
+    "learning.word.metsa_taynna_elamaa": {
+      "asset": "clips/bf/bf1a8cab9827.mp3",
+      "word_ends_ms": [
+        419,
+        819
+      ],
+      "word_fade_ms": [
+        12,
+        30
+      ],
+      "duration_ms": 1437,
+      "sha256": "bf1a8cab98271bf0f158cfc333dccdce7fdb91babe21c3bfbabc546b58e9f4ba",
+      "display_text": "METSÄ TÄYNNÄ ELÄMÄÄ",
+      "spoken_text": "metsä täynnä elämää"
+    },
+    "learning.word.mikroskooppi": {
+      "asset": "clips/d7/d7e413c2026b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "d7e413c2026b0b6dbce79f9575070952f6c845eb027f0cff9908a02629ddea82",
+      "display_text": "MIKROSKOOPPI",
+      "spoken_text": "mikroskooppi"
+    },
+    "learning.word.mustikka": {
+      "asset": "clips/5f/5fb83a9f8bbd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5fb83a9f8bbdd5fbbc613e43d840475aa9c2ea646c66ea3e568d4fb8aa3b985b",
+      "display_text": "MUSTIKKA",
+      "spoken_text": "mustikka"
+    },
+    "learning.word.nuku_hyvin_tana_illana": {
+      "asset": "clips/1d/1ddb6b610d0a.mp3",
+      "word_ends_ms": [
+        351,
+        712,
+        962
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "1ddb6b610d0a915996a60ddeedf562a275298c77bc45b95bbf14fec13259aa80",
+      "display_text": "NUKU HYVIN TÄNÄ ILLANA",
+      "spoken_text": "nuku hyvin tänä illana"
+    },
+    "learning.word.omena": {
+      "asset": "clips/c6/c63a3559691f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "c63a3559691f71a6c070521b8e52806a77e561eb0826e2bcd20e77d5f39b436f",
+      "display_text": "OMENA",
+      "spoken_text": "omena"
+    },
+    "learning.word.opi_joka_paiva_uutta": {
+      "asset": "clips/9e/9eb8148a9466.mp3",
+      "word_ends_ms": [
+        328,
+        618,
+        948
+      ],
+      "word_fade_ms": [
+        40,
+        12,
+        12
+      ],
+      "duration_ms": 1567,
+      "sha256": "9eb8148a9466474de78ee635416f53f46fb54811212802e127e6132acd36ae7b",
+      "display_text": "OPI JOKA PÄIVÄ UUTTA",
+      "spoken_text": "opi joka päivä uutta"
+    },
+    "learning.word.orava": {
+      "asset": "clips/3b/3bae7a08371f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "3bae7a08371f908834f8264fb8bba2d6a0b3319e005a723bd720816e1fa28e05",
+      "display_text": "ORAVA",
+      "spoken_text": "orava"
+    },
+    "learning.word.paaryna": {
+      "asset": "clips/0f/0f00cd86780f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "0f00cd86780f762ed31ac0c3308d29bc145a3e4a2201c7dadc49bb53f7218ba6",
+      "display_text": "PÄÄRYNÄ",
+      "spoken_text": "päärynä"
+    },
+    "learning.word.perheeni_on_rakkaus": {
+      "asset": "clips/1d/1d74ecb97341.mp3",
+      "word_ends_ms": [
+        528,
+        708
+      ],
+      "word_fade_ms": [
+        20,
+        39
+      ],
+      "duration_ms": 1567,
+      "sha256": "1d74ecb97341935f042e5a61e0f2bceff050249843d710d0d5426e95df32b912",
+      "display_text": "PERHEENI ON RAKKAUS",
+      "spoken_text": "perheeni on rakkaus"
+    },
+    "learning.word.perhonen": {
+      "asset": "clips/ae/aed7d0dc16ad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "aed7d0dc16ad7f74bb9997762b69004af1078519ed322015d5255f21c0ab770d",
+      "display_text": "PERHONEN",
+      "spoken_text": "perhonen"
+    },
+    "learning.word.peruna": {
+      "asset": "clips/d1/d1696e55224b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "d1696e55224b36167d31a703b6be9bc4d5596c989b836b17eea4bc141ae1f582",
+      "display_text": "PERUNA",
+      "spoken_text": "peruna"
+    },
+    "learning.word.pieni_talo": {
+      "asset": "clips/4e/4e41a7811d5d.mp3",
+      "word_ends_ms": [
+        396
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 758,
+      "sha256": "4e41a7811d5d306f52446db876192d741d179d6f66bb74f37d3a4cfac5f238a0",
+      "display_text": "PIENI TALO",
+      "spoken_text": "pieni talo"
+    },
+    "learning.word.piirakka": {
+      "asset": "clips/45/451e7ec43460.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "451e7ec43460c49f6749a9c4298714bf8cc46cd5af0297c9ee5c08b4b587877d",
+      "display_text": "PIIRAKKA",
+      "spoken_text": "piirakka"
+    },
+    "learning.word.pilvitaivas": {
+      "asset": "clips/f5/f537a301a72c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "f537a301a72cee23a78e70b159e22e26a593ba139e7c9b36b921661ac41f3a1a",
+      "display_text": "PILVITAIVAS",
+      "spoken_text": "pilvitaivas"
+    },
+    "learning.word.pingviini": {
+      "asset": "clips/a1/a1a1d2719c79.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a1a1d2719c79f6add34cdd68aa40fce73b9d643e3067e3fa96407c5535ff0773",
+      "display_text": "PINGVIINI",
+      "spoken_text": "pingviini"
+    },
+    "learning.word.poika": {
+      "asset": "clips/fd/fdaf363fd65d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "fdaf363fd65d797c985b4b36d8e52947de155619069e035968fdccef2a46720a",
+      "display_text": "POIKA",
+      "spoken_text": "poika"
+    },
+    "learning.word.polkupyora": {
+      "asset": "clips/6c/6c06c8ff21a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "6c06c8ff21a87e139c71400cb3879e7fc29f31a03f6fa8a4c7a6078b53a0c5a8",
+      "display_text": "POLKUPYÖRÄ",
+      "spoken_text": "polkupyörä"
+    },
+    "learning.word.porkkana": {
+      "asset": "clips/0a/0a72b46c5c96.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "0a72b46c5c96d8ad311784e91293a4ef450ec517fd72ae7f154a5c4acfcc1ebf",
+      "display_text": "PORKKANA",
+      "spoken_text": "porkkana"
+    },
+    "learning.word.poro": {
+      "asset": "clips/aa/aafeb55f1be9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "aafeb55f1be9f38069a9af2b4c476f214f8980fb398c1fec3d9854f80f5ca258",
+      "display_text": "PORO",
+      "spoken_text": "poro"
+    },
+    "learning.word.poyta": {
+      "asset": "clips/74/741aaaf74796.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "741aaaf7479633caa3c388d1dac3175c3dd3ffac6abd3fd76d9451748ece0eaf",
+      "display_text": "PÖYTÄ",
+      "spoken_text": "pöytä"
+    },
+    "learning.word.puistopolku": {
+      "asset": "clips/80/809fec392d64.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "809fec392d64db9ac88b6837a1427d76bc78988651b8534606f342c5a40ebf06",
+      "display_text": "PUISTOPOLKU",
+      "spoken_text": "puistopolku"
+    },
+    "learning.word.punainen_omena": {
+      "asset": "clips/0f/0f03b8e7918e.mp3",
+      "word_ends_ms": [
+        601
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1150,
+      "sha256": "0f03b8e7918e6ac934785ff522217976ec7d54670c0689ce9dbf1f2b3f11b4a4",
+      "display_text": "PUNAINEN OMENA",
+      "spoken_text": "punainen omena"
+    },
+    "learning.word.pupu": {
+      "asset": "clips/11/1159ebdd1801.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "1159ebdd1801c41b27d556d0905a9d6c92c40097bf7c19ec4c939c258698ab5d",
+      "display_text": "PUPU",
+      "spoken_text": "pupu"
+    },
+    "learning.word.puu": {
+      "asset": "clips/16/16d439b6cb96.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "16d439b6cb96e9cec3c128d72388d4f2b2cccb3e68162e5c33697faf8c40bd74",
+      "display_text": "PUU",
+      "spoken_text": "puu"
+    },
+    "learning.word.rakasta_planeettaa": {
+      "asset": "clips/ce/ce3975fb3c33.mp3",
+      "word_ends_ms": [
+        551
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1463,
+      "sha256": "ce3975fb3c3350c62cd0ad5b31f5c5aee10aaa43be9a1844dedb07b135c42bb1",
+      "display_text": "RAKASTA PLANEETTAA",
+      "spoken_text": "rakasta planeettaa"
+    },
+    "learning.word.saaristo": {
+      "asset": "clips/e7/e78218e7ad6b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "e78218e7ad6b727f27e3f974a73cfe2bff4d8928fffe796a48d26f2b5656c2d4",
+      "display_text": "SAARISTO",
+      "spoken_text": "saaristo"
+    },
+    "learning.word.sadepisara": {
+      "asset": "clips/80/80f34f020a24.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "80f34f020a24c3865248a078cc3920fb469f8068dbf32e1d81ea72389ca704b2",
+      "display_text": "SADEPISARA",
+      "spoken_text": "sadepisara"
+    },
+    "learning.word.sano_kiitos_aina": {
+      "asset": "clips/f7/f749552a0b03.mp3",
+      "word_ends_ms": [
+        451,
+        981
+      ],
+      "word_fade_ms": [
+        12,
+        40
+      ],
+      "duration_ms": 1489,
+      "sha256": "f749552a0b0359bfb92d7bcb814b62f58f58708aae866f5f2de7550b0091075a",
+      "display_text": "SANO KIITOS AINA",
+      "spoken_text": "sano kiitos aina"
+    },
+    "learning.word.sateenkaaressa_on_vareja": {
+      "asset": "clips/3b/3ba05ccaf50b.mp3",
+      "word_ends_ms": [
+        932,
+        1073
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1620,
+      "sha256": "3ba05ccaf50bebef0b2cd8615e6d3c196ebd56d2a4aa7dd7a173072304ce2041",
+      "display_text": "SATEENKAARESSA ON VÄREJÄ",
+      "spoken_text": "sateenkaaressa on värejä"
+    },
+    "learning.word.sateenkaari": {
+      "asset": "clips/ec/ecd5b54a118d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "ecd5b54a118dc16ef3cead8b566902427eae59aefe567f0c3267adc5e645aeaf",
+      "display_text": "SATEENKAARI",
+      "spoken_text": "sateenkaari"
+    },
+    "learning.word.sateenvarjo": {
+      "asset": "clips/e3/e3c107cff737.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "e3c107cff7378a682c7285def4797380d5c94b2b88e494ad51ea44bb33829e49",
+      "display_text": "SATEENVARJO",
+      "spoken_text": "sateenvarjo"
+    },
+    "learning.word.sauna": {
+      "asset": "clips/b9/b978bd3e3e48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "b978bd3e3e4831ca04d65b871955a310f83e2953b792ed9e729b48e60d508feb",
+      "display_text": "SAUNA",
+      "spoken_text": "sauna"
+    },
+    "learning.word.seikkailu": {
+      "asset": "clips/89/89b1cc6b7f72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "89b1cc6b7f729d143ce54efdbcaad4c514ad006bbd54bbbcc7d5fd073edf2ac2",
+      "display_text": "SEIKKAILU",
+      "spoken_text": "seikkailu"
+    },
+    "learning.word.sisko": {
+      "asset": "clips/04/0454c53f672e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "0454c53f672e857cf602b3fc467fca447ddf2402bfaa36f2008cadf7d10b5d34",
+      "display_text": "SISKO",
+      "spoken_text": "sisko"
+    },
+    "learning.word.sisu": {
+      "asset": "clips/08/08d8768d18da.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "08d8768d18daa9d5660203f3aeb8ecf08cef4d04ea624ddb8000010f4e962aa0",
+      "display_text": "SISU",
+      "spoken_text": "sisu"
+    },
+    "learning.word.suklaakakku": {
+      "asset": "clips/39/39776780b7d6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "39776780b7d61d603bbe7cf164da2cfe05561497e670d3308309317be1af2e7d",
+      "display_text": "SUKLAAKAKKU",
+      "spoken_text": "suklaakakku"
+    },
+    "learning.word.syo_paljon_hedelmia": {
+      "asset": "clips/a7/a71ffb26e5b4.mp3",
+      "word_ends_ms": [
+        380,
+        800
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1489,
+      "sha256": "a71ffb26e5b4ff8a0219af2e1cc15f7bdaa7a9f9177842220c5f4df3cdf6d438",
+      "display_text": "SYÖ PALJON HEDELMIÄ",
+      "spoken_text": "syö paljon hedelmiä"
+    },
+    "learning.word.syo_terveellisesti": {
+      "asset": "clips/bf/bf8939085795.mp3",
+      "word_ends_ms": [
+        328
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1384,
+      "sha256": "bf89390857951af764bc092f3fbbf2e6afe7b7703e7dda49cb5bc5533b73e64e",
+      "display_text": "SYÖ TERVEELLISESTI",
+      "spoken_text": "syö terveellisesti"
+    },
+    "learning.word.syysmetsa": {
+      "asset": "clips/44/441f080a0e13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "441f080a0e1389c16dd9bc0bc30fa9bb06b77bfe229a7a58a8acb535680bebb0",
+      "display_text": "SYYSMETSÄ",
+      "spoken_text": "syysmetsä"
+    },
+    "learning.word.tahdet_loistavat": {
+      "asset": "clips/b5/b534a292cf1c.mp3",
+      "word_ends_ms": [
+        466
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "b534a292cf1ca1d16405098b9d90b6f254ddb532bf430ea5fbddb0acbbc9359e",
+      "display_text": "TÄHDET LOISTAVAT",
+      "spoken_text": "tähdet loistavat"
+    },
+    "learning.word.tahti": {
+      "asset": "clips/1f/1f7db1ab8387.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "1f7db1ab8387d07497cce768e2f69a3926bec8aa3938ac8202d822b1d60e594f",
+      "display_text": "TÄHTI",
+      "spoken_text": "tähti"
+    },
+    "learning.word.talo": {
+      "asset": "clips/2b/2b72a77f9cfd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "2b72a77f9cfd51bfc9df6b55e37f2693addff6ef466cfdfd47c4b39bc8d25614",
+      "display_text": "TALO",
+      "spoken_text": "talo"
+    },
+    "learning.word.talviilta": {
+      "asset": "clips/bf/bfd99456c8bd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "bfd99456c8bd9e611db70778b145e235d2508314c870a2a95189719819733e95",
+      "display_text": "TALVIILTA",
+      "spoken_text": "talviilta"
+    },
+    "learning.word.tee": {
+      "asset": "clips/12/12b752f60932.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "12b752f60932516df309e3da787cba75fc36c31fe42eb8bb42547cd604ddd96d",
+      "display_text": "TEE",
+      "spoken_text": "tee"
+    },
+    "learning.word.teleskooppi": {
+      "asset": "clips/0b/0b06d922b791.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "0b06d922b7918c2a24011b5220198c3b48503b49e0ffecd9926a124a5c21e599",
+      "display_text": "TELESKOOPPI",
+      "spoken_text": "teleskooppi"
+    },
+    "learning.word.tuore_hedelma": {
+      "asset": "clips/11/11213dd20935.mp3",
+      "word_ends_ms": [
+        428
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1019,
+      "sha256": "11213dd2093555692baf1a4c1584c33a12af1a078d18067598c1ec479fca3a24",
+      "display_text": "TUORE HEDELMÄ",
+      "spoken_text": "tuore hedelmä"
+    },
+    "learning.word.tuulenpuuska": {
+      "asset": "clips/ad/ad2c083999c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "ad2c083999c844e8bb388b3b1e925bb781ccdd5bac917bb6470efd069f021204",
+      "display_text": "TUULENPUUSKA",
+      "spoken_text": "tuulenpuuska"
+    },
+    "learning.word.tytto": {
+      "asset": "clips/a9/a98c9229e8bc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a98c9229e8bc36b730d01fe0bd6aaae3d5eaa32b877c45b6c57a805822db7b4d",
+      "display_text": "TYTTÖ",
+      "spoken_text": "tyttö"
+    },
+    "learning.word.uiva_kala": {
+      "asset": "clips/3b/3bde980223a0.mp3",
+      "word_ends_ms": [
+        365
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 836,
+      "sha256": "3bde980223a02afad753573f589d60802ab125c9450d3b7ac5607eaac026efde",
+      "display_text": "UIVA KALA",
+      "spoken_text": "uiva kala"
+    },
+    "learning.word.ukkonen": {
+      "asset": "clips/cd/cd5194d4c9a5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "cd5194d4c9a5c4c1dc36ded62e5f736e00e91814d89c1e8b550b1a3611b335a8",
+      "display_text": "UKKONEN",
+      "spoken_text": "ukkonen"
+    },
+    "learning.word.unelias_kissa": {
+      "asset": "clips/bf/bfa8c45f2a8b.mp3",
+      "word_ends_ms": [
+        557
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "bfa8c45f2a8bf26b235e6d2f97e35473d0db6738bcc4b9768c630a084c63b9fa",
+      "display_text": "UNELIAS KISSA",
+      "spoken_text": "unelias kissa"
+    },
+    "learning.word.veli": {
+      "asset": "clips/39/397d0d0c7237.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "397d0d0c7237ee977291fd9e00a25c74bfd76d73835d84af4518c5f40989468d",
+      "display_text": "VELI",
+      "spoken_text": "veli"
+    },
+    "learning.word.vesi": {
+      "asset": "clips/b6/b6d0292ade85.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "b6d0292ade853f7c916ae610d264718f7c5e838751ac7ff869b2d44ede1a666d",
+      "display_text": "VESI",
+      "spoken_text": "vesi"
+    },
+    "learning.word.vesimeloni": {
+      "asset": "clips/6d/6d1010f2ca62.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "6d1010f2ca6243264bc4185b842d4c586355c95a49d86960e64546fd109e2595",
+      "display_text": "VESIMELONI",
+      "spoken_text": "vesimeloni"
+    },
+    "learning.word.veturi": {
+      "asset": "clips/b3/b32dcd927acd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b32dcd927acd7f194359f24833a32a261cb6dd7e79a9e7d7c19f198e598d297b",
+      "display_text": "VETURI",
+      "spoken_text": "veturi"
+    },
+    "learning.word.vihrea_metsa": {
+      "asset": "clips/3c/3c3e7f78ee9f.mp3",
+      "word_ends_ms": [
+        540
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1071,
+      "sha256": "3c3e7f78ee9fbaffea5823dac996fd877c8901a8c91cca3b34405646bbf5f618",
+      "display_text": "VIHREÄ METSÄ",
+      "spoken_text": "vihreä metsä"
+    },
+    "learning.word.viinirypale": {
+      "asset": "clips/e5/e531889437cf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "e531889437cf7d3315df33088f99c97720e71dd4dad1896d62da79b09d027557",
+      "display_text": "VIINIRYPÄLE",
+      "spoken_text": "viinirypäle"
+    },
+    "learning.word.vuodenaika": {
+      "asset": "clips/98/981d4888c590.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "981d4888c590158b57ffedbce01f6dab0701d3e568f308e87b27bf52f1d67f53",
+      "display_text": "VUODENAIKA",
+      "spoken_text": "vuodenaika"
+    },
+    "learning.word.vuoristo": {
+      "asset": "clips/4b/4beca0d8c2fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "4beca0d8c2fc16bf99f612a78750794127b1c8e60f3afb60743713b86a56246d",
+      "display_text": "VUORISTO",
+      "spoken_text": "vuoristo"
+    },
+    "learning.word.ystava": {
+      "asset": "clips/6a/6adc362ab4fe.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "6adc362ab4fee964851a9ac8de61610089026710dc0beffc6e67961a0488cd44",
+      "display_text": "YSTÄVÄ",
+      "spoken_text": "ystävä"
+    },
+    "learning.word.ystavat_jakavat": {
+      "asset": "clips/56/569b3987ceef.mp3",
+      "word_ends_ms": [
+        508
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1228,
+      "sha256": "569b3987ceef326cf54fc5eedf645359b8d9dd72208292c90d3e120b7c713b47",
+      "display_text": "YSTÄVÄT JAKAVAT",
+      "spoken_text": "ystävät jakavat"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/12/12989d3b1a53.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1384,
+      "sha256": "12989d3b1a53d4a6ca998dd89658d8b77ccf3b2763eb5145da46c0381ae29a90",
+      "display_text": "Oppimislabyrintti",
+      "spoken_text": "Oppimislabyrintti"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/d7/d7e941ae5253.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "d7e941ae5253e5ba406a79e34b5c820f1fa3688d478cabc9996c220d820057f0",
+      "display_text": "Automaattinen",
+      "spoken_text": "Automaattinen"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/c6/c6689e0ff13e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "c6689e0ff13ecbbb541820f59c34220ec64d591022dac45e346142fd56c6468f",
+      "display_text": "Tšekki",
+      "spoken_text": "Tšekki"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/6f/6f74912f7a1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "6f74912f7a1ab516519e568737f2a5627ceca7871a2f22e599427a7744e813c7",
+      "display_text": "Tanska",
+      "spoken_text": "Tanska"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/30/308e1bd356a7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "308e1bd356a7804262cb7359d8125a48de4828f8bd501db96de0277cd34252b9",
+      "display_text": "Hollanti",
+      "spoken_text": "Hollanti"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/cd/cd9fc6600c0e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "cd9fc6600c0e26c6076a812475faf552c0ceae72d2d583633bf0a8d2b20f08a3",
+      "display_text": "Englanti",
+      "spoken_text": "Englanti"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/66/66e4ab601184.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "66e4ab6011848d7a6b12d0c809f587cca3efe760002f58570c1f31277c5d9fd7",
+      "display_text": "Suomi",
+      "spoken_text": "Suomi"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/a6/a64f1d001744.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a64f1d001744468e510308a4cbe3ed0fdcfbd91bfb86ad6484ecd004b3d50ed0",
+      "display_text": "Ranska",
+      "spoken_text": "Ranska"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/05/05e2e908730a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "05e2e908730af52cf65ac64867f2804e0998e75e178c4370e053f0c012664662",
+      "display_text": "Saksa",
+      "spoken_text": "Saksa"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/92/92e2d8838077.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "92e2d8838077d746727c8f2a7ac3c43b25b1f9238201d28ae1281e8621e45be6",
+      "display_text": "Kreikka",
+      "spoken_text": "Kreikka"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/93/93f5357f9fb6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "93f5357f9fb63c08f73d8eba3507db6ce00ac9deb8e1f1067d1e313dbab86b4b",
+      "display_text": "Heprea",
+      "spoken_text": "Heprea"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/73/73341ab4073a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "73341ab4073afde852bfe342a9198e2bbf3bfb2e6432d01d90c85b0f017d4aa2",
+      "display_text": "Unkari",
+      "spoken_text": "Unkari"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/da/da23857549dc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "da23857549dce6bebd83c86fca5718a828212f1c7f21c4323c4421d2336de913",
+      "display_text": "tsekiksi",
+      "spoken_text": "tsekiksi"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/8f/8f51b2cfceb7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "8f51b2cfceb79fe84a1d8362d40b3226a6fbce3565500b193e5f197acd1a21f0",
+      "display_text": "tanskaksi",
+      "spoken_text": "tanskaksi"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/c8/c8f19dd17367.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "c8f19dd173674ac6d292323e2b14867b85e3c92a7b03518e789986531dcb66c3",
+      "display_text": "hollanniksi",
+      "spoken_text": "hollanniksi"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/47/47b3c3f821ec.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "47b3c3f821ec2d2eb24df8c9fd75f0fbe86ccb459824a0fbee99115cd4104dd5",
+      "display_text": "englanniksi",
+      "spoken_text": "englanniksi"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/33/33026dc57dd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "33026dc57dd259e0af0ef2333fadcbad99f5e50690debf9a326df823ca7debbe",
+      "display_text": "suomeksi",
+      "spoken_text": "suomeksi"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/bf/bf414c5dc106.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "bf414c5dc1065a64bb8b4c610bb1c3368089e460918706379ee92171ccd585d5",
+      "display_text": "ranskaksi",
+      "spoken_text": "ranskaksi"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/75/75b65bbc9ebf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "75b65bbc9ebf90eb78d185797de239d9ac1afd43b85fe9a00653c7759e3fc289",
+      "display_text": "saksaksi",
+      "spoken_text": "saksaksi"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/66/6692c219a3fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "6692c219a3fb76d4009b1a5c18587eb37ee3ea40264a975a97bf36a616906f74",
+      "display_text": "kreikaksi",
+      "spoken_text": "kreikaksi"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/b9/b94b026ef8fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "b94b026ef8fc5953576463fa2fb51bde26f6e88dc9cea07bb405c88edc6a01f1",
+      "display_text": "hepreaksi",
+      "spoken_text": "hepreaksi"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/6e/6ea9c502d88a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "6ea9c502d88ab43d8bc7ce3065fc27ab47f507bca580e08497de0e0a4dd1ea46",
+      "display_text": "unkariksi",
+      "spoken_text": "unkariksi"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/db/dbae981b2f5e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "dbae981b2f5e16b5d17016e41c88613b537af5c1395a673048f295dc3f32ab37",
+      "display_text": "italiaksi",
+      "spoken_text": "italiaksi"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/38/38f9fe3ea117.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "38f9fe3ea11753215a73303f40b4395fbf1505f48832ada37ab6153e7f03b8ae",
+      "display_text": "norjaksi",
+      "spoken_text": "norjaksi"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/e6/e6db2abc766a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "e6db2abc766a0626863be52a1ef4c1a5273a729c3c90fec357161f40b854f35d",
+      "display_text": "puolaksi",
+      "spoken_text": "puolaksi"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/35/350c82bf41fa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "350c82bf41faaef4aae4f6504ae07becd766aff01ff41342c4cddbdcebaaed87",
+      "display_text": "portugaliksi",
+      "spoken_text": "portugaliksi"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/45/4567ef83a651.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "4567ef83a6513b1963069c301d1e4a9632d8ee7035118d6544c8476bb3f7bccb",
+      "display_text": "romaniaksi",
+      "spoken_text": "romaniaksi"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/ba/baf465303630.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "baf465303630aed7948d4fc5d6be64cd2d22c1a425e897ee8c433a258dc9838c",
+      "display_text": "slovakiksi",
+      "spoken_text": "slovakiksi"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/c1/c19f21d8577d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "c19f21d8577d50a542a2cd152c0375200ba1db32a3ba8e5a6d227f77165fbf26",
+      "display_text": "espanjaksi",
+      "spoken_text": "espanjaksi"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/61/6109c095b0c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6109c095b0c3db70cdd81dd20072a70a83e818e19e98f0233d420967b5f1baa1",
+      "display_text": "ruotsiksi",
+      "spoken_text": "ruotsiksi"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/52/5227873af635.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "5227873af63594a469c547c36bbace1e01006cee9901275655df54f87d7b9748",
+      "display_text": "turkiksi",
+      "spoken_text": "turkiksi"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/d7/d7e14494cba1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d7e14494cba1ac8fc9becc57dd2d408a0d5ad67858081096dcfbece33d19593e",
+      "display_text": "ukrainaksi",
+      "spoken_text": "ukrainaksi"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/d4/d4725f2d6e78.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d4725f2d6e7895ea4ee2acbf556f48847527f0f236be8be0f5d40c9b139f9269",
+      "display_text": "vietnamiksi",
+      "spoken_text": "vietnamiksi"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/e7/e7f776815b12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "e7f776815b129a98cce2d8fc48c980eaa61d7216e4fe14361492979d0a3dc75e",
+      "display_text": "Italia",
+      "spoken_text": "Italia"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/ff/ff2cd7e04f55.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "ff2cd7e04f55accf6295fbf04e4ded5676bef522f2e2eb3167d8006f5c444cbd",
+      "display_text": "Norja",
+      "spoken_text": "Norja"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/f2/f2cfc7add080.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 496,
+      "sha256": "f2cfc7add0800b7a8d1c4bfe91358108c2834d470fef85cd4d1f0263fda16d6a",
+      "display_text": "Puola",
+      "spoken_text": "Puola"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/29/2956285f0b52.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "2956285f0b52f4f6ca7f6a5e8fac2e1798ded4489aad154350c4e82f9d79b512",
+      "display_text": "Portugali",
+      "spoken_text": "Portugali"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/65/65a22dde294a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "65a22dde294af880d690f3b1c4018d0b6c193ca0ecc3b8d39aa2aac3a39406f3",
+      "display_text": "Romania",
+      "spoken_text": "Romania"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/6d/6d0a509e554c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "6d0a509e554c982fe1f574274d36678cc252ae1118cd880ae8c3f37aafbc1b97",
+      "display_text": "Slovakki",
+      "spoken_text": "Slovakki"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/67/674e25c53e0c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "674e25c53e0c0c746912eaf92ce8b41ff9ffb385223c2408db9efa7885c9c832",
+      "display_text": "Espanja",
+      "spoken_text": "Espanja"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/fe/fe030cf10076.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "fe030cf10076ee2c79c6a134e926bc4d2be4c7712fd6c1158ee3f746ee46dda6",
+      "display_text": "Ruotsi",
+      "spoken_text": "Ruotsi"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/08/082deeea7bab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "082deeea7bab39ee1b08dc7c334f8bdf2f80977ce8b397020be20ee3f776a29a",
+      "display_text": "Turkki",
+      "spoken_text": "Turkki"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/39/39b6f645746f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "39b6f645746fb9080223599be1a86e47940fd99a4a15102a38f0ff03a7a0fd21",
+      "display_text": "Ukraina",
+      "spoken_text": "Ukraina"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/44/44f648dbd39f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "44f648dbd39f50a81f21e051c5bbbd1739eeda881bd4cf5139c0c5946eff3d4d",
+      "display_text": "Vietnam",
+      "spoken_text": "Vietnam"
+    },
+    "ui.number_to.001": {
+      "asset": "clips/6f/6fd62bc7fd06.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "6fd62bc7fd0607de95e298069bb83b2f165afc90a9f26fdd1e603fe766126ff7",
+      "display_text": "yhteen",
+      "spoken_text": "yhteen"
+    },
+    "ui.number_to.002": {
+      "asset": "clips/29/291009f989ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "291009f989ce78ac0c47e54075723ecd73d0a4183db112fe78f765ad20593fea",
+      "display_text": "kahteen",
+      "spoken_text": "kahteen"
+    },
+    "ui.number_to.003": {
+      "asset": "clips/09/09792490eb65.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "09792490eb65faa8c25a2136a1164ff3a5a0d1cfef31f3cf53ca0d3c349200fd",
+      "display_text": "kolmeen",
+      "spoken_text": "kolmeen"
+    },
+    "ui.number_to.004": {
+      "asset": "clips/37/37ac55c8b072.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "37ac55c8b07272ab5a46dbd69feb3a8be662320a1f1128cb4890dbb73d1970d4",
+      "display_text": "neljään",
+      "spoken_text": "neljään"
+    },
+    "ui.number_to.005": {
+      "asset": "clips/f0/f0827ff03b42.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "f0827ff03b4234ec43eaeb59da6c502b716be256bd3d1196b5fea5cf2469fd20",
+      "display_text": "viiteen",
+      "spoken_text": "viiteen"
+    },
+    "ui.number_to.006": {
+      "asset": "clips/4c/4ca5fb617d1f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "4ca5fb617d1f1251aa57f3a58f7bd3ab5e1ef027cbdc6b8f2620c91b0de26220",
+      "display_text": "kuuteen",
+      "spoken_text": "kuuteen"
+    },
+    "ui.number_to.007": {
+      "asset": "clips/2a/2a485230e79a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "2a485230e79a50d96172514e6e1a964fcdf7346faffd80f87384f005e1b784ad",
+      "display_text": "seitsemään",
+      "spoken_text": "seitsemään"
+    },
+    "ui.number_to.008": {
+      "asset": "clips/3c/3c80fab1e272.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "3c80fab1e272ca797cea8e672503781a6386497128e9fdd0c03fb61e2e1860e4",
+      "display_text": "kahdeksaan",
+      "spoken_text": "kahdeksaan"
+    },
+    "ui.number_to.009": {
+      "asset": "clips/f3/f3d1f8333ef7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "f3d1f8333ef7e84c2eba0ce79a264228fdbb1f29b7f82358ac13d52fcccf7490",
+      "display_text": "yhdeksään",
+      "spoken_text": "yhdeksään"
+    },
+    "ui.number_to.010": {
+      "asset": "clips/af/afd09053f0e4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "afd09053f0e4071c752742bb6f04764263e689cddd71f44a551027d253244631",
+      "display_text": "kymmeneen",
+      "spoken_text": "kymmeneen"
+    },
+    "ui.number_to.011": {
+      "asset": "clips/03/03ed5e0752f0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "03ed5e0752f045718b792c8c96f319cfb0db48fc22c90852ef090bd0643ba687",
+      "display_text": "yhteentoista",
+      "spoken_text": "yhteentoista"
+    },
+    "ui.number_to.012": {
+      "asset": "clips/39/39ba67d1c4db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "39ba67d1c4db95c20c1bc9b501d7fa740a69e929d261e7bd5838bb406a5c4742",
+      "display_text": "kahteentoista",
+      "spoken_text": "kahteentoista"
+    },
+    "ui.number_to.013": {
+      "asset": "clips/1d/1d3af847fa71.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "1d3af847fa712e603d82aba0a3b1e68325eeec4e6b28e95adc6f148aeaf87f05",
+      "display_text": "kolmeentoista",
+      "spoken_text": "kolmeentoista"
+    },
+    "ui.number_to.014": {
+      "asset": "clips/08/084f94fc9e8c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "084f94fc9e8ca13d4bd43d1197546bb2f58c4bb8a2a56a78ca1d32cfc72acd4a",
+      "display_text": "neljääntoista",
+      "spoken_text": "neljääntoista"
+    },
+    "ui.number_to.015": {
+      "asset": "clips/ad/ad6ffbb95dd4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "ad6ffbb95dd453bccf0a6df4ba1618dc1147bf0bfa5906f1031f4ac6a05abb7d",
+      "display_text": "viiteentoista",
+      "spoken_text": "viiteentoista"
+    },
+    "ui.number_to.016": {
+      "asset": "clips/f3/f3aa899fe503.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "f3aa899fe50359f4ed43bf0d450b4deab6d027eb426cd112b6623a3bcc0d77e6",
+      "display_text": "kuuteentoista",
+      "spoken_text": "kuuteentoista"
+    },
+    "ui.number_to.017": {
+      "asset": "clips/10/10e68c0b54e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "10e68c0b54e06c79dc43335b198a4c0295fb2efe8cca914227eabfc5d8f06d29",
+      "display_text": "seitsemääntoista",
+      "spoken_text": "seitsemääntoista"
+    },
+    "ui.number_to.018": {
+      "asset": "clips/88/889ca67c70f4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "889ca67c70f476e2a51d2866938c810ed03bed3e49a2bfca49ded6001f1955ff",
+      "display_text": "kahdeksaantoista",
+      "spoken_text": "kahdeksaantoista"
+    },
+    "ui.number_to.019": {
+      "asset": "clips/8c/8ca060f6ab39.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "8ca060f6ab39c3c87960fbd9c85bdd879c5e4ac5e0a13277255d5fb8cffe2a39",
+      "display_text": "yhdeksääntoista",
+      "spoken_text": "yhdeksääntoista"
+    },
+    "ui.number_to.020": {
+      "asset": "clips/e6/e67d19b48772.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "e67d19b4877243e3e4cde405fdf2f6501fbc88892c3db6f13d1f585ee045489d",
+      "display_text": "kahteenkymmeneen",
+      "spoken_text": "kahteenkymmeneen"
+    },
+    "ui.number_to.021": {
+      "asset": "clips/22/222f1ddd090c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "222f1ddd090caa4e357270a4455827db1c02650b06772bf4e9a715946e81c26a",
+      "display_text": "kahteenkymmeneenyhteen",
+      "spoken_text": "kahteenkymmeneenyhteen"
+    },
+    "ui.number_to.022": {
+      "asset": "clips/81/81ead9eeb491.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "81ead9eeb4914d1e9324fc88e5f22d1aba6a46e804d0f0537b86c479d4526572",
+      "display_text": "kahteenkymmeneenkahteen",
+      "spoken_text": "kahteenkymmeneenkahteen"
+    },
+    "ui.number_to.023": {
+      "asset": "clips/7c/7cdc3b962bfd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "7cdc3b962bfdbc5250b5e68ce94b3aac529ec616c8652e459ed247e20d756ed8",
+      "display_text": "kahteenkymmeneenkolmeen",
+      "spoken_text": "kahteenkymmeneenkolmeen"
+    },
+    "ui.number_to.024": {
+      "asset": "clips/2c/2c3d842e2569.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "2c3d842e2569083bc214306e3f209b8730b12e4d77a85a6429df646d72030b32",
+      "display_text": "kahteenkymmeneenneljään",
+      "spoken_text": "kahteenkymmeneenneljään"
+    },
+    "ui.number_to.025": {
+      "asset": "clips/c4/c48b92207c1e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "c48b92207c1e9d6617c568bd35edcbec59f59e6d3664e042a74aaa01640bb648",
+      "display_text": "kahteenkymmeneenviiteen",
+      "spoken_text": "kahteenkymmeneenviiteen"
+    },
+    "ui.number_to.026": {
+      "asset": "clips/d1/d1a6c8c3b64e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1567,
+      "sha256": "d1a6c8c3b64e004dc2b54689717101a81edccccebad1894c9d81d153aeda0de7",
+      "display_text": "kahteenkymmeneenkuuteen",
+      "spoken_text": "kahteenkymmeneenkuuteen"
+    },
+    "ui.number_to.027": {
+      "asset": "clips/98/98f8c661dd72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1776,
+      "sha256": "98f8c661dd72f91cbd4216233eceead5b295e1ca4df9fa900176c7725da71014",
+      "display_text": "kahteenkymmeneenseitsemään",
+      "spoken_text": "kahteenkymmeneenseitsemään"
+    },
+    "ui.number_to.028": {
+      "asset": "clips/d1/d1106844a157.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1776,
+      "sha256": "d1106844a1576ed22d650205cc5fef50e677183724035b64560ceff183fed916",
+      "display_text": "kahteenkymmeneenkahdeksaan",
+      "spoken_text": "kahteenkymmeneenkahdeksaan"
+    },
+    "ui.number_to.029": {
+      "asset": "clips/9b/9bfdeee17af1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1959,
+      "sha256": "9bfdeee17af1881805af1656525499b1a782534073566ba5eac9ba69f919cdcc",
+      "display_text": "kahteenkymmeneenyhdeksään",
+      "spoken_text": "kahteenkymmeneenyhdeksään"
+    },
+    "ui.number_to.030": {
+      "asset": "clips/82/822e45ebb723.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "822e45ebb72366879fb78f5ae021bf611fdf599b5f08970a714fd3ce4c04a5bd",
+      "display_text": "kolmeenkymmeneen",
+      "spoken_text": "kolmeenkymmeneen"
+    },
+    "ui.number_to.031": {
+      "asset": "clips/74/74b09099edad.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "74b09099edad111bb84e5c83be14e5e3e1a007bc07a679e2f255fb0eed02efaf",
+      "display_text": "kolmeenkymmeneenyhteen",
+      "spoken_text": "kolmeenkymmeneenyhteen"
+    },
+    "ui.number_to.032": {
+      "asset": "clips/cd/cdd514a0915b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1515,
+      "sha256": "cdd514a0915b680c2de4eca1e6005c16e1ae4e833581384be1a21e959524f1db",
+      "display_text": "kolmeenkymmeneenkahteen",
+      "spoken_text": "kolmeenkymmeneenkahteen"
+    },
+    "ui.number_to.033": {
+      "asset": "clips/43/43a5cc66ded0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "43a5cc66ded041dac0e6a897e1ea0682711cd8caf818658ceee13cf5d0b521c7",
+      "display_text": "kolmeenkymmeneenkolmeen",
+      "spoken_text": "kolmeenkymmeneenkolmeen"
+    },
+    "ui.number_to.034": {
+      "asset": "clips/13/13379da61d37.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1594,
+      "sha256": "13379da61d374480beb4223977dd1df33e88bfaf7c1811114854fefb895e4998",
+      "display_text": "kolmeenkymmeneenneljään",
+      "spoken_text": "kolmeenkymmeneenneljään"
+    },
+    "ui.number_to.035": {
+      "asset": "clips/3a/3a66ab6a1ba1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "3a66ab6a1ba10b0171a99441ee5e24434b01b46a61f1e47c352005f8e7f5e573",
+      "display_text": "kolmeenkymmeneenviiteen",
+      "spoken_text": "kolmeenkymmeneenviiteen"
+    },
+    "ui.number_to.036": {
+      "asset": "clips/a7/a7b7097ac9c2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "a7b7097ac9c26f22175f102c25c40c2362f529a5b0d0def339f28e99d6390d91",
+      "display_text": "kolmeenkymmeneenkuuteen",
+      "spoken_text": "kolmeenkymmeneenkuuteen"
+    },
+    "ui.number_to.037": {
+      "asset": "clips/90/90c0f584418b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1698,
+      "sha256": "90c0f584418b2d3b2067d856a808bc6801857096d00ef2a8a07d446a7cbac3be",
+      "display_text": "kolmeenkymmeneenseitsemään",
+      "spoken_text": "kolmeenkymmeneenseitsemään"
+    },
+    "ui.number_to.038": {
+      "asset": "clips/be/bedc8a7db88b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1724,
+      "sha256": "bedc8a7db88b8cf3debd27b18baa2ea9cde9d58cc715f39be51bc6cc21b44cd6",
+      "display_text": "kolmeenkymmeneenkahdeksaan",
+      "spoken_text": "kolmeenkymmeneenkahdeksaan"
+    },
+    "ui.number_to.039": {
+      "asset": "clips/41/419faf63d802.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1802,
+      "sha256": "419faf63d802b6168239431d0ef07091260741a11b20bd049331d3b028d244e4",
+      "display_text": "kolmeenkymmeneenyhdeksään",
+      "spoken_text": "kolmeenkymmeneenyhdeksään"
+    },
+    "ui.number_to.040": {
+      "asset": "clips/af/af8b468594c7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "af8b468594c73dc811c11ea1d1ad4c7b96c0c01b4b8aa00bab1a0db4fc97dff8",
+      "display_text": "neljäänkymmeneen",
+      "spoken_text": "neljäänkymmeneen"
+    },
+    "ui.number_to.041": {
+      "asset": "clips/01/01eb1663e84f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1620,
+      "sha256": "01eb1663e84ff167cbeb5c3d709c1a0181d86b7dd8676f71c827743efac83e46",
+      "display_text": "neljäänkymmeneenyhteen",
+      "spoken_text": "neljäänkymmeneenyhteen"
+    },
+    "ui.number_to.042": {
+      "asset": "clips/d7/d723630d228e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "d723630d228e82dd6c18d6584a4f1195e2975b0cb8676ad47e1a18ba541c6732",
+      "display_text": "neljäänkymmeneenkahteen",
+      "spoken_text": "neljäänkymmeneenkahteen"
+    },
+    "ui.number_to.043": {
+      "asset": "clips/5c/5cbb206b1c38.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1620,
+      "sha256": "5cbb206b1c388a1c946d9cee71905d2427598f9695d28733dce3b1dc92842c07",
+      "display_text": "neljäänkymmeneenkolmeen",
+      "spoken_text": "neljäänkymmeneenkolmeen"
+    },
+    "ui.number_to.044": {
+      "asset": "clips/38/38bc5a266047.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "38bc5a2660471ae697544716bed466b635b67d02c8e69fdbc244888485c4ea69",
+      "display_text": "neljäänkymmeneenneljään",
+      "spoken_text": "neljäänkymmeneenneljään"
+    },
+    "ui.number_to.045": {
+      "asset": "clips/75/75fa5f67651b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "75fa5f67651b95b409dbd567af73a1999d80cb32c88a1b618b3bf91637eca700",
+      "display_text": "neljäänkymmeneenviiteen",
+      "spoken_text": "neljäänkymmeneenviiteen"
+    },
+    "ui.number_to.046": {
+      "asset": "clips/5a/5ace3d2819d4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "5ace3d2819d43b207fcb32c7c6efa727480a459c09c6f2fcc67dc98a7f9bb950",
+      "display_text": "neljäänkymmeneenkuuteen",
+      "spoken_text": "neljäänkymmeneenkuuteen"
+    },
+    "ui.number_to.047": {
+      "asset": "clips/12/12d044f61821.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1646,
+      "sha256": "12d044f61821c1c9822b753ed1d0b04bd4e3ce6ede38bde3e2f28d8e1e37726d",
+      "display_text": "neljäänkymmeneenseitsemään",
+      "spoken_text": "neljäänkymmeneenseitsemään"
+    },
+    "ui.number_to.048": {
+      "asset": "clips/02/02656bb4693c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1724,
+      "sha256": "02656bb4693c2099f82d16c5b6a2543b9ff7caeefeeafab54d07d86b6a693b77",
+      "display_text": "neljäänkymmeneenkahdeksaan",
+      "spoken_text": "neljäänkymmeneenkahdeksaan"
+    },
+    "ui.number_to.049": {
+      "asset": "clips/bf/bf79c690e322.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1828,
+      "sha256": "bf79c690e322807832c7af4198517570015f18b65027313a5069e4f8bcc7d33c",
+      "display_text": "neljäänkymmeneenyhdeksään",
+      "spoken_text": "neljäänkymmeneenyhdeksään"
+    },
+    "ui.number_to.050": {
+      "asset": "clips/1a/1ac56493ef5e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "1ac56493ef5e2c20c9d80d835519595eb5675c943b0b19b4bcada8e20e279d68",
+      "display_text": "viiteenkymmeneen",
+      "spoken_text": "viiteenkymmeneen"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/6a/6acf6f881e45.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6acf6f881e4503f557be9193b3f83c2ce0d9f21583f47f958064a257ccd7c8ee",
+      "display_text": "Laskit",
+      "spoken_text": "Laskit"
+    },
+    "ui.recap_tts_counted_to.1": {
+      "asset": "clips/c9/c9a6335e30db.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "c9a6335e30db464e0c434052eed43d0c0487864167e506548bcf7c0e20a256c1",
+      "display_text": "asti",
+      "spoken_text": "asti"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/0c/0c1340180741.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "0c13401807414631e98564301b9b1ef127c24a09785a87cada6ee538a78c3acb",
+      "display_text": "Löysit kirjaimen",
+      "spoken_text": "Löysit kirjaimen"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/2d/2d510f177b2c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "2d510f177b2c0b32899430e26588d38adf32d9cca441e29d237f4742ee0df036",
+      "display_text": "Löysit",
+      "spoken_text": "Löysit"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/e2/e24087a3955b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "e24087a3955b6224232408beb056c8b5766a7ebf9b57bff4df5861da50708fea",
+      "display_text": "kirjaimen",
+      "spoken_text": "kirjaimen"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/fa/fa8c7bf52325.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "fa8c7bf523250652ec693d01d127ae3c7d2f7ccbaefefd678bdcea40fd735ee1",
+      "display_text": "Löysit kirjaimet",
+      "spoken_text": "Löysit kirjaimet"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/61/61b094b2386a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "61b094b2386aebca823fe6d079d9329956b11bce83235a765a0c8f7ee6123e34",
+      "display_text": "kirjaimet",
+      "spoken_text": "kirjaimet"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/3c/3ccb3dc3bc72.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "3ccb3dc3bc728f85686216e6a2d116c133566b6264ebb1280bbc75dbf85a07f1",
+      "display_text": "kielellä",
+      "spoken_text": "kielellä"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/0e/0e4ee9ff4236.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "0e4ee9ff42366d2c6cf33fd07e49d8de46cae306220e03875f563ee061c45ddb",
+      "display_text": "Tavasit ilmauksen",
+      "spoken_text": "Tavasit ilmauksen"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/f4/f420cfb80add.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "f420cfb80addb61b9b33192bc8ffc749776c9e600492b02ea485dee404a78872",
+      "display_text": "ilmauksen",
+      "spoken_text": "ilmauksen"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/b0/b0344dc8b762.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "b0344dc8b762d6afe354797a2af4650054d4dac501828dfb9bd37d64e735505c",
+      "display_text": "Tavasit sanan",
+      "spoken_text": "Tavasit sanan"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/a6/a6bae147b64b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a6bae147b64b33be5a4957abfe853269dfd9afcc603b39cff6b443068dcf0c67",
+      "display_text": "Tavasit",
+      "spoken_text": "Tavasit"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/2c/2cdd8fdb8844.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "2cdd8fdb884443f0650a1c814f5db373c2f224ab832a05fcd841f9af936a8646",
+      "display_text": "sanan",
+      "spoken_text": "sanan"
+    }
+  }
+}

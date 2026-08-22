@@ -1,0 +1,2979 @@
+{
+  "schema_version": 1,
+  "pack_version": 1,
+  "lang": "nb",
+  "locale": "nb-NO",
+  "voice_profile": "nb-NO@1",
+  "coverage": {
+    "number": "complete",
+    "char": "complete",
+    "word": "complete",
+    "ui": "complete"
+  },
+  "counts": {
+    "number": 50,
+    "char": 29,
+    "word": 168,
+    "ui": 59
+  },
+  "items": {
+    "learning.char.a": {
+      "asset": "clips/6a/6ab4e1ed90a0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "6ab4e1ed90a0ef42cac57f9de12632337e32c514fef21ce4f09ac69589ff69a7",
+      "display_text": "A",
+      "spoken_text": "a"
+    },
+    "learning.char.b": {
+      "asset": "clips/b5/b517343c8ea9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "b517343c8ea9f55af028613e22ab001c1a3f3d6005103e22f7f669878369cac0",
+      "display_text": "B",
+      "spoken_text": "be"
+    },
+    "learning.char.c": {
+      "asset": "clips/40/407de6fd6c83.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "407de6fd6c83830a8a93ba1ed16886c2f2d6e096373e320781832eed260f7d35",
+      "display_text": "C",
+      "spoken_text": "se"
+    },
+    "learning.char.c26": {
+      "asset": "clips/c9/c9cb74b544fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "c9cb74b544fd6d3f9aceea36a8993c7c40541e4da6cd7f3292083d16d7f6f823",
+      "display_text": "Æ",
+      "spoken_text": "æ"
+    },
+    "learning.char.c27": {
+      "asset": "clips/72/72dedec62dd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "72dedec62dd2ffa9b92ba84d69bef86f9bdde89b31b592b4048d8c85587dcfdf",
+      "display_text": "Ø",
+      "spoken_text": "ø"
+    },
+    "learning.char.c28": {
+      "asset": "clips/cc/cca39d6aba12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "cca39d6aba1248bce1a8febcb8bb6914f14dce16ab68cbeb02ecab489bbb4eff",
+      "display_text": "Å",
+      "spoken_text": "å"
+    },
+    "learning.char.d": {
+      "asset": "clips/27/27d4613cd1d8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 418,
+      "sha256": "27d4613cd1d85578b803cf3d6ccafa727615cd74960218cdb54ab06d1e237988",
+      "display_text": "D",
+      "spoken_text": "de"
+    },
+    "learning.char.e": {
+      "asset": "clips/05/05537f811046.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "05537f81104687a8ccbe439aab693c2b10b4c788e33e6cd2b1a5d62f8f953847",
+      "display_text": "E",
+      "spoken_text": "e"
+    },
+    "learning.char.f": {
+      "asset": "clips/71/71de34b13432.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "71de34b13432220ae52c6d98b737bb2429b1a8d4944d897cbdcd5c80aa9fe7fc",
+      "display_text": "F",
+      "spoken_text": "eff"
+    },
+    "learning.char.g": {
+      "asset": "clips/e0/e08b1c9b9470.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "e08b1c9b9470b0f770e45796a8b2a669603dd2d3f057f57f86c59c13dc3d9a1a",
+      "display_text": "G",
+      "spoken_text": "ge"
+    },
+    "learning.char.h": {
+      "asset": "clips/94/94745b8d38ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "94745b8d38ae1d080785345c3a5da862eb70905fdaf613023d598edb1b6bd302",
+      "display_text": "H",
+      "spoken_text": "hå"
+    },
+    "learning.char.i": {
+      "asset": "clips/cd/cd36d8caf6b0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "cd36d8caf6b0ffb4b49ddc10fb789007e6d7f98f34f0a85e9ec99231526717cb",
+      "display_text": "I",
+      "spoken_text": "i"
+    },
+    "learning.char.j": {
+      "asset": "clips/8f/8f164dc6955d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 470,
+      "sha256": "8f164dc6955d5dc5c9a76ab557822453ee089c345247aed6914dae96fb7c5470",
+      "display_text": "J",
+      "spoken_text": "je"
+    },
+    "learning.char.k": {
+      "asset": "clips/51/51dd6ea89a8f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "51dd6ea89a8f240c77547927b17d0c3633c742406f34845f8402d4a70cd1f016",
+      "display_text": "K",
+      "spoken_text": "kå"
+    },
+    "learning.char.l": {
+      "asset": "clips/b9/b9b50b2b2677.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 444,
+      "sha256": "b9b50b2b26779fcc47ad0e15637a27c2e5c9079d4d0d46f9200537d47d070312",
+      "display_text": "L",
+      "spoken_text": "ell"
+    },
+    "learning.char.m": {
+      "asset": "clips/fa/fa2af9b7f6c6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "fa2af9b7f6c661bd72a9513898c9712bc65969ec0091f9eeaed1545b351eccb3",
+      "display_text": "M",
+      "spoken_text": "emm"
+    },
+    "learning.char.n": {
+      "asset": "clips/d1/d12f31e046c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "d12f31e046c3b89fc0b114fed8335d766b89078f2a14971f16313d0011b770d2",
+      "display_text": "N",
+      "spoken_text": "enn"
+    },
+    "learning.char.o": {
+      "asset": "clips/fa/faccde53427c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "faccde53427c73910502710a9ed3dddc69d5630f6da0fde2c8d86d96e707eb5e",
+      "display_text": "O",
+      "spoken_text": "o"
+    },
+    "learning.char.p": {
+      "asset": "clips/62/628bc710636d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "628bc710636d15188465fd5d0c5b53a8b4c9347d98219a633630207fa707f5e6",
+      "display_text": "P",
+      "spoken_text": "pe"
+    },
+    "learning.char.q": {
+      "asset": "clips/b8/b8d4671337e5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "b8d4671337e5ea7d3fc42e8760faaf54f15b1e9dcada9ced2883d7b25074dc6b",
+      "display_text": "Q",
+      "spoken_text": "ku"
+    },
+    "learning.char.r": {
+      "asset": "clips/d2/d2a5ad8d0959.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "d2a5ad8d0959ab0f10f5070c84440fb44f2418604dbd8ed067a01d9e2a4c263e",
+      "display_text": "R",
+      "spoken_text": "ærr"
+    },
+    "learning.char.s": {
+      "asset": "clips/33/3399b32fdd6e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "3399b32fdd6e4654f762c00987e936e3da1f538294714fdea5aa4699a25b5075",
+      "display_text": "S",
+      "spoken_text": "ess"
+    },
+    "learning.char.t": {
+      "asset": "clips/a9/a92e3ef0d192.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a92e3ef0d19210ee4a38cbf1f93a4fa96bd943d307adb95fb11773d2f93e4381",
+      "display_text": "T",
+      "spoken_text": "te"
+    },
+    "learning.char.u": {
+      "asset": "clips/9d/9d6b31c6c2f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "9d6b31c6c2f6bf91016fac1218f2f17276c0cdba5ff77bb40450eb02c894a531",
+      "display_text": "U",
+      "spoken_text": "u"
+    },
+    "learning.char.v": {
+      "asset": "clips/21/216f670236fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "216f670236fdd3c720d306a37b0bf9401c11de542abd5be18392a5c226344319",
+      "display_text": "V",
+      "spoken_text": "ve"
+    },
+    "learning.char.w": {
+      "asset": "clips/5d/5df24a7ca17e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "5df24a7ca17e4b334ad90f6d12485dd2308282c68dc4f07ab2397b24cad2c252",
+      "display_text": "W",
+      "spoken_text": "dobbelt-ve"
+    },
+    "learning.char.x": {
+      "asset": "clips/fc/fce016db258b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "fce016db258b65a20b3edd7bf3e9aad074b723644b9b4ce9e79f2ea77aa8db06",
+      "display_text": "X",
+      "spoken_text": "eks"
+    },
+    "learning.char.y": {
+      "asset": "clips/35/35372b5c6a12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "35372b5c6a1212f0cd820c6d62312c6c7e0f242fd0da30235c03f40f84e55392",
+      "display_text": "Y",
+      "spoken_text": "y"
+    },
+    "learning.char.z": {
+      "asset": "clips/2e/2e9df6a1b8f3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "2e9df6a1b8f390ab00caa80dcde1671e8597e769438d755dd64c39620ef7f6ee",
+      "display_text": "Z",
+      "spoken_text": "sett"
+    },
+    "learning.number.001": {
+      "asset": "clips/51/515cf9222290.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "515cf9222290882e48da0037048348db32db8c16a96bce9918176f625af1e9e3",
+      "display_text": "1",
+      "spoken_text": "en"
+    },
+    "learning.number.002": {
+      "asset": "clips/83/83d2bfb11cf5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "83d2bfb11cf58bf13f55af523fa15d6bc64cc635171e229ba95b25d3efc1e861",
+      "display_text": "2",
+      "spoken_text": "to"
+    },
+    "learning.number.003": {
+      "asset": "clips/84/8484711db307.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "8484711db30729bcd24997c2dce6c00de86375144c28fd25d25b94da0739c239",
+      "display_text": "3",
+      "spoken_text": "tre"
+    },
+    "learning.number.004": {
+      "asset": "clips/b3/b38221de0ce2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "b38221de0ce27ff60f5daf5c4a577ca2f4eeb36d57b8cfe55a1928527316f0c7",
+      "display_text": "4",
+      "spoken_text": "fire"
+    },
+    "learning.number.005": {
+      "asset": "clips/b5/b50abf64d32d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "b50abf64d32d48dc5bc484f14ad38bff6c1ce69c3b05157955c08b8bd9801ba9",
+      "display_text": "5",
+      "spoken_text": "fem"
+    },
+    "learning.number.006": {
+      "asset": "clips/b9/b918833feb19.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "b918833feb19c7dddc53d3766d112e1c3c177760427c8253473bdb3624989f1f",
+      "display_text": "6",
+      "spoken_text": "seks"
+    },
+    "learning.number.007": {
+      "asset": "clips/fe/fe06ab85da9a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "fe06ab85da9a3fa8d5e346e2c0265dc5758387f56b60714b398cd96147fdb8f1",
+      "display_text": "7",
+      "spoken_text": "sju"
+    },
+    "learning.number.008": {
+      "asset": "clips/cd/cd46debb774e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "cd46debb774ee3ba279e004df4159003c27c22d9353fe21e1ae6c4db17392421",
+      "display_text": "8",
+      "spoken_text": "åtte"
+    },
+    "learning.number.009": {
+      "asset": "clips/29/29e2ac797579.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "29e2ac797579bcee70cad046be4ce19ac17dbee09b660180b1f6f3e27c26f832",
+      "display_text": "9",
+      "spoken_text": "ni"
+    },
+    "learning.number.010": {
+      "asset": "clips/1b/1bbbec4cbc52.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "1bbbec4cbc52100844aab099f059e95fff3522403aa77fffda08a1f906821361",
+      "display_text": "10",
+      "spoken_text": "ti"
+    },
+    "learning.number.011": {
+      "asset": "clips/c4/c47535f2f98e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "c47535f2f98e7a2d2762c1040163b13255e7733a8f1e72bac1f02bebf8b5fd5f",
+      "display_text": "11",
+      "spoken_text": "elleve"
+    },
+    "learning.number.012": {
+      "asset": "clips/5e/5efbcb66f181.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "5efbcb66f18185d7d541868465d2f0f5eaeda42aa1b8b7783adb53377914640a",
+      "display_text": "12",
+      "spoken_text": "tolv"
+    },
+    "learning.number.013": {
+      "asset": "clips/85/85560012fcf6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "85560012fcf66cb42d22cb8342e7262bab3c05399a040c8100b6621d57a6e364",
+      "display_text": "13",
+      "spoken_text": "tretten"
+    },
+    "learning.number.014": {
+      "asset": "clips/42/424c90b8341a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "424c90b8341a63a3a5c7f752b2e4cdf54957cbe204c3216b2da4cc3455234622",
+      "display_text": "14",
+      "spoken_text": "fjorten"
+    },
+    "learning.number.015": {
+      "asset": "clips/11/1187b383e413.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "1187b383e4133fb4425795323e7320ddbb0bd93c1698bc7b43d1d9a8e8da93fe",
+      "display_text": "15",
+      "spoken_text": "femten"
+    },
+    "learning.number.016": {
+      "asset": "clips/63/633cded04423.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "633cded044237abe1a3427490dc52d47bc2049b82727433a6de763ec9d297c59",
+      "display_text": "16",
+      "spoken_text": "seksten"
+    },
+    "learning.number.017": {
+      "asset": "clips/bd/bd68c982971f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "bd68c982971f714b37b1ee665d25d10addd4a14bd6633a8043d23b554a832c30",
+      "display_text": "17",
+      "spoken_text": "sytten"
+    },
+    "learning.number.018": {
+      "asset": "clips/e8/e815ec947c99.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "e815ec947c990187b2d578fb6ba0f4ca75f6c26ab703964920246b7949689dfd",
+      "display_text": "18",
+      "spoken_text": "atten"
+    },
+    "learning.number.019": {
+      "asset": "clips/d2/d2682a15cb61.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "d2682a15cb6107f8213b8451a39d6e95cb89857b8ca7df98d6785d240be58382",
+      "display_text": "19",
+      "spoken_text": "nitten"
+    },
+    "learning.number.020": {
+      "asset": "clips/6a/6a498ee311b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6a498ee311b3fb6f555b2e3a065535aa5d9203db4d2434ba9248128258859dca",
+      "display_text": "20",
+      "spoken_text": "tjue"
+    },
+    "learning.number.021": {
+      "asset": "clips/d0/d0b32f1ca138.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "d0b32f1ca138af186bbecfdca68944ef5e3829861b4883931f21e8c04ad49818",
+      "display_text": "21",
+      "spoken_text": "tjueen"
+    },
+    "learning.number.022": {
+      "asset": "clips/12/1232170a26c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "1232170a26c1432ea060825d9e76a137b47a449c8862911958f3219d3b83d56e",
+      "display_text": "22",
+      "spoken_text": "tjueto"
+    },
+    "learning.number.023": {
+      "asset": "clips/3d/3d765ce9f998.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3d765ce9f998104f58cc613029fdd695e7aa4ce05e1dbb3bd895c48bbb7647d9",
+      "display_text": "23",
+      "spoken_text": "tjuetre"
+    },
+    "learning.number.024": {
+      "asset": "clips/c7/c7ed7363fb09.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "c7ed7363fb09fa2f27fab65ab982743b03440e7a55c96c334705d57fdff45533",
+      "display_text": "24",
+      "spoken_text": "tjuefire"
+    },
+    "learning.number.025": {
+      "asset": "clips/2a/2a611b84fbc8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "2a611b84fbc879cc85007e2fd35bbfab9a87bc877ec4e9a9141956dab614b7ce",
+      "display_text": "25",
+      "spoken_text": "tjuefem"
+    },
+    "learning.number.026": {
+      "asset": "clips/02/024f3ceffda9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "024f3ceffda91290d12b40f89974d208172610615f6b20a2c7e160090e4f6574",
+      "display_text": "26",
+      "spoken_text": "tjueseks"
+    },
+    "learning.number.027": {
+      "asset": "clips/3b/3bf1dbe409de.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "3bf1dbe409de2f38fdc8e67521bdad24e609e985ad2a6fefd405441dbcbf3c09",
+      "display_text": "27",
+      "spoken_text": "tjuesju"
+    },
+    "learning.number.028": {
+      "asset": "clips/93/935ee4f1f76b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "935ee4f1f76b7c6fb88bc0ab0ba02bbc7bdef237eeb1765228343bd6c173aaf6",
+      "display_text": "28",
+      "spoken_text": "tjueåtte"
+    },
+    "learning.number.029": {
+      "asset": "clips/9b/9b2691c7da9b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "9b2691c7da9b2aa0be1fcbb9e8b0a6e679a7a53b3725f5d02b4cecdfe3f496d5",
+      "display_text": "29",
+      "spoken_text": "tjueni"
+    },
+    "learning.number.030": {
+      "asset": "clips/e5/e5289bb0a77e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "e5289bb0a77edce9484e13d3e695881d78410fca36e2a16000fb6ea8f587a6e9",
+      "display_text": "30",
+      "spoken_text": "tretti"
+    },
+    "learning.number.031": {
+      "asset": "clips/2a/2a575e5f5114.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "2a575e5f511436c91d26a68a88c60b4c2f2237771d524d174232e63f97b1e946",
+      "display_text": "31",
+      "spoken_text": "trettien"
+    },
+    "learning.number.032": {
+      "asset": "clips/b8/b87b59ea7a39.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "b87b59ea7a3998e56b521758568e6ff572c631f28a74089c16ac310e91f4d542",
+      "display_text": "32",
+      "spoken_text": "trettito"
+    },
+    "learning.number.033": {
+      "asset": "clips/fa/fa0e919cf270.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "fa0e919cf27047020c7ff1367e248af294aec03e046a6fe7315bcfaed75f3551",
+      "display_text": "33",
+      "spoken_text": "trettitre"
+    },
+    "learning.number.034": {
+      "asset": "clips/4d/4dc8c85578a9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1071,
+      "sha256": "4dc8c85578a9183cd9c23770528e42a5ed835de3214bee6bb048a681413791ac",
+      "display_text": "34",
+      "spoken_text": "trettifire"
+    },
+    "learning.number.035": {
+      "asset": "clips/ea/ea7b98d082c4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "ea7b98d082c4fff58a6e09c3c049c94517eacf8907a2f35c4a47fc6e75491ea1",
+      "display_text": "35",
+      "spoken_text": "trettifem"
+    },
+    "learning.number.036": {
+      "asset": "clips/f3/f37d352b3c16.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "f37d352b3c16ae72b0fd880041436b8f28ff5dad5d89b70c249ea27e03b61f8e",
+      "display_text": "36",
+      "spoken_text": "trettiseks"
+    },
+    "learning.number.037": {
+      "asset": "clips/0a/0a8330d5f89c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "0a8330d5f89c7695dc03916b00f34d617b6121f036274ae31bc717f3e38ffa1f",
+      "display_text": "37",
+      "spoken_text": "trettisju"
+    },
+    "learning.number.038": {
+      "asset": "clips/48/48877b1613b7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "48877b1613b731eb4a23c1f4c555ed56c2ed3f77eb9517e0b9a9158e03a3119f",
+      "display_text": "38",
+      "spoken_text": "trettiåtte"
+    },
+    "learning.number.039": {
+      "asset": "clips/51/5182ca25dd68.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "5182ca25dd685697fc4b37d241bc1f3dc84dbe800c3ba8f00f3856a6208d3db7",
+      "display_text": "39",
+      "spoken_text": "trettini"
+    },
+    "learning.number.040": {
+      "asset": "clips/53/53a69d03cf67.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "53a69d03cf67066d810bf53d65b91484ece570650aaf1ebeb0cb2481538f0f1c",
+      "display_text": "40",
+      "spoken_text": "førti"
+    },
+    "learning.number.041": {
+      "asset": "clips/ee/eed5299efea1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "eed5299efea1fe7a41f3ce2dc14b779e72a7d884b22e2d517fd4f3a434b0dfdc",
+      "display_text": "41",
+      "spoken_text": "førtien"
+    },
+    "learning.number.042": {
+      "asset": "clips/5d/5d7afca1a208.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "5d7afca1a20878c78e8d312760757ab01b71a2209a62cffbc77357d23b8631e1",
+      "display_text": "42",
+      "spoken_text": "førtito"
+    },
+    "learning.number.043": {
+      "asset": "clips/ad/ad13c1ca3f62.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "ad13c1ca3f62a8cc1d0ae9b80c60d97d9328af1bd31c62db67a9d0be3d4dc8cd",
+      "display_text": "43",
+      "spoken_text": "førtitre"
+    },
+    "learning.number.044": {
+      "asset": "clips/b4/b4ffd3e37673.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "b4ffd3e37673db5efe54706d837f982b4789c1409b1d47c3b474f16edcf09fe6",
+      "display_text": "44",
+      "spoken_text": "førtifire"
+    },
+    "learning.number.045": {
+      "asset": "clips/c4/c47d898f231f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "c47d898f231f5b42ba6d3f184bbeacff6c987ae186084024878ca1c054f087cc",
+      "display_text": "45",
+      "spoken_text": "førtifem"
+    },
+    "learning.number.046": {
+      "asset": "clips/8b/8b678f03fdd1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1097,
+      "sha256": "8b678f03fdd1c5822b774e3ab7b12b21a05cf41b1fe91266b972d7cd1f8c9aee",
+      "display_text": "46",
+      "spoken_text": "førtiseks"
+    },
+    "learning.number.047": {
+      "asset": "clips/28/286b8973bf40.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "286b8973bf40a3ee88d88445f3e92afe865c21417f305960b8462699a57fb48d",
+      "display_text": "47",
+      "spoken_text": "førtisju"
+    },
+    "learning.number.048": {
+      "asset": "clips/08/08eee645bf05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "08eee645bf05530a322dcceb0a4a2f4e697a901cb23364f9e16bbdf4d1132d5b",
+      "display_text": "48",
+      "spoken_text": "førtiåtte"
+    },
+    "learning.number.049": {
+      "asset": "clips/80/809635b7d7d2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "809635b7d7d2d43748b9850ad915543413e0f5a56ddb41e870c31a79e5a50b6a",
+      "display_text": "49",
+      "spoken_text": "førtini"
+    },
+    "learning.number.050": {
+      "asset": "clips/13/133bccf693e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "133bccf693e15a55f03f8ff2d34ff156ed1c2a5707345835cf443524a1139ae3",
+      "display_text": "50",
+      "spoken_text": "femti"
+    },
+    "learning.word.ananasen": {
+      "asset": "clips/f4/f4a3c5ffb859.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "f4a3c5ffb8594736ff6b8ffa3e02c6c8a583ea4d7882d93df2a8609ecba2b0e0",
+      "display_text": "ANANASEN",
+      "spoken_text": "ananasen"
+    },
+    "learning.word.ball": {
+      "asset": "clips/d6/d6649201b52e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "d6649201b52e34abeab4f65d42c85dc5bea6a281966931cfaceb5dd8e948b886",
+      "display_text": "BALL",
+      "spoken_text": "ball"
+    },
+    "learning.word.banan": {
+      "asset": "clips/f6/f61ad1bea3f1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "f61ad1bea3f14999e0a475ca97c35f33585f2abc79afbd8025afe98186649aef",
+      "display_text": "BANAN",
+      "spoken_text": "banan"
+    },
+    "learning.word.barn": {
+      "asset": "clips/35/35cf440fada3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "35cf440fada3ffd1198c7802458cfa39ac6cab0540c133e62f8861ff63002235",
+      "display_text": "BARN",
+      "spoken_text": "barn"
+    },
+    "learning.word.bat": {
+      "asset": "clips/c9/c98bde55123b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "c98bde55123b33591d1d667fa1ec622d3df42746529220bd7d715f6325f52d24",
+      "display_text": "BÅT",
+      "spoken_text": "båt"
+    },
+    "learning.word.bein": {
+      "asset": "clips/7b/7b6a8b7bf699.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "7b6a8b7bf699221bd39399576d33d1231a00fd8a2fb32678718797ab1076bcf0",
+      "display_text": "BEIN",
+      "spoken_text": "bein"
+    },
+    "learning.word.bil": {
+      "asset": "clips/60/604a068abd0d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "604a068abd0da4c3b433239626ee7961754b1bf8d73e1853575528716c2d3c29",
+      "display_text": "BIL",
+      "spoken_text": "bil"
+    },
+    "learning.word.bille": {
+      "asset": "clips/49/49d82f94c19a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "49d82f94c19a27abc08f36a5822df637116824c03a1080693aba33b0bae84caf",
+      "display_text": "BILLE",
+      "spoken_text": "bille"
+    },
+    "learning.word.bj_rn": {
+      "asset": "clips/95/958380edf196.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "958380edf196474dc008f5f2f4f0d3584a3cd18e891348f9753009f6bb2ca7e9",
+      "display_text": "BJØRN",
+      "spoken_text": "bjørn"
+    },
+    "learning.word.blad": {
+      "asset": "clips/64/6426246ec1ae.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "6426246ec1ae707150d53380d910447dfc47caf70dce6996c0dc39e0b1b145b0",
+      "display_text": "BLAD",
+      "spoken_text": "blad"
+    },
+    "learning.word.blatt_hav": {
+      "asset": "clips/6b/6b1e62e355a4.mp3",
+      "word_ends_ms": [
+        501
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1097,
+      "sha256": "6b1e62e355a45d5e24d61e0307855d4e34281ebabf09de08f6a56a63ab799bf3",
+      "display_text": "BLÅTT HAV",
+      "spoken_text": "blått hav"
+    },
+    "learning.word.blekksprut": {
+      "asset": "clips/00/00daed560703.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1254,
+      "sha256": "00daed560703ca89c4701feee3db1d3e69cd526ecce5e5769d207e0c9e1081d6",
+      "display_text": "BLEKKSPRUT",
+      "spoken_text": "blekksprut"
+    },
+    "learning.word.blomst": {
+      "asset": "clips/e8/e8da2a52a6ca.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "e8da2a52a6caa17cc8947c7ce9c783ab5c70e1fc9a9f591a9c6cb817bfba36f5",
+      "display_text": "BLOMST",
+      "spoken_text": "blomst"
+    },
+    "learning.word.bok": {
+      "asset": "clips/bb/bb9890156145.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "bb989015614527610ccf075f04f4aafd43f87e52e9e7b6672c33d9bbf32f0420",
+      "display_text": "BOK",
+      "spoken_text": "bok"
+    },
+    "learning.word.brannbilen": {
+      "asset": "clips/a4/a4023d5073f8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1176,
+      "sha256": "a4023d5073f87976eec08ce369a5678dd4b11764eb30ca78245c14c9b839f37c",
+      "display_text": "BRANNBILEN",
+      "spoken_text": "brannbilen"
+    },
+    "learning.word.bro": {
+      "asset": "clips/43/431673332b57.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "431673332b57fe91b5b7103f5dce6cf280cb913f5278636c8e46274fa8cce360",
+      "display_text": "BRO",
+      "spoken_text": "bro"
+    },
+    "learning.word.bror": {
+      "asset": "clips/d4/d4352b972314.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "d4352b9723144c82d296caccd496d2358ae6f068f5a814e94d933633260fc579",
+      "display_text": "BROR",
+      "spoken_text": "bror"
+    },
+    "learning.word.d_r": {
+      "asset": "clips/41/41bc563f1883.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "41bc563f18834c0409307ff81fd4ccdf3ee02c19100103ca0d240d05445ea7eb",
+      "display_text": "DØR",
+      "spoken_text": "dør"
+    },
+    "learning.word.dinosaurer": {
+      "asset": "clips/a2/a287fa4db663.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "a287fa4db66317f46e573b7d38306afbcff9fc0bd5abf12af500b818080df11b",
+      "display_text": "DINOSAURER",
+      "spoken_text": "dinosaurer"
+    },
+    "learning.word.drikk_vann": {
+      "asset": "clips/3f/3fe2ddc06b0f.mp3",
+      "word_ends_ms": [
+        482
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1019,
+      "sha256": "3fe2ddc06b0feb2b6101ab2c3402adec2d15bd48793d0a46ef5e68d5b9c23cd7",
+      "display_text": "DRIKK VANN",
+      "spoken_text": "drikk vann"
+    },
+    "learning.word.drikk_vann_hver_dag": {
+      "asset": "clips/50/50d34069d530.mp3",
+      "word_ends_ms": [
+        367,
+        877,
+        1237
+      ],
+      "word_fade_ms": [
+        40,
+        12,
+        12
+      ],
+      "duration_ms": 1672,
+      "sha256": "50d34069d530f736e5aca15ffb9cafca9113660fa497954a9c963ce2e1673a25",
+      "display_text": "DRIKK VANN HVER DAG",
+      "spoken_text": "drikk vann hver dag"
+    },
+    "learning.word.ekorn": {
+      "asset": "clips/24/241d6e3b9a9f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "241d6e3b9a9fcbbc23b6696db5da82b74234ba47e9f285aa70b3a8580da0beb0",
+      "display_text": "EKORN",
+      "spoken_text": "ekorn"
+    },
+    "learning.word.ekornet": {
+      "asset": "clips/22/220f1d106078.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "220f1d10607815e528b4424cdbcfd7151f7dceac1bd46a9efd3a435e8d0dad47",
+      "display_text": "EKORNET",
+      "spoken_text": "ekornet"
+    },
+    "learning.word.elefanten": {
+      "asset": "clips/ee/ee101ed2ef1b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "ee101ed2ef1be38012be16b5bf59032e12613f15fa38d34c383f174a41a79035",
+      "display_text": "ELEFANTEN",
+      "spoken_text": "elefanten"
+    },
+    "learning.word.elg": {
+      "asset": "clips/e5/e5bd03d36c59.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "e5bd03d36c59a34f36618d6daf716718bbc48e863184116e870158bfc7f4572a",
+      "display_text": "ELG",
+      "spoken_text": "elg"
+    },
+    "learning.word.elsk_planeten_din": {
+      "asset": "clips/a0/a07c1161c589.mp3",
+      "word_ends_ms": [
+        531,
+        1102
+      ],
+      "word_fade_ms": [
+        12,
+        19
+      ],
+      "duration_ms": 1437,
+      "sha256": "a07c1161c589ca662996e92d8a571af6db87e07675c39c57b3a43685e6f388df",
+      "display_text": "ELSK PLANETEN DIN",
+      "spoken_text": "elsk planeten din"
+    },
+    "learning.word.eple": {
+      "asset": "clips/9f/9fda956230c6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "9fda956230c628ba9aa9baddb973b749defdecdbe7ba6f93f010be4f04f252d9",
+      "display_text": "EPLE",
+      "spoken_text": "eple"
+    },
+    "learning.word.eventyret": {
+      "asset": "clips/c7/c7362fc68210.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "c7362fc68210216123063253f1bf7a522055fe02e16c2a91043bde11aa76649f",
+      "display_text": "EVENTYRET",
+      "spoken_text": "eventyret"
+    },
+    "learning.word.familie": {
+      "asset": "clips/69/696769cf6c55.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "696769cf6c55c358bdeefec32eda2480f51b50e789fe3bb985497c60d59b2d4a",
+      "display_text": "FAMILIE",
+      "spoken_text": "familie"
+    },
+    "learning.word.familien_min_er_kj_rlighet": {
+      "asset": "clips/92/9208ac0bdf8f.mp3",
+      "word_ends_ms": [
+        665,
+        925,
+        1175
+      ],
+      "word_fade_ms": [
+        20,
+        20,
+        12
+      ],
+      "duration_ms": 2142,
+      "sha256": "9208ac0bdf8f8cfc4c994f7c206c2608eca0899f9e237ceb7f46bf5a6494c429",
+      "display_text": "FAMILIEN MIN ER KJÆRLIGHET",
+      "spoken_text": "familien min er kjærlighet"
+    },
+    "learning.word.far": {
+      "asset": "clips/b9/b93fc17868fd.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "b93fc17868fdfd17a400c1de50bd49c753e755dfd51926eed4f6138d6bf71549",
+      "display_text": "FAR",
+      "spoken_text": "far"
+    },
+    "learning.word.farge": {
+      "asset": "clips/a8/a89f0b881c32.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "a89f0b881c3202c6b98637792f76217076fc8d8bfabad7ca0e31a945c73f8f4f",
+      "display_text": "FARGE",
+      "spoken_text": "farge"
+    },
+    "learning.word.fargebue": {
+      "asset": "clips/70/707f09be4a31.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "707f09be4a316e14f69ad71e66e5c3b9726483a184e3a83d47d1207005d39f23",
+      "display_text": "FARGEBUE",
+      "spoken_text": "fargebue"
+    },
+    "learning.word.fisk": {
+      "asset": "clips/a3/a370b86da30e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a370b86da30e984ffd8b8e0cf2dfb604573da98d1132f3f32f25ae40c3fa4bf5",
+      "display_text": "FISK",
+      "spoken_text": "fisk"
+    },
+    "learning.word.flamingo": {
+      "asset": "clips/4b/4b2f11728992.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "4b2f11728992cfdd567c15015a395c31abd1bab84d0076f7dc5d2275aeff0ae6",
+      "display_text": "FLAMINGO",
+      "spoken_text": "flamingo"
+    },
+    "learning.word.flygende_fugl": {
+      "asset": "clips/51/5127a68b17c6.mp3",
+      "word_ends_ms": [
+        665
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1150,
+      "sha256": "5127a68b17c66163ad0e1d3c3531bb374eb75bff70266654052693a4f91fbbed",
+      "display_text": "FLYGENDE FUGL",
+      "spoken_text": "flygende fugl"
+    },
+    "learning.word.frisk_frukt": {
+      "asset": "clips/0a/0a2a09bf7c88.mp3",
+      "word_ends_ms": [
+        584
+      ],
+      "word_fade_ms": [
+        39
+      ],
+      "duration_ms": 1254,
+      "sha256": "0a2a09bf7c882c9b42ae132f8ffccd1ff879b18ba831fbf32a63bf51f53fbd0b",
+      "display_text": "FRISK FRUKT",
+      "spoken_text": "frisk frukt"
+    },
+    "learning.word.frukt": {
+      "asset": "clips/dd/dd511d12bf68.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "dd511d12bf68cea826fa9d07ad75f517bfdf6378a6f1755907e3cbaf291ed5f6",
+      "display_text": "FRUKT",
+      "spoken_text": "frukt"
+    },
+    "learning.word.fugl": {
+      "asset": "clips/3e/3ea81cf33634.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "3ea81cf3363440458c9dea488c268efd41d385c75440c0f66b0d38cf3acb251c",
+      "display_text": "FUGL",
+      "spoken_text": "fugl"
+    },
+    "learning.word.fugler": {
+      "asset": "clips/de/de38bd949314.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "de38bd949314620dd40901c555424c4d6d547011af7ecf30af394e161d10712d",
+      "display_text": "FUGLER",
+      "spoken_text": "fugler"
+    },
+    "learning.word.fugler_flyr_h_yt": {
+      "asset": "clips/92/925ea23168be.mp3",
+      "word_ends_ms": [
+        645,
+        1095
+      ],
+      "word_fade_ms": [
+        20,
+        12
+      ],
+      "duration_ms": 1750,
+      "sha256": "925ea23168bec55087e883769d83bffc22a669fd657f019464518aa03690f0a5",
+      "display_text": "FUGLER FLYR HØYT",
+      "spoken_text": "fugler flyr høyt"
+    },
+    "learning.word.fugleskremsel": {
+      "asset": "clips/13/1317cc1c784a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "1317cc1c784a69bd992740faae29c3a3804b216134fb83a8722a960aa53ac6ea",
+      "display_text": "FUGLESKREMSEL",
+      "spoken_text": "fugleskremsel"
+    },
+    "learning.word.fyrverkeri": {
+      "asset": "clips/89/895cfed6da97.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "895cfed6da9718b9b68331b8eda9992b51c39f16c8e85ad1e72d8863a006d454",
+      "display_text": "FYRVERKERI",
+      "spoken_text": "fyrverkeri"
+    },
+    "learning.word.ga_med_glede": {
+      "asset": "clips/70/70d5de8e4ebc.mp3",
+      "word_ends_ms": [
+        411,
+        611
+      ],
+      "word_fade_ms": [
+        40,
+        30
+      ],
+      "duration_ms": 1254,
+      "sha256": "70d5de8e4ebcd28196f7c22815137affc47a6cdfbf50f242340c8c6e347f8220",
+      "display_text": "GÅ MED GLEDE",
+      "spoken_text": "gå med glede"
+    },
+    "learning.word.gasung": {
+      "asset": "clips/3b/3b9d81083f50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "3b9d81083f50bb41e23264ca2821184cfe041b9d03c77b6081d8b9fcc7de5817",
+      "display_text": "GÅSUNG",
+      "spoken_text": "gåsung"
+    },
+    "learning.word.gave": {
+      "asset": "clips/5a/5ab77535dd08.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "5ab77535dd08730486eec98dfa9dfd2675641b392cf9fc5acee683527d122d85",
+      "display_text": "GAVE",
+      "spoken_text": "gave"
+    },
+    "learning.word.glad_barn": {
+      "asset": "clips/f1/f16c135acd79.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "f16c135acd79db7dde82b2a295ddacc2d190eb5be25954461aca18e5054051a1",
+      "display_text": "GLAD BARN",
+      "spoken_text": "glad barn"
+    },
+    "learning.word.godteri": {
+      "asset": "clips/b9/b92ef888200c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "b92ef888200ce75587be85f8ba0ac0b00e799a1258909832f61b7556dfc960d6",
+      "display_text": "GODTERI",
+      "spoken_text": "godteri"
+    },
+    "learning.word.gr_nn_skog": {
+      "asset": "clips/18/188471b93536.mp3",
+      "word_ends_ms": [
+        402
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1123,
+      "sha256": "188471b9353609ca1621ffbf0d208d2c7de5d0d189cb806654dd47d2edfc722b",
+      "display_text": "GRØNN SKOG",
+      "spoken_text": "grønn skog"
+    },
+    "learning.word.gras": {
+      "asset": "clips/b9/b9b5bf0b6179.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "b9b5bf0b6179dc4c2b014bf9dd46fa3edd874eae5bb9f2268eea0d271a4e9f26",
+      "display_text": "GRAS",
+      "spoken_text": "gras"
+    },
+    "learning.word.gull": {
+      "asset": "clips/0c/0c3c2c5757f9.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "0c3c2c5757f93b0c222bad902926c80ee7c0b1e8ddd699a254834a0366127022",
+      "display_text": "GULL",
+      "spoken_text": "gull"
+    },
+    "learning.word.gutt": {
+      "asset": "clips/4b/4bd360e5ffab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "4bd360e5ffab950b0fd42ae553ed419f6557aa36de7ee0fe044bf66ba6d248c5",
+      "display_text": "GUTT",
+      "spoken_text": "gutt"
+    },
+    "learning.word.hamsteren": {
+      "asset": "clips/2f/2f3036acd8bf.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "2f3036acd8bff00d0d2029fd71abbe61afdefe2c5cf10205716ed479c3d4fe1e",
+      "display_text": "HAMSTEREN",
+      "spoken_text": "hamsteren"
+    },
+    "learning.word.hatt": {
+      "asset": "clips/63/6362900a39e0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "6362900a39e03a6e0108a9448d1b98f68c741ee9662bdb1aead17b75abf4c632",
+      "display_text": "HATT",
+      "spoken_text": "hatt"
+    },
+    "learning.word.havet_vart_er_blatt": {
+      "asset": "clips/78/78f9449acaf2.mp3",
+      "word_ends_ms": [
+        495,
+        784,
+        954
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        12
+      ],
+      "duration_ms": 1594,
+      "sha256": "78f9449acaf23c1cd0cbafcdd9ccb8966e444906621cd773fd2b06482bcbf884",
+      "display_text": "HAVET VÅRT ER BLÅTT",
+      "spoken_text": "havet vårt er blått"
+    },
+    "learning.word.hei": {
+      "asset": "clips/e0/e0c414480e33.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "e0c414480e338185f33ac6aa16dd08e3bf4bc80d528998cc2299494753a9500c",
+      "display_text": "HEI",
+      "spoken_text": "hei"
+    },
+    "learning.word.hei_venner": {
+      "asset": "clips/b5/b5de7065ace8.mp3",
+      "word_ends_ms": [
+        371
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 914,
+      "sha256": "b5de7065ace82b54bc460df11b24093b3271ee5a4afde1365bbbdb553cac45da",
+      "display_text": "HEI VENNER",
+      "spoken_text": "hei venner"
+    },
+    "learning.word.helikopter": {
+      "asset": "clips/18/18fb509bca4e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "18fb509bca4e4a0d143877cc074820276ba895137329b36f0141b45b79a8b260",
+      "display_text": "HELIKOPTER",
+      "spoken_text": "helikopter"
+    },
+    "learning.word.hest": {
+      "asset": "clips/c1/c18546b2a795.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "c18546b2a795d9e6db611b96494450c73376c689a1323397dcd127648bd018be",
+      "display_text": "HEST",
+      "spoken_text": "hest"
+    },
+    "learning.word.hester": {
+      "asset": "clips/ed/ed580d9c285d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "ed580d9c285d86568f0d6aae6d4def72d4dc49e911528d859f5650e678c9eee2",
+      "display_text": "HESTER",
+      "spoken_text": "hester"
+    },
+    "learning.word.hjelp_alle_andre": {
+      "asset": "clips/d8/d82d054ad75a.mp3",
+      "word_ends_ms": [
+        641,
+        1020
+      ],
+      "word_fade_ms": [
+        39,
+        40
+      ],
+      "duration_ms": 1515,
+      "sha256": "d82d054ad75a65fbfdcff475291cc2015b6afa01e85d8bd6704b9307818f3052",
+      "display_text": "HJELP ALLE ANDRE",
+      "spoken_text": "hjelp alle andre"
+    },
+    "learning.word.hund": {
+      "asset": "clips/54/5405865cf526.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "5405865cf5263cf169b25ae7f08fd341b16947b7bea07f75471c2f5e891bf0e9",
+      "display_text": "HUND",
+      "spoken_text": "hund"
+    },
+    "learning.word.hus": {
+      "asset": "clips/6f/6f8b42c73293.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "6f8b42c732939b8fbdb0f12e541c02fbb008414d663622ff3c2e3aa0649164dd",
+      "display_text": "HUS",
+      "spoken_text": "hus"
+    },
+    "learning.word.is": {
+      "asset": "clips/68/68402ee6741b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "68402ee6741b27bb724e2fd6b08af3c614b6a6361852d59e388d1b0df50d6a44",
+      "display_text": "IS",
+      "spoken_text": "is"
+    },
+    "learning.word.isbilen": {
+      "asset": "clips/ee/eec89fc447eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "eec89fc447eb6a1a1771629ffa6b99f11555e55f91fd1139aafd25cac8532569",
+      "display_text": "ISBILEN",
+      "spoken_text": "isbilen"
+    },
+    "learning.word.jente": {
+      "asset": "clips/a1/a193da86d7a4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "a193da86d7a4d2d7d591d15fe93b220abe1643a3f5f68bb98cb2b7d53d6675b7",
+      "display_text": "JENTE",
+      "spoken_text": "jente"
+    },
+    "learning.word.jordb_r": {
+      "asset": "clips/0a/0ad46caa64c4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "0ad46caa64c4b40e0742e73ab02e79064a06b6d806ba551247d7b0145e26a221",
+      "display_text": "JORDBÆR",
+      "spoken_text": "jordbær"
+    },
+    "learning.word.kake": {
+      "asset": "clips/3b/3bf6f3118c54.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "3bf6f3118c54627f8f7f9116eb6a02fb49f1bf1f124674ec08487160bdfeecfa",
+      "display_text": "KAKE",
+      "spoken_text": "kake"
+    },
+    "learning.word.kanin": {
+      "asset": "clips/02/029604f1eb1b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "029604f1eb1b5acef9317af94dddcadb43f9623a3ea986851ce3a67b2f535764",
+      "display_text": "KANIN",
+      "spoken_text": "kanin"
+    },
+    "learning.word.karneval": {
+      "asset": "clips/82/82718240987b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "82718240987bd97edfd5ddbc427c9b4e201e34f0f5fb3a51c3afe5ef59e56933",
+      "display_text": "KARNEVAL",
+      "spoken_text": "karneval"
+    },
+    "learning.word.katt": {
+      "asset": "clips/3f/3f2973e2c659.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "3f2973e2c6596c39f9bb1c0c6977a5f5101a1e0f8358a0e479a5bb43bca51ba4",
+      "display_text": "KATT",
+      "spoken_text": "katt"
+    },
+    "learning.word.kenguru": {
+      "asset": "clips/48/48ef473daee7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "48ef473daee78f7a063d14bb0c031edcc3a5c458ab9abd7ac3b05b3873145b0a",
+      "display_text": "KENGURU",
+      "spoken_text": "kenguru"
+    },
+    "learning.word.kjeks": {
+      "asset": "clips/21/21b48fbf48e3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "21b48fbf48e3f2e3d6b33368e08c74dcb468ee95c1849a06aa0375747089f1e3",
+      "display_text": "KJEKS",
+      "spoken_text": "kjeks"
+    },
+    "learning.word.kopp": {
+      "asset": "clips/17/17c9af1d8a94.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "17c9af1d8a9417526e7ce3c5198cbc6a35165373eb3e347b09b6d4d4d8ae0673",
+      "display_text": "KOPP",
+      "spoken_text": "kopp"
+    },
+    "learning.word.krokodille": {
+      "asset": "clips/54/541955889ef0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "541955889ef0e07d8bbdb8ddf012c895e5ef41efe62338fbdacc2cd51e12fecc",
+      "display_text": "KROKODILLE",
+      "spoken_text": "krokodille"
+    },
+    "learning.word.l_r_noe_nytt_hver_dag": {
+      "asset": "clips/21/21734d96e1e3.mp3",
+      "word_ends_ms": [
+        308,
+        539,
+        1058,
+        1388
+      ],
+      "word_fade_ms": [
+        19,
+        30,
+        12,
+        19
+      ],
+      "duration_ms": 1828,
+      "sha256": "21734d96e1e39b9d09940f26e65703f576d60dd447e854bbd44f77214cb9971b",
+      "display_text": "LÆR NOE NYTT HVER DAG",
+      "spoken_text": "lær noe nytt hver dag"
+    },
+    "learning.word.l_ve": {
+      "asset": "clips/15/153f8620389c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "153f8620389c245f832eb37a4431dca20cc26f971f55d8dad9618ce225ae8a9e",
+      "display_text": "LØVE",
+      "spoken_text": "løve"
+    },
+    "learning.word.lam": {
+      "asset": "clips/82/82d5e3499453.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "82d5e34994536c3b210ce547d0270e3eb4192f0906b9088a801237b4c212186d",
+      "display_text": "LAM",
+      "spoken_text": "lam"
+    },
+    "learning.word.lek_med_lekene_dine": {
+      "asset": "clips/27/274eb9580a88.mp3",
+      "word_ends_ms": [
+        431,
+        631,
+        1102
+      ],
+      "word_fade_ms": [
+        40,
+        20,
+        12
+      ],
+      "duration_ms": 1541,
+      "sha256": "274eb9580a88fcf02110a621bf428bfa2a74c05cd601e19873a55a9d9bd3f50b",
+      "display_text": "LEK MED LEKENE DINE",
+      "spoken_text": "lek med lekene dine"
+    },
+    "learning.word.lek_sammen": {
+      "asset": "clips/14/14815fa93a9f.mp3",
+      "word_ends_ms": [
+        455
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 914,
+      "sha256": "14815fa93a9f9babcb4af3338dd919bdba1308d10de2bb191f94eb6b20b6a293",
+      "display_text": "LEK SAMMEN",
+      "spoken_text": "lek sammen"
+    },
+    "learning.word.lekefull_hund": {
+      "asset": "clips/86/86c30889dca2.mp3",
+      "word_ends_ms": [
+        742
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1176,
+      "sha256": "86c30889dca20b4474e7abe8c66c4e83f7ae8518400b0cb5db85b810d837e34b",
+      "display_text": "LEKEFULL HUND",
+      "spoken_text": "lekefull hund"
+    },
+    "learning.word.leken": {
+      "asset": "clips/04/04b30fa763d8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "04b30fa763d8b68642a8ff8a1858c3a96aa4f1e9378f74408b61f59c2e65ee41",
+      "display_text": "LEKEN",
+      "spoken_text": "leken"
+    },
+    "learning.word.leket_y": {
+      "asset": "clips/71/71aa58c7d968.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "71aa58c7d96846e0add268766c340802dd0766211dd47301c370edbbfc03d807",
+      "display_text": "LEKETØY",
+      "spoken_text": "leketøy"
+    },
+    "learning.word.les_en_fin_bok": {
+      "asset": "clips/f9/f9a0f98423de.mp3",
+      "word_ends_ms": [
+        382,
+        592,
+        911
+      ],
+      "word_fade_ms": [
+        29,
+        19,
+        40
+      ],
+      "duration_ms": 1515,
+      "sha256": "f9a0f98423de08a1716ba9281d1ac80cd26aa01dcc308557dc3c527428a71489",
+      "display_text": "LES EN FIN BOK",
+      "spoken_text": "les en fin bok"
+    },
+    "learning.word.lite_hus": {
+      "asset": "clips/d6/d60ece2643c0.mp3",
+      "word_ends_ms": [
+        627
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1228,
+      "sha256": "d60ece2643c09d6f633b0f8e0c68d436c2d05e5cd806cf9d8738ce69e40ac19b",
+      "display_text": "LITE HUS",
+      "spoken_text": "lite hus"
+    },
+    "learning.word.lue": {
+      "asset": "clips/e3/e3f14dd611fc.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e3f14dd611fcc69f7ad4d47f8649a6a362a0b5c5efc9c8c4ebb55680f5520781",
+      "display_text": "LUE",
+      "spoken_text": "lue"
+    },
+    "learning.word.lykkelig_jente": {
+      "asset": "clips/59/5972aa9ca2c8.mp3",
+      "word_ends_ms": [
+        592
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1254,
+      "sha256": "5972aa9ca2c89c65317538bf12512c766d7e10431876c85f8c36f93000613b62",
+      "display_text": "LYKKELIG JENTE",
+      "spoken_text": "lykkelig jente"
+    },
+    "learning.word.lynglimt": {
+      "asset": "clips/03/0357690e8f5f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "0357690e8f5ff5126bdf2650d0f6d1539159214f7b54466a5ab24937cb2cc1a6",
+      "display_text": "LYNGLIMT",
+      "spoken_text": "lynglimt"
+    },
+    "learning.word.maling": {
+      "asset": "clips/af/afef6c1f2114.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "afef6c1f21146a3ba82982c0ec024a493b4b85a6cb5cf0f1ed72e5c7d708a449",
+      "display_text": "MALING",
+      "spoken_text": "maling"
+    },
+    "learning.word.manen_lyser_opp": {
+      "asset": "clips/c6/c6dd2e524e6f.mp3",
+      "word_ends_ms": [
+        573,
+        1014
+      ],
+      "word_fade_ms": [
+        40,
+        30
+      ],
+      "duration_ms": 1410,
+      "sha256": "c6dd2e524e6f909e0b6b6f70bf6dffcbb74f6459644983708e7db929ab271c5f",
+      "display_text": "MÅNEN LYSER OPP",
+      "spoken_text": "månen lyser opp"
+    },
+    "learning.word.marih_ne": {
+      "asset": "clips/6f/6f341a7afb87.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "6f341a7afb8755ba5620c392cc9024473994a77465e31ef8b3680fe4b792e851",
+      "display_text": "MARIHØNE",
+      "spoken_text": "marihøne"
+    },
+    "learning.word.mat": {
+      "asset": "clips/d8/d8b9e9317140.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "d8b9e931714096e985a82bf04ac59e7abc9d7f2038831e9d20d7ab498a56a161",
+      "display_text": "MAT",
+      "spoken_text": "mat"
+    },
+    "learning.word.maur": {
+      "asset": "clips/18/186875f79e74.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "186875f79e74b67f2f9c6455b39bb7065cf855597a0ef264aadcac9b879de132",
+      "display_text": "MAUR",
+      "spoken_text": "maur"
+    },
+    "learning.word.melk": {
+      "asset": "clips/56/5625d3d3d9f6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "5625d3d3d9f6c99e4e02d55589ce0b5d7318549434cefa04b682e43eea106e64",
+      "display_text": "MELK",
+      "spoken_text": "melk"
+    },
+    "learning.word.mikroskop": {
+      "asset": "clips/04/049795dd7375.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "049795dd7375c8e4461423ced647e6c9a902c254487760a965bd9edec3432fcb",
+      "display_text": "MIKROSKOP",
+      "spoken_text": "mikroskop"
+    },
+    "learning.word.mor": {
+      "asset": "clips/60/601e3879ea50.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "601e3879ea501f4d2f6d427d4e537ea9016e52f89822b214c7c337bfbe75c0b9",
+      "display_text": "MOR",
+      "spoken_text": "mor"
+    },
+    "learning.word.mus": {
+      "asset": "clips/ed/ed7c36de132d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "ed7c36de132d3a6475ad61f1d5a516b8fdfff5f8f8a66a0ae741a55e3c84db6e",
+      "display_text": "MUS",
+      "spoken_text": "mus"
+    },
+    "learning.word.natt": {
+      "asset": "clips/0f/0f1f324d8def.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "0f1f324d8defee05c2a77cf1238c5b65975428907b9a59301c7c203475ca8db2",
+      "display_text": "NATT",
+      "spoken_text": "natt"
+    },
+    "learning.word.p_re": {
+      "asset": "clips/18/18393d533bd2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "18393d533bd2147496bad9f568525f8e3909ec1646a36ffe8101482073a2bb26",
+      "display_text": "PÆRE",
+      "spoken_text": "pære"
+    },
+    "learning.word.pafugl": {
+      "asset": "clips/cc/cc7ac9a40a05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "cc7ac9a40a05b63228555182f26aa05bbcb9777f6d4bac28a3aa245bd3f8397c",
+      "display_text": "PÅFUGL",
+      "spoken_text": "påfugl"
+    },
+    "learning.word.panda": {
+      "asset": "clips/e5/e57ab2fb80b0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "e57ab2fb80b07aec83912545d2c51a0077249616fa56a047c33b3e007dc675cf",
+      "display_text": "PANDA",
+      "spoken_text": "panda"
+    },
+    "learning.word.papeg_ye": {
+      "asset": "clips/e7/e7c245d93ce0.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "e7c245d93ce0047d186ad6fd33aed1cfa6cf0aa791d8d44ee77c92f674d2b7f0",
+      "display_text": "PAPEGØYE",
+      "spoken_text": "papegøye"
+    },
+    "learning.word.paraplyen": {
+      "asset": "clips/47/4738bf8ab1ed.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "4738bf8ab1edfcf881d92473766dec272fbbe66491b43ae89e5434925e956f4a",
+      "display_text": "PARAPLYEN",
+      "spoken_text": "paraplyen"
+    },
+    "learning.word.pike": {
+      "asset": "clips/eb/ebb3377ddb4a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "ebb3377ddb4acf4d6d2f14326e3efa91b6256daefc6939523f26264522f5c07a",
+      "display_text": "PIKE",
+      "spoken_text": "pike"
+    },
+    "learning.word.pingvinen": {
+      "asset": "clips/ac/ac3a54949036.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "ac3a549490363e5cd88fa321536375769fc33cc1142b73b4efbff73bcf701d3d",
+      "display_text": "PINGVINEN",
+      "spoken_text": "pingvinen"
+    },
+    "learning.word.pinnsvin": {
+      "asset": "clips/2e/2ec1b5b93b0a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "2ec1b5b93b0a20becb225647b8eddd8889577013ddac31a028d5cda378df8963",
+      "display_text": "PINNSVIN",
+      "spoken_text": "pinnsvin"
+    },
+    "learning.word.r_dt_eple": {
+      "asset": "clips/54/5457a0be0588.mp3",
+      "word_ends_ms": [
+        543
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1123,
+      "sha256": "5457a0be05886f4245978e041189b2978ca3752d7d633c3c0a47b00d9d85b257",
+      "display_text": "RØDT EPLE",
+      "spoken_text": "rødt eple"
+    },
+    "learning.word.re": {
+      "asset": "clips/1a/1a699e12b2b1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "1a699e12b2b19118b673e7b45f0eaabe7a44bc4f7b651e7b82cc29f431e3d1a4",
+      "display_text": "ØRE",
+      "spoken_text": "øre"
+    },
+    "learning.word.regnbue": {
+      "asset": "clips/d4/d4a95ad14457.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "d4a95ad144577c0cde40916a0aeedbbdbb150a76f5f564d97afef17b559b8ab5",
+      "display_text": "REGNBUE",
+      "spoken_text": "regnbue"
+    },
+    "learning.word.regnbuen_har_farger": {
+      "asset": "clips/5f/5f53bb097668.mp3",
+      "word_ends_ms": [
+        693,
+        853
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1489,
+      "sha256": "5f53bb0976682054df32ef64b8d65d04f0f9054498fe12bcc283314a5dd62d33",
+      "display_text": "REGNBUEN HAR FARGER",
+      "spoken_text": "regnbuen har farger"
+    },
+    "learning.word.rev": {
+      "asset": "clips/c3/c3adc5ea289c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1358,
+      "sha256": "c3adc5ea289ce93facb5d89c5b83114525ab2e5f25a3a05fa5cc9315a4e40dd0",
+      "display_text": "REV",
+      "spoken_text": "rev"
+    },
+    "learning.word.romskip": {
+      "asset": "clips/ae/ae2afe865885.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "ae2afe865885c39925d986b1f25dffd37bb4be13e95846cb43ebe5c39bc85cd3",
+      "display_text": "ROMSKIP",
+      "spoken_text": "romskip"
+    },
+    "learning.word.s_ster": {
+      "asset": "clips/59/59f90d4dab11.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "59f90d4dab11499163150444c640b049f9c5cfd8b8fd62041e56fffbb6359175",
+      "display_text": "SØSTER",
+      "spoken_text": "søster"
+    },
+    "learning.word.s_tt_godteri": {
+      "asset": "clips/fb/fbd697703028.mp3",
+      "word_ends_ms": [
+        514
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1123,
+      "sha256": "fbd69770302826b51b90ef10ab549b6a4c21cec33351e3aa46f9424044b1c096",
+      "display_text": "SØTT GODTERI",
+      "spoken_text": "søtt godteri"
+    },
+    "learning.word.s_vn": {
+      "asset": "clips/f3/f3fa5124d832.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "f3fa5124d83275b38ffaaf03a0ddc7d476dd4dfc6c0e75ca77e8089dfd9ca5e8",
+      "display_text": "SØVN",
+      "spoken_text": "søvn"
+    },
+    "learning.word.sebra": {
+      "asset": "clips/8f/8fd119d15b41.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "8fd119d15b4190a20170d8f33f8996bfbe0c4f1e954601ead0612e419868fc19",
+      "display_text": "SEBRA",
+      "spoken_text": "sebra"
+    },
+    "learning.word.sel": {
+      "asset": "clips/cb/cb802eaa4dd4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "cb802eaa4dd484237a0e9c0d1e82ea97a9bce027e77559f4978e1071f0346d64",
+      "display_text": "SEL",
+      "spoken_text": "sel"
+    },
+    "learning.word.si_takk_og_v_r_snill": {
+      "asset": "clips/71/71a5bfc81bd1.mp3",
+      "word_ends_ms": [
+        310,
+        629,
+        730,
+        899
+      ],
+      "word_fade_ms": [
+        12,
+        12,
+        12,
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "71a5bfc81bd128db72bd8005fec7b25828edf7075fec7a727df69616b1552817",
+      "display_text": "SI TAKK OG VÆR SNILL",
+      "spoken_text": "si takk og vær snill"
+    },
+    "learning.word.sj_stjerne": {
+      "asset": "clips/c8/c876b31737e6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1123,
+      "sha256": "c876b31737e6dd897a88c36896ec3154b398076991ad4bfa16950a237a5e25be",
+      "display_text": "SJØSTJERNE",
+      "spoken_text": "sjøstjerne"
+    },
+    "learning.word.sjiraff": {
+      "asset": "clips/f7/f7a20a37c00c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "f7a20a37c00c32f0e3d71e2bbcd23739db1c0e5cf2f312fef57d1a20103955d1",
+      "display_text": "SJIRAFF",
+      "spoken_text": "sjiraff"
+    },
+    "learning.word.sjokolade": {
+      "asset": "clips/44/44aea102d1d7.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "44aea102d1d7c1359bb80a98aacb681de1cf30fa6cb2ff37e63f10ff182cda4f",
+      "display_text": "SJOKOLADE",
+      "spoken_text": "sjokolade"
+    },
+    "learning.word.skatten": {
+      "asset": "clips/f3/f3b55d516523.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "f3b55d51652335222aa1302c1c220eeaa17e0f7e41b97e6f2f3daf44c744660e",
+      "display_text": "SKATTEN",
+      "spoken_text": "skatten"
+    },
+    "learning.word.skip": {
+      "asset": "clips/7c/7cd85ea21322.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "7cd85ea21322c7bfeb18f12091879b06ecef2125b2f5ca54e67a1a2ad593e27a",
+      "display_text": "SKIP",
+      "spoken_text": "skip"
+    },
+    "learning.word.skje": {
+      "asset": "clips/12/1203dfd9d027.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "1203dfd9d02730b14d9b15e9f89b2b027ed09f3e5ce5cbcf2a5098aa2003db2e",
+      "display_text": "SKJE",
+      "spoken_text": "skje"
+    },
+    "learning.word.sko": {
+      "asset": "clips/6c/6c7ac881df48.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "6c7ac881df48d2c8c48b9587405bb59910002dda3d31223a7741ff64e49280c6",
+      "display_text": "SKO",
+      "spoken_text": "sko"
+    },
+    "learning.word.skog": {
+      "asset": "clips/22/22d6ab92ce4d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "22d6ab92ce4dece288cc86ca8f06dd40567a76043cbede7b9dde653cbcf29a8b",
+      "display_text": "SKOG",
+      "spoken_text": "skog"
+    },
+    "learning.word.skogen_er_full_av_liv": {
+      "asset": "clips/aa/aa3de565b01b.mp3",
+      "word_ends_ms": [
+        555,
+        745,
+        1034,
+        1164
+      ],
+      "word_fade_ms": [
+        12,
+        20,
+        12,
+        20
+      ],
+      "duration_ms": 1620,
+      "sha256": "aa3de565b01bc8e4ef9b6bc04531692a252f3fcdf5390c5310ec5f9304f0a6e9",
+      "display_text": "SKOGEN ER FULL AV LIV",
+      "spoken_text": "skogen er full av liv"
+    },
+    "learning.word.skole": {
+      "asset": "clips/0b/0bd09a88df02.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "0bd09a88df024f00a4eb91551f1083f83038ef5a83aae91072fab007313a4c0d",
+      "display_text": "SKOLE",
+      "spoken_text": "skole"
+    },
+    "learning.word.skrue": {
+      "asset": "clips/d7/d7defb34e6b3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d7defb34e6b3dbad4d57de4be1d683df6e56dc96167dad5f4ccd2953ed0fe293",
+      "display_text": "SKRUE",
+      "spoken_text": "skrue"
+    },
+    "learning.word.skyen": {
+      "asset": "clips/f5/f57093e05dc2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "f57093e05dc29049d7ddb393129aa52585d91483d507c08e284f5397fbdeed31",
+      "display_text": "SKYEN",
+      "spoken_text": "skyen"
+    },
+    "learning.word.slange": {
+      "asset": "clips/86/86e599ad8959.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "86e599ad89593c2ee62f3afa0637fbd7b40118426fa9475e4d815a349ab9532d",
+      "display_text": "SLANGE",
+      "spoken_text": "slange"
+    },
+    "learning.word.slott": {
+      "asset": "clips/a8/a8ae702f77e1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "a8ae702f77e15253773b5d40853870126cbeffad12c7e480f0bd23a2d8ef5ea6",
+      "display_text": "SLOTT",
+      "spoken_text": "slott"
+    },
+    "learning.word.sm_rbr_d": {
+      "asset": "clips/33/33c50d316eff.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "33c50d316eff0aca60e9200876c019921c3463ac3ce7f838601f3fe0ca741642",
+      "display_text": "SMØRBRØD",
+      "spoken_text": "smørbrød"
+    },
+    "learning.word.smil_og_v_r_glad": {
+      "asset": "clips/d8/d8b1d84b8fd5.mp3",
+      "word_ends_ms": [
+        606,
+        696,
+        826
+      ],
+      "word_fade_ms": [
+        20,
+        12,
+        20
+      ],
+      "duration_ms": 1228,
+      "sha256": "d8b1d84b8fd56d55bf606452d8ce7078e94b2a469875af4740cb610d97043280",
+      "display_text": "SMIL OG VÆR GLAD",
+      "spoken_text": "smil og vær glad"
+    },
+    "learning.word.sn_mannen": {
+      "asset": "clips/1d/1d183981ff69.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "1d183981ff694583ec5b99ad64f54a030ed391851b55b9a8c62d48cbae19497b",
+      "display_text": "SNØMANNEN",
+      "spoken_text": "snømannen"
+    },
+    "learning.word.sol": {
+      "asset": "clips/8b/8b113505228b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "8b113505228bf8a1c0d6f4b15bfb6ce2c3d8edebe9dd1dfcedc78f2e883d38a3",
+      "display_text": "SOL",
+      "spoken_text": "sol"
+    },
+    "learning.word.solen": {
+      "asset": "clips/83/83351acc8de5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "83351acc8de533d2ba10740449e0e165e69db983ddf43b089d373482ca839097",
+      "display_text": "SOLEN",
+      "spoken_text": "solen"
+    },
+    "learning.word.solen_er_gul": {
+      "asset": "clips/f3/f3fc6a9a7bc6.mp3",
+      "word_ends_ms": [
+        552,
+        712
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "f3fc6a9a7bc6b0dd0900845277cbce2d8b9fd959078ecb71cf80506c081df46f",
+      "display_text": "SOLEN ER GUL",
+      "spoken_text": "solen er gul"
+    },
+    "learning.word.solen_skinner_na": {
+      "asset": "clips/56/560d9e570852.mp3",
+      "word_ends_ms": [
+        469,
+        829
+      ],
+      "word_fade_ms": [
+        30,
+        12
+      ],
+      "duration_ms": 1150,
+      "sha256": "560d9e5708523bd738fcfaad24f0ffe5c3aea51934166cdeb9224a38b5583247",
+      "display_text": "SOLEN SKINNER NÅ",
+      "spoken_text": "solen skinner nå"
+    },
+    "learning.word.solsikke": {
+      "asset": "clips/81/81f9fdab492c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "81f9fdab492c6a63c0e41532e3f7b2cbeac5729832935cbb6f0d94042b5ad7cd",
+      "display_text": "SOLSIKKE",
+      "spoken_text": "solsikke"
+    },
+    "learning.word.solskinn": {
+      "asset": "clips/d6/d6680ed936ce.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "d6680ed936ceed16f38296587f21a5b835245e216c12bc636700c986206361d8",
+      "display_text": "SOLSKINN",
+      "spoken_text": "solskinn"
+    },
+    "learning.word.solstrale": {
+      "asset": "clips/a0/a0476349bea1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "a0476349bea16e513f95bfea7368b65ee760da365d5b1621577fe81ec453bc9a",
+      "display_text": "SOLSTRÅLE",
+      "spoken_text": "solstråle"
+    },
+    "learning.word.sommer": {
+      "asset": "clips/54/54765c2ac7a8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "54765c2ac7a870451f3fff862e60e34a45d4acbe2d0312ef2374912f78a0966e",
+      "display_text": "SOMMER",
+      "spoken_text": "sommer"
+    },
+    "learning.word.sommerfugl": {
+      "asset": "clips/b6/b6a53943171f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "b6a53943171f8c749ed9ef11dffc7b9866c8ad2fb3620e017f5836889a4979be",
+      "display_text": "SOMMERFUGL",
+      "spoken_text": "sommerfugl"
+    },
+    "learning.word.sov_godt_i_natt": {
+      "asset": "clips/40/40f594c49f7b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "40f594c49f7bf8cabd83f7463062e1cde2e578faa2ccc1dcc3b75edfdd772fec",
+      "display_text": "SOV GODT I NATT",
+      "spoken_text": "sov godt i natt"
+    },
+    "learning.word.sovende_katt": {
+      "asset": "clips/ce/ce77fb83e732.mp3",
+      "word_ends_ms": [
+        742
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1176,
+      "sha256": "ce77fb83e732bfd025302b0e6738f0d3985b79d2317efa858a82088d14ab0485",
+      "display_text": "SOVENDE KATT",
+      "spoken_text": "sovende katt"
+    },
+    "learning.word.spis_mye_frukt": {
+      "asset": "clips/5b/5b9f0bad8dac.mp3",
+      "word_ends_ms": [
+        699,
+        1000
+      ],
+      "word_fade_ms": [
+        12,
+        12
+      ],
+      "duration_ms": 1489,
+      "sha256": "5b9f0bad8dacadd1b6becf7bb426acdd12b008bcfcb65bc0f35507f45eec305a",
+      "display_text": "SPIS MYE FRUKT",
+      "spoken_text": "spis mye frukt"
+    },
+    "learning.word.spis_sunt": {
+      "asset": "clips/b4/b4809542df56.mp3",
+      "word_ends_ms": [
+        671
+      ],
+      "word_fade_ms": [
+        40
+      ],
+      "duration_ms": 1410,
+      "sha256": "b4809542df56d26b6ac14f955dfe2df5bc791c0c28c5a26f5ef84662618e6bb9",
+      "display_text": "SPIS SUNT",
+      "spoken_text": "spis sunt"
+    },
+    "learning.word.stjerne": {
+      "asset": "clips/d3/d3f8ad21c894.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "d3f8ad21c894bef14c352a38c20f2f903fe4e1819c585ef8647f2602d81077db",
+      "display_text": "STJERNE",
+      "spoken_text": "stjerne"
+    },
+    "learning.word.stjernene_lyser": {
+      "asset": "clips/03/038019f2df62.mp3",
+      "word_ends_ms": [
+        828
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1410,
+      "sha256": "038019f2df62a033fc7d97f05d0de5eda38ee972bdc351d4d8b8f44135ccf0b9",
+      "display_text": "STJERNENE LYSER",
+      "spoken_text": "stjernene lyser"
+    },
+    "learning.word.stol": {
+      "asset": "clips/1b/1b66f5a57926.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "1b66f5a57926cfda3dad03add402a538e897d76959a10f1c68410582f6824501",
+      "display_text": "STOL",
+      "spoken_text": "stol"
+    },
+    "learning.word.stralende_sol": {
+      "asset": "clips/1c/1cfc86c2bc84.mp3",
+      "word_ends_ms": [
+        945
+      ],
+      "word_fade_ms": [
+        20
+      ],
+      "duration_ms": 1463,
+      "sha256": "1cfc86c2bc847556d16000462df5bd3db4aa4e08164ed1ebe81ed67dbbb5f011",
+      "display_text": "STRÅLENDE SOL",
+      "spoken_text": "strålende sol"
+    },
+    "learning.word.sv_mmende_fisk": {
+      "asset": "clips/b9/b9454b1ef2fe.mp3",
+      "word_ends_ms": [
+        792
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1332,
+      "sha256": "b9454b1ef2fe17a4ba4479a82e874abd96022771340bf5f61437b1be5e867e77",
+      "display_text": "SVØMMENDE FISK",
+      "spoken_text": "svømmende fisk"
+    },
+    "learning.word.sykehuset": {
+      "asset": "clips/e2/e23a6947e782.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "e23a6947e7822db607b366aa43253c1b7d4aed0dda8cd66c1aa91e0ce77afb21",
+      "display_text": "SYKEHUSET",
+      "spoken_text": "sykehuset"
+    },
+    "learning.word.sykkelen": {
+      "asset": "clips/42/429047b9e307.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "429047b9e307371ddf410d83c4f8cf425b7be2521dd66e356e5fe8c263690f60",
+      "display_text": "SYKKELEN",
+      "spoken_text": "sykkelen"
+    },
+    "learning.word.syng_sang": {
+      "asset": "clips/11/1175a721cda3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1228,
+      "sha256": "1175a721cda350c8d9f8c3a009acff63b5b0b038d9e6eb8842d5fb6be9da97dd",
+      "display_text": "SYNG SANG",
+      "spoken_text": "syng sang"
+    },
+    "learning.word.ta": {
+      "asset": "clips/30/3064c51d4225.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "3064c51d42257afede4695895d77977a20ce9c08bc3967f5e16f981d27a392ed",
+      "display_text": "TÅ",
+      "spoken_text": "tå"
+    },
+    "learning.word.teleskop": {
+      "asset": "clips/04/04431d9a71a1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "04431d9a71a150a84ab1609229d6cf05216e086fbe59d639181ef551c3741c6c",
+      "display_text": "TELESKOP",
+      "spoken_text": "teleskop"
+    },
+    "learning.word.tog": {
+      "asset": "clips/9d/9dfa01a6e9df.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 575,
+      "sha256": "9dfa01a6e9df7905469c9ae29e86201a862d229ebf101b1a915613820cd6238e",
+      "display_text": "TOG",
+      "spoken_text": "tog"
+    },
+    "learning.word.tre": {
+      "asset": "clips/84/8484711db307.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "8484711db30729bcd24997c2dce6c00de86375144c28fd25d25b94da0739c239",
+      "display_text": "TRE",
+      "spoken_text": "tre"
+    },
+    "learning.word.ulven": {
+      "asset": "clips/e2/e21744f3350f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "e21744f3350f08ae63a75e79d503d84f5276f2a582ae2821f40fcc89bc2c3f75",
+      "display_text": "ULVEN",
+      "spoken_text": "ulven"
+    },
+    "learning.word.vakker_blomst": {
+      "asset": "clips/ea/ea0a09e34c7f.mp3",
+      "word_ends_ms": [
+        479
+      ],
+      "word_fade_ms": [
+        12
+      ],
+      "duration_ms": 1202,
+      "sha256": "ea0a09e34c7ff5618da0ae6628284cfad50a8f2e34d25b9b58187531898c92d1",
+      "display_text": "VAKKER BLOMST",
+      "spoken_text": "vakker blomst"
+    },
+    "learning.word.vannmelon": {
+      "asset": "clips/6e/6e41ec4f9305.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "6e41ec4f93052fa32e71e5f067607141276041b8489bf9fd6e95294a1b8075f3",
+      "display_text": "VANNMELON",
+      "spoken_text": "vannmelon"
+    },
+    "learning.word.vennen": {
+      "asset": "clips/be/be218c2a0fe4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "be218c2a0fe493b3ce27f8b20a3313bc6a6641af5c7008fc99955ad33f26de41",
+      "display_text": "VENNEN",
+      "spoken_text": "vennen"
+    },
+    "learning.word.venner_deler_gjerne": {
+      "asset": "clips/52/5297f71b3cb5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1541,
+      "sha256": "5297f71b3cb51f990db9a7d246fc25dbef42d855b444764b371c0b9a374899cf",
+      "display_text": "VENNER DELER GJERNE",
+      "spoken_text": "venner deler gjerne"
+    },
+    "learning.word.vind": {
+      "asset": "clips/58/58f2956ea03b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "58f2956ea03bc3498ad3c0ecfd99e0cfb286a45edf3471845ce65e7cddaa99b5",
+      "display_text": "VIND",
+      "spoken_text": "vind"
+    },
+    "learning.word.vinter": {
+      "asset": "clips/7f/7ffd030430d2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "7ffd030430d2496565e2a815ab44feed183ab2d07099cf1edc185cb58c94612b",
+      "display_text": "VINTER",
+      "spoken_text": "vinter"
+    },
+    "learning.word.ye": {
+      "asset": "clips/62/624f023f7862.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "624f023f78622509a08e752852abb0589a2c41983af5fcda8aa841ee439b3c97",
+      "display_text": "ØYE",
+      "spoken_text": "øye"
+    },
+    "ui.app_title.0": {
+      "asset": "clips/3c/3cfc7cb2eb5d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1410,
+      "sha256": "3cfc7cb2eb5d7c1b2cb0f5ca467e387123187632fb9c3ad0dc54d55b5a6e5f41",
+      "display_text": "Læringslabyrinten",
+      "spoken_text": "Læringslabyrinten"
+    },
+    "ui.lang_auto.0": {
+      "asset": "clips/23/23f60112c3e8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "23f60112c3e81325db23ca5a6fd5407a85bc8bc3be92578da2a76de3e04028ad",
+      "display_text": "Automatisk",
+      "spoken_text": "Automatisk"
+    },
+    "ui.lang_czech.0": {
+      "asset": "clips/6c/6c74bb781441.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "6c74bb781441b67f3735e468f3980bcc71a41b6de0f5d6fdb327d8deb81dc652",
+      "display_text": "Tsjekkisk",
+      "spoken_text": "Tsjekkisk"
+    },
+    "ui.lang_danish.0": {
+      "asset": "clips/5b/5bdcb9c7b4f8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "5bdcb9c7b4f89e61012e0b6743fcbdf9bf14fca2bd2a4fbed8c3132736d53c55",
+      "display_text": "Dansk",
+      "spoken_text": "Dansk"
+    },
+    "ui.lang_dutch.0": {
+      "asset": "clips/5a/5af8aeafd370.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1019,
+      "sha256": "5af8aeafd370deba9bc9fb496b2fdcc5abd8a0cb77bcefdd9dd2dd4e8ab588fc",
+      "display_text": "Nederlandsk",
+      "spoken_text": "Nederlandsk"
+    },
+    "ui.lang_english.0": {
+      "asset": "clips/bc/bc72857cdc05.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "bc72857cdc05dc2da529f708281e8200a0de6ccabf06aa403edd19563f3045a9",
+      "display_text": "Engelsk",
+      "spoken_text": "Engelsk"
+    },
+    "ui.lang_finnish.0": {
+      "asset": "clips/4e/4eb4137e22d2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "4eb4137e22d23b572882a5b0783aff0e5c747038bf4a07e38c1b2e59095e92b9",
+      "display_text": "Finsk",
+      "spoken_text": "Finsk"
+    },
+    "ui.lang_french.0": {
+      "asset": "clips/29/2919124aad98.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "2919124aad9807dcc77feec091700385fac70aeed04986ce8c4acc5aa201f018",
+      "display_text": "Fransk",
+      "spoken_text": "Fransk"
+    },
+    "ui.lang_german.0": {
+      "asset": "clips/0f/0fccc9830499.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "0fccc98304993e6cc160bf46ea023536e80ded237eb599274670d2ba7218140c",
+      "display_text": "Tysk",
+      "spoken_text": "Tysk"
+    },
+    "ui.lang_greek.0": {
+      "asset": "clips/44/4423a2574158.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "4423a2574158b8a0497cc40c14c0a5615bdc8821ed9c91a09e1f208d4ef50955",
+      "display_text": "Gresk",
+      "spoken_text": "Gresk"
+    },
+    "ui.lang_hebrew.0": {
+      "asset": "clips/ff/ff6ad7c5b451.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "ff6ad7c5b4512cafb58a384a5151218d274cf72197db3627d530019e81eb9860",
+      "display_text": "Hebraisk",
+      "spoken_text": "Hebraisk"
+    },
+    "ui.lang_hungarian.0": {
+      "asset": "clips/51/518b4a07b287.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "518b4a07b2870f1bf5718c9c83ff5a2acf49e0c8a9698897c21b8608b5b6327c",
+      "display_text": "Ungarsk",
+      "spoken_text": "Ungarsk"
+    },
+    "ui.lang_in_czech.0": {
+      "asset": "clips/9b/9bf69083b4c8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 784,
+      "sha256": "9bf69083b4c8c5552be8961d6a365aa8a9ce09b28d29a9a1ab49105be4874d82",
+      "display_text": "på tsjekkisk",
+      "spoken_text": "på tsjekkisk"
+    },
+    "ui.lang_in_danish.0": {
+      "asset": "clips/78/78c382de1cd4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "78c382de1cd418b60954867d94fb033f323e32ff0ff0cea2a2368aaf633e5f32",
+      "display_text": "på dansk",
+      "spoken_text": "på dansk"
+    },
+    "ui.lang_in_dutch.0": {
+      "asset": "clips/d4/d43e32a90c1c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "d43e32a90c1c5fdc71866a3da71784331d182d2388caab5d3bc37396b8b024ea",
+      "display_text": "på nederlandsk",
+      "spoken_text": "på nederlandsk"
+    },
+    "ui.lang_in_english.0": {
+      "asset": "clips/46/4662c86ee146.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "4662c86ee1465fce01857fb76499dedde12d4e8681bdd82aacbc23662e00b2df",
+      "display_text": "på engelsk",
+      "spoken_text": "på engelsk"
+    },
+    "ui.lang_in_finnish.0": {
+      "asset": "clips/00/003fded3475f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "003fded3475fd8422b3e73a8e55f9705ffe923a9e1b6e616a2900eb7008a6a30",
+      "display_text": "på finsk",
+      "spoken_text": "på finsk"
+    },
+    "ui.lang_in_french.0": {
+      "asset": "clips/91/913e5c0b837c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "913e5c0b837cb19c2a08c1fcc22d1669ca8aaabe25fed8ab9d5b432e4cbb65cc",
+      "display_text": "på fransk",
+      "spoken_text": "på fransk"
+    },
+    "ui.lang_in_german.0": {
+      "asset": "clips/3d/3decb1b49450.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "3decb1b49450bf3a2c888cfc759b56c10c0dceb7737bf5266d4098f89581547d",
+      "display_text": "på tysk",
+      "spoken_text": "på tysk"
+    },
+    "ui.lang_in_greek.0": {
+      "asset": "clips/97/975b25dd6e1a.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "975b25dd6e1a69ba3a38a7a5a34af1fa82324226bd2d247458dbde11988b2577",
+      "display_text": "på gresk",
+      "spoken_text": "på gresk"
+    },
+    "ui.lang_in_hebrew.0": {
+      "asset": "clips/74/74e8ac7a9eb2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 888,
+      "sha256": "74e8ac7a9eb2fcb8411ab03945b3e1f1dd8d0650526a525163edae3279a3130f",
+      "display_text": "på hebraisk",
+      "spoken_text": "på hebraisk"
+    },
+    "ui.lang_in_hungarian.0": {
+      "asset": "clips/5d/5dc6e4a427d1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "5dc6e4a427d18ef6e89654410f42a48c5500f3f2ab08d376ce6e8ac97906bd51",
+      "display_text": "på ungarsk",
+      "spoken_text": "på ungarsk"
+    },
+    "ui.lang_in_italian.0": {
+      "asset": "clips/7a/7ae8fb8f12aa.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 914,
+      "sha256": "7ae8fb8f12aae0d221fde4dfa6e6dc546969fcae5d40a24f4da87695250a650a",
+      "display_text": "på italiensk",
+      "spoken_text": "på italiensk"
+    },
+    "ui.lang_in_norwegian.0": {
+      "asset": "clips/1e/1e9003071b19.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 679,
+      "sha256": "1e9003071b19a527621a08d11f6b65f97cb295804091644ce77bc4ab28b03993",
+      "display_text": "på norsk",
+      "spoken_text": "på norsk"
+    },
+    "ui.lang_in_polish.0": {
+      "asset": "clips/56/56e575fe74b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "56e575fe74b4f93f690135338933c5dfd3d198706fa6db76dda3e41c7ef512da",
+      "display_text": "på polsk",
+      "spoken_text": "på polsk"
+    },
+    "ui.lang_in_portuguese.0": {
+      "asset": "clips/e1/e12b3f91949d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "e12b3f91949d28004344e751a78e17f85c228f484d00e260f2a4f793c842408f",
+      "display_text": "på portugisisk",
+      "spoken_text": "på portugisisk"
+    },
+    "ui.lang_in_romanian.0": {
+      "asset": "clips/b8/b82656e34f31.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "b82656e34f31a43415fea50e829f9e36db71232a93b7839dbfe40b28d0fa45e6",
+      "display_text": "på rumensk",
+      "spoken_text": "på rumensk"
+    },
+    "ui.lang_in_slovak.0": {
+      "asset": "clips/48/48ecec0e1dd8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 993,
+      "sha256": "48ecec0e1dd884f2f248b8559edd515014efd89cf24f2e68a8a2f9507f679114",
+      "display_text": "på slovakisk",
+      "spoken_text": "på slovakisk"
+    },
+    "ui.lang_in_spanish.0": {
+      "asset": "clips/e3/e3d578901975.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "e3d5789019758f53118febbb807055f017831b6d19e3a754d1aff9e0d3a61385",
+      "display_text": "på spansk",
+      "spoken_text": "på spansk"
+    },
+    "ui.lang_in_swedish.0": {
+      "asset": "clips/93/93a5aa2ce81d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "93a5aa2ce81d4fd85c3cc6429d8d9d570041e8d115196b4c02555a8b03ad515e",
+      "display_text": "på svensk",
+      "spoken_text": "på svensk"
+    },
+    "ui.lang_in_turkish.0": {
+      "asset": "clips/48/4884d9229aa8.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "4884d9229aa85547a7fb438fa639b7c8259dca318d9516badbb143117ae4d9c2",
+      "display_text": "på tyrkisk",
+      "spoken_text": "på tyrkisk"
+    },
+    "ui.lang_in_ukrainian.0": {
+      "asset": "clips/f9/f90ffbb39b13.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "f90ffbb39b13c4162d0d3cfe6a95768d5043ffed72dc5cae3ea4dbfde0dc1f5f",
+      "display_text": "på ukrainsk",
+      "spoken_text": "på ukrainsk"
+    },
+    "ui.lang_in_vietnamese.0": {
+      "asset": "clips/3e/3ed8055cb837.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "3ed8055cb83722114eef7a8335dc24f29cb83cf9b0c82fb7a6c20238aad9b365",
+      "display_text": "på vietnamesisk",
+      "spoken_text": "på vietnamesisk"
+    },
+    "ui.lang_italian.0": {
+      "asset": "clips/2c/2cd613bd0c86.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 940,
+      "sha256": "2cd613bd0c86504857235575f86e0ca0b25226cdf5a0badc72aa576206911837",
+      "display_text": "Italiensk",
+      "spoken_text": "Italiensk"
+    },
+    "ui.lang_norwegian.0": {
+      "asset": "clips/20/20da374d05c3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 601,
+      "sha256": "20da374d05c31731fcd2a0dc5fa527d6aa044e537bde0e5404fafe55e223caae",
+      "display_text": "Norsk",
+      "spoken_text": "Norsk"
+    },
+    "ui.lang_polish.0": {
+      "asset": "clips/cf/cf6536f9ab5d.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "cf6536f9ab5d6003fa35536a8ab5abf9f61774af3e6b1e1dc7f7a1b5592f3a0c",
+      "display_text": "Polsk",
+      "spoken_text": "Polsk"
+    },
+    "ui.lang_portuguese.0": {
+      "asset": "clips/85/85c248283eda.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1045,
+      "sha256": "85c248283eda5062cb1f92a4cf72da817418b9d9dceffa356b46fe7d9f7de570",
+      "display_text": "Portugisisk",
+      "spoken_text": "Portugisisk"
+    },
+    "ui.lang_romanian.0": {
+      "asset": "clips/d0/d0c03dad7e09.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "d0c03dad7e09d2e89401280ada16c0c4d65cf4d66ba34cb23028e7db3c54de5b",
+      "display_text": "Rumensk",
+      "spoken_text": "Rumensk"
+    },
+    "ui.lang_slovak.0": {
+      "asset": "clips/88/8815c0dfc7b4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "8815c0dfc7b4ef8f513ac83b468c84d9d5315e52a0db86387f4f9d0a5b8ddeef",
+      "display_text": "Slovakisk",
+      "spoken_text": "Slovakisk"
+    },
+    "ui.lang_spanish.0": {
+      "asset": "clips/d4/d477124cfec5.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "d477124cfec53b9fb1e0329e94a05c63f71beee8fc59a2bfe7e9c963cfaeac37",
+      "display_text": "Spansk",
+      "spoken_text": "Spansk"
+    },
+    "ui.lang_swedish.0": {
+      "asset": "clips/c2/c28e506669c4.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 705,
+      "sha256": "c28e506669c41451e9ff1f3d07897383e37549057d3bde25b52c2542e2850257",
+      "display_text": "Svensk",
+      "spoken_text": "Svensk"
+    },
+    "ui.lang_turkish.0": {
+      "asset": "clips/ff/ff88a7b124eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 758,
+      "sha256": "ff88a7b124ebeb2b0b78d2ac9f462dde4b276e38ea3c6c373e80052da7330d35",
+      "display_text": "Tyrkisk",
+      "spoken_text": "Tyrkisk"
+    },
+    "ui.lang_ukrainian.0": {
+      "asset": "clips/f9/f9bf3027d795.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "f9bf3027d79525817855147b79fc32b74f6b38b7f797a9cf8cab385bb3b931e5",
+      "display_text": "Ukrainsk",
+      "spoken_text": "Ukrainsk"
+    },
+    "ui.lang_vietnamese.0": {
+      "asset": "clips/9a/9aff3959c893.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1202,
+      "sha256": "9aff3959c8939c2782b9ca1391b058fa17c9b91589bf630be243617d43916079",
+      "display_text": "Vietnamesisk",
+      "spoken_text": "Vietnamesisk"
+    },
+    "ui.recap_tts_counted_to.0": {
+      "asset": "clips/20/208187d770eb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 966,
+      "sha256": "208187d770eb9b2213c94594f5bd7f5f2b8cbff6abcc02fd60bee9d6ea7bfda2",
+      "display_text": "Du telte til",
+      "spoken_text": "Du telte til"
+    },
+    "ui.recap_tts_counted_to_lang.0": {
+      "asset": "clips/1a/1ae2086d3fe3.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "1ae2086d3fe3433d6c6bb162f0287ec44ac2b2b830826036879930bf0672de5c",
+      "display_text": "Du telte",
+      "spoken_text": "Du telte"
+    },
+    "ui.recap_tts_counted_to_lang.1": {
+      "asset": "clips/62/62bc2565b7ab.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 522,
+      "sha256": "62bc2565b7ab24a807454226195cce97ebe1c8dc5101386b2195255e685bc661",
+      "display_text": "til",
+      "spoken_text": "til"
+    },
+    "ui.recap_tts_found_letter.0": {
+      "asset": "clips/c2/c220a90274fb.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1306,
+      "sha256": "c220a90274fb68620c265b6ed87310caf3dd01af8be78504e641691eb33a843f",
+      "display_text": "Du fant bokstaven",
+      "spoken_text": "Du fant bokstaven"
+    },
+    "ui.recap_tts_found_letter_lang.0": {
+      "asset": "clips/5c/5c10c33c1f4c.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 836,
+      "sha256": "5c10c33c1f4c26487fb4c9b463db7331bf99416cc83385362afffc5c113d8b66",
+      "display_text": "Du fant",
+      "spoken_text": "Du fant"
+    },
+    "ui.recap_tts_found_letter_lang.1": {
+      "asset": "clips/f1/f162c565d3c1.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 810,
+      "sha256": "f162c565d3c1fe5e0fb80de292413f2b4db6345ce94dcd7fa2c3ac31ba2dcc11",
+      "display_text": "bokstaven",
+      "spoken_text": "bokstaven"
+    },
+    "ui.recap_tts_found_letters.0": {
+      "asset": "clips/24/24fc06547c7f.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1672,
+      "sha256": "24fc06547c7fa80c8c3e6ead821b2c25379c8efe03e4a787bbdca69944626672",
+      "display_text": "Du fant bokstaver fra",
+      "spoken_text": "Du fant bokstaver fra"
+    },
+    "ui.recap_tts_found_letters_lang.0": {
+      "asset": "clips/70/70a0d540cb71.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1150,
+      "sha256": "70a0d540cb715bacad7602a8bd88a1ff0446b12c2a154a0779934db5d6f96e01",
+      "display_text": "Du fant bokstaver",
+      "spoken_text": "Du fant bokstaver"
+    },
+    "ui.recap_tts_found_letters_lang.1": {
+      "asset": "clips/da/da6fe026fd9e.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 627,
+      "sha256": "da6fe026fd9e7e6526212a1ea4cd0c52869df475e9bdeef366d5c311cd5661c3",
+      "display_text": "fra",
+      "spoken_text": "fra"
+    },
+    "ui.recap_tts_in_language.0": {
+      "asset": "clips/28/285e873d73e6.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 548,
+      "sha256": "285e873d73e673d9b4b5c5856acfb705b91fcbd57f8892d4a329c20a67c2d353",
+      "display_text": "på",
+      "spoken_text": "på"
+    },
+    "ui.recap_tts_spelled_phrase.0": {
+      "asset": "clips/7b/7b7c3f38840b.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1280,
+      "sha256": "7b7c3f38840b4cf27c0a5d68b0dd63a44f54034040ac8a1c3e5f2238e667c6f4",
+      "display_text": "Du stavet frasen",
+      "spoken_text": "Du stavet frasen"
+    },
+    "ui.recap_tts_spelled_phrase_lang.1": {
+      "asset": "clips/d5/d581fbbff4a2.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 732,
+      "sha256": "d581fbbff4a22534c420a39cfbbf976e6bcdc5b419f37eaaa287f262b0962273",
+      "display_text": "frasen",
+      "spoken_text": "frasen"
+    },
+    "ui.recap_tts_spelled_word.0": {
+      "asset": "clips/e2/e22b064a5f12.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 1463,
+      "sha256": "e22b064a5f12fdc2b61bedb4ee2cb087489d8bc3db28622fe4ebf65de3bb75f5",
+      "display_text": "Du stavet ordet",
+      "spoken_text": "Du stavet ordet"
+    },
+    "ui.recap_tts_spelled_word_lang.0": {
+      "asset": "clips/08/089d389a5101.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 862,
+      "sha256": "089d389a51019733a6ebdf383ec21d9227ca758afb5323db816edd45d887475e",
+      "display_text": "Du stavet",
+      "spoken_text": "Du stavet"
+    },
+    "ui.recap_tts_spelled_word_lang.1": {
+      "asset": "clips/b5/b5009fce6a17.mp3",
+      "word_ends_ms": [],
+      "word_fade_ms": [],
+      "duration_ms": 653,
+      "sha256": "b5009fce6a171d0884fa7b3fa36f130a4f86b79ecd19d4a6d460148e38a5c4d5",
+      "display_text": "ordet",
+      "spoken_text": "ordet"
+    }
+  }
+}

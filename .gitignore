@@ -16,6 +16,11 @@
 # are the only thing kept from them.
 /voice_masters/*
 !/voice_masters/.gdignore
+# The ledger is the exception: plain text, a few megabytes, and the record of
+# every recording ever paid for. It is what makes "nothing was lost" a
+# checkable claim rather than a reassurance, so it belongs in history even
+# though the audio beside it does not.
+!/voice_masters/generation_ledger.jsonl
 /build/*
 !/build/.gdignore
 
